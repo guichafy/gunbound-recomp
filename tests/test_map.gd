@@ -151,17 +151,17 @@ func run() -> void:
 	scene.start_match()
 	await process_frame
 	var limits: Rect2 = scene.camera_limits()
-	check(limits.position == Vector2.ZERO and limits.end == Vector2(520, 1130), "Camera range shows the whole 1800×1800 world above the HUD")
+	check(limits.position == Vector2.ZERO and limits.end == Vector2(520, 1136), "Camera range shows the whole 1800×1800 world above the HUD")
 	var player_screen: Vector2 = Vector2(scene.model.actors[0].pos) - scene.camera
 	check(Rect2(Vector2.ZERO, scene.VIEW_SIZE).has_point(player_screen), "Match opens with the player on screen")
 	scene.update_hud()
 	player_screen = Vector2(scene.model.actors[0].pos) - scene.camera
-	check(scene.health_bars[0].visible and scene.health_bars[0].position.distance_to(player_screen + Vector2(-48, 40)) < 1.0, "Life bar follows the actor in screen space")
+	check(Rect2(Vector2.ZERO, scene.VIEW_SIZE).has_point(player_screen + Vector2(0, 40)), "Life bar (actor + 40 px, drawn in world space) stays above the action bar")
 	var backdrop: Dictionary = scene.map_background(scene.model.map_id)
 	check(not backdrop.is_empty() and backdrop.texture.resource_path == map.background_hd and backdrop.texture.get_size() == Vector2(1920, 1536), "Arena prefers the stitched HD background (1920×1536)")
 	scene.camera = Vector2(0, 0)
 	var top_region: Rect2 = scene.background_region(backdrop)
-	scene.camera = Vector2(520, 1130)
+	scene.camera = Vector2(520, 1136)
 	var bottom_region: Rect2 = scene.background_region(backdrop)
 	check(is_equal_approx(top_region.size.x / top_region.size.y, 1.6) and top_region.position.y == 0.0, "Parallax starts at the top of the HD coverage")
 	check(bottom_region.end.y <= 1536.5 and bottom_region.position.y > top_region.position.y, "Parallax slides down within the HD coverage")

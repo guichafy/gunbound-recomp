@@ -25,7 +25,8 @@ func run() -> void:
 	check(scene.screen == "menu" and scene.nickname_input != null, "Menu shows nickname and vehicle controls")
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
-	check(scene.health_bars[0].size.y <= 10.0, "Life bar stays clear of numeric life label")
+	check(scene.weapon_buttons.size() == 3 and scene.pass_button is TextureButton and scene.options_button is TextureButton, "Original S1/S2/SS, Options and SkipTurn sprite buttons")
+	check(scene.hud.textures["ActionBar.png"].get_width() == 2400 and scene.hud.originals["ActionBar.png"].get_width() == 800, "Action bar uses the 3× HD remaster of the original 800 px bar")
 	scene.show_pause()
 	var before: float = scene.model.turn_time
 	scene._process(1.0)
@@ -40,7 +41,7 @@ func run() -> void:
 	space.pressed = true
 	scene._unhandled_key_input(space)
 	scene._process(0.1)
-	check(scene.charging and scene.power > 15.0, "Holding Space charges power through actual input handler")
+	check(scene.charging and is_equal_approx(scene.power, 4.0), "Holding Space charges from 0 in steps of 2 every 0.04 s (original)")
 	space.pressed = false
 	scene._unhandled_key_input(space)
 	check(scene.model.phase == "flight", "HUD fire command launches a real projectile")

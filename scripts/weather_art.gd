@@ -1,5 +1,5 @@
 extends RefCounted
-## Presentation of weather columns, Thor, beams, forecast icons and ground
+## Presentation of weather columns, Thor, beams and ground
 ## particles with the original OpenBound sprites. Never decides combat: it only
 ## reads match.gd state and events. Pause freezes it because game.gd stops ticking.
 
@@ -28,7 +28,6 @@ const PARTICLE_SPREAD := 5
 const PARTICLE_CAP := 80
 
 var sheets := {}
-var icons: Texture2D
 var thor_sheet: Texture2D
 var thor_laser: Texture2D
 var lightning: Texture2D
@@ -51,7 +50,6 @@ func _init() -> void:
 	noise.seed = 4242
 	for type in COLUMN_SHEETS:
 		sheets[type] = load("res://assets/openbound/weather/%s.png" % COLUMN_SHEETS[type][0])
-	icons = load("res://assets/openbound/weather/WeatherIcons.png")
 	thor_sheet = load("res://assets/openbound/thor/Spritesheet.png")
 	thor_laser = load("res://assets/openbound/thor/ThorLaser.png")
 	lightning = load("res://assets/openbound/weather/LightningSE.png")
@@ -240,22 +238,3 @@ func draw_particles(view: Node2D, offset: Vector2) -> void:
 		view.draw_set_transform(particle_position(particle) + offset, float(particle.rotation) + float(particle.spin) * float(particle.age), Vector2.ONE * scale)
 		view.draw_texture_rect_region(ground, Rect2(-ground_pivot, cell), source)
 	view.draw_set_transform(Vector2.ZERO)
-
-func draw_forecast(view: Node2D, model) -> void:
-	# Screen-space WeatherDisplay: active weather plus the next three.
-	var origin := Vector2(706, 20)
-	var ui = view.ui
-	view.draw_style_box(ui.box(Color(0.03, 0.08, 0.14, 0.82), 6, ui.STEEL), Rect2(origin - Vector2(6, 4), Vector2(140, 46)))
-	for slot in range(mini(4, model.weather.queue.size())):
-		var entry: Dictionary = model.weather.queue[slot]
-		var index: int = ICON_INDEX.get(entry.type, 3)
-		var size := 28.0 if slot == 0 else 22.0
-		var position := origin + Vector2(0 if slot == 0 else 38 + (slot - 1) * 32, 3 if slot == 0 else 6)
-		view.draw_texture_rect_region(icons, Rect2(position, Vector2(size, size)), Rect2(index * 22, 0 if slot == 0 else 22, 22, 22))
-	var active: Dictionary = model.weather.queue[0] if not model.weather.queue.is_empty() else {}
-	if not active.is_empty():
-		var name: String = NAMES.get(active.type, active.type)
-		if active.type == "random" and not str(active.extra).is_empty():
-			name += " → " + str(NAMES.get(active.extra, active.extra))
-		view.draw_string_outline(ui.bold, origin + Vector2(0, 52), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, 4, ui.INK)
-		view.draw_string(ui.bold, origin + Vector2(0, 52), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, ui.CREAM)

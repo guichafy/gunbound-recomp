@@ -25,7 +25,7 @@ func run() -> void:
 	scene.sound.muted = true
 	scene.start_match()
 	key(scene, true)
-	for i in range(14):
+	for i in range(22):
 		scene._process(0.1)
 	check(scene.model.phase == "flight", "Full charge fires automatically")
 	check(not scene.charging and scene.power == 100.0, "Automatic shot clears charge at maximum")
@@ -65,19 +65,20 @@ func run() -> void:
 	scene.start_match()
 	scene.model.actors[0].pos = Vector2(235, 510)
 	scene.update_hud()
-	# The opaque turn panel must never cover living actor status after a crater fall.
+	# The old opaque turn panel is gone: no Panel may cover the world above the bar.
 	var covered := false
 	for node in scene.root.get_children():
-		if node is Panel and node.size == Vector2(236, 114):
-			covered = node.get_rect().intersects(scene.hp_labels[0].get_rect())
-	check(not covered, "Turn panel avoids life text after falling into a crater")
+		if node is Panel and node.get_rect().intersects(Rect2(Vector2.ZERO, scene.VIEW_SIZE)):
+			covered = true
+	check(not covered, "No opaque panel covers the battlefield during combat")
 	scene.start_match()
 	check(scene.has_method("displayed_queue"), "HUD exposes displayed turn prediction")
 	if scene.has_method("displayed_queue"):
 		scene.model.pass_turn()
 		scene.consume_events()
 		scene.update_hud()
-		check(scene.displayed_queue().is_empty(), "HUD does not invent a CPU weapon before it is chosen")
+		var cpu_entry: Dictionary = scene.displayed_queue().filter(func(entry): return entry.actor == 1)[0]
+		check(is_equal_approx(cpu_entry.delay, maxf(0.0, scene.model.actors[1].ready - scene.model.clock)), "HUD does not invent a CPU weapon before it is chosen")
 		scene.start_match()
 		scene.model.actors[0].ready = 100.0
 		scene.model.actors[1].ready = 215.0

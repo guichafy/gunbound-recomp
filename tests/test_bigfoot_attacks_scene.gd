@@ -16,15 +16,15 @@ func run() -> void:
 	view.sound.muted = true
 	view.select_vehicle(2)
 	view.start_match()
-	check(view.angle <= 40 and view.angle_slider.min_value == 18 and view.angle_slider.max_value == 40, "Bigfoot starts with legal T1 aim in HUD")
+	check(view.angle <= 40 and view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.hud.crosshair_name(view.model, 0, view.weapon) == "CrosshairBigfootS1Ally.png", "Bigfoot starts with legal T1 aim and its original range sprite")
 	view.model.actors[0].turns = 3
 	view.angle = 18
 	view.select_weapon(2)
 	view.update_hud()
-	check(view.angle == 23 and view.angle_slider.min_value == 23 and view.angle_slider.max_value == 35, "Selecting SS adjusts value and legal HUD range")
+	check(view.angle == 23 and view.model.aim_limits(0, view.weapon) == Vector2(23, 35) and view.hud.crosshair_name(view.model, 0, view.weapon) == "CrosshairBigfootSSAlly.png", "Selecting SS adjusts value, legal range and crosshair sprite")
 	view.select_weapon(0)
 	view.update_hud()
-	check(view.angle_slider.min_value == 18 and view.angle_slider.max_value == 40, "Returning to T1 restores its wider aim range")
+	check(view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.weapon_buttons[0].get_meta("activated"), "Returning to T1 restores its wider aim range and active S1 button")
 	view.start_match()
 	view.select_weapon(1)
 	view.shoot()
@@ -54,7 +54,8 @@ func run() -> void:
 	key.physical_keycode = KEY_SPACE
 	key.pressed = true
 	view._unhandled_key_input(key)
-	for frame in range(14):
+	# Original strength bar: 50 steps of 0.04 s = 2 s to fill.
+	for frame in range(22):
 		view._process(0.1)
 	var count: int = view.model.projectiles.size()
 	key.pressed = false

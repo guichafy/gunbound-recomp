@@ -11,6 +11,8 @@ const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
 const MageSprite = preload("res://scripts/mage_sprite.gd")
 const Maps = preload("res://scripts/maps.gd")
 const WeatherArt = preload("res://scripts/weather_art.gd")
+const HudArt = preload("res://scripts/hud_art.gd")
+var hud = HudArt.new()
 var weather_art = WeatherArt.new()
 var mage = MageSprite.new()
 var bigfoot = BigfootSprite.new()
@@ -26,7 +28,7 @@ var overlay_kind := ""
 var background: Texture2D
 var map_backgrounds := {}
 # Camera: top-left world point of the view above the HUD (Camera.cs tracking 1/25).
-const VIEW_SIZE := Vector2(1280, 670)
+const VIEW_SIZE := Vector2(1280, 664)
 const CAMERA_DAMPENING := 25.0
 var camera := Vector2.ZERO
 var camera_manual := false
@@ -53,35 +55,19 @@ var result_wait := -1.0
 var effects: Array = []
 var floating: Array = []
 var shake := 0.0
-var banner_time := 0.0
-var banner_text := ""
-var angle_label: Label
-var power_label: Label
-var angle_slider: HSlider
-var power_slider: HSlider
 var fire_button: Button
-var pass_button: Button
+var pass_button: TextureButton
+var options_button: TextureButton
 var flip_button: Button
 var move_left: Button
 var move_right: Button
-var weapon_buttons: Array[Button] = []
-var health_bars: Array[ProgressBar] = []
-var shield_bars: Array[ProgressBar] = []
-var hp_labels: Array[Label] = []
-var wind_label: Label
-var timer_label: Label
-var turn_label: Label
-var movement_label: Label
-var delay_label: Label
-var shot_hint: Label
-var power_meter: ProgressBar
-var movement_meter: ProgressBar
-var force_marks: Node2D
-var queue_labels: Array[Label] = []
+var weapon_buttons: Array[TextureButton] = []
 var queue_entries: Array = []
-var queue_panel: Panel
-var queue_title: Label
-var queue_detail: Label
+var charge_timer := 0.0
+# Crosshair.UpdateShootingAngle key repeat: 0.15 s, −0.008 per step, minimum 0.03 s.
+var aim_direction := 0
+var aim_elapsed := 0.0
+var aim_limit := 0.15
 
 func _ready() -> void:
 	background = load("res://assets/art/background.png")
@@ -110,7 +96,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.9.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.10.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -198,7 +184,7 @@ func start_match() -> void:
 	reward = 0
 	result_wait = -1.0
 	angle = clampf(45.0, model.aim_limits(0).x, model.aim_limits(0).y)
-	power = 65.0
+	power = 0.0
 	weapon = 0
 	charging = false
 	cpu_plan.clear()
@@ -210,104 +196,49 @@ func start_match() -> void:
 	update_hud()
 
 func build_hud() -> void:
-	# The arena stays open; instruments are grouped in the classic lower console.
-	health_bars.clear()
-	shield_bars.clear()
-	hp_labels.clear()
-	for index in range(2):
-		var actor: Dictionary = model.actors[index]
-		var bar := make_meter(root, Vector2.ZERO, Vector2(96, 7), float(actor.max_hp), Match.VEHICLES[actor.vehicle].color)
-		health_bars.append(bar)
-		shield_bars.append(make_meter(root, Vector2.ZERO, Vector2(96, 5), maxf(1, actor.max_shield), Color("94baff")))
-		var hp := ui.label(root, "", Vector2.ZERO, Vector2(174, 19), 12, Color.WHITE, true)
-		hp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		hp.add_theme_color_override("font_outline_color", ui.INK)
-		hp.add_theme_constant_override("outline_size", 4)
-		hp_labels.append(hp)
-	wind_label = ui.label(root, "", Vector2(590, 111), Vector2(100, 25), 18, ui.INK, true)
-	wind_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	timer_label = ui.label(root, "30", Vector2(1153, 20), Vector2(94, 64), 48, ui.AMBER, true)
-	timer_label.add_theme_color_override("font_outline_color", ui.INK)
-	timer_label.add_theme_constant_override("outline_size", 5)
-	ui.label(root, "Tempo", Vector2(1160, 86), Vector2(85, 21), 13, ui.INK, true)
-	turn_label = ui.label(root, "", Vector2(408, 135), Vector2(570, 28), 16, ui.CREAM, true)
-	turn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	turn_label.add_theme_color_override("font_outline_color", ui.INK)
-	turn_label.add_theme_constant_override("outline_size", 4)
-	ui.button(root, "?", Vector2(18, 18), Vector2(38, 32), show_help)
-	ui.button(root, "Ⅱ", Vector2(64, 18), Vector2(38, 32), show_pause)
-	queue_panel = ui.metal_panel(root, Vector2(16, 544), Vector2(236, 114), Color("193650"))
-	queue_title = ui.label(queue_panel, "", Vector2(13, 6), Vector2(216, 22), 13, ui.AMBER, true)
-	queue_labels.clear()
-	for row in range(2):
-		queue_labels.append(ui.label(queue_panel, "", Vector2(14, 34 + row * 29), Vector2(212, 25), 14, ui.CREAM, true))
-	queue_detail = ui.label(queue_panel, "", Vector2(13, 91), Vector2(213, 18), 11, ui.MUTED)
-	ui.metal_panel(root, Vector2(0, 670), Vector2(1280, 130), Color("507498"))
-	ui.metal_panel(root, Vector2(8, 678), Vector2(202, 113), Color("234564"))
-	ui.label(root, "Armas", Vector2(20, 683), Vector2(180, 22), 13, ui.CREAM, true)
+	# OpenBound action bar (HUD.cs): sprite buttons sit on the bar drawn in _draw.
+	hud.reset(model)
+	var blocker := Control.new()
+	blocker.position = Vector2(0, VIEW_SIZE.y)
+	blocker.size = Vector2(1280, 800 - VIEW_SIZE.y)
+	blocker.mouse_filter = Control.MOUSE_FILTER_STOP
+	root.add_child(blocker)
+	# Shot strength selector: a draggable reference marker (does not set the power).
+	var selector := Control.new()
+	var area: Rect2 = hud.strength_rect().grow_individual(0, 8, 0, 8)
+	selector.position = area.position
+	selector.size = area.size
+	selector.mouse_filter = Control.MOUSE_FILTER_STOP
+	selector.gui_input.connect(func(event: InputEvent):
+		if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_LEFT):
+			hud.set_selector_from_screen(selector.position.x + event.position.x)
+	)
+	root.add_child(selector)
 	weapon_buttons.clear()
 	for index in range(3):
-		var button := ui.button(root, ["1", "2", "SS"][index], Vector2(20 + index * 61, 711), Vector2(55, 42), func(): select_weapon(index))
-		button.add_theme_font_size_override("font_size", 23)
+		var button: TextureButton = hud.make_button(root, "shot", index)
+		button.pressed.connect(func(): select_weapon(index))
 		button.tooltip_text = "%s · atraso %d" % [model.weapon_rules(0, index).name, model.weapon_rules(0, index).delay]
 		weapon_buttons.append(button)
-	delay_label = ui.label(root, "", Vector2(20, 763), Vector2(180, 21), 12, ui.AMBER, true)
-	ui.metal_panel(root, Vector2(218, 678), Vector2(180, 113), Color("234564"))
-	angle_label = ui.label(root, "", Vector2(229, 683), Vector2(160, 31), 22, ui.AMBER, true)
-	var limits: Vector2 = model.aim_limits(0)
-	angle_slider = ui.slider(root, Vector2(230, 722), Vector2(153, 17), limits.x, limits.y, angle, func(value): angle = value)
-	move_left = ui.button(root, "←", Vector2(230, 752), Vector2(42, 28), func(): pass)
-	move_right = ui.button(root, "→", Vector2(277, 752), Vector2(42, 28), func(): pass)
-	flip_button = ui.button(root, "F", Vector2(325, 752), Vector2(59, 28), flip)
-	ui.metal_panel(root, Vector2(406, 678), Vector2(600, 113), Color("17314d"))
-	power_label = ui.label(root, "", Vector2(420, 684), Vector2(260, 25), 18, ui.CREAM, true)
-	shot_hint = ui.label(root, "", Vector2(694, 684), Vector2(297, 25), 13, ui.MUTED)
-	power_meter = make_meter(root, Vector2(423, 728), Vector2(568, 20), 100, ui.AMBER)
-	power_slider = ui.slider(root, Vector2(423, 721), Vector2(568, 30), 0, 100, power, func(value): power = maxf(15.0, value))
-	power_slider.add_theme_stylebox_override("slider", ui.box(Color.TRANSPARENT, 0))
-	power_slider.add_theme_stylebox_override("grabber_area", ui.box(Color.TRANSPARENT, 0))
-	power_slider.add_theme_stylebox_override("grabber_area_highlight", ui.box(Color.TRANSPARENT, 0))
-	movement_label = ui.label(root, "", Vector2(420, 762), Vector2(180, 21), 12, ui.MUTED)
-	movement_meter = make_meter(root, Vector2(605, 768), Vector2(386, 6), model.movement_budget(), ui.TEAL)
-	force_marks = Node2D.new()
-	root.add_child(force_marks)
-	force_marks.draw.connect(draw_force_marks)
-	ui.metal_panel(root, Vector2(1014, 678), Vector2(258, 113), Color("234564"))
-	fire_button = ui.button(root, "DISPARAR", Vector2(1027, 690), Vector2(231, 41), shoot, true)
-	pass_button = ui.button(root, "Passar turno", Vector2(1027, 738), Vector2(231, 27), func():
-		if player_can_act():
-			charging = false
-			model.pass_turn()
-	)
-	pass_button.add_theme_font_size_override("font_size", 13)
-	ui.label(root, "Espaço: segurar e soltar", Vector2(1033, 768), Vector2(229, 18), 12, ui.MUTED)
+	options_button = hud.make_button(root, "options")
+	options_button.tooltip_text = "Opções (ESC)"
+	options_button.pressed.connect(show_pause)
+	pass_button = hud.make_button(root, "skip")
+	pass_button.tooltip_text = "Passar o turno (F8)"
+	pass_button.pressed.connect(pass_turn)
+	# Discreet extras for mouse/touch play; the original only has the keyboard.
+	var extras := Vector2(1062, VIEW_SIZE.y - 40)
+	move_left = ui.button(root, "←", extras, Vector2(40, 32), func(): pass)
+	move_right = ui.button(root, "→", extras + Vector2(44, 0), Vector2(40, 32), func(): pass)
+	flip_button = ui.button(root, "F", extras + Vector2(88, 0), Vector2(36, 32), flip)
+	fire_button = ui.button(root, "●", extras + Vector2(128, 0), Vector2(78, 32), func(): pass, true)
+	fire_button.tooltip_text = "Segure para carregar e solte para disparar (ou Espaço)"
+	fire_button.button_down.connect(begin_charge)
+	fire_button.button_up.connect(release_charge)
+	for button in [move_left, move_right, flip_button, fire_button]:
+		button.add_theme_font_size_override("font_size", 15)
+		button.modulate = Color(1, 1, 1, 0.82)
 	select_weapon(0)
-
-func make_meter(parent: Node, position: Vector2, size: Vector2, maximum: float, color: Color) -> ProgressBar:
-	var bar := ProgressBar.new()
-	bar.position = position
-	bar.max_value = maximum
-	bar.show_percentage = false
-	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	bar.add_theme_font_size_override("font_size", 1)
-	for pair in [["background", Color("081a2b")], ["fill", color]]:
-		var style := ui.box(pair[1], 1)
-		style.set_content_margin_all(0)
-		bar.add_theme_stylebox_override(pair[0], style)
-	parent.add_child(bar)
-	bar.size = size
-	return bar
-
-func draw_force_marks() -> void:
-	for i in range(41):
-		var x := 423.0 + i * 568.0 / 40.0
-		force_marks.draw_line(Vector2(x, 728), Vector2(x, 728 + (8 if i % 10 == 0 else 4)), Color("071728"), 1.0)
-		if i % 10 == 0:
-			force_marks.draw_string(ui.font, Vector2(x - 8, 719), str(int(i * 2.5)), HORIZONTAL_ALIGNMENT_LEFT, -1, 10, ui.MUTED)
-	var previous: Dictionary = model.last_shots[0]
-	if not previous.is_empty():
-		var x := 423.0 + float(previous.power) * 568.0 / 100.0
-		force_marks.draw_colored_polygon(PackedVector2Array([Vector2(x - 5, 754), Vector2(x + 5, 754), Vector2(x, 747)]), ui.CREAM)
 
 func displayed_queue() -> Array:
 	return queue_entries
@@ -327,11 +258,36 @@ func select_weapon(index: int) -> void:
 	var limits: Vector2 = model.aim_limits(0, weapon)
 	angle = clampf(angle, limits.x, limits.y)
 	for j in range(weapon_buttons.size()):
-		weapon_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if j == index else Color("24444e"), 9, ui.TEAL if j == index else Color("47626a")))
+		hud.style_button(weapon_buttons[j], j == index)
+
+func cycle_weapon() -> void:
+	# ShotButton.UpdateKeyboard: Tab moves to the next shot, skipping a disabled SS.
+	var next := (weapon + 1) % 3
+	if next == 2 and not model.can_use_special(0):
+		next = 0
+	select_weapon(next)
+
+func begin_charge() -> void:
+	# Mobile.Shoot: Space resets the strength bar and starts the shot sequence.
+	if player_can_act():
+		charging = true
+		power = 0.0
+		charge_timer = 0.0
+
+func release_charge() -> void:
+	if charging:
+		shoot()
+
+func pass_turn() -> void:
+	if player_can_act():
+		charging = false
+		model.pass_turn()
 
 func shoot() -> void:
 	if player_can_act():
 		charging = false
+		hud.previous_power = power
+		hud.previous_angle = hud.hud_angle(model, angle, weapon)
 		model.fire(angle, power, weapon)
 
 func flip() -> void:
@@ -353,14 +309,16 @@ func _process(delta: float) -> void:
 			direction += 1.0
 		if not is_zero_approx(direction):
 			model.move_actor(direction, frame_delta)
-		if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):
-			angle = minf(model.aim_limits(0, weapon).y, angle + 38.0 * frame_delta)
-		if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
-			angle = maxf(model.aim_limits(0, weapon).x, angle - 38.0 * frame_delta)
+		update_aim_keys(frame_delta)
 		if charging:
-			power = minf(100.0, power + 65.0 * frame_delta)
+			# TimedProgressBar: +2 every 0.04 s while held; full bar fires.
+			charge_timer += frame_delta
+			while charge_timer > 0.04 and power < 100.0:
+				charge_timer -= 0.04
+				power = minf(100.0, power + 2.0)
 			if power >= 100.0:
 				shoot()
+	hud.tick(frame_delta, model, sound)
 	model.tick(frame_delta)
 	weather_art.tick(frame_delta, model)
 	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == 1 and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
@@ -384,16 +342,42 @@ func _process(delta: float) -> void:
 			floating.remove_at(i)
 	update_camera(frame_delta)
 	shake = maxf(0.0, shake - frame_delta * 24.0)
-	banner_time = maxf(0.0, banner_time - frame_delta)
 	if result_wait >= 0.0:
 		result_wait -= frame_delta
 		if result_wait < 0.0:
 			show_result()
 	update_hud()
 
+func update_aim_keys(delta: float) -> void:
+	# Whole-degree steps: one per press, then a repeat that speeds up while held.
+	var direction := 0
+	if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):
+		direction = 1
+	elif Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
+		direction = -1
+	if direction != aim_direction:
+		aim_direction = direction
+		aim_elapsed = 0.0
+		aim_limit = 0.15
+		if direction != 0:
+			step_angle(direction)
+		return
+	if direction == 0:
+		return
+	aim_elapsed += delta
+	if aim_elapsed > aim_limit:
+		aim_elapsed = 0.0
+		aim_limit = maxf(aim_limit - 0.008, 0.03)
+		step_angle(direction)
+
+func step_angle(direction: int) -> void:
+	var limits: Vector2 = model.aim_limits(0, weapon)
+	angle = clampf(roundf(angle) + direction, limits.x, limits.y)
+
 func consume_events() -> void:
 	for event in model.events:
 		art.react(event)
+		hud.react(event, model)
 		weather_art.react(event, model, sound)
 		match event.type:
 			"turn":
@@ -402,8 +386,9 @@ func consume_events() -> void:
 				charging = false
 				cpu_plan.clear()
 				cpu_wait = 1.1
-				banner_text = "SUA VEZ · %s" % profile.nickname if event.actor == 0 else "AUTÔMATO CALCULANDO A MIRA"
-				banner_time = 1.9
+				if event.actor == 0:
+					# HUD.GrantTurn resets the strength bar; the marker keeps the last shot.
+					power = 0.0
 				sound.play("turn")
 				if weapon == 2 and not model.can_use_special(0):
 					weapon = 0
@@ -422,10 +407,6 @@ func consume_events() -> void:
 				if event.get("vehicle", 2) in [1, 2]:
 					original = (mage if event.vehicle == 1 else bigfoot).blast_sounds[event.weapon]
 				sound.play("explosion", original)
-			"damage":
-				floating.append({"pos": event.position, "text": "−%d" % event.amount, "age": 0.0, "color": Color("ffe5b1")})
-			"shield_damage":
-				floating.append({"pos": event.position + Vector2(0, -22), "text": "−%d ESC" % event.amount, "age": 0.0, "color": Color("94baff")})
 			"fall":
 				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, minf(float(model.actors[event.actor].pos.y), model.terrain.world_size().y) - 80.0), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
 			"finished":
@@ -438,85 +419,41 @@ func consume_events() -> void:
 func update_hud() -> void:
 	if screen != "match":
 		return
-	queue_panel.position = Vector2(16, 544)
-	for index in range(2):
-		var actor: Dictionary = model.actors[index]
-		# Labels follow the actor on screen; hidden when the camera leaves it.
-		var screen_pos: Vector2 = Vector2(actor.pos) - camera
-		var on_screen: bool = actor.hp > 0 and Rect2(Vector2(-100, -100), VIEW_SIZE + Vector2(200, 100)).has_point(screen_pos)
-		if on_screen and Rect2(16, 544, 236, 114).intersects(Rect2(screen_pos + Vector2(-90, 38), Vector2(180, 66))):
-			queue_panel.position = Vector2(16, 74)
-		health_bars[index].value = actor.hp
-		health_bars[index].visible = on_screen
-		health_bars[index].position = screen_pos + Vector2(-48, 40)
-		hp_labels[index].visible = on_screen
-		hp_labels[index].position = screen_pos + Vector2(-87, 54 if actor.vehicle == 1 else 49)
-		shield_bars[index].position = screen_pos + Vector2(-48, 49)
-		shield_bars[index].max_value = maxf(1, actor.max_shield)
-		shield_bars[index].value = actor.shield
-		shield_bars[index].visible = actor.vehicle == 1 and on_screen
-		hp_labels[index].text = "%d / %d" % [actor.hp, actor.max_hp]
-		if actor.vehicle == 1:
-			hp_labels[index].text += " · %d ESC" % actor.shield
-	wind_label.text = "%02d" % int(model.weather.wind_force)
-	timer_label.text = "%02d" % int(ceil(model.turn_time)) if model.phase == "aim" else "—"
-	timer_label.add_theme_color_override("font_color", Color("ff815e") if model.turn_time < 8.0 else ui.AMBER)
-	var status := "Seu turno" if model.active == 0 else "Turno do Autômato"
-	if model.phase == "flight":
-		status = "Projétil em voo"
-	elif model.phase == "settle":
-		status = "Resolvendo impacto"
-	elif model.phase == "finished":
-		status = "Treino encerrado"
-	turn_label.text = "%02d  /  %s" % [model.total_turns, status]
 	var limits: Vector2 = model.aim_limits(0, weapon)
 	angle = clampf(angle, limits.x, limits.y)
-	# Range setters emit value_changed; do not let the old thumb overwrite the aim.
-	angle_slider.set_block_signals(true)
-	angle_slider.min_value = limits.x
-	angle_slider.max_value = limits.y
-	angle_slider.set_value_no_signal(angle)
-	angle_slider.set_block_signals(false)
-	angle_label.text = "Mira  %02d°" % int(angle)
-	power_label.text = "%s  %03d%%" % ["Carregando" if charging else "Força", int(power)]
-	power_slider.set_value_no_signal(power)
-	power_meter.value = power
-	movement_meter.max_value = model.movement_budget()
-	movement_meter.value = model.movement_left
 	var enabled := player_can_act()
-	angle_slider.editable = enabled and not charging
-	power_slider.editable = enabled and not charging
-	fire_button.disabled = not enabled
 	pass_button.disabled = not enabled
 	flip_button.disabled = not enabled
 	move_left.disabled = not enabled
 	move_right.disabled = not enabled
+	fire_button.disabled = not enabled
 	for index in range(weapon_buttons.size()):
-		weapon_buttons[index].disabled = not enabled or (index == 2 and not model.can_use_special(0))
-		weapon_buttons[index].add_theme_stylebox_override("normal", ui.metal_box(Color("ac7134") if index == weapon else Color("315880"), ui.AMBER if index == weapon else ui.STEEL))
+		var button: TextureButton = weapon_buttons[index]
+		button.disabled = index == 2 and not model.can_use_special(0)
+		if bool(button.get_meta("activated")) != (index == weapon):
+			hud.style_button(button, index == weapon)
 	weapon_buttons[2].tooltip_text = "%s: terceiro turno próprio; um uso por partida." % model.weapon_rules(0, 2).name
-	movement_label.text = "Movimento  %d" % int(ceil(model.movement_left))
-	delay_label.text = "%s  +%d" % [model.weapon_rules(0, weapon).name, int(float(model.weapon_rules(0, weapon).delay) + float(Match.VEHICLES[vehicle].delay))]
-	var previous: Dictionary = model.last_shots[0]
-	shot_hint.text = "Último: %d° / %d%%" % [int(previous.angle), int(previous.power)] if not previous.is_empty() else "Marcador: tiro anterior"
 	var displayed_weapon: int = weapon if model.active == 0 else int(cpu_plan.get("weapon", 0))
-	queue_title.text = "Vez: " + (profile.nickname.left(18) if model.active == 0 else "Autômato")
-	if model.phase == "aim" and model.active == 1 and cpu_plan.is_empty():
+	if model.phase == "finished":
 		queue_entries = []
-		queue_labels[0].text = "Autômato escolhendo arma"
-		queue_labels[1].text = "Previsão em instantes…"
-		queue_detail.text = "Ordem depois do tiro"
-		force_marks.queue_redraw()
-		return
-	queue_entries = model.initiative_preview(displayed_weapon)
-	var preview_weapon: int = displayed_weapon if model.phase == "aim" else model.shot_weapon
-	queue_detail.text = "Após %s: ordem por atraso" % model.weapon_rules(model.active, preview_weapon).name
-	for row in range(queue_entries.size()):
-		var entry: Dictionary = queue_entries[row]
-		var name: String = profile.nickname if entry.actor == 0 else "Autômato"
-		queue_labels[row].text = "%s %s   +%d" % ["▶" if row == 0 else "  ", name.left(12), int(entry.delay)]
-		queue_labels[row].add_theme_color_override("font_color", ui.AMBER if row == 0 else ui.MUTED)
-	force_marks.queue_redraw()
+	elif model.phase == "aim" and model.active == 1 and cpu_plan.is_empty():
+		queue_entries = current_order()
+	else:
+		queue_entries = model.initiative_preview(displayed_weapon)
+
+## Turn order by current readiness only, while the CPU has not chosen a weapon.
+func current_order() -> Array:
+	var entries: Array = []
+	for index in range(2):
+		entries.append({"actor": index, "ready": float(model.actors[index].ready), "delay": maxf(0.0, float(model.actors[index].ready) - model.clock)})
+	entries.sort_custom(func(a, b): return a.ready < b.ready or (is_equal_approx(a.ready, b.ready) and a.actor == model.active))
+	return entries
+
+## State the HUD draws from; HudArt never reads game.gd internals directly.
+func hud_state() -> Dictionary:
+	return {"power": power, "angle": hud.hud_angle(model, angle, weapon),
+		"movement": model.movement_left / maxf(1.0, model.movement_budget()), "gold": reward, "queue": queue_entries,
+		"player_name": profile.nickname, "weapon": weapon, "aim": angle, "paused_cpu": false}
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or event.echo:
@@ -535,17 +472,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	if event.physical_keycode == KEY_SPACE:
 		if event.pressed:
-			charging = true
-			power = 15.0
-		elif charging:
-			shoot()
+			begin_charge()
+		else:
+			release_charge()
 	elif event.pressed:
 		match event.physical_keycode:
+			KEY_TAB: cycle_weapon()
+			KEY_F8: pass_turn()
 			KEY_1: select_weapon(0)
 			KEY_2: select_weapon(1)
 			KEY_3: select_weapon(2)
 			KEY_F: flip()
-			KEY_ENTER: shoot()
 
 func make_overlay(kind: String) -> Panel:
 	if is_instance_valid(overlay):
@@ -576,7 +513,7 @@ func close_overlay() -> void:
 func show_help() -> void:
 	var card := make_overlay("help")
 	ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, ui.CREAM, true)
-	var lines := ["A / D ou ← / →     Mover o veículo", "W / S ou ↑ / ↓     Ajustar o ângulo", "ESPAÇO                  Carregar; soltar ou encher para disparar", "1 / 2 / 3                 Escolher a arma", "F                             Virar parado", "ESC                        Pausar / continuar", "Arrastar a tela       Olhar o mapa (volta no próximo turno)"]
+	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8                           Passar o turno", "ESC                         Opções / pausa", "Arrastar a tela        Olhar o mapa; F vira parado"]
 	for index in range(lines.size()):
 		ui.label(card, lines[index], Vector2(32, 92 + index * 34), Vector2(500, 32), 17)
 	ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 336), Vector2(500, 70), 14, ui.MUTED)
@@ -641,9 +578,8 @@ func _draw() -> void:
 	draw_set_transform(offset)
 	for index in range(model.actors.size()):
 		art.draw_actor(self, index, offset)
+	hud.draw_world(self, model, offset, hud_state())
 	draw_set_transform(offset)
-	if model.phase == "aim" and model.active == 0:
-		draw_aim_guide()
 	for projectile in model.projectiles:
 		if not projectile.launched:
 			continue
@@ -676,12 +612,7 @@ func _draw() -> void:
 		draw_string(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32, Color(item.color, 1.0 - float(item.age) / 1.5))
 	draw_set_transform(Vector2.ZERO)
 	draw_offscreen_markers()
-	art.draw_compass(self)
-	weather_art.draw_forecast(self, model)
-	if banner_time > 0.0 and model.phase == "aim":
-		var width: float = ui.bold.get_string_size(banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17).x + 48.0
-		draw_style_box(ui.box(Color(0.05, 0.15, 0.19, minf(0.9, banner_time)), 10), Rect2(640 - width / 2, 176, width, 42))
-		draw_string(ui.bold, Vector2(664 - width / 2, 202), banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color(ui.CREAM, minf(1.0, banner_time)))
+	hud.draw_screen(self, model, hud_state())
 
 func draw_procedural_terrain() -> void:
 	draw_texture_rect(model.terrain.texture, Rect2(0, 0, 1280, 800), false)
@@ -814,24 +745,3 @@ func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: f
 	if kind == 2:
 		bigfoot.draw(self, pos, width, facing, rotation, bigfoot.frame_index("idle", elapsed, 0, false), color)
 		return
-
-func draw_aim_guide() -> void:
-	var center: Vector2 = model.cannon_pivot(0)
-	var facing: int = model.actors[0].facing
-	var rotation: float = model.body_rotation(0)
-	var limits: Vector2 = model.aim_limits(0, weapon)
-	var start := rotation - deg_to_rad(limits.y) if facing == 1 else rotation + PI + deg_to_rad(limits.x)
-	var end := rotation - deg_to_rad(limits.x) if facing == 1 else rotation + PI + deg_to_rad(limits.y)
-	draw_arc(center, 62, start, end, 42, Color(0.3, 0.85, 0.42, 0.65), 8, true)
-	for mark in range(int(limits.x), int(limits.y) + 1, 5):
-		var direction: Vector2 = model.shot_velocity(0, mark, 100, weapon).normalized()
-		draw_line(center + direction * 53, center + direction * (65 if mark % 15 == 0 else 61), Color(0.94, 1, 0.88, 0.85), 1, true)
-	var direction: Vector2 = model.shot_velocity(0, angle, 100, weapon).normalized()
-	var tip := center + direction * 73
-	draw_line(center + direction * 38, tip, ui.AMBER, 2, true)
-	draw_circle(tip, 5, ui.AMBER)
-	draw_circle(tip, 2, ui.INK)
-	var degrees: float = rad_to_deg(atan2(-direction.y, direction.x * facing))
-	var label_pos := center + Vector2(-72 if facing == 1 else 25, -13)
-	draw_string_outline(ui.bold, label_pos, "%d°" % roundi(degrees), HORIZONTAL_ALIGNMENT_LEFT, -1, 20, 4, ui.INK)
-	draw_string(ui.bold, label_pos, "%d°" % roundi(degrees), HORIZONTAL_ALIGNMENT_LEFT, -1, 20, ui.AMBER)

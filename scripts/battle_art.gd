@@ -87,16 +87,7 @@ func draw_actor(view: Node2D, index: int, offset: Vector2) -> void:
 	if state.pose == "recoil":
 		weapon = int(model.last_shots[index].get("weapon", 0))
 	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(view, index), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase)
-	if actor.hp <= 0:
-		return
-	if model.active == index and model.phase == "aim":
-		var pointer := pos + offset + Vector2(0, -94 + sin(time * 4.0) * 3.0)
-		view.draw_colored_polygon(PackedVector2Array([pointer + Vector2(-8, -9), pointer + Vector2(8, -9), pointer + Vector2(0, 3)]), view.ui.AMBER)
-		view.draw_string(view.ui.bold, pointer + Vector2(-23, -17), "TURNO", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, view.ui.INK)
-	var name: String = view.profile.nickname if index == 0 else "Autômato"
-	var width: float = view.ui.bold.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
-	view.draw_style_box(view.ui.box(Color(0.03, 0.08, 0.14, 0.87), 3, view.ui.STEEL), Rect2(pos.x + offset.x - width * 0.5 - 7, pos.y + offset.y + 76, width + 14, 22))
-	view.draw_string(view.ui.bold, pos + offset + Vector2(-width / 2, 92), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, tint.lightened(0.2))
+	# Turn pointer and name box gave way to the original HUD (hud_art.gd).
 
 func draw_explosion(view: Node2D, effect: Dictionary) -> void:
 	var age: float = effect.age
@@ -119,23 +110,3 @@ func draw_explosion(view: Node2D, effect: Dictionary) -> void:
 		var point := pos + Vector2((i - 2.5) * 11.0, -age * (38 + i * 5))
 		var opacity := maxf(0.0, 1.0 - age / 1.5) * 0.28
 		view.draw_circle(point, 8 + age * (15 + i), Color(0.2, 0.22, 0.26, opacity))
-
-func draw_compass(view: Node2D) -> void:
-	var center := Vector2(640, 52)
-	var ui = view.ui
-	view.draw_circle(center + Vector2(2, 4), 42, Color(0, 0, 0, 0.25))
-	view.draw_circle(center, 40, ui.INK)
-	view.draw_arc(center, 40, 0, TAU, 64, ui.STEEL, 3, true)
-	view.draw_arc(center, 35, 0, TAU, 64, Color("355c7c"), 1, true)
-	for i in range(12):
-		var dir := Vector2.from_angle(i * TAU / 12)
-		view.draw_line(center + dir * 30, center + dir * 34, ui.STEEL, 1, true)
-	# OpenBound wind compass: the arrow points along the 2D wind angle.
-	var wind: Vector2 = view.model.wind
-	if wind.length() >= 0.5:
-		var dir := wind.normalized()
-		var side := dir.orthogonal()
-		var arrow: Color = ui.AMBER if wind.length() > 18 else ui.TEAL
-		view.draw_line(center - dir * 19, center + dir * 22, arrow, 4, true)
-		view.draw_colored_polygon(PackedVector2Array([center + dir * 24, center + dir * 12 + side * 7, center + dir * 12 - side * 7]), arrow)
-	view.draw_string(ui.bold, center + Vector2(-29, 57), "VENTO", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, ui.INK)

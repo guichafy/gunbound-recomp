@@ -21,12 +21,13 @@ func _ready() -> void:
 	for kind in ["fire", "explosion", "turn", "result"]:
 		streams[kind] = synthesize(kind)
 
-func play(kind: String, original: AudioStream = null) -> void:
-	if muted or not streams.has(kind):
+func play(kind: String, original: AudioStream = null, pitch: float = 1.0) -> void:
+	if muted or (original == null and not streams.has(kind)):
 		return
 	var player := players[next_player]
 	next_player = (next_player + 1) % players.size()
 	player.stream = original if original != null else streams[kind]
+	player.pitch_scale = pitch
 	player.play()
 
 func synthesize(kind: String) -> AudioStreamWAV:
