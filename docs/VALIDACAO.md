@@ -1,4 +1,4 @@
-# Validação funcional — Brisa de Aço 0.6.2
+# Validação funcional — Brisa de Aço 0.6.3
 
 ## Piloto e tiros 0.6.2
 
@@ -108,3 +108,12 @@ sem esticar o carro, recuo após disparo, dano e morte sem troca brusca de desen
 Pausar durante movimento/carga/voo e retomar; iniciar revanche/menu e conferir
 que o estado anterior não persiste. Prévia animada em docs/animation/animation.gif
 é fixture do renderer, não substitui este teste funcional.
+
+## Composição0.6.3
+
+No menu compare Bigfoot/Mage com docs/composition/comparison.png: piloto maior
+em relação ao veículo, canhão/rodas menores, mãos perto dos controles e quadris
+no assento. Inicie treino, vire e mova em encostas; composição deve girar unida,
+sem separar peças ou deformar figura. Teste carga/recuo/dano e pausa. Tiros
+corrigidos em0.6.2 devem manter aparência/animação. Confirmação visual final
+continua a cargo do usuário.

@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.6.2
+# Especificação — protótipo 0.6.3
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;
@@ -127,3 +127,9 @@ lasers com rastro contínuo e impactos com transição suave, centro fixo e dura
 original. REQ-09: pausa congela as camadas. Critérios em PILOT_SHOTS_FIX_0_6_2.md;
 103 checks específicos, capturas GPU e revisão. Combate e tamanho dos mobiles
 preservados. Aceitação visual pelo usuário pendente.
+
+## Composição 0.6.3 — correção solicitada
+
+REQ-19/20/12: corrigir proporção relativa piloto/carrinho, tamanho de canhão
+e rodas e encaixe no assento, no menu e arena. Medidas originais são referência
+de composição, PNGs/tiros atuais preservados. Plano em COMPOSITION_FIX_0_6_3.md.

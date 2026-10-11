@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.2**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.3**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
 
 ## Jogar
 
@@ -131,3 +131,11 @@ preservados. [Piloto em encostas](docs/projectiles/pilot-poses.png),
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_pilot_projectiles.gd
 /Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_pilot_projectiles.gd
 ```
+
+## Composição corrigida 0.6.3
+
+Piloto, rodas e arma recalibrados pela proporção original, com novo encaixe no
+assento e peças sem esticar. Menu e arena usam o mesmo conjunto. Compare
+[original e HD em encostas](docs/composition/comparison.png) ou veja a
+[prévia animada](docs/composition/composition.gif). Tiros0.6.2 preservados.
+Plano em [COMPOSITION_FIX_0_6_3.md](docs/sdd/COMPOSITION_FIX_0_6_3.md).

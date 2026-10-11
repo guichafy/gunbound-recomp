@@ -190,3 +190,15 @@ Relógios são os mesmos age físicos/de efeitos, pausados pela cena. Cada camin
 exige textura, recortes não vazios e catalog_valid; falha retorna false e os
 sprites usam originais. Mobile também exige o piloto válido como conjunto.
 Nenhuma mudança em match/combat/terrain/profile ou suas regras.
+
+## Composição 0.6.3
+
+Rig compartilhado por menu/arena recalibrado contra o idle original. União alpha
+corpo/cabeça do piloto mede44px; hulls49/46px resultam em altura53,88/57,39 no
+layout base60. Fonte piloto mantém aspecto, quadris normalizados0,78/0,88.
+Bigfoot: assento17/−20, corpo60×24 em−30/−31, canhão25×21 pivot−17/−37,
+rodas24 em±18/−12. Mage: assento18/−28, corpo60×36, cajado29×23 pivot−19/−34.
+As peças são contidas em caixas preservando aspecto. Camadas chassis→piloto→
+arma→rodas; suspensão afeta assento/arma, rodas seguem o apoio. O conjunto
+recebe flip/inclinação/escala uniformes; animações/tiros/regras preservados.
+Metadados do layout usados pelo draw e pelo teste de composição.

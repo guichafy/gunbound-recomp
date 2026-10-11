@@ -1,5 +1,14 @@
 # Entregas e próximos trabalhos
 
+## Composição0.6.3
+
+- [x] Comparar original/HD e localizar escala relativa incorreta.
+- [x] Calibrar piloto/canhão/rodas/assento, preservar aspecto e camadas.
+- [x] Regressão RED→GREEN,788checks, comparação/120frames GPU e capturas reais.
+- [x] Revisão sem achados bloqueantes, app0.6.3/assinatura/runtime/PCK válidos.
+- [x] SDD e Git local atualizados.
+- [ ] Usuário avaliar composição corrigida no aplicativo.
+
 ## Piloto, tiros e impactos 0.6.2
 
 - [x] Diagnosticar anatomia separada, cabeça variável e orientação Bigfoot.

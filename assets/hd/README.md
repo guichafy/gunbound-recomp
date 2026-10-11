@@ -47,3 +47,8 @@ impactos fazem blend6fases/envelope com centro/duração fixos. Ausência de tex
 catálogo ou recortes válidos usa original. Prévia GPU em docs/projectiles.
 Adaptação artística, não restauração quadro a quadro nem garantia de igualdade
 com Gunbound. Full HD é o framebuffer de validação, fontes têm dimensões reais.
+
+Composição0.6.3 conserva esses PNGs intactos e recalibra o rig pelas proporções
+do piloto/veículo original. Altura do piloto54/57 contra base60, canhão e rodas
+menores, novo assento/sobreposição; piece preserva aspecto de cada peça.
+Prévia/comparação GPU em docs/composition; tiros0.6.2 preservados.

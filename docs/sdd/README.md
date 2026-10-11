@@ -29,7 +29,7 @@ da execução inicial. O conjunto `docs/sdd/` consolida o contexto atual.
 O [README principal](../../README.md), o [guia de aprendizado](../APRENDIZADO.md),
 o [roteiro funcional](../VALIDACAO.md) e a [origem da arte](../ART.md) o complementam.
 
-Baseline inicial: **0.1.0**; versão atual **0.6.2**, em **2026-10-11**. O histórico Git
+Baseline inicial: **0.1.0**; versão atual **0.6.3**, em **2026-10-11**. O histórico Git
 identifica as revisões; não manter hashes de commits dentro destes documentos.
 
 Assets HD atuais: [HD_ASSETS_0_6.md](HD_ASSETS_0_6.md), GPT Images e aparência
@@ -39,3 +39,6 @@ Correção atual de sprites/animação: [ANIMATION_FIX_0_6_1.md](ANIMATION_FIX_0
 
 Correção atual de piloto/tiros/impactos:
 [PILOT_SHOTS_FIX_0_6_2.md](PILOT_SHOTS_FIX_0_6_2.md), prévias em docs/projectiles.
+
+Composição atual: [COMPOSITION_FIX_0_6_3.md](COMPOSITION_FIX_0_6_3.md),
+referência original/HD e prévias em docs/composition.

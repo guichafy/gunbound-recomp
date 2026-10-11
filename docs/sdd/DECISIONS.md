@@ -129,3 +129,12 @@ ADR-036 — adotada: crossfade/envelope de impactos e EMP constante substituem
 enquadramento quadro a quadro de ADR-031. Catálogo válido obrigatório para Fx,
 EMP, cabeças e chamas; fallback original em dados inválidos. Offset da câmera
 é apenas visual. Mecânica, sons e duração original preservados.
+
+## Composição 0.6.3
+
+ADR-037 — adotada após feedback: piloto unido de0.6.2 corrigiu anatomia, mas
+escala relativa/encaixe permaneciam incorretos. Substituir altura29 e assentos
+anteriores pela relação44px de piloto nativo/hulls49/46. Recalibrar canhão e
+rodas, preservar aspecto também das peças do veículo e sobreposição natural.
+Não gerar novos sprites nem alterar tiros aprovados. Testes temporais anteriores
+não mediam proporção relativa; adicionar regressão e comparação GPU original/HD.

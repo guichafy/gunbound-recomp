@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.6.2 em Godot 4.7.2 + GDScript. Escopo:
+Protótipo 0.6.3 em Godot 4.7.2 + GDScript. Escopo:
 desktop macOS, treino offline 1×1 contra CPU, arte do protótipo + Bigfoot/Mage originais
 e progresso local.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
@@ -88,3 +88,11 @@ Bigfoot aponta DIREITA na fonte (velocity.angle, sem PI). Todo consumidor exige
 catalog_valid/regiões completas, fallback original. Offset de tremor só visual.
 Teste test_pilot_projectiles.gd; capture_pilot_projectiles.gd gera72frames/PNG.
 783checks nesta entrega; docs/projectiles preserva GPU PNG/MP4/GIF.
+
+## Composição 0.6.3 — ajuste atual
+
+Ver docs/sdd/COMPOSITION_FIX_0_6_3.md. Rig usa relação44px piloto/hulls49/46,
+não mais altura29. Caixas/assentos/arma/rodas em sample compartilhados pelo draw;
+piece preserva aspecto e camadas chassis/piloto/arma/rodas dão encaixe. Menu/arena
+mesmos parâmetros. Tiros preservados. tests/capture_mobile_composition.gd
+compara original/HD e poses em dois sentidos; docs/composition contém PNG/MP4/GIF.

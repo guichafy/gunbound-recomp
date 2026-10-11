@@ -49,19 +49,29 @@ func sample(pose: String, age: float, weapon: int) -> Dictionary:
 		angle = progress * 0.65
 		alpha = 1.0 - smoothstep(0.15, 1.0, progress)
 	var region: Rect2 = pilot.region(0, 0)
-	var pilot_size := Vector2(29.0 * region.size.x / maxf(region.size.y, 1.0), 29.0)
+	# Native idle body+head union: 44px tall against the 49/46px hulls.
+	# One shared composition scale, rather than unrelated pilot/vehicle boxes.
+	var pilot_height := 44.0 * 60.0 / (49.0 if kind == "bigfoot" else 46.0)
+	var pilot_size := Vector2(pilot_height * region.size.x / maxf(region.size.y, 1.0), pilot_height)
 	var pilot_rect := Rect2(-pilot_size * Vector2(0.78, 0.88), pilot_size)
 	var pilot_sway := Vector2.ZERO
 	var pilot_angle := sin(age * TAU * 1.5) * 0.014
-	var seat := Vector2(7, -25) if kind == "bigfoot" else Vector2(6, -37)
-	return {"body_size": Vector2(60, 29) if kind == "bigfoot" else Vector2(60, 39),
+	var seat := Vector2(17, -20) if kind == "bigfoot" else Vector2(18, -28)
+	var body_size := Vector2(60, 24) if kind == "bigfoot" else Vector2(60, 36)
+	return {"body_size": body_size,
+		"body_rect": Rect2(Vector2(-30, -31 if kind == "bigfoot" else -36), body_size),
+		"gun_pivot": Vector2(-17, -37) if kind == "bigfoot" else Vector2(-19, -34),
+		"gun_rect": Rect2(-13, -18, 25, 21) if kind == "bigfoot" else Rect2(-17, -23, 29, 23),
+		"wheel_radius": 12.0,
 		"pilot_size": pilot_size, "pilot_rect": pilot_rect, "pilot_sway": pilot_sway, "pilot_angle": pilot_angle,
 		"body_offset": offset, "body_angle": angle, "barrel_angle": barrel,
 		"wheel_angle": wheels, "flash": flash, "glow": glow, "alpha": alpha,
 		"pilot_anchor": seat + offset}
 func piece(view: Node2D, atlas, row: int, column: int, transform: Transform2D, target: Rect2, color: Color) -> void:
 	view.draw_set_transform_matrix(transform)
-	view.draw_texture_rect_region(atlas.paint, target, atlas.region(row, column), color)
+	var source: Rect2 = atlas.region(row, column)
+	var fitted := source.size * minf(target.size.x / source.size.x, target.size.y / source.size.y)
+	view.draw_texture_rect_region(atlas.paint, Rect2(target.get_center() - fitted * 0.5, fitted), source, color)
 func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0) -> bool:
 	if not available():
 		return false
@@ -76,21 +86,20 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	if low_health:
 		tint *= Color(0.7, 0.7, 0.7)
 	var row := 0 if kind == "bigfoot" else 1
-	var body_rect := Rect2(-30, -35, state.body_size.x, state.body_size.y) if kind == "bigfoot" else Rect2(-30, -39, state.body_size.x, state.body_size.y)
-	piece(view, sheet, row, 0, body, body_rect, tint)
-	if kind == "bigfoot":
-		# Chassis suspension moves independently. Tires stay on their fixed support.
-		for x in [-18.0, 18.0]:
-			piece(view, sheet, 0, 2, support * Transform2D(-facing * wheel_phase, Vector2(x, -15)), Rect2(-15, -15, 30, 30), tint)
-	var gun_pivot := Vector2(-18, -35) if kind == "bigfoot" else Vector2(-10, -35)
+	piece(view, sheet, row, 0, body, state.body_rect, tint)
+	var gun_pivot: Vector2 = state.gun_pivot
 	var gun := body * Transform2D(state.barrel_angle, gun_pivot)
-	var gun_rect := Rect2(-14, -27, 30, 28) if kind == "bigfoot" else Rect2(-25, -26, 40, 27)
-	piece(view, sheet, row, 1, gun, gun_rect, tint)
 	# Entire seated anatomy rotates as one figure around the hips, no seam/stretch.
 	var seat: Vector2 = state.pilot_anchor - state.body_offset + state.pilot_sway
 	piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
+	# Mounted weapon and near tires occlude the seated lower body naturally.
+	piece(view, sheet, row, 1, gun, state.gun_rect, tint)
+	if kind == "bigfoot":
+		var radius: float = state.wheel_radius
+		for x in [-18.0, 18.0]:
+			piece(view, sheet, 0, 2, support * Transform2D(-facing * wheel_phase, Vector2(x, -radius)), Rect2(-radius, -radius, radius * 2, radius * 2), tint)
 	view.draw_set_transform_matrix(gun)
-	var tip := Vector2(-13, -19) if kind == "bigfoot" else Vector2(-14, -15)
+	var tip := Vector2(-12, -13) if kind == "bigfoot" else Vector2(-13, -15)
 	if state.glow > 0.001:
 		var aura := Color("66cfff") if weapon == 2 else Color("ffbd51")
 		view.draw_arc(tip, 7 + state.glow * 3, age * 3, age * 3 + TAU * 0.8, 24, Color(aura, tint.a * state.glow * 0.65), 1.2, true)

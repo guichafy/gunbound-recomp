@@ -1,6 +1,49 @@
-# Hand-off — Brisa de Aço 0.6.2
+# Hand-off — Brisa de Aço 0.6.3
 
-## Entrega atual 0.6.2: piloto, tiros e impactos
+## Entrega atual 0.6.3: proporção e composição
+
+Feedback: tiros0.6.2 corrigidos, composição piloto/carrinho ainda inadequada.
+REQ-19/20/12; plano COMPOSITION_FIX_0_6_3.md. Piloto unido tinha altura29,
+pequeno em relação ao canhão/rodas. União alpha nativa corpo/cabeça mede44px;
+hulls49/46 dão altura53,88/57,39 no layout60. Recalibrados assentos, chassis,
+arma e rodas; peça preserva aspecto. Camadas chassis→piloto→arma→rodas.
+Mesmo rig menu/arena, flip/inclinação uniformes, quadris no assento e mãos
+próximas aos controles. Nenhum asset novo: PNGs HD/originais intactos. Tiros,
+combate, clocks, perfil e áudio sem diff. Detalhes concretos em DESIGN/ADR-037.
+
+Validação fresca: **788 checks, zero falhas**, nas12suites anteriores (108
+piloto/tiros;189HD;240animação;251modelos/cenas/ataques). Regressão RED106/3,
+GREEN108/0: proporção nativa e montagem arma/rodas/controles. Não repetir dez
+partidas como evidência nova, pois combate não mudou. Perfis isolados.
+Capturas reais de menu/arena/tiros atualizadas em docs/hd, rótulo0.6.3.
+Comparação original/HD e encostas±30° espelhadas em docs/composition/comparison.png,
+120framesGPU/24fps com repouso/movimento/carga/recuo/dano e MP4/GIF.
+Galeria usa poses controladas sobre fundo plano; não prova contato físico
+com terreno em encostas nem inclui destruição. Arena real foi inspecionada.
+Revisão independente sem achados bloqueantes; observou pequena margem inferior
+por aspect fit das rodas (~0,49unidade), sem impacto físico. Teste manual
+completo e aceitação visual do usuário pendentes.
+
+App/ZIP Universal0.6.3 reexportados por build_macos.py; assinatura profunda/
+estrita válida, runtime independente sem erros. PCK em projeto vazio validou
+assets/recortes/rig/tiros e salvas4/6/8, zero falhas. Git local/tagv0.6.3;
+sem remoto/push/publicação.
+
+```sh
+mkdir -p .tools
+/Applications/Godot.app/Contents/MacOS/Godot --headless --editor --path . --import
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_pilot_projectiles.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mobile_animation.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_hd_assets.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_mobile_composition.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_hd_assets.gd
+python3 scripts/build_macos.py
+```
+
+Próximo passo: usuário avaliar composição menu/arena no aplicativo. Arte HD
+adaptada; não anunciar recuperação exata de Gunbound. Históricos abaixo.
+
+## Entrega anterior 0.6.2: piloto, tiros e impactos
 
 Pedido: corrigir personagem e animações dos tiros após o print do piloto no
 Bigfoot inclinado. REQ-19/20/12 e pausa REQ-09; especificação/plano em

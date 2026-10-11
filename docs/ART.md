@@ -64,3 +64,9 @@ Prompt: Single ORIGINAL small cobalt-and-teal beetle-inspired artillery rover ga
 Prompt: Single ORIGINAL small amber-and-rust tortoise-inspired artillery rover game sprite, strict 2D side view facing RIGHT. Friendly 2000s cartoon videogame sprite matching blue beetle artillery rover, ivory circular cockpit with tiny goggled pilot, two chunky black rubber wheels along horizontal baseline, rounded orange turtle-shell armor plates, brass rivets, tiny red pennant. Short cannon level pointing right, compact rounded silhouette, vivid colors, crisp dark outlines, hand-painted cel shading. Entire vehicle centered with generous transparent padding. No ground, no shadow backdrop, no text or other items. Suitable for 100px-wide render. Actual transparent background.
 
 Terreno, canhão móvel, partículas, mira, barras e menus são desenhados pela engine. Os efeitos sonoros são sintetizados por `scripts/sound.gd`. Não foram reutilizados sprites, áudio ou código do Gunbound ou dos repositórios pesquisados.
+
+## Composição0.6.3
+
+Nenhuma imagem nova gerada/editada. Corrigidos tamanho relativo, assento,
+proporção das peças e camadas no rig; referência é o conjunto original.
+Comparação GPU e prévias em docs/composition; tiros aprovados preservados.

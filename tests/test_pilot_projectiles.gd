@@ -66,6 +66,17 @@ func run() -> void:
 		var state: Dictionary = rig.sample("idle", 0.0, 0)
 		check(is_equal_approx(state.pilot_size.x / state.pilot_size.y, frame.size.x / frame.size.y), "Pilot preserves source anatomy/aspect")
 		check((state.pilot_rect.position + state.pilot_size * Vector2(0.78, 0.88)).is_zero_approx(), "Pilot hips touch seat anchor")
+		# Native idle rider union is 44px tall, against hulls of 49/46px.
+		var native_height := 44.0 * 60.0 / (49.0 if kind == "bigfoot" else 46.0)
+		check(absf(state.pilot_size.y - native_height) < 1.0, "Pilot/car ratio matches native seated silhouette: " + kind)
+		if kind == "bigfoot" and not state.has("gun_rect"):
+			check(false, "Composition exposes the same mounted geometry used in rendering")
+		elif kind == "bigfoot":
+			check(state.gun_rect.size.y / state.pilot_size.y < 0.45, "Cannon does not dwarf the seated pilot")
+			check(state.wheel_radius * 2.0 / state.pilot_size.y < 0.5, "Wheel does not dwarf the seated pilot")
+			var hands: Vector2 = state.pilot_anchor + state.pilot_rect.position + state.pilot_size * Vector2(0.18, 0.64)
+			var controls: Vector2 = state.gun_pivot + state.gun_rect.end
+			check(hands.distance_to(controls) < 7.0, "Hands reach mounted controls rather than floating in cockpit")
 		var first: Dictionary = rig.sample("charging", 0.5, 2)
 		var next: Dictionary = rig.sample("charging", 0.501, 2)
 		check(first.pilot_size == next.pilot_size and first.pilot_sway.distance_to(next.pilot_sway) < 0.01, "Pilot animation has stable size and smooth motion")
