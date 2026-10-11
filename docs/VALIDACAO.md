@@ -1,4 +1,16 @@
-# Validação funcional — Brisa de Aço 0.2
+# Validação funcional — Brisa de Aço 0.3
+
+## Bigfoot nesta entrega
+
+Selecione Bigfoot (já selecionado ao abrir). Verifique piloto e animações reais
+quando mover, carregar, disparar, receber dano e morrer. Trocar de arma durante
+a carga reinicia a pose correspondente; pausa congela quadros e revanche reinicia
+estado. Projéteis têm imagens originais, com dano/regras ainda do protótipo.
+
+Passaram 130 verificações e oito partidas, incluindo 28 checks Bigfoot e duas
+partidas com o novo veículo. Revisão independente corrigiu SS trocando para S1
+após turno rápido. Sem validação manual completa de mouse. Os números específicos
+de 0.2 abaixo permanecem como histórico; o roteiro também serve para 0.3.
 
 ## Roteiro para você
 

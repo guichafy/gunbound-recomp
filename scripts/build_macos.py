@@ -35,8 +35,14 @@ def main() -> None:
     info["CFBundleDisplayName"] = "Brisa de Aço"
     with plist_path.open("wb") as target:
         plistlib.dump(info, target)
-    for name in ["GODOT_LICENSE.txt", "GODOT_COPYRIGHT.txt"]:
-        source = ROOT / "docs" / name
+    notices = {
+        "docs/GODOT_LICENSE.txt": "GODOT_LICENSE.txt",
+        "docs/GODOT_COPYRIGHT.txt": "GODOT_COPYRIGHT.txt",
+        "assets/openbound/OPENBOUND_CODE_LICENSE.GPL": "OPENBOUND_CODE_LICENSE.GPL",
+        "assets/openbound/ATTRIBUTION.md": "OPENBOUND_ATTRIBUTION.md",
+    }
+    for relative, name in notices.items():
+        source = ROOT / relative
         if source.exists():
             shutil.copy2(source, contents / "Resources" / name)
     # Normalize executable metadata before sealing resources. This avoids the

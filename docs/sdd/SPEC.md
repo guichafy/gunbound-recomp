@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.2.0
+# Especificação — protótipo 0.3.0
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o
@@ -58,15 +58,19 @@ bússola, inclinação, carga automática e animações. Aceitação automatizad
 `test_refinement.gd` (28) e `test_refinement_scene.gd` (21), além das suites anteriores.
 Os parâmetros de dano/vida/atraso/XP continuam os do baseline.
 
-## Fora da entrega
+## Bigfoot e integração original
 
 Solicitação posterior ao refinamento: **REQ-19 — integrar assets reais de Bigfoot
 e outros mobiles a partir do material disponível do OpenBound**, com animações e
 tiros correspondentes. A direção original de REQ-11 permanece descrição do
 baseline 0.2, mas foi substituída pelo pedido atual para a próxima integração.
 Status e origem do pacote externo em [ORIGINAL_ASSETS.md](ORIGINAL_ASSETS.md).
-REQ-19 ainda não implementado no jogo: os sprites ausentes do fork foram recebidos
-pelo Drive e estão baixados/validados em `.tools/source-assets/content/`.
+REQ-19 parcialmente atendido: Bigfoot selecionável com atlas, piloto padrão,
+quadros e projéteis originais na versão 0.3.0. Ver `BIGFOOT_0_3.md`. Vida 1100,
+movimento 90. Armas mantêm as regras do protótipo; salvas oficiais e outros
+mobiles pendentes. Todos os assets restantes estão em `.tools/source-assets/content/`.
+
+## Fora da entrega
 
 Multiplayer, salas privadas, busca de adversários, ranking, contas, reconexão,
 2×2 e demais formatos, campanha, monetização e distribuição pública.

@@ -1,6 +1,32 @@
-# Hand-off — Brisa de Aço 0.2.0
+# Hand-off — Brisa de Aço 0.3.0
 
-## Pedido atual: mobiles e assets reais do Gunbound/OpenBound
+## Entrega atual: Bigfoot com sprites originais
+
+Bigfoot foi integrado como terceira opção, selecionada inicialmente no menu.
+Atlas, piloto padrão masculino, offsets por quadro e projéteis são os originais
+do pacote recebido, sem alterar PNGs. Arquivos usados em `assets/openbound/`;
+leitor `scripts/bigfoot_sprite.gd`, poses em `battle_art.gd`. Capturas GPU reais:
+`docs/bigfoot-menu.png`, `bigfoot-arena.png`, `bigfoot-moving.png`,
+`bigfoot-charge.png` e `bigfoot-firing.png`. Fonte/avisos e hashes preservados.
+
+Plano em `BIGFOOT_0_3.md`. 130 verificações (40+28 modelos, 13+21 cena, 28 Bigfoot)
+passaram; oito partidas seeds 81–88 concluíram, incluindo duas Bigfoot. Revisão
+independente encontrou troca de quadros SS após turno rápido; corrigida com
+RED→GREEN. Trocar arma durante carga também reinicia seu próprio ciclo. JSON do
+piloto e avisos de referência incluídos no pacote. App/ZIP 0.3.0 Universal exportado.
+
+Esta é a integração visual Bigfoot. Armas ainda mantêm dano, quantidade, atraso
+e balística do protótipo; salvas 4/6/8, resistências, áudio específico e outros
+mobiles não foram portados. Vida 1100 e movimento 90. Não anunciar reprodução
+completa de Gunbound. Usuário ainda precisa validar funcionalmente no aplicativo.
+
+Novo teste: Godot `--headless --path . --script tests/test_bigfoot.gd`.
+Nova captura: Godot `--path . --script tests/capture_bigfoot.gd` (perfil isolado).
+Demais comandos do baseline abaixo continuam válidos; `test_matches` agora joga
+oito partidas. Próximo passo: feedback visual/funcional e ataques/próximos mobiles
+conforme nova solicitação. Textos sobre a entrega 0.2 abaixo são histórico.
+
+## Histórico do pedido e recebimento de assets
 
 O usuário pediu copiar e integrar Bigfoot e outros mobiles reais do fork
 informado, substituindo a aproximação visual por maior fidelidade. Nova auditoria

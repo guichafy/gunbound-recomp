@@ -5,7 +5,8 @@ const Terrain = preload("res://scripts/terrain.gd")
 const Combat = preload("res://scripts/combat.gd")
 const VEHICLES := [
 	{"name": "Escaravelho", "hp": 580, "move": 110.0, "delay": 0.0, "color": Color("65dce4")},
-	{"name": "Carapaça", "hp": 700, "move": 80.0, "delay": 18.0, "color": Color("ffbc79")}
+	{"name": "Carapaça", "hp": 700, "move": 80.0, "delay": 18.0, "color": Color("ffbc79")},
+	{"name": "Bigfoot", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("71c0ff")}
 ]
 var terrain
 var actors: Array = []
@@ -36,7 +37,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1) -> void:
 	terrain.generate()
 	actors.clear()
 	for index in range(2):
-		var kind := vehicle if index == 0 else 1 - vehicle
+		var kind := vehicle if index == 0 else (1 - vehicle if vehicle < 2 else 1)
 		var x := 235.0 if index == 0 else 1045.0
 		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, terrain.surface_at(x) - 24.0), "facing": 1 if index == 0 else -1, "ready": 0.0, "turns": 0, "special_used": false})
 	difficulty = clampi(cpu_difficulty, 0, 2)

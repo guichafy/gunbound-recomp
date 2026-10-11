@@ -7,6 +7,8 @@ const Profile = preload("res://scripts/profile.gd")
 const UIFactory = preload("res://scripts/ui.gd")
 const Sound = preload("res://scripts/sound.gd")
 const BattleArt = preload("res://scripts/battle_art.gd")
+const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
+var bigfoot = BigfootSprite.new()
 var art = BattleArt.new()
 var ui = UIFactory.new()
 var model = Match.new()
@@ -20,7 +22,7 @@ var background: Texture2D
 var sprites: Array[Texture2D] = []
 var regions: Array[Rect2] = []
 var nickname_input: LineEdit
-var vehicle := 0
+var vehicle := 2
 var cpu_difficulty := 1
 var vehicle_buttons: Array[Button] = []
 var vehicle_info: Label
@@ -99,7 +101,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.2", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.3", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "BRISA\nDE AÇO", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -128,8 +130,9 @@ func show_menu() -> void:
 	card.add_child(nickname_input)
 	ui.label(card, "ESCOLHA SEU VEÍCULO", Vector2(28, 214), Vector2(364, 22), 12, ui.TEAL, true)
 	vehicle_buttons.clear()
-	for index in range(2):
-		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + index * 186, 246), Vector2(178, 48), func(): select_vehicle(index))
+	for index in range(Match.VEHICLES.size()):
+		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + index * 124, 246), Vector2(116, 48), func(): select_vehicle(index))
+		button.add_theme_font_size_override("font_size", 14)
 		vehicle_buttons.append(button)
 	vehicle_info = ui.label(card, "", Vector2(28, 303), Vector2(364, 50), 15, ui.MUTED)
 	ui.label(card, "DIFICULDADE DA MÁQUINA", Vector2(28, 372), Vector2(364, 22), 12, ui.TEAL, true)
@@ -154,7 +157,8 @@ func select_vehicle(index: int) -> void:
 	for j in range(vehicle_buttons.size()):
 		vehicle_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if j == index else Color("24444e"), 9, ui.TEAL if j == index else Color("47626a")))
 	var data: Dictionary = Match.VEHICLES[index]
-	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), "Ágil, com recuperação mais rápida." if index == 0 else "Resistente, com recuperação mais lenta."]
+	var description: String = ["Ágil, com recuperação mais rápida.", "Resistente, com recuperação mais lenta.", "Bigfoot com sprites e animações originais."][index]
+	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), description]
 	queue_redraw()
 
 func start_match() -> void:
@@ -327,7 +331,7 @@ func _process(delta: float) -> void:
 			if power >= 100.0:
 				shoot()
 	model.tick(frame_delta)
-	art.tick(model, frame_delta)
+	art.tick(model, frame_delta, charging, weapon)
 	consume_events()
 	if model.phase == "aim" and model.active == 1:
 		cpu_wait -= frame_delta
@@ -551,7 +555,7 @@ func _draw() -> void:
 		draw_rect(Rect2(0, 0, 750, 800), Color(0.035, 0.13, 0.17, 0.30))
 		draw_circle(Vector2(342, 617), 157.0, Color(0.93, 0.96, 0.87, 0.14))
 		draw_arc(Vector2(342, 617), 169.0, 0.1, TAU - 0.4, 90, Color(0.78, 0.95, 0.88, 0.45), 1.5, true)
-		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 270.0, 1)
+		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 230.0 if vehicle == 2 else 270.0, 1)
 		return
 	if model.terrain == null:
 		return
@@ -576,6 +580,10 @@ func _draw() -> void:
 		var trail: Array = projectile.trail
 		for index in range(1, trail.size()):
 			draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
+		if model.actors[model.shot_actor].vehicle == 2:
+			bigfoot.draw_projectile(self, projectile, model.shot_weapon)
+			draw_set_transform(offset)
+			continue
 		draw_circle(projectile.pos, 11.0, Color(color, 0.18))
 		draw_circle(projectile.pos, 5.0, color)
 		draw_circle(projectile.pos + Vector2(-1, -1), 2.0, Color.WHITE)
@@ -594,6 +602,9 @@ func _draw() -> void:
 		draw_string(ui.bold, Vector2(664 - width / 2, 202), banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color(ui.CREAM, minf(1.0, banner_time)))
 
 func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
+	if kind == 2:
+		bigfoot.draw(self, pos, width, facing, rotation, bigfoot.frame_index("idle", elapsed, 0, false), color)
+		return
 	var region := regions[kind]
 	var height := width * region.size.y / region.size.x
 	var rect := Rect2(-width * 0.5, -height + width * 0.23, width, height)

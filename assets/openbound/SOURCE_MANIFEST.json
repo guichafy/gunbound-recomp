@@ -1,0 +1,26 @@
+{
+  "CharacterSpritesheet.png": {
+    "source": "Graphics/Tank/Bigfoot/CharacterSpritesheet.png",
+    "sha256": "f841fbef37073956e2e358f178fdb67de1e4ff61c347e0d2bf8dd07909f5594c"
+  },
+  "Bullet1.png": {
+    "source": "Graphics/Tank/Bigfoot/Bullet1.png",
+    "sha256": "73d176b8feaa2c05057c581cddda8ddd978ec9429beb222aa6d9bad34f97dc0c"
+  },
+  "Bullet2.png": {
+    "source": "Graphics/Tank/Bigfoot/Bullet2.png",
+    "sha256": "d8f24748c18f88c0da792ea650fe84cd524a637cef4b733debbad2e43b458d96"
+  },
+  "Bullet3.png": {
+    "source": "Graphics/Tank/Bigfoot/Bullet3.png",
+    "sha256": "f60659f2b5098757c006527b340ef505777b0228a5c909d6b734013462363f6a"
+  },
+  "RiderBody.png": {
+    "source": "Graphics/Avatar/Male/Body/Basic.png",
+    "sha256": "6ddec8d08d9e837c3a6bfbc14f23ae277dca37611852c8e38ee5d6626e0580b7"
+  },
+  "RiderHead.png": {
+    "source": "Graphics/Avatar/Male/Hat/Basic.png",
+    "sha256": "aa7816d434bf658f861319104ce3d5ac0c39a6df72465ad1de9ef3b56b9dfdb0"
+  }
+}

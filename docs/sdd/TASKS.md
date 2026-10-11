@@ -10,6 +10,7 @@
 | T-04 — SDD, hand-off e baseline Git | Concluída no snapshot que contém este documento | REQ-12 | `AGENTS.md`, `docs/sdd/`, commit inicial |
 | T-05 — pesquisa de referências e aprovação de 0.2 | Concluída | REQ-13–18 | `GUNBOUND_REFERENCES.md`, aprovação “implementa” |
 | T-06 — implementar e entregar refinamento 0.2 | Concluída tecnicamente; validação do usuário pendente | REQ-13–18 | 102 verificações, seis partidas, revisão, capturas e pacote 0.2.0 |
+| T-07 — Bigfoot visual com assets reais | Concluída tecnicamente; aceitação pendente | REQ-19 parcial | 130 verificações, oito partidas, sprites/piloto/projéteis, capturas e app 0.3.0 |
 
 O plano original permanece em `docs/superpowers/plans/2026-10-11-prototype.md`.
 Os estados acima distinguem implementação entregue de aceitação pelo usuário.
@@ -18,8 +19,8 @@ Os estados acima distinguem implementação entregue de aceitação pelo usuári
 
 - [x] Receber, extrair e verificar o pacote externo: `.tools/source-assets/content/`,
   813 arquivos, incluindo todos os 803 assets do pipeline do fork.
-- [ ] Integrar mobiles reais, começando por Bigfoot (REQ-19); arquivos disponíveis,
-  inventário e origem em `ORIGINAL_ASSETS.md`.
+- [x] Integrar Bigfoot visualmente, com piloto/quadros/projéteis originais.
+- [ ] Portar ataques próprios do Bigfoot e outros mobiles (REQ-19 restante).
 
 - [x] Aprovação do pacote em `REFINEMENT_0_2.md` com “implementa”.
 - [x] Implementar e verificar tecnicamente o refinamento 0.2.

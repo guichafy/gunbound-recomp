@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.2.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e animações de combate.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.3.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot com sprites originais.
 
 ## Jogar
 
@@ -27,6 +27,7 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 
 - Escaravelho: **580 de vida, 110 de movimento**, recuperação mais rápida.
 - Carapaça: **700 de vida, 80 de movimento**, 18 unidades adicionais de atraso.
+- Bigfoot: **1100 de vida e 90 de movimento**; terceira opção e seleção inicial. Atlas, piloto e projéteis originais; armas/regras ainda do protótipo.
 - Pulso: 145 de dano máximo, cratera de 46 unidades, atraso 100.
 - Impacto: 210 de dano máximo, cratera de 62 unidades, atraso 155.
 - Tempestade: três projéteis, até 105 de dano por projétil, atraso 210. Desbloqueia no terceiro turno próprio e só pode ser usada uma vez por partida.
@@ -39,7 +40,7 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 
 ## Conteúdo entregue
 
-Arena destrutível, dois veículos, três armas, três dificuldades de mira, vida/dano/queda, fila de atraso, efeitos visuais e sonoros, pausa, ajuda, resultado, revanche e perfil local. HUD azul metálico, bússola, inclinação, mira graduada, carga monotônica e animações de repouso, movimento, recuo, dano e destruição. Explosões com clarão, detritos e fumaça. As dificuldades mudam o erro de mira da máquina; não alteram vida/dano. A máquina usa a mesma física e conversão de inclinação do disparo real.
+Arena destrutível, três veículos, três armas, três dificuldades de mira, vida/dano/queda, fila de atraso, efeitos visuais e sonoros, pausa, ajuda, resultado, revanche e perfil local. HUD azul metálico, bússola, inclinação, mira graduada, carga monotônica e animações de repouso, movimento, recuo, dano e destruição. Explosões com clarão, detritos e fumaça. As dificuldades mudam o erro de mira da máquina; não alteram vida/dano. A máquina usa a mesma física e conversão de inclinação do disparo real.
 
 Apelido, XP, nível e vitórias ficam em `~/Library/Application Support/Godot/app_userdata/Brisa de Aço/profile.json`. Os testes usam arquivos separados e não alteram esse progresso.
 
@@ -61,10 +62,11 @@ mkdir -p .tools
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_scene.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement_scene.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_bigfoot.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_matches.gd
 ```
 
-`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; as duas suites `test_refinement*` cobrem encostas, fila, carga e animação; `test_matches` simula seis partidas completas. Total atual: 102 verificações e seis partidas. `tests/capture.gd` renderiza capturas de QA, incluindo carga; a tela de resultado usa uma condição controlada, sem escrever no perfil do jogador.
+`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; as duas suites `test_refinement*` cobrem encostas, fila, carga e animação; `test_matches` simula oito partidas completas. Total atual: 130 verificações e oito partidas, incluindo Bigfoot. `tests/capture.gd` renderiza capturas de QA, incluindo carga; a tela de resultado usa uma condição controlada, sem escrever no perfil do jogador.
 
 ## Exportar novamente
 
@@ -86,4 +88,4 @@ Multiplayer online, salas privadas, busca automática, ranking, reconexão e 2×
 
 ## Limitações conhecidas
 
-Um mapa e dois veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Animações usam transformações, rodas/canhão e efeitos por código sobre PNGs originais, sem spritesheets oficiais. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); nenhum código ou asset do fork foi incorporado.
+Um mapa e três veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Animações usam transformações, rodas/canhão e efeitos por código sobre PNGs originais, sem spritesheets oficiais. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; outros mobiles e regras oficiais completas continuam pendentes.

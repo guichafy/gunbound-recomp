@@ -5,9 +5,9 @@ Chafy-Studio/_OpenBound, incluindo Bigfoot e outros mobiles, para maior fidelida
 Esta solicitação altera a direção artística do próximo trabalho; não deve ser
 substituída por novas imagens geradas ou por renomear os veículos atuais.
 
-Status: **pacote externo baixado, extraído e validado; integração no jogo pendente**.
-O jogo permanece 0.2.0; nenhum mobile original foi integrado e nenhuma nova
-exportação foi feita nesta etapa de recebimento.
+Status: **Bigfoot integrado visualmente na versão 0.3.0**: atlas, piloto padrão,
+animações e projéteis originais. Armas/regras ainda são as do protótipo. Outros
+mobiles e regras completas pendentes. Plano/evidência em `BIGFOOT_0_3.md`.
 
 ## Pacote recebido — 2026-10-11
 
@@ -92,7 +92,8 @@ dano, raio, massa e influência do vento por tiro. O comportamento não correspo
 
 O código traz GPL-3.0-or-later e autoria de Carlos H.M.S.; o README trata as
 texturas separadamente. Preservar avisos e registrar proveniência dos arquivos
-efetivamente incorporados. Não foi copiado código ou asset para o jogo nesta auditoria.
+efetivamente incorporados. Na auditoria inicial não houve incorporação; na versão 0.3 os recursos Bigfoot,
+piloto e offsets foram copiados para `assets/openbound/`, com autoria/avisos preservados.
 
 ## Retomada após obter o pacote
 
@@ -107,6 +108,6 @@ efetivamente incorporados. Não foi copiado código ou asset para o jogo nesta a
    completa sem validar as regras específicas e a apresentação.
 5. Executar testes pertinentes, revisão, captura GPU e nova exportação/assinatura.
 
-Pendência atual: integrar os arquivos recebidos e as regras de cada mobile ao
-Godot. Não construir um Bigfoot fictício com a aparência dos veículos atuais:
+Pendência atual: integrar os demais mobiles recebidos e as regras específicas
+de armas, salvas, resistências e balística ao Godot. Não construir um Bigfoot fictício com a aparência dos veículos atuais:
 os sprites e metadados originais agora estão disponíveis localmente.

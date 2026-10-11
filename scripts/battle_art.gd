@@ -6,15 +6,19 @@ var motion: Array = []
 func reset(actors: Array) -> void:
 	motion.clear()
 	for actor in actors:
-		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "dead": 0.0, "rotation": 0.0})
+		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "bigfoot": actor.vehicle == 2})
 
 func react(event: Dictionary) -> void:
 	if event.type == "fire":
-		motion[event.actor].recoil = 0.45
+		motion[event.actor].recoil = 1.16 if motion[event.actor].bigfoot else 0.45
+		motion[event.actor].pose = "recoil"
+		motion[event.actor].pose_age = 0.0
 	elif event.type == "damage":
-		motion[event.actor].hurt = 0.5
+		motion[event.actor].hurt = 1.05 if motion[event.actor].bigfoot else 0.5
+		motion[event.actor].pose = "hurt"
+		motion[event.actor].pose_age = 0.0
 
-func tick(model, delta: float) -> void:
+func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0) -> void:
 	for index in range(motion.size()):
 		var state: Dictionary = motion[index]
 		var actor: Dictionary = model.actors[index]
@@ -26,6 +30,14 @@ func tick(model, delta: float) -> void:
 		state.hurt = maxf(0.0, state.hurt - delta)
 		if actor.hp <= 0:
 			state.dead += delta
+		var pose := state_name(model, index, charging)
+		if pose == "charging":
+			pose += "_" + str(selected_weapon)
+		if state.pose != pose:
+			state.pose = pose
+			state.pose_age = 0.0
+		else:
+			state.pose_age += delta
 
 func state_name(model, index: int, charging: bool) -> String:
 	if model.actors[index].hp <= 0:
@@ -39,6 +51,15 @@ func state_name(model, index: int, charging: bool) -> String:
 	if motion[index].moving > 0.0:
 		return "moving"
 	return "idle"
+
+func atlas_frame(view: Node2D, index: int) -> int:
+	var actor: Dictionary = view.model.actors[index]
+	var state: Dictionary = motion[index]
+	var pose := state_name(view.model, index, view.charging)
+	var weapon: int = view.weapon if index == 0 else int(view.model.last_shots[index].get("weapon", 0))
+	if pose == "recoil":
+		weapon = int(view.model.last_shots[index].get("weapon", 0))
+	return view.bigfoot.frame_index(pose, float(state.pose_age), weapon, actor.hp <= actor.max_hp * 0.3)
 
 func draw_actor(view: Node2D, index: int, offset: Vector2) -> void:
 	var model = view.model
@@ -63,33 +84,37 @@ func draw_actor(view: Node2D, index: int, offset: Vector2) -> void:
 	view.draw_set_transform(Vector2.ZERO)
 	var alpha := clampf(1.0 - dead / 1.15, 0.0, 1.0) if actor.hp <= 0 else 1.0
 	var color := Color(1, 0.65, 0.6, alpha) if state.hurt > 0.0 and int(time * 24.0) % 2 == 0 else Color(1, 1, 1, alpha)
-	view.draw_sprite(actor.vehicle, render_pos, 100.0, actor.facing, rotation, Vector2(1.0 + recoil * 0.05, 1.0 - recoil * 0.07), color)
+	if actor.vehicle == 2:
+		view.bigfoot.draw(view, pos + offset, 80.0, actor.facing, rotation, atlas_frame(view, index), color)
+	else:
+		view.draw_sprite(actor.vehicle, render_pos, 100.0, actor.facing, rotation, Vector2(1.0 + recoil * 0.05, 1.0 - recoil * 0.07), color)
 	if actor.hp <= 0:
 		return
-	# Small animated drive disks reinforce movement without changing the PNG.
-	view.draw_set_transform(render_pos, rotation)
-	for x in [-22.0, 0.0, 22.0]:
-		view.draw_circle(Vector2(x, 14), 7.0, Color("13283e"))
-		view.draw_arc(Vector2(x, 14), 5.0, 0, TAU, 16, tint.darkened(0.2), 2.0, true)
-		var spin: float = time * 10.0 * actor.facing if state.moving > 0.0 else 0.0
-		view.draw_line(Vector2(x, 14) - Vector2.from_angle(spin) * 4, Vector2(x, 14) + Vector2.from_angle(spin) * 4, view.ui.STEEL, 1.5, true)
-	view.draw_set_transform(Vector2.ZERO)
-	var actor_angle: float = view.angle if index == 0 else float(view.cpu_plan.get("angle", model.last_shots[index].get("angle", 45.0)))
-	var direction: Vector2 = model.shot_velocity(index, actor_angle, 100, 0).normalized()
-	var pivot: Vector2 = model.cannon_pivot(index) + offset
-	var tip := pivot + direction * (38.0 - recoil * 10.0)
-	view.draw_line(pivot, tip, Color("091523"), 13.0, true)
-	view.draw_line(pivot, tip, tint.darkened(0.2), 8.0, true)
-	view.draw_line(pivot + Vector2(-1, -2), tip + Vector2(-1, -2), tint.lightened(0.3), 2.0, true)
-	view.draw_circle(pivot, 7.0, view.ui.STEEL)
-	if view.charging and index == 0:
-		var radius: float = 10.0 + view.power * 0.1 + sin(time * 25.0) * 2.0
-		view.draw_circle(tip, radius, Color(tint, 0.2))
-		view.draw_arc(tip, radius * 0.7, time * 4, time * 4 + PI * 1.5, 30, view.ui.AMBER, 2.0, true)
-	if recoil > 0.55:
-		var blast: Vector2 = model.muzzle(index, actor_angle) + offset
-		view.draw_circle(blast, recoil * 15.0, Color(1, 0.75, 0.3, recoil * 0.8))
-		view.draw_circle(blast, recoil * 7.0, Color(1, 1, 0.85, recoil))
+	if actor.vehicle != 2:
+		# Small animated drive disks reinforce movement without changing the PNG.
+		view.draw_set_transform(render_pos, rotation)
+		for x in [-22.0, 0.0, 22.0]:
+			view.draw_circle(Vector2(x, 14), 7.0, Color("13283e"))
+			view.draw_arc(Vector2(x, 14), 5.0, 0, TAU, 16, tint.darkened(0.2), 2.0, true)
+			var spin: float = time * 10.0 * actor.facing if state.moving > 0.0 else 0.0
+			view.draw_line(Vector2(x, 14) - Vector2.from_angle(spin) * 4, Vector2(x, 14) + Vector2.from_angle(spin) * 4, view.ui.STEEL, 1.5, true)
+		view.draw_set_transform(Vector2.ZERO)
+		var actor_angle: float = view.angle if index == 0 else float(view.cpu_plan.get("angle", model.last_shots[index].get("angle", 45.0)))
+		var direction: Vector2 = model.shot_velocity(index, actor_angle, 100, 0).normalized()
+		var pivot: Vector2 = model.cannon_pivot(index) + offset
+		var tip := pivot + direction * (38.0 - recoil * 10.0)
+		view.draw_line(pivot, tip, Color("091523"), 13.0, true)
+		view.draw_line(pivot, tip, tint.darkened(0.2), 8.0, true)
+		view.draw_line(pivot + Vector2(-1, -2), tip + Vector2(-1, -2), tint.lightened(0.3), 2.0, true)
+		view.draw_circle(pivot, 7.0, view.ui.STEEL)
+		if view.charging and index == 0:
+			var radius: float = 10.0 + view.power * 0.1 + sin(time * 25.0) * 2.0
+			view.draw_circle(tip, radius, Color(tint, 0.2))
+			view.draw_arc(tip, radius * 0.7, time * 4, time * 4 + PI * 1.5, 30, view.ui.AMBER, 2.0, true)
+		if recoil > 0.55:
+			var blast: Vector2 = model.muzzle(index, actor_angle) + offset
+			view.draw_circle(blast, recoil * 15.0, Color(1, 0.75, 0.3, recoil * 0.8))
+			view.draw_circle(blast, recoil * 7.0, Color(1, 1, 0.85, recoil))
 	if model.active == index and model.phase == "aim":
 		var pointer := pos + offset + Vector2(0, -94 + sin(time * 4.0) * 3.0)
 		view.draw_colored_polygon(PackedVector2Array([pointer + Vector2(-8, -9), pointer + Vector2(8, -9), pointer + Vector2(0, 3)]), view.ui.AMBER)

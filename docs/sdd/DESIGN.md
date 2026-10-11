@@ -7,6 +7,7 @@
 | `scenes/main.tscn`, `scripts/game.gd` | Cena, menu/HUD, input, pausa, overlays, desenho, efeitos, CPU e recompensa |
 | `scripts/ui.gd` | Construção e estilo de controles |
 | `scripts/battle_art.gd` | Estado visual separado, interpolação, rodas/canhão, recuo, dano, destruição, explosão e bússola |
+| `scripts/bigfoot_sprite.gd` | Atlas Bigfoot, FPS/ciclos, piloto e offsets por quadro, projéteis, nearest por CanvasTexture |
 | `scripts/terrain.gd` | Máscara sólida 640×400, células de 2 px, textura, superfície, crateras e raycast DDA |
 | `scripts/combat.gd` | Parâmetros das armas, integração, colisão, dano e previsão de trajetória |
 | `scripts/match.gd` | Atores, RNG, projéteis, fases, movimento, disponibilidade, CPU e resultado |
@@ -59,6 +60,13 @@ reposicionamento do painel da fila.
 consome eventos e nunca escreve no modelo. A pausa impede seu avanço e cancela
 carga. Força sobe 65 pontos/s e dispara a 100% uma vez; botão/Enter mantêm tiro direto.
 Os estilos metálicos são gradientes em memória, compartilhados por cor/contorno.
+
+Em 0.3, Bigfoot tem índice 2; CPU usa Carapaça como adversário. `BattleArt` guarda
+`pose_age` e reinicia o relógio ao trocar de pose/arma de carga. Recuo usa a arma
+registrada em `last_shots`, para não trocar SS por S1 após um turno curto.
+Corpo e piloto usam quadros originais, sem rodas/canhão artificiais adicionais.
+JSON do piloto mantém arquivo intacto e normaliza sua vírgula final em memória.
+O preset inclui esse JSON; o pacote inclui avisos/licença de referência.
 
 Terreno desenhado e colisão derivam da mesma máscara. Explosão altera a máscara,
 depois atualiza sua textura. Fragmentos não desabam; veículos perdem suporte e caem.

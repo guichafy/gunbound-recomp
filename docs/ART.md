@@ -1,5 +1,13 @@
 # Imagens originais do protótipo
 
+## Bigfoot — versão 0.3
+
+Bigfoot, Bullet1/2/3 e Body/Basic + Hat/Basic do piloto foram copiados do pacote
+fornecido pelo usuário, sem editar PNGs. Fonte, avisos e hashes estão em
+`assets/openbound/ATTRIBUTION.md` e `SOURCE_MANIFEST.json`. Quadros e offsets do
+piloto seguem o fork OpenBound. Imagens geradas abaixo continuam no cenário e
+nos dois veículos anteriores.
+
 Geradas com a ferramenta integrada **GPT Images**. Os PNGs finais foram copiados para `assets/art/` e são consumidos pelo projeto. Os originais não foram sobrescritos. A engine enquadra os veículos por regiões de textura; não houve edição raster dos arquivos.
 
 Na versão 0.2, os mesmos PNGs recebem inclinação, recuo, reação ao dano e
