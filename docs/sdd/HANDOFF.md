@@ -8,11 +8,18 @@ das duas branches/releases e do pipeline confirma ausência do pacote: 803 fonte
 referidas por `Content.mgcb`, todas ausentes. Código/metadados Bigfoot existem;
 pixels dos sprites e projéteis não. Ver `ORIGINAL_ASSETS.md`.
 
-Solicitado ao usuário o caminho de pasta/ZIP ou link direto para o pacote externo.
-Integração depende desse material. Versão executável permanece 0.2.0; esta sessão
-apenas registra a auditoria e a nova direção, sem incorporar assets/código ao jogo.
-Priorizar essa solicitação quando os arquivos chegarem; não gerar substitutos
-visuais nem manter a restrição de arte original do baseline como veto ao pedido.
+O usuário forneceu a pasta Drive; **Game Assets.rar já está baixado, extraído e
+validado** em `.tools/source-assets/`. Conteúdo em `.tools/source-assets/content/`;
+manifesto em `.tools/source-assets/manifest.json`. São 813 arquivos, incluindo os
+dez mobiles reais, projéteis, efeitos e áudio; todos os 803 assets referidos pelo
+pipeline estão disponíveis. RAR íntegro e 628 PNGs verificados, sem imagens inválidas.
+Detalhes e checksum em `ORIGINAL_ASSETS.md`. Não pedir novamente o pacote.
+
+Próximo trabalho: integrar spritesheets e regras por mobile, começando por Bigfoot.
+Versão executável permanece 0.2.0; não anunciar integração ou novo build antes de
+implementar e verificar. Não gerar substitutos visuais nem usar a restrição de
+arte original do baseline como veto ao pedido. Os downloads ficam fora do Git;
+copiar para `assets/openbound/` somente os recursos usados na implementação.
 
 ## Estado atual: refinamento 0.2 entregue
 

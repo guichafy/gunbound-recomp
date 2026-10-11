@@ -16,8 +16,9 @@ O usuário quer aprender com o resultado e validar um protótipo funcional.
 Pedido posterior ao baseline: integrar assets reais e mobiles do OpenBound,
 incluindo Bigfoot. A restrição de arte original descreve a entrega anterior e
 não veta essa nova solicitação. Ver `docs/sdd/ORIGINAL_ASSETS.md`: pacote externo
-ausente do fork, aguardando caminho/ZIP/link do usuário. Não gerar substitutos
-nem anunciar mobiles integrados antes de receber e validar os sprites reais.
+recebido e validado em `.tools/source-assets/content/`, 813 arquivos. Não pedir
+novamente caminho/ZIP/link. Integrar os sprites reais; não gerar substitutos nem
+anunciar mobiles integrados antes de implementar e verificar o jogo atualizado.
 
 ## Trabalho orientado por especificação
 

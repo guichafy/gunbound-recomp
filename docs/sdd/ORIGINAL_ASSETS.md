@@ -5,10 +5,41 @@ Chafy-Studio/_OpenBound, incluindo Bigfoot e outros mobiles, para maior fidelida
 Esta solicitação altera a direção artística do próximo trabalho; não deve ser
 substituída por novas imagens geradas ou por renomear os veículos atuais.
 
-Status: **aguardando os arquivos do pacote externo de assets**. O jogo permanece
-0.2.0; nenhum mobile original foi integrado e nenhuma nova exportação foi feita.
+Status: **pacote externo baixado, extraído e validado; integração no jogo pendente**.
+O jogo permanece 0.2.0; nenhum mobile original foi integrado e nenhuma nova
+exportação foi feita nesta etapa de recebimento.
 
-## Auditoria realizada
+## Pacote recebido — 2026-10-11
+
+O usuário forneceu a [pasta OpenBound no Google Drive](https://drive.google.com/drive/folders/120agUFRkAARqZNHYxB7NS86VtrPstx-K).
+Baixado `Game Assets.rar`, ID `1TpiMowBz1eHOJoqKco2zVm8ulLRj46O9`:
+
+- Arquivo local: `.tools/source-assets/Game Assets.rar`, **118.291.332 bytes**.
+- SHA-256: `59fb907b50eb51247b8da768dea3c2e4c33e55e848c9f0109ee3bf6c123a5bdd`.
+- Conteúdo extraído: `.tools/source-assets/content/`, **813 arquivos**,
+  121.006.200 bytes: 628 PNGs, 176 MP3s, 8 `.spritefont` e 1 `.otf`.
+- Manifesto local: `.tools/source-assets/manifest.json`, com dimensões e inventário.
+- `unrar t` terminou com código 0; caminhos do arquivo conferidos antes da
+  extração; todos os 628 PNGs passaram na leitura/verificação de imagem.
+- **Todos os 803 arquivos citados pelo `Content.mgcb` do fork estão presentes.**
+  A dependência de arquivos externos foi resolvida; não perguntar novamente pelo pacote.
+
+Spritesheets de mobiles: **Armor, Bigfoot, Dragon, Ice, Knight, Lightning,
+Mage, RaonLauncher, Trico e Turtle**. Também há `Random` e duas spritesheets de
+minas Raon; esses três conjuntos não devem ser contados como novos veículos.
+Bigfoot tem atlas RGBA **2580×3120**, com transparência e quadros de 129×130;
+o PNG foi inspecionado visualmente sem alterar seus pixels.
+
+O pacote e a cópia extraída permanecem em `.tools/`, ignorados pelo Git. Quando
+integrar, copiar apenas arquivos utilizados para `assets/openbound/`, preservando
+os originais e registrando fonte/avisos. Não executar binários de outros pacotes
+do Drive; apenas o arquivo de assets foi baixado.
+
+O download pelo navegador encontrou falha na transferência; o mesmo arquivo
+público foi obtido pelo endpoint de download do Drive, com tamanho correspondente
+ao informado na pasta. Nenhuma conexão de conta Google foi necessária.
+
+## Auditoria anterior do fork (histórico)
 
 Fonte: [Chafy-Studio/_OpenBound](https://github.com/Chafy-Studio/_OpenBound),
 `master` em `cb2fc197dd6b0498390219750ca6251bf0582d63`.
@@ -76,5 +107,6 @@ efetivamente incorporados. Não foi copiado código ou asset para o jogo nesta a
    completa sem validar as regras específicas e a apresentação.
 5. Executar testes pertinentes, revisão, captura GPU e nova exportação/assinatura.
 
-Pendência concreta: receber o pacote de conteúdo externo. Não construir um
-Bigfoot fictício com a aparência dos veículos atuais para contornar essa ausência.
+Pendência atual: integrar os arquivos recebidos e as regras de cada mobile ao
+Godot. Não construir um Bigfoot fictício com a aparência dos veículos atuais:
+os sprites e metadados originais agora estão disponíveis localmente.
