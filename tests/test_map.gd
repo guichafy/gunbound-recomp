@@ -176,11 +176,16 @@ func run() -> void:
 	scene._unhandled_input(drag)
 	var motion := InputEventMouseMotion.new()
 	motion.relative = Vector2(120, 40)
+	motion.button_mask = MOUSE_BUTTON_MASK_LEFT
 	scene.camera = Vector2(300, 600)
 	scene._unhandled_input(motion)
 	check(scene.camera == Vector2(180, 560) and scene.camera_manual, "Dragging pans the camera and pauses tracking")
 	scene.update_camera(1.0 / 60.0)
 	check(scene.camera == Vector2(180, 560), "Manual camera holds until the next turn or shot")
+	var hover := InputEventMouseMotion.new()
+	hover.relative = Vector2(50, 50)
+	scene._unhandled_input(hover)
+	check(scene.camera == Vector2(180, 560) and not scene.dragging, "Motion without a pressed button never pans (release eaten by the HUD)")
 	check(scene.model.terrain.visual_texture != null, "Arena draws the HD foreground texture")
 	scene.queue_free()
 	await process_frame

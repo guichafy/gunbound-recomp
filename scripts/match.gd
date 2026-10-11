@@ -6,6 +6,8 @@ const Maps = preload("res://scripts/maps.gd")
 const Weather = preload("res://scripts/weather.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+# Training option "all": equal weight for every weather type, Thor included.
+const ALL_WEATHER := [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 const Combat = preload("res://scripts/combat.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 # Stable mobile IDs are independent of menu slots. Removed ID0 is not playable.
@@ -47,7 +49,7 @@ var map_id := ""
 static func normalize_vehicle(vehicle: int) -> int:
 	return vehicle if VEHICLES.has(vehicle) else 2
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original") -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -84,6 +86,8 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	last_shots = [{}, {}]
 	weather = Weather.new()
 	var preset: Array = Maps.get_map(map_id).weather if not map_id.is_empty() else PROCEDURAL_WEATHER
+	if weather_mode == "all":
+		preset = ALL_WEATHER
 	apply_weather(weather.setup(preset, terrain.world_size(), rng))
 	begin_turn()
 

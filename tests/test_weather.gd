@@ -233,6 +233,33 @@ func run() -> void:
 			matched = matched or Vector2(point).distance_to(predicted.position) < 0.5
 		check(matched, "Prediction and live flight agree with %s (%d impacts)" % [setup[0], impacts.size()])
 		check(weather_events.has("thor") if setup[0] == "thor" else (weather_events.has("weather_hit")), "Shots in the path interact with %s" % setup[0])
+	# Menu option "all": every type can be drawn and Thor really activates.
+	model.start(2, 1, 41, Maps.DEFAULT, "all")
+	check(model.weather.weights == [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "Weather option 'all' weighs every type equally")
+	var thor_round := -1
+	for round in range(80):
+		if model.weather.thor.active:
+			thor_round = round
+			break
+		model.schedule(model.active, 50.0)
+		model.schedule(model.active, 50.0)
+	check(thor_round >= 0 and model.weather.queue[0].type == "thor", "Natural rounds in 'all' mode activate Thor")
+	var thor_fired := false
+	if model.weather.thor.active:
+		var shooter: int = model.active
+		var plan: Dictionary = model.choose_cpu_shot() if shooter == 1 else {"angle": 45.0, "power": 60.0, "weapon": 0}
+		model.events.clear()
+		model.fire(plan.angle, plan.power, plan.weapon)
+		for frame in range(2400):
+			model.advance_projectiles(1.0 / 120.0)
+			for event in model.events:
+				thor_fired = thor_fired or event.type == "thor"
+			model.events.clear()
+			if model.phase != "flight":
+				break
+	check(thor_fired, "A real shot under natural Thor triggers the satellite strike")
+	model.start(2, 1, 41, Maps.DEFAULT)
+	check(model.weather.weights == Maps.get_map(Maps.DEFAULT).weather, "Default mode keeps the original Miramo preset")
 	model.start(1, 2, 31)
 	var cpu: Dictionary = model.choose_cpu_shot()
 	check(cpu.angle >= 15.0 and cpu.power >= 15.0 and cpu.power <= 100.0, "CPU aims legally with weather and 2D wind")

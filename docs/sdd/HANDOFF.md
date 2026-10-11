@@ -25,14 +25,21 @@ clima, Thor no modelo), D (visuais), E (docs/export).
 - Apresentação (weather_art.gd) com sprites/sons originais: colunas rolando,
   satélite com LV/XP, feixes Thor/elétrico, ícones da previsão, marcas nos tiros,
   partículas de chão do Particle.png (pixels removidos ÷ 32); pausa congela.
+- Opção do menu (ADR-048): "Clima: original do mapa" (padrão, Map.cs: Força,
+  Tornado, Elétrico, Vento, Proteção, Aleatório; Espelho/Fraqueza só como extra
+  do Aleatório; **sem Thor**) ou "todos os efeitos" (pesos iguais, Thor incluído).
+- Arrasto exige botão pressionado (release consumido pelo HUD não prende) e
+  toque emulado como mouse não desloca em dobro.
 - Fixtures: vento migrado para Vector2 (−30 → −35 pela troca de fator);
   fixtures com literal 640 pedem o terreno procedural.
 
-Validação: `./scripts/check.sh` — **923 checks + 10 partidas, zero falhas**
-(test_weather 58, test_map 40). Seeds81–90: 56/12/13/15/19/10/8/12/9/15 tiros.
+Validação: `./scripts/check.sh` — **928 checks + 10 partidas, zero falhas**
+(test_weather 62, test_map 41; modo "todos" ativa o Thor por rodadas naturais e
+um tiro real dispara o satélite). Seeds81–90: 56/12/13/15/19/10/8/12/9/15 tiros.
 Capturas GPU 1920×1080 em docs/map e docs/weather (colunas, Thor/raio,
 partículas; pausa congela confirmada). App/ZIP 0.9.0 reexportados, assinatura
 válida; PCK isolado carrega mapa nativo, clima e assets de clima/Thor.
+Commits por fase A/C/D/E + opção de clima; tag local v0.9.0; sem push.
 Limites: choque elétrico aproximado pela distância ao segmento; arte de
 clima/Thor em baixa resolução original; sem teste manual de input/áudio no app.
 

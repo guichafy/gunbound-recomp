@@ -51,6 +51,11 @@ Visuais de clima/Thor/partícula usam os sprites e sons originais do OpenBound
   48×48), com espalhamento, gravidade e vento do `ParticleBuilder`. Só
   apresentação; a pausa congela.
 
+## Opção de clima (ADR-048)
+
+Menu: "original do mapa" (padrão) ou "todos os efeitos" (pesos iguais, Thor
+incluído), porque o preset do Miramo A não sorteia Thor.
+
 ## Invariantes preservados
 
 `match.gd` decide turno, dano, clima e Thor; `game.gd` apresenta. A previsão

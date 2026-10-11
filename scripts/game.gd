@@ -35,6 +35,8 @@ var last_impact := Vector2.INF
 var nickname_input: LineEdit
 var vehicle := 2
 var cpu_difficulty := 1
+# Training option: the map's original weather preset or every effect (Thor included).
+var weather_mode := "original"
 var vehicle_buttons: Array[Button] = []
 var vehicle_info: Label
 var angle := 45.0
@@ -143,10 +145,10 @@ func show_menu() -> void:
 		button.add_theme_font_size_override("font_size", 14)
 		vehicle_buttons.append(button)
 	vehicle_info = ui.label(card, "", Vector2(28, 303), Vector2(364, 50), 15, ui.MUTED)
-	ui.label(card, "DIFICULDADE DA MÁQUINA", Vector2(28, 372), Vector2(364, 22), 12, ui.TEAL, true)
+	ui.label(card, "DIFICULDADE DA MÁQUINA", Vector2(28, 360), Vector2(364, 22), 12, ui.TEAL, true)
 	var difficulty_buttons: Array[Button] = []
 	for index in range(3):
-		var button := ui.button(card, ["Leve", "Normal", "Precisa"][index], Vector2(28 + index * 124, 405), Vector2(116, 42), func():
+		var button := ui.button(card, ["Leve", "Normal", "Precisa"][index], Vector2(28 + index * 124, 388), Vector2(116, 40), func():
 			cpu_difficulty = index
 			for j in range(difficulty_buttons.size()):
 				difficulty_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if j == index else Color("24444e"), 9, ui.TEAL if j == index else Color("47626a")))
@@ -154,11 +156,21 @@ func show_menu() -> void:
 		difficulty_buttons.append(button)
 		if index == cpu_difficulty:
 			button.add_theme_stylebox_override("normal", ui.box(Color("32666b"), 9, ui.TEAL))
-	ui.button(card, "INICIAR TREINO    →", Vector2(28, 481), Vector2(364, 56), start_match, true)
+	var weather_button := ui.button(card, weather_label(), Vector2(28, 438), Vector2(364, 34), func(): pass)
+	weather_button.add_theme_font_size_override("font_size", 14)
+	weather_button.tooltip_text = "Original: pesos do mapa (Miramo A não tem Thor, Espelho nem Fraqueza).\nTodos: pesos iguais para todos os climas, Thor incluído."
+	weather_button.pressed.connect(func():
+		weather_mode = "all" if weather_mode == "original" else "original"
+		weather_button.text = weather_label()
+	)
+	ui.button(card, "INICIAR TREINO    →", Vector2(28, 484), Vector2(364, 52), start_match, true)
 	ui.label(card, "NÍVEL %d    ·    %d XP    ·    %d VITÓRIAS" % [profile.level(), profile.xp, profile.wins], Vector2(28, 555), Vector2(364, 26), 13, ui.MUTED, true)
 	ui.button(root, "Como jogar", Vector2(1030, 754), Vector2(190, 30), show_help)
 	select_vehicle(vehicle)
 	queue_redraw()
+
+func weather_label() -> String:
+	return "Clima: " + ("original do mapa" if weather_mode == "original" else "todos os efeitos (Thor)")
 
 func select_vehicle(index: int) -> void:
 	index = Match.normalize_vehicle(index)
@@ -175,7 +187,7 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty)
+	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode)
 	art.reset(model.actors)
 	camera_manual = false
 	dragging = false
@@ -778,11 +790,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Drag the world (mouse or touch) to look around; tracking resumes next turn or shot.
 	if screen != "match" or overlay != null or camera_limits().size == Vector2.ZERO:
 		return
+	# Touch is emulated as mouse by default; handle only one source to avoid double panning.
+	var touch_as_mouse: bool = ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch", true)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		dragging = event.pressed and event.position.y < VIEW_SIZE.y
-	elif event is InputEventScreenTouch:
+	elif event is InputEventScreenTouch and not touch_as_mouse:
 		dragging = event.pressed and event.position.y < VIEW_SIZE.y
-	elif (event is InputEventMouseMotion or event is InputEventScreenDrag) and dragging:
+	elif event is InputEventMouseMotion and dragging:
+		# A release consumed by the HUD must not leave the drag stuck on.
+		if not (event.button_mask & MOUSE_BUTTON_MASK_LEFT):
+			dragging = false
+			return
+		camera_manual = true
+		camera = clamp_camera(camera - event.relative)
+	elif event is InputEventScreenDrag and dragging and not touch_as_mouse:
 		camera_manual = true
 		camera = clamp_camera(camera - event.relative)
 

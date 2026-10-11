@@ -203,3 +203,9 @@ copiadas do código (Weakness com fatores do Force). Arte/sons originais.
 
 ADR-047 — adotada por decisão do usuário: não implementar outros mapas nem HD
 novo de mapa nesta etapa.
+
+ADR-048 — adotada por escolha do usuário após revisão: o preset original do
+Miramo A tem peso 0 para Thor/Espelho/Fraqueza/Ignorância, então o Thor nunca
+apareceria. O menu ganha "Clima: original do mapa / todos os efeitos"; o modo
+"todos" usa pesos iguais para os 10 tipos (Thor incluído). Padrão continua o
+preset original, fiel ao Map.cs.
