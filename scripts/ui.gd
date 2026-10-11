@@ -1,16 +1,19 @@
 extends RefCounted
 ## Small UI factory keeps presentation styling separate from gameplay.
 
-const INK := Color("112b38")
-const CREAM := Color("f7f0df")
-const MUTED := Color("a1b6b9")
-const TEAL := Color("8de0d2")
+const INK := Color("0b1b2e")
+const CREAM := Color("edf5ff")
+const MUTED := Color("afc8df")
+const TEAL := Color("6fdbef")
+const STEEL := Color("91b4d8")
+const AMBER := Color("ffc760")
 var font: SystemFont
 var bold: SystemFont
+var metal_styles: Dictionary = {}
 
 func _init() -> void:
 	font = SystemFont.new()
-	font.font_names = PackedStringArray(["Avenir Next", "Trebuchet MS", "Noto Sans"])
+	font.font_names = PackedStringArray(["Trebuchet MS", "Avenir Next", "Noto Sans"])
 	font.font_weight = 500
 	bold = SystemFont.new()
 	bold.font_names = font.font_names
@@ -39,6 +42,41 @@ func panel(parent: Node, position: Vector2, size: Vector2, color: Color = INK, r
 	parent.add_child(node)
 	return node
 
+func metal_box(color: Color = Color("284c72"), edge: Color = STEEL) -> StyleBoxTexture:
+	var key := color.to_html() + ":" + edge.to_html()
+	if metal_styles.has(key):
+		return metal_styles[key]
+	var gradient := Gradient.new()
+	gradient.offsets = PackedFloat32Array([0.0, 0.035, 0.12, 0.55, 0.96, 1.0])
+	gradient.colors = PackedColorArray([edge, color.lightened(0.2), color, color.darkened(0.2), color.darkened(0.4), edge.darkened(0.35)])
+	var texture := GradientTexture2D.new()
+	texture.width = 32
+	texture.height = 128
+	texture.fill_from = Vector2(0, 0)
+	texture.fill_to = Vector2(0, 1)
+	texture.gradient = gradient
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	style.texture_margin_left = 2
+	style.texture_margin_right = 2
+	style.texture_margin_top = 3
+	style.texture_margin_bottom = 3
+	style.content_margin_left = 5
+	style.content_margin_right = 5
+	style.content_margin_top = 3
+	style.content_margin_bottom = 3
+	metal_styles[key] = style
+	return style
+
+func metal_panel(parent: Node, position: Vector2, size: Vector2, color: Color = Color("284c72")) -> Panel:
+	var node := Panel.new()
+	node.position = position
+	node.size = size
+	node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	node.add_theme_stylebox_override("panel", metal_box(color))
+	parent.add_child(node)
+	return node
+
 func label(parent: Node, text: String, position: Vector2, size: Vector2, font_size: int = 18, color: Color = CREAM, strong: bool = false) -> Label:
 	var node := Label.new()
 	node.text = text
@@ -60,11 +98,11 @@ func button(parent: Node, text: String, position: Vector2, size: Vector2, callba
 	node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	node.add_theme_font_override("font", bold)
 	node.add_theme_font_size_override("font_size", 17)
-	var bg := TEAL if primary else Color("24444e")
-	node.add_theme_stylebox_override("normal", box(bg, 9, Color("47626a") if not primary else TEAL))
-	node.add_theme_stylebox_override("hover", box(bg.lightened(0.13), 9, TEAL))
-	node.add_theme_stylebox_override("pressed", box(bg.darkened(0.15), 9, TEAL))
-	node.add_theme_stylebox_override("disabled", box(Color("20343f"), 9))
+	var bg := AMBER if primary else Color("315880")
+	node.add_theme_stylebox_override("normal", metal_box(bg, AMBER if primary else STEEL))
+	node.add_theme_stylebox_override("hover", metal_box(bg.lightened(0.16), AMBER))
+	node.add_theme_stylebox_override("pressed", metal_box(bg.darkened(0.2), AMBER))
+	node.add_theme_stylebox_override("disabled", metal_box(Color("20354d"), Color("48617e")))
 	node.add_theme_color_override("font_color", INK if primary else CREAM)
 	node.add_theme_color_override("font_hover_color", INK if primary else CREAM)
 	node.add_theme_color_override("font_pressed_color", INK if primary else CREAM)

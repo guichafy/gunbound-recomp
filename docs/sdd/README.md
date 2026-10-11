@@ -13,7 +13,7 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [DECISIONS.md](DECISIONS.md) | Decisões, motivos e consequências |
 | [TASKS.md](TASKS.md) | Entregas, rastreabilidade, tarefas abertas e roadmap |
 | [GUNBOUND_REFERENCES.md](GUNBOUND_REFERENCES.md) | Pesquisa dos três vídeos e do fork OpenBound, com origem e limites dos assets |
-| [REFINEMENT_0_2.md](REFINEMENT_0_2.md) | Proposta de refinamento; status explícito de aprovação/implementação |
+| [REFINEMENT_0_2.md](REFINEMENT_0_2.md) | Design aprovado, plano e evidência da entrega 0.2 |
 
 Ordem de retomada: hand-off → especificação → design → tarefas → decisões.
 Para uma mudança, localizar o requisito, definir o delta da especificação,
@@ -25,5 +25,5 @@ da execução inicial. O conjunto `docs/sdd/` consolida o contexto atual.
 O [README principal](../../README.md), o [guia de aprendizado](../APRENDIZADO.md),
 o [roteiro funcional](../VALIDACAO.md) e a [origem da arte](../ART.md) o complementam.
 
-Baseline: protótipo **0.1.0**, consolidado em **2026-10-11**. O histórico Git
+Baseline inicial: **0.1.0**; versão atual **0.2.0**, em **2026-10-11**. O histórico Git
 identifica as revisões; não manter hashes de commits dentro destes documentos.

@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.1.0
+# Especificação — protótipo 0.2.0
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o
@@ -33,8 +33,9 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 - Arena lateral única, 1280×800. Jogador começa; CPU recebe o outro veículo.
 - Escaravelho: vida 580, movimento 110, atraso adicional 0.
   Carapaça: vida 700, movimento 80, atraso adicional 18.
-- Mira 10–85°, força 15–100%. Movimento de 60 unidades/s limitado pelo orçamento.
-  `F` muda a direção do canhão; deslocar não o vira automaticamente.
+- Mira local 10–85°, força 15–100%. Movimento de 60 unidades/s limitado pelo orçamento.
+  Deslocar vira o veículo; `F` vira parado. A inclinação do apoio afeta a direção
+  do disparo; o indicador junto ao canhão mostra o ângulo efetivo no mundo.
 - Pulso: dano máximo 145, raio 46, atraso 100, um projétil.
   Impacto: dano máximo 210, raio 62, atraso 155, um projétil.
   Tempestade: dano máximo 105 por projétil, raio 43, atraso 210, três projéteis.
@@ -48,6 +49,14 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
   completa ao jogador; HUD mostra direção inicial e último tiro.
 - Vitória 120 XP, derrota 45 XP, empate 70 XP; nível = 1 + piso(XP / 200).
   Apelido até 20 caracteres; vazio vira `Piloto`. Sem conta ou ranking.
+
+## Refinamento 0.2
+
+REQ-13–18 e critérios detalhados estão em [REFINEMENT_0_2.md](REFINEMENT_0_2.md).
+Incluem painel azul metálico, força graduada/referência anterior, fila prevista,
+bússola, inclinação, carga automática e animações. Aceitação automatizada:
+`test_refinement.gd` (28) e `test_refinement_scene.gd` (21), além das suites anteriores.
+Os parâmetros de dano/vida/atraso/XP continuam os do baseline.
 
 ## Fora da entrega
 

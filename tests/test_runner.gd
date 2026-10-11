@@ -82,7 +82,7 @@ func _initialize() -> void:
 	check(cpu_shot.power >= 15.0 and cpu_shot.power <= 100.0, "CPU returns legal power")
 	match_model.start(0, 2, 123)
 	match_model.wind = -30.0
-	var returning: Dictionary = combat.predict(match_model.muzzle(0, 78.0), combat.launch_velocity(78.0, 15.0, 1, 0), -30.0, match_model.terrain, match_model.actors, 0)
+	var returning: Dictionary = combat.predict(match_model.muzzle(0, 78.0), match_model.shot_velocity(0, 78.0, 15.0, 0), -30.0, match_model.terrain, match_model.actors, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")
 	match_model.fire(78.0, 15.0, 0)
 	for i in range(1600):

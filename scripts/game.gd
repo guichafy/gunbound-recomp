@@ -6,6 +6,8 @@ const Combat = preload("res://scripts/combat.gd")
 const Profile = preload("res://scripts/profile.gd")
 const UIFactory = preload("res://scripts/ui.gd")
 const Sound = preload("res://scripts/sound.gd")
+const BattleArt = preload("res://scripts/battle_art.gd")
+var art = BattleArt.new()
 var ui = UIFactory.new()
 var model = Match.new()
 var profile = Profile.new()
@@ -26,7 +28,6 @@ var angle := 45.0
 var power := 65.0
 var weapon := 0
 var charging := false
-var charge_direction := 1.0
 var paused := false
 var elapsed := 0.0
 var cpu_wait := 0.0
@@ -57,6 +58,14 @@ var turn_label: Label
 var movement_label: Label
 var delay_label: Label
 var shot_hint: Label
+var power_meter: ProgressBar
+var movement_meter: ProgressBar
+var force_marks: Node2D
+var queue_labels: Array[Label] = []
+var queue_entries: Array = []
+var queue_panel: Panel
+var queue_title: Label
+var queue_detail: Label
 
 func _ready() -> void:
 	background = load("res://assets/art/background.png")
@@ -90,7 +99,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.1", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.2", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "BRISA\nDE AÇO", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -154,6 +163,7 @@ func start_match() -> void:
 		profile.save_profile()
 	screen = "match"
 	model.start(vehicle, cpu_difficulty)
+	art.reset(model.actors)
 	match_id = str(Time.get_unix_time_from_system()) + ":" + str(Time.get_ticks_usec())
 	reward = 0
 	result_wait = -1.0
@@ -170,67 +180,107 @@ func start_match() -> void:
 	update_hud()
 
 func build_hud() -> void:
-	ui.panel(root, Vector2(20, 18), Vector2(1240, 91), Color("112b38"), 15)
+	# The arena stays open; instruments are grouped in the classic lower console.
 	health_bars.clear()
 	hp_labels.clear()
 	for index in range(2):
-		var left := 43.0 if index == 0 else 917.0
 		var actor: Dictionary = model.actors[index]
-		var name: String = profile.nickname if index == 0 else "AUTÔMATO"
-		ui.label(root, name + "  ·  " + Match.VEHICLES[actor.vehicle].name.to_upper(), Vector2(left, 28), Vector2(320, 24), 16, ui.CREAM, true)
-		var bar := ProgressBar.new()
-		bar.position = Vector2(left, 59)
-		bar.size = Vector2(320, 8)
-		bar.max_value = actor.max_hp
-		bar.value = actor.hp
-		bar.show_percentage = false
-		bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		bar.add_theme_font_size_override("font_size", 1)
-		var bar_background := ui.box(Color("304653"), 4)
-		var bar_fill := ui.box(Match.VEHICLES[actor.vehicle].color, 4)
-		for style in [bar_background, bar_fill]:
-			style.content_margin_top = 0
-			style.content_margin_bottom = 0
-			style.content_margin_left = 0
-			style.content_margin_right = 0
-		bar.add_theme_stylebox_override("background", bar_background)
-		bar.add_theme_stylebox_override("fill", bar_fill)
-		root.add_child(bar)
-		# Set the size after styling: the default theme initially clamps it taller.
-		bar.size = Vector2(320, 8)
+		var bar := make_meter(root, Vector2.ZERO, Vector2(96, 7), float(actor.max_hp), Match.VEHICLES[actor.vehicle].color)
 		health_bars.append(bar)
-		hp_labels.append(ui.label(root, "", Vector2(left, 74), Vector2(320, 22), 12, ui.MUTED))
-	wind_label = ui.label(root, "", Vector2(458, 29), Vector2(240, 30), 23, ui.TEAL, true)
-	ui.label(root, "VENTO", Vector2(458, 71), Vector2(180, 20), 11, ui.MUTED, true)
-	timer_label = ui.label(root, "30", Vector2(730, 26), Vector2(90, 36), 30, ui.CREAM, true)
-	ui.label(root, "SEGUNDOS", Vector2(729, 72), Vector2(100, 20), 11, ui.MUTED, true)
-	turn_label = ui.label(root, "", Vector2(455, 125), Vector2(500, 28), 17, ui.INK, true)
-	ui.button(root, "?", Vector2(1158, 123), Vector2(38, 34), show_help)
-	ui.button(root, "Ⅱ", Vector2(1204, 123), Vector2(38, 34), show_pause)
-	ui.panel(root, Vector2(20, 680), Vector2(1240, 101), Color("112b38"), 15)
-	ui.label(root, "ARSENAL", Vector2(36, 691), Vector2(170, 18), 11, ui.MUTED, true)
+		var hp := ui.label(root, "", Vector2.ZERO, Vector2(116, 19), 12, Color.WHITE, true)
+		hp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		hp.add_theme_color_override("font_outline_color", ui.INK)
+		hp.add_theme_constant_override("outline_size", 4)
+		hp_labels.append(hp)
+	wind_label = ui.label(root, "", Vector2(590, 111), Vector2(100, 25), 18, ui.INK, true)
+	wind_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	timer_label = ui.label(root, "30", Vector2(1153, 20), Vector2(94, 64), 48, ui.AMBER, true)
+	timer_label.add_theme_color_override("font_outline_color", ui.INK)
+	timer_label.add_theme_constant_override("outline_size", 5)
+	ui.label(root, "Tempo", Vector2(1160, 86), Vector2(85, 21), 13, ui.INK, true)
+	turn_label = ui.label(root, "", Vector2(408, 135), Vector2(570, 28), 16, ui.CREAM, true)
+	turn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	turn_label.add_theme_color_override("font_outline_color", ui.INK)
+	turn_label.add_theme_constant_override("outline_size", 4)
+	ui.button(root, "?", Vector2(18, 18), Vector2(38, 32), show_help)
+	ui.button(root, "Ⅱ", Vector2(64, 18), Vector2(38, 32), show_pause)
+	queue_panel = ui.metal_panel(root, Vector2(16, 544), Vector2(236, 114), Color("193650"))
+	queue_title = ui.label(queue_panel, "", Vector2(13, 6), Vector2(216, 22), 13, ui.AMBER, true)
+	queue_labels.clear()
+	for row in range(2):
+		queue_labels.append(ui.label(queue_panel, "", Vector2(14, 34 + row * 29), Vector2(212, 25), 14, ui.CREAM, true))
+	queue_detail = ui.label(queue_panel, "", Vector2(13, 91), Vector2(213, 18), 11, ui.MUTED)
+	ui.metal_panel(root, Vector2(0, 670), Vector2(1280, 130), Color("507498"))
+	ui.metal_panel(root, Vector2(8, 678), Vector2(202, 113), Color("234564"))
+	ui.label(root, "Armas", Vector2(20, 683), Vector2(180, 22), 13, ui.CREAM, true)
 	weapon_buttons.clear()
 	for index in range(3):
-		var text: String = "%d · %s" % [index + 1, Combat.WEAPONS[index].name]
-		weapon_buttons.append(ui.button(root, text, Vector2(36 + index * 137, 720), Vector2(129, 43), func(): select_weapon(index)))
-	angle_label = ui.label(root, "", Vector2(466, 693), Vector2(220, 26), 17, ui.CREAM, true)
-	angle_slider = ui.slider(root, Vector2(466, 734), Vector2(215, 23), 10, 85, angle, func(value): angle = value)
-	power_label = ui.label(root, "", Vector2(721, 693), Vector2(280, 26), 17, ui.CREAM, true)
-	power_slider = ui.slider(root, Vector2(721, 734), Vector2(265, 23), 15, 100, power, func(value): power = value)
-	fire_button = ui.button(root, "DISPARAR    ↗", Vector2(1040, 701), Vector2(200, 48), shoot, true)
-	ui.label(root, "Segure e solte ESPAÇO", Vector2(1043, 757), Vector2(205, 20), 12, ui.MUTED)
-	move_left = ui.button(root, "← A", Vector2(28, 627), Vector2(63, 33), func(): pass)
-	move_right = ui.button(root, "D →", Vector2(99, 627), Vector2(63, 33), func(): pass)
-	flip_button = ui.button(root, "Virar · F", Vector2(174, 627), Vector2(104, 33), flip)
-	movement_label = ui.label(root, "", Vector2(295, 632), Vector2(180, 22), 13, ui.INK, true)
-	delay_label = ui.label(root, "", Vector2(494, 632), Vector2(285, 22), 13, ui.INK, true)
-	pass_button = ui.button(root, "Passar turno", Vector2(1094, 627), Vector2(151, 33), func():
+		var button := ui.button(root, ["1", "2", "SS"][index], Vector2(20 + index * 61, 711), Vector2(55, 42), func(): select_weapon(index))
+		button.add_theme_font_size_override("font_size", 23)
+		button.tooltip_text = "%s · atraso %d" % [Combat.WEAPONS[index].name, Combat.WEAPONS[index].delay]
+		weapon_buttons.append(button)
+	delay_label = ui.label(root, "", Vector2(20, 763), Vector2(180, 21), 12, ui.AMBER, true)
+	ui.metal_panel(root, Vector2(218, 678), Vector2(180, 113), Color("234564"))
+	angle_label = ui.label(root, "", Vector2(229, 683), Vector2(160, 31), 22, ui.AMBER, true)
+	angle_slider = ui.slider(root, Vector2(230, 722), Vector2(153, 17), 10, 85, angle, func(value): angle = value)
+	move_left = ui.button(root, "←", Vector2(230, 752), Vector2(42, 28), func(): pass)
+	move_right = ui.button(root, "→", Vector2(277, 752), Vector2(42, 28), func(): pass)
+	flip_button = ui.button(root, "F", Vector2(325, 752), Vector2(59, 28), flip)
+	ui.metal_panel(root, Vector2(406, 678), Vector2(600, 113), Color("17314d"))
+	power_label = ui.label(root, "", Vector2(420, 684), Vector2(260, 25), 18, ui.CREAM, true)
+	shot_hint = ui.label(root, "", Vector2(694, 684), Vector2(297, 25), 13, ui.MUTED)
+	power_meter = make_meter(root, Vector2(423, 728), Vector2(568, 20), 100, ui.AMBER)
+	power_slider = ui.slider(root, Vector2(423, 721), Vector2(568, 30), 0, 100, power, func(value): power = maxf(15.0, value))
+	power_slider.add_theme_stylebox_override("slider", ui.box(Color.TRANSPARENT, 0))
+	power_slider.add_theme_stylebox_override("grabber_area", ui.box(Color.TRANSPARENT, 0))
+	power_slider.add_theme_stylebox_override("grabber_area_highlight", ui.box(Color.TRANSPARENT, 0))
+	movement_label = ui.label(root, "", Vector2(420, 762), Vector2(180, 21), 12, ui.MUTED)
+	movement_meter = make_meter(root, Vector2(605, 768), Vector2(386, 6), model.movement_budget(), ui.TEAL)
+	force_marks = Node2D.new()
+	root.add_child(force_marks)
+	force_marks.draw.connect(draw_force_marks)
+	ui.metal_panel(root, Vector2(1014, 678), Vector2(258, 113), Color("234564"))
+	fire_button = ui.button(root, "DISPARAR", Vector2(1027, 690), Vector2(231, 41), shoot, true)
+	pass_button = ui.button(root, "Passar turno", Vector2(1027, 738), Vector2(231, 27), func():
 		if player_can_act():
 			charging = false
 			model.pass_turn()
 	)
-	shot_hint = ui.label(root, "", Vector2(750, 632), Vector2(333, 24), 13, ui.INK, true)
+	pass_button.add_theme_font_size_override("font_size", 13)
+	ui.label(root, "Espaço: segurar e soltar", Vector2(1033, 768), Vector2(229, 18), 12, ui.MUTED)
 	select_weapon(0)
+
+func make_meter(parent: Node, position: Vector2, size: Vector2, maximum: float, color: Color) -> ProgressBar:
+	var bar := ProgressBar.new()
+	bar.position = position
+	bar.max_value = maximum
+	bar.show_percentage = false
+	bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	bar.add_theme_font_size_override("font_size", 1)
+	for pair in [["background", Color("081a2b")], ["fill", color]]:
+		var style := ui.box(pair[1], 1)
+		style.set_content_margin_all(0)
+		bar.add_theme_stylebox_override(pair[0], style)
+	parent.add_child(bar)
+	bar.size = size
+	return bar
+
+func draw_force_marks() -> void:
+	for i in range(41):
+		var x := 423.0 + i * 568.0 / 40.0
+		force_marks.draw_line(Vector2(x, 728), Vector2(x, 728 + (8 if i % 10 == 0 else 4)), Color("071728"), 1.0)
+		if i % 10 == 0:
+			force_marks.draw_string(ui.font, Vector2(x - 8, 719), str(int(i * 2.5)), HORIZONTAL_ALIGNMENT_LEFT, -1, 10, ui.MUTED)
+	var previous: Dictionary = model.last_shots[0]
+	if not previous.is_empty():
+		var x := 423.0 + float(previous.power) * 568.0 / 100.0
+		force_marks.draw_colored_polygon(PackedVector2Array([Vector2(x - 5, 754), Vector2(x + 5, 754), Vector2(x, 747)]), ui.CREAM)
+
+func displayed_queue() -> Array:
+	return queue_entries
+
+func animation_state(index: int) -> String:
+	return art.state_name(model, index, charging)
 
 func player_can_act() -> bool:
 	return screen == "match" and model.phase == "aim" and model.active == 0 and not paused
@@ -254,7 +304,8 @@ func flip() -> void:
 		model.actors[0].facing *= -1
 
 func _process(delta: float) -> void:
-	elapsed += delta
+	if not paused:
+		elapsed += minf(delta, 0.1)
 	queue_redraw()
 	if screen != "match" or paused:
 		return
@@ -272,12 +323,11 @@ func _process(delta: float) -> void:
 		if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
 			angle = maxf(10.0, angle - 38.0 * frame_delta)
 		if charging:
-			power = clampf(power + charge_direction * 65.0 * frame_delta, 15.0, 100.0)
+			power = minf(100.0, power + 65.0 * frame_delta)
 			if power >= 100.0:
-				charge_direction = -1.0
-			elif power <= 15.0:
-				charge_direction = 1.0
+				shoot()
 	model.tick(frame_delta)
+	art.tick(model, frame_delta)
 	consume_events()
 	if model.phase == "aim" and model.active == 1:
 		cpu_wait -= frame_delta
@@ -290,7 +340,7 @@ func _process(delta: float) -> void:
 				cpu_plan.clear()
 	for i in range(effects.size() - 1, -1, -1):
 		effects[i].age += frame_delta
-		if effects[i].age > 0.75:
+		if effects[i].age > 1.5:
 			effects.remove_at(i)
 	for i in range(floating.size() - 1, -1, -1):
 		floating[i].age += frame_delta
@@ -306,6 +356,7 @@ func _process(delta: float) -> void:
 
 func consume_events() -> void:
 	for event in model.events:
+		art.react(event)
 		match event.type:
 			"turn":
 				charging = false
@@ -336,28 +387,38 @@ func consume_events() -> void:
 func update_hud() -> void:
 	if screen != "match":
 		return
+	queue_panel.position = Vector2(16, 544)
 	for index in range(2):
 		var actor: Dictionary = model.actors[index]
+		if actor.hp > 0 and Rect2(16, 544, 236, 114).intersects(Rect2(actor.pos + Vector2(-70, 38), Vector2(140, 66))):
+			queue_panel.position = Vector2(16, 74)
 		health_bars[index].value = actor.hp
-		hp_labels[index].text = "%d / %d VIDA     ·     ATRASO %d" % [actor.hp, actor.max_hp, maxi(0, int(float(actor.ready) - model.clock))]
-	wind_label.text = ("←  " if model.wind < 0.0 else "→  ") + "%02d" % abs(int(model.wind))
+		health_bars[index].visible = actor.hp > 0
+		health_bars[index].position = actor.pos + Vector2(-48, 40)
+		hp_labels[index].visible = actor.hp > 0
+		hp_labels[index].position = actor.pos + Vector2(-58, 49)
+		hp_labels[index].text = "%d / %d" % [actor.hp, actor.max_hp]
+	wind_label.text = "%02d" % abs(int(model.wind))
 	timer_label.text = "%02d" % int(ceil(model.turn_time)) if model.phase == "aim" else "—"
-	timer_label.add_theme_color_override("font_color", Color("ffb58a") if model.turn_time < 8.0 else ui.CREAM)
-	var status := "SEU TURNO" if model.active == 0 else "TURNO DO AUTÔMATO"
+	timer_label.add_theme_color_override("font_color", Color("ff815e") if model.turn_time < 8.0 else ui.AMBER)
+	var status := "Seu turno" if model.active == 0 else "Turno do Autômato"
 	if model.phase == "flight":
-		status = "PROJÉTIL EM VOO"
+		status = "Projétil em voo"
 	elif model.phase == "settle":
-		status = "RESOLVENDO IMPACTO"
+		status = "Resolvendo impacto"
 	elif model.phase == "finished":
-		status = "TREINO ENCERRADO"
-	turn_label.text = "TURNO %02d   ·   %s" % [model.total_turns, status]
-	angle_label.text = "ÂNGULO    %02d°" % int(angle)
-	power_label.text = "FORÇA    %03d%%" % int(power)
+		status = "Treino encerrado"
+	turn_label.text = "%02d  /  %s" % [model.total_turns, status]
+	angle_label.text = "Mira  %02d°" % int(angle)
+	power_label.text = "%s  %03d%%" % ["Carregando" if charging else "Força", int(power)]
 	angle_slider.set_value_no_signal(angle)
 	power_slider.set_value_no_signal(power)
+	power_meter.value = power
+	movement_meter.max_value = model.movement_budget()
+	movement_meter.value = model.movement_left
 	var enabled := player_can_act()
-	angle_slider.editable = enabled
-	power_slider.editable = enabled
+	angle_slider.editable = enabled and not charging
+	power_slider.editable = enabled and not charging
 	fire_button.disabled = not enabled
 	pass_button.disabled = not enabled
 	flip_button.disabled = not enabled
@@ -365,12 +426,30 @@ func update_hud() -> void:
 	move_right.disabled = not enabled
 	for index in range(weapon_buttons.size()):
 		weapon_buttons[index].disabled = not enabled or (index == 2 and not model.can_use_special(0))
-		weapon_buttons[index].add_theme_stylebox_override("normal", ui.box(Color("32666b") if index == weapon else Color("24444e"), 9, ui.TEAL if index == weapon else Color("47626a")))
-	weapon_buttons[2].tooltip_text = "Disponível no terceiro turno próprio; um uso por partida."
-	movement_label.text = "MOVIMENTO  %d" % int(ceil(model.movement_left))
-	delay_label.text = "ATRASO DO TIRO  +%d" % int(float(Combat.WEAPONS[weapon].delay) + float(Match.VEHICLES[vehicle].delay))
+		weapon_buttons[index].add_theme_stylebox_override("normal", ui.metal_box(Color("ac7134") if index == weapon else Color("315880"), ui.AMBER if index == weapon else ui.STEEL))
+	weapon_buttons[2].tooltip_text = "Tempestade: terceiro turno próprio; um uso por partida."
+	movement_label.text = "Movimento  %d" % int(ceil(model.movement_left))
+	delay_label.text = "%s  +%d" % [Combat.WEAPONS[weapon].name, int(float(Combat.WEAPONS[weapon].delay) + float(Match.VEHICLES[vehicle].delay))]
 	var previous: Dictionary = model.last_shots[0]
-	shot_hint.text = "ANTERIOR  %d° / %d%%" % [int(previous.angle), int(previous.power)] if not previous.is_empty() else "W/S: ângulo · 1/2/3: arma"
+	shot_hint.text = "Último: %d° / %d%%" % [int(previous.angle), int(previous.power)] if not previous.is_empty() else "Marcador: tiro anterior"
+	var displayed_weapon: int = weapon if model.active == 0 else int(cpu_plan.get("weapon", 0))
+	queue_title.text = "Vez: " + (profile.nickname.left(18) if model.active == 0 else "Autômato")
+	if model.phase == "aim" and model.active == 1 and cpu_plan.is_empty():
+		queue_entries = []
+		queue_labels[0].text = "Autômato escolhendo arma"
+		queue_labels[1].text = "Previsão em instantes…"
+		queue_detail.text = "Ordem depois do tiro"
+		force_marks.queue_redraw()
+		return
+	queue_entries = model.initiative_preview(displayed_weapon)
+	var preview_weapon: int = displayed_weapon if model.phase == "aim" else model.shot_weapon
+	queue_detail.text = "Após %s: ordem por atraso" % Combat.WEAPONS[preview_weapon].name
+	for row in range(queue_entries.size()):
+		var entry: Dictionary = queue_entries[row]
+		var name: String = profile.nickname if entry.actor == 0 else "Autômato"
+		queue_labels[row].text = "%s %s   +%d" % ["▶" if row == 0 else "  ", name.left(12), int(entry.delay)]
+		queue_labels[row].add_theme_color_override("font_color", ui.AMBER if row == 0 else ui.MUTED)
+	force_marks.queue_redraw()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or event.echo:
@@ -390,7 +469,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.physical_keycode == KEY_SPACE:
 		if event.pressed:
 			charging = true
-			charge_direction = 1.0
 			power = 15.0
 		elif charging:
 			shoot()
@@ -431,7 +509,7 @@ func close_overlay() -> void:
 func show_help() -> void:
 	var card := make_overlay("help")
 	ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, ui.CREAM, true)
-	var lines := ["A / D ou ← / →     Mover o veículo", "W / S ou ↑ / ↓     Ajustar o ângulo", "ESPAÇO                  Segurar força; soltar para disparar", "1 / 2 / 3                 Escolher a arma", "F                             Virar o canhão", "ESC                        Pausar / continuar"]
+	var lines := ["A / D ou ← / →     Mover o veículo", "W / S ou ↑ / ↓     Ajustar o ângulo", "ESPAÇO                  Carregar; soltar ou encher para disparar", "1 / 2 / 3                 Escolher a arma", "F                             Virar parado", "ESC                        Pausar / continuar"]
 	for index in range(lines.size()):
 		ui.label(card, lines[index], Vector2(32, 96 + index * 37), Vector2(500, 32), 17)
 	ui.label(card, "O vento muda a trajetória. Use o último tiro como referência.\nArmas pesadas geram mais atraso. Especial: terceiro turno, um uso.\nZere a vida ou derrube o adversário para vencer.", Vector2(32, 335), Vector2(500, 70), 14, ui.MUTED)
@@ -489,28 +567,8 @@ func _draw() -> void:
 		if x % 3 == 0:
 			draw_circle(Vector2(x - 3, y - 8), 2.2, Color("f4d5b2"))
 	for index in range(model.actors.size()):
-		var actor: Dictionary = model.actors[index]
-		if int(actor.hp) <= 0:
-			continue
-		var pos: Vector2 = actor.pos
-		draw_set_transform(pos + offset)
-		draw_circle(Vector2(0, 25), 35.0, Color(0.03, 0.09, 0.1, 0.13))
-		if model.active == index and model.phase == "aim":
-			draw_arc(Vector2(0, 8), 50.0 + sin(elapsed * 4.0) * 2.0, -2.9, -0.25, 40, Match.VEHICLES[actor.vehicle].color, 2.0, true)
-		draw_set_transform(offset)
-		draw_sprite(actor.vehicle, pos, 105.0, actor.facing)
-		var actor_angle := angle if index == 0 else float(cpu_plan.get("angle", 45.0))
-		var direction := Vector2(cos(deg_to_rad(actor_angle)) * int(actor.facing), -sin(deg_to_rad(actor_angle)))
-		var pivot := pos + Vector2(0, -14)
-		draw_line(pivot, pivot + direction * 38.0, Color("172c35"), 13.0, true)
-		draw_line(pivot, pivot + direction * 36.0, Match.VEHICLES[actor.vehicle].color.darkened(0.16), 7.0, true)
-		draw_circle(pivot, 7.0, Color("efe3bd"))
-		var name: String = profile.nickname if index == 0 else "Autômato"
-		var width: float = ui.bold.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, 15).x
-		draw_style_box(ui.box(Color(0.05, 0.15, 0.19, 0.88), 6), Rect2(pos.x - width * 0.5 - 10, pos.y - 92, width + 20, 25))
-		draw_string(ui.bold, Vector2(pos.x - width * 0.5, pos.y - 74), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, ui.CREAM)
-		draw_style_box(ui.box(Color("223f48"), 3), Rect2(pos.x - 38, pos.y - 60, 76, 5))
-		draw_style_box(ui.box(Match.VEHICLES[actor.vehicle].color, 3), Rect2(pos.x - 38, pos.y - 60, maxf(1, 76.0 * float(actor.hp) / actor.max_hp), 5))
+		art.draw_actor(self, index, offset)
+	draw_set_transform(offset)
 	if model.phase == "aim" and model.active == 0:
 		draw_aim_guide()
 	for projectile in model.projectiles:
@@ -522,38 +580,43 @@ func _draw() -> void:
 		draw_circle(projectile.pos, 5.0, color)
 		draw_circle(projectile.pos + Vector2(-1, -1), 2.0, Color.WHITE)
 	for effect in effects:
-		var t := float(effect.age) / 0.75
-		var pos: Vector2 = effect.pos
-		var radius := float(effect.radius)
-		draw_circle(pos, radius * (0.2 + t * 1.3), Color(1.0, 0.78, 0.38, (1.0 - t) * 0.33))
-		draw_arc(pos, radius * (0.35 + t), 0, TAU, 50, Color(1.0, 0.96, 0.8, 1.0 - t), maxf(1.0, (1.0 - t) * 6.0), true)
-		for index in range(12):
-			var direction := Vector2.from_angle(index * TAU / 12.0)
-			var particle_pos := pos + direction * radius * t * 1.5 + Vector2(0, t * t * 80.0)
-			draw_circle(particle_pos, maxf(1.0, 4.0 * (1.0 - t)), Color("f8d3a4") * Color(1, 1, 1, 1.0 - t))
+		art.draw_explosion(self, effect)
+	draw_set_transform(offset)
 	for item in floating:
 		var pos: Vector2 = item.pos + Vector2(-22, -70 - float(item.age) * 34.0)
-		draw_string(ui.bold, pos + Vector2(1, 2), item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color(0.05, 0.12, 0.18, 1.0 - float(item.age) / 1.5))
-		draw_string(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color(item.color, 1.0 - float(item.age) / 1.5))
+		draw_string_outline(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32, 5, Color(0.05, 0.12, 0.18, 1.0 - float(item.age) / 1.5))
+		draw_string(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32, Color(item.color, 1.0 - float(item.age) / 1.5))
 	draw_set_transform(Vector2.ZERO)
+	art.draw_compass(self)
 	if banner_time > 0.0 and model.phase == "aim":
 		var width: float = ui.bold.get_string_size(banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17).x + 48.0
 		draw_style_box(ui.box(Color(0.05, 0.15, 0.19, minf(0.9, banner_time)), 10), Rect2(640 - width / 2, 176, width, 42))
 		draw_string(ui.bold, Vector2(664 - width / 2, 202), banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color(ui.CREAM, minf(1.0, banner_time)))
 
-func draw_sprite(kind: int, pos: Vector2, width: float, facing: int) -> void:
+func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
 	var region := regions[kind]
 	var height := width * region.size.y / region.size.x
 	var rect := Rect2(-width * 0.5, -height + width * 0.23, width, height)
-	draw_set_transform(pos, 0.0, Vector2(facing, 1))
-	draw_texture_rect_region(sprites[kind], rect, region)
+	draw_set_transform(pos, rotation, Vector2(facing, 1) * scale_amount)
+	draw_texture_rect_region(sprites[kind], rect, region, color)
 	draw_set_transform(Vector2.ZERO)
 
 func draw_aim_guide() -> void:
-	# A short launch-direction guide helps read the angle without solving the shot.
-	var pos: Vector2 = model.muzzle(0, angle)
-	var direction := Vector2(cos(deg_to_rad(angle)) * int(model.actors[0].facing), -sin(deg_to_rad(angle)))
-	for index in range(1, 6):
-		draw_circle(pos + direction * (index * 13.0), 2.0, Color(0.98, 0.99, 0.92, 0.85 - index * 0.1))
-	var center: Vector2 = model.actors[0].pos + Vector2(0, -14)
-	draw_arc(center, 62, -PI / 2, 0 if int(model.actors[0].facing) > 0 else -PI, 35, Color(0.12, 0.28, 0.3, 0.3), 1.0, true)
+	var center: Vector2 = model.cannon_pivot(0)
+	var facing: int = model.actors[0].facing
+	var rotation: float = model.body_rotation(0)
+	var start := rotation - deg_to_rad(85.0) if facing == 1 else rotation + PI + deg_to_rad(10.0)
+	var end := rotation - deg_to_rad(10.0) if facing == 1 else rotation + PI + deg_to_rad(85.0)
+	draw_arc(center, 62, start, end, 42, Color(0.3, 0.85, 0.42, 0.65), 8, true)
+	for mark in range(10, 86, 5):
+		var direction: Vector2 = model.shot_velocity(0, mark, 100, 0).normalized()
+		draw_line(center + direction * 53, center + direction * (65 if mark % 15 == 0 else 61), Color(0.94, 1, 0.88, 0.85), 1, true)
+	var direction: Vector2 = model.shot_velocity(0, angle, 100, 0).normalized()
+	var tip := center + direction * 73
+	draw_line(center + direction * 38, tip, ui.AMBER, 2, true)
+	draw_circle(tip, 5, ui.AMBER)
+	draw_circle(tip, 2, ui.INK)
+	var degrees: float = rad_to_deg(atan2(-direction.y, direction.x * facing))
+	var label_pos := center + Vector2(-72 if facing == 1 else 25, -13)
+	draw_string_outline(ui.bold, label_pos, "%d°" % roundi(degrees), HORIZONTAL_ALIGNMENT_LEFT, -1, 20, 4, ui.INK)
+	draw_string(ui.bold, label_pos, "%d°" % roundi(degrees), HORIZONTAL_ALIGNMENT_LEFT, -1, 20, ui.AMBER)

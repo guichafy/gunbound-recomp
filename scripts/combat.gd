@@ -13,10 +13,10 @@ static func advance(position: Vector2, velocity: Vector2, wind: float, delta: fl
 	var acceleration := Vector2(wind * 1.5, GRAVITY)
 	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
 
-static func launch_velocity(angle: float, power: float, facing: int, weapon: int) -> Vector2:
+static func launch_velocity(angle: float, power: float, facing: int, weapon: int, rotation: float = 0.0) -> Vector2:
 	var speed := lerpf(180.0, 660.0, clampf(power, 15.0, 100.0) / 100.0) * float(WEAPONS[weapon].speed)
 	var radians := deg_to_rad(clampf(angle, 10.0, 85.0))
-	return Vector2(cos(radians) * facing, -sin(radians)) * speed
+	return Vector2(cos(radians) * facing, -sin(radians)).rotated(rotation) * speed
 
 static func trace_segment(from: Vector2, to: Vector2, terrain, actors: Array, ignored: int) -> Dictionary:
 	var terrain_hit: Dictionary = terrain.raycast(from, to)

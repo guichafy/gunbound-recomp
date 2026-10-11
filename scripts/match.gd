@@ -67,9 +67,12 @@ func can_use_special(index: int) -> bool:
 	return int(actors[index].turns) >= 3 and not bool(actors[index].special_used)
 
 func move_actor(direction: float, delta: float) -> void:
-	if phase != "aim" or movement_left <= 0.0:
+	if phase != "aim" or is_zero_approx(direction):
 		return
 	var actor: Dictionary = actors[active]
+	actor.facing = int(signf(direction))
+	if movement_left <= 0.0:
+		return
 	var distance := minf(movement_left, absf(direction) * 60.0 * delta)
 	var steps := maxi(1, int(ceil(distance / 2.0)))
 	for i in range(steps):
@@ -89,9 +92,31 @@ func move_actor(direction: float, delta: float) -> void:
 			check_end()
 			break
 
+func body_rotation(index: int) -> float:
+	# Nearby supports only: do not tilt toward a distant lower floor or the abyss.
+	var pos: Vector2 = actors[index].pos
+	var left: float = terrain.surface_at(pos.x - 18.0, pos.y - 16.0)
+	var right: float = terrain.surface_at(pos.x + 18.0, pos.y - 16.0)
+	if left > 740.0 or right > 740.0 or absf(left - pos.y - 24.0) > 60.0 or absf(right - pos.y - 24.0) > 60.0:
+		return 0.0
+	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
+
+func shot_velocity(index: int, angle: float, power: float, weapon: int) -> Vector2:
+	return Combat.launch_velocity(angle, power, actors[index].facing, weapon, body_rotation(index))
+
+func cannon_pivot(index: int) -> Vector2:
+	return actors[index].pos + Vector2(0, -14).rotated(body_rotation(index))
+
 func muzzle(index: int, angle: float) -> Vector2:
-	var direction := Vector2(cos(deg_to_rad(angle)) * int(actors[index].facing), -sin(deg_to_rad(angle)))
-	return actors[index].pos + Vector2(0, -14) + direction * 38.0
+	return cannon_pivot(index) + shot_velocity(index, angle, 100.0, 0).normalized() * 38.0
+
+func initiative_preview(weapon: int) -> Array:
+	var ready := [float(actors[0].ready), float(actors[1].ready)]
+	if phase in ["aim", "flight", "settle"]:
+		var selected := clampi(weapon, 0, 2) if phase == "aim" else shot_weapon
+		ready[active] = maxf(ready[active], clock) + float(Combat.WEAPONS[selected].delay) + float(VEHICLES[actors[active].vehicle].delay)
+	var first := 1 - active if is_zero_approx(ready[0] - ready[1]) else (0 if ready[0] < ready[1] else 1)
+	return [{"actor": first, "ready": ready[first], "delay": maxf(0.0, ready[first] - clock)}, {"actor": 1 - first, "ready": ready[1 - first], "delay": maxf(0.0, ready[1 - first] - clock)}]
 
 func fire(angle: float, power: float, weapon: int) -> bool:
 	if phase != "aim" or weapon < 0 or weapon >= Combat.WEAPONS.size():
@@ -102,13 +127,15 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	shot_actor = active
 	if weapon == 2:
 		actors[active].special_used = true
+	angle = clampf(angle, 10.0, 85.0)
+	power = clampf(power, 15.0, 100.0)
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
 	var count := int(Combat.WEAPONS[weapon].count)
 	for i in range(count):
 		var spread := (float(i) - float(count - 1) * 0.5) * 3.0
 		var initial := muzzle(active, angle + spread)
-		projectiles.append({"pos": initial, "velocity": Combat.launch_velocity(angle + spread, power, actors[active].facing, weapon), "age": 0.0, "trail": [initial]})
+		projectiles.append({"pos": initial, "velocity": shot_velocity(active, angle + spread, power, weapon), "age": 0.0, "trail": [initial]})
 	phase = "flight"
 	accumulator = 0.0
 	events.append({"type": "fire", "actor": active, "weapon": weapon})
@@ -214,7 +241,7 @@ func choose_cpu_shot() -> Dictionary:
 	for angle in range(20, 81, 5):
 		for power in range(20, 101, 4):
 			var origin := muzzle(active, angle)
-			var velocity := Combat.launch_velocity(angle, power, actor.facing, weapon)
+			var velocity := shot_velocity(active, angle, power, weapon)
 			var impact := Combat.predict(origin, velocity, wind, terrain, actors, active)
 			var score := Vector2(impact.position).distance_to(target.pos)
 			if int(impact.actor) == 1 - active:

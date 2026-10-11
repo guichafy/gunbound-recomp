@@ -6,6 +6,7 @@
 |---|---|
 | `scenes/main.tscn`, `scripts/game.gd` | Cena, menu/HUD, input, pausa, overlays, desenho, efeitos, CPU e recompensa |
 | `scripts/ui.gd` | Construção e estilo de controles |
+| `scripts/battle_art.gd` | Estado visual separado, interpolação, rodas/canhão, recuo, dano, destruição, explosão e bússola |
 | `scripts/terrain.gd` | Máscara sólida 640×400, células de 2 px, textura, superfície, crateras e raycast DDA |
 | `scripts/combat.gd` | Parâmetros das armas, integração, colisão, dano e previsão de trajetória |
 | `scripts/match.gd` | Atores, RNG, projéteis, fases, movimento, disponibilidade, CPU e resultado |
@@ -41,6 +42,23 @@ som, partículas, texto e resultado. View não calcula dano nem ordena turnos.
 `p'=p+vΔt+aΔt²/2`, `v'=v+aΔt`. Previsão e voo real usam esse integrador e
 `trace_segment`: primeiro impacto entre máscara sólida e círculos dos veículos.
 O atirador é ignorado somente durante os primeiros 0,15 s em ambos os caminhos.
+
+Na versão 0.2, `MatchModel.body_rotation(index)` estima apoios x±18 a partir da
+máscara, descarta apoios distantes e limita a inclinação a ±30°.
+`shot_velocity(index, angle, power, weapon)` gira a direção local antes de lançar.
+`cannon_pivot` gira o offset do canhão; `muzzle` usa a mesma direção. CPU, view e
+voo consomem essa geometria. A mira local pode diferir do ângulo no mundo.
+
+`initiative_preview(weapon)` retorna duas entradas `{actor, ready, delay}`,
+incluindo custo do veículo e desempate idêntico ao scheduler, sem alterar estado.
+Durante voo/resolução considera a arma do tiro; a view aguarda escolha da CPU
+antes de exibir previsão. Vida/identificação são protegidas de sobreposição pelo
+reposicionamento do painel da fila.
+
+`BattleArt` guarda apenas poses/tempos; atualiza com o delta de apresentação,
+consome eventos e nunca escreve no modelo. A pausa impede seu avanço e cancela
+carga. Força sobe 65 pontos/s e dispara a 100% uma vez; botão/Enter mantêm tiro direto.
+Os estilos metálicos são gradientes em memória, compartilhados por cor/contorno.
 
 Terreno desenhado e colisão derivam da mesma máscara. Explosão altera a máscara,
 depois atualiza sua textura. Fragmentos não desabam; veículos perdem suporte e caem.

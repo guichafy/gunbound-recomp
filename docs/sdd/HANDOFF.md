@@ -1,20 +1,41 @@
-# Hand-off — Brisa de Aço 0.1.0
+# Hand-off — Brisa de Aço 0.2.0
 
-## Solicitação em andamento: refinamento por referências
+## Estado atual: refinamento 0.2 entregue
 
 Em 2026-10-11, após `c530e23`, o usuário solicitou melhorias de mecânica,
 animações e design a partir de três vídeos e do fork Chafy-Studio/_OpenBound.
-Pesquisa registrada em `GUNBOUND_REFERENCES.md`; proposta concreta em
-`REFINEMENT_0_2.md`. Design apresentado e aprovação solicitada pela ferramenta
-de pergunta da conversa. Implementação ainda não iniciada neste registro.
-Não considerar a proposta 0.2 como entregue. Após resposta do usuário, atualizar
-seu status e prosseguir com a sequência documentada.
+Pesquisa registrada em `GUNBOUND_REFERENCES.md`; design/execução em
+`REFINEMENT_0_2.md`. O usuário aprovou com “implementa”. Versão 0.2.0 implementada,
+testada, revisada e reexportada; próxima etapa é feedback funcional do usuário.
 
 O pacote principal de sprites não está no fork. Nenhum código/asset do OpenBound
 foi incorporado; a proposta utiliza nossa arte original e adapta comportamentos.
-Baseline executável continua 0.1.0. A pesquisa está em `.tools/`, fora do Git.
+Aplicativo e ZIP locais agora são 0.2.0. A pesquisa está em `.tools/`, fora do Git.
 
-## Histórico do baseline
+Mudanças: console azul metálico, armas 1/2/SS, força graduada e marcador anterior,
+fila prevista, bússola, movimento que vira, apoio inclinado afetando mira e
+auto-disparo a 100%. `battle_art.gd` cuida de repouso/movimento/carga/recuo/dano/
+destruição e clarão/detritos/fumaça. Animações por código sobre PNGs originais.
+Pausa cancela carga sem atirar e congela animação. Perfil e nome do app preservados.
+
+Verificação desta versão: 40 + 28 modelos, 13 + 21 cena = **102**, zero falhas;
+seis partidas seeds 81–86 com **24, 10, 10, 17, 6 e 7 tiros**, zero falhas.
+Revisão independente encontrou sobreposição de vida após cratera, corrigida com
+RED→GREEN. A fila espera a arma da CPU e muda de posição para proteger a vida.
+Build Universal 0.2.0, assinatura profunda/estrita válida, executável independente
+headless encerrou com código 0. Capturas GPU atualizadas, incluindo `charge.png`.
+Não foi realizada validação manual completa de mouse; o roteiro continua pendente.
+
+Comandos adicionais da versão atual, além dos três do baseline abaixo:
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement_scene.gd
+```
+
+Commits desta entrega são obtidos em `git log`; nenhum push/remoto foi criado.
+
+## Histórico do baseline 0.1 (preservado)
 
 Atualizado em 2026-10-11. Protótipo entregue; aguardando feedback funcional do
 usuário. Esta sessão acrescenta SDD e o primeiro snapshot Git, sem mudar o jogo.

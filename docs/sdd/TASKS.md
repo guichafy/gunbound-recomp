@@ -8,14 +8,16 @@
 | T-02 — perfil, menu, HUD, input, resultados e apresentação | Concluída | REQ-02, 03, 09–11 | `test_runner.gd`, `test_scene.gd`, capturas e arte |
 | T-03 — revisão, correções e pacote macOS | Concluída | REQ-01, 12 | Correções registradas, assinatura e launch; roteiro funcional |
 | T-04 — SDD, hand-off e baseline Git | Concluída no snapshot que contém este documento | REQ-12 | `AGENTS.md`, `docs/sdd/`, commit inicial |
+| T-05 — pesquisa de referências e aprovação de 0.2 | Concluída | REQ-13–18 | `GUNBOUND_REFERENCES.md`, aprovação “implementa” |
+| T-06 — implementar e entregar refinamento 0.2 | Concluída tecnicamente; validação do usuário pendente | REQ-13–18 | 102 verificações, seis partidas, revisão, capturas e pacote 0.2.0 |
 
 O plano original permanece em `docs/superpowers/plans/2026-10-11-prototype.md`.
 Os estados acima distinguem implementação entregue de aceitação pelo usuário.
 
 ## Pendência atual
 
-- [ ] Aprovação do pacote proposto em `REFINEMENT_0_2.md` (pesquisa concluída).
-- [ ] Implementar e validar o refinamento após essa aprovação; ainda não iniciado.
+- [x] Aprovação do pacote em `REFINEMENT_0_2.md` com “implementa”.
+- [x] Implementar e verificar tecnicamente o refinamento 0.2.
 
 - [ ] Usuário validar mouse/teclado, partida, pausa, especial, resultado, revanche
   e persistência seguindo `docs/VALIDACAO.md`.
@@ -23,7 +25,7 @@ Os estados acima distinguem implementação entregue de aceitação pelo usuári
 
 Não há bug impeditivo conhecido aberto no baseline; isso não substitui validação
 do usuário. IA estacionária, um mapa, sprites estáticos e fragmentos suspensos
-são limites conhecidos, sem tarefa de implementação autorizada nesta sessão.
+  são limites conhecidos, fora do refinamento 0.2 concluído nesta sessão.
 
 ## Roadmap para refinamento futuro
 

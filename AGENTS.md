@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.1.0 implementado em Godot 4.7.2 + GDScript. Primeira entrega:
+Protótipo 0.2.0 em Godot 4.7.2 + GDScript. Escopo:
 desktop macOS, treino offline 1×1 contra CPU, arte original e progresso local.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
 no roadmap; não os implemente sem uma nova solicitação. A engine deve preservar
@@ -29,6 +29,10 @@ O usuário quer aprender com o resultado e validar um protótipo funcional.
 
 - `match.gd` decide turno, dano e resultado; `game.gd` apresenta estado/eventos.
 - Previsão da CPU e disparos reais compartilham física e regras de colisão.
+- Mira é relativa ao apoio; `shot_velocity`/`muzzle` fazem a conversão de
+  inclinação e direção. HUD e CPU devem usar essas funções, sem duplicar geometria.
+- `battle_art.gd` guarda apenas animações. Não usar posições interpoladas para colisão.
+- Carga é crescente e dispara uma vez a 100%; a pausa cancela a carga sem atirar.
 - Resultado não pode duplicar XP. Testes usam perfil isolado, nunca o perfil real.
 - Preserve imagens originais, arquivos `.gd.uid` e configurações `.png.import`.
 - `.godot/`, `.tools/` e `builds/` são locais e ignorados pelo Git.

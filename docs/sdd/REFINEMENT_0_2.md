@@ -1,6 +1,6 @@
 # Proposta delimitada — refinamento 0.2
 
-Status: proposta apresentada, aguardando aprovação do design. Data: 2026-10-11.
+Status: design aprovado pelo usuário com “implementa”; versão 0.2.0 implementada, verificada e empacotada. Aceitação funcional pelo usuário pendente. Data: 2026-10-11.
 Base: `c530e23`; fontes em [GUNBOUND_REFERENCES.md](GUNBOUND_REFERENCES.md).
 Objetivo: aproximar a sensação de jogar, a animação e a composição visual das
 referências, mantendo Godot, arte original e a partida offline existente.
@@ -19,7 +19,7 @@ referências, mantendo Godot, arte original e a partida offline existente.
 REQ-03/04/08/09/11/12 são afetados. REQ-01/02/05/06/07/10 permanecem:
 vida, armas, orçamento, atraso, timer, especial, perfil e plataformas não mudam.
 
-## Decisões propostas
+## Decisões aprovadas
 
 - Preservar arquitetura modelo/view. `MatchModel` continua a decidir resultados;
   HUD pode simular a ordem para exibição sem alterar disponibilidades reais.
@@ -39,17 +39,17 @@ vida, armas, orçamento, atraso, timer, especial, perfil e plataformas não muda
 - Excluir nesta rodada câmera com zoom/scroll, itens de combate, novos veículos,
   movimentação tática da CPU, multiplayer e alterações de recompensa.
 
-## Sequência de execução após aprovação
+## Plano de execução
 
-1. Criar testes de regressão para virar ao mover, inclinação nos dois sentidos,
+- [x] Criar testes de regressão para virar ao mover, inclinação nos dois sentidos,
    estabilidade em borda/cratera e previsão igual ao voo real em terreno inclinado.
-2. Implementar geometria de lançamento compartilhada e novos controles de carga;
+- [x] Implementar geometria de lançamento compartilhada e novos controles de carga;
    verificar tiro único, limite e pausa durante carga.
-3. Refinar HUD/mira/fila e animações na apresentação existente; preservar
+- [x] Refinar HUD/mira/fila e animações na apresentação existente; preservar
    navegação de pausa, ajuda, resultado e revanche.
-4. Executar suites de modelos/cena/partidas completas, inspecionar renders reais
+- [x] Executar suites de modelos/cena/partidas completas, inspecionar renders reais
    e revisar colisão, input e idempotência das recompensas.
-5. Reexportar macOS, verificar assinatura/launch, atualizar SDD, README e roteiro
+- [x] Reexportar macOS, verificar assinatura/launch, atualizar SDD, README e roteiro
    funcional; registrar a revisão no Git para validação do usuário.
 
 ## Validação específica
@@ -64,3 +64,12 @@ vida, armas, orçamento, atraso, timer, especial, perfil e plataformas não muda
 - Treino continua terminando naturalmente com ambos os veículos e dificuldades.
 - Capturas inspecionadas para sobreposição, texto legível e hierarquia visual;
   mouse/teclado no aplicativo continuam no roteiro de aceitação do usuário.
+
+## Evidência da execução
+
+102 verificações passaram: 40 modelos baseline, 28 de refinamento, 13 cena baseline,
+21 cena refinada. Seis partidas completas passaram com 6–24 tiros. Revisão
+independente encontrou vida encoberta em cratera; regressão RED→GREEN protege o
+reposicionamento da fila. Outro teste RED→GREEN evita previsão de arma ainda não
+escolhida pela CPU. Capturas GPU inspecionadas; assinatura e launch do app
+Universal 0.2.0 verificados. Sem incorporação de assets/código do OpenBound.

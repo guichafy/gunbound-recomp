@@ -4,10 +4,10 @@
 
 1. `game.gd` recebe o teclado ou o clique. Ajusta a mira e pede a `match.gd` para disparar.
 2. `match.gd` confere se é o turno correto e se a arma está disponível. Cria um ou três projéteis e muda de **aim** para **flight**.
-3. `combat.gd` calcula velocidade inicial usando ângulo, força e direção. A física avança em passos de **1/120 de segundo**.
+3. `match.gd.shot_velocity` combina ângulo local, direção e inclinação do apoio; `combat.gd` calcula a velocidade e avança a física em passos de **1/120 de segundo**.
 4. Antes de aceitar a nova posição, o código verifica o segmento inteiro percorrido, procurando a primeira colisão com um veículo ou com o terreno.
 5. No impacto, `terrain.gd` abre a cratera; `match.gd` aplica dano e emite eventos.
-6. `game.gd` transforma os eventos em som, explosão, partículas e números de dano.
+6. `game.gd` transforma eventos em som/texto e delega a `battle_art.gd` o recuo, reação ao dano, rodas, carga, destruição e efeitos de impacto.
 7. Ao terminar todos os projéteis, os veículos descem até a superfície que restou. O jogo verifica queda, dano e vitória antes de escolher o próximo turno.
 
 Essa separação permite testar combate sem abrir uma janela. Também deixa uma base mais clara para discutir multiplayer depois: a interface não decide quem ganhou nem quanto dano ocorreu.
@@ -61,7 +61,30 @@ Cada partida tem um identificador. A recompensa registra esse identificador para
 | Formato e aparência do chão | `scripts/terrain.gd` |
 | XP e nível | `scripts/profile.gd` |
 | HUD, teclado, efeitos, menus | `scripts/game.gd` |
+| Animações de veículo, canhão, bússola, explosão | `scripts/battle_art.gd` |
 | Cores, fontes e aparência dos controles | `scripts/ui.gd` |
 | Efeitos sonoros | `scripts/sound.gd` |
 
 Mude um comportamento por vez e rode os testes antes de jogar. Use os testes como exemplos das regras, não como reprodução linha a linha da implementação. Depois valide visualmente: um teste de física não detecta um texto cobrindo o canhão.
+
+## O que a versão 0.2 ensina
+
+O ângulo inferior é local ao veículo. Dois apoios laterais fornecem a inclinação,
+limitada a ±30° e descartada se o apoio estiver distante ou ausente. A direção
+local é girada por esse ângulo antes de virar velocidade. `muzzle`, canhão e
+previsão usam a mesma conversão. Espelhar o PNG apenas muda a aparência; mudar
+`facing` no modelo também muda o tiro.
+
+A fila visível é uma previsão: calcula o custo sem alterar `ready`, `clock` ou
+RNG. Não deve inventar uma arma para a CPU ainda indecisa. Animação também é uma
+projeção: interpola a posição visual, mas colisão continua usando a posição real.
+
+Carga é uma pequena máquina de estados na entrada: apertar → carregar → soltar
+ou completar → disparar uma vez. Pausar/expirar/reiniciar cancelam a carga antiga.
+Uma soltura atrasada após auto-disparo não cria outro projétil. Os testes usam
+os handlers de teclado reais para proteger essas transições.
+
+O HUD metálico usa texturas de gradiente geradas por código e compartilhadas,
+sem downloads de skins. Textura/estilo não é recriado a cada quadro. Na revisão,
+um cenário de cratera revelou que o painel lateral podia esconder vida; uma
+regressão reproduziu isso antes de adaptar sua posição.

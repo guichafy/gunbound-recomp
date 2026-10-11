@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. A primeira entrega é um treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.2.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e animações de combate.
 
 ## Jogar
 
@@ -10,16 +10,18 @@ Também é possível importar `project.godot` no Godot 4.7.2 e pressionar **F6**
 
 | Controle | Ação |
 |---|---|
-| A/D ou ←/→ | Mover, consumindo o orçamento do turno |
-| W/S ou ↑/↓ | Ajustar ângulo |
-| Espaço, segurar e soltar | Carregar força e disparar |
+| A/D ou ←/→ | Mover e virar, consumindo o orçamento do turno |
+| W/S ou ↑/↓ | Ajustar a mira relativa à inclinação do veículo |
+| Espaço, segurar e soltar | Carregar e disparar; a 100%, dispara automaticamente |
 | Botão Disparar / Enter | Disparar com a força selecionada |
-| 1/2/3 | Pulso / Impacto / Tempestade |
-| F | Virar a direção do canhão |
+| 1/2/3 | Pulso / Impacto / Tempestade (botão SS) |
+| F | Virar parado |
 | Esc | Pausar / continuar |
 | H ou ? | Ajuda |
 
-Os controles na tela oferecem as mesmas ações. O último tiro fica registrado como referência. A linha pontilhada indica a direção inicial, sem prever toda a trajetória.
+Os controles na tela oferecem as mesmas ações. A barra graduada registra a força anterior. A mira circular mostra a direção inicial e seu ângulo efetivo no mundo, sem prever a trajetória completa. O controle inferior mostra o ângulo relativo ao veículo; em uma encosta os dois valores podem ser diferentes.
+
+A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhida. Enquanto a CPU escolhe a arma, ela aguarda essa escolha para calcular a previsão. O painel muda para o canto superior se uma queda colocar a vida do veículo atrás dele.
 
 ## Regras deste protótipo
 
@@ -31,13 +33,13 @@ Os controles na tela oferecem as mesmas ações. O último tiro fica registrado 
 - O dano diminui com a distância da explosão. Quedas grandes também causam dano; cair da ilha elimina o veículo.
 - Vento muda a cada turno. Gravidade e vento afetam todos os disparos.
 - O ator com menor disponibilidade acumulada joga primeiro. Um disparo leve pode permitir agir novamente antes de um adversário com muito atraso.
-- Cada decisão tem 30 segundos. Esgotar o tempo passa o turno. Pausa congela o relógio e os projéteis.
+- Cada decisão tem 30 segundos. Esgotar o tempo passa o turno. Pausa congela relógio, projéteis e animações; cancela uma carga em andamento sem disparar.
 - Vitória: 120 XP. Derrota: 45 XP. Empate: 70 XP. A cada 200 XP, aumenta um nível. A recompensa é concedida uma vez por partida concluída.
 - Os números são valores originais para validação e balanceamento, não uma reprodução exata dos dados do Gunbound.
 
 ## Conteúdo entregue
 
-Arena destrutível, dois veículos, três armas, três dificuldades de mira, vida/dano/queda, fila de atraso, efeitos visuais e sonoros, pausa, ajuda, resultado, revanche e perfil local. As dificuldades mudam o erro de mira da máquina; não alteram vida/dano. A máquina usa a mesma física do disparo real.
+Arena destrutível, dois veículos, três armas, três dificuldades de mira, vida/dano/queda, fila de atraso, efeitos visuais e sonoros, pausa, ajuda, resultado, revanche e perfil local. HUD azul metálico, bússola, inclinação, mira graduada, carga monotônica e animações de repouso, movimento, recuo, dano e destruição. Explosões com clarão, detritos e fumaça. As dificuldades mudam o erro de mira da máquina; não alteram vida/dano. A máquina usa a mesma física e conversão de inclinação do disparo real.
 
 Apelido, XP, nível e vitórias ficam em `~/Library/Application Support/Godot/app_userdata/Brisa de Aço/profile.json`. Os testes usam arquivos separados e não alteram esse progresso.
 
@@ -57,10 +59,12 @@ Comece por [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). O [índice SDD](docs/sdd/
 mkdir -p .tools
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_runner.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_scene.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement_scene.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_matches.gd
 ```
 
-`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; `test_matches` simula seis partidas completas com a mesma lógica. `tests/capture.gd` renderiza capturas de QA; a tela de resultado dessa ferramenta usa uma condição de vitória controlada, sem escrever no perfil do jogador.
+`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; as duas suites `test_refinement*` cobrem encostas, fila, carga e animação; `test_matches` simula seis partidas completas. Total atual: 102 verificações e seis partidas. `tests/capture.gd` renderiza capturas de QA, incluindo carga; a tela de resultado usa uma condição controlada, sem escrever no perfil do jogador.
 
 ## Exportar novamente
 
@@ -82,4 +86,4 @@ Multiplayer online, salas privadas, busca automática, ranking, reconexão e 2×
 
 ## Limitações conhecidas
 
-Um mapa e dois veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Os veículos são sprites estáticos com canhão, movimento e efeitos animados por código. Balanceamento e acabamento são provisórios.
+Um mapa e dois veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Animações usam transformações, rodas/canhão e efeitos por código sobre PNGs originais, sem spritesheets oficiais. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); nenhum código ou asset do fork foi incorporado.

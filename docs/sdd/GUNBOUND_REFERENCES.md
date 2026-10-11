@@ -1,8 +1,8 @@
 # Pesquisa de referência — Gunbound / OpenBound
 
 Data: 2026-10-11. Pesquisa para o refinamento solicitado depois do baseline
-`c530e23`. Status: pesquisa realizada, proposta apresentada; implementação
-pendente de aprovação do design. Não confundir achados da referência com
+`c530e23`. Status: pesquisa realizada; pacote aprovado e entregue na versão 0.2,
+conforme `REFINEMENT_0_2.md`. Não confundir achados da referência com
 comportamento já implementado em Brisa de Aço.
 
 ## Fontes consultadas
