@@ -13,6 +13,12 @@ no roadmap; não os implemente sem uma nova solicitação. A engine deve preserv
 a possibilidade de exportar para macOS, Windows, Linux, Android e iOS.
 O usuário quer aprender com o resultado e validar um protótipo funcional.
 
+Pedido posterior ao baseline: integrar assets reais e mobiles do OpenBound,
+incluindo Bigfoot. A restrição de arte original descreve a entrega anterior e
+não veta essa nova solicitação. Ver `docs/sdd/ORIGINAL_ASSETS.md`: pacote externo
+ausente do fork, aguardando caminho/ZIP/link do usuário. Não gerar substitutos
+nem anunciar mobiles integrados antes de receber e validar os sprites reais.
+
 ## Trabalho orientado por especificação
 
 - Antes de mudar comportamento, identifique os requisitos `REQ-*` afetados.

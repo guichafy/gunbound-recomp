@@ -14,6 +14,7 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [TASKS.md](TASKS.md) | Entregas, rastreabilidade, tarefas abertas e roadmap |
 | [GUNBOUND_REFERENCES.md](GUNBOUND_REFERENCES.md) | Pesquisa dos três vídeos e do fork OpenBound, com origem e limites dos assets |
 | [REFINEMENT_0_2.md](REFINEMENT_0_2.md) | Design aprovado, plano e evidência da entrega 0.2 |
+| [ORIGINAL_ASSETS.md](ORIGINAL_ASSETS.md) | Pedido de mobiles reais, auditoria do fork e arquivos externos necessários |
 
 Ordem de retomada: hand-off → especificação → design → tarefas → decisões.
 Para uma mudança, localizar o requisito, definir o delta da especificação,

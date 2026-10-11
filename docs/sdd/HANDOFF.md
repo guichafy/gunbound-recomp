@@ -1,5 +1,19 @@
 # Hand-off — Brisa de Aço 0.2.0
 
+## Pedido atual: mobiles e assets reais do Gunbound/OpenBound
+
+O usuário pediu copiar e integrar Bigfoot e outros mobiles reais do fork
+informado, substituindo a aproximação visual por maior fidelidade. Nova auditoria
+das duas branches/releases e do pipeline confirma ausência do pacote: 803 fontes
+referidas por `Content.mgcb`, todas ausentes. Código/metadados Bigfoot existem;
+pixels dos sprites e projéteis não. Ver `ORIGINAL_ASSETS.md`.
+
+Solicitado ao usuário o caminho de pasta/ZIP ou link direto para o pacote externo.
+Integração depende desse material. Versão executável permanece 0.2.0; esta sessão
+apenas registra a auditoria e a nova direção, sem incorporar assets/código ao jogo.
+Priorizar essa solicitação quando os arquivos chegarem; não gerar substitutos
+visuais nem manter a restrição de arte original do baseline como veto ao pedido.
+
 ## Estado atual: refinamento 0.2 entregue
 
 Em 2026-10-11, após `c530e23`, o usuário solicitou melhorias de mecânica,

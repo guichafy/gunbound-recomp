@@ -60,6 +60,13 @@ Os parâmetros de dano/vida/atraso/XP continuam os do baseline.
 
 ## Fora da entrega
 
+Solicitação posterior ao refinamento: **REQ-19 — integrar assets reais de Bigfoot
+e outros mobiles a partir do material disponível do OpenBound**, com animações e
+tiros correspondentes. A direção original de REQ-11 permanece descrição do
+baseline 0.2, mas foi substituída pelo pedido atual para a próxima integração.
+Status e dependência do pacote externo em [ORIGINAL_ASSETS.md](ORIGINAL_ASSETS.md).
+REQ-19 ainda não implementado: os sprites não estão no fork informado.
+
 Multiplayer, salas privadas, busca de adversários, ranking, contas, reconexão,
 2×2 e demais formatos, campanha, monetização e distribuição pública.
 O protótipo é gratuito. Mobile vem após desktop; UI/UX, controles, cross-play e

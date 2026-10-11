@@ -16,6 +16,9 @@ Os estados acima distinguem implementação entregue de aceitação pelo usuári
 
 ## Pendência atual
 
+- [ ] Receber pacote de conteúdo externo e integrar mobiles reais, começando
+  por Bigfoot (REQ-19); auditoria concluída em `ORIGINAL_ASSETS.md`, arquivos ausentes.
+
 - [x] Aprovação do pacote em `REFINEMENT_0_2.md` com “implementa”.
 - [x] Implementar e verificar tecnicamente o refinamento 0.2.
 
