@@ -1,4 +1,17 @@
-# Validação funcional — Brisa de Aço 0.5
+# Validação funcional — Brisa de Aço 0.6.2
+
+## Piloto e tiros 0.6.2
+
+Selecione Bigfoot e Mage. Mova/vire nos dois sentidos e observe o piloto em
+encostas: cabeça e corpo devem continuar unidos, com apoio no assento.
+TesteT1/T2 e SS após terceiro turno próprio: cabeça do tiro não muda tamanho
+ou identidade; Bigfoot aponta na direção do voo, chama fica atrás. MageT2 tem
+um rastro contínuo por laser em hélice; SS mantém orbe e círculo EMP constante.
+Impactos expandem/desaparecem sem saltos de centro. Pause durante voo/impacto:
+todos os efeitos devem congelar e retomar juntos. Compare docs/projectiles
+(fixture ampliada) com capturas naturais docs/hd.783checks zero falhas;
+72frames GPU, revisão e build independentes. Validação manual completa e
+aceitação visual do usuário ainda pendentes.
 
 ## Bigfoot T1/T2/SS nesta entrega
 

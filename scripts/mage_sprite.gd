@@ -16,13 +16,17 @@ var orb: Texture2D
 var effects: Array[Texture2D] = []
 var shoot_sounds: Array[AudioStream] = []
 var blast_sounds: Array[AudioStream] = []
+const ProjectileArt = preload("res://scripts/projectile_art.gd")
+var projectile_art
+var effect_sizes: Array[Vector2] = []
 var hd_shots
 var hd_effects
 var hd_emp
 
 func _init() -> void:
 	configure("res://assets/openbound/mage", Vector2(109, 150), Vector2(52, 85), SEQUENCES, 46.0, 117.0)
-	hd_shots = HDSheet.new("res://assets/hd/shots.png", 4, 6)
+	projectile_art = ProjectileArt.new()
+	hd_shots = projectile_art.sheet
 	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)
 	hd_emp = HDSheet.new("res://assets/hd/emp.png", 1, 1)
 	for number in [1, 2]:
@@ -34,6 +38,9 @@ func _init() -> void:
 		shoot_sounds.append(load("res://assets/openbound/mage/Shoot%s.mp3" % key))
 		blast_sounds.append(load("res://assets/openbound/mage/Blast%s.mp3" % key))
 
+	for weapon in range(3):
+		effect_sizes.append(ProjectileArt.effect_size(effects[weapon], effect_cell(weapon)))
+
 func effect_cell(weapon: int) -> Vector2:
 	return [Vector2(193, 192), Vector2(143, 142), Vector2(385, 384)][weapon]
 
@@ -44,7 +51,7 @@ func effect_capacity(weapon: int) -> int:
 func effect_frame(weapon: int, age: float) -> int:
 	return clampi(int(age * 30.0), 0, effect_capacity(weapon) - 1)
 
-func draw_effect(view: Node2D, effect: Dictionary) -> void:
+func draw_effect(view: Node2D, effect: Dictionary, offset: Vector2 = Vector2.ZERO) -> void:
 	var weapon: int = effect.weapon
 	var size := effect_cell(weapon)
 	var columns := int(effects[weapon].get_width() / size.x)
@@ -52,23 +59,26 @@ func draw_effect(view: Node2D, effect: Dictionary) -> void:
 	var duration := float(effect_capacity(weapon)) / 30.0
 	if effect.age >= duration:
 		return
+	if projectile_art.draw_effect(view, effect, hd_effects, weapon + 3, effect_sizes[weapon], duration, offset, hd_emp if weapon == 2 else null):
+		return
 	var alpha := 1.0 - float(effect.age) / duration
-	view.draw_set_transform(effect.pos, float(effect.age) * PI if weapon == 2 else 0.0)
+	view.draw_set_transform(effect.pos + offset, float(effect.age) * PI if weapon == 2 else 0.0)
 	var target := Rect2(-size / 2, size)
 	var source := Rect2(Vector2(frame % columns, int(frame / columns)) * size, size)
-	var emp_drawn: bool = weapon == 2 and hd_emp.draw_patch(view, 0, 0, effects[weapon], source, target, Color(1, 1, 1, alpha))
-	if not emp_drawn and not hd_effects.draw_patch(view, weapon + 3, roundi(frame * 5.0 / maxi(1, effect_capacity(weapon) - 1)), effects[weapon], source, target, Color(1, 1, 1, alpha)):
-		view.draw_texture_rect_region(effects[weapon], target, source, Color(1, 1, 1, alpha))
+	view.draw_texture_rect_region(effects[weapon], target, source, Color(1, 1, 1, alpha))
 	view.draw_set_transform(Vector2.ZERO)
 
-func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int) -> void:
+func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: Vector2 = Vector2.ZERO) -> void:
+	if projectile_art.draw(view, "mage", projectile, weapon, offset):
+		return
+	if not projectile.get("launched", true):
+		return
 	var position: Vector2 = projectile.get("hit_pos", projectile.pos)
 	var rotation := Vector2(projectile.velocity).angle()
 	if weapon == 2:
 		var frame := int(projectile.age * 20.0) % 15
-		view.draw_set_transform(position, rotation + PI)
-		if not hd_shots.draw_patch(view, 5, roundi(frame * 3.0 / 14), orb, Rect2(frame * 54, 0, 54, 54), Rect2(-27, -27, 54, 54)):
-			view.draw_texture_rect_region(orb, Rect2(-27, -27, 54, 54), Rect2(frame * 54, 0, 54, 54))
+		view.draw_set_transform(position + offset, rotation + PI)
+		view.draw_texture_rect_region(orb, Rect2(-27, -27, 54, 54), Rect2(frame * 54, 0, 54, 54))
 	else:
 		var tint := Color.WHITE
 		if weapon == 1:
@@ -77,13 +87,11 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int) -> void:
 		for index in range(trail.size()):
 			var age := float(trail.size() - index) / 30.0
 			var frame := clampi(int(age * 72.0), 0, 72)
-			view.draw_set_transform(trail[index], rotation)
+			view.draw_set_transform(trail[index] + offset, rotation)
 			var fade := Color(tint, float(index + 1) / trail.size() * 0.8)
 			var source := Rect2((frame % 8) * 16, int(frame / 8) * 16, 16, 16)
-			if not hd_shots.draw_patch(view, weapon + 3, mini(frame / 2, 3), laser_textures[weapon], source, Rect2(-8, -8, 16, 16), fade):
-				view.draw_texture_rect_region(laser_textures[weapon], Rect2(-8, -8, 16, 16), source, fade)
+			view.draw_texture_rect_region(laser_textures[weapon], Rect2(-8, -8, 16, 16), source, fade)
 		var frame := int(projectile.age * 30.0) % 8
-		view.draw_set_transform(position, rotation)
-		if not hd_shots.draw_patch(view, weapon + 3, roundi(frame * 3.0 / 7), laser_textures[weapon], Rect2(frame * 16, 0, 16, 16), Rect2(-8, -8, 16, 16), tint):
-			view.draw_texture_rect_region(laser_textures[weapon], Rect2(-8, -8, 16, 16), Rect2(frame * 16, 0, 16, 16), tint)
+		view.draw_set_transform(position + offset, rotation)
+		view.draw_texture_rect_region(laser_textures[weapon], Rect2(-8, -8, 16, 16), Rect2(frame * 16, 0, 16, 16), tint)
 	view.draw_set_transform(Vector2.ZERO)

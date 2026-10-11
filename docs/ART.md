@@ -1,5 +1,14 @@
 # Imagens originais do protótipo
 
+## Piloto e tiros 0.6.2
+
+GPT Images gerou pilot_seated.png e projectile_heads.png. Figura completa
+substitui corpo/cabeça separados; seis cabeças constantes, chamas de recortes
+HD preservados e efeitos contínuos resolvem deformação entre quadros. Prompts
+completos em assets/hd/PILOT_SHOTS_PROMPTS.md; origens/hashes em GENERATION.json
+/atlas_regions.json. PNGs/áudio originais e antigos derivados preservados.
+Prévia GPU docs/projectiles; detalhes em sdd/PILOT_SHOTS_FIX_0_6_2.md.
+
 ## Correção de animação 0.6.1
 
 Atlas anteriores de mobile variavam anatomia e misturavam efeitos com corpo.

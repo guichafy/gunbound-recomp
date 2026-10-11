@@ -171,3 +171,22 @@ Antigos hd_frame/hd_rows e uso de heroes/atlas de mobile saíram do caminho ativ
 Tiros/Fx continuam HDSheet.destination, sem mudar combate. Catalogo de peças usa
 janelas reais entre objetos para conter as bordas completas, pois a geração
 não respeitou exatamente a grade. Requer metadados válidos para evitar clipping.
+
+## Piloto e projéteis 0.6.2 (substitui estes caminhos anteriores)
+
+mobile_rig usa pilot_seated.png 1×1, figura completa com proporção preservada,
+pivô dos quadris no assento. Substitui cabeça/corpo separados de0.6.1.
+projectile_art.gd usa projectile_heads.png 3×2: uma cabeça constante por arma,
+centrada em hit_pos/pos, ângulo da velocidade; não usa posição interpolada.
+Flamas isoladas via componentes de shots.png ficam atrás da cabeça Bigfoot,
+pulsam por age; Mage usa polyline sobre trail real, com gradiente e tint por phase.
+Cabeças não mudam tamanho/identidade em voo. SS gira overlays, não troca o orbe.
+
+Impactos effects.png usam crossfade6fases, envelope contínuo de escala/alpha,
+dimensões máximas originais calculadas uma vez, mantendo centro e proporções.
+EMP usa seu círculo constante girando. Duração vem de effect_capacity/30.
+Game passa offset visual de tremor explicitamente; física não recebe offset.
+Relógios são os mesmos age físicos/de efeitos, pausados pela cena. Cada caminho
+exige textura, recortes não vazios e catalog_valid; falha retorna false e os
+sprites usam originais. Mobile também exige o piloto válido como conjunto.
+Nenhuma mudança em match/combat/terrain/profile ou suas regras.

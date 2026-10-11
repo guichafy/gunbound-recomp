@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Piloto, tiros e impactos 0.6.2
+
+- [x] Diagnosticar anatomia separada, cabeça variável e orientação Bigfoot.
+- [x] Gerar piloto completo/seis cabeças GPT Images, preservar fontes/originais.
+- [x] Integrar piloto proporcional, chama separada, rastro contínuo e impactos.
+- [x] Preservar posição física, duração, pausa, tremor e fallback de recursos.
+- [x] RED→GREEN,783checks,72framesGPU e16capturas reais de jogo.
+- [x] Revisão aprovada após corrigir catálogo inválido de impactos/EMP.
+- [x] Reexportar0.6.2, validar assinatura/runtime/PCK; atualizar SDD/Git local.
+- [ ] Usuário validar personagem e T1/T2/SS visualmente no aplicativo.
+
 ## Correção de animação 0.6.1
 
 - [x] Identificar inconsistências anatômicas/estado e redimensionamento por aura.

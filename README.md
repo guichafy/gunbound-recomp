@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.1**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.2**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
 
 ## Jogar
 
@@ -116,3 +116,18 @@ Rodas acompanham deslocamento; suspensão, carga, recuo, dano e morte são
 contínuos. O piloto conserva proporções e acompanha o corpo; auras não
 redimensionam o carro. [Prévia animada](docs/animation/animation.gif),
 [vídeo](docs/animation/animation.mp4), [plano/validação](docs/sdd/ANIMATION_FIX_0_6_1.md).
+
+## Personagem e tiros 0.6.2
+
+Piloto completo com encaixe no assento, tiros com forma constante, chamas para
+trás, lasers com rastro contínuo e impactos suavizados. Física, dano e salvas
+preservados. [Piloto em encostas](docs/projectiles/pilot-poses.png),
+[prévia dos tiros](docs/projectiles/shots.gif),
+[plano/validação](docs/sdd/PILOT_SHOTS_FIX_0_6_2.md).783checks sem falhas.
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_hd_assets.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mobile_animation.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_pilot_projectiles.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_pilot_projectiles.gd
+```

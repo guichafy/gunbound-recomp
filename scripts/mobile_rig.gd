@@ -7,15 +7,15 @@ var pilot
 func _init(mobile_kind: String) -> void:
 	kind = mobile_kind
 	sheet = Sheet.new("res://assets/hd/mobile_parts.png", 3, 2)
-	pilot = Sheet.new("res://assets/hd/rider.png", 4, 2)
+	pilot = Sheet.new("res://assets/hd/pilot_seated.png", 1, 1)
 func available() -> bool:
-	if not sheet.available() or not sheet.catalog_valid or not pilot.available():
+	if not sheet.available() or not sheet.catalog_valid or not pilot.available() or not pilot.catalog_valid:
 		return false
 	var row := 0 if kind == "bigfoot" else 1
 	for column in range(3 if kind == "bigfoot" else 2):
 		if not sheet.region(row, column).has_area():
 			return false
-	return pilot.region(0, 0).has_area() and pilot.region(1, 0).has_area()
+	return pilot.region(0, 0).has_area()
 func sample(pose: String, age: float, weapon: int) -> Dictionary:
 	age = maxf(0.0, age)
 	pose = pose.get_slice("_", 0)
@@ -48,9 +48,14 @@ func sample(pose: String, age: float, weapon: int) -> Dictionary:
 		offset.y = progress * progress * 14.0
 		angle = progress * 0.65
 		alpha = 1.0 - smoothstep(0.15, 1.0, progress)
+	var region: Rect2 = pilot.region(0, 0)
+	var pilot_size := Vector2(29.0 * region.size.x / maxf(region.size.y, 1.0), 29.0)
+	var pilot_rect := Rect2(-pilot_size * Vector2(0.78, 0.88), pilot_size)
+	var pilot_sway := Vector2.ZERO
+	var pilot_angle := sin(age * TAU * 1.5) * 0.014
 	var seat := Vector2(7, -25) if kind == "bigfoot" else Vector2(6, -37)
 	return {"body_size": Vector2(60, 29) if kind == "bigfoot" else Vector2(60, 39),
-		"pilot_body_size": Vector2(18, 12), "pilot_head_size": Vector2(17, 15),
+		"pilot_size": pilot_size, "pilot_rect": pilot_rect, "pilot_sway": pilot_sway, "pilot_angle": pilot_angle,
 		"body_offset": offset, "body_angle": angle, "barrel_angle": barrel,
 		"wheel_angle": wheels, "flash": flash, "glow": glow, "alpha": alpha,
 		"pilot_anchor": seat + offset}
@@ -81,10 +86,9 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	var gun := body * Transform2D(state.barrel_angle, gun_pivot)
 	var gun_rect := Rect2(-14, -27, 30, 28) if kind == "bigfoot" else Rect2(-25, -26, 40, 27)
 	piece(view, sheet, row, 1, gun, gun_rect, tint)
-	# One head and body master. Both use the same seat and body transform.
-	var seat: Vector2 = state.pilot_anchor - state.body_offset
-	piece(view, pilot, 0, 0, body * Transform2D(0, seat), Rect2(-9, -9, 18, 12), tint)
-	piece(view, pilot, 1, 0, body * Transform2D(0, seat), Rect2(-8, -22, 17, 15), tint)
+	# Entire seated anatomy rotates as one figure around the hips, no seam/stretch.
+	var seat: Vector2 = state.pilot_anchor - state.body_offset + state.pilot_sway
+	piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
 	view.draw_set_transform_matrix(gun)
 	var tip := Vector2(-13, -19) if kind == "bigfoot" else Vector2(-14, -15)
 	if state.glow > 0.001:

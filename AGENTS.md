@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.6.1 em Godot 4.7.2 + GDScript. Escopo:
+Protótipo 0.6.2 em Godot 4.7.2 + GDScript. Escopo:
 desktop macOS, treino offline 1×1 contra CPU, arte do protótipo + Bigfoot/Mage originais
 e progresso local.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
@@ -78,3 +78,13 @@ Fallback conjunto integral original se peças/piloto/catalogo válido ausentes.
 Preservar janelas reais de recorte no catalogador. Teste test_mobile_animation.gd
 e capture_mobile_animation.gd (216 frames GPU, PNG/MP4/GIF em docs/animation).
 Histórico acima sobre32 quadros/menuheroes descreve0.6, substituído no render.
+
+## Piloto e tiros 0.6.2 — caminho atual
+
+Ver PILOT_SHOTS_FIX_0_6_2.md. Piloto completo pilot_seated.png, um sprite1×1;
+não remontar cabeça/corpo do rider. projectile_art.gd usa seis cabeças fixas,
+chama recortada de shots.png, rastro contínuo Mage, crossfade de impactos/EMP.
+Bigfoot aponta DIREITA na fonte (velocity.angle, sem PI). Todo consumidor exige
+catalog_valid/regiões completas, fallback original. Offset de tremor só visual.
+Teste test_pilot_projectiles.gd; capture_pilot_projectiles.gd gera72frames/PNG.
+783checks nesta entrega; docs/projectiles preserva GPU PNG/MP4/GIF.

@@ -23,12 +23,16 @@ var bullets: Array[Texture2D] = []
 var effects: Array[Texture2D] = []
 var shoot_sounds: Array[AudioStream] = []
 var blast_sounds: Array[AudioStream] = []
+const ProjectileArt = preload("res://scripts/projectile_art.gd")
+var projectile_art
+var effect_sizes: Array[Vector2] = []
 var hd_shots
 var hd_effects
 
 func _init() -> void:
 	configure("res://assets/openbound/bigfoot", CELL, PIVOT, SEQUENCES, 49.0, 119.0)
-	hd_shots = HDSheet.new("res://assets/hd/shots.png", 4, 6)
+	projectile_art = ProjectileArt.new()
+	hd_shots = projectile_art.sheet
 	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)
 	for number in range(1, 4):
 		bullets.append(pixel_texture(load("res://assets/openbound/bigfoot/Bullet%d.png" % number)))
@@ -37,16 +41,20 @@ func _init() -> void:
 		shoot_sounds.append(load("res://assets/openbound/bigfoot/Shoot%s.mp3" % key))
 		blast_sounds.append(load("res://assets/openbound/bigfoot/Blast%s.mp3" % key))
 
-func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int) -> void:
+	for weapon in range(3):
+		effect_sizes.append(ProjectileArt.effect_size(effects[weapon], effect_cell(weapon)))
+
+func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: Vector2 = Vector2.ZERO) -> void:
+	if projectile_art.draw(view, "bigfoot", projectile, weapon, offset):
+		return
+	if not projectile.get("launched", true):
+		return
 	var cell: Vector2 = [Vector2(63, 40), Vector2(18, 15), Vector2(69, 35)][weapon]
 	var count: int = [5, 10, 5][weapon]
 	var frame := int(projectile.age * 20.0) % count
-	# Canonical bullet sprites also face left; align them with actual velocity.
-	view.draw_set_transform(projectile.pos, Vector2(projectile.velocity).angle() + PI)
-	var target := Rect2(-cell * 0.5, cell)
-	var source := Rect2(Vector2(frame * cell.x, 0), cell)
-	if not hd_shots.draw_patch(view, weapon, roundi(frame * 3.0 / (count - 1)), bullets[weapon], source, target):
-		view.draw_texture_rect_region(bullets[weapon], target, source)
+	# Original bullets point RIGHT, unlike the left-facing mobile atlas.
+	view.draw_set_transform(projectile.get("hit_pos", projectile.pos) + offset, Vector2(projectile.velocity).angle())
+	view.draw_texture_rect_region(bullets[weapon], Rect2(-cell * 0.5, cell), Rect2(Vector2(frame * cell.x, 0), cell))
 	view.draw_set_transform(Vector2.ZERO)
 
 func effect_cell(weapon: int) -> Vector2:
@@ -56,17 +64,18 @@ func effect_capacity(weapon: int) -> int:
 	var size := effect_cell(weapon)
 	return int(effects[weapon].get_width() / size.x) * int(effects[weapon].get_height() / size.y)
 
-func draw_effect(view: Node2D, effect: Dictionary) -> void:
+func draw_effect(view: Node2D, effect: Dictionary, offset: Vector2 = Vector2.ZERO) -> void:
 	var weapon: int = effect.weapon
 	var size := effect_cell(weapon)
 	var count := effect_capacity(weapon)
+	if projectile_art.draw_effect(view, effect, hd_effects, weapon, effect_sizes[weapon], count / 30.0, offset):
+		return
 	var frame := int(float(effect.age) * 30.0)
 	if frame >= count:
 		return
 	var columns := int(effects[weapon].get_width() / size.x)
-	view.draw_set_transform(effect.pos)
+	view.draw_set_transform(effect.pos + offset)
 	var target := Rect2(-size / 2, size)
 	var source := Rect2(Vector2(frame % columns, int(frame / columns)) * size, size)
-	if not hd_effects.draw_patch(view, weapon, roundi(frame * 5.0 / maxi(1, count - 1)), effects[weapon], source, target):
-		view.draw_texture_rect_region(effects[weapon], target, source)
+	view.draw_texture_rect_region(effects[weapon], target, source)
 	view.draw_set_transform(Vector2.ZERO)

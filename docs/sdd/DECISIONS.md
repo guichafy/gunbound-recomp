@@ -113,3 +113,19 @@ porque o gerador extrapolou células iguais. HDSheet informa catalog_valid;
 rig incompleto/sem catálogo retorna conjunto integral original. Não mistura
 carro original com piloto HD. Catalogo não altera pixels. Tiros/Fx e demais
 consumidores de ADR-031 permanecem inalterados.
+
+## Piloto e tiros 0.6.2
+
+ADR-034 — adotada: figura sentada completa GPT Images substitui cabeça/corpo
+independentes de ADR-032, preservando anatomia e apoio dos quadris. Animação por
+transformações leves; imagens antigas preservadas.
+
+ADR-035 — adotada: seis cabeças constantes com efeitos separados substituem
+quatro fases dos tiros de ADR-030/031. Bigfoot aponta à direita na fonte: usar
+ângulo da velocidade, sem PI; chama sempre atrás. Laser segue trail real sem
+repetir cabeças. Escala/aspecto fixos eliminam deformação entre fases.
+
+ADR-036 — adotada: crossfade/envelope de impactos e EMP constante substituem
+enquadramento quadro a quadro de ADR-031. Catálogo válido obrigatório para Fx,
+EMP, cabeças e chamas; fallback original em dados inválidos. Offset da câmera
+é apenas visual. Mecânica, sons e duração original preservados.

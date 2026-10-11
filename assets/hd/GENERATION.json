@@ -18,5 +18,26 @@
     "origin": "exec-aee267cf-9a6a-4fe1-8dc9-c43d6fa2104b.png",
     "first_origin": "exec-a32337a9-d6ca-404c-9e7d-4a4a9a43e633.png",
     "note": "PNG/alpha intactos; regiões catalogadas pelos intervalos transparentes entre peças."
+  },
+  "pilot_shots_fix_0_6_2": {
+    "tool": "GPT Images built-in imagegen",
+    "prompts": "PILOT_SHOTS_PROMPTS.md",
+    "assets": {
+      "pilot_seated.png": {
+        "origin": "exec-2da72c14-5649-452f-9218-c2d0e0c8f7c2.png",
+        "size": [
+          1254,
+          1254
+        ]
+      },
+      "projectile_heads.png": {
+        "origin": "exec-927c0a3d-1756-4c96-a9e4-d26319e7084a.png",
+        "size": [
+          1536,
+          1024
+        ]
+      }
+    },
+    "note": "PNGs/alpha intactos. Piloto completo 1×1 e seis cabeças constantes 3×2. Chamas recortadas por metadados do shots.png anterior, sem cabeça. Animação contínua por transformações, sem alternar identidade do tiro."
   }
 }

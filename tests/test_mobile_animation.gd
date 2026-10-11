@@ -32,7 +32,7 @@ func run() -> void:
 					var age := tick / 60.0
 					var current: Dictionary = rig.sample(pose, age, weapon)
 					stable_body = stable_body and current.body_size == idle.body_size
-					stable_pilot = stable_pilot and current.pilot_head_size == idle.pilot_head_size and current.pilot_body_size == idle.pilot_body_size
+					stable_pilot = stable_pilot and current.pilot_size == idle.pilot_size
 					smooth_body = smooth_body and current.body_offset.distance_to(previous.body_offset) < 3.0
 					smooth_gun = smooth_gun and absf(current.barrel_angle - previous.barrel_angle) < 0.15
 					smooth_seat = smooth_seat and current.pilot_anchor.distance_to(previous.pilot_anchor) < 3.0

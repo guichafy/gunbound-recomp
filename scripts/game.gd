@@ -104,7 +104,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.6.1", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.6.2", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "BRISA\nDE AÇO", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -610,14 +610,14 @@ func _draw() -> void:
 			continue
 		var color: Color = model.weapon_rules(model.shot_actor, model.shot_weapon).color
 		if model.actors[model.shot_actor].vehicle == 1:
-			mage.draw_projectile(self, projectile, model.shot_weapon)
+			mage.draw_projectile(self, projectile, model.shot_weapon, offset)
 			draw_set_transform(offset)
 			continue
 		var trail: Array = projectile.trail
 		for index in range(1, trail.size()):
 			draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
 		if model.actors[model.shot_actor].vehicle == 2:
-			bigfoot.draw_projectile(self, projectile, model.shot_weapon)
+			bigfoot.draw_projectile(self, projectile, model.shot_weapon, offset)
 			draw_set_transform(offset)
 			continue
 		draw_circle(projectile.pos, 11.0, Color(color, 0.18))
@@ -625,9 +625,9 @@ func _draw() -> void:
 		draw_circle(projectile.pos + Vector2(-1, -1), 2.0, Color.WHITE)
 	for effect in effects:
 		if effect.get("vehicle", 0) == 1:
-			mage.draw_effect(self, effect)
+			mage.draw_effect(self, effect, offset)
 		elif effect.get("vehicle", 0) == 2:
-			bigfoot.draw_effect(self, effect)
+			bigfoot.draw_effect(self, effect, offset)
 		else:
 			art.draw_explosion(self, effect)
 	draw_set_transform(offset)

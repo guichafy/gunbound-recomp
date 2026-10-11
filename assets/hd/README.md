@@ -6,8 +6,8 @@ detalhes mais nítidos. Os PNGs originais em assets/openbound não foram editado
 Estes derivados não são restaurações exatas dos quadros originais.
 
 - bigfoot/mage: atlas anteriores 0.6, preservados para histórico, inativos no render dos mobiles.
-- rider: corpo/cabeça separados, grade4×2,8 quadros.
-- shots: grade4×6;4 variações dos3 tiros por mobile.
+- rider: corpo/cabeça anteriores, preservados como histórico, inativos no rig HD.
+- shots: grade4×6 anterior; somente recortes constantes das chamas T1/SS são ativos.
 - effects: grade6×6;6 fases por explosão.
 - heroes: referência artística HD anterior, preservada; menu agora monta as mesmas peças da arena.
 - emp: círculo MageSS em fonte dedicada1254×1254 para efeitos grandes.
@@ -26,14 +26,24 @@ RGB vazio tem alpha0; não é fundo desenhado no jogo. Nenhum PNG foi editado
 por código. Prompts desta correção em ANIMATION_PROMPTS.md.
 
 mobile_rig.gd usa medidas constantes/âncoras fixas e transformações contínuas;
-mesmo conjunto no menu/arena. Uma cabeça e corpo do rider são usados, sem
-trocar rosto/proporções. Rodas conservam fase ao parar. Auras/clarão são camadas
+mesmo conjunto no menu/arena. Em0.6.1, uma cabeça e corpo do rider eram usados;0.6.2 substitui por figura
+completa pilot_seated.png, sem remontar anatomia. Rodas conservam fase ao parar. Auras/clarão são camadas
 separadas. Morte tem colapso/fade do mesmo corpo; não reproduz os destroços
 quadro a quadro do original. Saúde baixa escurece a peça HD; sons/combate
 preservados. Ausência de peça/piloto/catalogo válido usa atlas/piloto originais
-como um conjunto inteiro, sem misturar estilos. Tiros/Fx continuam o pipeline0.6.
+como um conjunto inteiro, sem misturar estilos. Tiros/Fx usam o pipeline contínuo0.6.2 descrito abaixo.
 
 Recortes são metadados: scripts/catalog_hd_assets.py lê alpha>8/255 para ignorar
 ruído quase invisível da geração; não altera pixels nem aumenta PNGs por escala.
 Regenerar o catálogo ao substituir um PNG. A exportação inclui atlas_regions.json.
 Fonte/proveniência dos originais: ../openbound/ATTRIBUTION.md.
+
+Em0.6.2: pilot_seated.png1254×1254 RGBA é um único piloto coeso; cabeças de tiros
+projectile_heads.png1536×1024 RGBA em grade3×2, BigfootT1/T2/SS e MageT1/T2/SS.
+Prompts/origens em PILOT_SHOTS_PROMPTS.md e GENERATION.json. Uma cabeça constante
+por tiro preserva aspecto. Chamas t1_flame/ss_flame vêm de componentes do
+shots.png preservado. Laser usa trail contínuo, orbe/EMP overlays contínuos;
+impactos fazem blend6fases/envelope com centro/duração fixos. Ausência de textura,
+catálogo ou recortes válidos usa original. Prévia GPU em docs/projectiles.
+Adaptação artística, não restauração quadro a quadro nem garantia de igualdade
+com Gunbound. Full HD é o framebuffer de validação, fontes têm dimensões reais.

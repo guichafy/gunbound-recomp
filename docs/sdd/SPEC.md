@@ -1,8 +1,10 @@
-# Especificação — protótipo 0.6.1
+# Especificação — protótipo 0.6.2
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;
 REQ-19/20/12, plano e critérios em `ANIMATION_FIX_0_6_1.md`.
+Pedido posterior: piloto coeso e tiros/impactos sem mudanças de silhueta,
+salto de fase ou orientação invertida; `PILOT_SHOTS_FIX_0_6_2.md`.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o
 comportamento entregue; parâmetros concretos são decisões do protótipo.
 
@@ -116,3 +118,12 @@ A entrega técnica requer testes passando, aplicativo macOS verificável e
 documentação de execução. A aceitação funcional final depende do usuário
 percorrer `docs/VALIDACAO.md` e relatar o resultado. Testes não substituem avaliação
 de diversão, balanceamento, acessibilidade ou uso real de mouse/teclado.
+
+## Piloto, tiros e impactos 0.6.2
+
+REQ-19/20/12: piloto completo proporcional com encaixe no assento; cabeça de
+cada tiro constante, orientação acompanhando velocidade e chama para trás;
+lasers com rastro contínuo e impactos com transição suave, centro fixo e duração
+original. REQ-09: pausa congela as camadas. Critérios em PILOT_SHOTS_FIX_0_6_2.md;
+103 checks específicos, capturas GPU e revisão. Combate e tamanho dos mobiles
+preservados. Aceitação visual pelo usuário pendente.

@@ -1,6 +1,64 @@
-# Hand-off — Brisa de Aço 0.6.1
+# Hand-off — Brisa de Aço 0.6.2
 
-## Entrega atual 0.6.1: correção de sprites/animação
+## Entrega atual 0.6.2: piloto, tiros e impactos
+
+Pedido: corrigir personagem e animações dos tiros após o print do piloto no
+Bigfoot inclinado. REQ-19/20/12 e pausa REQ-09; especificação/plano em
+PILOT_SHOTS_FIX_0_6_2.md. Diagnóstico: cabeça/corpo esticados separadamente,
+cabeças de tiro variáveis e Bigfoot com orientação invertida; impactos mudavam
+recorte/escala por quadro. Corrigido tecnicamente; aceitação do usuário pendente.
+
+GPT Images gerou pilot_seated.png (1254×1254, figura completa) e
+projectile_heads.png (1536×1024, seis cabeças constantes em grade3×2).
+PNGs copiados intactos. Prompts/origens em assets/hd/PILOT_SHOTS_PROMPTS.md e
+GENERATION.json; recortes/hashes em atlas_regions.json. Rider/atlas anteriores,
+originais e áudio preservados. Mobile usa um único piloto proporcional com
+pivô dos quadris no assento, nos dois sentidos e em encostas.
+
+projectile_art.gd mantém cabeça/aspecto fixos centrados em hit_pos/pos;
+Bigfoot usa velocity.angle (fonte aponta DIREITA), chama atrás, pulsação contínua.
+Chamas HD são componentes isolados de shots.png. Mage usa rastro contínuo
+sobre trail físico, tint por fase e orbe constante com overlays. Impactos
+fazem crossfade6fases e envelope suave; EMP círculo constante, centro/duração
+originais. Offset de tremor só visual, aplicado também aos tiros/Fx. Pausa
+congela clocks. Catálogo/recortes válidos obrigatórios, senão usa original.
+Modelo de combate, terreno, perfil, regras, salvas e tamanho dos mobiles sem diff.
+
+Validação fresca: **783 checks, zero falhas**: 251 modelos/cenas/ataques,
+189 atlas HD, 240 animação e103 piloto/tiros. Continuidade de tiro cobre180
+amostras por configuração e efeito120; não contar cada amostra como um teste.
+RED→GREEN para renderer, chama ausente e catálogo inválido de impactos/EMP.
+Perfis isolados. Dez partidas anteriores são histórico, não foram repetidas
+pois regras de combate não mudaram. Logs locais .tools/pilot-shots-final-*.
+
+GPU:72frames a24fps, seis armas/impactos, PNG1920×1080 e MP4/GIF em
+docs/projectiles; piloto em ±30°, plano e recuo virado. Galeria de tiros usa
+fixtures e escala4×, não prova voo natural.16capturas reais de jogo atualizadas
+em docs/hd com capture_hd_assets.gd. Revisão independente conferiu fontes e
+frames; P2 de fallback de catálogo corrigido com duas regressões; revisão
+aprovada sem pendências. Inspeção de frames, sem avaliação manual completa.
+
+App/ZIP Universal **0.6.2** reexportados via build_macos.py. Assinatura
+profunda/estrita válida, runtime exportado sem erros. PCK isolado em projeto
+vazio validou novos assets/recortes/catálogo/chamas, piloto1×1 e salvas4/6/8,
+zero falhas. Git local/tag v0.6.2; sem remoto/push/publicação.
+
+```sh
+mkdir -p .tools
+python3 scripts/catalog_hd_assets.py
+/Applications/Godot.app/Contents/MacOS/Godot --headless --editor --path . --import
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_hd_assets.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mobile_animation.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_pilot_projectiles.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_pilot_projectiles.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_hd_assets.gd
+python3 scripts/build_macos.py
+```
+
+Limite: arte/animação HD adaptadas, não restauração quadro a quadro Gunbound.
+Próximo passo: usuário validar personagem, T1/T2/SS e impactos no aplicativo.
+
+## Entrega anterior 0.6.1: correção de sprites/animação
 
 Usuário relatou inconsistências visuais/animadas Bigfoot/Mage. Diagnóstico:
 atlas GPT mudava anatomia, Bigfoot moving tinha clarão; recorte de aura junto
