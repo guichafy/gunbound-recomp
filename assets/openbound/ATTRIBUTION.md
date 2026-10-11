@@ -79,3 +79,18 @@ Regras de clima, vento e Thor portadas de `MatchMetadata.cs`,
 `WeatherDisplay.cs`, `WeatherHandler.cs`, `WeatherEffect/*.cs`,
 `ThorSatellite.cs`, `BeamDummyProjectile.cs` e `ParticleBuilder.cs` (GPL).
 Arquivos copiados sem edição; SHA-256 em `SOURCE_MANIFEST.json`.
+
+## HUD de batalha (0.10)
+
+- `hud/` — barra de ação (`Interface/InGame/HUD/Blue/ActionBar/*`), botões
+  ShotSelector/Options/SkipTurn (`Interface/StaticButtons/HUD/Blue/*`), bússola
+  (`WindCompass/*`), moldura do clima, balão do relógio, moldura de vida, mira
+  (`Interface/InGame/HUD/Crosshair/CrosshairFrame`, `Pointer` e as faixas
+  Mage/Bigfoot S1/S2/SS Ally/Enemy), fontes numéricas
+  (`Interface/Spritefont/HUD/Blue/*`) e o som `ClockSecond`.
+
+Layout, estados de botão, carga e mira portados de `HUD.cs`, `Crosshair.cs`,
+`WindCompass.cs`, `Delayboard.cs`, `HealthBar.cs`, `ProgressBar.cs`,
+`SpriteNumericField.cs`, `Button.cs`, `ShotButton.cs` e `Mobile.cs` (GPL).
+Arquivos copiados sem edição; SHA-256 em `SOURCE_MANIFEST.json`. Derivados HD
+GPT Images em `assets/hd/hud/`.

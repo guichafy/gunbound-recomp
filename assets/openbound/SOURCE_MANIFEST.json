@@ -191,5 +191,173 @@
   "maps/miramo_town/Particle.png": {
     "source": "Graphics/Maps/MiramoTown/Particle.png",
     "sha256": "5177b978fb422d626d91cf8d8510043f50f89fb3668e6a1105ad3c91701149be"
+  },
+  "hud/ActionBar.png": {
+    "source": "Interface/InGame/HUD/Blue/ActionBar/Background.png",
+    "sha256": "446b91ad8bca1a09b7eb3e13efb4b495176072d37077ad17fba591bdd7d3e785"
+  },
+  "hud/MovementMetter.png": {
+    "source": "Interface/InGame/HUD/Blue/ActionBar/MovementMetter.png",
+    "sha256": "234ed5d0e5be345ce8a5a72aa52c4e11de1aad05ad870bd4f140de68a2efbded"
+  },
+  "hud/StrenghtMetter.png": {
+    "source": "Interface/InGame/HUD/Blue/ActionBar/StrenghtMetter.png",
+    "sha256": "57dd18843f73f164e578a9120fbe677b359ed3d1153ff4e04d31be71a8015c8b"
+  },
+  "hud/PreviousShootingStrenghtPointer.png": {
+    "source": "Interface/InGame/HUD/Blue/ActionBar/PreviousShootingStrenghtPointer.png",
+    "sha256": "d347973c6f614145c301d0dc8f49348e1f62c583e272bc89838b5f6176de38bd"
+  },
+  "hud/ShotStrenghtSelector.png": {
+    "source": "Interface/InGame/HUD/Blue/ActionBar/ShotStrenghtSelector.png",
+    "sha256": "69239cb4ea4e6b93d644a552453073c61e1f7370d8c2c0bcb92da05bb74dd37d"
+  },
+  "hud/SelectedPlayerTurnBG.png": {
+    "source": "Interface/InGame/HUD/Blue/ActionBar/SelectedPlayerTurnBG.png",
+    "sha256": "b5468df29e9324a7a6efd99607e900d1ced917ea851a50bdf85989580d5267cc"
+  },
+  "hud/TurnCounterBalloon.png": {
+    "source": "Interface/InGame/HUD/Blue/TurnCounterBalloon.png",
+    "sha256": "d38d9eeb8be72058ae2f0e1bb89f46de98604fa497da30001b4f496026d5cfff"
+  },
+  "hud/WeatherFrame.png": {
+    "source": "Interface/InGame/HUD/Blue/WeatherDisplay/Frame.png",
+    "sha256": "240df5f4512b04698113981cfb15775ec639b2c9b8bed444fb31c405f2df7957"
+  },
+  "hud/CompassBackground.png": {
+    "source": "Interface/InGame/HUD/Blue/WindCompass/Background.png",
+    "sha256": "facf2e2b09a933b79087ee2a88ffcc07cb62b0c79baa2072db7633eb2d1a98d5"
+  },
+  "hud/CompassForeground.png": {
+    "source": "Interface/InGame/HUD/Blue/WindCompass/Foreground.png",
+    "sha256": "cb95bcbfbaa5c8812bde2c6585a154b4e0e156cc62f6d6b9cb6c1b3d11635dd2"
+  },
+  "hud/CompassWhiteArrow.png": {
+    "source": "Interface/InGame/HUD/Blue/WindCompass/WhiteArrow.png",
+    "sha256": "491495bae9e0fa0059b64b26df6e22a898ef58f05c26ccc374c55e9e287825bd"
+  },
+  "hud/CompassYellowArrow.png": {
+    "source": "Interface/InGame/HUD/Blue/WindCompass/YellowArrow.png",
+    "sha256": "4b12b574429e4184a00fe482f150b172dce85285e2a07e334c534b4630303f44"
+  },
+  "hud/CompassRedArrow.png": {
+    "source": "Interface/InGame/HUD/Blue/WindCompass/RedArrow.png",
+    "sha256": "7e040bef57a3de0edb41f45c2158070fa1b33608afcff08f1a3cf2032dab0214"
+  },
+  "hud/HealthBarFrame.png": {
+    "source": "Interface/InGame/HUD/HealthBarFrame.png",
+    "sha256": "ecc8fdc8890f7bb3488977a64a1d8272a20ccdf98dd3e1105792359d0ba8fd52"
+  },
+  "hud/CrosshairFrame.png": {
+    "source": "Interface/InGame/HUD/Crosshair/CrosshairFrame.png",
+    "sha256": "5a7997161ddc728c21b6ed93b0132a0f86e182d3c62d156c38bb987af194e3c2"
+  },
+  "hud/CrosshairPointer.png": {
+    "source": "Interface/InGame/HUD/Crosshair/Pointer.png",
+    "sha256": "abe4dac63abf882e8b5d2cf68f9993ffb541487913ba0c2906f04f0e40bf0c78"
+  },
+  "hud/ShotSelector.png": {
+    "source": "Interface/StaticButtons/HUD/Blue/ShotSelector.png",
+    "sha256": "0aacac15183ffae14e56d81ef40c5e5dab572ded95420ab6d873a5b1113b58be"
+  },
+  "hud/Options.png": {
+    "source": "Interface/StaticButtons/HUD/Blue/Options.png",
+    "sha256": "032fdb92c136b913ade58abdca0abc434bc788eaa00e1ca5fb8cd455cc2a6400"
+  },
+  "hud/SkipTurn.png": {
+    "source": "Interface/StaticButtons/HUD/Blue/SkipTurn.png",
+    "sha256": "9bb3beae137db1b5c4e679a8034f4ab1480919de87c11a26d9c1276de07c7036"
+  },
+  "hud/FontCurrentAngle.png": {
+    "source": "Interface/Spritefont/HUD/Blue/CurrentAngle.png",
+    "sha256": "292e75591aaa21863852e6d6cc4f586bc3e8d8de7e19d598974995cf83275f7a"
+  },
+  "hud/FontPreviousAngle.png": {
+    "source": "Interface/Spritefont/HUD/Blue/PreviousAngle.png",
+    "sha256": "2a7d67996fdb02b662db2c3c0357f993724f41a318edbb3954c9b3b1b9ffcf36"
+  },
+  "hud/FontDamage.png": {
+    "source": "Interface/Spritefont/HUD/Blue/Damage.png",
+    "sha256": "52aca9398268da521d663f4936c8744d3725f1f453e320c2798316232227305c"
+  },
+  "hud/FontDelay.png": {
+    "source": "Interface/Spritefont/HUD/Blue/Delay.png",
+    "sha256": "2dd26db57a20163851a7456a9b14756e61364fa5f11748b58f8100c411ebd7c7"
+  },
+  "hud/FontGold.png": {
+    "source": "Interface/Spritefont/HUD/Blue/Gold.png",
+    "sha256": "ae263916ad0cc9c8ecc7f1933f86493a2397b13296ff82c2f19c03c05d9ea799"
+  },
+  "hud/FontCrosshairAngle.png": {
+    "source": "Interface/Spritefont/HUD/Blue/CrosshairAngle.png",
+    "sha256": "86730be90cefdd705da98f9945c303bdf4ae6116e256f63f8ad46376e982a964"
+  },
+  "hud/FontWindCompass.png": {
+    "source": "Interface/Spritefont/HUD/Blue/WindCompass.png",
+    "sha256": "5c9335b5b46f79c252c30881efd1bbdc3beab42f0018a066de2da471c288ccd1"
+  },
+  "hud/FontTurnTimer.png": {
+    "source": "Interface/Spritefont/HUD/Blue/TurnTimer.png",
+    "sha256": "f746e24415d79838cc6d0851672a053712bd8eb1ac0d771381c94048e75ea742"
+  },
+  "hud/FontBlueTurnCounter.png": {
+    "source": "Interface/Spritefont/HUD/Blue/BlueTeamTurnCounter.png",
+    "sha256": "4ae341bb6558c94c6aaaef3f03758b77c4ddf7853d5f28f7a812cb037662896a"
+  },
+  "hud/FontRedTurnCounter.png": {
+    "source": "Interface/Spritefont/HUD/Blue/RedTeamTurnCounter.png",
+    "sha256": "d2a1b63a7f3fe356715bdc27bdb2bedbbfdef5719e4060c68651abb5a00adf78"
+  },
+  "hud/CrosshairMageS1Ally.png": {
+    "source": "Interface/InGame/HUD/Crosshair/MageS1Ally.png",
+    "sha256": "1a6560caa729cfe270380267655763a177829f7fe6208c9e2ae013c89b8c4a6c"
+  },
+  "hud/CrosshairMageS1Enemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/MageS1Enemy.png",
+    "sha256": "44a05a85b994adb0514a2d7d9d397e6ecc16c9ccd4d1a1646aae6a15a528a202"
+  },
+  "hud/CrosshairMageS2Ally.png": {
+    "source": "Interface/InGame/HUD/Crosshair/MageS2Ally.png",
+    "sha256": "1a6560caa729cfe270380267655763a177829f7fe6208c9e2ae013c89b8c4a6c"
+  },
+  "hud/CrosshairMageS2Enemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/MageS2Enemy.png",
+    "sha256": "44a05a85b994adb0514a2d7d9d397e6ecc16c9ccd4d1a1646aae6a15a528a202"
+  },
+  "hud/CrosshairMageSSAlly.png": {
+    "source": "Interface/InGame/HUD/Crosshair/MageSSAlly.png",
+    "sha256": "1a6560caa729cfe270380267655763a177829f7fe6208c9e2ae013c89b8c4a6c"
+  },
+  "hud/CrosshairMageSSEnemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/MageSSEnemy.png",
+    "sha256": "44a05a85b994adb0514a2d7d9d397e6ecc16c9ccd4d1a1646aae6a15a528a202"
+  },
+  "hud/CrosshairBigfootS1Ally.png": {
+    "source": "Interface/InGame/HUD/Crosshair/BigfootS1Ally.png",
+    "sha256": "6bfb0e58a59d6c86e9e1fa2641b5599c0196233db6eac9776526421a1bea2c70"
+  },
+  "hud/CrosshairBigfootS1Enemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/BigfootS1Enemy.png",
+    "sha256": "44c735eb3dc54bb9e99f16aac1da707610e919e0f96bcea13a3781bce2f29ee5"
+  },
+  "hud/CrosshairBigfootS2Ally.png": {
+    "source": "Interface/InGame/HUD/Crosshair/BigfootS2Ally.png",
+    "sha256": "6bfb0e58a59d6c86e9e1fa2641b5599c0196233db6eac9776526421a1bea2c70"
+  },
+  "hud/CrosshairBigfootS2Enemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/BigfootS2Enemy.png",
+    "sha256": "44c735eb3dc54bb9e99f16aac1da707610e919e0f96bcea13a3781bce2f29ee5"
+  },
+  "hud/CrosshairBigfootSSAlly.png": {
+    "source": "Interface/InGame/HUD/Crosshair/BigfootSSAlly.png",
+    "sha256": "3b72a38488389cf28cc0c2c88603d11259e0ffd16bb8bc2052eba3d97c3fc699"
+  },
+  "hud/CrosshairBigfootSSEnemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/BigfootSSEnemy.png",
+    "sha256": "98502381bee78ebed1f5a544ff350212d0f5e5aba09b92420e18203f1b8d3069"
+  },
+  "hud/ClockSecond.mp3": {
+    "source": "Audio/SFX/InGame/Gameplay/ClockSecond.mp3",
+    "sha256": "6563acf3f6d26ebd2a43daa52e1526065642826e7cd61b041ad9b527684fba8b"
   }
 }

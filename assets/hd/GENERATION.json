@@ -121,5 +121,33 @@
     },
     "assembly": "scripts/build_map_hd.py; manifest em maps/miramo_town/manifest.json",
     "note": "Blocos brutos intactos. Foreground costurado com feather e alpha substituído pela máscara original; colisão nunca usa o PNG gerado."
+  },
+  "hud_0_10": {
+    "tool": "GPT Images via Codex CLI image_gen (gpt-5.6-sol)",
+    "prompts": "HUD_PROMPTS.md",
+    "source": "assets/openbound/hud (originais OpenBound) e weather/WeatherIcons.png",
+    "sheets": {
+      "hud/source/gen_buttons.png": {
+        "origin": "exec-5c759a36-69ad-421e-88ff-0f2041cad6bb.png",
+        "session": "01a12d43-d6ac-7992-b438-81e5dc116e1f"
+      },
+      "hud/source/gen_timer.png": {
+        "origin": "exec-482f9127-1e6a-4ea0-82cf-ff5d2c2694bf.png",
+        "session": "01a12d43-d6ab-7710-bc56-9711f74a7405"
+      },
+      "hud/source/gen_misc.png": {
+        "origin": "exec-93b7ee2e-f6ad-473e-aee5-3dc81f9530eb.png",
+        "session": "01a12d43-d7ff-7502-960d-2e70e4e1ba33"
+      },
+      "hud/source/gen_bar.png": {
+        "origin": "exec-119e4f64-808f-4b65-b66e-fcc950a1bb45.png",
+        "session": "01a12d43-d6bd-7571-843c-1ffdc8a365f5"
+      },
+      "hud/source/gen_fonts.png": {
+        "origin": "exec-7e36a526-fbbf-435f-9b3d-29ff2fb4f047.png",
+        "session": "01a12d43-d6a2-7651-9292-f28336235fa9"
+      }
+    },
+    "note": "Folhas com layout fixo; build_hud_hd.py recorta cada sprite, 3× o original, alfa original. Faixas de mira, barras planas, moldura de vida e ponteiros ampliados direto (Lanczos)."
   }
 }

@@ -209,3 +209,23 @@ Miramo A tem peso 0 para Thor/Espelho/Fraqueza/Ignorância, então o Thor nunca
 apareceria. O menu ganha "Clima: original do mapa / todos os efeitos"; o modo
 "todos" usa pesos iguais para os 10 tipos (Thor incluído). Padrão continua o
 preset original, fiel ao Map.cs.
+
+## HUD original de batalha 0.10
+
+ADR-049 — adotada por solicitação explícita: o console de batalha próprio
+(painéis "Armas/Mira/Força/DISPARAR", fila de iniciativa, bússola desenhada,
+relógio em texto, barras de vida ProgressBar) é substituído pelo HUD do
+OpenBound: barra de ação, botões S1/S2/SS, Options/SkipTurn, barras de força e
+movimento, ângulos atual/anterior, previsão de clima na barra, Delayboard,
+bússola, TurnTimer, mira, barra de vida, nome e dano flutuante. Layout copiado
+dos offsets do C# na tela virtual 800×500 com fator 1,6; a área do mundo passa
+de 1280×670 para 1280×664 (substitui o `VIEW_SIZE` de ADR-044).
+
+ADR-050 — adotada por escolha do usuário: carga do tiro igual ao original
+(0→100, passo 2 a cada 0,04 s; soltar ou encher dispara). Substitui a carga
+15→100 a 65/s e o clique que definia a força; o seletor da barra só marca.
+
+ADR-051 — adotada por escolha do usuário: arte do HUD em HD via GPT Images
+(3× o original, ≥ Full HD), recortada de folhas de referência com layout fixo e
+alfa do original. Controles sem equivalente no original (mover, virar,
+disparar, passar com mouse/toque) ficam como botões pequenos fora da barra.

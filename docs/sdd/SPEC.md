@@ -167,3 +167,10 @@ REQ-22 câmera rolante 1:1, REQ-23 vento 2D, REQ-24 clima, REQ-25 Thor,
 REQ-26 partícula de chão, conforme WEATHER_CAMERA_0_9.md. Substitui a arena
 fixa de REQ-21 (mapa e colisão original mantidos). Outros mapas fora do escopo
 por decisão do usuário.
+
+## HUD original de batalha 0.10 — escopo solicitado
+
+REQ-27 barra de ação, REQ-28 barras de força/movimento e carga original,
+REQ-29 mira original, REQ-30 bússola, relógio, Delayboard, vida, nome e dano,
+conforme HUD_0_10.md. Substitui o console de REQ-03 (teclado e controles na
+tela continuam) e muda a altura visível do mundo de REQ-22 para 664 px.
