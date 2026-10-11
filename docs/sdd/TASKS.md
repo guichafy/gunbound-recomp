@@ -14,6 +14,9 @@ Os estados acima distinguem implementação entregue de aceitação pelo usuári
 
 ## Pendência atual
 
+- [ ] Aprovação do pacote proposto em `REFINEMENT_0_2.md` (pesquisa concluída).
+- [ ] Implementar e validar o refinamento após essa aprovação; ainda não iniciado.
+
 - [ ] Usuário validar mouse/teclado, partida, pausa, especial, resultado, revanche
   e persistência seguindo `docs/VALIDACAO.md`.
 - [ ] Registrar feedback e priorizar correções/refinos conforme esse resultado.

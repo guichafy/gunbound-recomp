@@ -1,5 +1,21 @@
 # Hand-off — Brisa de Aço 0.1.0
 
+## Solicitação em andamento: refinamento por referências
+
+Em 2026-10-11, após `c530e23`, o usuário solicitou melhorias de mecânica,
+animações e design a partir de três vídeos e do fork Chafy-Studio/_OpenBound.
+Pesquisa registrada em `GUNBOUND_REFERENCES.md`; proposta concreta em
+`REFINEMENT_0_2.md`. Design apresentado e aprovação solicitada pela ferramenta
+de pergunta da conversa. Implementação ainda não iniciada neste registro.
+Não considerar a proposta 0.2 como entregue. Após resposta do usuário, atualizar
+seu status e prosseguir com a sequência documentada.
+
+O pacote principal de sprites não está no fork. Nenhum código/asset do OpenBound
+foi incorporado; a proposta utiliza nossa arte original e adapta comportamentos.
+Baseline executável continua 0.1.0. A pesquisa está em `.tools/`, fora do Git.
+
+## Histórico do baseline
+
 Atualizado em 2026-10-11. Protótipo entregue; aguardando feedback funcional do
 usuário. Esta sessão acrescenta SDD e o primeiro snapshot Git, sem mudar o jogo.
 

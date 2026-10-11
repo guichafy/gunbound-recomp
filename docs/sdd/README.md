@@ -12,6 +12,8 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [DESIGN.md](DESIGN.md) | Arquitetura implementada, estados, contratos e invariantes |
 | [DECISIONS.md](DECISIONS.md) | Decisões, motivos e consequências |
 | [TASKS.md](TASKS.md) | Entregas, rastreabilidade, tarefas abertas e roadmap |
+| [GUNBOUND_REFERENCES.md](GUNBOUND_REFERENCES.md) | Pesquisa dos três vídeos e do fork OpenBound, com origem e limites dos assets |
+| [REFINEMENT_0_2.md](REFINEMENT_0_2.md) | Proposta de refinamento; status explícito de aprovação/implementação |
 
 Ordem de retomada: hand-off → especificação → design → tarefas → decisões.
 Para uma mudança, localizar o requisito, definir o delta da especificação,
