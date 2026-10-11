@@ -86,3 +86,12 @@ Outras plataformas, multiplayer, ranking, reconexão, mobile, distribuição pú
    HD tem menos imagens distintas. Avaliar se a fluidez e estilo agradam.
 5. Comparar docs/hd/original-bigfoot-menu.png com bigfoot-menu.png; ambas são
    capturas1920×1080. Campo/balística/HUD não foram redesenhados nesta entrega.
+
+## Aceitação da correção de animação 0.6.1
+
+No aplicativo0.6.1, verificar Bigfoot e Mage: movimento sem trocar silhueta,
+piloto estável no assento, rodas girando/parando sem reset, carga das três armas
+sem esticar o carro, recuo após disparo, dano e morte sem troca brusca de desenho.
+Pausar durante movimento/carga/voo e retomar; iniciar revanche/menu e conferir
+que o estado anterior não persiste. Prévia animada em docs/animation/animation.gif
+é fixture do renderer, não substitui este teste funcional.

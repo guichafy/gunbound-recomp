@@ -1,6 +1,8 @@
-# Especificação — protótipo 0.6.0
+# Especificação — protótipo 0.6.1
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
+Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;
+REQ-19/20/12, plano e critérios em `ANIMATION_FIX_0_6_1.md`.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o
 comportamento entregue; parâmetros concretos são decisões do protótipo.
 

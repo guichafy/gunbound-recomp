@@ -98,3 +98,18 @@ quase invisível no enquadramento. Apenas metadados de recorte; PNGs gerados e
 originais permanecem intactos. Destino acompanha alpha footprint original para
 manter o contato com terreno e geometria existente. SHA256/dimensões/prompts
 registrados; Full HD validado no framebuffer, não inferido pelo prompt.
+
+## Correção de animação 0.6.1
+
+ADR-032 — adotada: substitui ADR-030 somente para render dos mobiles/piloto.
+Quadros GPT variam anatomia e estado (Bigfoot moving com clarão); ajuste pelo
+alpha original comprimia carro ao incluir aura. Cinco peças constantes HD com
+pivôs fixos, relógio contínuo e piloto constante evitam regenerar identidade
+a cada quadro. Originais/antigos HD preservados. Rodas acumulam fase de viagem,
+não reiniciam no repouso. Morte articulada/fade é adaptação, não restauração.
+
+ADR-033 — adotada: recortes de peças seguem intervalos transparentes reais,
+porque o gerador extrapolou células iguais. HDSheet informa catalog_valid;
+rig incompleto/sem catálogo retorna conjunto integral original. Não mistura
+carro original com piloto HD. Catalogo não altera pixels. Tiros/Fx e demais
+consumidores de ADR-031 permanecem inalterados.

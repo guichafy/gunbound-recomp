@@ -1,6 +1,15 @@
 # Imagens originais do protótipo
 
-## Derivados em alta definição 0.6
+## Correção de animação 0.6.1
+
+Atlas anteriores de mobile variavam anatomia e misturavam efeitos com corpo.
+Agora `mobile_parts.png` separa cinco peças constantes, geradas com GPT Images
+a partir de heroes; prompts em `assets/hd/ANIMATION_PROMPTS.md`.
+O render articula peças/piloto com pivôs fixos e relógio contínuo.
+Prévia GPU/vídeo em `docs/animation`; ver `docs/sdd/ANIMATION_FIX_0_6_1.md`.
+Tiros/Fx HD anteriores preservados. Original e derivado PNG intactos.
+
+## Entrega anterior em alta definição 0.6
 
 Bigfoot, Mage, piloto, projéteis e explosões usam versões redesenhadas pelo
 **GPT Images integrado**, preservando a aparência clássica escolhida pelo usuário.

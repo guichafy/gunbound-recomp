@@ -1,6 +1,56 @@
-# Hand-off — Brisa de Aço 0.6.0
+# Hand-off — Brisa de Aço 0.6.1
 
-## Entrega atual 0.6.0: assets HD
+## Entrega atual 0.6.1: correção de sprites/animação
+
+Usuário relatou inconsistências visuais/animadas Bigfoot/Mage. Diagnóstico:
+atlas GPT mudava anatomia, Bigfoot moving tinha clarão; recorte de aura junto
+ao corpo redimensionava silhueta e piloto. REQ-19/20/12; plano completo em
+`ANIMATION_FIX_0_6_1.md`. Corrigido e revisado, aceitação visual do usuário pendente.
+
+`mobile_parts.png` gerado via GPT Images a partir de heroes, 1536×1024 RGBA,
+cinco peças constantes: chassis/canhão/roda Bigfoot; corpo/cajado Mage. Prompts
+em `assets/hd/ANIMATION_PROMPTS.md`, origens em GENERATION.json. PNGs antigos
+e originais preservados. Janelas reais x0–570/570–1040/1040–1536, y0–512/512–1024,
+alpha>8; fronteiras sem corte opaco. Haze RGB fora das peças tem alpha0.
+
+`mobile_rig.gd` anima peças contínuas com âncoras e dimensões fixas, mesmo render
+menu/arena. Piloto usa cabeça/corpo constantes sobre assento do chassis.
+Suspensão, canhão/cajado, carga/recuo/dano/morte separados de auras/clarões.
+BattleArt passa pose_age/arma correta e acumula wheel_phase pelo deslocamento:
+rodas conservam fase ao parar. Pausa congela tudo. Fallback integral ao atlas
+original/piloto/offsets originais se rig incompleto ou catálogo de peças inválido.
+Removidos hd_frame/hd_rows e referências ativas aos atlas variáveis de mobile
+e portraits heroes; arquivos mantidos como histórico. Tiros/Fx permanecem HD0.6.
+Sem mudanças de física, colisão, dano, turnos, progresso ou sons.
+
+Validação fresca: **667 checks**, zero falhas (251 modelos/cenas/ataques,
+176 atlas HD atualizados +240 animação). Cada critério contínuo avalia90
+amostras a60Hz por estado/arma; não contar cada amostra como teste distinto.
+RED→GREEN para rig, continuidade/fase de roda e catálogo inválido. Perfis
+isolados. Capturas GPU: 216 frames a24fps, storyboard1920×1080 e prévias
+MP4/GIF em `docs/animation`; 16 capturas de jogo atualizadas em `docs/hd`.
+Revisão independente aprovou após examinar fontes, 240checks e frames
+representativos. Inspeção de frames, sem teste manual completo da fluidez.
+
+App/ZIP Universal **0.6.1** reexportados via build_macos.py, assinatura
+profunda/estrita válida, runtime independente sem erros. PCK sozinho em
+projeto vazio validou rigs/recortes/tiros/Fx e salvas4/6/8, zero falhas.
+Git local tag `v0.6.1`, nenhum remoto/push/publicação.
+
+Limites: animação articulada é adaptação; morte colapsa/faz fade do mesmo
+corpo, não restaura os destroços originais quadro a quadro. Próximo passo:
+usuário avaliar movimentos/cargas/recuo/morte e uso funcional do aplicativo.
+
+```sh
+python3 scripts/catalog_hd_assets.py
+/Applications/Godot.app/Contents/MacOS/Godot --headless --editor --path . --import
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mobile_animation.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_mobile_animation.gd
+python3 scripts/build_macos.py
+```
+
+
+## Entrega anterior 0.6.0: assets HD
 
 Pedido: melhorar Bigfoot, tiros e assets importados com GPT Images. Preferência
 confirmada: aparência clássica com detalhes mais nítidos. REQ-19/12/20; plano

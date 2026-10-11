@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Correção de animação 0.6.1
+
+- [x] Identificar inconsistências anatômicas/estado e redimensionamento por aura.
+- [x] Gerar peças GPT Images e integrar rig contínuo/piloto fixo/fallback original.
+- [x] Preservar fase das rodas, pausa, arma do recuo e reinício.
+- [x] Verificar667checks,216framesGPU e16capturas de jogo; revisão aprovada.
+- [x] Reexportar app0.6.1, validar assinatura/runtime/PCKisolado; SDD e Git local.
+- [ ] Usuário validar visualmente/funcionalmente a correção no aplicativo.
+
+
 ## Assets HD 0.6
 
 - [x] Confirmar aparência clássica com detalhes mais nítidos.
@@ -7,7 +17,7 @@
 - [x] Integrar recortes/alinhamento/fallback; conservar tamanho e combate.
 - [x] Verificar439checks,10partidas e exportação independente.
 - [x] Reexportar aplicativo0.6.0 e verificar assinatura profunda/estrita.
-- [ ] Usuário avaliar arte/animações HD e protótipo funcional.
+- [x] Usuário avaliou HD e relatou inconsistências; corrigidas tecnicamente em0.6.1.
 
 ## Baseline implementado
 

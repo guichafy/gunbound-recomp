@@ -65,10 +65,9 @@ func run() -> void:
 				return
 	# Same scene/pose, original renderer only, for honest visual comparison.
 	for mobile in [view.bigfoot, view.mage]:
-		for sheet in [mobile.hd_sheet, mobile.hd_rider, mobile.hd_shots, mobile.hd_effects]:
+		mobile.hd_rig.sheet.texture = null
+		for sheet in [mobile.hd_shots, mobile.hd_effects]:
 			sheet.texture = null
-		if mobile.get("hd_heroes") != null:
-			mobile.hd_heroes.texture = null
 		if mobile.get("hd_emp") != null:
 			mobile.hd_emp.texture = null
 	view.show_menu()

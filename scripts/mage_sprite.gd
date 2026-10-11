@@ -21,7 +21,6 @@ var hd_effects
 var hd_emp
 
 func _init() -> void:
-	hd_rows.assign(["idle", "moving", "charging_0", "charging_1", "charging_2", "recoil_0", "hurt", "destroyed"])
 	configure("res://assets/openbound/mage", Vector2(109, 150), Vector2(52, 85), SEQUENCES, 46.0, 117.0)
 	hd_shots = HDSheet.new("res://assets/hd/shots.png", 4, 6)
 	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)

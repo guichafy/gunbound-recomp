@@ -156,3 +156,18 @@ Modelo de combate, terreno e perfil não foram modificados.
 escalada uniformemente1,35 e margem96px de cada lado. O stretch de Window
 excluía barras laterais e retornava1728×1080; a captura corrige somente o setup
 de QA, sem alterar resolução lógica ou exportação do jogo. Perfis são isolados.
+
+## Correção HD 0.6.1
+
+`mobile_rig.gd` substitui somente o render dos mobiles por peças constantes
+`mobile_parts.png` e cabeça/corpo constantes do rider. `sample(pose,age,weapon)`
+produz transformações contínuas sem redimensionar corpo/piloto; aura e clarão
+são overlays. `BattleArt` passa pose_age/arma correta e acumula wheel_phase
+pelo deslocamento visual. Pausa congela relógio/fase. A sede do piloto acompanha
+chassis; pneus têm contato fixo enquanto suspensão se move. Morte colapsa/faz
+fade do conjunto. Menu/arena usam mesmos assets. Sem rig completo/catalog_valid,
+`mobile_sprite.gd` desenha integralmente original/piloto e offsets originais.
+Antigos hd_frame/hd_rows e uso de heroes/atlas de mobile saíram do caminho ativo.
+Tiros/Fx continuam HDSheet.destination, sem mudar combate. Catalogo de peças usa
+janelas reais entre objetos para conter as bordas completas, pois a geração
+não respeitou exatamente a grade. Requer metadados válidos para evitar clipping.

@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.1**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
 
 ## Jogar
 
@@ -92,7 +92,7 @@ Multiplayer online, salas privadas, busca automática, ranking, reconexão e 2×
 
 ## Limitações conhecidas
 
-Um mapa e três veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Escaravelho usa animações por código; Bigfoot e Mage usam derivados HD por quadros chave, com duração original e piloto alinhado. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot/Mage e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; demais mobiles e regras completas Gunbound continuam pendentes.
+Um mapa e três veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Escaravelho usa animações por código; Bigfoot e Mage usam peças HD constantes articuladas, animação contínua e piloto preso ao assento; os atlas originais ficam disponíveis como fallback. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot/Mage e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; demais mobiles e regras completas Gunbound continuam pendentes.
 
 ## Assets HD 0.6
 
@@ -108,3 +108,11 @@ python3 scripts/catalog_hd_assets.py
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_hd_assets.gd
 /Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_hd_assets.gd
 ```
+
+## Correção de animações 0.6.1
+
+Peças Bigfoot/Mage redesenhadas com GPT Images e animadas com pivôs fixos.
+Rodas acompanham deslocamento; suspensão, carga, recuo, dano e morte são
+contínuos. O piloto conserva proporções e acompanha o corpo; auras não
+redimensionam o carro. [Prévia animada](docs/animation/animation.gif),
+[vídeo](docs/animation/animation.mp4), [plano/validação](docs/sdd/ANIMATION_FIX_0_6_1.md).

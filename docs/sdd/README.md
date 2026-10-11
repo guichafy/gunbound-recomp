@@ -34,3 +34,5 @@ identifica as revisões; não manter hashes de commits dentro destes documentos.
 
 Assets HD atuais: [HD_ASSETS_0_6.md](HD_ASSETS_0_6.md), GPT Images e aparência
 clássica; metadados/prompts em assets/hd e capturas1920×1080 em docs/hd.
+
+Correção atual de sprites/animação: [ANIMATION_FIX_0_6_1.md](ANIMATION_FIX_0_6_1.md).

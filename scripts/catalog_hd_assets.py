@@ -6,7 +6,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 GRIDS = {"bigfoot": (4, 8), "mage": (4, 8), "rider": (4, 2),
-         "shots": (4, 6), "effects": (6, 6), "heroes": (2, 1), "emp": (1, 1)}
+         "shots": (4, 6), "effects": (6, 6), "heroes": (2, 1), "emp": (1, 1), "mobile_parts": (3, 2)}
 result = {}
 for name, (columns, rows) in GRIDS.items():
     path = ROOT / "assets" / "hd" / f"{name}.png"
@@ -22,6 +22,10 @@ for name, (columns, rows) in GRIDS.items():
             left, top = column * image.width // columns, row * image.height // rows
             right = (column + 1) * image.width // columns
             bottom = (row + 1) * image.height // rows
+            # Generator parts slightly overrun equal cells; actual transparent gaps
+            # separate them. These windows contain complete, isolated pieces.
+            if name == "mobile_parts":
+                left, right = [(0, 570), (570, 1040), (1040, image.width)][column]
             bounds = alpha.crop((left, top, right, bottom)).getbbox()
             regions.append([left + bounds[0], top + bounds[1],
                             bounds[2] - bounds[0], bounds[3] - bounds[1]]

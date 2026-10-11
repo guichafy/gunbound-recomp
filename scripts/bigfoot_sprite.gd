@@ -27,7 +27,6 @@ var hd_shots
 var hd_effects
 
 func _init() -> void:
-	hd_rows.assign(["idle", "moving", "charging_0", "charging_1", "recoil_0", "recoil_2", "hurt", "destroyed"])
 	configure("res://assets/openbound/bigfoot", CELL, PIVOT, SEQUENCES, 49.0, 119.0)
 	hd_shots = HDSheet.new("res://assets/hd/shots.png", 4, 6)
 	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)

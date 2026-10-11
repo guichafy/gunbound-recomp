@@ -5,6 +5,7 @@ var paint: CanvasTexture
 var columns: int
 var rows: int
 var regions: Dictionary = {}
+var catalog_valid := false
 var footprints: Dictionary = {}
 var source_images: Dictionary = {}
 
@@ -24,6 +25,7 @@ func _init(path: String, column_count: int, row_count: int) -> void:
 				var size: Array = data.get("size", [])
 				var grid: Array = data.get("grid", [])
 				if size.size() == 2 and grid.size() == 2 and Vector2i(int(size[0]), int(size[1])) == Vector2i(texture.get_size()) and Vector2i(int(grid[0]), int(grid[1])) == Vector2i(columns, rows) and data.get("regions", []).size() == columns * rows:
+					catalog_valid = true
 					for row in range(rows):
 						for column in range(columns):
 							var rect: Array = data.regions[row * columns + column]

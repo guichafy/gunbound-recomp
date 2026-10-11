@@ -6,7 +6,7 @@ var motion: Array = []
 func reset(actors: Array) -> void:
 	motion.clear()
 	for actor in actors:
-		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "bigfoot": actor.vehicle == 2, "mage": actor.vehicle == 1})
+		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "bigfoot": actor.vehicle == 2, "mage": actor.vehicle == 1})
 
 func react(event: Dictionary) -> void:
 	if event.type == "fire":
@@ -23,6 +23,7 @@ func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0,
 		var state: Dictionary = motion[index]
 		var actor: Dictionary = model.actors[index]
 		state.moving = 0.16 if absf(actor.pos.x - state.previous.x) > 0.01 else maxf(0.0, state.moving - delta)
+		state.wheel_phase += (actor.pos.x - state.previous.x) / 15.0
 		state.previous = actor.pos
 		state.pos = Vector2(state.pos).lerp(actor.pos, 1.0 - exp(-delta * 18.0))
 		state.rotation = lerp_angle(float(state.rotation), model.body_rotation(index), 1.0 - exp(-delta * 18.0))
@@ -86,10 +87,12 @@ func draw_actor(view: Node2D, index: int, offset: Vector2) -> void:
 	view.draw_set_transform(Vector2.ZERO)
 	var alpha := clampf(1.0 - dead / death_duration, 0.0, 1.0) if actor.hp <= 0 else 1.0
 	var color := Color(1, 0.65, 0.6, alpha) if state.hurt > 0.0 and int(time * 24.0) % 2 == 0 else Color(1, 1, 1, alpha)
-	if actor.vehicle == 1:
-		view.mage.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(view, index), color)
-	elif actor.vehicle == 2:
-		view.bigfoot.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(view, index), color)
+	if actor.vehicle in [1, 2]:
+		var atlas = view.mage if actor.vehicle == 1 else view.bigfoot
+		var weapon: int = view.weapon if index == 0 else int(view.cpu_plan.get("weapon", model.last_shots[index].get("weapon", 0)))
+		if state.pose == "recoil":
+			weapon = int(model.last_shots[index].get("weapon", 0))
+		atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(view, index), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase)
 	else:
 		view.draw_sprite(actor.vehicle, render_pos, 100.0, actor.facing, rotation, Vector2(1.0 + recoil * 0.05, 1.0 - recoil * 0.07), color)
 	if actor.hp <= 0:

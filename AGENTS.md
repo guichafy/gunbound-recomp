@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.6.0 em Godot 4.7.2 + GDScript. Escopo:
+Protótipo 0.6.1 em Godot 4.7.2 + GDScript. Escopo:
 desktop macOS, treino offline 1×1 contra CPU, arte do protótipo + Bigfoot/Mage originais
 e progresso local.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
@@ -68,3 +68,13 @@ Recortes metadata alpha>8/255 em atlas_regions.json; regenerar com
 scripts/catalog_hd_assets.py quando substituir PNG. Preset deve incluir esse
 JSON. Não apagar originais: orientam geometria e fallback. Modelo inalterado.
 Teste tests/test_hd_assets.gd e captura GPU tests/capture_hd_assets.gd (1920×1080).
+
+## Correção de animação 0.6.1
+
+Render de mobile usa mobile_rig.gd/peças constantes mobile_parts.png, não mais
+os atlas gerados quadro a quadro. Ver ANIMATION_FIX_0_6_1.md. Piloto fixo,
+âncoras constantes, relógio pose_age; wheel_phase acumulada por deslocamento.
+Fallback conjunto integral original se peças/piloto/catalogo válido ausentes.
+Preservar janelas reais de recorte no catalogador. Teste test_mobile_animation.gd
+e capture_mobile_animation.gd (216 frames GPU, PNG/MP4/GIF em docs/animation).
+Histórico acima sobre32 quadros/menuheroes descreve0.6, substituído no render.
