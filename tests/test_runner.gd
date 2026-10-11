@@ -80,7 +80,7 @@ func _initialize() -> void:
 	var cpu_shot: Dictionary = match_model.choose_cpu_shot()
 	check(cpu_shot.angle >= 10.0 and cpu_shot.angle <= 85.0, "CPU returns a legal angle")
 	check(cpu_shot.power >= 15.0 and cpu_shot.power <= 100.0, "CPU returns legal power")
-	match_model.start(1, 2, 123)
+	match_model.start(1, 2, 123, "")
 	# A real -30-degree support makes Mage's legal 50-degree aim steep enough
 	# for wind to return the laser to its shooter after muzzle clearance.
 	for y in range(400):
@@ -101,7 +101,7 @@ func _initialize() -> void:
 		if event.type == "explosion":
 			live_impact = event.position
 	check(Vector2(returning.position).distance_to(live_impact) < 2.0, "Prediction and live shot agree on returning-shell impact")
-	match_model.start(1, 1, 47)
+	match_model.start(1, 1, 47, "")
 	var foot: Vector2 = match_model.actors[1].pos + Vector2(0, 24)
 	match_model.terrain.carve(foot, 200.0)
 	match_model.settle_actors()

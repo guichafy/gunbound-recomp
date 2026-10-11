@@ -96,7 +96,7 @@ Multiplayer online, salas privadas, busca automática, ranking, reconexão e 2×
 
 ## Limitações conhecidas
 
-Um mapa e dois veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Bigfoot e Mage usam peças HD constantes articuladas, animação contínua e piloto preso ao assento; os atlas originais ficam disponíveis como fallback. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot/Mage e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; demais mobiles e regras completas Gunbound continuam pendentes.
+Um mapa original do OpenBound (Miramo Town A, terreno HD via GPT Images e colisão pelo alpha original) e dois veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Bigfoot e Mage usam peças HD constantes articuladas, animação contínua e piloto preso ao assento; os atlas originais ficam disponíveis como fallback. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot/Mage e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; demais mobiles e regras completas Gunbound continuam pendentes.
 
 ## Assets HD 0.6
 

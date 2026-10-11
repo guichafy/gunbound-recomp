@@ -9,6 +9,7 @@ const Sound = preload("res://scripts/sound.gd")
 const BattleArt = preload("res://scripts/battle_art.gd")
 const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
 const MageSprite = preload("res://scripts/mage_sprite.gd")
+const Maps = preload("res://scripts/maps.gd")
 var mage = MageSprite.new()
 var bigfoot = BigfootSprite.new()
 var art = BattleArt.new()
@@ -21,6 +22,7 @@ var root: Control
 var overlay: Control
 var overlay_kind := ""
 var background: Texture2D
+var map_backgrounds := {}
 var nickname_input: LineEdit
 var vehicle := 2
 var cpu_difficulty := 1
@@ -97,7 +99,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.7.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.8.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -575,7 +577,11 @@ func show_result() -> void:
 func _draw() -> void:
 	if background == null:
 		return
-	draw_texture_rect(background, Rect2(0, 0, 1280, 800), false)
+	var backdrop: Array = map_background(model.map_id) if screen != "menu" and model.terrain != null else []
+	if backdrop.is_empty():
+		draw_texture_rect(background, Rect2(0, 0, 1280, 800), false)
+	else:
+		draw_texture_rect_region(backdrop[0], Rect2(0, 0, 1280, 800), backdrop[1])
 	if screen == "menu":
 		draw_rect(Rect2(0, 0, 750, 800), Color(0.035, 0.13, 0.17, 0.30))
 		draw_circle(Vector2(342, 617), 157.0, Color(0.93, 0.96, 0.87, 0.14))
@@ -586,15 +592,12 @@ func _draw() -> void:
 		return
 	var offset := Vector2(sin(elapsed * 81.0), cos(elapsed * 74.0)) * shake
 	draw_set_transform(offset)
-	draw_texture_rect(model.terrain.texture, Rect2(0, 0, 1280, 800), false)
-	# Small vegetation details follow the current collision surface.
-	for x in range(48, 1240, 31):
-		var y: float = model.terrain.surface_at(x)
-		if y > 610.0:
-			continue
-		draw_line(Vector2(x, y), Vector2(x - 3, y - 7), Color("4b8050"), 2.0, true)
-		if x % 3 == 0:
-			draw_circle(Vector2(x - 3, y - 8), 2.2, Color("f4d5b2"))
+	if not model.terrain.map_id.is_empty():
+		# Original map: HD foreground carries its own crater and blackmask pixels.
+		if model.terrain.visual_texture != null:
+			draw_texture_rect(model.terrain.visual_texture, model.terrain.visual_rect, false)
+	else:
+		draw_procedural_terrain()
 	for index in range(model.actors.size()):
 		art.draw_actor(self, index, offset)
 	draw_set_transform(offset)
@@ -631,6 +634,35 @@ func _draw() -> void:
 		var width: float = ui.bold.get_string_size(banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17).x + 48.0
 		draw_style_box(ui.box(Color(0.05, 0.15, 0.19, minf(0.9, banner_time)), 10), Rect2(640 - width / 2, 176, width, 42))
 		draw_string(ui.bold, Vector2(664 - width / 2, 202), banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color(ui.CREAM, minf(1.0, banner_time)))
+
+func draw_procedural_terrain() -> void:
+	draw_texture_rect(model.terrain.texture, Rect2(0, 0, 1280, 800), false)
+	# Small vegetation details follow the current collision surface.
+	for x in range(48, 1240, 31):
+		var y: float = model.terrain.surface_at(x)
+		if y > 610.0:
+			continue
+		draw_line(Vector2(x, y), Vector2(x - 3, y - 7), Color("4b8050"), 2.0, true)
+		if x % 3 == 0:
+			draw_circle(Vector2(x - 3, y - 8), 2.2, Color("f4d5b2"))
+
+func map_background(id: String) -> Array:
+	# [texture, source region]: HD stitched file first, original Background.png otherwise.
+	if id.is_empty():
+		return []
+	if not map_backgrounds.has(id):
+		var map: Dictionary = Maps.get_map(id)
+		var view: Rect2 = map.background_view
+		var entry := []
+		if ResourceLoader.exists(map.background_hd):
+			var hd: Texture2D = load(map.background_hd)
+			var source: Rect2 = map.background_hd_source
+			var density := float(hd.get_width()) / source.size.x
+			entry = [hd, Rect2((view.position - source.position) * density, view.size * density)]
+		elif ResourceLoader.exists(map.background):
+			entry = [load(map.background), view]
+		map_backgrounds[id] = entry
+	return map_backgrounds[id]
 
 func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, _scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
 	if kind == 1:

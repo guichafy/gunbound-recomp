@@ -166,3 +166,21 @@ ADR-041 — adotada: consolidar o harness em `scripts/check.sh` — uma entrada
 para as14suites headless, com log por suite em `.tools/check-logs/`, resumo
 consolidado e código de saída!=0 em falha. `--quick` omite partidas longas;
 `GODOT=` permite binário alternativo. Suites continuam executáveis isoladas.
+
+## Mapa Miramo Town 0.8
+
+ADR-042 — adotada por solicitação explícita: primeiro mapa original do
+OpenBound, Miramo Town A (escolha do usuário), em arena fixa 1280×800 (escolha
+do usuário sobre câmera rolante). A colisão deriva do alpha original do
+`ForegroundA.png` reamostrado para a grade 640×400 existente; o PNG HD gerado
+por GPT Images é apenas visual e recebe a máscara original como alpha. Crateras
+seguem `Topography.CreateErosion` (anel escurecido ×0,4). Spawns sorteados pelo
+`rng` da partida, um por metade, da lista de `Map.cs`. Terreno procedural
+permanece como fallback e para fixtures de teste. Substitui o terreno procedural
+de REQ-11 como arena padrão. Detalhes em MAP_0_8.md.
+
+ADR-043 — adotada: geração em blocos sobrepostos. O gerador não produz a faixa
+3,9:1 com ganho de resolução em uma só imagem; três blocos 3:2 do foreground e
+dois 2:3 do fundo são costurados por `scripts/build_map_hd.py` (feather linear).
+Blocos brutos preservados intactos em `source/` com `.gdignore`; o script é
+determinístico e registra SHA-256 em `manifest.json`.

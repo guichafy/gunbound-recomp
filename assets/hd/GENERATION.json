@@ -47,5 +47,66 @@
     "origin": "exec-5f6ffd29-db98-4e93-9fca-68f9b265173c.png",
     "prompt": "SIDE_PILOT_PROMPT.md",
     "note": "Perna distante inteiramente oculta; PNG/alpha intactos, registro anterior preservado com4px extra no limite inferior."
+  },
+  "map_miramo_town_0_8": {
+    "tool": "GPT Images via Codex CLI image_gen (gpt-5.6-sol)",
+    "prompts": "MAP_PROMPTS.md",
+    "source": "assets/openbound/maps/miramo_town/ForegroundA.png e Background.png",
+    "tiles": {
+      "maps/miramo_town/source/fg_tile0.png": {
+        "origin": "exec-f430dd79-ec18-4a09-9de1-686b4d9f52da.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "source_window": [
+          17,
+          1344,
+          701,
+          1800
+        ]
+      },
+      "maps/miramo_town/source/fg_tile1.png": {
+        "origin": "exec-53efe6fb-ba93-46c5-addf-c570722aa82d.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "source_window": [
+          558,
+          1344,
+          1242,
+          1800
+        ]
+      },
+      "maps/miramo_town/source/fg_tile2.png": {
+        "origin": "exec-4f8b144c-4b2d-4354-b35a-1791e29f9814.png",
+        "size": [
+          1536,
+          1024
+        ],
+        "source_window": [
+          1099,
+          1344,
+          1783,
+          1800
+        ]
+      },
+      "maps/miramo_town/source/bg_tile0.png": {
+        "origin": "exec-9a4935cd-c652-488e-8fa9-bd6e8c2f47ea.png",
+        "size": [
+          1024,
+          1536
+        ],
+        "source_window": [
+          0,
+          260,
+          693,
+          1300
+        ]
+      }
+    },
+    "assembly": "scripts/build_map_hd.py; manifest em maps/miramo_town/manifest.json",
+    "note": "Blocos brutos intactos. Foreground costurado com feather e alpha substituído pela máscara original; colisão nunca usa o PNG gerado."
   }
 }

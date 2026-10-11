@@ -8,7 +8,9 @@
 | `scripts/ui.gd` | Construção e estilo de controles |
 | `scripts/battle_art.gd` | Estado visual separado, interpolação, rodas/canhão, recuo, dano, destruição, explosão e bússola |
 | `scripts/bigfoot_sprite.gd` | Atlas Bigfoot, FPS/ciclos, piloto e offsets por quadro, projéteis, nearest por CanvasTexture |
-| `scripts/terrain.gd` | Máscara sólida 640×400, células de 2 px, textura, superfície, crateras e raycast DDA |
+| `scripts/terrain.gd` | Máscara sólida 640×400, células de 2 px, mapa original (alpha do foreground) ou procedural, visual HD, superfície, crateras e raycast DDA |
+| `scripts/maps.gd` | Catálogo de mapas OpenBound (Map.cs): spawns, clima, recorte e transformação para a arena fixa |
+| `scripts/build_map_hd.py` | Costura blocos GPT Images do mapa, aplica a máscara original e grava manifest |
 | `scripts/combat.gd` | Parâmetros das armas, integração, colisão, dano e previsão de trajetória |
 | `scripts/match.gd` | Atores, RNG, projéteis, fases, movimento, disponibilidade, CPU e resultado |
 | `scripts/profile.gd` | JSON local, saneamento, recompensa e gravação temporária seguida de rename |
@@ -219,3 +221,17 @@ Combat guarda só física compartilhada, sem tabela de armas genéricas.
 Física de Mage/Bigfoot preserva velocidade base1, parâmetros próprios e previsões.
 Assets anteriores preservados mas scarab/tortoise excluídos do export. Ícone novo.
 Perfil não persiste veículo, apenas apelido/XP/vitórias/partidas/IDs recompensados.
+
+## Mapa Miramo Town 0.8
+
+`Maps.MAPS["miramo_town_a"]` descreve o recorte do alpha original
+(x17–1783, y1344–1800) e o topo y420 da arena; `k = 1280/1766`.
+`Terrain.load_map` amostra o alpha original no centro de cada célula (cache
+estático por mapa, cópia por partida) e carrega `foreground_a.png` 2560×661
+como `visual`. `carve` atualiza células e, se houver visual, apaga o círculo em
+pixels HD e escurece o anel `radius+3` por 0,4 (`Topography.CreateErosion`).
+`collision_copy` não leva visual. `Match.start(..., map)` usa
+`Maps.DEFAULT`; mapa vazio/inválido gera o terreno procedural. Spawns: um por
+metade, sorteados pelo `rng` da partida. `game.gd` desenha a janela do fundo
+(HD quando existir, senão `Background.png` original) e o `visual_texture` no
+`visual_rect`; grama e borda procedurais só no fallback. Câmera continua fixa.

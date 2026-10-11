@@ -122,3 +122,15 @@ ler SIDE_PILOT_ROSTER_0_6_4.md. PNG anterior preservado. Captura capture_side_pi
 144frames/PNG/MP4/GIF em docs/occlusion; test_roster.gd e suites existentes.
 Assets scarab/tortoise mantidos como histórico, excluídos do export macOS;
 ícone agora piloto. Progresso local não inclui mobile selecionado e foi preservado.
+
+## Mapa Miramo Town 0.8 — estado atual
+
+Arena padrão é Miramo Town A do OpenBound (ID20), arena fixa 1280×800, escolhas
+do usuário. Ler MAP_0_8.md. Colisão = alpha do ForegroundA original amostrado
+na grade 640×400 (maps.gd/terrain.load_map); HD foreground_a.png é só visual,
+alpha = máscara original. Crateras apagam HD e escurecem anel ×0,4. Spawns
+sorteados por metade da lista de Map.cs. Terreno procedural = fallback e
+fixtures (`start(..., "")`). Blocos GPT brutos em assets/hd/maps/*/source
+(.gdignore); rodar scripts/build_map_hd.py ao trocar blocos. Codex CLI gera
+imagens com `-m gpt-5.6-sol` (modelo padrão do config é recusado). Teste
+test_map.gd; captura capture_map.gd em docs/map. Clima/outros mapas pendentes.

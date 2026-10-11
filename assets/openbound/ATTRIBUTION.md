@@ -53,3 +53,15 @@ BigfootProjectile2Explosion não usado. As três imagens têm20 quadros reais;
 SS limita ao tamanho real, apesar do fim29 na referência. PNGs/MP3s intactos,
 hashes/caminhos exatos em SOURCE_MANIFEST. Emitter/dados de referência e
 adaptações em `docs/sdd/BIGFOOT_ATTACKS_0_5.md` e `scripts/bigfoot_attacks.gd`.
+
+## Mapa Miramo Town (0.8)
+
+- `maps/miramo_town/ForegroundA.png` — foreground original 1800×1800 RGBA de
+  `Graphics/Maps/MiramoTown/`; o alpha é a máscara de colisão do jogo.
+- `maps/miramo_town/Background.png` — fundo original 1300×1300; fallback do
+  fundo HD.
+
+Dados do mapa (ID20, tipo A, clima, 11 spawn points) e a regra de erosão vêm de
+`Map.cs`, `Topography.cs`, `LevelScene.cs` e `RoomMetadata.cs` do OpenBound,
+copiados em `scripts/maps.gd`/`scripts/terrain.gd` com aviso GPL. Derivados HD
+GPT Images em `assets/hd/maps/miramo_town/`. Arquivos originais intactos.

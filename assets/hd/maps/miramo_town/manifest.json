@@ -1,0 +1,45 @@
+{
+  "map": "miramo_town",
+  "foreground": {
+    "output": "foreground_a.png",
+    "size": [
+      2560,
+      661
+    ],
+    "sha256": "3540bd11748ea571a3d0ac2c55e067e20bd13874042ec039835096625af25617",
+    "stitched_size": [
+      3966,
+      1024
+    ],
+    "scale_vs_original": 1.4496,
+    "crop": [
+      17,
+      1344,
+      1783,
+      1800
+    ],
+    "tile_offsets": [
+      0,
+      541,
+      1082
+    ],
+    "tile_size": [
+      684,
+      456
+    ],
+    "tiles": {
+      "fg_tile0.png": "7545b499bdeeb471236e0dd55d0f18ae92e386837c76e6fe71d4ff278e9a7756",
+      "fg_tile1.png": "5309217c5230fdf2f2fcd8e4dfa4a0563dbad355f256558e9885def8c98cdc0a",
+      "fg_tile2.png": "3e98100363fa0caa4e43a1151025b763cbb177e44ce5cc50f723c11f206944ca"
+    },
+    "original": {
+      "ForegroundA.png": "f9270de8d1d8785b9ddeb4048a74c4daa91903eb9b9f47fadd898da16c54628e"
+    }
+  },
+  "background": {
+    "status": "pending",
+    "missing": [
+      "bg_tile1.png"
+    ]
+  }
+}

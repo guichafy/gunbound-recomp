@@ -151,3 +151,12 @@ nó raiz, bundle `com.local.gunboundrecomp`, assinatura `GREC`, app/ZIP
 usuário, sem migrar nem apagar o arquivo antigo. `scripts/check.sh` consolida
 as14suites headless com logs/saída de falha. Regras, roster, arte e áudio
 inalterados; documentos históricos mantêm o nome anterior "Brisa de Aço".
+
+## Mapa Miramo Town 0.8 — escopo solicitado
+
+REQ-21: a arena usa o mapa original Miramo Town A do OpenBound (terreno e fundo),
+com derivados HD por GPT Images e colisão pelo alpha original. Arena fixa
+1280×800, spawns sorteados da lista original (um por metade), crateras com anel
+escurecido como no original. REQ-04/05/08/11/12 relacionados. Terreno
+procedural permanece como fallback. Plano e critérios em MAP_0_8.md. Clima,
+outros mapas, câmera rolante e partícula de chão continuam fora do escopo.

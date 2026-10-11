@@ -1,6 +1,55 @@
-# Hand-off — Gunbound Recomp 0.7.0
+# Hand-off — Gunbound Recomp 0.8.0
 
-## Entrega atual 0.7.0: identidade Gunbound Recomp e harness
+## Entrega atual 0.8.0: mapa Miramo Town A
+
+Pedido: implementar um mapa do projeto C# com sprites HD por GPT Images. Usuário
+escolheu Miramo Town A e arena fixa 1280×800. REQ-21 (REQ-04/05/08/11/12);
+plano MAP_0_8.md, ADR-042/043.
+
+- Dados de `Map.cs` (ID20, clima, 11 spawns) em `scripts/maps.gd`. Colisão =
+  alpha>0 do `ForegroundA.png` original (cópia intacta em
+  `assets/openbound/maps/miramo_town/`) amostrado na grade 640×400; o recorte
+  1766×456 vira x0–1280, y420–750 e a colisão termina em y670 (linha do HUD),
+  abaixo é abismo.
+- Visual: GPT Images via `codex exec -m gpt-5.6-sol` (`image_gen`), 3 blocos 3:2
+  do foreground; `scripts/build_map_hd.py` costura e aplica a máscara original
+  como alpha → `foreground_a.png` 2560×661. Brutos em `source/` (.gdignore).
+- Crateras apagam células e pixels HD e escurecem o anel `r+3` ×0,4
+  (`Topography.CreateErosion`). `collision_copy` sem visual; CPU usa a mesma máscara.
+- Spawns: adaptação do sorteio livre do original — um spawn por metade, pelo
+  `rng` da partida (jogador esquerda, CPU direita). Podem ficar a ~114 unidades.
+- Terreno procedural continua como fallback (`start(..., "")` e mapa inválido,
+  com `push_warning` se faltar recurso). Sem `foreground_a.png`, o visual cai
+  no ForegroundA original na mesma geometria (achado da revisão: antes a
+  colisão ficaria invisível). Duas fixtures de `test_runner` passaram
+  a pedir o procedural explicitamente (dependem de x235 e espessura antiga).
+- Fundo: janela 1300×812,5 alinhada à base do `Background.png` original. O fundo
+  HD tem só 1 de 2 blocos (limite de uso do Codex atingido); `game.gd` já usa
+  `background.png` HD automaticamente quando existir.
+
+Validação: `./scripts/check.sh` — **856 checks + 10 partidas no mapa, zero
+falhas** (seeds81–90: 34/17/15/10/16/10/7/6/7/12 tiros). Evidência principal
+de concordância é independente do GDScript: alpha HD (pipeline Python) contra
+células, <1% de amostras de borda divergentes; o check "máscara = alpha" usa a
+mesma transformação de `maps.gd` e não detectaria erro dela. Previsão × tiro
+real concordam no mapa; cavar até y670 elimina por queda. Capturas GPU
+1920×1080 em `docs/map` (arena, tiro, crateras, original×HD). App/ZIP 0.8.0
+reexportados, assinatura estrita válida; PCK isolado carrega o mapa e exclui
+os blocos brutos. Sem commit, remoto ou publicação.
+
+```sh
+python3 scripts/build_map_hd.py
+/Applications/Godot.app/Contents/MacOS/Godot --headless --editor --path . --import
+./scripts/check.sh
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_map.gd
+python3 scripts/build_macos.py
+```
+
+Usuário validou o mapa e pediu revisão/versionamento: commit/tag local v0.8.0.
+Próximo passo: concluir o fundo HD (commit separado). Clima/Thor,
+partícula de chão, outros mapas e câmera rolante pendentes.
+
+## Entrega anterior 0.7.0: identidade Gunbound Recomp e harness
 
 Pedido: revisar configurações/strings, melhoria contínua do harness de qualidade
 e definir a identidade do projeto como "Gunbound Recomp". REQ-01/12; sem mudança

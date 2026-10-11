@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Mapa Miramo Town0.8.0
+
+- [x] Levantar mapas/dados no C# (Map.cs, Topography, LevelScene, RoomMetadata).
+- [x] Usuário escolheu Miramo Town A e arena fixa; MAP_0_8.md, REQ-21, ADR-042/043.
+- [x] GPT Images (Codex image_gen): 3 blocos do foreground, costura/manifest reprodutíveis.
+- [x] Colisão pelo alpha original, visual HD, crateras com anel ×0,4, spawns por metade.
+- [x] Colisão cortada na linha do HUD (y670) após revisão; fallback visual original; test_map 31 checks.
+- [x] 856 checks + 10 partidas no mapa; capturas GPU em docs/map; app/PCK validados.
+- [ ] Fundo HD: 2º bloco aguardando limite do Codex; hoje usa Background.png original.
+- [x] Usuário validou o mapa; commit/tag local v0.8.0.
+- [ ] Pendentes: clima/Thor do preset, partícula de chão, outros mapas, câmera rolante.
+
 ## Identidade e harness0.7.0
 
 - [x] Renomear projeto/config/export/build para "Gunbound Recomp" 0.7.0.

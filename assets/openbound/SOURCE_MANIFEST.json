@@ -115,5 +115,13 @@
   "bigfoot/BlastSS.mp3": {
     "source": "Audio/SFX/Tank/Blast/BigfootSS.mp3",
     "sha256": "807eeab478ec61ff6b355a793091a05d9d9bbca8fe1d22943013a8c94c0289ef"
+  },
+  "maps/miramo_town/ForegroundA.png": {
+    "source": "Graphics/Maps/MiramoTown/ForegroundA.png",
+    "sha256": "f9270de8d1d8785b9ddeb4048a74c4daa91903eb9b9f47fadd898da16c54628e"
+  },
+  "maps/miramo_town/Background.png": {
+    "source": "Graphics/Maps/MiramoTown/Background.png",
+    "sha256": "1f41165f5b68fc12cb3859c77a715b72d315f4e6a21db071e9d8abd045bf650c"
   }
 }

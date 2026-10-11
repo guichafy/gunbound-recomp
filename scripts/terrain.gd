@@ -1,15 +1,95 @@
 extends RefCounted
 ## Pixel mask is the single source of truth for both drawing and collision.
 
+const Maps = preload("res://scripts/maps.gd")
 const SCALE := 2
 const WIDTH := 640
 const HEIGHT := 400
+# Topography.cs: ring beyond the crater darkened by BlastBlackmaskExplosionRadiusColorFactor.
+const BLACKMASK_RADIUS := 3.0
+const BLACKMASK_FACTOR := 0.4
 var cells := PackedByteArray()
 var image: Image
 var texture: ImageTexture
 var revision := 0
+# Empty map_id means the procedural fallback terrain.
+var map_id := ""
+var visual: Image
+var visual_texture: ImageTexture
+var visual_rect := Rect2()
+static var mask_cache := {}
+
+func load_map(id: String, with_visual: bool = true) -> bool:
+	var map: Dictionary = Maps.get_map(id)
+	if map.is_empty():
+		return false
+	if not mask_cache.has(id):
+		var source := texture_image(map.mask)
+		if source == null:
+			return false
+		mask_cache[id] = mask_from_source(source, map)
+	cells = mask_cache[id].duplicate()
+	map_id = id
+	image = null
+	texture = null
+	visual = null
+	visual_texture = null
+	visual_rect = Maps.foreground_rect(map)
+	if with_visual:
+		visual = texture_image(map.foreground_hd)
+		if visual == null:
+			visual = original_visual(map)
+		if visual != null:
+			visual_texture = ImageTexture.create_from_image(visual)
+	revision += 1
+	return true
+
+static func texture_image(path: String) -> Image:
+	if not ResourceLoader.exists(path):
+		push_warning("Map resource missing: " + path)
+		return null
+	var resource: Texture2D = load(path)
+	if resource == null:
+		return null
+	var result: Image = resource.get_image()
+	if result == null:
+		return null
+	if result.is_compressed():
+		result.decompress()
+	result.convert(Image.FORMAT_RGBA8)
+	return result
+
+static func original_visual(map: Dictionary) -> Image:
+	# Fallback when the HD file is missing: never leave collision without a drawing.
+	var source := texture_image(map.mask)
+	if source == null:
+		return null
+	var result := source.get_region(map.crop)
+	var rect := Maps.foreground_rect(map)
+	result.resize(int(rect.size.x * 2.0), int(round(rect.size.y * 2.0)), Image.INTERPOLATE_BILINEAR)
+	return result
+
+static func mask_from_source(source: Image, map: Dictionary) -> PackedByteArray:
+	# Each cell samples the original foreground at its centre: alpha > 0 is solid.
+	var mask := PackedByteArray()
+	mask.resize(WIDTH * HEIGHT)
+	mask.fill(0)
+	var crop: Rect2i = map.crop
+	var last_row := mini(HEIGHT, int(float(map.floor) / SCALE))
+	for y in range(last_row):
+		var source_y := int(floor(Maps.to_source(map, Vector2(0, y * SCALE + SCALE * 0.5)).y))
+		if source_y < crop.position.y or source_y >= crop.end.y:
+			continue
+		for x in range(WIDTH):
+			var source_x := int(floor(Maps.to_source(map, Vector2(x * SCALE + SCALE * 0.5, 0)).x))
+			if source_x >= crop.position.x and source_x < crop.end.x and source.get_pixel(source_x, source_y).a > 0.0:
+				mask[y * WIDTH + x] = 1
+	return mask
 
 func generate() -> void:
+	map_id = ""
+	visual = null
+	visual_texture = null
 	cells.resize(WIDTH * HEIGHT)
 	cells.fill(0)
 	image = Image.create(WIDTH, HEIGHT, false, Image.FORMAT_RGBA8)
@@ -98,6 +178,7 @@ func collision_copy():
 	var copy = get_script().new()
 	copy.cells = cells.duplicate()
 	copy.revision = revision
+	copy.map_id = map_id
 	return copy
 
 func carve(center: Vector2, radius: float) -> void:
@@ -112,6 +193,8 @@ func carve(center: Vector2, radius: float) -> void:
 				if image != null:
 					image.set_pixel(x, y, Color.TRANSPARENT)
 	revision += 1
+	if visual != null:
+		carve_visual(center, radius)
 	if image == null:
 		return
 	# Dress the new crater lip without changing the collision mask.
@@ -120,3 +203,29 @@ func carve(center: Vector2, radius: float) -> void:
 			if cells[y * WIDTH + x] != 0 and cells[(y - 1) * WIDTH + x] == 0:
 				image.set_pixel(x, y, Color("d8b28b"))
 	texture.update(image)
+
+func carve_visual(center: Vector2, radius: float) -> void:
+	# Same erosion in HD pixels: open the crater, darken the surrounding ring.
+	var density := float(visual.get_width()) / visual_rect.size.x
+	var local := (center - visual_rect.position) * density
+	var hole := radius * density
+	var ring := (radius + BLACKMASK_RADIUS) * density
+	var left := maxi(0, int(local.x - ring))
+	var right := mini(visual.get_width() - 1, int(local.x + ring) + 1)
+	var top := maxi(0, int(local.y - ring))
+	var bottom := mini(visual.get_height() - 1, int(local.y + ring) + 1)
+	if left > right or top > bottom:
+		return
+	for y in range(top, bottom + 1):
+		for x in range(left, right + 1):
+			var distance := Vector2(x + 0.5, y + 0.5).distance_squared_to(local)
+			if distance > ring * ring:
+				continue
+			var color := visual.get_pixel(x, y)
+			if color.a <= 0.0:
+				continue
+			if distance <= hole * hole:
+				visual.set_pixel(x, y, Color(0, 0, 0, 0))
+			else:
+				visual.set_pixel(x, y, Color(color.r * BLACKMASK_FACTOR, color.g * BLACKMASK_FACTOR, color.b * BLACKMASK_FACTOR, color.a))
+	visual_texture.update(visual)

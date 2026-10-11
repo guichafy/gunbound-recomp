@@ -58,3 +58,11 @@ oculta, resto do mestre preservado. Registro271/153/703/977 contém a figura sem
 corte, mantendo padding esquerdo da fonte anterior para preservar encaixe.
 Prompt/origem em SIDE_PILOT_PROMPT.md/GENERATION.json. PNGs anteriores intactos.
 Prévia montada em docs/occlusion.
+
+Mapa0.8 (Miramo Town A): `maps/miramo_town/source/` guarda os blocos GPT Images
+brutos (3 do foreground 1536×1024, fundo 1024×1536), intactos e com `.gdignore`
+(não importados nem exportados). `scripts/build_map_hd.py` gera
+`foreground_a.png` 2560×661 (2× arena) com alpha = máscara original ampliada e,
+quando os dois blocos existirem, `background.png`. `manifest.json` registra
+SHA-256 de blocos, originais e saídas. A colisão vem sempre do ForegroundA
+original; o HD é só visual. Prompts em MAP_PROMPTS.md.

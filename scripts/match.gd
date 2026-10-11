@@ -2,6 +2,7 @@ extends RefCounted
 ## Owns the entire combat lifecycle. Presentation consumes events, never decides damage.
 
 const Terrain = preload("res://scripts/terrain.gd")
+const Maps = preload("res://scripts/maps.gd")
 const Combat = preload("res://scripts/combat.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 # Stable mobile IDs are independent of menu slots. Removed ID0 is not playable.
@@ -37,22 +38,32 @@ var shot_actor := 0
 var resolve_wait := 0.0
 var flight_elapsed := 0.0
 var last_shots: Array = [{}, {}]
+var map_id := ""
 
 static func normalize_vehicle(vehicle: int) -> int:
 	return vehicle if VEHICLES.has(vehicle) else 2
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
 	else:
 		rng.seed = seed_value
 	terrain = Terrain.new()
-	terrain.generate()
+	# An empty or unavailable map falls back to the procedural arena.
+	var spawns := [235.0, 1045.0]
+	map_id = map if not map.is_empty() and terrain.load_map(map) else ""
+	if map_id.is_empty():
+		terrain.generate()
+	else:
+		# RoomMetadata.cs draws each spawn from the original list; 1×1 keeps sides.
+		for index in range(2):
+			var options: Array = Maps.spawn_x(Maps.get_map(map_id), index == 0)
+			spawns[index] = options[rng.randi_range(0, options.size() - 1)]
 	actors.clear()
 	for index in range(2):
 		var kind := vehicle if index == 0 else 3 - vehicle
-		var x := 235.0 if index == 0 else 1045.0
+		var x: float = spawns[index]
 		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, terrain.surface_at(x) - 24.0), "facing": 1 if index == 0 else -1, "shield": 220 if kind == 1 else 0, "max_shield": 220 if kind == 1 else 0, "ready": 0.0, "turns": 0, "special_used": false})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = 0
