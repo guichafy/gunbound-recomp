@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.5.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com sprites originais.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
 
 ## Jogar
 
@@ -92,4 +92,19 @@ Multiplayer online, salas privadas, busca automática, ranking, reconexão e 2×
 
 ## Limitações conhecidas
 
-Um mapa e três veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Escaravelho usa animações por código; Bigfoot e Mage usam atlas originais com piloto por quadro. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot/Mage e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; demais mobiles e regras completas Gunbound continuam pendentes.
+Um mapa e três veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Escaravelho usa animações por código; Bigfoot e Mage usam derivados HD por quadros chave, com duração original e piloto alinhado. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot/Mage e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; demais mobiles e regras completas Gunbound continuam pendentes.
+
+## Assets HD 0.6
+
+Bigfoot, Mage, piloto, tiros e explosões redesenhados com GPT Images integrado.
+[Amostra Full HD](docs/hd/bigfoot-menu.png), [salva SS](docs/hd/bigfoot-ss.png),
+[MageEMP](docs/hd/mage-ss-impact.png). Originais preservados; menos quadros chave
+por ciclo, duração/estados e combate inalterados. Plano/limites em
+[HD_ASSETS_0_6.md](docs/sdd/HD_ASSETS_0_6.md); prompts em
+[GENERATION.json](assets/hd/GENERATION.json).439checks+10partidas, zero falhas.
+
+```sh
+python3 scripts/catalog_hd_assets.py
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_hd_assets.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_hd_assets.gd
+```

@@ -1,5 +1,15 @@
 # Imagens originais do protótipo
 
+## Derivados em alta definição 0.6
+
+Bigfoot, Mage, piloto, projéteis e explosões usam versões redesenhadas pelo
+**GPT Images integrado**, preservando a aparência clássica escolhida pelo usuário.
+Fontes em `assets/hd`, prompts completos em `GENERATION.json`, dimensões/hashes/
+recortes em `atlas_regions.json`. PNGs originais permanecem intactos e servem
+como referência geométrica/fallback; sons não mudaram. Atlas HD têm menos
+quadros distintos, conservando estados e duração. Não alegar restauração exata.
+Capturas reais em1920×1080 em `docs/hd`; detalhes em `docs/sdd/HD_ASSETS_0_6.md`.
+
 ## Atualização de arte/áudio 0.4–0.5
 
 Bigfoot e Mage usam atlas/piloto/projéteis originais do pacote recebido. Ambos

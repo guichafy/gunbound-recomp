@@ -133,3 +133,26 @@ de limites do slider bloqueia sinais para o thumb antigo não sobrescrever mira.
 BigfootSprite desenha Fx originais e áudio de impacto consultando veículo de
 origem do evento, mesmo após mudança de turno. Escaravelho e Mage mantêm seus
 perfis e formatos anteriores; fonte/adaptações em BIGFOOT_ATTACKS_0_5.
+
+## Derivados HD 0.6
+
+`hd_sheet.gd` renderiza derivados GPT Images com filtragem linear. Metadados de
+`assets/hd/atlas_regions.json` guardam grade/dimensões e recortes sem ruído de
+alpha≤8/255. Leitura usa números normalizados em int: JSON do Godot retorna
+floats, cuja igualdade de Array não corresponde aos arrays de inteiros.
+Dimensões/grade devem coincidir com a textura; sem catálogo válido, usa recorte
+por alpha da engine. Sem textura/quadro, o consumidor renderiza original.
+
+`mobile_sprite.gd.hd_frame` converte os índices originais para4 quadros por
+estado. Aliases BigfootSS-carga/recuoT2 e Mage-recuos preservam a organização
+existente; baixa saúde escurece o derivado. O estado/FPS/tempo continua vindo do
+mesmo frame_index/BattleArt. A área opaca do quadro original determina destino,
+preservando pivô/chão e offsets do piloto, com metadados/imagens cacheados.
+Menus usam a imagem maior heroes; arena usa atlas. Tiros/Fx mantêm contagem,
+rotação, posição real e duração antiga, selecionando quadros HD proporcionais.
+Modelo de combate, terreno e perfil não foram modificados.
+
+`capture_hd_assets.gd` renderiza framebuffer1920×1080 com cena original1280×800
+escalada uniformemente1,35 e margem96px de cada lado. O stretch de Window
+excluía barras laterais e retornava1728×1080; a captura corrige somente o setup
+de QA, sem alterar resolução lógica ou exportação do jogo. Perfis são isolados.

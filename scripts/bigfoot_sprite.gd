@@ -23,9 +23,14 @@ var bullets: Array[Texture2D] = []
 var effects: Array[Texture2D] = []
 var shoot_sounds: Array[AudioStream] = []
 var blast_sounds: Array[AudioStream] = []
+var hd_shots
+var hd_effects
 
 func _init() -> void:
+	hd_rows.assign(["idle", "moving", "charging_0", "charging_1", "recoil_0", "recoil_2", "hurt", "destroyed"])
 	configure("res://assets/openbound/bigfoot", CELL, PIVOT, SEQUENCES, 49.0, 119.0)
+	hd_shots = HDSheet.new("res://assets/hd/shots.png", 4, 6)
+	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)
 	for number in range(1, 4):
 		bullets.append(pixel_texture(load("res://assets/openbound/bigfoot/Bullet%d.png" % number)))
 		effects.append(pixel_texture(load("res://assets/openbound/bigfoot/Flame%d.png" % number)))
@@ -39,7 +44,10 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int) -> void:
 	var frame := int(projectile.age * 20.0) % count
 	# Canonical bullet sprites also face left; align them with actual velocity.
 	view.draw_set_transform(projectile.pos, Vector2(projectile.velocity).angle() + PI)
-	view.draw_texture_rect_region(bullets[weapon], Rect2(-cell * 0.5, cell), Rect2(Vector2(frame * cell.x, 0), cell))
+	var target := Rect2(-cell * 0.5, cell)
+	var source := Rect2(Vector2(frame * cell.x, 0), cell)
+	if not hd_shots.draw_patch(view, weapon, roundi(frame * 3.0 / (count - 1)), bullets[weapon], source, target):
+		view.draw_texture_rect_region(bullets[weapon], target, source)
 	view.draw_set_transform(Vector2.ZERO)
 
 func effect_cell(weapon: int) -> Vector2:
@@ -58,5 +66,8 @@ func draw_effect(view: Node2D, effect: Dictionary) -> void:
 		return
 	var columns := int(effects[weapon].get_width() / size.x)
 	view.draw_set_transform(effect.pos)
-	view.draw_texture_rect_region(effects[weapon], Rect2(-size / 2, size), Rect2(Vector2(frame % columns, int(frame / columns)) * size, size))
+	var target := Rect2(-size / 2, size)
+	var source := Rect2(Vector2(frame % columns, int(frame / columns)) * size, size)
+	if not hd_effects.draw_patch(view, weapon, roundi(frame * 5.0 / maxi(1, count - 1)), effects[weapon], source, target):
+		view.draw_texture_rect_region(effects[weapon], target, source)
 	view.draw_set_transform(Vector2.ZERO)

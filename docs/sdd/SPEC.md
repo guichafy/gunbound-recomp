@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.5.0
+# Especificação — protótipo 0.6.0
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o
@@ -91,7 +91,17 @@ na CPU e voo real. Bigfoot permanece pequeno. Dados/adaptações e plano em
 [BIGFOOT_ATTACKS_0_5.md](BIGFOOT_ATTACKS_0_5.md). Substitui as armas genéricas do
 Bigfoot de0.3/0.4. Resistências, itens, clima/Thor e regenHP continuam fora.
 
-## Fora da entrega
+## Assets HD 0.6
+
+REQ-20 — melhorar a definição dos assets integrados com GPT Images, mantendo a
+aparência clássica confirmada pelo usuário. Bigfoot, Mage, piloto, tiros e
+explosões recebem derivados separados dos originais, com transparência e
+recortes alinhados ao footprint antigo. Apresentação verificada em1920×1080.
+Arena60/menu180, combate e sons preservados. Novos atlas usam quadros chave,
+com menos imagens distintas que as sequências originais; duração e estados
+permanecem. REQ-19/12 relacionados. Plano/limites em [HD_ASSETS_0_6.md](HD_ASSETS_0_6.md).
+
+## Fora da entrega atual
 
 Multiplayer, salas privadas, busca de adversários, ranking, contas, reconexão,
 2×2 e demais formatos, campanha, monetização e distribuição pública.

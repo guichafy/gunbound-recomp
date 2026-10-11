@@ -1,5 +1,14 @@
 # Entregas e próximos trabalhos
 
+## Assets HD 0.6
+
+- [x] Confirmar aparência clássica com detalhes mais nítidos.
+- [x] Gerar sete PNGs GPT Images: mobiles, piloto, tiros/Fx, heroes eEMP.
+- [x] Integrar recortes/alinhamento/fallback; conservar tamanho e combate.
+- [x] Verificar439checks,10partidas e exportação independente.
+- [x] Reexportar aplicativo0.6.0 e verificar assinatura profunda/estrita.
+- [ ] Usuário avaliar arte/animações HD e protótipo funcional.
+
 ## Baseline implementado
 
 | Tarefa | Status | Requisitos | Evidência |

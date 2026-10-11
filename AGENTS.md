@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.5.0 em Godot 4.7.2 + GDScript. Escopo:
+Protótipo 0.6.0 em Godot 4.7.2 + GDScript. Escopo:
 desktop macOS, treino offline 1×1 contra CPU, arte do protótipo + Bigfoot/Mage originais
 e progresso local.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
@@ -58,3 +58,13 @@ Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd
 
 Não há remoto Git configurado no baseline. Não publique nem envie mudanças
 a um remoto sem solicitação do usuário.
+
+## Arte HD 0.6
+
+Derivados GPT Images em assets/hd; ver docs/sdd/HD_ASSETS_0_6.md. Aparência
+clássica confirmada. Originais e sons preservados;32 quadros chave por mobile,
+4 fases por tiro/6 por explosão, duração/estados antigos. Menu usa heroes.
+Recortes metadata alpha>8/255 em atlas_regions.json; regenerar com
+scripts/catalog_hd_assets.py quando substituir PNG. Preset deve incluir esse
+JSON. Não apagar originais: orientam geometria e fallback. Modelo inalterado.
+Teste tests/test_hd_assets.gd e captura GPU tests/capture_hd_assets.gd (1920×1080).

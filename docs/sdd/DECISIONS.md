@@ -78,3 +78,23 @@ pendente aparece, colide ou permite encerrar o voo prematuramente.
 ADR-028 — adotada: T2 usa efeito Armor/Flame2 porque essa é a chamada executada
 no C#; não o método Bigfoot2 não utilizado. SS imagem tem20 quadros reais; não
 ler os10 quadros excedentes solicitados na referência. Proveniência registrada.
+
+## Assets HD 0.6
+
+ADR-029 — adotada: GPT Images integrado conforme solicitação explícita, aparência
+clássica confirmada, derivados separados em assets/hd. Substitui somente a
+apresentação padrão dos originais de ADR-020/023/028; fontes, áudio, offsets e
+combate continuam preservados. Escopo inclui apenas assets já usados, não todos
+os628 PNGs do pacote. Não ampliar mobiles ou gameplay por esta solicitação.
+
+ADR-030 — adotada: atlas de quadros chave remasterizados mantêm duração/estados
+antigos, com seleção proporcional. Há menos quadros distintos: custo explícito
+da geração, não prometer recuperação pixel a pixel das centenas de quadros.
+Imagens maiores de seleção evitam ampliar células pequenas do atlas da arena.
+Originais disponíveis como fallback automático se o derivado estiver ausente.
+
+ADR-031 — adotada: catálogo de recortes de alpha>8/255 remove influência de ruído
+quase invisível no enquadramento. Apenas metadados de recorte; PNGs gerados e
+originais permanecem intactos. Destino acompanha alpha footprint original para
+manter o contato com terreno e geometria existente. SHA256/dimensões/prompts
+registrados; Full HD validado no framebuffer, não inferido pelo prompt.

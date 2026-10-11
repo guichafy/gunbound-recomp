@@ -1,6 +1,55 @@
-# Hand-off — Brisa de Aço 0.5.0
+# Hand-off — Brisa de Aço 0.6.0
 
-## Entrega atual 0.5.0: ataques Bigfoot
+## Entrega atual 0.6.0: assets HD
+
+Pedido: melhorar Bigfoot, tiros e assets importados com GPT Images. Preferência
+confirmada: aparência clássica com detalhes mais nítidos. REQ-19/12/20; plano
+em `HD_ASSETS_0_6.md`. Sete PNGs separados em `assets/hd`: Bigfoot/Mage4×8,
+piloto4×2, tiros4×6, efeitos6×6, heroes2×1 eEMP1254×1254. Seleção usa heroes;
+arena60/menu180 preservados. Originais PNG/MP3/JSON comparados byte a byte com
+Git, nenhum alterado. Sons, combate, terreno e progresso permanecem os atuais.
+
+`hd_sheet.gd` alinha a figura à área visível do quadro original, filtro linear.
+`mobile_sprite.gd.hd_frame` converte estado antigo a4 quadros chave, preservando
+duração/índices originais; saúde baixa modula cor. Tiros têm4 fases/Fx6; MageSS
+usa fonte maior girando com o efeito. Menos imagens distintas por animação:
+não anunciar recuperação exata dos419 quadros ou equivalência artística total.
+Ausência de derivado/quadro usa original automaticamente.
+
+Prompts/ferramenta em `assets/hd/GENERATION.json`; dimensões/hashes/recortes em
+`atlas_regions.json`. Alpha1/255 fora da figura deformava enquadramento:
+catálogo considera alpha>8/255 somente para recorte, sem editar PNGs. Regenerar
+por `scripts/catalog_hd_assets.py` (Python+Pillow) depois de trocar derivado.
+JSON normaliza números em int; preset inclui explicitamente esse arquivo.
+
+Validação: **439 checks**, zero falhas (251 anteriores+188 HD). Dez partidas
+naturais seeds81–90 mantiveram17/10/8/7/10/8/15/9/11/20 tiros, zero falhas;
+modelos de combate sem diff. RED→GREEN para suporte HD, ruído, heroes eEMP.
+CenaMage15/Bigfoot14 repetidas após EMP final. Perfis isolados nos testes.
+App/ZIP0.6.0 Universal reexportados, assinatura profunda/estrita válida e
+runtime nativo sem erros. PCK sozinho em projeto vazio validou derivados,
+JSON de recortes e salvas4/6/8, zero falhas.
+
+16 capturas GPU em `docs/hd`, framebuffer1920×1080, cena1280×800 escalada1,35
+com margem96px. Resolução lógica/exportação não mudaram. Script exige efeito
+do mobile/arma antes de salvar impacto; primeiras capturas MageT1/SS tinham
+chegado à CPU sem explosão e foram rejeitadas. Mage usa força65 na captura
+natural corrigida. Não houve teste manual completo; usuário avalia arte/fluidez.
+Revisão independente aprovou a implementação e os impactos corrigidos de Mage
+T1/SS, sem achados pendentes. Commit/tag local v0.6.0.
+
+```sh
+python3 scripts/catalog_hd_assets.py
+/Applications/Godot.app/Contents/MacOS/Godot --headless --editor --path . --import
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_hd_assets.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_hd_assets.gd
+python3 scripts/build_macos.py
+```
+
+Versionamento local; sem remoto, push ou publicação. Próximo passo: usuário
+validar aparência, animações e uso funcional. Seções abaixo são histórico.
+
+## Entrega anterior 0.5.0: ataques Bigfoot
 
 Pedido atual: identificar no C# e assets os tiros T1/T2/SS e reproduzir as
 salvas próprias do Bigfoot. Requisitos03–09/19; plano e dados exatos em

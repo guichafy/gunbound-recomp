@@ -75,3 +75,14 @@ O controle de mouse pelo conector Computador não funcionou nesta sessão (janel
 ## Fora desta validação
 
 Outras plataformas, multiplayer, ranking, reconexão, mobile, distribuição pública e notarização Apple. A primeira entrega é o protótipo offline para este Mac.
+
+## Validação visual HD 0.6
+
+1. Abrir o aplicativo0.6.0; selecionar Bigfoot e Mage, conferir contornos/piloto.
+2. Iniciar treino: veículos continuam pequenos e apoiados no terreno; mover e
+   virar, carregar e soltar tiros1/2/SS, verificar cores/efeitos e recuo.
+3. Conferir ausência de blocos opacos, cortes entre quadros ou salto no chão.
+4. Conferir pausa, dano, morte e revanche; estados mantêm duração, mas a arte
+   HD tem menos imagens distintas. Avaliar se a fluidez e estilo agradam.
+5. Comparar docs/hd/original-bigfoot-menu.png com bigfoot-menu.png; ambas são
+   capturas1920×1080. Campo/balística/HUD não foram redesenhados nesta entrega.
