@@ -3,8 +3,9 @@ extends RefCounted
 
 const Maps = preload("res://scripts/maps.gd")
 const SCALE := 2
-const WIDTH := 640
-const HEIGHT := 400
+# Grid size in cells: procedural arena 640×400; a map uses its native foreground size.
+var WIDTH := 640
+var HEIGHT := 400
 # Topography.cs: ring beyond the crater darkened by BlastBlackmaskExplosionRadiusColorFactor.
 const BLACKMASK_RADIUS := 3.0
 const BLACKMASK_FACTOR := 0.4
@@ -28,7 +29,10 @@ func load_map(id: String, with_visual: bool = true) -> bool:
 		if source == null:
 			return false
 		mask_cache[id] = mask_from_source(source, map)
-	cells = mask_cache[id].duplicate()
+	var cached: Dictionary = mask_cache[id]
+	WIDTH = int(cached.width)
+	HEIGHT = int(cached.height)
+	cells = PackedByteArray(cached.cells).duplicate()
 	map_id = id
 	image = null
 	texture = null
@@ -64,29 +68,25 @@ static func original_visual(map: Dictionary) -> Image:
 	var source := texture_image(map.mask)
 	if source == null:
 		return null
-	var result := source.get_region(map.crop)
-	var rect := Maps.foreground_rect(map)
-	result.resize(int(rect.size.x * 2.0), int(round(rect.size.y * 2.0)), Image.INTERPOLATE_BILINEAR)
-	return result
+	return source.get_region(map.crop)
 
-static func mask_from_source(source: Image, map: Dictionary) -> PackedByteArray:
-	# Each cell samples the original foreground at its centre: alpha > 0 is solid.
+static func mask_from_source(source: Image, map: Dictionary) -> Dictionary:
+	# World is the native foreground; each cell samples its centre: alpha > 0 is solid.
+	var width := source.get_width() / SCALE
+	var height := source.get_height() / SCALE
 	var mask := PackedByteArray()
-	mask.resize(WIDTH * HEIGHT)
+	mask.resize(width * height)
 	mask.fill(0)
 	var crop: Rect2i = map.crop
-	var last_row := mini(HEIGHT, int(float(map.floor) / SCALE))
-	for y in range(last_row):
-		var source_y := int(floor(Maps.to_source(map, Vector2(0, y * SCALE + SCALE * 0.5)).y))
-		if source_y < crop.position.y or source_y >= crop.end.y:
-			continue
-		for x in range(WIDTH):
-			var source_x := int(floor(Maps.to_source(map, Vector2(x * SCALE + SCALE * 0.5, 0)).x))
-			if source_x >= crop.position.x and source_x < crop.end.x and source.get_pixel(source_x, source_y).a > 0.0:
-				mask[y * WIDTH + x] = 1
-	return mask
+	for y in range(crop.position.y / SCALE, mini(height, (crop.end.y + SCALE - 1) / SCALE)):
+		for x in range(crop.position.x / SCALE, mini(width, (crop.end.x + SCALE - 1) / SCALE)):
+			if source.get_pixel(x * SCALE + 1, y * SCALE + 1).a > 0.0:
+				mask[y * width + x] = 1
+	return {"cells": mask, "width": width, "height": height}
 
 func generate() -> void:
+	WIDTH = 640
+	HEIGHT = 400
 	map_id = ""
 	visual = null
 	visual_texture = null
@@ -119,6 +119,16 @@ func ground_color(x: int, y: int, top: int) -> Color:
 		base = base.lightened(0.16)
 	return base.lightened(grain * 0.045)
 
+func world_size() -> Vector2:
+	return Vector2(WIDTH * SCALE, HEIGHT * SCALE)
+
+func void_y() -> float:
+	# surface_at sentinel: no support below this column.
+	return float(HEIGHT * SCALE) + 50.0
+
+func is_void(floor_y: float) -> bool:
+	return floor_y >= float(HEIGHT * SCALE)
+
 func is_solid(point: Vector2) -> bool:
 	var x := int(floor(point.x / SCALE))
 	var y := int(floor(point.y / SCALE))
@@ -129,11 +139,11 @@ func is_solid(point: Vector2) -> bool:
 func surface_at(world_x: float, from_y: float = 0.0) -> float:
 	var x := int(floor(world_x / SCALE))
 	if x < 0 or x >= WIDTH:
-		return 850.0
+		return void_y()
 	for y in range(maxi(0, int(from_y / SCALE)), HEIGHT):
 		if cells[y * WIDTH + x] != 0:
 			return float(y * SCALE)
-	return 850.0
+	return void_y()
 
 func raycast(from: Vector2, to: Vector2) -> Dictionary:
 	# Traverse every crossed mask cell (DDA), including short corner intersections.
@@ -176,19 +186,24 @@ func raycast(from: Vector2, to: Vector2) -> Dictionary:
 func collision_copy():
 	# Prediction owns its mask; no image/GPU resources or live state are shared.
 	var copy = get_script().new()
+	copy.WIDTH = WIDTH
+	copy.HEIGHT = HEIGHT
 	copy.cells = cells.duplicate()
 	copy.revision = revision
 	copy.map_id = map_id
 	return copy
 
-func carve(center: Vector2, radius: float) -> void:
+func carve(center: Vector2, radius: float) -> int:
 	var left := maxi(0, int((center.x - radius) / SCALE) - 1)
 	var right := mini(WIDTH - 1, int((center.x + radius) / SCALE) + 1)
 	var top := maxi(0, int((center.y - radius) / SCALE) - 1)
 	var bottom := mini(HEIGHT - 1, int((center.y + radius) / SCALE) + 1)
+	# Removed cells feed the ground particles (Projectile.cs: removed pixels / 32).
+	var removed := 0
 	for y in range(top, bottom + 1):
 		for x in range(left, right + 1):
 			if Vector2(x * SCALE, y * SCALE).distance_squared_to(center) <= radius * radius:
+				removed += cells[y * WIDTH + x]
 				cells[y * WIDTH + x] = 0
 				if image != null:
 					image.set_pixel(x, y, Color.TRANSPARENT)
@@ -196,13 +211,14 @@ func carve(center: Vector2, radius: float) -> void:
 	if visual != null:
 		carve_visual(center, radius)
 	if image == null:
-		return
+		return removed
 	# Dress the new crater lip without changing the collision mask.
 	for x in range(left, right + 1):
 		for y in range(maxi(1, top - 3), mini(HEIGHT - 1, bottom + 4)):
 			if cells[y * WIDTH + x] != 0 and cells[(y - 1) * WIDTH + x] == 0:
 				image.set_pixel(x, y, Color("d8b28b"))
 	texture.update(image)
+	return removed
 
 func carve_visual(center: Vector2, radius: float) -> void:
 	# Same erosion in HD pixels: open the crater, darken the surrounding ring.

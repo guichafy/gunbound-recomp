@@ -23,6 +23,13 @@ var overlay: Control
 var overlay_kind := ""
 var background: Texture2D
 var map_backgrounds := {}
+# Camera: top-left world point of the view above the HUD (Camera.cs tracking 1/25).
+const VIEW_SIZE := Vector2(1280, 670)
+const CAMERA_DAMPENING := 25.0
+var camera := Vector2.ZERO
+var camera_manual := false
+var dragging := false
+var last_impact := Vector2.INF
 var nickname_input: LineEdit
 var vehicle := 2
 var cpu_difficulty := 1
@@ -168,6 +175,10 @@ func start_match() -> void:
 	screen = "match"
 	model.start(vehicle, cpu_difficulty)
 	art.reset(model.actors)
+	camera_manual = false
+	dragging = false
+	last_impact = Vector2.INF
+	camera = clamp_camera(camera_goal())
 	match_id = str(Time.get_unix_time_from_system()) + ":" + str(Time.get_ticks_usec())
 	reward = 0
 	result_wait = -1.0
@@ -355,6 +366,7 @@ func _process(delta: float) -> void:
 		floating[i].age += frame_delta
 		if floating[i].age > 1.5:
 			floating.remove_at(i)
+	update_camera(frame_delta)
 	shake = maxf(0.0, shake - frame_delta * 24.0)
 	banner_time = maxf(0.0, banner_time - frame_delta)
 	if result_wait >= 0.0:
@@ -368,6 +380,8 @@ func consume_events() -> void:
 		art.react(event)
 		match event.type:
 			"turn":
+				camera_manual = false
+				last_impact = Vector2.INF
 				charging = false
 				cpu_plan.clear()
 				cpu_wait = 1.1
@@ -377,12 +391,14 @@ func consume_events() -> void:
 				if weapon == 2 and not model.can_use_special(0):
 					weapon = 0
 			"fire":
+				camera_manual = false
 				if model.actors[event.actor].vehicle != 2:
 					sound.play("fire", mage.shoot_sounds[event.weapon])
 			"projectile_launch":
 				if event.vehicle == 2:
 					sound.play("fire", bigfoot.shoot_sounds[event.weapon])
 			"explosion":
+				last_impact = event.position
 				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": event.get("vehicle", 2), "age": 0.0})
 				shake = 7.0
 				var original: AudioStream = null
@@ -394,7 +410,7 @@ func consume_events() -> void:
 			"shield_damage":
 				floating.append({"pos": event.position + Vector2(0, -22), "text": "−%d ESC" % event.amount, "age": 0.0, "color": Color("94baff")})
 			"fall":
-				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, 560), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
+				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, minf(float(model.actors[event.actor].pos.y), model.terrain.world_size().y) - 80.0), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
 			"finished":
 				charging = false
 				reward = profile.award(match_id, model.winner == 0, model.winner == -1)
@@ -408,17 +424,20 @@ func update_hud() -> void:
 	queue_panel.position = Vector2(16, 544)
 	for index in range(2):
 		var actor: Dictionary = model.actors[index]
-		if actor.hp > 0 and Rect2(16, 544, 236, 114).intersects(Rect2(actor.pos + Vector2(-90, 38), Vector2(180, 66))):
+		# Labels follow the actor on screen; hidden when the camera leaves it.
+		var screen_pos: Vector2 = Vector2(actor.pos) - camera
+		var on_screen: bool = actor.hp > 0 and Rect2(Vector2(-100, -100), VIEW_SIZE + Vector2(200, 100)).has_point(screen_pos)
+		if on_screen and Rect2(16, 544, 236, 114).intersects(Rect2(screen_pos + Vector2(-90, 38), Vector2(180, 66))):
 			queue_panel.position = Vector2(16, 74)
 		health_bars[index].value = actor.hp
-		health_bars[index].visible = actor.hp > 0
-		health_bars[index].position = actor.pos + Vector2(-48, 40)
-		hp_labels[index].visible = actor.hp > 0
-		hp_labels[index].position = actor.pos + Vector2(-87, 54 if actor.vehicle == 1 else 49)
-		shield_bars[index].position = actor.pos + Vector2(-48, 49)
+		health_bars[index].visible = on_screen
+		health_bars[index].position = screen_pos + Vector2(-48, 40)
+		hp_labels[index].visible = on_screen
+		hp_labels[index].position = screen_pos + Vector2(-87, 54 if actor.vehicle == 1 else 49)
+		shield_bars[index].position = screen_pos + Vector2(-48, 49)
 		shield_bars[index].max_value = maxf(1, actor.max_shield)
 		shield_bars[index].value = actor.shield
-		shield_bars[index].visible = actor.vehicle == 1 and actor.hp > 0
+		shield_bars[index].visible = actor.vehicle == 1 and on_screen
 		hp_labels[index].text = "%d / %d" % [actor.hp, actor.max_hp]
 		if actor.vehicle == 1:
 			hp_labels[index].text += " · %d ESC" % actor.shield
@@ -577,11 +596,11 @@ func show_result() -> void:
 func _draw() -> void:
 	if background == null:
 		return
-	var backdrop: Array = map_background(model.map_id) if screen != "menu" and model.terrain != null else []
+	var backdrop: Dictionary = map_background(model.map_id) if screen != "menu" and model.terrain != null else {}
 	if backdrop.is_empty():
 		draw_texture_rect(background, Rect2(0, 0, 1280, 800), false)
 	else:
-		draw_texture_rect_region(backdrop[0], Rect2(0, 0, 1280, 800), backdrop[1])
+		draw_texture_rect_region(backdrop.texture, Rect2(0, 0, 1280, 800), background_region(backdrop))
 	if screen == "menu":
 		draw_rect(Rect2(0, 0, 750, 800), Color(0.035, 0.13, 0.17, 0.30))
 		draw_circle(Vector2(342, 617), 157.0, Color(0.93, 0.96, 0.87, 0.14))
@@ -590,7 +609,7 @@ func _draw() -> void:
 		return
 	if model.terrain == null:
 		return
-	var offset := Vector2(sin(elapsed * 81.0), cos(elapsed * 74.0)) * shake
+	var offset := (Vector2(sin(elapsed * 81.0), cos(elapsed * 74.0)) * shake - camera).round()
 	draw_set_transform(offset)
 	if not model.terrain.map_id.is_empty():
 		# Original map: HD foreground carries its own crater and blackmask pixels.
@@ -629,6 +648,7 @@ func _draw() -> void:
 		draw_string_outline(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32, 5, Color(0.05, 0.12, 0.18, 1.0 - float(item.age) / 1.5))
 		draw_string(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32, Color(item.color, 1.0 - float(item.age) / 1.5))
 	draw_set_transform(Vector2.ZERO)
+	draw_offscreen_markers()
 	art.draw_compass(self)
 	if banner_time > 0.0 and model.phase == "aim":
 		var width: float = ui.bold.get_string_size(banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17).x + 48.0
@@ -646,23 +666,109 @@ func draw_procedural_terrain() -> void:
 		if x % 3 == 0:
 			draw_circle(Vector2(x - 3, y - 8), 2.2, Color("f4d5b2"))
 
-func map_background(id: String) -> Array:
-	# [texture, source region]: HD stitched file first, original Background.png otherwise.
+func draw_offscreen_markers() -> void:
+	# Edge arrows for actors the camera does not show, so the target is never lost.
+	var view := Rect2(Vector2.ZERO, VIEW_SIZE)
+	for index in range(model.actors.size()):
+		var actor: Dictionary = model.actors[index]
+		var screen_pos: Vector2 = Vector2(actor.pos) - camera
+		if int(actor.hp) <= 0 or view.grow(-10).has_point(screen_pos):
+			continue
+		var edge := Vector2(clampf(screen_pos.x, 34.0, VIEW_SIZE.x - 34.0), clampf(screen_pos.y, 74.0, VIEW_SIZE.y - 30.0))
+		var direction := (screen_pos - edge).normalized()
+		if direction == Vector2.ZERO:
+			continue
+		var tint: Color = Match.VEHICLES[actor.vehicle].color
+		var tip := edge + direction * 16.0
+		var side := direction.orthogonal() * 10.0
+		draw_colored_polygon(PackedVector2Array([tip, edge - side, edge + side]), tint)
+		draw_polyline(PackedVector2Array([tip, edge - side, edge + side, tip]), ui.INK, 2.0, true)
+		var label := "%s · %dm" % ["Você" if index == 0 else "Autômato", int(screen_pos.distance_to(edge) / 10.0)]
+		var width: float = ui.bold.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
+		var text_pos := edge - direction * 22.0 + Vector2(-width * 0.5, 5)
+		text_pos.x = clampf(text_pos.x, 8.0, VIEW_SIZE.x - width - 8.0)
+		draw_string_outline(ui.bold, text_pos, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, 4, ui.INK)
+		draw_string(ui.bold, text_pos, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, tint.lightened(0.25))
+
+func map_background(id: String) -> Dictionary:
+	# HD stitched file first, original Background.png otherwise; source = covered original pixels.
 	if id.is_empty():
-		return []
+		return {}
 	if not map_backgrounds.has(id):
 		var map: Dictionary = Maps.get_map(id)
-		var view: Rect2 = map.background_view
-		var entry := []
+		var entry := {}
 		if ResourceLoader.exists(map.background_hd):
 			var hd: Texture2D = load(map.background_hd)
 			var source: Rect2 = map.background_hd_source
-			var density := float(hd.get_width()) / source.size.x
-			entry = [hd, Rect2((view.position - source.position) * density, view.size * density)]
+			entry = {"texture": hd, "source": source, "density": float(hd.get_width()) / source.size.x}
 		elif ResourceLoader.exists(map.background):
-			entry = [load(map.background), view]
+			var original: Texture2D = load(map.background)
+			entry = {"texture": original, "source": Rect2(Vector2.ZERO, original.get_size()), "density": 1.0}
 		map_backgrounds[id] = entry
 	return map_backgrounds[id]
+
+func background_region(backdrop: Dictionary) -> Rect2:
+	# LevelScene parallax: the 1.6:1 window slides across the background as the
+	# camera crosses its range, limited to the pixels the file covers.
+	var source: Rect2 = backdrop.source
+	var window := Vector2(source.size.x, source.size.x / 1.6)
+	if window.y > source.size.y:
+		window = Vector2(source.size.y * 1.6, source.size.y)
+	var limits := camera_limits()
+	var fraction := Vector2.ZERO
+	if limits.size.x > 0.0:
+		fraction.x = (camera.x - limits.position.x) / limits.size.x
+	if limits.size.y > 0.0:
+		fraction.y = (camera.y - limits.position.y) / limits.size.y
+	var top_left := source.position + (source.size - window) * fraction
+	return Rect2((top_left - source.position) * float(backdrop.density), window * float(backdrop.density))
+
+func camera_limits() -> Rect2:
+	# Position range of the camera; a world that fits the screen stays fixed.
+	if model.terrain == null:
+		return Rect2()
+	var world: Vector2 = model.terrain.world_size()
+	if world.x <= 1280.0 and world.y <= 800.0:
+		return Rect2()
+	var low := Vector2(minf(0.0, (world.x - VIEW_SIZE.x) * 0.5), 0.0)
+	var high := Vector2(maxf(0.0, world.x - VIEW_SIZE.x), maxf(0.0, world.y - VIEW_SIZE.y))
+	if world.x < VIEW_SIZE.x:
+		high.x = low.x
+	return Rect2(low, high - low)
+
+func clamp_camera(value: Vector2) -> Vector2:
+	var limits := camera_limits()
+	return Vector2(clampf(value.x, limits.position.x, limits.end.x), clampf(value.y, limits.position.y, limits.end.y))
+
+func camera_goal() -> Vector2:
+	# Follow the shell in flight, then its impact, otherwise the active actor.
+	var focus: Vector2 = model.actors[model.active].pos + Vector2(0, -60) if not model.actors.is_empty() else Vector2.ZERO
+	if model.phase == "flight":
+		for projectile in model.projectiles:
+			if bool(projectile.launched):
+				focus = projectile.pos
+				break
+	elif model.phase in ["settle", "finished"] and last_impact != Vector2.INF:
+		focus = last_impact
+	return focus - VIEW_SIZE * 0.5
+
+func update_camera(delta: float) -> void:
+	if not camera_manual:
+		var follow := 1.0 - pow(1.0 - 1.0 / CAMERA_DAMPENING, delta * 60.0)
+		camera = camera.lerp(clamp_camera(camera_goal()), follow)
+	camera = clamp_camera(camera)
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Drag the world (mouse or touch) to look around; tracking resumes next turn or shot.
+	if screen != "match" or overlay != null or camera_limits().size == Vector2.ZERO:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		dragging = event.pressed and event.position.y < VIEW_SIZE.y
+	elif event is InputEventScreenTouch:
+		dragging = event.pressed and event.position.y < VIEW_SIZE.y
+	elif (event is InputEventMouseMotion or event is InputEventScreenDrag) and dragging:
+		camera_manual = true
+		camera = clamp_camera(camera - event.relative)
 
 func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, _scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
 	if kind == 1:

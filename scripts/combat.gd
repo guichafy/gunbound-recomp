@@ -37,6 +37,11 @@ static func trace_segment(from: Vector2, to: Vector2, terrain, actors: Array, ig
 			hit = {"position": from + direction * fraction, "actor": index}
 	return hit
 
+static func out_of_bounds(position: Vector2, terrain) -> bool:
+	# Shells may fly above the world; they leave by the sides or below it.
+	var size: Vector2 = terrain.world_size()
+	return position.x < -150.0 or position.x > size.x + 150.0 or position.y > size.y + 20.0
+
 static func ignored_shooter(age: float, shooter: int) -> int:
 	return shooter if age < 0.15 else -1
 
@@ -65,6 +70,6 @@ static func predict(origin: Vector2, velocity: Vector2, wind: float, terrain, ac
 		position = next.position
 		speed = next.velocity
 		age += STEP
-		if position.x < -150.0 or position.x > 1430.0 or position.y > 820.0:
+		if out_of_bounds(position, terrain):
 			return {"position": position, "actor": -1, "hit": false}
 	return {"position": position, "actor": -1, "hit": false}

@@ -17,7 +17,7 @@ func launches(model) -> Array:
 	return result
 func fixture():
 	var model = Match.new()
-	model.start(2, 2, 51)
+	model.start(2, 2, 51, "")
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(200, 350)
 	model.actors[1].pos = Vector2(1100, 700)

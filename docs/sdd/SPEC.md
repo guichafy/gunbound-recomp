@@ -160,3 +160,10 @@ com derivados HD por GPT Images e colisão pelo alpha original. Arena fixa
 escurecido como no original. REQ-04/05/08/11/12 relacionados. Terreno
 procedural permanece como fallback. Plano e critérios em MAP_0_8.md. Clima,
 outros mapas, câmera rolante e partícula de chão continuam fora do escopo.
+
+## Câmera, vento, clima e Thor 0.9 — escopo solicitado
+
+REQ-22 câmera rolante 1:1, REQ-23 vento 2D, REQ-24 clima, REQ-25 Thor,
+REQ-26 partícula de chão, conforme WEATHER_CAMERA_0_9.md. Substitui a arena
+fixa de REQ-21 (mapa e colisão original mantidos). Outros mapas fora do escopo
+por decisão do usuário.

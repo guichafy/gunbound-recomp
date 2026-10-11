@@ -19,6 +19,16 @@ func run() -> void:
 	view.scale = Vector2(1.35, 1.35)
 	view.position = Vector2(96, 0)
 	view.set_process(false)
+	# The app viewport clips the 1280×800 world; mask the capture's pillarbox the same way.
+	var bars := CanvasLayer.new()
+	bars.layer = 10
+	root.add_child(bars)
+	for rect in [Rect2(0, 0, 96, 1080), Rect2(1824, 0, 96, 1080)]:
+		var bar := ColorRect.new()
+		bar.color = Color.BLACK
+		bar.position = rect.position
+		bar.size = rect.size
+		bars.add_child(bar)
 	view.sound.muted = true
 	view.profile.nickname = "Piloto"
 	view.show_menu()
@@ -33,19 +43,23 @@ func run() -> void:
 	view.power = 30.0
 	for power in range(30, 80, 2):
 		var landing: Dictionary = Combat.predict(view.model.muzzle(0, 35.0), view.model.shot_velocity(0, 35.0, float(power), 0), view.model.wind, view.model.terrain, view.model.actors, 0)
-		if not landing.is_empty() and Vector2(landing.position).x > 820.0 and Vector2(landing.position).x < 1150.0 and Vector2(landing.position).y < 760.0:
+		if bool(landing.get("hit", false)) and absf(Vector2(landing.position).x - view.model.actors[1].pos.x) < 260.0:
 			view.power = float(power)
 			break
 	view.update_hud()
+	for frame in range(30):
+		view._process(0.05)
 	await snap("miramo-arena")
 	view.shoot()
 	view.consume_events()
-	for frame in range(14):
+	for frame in range(22):
 		view._process(0.05)
 	await snap("miramo-shot")
 	for frame in range(160):
 		view._process(0.05)
-		if view.model.phase == "aim" and view.effects.is_empty():
+		if view.model.phase == "settle":
+			for settle in range(6):
+				view._process(0.05)
 			break
 	await snap("miramo-craters")
 	# Original vs HD terrain at native density, same crop, for review.

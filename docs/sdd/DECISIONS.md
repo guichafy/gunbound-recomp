@@ -184,3 +184,22 @@ ADR-043 — adotada: geração em blocos sobrepostos. O gerador não produz a fa
 dois 2:3 do fundo são costurados por `scripts/build_map_hd.py` (feather linear).
 Blocos brutos preservados intactos em `source/` com `.gdignore`; o script é
 determinístico e registra SHA-256 em `manifest.json`.
+
+## Câmera, vento, clima e Thor 0.9
+
+ADR-044 — adotada por solicitação explícita: câmera rolante em escala nativa
+1:1. Substitui a arena fixa e o recorte/escala de ADR-042 (colisão continua pelo
+alpha original). Mundo = ForegroundA inteiro; visual HD aplicado no retângulo
+do recorte; corte na linha do HUD removido (a câmera mostra a base). Arrasto
+manual + seguimento amortecido 1/25.
+
+ADR-045 — adotada: vento 2D do OpenBound (força/ângulo, perturbação por rodada,
+clima Wind). Adaptação: sorteio de Wind na largada. Fator 1,3 px/s² por ponto
+de força mantém o máximo anterior.
+
+ADR-046 — adotada: clima e Thor vivem no modelo e no laço de voo comum; a
+previsão da CPU sempre simula em cópias. Rodada = 2 turnos totais. Fórmulas
+copiadas do código (Weakness com fatores do Force). Arte/sons originais.
+
+ADR-047 — adotada por decisão do usuário: não implementar outros mapas nem HD
+novo de mapa nesta etapa.

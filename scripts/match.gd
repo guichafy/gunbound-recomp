@@ -51,20 +51,22 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		rng.seed = seed_value
 	terrain = Terrain.new()
 	# An empty or unavailable map falls back to the procedural arena.
-	var spawns := [235.0, 1045.0]
+	var spawns := [Vector2(235.0, 0.0), Vector2(1045.0, 0.0)]
 	map_id = map if not map.is_empty() and terrain.load_map(map) else ""
 	if map_id.is_empty():
 		terrain.generate()
 	else:
 		# RoomMetadata.cs draws each spawn from the original list; 1×1 keeps sides.
 		for index in range(2):
-			var options: Array = Maps.spawn_x(Maps.get_map(map_id), index == 0)
+			var options: Array = Maps.spawn_points(Maps.get_map(map_id), index == 0, terrain.world_size().x)
 			spawns[index] = options[rng.randi_range(0, options.size() - 1)]
 	actors.clear()
 	for index in range(2):
 		var kind := vehicle if index == 0 else 3 - vehicle
-		var x: float = spawns[index]
-		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, terrain.surface_at(x) - 24.0), "facing": 1 if index == 0 else -1, "shield": 220 if kind == 1 else 0, "max_shield": 220 if kind == 1 else 0, "ready": 0.0, "turns": 0, "special_used": false})
+		var x: float = spawns[index].x
+		# Search from just above the listed spawn so layered maps keep its platform.
+		var ground: float = terrain.surface_at(x, maxf(0.0, spawns[index].y - 80.0))
+		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == 0 else -1, "shield": 220 if kind == 1 else 0, "max_shield": 220 if kind == 1 else 0, "ready": 0.0, "turns": 0, "special_used": false})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = 0
 	winner = -1
@@ -107,7 +109,7 @@ func move_actor(direction: float, delta: float) -> void:
 	var steps := maxi(1, int(ceil(distance / 2.0)))
 	for i in range(steps):
 		var dx := signf(direction) * distance / steps
-		var next_x := clampf(float(actor.pos.x) + dx, 24.0, 1256.0)
+		var next_x := clampf(float(actor.pos.x) + dx, 24.0, terrain.world_size().x - 24.0)
 		if absf(next_x - float(actors[1 - active].pos.x)) < 60.0:
 			break
 		var floor_y: float = terrain.surface_at(next_x, actor.pos.y + 8.0)
@@ -116,7 +118,7 @@ func move_actor(direction: float, delta: float) -> void:
 			break
 		actor.pos = Vector2(next_x, next_y)
 		movement_left = maxf(0.0, movement_left - absf(dx))
-		if floor_y > 740.0:
+		if terrain.is_void(floor_y):
 			actor.hp = 0
 			events.append({"type": "fall", "actor": active})
 			check_end()
@@ -127,7 +129,7 @@ func body_rotation(index: int) -> float:
 	var pos: Vector2 = actors[index].pos
 	var left: float = terrain.surface_at(pos.x - 18.0, pos.y - 16.0)
 	var right: float = terrain.surface_at(pos.x + 18.0, pos.y - 16.0)
-	if left > 740.0 or right > 740.0 or absf(left - pos.y - 24.0) > 60.0 or absf(right - pos.y - 24.0) > 60.0:
+	if terrain.is_void(left) or terrain.is_void(right) or absf(left - pos.y - 24.0) > 60.0 or absf(right - pos.y - 24.0) > 60.0:
 		return 0.0
 	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
 
@@ -296,7 +298,7 @@ func advance_projectiles(delta: float) -> void:
 		if not hit.is_empty():
 			explode(hit.position, int(hit.actor))
 			projectiles.remove_at(i)
-		elif projectile.pos.x < -150.0 or projectile.pos.x > 1430.0 or projectile.pos.y > 820.0 or projectile.age > 12.0:
+		elif Combat.out_of_bounds(projectile.pos, terrain) or projectile.age > 12.0:
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
 	if projectiles.is_empty():
@@ -332,7 +334,7 @@ func settle_actors() -> void:
 		var floor_y: float = terrain.surface_at(actor.pos.x, actor.pos.y + 10.0)
 		var drop := maxf(0.0, floor_y - 24.0 - float(actor.pos.y))
 		actor.pos.y = floor_y - 24.0
-		if floor_y > 740.0:
+		if terrain.is_void(floor_y):
 			actor.hp = 0
 			events.append({"type": "fall", "actor": index})
 		elif drop > 70.0:

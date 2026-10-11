@@ -51,7 +51,7 @@ func _initialize() -> void:
 	model.actors[1].ready = 215
 	model.clock = 100
 	check(model.initiative_preview(0)[0].actor == 0 and model.initiative_preview(1)[0].actor == 1, "Preview uses selected Mage delay")
-	model.start(1, 2, 45)
+	model.start(1, 2, 45, "")
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(640, 300)
 	model.actors[1].pos = Vector2(900, 126)
@@ -84,7 +84,7 @@ func _initialize() -> void:
 		else:
 			check(model.phase == "settle", "Mage miss resolves and cannot hang flight")
 	# A first crater must change the second laser's collision, exactly as in flight.
-	model.start(1, 1, 49)
+	model.start(1, 1, 49, "")
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(200, 350)
 	model.actors[1].pos = Vector2(480, 153.4247)
