@@ -10,6 +10,8 @@ const BattleArt = preload("res://scripts/battle_art.gd")
 const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
 const MageSprite = preload("res://scripts/mage_sprite.gd")
 const Maps = preload("res://scripts/maps.gd")
+const WeatherArt = preload("res://scripts/weather_art.gd")
+var weather_art = WeatherArt.new()
 var mage = MageSprite.new()
 var bigfoot = BigfootSprite.new()
 var art = BattleArt.new()
@@ -179,6 +181,7 @@ func start_match() -> void:
 	dragging = false
 	last_impact = Vector2.INF
 	camera = clamp_camera(camera_goal())
+	weather_art.reset(Maps.get_map(model.map_id))
 	match_id = str(Time.get_unix_time_from_system()) + ":" + str(Time.get_ticks_usec())
 	reward = 0
 	result_wait = -1.0
@@ -347,6 +350,7 @@ func _process(delta: float) -> void:
 			if power >= 100.0:
 				shoot()
 	model.tick(frame_delta)
+	weather_art.tick(frame_delta, model)
 	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == 1 and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
 	consume_events()
 	if model.phase == "aim" and model.active == 1:
@@ -378,6 +382,7 @@ func _process(delta: float) -> void:
 func consume_events() -> void:
 	for event in model.events:
 		art.react(event)
+		weather_art.react(event, model, sound)
 		match event.type:
 			"turn":
 				camera_manual = false
@@ -617,6 +622,11 @@ func _draw() -> void:
 			draw_texture_rect(model.terrain.visual_texture, model.terrain.visual_rect, false)
 	else:
 		draw_procedural_terrain()
+	# Weather layers draw in world space with their own offset (identity canvas).
+	draw_set_transform(Vector2.ZERO)
+	weather_art.draw_columns(self, model, offset)
+	weather_art.draw_thor(self, model, offset)
+	draw_set_transform(offset)
 	for index in range(model.actors.size()):
 		art.draw_actor(self, index, offset)
 	draw_set_transform(offset)
@@ -637,6 +647,11 @@ func _draw() -> void:
 			bigfoot.draw_projectile(self, projectile, model.shot_weapon, offset)
 			draw_set_transform(offset)
 			continue
+	draw_set_transform(Vector2.ZERO)
+	weather_art.draw_shell_marks(self, model, offset)
+	weather_art.draw_beams(self, offset)
+	weather_art.draw_particles(self, offset)
+	draw_set_transform(offset)
 	for effect in effects:
 		if effect.get("vehicle", 0) == 1:
 			mage.draw_effect(self, effect, offset)
@@ -650,6 +665,7 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO)
 	draw_offscreen_markers()
 	art.draw_compass(self)
+	weather_art.draw_forecast(self, model)
 	if banner_time > 0.0 and model.phase == "aim":
 		var width: float = ui.bold.get_string_size(banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17).x + 48.0
 		draw_style_box(ui.box(Color(0.05, 0.15, 0.19, minf(0.9, banner_time)), 10), Rect2(640 - width / 2, 176, width, 42))

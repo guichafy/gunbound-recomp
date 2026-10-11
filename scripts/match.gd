@@ -330,7 +330,8 @@ func advance_projectiles(delta: float) -> void:
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
 	var weapon: Dictionary = weapon_rules(shot_actor, shot_weapon)
 	var removed: int = terrain.carve(position, float(weapon.radius))
-	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed})
+	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
+	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
 	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)))
 	# OnExplodeAction order: Thor attached at launch, then Electricity.
 	if bool(projectile.get("thor", false)):

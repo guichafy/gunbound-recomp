@@ -65,3 +65,17 @@ Dados do mapa (ID20, tipo A, clima, 11 spawn points) e a regra de erosão vêm d
 `Map.cs`, `Topography.cs`, `LevelScene.cs` e `RoomMetadata.cs` do OpenBound,
 copiados em `scripts/maps.gd`/`scripts/terrain.gd` com aviso GPL. Derivados HD
 GPT Images em `assets/hd/maps/miramo_town/`. Arquivos originais intactos.
+
+## Clima, Thor e partícula (0.9)
+
+- `weather/` — colunas Force/Tornado/Electricity/Weakness/Mirror/Random,
+  partículas ForceParticle/ElectricityParticle, raio LightningSE e ícones do
+  WeatherDisplay (`Interface/InGame/HUD/Blue/WeatherDisplay/Weather.png`);
+  sons Mirror, WindTransition e LightningS1.
+- `thor/` — Spritesheet 14×4 (197×190), ThorLaser e som AdukaS2.
+- `maps/miramo_town/Particle.png` — partícula de chão 20×3 (48×48).
+
+Regras de clima, vento e Thor portadas de `MatchMetadata.cs`,
+`WeatherDisplay.cs`, `WeatherHandler.cs`, `WeatherEffect/*.cs`,
+`ThorSatellite.cs`, `BeamDummyProjectile.cs` e `ParticleBuilder.cs` (GPL).
+Arquivos copiados sem edição; SHA-256 em `SOURCE_MANIFEST.json`.

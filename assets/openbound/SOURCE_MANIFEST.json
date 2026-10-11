@@ -123,5 +123,73 @@
   "maps/miramo_town/Background.png": {
     "source": "Graphics/Maps/MiramoTown/Background.png",
     "sha256": "1f41165f5b68fc12cb3859c77a715b72d315f4e6a21db071e9d8abd045bf650c"
+  },
+  "weather/Force.png": {
+    "source": "Graphics/Special Effects/Weather/Force.png",
+    "sha256": "a5018037670e356d08464eb05afd54ec1911295a809fc7c6458710813cfbff64"
+  },
+  "weather/Tornado.png": {
+    "source": "Graphics/Special Effects/Weather/Tornado.png",
+    "sha256": "fbcc015caec566669ed02341a15b16d1c4269cb528c9387773db80146b5c7032"
+  },
+  "weather/Electricity.png": {
+    "source": "Graphics/Special Effects/Weather/Electricity.png",
+    "sha256": "aa0878356e05af976422f2de9448366dfb3adc073dc20cadcd70f34c36c77ee0"
+  },
+  "weather/Weakness.png": {
+    "source": "Graphics/Special Effects/Weather/Weakness.png",
+    "sha256": "cb7575a2402bdd892203eba6864a12fb3ea34ddd3f8e0e55a08d5892dda8ef12"
+  },
+  "weather/Mirror.png": {
+    "source": "Graphics/Special Effects/Weather/Mirror.png",
+    "sha256": "ddd178eaa0e6f749b1a8d37ebde99595dc95678c1d3d9ea27ddc0fe58c8f3135"
+  },
+  "weather/Random.png": {
+    "source": "Graphics/Special Effects/Weather/Random.png",
+    "sha256": "1ae0b3fa384b210d7bbab62c4e8981a63f23eb30d25240e9532f4018358127d4"
+  },
+  "weather/ForceParticle.png": {
+    "source": "Graphics/Special Effects/Weather/ForceParticle.png",
+    "sha256": "f48f7f71755a439edbb13023b210d4fba46a6d5491adfaa95cdcf27942f349b5"
+  },
+  "weather/ElectricityParticle.png": {
+    "source": "Graphics/Special Effects/Weather/ElectricityParticle.png",
+    "sha256": "58941756aca99255a9bd3941582ea5a22669f6181908d1c9a6dcc0792771a8a3"
+  },
+  "weather/LightningSE.png": {
+    "source": "Graphics/Special Effects/Weather/LightningSE.png",
+    "sha256": "ee8b1b9a82fef9c4d262b395e9fcc04cd1272d0de47162730c007cdac8d3f777"
+  },
+  "weather/WeatherIcons.png": {
+    "source": "Interface/InGame/HUD/Blue/WeatherDisplay/Weather.png",
+    "sha256": "b88cf4f8fc9ccca434d828d25e10fa613f58424e26f15bfe1c3cf4044a9e956e"
+  },
+  "weather/Mirror.mp3": {
+    "source": "Audio/SFX/Weather/Mirror.mp3",
+    "sha256": "5224abe3cbc7d744bcf692b00611f2a3bb4cc7c9df4897fed429f5950dcb561f"
+  },
+  "weather/WindTransition.mp3": {
+    "source": "Audio/SFX/InGame/Weather/WindTransition.mp3",
+    "sha256": "4b67fa237d234b792ed924e823bcecf2f014e4cf0b1807c142de9b70300b2c08"
+  },
+  "weather/LightningS1.mp3": {
+    "source": "Audio/SFX/Tank/Blast/LightningS1.mp3",
+    "sha256": "de3c539a3d7834c5d17ec708057cecb42ab00b5b2f571958c6bb1a493b1e70ec"
+  },
+  "thor/Spritesheet.png": {
+    "source": "Graphics/Entity/Thor/Spritesheet.png",
+    "sha256": "9896d454c0b8b9c76b798381cf8fccd5fa1b320dfeba95eec432e3f6b825f034"
+  },
+  "thor/ThorLaser.png": {
+    "source": "Graphics/Entity/Thor/ThorLaser.png",
+    "sha256": "266efccf4e3e62f7d8135cbfbd3edb8c43339f08531fcd6c6156069bf0cdc695"
+  },
+  "thor/AdukaS2.mp3": {
+    "source": "Audio/SFX/Tank/Blast/AdukaS2.mp3",
+    "sha256": "194db48b4edbe67473962c97fdee1ea3976058f3683b2e0d65fb129652132b9b"
+  },
+  "maps/miramo_town/Particle.png": {
+    "source": "Graphics/Maps/MiramoTown/Particle.png",
+    "sha256": "5177b978fb422d626d91cf8d8510043f50f89fb3668e6a1105ad3c91701149be"
   }
 }

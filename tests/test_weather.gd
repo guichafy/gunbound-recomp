@@ -236,5 +236,27 @@ func run() -> void:
 	model.start(1, 2, 31)
 	var cpu: Dictionary = model.choose_cpu_shot()
 	check(cpu.angle >= 15.0 and cpu.power >= 15.0 and cpu.power <= 100.0, "CPU aims legally with weather and 2D wind")
+	# Presentation: ground particles from Particle.png; pause freezes the layer (REQ-26).
+	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.profile = load("res://scripts/profile.gd").new("res://.tools/weather-test-profile.json")
+	root.add_child(scene)
+	scene.sound.muted = true
+	scene.start_match()
+	await process_frame
+	check(scene.weather_art.ground != null and scene.weather_art.ground_frames == 60, "Miramo ground particle sheet has 60 frames (Map.cs)")
+	scene.weather_art.emit_ground(Vector2(900, 1400), 480, PI * 0.5, scene.model)
+	check(scene.weather_art.particles.size() == 60, "Removed pixels / 32 particles are emitted (480 cells → 60)")
+	scene.weather_art.react({"type": "thor", "from": Vector2(900, 900), "position": Vector2(900, 1400), "removed": 0, "level": 2}, scene.model, scene.sound)
+	scene.show_pause()
+	var frozen: Array = scene.weather_art.particles.duplicate(true)
+	var beams: Array = scene.weather_art.beams.duplicate(true)
+	scene._process(0.2)
+	check(scene.weather_art.particles == frozen and scene.weather_art.beams == beams, "Pause freezes particles and beams")
+	scene.close_overlay()
+	scene._process(0.2)
+	check(scene.weather_art.particles != frozen, "Particles move again after resuming")
+	scene.queue_free()
+	await process_frame
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/weather-test-profile.json"))
 	print("WEATHER CHECKS: ", checks, " | FAILURES: ", failures)
 	quit(0 if failures == 0 else 1)
