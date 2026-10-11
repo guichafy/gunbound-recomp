@@ -29,6 +29,17 @@ temporizados, dados/Fx/áudio originais e adaptações descritas em
 e regenHP continuam pendentes.
 Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd/MAGE_0_4.md`.
 
+## Referência C# em `~/Workspaces/Gunbound`
+
+`/Users/guichafy/Workspaces/Gunbound` é o projeto open source em C# (OpenBound)
+que estamos reescrevendo em Godot neste repositório, com algumas melhorias e
+preferências do usuário. Está configurado como pasta adicional das sessões
+(devin-cli `.devin/config.json`, Claude Code `.claude/settings.json`, Codex
+`~/.codex/config.toml`). Consulte-o como fonte de dados, mecânicas e assets
+originais; não modifique essa fonte sem solicitação explícita. No Devin CLI,
+`/add-dir /Users/guichafy/Workspaces/Gunbound` anexa a pasta como workspace
+extra da sessão quando necessário.
+
 ## Trabalho orientado por especificação
 
 - Antes de mudar comportamento, identifique os requisitos `REQ-*` afetados.

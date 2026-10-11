@@ -20,6 +20,10 @@ de regras, combate, roster ou arte. Herda todo o conteúdo de0.6.4 (tag v0.6.4).
   `--quick` omite `test_matches`; `GODOT=...` sobrepõe o binário padrão.
 - Docs vivos atualizados (README/VALIDACAO/AGENTS/SPEC/DECISIONS/TASKS/
   ATTRIBUTION); seções históricas deste hand-off preservam os nomes antigos.
+- Complemento posterior: `/Users/guichafy/Workspaces/Gunbound` (projeto C#
+  OpenBound de referência) configurado como pasta adicional das sessões em
+  `.devin/config.json`, `.claude/settings.json` e `~/.codex/config.toml`;
+  instrução no AGENTS.md. No Devin CLI, `/add-dir` anexa como workspace extra.
 
 Validação: `./scripts/check.sh` completo — **825 checks +10partidas, zero
 falhas**. App/ZIP0.7.0 reexportados por `build_macos.py`; assinatura
