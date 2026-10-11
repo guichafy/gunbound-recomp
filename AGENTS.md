@@ -134,3 +134,15 @@ fixtures (`start(..., "")`). Blocos GPT brutos em assets/hd/maps/*/source
 (.gdignore); rodar scripts/build_map_hd.py ao trocar blocos. Codex CLI gera
 imagens com `-m gpt-5.6-sol` (modelo padrão do config é recusado). Teste
 test_map.gd; captura capture_map.gd em docs/map. Clima/outros mapas pendentes.
+
+## Câmera, clima e Thor 0.9 — estado atual
+
+Ler WEATHER_CAMERA_0_9.md. Mundo do mapa é nativo 1:1 (1800×1800, grade
+900×900); ADR-044 substitui a arena fixa/escala de 0.8. Câmera em game.gd
+(seguimento 1/25, arrasto). Vento 2D e clima/Thor ficam em weather.gd e no laço
+comum de match.gd; previsão da CPU sempre simula em cópias. Wind fixtures usam
+Vector2; fixtures com literal 640 pedem `start(..., "")`. Arte/sons originais
+em assets/openbound/weather e thor. Usuário decidiu: sem outros mapas nem HD
+novo. Testes test_weather.gd/test_map.gd; capturas capture_weather.gd e
+capture_map.gd (docs/weather, docs/map).
+

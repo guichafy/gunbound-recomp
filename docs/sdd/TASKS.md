@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Câmera, vento, clima e Thor 0.9.0
+
+- [x] Levantar Camera/Weather/Thor/ParticleBuilder no C#; usuário decidiu escopo
+      (sem outros mapas/HD, escala nativa, vento 2D, commits por fase).
+- [x] Fase A: mundo nativo 1800×1800, câmera com seguimento/arrasto, parallax, setas.
+- [x] Fase C: vento 2D, fila/colunas/efeitos de clima, Thor e raio elétrico no laço comum.
+- [x] Fase D: colunas, satélite, feixes, ícones e partículas com sprites originais.
+- [x] 923+ checks e 10 partidas; capturas GPU docs/map e docs/weather; app/PCK.
+- [ ] Usuário validar câmera, clima e Thor no aplicativo.
+- [ ] Fora do escopo por decisão: outros mapas, HD de clima/Thor, itens (Ignorance).
+
 ## Mapa Miramo Town0.8.0/0.8.1
 
 - [x] Levantar mapas/dados no C# (Map.cs, Topography, LevelScene, RoomMetadata).
@@ -10,7 +21,7 @@
 - [x] 856 checks + 10 partidas no mapa; capturas GPU em docs/map; app/PCK validados.
 - [x] Fundo HD 1920×1536 concluído em 0.8.1 (2º bloco após reset do limite); emenda inspecionada.
 - [x] Usuário validou o mapa; commit/tag local v0.8.0.
-- [ ] Pendentes: clima/Thor do preset, partícula de chão, outros mapas, câmera rolante.
+- [x] Clima/Thor, partícula e câmera entregues em 0.9.0; outros mapas descartados pelo usuário.
 
 ## Identidade e harness0.7.0
 

@@ -1,6 +1,44 @@
-# Hand-off — Gunbound Recomp 0.8.1
+# Hand-off — Gunbound Recomp 0.9.0
 
-## Entrega atual 0.8.1: fundo HD do Miramo Town
+## Entrega atual 0.9.0: câmera rolante, vento 2D, clima, Thor e partícula
+
+Pedido: implementar clima, Thor, partícula de chão, outros mapas e câmera
+rolante. Decisões do usuário: **sem outros mapas nem HD novo**, escala nativa
+1:1, vento 2D do original, commits locais por fase. REQ-22..26, ADR-044..047,
+plano WEATHER_CAMERA_0_9.md. Fases commitadas: A (mundo/câmera), C (vento,
+clima, Thor no modelo), D (visuais), E (docs/export).
+
+- Mundo = ForegroundA inteiro 1800×1800 (grade 900×900); spawns do Map.cs
+  nativos; limites derivam do tamanho do mundo. Câmera segue mobile/tiro/impacto
+  (1/25), arrasto com mouse/toque até o próximo turno ou disparo; parallax do
+  fundo dentro da cobertura HD; setas na borda para mobiles fora da vista.
+- Vento 2D (0–35, 0–360, perturbação ±2/±3 por rodada, Wind re-sorteia;
+  adaptação: sorteio de Wind na largada). Fator 1,3 px/s² por ponto.
+- Clima (weather.gd): pesos do Miramo A, fila de 4, rodada = 2 turnos, colunas
+  com fusão/limpeza; Força ×1,2+10, Fraqueza ÷1,2−10, Espelho inverte vx
+  ×1,1+5, Elétrico (raio vertical, cratera 10, choque 30), Tornado (3 etapas e
+  relançamento), Aleatório (ativa uma vez), Proteção +35, Ignorância sem efeito.
+- Thor: satélite em x10–90%/y10–70%, raio do satélite ao impacto (25,
+  40+20·nível), XP pelo dano, tabela 800…3000; desativa com outro clima.
+- Tudo no laço de voo comum; `predict_shot` sempre simula em cópias (CPU
+  120–290 ms por decisão, antes 70–270).
+- Apresentação (weather_art.gd) com sprites/sons originais: colunas rolando,
+  satélite com LV/XP, feixes Thor/elétrico, ícones da previsão, marcas nos tiros,
+  partículas de chão do Particle.png (pixels removidos ÷ 32); pausa congela.
+- Fixtures: vento migrado para Vector2 (−30 → −35 pela troca de fator);
+  fixtures com literal 640 pedem o terreno procedural.
+
+Validação: `./scripts/check.sh` — **923 checks + 10 partidas, zero falhas**
+(test_weather 58, test_map 40). Seeds81–90: 56/12/13/15/19/10/8/12/9/15 tiros.
+Capturas GPU 1920×1080 em docs/map e docs/weather (colunas, Thor/raio,
+partículas; pausa congela confirmada). App/ZIP 0.9.0 reexportados, assinatura
+válida; PCK isolado carrega mapa nativo, clima e assets de clima/Thor.
+Limites: choque elétrico aproximado pela distância ao segmento; arte de
+clima/Thor em baixa resolução original; sem teste manual de input/áudio no app.
+
+Próximo passo: usuário validar câmera, clima e Thor no aplicativo.
+
+## Entrega anterior 0.8.1: fundo HD do Miramo Town
 
 Após o reset do limite do Codex, gerado o 2º bloco do fundo (exec-ad42a28a).
 `build_map_hd.py` costurou `background.png` 1920×1536 (1,48× o original);

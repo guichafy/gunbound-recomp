@@ -9,7 +9,9 @@
 | `scripts/battle_art.gd` | Estado visual separado, interpolação, rodas/canhão, recuo, dano, destruição, explosão e bússola |
 | `scripts/bigfoot_sprite.gd` | Atlas Bigfoot, FPS/ciclos, piloto e offsets por quadro, projéteis, nearest por CanvasTexture |
 | `scripts/terrain.gd` | Máscara sólida 640×400, células de 2 px, mapa original (alpha do foreground) ou procedural, visual HD, superfície, crateras e raycast DDA |
-| `scripts/maps.gd` | Catálogo de mapas OpenBound (Map.cs): spawns, clima, recorte e transformação para a arena fixa |
+| `scripts/maps.gd` | Catálogo de mapas OpenBound (Map.cs): spawns, clima, recorte HD e partícula, em coordenadas nativas |
+| `scripts/weather.gd` | Vento 2D, fila de clima, colunas, Thor e XP (modelo puro, copiado na previsão) |
+| `scripts/weather_art.gd` | Apresentação de colunas, Thor, feixes, ícones e partículas de chão |
 | `scripts/build_map_hd.py` | Costura blocos GPT Images do mapa, aplica a máscara original e grava manifest |
 | `scripts/combat.gd` | Parâmetros das armas, integração, colisão, dano e previsão de trajetória |
 | `scripts/match.gd` | Atores, RNG, projéteis, fases, movimento, disponibilidade, CPU e resultado |
@@ -235,3 +237,28 @@ pixels HD e escurece o anel `radius+3` por 0,4 (`Topography.CreateErosion`).
 metade, sorteados pelo `rng` da partida. `game.gd` desenha a janela do fundo
 (HD quando existir, senão `Background.png` original) e o `visual_texture` no
 `visual_rect`; grama e borda procedurais só no fallback. Câmera continua fixa.
+
+## Câmera, vento, clima e Thor 0.9
+
+Mundo nativo: `Terrain.load_map` dimensiona a grade pelo `ForegroundA` inteiro
+(1800×1800 → 900×900 células); `world_size`, `void_y/is_void`,
+`Combat.out_of_bounds` e o clamp de movimento derivam dele (procedural
+continua 640×400 / 1280×800). `first_solid_y` é calculado uma vez, como
+`FirstCollidableBlockY`. `carve` devolve as células removidas.
+
+`game.gd` mantém `camera` (canto superior esquerdo da vista 1280×670): segue
+mobile ativo → projétil lançado → impacto com fator `1/25` por quadro;
+arrastar (mouse/toque, `_unhandled_input`) liga `camera_manual` até o próximo
+`turn`/`fire`. O mundo é desenhado com `offset = tremor − camera`; barras e
+rótulos convertem para tela; setas na borda para mobiles fora da vista. O fundo
+usa uma janela 1,6:1 que desliza pela fração da câmera dentro da cobertura HD.
+
+`weather.gd` (modelo puro, copiável): pesos do preset, fila de 4, rodada = 2
+turnos, vento 2D (força/ângulo, perturbação, Wind), colunas com fusão/limpeza,
+Thor (posição, nível, XP). `match.gd`: cada projétil guarda `damage`,
+`inside`, `influenced`, `electric`, `thor`, `tornado`; `apply_weather_contact`
+roda antes de cada passo do laço comum; `tornado_step` substitui a balística
+enquanto ativo; `explode` → `blast` → Thor → raio elétrico. `predict_shot`
+sempre simula em cópias (máscara, atores, vento, clima). `weather_art.gd`
+apresenta colunas, satélite, feixes, ícones e partículas de chão, sem decidir
+combate; a pausa congela porque `_process` não avança.

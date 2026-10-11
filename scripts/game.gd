@@ -108,7 +108,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.8.1", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.9.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -564,10 +564,10 @@ func close_overlay() -> void:
 func show_help() -> void:
 	var card := make_overlay("help")
 	ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, ui.CREAM, true)
-	var lines := ["A / D ou ← / →     Mover o veículo", "W / S ou ↑ / ↓     Ajustar o ângulo", "ESPAÇO                  Carregar; soltar ou encher para disparar", "1 / 2 / 3                 Escolher a arma", "F                             Virar parado", "ESC                        Pausar / continuar"]
+	var lines := ["A / D ou ← / →     Mover o veículo", "W / S ou ↑ / ↓     Ajustar o ângulo", "ESPAÇO                  Carregar; soltar ou encher para disparar", "1 / 2 / 3                 Escolher a arma", "F                             Virar parado", "ESC                        Pausar / continuar", "Arrastar a tela       Olhar o mapa (volta no próximo turno)"]
 	for index in range(lines.size()):
-		ui.label(card, lines[index], Vector2(32, 96 + index * 37), Vector2(500, 32), 17)
-	ui.label(card, "O vento muda a trajetória. Use o último tiro como referência.\nArmas pesadas geram mais atraso. Especial: terceiro turno, um uso.\nZere a vida ou derrube o adversário para vencer.", Vector2(32, 335), Vector2(500, 70), 14, ui.MUTED)
+		ui.label(card, lines[index], Vector2(32, 92 + index * 34), Vector2(500, 32), 17)
+	ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 336), Vector2(500, 70), 14, ui.MUTED)
 	ui.button(card, "ENTENDI", Vector2(32, 424), Vector2(496, 42), close_overlay, true)
 
 func show_pause() -> void:
