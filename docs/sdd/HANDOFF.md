@@ -1,6 +1,18 @@
-# Hand-off — Gunbound Recomp 0.8.0
+# Hand-off — Gunbound Recomp 0.8.1
 
-## Entrega atual 0.8.0: mapa Miramo Town A
+## Entrega atual 0.8.1: fundo HD do Miramo Town
+
+Após o reset do limite do Codex, gerado o 2º bloco do fundo (exec-ad42a28a).
+`build_map_hd.py` costurou `background.png` 1920×1536 (1,48× o original);
+sobreposição de 127 px HD com diferença média ~12/255, emenda no canyon de
+nuvens inspecionada em 1:1 sem degrau visível (cano/nuvens contínuos). A arena
+já preferia o HD quando presente. test_map 33 checks (fundo HD + hash do
+manifest); `./scripts/check.sh` **858 checks + 10 partidas, zero falhas**;
+capturas `docs/map` atualizadas; app/ZIP 0.8.1 reexportados, assinatura e PCK
+isolado válidos. Commit/tag local v0.8.1, sem remoto.
+
+
+## Entrega anterior 0.8.0: mapa Miramo Town A
 
 Pedido: implementar um mapa do projeto C# com sprites HD por GPT Images. Usuário
 escolheu Miramo Town A e arena fixa 1280×800. REQ-21 (REQ-04/05/08/11/12);
@@ -23,9 +35,8 @@ plano MAP_0_8.md, ADR-042/043.
   no ForegroundA original na mesma geometria (achado da revisão: antes a
   colisão ficaria invisível). Duas fixtures de `test_runner` passaram
   a pedir o procedural explicitamente (dependem de x235 e espessura antiga).
-- Fundo: janela 1300×812,5 alinhada à base do `Background.png` original. O fundo
-  HD tem só 1 de 2 blocos (limite de uso do Codex atingido); `game.gd` já usa
-  `background.png` HD automaticamente quando existir.
+- Fundo: janela 1300×812,5 alinhada à base do `Background.png`. Em 0.8.0 o
+  fundo HD tinha só 1 de 2 blocos (limite do Codex); concluído em 0.8.1.
 
 Validação: `./scripts/check.sh` — **856 checks + 10 partidas no mapa, zero
 falhas** (seeds81–90: 34/17/15/10/16/10/7/6/7/12 tiros). Evidência principal

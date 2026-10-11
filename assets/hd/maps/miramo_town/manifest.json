@@ -37,9 +37,33 @@
     }
   },
   "background": {
-    "status": "pending",
-    "missing": [
-      "bg_tile1.png"
-    ]
+    "output": "background.png",
+    "size": [
+      1920,
+      1536
+    ],
+    "sha256": "e74217e9d2feaa0ea50636d0423e8046b378b07ebe5526370280c19e62367ee0",
+    "scale_vs_original": 1.4769,
+    "crop": [
+      0,
+      260,
+      1300,
+      1300
+    ],
+    "tile_offsets": [
+      0,
+      607
+    ],
+    "tile_size": [
+      693,
+      1040
+    ],
+    "tiles": {
+      "bg_tile0.png": "3c9011dcdb457f856e350ee9f08ea6df59f13d3cd895d88c19074e85fe2a69fc",
+      "bg_tile1.png": "88468e8c4349aa2b65c6e9ae0780d919dbf91c96ceade06752d3ec63a15a44ff"
+    },
+    "original": {
+      "Background.png": "1f41165f5b68fc12cb3859c77a715b72d315f4e6a21db071e9d8abd045bf650c"
+    }
   }
 }

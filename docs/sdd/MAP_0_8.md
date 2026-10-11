@@ -46,7 +46,7 @@ REQ-11 (direção de arte, já relativizada por REQ-19/20), REQ-12.
   alpha = máscara original ampliada. Crateras apagam essa imagem na mesma
   transformação e escurecem o anel ×0,4 como o `CreateErosion` original; a
   borda de cor fixa e os tufos de grama procedurais não são usados no mapa.
-- Fundo: `background.png` HD (ou o `Background.png` original como fallback),
+- Fundo: `background.png` HD 1920×1536 (0.8.1; ou o `Background.png` original como fallback),
   recorte com largura total, alinhado à base como a câmera original no chão.
 - Spawns: 1×1 sorteia, com o `rng` da partida, um spawn da metade esquerda para
   o jogador e outro da metade direita para a CPU, convertidos por `k`.

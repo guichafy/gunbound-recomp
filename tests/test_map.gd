@@ -158,6 +158,8 @@ func run() -> void:
 	await process_frame
 	var backdrop: Array = scene.map_background(scene.model.map_id)
 	check(scene.model.map_id == Maps.DEFAULT and backdrop.size() == 2 and backdrop[0] is Texture2D, "Arena uses the Miramo Town background")
+	check(backdrop.size() == 2 and backdrop[0].resource_path == map.background_hd and backdrop[0].get_size() == Vector2(1920, 1536), "Arena prefers the stitched HD background (1920×1536)")
+	check(manifest.background.sha256 == FileAccess.get_sha256(map.background_hd), "Manifest records the stitched HD background hash")
 	var region: Rect2 = backdrop[1] if backdrop.size() == 2 else Rect2()
 	check(region.size.x > 0.0 and is_equal_approx(region.size.x / region.size.y, 1.6), "Background window keeps the 1280×800 aspect")
 	check(scene.model.terrain.visual_texture != null, "Arena draws the HD foreground texture")

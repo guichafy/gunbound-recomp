@@ -104,6 +104,19 @@
           693,
           1300
         ]
+      },
+      "maps/miramo_town/source/bg_tile1.png": {
+        "origin": "exec-ad42a28a-fbfc-4d22-a44a-908ea27f8700.png",
+        "size": [
+          1024,
+          1536
+        ],
+        "source_window": [
+          607,
+          260,
+          1300,
+          1300
+        ]
       }
     },
     "assembly": "scripts/build_map_hd.py; manifest em maps/miramo_town/manifest.json",
