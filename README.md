@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.7.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
+Protótipo de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.10.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, no mapa Miramo Town do OpenBound com câmera rolante, vento 2D, clima/Thor, o HUD de batalha original do OpenBound (remasterizado em HD) e Bigfoot/Mage com derivados HD do GPT Images.
 
 ## Jogar
 
@@ -10,18 +10,16 @@ Também é possível importar `project.godot` no Godot 4.7.2 e pressionar **F6**
 
 | Controle | Ação |
 |---|---|
-| A/D ou ←/→ | Mover e virar, consumindo o orçamento do turno |
-| W/S ou ↑/↓ | Ajustar a mira relativa à inclinação do veículo |
-| Espaço, segurar e soltar | Carregar e disparar; a 100%, dispara automaticamente |
-| Botão Disparar / Enter | Disparar com a força selecionada |
-| 1/2/3 | Tiro 1 / tiro 2 / especial (botão SS), conforme veículo |
+| A/D ou ←/→ | Mover e virar, consumindo o orçamento do turno (barra de movimento) |
+| W/S ou ↑/↓ | Mira: 1° por toque; segurar repete cada vez mais rápido |
+| Espaço, segurar e soltar | A barra de força enche de 0 a 100 em 2 s; soltar dispara, cheia dispara sozinha |
+| Tab ou 1/2/3 | Trocar o tiro S1 / S2 / SS (botões da barra) |
+| F8 ou botão PASS | Passar o turno |
+| Esc ou botão ESC | Opções / pausa |
 | F | Virar parado |
-| Esc | Pausar / continuar |
-| H ou ? | Ajuda |
+| H | Ajuda |
 
-Os controles na tela oferecem as mesmas ações. A barra graduada registra a força anterior. A mira circular mostra a direção inicial e seu ângulo efetivo no mundo, sem prever a trajetória completa. O controle inferior mostra o ângulo relativo ao veículo; em uma encosta os dois valores podem ser diferentes.
-
-A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhida. Enquanto a CPU escolhe a arma, ela aguarda essa escolha para calcular a previsão. O painel muda para o canto superior se uma queda colocar a vida do veículo atrás dele.
+O HUD é o do OpenBound: barra de ação com botões S1/S2/SS, ângulo atual e LAST, barra de força com marcador do tiro anterior e um seletor arrastável (só referência), barra de movimento, previsão de clima, Delayboard (ordem e atraso), bússola, relógio do turno, mira com a faixa legal do mobile, barra de vida, nome e contador de dano. Botões pequenos acima da barra (← → F ●) permitem jogar só com mouse/toque; o ● segura para carregar. Ver [HUD_0_10.md](docs/sdd/HUD_0_10.md).
 
 ## Regras deste protótipo
 
@@ -36,7 +34,7 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 
 ## Conteúdo entregue
 
-Arena destrutível, dois veículos, três armas, três dificuldades de mira, vida/dano/queda, fila de atraso, efeitos visuais e sonoros, pausa, ajuda, resultado, revanche e perfil local. HUD azul metálico, bússola, inclinação, mira graduada, carga monotônica e animações de repouso, movimento, recuo, dano e destruição. Explosões com clarão, detritos e fumaça. As dificuldades mudam o erro de mira da máquina; não alteram vida/dano. A máquina usa a mesma física e conversão de inclinação do disparo real.
+Arena destrutível, dois veículos, três armas, três dificuldades de mira, vida/dano/queda, fila de atraso, efeitos visuais e sonoros, pausa, ajuda, resultado, revanche e perfil local. HUD de batalha original do OpenBound (HD), bússola, inclinação, mira com faixa legal, carga de 0 a 100 e animações de repouso, movimento, recuo, dano e destruição. Explosões com clarão, detritos e fumaça. As dificuldades mudam o erro de mira da máquina; não alteram vida/dano. A máquina usa a mesma física e conversão de inclinação do disparo real.
 
 Apelido, XP, nível e vitórias ficam em `~/Library/Application Support/Godot/app_userdata/Gunbound Recomp/profile.json`. Os testes usam arquivos separados e não alteram esse progresso.
 

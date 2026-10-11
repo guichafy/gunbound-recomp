@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## HUD original de batalha 0.10.0
+
+- [x] Levantar HUD.cs, Crosshair, WindCompass, Delayboard, HealthBar, fontes e
+      botões no C#; usuário escolheu HD GPT Images, carga original e extras discretos.
+- [x] Fase A: HUD_0_10.md, ADR-049..051, originais + SHA, pipeline e 5 folhas HD.
+- [x] Fases B/C: hud_art.gd, integração em game.gd, mira/vida/dano, input original.
+- [x] Fase D: test_hud (81), testes migrados, 1010 checks + 10 partidas, capturas
+      docs/hud, app/ZIP 0.10.0 e PCK verificados.
+- [ ] Usuário validar o HUD no aplicativo (mouse, toque, áudio do relógio).
+- [ ] Fora do escopo: itens/slots F1–F6, ouro real, chat, rank, MatchStatus.
+
 ## Câmera, vento, clima e Thor 0.9.0
 
 - [x] Levantar Camera/Weather/Thor/ParticleBuilder no C#; usuário decidiu escopo

@@ -146,3 +146,13 @@ em assets/openbound/weather e thor. Usuário decidiu: sem outros mapas nem HD
 novo. Testes test_weather.gd/test_map.gd; capturas capture_weather.gd e
 capture_map.gd (docs/weather, docs/map).
 
+## HUD original 0.10 — estado atual
+
+Ler HUD_0_10.md. HUD do OpenBound em hud_art.gd (offsets HUD.cs, tela virtual
+800×500 × 1,6; mundo 1280×664). Sprites originais em assets/openbound/hud;
+HD 3× GPT Images em assets/hd/hud via scripts/build_hud_hd.py (folhas brutas
+em hud/source com .gdignore; rodar `refs`, gerar, depois sem argumento).
+Carga original 0→100 em 2 s (+2/0,04 s); Tab/F8/↑↓ do original; extras
+discretos ← → F ● para mouse/toque. Teste test_hud.gd; captura capture_hud.gd
+(docs/hud, HD e original lado a lado).
+

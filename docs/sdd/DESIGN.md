@@ -246,7 +246,7 @@ Mundo nativo: `Terrain.load_map` dimensiona a grade pelo `ForegroundA` inteiro
 continua 640×400 / 1280×800). `first_solid_y` é calculado uma vez, como
 `FirstCollidableBlockY`. `carve` devolve as células removidas.
 
-`game.gd` mantém `camera` (canto superior esquerdo da vista 1280×670): segue
+`game.gd` mantém `camera` (canto superior esquerdo da vista 1280×670; 1280×664 desde 0.10): segue
 mobile ativo → projétil lançado → impacto com fator `1/25` por quadro;
 arrastar (mouse/toque, `_unhandled_input`) liga `camera_manual` até o próximo
 `turn`/`fire`. O mundo é desenhado com `offset = tremor − camera`; barras e
@@ -262,3 +262,17 @@ enquanto ativo; `explode` → `blast` → Thor → raio elétrico. `predict_shot
 sempre simula em cópias (máscara, atores, vento, clima). `weather_art.gd`
 apresenta colunas, satélite, feixes, ícones e partículas de chão, sem decidir
 combate; a pausa congela porque `_process` não avança.
+
+## HUD original de batalha 0.10
+
+`hud_art.gd` (apresentação, sem regras) desenha o HUD do OpenBound com os
+offsets de `HUD.cs` numa tela virtual 800×500 × 1,6 (`bar_point`): barra de
+ação, barras de força/movimento, marcador anterior, seletor, ângulos (fontes
+numéricas por `SpriteNumericField`), roleta de clima, Delayboard, bússola,
+TurnTimer; no mundo (1:1): mira (`CrosshairFrame` + faixa por mobile/tiro +
+ponteiro pela direção de `shot_velocity`), vida (76 px, vida+escudo), nome,
+balão do relógio da CPU e contador de dano acumulado. Texturas HD 3× em
+`assets/hd/hud` com fallback para `assets/openbound/hud`. Botões S1/S2/SS,
+Options e SkipTurn são `TextureButton` com as regiões de `Button.cs`. `game.gd`
+cuida do input original (carga 0→100 a +2/0,04 s, Tab, F8, ↑/↓ com repetição
+acelerada) e entrega um `hud_state()`; `match.gd` não mudou.

@@ -1,6 +1,47 @@
-# Hand-off — Gunbound Recomp 0.9.0
+# Hand-off — Gunbound Recomp 0.10.0
 
-## Entrega atual 0.9.0: câmera rolante, vento 2D, clima, Thor e partícula
+## Entrega atual 0.10.0: HUD de batalha original do OpenBound
+
+Pedido: deixar os sprites da batalha iguais ao OpenBound — seleção de arma,
+barra de força e demais opções. Decisões do usuário: **arte HD via GPT Images
+(Full HD) ajustada ao layout original**, **carga igual ao original**, controles
+extras **discretos**. REQ-27..30, ADR-049..051, plano HUD_0_10.md.
+
+- `hud_art.gd` desenha o HUD com os offsets de HUD.cs (tela virtual 800×500 ×
+  1,6): barra de ação 1280×136, S1/S2/SS/ESC/F8 PASS (`TextureButton`, estados
+  de Button.cs), barra de força com marcador anterior e seletor arrastável,
+  barra de movimento, ângulo atual e LAST, roleta de clima na janela branca,
+  Gold (= XP ganho na partida), Delayboard, bússola original, TurnTimer +
+  ClockSecond, balão do relógio sobre a CPU (≤ 20 s); no mundo (1:1) mira
+  original (moldura, faixa legal Ally/Enemy por mobile/tiro, ponteiro pela
+  direção real do tiro, ângulo), vida 76 px (vida+escudo, vermelha < 30%),
+  nome e contador de dano acumulado.
+- Input original: Espaço zera e soma 2 a cada 0,04 s (2 s até 100), soltar ou
+  encher dispara; Tab cicla (pula SS bloqueado); F8 passa; ↑/↓ 1° por toque com
+  repetição 0,15 s → 0,03 s. Extras ← → F ● acima da barra (● segura/solta).
+- Arte: 42 sprites originais em assets/openbound/hud (SHA no manifest);
+  `build_hud_hd.py` monta 5 folhas de layout fixo, o Codex `image_gen` remasteriza
+  e o script recorta cada sprite a 3× com o alfa original (assets/hd/hud,
+  manifest; prompts em HUD_PROMPTS.md). Faixas de mira, barras planas e
+  ponteiros ampliados direto.
+- Removidos: console próprio (painéis, sliders, DISPARAR grande, fila lateral,
+  bússola desenhada, banner "SUA VEZ", seta TURNO e caixa de nome). Mundo
+  visível 1280×664. `match.gd` e a balística não mudaram.
+
+Validação: `./scripts/check.sh` — **1010 checks + 10 partidas, zero falhas**
+(novo test_hud 81 checks; testes de cena migrados dos sliders/labels para o
+estado do HUD; partidas seeds 81–90 idênticas à 0.9). Capturas GPU 1920×1200
+em docs/hud (turno do jogador HD e original lado a lado, carga, turno da CPU
+com balão e dano). App/ZIP 0.10.0 reexportados, assinatura válida; PCK isolado
+carrega HUD HD/originais e exclui as folhas brutas. Commits por fase; sem push.
+Limites: balística mantém o piso de velocidade equivalente a 15 (a barra vai de
+0 a 100); itens, ouro, chat, rank e MatchStatus não existem (slots vazios, Gold
+mostra XP); fonte dos nomes é do sistema (NotoSans10 original não incluída);
+sem teste manual de mouse/toque/áudio no app.
+
+Próximo passo: usuário validar o HUD no aplicativo.
+
+## Entrega anterior 0.9.0: câmera rolante, vento 2D, clima, Thor e partícula
 
 Pedido: implementar clima, Thor, partícula de chão, outros mapas e câmera
 rolante. Decisões do usuário: **sem outros mapas nem HD novo**, escala nativa
