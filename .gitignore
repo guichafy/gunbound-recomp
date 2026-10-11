@@ -1,0 +1,11 @@
+.godot/
+.tools/
+builds/
+*.tmp
+.DS_Store
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+export_credentials.cfg
