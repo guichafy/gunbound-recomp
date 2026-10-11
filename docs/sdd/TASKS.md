@@ -26,7 +26,8 @@ Os estados acima distinguem implementação entregue de aceitação pelo usuári
 - [x] Receber, extrair e verificar o pacote externo: `.tools/source-assets/content/`,
   813 arquivos, incluindo todos os 803 assets do pipeline do fork.
 - [x] Integrar Bigfoot visualmente, com piloto/quadros/projéteis originais.
-- [ ] Portar ataques próprios do Bigfoot e outros mobiles (REQ-19 restante).
+- [x] Portar ataques próprios do Bigfoot T1/T2/SS (0.5; adaptações documentadas).
+- [ ] Integrar outros mobiles e sistemas pendentes conforme nova solicitação.
 
 - [x] Aprovação do pacote em `REFINEMENT_0_2.md` com “implementa”.
 - [x] Implementar e verificar tecnicamente o refinamento 0.2.
@@ -63,3 +64,12 @@ escopo próprio. O roadmap é contexto e não uma autorização para executar tu
 - [x] Revisão independente/correção da salva, capturas, exportação/assinatura e Git local.
 - [x] 181 checks e oito partidas; runtime e pacote PCK exportados verificados.
 - [ ] Validação funcional do usuário no aplicativo atualizado.
+
+## Bigfoot T1/T2/SS 0.5 — REQ-03–09, REQ-19
+
+- [x] Identificar emitter, dados e assets no C#; especificar antes do código.
+- [x] T1/T2/SS temporizados, forças/ângulos, danos e mira por arma.
+- [x] Áudio/Fx originais, HUD, render e pausa/reinício de bombas pendentes.
+- [x] 251 checks, dez partidas, revisão independente e capturas GPU.
+- [x] Exportação/assinatura/PCK/startup0.5.0 e registro Git/SDD final.
+- [ ] Validação funcional do usuário.

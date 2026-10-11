@@ -1,5 +1,13 @@
 # Imagens originais do protótipo
 
+## Atualização de arte/áudio 0.4–0.5
+
+Bigfoot e Mage usam atlas/piloto/projéteis originais do pacote recebido. Ambos
+agora têm efeitos e seis sons originais. T2 Bigfoot usa Armor/Flame2 conforme
+chamada C# executada. Hashes e fontes em assets/openbound. As seções sobre arte
+inteiramente gerada/sintetizada abaixo descrevem o baseline0.2, preservado como
+histórico; cenário e Escaravelho continuam usando essa arte.
+
 ## Bigfoot — versão 0.3
 
 Bigfoot, Bullet1/2/3 e Body/Basic + Hat/Basic do piloto foram copiados do pacote

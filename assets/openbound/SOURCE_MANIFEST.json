@@ -79,5 +79,41 @@
     "source": "OpenBound/ContentMetadata/Mobile/Mage/RiderPivot.json",
     "commit": "cb2fc197dd6b0498390219750ca6251bf0582d63",
     "sha256": "97966b1636db3c470154760c2a780f323f7204e29ab0c7c156d2c5b8321067b4"
+  },
+  "bigfoot/Flame1.png": {
+    "source": "Graphics/Special Effects/Tank/Bigfoot/Flame1.png",
+    "sha256": "100fb83c57dbd0115fc25c0e7a40bc8fa82582dbb17910a570494871c4ab44fc"
+  },
+  "bigfoot/Flame2.png": {
+    "source": "Graphics/Special Effects/Tank/Armor/Flame2.png",
+    "sha256": "94c53326c2687f90640323f445c7dde0d00d8c0a9e1d3dceb5eb6fde5fa0a743"
+  },
+  "bigfoot/Flame3.png": {
+    "source": "Graphics/Special Effects/Tank/Bigfoot/Flame3.png",
+    "sha256": "7c36cd45e3bc76f6fbc84488aadb9540e01ef8bc0816c348c8ce0de90ddec8b0"
+  },
+  "bigfoot/ShootS1.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/BigfootS1.mp3",
+    "sha256": "93ec2fcf7e2d78613e524f80bbf7a1a4d3dd14144ffec09863bd66027518a137"
+  },
+  "bigfoot/ShootS2.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/BigfootS2.mp3",
+    "sha256": "07b7738238989719dfca91d3c3ce10b3c387408ceec6678179215c45785329d3"
+  },
+  "bigfoot/ShootSS.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/BigfootSS.mp3",
+    "sha256": "93ec2fcf7e2d78613e524f80bbf7a1a4d3dd14144ffec09863bd66027518a137"
+  },
+  "bigfoot/BlastS1.mp3": {
+    "source": "Audio/SFX/Tank/Blast/BigfootS1.mp3",
+    "sha256": "807eeab478ec61ff6b355a793091a05d9d9bbca8fe1d22943013a8c94c0289ef"
+  },
+  "bigfoot/BlastS2.mp3": {
+    "source": "Audio/SFX/Tank/Blast/BigfootS2.mp3",
+    "sha256": "6cdc72bd59c49869512ffb3ad7a36ed0de9a0652037f7a08afdc7e00359a872f"
+  },
+  "bigfoot/BlastSS.mp3": {
+    "source": "Audio/SFX/Tank/Blast/BigfootSS.mp3",
+    "sha256": "807eeab478ec61ff6b355a793091a05d9d9bbca8fe1d22943013a8c94c0289ef"
   }
 }

@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.4.0
+# Especificação — protótipo 0.5.0
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o
@@ -22,7 +22,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 | REQ-05 | Vida, dano por explosão/queda, vitória, derrota e empate | `match.gd`, tela de resultado | Modelos, partidas e cena |
 | REQ-06 | Iniciativa por atraso, turno de 30 s, passagem voluntária/automática | `match.gd.schedule`, `pass_turn`, `tick` | Modelos e roteiro manual |
 | REQ-07 | Três armas; especial no terceiro turno próprio, uma vez por partida | `match.gd.weapon_rules/can_use_special` | Modelos + roteiro manual para apresentação da especial |
-| REQ-08 | CPU joga com as mesmas regras; três dificuldades por erro de mira | `match.gd.choose_cpu_shot/predict_shot`, `combat.gd` | Modelos e oito partidas completas |
+| REQ-08 | CPU joga com as mesmas regras; três dificuldades por erro de mira | `match.gd.choose_cpu_shot/predict_shot`, `combat.gd` | Modelos e dez partidas completas |
 | REQ-09 | Pausa congela relógio/voo; ajuda, resultado, revanche e menu navegáveis | `game.gd` | `test_scene.gd` + roteiro manual |
 | REQ-10 | Apelido, XP, nível e vitórias locais; recompensa uma vez por resultado | `profile.gd`, `game.gd` | Persistência/corrupção/idempotência e cena |
 | REQ-11 | Arte e efeitos originais, sem copiar recursos do Gunbound | `assets/art/`, terreno procedural, `sound.gd` | `docs/ART.md`, capturas visuais |
@@ -80,6 +80,16 @@ dois colliders em hélice; SS EMP zera escudos próximos antes do dano. Delays
 normalizados ao protótipo. Bigfoot permanece arena60/menu180 e armas atuais.
 Gravidade/força/vento e disponibilidade de SS continuam adaptados ao protótipo.
 Não reproduz itens, Thor, resistências ou cliente completo de Gunbound.
+
+## Ataques Bigfoot 0.5
+
+REQ-03–08, REQ-09 e REQ-19: T1 tem4 bombas em0/0,2/0,4/0,6s; T2 duas rajadas
+de3 bombas em0,2/0,4s com força−4/0/+4; SS8 bombas a cada0,125s. Danos90/70/90
+por bomba, raio25, delays770/920/1320÷7,5. Mira18–40° para T1/T2 e23–35° paraSS.
+Sprites/Fx/seis sons originais; tudo aguardando seu lançamento, com mesmo avanço
+na CPU e voo real. Bigfoot permanece pequeno. Dados/adaptações e plano em
+[BIGFOOT_ATTACKS_0_5.md](BIGFOOT_ATTACKS_0_5.md). Substitui as armas genéricas do
+Bigfoot de0.3/0.4. Resistências, itens, clima/Thor e regenHP continuam fora.
 
 ## Fora da entrega
 

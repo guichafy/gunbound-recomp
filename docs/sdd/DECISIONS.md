@@ -62,3 +62,19 @@ ADR-025 — adotada após revisão0.4: prever salvas com o mesmo avanço real so
 máscara/atores isolados. Prever componentes separadamente no terreno inicial
 perdia impactos após o primeiro abrir cratera; fixture com parede de2px verifica
 passagem do segundo laser e ausência de mutação do modelo vivo (RED→GREEN).
+
+## Ataques Bigfoot 0.5
+
+ADR-026 — adotada: substituir armas genéricas Bigfoot pelos padrões do emitter
+C# (T1 sequencial4, T2 duas rajadas de3 com força±4, SS sequencial8). Danos/raios,
+limites por tiro e proporções de delay seguem fonte; gravidade/força/vento da
+arena e desbloqueio SS permanecem adaptações explícitas. Substitui a ressalva
+sobre armas genéricas Bigfoot de ADR-020/023 para este veículo.
+
+ADR-027 — adotada: tempo de espera separado de idade de voo; previsão executa
+mesmo lançamento/voo em cópias isoladas, até12s após último spawn. Nenhuma bomba
+pendente aparece, colide ou permite encerrar o voo prematuramente.
+
+ADR-028 — adotada: T2 usa efeito Armor/Flame2 porque essa é a chamada executada
+no C#; não o método Bigfoot2 não utilizado. SS imagem tem20 quadros reais; não
+ler os10 quadros excedentes solicitados na referência. Proveniência registrada.

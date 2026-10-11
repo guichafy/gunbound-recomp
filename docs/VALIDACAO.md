@@ -1,4 +1,18 @@
-# Validação funcional — Brisa de Aço 0.4
+# Validação funcional — Brisa de Aço 0.5
+
+## Bigfoot T1/T2/SS nesta entrega
+
+Teste Bigfoot com mira30° e força75%: T1 lança4 bombas com intervalo0,2s; T2 duas
+rajadas de3 em0,2/0,4s, com forças ligeiramente diferentes; SS lança8 a cada0,125s
+(após terceiro turno próprio). Observe sprites, sons individuais e explosões.
+Mira T1/T2 limitada18–40°; SS23–35°, com ajuste ao selecionar a arma. Pausar antes
+da primeira rajada deve impedir lançamentos até continuar. Auto-carga dispara
+uma salva, sem repetição na soltura. Próximo turno espera todas as bombas.
+
+251 checks e dez partidas passaram; revisão independente conferiu fonte/assets
+e72 cenários adicionais de previsão versus voo. Capturas GPU `bigfoot-t1.png`,
+`bigfoot-t2.png`, `bigfoot-ss.png` e respectivos impactos. Sem validação manual
+completa de mouse/áudio. Dados/adaptações em `sdd/BIGFOOT_ATTACKS_0_5.md`.
 
 ## Mage nesta entrega
 

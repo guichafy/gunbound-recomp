@@ -40,3 +40,16 @@ Hashes e caminhos exatos em `SOURCE_MANIFEST.json`. Arquivos PNG/MP3/JSON intact
 Regras Mage baseadas em MobileMetadata, MageProjectile e HelicoidalTrace do fork;
 valores/adaptações registrados em `docs/sdd/MAGE_0_4.md`. Os avisos de autoria e
 licença do código de referência acima também se aplicam a esses dados.
+
+## Ataques Bigfoot (0.5)
+
+Seis sons `bigfoot/{Shoot,Blast}{S1,S2,SS}.mp3` copiados de
+`Audio/SFX/Tank/{Shoot,Blast}/Bigfoot*.mp3`. Efeitos:
+`bigfoot/Flame1.png` e `Flame3.png` de `Graphics/Special Effects/Tank/Bigfoot/`;
+`bigfoot/Flame2.png` vem de `Graphics/Special Effects/Tank/Armor/Flame2.png`.
+Essa origem diferente do T2 reproduz a chamada ArmorProjectile2Explosion
+executada em BigfootProjectile2.cs. Não substituir silenciosamente pelo método
+BigfootProjectile2Explosion não usado. As três imagens têm20 quadros reais;
+SS limita ao tamanho real, apesar do fim29 na referência. PNGs/MP3s intactos,
+hashes/caminhos exatos em SOURCE_MANIFEST. Emitter/dados de referência e
+adaptações em `docs/sdd/BIGFOOT_ATTACKS_0_5.md` e `scripts/bigfoot_attacks.gd`.

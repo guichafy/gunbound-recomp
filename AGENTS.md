@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.4.0 em Godot 4.7.2 + GDScript. Escopo:
+Protótipo 0.5.0 em Godot 4.7.2 + GDScript. Escopo:
 desktop macOS, treino offline 1×1 contra CPU, arte do protótipo + Bigfoot/Mage originais
 e progresso local.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
@@ -20,8 +20,10 @@ não veta essa nova solicitação. Ver `docs/sdd/ORIGINAL_ASSETS.md`: pacote ext
 recebido e validado em `.tools/source-assets/content/`, 813 arquivos. Bigfoot já
 integrado visualmente com piloto/quadros/projéteis em `assets/openbound/bigfoot/`.
 Mage substitui Carapaça com escudo/regen, mira própria, duplo laser helicoidal e
-EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot mantém armas do protótipo; seus ataques
-oficiais e demais mobiles continuam pendentes.
+EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com4 bombas, T2 duas rajadas de3 e SS com8, com lançamentos
+temporizados, dados/Fx/áudio originais e adaptações descritas em
+`docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Demais mobiles, resistências, itens, clima/Thor
+e regenHP continuam pendentes.
 Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd/MAGE_0_4.md`.
 
 ## Trabalho orientado por especificação

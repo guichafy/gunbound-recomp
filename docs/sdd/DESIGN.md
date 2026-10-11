@@ -112,3 +112,24 @@ Para salvas, `predict_shot` executa `advance_projectiles` num modelo temporário
 com atores duplicados e `Terrain.collision_copy`. Crateras e morte afetam os
 componentes restantes na mesma ordem do voo real. A cópia manipula só máscara,
 sem imagens/GPU, e não altera recursos ou eventos do modelo vivo.
+
+## Ataques Bigfoot 0.5
+
+`bigfoot_attacks.gd` guarda o perfil e a função `salvo(weapon)` do emitter.
+`weapon_rules` escolhe perfil Bigfoot; `aim_limits(index, weapon)` fornece limite
+por tiro. `shot_velocity` limita a mira base e depois aplica dispersão espelhada,
+e acrescenta força após limitar entrada (T2 aceita componentes11–104%).
+Todas as bombas Bigfoot compartilham a origem `muzzle(index, angle, weapon)`.
+
+Projéteis guardam `spawn_at` e `launched`; `flight_elapsed` conta tempo de salva.
+Passo fixo lança bombas elegíveis e integra somente o trecho posterior ao spawn.
+`age` mede voo, sem contar espera. Bombas pendentes mantêm o voo vivo e não são
+desenhadas; `projectile_launch` emite áudio original de cada lançamento.
+Pausa não avança relógio da salva. Reinício limpa tempo e projéteis.
+
+CPU executa a salva em cópia de modelo/máscara/atores até12s após último spawn.
+Ordem/crateras/dano idênticos ao voo real. Mira do HUD muda por arma; atualização
+de limites do slider bloqueia sinais para o thumb antigo não sobrescrever mira.
+BigfootSprite desenha Fx originais e áudio de impacto consultando veículo de
+origem do evento, mesmo após mudança de turno. Escaravelho e Mage mantêm seus
+perfis e formatos anteriores; fonte/adaptações em BIGFOOT_ATTACKS_0_5.

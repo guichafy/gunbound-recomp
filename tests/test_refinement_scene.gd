@@ -80,7 +80,7 @@ func run() -> void:
 		check(scene.displayed_queue().is_empty(), "HUD does not invent a CPU weapon before it is chosen")
 		scene.start_match()
 		scene.model.actors[0].ready = 100.0
-		scene.model.actors[1].ready = 250.0
+		scene.model.actors[1].ready = 215.0
 		scene.model.clock = 100.0
 		scene.select_weapon(0)
 		scene.update_hud()

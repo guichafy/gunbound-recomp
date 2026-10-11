@@ -1,6 +1,60 @@
-# Hand-off — Brisa de Aço 0.4.0
+# Hand-off — Brisa de Aço 0.5.0
 
-## Entrega atual 0.4.0: Mage
+## Entrega atual 0.5.0: ataques Bigfoot
+
+Pedido atual: identificar no C# e assets os tiros T1/T2/SS e reproduzir as
+salvas próprias do Bigfoot. Requisitos03–09/19; plano e dados exatos em
+`BIGFOOT_ATTACKS_0_5.md`. Bigfoot mantém arena60/menu180. Mage preservado.
+
+- T1:4 bombas, intervalos0,2s, dispersão local+3/−3/0/0°.
+- T2:duas rajadas de3 em0,2/0,4s, força−4/0/+4 pontos por rajada.
+- SS:8 bombas, intervalos0,125s, dispersão T1 repetida.
+- Dano por bomba90/70/90 e raio25; delays770/920/1320÷7,5; mira18–40° eSS23–35°.
+- Bullet1/2/3, explosões e seis sons originais. T2 usa Armor/Flame2 como a chamada
+  C# executada; SS imagem tem20 quadros, não os30 solicitados no fork.
+
+`bigfoot_attacks.gd` guarda dados/emitter. `spawn_at`/`launched`/`flight_elapsed`
+separam espera e voo; bombas pendentes não envelhecem, aparecem ou colidem.
+Todo turno espera a salva acabar. CPU executa o mesmo avanço e agendamento em
+cópias isoladas, incluindo crateras/mortes, até12s após o último lançamento.
+`shot_velocity` aplica dispersão depois de limitar mira base; força T2 pode
+chegar11–104% após ajuste, sem comprimir variantes nas bordas. HUD muda limites
+por tiro e bloqueia sinais do slider ao ajustar faixa, evitando sobrescrever
+mira com thumb antigo. Pausa congela pendentes/voo; reinício limpa a salva.
+
+Validação **251 checks**, zero falhas: anteriores181 +56 ataques +14 cena.
+Dez partidas naturais seeds81–90 concluíram com17/10/8/7/10/8/15/9/11/20 tiros;
+87–88 Bigfoot jogador,89–90 Bigfoot adversárioCPU. Teste Mage de escudo agora usa
+Escaravelho para isolar o Pulso145; fila de cena usa ready215 para ficar entre
+novos delays Bigfoot. São fixtures atualizadas por mudança intencional de perfil.
+Revisão independente aprovada: dados/assets conferidos por hash e72 cenários
+adicionais de previsão versus voo, incluindo bordas, direções e deltas.
+
+Capturas GPU reais: `docs/bigfoot-{t1,t2,ss}.png`, `*-impact.png` e
+`bigfoot-t2-pending.png`; capturas antigas de menu/arena/carga/movimento/tiro
+atualizadas. Sem validação manual completa de áudio/mouse. Balística mundial,
+resistências, clima/Thor, itens e regenHP35 não foram portados. SS continua
+terceiro turno próprio/um uso por partida. Não anunciar equivalência integral.
+
+App/ZIP **0.5.0 Universal arm64/x86_64** reexportados por `build_macos.py`,
+assinatura profunda/estrita válida. Runtime independente iniciou sem erros;
+PCK carregado sozinho em projeto vazio com perfil isolado validou salvas4/6/8,
+quadros/piloto, efeitos e12 streams de áudio Bigfoot/Mage, zero falhas.
+Commit/tag local `v0.5.0`; nenhum remoto/push/publicação.
+
+Novos comandos:
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_bigfoot_attacks.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_bigfoot_attacks_scene.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_bigfoot_attacks.gd
+```
+
+Perfis isolados em `.tools/`. Próximo passo: usuário validar T1/T2/SS, mouse,
+áudio/volume, pausa e fim de partida conforme `docs/VALIDACAO.md`. Demais mobiles
+ou rede/ranking/mobile exigem nova solicitação. Seções abaixo são histórico.
+
+## Entrega anterior 0.4.0: Mage
 
 Pedido: implementar o outro veículo como Mage do Gunbound com os assets recebidos.
 Mage substitui Carapaça (índice 1), selecionável e adversário do Bigfoot padrão.

@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.4.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com sprites originais.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.5.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com sprites originais.
 
 ## Jogar
 
@@ -27,8 +27,8 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 
 - Escaravelho: **580 de vida, 110 de movimento**, recuperação mais rápida.
 - Mage: **760 de vida, 220 de escudo, 90 de movimento**; mira15–50°. Regenera20 de escudo por turno próprio, até220+vida perdida. Laser150; duplo laser200 por componente em hélice; EMP200 que zera escudos próximos. Cratera25, delays100/120/173,33. Substitui Carapaça e enfrenta Bigfoot como CPU.
-- Bigfoot: **1100 de vida e 90 de movimento**; terceira opção e seleção inicial. Atlas, piloto e projéteis originais; armas/regras ainda do protótipo.
-- Para Escaravelho e Bigfoot — Pulso: 145 de dano máximo, cratera de 46 unidades, atraso 100.
+- Bigfoot: **1100 de vida e 90 de movimento**; terceira opção e seleção inicial. Atlas/piloto/projéteis originais; T1 quatro bombas sequenciais, T2 duas rajadas de três, SS oito bombas sequenciais. Danos90/70/90 por bomba, raio25, mira18–40° (SS23–35°). Efeitos e áudio originais.
+- Para Escaravelho — Pulso: 145 de dano máximo, cratera de 46 unidades, atraso 100.
 - Impacto: 210 de dano máximo, cratera de 62 unidades, atraso 155.
 - Tempestade: três projéteis, até 105 de dano por projétil, atraso 210. Desbloqueia no terceiro turno próprio e só pode ser usada uma vez por partida.
 - O dano diminui com a distância da explosão. Quedas grandes também causam dano; cair da ilha elimina o veículo.
@@ -36,7 +36,7 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 - O ator com menor disponibilidade acumulada joga primeiro. Um disparo leve pode permitir agir novamente antes de um adversário com muito atraso.
 - Cada decisão tem 30 segundos. Esgotar o tempo passa o turno. Pausa congela relógio, projéteis e animações; cancela uma carga em andamento sem disparar.
 - Vitória: 120 XP. Derrota: 45 XP. Empate: 70 XP. A cada 200 XP, aumenta um nível. A recompensa é concedida uma vez por partida concluída.
-- Mage usa dados do fork com balística/delays adaptados à arena. Detalhes e limites em [MAGE_0_4.md](docs/sdd/MAGE_0_4.md). Bigfoot mantém as armas do protótipo.
+- Mage usa dados do fork com balística/delays adaptados à arena. Detalhes e limites em [MAGE_0_4.md](docs/sdd/MAGE_0_4.md). Bigfoot usa o emitter original com as adaptações em [BIGFOOT_ATTACKS_0_5.md](docs/sdd/BIGFOOT_ATTACKS_0_5.md).
 
 ## Conteúdo entregue
 
@@ -65,10 +65,12 @@ mkdir -p .tools
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_bigfoot.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mage.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mage_scene.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_bigfoot_attacks.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_bigfoot_attacks_scene.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_matches.gd
 ```
 
-`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; as duas suites `test_refinement*` cobrem encostas, fila, carga e animação; `test_matches` simula oito partidas completas. Total atual: 181 verificações e oito partidas, incluindo Bigfoot/Mage. Mage tem36 checks de combate/atlas e15 de cena; a salva prevê crateras em cópia isolada do modelo. `tests/capture.gd` renderiza capturas de QA, incluindo carga; a tela de resultado usa uma condição controlada, sem escrever no perfil do jogador.
+`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; as duas suites `test_refinement*` cobrem encostas, fila, carga e animação; `test_matches` simula dez partidas completas. Total atual: 251 verificações e dez partidas, incluindo Bigfoot/Mage. Bigfoot tem56 checks de ataques e14 de cena adicionais. Mage tem36 checks de combate/atlas e15 de cena; a salva prevê crateras em cópia isolada do modelo. `tests/capture.gd` renderiza capturas de QA, incluindo carga; a tela de resultado usa uma condição controlada, sem escrever no perfil do jogador.
 
 ## Exportar novamente
 

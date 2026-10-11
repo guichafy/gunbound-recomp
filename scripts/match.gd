@@ -3,6 +3,7 @@ extends RefCounted
 
 const Terrain = preload("res://scripts/terrain.gd")
 const Combat = preload("res://scripts/combat.gd")
+const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 const VEHICLES := [
 	{"name": "Escaravelho", "hp": 580, "move": 110.0, "delay": 0.0, "color": Color("65dce4")},
 	{"name": "Mage", "hp": 760, "move": 90.0, "delay": 0.0, "color": Color("a9b7ff")},
@@ -33,6 +34,7 @@ var accumulator := 0.0
 var shot_weapon := 0
 var shot_actor := 0
 var resolve_wait := 0.0
+var flight_elapsed := 0.0
 var last_shots: Array = [{}, {}]
 
 func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1) -> void:
@@ -54,6 +56,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1) -> void:
 	total_turns = 0
 	accumulator = 0.0
 	resolve_wait = 0.0
+	flight_elapsed = 0.0
 	projectiles.clear()
 	events.clear()
 	last_shots = [{}, {}]
@@ -113,23 +116,42 @@ func body_rotation(index: int) -> float:
 	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
 
 func weapon_rules(index: int, weapon: int) -> Dictionary:
-	return MAGE_WEAPONS[weapon] if actors[index].vehicle == 1 else Combat.WEAPONS[weapon]
+	if actors[index].vehicle == 1:
+		return MAGE_WEAPONS[weapon]
+	if actors[index].vehicle == 2:
+		return BigfootAttacks.WEAPONS[weapon]
+	return Combat.WEAPONS[weapon]
 
-func aim_limits(index: int) -> Vector2:
+func aim_limits(index: int, weapon: int = 0) -> Vector2:
+	if actors[index].vehicle == 2:
+		return BigfootAttacks.AIM_LIMITS[weapon]
 	return Vector2(15, 50) if actors[index].vehicle == 1 else Vector2(10, 85)
 
-func shot_velocity(index: int, angle: float, power: float, weapon: int) -> Vector2:
-	var limits := aim_limits(index)
-	return Combat.launch_velocity(clampf(angle, limits.x, limits.y), power, actors[index].facing, 0 if actors[index].vehicle == 1 else weapon, body_rotation(index))
+func shot_velocity(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0) -> Vector2:
+	var limits := aim_limits(index, weapon)
+	var velocity := Combat.launch_velocity(clampf(angle, limits.x, limits.y), power, actors[index].facing, 0 if actors[index].vehicle in [1, 2] else weapon, body_rotation(index), power_offset)
+	# Emitter spread comes after base aim limiting and mirrors with facing.
+	return velocity.rotated(-float(actors[index].facing) * deg_to_rad(angle_offset))
 
 func projectile_parameters(index: int, angle: float, power: float, weapon: int) -> Array:
 	var rules := weapon_rules(index, weapon)
 	var result: Array = []
-	for component in range(int(rules.count)):
-		var spread := 0.0 if actors[index].vehicle == 1 else (float(component) - float(rules.count - 1) * 0.5) * 3.0
-		var initial := muzzle(index, angle + spread)
-		result.append({"pos": initial, "hit_pos": initial, "velocity": shot_velocity(index, angle + spread, power, weapon), "age": 0.0, "trail": [initial], "helix": float(rules.get("helix", 0)), "phase": float(component) * PI})
+	var emission: Array = BigfootAttacks.salvo(weapon) if actors[index].vehicle == 2 else []
+	if emission.is_empty():
+		for component in range(int(rules.count)):
+			var spread := 0.0 if actors[index].vehicle == 1 else (float(component) - float(rules.count - 1) * 0.5) * 3.0
+			emission.append({"spawn": 0.0, "angle": spread, "power": 0.0})
+	for component in range(emission.size()):
+		var entry: Dictionary = emission[component]
+		var original: bool = actors[index].vehicle == 2
+		var initial := muzzle(index, angle if original else angle + float(entry.angle), weapon)
+		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power) if original else shot_velocity(index, angle + float(entry.angle), power, weapon)
+		result.append({"pos": initial, "hit_pos": initial, "velocity": velocity, "age": 0.0, "trail": [initial], "helix": float(rules.get("helix", 0)), "phase": float(component) * PI, "spawn_at": entry.spawn, "launched": false})
 	return result
+
+func launch_projectile(projectile: Dictionary) -> void:
+	projectile.launched = true
+	events.append({"type": "projectile_launch", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": shot_weapon, "time": projectile.spawn_at})
 
 func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictionary:
 	var shells := projectile_parameters(index, angle, power, weapon)
@@ -148,7 +170,10 @@ func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictio
 	simulation.phase = "flight"
 	var closest: Dictionary = {}
 	var distance := INF
-	for frame in range(1441):
+	var last_spawn := 0.0
+	for shell in shells:
+		last_spawn = maxf(last_spawn, float(shell.spawn_at))
+	for frame in range(ceili((12.0 + last_spawn) / Combat.STEP) + 1):
 		simulation.advance_projectiles(Combat.STEP)
 		for event in simulation.events:
 			if event.type not in ["explosion", "miss"]:
@@ -165,8 +190,8 @@ func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictio
 func cannon_pivot(index: int) -> Vector2:
 	return actors[index].pos + Vector2(0, -14).rotated(body_rotation(index))
 
-func muzzle(index: int, angle: float) -> Vector2:
-	return cannon_pivot(index) + shot_velocity(index, angle, 100.0, 0).normalized() * 38.0
+func muzzle(index: int, angle: float, weapon: int = 0) -> Vector2:
+	return cannon_pivot(index) + shot_velocity(index, angle, 100.0, weapon).normalized() * 38.0
 
 func initiative_preview(weapon: int) -> Array:
 	var ready := [float(actors[0].ready), float(actors[1].ready)]
@@ -185,7 +210,7 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	shot_actor = active
 	if weapon == 2:
 		actors[active].special_used = true
-	var limits := aim_limits(active)
+	var limits := aim_limits(active, weapon)
 	angle = clampf(angle, limits.x, limits.y)
 	power = clampf(power, 15.0, 100.0)
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
@@ -193,7 +218,11 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	projectiles = projectile_parameters(active, angle, power, weapon)
 	phase = "flight"
 	accumulator = 0.0
+	flight_elapsed = 0.0
 	events.append({"type": "fire", "actor": active, "weapon": weapon})
+	for projectile in projectiles:
+		if float(projectile.spawn_at) <= 0.0:
+			launch_projectile(projectile)
 	return true
 
 func schedule(index: int, delay: float) -> void:
@@ -227,15 +256,24 @@ func tick(delta: float) -> void:
 				schedule(shot_actor, float(weapon_rules(shot_actor, shot_weapon).delay) + float(VEHICLES[actors[shot_actor].vehicle].delay))
 
 func advance_projectiles(delta: float) -> void:
+	flight_elapsed += delta
 	for i in range(projectiles.size() - 1, -1, -1):
 		var projectile: Dictionary = projectiles[i]
-		var next: Dictionary = Combat.advance(projectile.pos, projectile.velocity, wind, delta)
+		var travel_delta := delta
+		if not projectile.launched:
+			if float(projectile.spawn_at) > flight_elapsed + 0.0000001:
+				continue
+			launch_projectile(projectile)
+			travel_delta = clampf(flight_elapsed - float(projectile.spawn_at), 0.0, delta)
+			if travel_delta <= 0.0000001:
+				continue
+		var next: Dictionary = Combat.advance(projectile.pos, projectile.velocity, wind, travel_delta)
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
-		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + delta, projectile.helix, projectile.phase)
+		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
 		var hit: Dictionary = Combat.trace_segment(projectile.hit_pos, actual, terrain, actors, ignored)
 		projectile.hit_pos = actual
-		projectile.age += delta
+		projectile.age += travel_delta
 		projectile.pos = next.position
 		projectile.velocity = next.velocity
 		if int(float(projectile.age) * 120.0) % 4 == 0:
@@ -307,7 +345,7 @@ func choose_cpu_shot() -> Dictionary:
 		weapon = 2
 	var best := {"angle": 45.0, "power": 65.0, "weapon": weapon}
 	var best_score := INF
-	var limits := aim_limits(active)
+	var limits := aim_limits(active, weapon)
 	for angle in range(int(maxf(15, limits.x)), int(minf(80, limits.y)) + 1, 5):
 		for power in range(20, 101, 4):
 			var impact := predict_shot(active, angle, power, weapon)

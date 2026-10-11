@@ -104,7 +104,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.4.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.5.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "BRISA\nDE AÇO", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -160,7 +160,7 @@ func select_vehicle(index: int) -> void:
 	for j in range(vehicle_buttons.size()):
 		vehicle_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if j == index else Color("24444e"), 9, ui.TEAL if j == index else Color("47626a")))
 	var data: Dictionary = Match.VEHICLES[index]
-	var description: String = ["Ágil, com recuperação mais rápida.", "220 de escudo · duplo laser e especial EMP.", "Bigfoot com sprites e animações originais."][index]
+	var description: String = ["Ágil, com recuperação mais rápida.", "220 de escudo · duplo laser e especial EMP.", "T1: 4 bombas · T2: 6 · SS: 8 bombas."][index]
 	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), description]
 	queue_redraw()
 
@@ -174,7 +174,7 @@ func start_match() -> void:
 	match_id = str(Time.get_unix_time_from_system()) + ":" + str(Time.get_ticks_usec())
 	reward = 0
 	result_wait = -1.0
-	angle = 45.0
+	angle = clampf(45.0, model.aim_limits(0).x, model.aim_limits(0).y)
 	power = 65.0
 	weapon = 0
 	charging = false
@@ -301,6 +301,8 @@ func select_weapon(index: int) -> void:
 	if index == 2 and not model.can_use_special(0):
 		return
 	weapon = index
+	var limits: Vector2 = model.aim_limits(0, weapon)
+	angle = clampf(angle, limits.x, limits.y)
 	for j in range(weapon_buttons.size()):
 		weapon_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if j == index else Color("24444e"), 9, ui.TEAL if j == index else Color("47626a")))
 
@@ -329,9 +331,9 @@ func _process(delta: float) -> void:
 		if not is_zero_approx(direction):
 			model.move_actor(direction, frame_delta)
 		if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):
-			angle = minf(model.aim_limits(0).y, angle + 38.0 * frame_delta)
+			angle = minf(model.aim_limits(0, weapon).y, angle + 38.0 * frame_delta)
 		if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
-			angle = maxf(model.aim_limits(0).x, angle - 38.0 * frame_delta)
+			angle = maxf(model.aim_limits(0, weapon).x, angle - 38.0 * frame_delta)
 		if charging:
 			power = minf(100.0, power + 65.0 * frame_delta)
 			if power >= 100.0:
@@ -378,11 +380,18 @@ func consume_events() -> void:
 				if weapon == 2 and not model.can_use_special(0):
 					weapon = 0
 			"fire":
-				sound.play("fire", mage.shoot_sounds[event.weapon] if model.actors[event.actor].vehicle == 1 else null)
+				if model.actors[event.actor].vehicle != 2:
+					sound.play("fire", mage.shoot_sounds[event.weapon] if model.actors[event.actor].vehicle == 1 else null)
+			"projectile_launch":
+				if event.vehicle == 2:
+					sound.play("fire", bigfoot.shoot_sounds[event.weapon])
 			"explosion":
 				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": event.get("vehicle", 0), "age": 0.0})
 				shake = 7.0
-				sound.play("explosion", mage.blast_sounds[event.weapon] if event.get("vehicle", 0) == 1 else null)
+				var original: AudioStream = null
+				if event.get("vehicle", 0) in [1, 2]:
+					original = (mage if event.vehicle == 1 else bigfoot).blast_sounds[event.weapon]
+				sound.play("explosion", original)
 			"damage":
 				floating.append({"pos": event.position, "text": "−%d" % event.amount, "age": 0.0, "color": Color("ffe5b1")})
 			"shield_damage":
@@ -427,9 +436,16 @@ func update_hud() -> void:
 	elif model.phase == "finished":
 		status = "Treino encerrado"
 	turn_label.text = "%02d  /  %s" % [model.total_turns, status]
+	var limits: Vector2 = model.aim_limits(0, weapon)
+	angle = clampf(angle, limits.x, limits.y)
+	# Range setters emit value_changed; do not let the old thumb overwrite the aim.
+	angle_slider.set_block_signals(true)
+	angle_slider.min_value = limits.x
+	angle_slider.max_value = limits.y
+	angle_slider.set_value_no_signal(angle)
+	angle_slider.set_block_signals(false)
 	angle_label.text = "Mira  %02d°" % int(angle)
 	power_label.text = "%s  %03d%%" % ["Carregando" if charging else "Força", int(power)]
-	angle_slider.set_value_no_signal(angle)
 	power_slider.set_value_no_signal(power)
 	power_meter.value = power
 	movement_meter.max_value = model.movement_budget()
@@ -590,6 +606,8 @@ func _draw() -> void:
 	if model.phase == "aim" and model.active == 0:
 		draw_aim_guide()
 	for projectile in model.projectiles:
+		if not projectile.launched:
+			continue
 		var color: Color = model.weapon_rules(model.shot_actor, model.shot_weapon).color
 		if model.actors[model.shot_actor].vehicle == 1:
 			mage.draw_projectile(self, projectile, model.shot_weapon)
@@ -608,6 +626,8 @@ func _draw() -> void:
 	for effect in effects:
 		if effect.get("vehicle", 0) == 1:
 			mage.draw_effect(self, effect)
+		elif effect.get("vehicle", 0) == 2:
+			bigfoot.draw_effect(self, effect)
 		else:
 			art.draw_explosion(self, effect)
 	draw_set_transform(offset)
@@ -640,14 +660,14 @@ func draw_aim_guide() -> void:
 	var center: Vector2 = model.cannon_pivot(0)
 	var facing: int = model.actors[0].facing
 	var rotation: float = model.body_rotation(0)
-	var limits: Vector2 = model.aim_limits(0)
+	var limits: Vector2 = model.aim_limits(0, weapon)
 	var start := rotation - deg_to_rad(limits.y) if facing == 1 else rotation + PI + deg_to_rad(limits.x)
 	var end := rotation - deg_to_rad(limits.x) if facing == 1 else rotation + PI + deg_to_rad(limits.y)
 	draw_arc(center, 62, start, end, 42, Color(0.3, 0.85, 0.42, 0.65), 8, true)
 	for mark in range(int(limits.x), int(limits.y) + 1, 5):
-		var direction: Vector2 = model.shot_velocity(0, mark, 100, 0).normalized()
+		var direction: Vector2 = model.shot_velocity(0, mark, 100, weapon).normalized()
 		draw_line(center + direction * 53, center + direction * (65 if mark % 15 == 0 else 61), Color(0.94, 1, 0.88, 0.85), 1, true)
-	var direction: Vector2 = model.shot_velocity(0, angle, 100, 0).normalized()
+	var direction: Vector2 = model.shot_velocity(0, angle, 100, weapon).normalized()
 	var tip := center + direction * 73
 	draw_line(center + direction * 38, tip, ui.AMBER, 2, true)
 	draw_circle(tip, 5, ui.AMBER)

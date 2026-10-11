@@ -22,6 +22,8 @@ func _initialize() -> void:
 		finish()
 		return
 	check(model.actors[1].hp == 760 and model.actors[1].shield == 220, "Mage starts with original life and shield")
+	# Keep this shield fixture on Escaravelho's 145-damage pulse; Bigfoot now has its own attacks.
+	model.start(0, 1, 42)
 	# Real explosions exercise shield absorption, not a mocked damage handler.
 	model.shot_actor = 0
 	model.shot_weapon = 0
