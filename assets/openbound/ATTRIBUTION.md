@@ -1,4 +1,4 @@
-# Origem dos recursos Bigfoot
+# Origem dos recursos Bigfoot e Mage
 
 Arquivos copiados sem edição do pacote `Game Assets.rar`, fornecido pelo usuário
 via [Google Drive](https://drive.google.com/drive/folders/120agUFRkAARqZNHYxB7NS86VtrPstx-K).
@@ -24,3 +24,19 @@ código de referência com a origem dos sprites.
 
 A integração é um protótipo local. Não houve publicação nem upload dos assets.
 O restante dos recursos baixados ainda não foi incorporado ao jogo.
+
+## Mage (0.4)
+
+- `mage/CharacterSpritesheet.png` — atlas original 2180×3150, células 109×150.
+- `mage/S1T.png`, `S2T.png`, `Bullet3.png` — lasers/trilhas e orbe originais.
+- `mage/Flame1.png`, `Flame2.png`, `Flame3.png` — efeitos de impacto originais,
+  copiados de `Graphics/Special Effects/Tank/Mage/`.
+- `mage/ShootS1.mp3`, `ShootS2.mp3`, `ShootSS.mp3`, `BlastS1.mp3`, `BlastS2.mp3`,
+  `BlastSS.mp3` — áudio original de `Audio/SFX/Tank/{Shoot,Blast}/Mage*.mp3`.
+- `mage/RiderPivot.json` — offsets originais do mesmo commit do fork; piloto
+  reutiliza as camadas masculinas já presentes em `bigfoot/`.
+
+Hashes e caminhos exatos em `SOURCE_MANIFEST.json`. Arquivos PNG/MP3/JSON intactos.
+Regras Mage baseadas em MobileMetadata, MageProjectile e HelicoidalTrace do fork;
+valores/adaptações registrados em `docs/sdd/MAGE_0_4.md`. Os avisos de autoria e
+licença do código de referência acima também se aplicam a esses dados.

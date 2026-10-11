@@ -8,6 +8,8 @@ const UIFactory = preload("res://scripts/ui.gd")
 const Sound = preload("res://scripts/sound.gd")
 const BattleArt = preload("res://scripts/battle_art.gd")
 const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
+const MageSprite = preload("res://scripts/mage_sprite.gd")
+var mage = MageSprite.new()
 var bigfoot = BigfootSprite.new()
 var art = BattleArt.new()
 var ui = UIFactory.new()
@@ -53,6 +55,7 @@ var move_left: Button
 var move_right: Button
 var weapon_buttons: Array[Button] = []
 var health_bars: Array[ProgressBar] = []
+var shield_bars: Array[ProgressBar] = []
 var hp_labels: Array[Label] = []
 var wind_label: Label
 var timer_label: Label
@@ -101,7 +104,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.3.1", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.4.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "BRISA\nDE AÇO", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -157,7 +160,7 @@ func select_vehicle(index: int) -> void:
 	for j in range(vehicle_buttons.size()):
 		vehicle_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if j == index else Color("24444e"), 9, ui.TEAL if j == index else Color("47626a")))
 	var data: Dictionary = Match.VEHICLES[index]
-	var description: String = ["Ágil, com recuperação mais rápida.", "Resistente, com recuperação mais lenta.", "Bigfoot com sprites e animações originais."][index]
+	var description: String = ["Ágil, com recuperação mais rápida.", "220 de escudo · duplo laser e especial EMP.", "Bigfoot com sprites e animações originais."][index]
 	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), description]
 	queue_redraw()
 
@@ -186,12 +189,14 @@ func start_match() -> void:
 func build_hud() -> void:
 	# The arena stays open; instruments are grouped in the classic lower console.
 	health_bars.clear()
+	shield_bars.clear()
 	hp_labels.clear()
 	for index in range(2):
 		var actor: Dictionary = model.actors[index]
 		var bar := make_meter(root, Vector2.ZERO, Vector2(96, 7), float(actor.max_hp), Match.VEHICLES[actor.vehicle].color)
 		health_bars.append(bar)
-		var hp := ui.label(root, "", Vector2.ZERO, Vector2(116, 19), 12, Color.WHITE, true)
+		shield_bars.append(make_meter(root, Vector2.ZERO, Vector2(96, 5), maxf(1, actor.max_shield), Color("94baff")))
+		var hp := ui.label(root, "", Vector2.ZERO, Vector2(174, 19), 12, Color.WHITE, true)
 		hp.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		hp.add_theme_color_override("font_outline_color", ui.INK)
 		hp.add_theme_constant_override("outline_size", 4)
@@ -221,12 +226,13 @@ func build_hud() -> void:
 	for index in range(3):
 		var button := ui.button(root, ["1", "2", "SS"][index], Vector2(20 + index * 61, 711), Vector2(55, 42), func(): select_weapon(index))
 		button.add_theme_font_size_override("font_size", 23)
-		button.tooltip_text = "%s · atraso %d" % [Combat.WEAPONS[index].name, Combat.WEAPONS[index].delay]
+		button.tooltip_text = "%s · atraso %d" % [model.weapon_rules(0, index).name, model.weapon_rules(0, index).delay]
 		weapon_buttons.append(button)
 	delay_label = ui.label(root, "", Vector2(20, 763), Vector2(180, 21), 12, ui.AMBER, true)
 	ui.metal_panel(root, Vector2(218, 678), Vector2(180, 113), Color("234564"))
 	angle_label = ui.label(root, "", Vector2(229, 683), Vector2(160, 31), 22, ui.AMBER, true)
-	angle_slider = ui.slider(root, Vector2(230, 722), Vector2(153, 17), 10, 85, angle, func(value): angle = value)
+	var limits: Vector2 = model.aim_limits(0)
+	angle_slider = ui.slider(root, Vector2(230, 722), Vector2(153, 17), limits.x, limits.y, angle, func(value): angle = value)
 	move_left = ui.button(root, "←", Vector2(230, 752), Vector2(42, 28), func(): pass)
 	move_right = ui.button(root, "→", Vector2(277, 752), Vector2(42, 28), func(): pass)
 	flip_button = ui.button(root, "F", Vector2(325, 752), Vector2(59, 28), flip)
@@ -284,7 +290,7 @@ func displayed_queue() -> Array:
 	return queue_entries
 
 func animation_state(index: int) -> String:
-	return art.state_name(model, index, charging)
+	return art.state_name(model, index, charging, model.phase == "aim" and model.active == 1 and not cpu_plan.is_empty())
 
 func player_can_act() -> bool:
 	return screen == "match" and model.phase == "aim" and model.active == 0 and not paused
@@ -323,15 +329,15 @@ func _process(delta: float) -> void:
 		if not is_zero_approx(direction):
 			model.move_actor(direction, frame_delta)
 		if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):
-			angle = minf(85.0, angle + 38.0 * frame_delta)
+			angle = minf(model.aim_limits(0).y, angle + 38.0 * frame_delta)
 		if Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
-			angle = maxf(10.0, angle - 38.0 * frame_delta)
+			angle = maxf(model.aim_limits(0).x, angle - 38.0 * frame_delta)
 		if charging:
 			power = minf(100.0, power + 65.0 * frame_delta)
 			if power >= 100.0:
 				shoot()
 	model.tick(frame_delta)
-	art.tick(model, frame_delta, charging, weapon)
+	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == 1 and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
 	consume_events()
 	if model.phase == "aim" and model.active == 1:
 		cpu_wait -= frame_delta
@@ -372,19 +378,21 @@ func consume_events() -> void:
 				if weapon == 2 and not model.can_use_special(0):
 					weapon = 0
 			"fire":
-				sound.play("fire")
+				sound.play("fire", mage.shoot_sounds[event.weapon] if model.actors[event.actor].vehicle == 1 else null)
 			"explosion":
-				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "age": 0.0})
+				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": event.get("vehicle", 0), "age": 0.0})
 				shake = 7.0
-				sound.play("explosion")
+				sound.play("explosion", mage.blast_sounds[event.weapon] if event.get("vehicle", 0) == 1 else null)
 			"damage":
 				floating.append({"pos": event.position, "text": "−%d" % event.amount, "age": 0.0, "color": Color("ffe5b1")})
+			"shield_damage":
+				floating.append({"pos": event.position + Vector2(0, -22), "text": "−%d ESC" % event.amount, "age": 0.0, "color": Color("94baff")})
 			"fall":
 				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, 560), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
 			"finished":
 				charging = false
 				reward = profile.award(match_id, model.winner == 0, model.winner == -1)
-				result_wait = 1.2
+				result_wait = 1.7
 				sound.play("result")
 	model.events.clear()
 
@@ -394,14 +402,20 @@ func update_hud() -> void:
 	queue_panel.position = Vector2(16, 544)
 	for index in range(2):
 		var actor: Dictionary = model.actors[index]
-		if actor.hp > 0 and Rect2(16, 544, 236, 114).intersects(Rect2(actor.pos + Vector2(-70, 38), Vector2(140, 66))):
+		if actor.hp > 0 and Rect2(16, 544, 236, 114).intersects(Rect2(actor.pos + Vector2(-90, 38), Vector2(180, 66))):
 			queue_panel.position = Vector2(16, 74)
 		health_bars[index].value = actor.hp
 		health_bars[index].visible = actor.hp > 0
 		health_bars[index].position = actor.pos + Vector2(-48, 40)
 		hp_labels[index].visible = actor.hp > 0
-		hp_labels[index].position = actor.pos + Vector2(-58, 49)
+		hp_labels[index].position = actor.pos + Vector2(-87, 54 if actor.vehicle == 1 else 49)
+		shield_bars[index].position = actor.pos + Vector2(-48, 49)
+		shield_bars[index].max_value = maxf(1, actor.max_shield)
+		shield_bars[index].value = actor.shield
+		shield_bars[index].visible = actor.vehicle == 1 and actor.hp > 0
 		hp_labels[index].text = "%d / %d" % [actor.hp, actor.max_hp]
+		if actor.vehicle == 1:
+			hp_labels[index].text += " · %d ESC" % actor.shield
 	wind_label.text = "%02d" % abs(int(model.wind))
 	timer_label.text = "%02d" % int(ceil(model.turn_time)) if model.phase == "aim" else "—"
 	timer_label.add_theme_color_override("font_color", Color("ff815e") if model.turn_time < 8.0 else ui.AMBER)
@@ -431,9 +445,9 @@ func update_hud() -> void:
 	for index in range(weapon_buttons.size()):
 		weapon_buttons[index].disabled = not enabled or (index == 2 and not model.can_use_special(0))
 		weapon_buttons[index].add_theme_stylebox_override("normal", ui.metal_box(Color("ac7134") if index == weapon else Color("315880"), ui.AMBER if index == weapon else ui.STEEL))
-	weapon_buttons[2].tooltip_text = "Tempestade: terceiro turno próprio; um uso por partida."
+	weapon_buttons[2].tooltip_text = "%s: terceiro turno próprio; um uso por partida." % model.weapon_rules(0, 2).name
 	movement_label.text = "Movimento  %d" % int(ceil(model.movement_left))
-	delay_label.text = "%s  +%d" % [Combat.WEAPONS[weapon].name, int(float(Combat.WEAPONS[weapon].delay) + float(Match.VEHICLES[vehicle].delay))]
+	delay_label.text = "%s  +%d" % [model.weapon_rules(0, weapon).name, int(float(model.weapon_rules(0, weapon).delay) + float(Match.VEHICLES[vehicle].delay))]
 	var previous: Dictionary = model.last_shots[0]
 	shot_hint.text = "Último: %d° / %d%%" % [int(previous.angle), int(previous.power)] if not previous.is_empty() else "Marcador: tiro anterior"
 	var displayed_weapon: int = weapon if model.active == 0 else int(cpu_plan.get("weapon", 0))
@@ -447,7 +461,7 @@ func update_hud() -> void:
 		return
 	queue_entries = model.initiative_preview(displayed_weapon)
 	var preview_weapon: int = displayed_weapon if model.phase == "aim" else model.shot_weapon
-	queue_detail.text = "Após %s: ordem por atraso" % Combat.WEAPONS[preview_weapon].name
+	queue_detail.text = "Após %s: ordem por atraso" % model.weapon_rules(model.active, preview_weapon).name
 	for row in range(queue_entries.size()):
 		var entry: Dictionary = queue_entries[row]
 		var name: String = profile.nickname if entry.actor == 0 else "Autômato"
@@ -555,7 +569,7 @@ func _draw() -> void:
 		draw_rect(Rect2(0, 0, 750, 800), Color(0.035, 0.13, 0.17, 0.30))
 		draw_circle(Vector2(342, 617), 157.0, Color(0.93, 0.96, 0.87, 0.14))
 		draw_arc(Vector2(342, 617), 169.0, 0.1, TAU - 0.4, 90, Color(0.78, 0.95, 0.88, 0.45), 1.5, true)
-		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 180.0 if vehicle == 2 else 270.0, 1)
+		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 180.0 if vehicle in [1, 2] else 270.0, 1)
 		return
 	if model.terrain == null:
 		return
@@ -576,7 +590,11 @@ func _draw() -> void:
 	if model.phase == "aim" and model.active == 0:
 		draw_aim_guide()
 	for projectile in model.projectiles:
-		var color: Color = Combat.WEAPONS[model.shot_weapon].color
+		var color: Color = model.weapon_rules(model.shot_actor, model.shot_weapon).color
+		if model.actors[model.shot_actor].vehicle == 1:
+			mage.draw_projectile(self, projectile, model.shot_weapon)
+			draw_set_transform(offset)
+			continue
 		var trail: Array = projectile.trail
 		for index in range(1, trail.size()):
 			draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
@@ -588,7 +606,10 @@ func _draw() -> void:
 		draw_circle(projectile.pos, 5.0, color)
 		draw_circle(projectile.pos + Vector2(-1, -1), 2.0, Color.WHITE)
 	for effect in effects:
-		art.draw_explosion(self, effect)
+		if effect.get("vehicle", 0) == 1:
+			mage.draw_effect(self, effect)
+		else:
+			art.draw_explosion(self, effect)
 	draw_set_transform(offset)
 	for item in floating:
 		var pos: Vector2 = item.pos + Vector2(-22, -70 - float(item.age) * 34.0)
@@ -602,6 +623,9 @@ func _draw() -> void:
 		draw_string(ui.bold, Vector2(664 - width / 2, 202), banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color(ui.CREAM, minf(1.0, banner_time)))
 
 func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
+	if kind == 1:
+		mage.draw(self, pos, width, facing, rotation, mage.frame_index("idle", elapsed, 0, false), color)
+		return
 	if kind == 2:
 		bigfoot.draw(self, pos, width, facing, rotation, bigfoot.frame_index("idle", elapsed, 0, false), color)
 		return
@@ -616,10 +640,11 @@ func draw_aim_guide() -> void:
 	var center: Vector2 = model.cannon_pivot(0)
 	var facing: int = model.actors[0].facing
 	var rotation: float = model.body_rotation(0)
-	var start := rotation - deg_to_rad(85.0) if facing == 1 else rotation + PI + deg_to_rad(10.0)
-	var end := rotation - deg_to_rad(10.0) if facing == 1 else rotation + PI + deg_to_rad(85.0)
+	var limits: Vector2 = model.aim_limits(0)
+	var start := rotation - deg_to_rad(limits.y) if facing == 1 else rotation + PI + deg_to_rad(limits.x)
+	var end := rotation - deg_to_rad(limits.x) if facing == 1 else rotation + PI + deg_to_rad(limits.y)
 	draw_arc(center, 62, start, end, 42, Color(0.3, 0.85, 0.42, 0.65), 8, true)
-	for mark in range(10, 86, 5):
+	for mark in range(int(limits.x), int(limits.y) + 1, 5):
 		var direction: Vector2 = model.shot_velocity(0, mark, 100, 0).normalized()
 		draw_line(center + direction * 53, center + direction * (65 if mark % 15 == 0 else 61), Color(0.94, 1, 0.88, 0.85), 1, true)
 	var direction: Vector2 = model.shot_velocity(0, angle, 100, 0).normalized()

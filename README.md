@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.3.1**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot com sprites originais.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.4.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com sprites originais.
 
 ## Jogar
 
@@ -14,7 +14,7 @@ Também é possível importar `project.godot` no Godot 4.7.2 e pressionar **F6**
 | W/S ou ↑/↓ | Ajustar a mira relativa à inclinação do veículo |
 | Espaço, segurar e soltar | Carregar e disparar; a 100%, dispara automaticamente |
 | Botão Disparar / Enter | Disparar com a força selecionada |
-| 1/2/3 | Pulso / Impacto / Tempestade (botão SS) |
+| 1/2/3 | Tiro 1 / tiro 2 / especial (botão SS), conforme veículo |
 | F | Virar parado |
 | Esc | Pausar / continuar |
 | H ou ? | Ajuda |
@@ -26,9 +26,9 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 ## Regras deste protótipo
 
 - Escaravelho: **580 de vida, 110 de movimento**, recuperação mais rápida.
-- Carapaça: **700 de vida, 80 de movimento**, 18 unidades adicionais de atraso.
+- Mage: **760 de vida, 220 de escudo, 90 de movimento**; mira15–50°. Regenera20 de escudo por turno próprio, até220+vida perdida. Laser150; duplo laser200 por componente em hélice; EMP200 que zera escudos próximos. Cratera25, delays100/120/173,33. Substitui Carapaça e enfrenta Bigfoot como CPU.
 - Bigfoot: **1100 de vida e 90 de movimento**; terceira opção e seleção inicial. Atlas, piloto e projéteis originais; armas/regras ainda do protótipo.
-- Pulso: 145 de dano máximo, cratera de 46 unidades, atraso 100.
+- Para Escaravelho e Bigfoot — Pulso: 145 de dano máximo, cratera de 46 unidades, atraso 100.
 - Impacto: 210 de dano máximo, cratera de 62 unidades, atraso 155.
 - Tempestade: três projéteis, até 105 de dano por projétil, atraso 210. Desbloqueia no terceiro turno próprio e só pode ser usada uma vez por partida.
 - O dano diminui com a distância da explosão. Quedas grandes também causam dano; cair da ilha elimina o veículo.
@@ -36,7 +36,7 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 - O ator com menor disponibilidade acumulada joga primeiro. Um disparo leve pode permitir agir novamente antes de um adversário com muito atraso.
 - Cada decisão tem 30 segundos. Esgotar o tempo passa o turno. Pausa congela relógio, projéteis e animações; cancela uma carga em andamento sem disparar.
 - Vitória: 120 XP. Derrota: 45 XP. Empate: 70 XP. A cada 200 XP, aumenta um nível. A recompensa é concedida uma vez por partida concluída.
-- Os números são valores originais para validação e balanceamento, não uma reprodução exata dos dados do Gunbound.
+- Mage usa dados do fork com balística/delays adaptados à arena. Detalhes e limites em [MAGE_0_4.md](docs/sdd/MAGE_0_4.md). Bigfoot mantém as armas do protótipo.
 
 ## Conteúdo entregue
 
@@ -63,10 +63,12 @@ mkdir -p .tools
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement_scene.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_bigfoot.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mage.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mage_scene.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_matches.gd
 ```
 
-`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; as duas suites `test_refinement*` cobrem encostas, fila, carga e animação; `test_matches` simula oito partidas completas. Total atual: 130 verificações e oito partidas, incluindo Bigfoot. `tests/capture.gd` renderiza capturas de QA, incluindo carga; a tela de resultado usa uma condição controlada, sem escrever no perfil do jogador.
+`test_runner` cobre regras e persistência; `test_scene` percorre a cena real; as duas suites `test_refinement*` cobrem encostas, fila, carga e animação; `test_matches` simula oito partidas completas. Total atual: 181 verificações e oito partidas, incluindo Bigfoot/Mage. Mage tem36 checks de combate/atlas e15 de cena; a salva prevê crateras em cópia isolada do modelo. `tests/capture.gd` renderiza capturas de QA, incluindo carga; a tela de resultado usa uma condição controlada, sem escrever no perfil do jogador.
 
 ## Exportar novamente
 
@@ -88,4 +90,4 @@ Multiplayer online, salas privadas, busca automática, ranking, reconexão e 2×
 
 ## Limitações conhecidas
 
-Um mapa e três veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Animações usam transformações, rodas/canhão e efeitos por código sobre PNGs originais, sem spritesheets oficiais. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; outros mobiles e regras oficiais completas continuam pendentes.
+Um mapa e três veículos; sem campanha, contas, ranking ou multiplayer. A IA calcula o disparo, mas não desloca seu veículo. O terreno tem resolução de colisão de dois pixels e fragmentos flutuantes permanecem no lugar; somente os veículos caem. Escaravelho usa animações por código; Bigfoot e Mage usam atlas originais com piloto por quadro. Câmera fixa e balanceamento provisório. A pesquisa dos vídeos/OpenBound está em [docs/sdd/GUNBOUND_REFERENCES.md](docs/sdd/GUNBOUND_REFERENCES.md); sprites originais Bigfoot/Mage e piloto foram incorporados, com proveniência em `assets/openbound/ATTRIBUTION.md`; demais mobiles e regras completas Gunbound continuam pendentes.

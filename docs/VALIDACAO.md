@@ -1,4 +1,18 @@
-# Validação funcional — Brisa de Aço 0.3
+# Validação funcional — Brisa de Aço 0.4
+
+## Mage nesta entrega
+
+Bigfoot inicia contra Mage. Verifique o adversário com piloto/atlas original e
+barra azul de escudo. Selecione Mage no menu para testar mira15–50°, laser1,
+dois lasers em hélice no tiro2 e orbe EMP no especial. Escudo absorve dano antes
+da vida, regenera20 por turno próprio e reinicia em220 na revanche. Pausa congela
+lasers/animações, inclusive quando a CPU carrega. Mage tem760 de vida/movimento90.
+
+181 checks e oito partidas passaram (seeds81–88,24/10/8/17/17/8/29/19 tiros).
+Revisão corrigiu previsão da segunda colisão após cratera do primeiro laser.
+Capturas `mage-*.png` são render GPU real; impacto usa fixture controlada.
+Sem teste manual completo de mouse. SS/delays/balística têm adaptações descritas
+em `sdd/MAGE_0_4.md`; outros sistemas Gunbound continuam fora do escopo.
 
 ## Bigfoot nesta entrega
 
@@ -26,7 +40,7 @@ de 0.2 abaixo permanecem como histórico; o roteiro também serve para 0.3.
 10. Deixe o tempo de um turno terminar. O jogo deve passar o turno sozinho.
 11. Termine uma partida. Confirme vida, queda ou vitória/derrota, XP e opções de navegação.
 12. Faça revanche. Terreno, vida e especial devem reiniciar; XP deve permanecer.
-13. Feche e reabra. Apelido e progresso devem permanecer. Experimente Carapaça e as três dificuldades.
+13. Feche e reabra. Apelido e progresso devem permanecer. Experimente Mage e as três dificuldades.
 14. Troque a arma e observe a fila prevista, que considera atraso do veículo. Durante a escolha da CPU, aguarda a arma real. É ordem da partida, sem ranking de usuários.
 15. Confira clarão, detritos, fumaça e reação ao dano. Se cair numa cratera perto da fila lateral, o painel deve ir para o canto superior e preservar a leitura da vida/apelido.
 

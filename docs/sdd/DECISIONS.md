@@ -45,3 +45,20 @@ não representa uma nova revisão independente desta documentação.
 ADR-022 — adotada: reduzir Bigfoot/piloto juntos, mantendo os pixels originais,
 contato com chão e offsets relativos. Escala de arena 60 (antes 80), menu 180
 (antes 230). Ajuste de apresentação em REQ-19; regras de colisão/combate preservadas.
+
+## Mage 0.4
+
+ADR-023 — adotada: substituir Carapaça por Mage com atlas/piloto/efeitos/sons
+originais. Reutilizar leitor base de atlas sem mudar quadros ou escala Bigfoot.
+Dados de combate próprios do Mage consultados pelo modelo, HUD e CPU.
+
+ADR-024 — adotada: manter SS=200 conforme construtor executado do fork, embora
+constante SS=300 não seja utilizada lá; EMP antes do dano. Delays750/900/1300
+normalizados÷7,5. HP/escudo/regen/mira/hélice seguem dados originais; balística e
+regras de desbloqueio SS continuam adaptadas à arena atual. Sem alegar clone
+completo nem ampliar para resistência/clima/itens/rede.
+
+ADR-025 — adotada após revisão0.4: prever salvas com o mesmo avanço real sobre
+máscara/atores isolados. Prever componentes separadamente no terreno inicial
+perdia impactos após o primeiro abrir cratera; fixture com parede de2px verifica
+passagem do segundo laser e ausência de mutação do modelo vivo (RED→GREEN).

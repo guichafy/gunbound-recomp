@@ -22,5 +22,62 @@
   "RiderHead.png": {
     "source": "Graphics/Avatar/Male/Hat/Basic.png",
     "sha256": "aa7816d434bf658f861319104ce3d5ac0c39a6df72465ad1de9ef3b56b9dfdb0"
+  },
+  "mage/BlastS1.mp3": {
+    "source": "Audio/SFX/Tank/Blast/MageS1.mp3",
+    "sha256": "194db48b4edbe67473962c97fdee1ea3976058f3683b2e0d65fb129652132b9b"
+  },
+  "mage/BlastS2.mp3": {
+    "source": "Audio/SFX/Tank/Blast/MageS2.mp3",
+    "sha256": "194db48b4edbe67473962c97fdee1ea3976058f3683b2e0d65fb129652132b9b"
+  },
+  "mage/BlastSS.mp3": {
+    "source": "Audio/SFX/Tank/Blast/MageSS.mp3",
+    "sha256": "194db48b4edbe67473962c97fdee1ea3976058f3683b2e0d65fb129652132b9b"
+  },
+  "mage/Bullet3.png": {
+    "source": "Graphics/Tank/Mage/Bullet3.png",
+    "sha256": "f2eeefef680b64948ab5b0b4384a90f07cf39da27d55ffc97af6d6df75fc99df"
+  },
+  "mage/CharacterSpritesheet.png": {
+    "source": "Graphics/Tank/Mage/CharacterSpritesheet.png",
+    "sha256": "510c774bcbce8a7807a93d5444e8d97f416d2143463f7d5a2f4e27e4e0524c0c"
+  },
+  "mage/Flame1.png": {
+    "source": "Graphics/Special Effects/Tank/Mage/Flame1.png",
+    "sha256": "578f106a26df03a086c63fb73aa5ab92e77eb0223c0f7bfea8e0fec4adbbb11b"
+  },
+  "mage/Flame2.png": {
+    "source": "Graphics/Special Effects/Tank/Mage/Flame2.png",
+    "sha256": "f37e5edbfd1dd46891b7c16e1391f6406873ccb2aec5a29722bc075ebe9347d8"
+  },
+  "mage/Flame3.png": {
+    "source": "Graphics/Special Effects/Tank/Mage/Flame3.png",
+    "sha256": "18ed339097e56d4b73743fb521f6ddc47c6a434dfcc808b4f72b1b788c849a52"
+  },
+  "mage/S1T.png": {
+    "source": "Graphics/Tank/Mage/S1T.png",
+    "sha256": "4e49ea71c56278038dd2ed6d6453db665eb7f179507b243f7cb9b605c944a390"
+  },
+  "mage/S2T.png": {
+    "source": "Graphics/Tank/Mage/S2T.png",
+    "sha256": "e9121c96339597991cfa965927bfc6c100b794d1b41d9b20c157f4f5e13aedf6"
+  },
+  "mage/ShootS1.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/MageS1.mp3",
+    "sha256": "217a2920994d08d712594b11fd9166fd6b7669c0439dfe80cd5cfcb61a5e5833"
+  },
+  "mage/ShootS2.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/MageS2.mp3",
+    "sha256": "217a2920994d08d712594b11fd9166fd6b7669c0439dfe80cd5cfcb61a5e5833"
+  },
+  "mage/ShootSS.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/MageSS.mp3",
+    "sha256": "217a2920994d08d712594b11fd9166fd6b7669c0439dfe80cd5cfcb61a5e5833"
+  },
+  "mage/RiderPivot.json": {
+    "source": "OpenBound/ContentMetadata/Mobile/Mage/RiderPivot.json",
+    "commit": "cb2fc197dd6b0498390219750ca6251bf0582d63",
+    "sha256": "97966b1636db3c470154760c2a780f323f7204e29ab0c7c156d2c5b8321067b4"
   }
 }

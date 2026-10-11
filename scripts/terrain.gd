@@ -93,6 +93,13 @@ func raycast(from: Vector2, to: Vector2) -> Dictionary:
 			break
 	return {}
 
+func collision_copy():
+	# Prediction owns its mask; no image/GPU resources or live state are shared.
+	var copy = get_script().new()
+	copy.cells = cells.duplicate()
+	copy.revision = revision
+	return copy
+
 func carve(center: Vector2, radius: float) -> void:
 	var left := maxi(0, int((center.x - radius) / SCALE) - 1)
 	var right := mini(WIDTH - 1, int((center.x + radius) / SCALE) + 1)
@@ -102,11 +109,14 @@ func carve(center: Vector2, radius: float) -> void:
 		for x in range(left, right + 1):
 			if Vector2(x * SCALE, y * SCALE).distance_squared_to(center) <= radius * radius:
 				cells[y * WIDTH + x] = 0
-				image.set_pixel(x, y, Color.TRANSPARENT)
+				if image != null:
+					image.set_pixel(x, y, Color.TRANSPARENT)
+	revision += 1
+	if image == null:
+		return
 	# Dress the new crater lip without changing the collision mask.
 	for x in range(left, right + 1):
 		for y in range(maxi(1, top - 3), mini(HEIGHT - 1, bottom + 4)):
 			if cells[y * WIDTH + x] != 0 and cells[(y - 1) * WIDTH + x] == 0:
 				image.set_pixel(x, y, Color("d8b28b"))
 	texture.update(image)
-	revision += 1

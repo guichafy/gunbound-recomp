@@ -16,6 +16,7 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [REFINEMENT_0_2.md](REFINEMENT_0_2.md) | Design aprovado, plano e evidência da entrega 0.2 |
 | [ORIGINAL_ASSETS.md](ORIGINAL_ASSETS.md) | Pedido de mobiles reais, auditoria do fork e arquivos externos necessários |
 | [BIGFOOT_0_3.md](BIGFOOT_0_3.md) | Recorte, plano e limites da integração Bigfoot 0.3 |
+| [MAGE_0_4.md](MAGE_0_4.md) | Mage: assets, ataques, escudo, adaptações e validação 0.4 |
 
 Ordem de retomada: hand-off → especificação → design → tarefas → decisões.
 Para uma mudança, localizar o requisito, definir o delta da especificação,
@@ -27,5 +28,5 @@ da execução inicial. O conjunto `docs/sdd/` consolida o contexto atual.
 O [README principal](../../README.md), o [guia de aprendizado](../APRENDIZADO.md),
 o [roteiro funcional](../VALIDACAO.md) e a [origem da arte](../ART.md) o complementam.
 
-Baseline inicial: **0.1.0**; versão atual **0.3.1**, em **2026-10-11**. O histórico Git
+Baseline inicial: **0.1.0**; versão atual **0.4.0**, em **2026-10-11**. O histórico Git
 identifica as revisões; não manter hashes de commits dentro destes documentos.

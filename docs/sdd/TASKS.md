@@ -36,7 +36,7 @@ Os estados acima distinguem implementação entregue de aceitação pelo usuári
 - [ ] Registrar feedback e priorizar correções/refinos conforme esse resultado.
 
 Não há bug impeditivo conhecido aberto no baseline; isso não substitui validação
-do usuário. IA estacionária, um mapa, sprites estáticos e fragmentos suspensos
+do usuário. IA estacionária, um mapa e fragmentos suspensos
   são limites conhecidos, fora do refinamento 0.2 concluído nesta sessão.
 
 ## Roadmap para refinamento futuro
@@ -53,3 +53,13 @@ do usuário. IA estacionária, um mapa, sprites estáticos e fragmentos suspenso
 
 Distribuição pública, notarização Apple, monetização e serviços externos exigem
 escopo próprio. O roadmap é contexto e não uma autorização para executar tudo.
+
+## Mage 0.4 — REQ-19
+
+- [x] Especificar perfil, ataques e adaptações antes do código (`MAGE_0_4.md`).
+- [x] Copiar atlas, lasers, orbe, efeitos, áudio e offsets originais; hashes/avisos.
+- [x] Integrar escudo, regeneração, S2 hélice, EMP, CPU/fila/HUD e animações.
+- [x] RED→GREEN Mage/modelos/interface; suites existentes e oito partidas naturais.
+- [x] Revisão independente/correção da salva, capturas, exportação/assinatura e Git local.
+- [x] 181 checks e oito partidas; runtime e pacote PCK exportados verificados.
+- [ ] Validação funcional do usuário no aplicativo atualizado.

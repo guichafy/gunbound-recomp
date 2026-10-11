@@ -5,8 +5,15 @@ const Terrain = preload("res://scripts/terrain.gd")
 const Combat = preload("res://scripts/combat.gd")
 const VEHICLES := [
 	{"name": "Escaravelho", "hp": 580, "move": 110.0, "delay": 0.0, "color": Color("65dce4")},
-	{"name": "Carapaça", "hp": 700, "move": 80.0, "delay": 18.0, "color": Color("ffbc79")},
+	{"name": "Mage", "hp": 760, "move": 90.0, "delay": 0.0, "color": Color("a9b7ff")},
 	{"name": "Bigfoot", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("71c0ff")}
+]
+# Original Mage metadata from OpenBound, normalized to this prototype's delay units.
+# Copyright (C) 2020, Carlos H.M.S.; reference code GPL-3.0-or-later.
+const MAGE_WEAPONS := [
+	{"name": "Laser", "damage": 150.0, "radius": 25.0, "delay": 100.0, "count": 1, "helix": 0.0, "emp": 0.0, "color": Color("b3ceff")},
+	{"name": "Duplo laser", "damage": 200.0, "radius": 25.0, "delay": 120.0, "count": 2, "helix": 15.0, "emp": 0.0, "color": Color("d43e70")},
+	{"name": "EMP", "damage": 200.0, "radius": 25.0, "delay": 1300.0 / 7.5, "count": 1, "helix": 0.0, "emp": 100.0, "color": Color("b6adff")}
 ]
 var terrain
 var actors: Array = []
@@ -39,7 +46,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1) -> void:
 	for index in range(2):
 		var kind := vehicle if index == 0 else (1 - vehicle if vehicle < 2 else 1)
 		var x := 235.0 if index == 0 else 1045.0
-		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, terrain.surface_at(x) - 24.0), "facing": 1 if index == 0 else -1, "ready": 0.0, "turns": 0, "special_used": false})
+		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, terrain.surface_at(x) - 24.0), "facing": 1 if index == 0 else -1, "shield": 220 if kind == 1 else 0, "max_shield": 220 if kind == 1 else 0, "ready": 0.0, "turns": 0, "special_used": false})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = 0
 	winner = -1
@@ -59,6 +66,9 @@ func begin_turn() -> void:
 	phase = "aim"
 	turn_time = 30.0
 	movement_left = movement_budget()
+	if actors[active].vehicle == 1:
+		actors[active].max_shield = 220 + int(actors[active].max_hp) - int(actors[active].hp)
+		actors[active].shield = mini(int(actors[active].max_shield), int(actors[active].shield) + 20)
 	actors[active].turns += 1
 	total_turns += 1
 	wind = float(rng.randi_range(-30, 30))
@@ -102,8 +112,55 @@ func body_rotation(index: int) -> float:
 		return 0.0
 	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
 
+func weapon_rules(index: int, weapon: int) -> Dictionary:
+	return MAGE_WEAPONS[weapon] if actors[index].vehicle == 1 else Combat.WEAPONS[weapon]
+
+func aim_limits(index: int) -> Vector2:
+	return Vector2(15, 50) if actors[index].vehicle == 1 else Vector2(10, 85)
+
 func shot_velocity(index: int, angle: float, power: float, weapon: int) -> Vector2:
-	return Combat.launch_velocity(angle, power, actors[index].facing, weapon, body_rotation(index))
+	var limits := aim_limits(index)
+	return Combat.launch_velocity(clampf(angle, limits.x, limits.y), power, actors[index].facing, 0 if actors[index].vehicle == 1 else weapon, body_rotation(index))
+
+func projectile_parameters(index: int, angle: float, power: float, weapon: int) -> Array:
+	var rules := weapon_rules(index, weapon)
+	var result: Array = []
+	for component in range(int(rules.count)):
+		var spread := 0.0 if actors[index].vehicle == 1 else (float(component) - float(rules.count - 1) * 0.5) * 3.0
+		var initial := muzzle(index, angle + spread)
+		result.append({"pos": initial, "hit_pos": initial, "velocity": shot_velocity(index, angle + spread, power, weapon), "age": 0.0, "trail": [initial], "helix": float(rules.get("helix", 0)), "phase": float(component) * PI})
+	return result
+
+func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictionary:
+	var shells := projectile_parameters(index, angle, power, weapon)
+	if shells.size() == 1:
+		var shell: Dictionary = shells[0]
+		return Combat.predict(shell.pos, shell.velocity, wind, terrain, actors, index, shell.helix, shell.phase)
+	# A salvo can open a crater or eliminate an actor before the next component.
+	# Run the real flight loop on isolated model/mask copies to preserve ordering.
+	var simulation = get_script().new()
+	simulation.terrain = terrain.collision_copy()
+	simulation.actors = actors.duplicate(true)
+	simulation.wind = wind
+	simulation.shot_actor = index
+	simulation.shot_weapon = weapon
+	simulation.projectiles = shells
+	simulation.phase = "flight"
+	var closest: Dictionary = {}
+	var distance := INF
+	for frame in range(1441):
+		simulation.advance_projectiles(Combat.STEP)
+		for event in simulation.events:
+			if event.type not in ["explosion", "miss"]:
+				continue
+			var score := Vector2(event.position).distance_to(actors[1 - index].pos)
+			if score < distance:
+				distance = score
+				closest = {"position": event.position, "actor": event.get("collided_actor", -1), "hit": event.type == "explosion"}
+		simulation.events.clear()
+		if simulation.phase != "flight":
+			break
+	return closest
 
 func cannon_pivot(index: int) -> Vector2:
 	return actors[index].pos + Vector2(0, -14).rotated(body_rotation(index))
@@ -115,7 +172,7 @@ func initiative_preview(weapon: int) -> Array:
 	var ready := [float(actors[0].ready), float(actors[1].ready)]
 	if phase in ["aim", "flight", "settle"]:
 		var selected := clampi(weapon, 0, 2) if phase == "aim" else shot_weapon
-		ready[active] = maxf(ready[active], clock) + float(Combat.WEAPONS[selected].delay) + float(VEHICLES[actors[active].vehicle].delay)
+		ready[active] = maxf(ready[active], clock) + float(weapon_rules(active, selected).delay) + float(VEHICLES[actors[active].vehicle].delay)
 	var first := 1 - active if is_zero_approx(ready[0] - ready[1]) else (0 if ready[0] < ready[1] else 1)
 	return [{"actor": first, "ready": ready[first], "delay": maxf(0.0, ready[first] - clock)}, {"actor": 1 - first, "ready": ready[1 - first], "delay": maxf(0.0, ready[1 - first] - clock)}]
 
@@ -128,15 +185,12 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	shot_actor = active
 	if weapon == 2:
 		actors[active].special_used = true
-	angle = clampf(angle, 10.0, 85.0)
+	var limits := aim_limits(active)
+	angle = clampf(angle, limits.x, limits.y)
 	power = clampf(power, 15.0, 100.0)
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
-	var count := int(Combat.WEAPONS[weapon].count)
-	for i in range(count):
-		var spread := (float(i) - float(count - 1) * 0.5) * 3.0
-		var initial := muzzle(active, angle + spread)
-		projectiles.append({"pos": initial, "velocity": shot_velocity(active, angle + spread, power, weapon), "age": 0.0, "trail": [initial]})
+	projectiles = projectile_parameters(active, angle, power, weapon)
 	phase = "flight"
 	accumulator = 0.0
 	events.append({"type": "fire", "actor": active, "weapon": weapon})
@@ -170,7 +224,7 @@ func tick(delta: float) -> void:
 		if resolve_wait <= 0.0:
 			settle_actors()
 			if not check_end():
-				schedule(shot_actor, float(Combat.WEAPONS[shot_weapon].delay) + float(VEHICLES[actors[shot_actor].vehicle].delay))
+				schedule(shot_actor, float(weapon_rules(shot_actor, shot_weapon).delay) + float(VEHICLES[actors[shot_actor].vehicle].delay))
 
 func advance_projectiles(delta: float) -> void:
 	for i in range(projectiles.size() - 1, -1, -1):
@@ -178,30 +232,44 @@ func advance_projectiles(delta: float) -> void:
 		var next: Dictionary = Combat.advance(projectile.pos, projectile.velocity, wind, delta)
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
-		var hit: Dictionary = Combat.trace_segment(projectile.pos, next.position, terrain, actors, ignored)
+		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + delta, projectile.helix, projectile.phase)
+		var hit: Dictionary = Combat.trace_segment(projectile.hit_pos, actual, terrain, actors, ignored)
+		projectile.hit_pos = actual
 		projectile.age += delta
 		projectile.pos = next.position
 		projectile.velocity = next.velocity
 		if int(float(projectile.age) * 120.0) % 4 == 0:
-			projectile.trail.append(projectile.pos)
+			projectile.trail.append(projectile.hit_pos)
 			if projectile.trail.size() > 28:
 				projectile.trail.pop_front()
 		if not hit.is_empty():
-			explode(hit.position)
+			explode(hit.position, int(hit.actor))
 			projectiles.remove_at(i)
 		elif projectile.pos.x < -150.0 or projectile.pos.x > 1430.0 or projectile.pos.y > 820.0 or projectile.age > 12.0:
+			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
 	if projectiles.is_empty():
 		phase = "settle"
 		resolve_wait = 0.55
 
-func explode(position: Vector2) -> void:
-	var weapon: Dictionary = Combat.WEAPONS[shot_weapon]
+func explode(position: Vector2, collided_actor: int = -1) -> void:
+	var weapon: Dictionary = weapon_rules(shot_actor, shot_weapon)
 	terrain.carve(position, float(weapon.radius))
-	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon})
+	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor})
 	for index in range(actors.size()):
-		var damage := Combat.damage_at(position.distance_to(actors[index].pos), float(weapon.damage), float(weapon.radius))
-		if damage > 0 and int(actors[index].hp) > 0:
+		if int(actors[index].hp) <= 0:
+			continue
+		var distance := position.distance_to(actors[index].pos)
+		if float(weapon.get("emp", 0)) > 0 and distance <= float(weapon.emp) + 22.0 and int(actors[index].shield) > 0:
+			events.append({"type": "shield_damage", "actor": index, "amount": actors[index].shield, "position": actors[index].pos})
+			actors[index].shield = 0
+		var damage := Combat.damage_at(distance, float(weapon.damage), float(weapon.radius))
+		var absorbed := mini(damage, int(actors[index].shield))
+		if absorbed > 0:
+			actors[index].shield -= absorbed
+			events.append({"type": "shield_damage", "actor": index, "amount": absorbed, "position": actors[index].pos})
+		damage -= absorbed
+		if damage > 0:
 			actors[index].hp = maxi(0, int(actors[index].hp) - damage)
 			events.append({"type": "damage", "actor": index, "amount": damage, "position": actors[index].pos})
 
@@ -239,11 +307,10 @@ func choose_cpu_shot() -> Dictionary:
 		weapon = 2
 	var best := {"angle": 45.0, "power": 65.0, "weapon": weapon}
 	var best_score := INF
-	for angle in range(20, 81, 5):
+	var limits := aim_limits(active)
+	for angle in range(int(maxf(15, limits.x)), int(minf(80, limits.y)) + 1, 5):
 		for power in range(20, 101, 4):
-			var origin := muzzle(active, angle)
-			var velocity := shot_velocity(active, angle, power, weapon)
-			var impact := Combat.predict(origin, velocity, wind, terrain, actors, active)
+			var impact := predict_shot(active, angle, power, weapon)
 			var score := Vector2(impact.position).distance_to(target.pos)
 			if int(impact.actor) == 1 - active:
 				score -= 20.0
@@ -254,6 +321,6 @@ func choose_cpu_shot() -> Dictionary:
 				best = {"angle": float(angle), "power": float(power), "weapon": weapon}
 	var angle_error: float = [5.0, 2.5, 0.7][difficulty]
 	var power_error: float = [10.0, 4.0, 1.0][difficulty]
-	best.angle = clampf(float(best.angle) + rng.randf_range(-angle_error, angle_error), 10.0, 85.0)
+	best.angle = clampf(float(best.angle) + rng.randf_range(-angle_error, angle_error), limits.x, limits.y)
 	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), 15.0, 100.0)
 	return best

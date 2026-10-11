@@ -1,5 +1,5 @@
 extends Node
-## Short synthesized effects; no external audio dependencies.
+## Small pooled audio player; originals for Mage, synthesized fallback for others.
 
 var streams: Dictionary = {}
 var players: Array[AudioStreamPlayer] = []
@@ -21,12 +21,12 @@ func _ready() -> void:
 	for kind in ["fire", "explosion", "turn", "result"]:
 		streams[kind] = synthesize(kind)
 
-func play(kind: String) -> void:
+func play(kind: String, original: AudioStream = null) -> void:
 	if muted or not streams.has(kind):
 		return
 	var player := players[next_player]
 	next_player = (next_player + 1) % players.size()
-	player.stream = streams[kind]
+	player.stream = original if original != null else streams[kind]
 	player.play()
 
 func synthesize(kind: String) -> AudioStreamWAV:

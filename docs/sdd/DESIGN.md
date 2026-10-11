@@ -91,3 +91,24 @@ após alterações. Caches, templates e binários não entram no Git.
 
 Não há garantia de determinismo entre plataformas nem protocolo de rede definido.
 RNG com seed explícita permite cenários repetíveis nos testes atuais.
+
+## Integração Mage 0.4
+
+`mobile_sprite.gd` concentra leitura/recorte/filtragem dos atlas e piloto;
+`bigfoot_sprite.gd` e `mage_sprite.gd` fornecem dados/tiros próprios. Mage substitui
+Carapaça no índice1. Modelo consulta `weapon_rules`, `aim_limits` e
+`projectile_parameters` por ator; view e CPU consomem essas regras. Deslocamento
+helicoidal passa por `Combat.sample_position`; `hit_pos` é posição física real
+do componente, independente da interpolação visual do veículo.
+
+Escudo integra o estado do modelo, absorve explosões antes de HP e regenera no
+turno próprio até220+HPperdido. EMP zera escudo próximo antes da explosão. HUD
+mostra barra azul/valor e usa os limites de mira. Eventos carregam veículo de
+origem para escolher Fx/áudio mesmo após mudança de turno. Carga da CPU acompanha
+plano/arma; recuo usa `last_shots`. Morte Mage completa25quadros antes do resultado.
+Detalhes de fonte/adaptações em `MAGE_0_4.md`, avisos/hashes em `assets/openbound/`.
+
+Para salvas, `predict_shot` executa `advance_projectiles` num modelo temporário
+com atores duplicados e `Terrain.collision_copy`. Crateras e morte afetam os
+componentes restantes na mesma ordem do voo real. A cópia manipula só máscara,
+sem imagens/GPU, e não altera recursos ou eventos do modelo vivo.

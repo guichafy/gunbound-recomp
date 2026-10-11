@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.3.1
+# Especificação — protótipo 0.4.0
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o
@@ -21,8 +21,8 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 | REQ-04 | Balística afetada por gravidade/vento, colisão com terreno e veículos, crateras | `combat.gd`, `terrain.gd`, `match.gd` | `test_runner.gd`, partidas completas |
 | REQ-05 | Vida, dano por explosão/queda, vitória, derrota e empate | `match.gd`, tela de resultado | Modelos, partidas e cena |
 | REQ-06 | Iniciativa por atraso, turno de 30 s, passagem voluntária/automática | `match.gd.schedule`, `pass_turn`, `tick` | Modelos e roteiro manual |
-| REQ-07 | Três armas; especial no terceiro turno próprio, uma vez por partida | `combat.gd.WEAPONS`, `match.gd.can_use_special` | Modelos + roteiro manual para apresentação da especial |
-| REQ-08 | CPU joga com as mesmas regras; três dificuldades por erro de mira | `match.gd.choose_cpu_shot`, `combat.gd.predict` | Modelos e seis partidas completas |
+| REQ-07 | Três armas; especial no terceiro turno próprio, uma vez por partida | `match.gd.weapon_rules/can_use_special` | Modelos + roteiro manual para apresentação da especial |
+| REQ-08 | CPU joga com as mesmas regras; três dificuldades por erro de mira | `match.gd.choose_cpu_shot/predict_shot`, `combat.gd` | Modelos e oito partidas completas |
 | REQ-09 | Pausa congela relógio/voo; ajuda, resultado, revanche e menu navegáveis | `game.gd` | `test_scene.gd` + roteiro manual |
 | REQ-10 | Apelido, XP, nível e vitórias locais; recompensa uma vez por resultado | `profile.gd`, `game.gd` | Persistência/corrupção/idempotência e cena |
 | REQ-11 | Arte e efeitos originais, sem copiar recursos do Gunbound | `assets/art/`, terreno procedural, `sound.gd` | `docs/ART.md`, capturas visuais |
@@ -69,6 +69,17 @@ REQ-19 parcialmente atendido: Bigfoot selecionável com atlas, piloto padrão,
 quadros e projéteis originais na versão 0.3.0. Ver `BIGFOOT_0_3.md`. Vida 1100,
 movimento 90. Armas mantêm as regras do protótipo; salvas oficiais e outros
 mobiles pendentes. Todos os assets restantes estão em `.tools/source-assets/content/`.
+
+## Mage 0.4
+
+REQ-19: Carapaça substituído por Mage (índice 1), selecionável e adversário do
+Bigfoot. Atlas/piloto, lasers, orbe, efeitos e sons originais preservados. Vida760,
+escudo220 regenerando20 por turno próprio; S1/S2/SS e mira15–50° descritos em
+[MAGE_0_4.md](MAGE_0_4.md). Regras por ator alimentam CPU, voo, fila e HUD. S2 tem
+dois colliders em hélice; SS EMP zera escudos próximos antes do dano. Delays
+normalizados ao protótipo. Bigfoot permanece arena60/menu180 e armas atuais.
+Gravidade/força/vento e disponibilidade de SS continuam adaptados ao protótipo.
+Não reproduz itens, Thor, resistências ou cliente completo de Gunbound.
 
 ## Fora da entrega
 

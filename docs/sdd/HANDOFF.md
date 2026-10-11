@@ -1,6 +1,58 @@
-# Hand-off — Brisa de Aço 0.3.1
+# Hand-off — Brisa de Aço 0.4.0
 
-## Ajuste atual 0.3.1: Bigfoot menor
+## Entrega atual 0.4.0: Mage
+
+Pedido: implementar o outro veículo como Mage do Gunbound com os assets recebidos.
+Mage substitui Carapaça (índice 1), selecionável e adversário do Bigfoot padrão.
+Bigfoot mantém escala de arena 60/menu 180. Fonte/escopo em `MAGE_0_4.md`; REQ-19
+avança com Mage, sem concluir ataques oficiais do Bigfoot ou os demais mobiles.
+
+Mage usa atlas/piloto/offsets, lasers/orbe, efeitos e seis sons originais. PNGs,
+MP3s e JSON intactos, hashes/avisos em `assets/openbound/`. `mobile_sprite.gd`
+compartilha leitor de atlas; `mage_sprite.gd` traz dados e efeitos específicos.
+Vida 760, escudo 220, regeneração 20 por turno próprio até 220 + HP perdido,
+mira 15–50°. Tiro 1: laser 150; tiro 2: dois lasers helicoidais de 200; SS: orbe
+200 com EMP zerando escudos próximos. Dano/raios/delays no plano. SS usa valor
+executado do fork (200, apesar da constante 300 não usada). Delays normalizados
+por 7,5; força/gravidade/vento e desbloqueio SS mantêm adaptações do protótipo.
+Não declarar reprodução integral do cliente Gunbound.
+
+`weapon_rules/aim_limits` abastecem modelo, CPU, fila e HUD. Hélice usa
+`Combat.sample_position`; `hit_pos` guarda collider físico real. Salvas previstas
+executam o mesmo voo em cópias de máscara/atores, incluindo crateras e mortes,
+sem imagens GPU. Revisão encontrou divergência quando o primeiro laser abre
+passagem para o segundo; corrigida e revisada com regressão RED→GREEN da parede.
+HUD mostra escudo, limites reais de mira e nomes de arma. Pausa congela hélice e
+quadros; carga da CPU segue plano/arma. Morte Mage completa antes do resultado.
+
+Validação fresca: **181 checks** (40 + 28 modelos, 13 + 21 cena, 28 Bigfoot,
+36 Mage e 15 cena Mage), zero falhas. Oito partidas naturais seeds 81–88 concluíram
+em **24/10/8/17/17/8/29/19 tiros**. Revisão independente aprovada após correção.
+Capturas GPU em `docs/mage-{menu,arena,charge,s2,ss,impact}.png`; Bigfoot capturas
+atualizadas com Mage adversário. Impacto Mage é fixture visual controlada; partidas
+naturais são evidência separada. Não houve teste manual completo de mouse.
+
+App/ZIP **0.4.0 Universal arm64/x86_64** reexportados pelo script. Assinatura
+profunda/estrita válida; runtime independente headless iniciou sem erros. O
+runtime release não aceita `--script`; a validação detalhada do PCK foi feita
+carregando somente o pacote exportado em projeto vazio, com perfil isolado: JSON,
+seis áudios, estado Mage e disparo carregados, zero falhas. Avisos incluídos.
+Versionamento local com tag `v0.4.0`; nenhum remoto/push/publicação.
+
+Novos comandos, além das suites anteriores:
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mage.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_mage_scene.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_mage.gd
+```
+
+Perfis de teste/captura isolados em `.tools/`. Aplicativo e ZIP nos caminhos do
+baseline abaixo; usuário deve validar funcionalmente seguindo `docs/VALIDACAO.md`.
+Próximo passo é feedback da entrega, sem ampliar rede/ranking/mobile ou demais
+mobiles automaticamente. Seções abaixo preservam evidências e limites históricos.
+
+## Ajuste anterior 0.3.1: Bigfoot menor
 
 Pedido do usuário: diminuir o carro e realizar versionamento. Bigfoot e piloto
 reduzidos juntos de 80 para 60 unidades visuais na arena (25%) e de 230 para 180
