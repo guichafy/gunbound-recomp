@@ -22,22 +22,23 @@ func _initialize() -> void:
 		finish()
 		return
 	check(model.actors[1].hp == 760 and model.actors[1].shield == 220, "Mage starts with original life and shield")
-	# Keep this shield fixture on Escaravelho's 145-damage pulse; Bigfoot now has its own attacks.
-	model.start(0, 1, 42)
+	# Bigfoot's actual 90-damage bomb exercises Mage shield absorption.
+	model.start(2, 1, 42)
 	# Real explosions exercise shield absorption, not a mocked damage handler.
 	model.shot_actor = 0
 	model.shot_weapon = 0
 	var target: Vector2 = model.actors[1].pos
 	model.explode(target)
-	check(model.actors[1].hp == 760 and model.actors[1].shield == 75, "Shield absorbs an entire direct pulse")
+	check(model.actors[1].hp == 760 and model.actors[1].shield == 130, "Shield absorbs an entire direct pulse")
 	model.explode(target)
-	check(model.actors[1].shield == 0 and model.actors[1].hp == 690, "Damage overflow reaches health")
+	model.explode(target)
+	check(model.actors[1].shield == 0 and model.actors[1].hp == 710, "Damage overflow reaches health")
 	model.active = 1
 	model.begin_turn()
 	check(model.actors[1].shield == 20, "Mage regenerates shield on its own turn")
-	model.actors[1].shield = 280
+	model.actors[1].shield = 260
 	model.begin_turn()
-	check(model.actors[1].shield == 290, "Shield cap compensates missing health as in the fork")
+	check(model.actors[1].shield == 270, "Shield cap compensates missing health as in the fork")
 	model.start(1, 1, 43)
 	model.fire(80, 65, 1)
 	check(model.last_shots[0].angle == 50.0, "Mage clamps aim to original 50 degree maximum")
@@ -105,7 +106,7 @@ func _initialize() -> void:
 		model.events.clear()
 		if model.phase != "flight":
 			break
-	check(wall_hits.size() == 2 and model.actors[1].hp < 580, "Both components resolve, with second damaging target behind wall")
+	check(wall_hits.size() == 2 and model.actors[1].hp < 1100, "Both components resolve, with second damaging target behind wall")
 	var minimum := INF
 	for point in wall_hits:
 		minimum = minf(minimum, point.distance_to(predicted_wall.position))
@@ -116,7 +117,7 @@ func _initialize() -> void:
 	model.shot_actor = 0
 	model.shot_weapon = 2
 	model.explode(model.actors[1].pos + Vector2(80, 0))
-	check(model.actors[1].shield == 0 and model.actors[1].hp == 580, "EMP drains nearby shield without inventing distant health damage")
+	check(model.actors[1].shield == 0 and model.actors[1].hp == 1100, "EMP drains nearby shield without inventing distant health damage")
 	model.start(1, 2, 47)
 	var shot: Dictionary = model.choose_cpu_shot()
 	check(shot.angle >= 15.0 and shot.angle <= 50.0, "CPU respects Mage aim limits")

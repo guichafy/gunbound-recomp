@@ -1,6 +1,64 @@
-# Hand-off — Brisa de Aço 0.6.3
+# Hand-off — Brisa de Aço 0.6.4
 
-## Entrega atual 0.6.3: proporção e composição
+## Entrega atual 0.6.4: perna oculta e roster Gunbound
+
+Usuário aprovou proporção0.6.3 e pediu esconder a perna distante do piloto;
+remover Escaravelho por não seguir Gunbound. REQ-19/20/12 e REQ-02/08;
+plano SIDE_PILOT_ROSTER_0_6_4.md. Progresso REQ-10 e pausa REQ-09 preservados.
+
+GPT Images editou mestre anterior: pilot_side.png1254×1254 RGBA, apenas a perna
+próxima visível. Far-leg era conteúdo interno do PNG, ordem de camadas não o
+ocultava. Origem/prompt em assets/hd/SIDE_PILOT_PROMPT.md e GENERATION.json.
+PNG/alpha copiados intactos. Fonte anterior preservada. Registro271/153/703/977
+inclui4px extra inferiores para não cortar; conserva padding esquerdo/assento.
+MobileRig só muda piloto, sem alterar proporção/animações0.6.3 ou tiros0.6.2.
+
+Somente Mage(ID1) e Bigfoot(ID2). VEHICLES Dictionary, PLAYABLE_VEHICLES=[1,2];
+UI usa ID separado do slot, normalize_vehicle mapeia ID0/inválido para Bigfoot.
+CPU recebe3−id. Não reindexar. Removidos registro/armas/render/carregamento
+Escaravelho ativos. Combat mantém integrador comum, mesma velocidade dos dois;
+tabela de armas genéricas removida. Ícones apontam ao piloto; scarab/tortoise
+históricos preservados no Git mas excluídos do pacote. Perfil/terreno/projéteis/
+peças/áudio originais e HD anteriores sem alterações. Perfil não guarda mobile.
+
+Validação fresca: **825 checks, zero falhas** em13suites (251modelos/cenas/ataques,
+193HD,240animação,108piloto/tiros,33roster). Regressão roster/perfil RED26/6,
+GREEN33/0; IDs/menu/oponentes/armas/dificuldades/registro. Fixtures antigas com
+Escaravelho migraram para regras reais: escudo com bombas90, EMPcontraBigfoot,
+retorno do laser em máscara inclinada legal50°, preview com delays Mage100/120.
+Preservar essas coberturas; não reintroduzir mobile removido só para teste.
+
+**10 partidas naturais** seeds81–90, alternando Mage/Bigfoot e dificuldades;
+29/18/15/22/26/9/34/9/11/26 tiros, zero falhas. CPU atua com ambos, inclusive
+Bigfoot contra Mage. Perfis isolados nos testes, antes de adicionar cena.
+Logs locais .tools/side-roster-final-*. Revisão independente sem bugs concretos.
+144framesGPU/24fps em docs/occlusion, PNG1600×1080 e MP4/GIF: ambos mobiles,
+dois sentidos, encosta−30°, repouso/movimento/carga/recuo/dano/destruição.
+16capturas reais de menu/arena/tiros/impactos atualizadas em docs/hd.
+Galeria usa poses controladas; não prova contato físico em todas as encostas.
+Sem teste manual completo de áudio/input; aceitação visual do usuário pendente.
+
+App/ZIP Universal0.6.4 reexportados por build_macos.py. Assinatura profunda/
+estrita, runtime e PCK isolado verificados: recursos/piloto/recortes, menu2,
+oponente de Mage, salvas4/6/8 e ausência scarab/tortoise. Git local/tagv0.6.4;
+nenhum remoto/push/publicação.
+
+```sh
+mkdir -p .tools
+python3 scripts/catalog_hd_assets.py
+/Applications/Godot.app/Contents/MacOS/Godot --headless --editor --path . --import
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_roster.gd
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_matches.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_side_pilot.gd
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_hd_assets.gd
+python3 scripts/build_macos.py
+```
+
+Próximo passo: usuário validar perna/sobreposição dos dois mobiles e seleção
+no app. Arte HD adaptada; não anunciar reprodução exata de todos os sistemas.
+Histórico abaixo.
+
+## Entrega anterior 0.6.3: proporção e composição
 
 Feedback: tiros0.6.2 corrigidos, composição piloto/carrinho ainda inadequada.
 REQ-19/20/12; plano COMPOSITION_FIX_0_6_3.md. Piloto unido tinha altura29,

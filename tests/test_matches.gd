@@ -7,14 +7,7 @@ func _initialize() -> void:
 	var started := Time.get_ticks_msec()
 	for seed_value in [81, 82, 83, 84, 85, 86, 87, 88, 89, 90]:
 		var model = Match.new()
-		model.start(1 if seed_value >= 89 else (2 if seed_value >= 87 else seed_value % 2), seed_value % 3, seed_value)
-		if seed_value >= 89:
-			# Exercise Bigfoot as CPU opponent of Mage, including delayed salvos.
-			model.actors[1].vehicle = 2
-			model.actors[1].hp = 1100
-			model.actors[1].max_hp = 1100
-			model.actors[1].shield = 0
-			model.actors[1].max_shield = 0
+		model.start(1 if seed_value % 2 else 2, seed_value % 3, seed_value)
 		var shots := 0
 		for frame in range(50000):
 			if model.phase == "finished":

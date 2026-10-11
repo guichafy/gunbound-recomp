@@ -14,12 +14,12 @@ func _initialize() -> void:
 
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.profile = load("res://scripts/profile.gd").new("res://.tools/bigfoot-profile.json")
 	root.add_child(scene)
 	scene.sound.muted = true
-	scene.profile = load("res://scripts/profile.gd").new("res://.tools/bigfoot-profile.json")
-	check(scene.vehicle_buttons.size() == 3, "Menu offers a real third vehicle")
+	check(scene.vehicle_buttons.size() == 2, "Menu offers Bigfoot and Mage only")
 	check(ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"), "Original atlas animation renderer is available")
-	if scene.vehicle_buttons.size() < 3 or not ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"):
+	if scene.vehicle_buttons.size() < 2 or not ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"):
 		scene.queue_free()
 		await process_frame
 		quit(1)
@@ -27,7 +27,7 @@ func run() -> void:
 	scene.select_vehicle(2)
 	scene.start_match()
 	check(scene.model.VEHICLES[scene.model.actors[0].vehicle].name == "Bigfoot", "Selection starts match with Bigfoot")
-	check(scene.model.actors[1].vehicle >= 0 and scene.model.actors[1].vehicle < 3, "CPU index is valid with third vehicle")
+	check(scene.model.actors[1].vehicle == 1, "Bigfoot faces Mage")
 	var atlas = load("res://scripts/bigfoot_sprite.gd").new()
 	check(atlas.texture.get_size() == Vector2(2580, 3120), "Original atlas loaded with full dimensions")
 	check(atlas.frame_index("idle", 0.0, 0, false) == 0, "Idle begins with original first frame")

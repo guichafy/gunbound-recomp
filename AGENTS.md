@@ -6,9 +6,9 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.6.3 em Godot 4.7.2 + GDScript. Escopo:
-desktop macOS, treino offline 1×1 contra CPU, arte do protótipo + Bigfoot/Mage originais
-e progresso local.
+Protótipo 0.6.4 em Godot 4.7.2 + GDScript. Escopo:
+desktop macOS, treino offline 1×1 contra CPU, apenas Bigfoot/Mage com derivados HD
+e progresso local. Escaravelho foi removido por solicitação do usuário.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
 no roadmap; não os implemente sem uma nova solicitação. A engine deve preservar
 a possibilidade de exportar para macOS, Windows, Linux, Android e iOS.
@@ -96,3 +96,14 @@ não mais altura29. Caixas/assentos/arma/rodas em sample compartilhados pelo dra
 piece preserva aspecto e camadas chassis/piloto/arma/rodas dão encaixe. Menu/arena
 mesmos parâmetros. Tiros preservados. tests/capture_mobile_composition.gd
 compara original/HD e poses em dois sentidos; docs/composition contém PNG/MP4/GIF.
+
+## Roster/perfil0.6.4 — estado atual
+
+Só Mage(ID1) e Bigfoot(ID2). Escaravelho retirado; não reintroduzir ID0.
+VEHICLES é Dictionary; PLAYABLE_VEHICLES separa slots dos IDs. normalize_vehicle
+mapeia IDs inválidos para2; CPU sempre3−id. Não alterar IDs restantes.
+Piloto ativo é pilot_side.png com perna distante oculta, mesmo registro/assento;
+ler SIDE_PILOT_ROSTER_0_6_4.md. PNG anterior preservado. Captura capture_side_pilot.gd
+144frames/PNG/MP4/GIF em docs/occlusion; test_roster.gd e suites existentes.
+Assets scarab/tortoise mantidos como histórico, excluídos do export macOS;
+ícone agora piloto. Progresso local não inclui mobile selecionado e foi preservado.

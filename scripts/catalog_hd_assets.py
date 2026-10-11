@@ -6,7 +6,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 GRIDS = {"bigfoot": (4, 8), "mage": (4, 8), "rider": (4, 2),
-         "shots": (4, 6), "effects": (6, 6), "heroes": (2, 1), "emp": (1, 1), "mobile_parts": (3, 2), "pilot_seated": (1, 1), "projectile_heads": (3, 2)}
+         "shots": (4, 6), "effects": (6, 6), "heroes": (2, 1), "emp": (1, 1), "mobile_parts": (3, 2), "pilot_seated": (1, 1), "projectile_heads": (3, 2), "pilot_side": (1, 1)}
 result = {}
 for name, (columns, rows) in GRIDS.items():
     path = ROOT / "assets" / "hd" / f"{name}.png"
@@ -33,6 +33,10 @@ for name, (columns, rows) in GRIDS.items():
     result[path.name] = {"size": list(image.size), "grid": [columns, rows],
                          "alpha_threshold": 8, "regions": regions,
                          "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+    if name == "pilot_side" and image.size == (1254, 1254):
+        # Preserve the approved master's registration frame even though the
+        # hidden far leg leaves transparent space at its left edge. No pixel edits.
+        result[path.name]["regions"] = [[271, 153, 703, 977]]
 # Stable flame-only pieces from the approved old shot artwork. Metadata only;
 # exclude the blue/red head at the right boundary, not re-render PNG pixels.
 shot_path = ROOT / "assets" / "hd" / "shots.png"

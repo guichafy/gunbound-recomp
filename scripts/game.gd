@@ -21,8 +21,6 @@ var root: Control
 var overlay: Control
 var overlay_kind := ""
 var background: Texture2D
-var sprites: Array[Texture2D] = []
-var regions: Array[Rect2] = []
 var nickname_input: LineEdit
 var vehicle := 2
 var cpu_difficulty := 1
@@ -74,11 +72,6 @@ var queue_detail: Label
 
 func _ready() -> void:
 	background = load("res://assets/art/background.png")
-	for path in ["res://assets/art/scarab.png", "res://assets/art/tortoise.png"]:
-		var texture: Texture2D = load(path)
-		sprites.append(texture)
-		# Ignore faint generated glow padding; retain the original PNG unchanged.
-		regions.append(Rect2(336, 90, 895, 813) if sprites.size() == 1 else Rect2(215, 151, 1112, 824))
 	profile.load_profile()
 	sound = Sound.new()
 	add_child(sound)
@@ -104,7 +97,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.6.3", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.6.4", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "BRISA\nDE AÇO", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -133,8 +126,9 @@ func show_menu() -> void:
 	card.add_child(nickname_input)
 	ui.label(card, "ESCOLHA SEU VEÍCULO", Vector2(28, 214), Vector2(364, 22), 12, ui.TEAL, true)
 	vehicle_buttons.clear()
-	for index in range(Match.VEHICLES.size()):
-		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + index * 124, 246), Vector2(116, 48), func(): select_vehicle(index))
+	for slot in range(Match.PLAYABLE_VEHICLES.size()):
+		var index: int = Match.PLAYABLE_VEHICLES[slot]
+		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + slot * 186, 246), Vector2(178, 48), func(): select_vehicle(index))
 		button.add_theme_font_size_override("font_size", 14)
 		vehicle_buttons.append(button)
 	vehicle_info = ui.label(card, "", Vector2(28, 303), Vector2(364, 50), 15, ui.MUTED)
@@ -156,11 +150,12 @@ func show_menu() -> void:
 	queue_redraw()
 
 func select_vehicle(index: int) -> void:
+	index = Match.normalize_vehicle(index)
 	vehicle = index
 	for j in range(vehicle_buttons.size()):
-		vehicle_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if j == index else Color("24444e"), 9, ui.TEAL if j == index else Color("47626a")))
+		vehicle_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if Match.PLAYABLE_VEHICLES[j] == index else Color("24444e"), 9, ui.TEAL if Match.PLAYABLE_VEHICLES[j] == index else Color("47626a")))
 	var data: Dictionary = Match.VEHICLES[index]
-	var description: String = ["Ágil, com recuperação mais rápida.", "220 de escudo · duplo laser e especial EMP.", "T1: 4 bombas · T2: 6 · SS: 8 bombas."][index]
+	var description := "220 de escudo · duplo laser e especial EMP." if index == 1 else "T1: 4 bombas · T2: 6 · SS: 8 bombas."
 	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), description]
 	queue_redraw()
 
@@ -381,15 +376,15 @@ func consume_events() -> void:
 					weapon = 0
 			"fire":
 				if model.actors[event.actor].vehicle != 2:
-					sound.play("fire", mage.shoot_sounds[event.weapon] if model.actors[event.actor].vehicle == 1 else null)
+					sound.play("fire", mage.shoot_sounds[event.weapon])
 			"projectile_launch":
 				if event.vehicle == 2:
 					sound.play("fire", bigfoot.shoot_sounds[event.weapon])
 			"explosion":
-				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": event.get("vehicle", 0), "age": 0.0})
+				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": event.get("vehicle", 2), "age": 0.0})
 				shake = 7.0
 				var original: AudioStream = null
-				if event.get("vehicle", 0) in [1, 2]:
+				if event.get("vehicle", 2) in [1, 2]:
 					original = (mage if event.vehicle == 1 else bigfoot).blast_sounds[event.weapon]
 				sound.play("explosion", original)
 			"damage":
@@ -585,7 +580,7 @@ func _draw() -> void:
 		draw_rect(Rect2(0, 0, 750, 800), Color(0.035, 0.13, 0.17, 0.30))
 		draw_circle(Vector2(342, 617), 157.0, Color(0.93, 0.96, 0.87, 0.14))
 		draw_arc(Vector2(342, 617), 169.0, 0.1, TAU - 0.4, 90, Color(0.78, 0.95, 0.88, 0.45), 1.5, true)
-		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 180.0 if vehicle in [1, 2] else 270.0, 1)
+		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 180.0, 1)
 		return
 	if model.terrain == null:
 		return
@@ -620,16 +615,11 @@ func _draw() -> void:
 			bigfoot.draw_projectile(self, projectile, model.shot_weapon, offset)
 			draw_set_transform(offset)
 			continue
-		draw_circle(projectile.pos, 11.0, Color(color, 0.18))
-		draw_circle(projectile.pos, 5.0, color)
-		draw_circle(projectile.pos + Vector2(-1, -1), 2.0, Color.WHITE)
 	for effect in effects:
 		if effect.get("vehicle", 0) == 1:
 			mage.draw_effect(self, effect, offset)
 		elif effect.get("vehicle", 0) == 2:
 			bigfoot.draw_effect(self, effect, offset)
-		else:
-			art.draw_explosion(self, effect)
 	draw_set_transform(offset)
 	for item in floating:
 		var pos: Vector2 = item.pos + Vector2(-22, -70 - float(item.age) * 34.0)
@@ -642,19 +632,13 @@ func _draw() -> void:
 		draw_style_box(ui.box(Color(0.05, 0.15, 0.19, minf(0.9, banner_time)), 10), Rect2(640 - width / 2, 176, width, 42))
 		draw_string(ui.bold, Vector2(664 - width / 2, 202), banner_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, Color(ui.CREAM, minf(1.0, banner_time)))
 
-func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
+func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, _scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
 	if kind == 1:
 		mage.draw(self, pos, width, facing, rotation, mage.frame_index("idle", elapsed, 0, false), color)
 		return
 	if kind == 2:
 		bigfoot.draw(self, pos, width, facing, rotation, bigfoot.frame_index("idle", elapsed, 0, false), color)
 		return
-	var region := regions[kind]
-	var height := width * region.size.y / region.size.x
-	var rect := Rect2(-width * 0.5, -height + width * 0.23, width, height)
-	draw_set_transform(pos, rotation, Vector2(facing, 1) * scale_amount)
-	draw_texture_rect_region(sprites[kind], rect, region, color)
-	draw_set_transform(Vector2.ZERO)
 
 func draw_aim_guide() -> void:
 	var center: Vector2 = model.cannon_pivot(0)

@@ -70,3 +70,11 @@ Terreno, canhão móvel, partículas, mira, barras e menus são desenhados pela 
 Nenhuma imagem nova gerada/editada. Corrigidos tamanho relativo, assento,
 proporção das peças e camadas no rig; referência é o conjunto original.
 Comparação GPU e prévias em docs/composition; tiros aprovados preservados.
+
+## Perfil0.6.4
+
+GPT Images editou pilot_seated.png para esconder totalmente a perna distante.
+Novo pilot_side.png1254×1254 RGBA, pixels/alpha copiados intactos. Fonte anterior
+preservada; metadados conservam registro para não mover assento/mãos.
+Prompt/origem em assets/hd/SIDE_PILOT_PROMPT.md. Scarab/tortoise são históricos
+inativos e excluídos do aplicativo; apenas Bigfoot/Mage estão no jogo.

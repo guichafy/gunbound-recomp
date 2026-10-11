@@ -20,9 +20,9 @@ func _initialize() -> void:
 
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.profile = load("res://scripts/profile.gd").new("res://.tools/refinement-profile.json")
 	root.add_child(scene)
 	scene.sound.muted = true
-	scene.profile = load("res://scripts/profile.gd").new("res://.tools/refinement-profile.json")
 	scene.start_match()
 	key(scene, true)
 	for i in range(14):

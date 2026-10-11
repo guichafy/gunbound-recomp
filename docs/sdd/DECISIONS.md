@@ -138,3 +138,16 @@ anteriores pela relação44px de piloto nativo/hulls49/46. Recalibrar canhão e
 rodas, preservar aspecto também das peças do veículo e sobreposição natural.
 Não gerar novos sprites nem alterar tiros aprovados. Testes temporais anteriores
 não mediam proporção relativa; adicionar regressão e comparação GPU original/HD.
+
+## Perfil e roster0.6.4
+
+ADR-038 — adotada: ocultar perna distante no mestre GPT Images. Ordem de camadas
+não resolve sobreposição dentro de um PNG inteiro. Novo pilot_side preserva
+pilot_seated e registro do assento, com4px extra embaixo para evitar corte;
+sem máscara por código. Substitui mestre ativo de ADR-034, proporção ADR-037 mantida.
+
+ADR-039 — adotada por solicitação explícita: remover Escaravelho do jogo ativo.
+Preservar IDs Mage1/Bigfoot2 em Dictionary e separar slots UI, normalizar ID
+antigo/inválido para Bigfoot. CPU sempre outro mobile. Remover armas/render
+exclusivos e excluir PNGs scarab/tortoise do pacote, mantendo histórico no Git.
+Substitui roster de3 do baseline. Não reindexar mobiles nem alterar progresso.

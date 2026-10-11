@@ -39,5 +39,13 @@
       }
     },
     "note": "PNGs/alpha intactos. Piloto completo 1×1 e seis cabeças constantes 3×2. Chamas recortadas por metadados do shots.png anterior, sem cabeça. Animação contínua por transformações, sem alternar identidade do tiro."
+  },
+  "side_pilot_0_6_4": {
+    "tool": "GPT Images built-in imagegen",
+    "source": "pilot_seated.png",
+    "asset": "pilot_side.png",
+    "origin": "exec-5f6ffd29-db98-4e93-9fca-68f9b265173c.png",
+    "prompt": "SIDE_PILOT_PROMPT.md",
+    "note": "Perna distante inteiramente oculta; PNG/alpha intactos, registro anterior preservado com4px extra no limite inferior."
   }
 }

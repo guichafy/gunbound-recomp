@@ -3,18 +3,13 @@ extends RefCounted
 
 const GRAVITY := 260.0
 const STEP := 1.0 / 120.0
-const WEAPONS := [
-	{"name": "Pulso", "damage": 145.0, "radius": 46.0, "delay": 100.0, "speed": 1.0, "count": 1, "color": Color("a2edf0")},
-	{"name": "Impacto", "damage": 210.0, "radius": 62.0, "delay": 155.0, "speed": 0.93, "count": 1, "color": Color("ffc080")},
-	{"name": "Tempestade", "damage": 105.0, "radius": 43.0, "delay": 210.0, "speed": 1.04, "count": 3, "color": Color("f2a8dd")}
-]
 
 static func advance(position: Vector2, velocity: Vector2, wind: float, delta: float) -> Dictionary:
 	var acceleration := Vector2(wind * 1.5, GRAVITY)
 	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
 
-static func launch_velocity(angle: float, power: float, facing: int, weapon: int, rotation: float = 0.0, power_offset: float = 0.0) -> Vector2:
-	var speed := lerpf(180.0, 660.0, (clampf(power, 15.0, 100.0) + power_offset) / 100.0) * float(WEAPONS[weapon].speed)
+static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0) -> Vector2:
+	var speed := lerpf(180.0, 660.0, (clampf(power, 15.0, 100.0) + power_offset) / 100.0)
 	var radians := deg_to_rad(clampf(angle, 10.0, 85.0))
 	return Vector2(cos(radians) * facing, -sin(radians)).rotated(rotation) * speed
 

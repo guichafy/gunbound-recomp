@@ -14,6 +14,7 @@ func _initialize() -> void:
 
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.profile = load("res://scripts/profile.gd").new("res://.tools/smoke-profile.json")
 	root.add_child(scene)
 	if scene.get("sound") != null:
 		scene.sound.muted = true
@@ -22,7 +23,6 @@ func run() -> void:
 		quit(1)
 		return
 	check(scene.screen == "menu" and scene.nickname_input != null, "Menu shows nickname and vehicle controls")
-	scene.profile = load("res://scripts/profile.gd").new("res://.tools/smoke-profile.json")
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
 	check(scene.health_bars[0].size.y <= 10.0, "Life bar stays clear of numeric life label")

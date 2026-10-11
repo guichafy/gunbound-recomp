@@ -202,3 +202,20 @@ As peças são contidas em caixas preservando aspecto. Camadas chassis→piloto�
 arma→rodas; suspensão afeta assento/arma, rodas seguem o apoio. O conjunto
 recebe flip/inclinação/escala uniformes; animações/tiros/regras preservados.
 Metadados do layout usados pelo draw e pelo teste de composição.
+
+## Perfil/roster0.6.4
+
+Piloto mestre pilot_side.png1254×1254, perna distante oculta no PNG por GPT Images.
+Registro271/153/703/977 preserva caixa anterior à esquerda/topo/direita, incluindo
+4px adicionais embaixo para conter a nova silhueta sem cortar. Padding vazio
+esquerdo impede recentrar pelo alpha e deslocar mãos/quadris. Altura/hip anchor
+anteriores mantidos. Apenas troca de fonte, animações/tiros inalterados.
+
+Match.VEHICLES é Dictionary com IDs1Mage/2Bigfoot; PLAYABLE_VEHICLES=[1,2] ordena
+UI. normalize_vehicle converte ID0/−1/99 em2. Start normaliza e CPU usa3−id.
+UI aplica ID nas closures/seleção; dificuldade e arma continuam seus próprios
+slots0/1/2. Registro/render/armas genéricas Escaravelho saíram do caminho ativo;
+Combat guarda só física compartilhada, sem tabela de armas genéricas.
+Física de Mage/Bigfoot preserva velocidade base1, parâmetros próprios e previsões.
+Assets anteriores preservados mas scarab/tortoise excluídos do export. Ícone novo.
+Perfil não persiste veículo, apenas apelido/XP/vitórias/partidas/IDs recompensados.

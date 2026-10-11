@@ -10,10 +10,10 @@ func _initialize() -> void:
 	call_deferred("run")
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.profile = load("res://scripts/profile.gd").new("res://.tools/mage-scene-profile.json")
 	root.add_child(scene)
 	scene.set_process(false)
 	scene.sound.muted = true
-	scene.profile = load("res://scripts/profile.gd").new("res://.tools/mage-scene-profile.json")
 	scene.select_vehicle(1)
 	scene.start_match()
 	check(scene.angle_slider.min_value == 15 and scene.angle_slider.max_value == 50, "Mage HUD uses legal aim range")
@@ -39,7 +39,7 @@ func run() -> void:
 	scene.consume_events()
 	scene.update_hud()
 	check(scene.animation_state(0) == "hurt", "Shield impact animates Mage hurt pose")
-	check("75" in scene.hp_labels[0].text, "HUD updates shield after real impact")
+	check("130" in scene.hp_labels[0].text, "HUD updates shield after real impact")
 	scene.start_match()
 	check(scene.model.actors[0].shield == 220 and scene.effects.is_empty(), "Restart resets shield and effects")
 	scene.select_weapon(1)

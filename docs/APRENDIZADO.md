@@ -24,7 +24,7 @@ A força determina a velocidade inicial. O ângulo divide essa velocidade entre 
 
 O integrador calcula `posição + velocidade × tempo + aceleração × tempo² / 2`, depois atualiza a velocidade. Essa equação é exata para a aceleração constante usada neste protótipo. O passo fixo mantém o mesmo comportamento quando a taxa de desenho varia.
 
-Para experimentar, mude `GRAVITY` e os dados de `WEAPONS` em `combat.gd`. Aumentar gravidade encurta o alcance; aumentar velocidade alonga o arco. Não é necessário alterar o desenho do projétil para mudar suas regras.
+Para experimentar, mude `GRAVITY` e os limites de velocidade em `combat.gd`; os dados das armas ficam em `bigfoot_attacks.gd` e `match.gd.MAGE_WEAPONS`. Aumentar gravidade encurta o alcance; aumentar velocidade alonga o arco. Não é necessário alterar o desenho do projétil para mudar suas regras.
 
 ## Terreno destrutível
 
@@ -36,7 +36,7 @@ Os veículos procuram o primeiro chão abaixo deles depois de uma explosão. Nã
 
 ## Como a máquina mira
 
-A máquina experimenta combinações de ângulo e força. Cada candidata é simulada por `Combat.predict`, usando o mesmo passo, gravidade, vento e colisão do disparo real. Ela escolhe o impacto mais próximo do adversário e aplica um erro conforme a dificuldade.
+A máquina experimenta combinações de ângulo e força. Cada candidata é simulada por `Match.predict_shot` em uma cópia da partida e da máscara, com o mesmo avanço de salvas, usando o mesmo passo, gravidade, vento e colisão do disparo real. Ela escolhe o impacto mais próximo do adversário e aplica um erro conforme a dificuldade.
 
 Assim a dificuldade tem uma causa compreensível: mira menos precisa. A máquina não recebe um projétil que teletransporta para o jogador nem aumenta seu dano escondido. Nesta versão ela não planeja deslocamento; esse é um caminho de melhoria separado.
 
@@ -56,7 +56,8 @@ Cada partida tem um identificador. A recompensa registra esse identificador para
 
 | Experimento | Arquivo |
 |---|---|
-| Dano, cratera, velocidade, atraso de armas | `scripts/combat.gd` |
+| Dano, cratera e atraso das armas | `scripts/bigfoot_attacks.gd`, `scripts/match.gd.MAGE_WEAPONS` |
+| Velocidade/gravidade/colisão compartilhadas | `scripts/combat.gd` |
 | Vida e mobilidade dos veículos | `scripts/match.gd` |
 | Formato e aparência do chão | `scripts/terrain.gd` |
 | XP e nível | `scripts/profile.gd` |
@@ -88,3 +89,14 @@ O HUD metálico usa texturas de gradiente geradas por código e compartilhadas,
 sem downloads de skins. Textura/estilo não é recriado a cada quadro. Na revisão,
 um cenário de cratera revelou que o painel lateral podia esconder vida; uma
 regressão reproduziu isso antes de adaptar sua posição.
+
+## IDs e peças do mobile
+
+O roster atual só tem Mage(ID1) e Bigfoot(ID2). O slot do botão não é o ID;
+UI consulta PLAYABLE_VEHICLES e o modelo escolhe o outro como CPU. ID0 foi
+removido; entradas antigas/inválidas normalizam para Bigfoot.
+
+mobile_rig.gd articula peças constantes e piloto inteiro em perfil. A perna
+invisível é ocultada no próprio PNG, pois trocar a ordem de uma imagem inteira
+não muda a sobreposição dentro dela. O catálogo conserva o espaço transparente
+para manter mãos e assento na posição aprovada. Física não usa essas imagens.

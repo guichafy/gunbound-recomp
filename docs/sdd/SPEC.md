@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.6.3
+# Especificação — protótipo 0.6.4
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;
@@ -133,3 +133,10 @@ preservados. Aceitação visual pelo usuário pendente.
 REQ-19/20/12: corrigir proporção relativa piloto/carrinho, tamanho de canhão
 e rodas e encaixe no assento, no menu e arena. Medidas originais são referência
 de composição, PNGs/tiros atuais preservados. Plano em COMPOSITION_FIX_0_6_3.md.
+
+## Perfil do piloto e roster0.6.4 — escopo solicitado
+
+REQ-19/20: perna distante totalmente oculta por perna próxima no piloto HD dos
+dois mobiles, mesma proporção/assento e flip. REQ-02/08: somente Bigfoot/Mage
+selecionáveis e como adversários; Escaravelho removido do jogo ativo.
+Plano SIDE_PILOT_ROSTER_0_6_4.md. Sem novas armas/rede/ranking/mobile.

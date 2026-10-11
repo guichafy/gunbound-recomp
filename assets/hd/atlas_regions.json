@@ -1040,5 +1040,25 @@
       ]
     ],
     "sha256": "335ef48d73c8010e2bc818f0a340d5e765af08b60a9d8a8596c892597859e1ac"
+  },
+  "pilot_side.png": {
+    "size": [
+      1254,
+      1254
+    ],
+    "grid": [
+      1,
+      1
+    ],
+    "alpha_threshold": 8,
+    "regions": [
+      [
+        271,
+        153,
+        703,
+        977
+      ]
+    ],
+    "sha256": "f27df1234dc9ed2bab1a53f66664dbd0b537e0ea49dc480393d1c4ea502af0ac"
   }
 }

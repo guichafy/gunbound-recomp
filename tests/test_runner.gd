@@ -43,7 +43,7 @@ func _initialize() -> void:
 	check(combat.damage_at(0.0, 160.0, 60.0) == 160, "Direct blast applies full damage")
 	check(combat.damage_at(100.0, 160.0, 60.0) == 0, "Blast cannot damage actors beyond radius plus hull")
 	var match_model = match_script.new()
-	match_model.start(0, 1, 42)
+	match_model.start(1, 1, 42)
 	check(match_model.active == 0, "Player starts the match")
 	check(match_model.phase == "aim", "Match starts in aiming phase")
 	check(not match_model.can_use_special(0), "Special is locked before third own turn")
@@ -57,15 +57,15 @@ func _initialize() -> void:
 	check(match_model.active == 0, "Fast shot can retain initiative when opponent delay is larger")
 	match_model.schedule(0, 60.0)
 	check(match_model.active == 1, "Heavier delay gives opponent the next turn")
-	match_model.start(0, 1, 43)
+	match_model.start(1, 1, 43)
 	match_model.tick(31.0)
 	check(match_model.active == 1, "Expired turn passes control to CPU")
-	match_model.start(0, 1, 44)
+	match_model.start(1, 1, 44)
 	var previous_x: float = match_model.actors[0].pos.x
 	match_model.move_actor(1.0, 0.2)
 	check(match_model.actors[0].pos.x > previous_x, "Player movement changes position")
 	check(match_model.movement_left < match_model.movement_budget(), "Movement spends the turn budget")
-	match_model.start(0, 1, 45)
+	match_model.start(1, 1, 45)
 	match_model.fire(45.0, 65.0, 0)
 	check(match_model.phase == "flight", "Fire enters projectile flight phase")
 	var projectiles_before: int = match_model.projectiles.size()
@@ -76,15 +76,22 @@ func _initialize() -> void:
 		if match_model.phase != "flight":
 			break
 	check(match_model.phase != "flight", "Projectile always resolves or exits bounds")
-	match_model.start(0, 1, 46)
+	match_model.start(1, 1, 46)
 	var cpu_shot: Dictionary = match_model.choose_cpu_shot()
 	check(cpu_shot.angle >= 10.0 and cpu_shot.angle <= 85.0, "CPU returns a legal angle")
 	check(cpu_shot.power >= 15.0 and cpu_shot.power <= 100.0, "CPU returns legal power")
-	match_model.start(0, 2, 123)
+	match_model.start(1, 2, 123)
+	# A real -30-degree support makes Mage's legal 50-degree aim steep enough
+	# for wind to return the laser to its shooter after muzzle clearance.
+	for y in range(400):
+		for x in range(640):
+			match_model.terrain.cells[y * 640 + x] = 1 if y * 2 >= 480.0 - (x * 2 - 235.0) * tan(PI / 6.0) else 0
+	match_model.actors[0].pos.y = match_model.terrain.surface_at(235) - 24
+	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - 24
 	match_model.wind = -30.0
-	var returning: Dictionary = combat.predict(match_model.muzzle(0, 78.0), match_model.shot_velocity(0, 78.0, 15.0, 0), -30.0, match_model.terrain, match_model.actors, 0)
+	var returning: Dictionary = combat.predict(match_model.muzzle(0, 50.0), match_model.shot_velocity(0, 50.0, 15.0, 0), -30.0, match_model.terrain, match_model.actors, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")
-	match_model.fire(78.0, 15.0, 0)
+	match_model.fire(50.0, 15.0, 0)
 	for i in range(1600):
 		match_model.tick(1.0 / 120.0)
 		if match_model.phase != "flight":
@@ -94,13 +101,13 @@ func _initialize() -> void:
 		if event.type == "explosion":
 			live_impact = event.position
 	check(Vector2(returning.position).distance_to(live_impact) < 2.0, "Prediction and live shot agree on returning-shell impact")
-	match_model.start(0, 1, 47)
+	match_model.start(1, 1, 47)
 	var foot: Vector2 = match_model.actors[1].pos + Vector2(0, 24)
 	match_model.terrain.carve(foot, 200.0)
 	match_model.settle_actors()
 	match_model.check_end()
 	check(match_model.phase == "finished" and match_model.winner == 0, "Removing all support eliminates CPU by fall")
-	match_model.start(0, 1, 48)
+	match_model.start(1, 1, 48)
 	match_model.actors[0].hp = 0
 	match_model.actors[1].hp = 0
 	match_model.check_end()

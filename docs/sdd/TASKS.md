@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Perfil/roster0.6.4
+
+- [x] Diagnosticar perna distante embutida no mestre; editar via GPT Images.
+- [x] Integrar perfil único sem mudar proporção/assento/tiros, preservar PNGs.
+- [x] Remover Escaravelho ativo, separar IDs/slots e corrigir CPU de Mage.
+- [x] Migrar fixtures reais;825checks e10partidas, zero falhas.
+- [x] Capturas144framesGPU, menu/arena; revisão sem achados bloqueantes.
+- [x] App0.6.4 exportado, assinatura/runtime/PCK isolado; SDD/Git local.
+- [ ] Usuário validar sobreposição/seleção no aplicativo.
+
 ## Composição0.6.3
 
 - [x] Comparar original/HD e localizar escala relativa incorreta.

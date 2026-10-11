@@ -4,11 +4,12 @@ extends RefCounted
 const Terrain = preload("res://scripts/terrain.gd")
 const Combat = preload("res://scripts/combat.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
-const VEHICLES := [
-	{"name": "Escaravelho", "hp": 580, "move": 110.0, "delay": 0.0, "color": Color("65dce4")},
-	{"name": "Mage", "hp": 760, "move": 90.0, "delay": 0.0, "color": Color("a9b7ff")},
-	{"name": "Bigfoot", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("71c0ff")}
-]
+# Stable mobile IDs are independent of menu slots. Removed ID0 is not playable.
+const PLAYABLE_VEHICLES := [1, 2]
+const VEHICLES := {
+	1: {"name": "Mage", "hp": 760, "move": 90.0, "delay": 0.0, "color": Color("a9b7ff")},
+	2: {"name": "Bigfoot", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("71c0ff")}
+}
 # Original Mage metadata from OpenBound, normalized to this prototype's delay units.
 # Copyright (C) 2020, Carlos H.M.S.; reference code GPL-3.0-or-later.
 const MAGE_WEAPONS := [
@@ -26,7 +27,7 @@ var phase := "menu"
 var wind := 0.0
 var clock := 0.0
 var turn_time := 30.0
-var movement_left := 110.0
+var movement_left := 90.0
 var difficulty := 1
 var winner := -1
 var total_turns := 0
@@ -37,7 +38,11 @@ var resolve_wait := 0.0
 var flight_elapsed := 0.0
 var last_shots: Array = [{}, {}]
 
+static func normalize_vehicle(vehicle: int) -> int:
+	return vehicle if VEHICLES.has(vehicle) else 2
+
 func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1) -> void:
+	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
 	else:
@@ -46,7 +51,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1) -> void:
 	terrain.generate()
 	actors.clear()
 	for index in range(2):
-		var kind := vehicle if index == 0 else (1 - vehicle if vehicle < 2 else 1)
+		var kind := vehicle if index == 0 else 3 - vehicle
 		var x := 235.0 if index == 0 else 1045.0
 		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, terrain.surface_at(x) - 24.0), "facing": 1 if index == 0 else -1, "shield": 220 if kind == 1 else 0, "max_shield": 220 if kind == 1 else 0, "ready": 0.0, "turns": 0, "special_used": false})
 	difficulty = clampi(cpu_difficulty, 0, 2)
@@ -118,18 +123,16 @@ func body_rotation(index: int) -> float:
 func weapon_rules(index: int, weapon: int) -> Dictionary:
 	if actors[index].vehicle == 1:
 		return MAGE_WEAPONS[weapon]
-	if actors[index].vehicle == 2:
-		return BigfootAttacks.WEAPONS[weapon]
-	return Combat.WEAPONS[weapon]
+	return BigfootAttacks.WEAPONS[weapon]
 
 func aim_limits(index: int, weapon: int = 0) -> Vector2:
 	if actors[index].vehicle == 2:
 		return BigfootAttacks.AIM_LIMITS[weapon]
-	return Vector2(15, 50) if actors[index].vehicle == 1 else Vector2(10, 85)
+	return Vector2(15, 50)
 
 func shot_velocity(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0) -> Vector2:
 	var limits := aim_limits(index, weapon)
-	var velocity := Combat.launch_velocity(clampf(angle, limits.x, limits.y), power, actors[index].facing, 0 if actors[index].vehicle in [1, 2] else weapon, body_rotation(index), power_offset)
+	var velocity := Combat.launch_velocity(clampf(angle, limits.x, limits.y), power, actors[index].facing, body_rotation(index), power_offset)
 	# Emitter spread comes after base aim limiting and mirrors with facing.
 	return velocity.rotated(-float(actors[index].facing) * deg_to_rad(angle_offset))
 
@@ -139,8 +142,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 	var emission: Array = BigfootAttacks.salvo(weapon) if actors[index].vehicle == 2 else []
 	if emission.is_empty():
 		for component in range(int(rules.count)):
-			var spread := 0.0 if actors[index].vehicle == 1 else (float(component) - float(rules.count - 1) * 0.5) * 3.0
-			emission.append({"spawn": 0.0, "angle": spread, "power": 0.0})
+			emission.append({"spawn": 0.0, "angle": 0.0, "power": 0.0})
 	for component in range(emission.size()):
 		var entry: Dictionary = emission[component]
 		var original: bool = actors[index].vehicle == 2
@@ -202,7 +204,7 @@ func initiative_preview(weapon: int) -> Array:
 	return [{"actor": first, "ready": ready[first], "delay": maxf(0.0, ready[first] - clock)}, {"actor": 1 - first, "ready": ready[1 - first], "delay": maxf(0.0, ready[1 - first] - clock)}]
 
 func fire(angle: float, power: float, weapon: int) -> bool:
-	if phase != "aim" or weapon < 0 or weapon >= Combat.WEAPONS.size():
+	if phase != "aim" or weapon < 0 or weapon >= MAGE_WEAPONS.size():
 		return false
 	if weapon == 2 and not can_use_special(active):
 		return false

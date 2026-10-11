@@ -1,4 +1,4 @@
-# Validação funcional — Brisa de Aço 0.6.3
+# Validação funcional — Brisa de Aço 0.6.4
 
 ## Piloto e tiros 0.6.2
 
@@ -55,13 +55,13 @@ de 0.2 abaixo permanecem como histórico; o roteiro também serve para 0.3.
 
 ## Roteiro para você
 
-1. Abra o aplicativo, digite seu apelido e inicie com Escaravelho / dificuldade Normal.
+1. Abra o aplicativo, digite seu apelido e inicie com Bigfoot / dificuldade Normal.
 2. Mova com A/D; confirme giro na direção escolhida, rodas animadas, inclinação e redução do movimento. Deslocamento para ao esgotar o orçamento; F permite virar parado.
 3. Ajuste mira e força. Compare a mira local no console com a direção efetiva junto ao canhão; a encosta muda a trajetória. Dispare por botão e observe recuo, vento e turnos.
 4. Segure Espaço e solte para disparar. A força cresce; se chegar a 100%, dispara automaticamente uma vez. Soltar depois não cria outro tiro. O marcador branco indica força anterior.
-5. Selecione Impacto (2). Observe cratera maior, dano e atraso diferente.
+5. Selecione T2(2). Bigfoot lança duas rajadas de3; Mage lança dois lasers em hélice. Observe seus efeitos e atrasos.
 6. Acompanhe o tiro da máquina e tente melhorar seu tiro usando os valores anteriores.
-7. No terceiro turno próprio, use Tempestade (3). Ela dispara três projéteis e não pode ser usada novamente na mesma partida.
+7. No terceiro turno próprio, use SS(3). Bigfoot lança8bombas; Mage lança EMP. Não pode ser usada novamente na mesma partida.
 8. Pause com Esc durante carga ou voo. Aguarde; relógio, força e animações ficam parados. A carga é cancelada; continuar não dispara sozinho. Um tiro em voo continua depois da pausa.
 9. Abra ajuda por H/?; feche. Faça o mesmo na tela de resultado e confirme que revanche/menu continuam disponíveis.
 10. Deixe o tempo de um turno terminar. O jogo deve passar o turno sozinho.
@@ -117,3 +117,11 @@ no assento. Inicie treino, vire e mova em encostas; composição deve girar unid
 sem separar peças ou deformar figura. Teste carga/recuo/dano e pausa. Tiros
 corrigidos em0.6.2 devem manter aparência/animação. Confirmação visual final
 continua a cargo do usuário.
+
+## Perfil e seleção0.6.4
+
+Menu deve mostrar somente Mage/Bigfoot; teste iniciar com cada um e confirme
+que a CPU recebe o outro. Vire os dois: piloto deve apresentar uma perna e um
+pé, sem perna distante atravessando o mobile. Confira encosta, carga, recuo,
+dano/morte e pausa. Proporção/assento permanecem0.6.3; tiros0.6.2 preservados.
+825checks e10partidas passaram; inspeção GPU não substitui aceitação visual.

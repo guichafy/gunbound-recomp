@@ -52,3 +52,9 @@ Composição0.6.3 conserva esses PNGs intactos e recalibra o rig pelas proporç�
 do piloto/veículo original. Altura do piloto54/57 contra base60, canhão e rodas
 menores, novo assento/sobreposição; piece preserva aspecto de cada peça.
 Prévia/comparação GPU em docs/composition; tiros0.6.2 preservados.
+
+0.6.4 usa pilot_side.png: edição GPT Images com perna distante inteiramente
+oculta, resto do mestre preservado. Registro271/153/703/977 contém a figura sem
+corte, mantendo padding esquerdo da fonte anterior para preservar encaixe.
+Prompt/origem em SIDE_PILOT_PROMPT.md/GENERATION.json. PNGs anteriores intactos.
+Prévia montada em docs/occlusion.

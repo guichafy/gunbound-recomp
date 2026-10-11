@@ -14,7 +14,7 @@ func check(condition: bool, description: String) -> void:
 
 func _initialize() -> void:
 	var model = Match.new()
-	model.start(0, 1, 42)
+	model.start(1, 1, 42)
 	model.move_actor(-1.0, 0.1)
 	check(model.actors[0].facing == -1, "Moving left turns the vehicle left")
 	model.move_actor(1.0, 0.1)
@@ -54,12 +54,12 @@ func _initialize() -> void:
 				if model.phase != "flight":
 					break
 			check(observed.distance_to(predicted.position) < 0.1, "Prediction equals live impact on slope")
-	model.start(0, 1, 42)
+	model.start(1, 1, 42)
 	model.terrain.cells.fill(0)
 	check(is_zero_approx(model.body_rotation(0)), "Missing support yields stable zero rotation")
-	model.start(0, 1, 42)
+	model.start(1, 1, 42)
 	model.actors[0].ready = 100.0
-	model.actors[1].ready = 250.0
+	model.actors[1].ready = 215.0
 	model.clock = 100.0
 	var turns: int = model.total_turns
 	var light: Array = model.initiative_preview(0)
@@ -67,9 +67,9 @@ func _initialize() -> void:
 	check(light[0].actor == 0 and heavy[0].actor == 1, "Selected weapon changes predicted next actor")
 	check(model.actors[0].ready == 100.0 and model.total_turns == turns, "Preview does not mutate initiative")
 	var expected_actor: int = heavy[0].actor
-	model.schedule(0, 155.0)
+	model.schedule(0, 120.0)
 	check(model.active == expected_actor, "Preview agrees with actual scheduler")
-	model.start(0, 1, 42)
+	model.start(1, 1, 42)
 	model.actors[1].ready = 100.0
 	check(model.initiative_preview(0)[0].actor == 1, "Initiative ties favor the other actor")
 	finish()

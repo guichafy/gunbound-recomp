@@ -15,7 +15,7 @@ func run() -> void:
 		quit(1)
 		return
 	var Sheet = load("res://scripts/hd_sheet.gd")
-	for entry in [["bigfoot", 4, 8], ["mage", 4, 8], ["rider", 4, 2], ["shots", 4, 6], ["effects", 6, 6], ["heroes", 2, 1], ["emp", 1, 1], ["mobile_parts", 3, 2], ["pilot_seated", 1, 1], ["projectile_heads", 3, 2]]:
+	for entry in [["bigfoot", 4, 8], ["mage", 4, 8], ["rider", 4, 2], ["shots", 4, 6], ["effects", 6, 6], ["heroes", 2, 1], ["emp", 1, 1], ["mobile_parts", 3, 2], ["pilot_seated", 1, 1], ["projectile_heads", 3, 2], ["pilot_side", 1, 1]]:
 		var sheet = Sheet.new("res://assets/hd/" + entry[0] + ".png", entry[1], entry[2])
 		check(sheet.available(), "HD sheet loads: " + entry[0])
 		if not sheet.available():

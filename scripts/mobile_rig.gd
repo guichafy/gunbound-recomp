@@ -7,7 +7,7 @@ var pilot
 func _init(mobile_kind: String) -> void:
 	kind = mobile_kind
 	sheet = Sheet.new("res://assets/hd/mobile_parts.png", 3, 2)
-	pilot = Sheet.new("res://assets/hd/pilot_seated.png", 1, 1)
+	pilot = Sheet.new("res://assets/hd/pilot_side.png", 1, 1)
 func available() -> bool:
 	if not sheet.available() or not sheet.catalog_valid or not pilot.available() or not pilot.catalog_valid:
 		return false
