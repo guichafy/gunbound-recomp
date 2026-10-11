@@ -4,8 +4,11 @@ extends RefCounted
 const GRAVITY := 260.0
 const STEP := 1.0 / 120.0
 
-static func advance(position: Vector2, velocity: Vector2, wind: float, delta: float) -> Dictionary:
-	var acceleration := Vector2(wind * 1.5, GRAVITY)
+# Wind is the OpenBound vector (force units, screen angle); 35 ≈ 45 px/s².
+const WIND_ACCELERATION := 1.3
+
+static func advance(position: Vector2, velocity: Vector2, wind: Vector2, delta: float) -> Dictionary:
+	var acceleration := Vector2(0.0, GRAVITY) + wind * WIND_ACCELERATION
 	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
 
 static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0) -> Vector2:
@@ -54,7 +57,7 @@ static func damage_at(distance: float, damage: float, radius: float) -> int:
 static func sample_position(position: Vector2, velocity: Vector2, age: float, amplitude: float = 0.0, phase: float = 0.0) -> Vector2:
 	return position + Vector2(-velocity.y, velocity.x).normalized() * amplitude * sin(age * TAU + phase)
 
-static func predict(origin: Vector2, velocity: Vector2, wind: float, terrain, actors: Array, ignored: int, amplitude: float = 0.0, phase: float = 0.0) -> Dictionary:
+static func predict(origin: Vector2, velocity: Vector2, wind: Vector2, terrain, actors: Array, ignored: int, amplitude: float = 0.0, phase: float = 0.0) -> Dictionary:
 	var position := origin
 	var speed := velocity
 	var age := 0.0

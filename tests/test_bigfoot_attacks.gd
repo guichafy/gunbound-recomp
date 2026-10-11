@@ -22,7 +22,7 @@ func fixture():
 	model.actors[0].pos = Vector2(200, 350)
 	model.actors[1].pos = Vector2(1100, 700)
 	model.actors[0].turns = 3
-	model.wind = 0
+	model.wind = Vector2.ZERO
 	model.events.clear()
 	return model
 func _initialize() -> void:

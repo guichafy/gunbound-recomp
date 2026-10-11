@@ -108,11 +108,11 @@ func run() -> void:
 
 	# Prediction and the live shell share the map mask (REQ-08).
 	model.start(1, 1, 7)
-	model.wind = 0.0
+	model.wind = Vector2.ZERO
 	var power := 15.0
 	var predicted: Dictionary = {}
 	while power <= 100.0:
-		predicted = Combat.predict(model.muzzle(0, 45.0), model.shot_velocity(0, 45.0, power, 0), 0.0, model.terrain, model.actors, 0)
+		predicted = Combat.predict(model.muzzle(0, 45.0), model.shot_velocity(0, 45.0, power, 0), Vector2.ZERO, model.terrain, model.actors, 0)
 		if bool(predicted.get("hit", false)):
 			break
 		power += 5.0

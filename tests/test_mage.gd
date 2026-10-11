@@ -55,7 +55,7 @@ func _initialize() -> void:
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(640, 300)
 	model.actors[1].pos = Vector2(900, 126)
-	model.wind = 0
+	model.wind = Vector2.ZERO
 	for weapon in [0, 1, 2]:
 		model.actors[0].turns = 3
 		model.actors[0].special_used = false
@@ -88,7 +88,7 @@ func _initialize() -> void:
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(200, 350)
 	model.actors[1].pos = Vector2(480, 153.4247)
-	model.wind = 0
+	model.wind = Vector2.ZERO
 	for row in range(400):
 		model.terrain.cells[row * 640 + 190] = 1
 	var before: PackedByteArray = model.terrain.cells.duplicate()

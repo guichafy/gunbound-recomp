@@ -130,9 +130,12 @@ func draw_compass(view: Node2D) -> void:
 	for i in range(12):
 		var dir := Vector2.from_angle(i * TAU / 12)
 		view.draw_line(center + dir * 30, center + dir * 34, ui.STEEL, 1, true)
-	if not is_zero_approx(view.model.wind):
-		var facing := signf(view.model.wind)
-		var arrow: Color = ui.AMBER if absf(view.model.wind) > 18 else ui.TEAL
-		view.draw_line(center + Vector2(-facing * 19, 0), center + Vector2(facing * 22, 0), arrow, 4, true)
-		view.draw_colored_polygon(PackedVector2Array([center + Vector2(facing * 24, 0), center + Vector2(facing * 12, -7), center + Vector2(facing * 12, 7)]), arrow)
+	# OpenBound wind compass: the arrow points along the 2D wind angle.
+	var wind: Vector2 = view.model.wind
+	if wind.length() >= 0.5:
+		var dir := wind.normalized()
+		var side := dir.orthogonal()
+		var arrow: Color = ui.AMBER if wind.length() > 18 else ui.TEAL
+		view.draw_line(center - dir * 19, center + dir * 22, arrow, 4, true)
+		view.draw_colored_polygon(PackedVector2Array([center + dir * 24, center + dir * 12 + side * 7, center + dir * 12 - side * 7]), arrow)
 	view.draw_string(ui.bold, center + Vector2(-29, 57), "VENTO", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, ui.INK)

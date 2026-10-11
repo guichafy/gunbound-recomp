@@ -441,7 +441,7 @@ func update_hud() -> void:
 		hp_labels[index].text = "%d / %d" % [actor.hp, actor.max_hp]
 		if actor.vehicle == 1:
 			hp_labels[index].text += " · %d ESC" % actor.shield
-	wind_label.text = "%02d" % abs(int(model.wind))
+	wind_label.text = "%02d" % int(model.weather.wind_force)
 	timer_label.text = "%02d" % int(ceil(model.turn_time)) if model.phase == "aim" else "—"
 	timer_label.add_theme_color_override("font_color", Color("ff815e") if model.turn_time < 8.0 else ui.AMBER)
 	var status := "Seu turno" if model.active == 0 else "Turno do Autômato"

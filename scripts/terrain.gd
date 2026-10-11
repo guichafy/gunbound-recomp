@@ -18,6 +18,8 @@ var map_id := ""
 var visual: Image
 var visual_texture: ImageTexture
 var visual_rect := Rect2()
+# Topography.FirstCollidableBlockY: computed once per map, like the original.
+var first_solid_y := 0.0
 static var mask_cache := {}
 
 func load_map(id: String, with_visual: bool = true) -> bool:
@@ -33,6 +35,7 @@ func load_map(id: String, with_visual: bool = true) -> bool:
 	WIDTH = int(cached.width)
 	HEIGHT = int(cached.height)
 	cells = PackedByteArray(cached.cells).duplicate()
+	first_solid_y = find_first_solid_y()
 	map_id = id
 	image = null
 	texture = null
@@ -103,6 +106,7 @@ func generate() -> void:
 			cells[y * WIDTH + x] = 1
 			image.set_pixel(x, y, ground_color(x, y, top))
 	texture = ImageTexture.create_from_image(image)
+	first_solid_y = find_first_solid_y()
 	revision += 1
 
 func ground_color(x: int, y: int, top: int) -> Color:
@@ -118,6 +122,12 @@ func ground_color(x: int, y: int, top: int) -> Color:
 	if (x * 7 + y * 11) % 97 < 3:
 		base = base.lightened(0.16)
 	return base.lightened(grain * 0.045)
+
+func find_first_solid_y() -> float:
+	for y in range(HEIGHT):
+		if cells.slice(y * WIDTH, (y + 1) * WIDTH).has(1):
+			return float(y * SCALE)
+	return float(HEIGHT * SCALE)
 
 func world_size() -> Vector2:
 	return Vector2(WIDTH * SCALE, HEIGHT * SCALE)
@@ -189,6 +199,7 @@ func collision_copy():
 	copy.WIDTH = WIDTH
 	copy.HEIGHT = HEIGHT
 	copy.cells = cells.duplicate()
+	copy.first_solid_y = first_solid_y
 	copy.revision = revision
 	copy.map_id = map_id
 	return copy

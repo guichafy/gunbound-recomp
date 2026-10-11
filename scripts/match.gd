@@ -3,6 +3,9 @@ extends RefCounted
 
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
+const Weather = preload("res://scripts/weather.gd")
+# Procedural arena has no map preset: only the Wind weather re-rolls each round.
+const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 const Combat = preload("res://scripts/combat.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 # Stable mobile IDs are independent of menu slots. Removed ID0 is not playable.
@@ -25,7 +28,8 @@ var events: Array = []
 var rng := RandomNumberGenerator.new()
 var active := 0
 var phase := "menu"
-var wind := 0.0
+var wind := Vector2.ZERO
+var weather
 var clock := 0.0
 var turn_time := 30.0
 var movement_left := 90.0
@@ -78,6 +82,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	projectiles.clear()
 	events.clear()
 	last_shots = [{}, {}]
+	weather = Weather.new()
+	var preset: Array = Maps.get_map(map_id).weather if not map_id.is_empty() else PROCEDURAL_WEATHER
+	apply_weather(weather.setup(preset, terrain.world_size(), rng))
 	begin_turn()
 
 func movement_budget() -> float:
@@ -92,8 +99,20 @@ func begin_turn() -> void:
 		actors[active].shield = mini(int(actors[active].max_shield), int(actors[active].shield) + 20)
 	actors[active].turns += 1
 	total_turns += 1
-	wind = float(rng.randi_range(-30, 30))
+	# A round is two turns (RoomSize 2 in MatchMetadata.PassTurn).
+	if total_turns > 1 and (total_turns - 1) % 2 == 0:
+		apply_weather(weather.next_round(rng))
+	wind = weather.wind_vector()
 	events.append({"type": "turn", "actor": active})
+
+func apply_weather(entry: Dictionary) -> void:
+	wind = weather.wind_vector()
+	if entry.type == "protection":
+		# WeatherDisplay: Protection regenerates every mobile (HealthRegenerationProtection 35).
+		for actor in actors:
+			if int(actor.hp) > 0:
+				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Weather.PROTECTION_HEAL)
+	events.append({"type": "weather", "weather": entry.type, "extra": entry.extra, "queue": weather.queue.duplicate(true), "wind_force": weather.wind_force, "wind_angle": weather.wind_angle})
 
 func can_use_special(index: int) -> bool:
 	return int(actors[index].turns) >= 3 and not bool(actors[index].special_used)
@@ -161,24 +180,26 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		var original: bool = actors[index].vehicle == 2
 		var initial := muzzle(index, angle if original else angle + float(entry.angle), weapon)
 		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power) if original else shot_velocity(index, angle + float(entry.angle), power, weapon)
-		result.append({"pos": initial, "hit_pos": initial, "velocity": velocity, "age": 0.0, "trail": [initial], "helix": float(rules.get("helix", 0)), "phase": float(component) * PI, "spawn_at": entry.spawn, "launched": false})
+		result.append({"pos": initial, "hit_pos": initial, "velocity": velocity, "age": 0.0, "trail": [initial], "helix": float(rules.get("helix", 0)), "phase": float(component) * PI, "spawn_at": entry.spawn, "launched": false,
+			# Weather state per shell (Projectile.cs): base damage, columns touched, influences.
+			"damage": int(rules.damage), "launch_speed": velocity.length(), "inside": {}, "influenced": [], "electric": false, "thor": false, "tornado": {}})
 	return result
 
 func launch_projectile(projectile: Dictionary) -> void:
 	projectile.launched = true
+	# Thor intersects everything: every shell fired while active attaches to it.
+	projectile.thor = bool(weather.thor.active)
 	events.append({"type": "projectile_launch", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": shot_weapon, "time": projectile.spawn_at})
 
 func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictionary:
 	var shells := projectile_parameters(index, angle, power, weapon)
-	if shells.size() == 1:
-		var shell: Dictionary = shells[0]
-		return Combat.predict(shell.pos, shell.velocity, wind, terrain, actors, index, shell.helix, shell.phase)
-	# A salvo can open a crater or eliminate an actor before the next component.
-	# Run the real flight loop on isolated model/mask copies to preserve ordering.
+	# Weather, Thor and salvo craters change the flight: always run the real
+	# flight loop on isolated copies of mask, actors, wind and weather.
 	var simulation = get_script().new()
 	simulation.terrain = terrain.collision_copy()
 	simulation.actors = actors.duplicate(true)
 	simulation.wind = wind
+	simulation.weather = weather.copy()
 	simulation.shot_actor = index
 	simulation.shot_weapon = weapon
 	simulation.projectiles = shells
@@ -282,7 +303,8 @@ func advance_projectiles(delta: float) -> void:
 			travel_delta = clampf(flight_elapsed - float(projectile.spawn_at), 0.0, delta)
 			if travel_delta <= 0.0000001:
 				continue
-		var next: Dictionary = Combat.advance(projectile.pos, projectile.velocity, wind, travel_delta)
+		apply_weather_contact(projectile)
+		var next: Dictionary = tornado_step(projectile, travel_delta) if not projectile.tornado.is_empty() else Combat.advance(projectile.pos, projectile.velocity, wind, travel_delta)
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
 		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
@@ -296,7 +318,7 @@ func advance_projectiles(delta: float) -> void:
 			if projectile.trail.size() > 28:
 				projectile.trail.pop_front()
 		if not hit.is_empty():
-			explode(hit.position, int(hit.actor))
+			explode(hit.position, int(hit.actor), projectile)
 			projectiles.remove_at(i)
 		elif Combat.out_of_bounds(projectile.pos, terrain) or projectile.age > 12.0:
 			events.append({"type": "miss", "position": projectile.hit_pos})
@@ -305,26 +327,149 @@ func advance_projectiles(delta: float) -> void:
 		phase = "settle"
 		resolve_wait = 0.55
 
-func explode(position: Vector2, collided_actor: int = -1) -> void:
+func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
 	var weapon: Dictionary = weapon_rules(shot_actor, shot_weapon)
-	terrain.carve(position, float(weapon.radius))
-	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor})
+	var removed: int = terrain.carve(position, float(weapon.radius))
+	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed})
+	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)))
+	# OnExplodeAction order: Thor attached at launch, then Electricity.
+	if bool(projectile.get("thor", false)):
+		thor_strike(position)
+	if bool(projectile.get("electric", false)):
+		lightning_strike(position)
+
+func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0) -> int:
+	var dealt := 0
 	for index in range(actors.size()):
 		if int(actors[index].hp) <= 0:
 			continue
 		var distance := position.distance_to(actors[index].pos)
-		if float(weapon.get("emp", 0)) > 0 and distance <= float(weapon.emp) + 22.0 and int(actors[index].shield) > 0:
+		if emp > 0 and distance <= emp + 22.0 and int(actors[index].shield) > 0:
 			events.append({"type": "shield_damage", "actor": index, "amount": actors[index].shield, "position": actors[index].pos})
 			actors[index].shield = 0
-		var damage := Combat.damage_at(distance, float(weapon.damage), float(weapon.radius))
-		var absorbed := mini(damage, int(actors[index].shield))
-		if absorbed > 0:
-			actors[index].shield -= absorbed
-			events.append({"type": "shield_damage", "actor": index, "amount": absorbed, "position": actors[index].pos})
-		damage -= absorbed
-		if damage > 0:
-			actors[index].hp = maxi(0, int(actors[index].hp) - damage)
-			events.append({"type": "damage", "actor": index, "amount": damage, "position": actors[index].pos})
+		dealt += deal_damage(index, Combat.damage_at(distance, damage, radius))
+	return dealt
+
+func deal_damage(index: int, damage: int) -> int:
+	# Shield absorbs first (Mobile.ReceiveDamage / ReceiveShock).
+	if damage <= 0:
+		return 0
+	var absorbed := mini(damage, int(actors[index].shield))
+	if absorbed > 0:
+		actors[index].shield -= absorbed
+		events.append({"type": "shield_damage", "actor": index, "amount": absorbed, "position": actors[index].pos})
+	var remaining := damage - absorbed
+	if remaining > 0:
+		actors[index].hp = maxi(0, int(actors[index].hp) - remaining)
+		events.append({"type": "damage", "actor": index, "amount": remaining, "position": actors[index].pos})
+	return damage
+
+func thor_strike(impact: Vector2) -> void:
+	# ThorProjectile: beam from the satellite to the impact hits the first solid
+	# point on its path (radius 25, damage 40 + 20/level); dealt damage is XP.
+	var origin: Vector2 = weather.thor.pos
+	var hit: Dictionary = Combat.trace_segment(origin, impact, terrain, actors, -1)
+	var strike: Vector2 = hit.position if not hit.is_empty() else impact
+	var removed: int = terrain.carve(strike, Weather.THOR_RADIUS)
+	var level := int(weather.thor.level)
+	var dealt := blast(strike, Weather.THOR_RADIUS, float(weather.thor_damage()))
+	weather.gain_thor_experience(dealt)
+	events.append({"type": "thor", "from": origin, "position": strike, "removed": removed, "level": level, "new_level": weather.thor.level, "xp": weather.thor.xp})
+
+func lightning_strike(impact: Vector2) -> void:
+	# LightningBaseProjectile: a vertical beam rises from the impact to the top of
+	# the terrain; the topmost solid point takes a radius-10 blast without damage
+	# and actors within 30 of the beam above it take a 30 shock.
+	var top := Vector2(impact.x, terrain.first_solid_y - 2.0)
+	var hit: Dictionary = Combat.trace_segment(top, impact, terrain, actors, -1) if top.y < impact.y else {}
+	var strike: Vector2 = hit.position if not hit.is_empty() else impact
+	var removed: int = terrain.carve(strike, Weather.LIGHTNING_RADIUS)
+	events.append({"type": "lightning", "position": strike, "top": top, "removed": removed})
+	for index in range(actors.size()):
+		if int(actors[index].hp) <= 0:
+			continue
+		var closest := Geometry2D.get_closest_point_to_segment(Vector2(actors[index].pos), top, strike)
+		if Vector2(actors[index].pos).distance_to(closest) < 24.0 + Weather.LIGHTNING_SHOCK_RADIUS:
+			deal_damage(index, Weather.LIGHTNING_SHOCK_DAMAGE)
+
+func apply_weather_contact(projectile: Dictionary) -> void:
+	# Weather.CheckProjectileInteraction: entering a column's inner rectangle
+	# interacts once; leaving through the outer margin re-arms it.
+	var point: Vector2 = projectile.pos
+	for column in weather.columns.duplicate():
+		var id := int(column.id)
+		var inner: bool = weather.inside_inner(column, point)
+		var inside: bool = projectile.inside.has(id)
+		if inner and not inside:
+			projectile.inside[id] = true
+			weather_interact(projectile, column)
+		elif inside and not inner and column.type not in ["random", "tornado"] and weather.inside_outer(column, point):
+			projectile.inside.erase(id)
+
+func weather_interact(projectile: Dictionary, column: Dictionary) -> void:
+	var type: String = column.type
+	var first: bool = type not in projectile.influenced
+	if first and type != "tornado" and type != "random":
+		projectile.influenced.append(type)
+	var damage := int(projectile.damage)
+	match type:
+		"force":
+			if first and damage != 0:
+				projectile.damage = int(damage * 1.2 + 10.0)
+		"weakness":
+			# Weakness.cs divides by the Force factors, not its own constants.
+			if first and damage != 0:
+				projectile.damage = int(damage / 1.2 - 10.0)
+		"mirror":
+			if first and damage != 0:
+				projectile.damage = int(damage * 1.1 + 5.0)
+			projectile.velocity = Vector2(-projectile.velocity.x, projectile.velocity.y)
+		"electricity":
+			if first:
+				projectile.electric = true
+		"tornado":
+			if projectile.tornado.is_empty():
+				var velocity: Vector2 = projectile.velocity
+				projectile.tornado = {"column": int(column.id), "step": 1, "direction": velocity.normalized() if velocity != Vector2.ZERO else Vector2.DOWN, "speed": maxf(velocity.length(), Weather.TORNADO_MIN_SPEED)}
+		"random":
+			if not bool(column.used):
+				column.used = true
+				var spawned: Dictionary = weather.add_column(column.extra, float(column.x), 1.0)
+				projectile.inside.erase(int(spawned.id))
+	events.append({"type": "weather_hit", "weather": type, "position": projectile.pos, "extra": column.get("extra", "")})
+
+func tornado_step(projectile: Dictionary, delta: float) -> Dictionary:
+	# Tornado.cs: cross the column along the entry heading, back across mirrored,
+	# then out along the heading; afterwards relaunch at the initial speed.
+	var state: Dictionary = projectile.tornado
+	var column: Dictionary = weather.find_column(int(state.column))
+	var direction: Vector2 = state.direction
+	var travel: float = float(state.speed) * delta
+	var position: Vector2 = projectile.pos
+	var heading := direction
+	if column.is_empty():
+		state.step = 3
+	match int(state.step):
+		1:
+			var next := position + direction * travel
+			if weather.inside_inner(column, next):
+				position = next
+			else:
+				state.step = 2
+		2:
+			heading = Vector2(-direction.x, direction.y)
+			var next := position + heading * travel
+			if weather.inside_inner(column, next):
+				position = next
+			else:
+				state.step = 3
+		_:
+			position += direction * travel
+			if column.is_empty() or not weather.inside_outer(column, position):
+				projectile.tornado = {}
+				projectile.inside.erase(int(state.column))
+				return {"position": position, "velocity": direction * float(projectile.launch_speed)}
+	return {"position": position, "velocity": heading * float(state.speed)}
 
 func settle_actors() -> void:
 	for index in range(actors.size()):

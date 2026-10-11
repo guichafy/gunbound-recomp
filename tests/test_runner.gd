@@ -26,10 +26,10 @@ func _initialize() -> void:
 	terrain.carve(Vector2(640, 580), 32.0)
 	check(not terrain.is_solid(Vector2(640, 580)), "Explosion removes crater center")
 	check(terrain.is_solid(Vector2(680, 580)), "Explosion preserves ground beyond its radius")
-	var step: Dictionary = combat.advance(Vector2.ZERO, Vector2(100, -100), 0.0, 0.1)
+	var step: Dictionary = combat.advance(Vector2.ZERO, Vector2(100, -100), Vector2.ZERO, 0.1)
 	check(is_equal_approx(step.velocity.x, 100.0), "No wind preserves horizontal velocity")
 	check(step.velocity.y > -100.0, "Gravity accelerates projectile downward")
-	var windy: Dictionary = combat.advance(Vector2.ZERO, Vector2(100, -100), 20.0, 0.1)
+	var windy: Dictionary = combat.advance(Vector2.ZERO, Vector2(100, -100), Vector2(20, 0), 0.1)
 	check(windy.velocity.x > step.velocity.x, "Positive wind accelerates rightwards")
 	var hit: Dictionary = combat.trace_segment(Vector2(640, 100), Vector2(640, 650), terrain, [], -1)
 	check(not hit.is_empty(), "Swept collision catches ground across a long segment")
@@ -88,8 +88,8 @@ func _initialize() -> void:
 			match_model.terrain.cells[y * 640 + x] = 1 if y * 2 >= 480.0 - (x * 2 - 235.0) * tan(PI / 6.0) else 0
 	match_model.actors[0].pos.y = match_model.terrain.surface_at(235) - 24
 	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - 24
-	match_model.wind = -30.0
-	var returning: Dictionary = combat.predict(match_model.muzzle(0, 50.0), match_model.shot_velocity(0, 50.0, 15.0, 0), -30.0, match_model.terrain, match_model.actors, 0)
+	match_model.wind = Vector2(-35, 0)
+	var returning: Dictionary = combat.predict(match_model.muzzle(0, 50.0), match_model.shot_velocity(0, 50.0, 15.0, 0), Vector2(-35, 0), match_model.terrain, match_model.actors, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")
 	match_model.fire(50.0, 15.0, 0)
 	for i in range(1600):
