@@ -53,23 +53,21 @@ partidas com o novo veículo. Revisão independente corrigiu SS trocando para S1
 após turno rápido. Sem validação manual completa de mouse. Os números específicos
 de 0.2 abaixo permanecem como histórico; o roteiro também serve para 0.3.
 
-## Roteiro para você
+## Roteiro para você (0.10.0, HUD original)
 
 1. Abra o aplicativo, digite seu apelido e inicie com Bigfoot / dificuldade Normal.
-2. Mova com A/D; confirme giro na direção escolhida, rodas animadas, inclinação e redução do movimento. Deslocamento para ao esgotar o orçamento; F permite virar parado.
-3. Ajuste mira e força. Compare a mira local no console com a direção efetiva junto ao canhão; a encosta muda a trajetória. Dispare por botão e observe recuo, vento e turnos.
-4. Segure Espaço e solte para disparar. A força cresce; se chegar a 100%, dispara automaticamente uma vez. Soltar depois não cria outro tiro. O marcador branco indica força anterior.
-5. Selecione T2(2). Bigfoot lança duas rajadas de3; Mage lança dois lasers em hélice. Observe seus efeitos e atrasos.
-6. Acompanhe o tiro da máquina e tente melhorar seu tiro usando os valores anteriores.
-7. No terceiro turno próprio, use SS(3). Bigfoot lança8bombas; Mage lança EMP. Não pode ser usada novamente na mesma partida.
-8. Pause com Esc durante carga ou voo. Aguarde; relógio, força e animações ficam parados. A carga é cancelada; continuar não dispara sozinho. Um tiro em voo continua depois da pausa.
-9. Abra ajuda por H/?; feche. Faça o mesmo na tela de resultado e confirme que revanche/menu continuam disponíveis.
-10. Deixe o tempo de um turno terminar. O jogo deve passar o turno sozinho.
-11. Termine uma partida. Confirme vida, queda ou vitória/derrota, XP e opções de navegação.
-12. Faça revanche. Terreno, vida e especial devem reiniciar; XP deve permanecer.
-13. Feche e reabra. Apelido e progresso devem permanecer. Experimente Mage e as três dificuldades.
-14. Troque a arma e observe a fila prevista, que considera atraso do veículo. Durante a escolha da CPU, aguarda a arma real. É ordem da partida, sem ranking de usuários.
-15. Confira clarão, detritos, fumaça e reação ao dano. Se cair numa cratera perto da fila lateral, o painel deve ir para o canto superior e preservar a leitura da vida/apelido.
+2. Confira a barra de ação original na base: WEAPON com 1 / 2 / SS, ESC e F8 PASS, janela LAST com ângulo atual e anterior, previsão de clima na janela branca, barras de força e movimento, contador G. No topo: bússola com o número do vento e o relógio vermelho do turno; acima da barra, à esquerda, o Delayboard com a ordem e o atraso.
+3. Mova com ←/→ (ou A/D); a barra de movimento diminui e o deslocamento para ao esgotar. F vira parado.
+4. Ajuste a mira com ↑/↓: um toque muda 1°; segurar repete cada vez mais rápido. A moldura da mira gira com o chassi, o ponteiro anda dentro da faixa verde e o número ao lado mostra o ângulo no mundo, o mesmo da janela LAST.
+5. Segure Espaço: a barra vermelha enche de 0 a 100 em cerca de 2 s; soltar dispara, cheia dispara sozinha e soltar depois não cria outro tiro. O triângulo marca a força anterior e LAST guarda o ângulo anterior. Arraste o seletor amarelo na barra: ele só marca uma referência e não muda a força.
+6. Troque o tiro com Tab (ou 1/2/3 ou clique): o botão ativo fica com a aba amarela; SS fica cinza até o terceiro turno próprio e o Tab pula ele. A faixa verde da mira muda com o tiro (Bigfoot SS é mais estreita).
+7. No turno da máquina, o relógio some e um balão numerado aparece sobre ela nos últimos 20 s; o tique do relógio toca nos últimos 10 s.
+8. Ao acertar, o dano sobe como número vermelho e soma acertos seguidos; a barra de vida sob o mobile encolhe (azul = escudo do Mage; vermelha abaixo de 30%).
+9. F8 ou PASS passam o turno. ESC ou o botão ESC abre a pausa: relógio, força e animações param; a carga é cancelada sem disparar.
+10. Com mouse/toque: use ← → F e segure ● (acima da barra, à direita) para carregar e soltar. Arrastar a tela fora da barra olha o mapa.
+11. Termine uma partida e faça revanche; o G mostra o XP ganho no fim. Feche e reabra: apelido e progresso continuam.
+
+O roteiro das versões anteriores (0.2–0.9) valia para o console antigo, substituído pelo HUD do OpenBound em 0.10.
 
 ## Evidência automatizada
 

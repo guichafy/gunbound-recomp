@@ -6,10 +6,11 @@
       botões no C#; usuário escolheu HD GPT Images, carga original e extras discretos.
 - [x] Fase A: HUD_0_10.md, ADR-049..051, originais + SHA, pipeline e 5 folhas HD.
 - [x] Fases B/C: hud_art.gd, integração em game.gd, mira/vida/dano, input original.
-- [x] Fase D: test_hud (81), testes migrados, 1010 checks + 10 partidas, capturas
+- [x] Fase D: test_hud (87, inclui faixas de mira × limites legais), testes migrados, 1016 checks + 10 partidas, capturas
       docs/hud, app/ZIP 0.10.0 e PCK verificados.
 - [ ] Usuário validar o HUD no aplicativo (mouse, toque, áudio do relógio).
-- [ ] Fora do escopo: itens/slots F1–F6, ouro real, chat, rank, MatchStatus.
+- [ ] Fora do escopo: itens/slots F1–F6, ouro real, chat, rank, MatchStatus,
+      PopupGameOptions original (ESC abre a pausa própria).
 
 ## Câmera, vento, clima e Thor 0.9.0
 

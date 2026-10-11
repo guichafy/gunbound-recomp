@@ -70,6 +70,8 @@ var aim_elapsed := 0.0
 var aim_limit := 0.15
 
 func _ready() -> void:
+	# HUD HD sprites (3×) are drawn smaller than their pixels; mipmaps keep 1 px borders.
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	background = load("res://assets/art/background.png")
 	profile.load_profile()
 	sound = Sound.new()

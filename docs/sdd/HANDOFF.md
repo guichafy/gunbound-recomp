@@ -28,16 +28,21 @@ extras **discretos**. REQ-27..30, ADR-049..051, plano HUD_0_10.md.
   bússola desenhada, banner "SUA VEZ", seta TURNO e caixa de nome). Mundo
   visível 1280×664. `match.gd` e a balística não mudaram.
 
-Validação: `./scripts/check.sh` — **1010 checks + 10 partidas, zero falhas**
-(novo test_hud 81 checks; testes de cena migrados dos sliders/labels para o
+Validação: `./scripts/check.sh` — **1016 checks + 10 partidas, zero falhas**
+(novo test_hud 87 checks; testes de cena migrados dos sliders/labels para o
 estado do HUD; partidas seeds 81–90 idênticas à 0.9). Capturas GPU 1920×1200
 em docs/hud (turno do jogador HD e original lado a lado, carga, turno da CPU
 com balão e dano). App/ZIP 0.10.0 reexportados, assinatura válida; PCK isolado
 carrega HUD HD/originais e exclui as folhas brutas. Commits por fase; sem push.
+Faixas verdes originais cobrem exatamente os limites legais (Mage 15–50°,
+Bigfoot 18–40°, SS 23–35°), verificado em test_hud. Mipmaps nas texturas HD do
+HUD deixam a janela 1× (1280×800) nítida.
 Limites: balística mantém o piso de velocidade equivalente a 15 (a barra vai de
 0 a 100); itens, ouro, chat, rank e MatchStatus não existem (slots vazios, Gold
-mostra XP); fonte dos nomes é do sistema (NotoSans10 original não incluída);
-sem teste manual de mouse/toque/áudio no app.
+mostra XP só no fim); ESC abre a pausa própria, o PopupGameOptions original
+(configurações de mira/rolagem/volume/skin) não foi portado; fonte dos nomes é
+do sistema (NotoSans10 original não incluída); sem teste manual de
+mouse/toque/áudio no app. Roteiro manual atualizado em docs/VALIDACAO.md.
 
 Próximo passo: usuário validar o HUD no aplicativo.
 

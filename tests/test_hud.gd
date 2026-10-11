@@ -80,8 +80,10 @@ func run() -> void:
 	key(scene, KEY_SPACE, false)
 	check(scene.model.phase == "flight", "Releasing Space fires")
 	check(is_equal_approx(hud.previous_power, 10.0) and hud.previous_angle == expected_angle, "Previous shot marker and LAST angle record the shot")
+	var shot_before: Dictionary = scene.model.last_shots[0].duplicate()
+	var shells_before: int = scene.model.projectiles.size()
 	key(scene, KEY_SPACE, false)
-	check(scene.model.projectiles.size() <= 1 or scene.model.shot_weapon == 0, "A second release cannot fire again")
+	check(scene.model.last_shots[0] == shot_before and scene.model.projectiles.size() == shells_before, "A second release cannot fire again")
 
 	# Pause cancels a charge without firing.
 	scene.start_match()
@@ -170,6 +172,28 @@ func run() -> void:
 	scene._process(0.5)
 	check(hud.floats[0].age == age, "Pause freezes the HUD animations")
 	scene.close_overlay()
+
+	# The original range wedges cover exactly the legal aim of every shot.
+	var Match = load("res://scripts/match.gd")
+	for vehicle in [1, 2]:
+		var aim_model = Match.new()
+		aim_model.start(vehicle, 1, 4)
+		for shot in range(3):
+			var wedge: String = hud.crosshair_name(aim_model, 0, shot)
+			var image: Image = hud.originals[wedge].get_image()
+			if image.is_compressed():
+				image.decompress()
+			var legal: Vector2 = aim_model.aim_limits(0, shot)
+			var inside := true
+			for aim in [legal.x, (legal.x + legal.y) * 0.5, legal.y]:
+				var world: Vector2 = aim_model.shot_velocity(0, aim, 100.0, shot).normalized().rotated(-aim_model.body_rotation(0))
+				var local := Vector2(-world.x, world.y) if aim_model.actors[0].facing == 1 else world
+				var hit := false
+				for radius in range(28, 41):
+					var point := Vector2(41.5, 41.5) + local * radius
+					hit = hit or image.get_pixelv(point).a > 0.1
+				inside = inside and hit
+			check(inside, "%s covers the legal aim %s at both ends" % [wedge, legal])
 
 	# Delayboard data never invents a CPU weapon before the CPU chooses.
 	scene.start_match()
