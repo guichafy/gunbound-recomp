@@ -1,6 +1,42 @@
-# Hand-off — Brisa de Aço 0.6.4
+# Hand-off — Gunbound Recomp 0.7.0
 
-## Entrega atual 0.6.4: perna oculta e roster Gunbound
+## Entrega atual 0.7.0: identidade Gunbound Recomp e harness
+
+Pedido: revisar configurações/strings, melhoria contínua do harness de qualidade
+e definir a identidade do projeto como "Gunbound Recomp". REQ-01/12; sem mudança
+de regras, combate, roster ou arte. Herda todo o conteúdo de0.6.4 (tag v0.6.4).
+
+- Renome: project.godot nome/descrição, nó raiz `GunboundRecomp`, bundle id
+  `com.local.gunboundrecomp`, assinatura `GREC`, copyright, ícone do piloto.
+- App/ZIP: `builds/Gunbound Recomp.app` e `Gunbound-Recomp-macOS.zip`;
+  executável/PCK internos `GunboundRecomp` (ASCII, normalização preservada).
+- Menu: título GUNBOUND/RECOMP, tag 0.7.0; pausa "Uma pausa no combate.";
+  rótulos das capturas de QA atualizados.
+- Perfil: por decisão do usuário, recomeça do zero na pasta nova
+  `app_userdata/Gunbound Recomp/profile.json`; perfil antigo não é migrado
+  nem apagado.
+- Harness: `scripts/check.sh` roda as14suites headless, grava logs em
+  `.tools/check-logs/`, consolida os checks e sai!=0 em qualquer falha.
+  `--quick` omite `test_matches`; `GODOT=...` sobrepõe o binário padrão.
+- Docs vivos atualizados (README/VALIDACAO/AGENTS/SPEC/DECISIONS/TASKS/
+  ATTRIBUTION); seções históricas deste hand-off preservam os nomes antigos.
+
+Validação: `./scripts/check.sh` completo — **825 checks +10partidas, zero
+falhas**. App/ZIP0.7.0 reexportados por `build_macos.py`; assinatura
+profunda/estrita e runtime independente verificados. Commit/tag local
+`v0.7.0`; nenhum remoto/push/publicação.
+
+```sh
+./scripts/check.sh          # todas as suites headless
+./scripts/check.sh --quick  # sem as dez partidas completas
+python3 scripts/build_macos.py
+```
+
+Próximo passo: usuário validar título/menu e funcionamento geral no app.
+Observação: "Gunbound" é marca de terceiros; uso é protótipo local, sem
+publicação ou distribuição. Histórico abaixo.
+
+## Entrega anterior 0.6.4: perna oculta e roster Gunbound
 
 Usuário aprovou proporção0.6.3 e pediu esconder a perna distante do piloto;
 remover Escaravelho por não seguir Gunbound. REQ-19/20/12 e REQ-02/08;
@@ -484,8 +520,8 @@ inicial. Fonte é o projeto Godot; aplicativo e ZIP são artefatos locais ignora
 |---|---|
 | `project.godot` | Importar no Godot e executar com F5 |
 | `scenes/main.tscn` | Cena principal; executar com F6 |
-| `builds/Brisa de Aco.app` | Aplicativo local independente |
-| `builds/Brisa-de-Aco-macOS.zip` | Pacote local da entrega |
+| `builds/Gunbound Recomp.app` | Aplicativo local independente |
+| `builds/Gunbound-Recomp-macOS.zip` | Pacote local da entrega |
 | `docs/VALIDACAO.md` | Roteiro de aceitação funcional pelo usuário |
 | `docs/APRENDIZADO.md` | Explicação da implementação para aprender com o resultado |
 | `docs/ART.md` | Prompts e origem das imagens |
@@ -515,6 +551,7 @@ comandos de pacote e assinatura abaixo são exclusivos do macOS.
 ## Verificações
 
 ```sh
+./scripts/check.sh
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_runner.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_scene.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_matches.gd
@@ -549,11 +586,11 @@ esse template com o editor. Os presets debug/release apontam para esse arquivo.
 
 ```sh
 python3 scripts/build_macos.py
-codesign --verify --deep --strict --verbose=2 'builds/Brisa de Aco.app'
-open 'builds/Brisa de Aco.app'
+codesign --verify --deep --strict --verbose=2 'builds/Gunbound Recomp.app'
+open 'builds/Gunbound Recomp.app'
 ```
 
-O script exporta, normaliza executável/PCK para `BrisaDeAco`, inclui avisos de
+O script exporta, normaliza executável/PCK para `GunboundRecomp`, inclui avisos de
 licença Godot, assina ad-hoc, verifica e cria ZIP. Não publicar uma exportação
 direta sem essa normalização: foi necessário corrigir assinatura inválida com
 nomes internos acentuados. Pacote não notarizado nem publicado; teste local.
@@ -562,7 +599,7 @@ Mudanças no código só chegam ao aplicativo depois de reexportar.
 ## Progresso do jogador e limites
 
 Perfil real no Mac:
-`~/Library/Application Support/Godot/app_userdata/Brisa de Aço/profile.json`.
+`~/Library/Application Support/Godot/app_userdata/Gunbound Recomp/profile.json`.
 Não apagar, migrar ou usar esse perfil em testes. Sem conta, ranking ou nuvem.
 
 Limites: um mapa, dois veículos, CPU não se move, sprites estáticos com efeitos

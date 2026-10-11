@@ -7,7 +7,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-APP = ROOT / "builds" / "Brisa de Aco.app"
+APP = ROOT / "builds" / "Gunbound Recomp.app"
 GODOT = Path("/Applications/Godot.app/Contents/MacOS/Godot")
 
 
@@ -27,12 +27,12 @@ def main() -> None:
     with plist_path.open("rb") as source:
         info = plistlib.load(source)
     original = info["CFBundleExecutable"]
-    internal = "BrisaDeAco"
+    internal = "GunboundRecomp"
     if original != internal:
         (contents / "MacOS" / original).rename(contents / "MacOS" / internal)
         (contents / "Resources" / (original + ".pck")).rename(contents / "Resources" / (internal + ".pck"))
     info["CFBundleExecutable"] = internal
-    info["CFBundleDisplayName"] = "Brisa de Aço"
+    info["CFBundleDisplayName"] = "Gunbound Recomp"
     with plist_path.open("wb") as target:
         plistlib.dump(info, target)
     notices = {
@@ -50,7 +50,7 @@ def main() -> None:
     run("codesign", "--force", "--sign", "-", "--timestamp=none", str(contents / "MacOS" / internal))
     run("codesign", "--force", "--sign", "-", "--timestamp=none", str(APP))
     run("codesign", "--verify", "--deep", "--strict", "--verbose=2", str(APP))
-    run("ditto", "-c", "-k", "--keepParent", str(APP), str(APP.parent / "Brisa-de-Aco-macOS.zip"))
+    run("ditto", "-c", "-k", "--keepParent", str(APP), str(APP.parent / "Gunbound-Recomp-macOS.zip"))
     print("Ready:", APP)
 
 

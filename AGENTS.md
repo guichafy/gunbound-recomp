@@ -1,4 +1,4 @@
-# Contexto para agentes — Brisa de Aço
+# Contexto para agentes — Gunbound Recomp
 
 Leia primeiro `docs/sdd/HANDOFF.md`, depois `docs/sdd/SPEC.md` e
 `docs/sdd/DESIGN.md`. `docs/sdd/README.md` explica a organização SDD.
@@ -6,9 +6,12 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.6.4 em Godot 4.7.2 + GDScript. Escopo:
+Protótipo 0.7.0 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
+(app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
+"Brisa de Aço"). Escopo:
 desktop macOS, treino offline 1×1 contra CPU, apenas Bigfoot/Mage com derivados HD
 e progresso local. Escaravelho foi removido por solicitação do usuário.
+O perfil recomeçou na pasta `app_userdata/Gunbound Recomp`, sem migração.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
 no roadmap; não os implemente sem uma nova solicitação. A engine deve preservar
 a possibilidade de exportar para macOS, Windows, Linux, Android e iOS.
@@ -51,6 +54,7 @@ Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd
 - `.godot/`, `.tools/` e `builds/` são locais e ignorados pelo Git.
 - Prepare `.tools/` antes dos testes. Em checkout novo, importe o projeto primeiro.
 - Execute as verificações pertinentes descritas em `docs/sdd/HANDOFF.md`.
+  `./scripts/check.sh` roda todas as suites (`--quick` omite partidas longas).
   Mudanças em regras de combate exigem os testes de modelos e partidas completas;
   mudanças de navegação/input exigem os testes de cena.
 - Se entregar aplicativo atualizado, reexporte com `scripts/build_macos.py` e

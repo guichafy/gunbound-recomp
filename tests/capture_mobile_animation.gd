@@ -11,7 +11,7 @@ class Preview extends Node2D:
 	func _draw() -> void:
 		draw_rect(Rect2(0, 0, 1920, 1080), Color("15263b"))
 		var font := ThemeDB.fallback_font
-		draw_string(font, Vector2(40, 55), "Brisa de Aço — animações HD consistentes 0.6.1", HORIZONTAL_ALIGNMENT_LEFT, -1, 28, Color.WHITE)
+		draw_string(font, Vector2(40, 55), "Gunbound Recomp — animações HD consistentes 0.7.0", HORIZONTAL_ALIGNMENT_LEFT, -1, 28, Color.WHITE)
 		var poses := ["idle", "moving", "charging", "recoil", "hurt", "destroyed"]
 		var labels := ["Repouso", "Movimento", "Carga SS", "Disparo SS", "Dano", "Destruição"]
 		for row in range(2):

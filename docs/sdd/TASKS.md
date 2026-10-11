@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Identidade e harness0.7.0
+
+- [x] Renomear projeto/config/export/build para "Gunbound Recomp" 0.7.0.
+- [x] Atualizar strings do jogo e rótulos de QA; docs vivos e ADR-040/041.
+- [x] Criar `scripts/check.sh` consolidando as14suites com logs e saída de falha.
+- [x] Reexecutar harness completo, reexportar app/ZIP e verificar assinatura.
+- [ ] Usuário validar identidade/funcionamento no aplicativo 0.7.0.
+
 ## Perfil/roster0.6.4
 
 - [x] Diagnosticar perna distante embutida no mestre; editar via GPT Images.

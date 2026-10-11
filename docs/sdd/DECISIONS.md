@@ -151,3 +151,18 @@ Preservar IDs Mage1/Bigfoot2 em Dictionary e separar slots UI, normalizar ID
 antigo/inválido para Bigfoot. CPU sempre outro mobile. Remover armas/render
 exclusivos e excluir PNGs scarab/tortoise do pacote, mantendo histórico no Git.
 Substitui roster de3 do baseline. Não reindexar mobiles nem alterar progresso.
+
+## Identidade 0.7
+
+ADR-040 — adotada por solicitação explícita: renomear o projeto para
+"Gunbound Recomp" na versão0.7.0 (marco da nova identidade, escolhida pelo
+usuário sobre manter0.6.4). Nome visível com espaço; internos ASCII
+`GunboundRecomp`/bundle `com.local.gunboundrecomp`/assinatura `GREC` preservam
+a normalização de ADR-011. Perfis: usuário optou por começar do zero na pasta
+nova `app_userdata/Gunbound Recomp`, sem migração. Documentos históricos
+mantêm o nome "Brisa de Aço"; não rebatizar o passado registrado.
+
+ADR-041 — adotada: consolidar o harness em `scripts/check.sh` — uma entrada
+para as14suites headless, com log por suite em `.tools/check-logs/`, resumo
+consolidado e código de saída!=0 em falha. `--quick` omite partidas longas;
+`GODOT=` permite binário alternativo. Suites continuam executáveis isoladas.

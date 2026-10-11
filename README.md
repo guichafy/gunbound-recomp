@@ -1,10 +1,10 @@
-# Brisa de Aço
+# Gunbound Recomp
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.6.4**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
+Protótipo de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.7.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot/Mage com derivados HD do GPT Images.
 
 ## Jogar
 
-Abra **`builds/Brisa de Aco.app`**. O aplicativo é independente: não precisa abrir o editor. Escolha seu apelido, veículo e dificuldade, depois clique em **Iniciar treino**.
+Abra **`builds/Gunbound Recomp.app`**. O aplicativo é independente: não precisa abrir o editor. Escolha seu apelido, veículo e dificuldade, depois clique em **Iniciar treino**.
 
 Também é possível importar `project.godot` no Godot 4.7.2 e pressionar **F6** na cena `scenes/main.tscn`, ou **F5** para executar o projeto.
 
@@ -38,7 +38,7 @@ A fila lateral mostra quem está ativo e a ordem prevista depois da arma escolhi
 
 Arena destrutível, dois veículos, três armas, três dificuldades de mira, vida/dano/queda, fila de atraso, efeitos visuais e sonoros, pausa, ajuda, resultado, revanche e perfil local. HUD azul metálico, bússola, inclinação, mira graduada, carga monotônica e animações de repouso, movimento, recuo, dano e destruição. Explosões com clarão, detritos e fumaça. As dificuldades mudam o erro de mira da máquina; não alteram vida/dano. A máquina usa a mesma física e conversão de inclinação do disparo real.
 
-Apelido, XP, nível e vitórias ficam em `~/Library/Application Support/Godot/app_userdata/Brisa de Aço/profile.json`. Os testes usam arquivos separados e não alteram esse progresso.
+Apelido, XP, nível e vitórias ficam em `~/Library/Application Support/Godot/app_userdata/Gunbound Recomp/profile.json`. Os testes usam arquivos separados e não alteram esse progresso.
 
 ## Para aprender com o resultado
 
@@ -54,6 +54,8 @@ Comece por [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). O [índice SDD](docs/sdd/
 
 ```sh
 mkdir -p .tools
+./scripts/check.sh          # roda todas as suites e consolida o resultado
+./scripts/check.sh --quick  # sem as dez partidas completas
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_runner.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_scene.gd
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_refinement.gd
@@ -86,7 +88,7 @@ python3 scripts/build_macos.py
 
 Este build foi feito para validação local, sem publicação ou notarização Apple. Somente macOS foi validado. A engine mantém suporte aos demais alvos acordados; builds Windows/Linux e adaptação mobile são etapas posteriores.
 
-O script exporta pelo Godot, normaliza os nomes internos do executável/pacote para `BrisaDeAco` (mantendo o título visível com acento), assina e verifica o aplicativo, e gera um ZIP. Essa normalização corrigiu um selo inválido observado no exportador ao usar o nome com acento.
+O script exporta pelo Godot, normaliza os nomes internos do executável/pacote para `GunboundRecomp` (ASCII, sem espaço), assina e verifica o aplicativo, e gera um ZIP. Essa normalização corrigiu um selo inválido observado no exportador ao usar nomes internos com acento.
 
 ## Roadmap
 
@@ -155,3 +157,12 @@ Fontes históricas preservadas, assets Escaravelho/Carapaça excluídos do pacot
 /Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script tests/test_roster.gd
 /Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_side_pilot.gd
 ```
+
+## Identidade 0.7.0
+
+O projeto passa a se chamar **Gunbound Recomp**: nome do projeto, menu,
+`Gunbound Recomp.app`, `Gunbound-Recomp-macOS.zip`, bundle
+`com.local.gunboundrecomp` e executável interno `GunboundRecomp`. O progresso
+recomeça em `app_userdata/Gunbound Recomp/` — o perfil antigo não foi migrado
+nem apagado. `scripts/check.sh` consolidou o harness de testes. Regras, roster,
+arte e áudio são os mesmos de0.6.4.

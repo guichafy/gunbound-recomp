@@ -8,7 +8,7 @@ class Preview extends Node2D:
 	func _draw() -> void:
 		draw_rect(Rect2(0, 0, 1600, 1080), Color("172b40"))
 		var font := ThemeDB.fallback_font
-		draw_string(font, Vector2(40, 55), "Brisa de Aço 0.6.3 — composição piloto / mobile", HORIZONTAL_ALIGNMENT_LEFT, -1, 28, Color.WHITE)
+		draw_string(font, Vector2(40, 55), "Gunbound Recomp 0.7.0 — composição piloto / mobile", HORIZONTAL_ALIGNMENT_LEFT, -1, 28, Color.WHITE)
 		for row in range(2):
 			var y := 340.0 + row * 510.0
 			draw_string(font, Vector2(40, y - 220), "BIGFOOT" if row == 0 else "MAGE", HORIZONTAL_ALIGNMENT_LEFT, -1, 24, Color("76c6ff"))

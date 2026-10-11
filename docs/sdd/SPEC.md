@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.6.4
+# Especificação — Gunbound Recomp 0.7.0
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;
@@ -140,3 +140,14 @@ REQ-19/20: perna distante totalmente oculta por perna próxima no piloto HD dos
 dois mobiles, mesma proporção/assento e flip. REQ-02/08: somente Bigfoot/Mage
 selecionáveis e como adversários; Escaravelho removido do jogo ativo.
 Plano SIDE_PILOT_ROSTER_0_6_4.md. Sem novas armas/rede/ranking/mobile.
+
+## Identidade e harness 0.7 — escopo solicitado
+
+REQ-01/12: o projeto passa a se chamar **Gunbound Recomp** — nome do projeto,
+nó raiz, bundle `com.local.gunboundrecomp`, assinatura `GREC`, app/ZIP
+`builds/Gunbound Recomp.app`/`Gunbound-Recomp-macOS.zip` e executável interno
+`GunboundRecomp` (ASCII). Título do menu e rótulos de QA acompanham; versão
+0.7.0. Perfil reinicia em `app_userdata/Gunbound Recomp/` por escolha do
+usuário, sem migrar nem apagar o arquivo antigo. `scripts/check.sh` consolida
+as14suites headless com logs/saída de falha. Regras, roster, arte e áudio
+inalterados; documentos históricos mantêm o nome anterior "Brisa de Aço".

@@ -1,4 +1,4 @@
-# Validação funcional — Brisa de Aço 0.6.4
+# Validação funcional — Gunbound Recomp 0.7.0
 
 ## Piloto e tiros 0.6.2
 

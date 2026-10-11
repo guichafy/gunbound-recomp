@@ -12,7 +12,7 @@ Originais preservados em `.tools/source-assets/content/Graphics/Tank/Bigfoot/`.
   GPL, mantidos sem alterações no arquivo. O leitor aceita sua vírgula final.
 
 Recursos visuais de Gunbound, atribuídos a seus titulares originais; não são
-imagens geradas pelo projeto Brisa de Aço. O fork OpenBound não distribui o
+imagens geradas pelo projeto Gunbound Recomp. O fork OpenBound não distribui o
 pacote de texturas nem o identifica como arte licenciada sob GPL.
 
 Intervalos de quadros, dimensões e FPS referenciados de

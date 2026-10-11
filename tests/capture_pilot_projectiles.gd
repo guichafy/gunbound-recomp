@@ -29,7 +29,7 @@ class Gallery extends Node2D:
 	func _draw() -> void:
 		draw_rect(Rect2(0, 0, 1920, 1080), Color("172b40"))
 		var font := ThemeDB.fallback_font
-		draw_string(font, Vector2(45, 60), "Brisa de Aço 0.6.2 — " + ("piloto coeso em apoio inclinado" if pilots else "tiros e impactos contínuos"), HORIZONTAL_ALIGNMENT_LEFT, -1, 30, Color.WHITE)
+		draw_string(font, Vector2(45, 60), "Gunbound Recomp 0.7.0 — " + ("piloto coeso em apoio inclinado" if pilots else "tiros e impactos contínuos"), HORIZONTAL_ALIGNMENT_LEFT, -1, 30, Color.WHITE)
 		for row in range(2):
 			draw_string(font, Vector2(45, 120 + row * 450), "BIGFOOT" if row == 0 else "MAGE", HORIZONTAL_ALIGNMENT_LEFT, -1, 26, Color("76c6ff"))
 			for column in range(4 if pilots else 3):
