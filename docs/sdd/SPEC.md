@@ -1,4 +1,4 @@
-# Especificação — protótipo 0.3.0
+# Especificação — protótipo 0.3.1
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Data: 2026-10-11. Esta especificação consolida as escolhas da conversa e o

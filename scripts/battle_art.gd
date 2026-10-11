@@ -85,7 +85,7 @@ func draw_actor(view: Node2D, index: int, offset: Vector2) -> void:
 	var alpha := clampf(1.0 - dead / 1.15, 0.0, 1.0) if actor.hp <= 0 else 1.0
 	var color := Color(1, 0.65, 0.6, alpha) if state.hurt > 0.0 and int(time * 24.0) % 2 == 0 else Color(1, 1, 1, alpha)
 	if actor.vehicle == 2:
-		view.bigfoot.draw(view, pos + offset, 80.0, actor.facing, rotation, atlas_frame(view, index), color)
+		view.bigfoot.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(view, index), color)
 	else:
 		view.draw_sprite(actor.vehicle, render_pos, 100.0, actor.facing, rotation, Vector2(1.0 + recoil * 0.05, 1.0 - recoil * 0.07), color)
 	if actor.hp <= 0:

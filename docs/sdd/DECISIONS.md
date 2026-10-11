@@ -39,3 +39,9 @@ imutáveis: registrar substituição e motivo se uma solicitação futura as alt
 
 Esses ajustes têm regressões nos testes. A revisão foi da implementação inicial;
 não representa uma nova revisão independente desta documentação.
+
+## Ajuste visual 0.3.1
+
+ADR-022 — adotada: reduzir Bigfoot/piloto juntos, mantendo os pixels originais,
+contato com chão e offsets relativos. Escala de arena 60 (antes 80), menu 180
+(antes 230). Ajuste de apresentação em REQ-19; regras de colisão/combate preservadas.

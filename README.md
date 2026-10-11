@@ -1,6 +1,6 @@
 # Brisa de Aço
 
-Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.3.0**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot com sprites originais.
+Protótipo original de artilharia 2D por turnos, inspirado na experiência de Gunbound. Versão **0.3.1**: treino **1×1 contra o computador no macOS**, feito em **Godot 4.7.2 + GDScript**, com painel clássico, mira em encostas e Bigfoot com sprites originais.
 
 ## Jogar
 

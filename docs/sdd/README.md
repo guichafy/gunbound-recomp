@@ -27,5 +27,5 @@ da execução inicial. O conjunto `docs/sdd/` consolida o contexto atual.
 O [README principal](../../README.md), o [guia de aprendizado](../APRENDIZADO.md),
 o [roteiro funcional](../VALIDACAO.md) e a [origem da arte](../ART.md) o complementam.
 
-Baseline inicial: **0.1.0**; versão atual **0.3.0**, em **2026-10-11**. O histórico Git
+Baseline inicial: **0.1.0**; versão atual **0.3.1**, em **2026-10-11**. O histórico Git
 identifica as revisões; não manter hashes de commits dentro destes documentos.

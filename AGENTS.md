@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.3.0 em Godot 4.7.2 + GDScript. Escopo:
+Protótipo 0.3.1 em Godot 4.7.2 + GDScript. Escopo:
 desktop macOS, treino offline 1×1 contra CPU, arte do protótipo + Bigfoot original
 e progresso local.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão

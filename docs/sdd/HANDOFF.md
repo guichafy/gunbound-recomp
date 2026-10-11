@@ -1,6 +1,17 @@
-# Hand-off — Brisa de Aço 0.3.0
+# Hand-off — Brisa de Aço 0.3.1
 
-## Entrega atual: Bigfoot com sprites originais
+## Ajuste atual 0.3.1: Bigfoot menor
+
+Pedido do usuário: diminuir o carro e realizar versionamento. Bigfoot e piloto
+reduzidos juntos de 80 para 60 unidades visuais na arena (25%) e de 230 para 180
+na prévia do menu. Não houve alteração de PNG, regras, colisão ou perfil.
+Capturas `docs/bigfoot-*.png` atualizadas. Passaram os 28 checks Bigfoot existentes;
+novos testes de constantes de estilo não foram necessários. Aplicativo/ZIP 0.3.1
+reexportados; assinatura e execução independente verificadas. Commit local da
+mudança; nenhum remoto/push. Os 130 checks e oito partidas abaixo são evidência
+da integração 0.3.0 anterior, não uma nova execução integral neste ajuste visual.
+
+## Integração 0.3.0: Bigfoot com sprites originais
 
 Bigfoot foi integrado como terceira opção, selecionada inicialmente no menu.
 Atlas, piloto padrão masculino, offsets por quadro e projéteis são os originais

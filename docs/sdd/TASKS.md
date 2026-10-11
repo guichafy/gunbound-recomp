@@ -15,6 +15,12 @@
 O plano original permanece em `docs/superpowers/plans/2026-10-11-prototype.md`.
 Os estados acima distinguem implementação entregue de aceitação pelo usuário.
 
+## Ajuste visual concluído 0.3.1
+
+- [x] Reduzir Bigfoot/piloto na arena (80→60) e no menu (230→180).
+- [x] Inspecionar novas capturas e repetir 28 checks Bigfoot.
+- [x] Reexportar/validar aplicativo e registrar commit local com SDD atualizado.
+
 ## Pendência atual
 
 - [x] Receber, extrair e verificar o pacote externo: `.tools/source-assets/content/`,

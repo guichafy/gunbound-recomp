@@ -101,7 +101,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.3", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.3.1", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "BRISA\nDE AÇO", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -555,7 +555,7 @@ func _draw() -> void:
 		draw_rect(Rect2(0, 0, 750, 800), Color(0.035, 0.13, 0.17, 0.30))
 		draw_circle(Vector2(342, 617), 157.0, Color(0.93, 0.96, 0.87, 0.14))
 		draw_arc(Vector2(342, 617), 169.0, 0.1, TAU - 0.4, 90, Color(0.78, 0.95, 0.88, 0.45), 1.5, true)
-		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 230.0 if vehicle == 2 else 270.0, 1)
+		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 180.0 if vehicle == 2 else 270.0, 1)
 		return
 	if model.terrain == null:
 		return

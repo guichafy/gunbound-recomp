@@ -7,6 +7,16 @@ REQ-19 é atendido nesta etapa para Bigfoot; os demais mobiles permanecem penden
 Status: integração visual implementada, verificada e exportada em 0.3.0.
 Não inclui equivalência integral de ataques. Aceitação pelo usuário pendente.
 
+## Ajuste visual 0.3.1 — tamanho menor
+
+Pedido posterior do usuário: diminuir o carro e versionar. Recorte de REQ-19:
+reduzir Bigfoot/piloto juntos de 80 para 60 unidades visuais na arena (25%) e de
+230 para 180 na prévia do menu. Preservar os PNGs originais, contato com o solo,
+offsets e animações. É ajuste de escala da apresentação, sem mudar o modelo.
+Plano: alterar os dois pontos de desenho, capturar os cinco estados, executar
+os checks Bigfoot existentes, reexportar 0.3.1, verificar assinatura/launch e
+registrar commit local com hand-off/capturas atualizados.
+
 ## Entrega planejada
 
 - Terceira opção selecionável no menu: Bigfoot, inicialmente selecionado para
