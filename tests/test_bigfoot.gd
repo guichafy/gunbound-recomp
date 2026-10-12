@@ -72,7 +72,7 @@ func run() -> void:
 	scene.model.projectiles.clear()
 	scene.model.schedule(0, 210.0)
 	scene.consume_events()
-	var rendered_frame: int = scene.art.atlas_frame(scene, 0)
+	var rendered_frame: int = scene.actor_frame(0)
 	check(rendered_frame >= 274 and rendered_frame <= 293, "Fast turn transition preserves special firing frames")
 	scene.start_match()
 	key.pressed = true
@@ -81,7 +81,7 @@ func run() -> void:
 	scene._process(0.1)
 	scene.select_weapon(1)
 	scene._process(0.1)
-	check(scene.art.atlas_frame(scene, 0) == 254, "Changing weapon while charging restarts the new sequence")
+	check(scene.actor_frame(0) == 254, "Changing weapon while charging restarts the new sequence")
 	scene.queue_free()
 	await process_frame
 	await process_frame

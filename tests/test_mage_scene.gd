@@ -20,14 +20,14 @@ func run() -> void:
 	check(scene.weapon_buttons[0].tooltip_text.begins_with("Laser"), "HUD uses Mage weapon names")
 	var full: Vector2 = scene.hud.health_segments(scene.model.actors[0])
 	check(full.y > 0.0 and full.x + full.y == 76.0, "Mage shield is visible in the original life bar")
-	check(scene.art.atlas_frame(scene, 0) < 20, "Mage idle uses Mage atlas")
+	check(scene.actor_frame(0) < 20, "Mage idle uses Mage atlas")
 	scene.select_weapon(1)
 	var key := InputEventKey.new()
 	key.physical_keycode = KEY_SPACE
 	key.pressed = true
 	scene._unhandled_key_input(key)
 	scene._process(0.1)
-	check(scene.art.atlas_frame(scene, 0) == 303, "Mage charges second shot with original frame")
+	check(scene.actor_frame(0) == 303, "Mage charges second shot with original frame")
 	scene.show_pause()
 	var age: float = scene.art.motion[0].pose_age
 	scene._process(0.5)
@@ -46,12 +46,12 @@ func run() -> void:
 	scene.select_weapon(1)
 	scene.shoot()
 	scene.consume_events()
-	check(scene.art.atlas_frame(scene, 0) == 100, "Mage firing uses its original atlas")
+	check(scene.actor_frame(0) == 100, "Mage firing uses its original atlas")
 	scene.art.tick(scene.model, 0.2)
 	scene.model.projectiles.clear()
 	scene.model.schedule(0, 120)
 	scene.consume_events()
-	check(scene.art.atlas_frame(scene, 0) >= 100 and scene.art.atlas_frame(scene, 0) <= 119, "Turn change preserves Mage recoil")
+	check(scene.actor_frame(0) >= 100 and scene.actor_frame(0) <= 119, "Turn change preserves Mage recoil")
 	scene.start_match()
 	scene.model.actors[0].hp = 0
 	scene.model.check_end()
@@ -67,7 +67,7 @@ func run() -> void:
 	scene.cpu_plan = {"weapon": 1, "angle": 40, "power": 65}
 	scene._process(0.1)
 	check(scene.animation_state(1) == "charging", "CPU exposes its actual Mage charge pose")
-	check(scene.art.atlas_frame(scene, 1) == 303, "CPU charge selects original Mage S2 frames")
+	check(scene.actor_frame(1) == 303, "CPU charge selects original Mage S2 frames")
 	scene.model.fire(40, 65, 1)
 	scene.cpu_plan.clear()
 	scene.consume_events()

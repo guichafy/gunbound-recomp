@@ -14,6 +14,11 @@ const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
 const Options = preload("res://scripts/options.gd")
 const OptionsPopup = preload("res://scripts/options_popup.gd")
+const Terrain = preload("res://scripts/terrain.gd")
+const Mobiles = preload("res://scripts/mobiles.gd")
+const AimControl = preload("res://scripts/aim_control.gd")
+const CameraRig = preload("res://scripts/camera_rig.gd")
+const MatchOverlay = preload("res://scripts/match_overlay.gd")
 var hud = HudArt.new()
 var weather_art = WeatherArt.new()
 var mage = MageSprite.new()
@@ -21,25 +26,38 @@ var bigfoot = BigfootSprite.new()
 var art = BattleArt.new()
 var ui = UIFactory.new()
 var model = Match.new()
-var profile = Profile.new()
+var profile = null
 # PopupGameOptions values; saved next to the profile (tests isolate both).
 var options
 var options_popup: Control
-var sound
+var sound = null
 var screen := "menu"
 var root: Control
 var overlay: Control
 var overlay_kind := ""
 var background: Texture2D
 var map_backgrounds := {}
-# Camera: top-left world point of the view above the HUD (Camera.cs tracking 1/25).
-const VIEW_SIZE := Vector2(1280, 664)
-const CAMERA_DAMPENING := 25.0
-var camera := Vector2.ZERO
-var camera_manual := false
+const VIEW_SIZE := CameraRig.VIEW_SIZE
+var rig := CameraRig.new()
+var aim := AimControl.new()
+var overlays := MatchOverlay.new()
+var camera: Vector2:
+	get:
+		return rig.position
+	set(value):
+		rig.position = value
+var camera_manual: bool:
+	get:
+		return rig.manual
+	set(value):
+		rig.manual = value
 var dragging := false
 var pan_mask := MOUSE_BUTTON_MASK_LEFT
-var last_impact := Vector2.INF
+var last_impact: Vector2:
+	get:
+		return rig.last_impact
+	set(value):
+		rig.last_impact = value
 var nickname_input: LineEdit
 var vehicle := 2
 var cpu_difficulty := 1
@@ -47,25 +65,46 @@ var cpu_difficulty := 1
 var weather_mode := "original"
 var vehicle_buttons: Array[Button] = []
 var vehicle_info: Label
-var angle := 45.0
-var power := 65.0
-var weapon := 0
-# Any end of a charge (shot, cancel, overlay, turn change) also ends a Drag.
-var charging := false:
+var angle: float:
+	get:
+		return aim.angle
 	set(value):
-		charging = value
-		if not value:
-			drag_aiming = false
-# Drag aiming (REQ-34/ADR-056): hold the left button in the world and drag right;
-# the strength bar width on screen (400 × 1.6 px) is the full power; release fires.
-# TODO(Mouse Speed): scale DRAG_FULL_POWER by the popup's Mouse Speed slider.
-const DRAG_FULL_POWER := 640.0
-const DRAG_QUIVER := 2.0  # power wobble every 0.04 s while the cursor stops or goes back
-var drag_aiming := false
-var drag_origin_x := 0.0
-var drag_advanced := false
-var drag_quiver_timer := 0.0
-var drag_rng := RandomNumberGenerator.new()
+		aim.angle = value
+var power: float:
+	get:
+		return aim.power
+	set(value):
+		aim.power = value
+var weapon: int:
+	get:
+		return aim.weapon
+	set(value):
+		aim.weapon = value
+var charging: bool:
+	get:
+		return aim.charging
+	set(value):
+		aim.charging = value
+var drag_aiming: bool:
+	get:
+		return aim.drag_aiming
+	set(value):
+		aim.drag_aiming = value
+var aim_direction: int:
+	get:
+		return aim.aim_direction
+	set(value):
+		aim.aim_direction = value
+var aim_limit: float:
+	get:
+		return aim.aim_limit
+	set(value):
+		aim.aim_limit = value
+var drag_rng:
+	get:
+		return aim.drag_rng
+	set(value):
+		aim.drag_rng = value
 var paused := false
 var elapsed := 0.0
 var cpu_wait := 0.0
@@ -88,23 +127,25 @@ var move_left: Button
 var move_right: Button
 var weapon_buttons: Array[TextureButton] = []
 var queue_entries: Array = []
-var charge_timer := 0.0
-# Crosshair.UpdateShootingAngle key repeat: 0.15 s, −0.008 per step, minimum 0.03 s.
-var aim_direction := 0
-var aim_elapsed := 0.0
-var aim_limit := 0.15
+var sprites := {}
 
 func _ready() -> void:
 	# HUD HD sprites (3×) are drawn smaller than their pixels; mipmaps keep 1 px borders.
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	background = load("res://assets/art/background.png")
+	sprites[1] = mage
+	sprites[2] = bigfoot
+	if profile == null:
+		profile = Profile.new()
 	profile.load_profile()
 	if options == null:
 		options = Options.new(profile.path.get_basename() + "-options.json")
 		options.load_options()
-	drag_rng.randomize()
-	sound = Sound.new()
-	add_child(sound)
+	aim.drag_rng.randomize()
+	if sound == null:
+		sound = Sound.new()
+	if sound.get_parent() != self:
+		add_child(sound)
 	apply_options()
 	show_menu()
 
@@ -199,8 +240,7 @@ func select_vehicle(index: int) -> void:
 	for j in range(vehicle_buttons.size()):
 		vehicle_buttons[j].add_theme_stylebox_override("normal", ui.box(Color("32666b") if Match.PLAYABLE_VEHICLES[j] == index else Color("24444e"), 9, ui.TEAL if Match.PLAYABLE_VEHICLES[j] == index else Color("47626a")))
 	var data: Dictionary = Match.VEHICLES[index]
-	var description := "220 de escudo · duplo laser e especial EMP." if index == 1 else "T1: 4 bombas · T2: 6 · SS: 8 bombas."
-	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), description]
+	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), str(data.summary)]
 	queue_redraw()
 
 func start_match() -> void:
@@ -208,7 +248,7 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode)
+	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new())
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
 	sound.play_music()
 	art.reset(model.actors)
@@ -220,7 +260,7 @@ func start_match() -> void:
 	match_id = str(Time.get_unix_time_from_system()) + ":" + str(Time.get_ticks_usec())
 	reward = 0
 	result_wait = -1.0
-	angle = clampf(45.0, model.aim_limits(0).x, model.aim_limits(0).y)
+	angle = clampf(45.0, model.aim_limits(Match.PLAYER).x, model.aim_limits(Match.PLAYER).y)
 	power = 0.0
 	weapon = 0
 	charging = false
@@ -256,7 +296,7 @@ func build_hud() -> void:
 	for index in range(3):
 		var button: TextureButton = hud.make_button(root, "shot", index)
 		button.pressed.connect(func(): select_weapon(index))
-		button.tooltip_text = "%s · atraso %d" % [model.weapon_rules(0, index).name, model.weapon_rules(0, index).delay]
+		button.tooltip_text = "%s · atraso %d" % [model.weapon_rules(Match.PLAYER, index).name, model.weapon_rules(Match.PLAYER, index).delay]
 		weapon_buttons.append(button)
 	options_button = hud.make_button(root, "options")
 	options_button.tooltip_text = "Opções (ESC) · pausa (P)"
@@ -282,18 +322,18 @@ func displayed_queue() -> Array:
 	return queue_entries
 
 func animation_state(index: int) -> String:
-	return art.state_name(model, index, charging, model.phase == "aim" and model.active == 1 and not cpu_plan.is_empty())
+	return art.state_name(model, index, charging, model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty())
 
 func player_can_act() -> bool:
-	return screen == "match" and model.phase == "aim" and model.active == 0 and not paused
+	return screen == "match" and model.phase == "aim" and model.active == Match.PLAYER and not paused
 
 func select_weapon(index: int) -> void:
 	if screen != "match" or not player_can_act():
 		return
-	if index == 2 and not model.can_use_special(0):
+	if Match.SPECIAL_WEAPON == index and not model.can_use_special(Match.PLAYER):
 		return
 	weapon = index
-	var limits: Vector2 = model.aim_limits(0, weapon)
+	var limits: Vector2 = model.aim_limits(Match.PLAYER, weapon)
 	angle = clampf(angle, limits.x, limits.y)
 	for j in range(weapon_buttons.size()):
 		hud.style_button(weapon_buttons[j], j == index)
@@ -301,43 +341,24 @@ func select_weapon(index: int) -> void:
 func cycle_weapon() -> void:
 	# ShotButton.UpdateKeyboard: Tab moves to the next shot, skipping a disabled SS.
 	var next := (weapon + 1) % 3
-	if next == 2 and not model.can_use_special(0):
+	if next == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER):
 		next = 0
 	select_weapon(next)
 
 func begin_charge() -> void:
-	# Mobile.Shoot: Space resets the strength bar and starts the shot sequence.
-	# A Drag in progress owns the shot; Space waits for it to end.
-	if player_can_act() and not drag_aiming:
-		charging = true
-		power = 0.0
-		charge_timer = 0.0
+	aim.begin_charge(self)
 
 func release_charge() -> void:
-	if charging and not drag_aiming:
-		shoot()
+	aim.release_charge(self)
 
 func begin_drag(x: float) -> void:
-	if player_can_act() and not charging:
-		charging = true
-		drag_aiming = true
-		power = 0.0
-		drag_origin_x = x
-		drag_advanced = false
-		drag_quiver_timer = 0.0
+	aim.begin_drag(self, x)
 
 func update_drag(x: float, relative_x: float) -> void:
-	power = clampf((x - drag_origin_x) / DRAG_FULL_POWER * 100.0, 0.0, 100.0)
-	if relative_x > 0.0:
-		drag_advanced = true
+	aim.update_drag(x, relative_x)
 
-## Releasing fires once; a click without a drag (power < 1) cancels.
 func release_drag() -> void:
-	if not (charging and drag_aiming):
-		return
-	if power >= 1.0:
-		shoot()
-	charging = false
+	aim.release_drag(self)
 
 func pass_turn() -> void:
 	if player_can_act():
@@ -353,7 +374,7 @@ func shoot() -> void:
 
 func flip() -> void:
 	if player_can_act():
-		model.actors[0].facing *= -1
+		model.actors[Match.PLAYER].facing *= -1
 
 func _process(delta: float) -> void:
 	if not paused:
@@ -371,27 +392,13 @@ func _process(delta: float) -> void:
 		if not is_zero_approx(direction):
 			model.move_actor(direction, frame_delta)
 		update_aim_keys(frame_delta)
-		if charging and drag_aiming:
-			drag_quiver_timer += frame_delta
-			while drag_quiver_timer >= 0.04:
-				drag_quiver_timer -= 0.04
-				if not drag_advanced:
-					power = clampf(power + drag_rng.randf_range(-DRAG_QUIVER, DRAG_QUIVER), 0.0, 100.0)
-				drag_advanced = false
-		elif charging:
-			# TimedProgressBar: +2 every 0.04 s while held; full bar fires.
-			charge_timer += frame_delta
-			while charge_timer > 0.04 and power < 100.0:
-				charge_timer -= 0.04
-				power = minf(100.0, power + 2.0)
-			if power >= 100.0:
-				shoot()
+		aim.tick(self, frame_delta)
 	hud.tick(frame_delta, model, sound)
 	model.tick(frame_delta)
 	weather_art.tick(frame_delta, model)
-	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == 1 and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
+	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
 	consume_events()
-	if model.phase == "aim" and model.active == 1:
+	if model.phase == "aim" and model.active == Match.CPU:
 		if cpu_plan.is_empty() and cpu_search.is_empty():
 			start_cpu_search()
 		cpu_wait -= frame_delta
@@ -438,30 +445,37 @@ func _exit_tree() -> void:
 	discard_cpu_search()
 
 func update_aim_keys(delta: float) -> void:
-	# Whole-degree steps: one per press, then a repeat that speeds up while held.
-	var direction := 0
-	if Input.is_physical_key_pressed(KEY_W) or Input.is_physical_key_pressed(KEY_UP):
-		direction = 1
-	elif Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
-		direction = -1
-	if direction != aim_direction:
-		aim_direction = direction
-		aim_elapsed = 0.0
-		aim_limit = 0.15
-		if direction != 0:
-			step_angle(direction)
-		return
-	if direction == 0:
-		return
-	aim_elapsed += delta
-	if aim_elapsed > aim_limit:
-		aim_elapsed = 0.0
-		aim_limit = maxf(aim_limit - 0.008, 0.03)
-		step_angle(direction)
+	aim.update_keys(self, delta)
 
 func step_angle(direction: int) -> void:
-	var limits: Vector2 = model.aim_limits(0, weapon)
-	angle = clampf(roundf(angle) + direction, limits.x, limits.y)
+	aim.step_angle(self, direction)
+
+func actor_context(index: int) -> Dictionary:
+	var cpu_weapon := int(cpu_plan.get("weapon", model.last_shots[index].get("weapon", 0)))
+	return {
+		"charging": charging,
+		"cpu_charging": model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty(),
+		"player_weapon": weapon,
+		"cpu_weapon": cpu_weapon,
+		"atlas": sprite_for(int(model.actors[index].vehicle)),
+		"elapsed": elapsed,
+		"shadow": ui.box(Color(0.02, 0.04, 0.1, 0.28), 10),
+	}
+
+func actor_frame(index: int) -> int:
+	return art.atlas_frame(model, index, actor_context(index))
+
+func sprite_for(vehicle_id: int):
+	return sprites.get(vehicle_id)
+
+func play_mobile_shot(event: Dictionary) -> void:
+	var id := int(event.vehicle) if event.has("vehicle") else int(model.actors[event.actor].vehicle)
+	if not Mobiles.has_id(id) or Mobiles.shot_sound_on(id) != event.type:
+		return
+	var body = sprite_for(id)
+	if body == null:
+		return
+	sound.play("fire", body.shoot_sounds[event.weapon])
 
 func consume_events() -> void:
 	for event in model.events:
@@ -476,32 +490,32 @@ func consume_events() -> void:
 				cpu_plan.clear()
 				discard_cpu_search()
 				cpu_wait = 1.1
-				if event.actor == 0:
+				if event.actor == Match.PLAYER:
 					# HUD.GrantTurn resets the strength bar; the marker keeps the last shot.
 					power = 0.0
 				sound.play("turn")
-				if weapon == 2 and not model.can_use_special(0):
+				if weapon == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER):
 					weapon = 0
 			"fire":
 				camera_manual = false
-				if model.actors[event.actor].vehicle != 2:
-					sound.play("fire", mage.shoot_sounds[event.weapon])
+				play_mobile_shot(event)
 			"projectile_launch":
-				if event.vehicle == 2:
-					sound.play("fire", bigfoot.shoot_sounds[event.weapon])
+				play_mobile_shot(event)
 			"explosion":
 				last_impact = event.position
-				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": event.get("vehicle", 2), "age": 0.0})
+				var vehicle_id := int(event.get("vehicle", Mobiles.DEFAULT_ID))
+				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "age": 0.0})
 				shake = 7.0
 				var original: AudioStream = null
-				if event.get("vehicle", 2) in [1, 2]:
-					original = (mage if event.vehicle == 1 else bigfoot).blast_sounds[event.weapon]
+				var body = sprite_for(vehicle_id)
+				if body != null:
+					original = body.blast_sounds[event.weapon]
 				sound.play("explosion", original)
 			"fall":
 				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, minf(float(model.actors[event.actor].pos.y), model.terrain.world_size().y) - 80.0), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
 			"finished":
 				charging = false
-				reward = profile.award(match_id, model.winner == 0, model.winner == -1)
+				reward = profile.award(match_id, model.winner == Match.PLAYER, model.winner == -1)
 				result_wait = 1.7
 				sound.play("result")
 	model.events.clear()
@@ -509,7 +523,7 @@ func consume_events() -> void:
 func update_hud() -> void:
 	if screen != "match":
 		return
-	var limits: Vector2 = model.aim_limits(0, weapon)
+	var limits: Vector2 = model.aim_limits(Match.PLAYER, weapon)
 	angle = clampf(angle, limits.x, limits.y)
 	var enabled := player_can_act()
 	pass_button.disabled = not enabled
@@ -519,14 +533,14 @@ func update_hud() -> void:
 	fire_button.disabled = not enabled
 	for index in range(weapon_buttons.size()):
 		var button: TextureButton = weapon_buttons[index]
-		button.disabled = index == 2 and not model.can_use_special(0)
+		button.disabled = index == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER)
 		if bool(button.get_meta("activated")) != (index == weapon):
 			hud.style_button(button, index == weapon)
-	weapon_buttons[2].tooltip_text = "%s: terceiro turno próprio; um uso por partida." % model.weapon_rules(0, 2).name
-	var displayed_weapon: int = weapon if model.active == 0 else int(cpu_plan.get("weapon", 0))
+	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = "%s: terceiro turno próprio; um uso por partida." % model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name
+	var displayed_weapon: int = weapon if model.active == Match.PLAYER else int(cpu_plan.get("weapon", 0))
 	if model.phase == "finished":
 		queue_entries = []
-	elif model.phase == "aim" and model.active == 1 and cpu_plan.is_empty():
+	elif model.phase == "aim" and model.active == Match.CPU and cpu_plan.is_empty():
 		queue_entries = current_order()
 	else:
 		queue_entries = model.initiative_preview(displayed_weapon)
@@ -581,68 +595,19 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 ## Full-screen layer that pauses the match and blocks the HUD below it.
 func open_overlay(kind: String) -> Control:
-	if overlay_kind == "options" and kind != "options":
-		# Leaving the popup for the pause or help keeps its values like Accept.
-		options.save_options()
-	if is_instance_valid(overlay):
-		root.remove_child(overlay)
-		overlay.queue_free()
-	charging = false
-	paused = true
-	overlay_kind = kind
-	overlay = Control.new()
-	overlay.size = Vector2(1280, 800)
-	root.add_child(overlay)
-	options_popup = null
-	if is_instance_valid(options_button):
-		options_button.disabled = kind == "options"
-	return overlay
+	return overlays.open(self, kind)
 
 func make_overlay(kind: String) -> Panel:
-	open_overlay(kind)
-	var shade := ColorRect.new()
-	shade.size = Vector2(1280, 800)
-	shade.color = Color(0.025, 0.09, 0.12, 0.73)
-	overlay.add_child(shade)
-	return ui.panel(overlay, Vector2(360, 155), Vector2(560, 490), ui.INK, 22)
+	return overlays.make(self, kind)
 
 func close_overlay() -> void:
-	if is_instance_valid(overlay):
-		root.remove_child(overlay)
-		overlay.queue_free()
-	overlay = null
-	overlay_kind = ""
-	options_popup = null
-	paused = false
-	if is_instance_valid(options_button):
-		options_button.disabled = false
-	if screen == "match" and model.phase == "finished":
-		show_result()
+	overlays.close(self)
 
 func show_help() -> void:
-	var card := make_overlay("help")
-	ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, ui.CREAM, true)
-	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "Modo Drag (ESC)    Arrastar → no mapa: força; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8  /  F                   Passar o turno  /  virar parado", "ESC  /  P                 Opções  /  pausa", "Arrastar a tela        Olhar o mapa (botão direito no Drag)"]
-	for index in range(lines.size()):
-		ui.label(card, lines[index], Vector2(32, 88 + index * 31), Vector2(500, 30), 16)
-	ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 344), Vector2(500, 70), 14, ui.MUTED)
-	ui.button(card, "ENTENDI", Vector2(32, 424), Vector2(496, 42), close_overlay, true)
+	overlays.show_help(self)
 
-## PopupGameOptions (HUD.cs GameOptionsOnClickAction): ESC/Options open it, Accept
-## or ESC save and close. It pauses the training match; "PAUSA" or P open the pause.
 func show_options() -> void:
-	if screen != "match" or model.phase == "finished":
-		return
-	var layer := open_overlay("options")
-	options_popup = OptionsPopup.new(options)
-	options_popup.changed.connect(apply_options)
-	options_popup.accepted.connect(accept_options)
-	layer.add_child(options_popup)
-	var pause_size := Vector2(84, 30)
-	var pause := ui.button(options_popup, "PAUSA", options_popup.point(OptionsPopup.PAUSE_OFFSET) - pause_size * 0.5, pause_size, show_pause)
-	pause.add_theme_font_size_override("font_size", 13)
-	pause.modulate = Color(1, 1, 1, 0.82)
-	pause.tooltip_text = "Pausa, recomeçar ou voltar ao menu (P)"
+	overlays.show_options(self)
 
 func apply_options() -> void:
 	sound.set_volume(options.sfx / 100.0)
@@ -650,37 +615,14 @@ func apply_options() -> void:
 	queue_redraw()
 
 func accept_options() -> void:
-	# PopupGameOptions.CloseAction: overwrite the client settings file.
 	options.save_options()
 	close_overlay()
 
 func show_pause() -> void:
-	if screen != "match" or model.phase == "finished":
-		return
-	var card := make_overlay("pause")
-	ui.label(card, "Uma pausa no combate.", Vector2(32, 27), Vector2(496, 55), 30, ui.CREAM, true)
-	ui.label(card, "A partida e o relógio estão pausados.", Vector2(32, 91), Vector2(496, 35), 17, ui.MUTED)
-	ui.button(card, "CONTINUAR", Vector2(32, 160), Vector2(496, 48), close_overlay, true)
-	ui.button(card, "Como jogar", Vector2(32, 226), Vector2(240, 45), show_help)
-	ui.button(card, "Som: " + ("ligado" if not sound.muted else "desligado"), Vector2(288, 226), Vector2(240, 45), func(): sound.muted = not sound.muted; show_pause())
-	ui.button(card, "Recomeçar treino", Vector2(32, 300), Vector2(496, 45), start_match)
-	ui.button(card, "Voltar ao menu", Vector2(32, 366), Vector2(496, 45), show_menu)
-	ui.label(card, "Seu progresso de partidas concluídas fica salvo.", Vector2(32, 438), Vector2(496, 28), 14, ui.MUTED)
+	overlays.show_pause(self)
 
 func show_result() -> void:
-	if screen != "match" or model.phase != "finished":
-		return
-	var card := make_overlay("result")
-	var result := "VITÓRIA!" if model.winner == 0 else ("EMPATE" if model.winner == -1 else "A MÁQUINA VENCEU")
-	ui.label(card, "TREINO CONCLUÍDO", Vector2(32, 24), Vector2(496, 24), 12, ui.TEAL, true)
-	ui.label(card, result, Vector2(32, 72), Vector2(496, 65), 38, ui.CREAM, true)
-	ui.label(card, "Boa mira, %s." % profile.nickname if model.winner == 0 else "Cada cratera ensina. Tente uma nova trajetória.", Vector2(32, 145), Vector2(496, 45), 17, ui.MUTED)
-	ui.panel(card, Vector2(32, 215), Vector2(496, 92), Color("23454d"), 12)
-	ui.label(card, "+%d XP" % reward, Vector2(53, 230), Vector2(215, 35), 28, ui.TEAL, true)
-	ui.label(card, "NÍVEL %d   ·   %d XP TOTAL" % [profile.level(), profile.xp], Vector2(53, 270), Vector2(450, 24), 14, ui.CREAM)
-	ui.label(card, "%d turnos  ·  %s" % [model.total_turns, "progresso salvo neste Mac" if profile.last_save_ok else "não foi possível salvar o progresso"], Vector2(32, 324), Vector2(496, 35), 14, ui.MUTED)
-	ui.button(card, "REVANCHE", Vector2(32, 386), Vector2(496, 47), start_match, true)
-	ui.button(card, "Voltar ao menu", Vector2(32, 444), Vector2(496, 33), show_menu)
+	overlays.show_result(self)
 
 func _draw() -> void:
 	if background == null:
@@ -715,34 +657,32 @@ func _draw() -> void:
 	weather_art.draw_thor(self, model, offset)
 	draw_set_transform(offset)
 	for index in range(model.actors.size()):
-		art.draw_actor(self, index, offset)
+		art.draw_actor(self, model, index, offset, actor_context(index))
 	hud.draw_world(self, model, offset, hud_state())
 	draw_set_transform(offset)
 	for projectile in model.projectiles:
 		if not projectile.launched:
 			continue
+		var shooter := int(model.actors[model.shot_actor].vehicle)
+		var body = sprite_for(shooter)
+		if body == null:
+			continue
 		var color: Color = model.weapon_rules(model.shot_actor, model.shot_weapon).color
-		if model.actors[model.shot_actor].vehicle == 1:
-			mage.draw_projectile(self, projectile, model.shot_weapon, offset)
-			draw_set_transform(offset)
-			continue
-		var trail: Array = projectile.trail
-		for index in range(1, trail.size()):
-			draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
-		if model.actors[model.shot_actor].vehicle == 2:
-			bigfoot.draw_projectile(self, projectile, model.shot_weapon, offset)
-			draw_set_transform(offset)
-			continue
+		if Mobiles.generic_trail(shooter):
+			var trail: Array = projectile.trail
+			for index in range(1, trail.size()):
+				draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
+		body.draw_projectile(self, projectile, model.shot_weapon, offset)
+		draw_set_transform(offset)
 	draw_set_transform(Vector2.ZERO)
 	weather_art.draw_shell_marks(self, model, offset)
 	weather_art.draw_beams(self, offset)
 	weather_art.draw_particles(self, offset)
 	draw_set_transform(offset)
 	for effect in effects:
-		if effect.get("vehicle", 0) == 1:
-			mage.draw_effect(self, effect, offset)
-		elif effect.get("vehicle", 0) == 2:
-			bigfoot.draw_effect(self, effect, offset)
+		var body = sprite_for(int(effect.get("vehicle", -1)))
+		if body != null:
+			body.draw_effect(self, effect, offset)
 	draw_set_transform(offset)
 	for item in floating:
 		var pos: Vector2 = item.pos + Vector2(-22, -70 - float(item.age) * 34.0)
@@ -780,7 +720,7 @@ func draw_offscreen_markers() -> void:
 		var side := direction.orthogonal() * 10.0
 		draw_colored_polygon(PackedVector2Array([tip, edge - side, edge + side]), tint)
 		draw_polyline(PackedVector2Array([tip, edge - side, edge + side, tip]), ui.INK, 2.0, true)
-		var label := "%s · %dm" % ["Você" if index == 0 else "Autômato", int(screen_pos.distance_to(edge) / 10.0)]
+		var label := "%s · %dm" % ["Você" if index == Match.PLAYER else "Autômato", int(screen_pos.distance_to(edge) / 10.0)]
 		var width: float = ui.bold.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
 		var text_pos := edge - direction * 22.0 + Vector2(-width * 0.5, 5)
 		text_pos.x = clampf(text_pos.x, 8.0, VIEW_SIZE.x - width - 8.0)
@@ -821,39 +761,16 @@ func background_region(backdrop: Dictionary) -> Rect2:
 	return Rect2((top_left - source.position) * float(backdrop.density), window * float(backdrop.density))
 
 func camera_limits() -> Rect2:
-	# Position range of the camera; a world that fits the screen stays fixed.
-	if model.terrain == null:
-		return Rect2()
-	var world: Vector2 = model.terrain.world_size()
-	if world.x <= 1280.0 and world.y <= 800.0:
-		return Rect2()
-	var low := Vector2(minf(0.0, (world.x - VIEW_SIZE.x) * 0.5), 0.0)
-	var high := Vector2(maxf(0.0, world.x - VIEW_SIZE.x), maxf(0.0, world.y - VIEW_SIZE.y))
-	if world.x < VIEW_SIZE.x:
-		high.x = low.x
-	return Rect2(low, high - low)
+	return rig.limits(model.terrain if model != null else null)
 
 func clamp_camera(value: Vector2) -> Vector2:
-	var limits := camera_limits()
-	return Vector2(clampf(value.x, limits.position.x, limits.end.x), clampf(value.y, limits.position.y, limits.end.y))
+	return rig.fit(model.terrain if model != null else null, value)
 
 func camera_goal() -> Vector2:
-	# Follow the shell in flight, then its impact, otherwise the active actor.
-	var focus: Vector2 = model.actors[model.active].pos + Vector2(0, -60) if not model.actors.is_empty() else Vector2.ZERO
-	if model.phase == "flight":
-		for projectile in model.projectiles:
-			if bool(projectile.launched):
-				focus = projectile.pos
-				break
-	elif model.phase in ["settle", "finished"] and last_impact != Vector2.INF:
-		focus = last_impact
-	return focus - VIEW_SIZE * 0.5
+	return rig.goal(model)
 
 func update_camera(delta: float) -> void:
-	if not camera_manual:
-		var follow := 1.0 - pow(1.0 - 1.0 / CAMERA_DAMPENING, delta * 60.0)
-		camera = camera.lerp(clamp_camera(camera_goal()), follow)
-	camera = clamp_camera(camera)
+	rig.update(delta, model)
 
 ## Drag aiming sees the motion and the release before the HUD, so letting go
 ## over the action bar (or a lost release) still ends the drag.
@@ -899,9 +816,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera = clamp_camera(camera - event.relative * options.scroll_factor())
 
 func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, _scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
-	if kind == 1:
-		mage.draw(self, pos, width, facing, rotation, mage.frame_index("idle", elapsed, 0, false), color)
+	var body = sprite_for(kind)
+	if body == null:
 		return
-	if kind == 2:
-		bigfoot.draw(self, pos, width, facing, rotation, bigfoot.frame_index("idle", elapsed, 0, false), color)
-		return
+	body.draw(self, pos, width, facing, rotation, body.frame_index("idle", elapsed, 0, false), color)

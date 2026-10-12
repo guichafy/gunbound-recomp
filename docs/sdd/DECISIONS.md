@@ -274,3 +274,14 @@ invariante da carga). Espaço continua ativo nos dois modos. Botão direito/meio
 olha o mapa. Mouse Speed desabilitado com TODO (escalará o arraste); skins:
 só Blue, por decisão do usuário. Substitui "Aiming Mode desabilitado" de
 ADR-052/055.
+
+## Reorganização SOLID
+
+ADR-057 — adotada por solicitação explícita de aplicar o plano de arquitetura.
+Sem mudança de regra de combate, de mira ou de roster. O Match segue a única
+fachada de turno, dano e resultado. Armas e limites saem de ramos por ID e
+vão para `mobiles.gd`. A previsão copia só a lista de `flight_snapshot.gd` (a cópia usa
+`get_script().new()`: `load()` numa thread da CPU trava o importador).
+Dano e agenda ficam em módulos chamados pelo Match. A cena delega mira, câmera
+e overlays e injeta a máscara em `start`. Papéis nomeados `PLAYER` e `CPU`; o
+treino continua 1×1, sem rede. Seeds 81–90 devem permanecer iguais.

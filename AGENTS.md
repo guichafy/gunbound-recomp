@@ -174,8 +174,18 @@ Popup HD pela folha options de build_hud_hd.py. Teste test_performance.gd.
 ## Modo de mira 0.12 — estado atual
 
 Ler AIMING_0_12.md. Rádio Aiming Mode ativo (options.aiming: 0 Drag, 1 Slice
-padrão). Drag em game.gd: begin_drag no _unhandled_input (mundo, turno do
-jogador), update/release no _input (soltura sobre o HUD), tremor com
-drag_rng próprio. Setter de `charging` encerra o Drag. Botão direito/meio olha
-o mapa. Mouse Speed: TODO (escalar DRAG_FULL_POWER). Skins: só Blue.
+padrão). A lógica do Drag está em `aim_control.gd` (`begin_drag`, tremor com
+`drag_rng`, soltura). A cena encaminha `charging`: o setter encerra o Drag.
+Botão direito/meio olha o mapa. Mouse Speed: TODO (escalar `DRAG_FULL_POWER`
+em `aim_control.gd`). Skins: só Blue.
 Teste test_aiming.gd.
+
+## Arquitetura SOLID — estado atual
+
+ADR-057. `match.gd` decide turno, dano e resultado. Catálogo em `mobiles.gd`
+(IDs 1 e 2). Previsão só pelos campos de `flight_snapshot.gd`. Dano em
+`damage.gd`, agenda em `turn_table.gd`. Cena delega a `aim_control.gd`,
+`camera_rig.gd` e `match_overlay.gd`. Papéis `Match.PLAYER` e `Match.CPU`.
+`battle_art` não lê campos da cena: recebe o contexto de `actor_context`.
+Treino segue 1×1; não adicionar rede neste corte.
+

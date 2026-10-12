@@ -5,6 +5,8 @@ extends RefCounted
 ## Offsets are the C# ones on an 800×500 virtual screen scaled by K = 1.6;
 ## HD sprites (assets/hd/hud, 3× the original) fall back to the originals.
 
+const Match = preload("res://scripts/match.gd")
+
 const K := 1.6
 const BAR_CENTER := Vector2(400, 457.5)  # origin = (0, (500 - 85) / 2) from the centre
 const COMPASS_CENTER := Vector2(400, 73.6)  # (0, (54 - 250) * 0.9) from the centre
@@ -207,7 +209,7 @@ func draw_number(view: CanvasItem, kind: String, value: int, position: Vector2, 
 func react(event: Dictionary, model) -> void:
 	match event.type:
 		"turn":
-			if event.actor == 0:
+			if event.actor == Match.PLAYER:
 				crosshair_age = 0.0
 		"damage", "shield_damage":
 			add_damage(event.actor, int(event.amount), model)
@@ -257,7 +259,7 @@ func tick(delta: float, model, sound) -> void:
 	# HUD.UpdateTimer: ClockSecond every second of the player's turn, last 10 s of others.
 	var seconds := display_seconds(model)
 	if seconds != last_second:
-		if last_second >= 0 and seconds >= 0 and sound != null and (model.active == 0 or seconds < 10):
+		if last_second >= 0 and seconds >= 0 and sound != null and (model.active == Match.PLAYER or seconds < 10):
 			var pitch := clampf((float(last_second - 1) / TURN_TIME - 0.5) * 2.0, -1.0, 1.0)
 			sound.play("clock", clock_sound, pow(2.0, pitch))
 		last_second = seconds
@@ -367,7 +369,7 @@ func draw_delayboard(view, model, state: Dictionary) -> void:
 	var names: Array = []
 	var widest := 0.0
 	for entry in entries:
-		var name: String = state.player_name if entry.actor == 0 else "Autômato"
+		var name: String = state.player_name if entry.actor == Match.PLAYER else "Autômato"
 		names.append(name)
 		widest = maxf(widest, font.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size)).x / K)
 	var delay_width := 0.0
@@ -378,12 +380,12 @@ func draw_delayboard(view, model, state: Dictionary) -> void:
 	for row in range(entries.size()):
 		var entry: Dictionary = entries[row]
 		var top := base + Vector2(0, row * row_height)
-		if entry.actor == 0:
+		if entry.actor == Match.PLAYER:
 			# SelectedPlayerTurnBG column: green when next, orange otherwise.
 			var column := 1.0 if row == 0 else 4.0
 			blit(view, "SelectedPlayerTurnBG.png", Rect2(column, 0, 1, 17), Rect2(top * K, Vector2(delay_right + 4.0, 17) * K))
-		draw_number(view, "blue_turn" if entry.actor == 0 else "red_turn", row, top * K, "left", K)
-		var color := TEAM_BLUE if entry.actor == 0 else TEAM_RED
+		draw_number(view, "blue_turn" if entry.actor == Match.PLAYER else "red_turn", row, top * K, "left", K)
+		var color := TEAM_BLUE if entry.actor == Match.PLAYER else TEAM_RED
 		var baseline := (top + Vector2(nick_x, 12.5)) * K
 		view.draw_string_outline(font, baseline, names[row], HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size), 4, Color.BLACK)
 		view.draw_string(font, baseline, names[row], HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size), color)
@@ -397,11 +399,11 @@ func draw_world(view, model, offset: Vector2, state: Dictionary) -> void:
 		if int(actor.hp) <= 0:
 			continue
 		draw_health(view, actor, Vector2(actor.pos) + offset)
-		var name: String = state.player_name if index == 0 else "Autômato"
-		draw_nameplate(view, name, TEAM_BLUE if index == 0 else TEAM_RED, Vector2(actor.pos) + offset + Vector2(0, 70))
-	if model.phase == "aim" and model.active == 0 and not state.paused_cpu:
+		var name: String = state.player_name if index == Match.PLAYER else "Autômato"
+		draw_nameplate(view, name, TEAM_BLUE if index == Match.PLAYER else TEAM_RED, Vector2(actor.pos) + offset + Vector2(0, 70))
+	if model.phase == "aim" and model.active == Match.PLAYER and not state.paused_cpu:
 		draw_crosshair(view, model, offset, state)
-	if model.phase == "aim" and model.active == 1:
+	if model.phase == "aim" and model.active == Match.CPU:
 		draw_balloon(view, model, offset)
 	for entry in floats:
 		var rise := 40.0 * (1.0 - pow(1.0 - minf(1.0, entry.age / 0.6), 2.0))
@@ -435,15 +437,15 @@ func draw_nameplate(view: CanvasItem, name: String, color: Color, center: Vector
 	view.draw_string(font, baseline, name, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
 
 func crosshair_name(model, index: int, weapon: int) -> String:
-	var mob := "Mage" if model.actors[index].vehicle == 1 else "Bigfoot"
-	return "Crosshair%s%s%s.png" % [mob, ["S1", "S2", "SS"][clampi(weapon, 0, 2)], "Ally" if index == 0 else "Enemy"]
+	var mob: String = str(model.VEHICLES[model.actors[index].vehicle].name)
+	return "Crosshair%s%s%s.png" % [mob, ["S1", "S2", "SS"][clampi(weapon, 0, 2)], "Ally" if index == Match.PLAYER else "Enemy"]
 
 func draw_crosshair(view: CanvasItem, model, offset: Vector2, state: Dictionary) -> void:
 	# Crosshair.Update: frame on the cannon, rotated with the chassis, flipped
 	# with facing; pointer 29 px along the real shot direction (shot_velocity).
-	var center: Vector2 = model.cannon_pivot(0) + offset
-	var rotation: float = model.body_rotation(0)
-	var facing: int = model.actors[0].facing
+	var center: Vector2 = model.cannon_pivot(Match.PLAYER) + offset
+	var rotation: float = model.body_rotation(Match.PLAYER)
+	var facing: int = model.actors[Match.PLAYER].facing
 	var flip := Vector2(-1.0 if facing == 1 else 1.0, 1.0)
 	var intro := clampf(crosshair_age / CROSSHAIR_INTRO, 0.0, 1.0)
 	var frame_scale := 5.0 - 4.0 * intro
@@ -454,9 +456,9 @@ func draw_crosshair(view: CanvasItem, model, offset: Vector2, state: Dictionary)
 		view.draw_set_transform(Vector2.ZERO)
 		return
 	view.draw_set_transform(center, rotation, flip)
-	var wedge := crosshair_name(model, 0, int(state.weapon))
+	var wedge := crosshair_name(model, Match.PLAYER, int(state.weapon))
 	blit(view, wedge, Rect2(Vector2.ZERO, original_size(wedge)), Rect2(-original_size(wedge) * 0.5, original_size(wedge)))
-	var direction: Vector2 = model.shot_velocity(0, float(state.aim), 100.0, int(state.weapon)).normalized()
+	var direction: Vector2 = model.shot_velocity(Match.PLAYER, float(state.aim), 100.0, int(state.weapon)).normalized()
 	view.draw_set_transform(center + direction * POINTER_OFFSET, direction.angle() + PI * 0.5)
 	var pointer := original_size("CrosshairPointer.png")
 	blit(view, "CrosshairPointer.png", Rect2(Vector2.ZERO, pointer), Rect2(-pointer * 0.5, pointer), CROSSHAIR_FADE)
@@ -481,5 +483,5 @@ func draw_balloon(view: CanvasItem, model, offset: Vector2) -> void:
 	var remaining: float = model.turn_time
 	var frame := clampi(20 - seconds, 0, 20)
 	var source := Rect2(Vector2((frame % 7) * 34, (frame / 7) * 31), Vector2(34, 31))
-	var position: Vector2 = Vector2(model.actors[1].pos) + offset - Vector2(0, 120) + Vector2(0, sin(PI * 0.5 + (20.0 - remaining)) * 5.0)
+	var position: Vector2 = Vector2(model.actors[Match.CPU].pos) + offset - Vector2(0, 120) + Vector2(0, sin(PI * 0.5 + (20.0 - remaining)) * 5.0)
 	sprite(view, "TurnCounterBalloon.png", position, 1.0, source)

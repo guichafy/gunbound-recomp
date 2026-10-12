@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Reorganização SOLID (ADR-057)
+
+- [x] Catálogo `mobiles.gd` no lugar dos ramos por ID.
+- [x] `flight_snapshot.gd` como cópia fechada da previsão.
+- [x] Dano e turno atrás da fachada do Match.
+- [x] Mira, câmera e overlays extraídos; cena continua orquestrando.
+- [x] Contexto de desenho em `battle_art`.
+- [x] Papéis `PLAYER`/`CPU` e injeção da máscara.
+- [x] Conferir `./scripts/check.sh` (1114 checks, seeds 81–90, zero falhas).
+
 ## Modo de mira 0.12.0
 
 - [x] Pesquisa: OpenBound só declara AimType; Drag do GunBound por guias.

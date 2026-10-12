@@ -1,5 +1,30 @@
 # Hand-off — Gunbound Recomp 0.12.0
 
+## Reorganização SOLID (mesma versão, sem export)
+
+Pedido: aplicar o plano de arquitetura SOLID, incluindo os três itens que
+estavam fora da dívida. ADR-057. Nenhuma regra de combate, mira ou roster
+mudou. App/ZIP não foram reexportados.
+
+- `mobiles.gd` é o catálogo de Mage e Bigfoot. `weapon_rules` e `aim_limits`
+  leem o catálogo. IDs 1 e 2 e o oponente `3 - id` permanecem.
+- `flight_snapshot.gd` é a única cópia usada por `predict_shot` e
+  `begin_cpu_plan`.
+- `damage.gd` e `turn_table.gd` são chamados pelo Match, que guarda `phase`,
+  `actors` e `events`.
+- `aim_control.gd`, `camera_rig.gd` e `match_overlay.gd` recebem a lógica que
+  estava em `game.gd`. A cena continua a superfície dos testes (`angle`,
+  `charging`, `drag_aiming`, `camera`, overlays).
+- `battle_art` desenha com um contexto (pose, arma, atlas, tempo).
+- `Match.PLAYER` / `Match.CPU` nomeiam os índices 0 e 1. `start` aceita a
+  máscara; sem ela, cria o terreno. Som e perfil nascem na cena se ninguém
+  os injetou antes.
+
+Validação nesta sessão: `./scripts/check.sh` com 1114 checks e zero falhas,
+mais 10 partidas seeds 81–90 em 41 s, zero falhas. Vencedor, tiros e vida
+restante de cada semente coincidem com a entrega 0.12. App e ZIP não foram
+reexportados.
+
 ## Entrega atual 0.12.0: modo de mira Drag/Slice
 
 Pedido: implementar o Aiming Mode com opção de ligar/desligar no menu de

@@ -1,6 +1,37 @@
 # Design implementado
 
+Estado vigente: 0.12 mais a reorganização abaixo. As seções anteriores a
+«Integração Mage 0.4» guardam o histórico: terreno 640×400, força a 65 pontos/s,
+CPU com Carapaça e som só PCM não descrevem o jogo atual. O contrato que o
+código segue é esta seção e `HANDOFF.md`.
+
+## Arquitetura SOLID
+
+`match.gd` continua dono de `phase`, `actors` e da fila `events`. A cena
+orquestra e não decide dano. Papéis do treino 1×1: `Match.PLAYER` (0) e
+`Match.CPU` (1).
+
+| Arquivo | Responsabilidade |
+|---|---|
+| `scripts/mobiles.gd` | Catálogo Mage/Bigfoot: armas, mira, escudo, som e texto. Sem ramo por ID |
+| `scripts/flight_snapshot.gd` | Lista fechada copiada por `predict_shot` e pela busca da CPU |
+| `scripts/damage.gd` | `blast` e `deal_damage`; o Match chama e guarda os eventos |
+| `scripts/turn_table.gd` | Agenda, passe, previsão de iniciativa e fim de partida |
+| `scripts/aim_control.gd` | Carga Slice, Drag e repetição das teclas de mira |
+| `scripts/camera_rig.gd` | Seguimento, limites e impacto |
+| `scripts/match_overlay.gd` | Ajuda, opções, pausa e resultado |
+| `scripts/game.gd` | Fachada da cena: menu, HUD, laço, desenho e thread da CPU |
+| `scripts/battle_art.gd` | Poses. O desenho recebe um contexto, não os campos da cena |
+
+A máscara entra em `Match.start(..., mask)`. Sem máscara, o Match cria o
+terreno, como os testes. Som e perfil são criados em `game.gd._ready` quando
+a cena ainda não os recebeu. `weather.gd` e `combat.gd` seguem concretos:
+previsão e tiro real compartilham os dois.
+
 ## Componentes e responsabilidades
+
+Tabela da entrega 0.2, mantida como histórico. As responsabilidades atuais
+estão na seção anterior.
 
 | Arquivo | Responsabilidade |
 |---|---|

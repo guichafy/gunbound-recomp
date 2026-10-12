@@ -35,7 +35,7 @@ const RADIOS := {
 # Only these exist in this game; the rest keep the C# defaults, disabled.
 const ENABLED := ["aiming", "scroll", "sfx", "bgm", "background"]
 # TODO(Mouse Speed): enable this slider and scale the Drag aiming distance
-# (game.gd DRAG_FULL_POWER) by it; kept disabled at the C# default for now.
+# (aim_control.gd DRAG_FULL_POWER) by it; kept disabled at the C# default for now.
 # Interface: only the Blue skin exists in this game (user decision, ADR-056).
 const FIXED := {"mouse": 50, "interface": 1}
 const ACCEPT_OFFSET := Vector2(130, 144)
