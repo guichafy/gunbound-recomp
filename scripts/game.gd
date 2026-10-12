@@ -12,6 +12,8 @@ const MageSprite = preload("res://scripts/mage_sprite.gd")
 const Maps = preload("res://scripts/maps.gd")
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
+const Options = preload("res://scripts/options.gd")
+const OptionsPopup = preload("res://scripts/options_popup.gd")
 var hud = HudArt.new()
 var weather_art = WeatherArt.new()
 var mage = MageSprite.new()
@@ -20,6 +22,9 @@ var art = BattleArt.new()
 var ui = UIFactory.new()
 var model = Match.new()
 var profile = Profile.new()
+# PopupGameOptions values; saved next to the profile (tests isolate both).
+var options
+var options_popup: Control
 var sound
 var screen := "menu"
 var root: Control
@@ -74,8 +79,12 @@ func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	background = load("res://assets/art/background.png")
 	profile.load_profile()
+	if options == null:
+		options = Options.new(profile.path.get_basename() + "-options.json")
+		options.load_options()
 	sound = Sound.new()
 	add_child(sound)
+	apply_options()
 	show_menu()
 
 func replace_root() -> void:
@@ -88,6 +97,7 @@ func replace_root() -> void:
 	add_child(root)
 	overlay = null
 	overlay_kind = ""
+	options_popup = null
 	paused = false
 	charging = false
 
@@ -98,7 +108,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.10.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.10.1", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -223,8 +233,8 @@ func build_hud() -> void:
 		button.tooltip_text = "%s · atraso %d" % [model.weapon_rules(0, index).name, model.weapon_rules(0, index).delay]
 		weapon_buttons.append(button)
 	options_button = hud.make_button(root, "options")
-	options_button.tooltip_text = "Opções (ESC)"
-	options_button.pressed.connect(show_pause)
+	options_button.tooltip_text = "Opções (ESC) · pausa (P)"
+	options_button.pressed.connect(show_options)
 	pass_button = hud.make_button(root, "skip")
 	pass_button.tooltip_text = "Passar o turno (F8)"
 	pass_button.pressed.connect(pass_turn)
@@ -461,11 +471,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or event.echo:
 		return
 	if event.pressed and event.physical_keycode == KEY_ESCAPE:
-		if overlay != null:
+		if overlay_kind == "options":
+			accept_options()
+		elif overlay != null:
 			if overlay_kind != "result":
 				close_overlay()
 		elif screen == "match":
-			show_pause()
+			show_options()
+		return
+	if event.pressed and event.physical_keycode == KEY_P and screen == "match" and overlay_kind in ["", "options"]:
+		show_pause()
 		return
 	if event.pressed and event.physical_keycode == KEY_H:
 		show_help()
@@ -486,7 +501,11 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			KEY_3: select_weapon(2)
 			KEY_F: flip()
 
-func make_overlay(kind: String) -> Panel:
+## Full-screen layer that pauses the match and blocks the HUD below it.
+func open_overlay(kind: String) -> Control:
+	if overlay_kind == "options" and kind != "options":
+		# Leaving the popup for the pause or help keeps its values like Accept.
+		options.save_options()
 	if is_instance_valid(overlay):
 		root.remove_child(overlay)
 		overlay.queue_free()
@@ -496,6 +515,13 @@ func make_overlay(kind: String) -> Panel:
 	overlay = Control.new()
 	overlay.size = Vector2(1280, 800)
 	root.add_child(overlay)
+	options_popup = null
+	if is_instance_valid(options_button):
+		options_button.disabled = kind == "options"
+	return overlay
+
+func make_overlay(kind: String) -> Panel:
+	open_overlay(kind)
 	var shade := ColorRect.new()
 	shade.size = Vector2(1280, 800)
 	shade.color = Color(0.025, 0.09, 0.12, 0.73)
@@ -508,18 +534,46 @@ func close_overlay() -> void:
 		overlay.queue_free()
 	overlay = null
 	overlay_kind = ""
+	options_popup = null
 	paused = false
+	if is_instance_valid(options_button):
+		options_button.disabled = false
 	if screen == "match" and model.phase == "finished":
 		show_result()
 
 func show_help() -> void:
 	var card := make_overlay("help")
 	ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, ui.CREAM, true)
-	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8                           Passar o turno", "ESC                         Opções / pausa", "Arrastar a tela        Olhar o mapa; F vira parado"]
+	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8                           Passar o turno", "ESC  /  P                 Opções  /  pausa", "Arrastar a tela        Olhar o mapa; F vira parado"]
 	for index in range(lines.size()):
 		ui.label(card, lines[index], Vector2(32, 92 + index * 34), Vector2(500, 32), 17)
 	ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 336), Vector2(500, 70), 14, ui.MUTED)
 	ui.button(card, "ENTENDI", Vector2(32, 424), Vector2(496, 42), close_overlay, true)
+
+## PopupGameOptions (HUD.cs GameOptionsOnClickAction): ESC/Options open it, Accept
+## or ESC save and close. It pauses the training match; "PAUSA" or P open the pause.
+func show_options() -> void:
+	if screen != "match" or model.phase == "finished":
+		return
+	var layer := open_overlay("options")
+	options_popup = OptionsPopup.new(options)
+	options_popup.changed.connect(apply_options)
+	options_popup.accepted.connect(accept_options)
+	layer.add_child(options_popup)
+	var pause_size := Vector2(84, 30)
+	var pause := ui.button(options_popup, "PAUSA", options_popup.point(OptionsPopup.PAUSE_OFFSET) - pause_size * 0.5, pause_size, show_pause)
+	pause.add_theme_font_size_override("font_size", 13)
+	pause.modulate = Color(1, 1, 1, 0.82)
+	pause.tooltip_text = "Pausa, recomeçar ou voltar ao menu (P)"
+
+func apply_options() -> void:
+	sound.set_volume(options.sfx / 100.0)
+	queue_redraw()
+
+func accept_options() -> void:
+	# PopupGameOptions.CloseAction: overwrite the client settings file.
+	options.save_options()
+	close_overlay()
 
 func show_pause() -> void:
 	if screen != "match" or model.phase == "finished":
@@ -553,7 +607,10 @@ func _draw() -> void:
 	if background == null:
 		return
 	var backdrop: Dictionary = map_background(model.map_id) if screen != "menu" and model.terrain != null else {}
-	if backdrop.is_empty():
+	if screen == "match" and not options.background:
+		# PopupGameOptions "Background: Off" hides the map backdrop.
+		draw_rect(Rect2(0, 0, 1280, 800), Color.BLACK)
+	elif backdrop.is_empty():
 		draw_texture_rect(background, Rect2(0, 0, 1280, 800), false)
 	else:
 		draw_texture_rect_region(backdrop.texture, Rect2(0, 0, 1280, 800), background_region(backdrop))
@@ -735,10 +792,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			dragging = false
 			return
 		camera_manual = true
-		camera = clamp_camera(camera - event.relative)
+		camera = clamp_camera(camera - event.relative * options.scroll_factor())
 	elif event is InputEventScreenDrag and dragging and not touch_as_mouse:
 		camera_manual = true
-		camera = clamp_camera(camera - event.relative)
+		camera = clamp_camera(camera - event.relative * options.scroll_factor())
 
 func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, _scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
 	if kind == 1:

@@ -1,6 +1,52 @@
-# Hand-off — Gunbound Recomp 0.10.0
+# Hand-off — Gunbound Recomp 0.10.1
 
-## Entrega atual 0.10.0: HUD de batalha original do OpenBound
+## Entrega atual 0.10.1: popup de opções original (PopupGameOptions)
+
+Pedido: ESC/Options deve abrir o popup de configurações do OpenBound em vez da
+pausa própria, com os sprites originais, mantendo a pausa acessível e aplicando
+as opções que existem no jogo. REQ-31, ADR-052, plano na seção 0.10.1 de
+HUD_0_10.md.
+
+- ESC/Options abrem o popup; sair dele para a pausa/ajuda também grava.
+- `scripts/options_popup.gd` porta `PopupGameOptions`/`PopupMenu`/`SliderBar`/
+  `RadioButtonSet` com os offsets do C# × 1,6 a partir do centro da tela:
+  fundo Blue/Options 323×328, textos com as cores de Parameter.cs (fonte
+  monoespaçada do sistema no lugar da Consolas 10), sliders com
+  BarFrame/Bar/ponteiro, rádios, Accept 20×25 com 4 estados e barra de título
+  arrastável limitada à tela.
+- Aplicadas: **SFX** (`sound.set_volume`, linear sobre −19 dB; 0 silencia),
+  **Scroll Speed** (multiplicador `2^((v−50)/50)` do arrasto da câmera; 50 =
+  comportamento anterior) e **Background On/Off** (fundo do mapa preto na
+  batalha). Desabilitadas, com o padrão do C#: Aiming Mode (Slice), Mouse
+  Speed (50), BGM (0, o jogo não tem música) e Interface (TH Blue; só a skin
+  Blue existe no pacote).
+- ESC/Options abrem o popup (Options desabilitado enquanto aberto, como em
+  HUD.cs); ESC ou Accept fecham e gravam `scripts/options.gd` em
+  `<perfil>-options.json` (`user://profile-options.json`; testes no caminho
+  isolado do perfil). O popup pausa o treino e cancela a carga. Pausa própria
+  em P (partida ou popup) e no extra discreto "PAUSA" do popup;
+  `show_pause()` inalterado. Ajuda/README/VALIDACAO atualizados.
+- Sprites: 5 de Interface/Popup/Blue/Options e StaticButtons/Popup/Accept em
+  assets/openbound/hud (prefixo Options*/PopupAccept), SHA no manifest.
+  `BarFrame.png` do pacote é BMP; copiado com bytes idênticos como `.bmp`.
+
+Validação: `./scripts/check.sh` — **1044 checks + 10 partidas, zero falhas**
+(test_hud 115, +28 do popup: abrir/pausar/cancelar carga, Options desabilitado,
+layout, SFX 0/50 no volume real, padrões desabilitados, fundo, rolagem 2×/1×
+no arrasto, arrastar janela, ESC/Accept/P/PAUSA gravando no caminho isolado). Captura GPU `docs/hud/hud-options-popup.png` (1920×1200)
+conferida: textos, sliders e rádios alinhados ao fundo original. Versão do
+menu e do preset 0.10.1; **app/ZIP não reexportados** nesta entrega (continuam
+0.10.0) — rodar `scripts/build_macos.py` para entregar o app. Commit local,
+sem push.
+Limites: no C# lançado Scroll/Mouse/rádios estão desativados ("Pre-release
+deactivation"); aqui Scroll e Background ficam ativos e os demais aparecem
+esmaecidos. O original não pausa (online). Sem HD do popup (PNG 1,6×).
+Toggle "Som" da pausa continua como mudo geral, separado do SFX. Sem teste
+manual de mouse/áudio no app.
+
+Próximo passo: usuário validar o popup no aplicativo após reexportar.
+
+## Entrega anterior 0.10.0: HUD de batalha original do OpenBound
 
 Pedido: deixar os sprites da batalha iguais ao OpenBound — seleção de arma,
 barra de força e demais opções. Decisões do usuário: **arte HD via GPT Images
@@ -39,7 +85,7 @@ Bigfoot 18–40°, SS 23–35°), verificado em test_hud. Mipmaps nas texturas H
 HUD deixam a janela 1× (1280×800) nítida.
 Limites: balística mantém o piso de velocidade equivalente a 15 (a barra vai de
 0 a 100); itens, ouro, chat, rank e MatchStatus não existem (slots vazios, Gold
-mostra XP só no fim); ESC abre a pausa própria, o PopupGameOptions original
+mostra XP só no fim); ESC abria a pausa própria (substituído na 0.10.1), o PopupGameOptions original
 (configurações de mira/rolagem/volume/skin) não foi portado; fonte dos nomes é
 do sistema (NotoSans10 original não incluída); sem teste manual de
 mouse/toque/áudio no app. Roteiro manual atualizado em docs/VALIDACAO.md.

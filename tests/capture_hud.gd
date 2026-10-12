@@ -1,7 +1,8 @@
 extends SceneTree
 ## REQ-27..30 GPU captures at 1920×1200 (1.5× the 1280×800 canvas): original
 ## OpenBound battle HUD with the HD remaster, the same frame with the original
-## sprites, charging, the CPU turn balloon and floating damage.
+## sprites, the options popup (REQ-31), charging, the CPU turn balloon and
+## floating damage.
 var view
 func _initialize() -> void:
 	call_deferred("run")
@@ -48,6 +49,10 @@ func run() -> void:
 	view.hud.textures = view.hud.originals.duplicate()
 	await snap("hud-player-turn-original")
 	view.hud.textures = hd
+	# REQ-31: ESC/Options opens the original PopupGameOptions over the battle.
+	view.show_options()
+	await snap("hud-options-popup")
+	view.close_overlay()
 	var space := InputEventKey.new()
 	space.physical_keycode = KEY_SPACE
 	space.pressed = true
@@ -64,6 +69,6 @@ func run() -> void:
 	view.hud.add_damage(1, 187, view.model)
 	advance(0.7)
 	await snap("hud-cpu-turn")
-	print("HUD CAPTURES: 4 | ACTIVE ", view.model.active, " | SECONDS ", view.hud.display_seconds(view.model))
+	print("HUD CAPTURES: 5 | ACTIVE ", view.model.active, " | SECONDS ", view.hud.display_seconds(view.model))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/hud-capture-profile.json"))
 	quit()

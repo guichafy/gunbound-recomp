@@ -174,3 +174,11 @@ REQ-27 barra de ação, REQ-28 barras de força/movimento e carga original,
 REQ-29 mira original, REQ-30 bússola, relógio, Delayboard, vida, nome e dano,
 conforme HUD_0_10.md. Substitui o console de REQ-03 (teclado e controles na
 tela continuam) e muda a altura visível do mundo de REQ-22 para 664 px.
+
+## Popup de opções 0.10.1 — escopo solicitado
+
+REQ-31: ESC/Options abre o `PopupGameOptions` original (sprites originais,
+layout do C# × 1,6) em vez da pausa própria; aplica volume SFX, velocidade de
+rolagem (arrasto da câmera) e fundo on/off; mira, mouse, BGM e skin aparecem
+desabilitados. A pausa continua acessível (P e extra "PAUSA" no popup).
+Conforme HUD_0_10.md. Altera a parte "Options abre a pausa" de REQ-27.

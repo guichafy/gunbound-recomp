@@ -359,5 +359,29 @@
   "hud/ClockSecond.mp3": {
     "source": "Audio/SFX/InGame/Gameplay/ClockSecond.mp3",
     "sha256": "6563acf3f6d26ebd2a43daa52e1526065642826e7cd61b041ad9b527684fba8b"
+  },
+  "hud/OptionsBackground.png": {
+    "source": "Interface/Popup/Blue/Options/Background.png",
+    "sha256": "8639a1c921a32e770336235f1df4843c43756d033e72728c42c1ee40f02b9315"
+  },
+  "hud/OptionsBar.png": {
+    "source": "Interface/Popup/Blue/Options/Bar.png",
+    "sha256": "6c40ac89d3889452fa8a38ef224813d4c0672f1a9293054fb4a89c26dfb45e9f"
+  },
+  "hud/OptionsBarFrame.bmp": {
+    "source": "Interface/Popup/Blue/Options/BarFrame.png",
+    "sha256": "c97debdb011ceb0a3b72d5bd7dfd38d2637373e1e2d8ae600acd99aa1eafa7da"
+  },
+  "hud/OptionsBarIntensityPointer.png": {
+    "source": "Interface/Popup/Blue/Options/BarIntensityPointer.png",
+    "sha256": "aa3869c2e5736693b561b2cc70f2dbe9446975ab300f68befb1020f4f6ffad15"
+  },
+  "hud/OptionsRadioButton.png": {
+    "source": "Interface/Popup/Blue/Options/RadioButton.png",
+    "sha256": "f10e231b37c5dc0a461ef623f61b2982bbb27567a5a259e284ece5d6bf2408ed"
+  },
+  "hud/PopupAccept.png": {
+    "source": "Interface/StaticButtons/Popup/Accept.png",
+    "sha256": "986daad40b7d5e73bdc63d4a21305f40fa21d6bae93779fa132ad368006111a1"
   }
 }

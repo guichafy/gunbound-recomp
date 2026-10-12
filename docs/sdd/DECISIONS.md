@@ -229,3 +229,15 @@ ADR-051 — adotada por escolha do usuário: arte do HUD em HD via GPT Images
 (3× o original, ≥ Full HD), recortada de folhas de referência com layout fixo e
 alfa do original. Controles sem equivalente no original (mover, virar,
 disparar, passar com mouse/toque) ficam como botões pequenos fora da barra.
+
+ADR-052 — adotada por solicitação explícita (0.10.1): ESC/Options abre o
+`PopupGameOptions` original em vez da pausa própria (substitui essa parte de
+ADR-049). Aplica só o que existe no jogo: SFX (escala o volume dos efeitos),
+Scroll Speed (multiplicador do arrasto da câmera; 50 = comportamento atual) e
+Background on/off. Aiming Mode, Mouse Speed, BGM e Interface são desenhados
+desabilitados. Adaptações: o popup pausa o treino (o original online não
+pausa); a pausa própria fica em P e no extra "PAUSA" do popup; o Accept grava
+as opções em arquivo próprio ao lado do perfil, como o
+`ConfigFileManager.OverwriteGameServerSettings` do original, sem tocar no
+progresso. No C# lançado Scroll/Background estavam desativados
+("Pre-release deactivation"); aqui ficam ativos porque o pedido os inclui.

@@ -155,4 +155,7 @@ em hud/source com .gdignore; rodar `refs`, gerar, depois sem argumento).
 Carga original 0→100 em 2 s (+2/0,04 s); Tab/F8/↑↓ do original; extras
 discretos ← → F ● para mouse/toque. Teste test_hud.gd; captura capture_hud.gd
 (docs/hud, HD e original lado a lado).
-
+Popup de opções 0.10.1: ESC/Options abre PopupGameOptions original
+(options_popup.gd; valores em options.gd, gravados ao lado do perfil). Só SFX,
+Scroll Speed e Background têm efeito; demais esmaecidos. Pausa própria em P e
+no extra PAUSA. Ver seção 0.10.1 de HUD_0_10.md/ADR-052.

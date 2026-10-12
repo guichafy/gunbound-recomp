@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Popup de opções original 0.10.1
+
+- [x] Levantar PopupGameOptions/PopupMenu/SliderBar/RadioButtonSet/Accept no C#.
+- [x] HUD_0_10.md (seção 0.10.1), REQ-31, ADR-052 antes do código.
+- [x] Sprites Blue/Options + Accept com SHA; BarFrame (BMP) com bytes idênticos.
+- [x] options_popup.gd/options.gd; ESC/Options → popup, P/PAUSA → pausa;
+      SFX, Scroll Speed e Background aplicados e gravados no Accept.
+- [x] test_hud +28 checks (115); check.sh 1044 checks + 10 partidas; captura docs/hud/hud-options-popup.png.
+- [ ] Reexportar app/ZIP 0.10.1 (`scripts/build_macos.py`) e o usuário validar.
+- [ ] Fora do escopo: Aiming Mode, Mouse Speed, BGM (sem música), skins de HUD
+      além da Blue, HD do popup.
+
 ## HUD original de batalha 0.10.0
 
 - [x] Levantar HUD.cs, Crosshair, WindCompass, Delayboard, HealthBar, fontes e
@@ -9,8 +21,8 @@
 - [x] Fase D: test_hud (87, inclui faixas de mira × limites legais), testes migrados, 1016 checks + 10 partidas, capturas
       docs/hud, app/ZIP 0.10.0 e PCK verificados.
 - [ ] Usuário validar o HUD no aplicativo (mouse, toque, áudio do relógio).
-- [ ] Fora do escopo: itens/slots F1–F6, ouro real, chat, rank, MatchStatus,
-      PopupGameOptions original (ESC abre a pausa própria).
+- [ ] Fora do escopo: itens/slots F1–F6, ouro real, chat, rank, MatchStatus.
+      (PopupGameOptions entregue na 0.10.1.)
 
 ## Câmera, vento, clima e Thor 0.9.0
 

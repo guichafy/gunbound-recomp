@@ -5,6 +5,9 @@ var streams: Dictionary = {}
 var players: Array[AudioStreamPlayer] = []
 var muted := false
 var next_player := 0
+# PopupGameOptions SFX slider (0–100 → 0–1), linear over the base −19 dB.
+const BASE_DB := -19.0
+var volume := 1.0
 
 func _exit_tree() -> void:
 	for player in players:
@@ -15,14 +18,19 @@ func _exit_tree() -> void:
 func _ready() -> void:
 	for i in range(5):
 		var player := AudioStreamPlayer.new()
-		player.volume_db = -19.0
 		add_child(player)
 		players.append(player)
+	set_volume(volume)
 	for kind in ["fire", "explosion", "turn", "result"]:
 		streams[kind] = synthesize(kind)
 
+func set_volume(value: float) -> void:
+	volume = clampf(value, 0.0, 1.0)
+	for player in players:
+		player.volume_db = BASE_DB + linear_to_db(maxf(volume, 0.0001))
+
 func play(kind: String, original: AudioStream = null, pitch: float = 1.0) -> void:
-	if muted or (original == null and not streams.has(kind)):
+	if muted or volume <= 0.0 or (original == null and not streams.has(kind)):
 		return
 	var player := players[next_player]
 	next_player = (next_player + 1) % players.size()

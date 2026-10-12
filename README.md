@@ -15,7 +15,8 @@ Também é possível importar `project.godot` no Godot 4.7.2 e pressionar **F6**
 | Espaço, segurar e soltar | A barra de força enche de 0 a 100 em 2 s; soltar dispara, cheia dispara sozinha |
 | Tab ou 1/2/3 | Trocar o tiro S1 / S2 / SS (botões da barra) |
 | F8 ou botão PASS | Passar o turno |
-| Esc ou botão ESC | Opções / pausa |
+| Esc ou botão ESC | Opções (popup original: SFX, rolagem, fundo) |
+| P ou PAUSA no popup | Pausa (recomeçar, menu, ajuda) |
 | F | Virar parado |
 | H | Ajuda |
 

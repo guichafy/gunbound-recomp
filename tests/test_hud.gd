@@ -1,6 +1,7 @@
 extends SceneTree
 ## REQ-27..30: original OpenBound battle HUD (layout, buttons, strength bar,
-## keyboard, crosshair, compass, timer, Delayboard, life bar, damage counter).
+## keyboard, crosshair, compass, timer, Delayboard, life bar, damage counter) and
+## REQ-31 PopupGameOptions (SFX, scroll speed, background, pause access).
 
 var failures := 0
 var checks := 0
@@ -128,13 +129,104 @@ func run() -> void:
 	var direction: Vector2 = scene.model.shot_velocity(0, scene.angle, 100.0, scene.weapon).normalized()
 	check(hud.hud_angle(scene.model, scene.angle, scene.weapon) == roundi(rad_to_deg(atan2(-direction.y, absf(direction.x)))), "HUD angle is the real shot direction over the horizon")
 
-	# F8 passes; the Options button opens the pause menu.
+	# F8 passes the turn.
 	player_turn(scene)
 	key(scene, KEY_F8, true)
 	check(scene.model.active == 1 or scene.model.phase != "aim", "F8 passes the turn")
+
+	# REQ-31 PopupGameOptions: Options/ESC open it; SFX, scroll and background apply.
+	var Popup = load("res://scripts/options_popup.gd")
+	var options_file: String = scene.options.path
+	check(options_file == "res://.tools/hud-test-profile-options.json", "Options file sits next to the isolated test profile")
+	player_turn(scene)
+	key(scene, KEY_SPACE, true)
+	scene._process(0.1)
 	scene.options_button.pressed.emit()
-	check(scene.overlay_kind == "pause", "Options (ESC) opens the pause menu")
+	var popup = scene.options_popup
+	check(scene.overlay_kind == "options" and popup != null and scene.paused, "Options opens the original options popup and pauses the training")
+	check(not scene.charging and scene.model.phase == "aim", "Opening the options cancels the charge without firing")
+	check(scene.options_button.disabled, "Options stays disabled while its popup is open (HUD.cs)")
+	check(popup.size.is_equal_approx(Vector2(323, 328) * 1.6) and (popup.position + popup.size * 0.5).distance_to(Vector2(640, 400)) <= 0.6, "Popup background 323×328 × 1.6 centred on the screen")
+	var accept: TextureButton = popup.accept_button
+	check(accept.size.is_equal_approx(Vector2(20, 25) * 1.6) and (accept.position + accept.size * 0.5).is_equal_approx(popup.point(Vector2(130, 144))), "Accept sits at the original (130, 144)")
+	var sfx_area: Rect2 = popup.slider_rect("sfx")
+	check(sfx_area.size.is_equal_approx(Vector2(145, 20) * 1.6) and sfx_area.get_center().is_equal_approx(popup.point(Vector2(60, 7))), "SFX slider area 145×20 at (60, 7)")
+	popup.pointer_down(Vector2(sfx_area.position.x + 2.0, sfx_area.get_center().y))
+	popup.pointer_up()
+	check(scene.options.sfx == 0 and scene.sound.volume == 0.0, "Dragging SFX to the start silences the effects")
+	popup.set_slider_from_local("sfx", popup.point(Vector2(60, 7)).x)
+	check(scene.options.sfx == 50 and is_equal_approx(scene.sound.volume, 0.5), "SFX at the middle halves the effects volume")
+	check(is_equal_approx(scene.sound.players[0].volume_db, -19.0 + linear_to_db(0.5)), "SFX scales the −19 dB players linearly")
+	popup.pointer_down(popup.slider_rect("bgm").get_center())
+	popup.pointer_up()
+	check(popup.value_of("bgm") == 0 and popup.value_of("mouse") == 50 and popup.value_of("aiming") == 1 and popup.value_of("interface") == 1, "BGM, mouse, aiming and interface keep the original defaults, disabled")
+	popup.pointer_down(popup.radio_rect("background", 1).get_center())
+	popup.pointer_up()
+	check(not scene.options.background, "Background radio Off turns the map backdrop off")
+	popup.set_slider_from_local("scroll", popup.slider_rect("scroll").end.x + 50.0)
+	check(scene.options.scroll == 100 and is_equal_approx(scene.options.scroll_factor(), 2.0), "Scroll speed 100 doubles the drag")
+	var start_pos: Vector2 = popup.position
+	popup.pointer_down(Vector2(80, 10))
+	popup.pointer_move(Vector2(130, 30))
+	popup.pointer_up()
+	check(popup.position == start_pos + Vector2(50, 20), "The title bar drags the popup")
+	popup.pointer_down(Vector2(80, 10))
+	popup.pointer_move(Vector2(5000, -5000))
+	popup.pointer_up()
+	check(popup.position.x == roundf(1280.0 - popup.size.x) and popup.position.y == 0.0 and popup.position.x + popup.size.x <= 1280.0, "The dragged popup stays on the screen")
+	key(scene, KEY_ESCAPE, true)
+	check(scene.overlay == null and not scene.paused and not scene.options_button.disabled, "ESC accepts and closes the popup, re-enabling Options")
+	var saved = load("res://scripts/options.gd").new(options_file)
+	saved.load_options()
+	check(saved.sfx == 50 and saved.scroll == 100 and not saved.background, "Accept saves the options next to the profile")
+	# Scroll speed scales the manual camera drag; 50 keeps the original 1×.
+	scene.camera = Vector2(100, 100)
+	var press := InputEventMouseButton.new()
+	press.button_index = MOUSE_BUTTON_LEFT
+	press.pressed = true
+	press.position = Vector2(640, 300)
+	scene._unhandled_input(press)
+	var motion := InputEventMouseMotion.new()
+	motion.button_mask = MOUSE_BUTTON_MASK_LEFT
+	motion.relative = Vector2(-10, -5)
+	scene._unhandled_input(motion)
+	check(scene.camera.is_equal_approx(Vector2(120, 110)), "Scroll speed 100 moves the camera twice the drag")
+	scene.options.scroll = 50
+	scene._unhandled_input(motion)
+	check(scene.camera.is_equal_approx(Vector2(130, 115)), "Scroll speed 50 keeps the 1:1 drag")
+	press.pressed = false
+	scene._unhandled_input(press)
+	# The pause stays reachable: P from the match, P or "PAUSA" from the popup.
+	key(scene, KEY_ESCAPE, true)
+	check(scene.overlay_kind == "options", "ESC opens the options popup")
+	scene.options_popup.set_slider_from_local("sfx", scene.options_popup.slider_rect("sfx").position.x)
+	key(scene, KEY_P, true)
+	check(scene.overlay_kind == "pause" and not scene.options_button.disabled, "P opens the pause from the popup")
+	saved.load_options()
+	check(saved.sfx == 0, "Leaving the popup for the pause keeps its values like Accept")
+	key(scene, KEY_ESCAPE, true)
+	check(scene.overlay == null, "ESC closes the pause")
+	key(scene, KEY_P, true)
+	check(scene.overlay_kind == "pause", "P opens the pause during the match")
 	scene.close_overlay()
+	scene.show_options()
+	var pause_button: Button = null
+	for child in scene.options_popup.get_children():
+		if child is Button and child.text == "PAUSA":
+			pause_button = child
+	check(pause_button != null and Rect2(Vector2.ZERO, scene.options_popup.size).encloses(Rect2(pause_button.position, pause_button.size)), "Discreet PAUSA extra sits inside the popup")
+	pause_button.pressed.emit()
+	check(scene.overlay_kind == "pause", "PAUSA opens the pause menu")
+	scene.close_overlay()
+	scene.show_options()
+	scene.options_popup.accept_button.pressed.emit()
+	check(scene.overlay == null, "Accept closes the popup")
+	scene.options.sfx = 100
+	scene.options.background = true
+	scene.apply_options()
+	check(scene.sound.volume == 1.0, "SFX 100 restores the original effects volume")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(options_file))
+	check(Popup.ENABLED == ["scroll", "sfx", "background"], "Only scroll, SFX and background are live in this game")
 
 	# REQ-30 timer, damage counter, life bar, compass, weather roulette.
 	scene.model.phase = "aim"
