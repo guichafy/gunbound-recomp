@@ -182,3 +182,9 @@ layout do C# × 1,6) em vez da pausa própria; aplica volume SFX, velocidade de
 rolagem (arrasto da câmera) e fundo on/off; mira, mouse, BGM e skin aparecem
 desabilitados. A pausa continua acessível (P e extra "PAUSA" no popup).
 Conforme HUD_0_10.md. Altera a parte "Options abre a pausa" de REQ-27.
+
+## Performance e limites 0.11 — escopo solicitado
+
+REQ-32 troca de turno sem travar (busca da CPU fatiada em frames, plano
+idêntico), REQ-33 música de batalha original com o slider BGM, e revisão de
+REQ-31 com o popup em HD (GPT Images), conforme PERF_LIMITS_0_11.md.

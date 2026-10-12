@@ -502,28 +502,52 @@ func check_end() -> bool:
 	return true
 
 func choose_cpu_shot() -> Dictionary:
+	var plan := begin_cpu_plan()
+	search_cpu_plan(plan)
+	return finish_cpu_plan(plan)
+
+## CPU aim in three steps (REQ-32/ADR-053) so the grid can run off the main
+## thread: begin draws the weapon and snapshots mask, actors, wind and weather;
+## search scores the grid only on that snapshot (no RNG, no live state); finish
+## draws the aim errors. Same RNG order and result as a one-shot search.
+func begin_cpu_plan() -> Dictionary:
 	var actor: Dictionary = actors[active]
 	var target: Dictionary = actors[1 - active]
 	actor.facing = 1 if target.pos.x > actor.pos.x else -1
 	var weapon := 1 if rng.randf() < 0.35 else 0
 	if can_use_special(active) and rng.randf() < 0.45:
 		weapon = 2
-	var best := {"angle": 45.0, "power": 65.0, "weapon": weapon}
+	var snapshot = get_script().new()
+	snapshot.terrain = terrain.collision_copy()
+	snapshot.actors = actors.duplicate(true)
+	snapshot.wind = wind
+	snapshot.weather = weather.copy()
+	snapshot.active = active
+	return {"actor": active, "weapon": weapon, "limits": aim_limits(active, weapon), "snapshot": snapshot,
+		"target": target.pos, "best": {"angle": 45.0, "power": 65.0, "weapon": weapon}}
+
+static func search_cpu_plan(plan: Dictionary) -> void:
+	var index: int = plan.actor
+	var limits: Vector2 = plan.limits
 	var best_score := INF
-	var limits := aim_limits(active, weapon)
 	for angle in range(int(maxf(15, limits.x)), int(minf(80, limits.y)) + 1, 5):
 		for power in range(20, 101, 4):
-			var impact := predict_shot(active, angle, power, weapon)
-			var score := Vector2(impact.position).distance_to(target.pos)
-			if int(impact.actor) == 1 - active:
+			var impact: Dictionary = plan.snapshot.predict_shot(index, angle, power, plan.weapon)
+			var score := Vector2(impact.position).distance_to(plan.target)
+			if int(impact.actor) == 1 - index:
 				score -= 20.0
-			elif int(impact.actor) == active:
+			elif int(impact.actor) == index:
 				score += 500.0
 			if score < best_score:
 				best_score = score
-				best = {"angle": float(angle), "power": float(power), "weapon": weapon}
+				plan.best = {"angle": float(angle), "power": float(power), "weapon": plan.weapon}
+
+func finish_cpu_plan(plan: Dictionary) -> Dictionary:
+	var best: Dictionary = plan.best
+	var limits: Vector2 = plan.limits
 	var angle_error: float = [5.0, 2.5, 0.7][difficulty]
 	var power_error: float = [10.0, 4.0, 1.0][difficulty]
 	best.angle = clampf(float(best.angle) + rng.randf_range(-angle_error, angle_error), limits.x, limits.y)
 	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), 15.0, 100.0)
+	plan.snapshot = null
 	return best

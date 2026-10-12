@@ -54,6 +54,10 @@ var paused := false
 var elapsed := 0.0
 var cpu_wait := 0.0
 var cpu_plan: Dictionary = {}
+# CPU aim search on a worker thread (REQ-32): starts with the CPU turn on a
+# snapshot; cpu_plan only appears when it is done and the initial wait is over.
+var cpu_search: Dictionary = {}
+var cpu_task := -1
 var match_id := ""
 var reward := 0
 var result_wait := -1.0
@@ -104,6 +108,7 @@ func replace_root() -> void:
 func show_menu() -> void:
 	screen = "menu"
 	model.phase = "menu"
+	discard_cpu_search()
 	result_wait = -1.0
 	effects.clear()
 	floating.clear()
@@ -200,6 +205,7 @@ func start_match() -> void:
 	weapon = 0
 	charging = false
 	cpu_plan.clear()
+	discard_cpu_search()
 	effects.clear()
 	floating.clear()
 	replace_root()
@@ -336,11 +342,17 @@ func _process(delta: float) -> void:
 	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == 1 and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
 	consume_events()
 	if model.phase == "aim" and model.active == 1:
+		if cpu_plan.is_empty() and cpu_search.is_empty():
+			start_cpu_search()
 		cpu_wait -= frame_delta
 		if cpu_wait <= 0.0:
 			if cpu_plan.is_empty():
-				cpu_plan = model.choose_cpu_shot()
-				cpu_wait = 0.75
+				if WorkerThreadPool.is_task_completed(cpu_task):
+					WorkerThreadPool.wait_for_task_completion(cpu_task)
+					cpu_task = -1
+					cpu_plan = model.finish_cpu_plan(cpu_search)
+					cpu_search = {}
+					cpu_wait = 0.75
 			else:
 				model.fire(cpu_plan.angle, cpu_plan.power, cpu_plan.weapon)
 				cpu_plan.clear()
@@ -359,6 +371,21 @@ func _process(delta: float) -> void:
 		if result_wait < 0.0:
 			show_result()
 	update_hud()
+
+func start_cpu_search() -> void:
+	cpu_search = model.begin_cpu_plan()
+	var plan := cpu_search
+	cpu_task = WorkerThreadPool.add_task(func(): Match.search_cpu_plan(plan), false, "CPU aim search")
+
+## A running search only reads its own snapshot; wait for it before dropping it.
+func discard_cpu_search() -> void:
+	if cpu_task >= 0:
+		WorkerThreadPool.wait_for_task_completion(cpu_task)
+		cpu_task = -1
+	cpu_search = {}
+
+func _exit_tree() -> void:
+	discard_cpu_search()
 
 func update_aim_keys(delta: float) -> void:
 	# Whole-degree steps: one per press, then a repeat that speeds up while held.
@@ -397,6 +424,7 @@ func consume_events() -> void:
 				last_impact = Vector2.INF
 				charging = false
 				cpu_plan.clear()
+				discard_cpu_search()
 				cpu_wait = 1.1
 				if event.actor == 0:
 					# HUD.GrantTurn resets the strength bar; the marker keeps the last shot.

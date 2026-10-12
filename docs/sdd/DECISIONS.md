@@ -241,3 +241,23 @@ as opções em arquivo próprio ao lado do perfil, como o
 `ConfigFileManager.OverwriteGameServerSettings` do original, sem tocar no
 progresso. No C# lançado Scroll/Background estavam desativados
 ("Pre-release deactivation"); aqui ficam ativos porque o pedido os inclui.
+
+## Performance e limites 0.11
+
+ADR-053 — adotada por solicitação explícita: a busca da CPU roda numa thread
+do `WorkerThreadPool` sobre um retrato do estado do início do turno, em vez
+de um único frame de 90–314 ms. Sorteios de arma e de erro ficam na thread
+principal (mesma ordem de RNG); a grade só lê o retrato. Plano idêntico ao
+`choose_cpu_shot` síncrono. O fatiamento em frames foi testado e descartado
+(atrasava o disparo da CPU de ~1,9 s para ~3,3 s). Não reduzir a grade sem
+nova decisão (mudaria a IA).
+
+ADR-054 — adotada por solicitação explícita de implementar os limites: BGM
+com as 12 faixas originais `LevelScene/Theme*` (≈17 MB a mais no app), faixa
+aleatória ao iniciar e ao terminar cada uma, volume pelo slider BGM (padrão
+50). Menu sem música. Substitui o "BGM desabilitado" de ADR-052.
+
+ADR-055 — adotada por pedido explícito: o popup de opções ganha derivados HD
+3× por GPT Images (Codex `image_gen`), como o HUD de ADR-051. Aiming Mode,
+Mouse Speed, skins e Consolas continuam como limite (sem implementação no
+original, cursor do sistema, só skin Blue no pacote, fonte proprietária).

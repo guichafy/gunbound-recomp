@@ -1,0 +1,100 @@
+extends SceneTree
+## REQ-32: the CPU aim search runs on a worker thread over a snapshot, gives the
+## same plan as the one-shot search and never blocks the battle frame.
+
+var failures := 0
+var checks := 0
+
+func check(condition: bool, description: String) -> void:
+	checks += 1
+	if not condition:
+		failures += 1
+		printerr("FAIL: ", description)
+
+func _initialize() -> void:
+	call_deferred("run")
+
+func cpu_model(seed_value: int):
+	var model = load("res://scripts/match.gd").new()
+	model.start(2, 1, seed_value)
+	if model.active == 0:
+		model.pass_turn()
+	return model
+
+func run() -> void:
+	var Match = load("res://scripts/match.gd")
+	# Same plan: one-shot, split steps and a worker thread from the same RNG state.
+	for seed_value in [3, 17, 42]:
+		var model = cpu_model(seed_value)
+		var state: int = model.rng.state
+		var direct: Dictionary = model.choose_cpu_shot()
+		model.rng.state = state
+		var plan: Dictionary = model.begin_cpu_plan()
+		Match.search_cpu_plan(plan)
+		var split: Dictionary = model.finish_cpu_plan(plan)
+		model.rng.state = state
+		var threaded_plan: Dictionary = model.begin_cpu_plan()
+		var task := WorkerThreadPool.add_task(func(): Match.search_cpu_plan(threaded_plan))
+		WorkerThreadPool.wait_for_task_completion(task)
+		var threaded: Dictionary = model.finish_cpu_plan(threaded_plan)
+		check(direct == split and direct == threaded, "Seed %d: split and threaded searches give the one-shot plan %s" % [seed_value, direct])
+		check(threaded_plan.snapshot == null, "Finishing a plan releases its snapshot")
+
+	# The search reads only its snapshot: later changes to the live match do not leak in.
+	var live = cpu_model(5)
+	var live_state: int = live.rng.state
+	var expected: Dictionary = live.choose_cpu_shot()
+	live.rng.state = live_state
+	var isolated: Dictionary = live.begin_cpu_plan()
+	var target_before: Vector2 = live.actors[1 - live.active].pos
+	live.actors[1 - live.active].pos += Vector2(300, 0)
+	live.wind = Vector2(35, 0)
+	Match.search_cpu_plan(isolated)
+	live.actors[1 - live.active].pos = target_before
+	check(live.finish_cpu_plan(isolated) == expected, "The snapshot isolates the search from the live match")
+
+	# Scene: the CPU turn starts the worker; a frame stays far below the old 90–314 ms.
+	var scene = load("res://scenes/main.tscn").instantiate()
+	scene.profile = load("res://scripts/profile.gd").new("res://.tools/performance-test-profile.json")
+	root.add_child(scene)
+	scene.set_process(false)
+	scene.sound.muted = true
+	scene.select_vehicle(2)
+	scene.start_match()
+	if scene.model.active == 0:
+		scene.model.pass_turn()
+		scene.consume_events()
+	var worst := 0
+	var fired := false
+	var started_at := Time.get_ticks_msec()
+	var first_task := -2
+	for frame in range(600):
+		var before := Time.get_ticks_usec()
+		scene._process(1.0 / 60.0)
+		worst = maxi(worst, Time.get_ticks_usec() - before)
+		if first_task == -2:
+			first_task = scene.cpu_task
+			check(first_task >= 0 and scene.cpu_plan.is_empty(), "The CPU turn starts the search on a worker thread")
+		if scene.model.phase != "aim" or scene.model.active != 1:
+			fired = true
+			break
+		OS.delay_msec(4)
+	check(fired, "The CPU still fires after the threaded search")
+	check(worst < 40000, "No battle frame runs the CPU search (worst %.1f ms)" % (worst / 1000.0))
+	check(scene.cpu_task == -1 and scene.cpu_search.is_empty(), "The finished search is collected")
+	check(Time.get_ticks_msec() - started_at < 15000, "The CPU fires well before the turn timer")
+
+	# Restarting during a search waits for the worker and drops it.
+	scene.start_match()
+	if scene.model.active == 0:
+		scene.model.pass_turn()
+		scene.consume_events()
+	scene._process(1.0 / 60.0)
+	check(scene.cpu_task >= 0, "A new CPU turn starts a new search")
+	scene.start_match()
+	check(scene.cpu_task == -1 and scene.cpu_search.is_empty() and scene.cpu_plan.is_empty(), "Restarting drops a running search safely")
+	scene.show_menu()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/performance-test-profile.json"))
+	print("PERFORMANCE CHECKS: ", checks, " | FAILURES: ", failures)
+	scene.queue_free()
+	quit(1 if failures > 0 else 0)
