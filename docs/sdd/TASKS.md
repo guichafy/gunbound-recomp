@@ -7,7 +7,7 @@
 - [x] Sprites Blue/Options + Accept com SHA; BarFrame (BMP) com bytes idênticos.
 - [x] options_popup.gd/options.gd; ESC/Options → popup, P/PAUSA → pausa;
       SFX, Scroll Speed e Background aplicados e gravados no Accept.
-- [x] test_hud +28 checks (115); check.sh 1044 checks + 10 partidas; captura docs/hud/hud-options-popup.png.
+- [x] test_hud +29 checks (116); check.sh 1045 checks + 10 partidas; captura docs/hud/hud-options-popup.png.
 - [ ] Reexportar app/ZIP 0.10.1 (`scripts/build_macos.py`) e o usuário validar.
 - [ ] Fora do escopo: Aiming Mode, Mouse Speed, BGM (sem música), skins de HUD
       além da Blue, HD do popup.

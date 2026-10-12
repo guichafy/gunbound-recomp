@@ -30,8 +30,8 @@ HUD_0_10.md.
   assets/openbound/hud (prefixo Options*/PopupAccept), SHA no manifest.
   `BarFrame.png` do pacote é BMP; copiado com bytes idênticos como `.bmp`.
 
-Validação: `./scripts/check.sh` — **1044 checks + 10 partidas, zero falhas**
-(test_hud 115, +28 do popup: abrir/pausar/cancelar carga, Options desabilitado,
+Validação: `./scripts/check.sh` — **1045 checks + 10 partidas, zero falhas**
+(test_hud 116, +29 do popup, incluindo cliques reais pela viewport no slider e no Accept: abrir/pausar/cancelar carga, Options desabilitado,
 layout, SFX 0/50 no volume real, padrões desabilitados, fundo, rolagem 2×/1×
 no arrasto, arrastar janela, ESC/Accept/P/PAUSA gravando no caminho isolado). Captura GPU `docs/hud/hud-options-popup.png` (1920×1200)
 conferida: textos, sliders e rádios alinhados ao fundo original. Versão do

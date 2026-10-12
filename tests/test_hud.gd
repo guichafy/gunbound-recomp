@@ -21,6 +21,18 @@ func key(scene, code: int, pressed: bool) -> void:
 	event.pressed = pressed
 	scene._unhandled_key_input(event)
 
+## Mouse click through the viewport GUI (window 1:1 with the 1280×800 canvas).
+func click(point: Vector2) -> void:
+	root.size = Vector2i(1280, 800)
+	for pressed in [true, false]:
+		var event := InputEventMouseButton.new()
+		event.button_index = MOUSE_BUTTON_LEFT
+		event.pressed = pressed
+		event.button_mask = MOUSE_BUTTON_MASK_LEFT if pressed else 0
+		event.position = point
+		event.global_position = point
+		root.push_input(event)
+
 func player_turn(scene) -> void:
 	for frame in range(400):
 		if scene.model.phase == "aim" and scene.model.active == 0:
@@ -218,9 +230,14 @@ func run() -> void:
 	pause_button.pressed.emit()
 	check(scene.overlay_kind == "pause", "PAUSA opens the pause menu")
 	scene.close_overlay()
+	# Real mouse clicks routed by the viewport reach the slider and Accept.
 	scene.show_options()
-	scene.options_popup.accept_button.pressed.emit()
-	check(scene.overlay == null, "Accept closes the popup")
+	var sfx_point: Vector2 = scene.options_popup.global_position + scene.options_popup.slider_rect("sfx").get_center()
+	click(sfx_point + Vector2(40, 0))
+	check(scene.options.sfx > 50 and scene.options.sfx < 80, "A real click on the SFX bar sets the volume (%d)" % scene.options.sfx)
+	var accept_point: Vector2 = scene.options_popup.accept_button.global_position + scene.options_popup.accept_button.size * 0.5
+	click(accept_point)
+	check(scene.overlay == null, "A real click on Accept closes the popup")
 	scene.options.sfx = 100
 	scene.options.background = true
 	scene.apply_options()
