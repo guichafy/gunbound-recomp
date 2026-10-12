@@ -1,5 +1,24 @@
 # Hand-off — Gunbound Recomp 0.14.4
 
+## Aprendizado reutilizável
+
+Usuário confirmou que o resultado ficou bom e pediu uma skill para próximas
+tarefas de regeneração Gunbound Classic em alta resolução/Full HD e animação.
+`skills/gunbound-classic-hd/SKILL.md` reúne o fluxo validado e referências de
+geração, registro/movimento e aplicação no projeto. Skill pessoal também
+instalada no Codex para invocação `$gunbound-classic-hd`; cópia versionada
+preserva o aprendizado neste repositório. Imagem isolada não exige integração;
+regeneração usa referência clássica de identidade e HD aprovado de acabamento.
+Full HD1920×1080 distingue-se das dimensões reais de atlas/sprites. Não houve
+novo asset, mudança de runtime nem novo build nesta consolidação.
+
+Validação da skill: quick_validate aprovado na cópia do projeto e na instalação;
+cinco arquivos instalados idênticos aos versionados. Teste independente aplicou
+prompt, registro Body/apoio, rig por ator e resolução real; variação de imagem
+estática respeitou o escopo sem integração. Verificação numérica do exemplo:
+Body local no apoio(3,673469,−31,836735), relativo ao ator com apoio24px
+(3,673469,−7,836735). Não geramos novas imagens para avaliar a instrução.
+
 ## Animação contínua e Vestir no Shop 0.14.4
 
 Relato do usuário: avatar/personagem parecem imagens diferentes alternadas;
@@ -29,8 +48,8 @@ App/ZIP0.14.4 reexportados em builds, assinatura estrita válida. Smoke GPU do
 PCK passou: quatro peças vestidas pela ação do Shop, recarga de perfil,
 batalha com conjunto persistido, interpolação real e13peças HD registradas.
 Imagem do Shop em docs/avatar-motion/shop-vestido.png. Fonte C#, arte original
-e perfil real não modificados; sem publicação. Validação visual do usuário
-ainda pendente. HD preserva peças constantes; gestos/olhos originais não
+e perfil real não modificados; sem publicação. Usuário confirmou aparência e
+suavidade após a entrega. HD preserva peças constantes; gestos/olhos originais não
 foram reanimados, fallback nativo mantém o flipbook original.
 
 ## Integração à main 0.14.3

@@ -233,3 +233,18 @@ Integração main0.14.3 (ADR-062): itens0.13 + Shop/HD0.14.2. Match.start recebe
 loadout7º, atributos8º. ItemDelay ativo no custo original truncado antes÷7,5;
 Attack/bonus−Defense e Dig/bonus somam. Isso substitui os limites antigos de
 ItemDelay acima. Test test_shop_items_integration39; suite1584+10partidas.
+
+## Animação aprovada e skill de arte clássica HD
+
+0.14.4/ADR-063 substitui deslocamentos do centro alpha por quadro: peças HD
+mantêm registro constante; respiração usa relógio contínuo e poses misturam
+geometria exibida por ator em0,14s. Não reintroduzir offsets de silhueta como
+movimento anatômico. Shop tem Vestir persistido; Experimentar é temporário
+para não possuídos. Suavidade/aparência confirmadas pelo usuário.
+
+Para regenerar/animar arte Gunbound Classic, consulte a skill reutilizável
+`skills/gunbound-classic-hd/SKILL.md` (`$gunbound-classic-hd` no Codex).
+Inclui prompts, distinção Full HD1920×1080/pixels úteis dos sprites, pivôs,
+montagem Body/mobile, transições, fallback e validação. Referências específicas
+do projeto ficam separadas das técnicas gerais. Não mudar combate/perfil como
+efeito de uma tarefa apenas de arte.

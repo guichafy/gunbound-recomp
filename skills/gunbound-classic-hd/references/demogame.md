@@ -1,0 +1,78 @@
+# Aplicação em Gunbound Recomp / DemoGame
+
+Use este mapa apenas ao trabalhar no projeto correspondente. Localize a raiz
+pela sessão; os caminhos abaixo são relativos a ela. A skill funciona sem
+essa cópia do projeto para princípios de geração/registro/animação.
+
+## Onde encontrar fonte e estado vigente
+
+- Godot: `/Users/guichafy/Workspaces/DemoGame`; leia AGENTS.md e
+  `docs/sdd/HANDOFF.md` → SPEC.md → DESIGN.md antes de alterar comportamento.
+- C# OpenBound: `/Users/guichafy/Workspaces/Gunbound`, fonte de mecânicas,
+  metadados e arte; não modificar a referência para ajustar um derivado.
+- Originais integrados: `assets/openbound/`; derivados: `assets/hd/`.
+  Preserve originais, `.gd.uid` e `.png.import`. Brutos de geração ficam
+  separados do runtime, usualmente em `source/` com `.gdignore`.
+- Estado aprovado: composição e animação0.14.4 confirmadas pelo usuário.
+  Documentos antigos guardam tentativas substituídas; ADR-063 prevalece sobre
+  offsets de bbox por quadro da ADR-061. Não recuperar o tremor antigo.
+
+## Código e metadados reutilizáveis
+
+| Tema | Implementação existente |
+|---|---|
+| Arte do avatar / fallback original | scripts/avatar_art.gd, avatar_hd.gd |
+| Cabeça/corpo/óculos/bandeira e pivôs | assets/openbound/avatars/catalog.json |
+| HD aprovado, recortes/hashes | assets/hd/avatars/catalog.json, GENERATION.json |
+| Layout de referências para regenerar | assets/hd/avatars/source/layout.json |
+| Montagem mobile/Body | scripts/mobile_sprite.gd, mobile_rig.gd |
+| Interrupção e mistura por ator | scripts/battle_art.gd: presentation |
+| Piloto não modular / partes do mobile | assets/hd/pilot_side.png, mobile_parts.png |
+| Tiros, impactos e orientação | scripts/projectile_art.gd |
+
+Use os catalogadores existentes em vez de redescobrir o layout:
+
+```sh
+python3 scripts/catalog_avatar_hd.py
+python3 scripts/catalog_hd_assets.py
+```
+
+Execute apenas o correspondente aos assets realmente alterados. AvatarHD
+valida offsets legados para integridade do catálogo, mas **não os aplica**
+como deslocamento em peças HD. Não reintroduzir a linha que traduz a peça
+pelo centro alpha de cada quadro.
+
+Para Shop, a prévia de item não possuído continua temporária. Vestir item
+possuído usa Profile.equip transacional; game.start_match copia equipped_set.
+Confira as quatro categorias após recarga de perfil/batalha quando mudar
+esse fluxo. Não gerar catálogo, preços ou mecânicas novas como parte da arte.
+
+## Verificação e aplicativo
+
+Prepare `.tools/` e importe recursos em checkout novo. Regressões úteis:
+
+```sh
+./scripts/check.sh test_avatar_hd test_avatar_mount test_avatar_continuity test_mobile_animation test_pilot_projectiles test_avatar_shop
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script tests/capture_avatar_continuity.gd
+```
+
+A captura de continuidade atual gera360frames a60fps em1600×1080; não é
+1920×1080. Para nova entrega Full HD, adapte o framebuffer/layout ou use uma
+captura Full HD existente pertinente, preservando aspecto. Não renomear um
+vídeo de outra resolução como Full HD.
+
+Mudanças de cena/input também exigem testes de cena; regras de combate exigem
+modelos e partidas completas. Perfis de teste isolados, nunca o perfil real.
+Ao entregar aplicativo atualizado:
+
+```sh
+python3 scripts/build_macos.py
+codesign --verify --deep --strict --verbose=2 'builds/Gunbound Recomp.app'
+```
+
+Confirme recursos no PCK exportado; rodar o projeto não atualiza o app pronto.
+Registre REQs/decisão e evidências em SDD quando mudar o projeto. Não publicar
+ou criar novos serviços como parte desse aprendizado.
+
+Detalhes medidos: `docs/sdd/AVATAR_MOUNT_FIX.md`, AVATAR_HD.md,
+AVATAR_SMOOTH_0_14_4.md, COMPOSITION_FIX_0_6_3.md, PILOT_SHOTS_FIX_0_6_2.md.
