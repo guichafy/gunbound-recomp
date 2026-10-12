@@ -1,4 +1,27 @@
-# Hand-off — Gunbound Recomp 0.14.0
+# Hand-off — Gunbound Recomp 0.14.1
+
+## Correção de encaixe do avatar 0.14.1
+
+Relato do usuário: inventory.png mostrava corpo/cabeça/acessórios recuados e
+sem encaixe no mobile. REQ-39/19, ADR-060; AVATAR_MOUNT_FIX.md.
+
+Causa confirmada: centro Body do avatar aplicado no pivô dos quadris do piloto
+HD, com offset arbitrário(0,−8); camadas também desenhavam avatar sobre chassis,
+ao contrário de AvatarBody0.046/Mobile0.05 do C#. A montagem agora deriva de
+RiderPivot idle, contact_y/pivot_y e largura nativa: Bigfoot(3,−26)×60/49 e
+Mage(5,−26)×60/46. Chassis/arma/rodas ficam à frente das peças equipadas;
+piloto legado preserva seu caminho. Movimento contínuo e física preservados.
+
+Validação: test_avatar_mount vermelho2→verde24, registrando escala uniforme,
+ponto Body, flip, encosta e5poses. Suites pertinentes432checks; harness quick
+final1314checks, zero falhas. Não repetimos partidas longas porque só o render
+mudou. Comparação GPU original/HD (render Godot com metadados C#) em
+mount-comparison.png e inventory/poses atualizados. Prévia anterior preservada
+em inventory-before-mount-fix.png. App/ZIP0.14.1 reexportados, assinatura estrita
+válida; PCK renderiza preview, PASS. Sem uso do perfil real.
+
+Próximo passo: usuário conferir o encaixe na nova imagem/app. A inspeção anterior
+não cobria equivalência do ponto Body com a fonte; nova regressão cobre isso.
 
 ## Shop de avatar 0.14.0 — entregue no worktree
 

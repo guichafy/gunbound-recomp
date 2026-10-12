@@ -332,3 +332,9 @@ Só impactos com dano positivo entram nos metadados de Gold; boomer/backward
 consideram alvo inimigo. FinishGoldShot agrega salvo uma vez após acomodação;
 Profile.award recebe Gold junto do XP, usando awarded para impedir repetição.
 ItemDelay é contrato puro até integração da funcionalidade de itens.
+
+Registro0.14.1: MobileSprite.configure transmite RiderPivot idle e geometria
+nativa ao MobileRig.register_avatar. avatar_transform aplica escala60/hull e
+origem `(RiderPivot−(0,contact_y−pivot_y))×escala` ao conjunto; rotação/offset da
+pose envolvem esse ponto. Avatar equipado é desenhado antes do chassis, que
+oculta pernas/corpo inferior; sem contexto, o piloto legado mantém seu draw.

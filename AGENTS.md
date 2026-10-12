@@ -203,3 +203,8 @@ recebe contexto; legado preservado sem contexto. GoldRewards segue fluxo C#
 até integrar código de itens. Assets originais, sem novo HD. Suites
 test_avatar_catalog/profile/shop/art, test_attributes e test_gold_rewards;
 capture_avatar_shop gera capturas GPU e smoke separado confere PCK exportado.
+
+Encaixe0.14.1 (ADR-060): AvatarArt usa origem Body via registro nativo do
+MobileSprite no rig, não o pivô hip do pilot_side nem offset(0,−8). Chassis
+oculta parte inferior das peças equipadas como no C#. Ver AVATAR_MOUNT_FIX.md
+e test_avatar_mount24; comparação em docs/avatar-shop/mount-comparison.png.

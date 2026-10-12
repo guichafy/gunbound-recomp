@@ -6,10 +6,19 @@ const Sheet = preload("res://scripts/hd_sheet.gd")
 var kind: String
 var sheet
 var pilot
+var avatar_mount := Transform2D.IDENTITY
+var avatar_registered := false
 func _init(mobile_kind: String) -> void:
 	kind = mobile_kind
 	sheet = Sheet.new("res://assets/hd/mobile_parts.png", 3, 2)
 	pilot = Sheet.new("res://assets/hd/pilot_side.png", 1, 1)
+func register_avatar(native_origin: Vector2, contact_offset: float, native_hull: float) -> void:
+	# RiderPivot is the body sprite origin, distinct from the HD master's hip.
+	var native_scale := 60.0 / native_hull
+	avatar_mount = Transform2D(0,Vector2.ONE*native_scale,0,(native_origin-Vector2(0,contact_offset))*native_scale)
+	avatar_registered = true
+func avatar_transform(state: Dictionary) -> Transform2D:
+	return Transform2D(state.body_angle,state.body_offset) * avatar_mount * Transform2D(state.pilot_angle,Vector2.ZERO)
 func available() -> bool:
 	if not sheet.available() or not sheet.catalog_valid or not pilot.available() or not pilot.catalog_valid:
 		return false
@@ -88,16 +97,15 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	if low_health:
 		tint *= Color(0.7, 0.7, 0.7)
 	var row := 0 if kind == "bigfoot" else 1
-	piece(view, sheet, row, 0, body, state.body_rect, tint)
 	var gun_pivot: Vector2 = state.gun_pivot
 	var gun := body * Transform2D(state.barrel_angle, gun_pivot)
 	# Entire seated anatomy rotates as one figure around the hips, no seam/stretch.
 	var seat: Vector2 = state.pilot_anchor - state.body_offset + state.pilot_sway
 	var avatar_drawn := false
-	if not avatar_context.is_empty():
-		var avatar_scale: float = float(state.pilot_size.y)/44.0
-		var rider_transform := body * Transform2D(state.pilot_angle,seat) * Transform2D(0,Vector2.ONE*avatar_scale,0,Vector2(0,-8))
-		avatar_drawn = avatars.draw(view,avatar_context.get("equipment",{}),rider_transform,float(avatar_context.get("age",age)),tint)
+	if avatar_registered and not avatar_context.is_empty():
+		avatar_drawn = avatars.draw(view,avatar_context.get("equipment",{}),support*avatar_transform(state),float(avatar_context.get("age",age)),tint)
+	# C# depth puts the mobile in front of equipped avatars, covering the legs.
+	piece(view, sheet, row, 0, body, state.body_rect, tint)
 	if not avatar_drawn:
 		piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
 	# Mounted weapon and near tires occlude the seated lower body naturally.

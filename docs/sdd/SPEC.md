@@ -212,3 +212,6 @@ confirmados pelo usuário. Detalhes e adaptações aprovados em AVATAR_SHOP.md.
 Implementado no worktree; plano AVATAR_SHOP_PLAN.md e evidências HANDOFF.md.
 ItemDelay aguarda integração dos itens; demais modificadores ativos. Relacionados REQ-02/04–10/12/19/20,
 REQ-32 (thread) e REQ-35 (dependência ItemDelay).
+
+REQ-39/19: correção0.14.1 do ponto Body/oclusão de chassis (ADR-060,
+AVATAR_MOUNT_FIX.md), validada com metadados originais, poses e ambos os sentidos.

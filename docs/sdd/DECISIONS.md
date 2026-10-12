@@ -330,3 +330,13 @@ redundante por robustez. Três achados Important reais reproduzidos/corrigidos.
 ItemDelay é limite assumido pela especificação aprovada, sem importar código
 não commitado de outra tarefa. Branch/worktree mantidos; aplicativo0.14.0
 exportado para validação local, sem integrar main nem publicar.
+
+ADR-060 — correção por relato do usuário no inventory.png. O avatar equipado
+usa o centro Body original, não o registro dos quadris do mestre HD. A montagem
+é calculada da configuração existente do MobileSprite (RiderPivot idle,
+contact_y−pivot_y e hull_width), transmitida ao rig. Todas as peças compartilham
+escala e transform; poses seguem movimento contínuo do chassis. O chassis
+passa a cobrir a parte inferior do avatar equipado, como a ordem de profundidade
+original. Isso substitui a adaptação arbitrária do assento usada no caminho
+AvatarArt da0.14.0; o piloto legado0.6.4 mantém as camadas anteriores. Sem
+mudanças de modelo/perfil/PNG. Evidências AVATAR_MOUNT_FIX.md, regressão24 eGPU.

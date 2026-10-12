@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Encaixe do avatar 0.14.1
+
+- [x] Reproduzir desalinhamento do inventory.png e comparar registro C#.
+- [x] Montagem por RiderPivot/body origin, proporção nativa e oclusão por chassis.
+- [x] test_avatar_mount24; quick1314; GPU inventário/poses/comparação.
+- [x] App/ZIP0.14.1 e PCK/assinatura verificados.
+- [ ] Usuário conferir o novo encaixe.
+
 ## Shop de avatar 0.14.0 (ADR-059, REQ-38..41)
 
 - [x] Worktree de main, branch codex/avatar-shop, especificação/plano aprovados.
