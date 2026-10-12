@@ -73,8 +73,16 @@ D. Integração do HD do popup, testes, capturas, docs, reexportação do app.
 
 ## Resultado medido (depois)
 
-Mesmo roteiro a 60 FPS no app com Metal: nenhum frame acima de 25 ms no turno
-da CPU (máximo 18,1 ms, o normal a 60 FPS; antes 160–185 ms); a CPU dispara
-1,83–1,87 s após o início do turno (antes 1,88–1,90 s). Partidas seeds 81–90
-idênticas (56/12/13/15/19/10/8/12/9/15 tiros). O pico de ~45 ms no primeiro
-frame da partida (carga de texturas) continua e não é troca de turno.
+Roteiro local `.tools/profile_live.gd` (não versionado; `VEHICLE=1|2`), 60 FPS
+no app com Metal, M4 Pro, seis turnos da CPU por cenário:
+
+| Cenário | Pior frame no turno da CPU (antes → depois) | Disparo da CPU após o início do turno (antes → depois) |
+|---|---|---|
+| Jogador Bigfoot × CPU Mage | 160–185 ms → 17,7 ms | 1,88–1,90 s → 1,83–1,87 s |
+| Jogador Mage × CPU Bigfoot (salvas, SS incluído) | 336–484 ms → 17,8 ms | 2,05–2,20 s → 1,83–1,87 s |
+
+17–18 ms é o frame normal a 60 FPS. Partidas seeds 81–90 idênticas
+(56/12/13/15/19/10/8/12/9/15 tiros). test_performance cobre a equivalência
+direta = em passos = em thread com CPU Mage e CPU Bigfoot (T1, T2 e SS). O
+pico de ~45 ms no primeiro frame da partida (carga de texturas) continua e
+não é troca de turno. Máquinas mais lentas terão números diferentes.

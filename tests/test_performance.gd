@@ -14,18 +14,24 @@ func check(condition: bool, description: String) -> void:
 func _initialize() -> void:
 	call_deferred("run")
 
-func cpu_model(seed_value: int):
+## Player vehicle 2 → CPU Mage; player vehicle 1 → CPU Bigfoot (bomb salvos).
+func cpu_model(seed_value: int, vehicle: int = 2, special: bool = false):
 	var model = load("res://scripts/match.gd").new()
-	model.start(2, 1, seed_value)
+	model.start(vehicle, 1, seed_value)
 	if model.active == 0:
 		model.pass_turn()
+	if special:
+		model.actors[model.active].turns = 3
 	return model
 
 func run() -> void:
 	var Match = load("res://scripts/match.gd")
 	# Same plan: one-shot, split steps and a worker thread from the same RNG state.
-	for seed_value in [3, 17, 42]:
-		var model = cpu_model(seed_value)
+	var cases := [[3, 2, false], [17, 2, true], [42, 1, false], [8, 1, true], [23, 1, true]]
+	var weapons := {}
+	for entry in cases:
+		var seed_value: int = entry[0]
+		var model = cpu_model(seed_value, entry[1], entry[2])
 		var state: int = model.rng.state
 		var direct: Dictionary = model.choose_cpu_shot()
 		model.rng.state = state
@@ -37,8 +43,12 @@ func run() -> void:
 		var task := WorkerThreadPool.add_task(func(): Match.search_cpu_plan(threaded_plan))
 		WorkerThreadPool.wait_for_task_completion(task)
 		var threaded: Dictionary = model.finish_cpu_plan(threaded_plan)
-		check(direct == split and direct == threaded, "Seed %d: split and threaded searches give the one-shot plan %s" % [seed_value, direct])
+		weapons["%d-%d" % [model.actors[model.active].vehicle, direct.weapon]] = true
+		check(direct == split and direct == threaded, "CPU %s seed %d: split and threaded searches give the one-shot plan %s" % [Match.VEHICLES[model.actors[model.active].vehicle].name, seed_value, direct])
 		check(threaded_plan.snapshot == null, "Finishing a plan releases its snapshot")
+
+	check(weapons.has("2-2") or weapons.has("2-1"), "A CPU Bigfoot salvo plan is covered (%s)" % [weapons.keys()])
+	print("CPU plans covered (vehicle-weapon): ", weapons.keys())
 
 	# The search reads only its snapshot: later changes to the live match do not leak in.
 	var live = cpu_model(5)
