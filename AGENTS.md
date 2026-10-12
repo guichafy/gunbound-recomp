@@ -208,3 +208,10 @@ Encaixe0.14.1 (ADR-060): AvatarArt usa origem Body via registro nativo do
 MobileSprite no rig, não o pivô hip do pilot_side nem offset(0,−8). Chassis
 oculta parte inferior das peças equipadas como no C#. Ver AVATAR_MOUNT_FIX.md
 e test_avatar_mount24; comparação em docs/avatar-shop/mount-comparison.png.
+
+Avatares HD0.14.2 (ADR-061):13peças em5folhas GPT Images1254×1254, constantes
+com registro original. AvatarHD/catalog_avatar_hd.py guardam recortes,
+janela/pivô/deslocamentos; AvatarArt usa HD com fallback. Fontes originais
+preservadas. Regenerar catalog.json ao trocar PNG. Source/.gdignore exclui
+referências; preset inclui avatars/*.json. Tests test_avatar_hd e captura
+capture_avatar_hd_roster. Ver AVATAR_HD.md; não é geração quadro a quadro.

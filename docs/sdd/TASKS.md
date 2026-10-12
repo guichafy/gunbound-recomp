@@ -1,5 +1,14 @@
 # Entregas e próximos trabalhos
 
+## Avatares HD0.14.2 (ADR-061)
+
+- [x] Gerar13peças transparentes em5folhas GPT Images1254×1254, estilo dos mobiles.
+- [x] Preservar fontes; catálogo/hashes/janela/pivô/deslocamentos e fallback.
+- [x] Integrar no piloto e retratos; aspecto preservado e card87×45.
+- [x] HD139, Shop19 e quick1454sem falhas; capturasGPU das6famílias/poses.
+- [x] App/ZIP0.14.2, assinatura e PCK conferidos.
+- [ ] Usuário validar visual HD no inventário e aplicativo.
+
 ## Encaixe do avatar 0.14.1
 
 - [x] Reproduzir desalinhamento do inventory.png e comparar registro C#.

@@ -37,6 +37,9 @@ func run() -> void:
 	await process_frame
 	check(view.screen == "shop" and view.shop.cards.get_child_count() == 5, "Scene shop cards")
 	var shop = view.shop
+	for child in shop.cards.get_child(1).get_children():
+		if child is TextureRect and child.texture is AtlasTexture:
+			check(child.size == Vector2(87,45), "HD portrait remains inside original card window")
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	check(shop.model.selected_key == "0:0:1", "Real card click")

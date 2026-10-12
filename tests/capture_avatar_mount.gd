@@ -13,6 +13,7 @@ class Compare extends Node2D:
 					sprite.hd_rig.sheet.catalog_valid = false
 				else:
 					sprite.hd_rig.sheet.catalog_valid = saved[row]
+				sprite.hd_rig.avatars.use_hd = col == 1
 				var pos := Vector2(350+col*850,330+row*540)
 				sprite.draw(self,pos,180,1,0,0,Color.WHITE,"idle",0,0,false,0,{"equipment":equipment,"age":0.0})
 				draw_string(font,pos+Vector2(-250,120),["Referência original C#","Mobile HD + avatar"][col],HORIZONTAL_ALIGNMENT_LEFT,-1,24,Color.WHITE)

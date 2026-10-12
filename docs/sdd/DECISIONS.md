@@ -340,3 +340,13 @@ passa a cobrir a parte inferior do avatar equipado, como a ordem de profundidade
 original. Isso substitui a adaptação arbitrária do assento usada no caminho
 AvatarArt da0.14.0; o piloto legado0.6.4 mantém as camadas anteriores. Sem
 mudanças de modelo/perfil/PNG. Evidências AVATAR_MOUNT_FIX.md, regressão24 eGPU.
+
+ADR-061 — pedido do usuário: aumentar qualidade dos avatares e aproximar dos
+mobiles HD.13peças visíveis em5folhas GPT Images,1254×1254RGBA, mantendo originais,
+IDs/preços e registro do avatar0.14.1. Peças constantes evitam deformar anatomia
+entre quadros gerados. Relógio e deslocamentos vêm dos quadros originais;
+adaptação não restaura todos os gestos/olhos. Recortes/catalogo/hashes permitem
+fallback e reprodução. Retratos compartilham as peças da arena. O pivô
+normalizado é preservado ao conter cada imagem com aspecto uniforme na caixa
+nativa. Source bruto fica fora do export; catalog.json e folhas finais entram.
+Substitui o limite “sem HD novo” da entrega0.14.0/0.14.1 para avatares.

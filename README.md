@@ -184,3 +184,10 @@ continua separado. ItemDelay tem fórmula, mas depende da integração dos itens
 
 [Especificação](docs/sdd/AVATAR_SHOP.md), [capturas](docs/avatar-shop/inventory.png).
 Arte dos avatares/interface original; nenhum derivado GPT novo foi gerado.
+
+### Avatares HD0.14.2
+
+As13peças visíveis agora têm derivados GPT Images no mesmo acabamento2.5D dos
+mobiles. Retratos e piloto usam a mesma arte, com encaixe preservado.
+[Inventário HD](docs/avatar-shop/inventory.png) · [Conjuntos](docs/avatar-shop/hd-roster.png).
+Originais mantidos para referência/fallback; prompts em assets/hd/avatars/GENERATION.json.

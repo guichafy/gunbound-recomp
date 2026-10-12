@@ -215,3 +215,7 @@ REQ-32 (thread) e REQ-35 (dependência ItemDelay).
 
 REQ-39/19: correção0.14.1 do ponto Body/oclusão de chassis (ADR-060,
 AVATAR_MOUNT_FIX.md), validada com metadados originais, poses e ambos os sentidos.
+
+REQ-20/39: derivados GPT Images das13peças de avatar, próximos do estilo2.5D
+dos mobiles, integrados no menu, loja/inventário e arena. Registro/pivôs, aspecto
+e originais preservados, fallback por peça; detalhes/adaptação em AVATAR_HD.md.

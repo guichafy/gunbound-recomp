@@ -12,7 +12,7 @@ func run() -> void:
 	check(FileAccess.file_exists("res://scripts/avatar_art.gd"), "Composed avatar renderer exists")
 	if failures == 0:
 		var c = load("res://scripts/avatar_catalog.gd").new()
-		var art = load("res://scripts/avatar_art.gd").new()
+		var art = load("res://scripts/avatar_art.gd").new(false)
 		var pieces: Array = art.sample(c.defaults(0),0.0)
 		check(pieces.size() == 2 and pieces[0].category == 0 and pieces[1].category == 1, "Source depth")
 		check(pieces[0].frame == 11, "Head starts normal11")

@@ -338,3 +338,10 @@ nativa ao MobileRig.register_avatar. avatar_transform aplica escala60/hull e
 origem `(RiderPivot−(0,contact_y−pivot_y))×escala` ao conjunto; rotação/offset da
 pose envolvem esse ponto. Avatar equipado é desenhado antes do chassis, que
 oculta pernas/corpo inferior; sem contexto, o piloto legado mantém seu draw.
+
+AvatarHD0.14.2: catálogo independente de recortes transparentes e janela/pivô
+nativos. Cada imagem é contida com aspecto original, preservando a posição
+normalizada do pivô; offsets por quadro deslocam o mesmo sprite fixo. AvatarArt
+consulta HD antes da textura original; ausência/invalidez retorna ao original
+por peça. Retratos usam AtlasTexture da mesma região, dimensionados só depois
+do expand_mode para impedir minimum-size de texturas grandes na UI.

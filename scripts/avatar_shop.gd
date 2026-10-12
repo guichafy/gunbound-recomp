@@ -193,13 +193,19 @@ func refresh(category: int, page: int) -> void:
 		card.tooltip_text = item.name
 		label(card,str(item.name).left(13),Vector2(7,2),Vector2(92,15),10)
 		var portrait := TextureRect.new()
-		portrait.texture = load(item.portrait)
+		portrait.texture = avatar_art.hd.portrait(item.key)
+		if portrait.texture == null:
+			portrait.texture = load(item.portrait)
+		portrait.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		portrait.position = Vector2(9,17)
 		portrait.size = Vector2(87,45)
 		portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		card.add_child(portrait)
+		# Changing expand mode releases texture minimums; reset size afterwards.
+		portrait.size = Vector2(87,45)
+		card.clip_contents = true
 		var marker := ""
 		var set_data: Dictionary = model.profile.equipped_set() if model.inventory else model.preview
 		if set_data.get(str(category)) == item.key:

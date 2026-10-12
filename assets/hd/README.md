@@ -66,3 +66,10 @@ brutos (3 do foreground 1536×1024, fundo 1024×1536), intactos e com `.gdignore
 quando os dois blocos existirem, `background.png`. `manifest.json` registra
 SHA-256 de blocos, originais e saídas. A colisão vem sempre do ForegroundA
 original; o HD é só visual. Prompts em MAP_PROMPTS.md.
+
+Avatares0.14.2: avatars/{space,basic,miner,punk,kappa}.png, cinco folhas GPT
+Images1254×1254RGBA com13peças fixas. AvatarHD usa recortes/metadados de
+avatars/catalog.json, preservando pivôs/escala nativos e o encaixe0.14.1. Prompts
+e origem em avatars/GENERATION.json; scripts/catalog_avatar_hd.py cataloga
+alpha>8/255 sem alterar PNGs. Source é referência fora do export. Arte polida
+2.5D aproxima os avatares dos mobiles; não é remaster quadro a quadro.

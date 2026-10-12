@@ -147,3 +147,10 @@ dano/morte e pausa. Proporção/assento permanecem0.6.3; tiros0.6.2 preservados.
 
 Testes automatizados usam perfis isolados. Capturas GPU e smoke do PCK não
 substituem este teste manual de experiência e áudio pelo usuário.
+
+## Avatares HD0.14.2
+
+Conferir Basic masculino/feminino, Space Marine, Miner, Punk, Kappa, óculos e
+bandeira na loja e no mobile. Comparar hd-roster.png; peças devem ter contornos
+suaves/material próximo do mobile, sem esticar ou mudar encaixe ao virar.
+Trocar equipamento/aba e abrir compra; retratos não ultrapassam cards.

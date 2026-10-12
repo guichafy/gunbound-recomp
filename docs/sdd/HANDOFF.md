@@ -1,4 +1,36 @@
-# Hand-off — Gunbound Recomp 0.14.1
+# Hand-off — Gunbound Recomp 0.14.2
+
+## Avatares HD 0.14.2
+
+Pedido do usuário: melhorar qualidade dos assets para aproximar o design dos
+mobiles. REQ-20/39, ADR-061; AVATAR_HD.md.13peças em5folhas1254×1254RGBA geradas
+pela ferramenta integrada GPT Images: Space Marine+óculos/bandeira, Basic
+masculino/feminino, Miner, Punk e Kappa. PNGs originais intactos.
+
+AvatarHD valida recortes/catálogo/texturas, preserva a proporção intrínseca da
+imagem e posição normalizada do pivô dentro da janela original. AvatarArt usa
+peças HD fixas no menu/previews/arena, com relógio/deslocamentos originais e
+fallback original por peça. Loja usa as mesmas regiões nos retratos, com
+limites87×45 para impedir tamanho mínimo de textura alta ultrapassar o card.
+Encaixe/oclusão0.14.1 preservados; perfil/combate/IDs/preços não mudam.
+
+Evidências: teste HD139 (13peças, densidade≥4×, aspecto e tamanho estáveis,
+clock/pivô/fallback, offsets/regiões inválidas), regressão de retrato no Shop19.
+Harness quick final **1454checks, zero falhas**; partidas longas não repetidas
+porque só a arte/render mudaram. Capturas GPU inventory/poses/battle/hd-roster
+conferidas; comparação original/HD em hd-comparison.png. Pré-HD preservado em
+inventory-before-hd.png. App/ZIP0.14.2 reexportados, assinatura estrita válida,
+ZIP101MB; smoke GPU do PCK renderiza avatar (2313pixels, PASS). Perfis isolados.
+
+Prompts completos/origens/modo em assets/hd/avatars/GENERATION.json. Ativos:
+space.png/basic.png/miner.png/punk.png/kappa.png+catalog.json; source/.gdignore
+exclui referências do pacote. Regenerar metadados com catalog_avatar_hd.py ao
+trocar PNG. Originais gerados permanecem também na pasta padrão do image_gen.
+
+Limite: peças constantes preservam registros e evitam deformação entre quadros,
+mas gestos/olhos não são regenerados quadro a quadro. UI do Shop continua fonte
+original. ItemDelay segue dependendo da integração de itens. Usuário validar
+novo design no inventory/hd-roster e app; branch/worktree mantidos.
 
 ## Correção de encaixe do avatar 0.14.1
 

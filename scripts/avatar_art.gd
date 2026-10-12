@@ -1,5 +1,10 @@
 extends RefCounted
 ## Original rider pieces. Source pivots and depth order remain stable over time.
+const HD = preload("res://scripts/avatar_hd.gd")
+var hd = HD.new()
+var use_hd := true
+func _init(prefer_hd: bool = true) -> void:
+	use_hd = prefer_hd
 const Catalog = preload("res://scripts/avatar_catalog.gd")
 static var catalog = Catalog.new()
 static var textures := {}
@@ -24,7 +29,14 @@ func sample(equipment: Dictionary, age: float, staring: bool = false) -> Array:
 		if size.x <= 0 or size.y <= 0:
 			return []
 		var anchor: Vector2 = {0:Vector2(7,-17),1:Vector2.ZERO,2:Vector2(9,-17),3:Vector2(11,-17)}[category]
-		result.append({"category":category,"frame":frame,"texture":texture,"source":Rect2(origin,size),"target":Rect2(anchor-Vector2(float(item.pivot[0]),float(item.pivot[1])),size)})
+		var target := Rect2(anchor-Vector2(float(item.pivot[0]),float(item.pivot[1])),size)
+		var data: Dictionary = hd.piece(item.key,frame) if use_hd else {}
+		if not data.is_empty():
+			# Keep the native registration window; only artwork density changes.
+			target = Rect2(target.position+data.native.position,data.native.size)
+			result.append({"category":category,"frame":frame,"texture":data.paint,"source":data.source,"target":target,"hd":true})
+		else:
+			result.append({"category":category,"frame":frame,"texture":texture,"source":Rect2(origin,size),"target":target,"hd":false})
 	return result
 func draw(view: Node2D, equipment: Dictionary, transform: Transform2D, age: float, tint: Color) -> bool:
 	var pieces := sample(equipment,age)
