@@ -69,10 +69,16 @@ SHEETS = {
         [whole("TurnCounterBalloon.png"), whole("WeatherFrame.png")],
         [whole("WeatherIcons.png")],
     ]},
+    # PopupGameOptions (0.11): window, Accept states and radio states.
+    "options": {"canvas": (1024, 1536), "gap": 8, "rows": [
+        [whole("OptionsBackground.png")],
+        [whole("PopupAccept.png"), whole("OptionsRadioButton.png")],
+    ]},
 }
 
 DIRECT = ["StrenghtMetter.png", "MovementMetter.png", "PreviousShootingStrenghtPointer.png",
-          "CrosshairPointer.png", "HealthBarFrame.png"] + [
+          "CrosshairPointer.png", "HealthBarFrame.png", "OptionsBar.png", "OptionsBarFrame.bmp",
+          "OptionsBarIntensityPointer.png"] + [
     f"Crosshair{mob}{shot}{side}.png" for mob in ["Mage", "Bigfoot"] for shot in ["S1", "S2", "SS"] for side in ["Ally", "Enemy"]]
 NEAREST = ["SelectedPlayerTurnBG.png"]
 
@@ -122,6 +128,8 @@ def finish(name, colour, report, origin):
     size = (source.width * SCALE, source.height * SCALE)
     result = colour.resize(size, Image.LANCZOS) if colour.size != size else colour
     result.putalpha(source.getchannel("A").resize(size, Image.BILINEAR))
+    # HD outputs are always PNG (the original BarFrame is a BMP).
+    name = Path(name).with_suffix(".png").name
     out = OUT / name
     result.save(out, optimize=True)
     report[name] = {"size": list(size), "sha256": sha256(out), "from": origin}

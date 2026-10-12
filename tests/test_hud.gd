@@ -159,6 +159,13 @@ func run() -> void:
 	check(not scene.charging and scene.model.phase == "aim", "Opening the options cancels the charge without firing")
 	check(scene.options_button.disabled, "Options stays disabled while its popup is open (HUD.cs)")
 	check(popup.size.is_equal_approx(Vector2(323, 328) * 1.6) and (popup.position + popup.size * 0.5).distance_to(Vector2(640, 400)) <= 0.6, "Popup background 323×328 × 1.6 centred on the screen")
+	for name in popup.textures:
+		check(is_equal_approx(popup.density(name), 3.0), "Popup %s uses the 3× HD sprite" % name)
+	check(popup.scaled("OptionsRadioButton.png", Rect2(12, 0, 11, 12)) == Rect2(36, 0, 33, 36), "Radio frames scale with the HD density")
+	var fallback = Popup.new(scene.options)
+	fallback.textures = fallback.originals.duplicate()
+	check(fallback.density("OptionsBackground.png") == 1.0 and fallback.scaled("PopupAccept.png", Rect2(20, 0, 20, 25)) == Rect2(20, 0, 20, 25), "Without HD the popup falls back to the original pixels")
+	fallback.free()
 	var accept: TextureButton = popup.accept_button
 	check(accept.size.is_equal_approx(Vector2(20, 25) * 1.6) and (accept.position + accept.size * 0.5).is_equal_approx(popup.point(Vector2(130, 144))), "Accept sits at the original (130, 144)")
 	var sfx_area: Rect2 = popup.slider_rect("sfx")

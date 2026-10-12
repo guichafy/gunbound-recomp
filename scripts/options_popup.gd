@@ -1,9 +1,11 @@
 extends Control
 ## PopupGameOptions.cs (PopupMenu, SliderBar, RadioButtonSet) with the original
 ## Interface/Popup/Blue/Options sprites. Offsets are the C# ones, relative to the
-## popup centre on the 800×500 virtual screen, scaled by K = 1.6. Values live in
-## options.gd; game.gd applies them. Controls with no equivalent in this game are
-## drawn with the original default and disabled.
+## popup centre on the 800×500 virtual screen, scaled by K = 1.6. HD sprites
+## (assets/hd/hud, 3× GPT Images remaster) fall back to the originals; frame
+## regions are in original pixels and scale by each texture's density. Values
+## live in options.gd; game.gd applies them. Controls with no equivalent in this
+## game are drawn with the original default and disabled.
 
 signal changed
 signal accepted
@@ -38,6 +40,7 @@ const PAUSE_OFFSET := Vector2(-112, 144)
 
 var options
 var textures := {}
+var originals := {}
 var font: SystemFont
 var accept_button: TextureButton
 var drag_slider := ""
@@ -51,7 +54,10 @@ func _init(values = null) -> void:
 	font = SystemFont.new()
 	font.font_names = PackedStringArray(["Consolas", "Menlo", "Monaco", "DejaVu Sans Mono", "monospace"])
 	for name in ["OptionsBackground.png", "OptionsBar.png", "OptionsBarFrame.bmp", "OptionsBarIntensityPointer.png", "OptionsRadioButton.png", "PopupAccept.png"]:
-		textures[name] = load("res://assets/openbound/hud/" + name)
+		originals[name] = load("res://assets/openbound/hud/" + name)
+		# The HD remaster is always PNG (the original BarFrame is a BMP).
+		var hd_path: String = "res://assets/hd/hud/" + name.get_basename() + ".png"
+		textures[name] = load(hd_path) if ResourceLoader.exists(hd_path) else originals[name]
 	# Button.cs Accept preset: 20×25 frames normal, hover, clicked, disabled.
 	accept_button = TextureButton.new()
 	accept_button.ignore_texture_size = true
@@ -60,19 +66,30 @@ func _init(values = null) -> void:
 	accept_button.size = Vector2(20, 25) * K
 	accept_button.position = point(ACCEPT_OFFSET) - accept_button.size * 0.5
 	accept_button.tooltip_text = "Accept (ESC)"
+	style_accept()
+	accept_button.pressed.connect(func(): accepted.emit())
+	add_child(accept_button)
+	center_on(Vector2(640, 400))
+
+func style_accept() -> void:
 	var frames: Array[AtlasTexture] = []
 	for frame in range(4):
 		var region := AtlasTexture.new()
 		region.atlas = textures["PopupAccept.png"]
-		region.region = Rect2(frame * 20, 0, 20, 25)
+		region.region = scaled("PopupAccept.png", Rect2(frame * 20, 0, 20, 25))
 		frames.append(region)
 	accept_button.texture_normal = frames[0]
 	accept_button.texture_hover = frames[1]
 	accept_button.texture_pressed = frames[2]
 	accept_button.texture_disabled = frames[3]
-	accept_button.pressed.connect(func(): accepted.emit())
-	add_child(accept_button)
-	center_on(Vector2(640, 400))
+
+## HD pixels per original pixel (1 when the original is used).
+func density(name: String) -> float:
+	return float(textures[name].get_width()) / float(originals[name].get_width())
+
+func scaled(name: String, source: Rect2) -> Rect2:
+	var d := density(name)
+	return Rect2(source.position * d, source.size * d)
 
 ## Local point of a PopupGameOptions offset (relative to the popup centre).
 func point(offset: Vector2) -> Vector2:
@@ -174,7 +191,7 @@ func _draw() -> void:
 		draw_texture_rect(textures["OptionsBarFrame.bmp"], Rect2(center - Vector2(147, 5) * K * 0.5, Vector2(147, 5) * K), false, tint)
 		var filled := float(int(value * BAR_SIZE.x / 100.0))
 		if filled > 0.0:
-			draw_texture_rect_region(textures["OptionsBar.png"], Rect2(center - BAR_SIZE * K * 0.5, Vector2(filled, BAR_SIZE.y) * K), Rect2(0, 0, filled, BAR_SIZE.y), tint)
+			draw_texture_rect_region(textures["OptionsBar.png"], Rect2(center - BAR_SIZE * K * 0.5, Vector2(filled, BAR_SIZE.y) * K), scaled("OptionsBar.png", Rect2(0, 0, filled, BAR_SIZE.y)), tint)
 		var pointer := center + Vector2(-BAR_SIZE.x * 0.5 + float(int(value * BAR_SIZE.x / 100.0)), -5) * K
 		draw_texture_rect(textures["OptionsBarIntensityPointer.png"], Rect2(pointer - Vector2(9, 6) * K * 0.5, Vector2(9, 6) * K), false, tint)
 	for key in RADIOS:
@@ -183,6 +200,6 @@ func _draw() -> void:
 		for index in range(RADIOS[key].labels.size()):
 			var center := point(RADIOS[key].centers[index])
 			var source := Rect2(12, 0, 11, 12) if index == selected else Rect2(0, 0, 12, 12)
-			draw_texture_rect_region(textures["OptionsRadioButton.png"], Rect2(center - Vector2(6, 6) * K, source.size * K), source, tint)
+			draw_texture_rect_region(textures["OptionsRadioButton.png"], Rect2(center - Vector2(6, 6) * K, source.size * K), scaled("OptionsRadioButton.png", source), tint)
 			var text_size := font.get_string_size(RADIOS[key].labels[index], HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE)
 			draw_text(RADIOS[key].labels[index], Vector2(center.x + 11.0 * K, center.y + K - int(text_size.y * 0.5)), Color(ELEMENT, tint.a))

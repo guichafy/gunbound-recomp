@@ -52,6 +52,11 @@ func run() -> void:
 	# REQ-31: ESC/Options opens the original PopupGameOptions over the battle.
 	view.show_options()
 	await snap("hud-options-popup")
+	# Same popup with the original sprites, for a side-by-side check.
+	view.options_popup.textures = view.options_popup.originals.duplicate()
+	view.options_popup.style_accept()
+	view.options_popup.queue_redraw()
+	await snap("hud-options-popup-original")
 	view.close_overlay()
 	var space := InputEventKey.new()
 	space.physical_keycode = KEY_SPACE
@@ -69,6 +74,6 @@ func run() -> void:
 	view.hud.add_damage(1, 187, view.model)
 	advance(0.7)
 	await snap("hud-cpu-turn")
-	print("HUD CAPTURES: 5 | ACTIVE ", view.model.active, " | SECONDS ", view.hud.display_seconds(view.model))
+	print("HUD CAPTURES: 6 | ACTIVE ", view.model.active, " | SECONDS ", view.hud.display_seconds(view.model))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/hud-capture-profile.json"))
 	quit()

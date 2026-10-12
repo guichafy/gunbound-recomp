@@ -193,6 +193,30 @@
       "sha256": "55137af04461e7aeff69476a91be323e7a37589bd428db09af9b33bab4fc600f",
       "from": "gpt"
     },
+    "OptionsBackground.png": {
+      "size": [
+        969,
+        984
+      ],
+      "sha256": "443b5a2a2962e5b32413274b2da0d44a1bae8a99b430e793b85fad632977d89f",
+      "from": "gpt"
+    },
+    "PopupAccept.png": {
+      "size": [
+        240,
+        75
+      ],
+      "sha256": "3730822f4e18ecc36a7b11a9691f75dc978965728cd56361a933b4b4f64b160c",
+      "from": "gpt"
+    },
+    "OptionsRadioButton.png": {
+      "size": [
+        69,
+        36
+      ],
+      "sha256": "2e98afc70f8c585f120631851a9105e58c6d4eb66a62e6e50dadcb8f99365b30",
+      "from": "gpt"
+    },
     "StrenghtMetter.png": {
       "size": [
         1200,
@@ -231,6 +255,30 @@
         15
       ],
       "sha256": "d9b7711b5f05af70b714202ba94be2174b1bf11b5583cb5664780f8f386dd2a5",
+      "from": "lanczos"
+    },
+    "OptionsBar.png": {
+      "size": [
+        435,
+        9
+      ],
+      "sha256": "aeafe459261c75965ba883c583eb3fb1c7b6768de7d03bc414c3d76e16cba4ab",
+      "from": "lanczos"
+    },
+    "OptionsBarFrame.png": {
+      "size": [
+        441,
+        15
+      ],
+      "sha256": "97662aec9616d2bb11467559f99963dec5059456c0fb2b0be3c1634dff5fba7a",
+      "from": "lanczos"
+    },
+    "OptionsBarIntensityPointer.png": {
+      "size": [
+        27,
+        18
+      ],
+      "sha256": "850e8a9f6a1468d677ca9abbee95ad47192339abad1fbbb31459b59fce016084",
       "from": "lanczos"
     },
     "CrosshairMageS1Ally.png": {
@@ -358,6 +406,10 @@
     "misc": {
       "generated": "gen_misc.png",
       "sha256": "fe8f992e6af4381c36acfffe009f27d4a7c90eef832a8a18fae3595e33dcfde4"
+    },
+    "options": {
+      "generated": "gen_options.png",
+      "sha256": "da7bd9fc437bfe12d1af621b026da3d8866f3de9dbd0c1f42f688a44b9777e8e"
     }
   }
 }

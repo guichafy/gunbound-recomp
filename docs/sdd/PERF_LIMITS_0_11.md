@@ -68,6 +68,8 @@ GPU (atualização da textura HD 2560×661), sem pico relevante. O pico de
 
 A. Especificação, folha `options` no pipeline HD e geração no Codex (fundo).
 B. Busca da CPU em thread (match.gd/game.gd), teste de equivalência, medição.
+C. BGM: cópia das faixas com SHA, player de música, slider ativo.
+D. Integração do HD do popup, testes, capturas, docs, reexportação do app.
 
 ## Resultado medido (depois)
 
@@ -76,5 +78,3 @@ da CPU (máximo 18,1 ms, o normal a 60 FPS; antes 160–185 ms); a CPU dispara
 1,83–1,87 s após o início do turno (antes 1,88–1,90 s). Partidas seeds 81–90
 idênticas (56/12/13/15/19/10/8/12/9/15 tiros). O pico de ~45 ms no primeiro
 frame da partida (carga de texturas) continua e não é troca de turno.
-C. BGM: cópia das faixas com SHA, player de música, slider ativo.
-D. Integração do HD do popup, testes, capturas, docs, reexportação do app.

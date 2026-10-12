@@ -146,6 +146,12 @@
       "hud/source/gen_fonts.png": {
         "origin": "exec-7e36a526-fbbf-435f-9b3d-29ff2fb4f047.png",
         "session": "01a12d43-d6a2-7651-9292-f28336235fa9"
+      },
+      "hud/source/gen_options.png": {
+        "origin": "exec-568e345b-d4f1-4b9f-a79c-4e5f2d0a3661.png",
+        "session": "01a12dcf-ed97-7cb3-ab74-fbf36eae3eac",
+        "version": "0.11.0",
+        "note": "Popup PopupGameOptions: fundo, Accept (4 estados), RadioButton; Bar/BarFrame/ponteiro ampliados direto"
       }
     },
     "note": "Folhas com layout fixo; build_hud_hd.py recorta cada sprite, 3× o original, alfa original. Faixas de mira, barras planas, moldura de vida e ponteiros ampliados direto (Lanczos)."
