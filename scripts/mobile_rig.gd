@@ -1,5 +1,7 @@
 extends RefCounted
 ## Stable HD pieces. Continuous presentation transforms; never changes combat.
+const AvatarArt = preload("res://scripts/avatar_art.gd")
+var avatars = AvatarArt.new()
 const Sheet = preload("res://scripts/hd_sheet.gd")
 var kind: String
 var sheet
@@ -72,7 +74,7 @@ func piece(view: Node2D, atlas, row: int, column: int, transform: Transform2D, t
 	var source: Rect2 = atlas.region(row, column)
 	var fitted := source.size * minf(target.size.x / source.size.x, target.size.y / source.size.y)
 	view.draw_texture_rect_region(atlas.paint, Rect2(target.get_center() - fitted * 0.5, fitted), source, color)
-func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0) -> bool:
+func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> bool:
 	if not available():
 		return false
 	var state := sample(pose, age, weapon)
@@ -91,7 +93,13 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	var gun := body * Transform2D(state.barrel_angle, gun_pivot)
 	# Entire seated anatomy rotates as one figure around the hips, no seam/stretch.
 	var seat: Vector2 = state.pilot_anchor - state.body_offset + state.pilot_sway
-	piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
+	var avatar_drawn := false
+	if not avatar_context.is_empty():
+		var avatar_scale: float = float(state.pilot_size.y)/44.0
+		var rider_transform := body * Transform2D(state.pilot_angle,seat) * Transform2D(0,Vector2.ONE*avatar_scale,0,Vector2(0,-8))
+		avatar_drawn = avatars.draw(view,avatar_context.get("equipment",{}),rider_transform,float(avatar_context.get("age",age)),tint)
+	if not avatar_drawn:
+		piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
 	# Mounted weapon and near tires occlude the seated lower body naturally.
 	piece(view, sheet, row, 1, gun, state.gun_rect, tint)
 	if kind == "bigfoot":

@@ -56,8 +56,8 @@ func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int
 func frame_rect(index: int) -> Rect2:
 	return Rect2(Vector2(index % COLUMNS, int(index / COLUMNS)) * cell, cell)
 
-func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, frame: int, color: Color = Color.WHITE, pose: String = "idle", age: float = 0.0, weapon: int = 0, low_health: bool = false, wheel_phase: float = 0.0) -> void:
-	if hd_rig.draw(view, pos, width, facing, rotation, pose, age, weapon, low_health, color, wheel_phase):
+func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, frame: int, color: Color = Color.WHITE, pose: String = "idle", age: float = 0.0, weapon: int = 0, low_health: bool = false, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> void:
+	if hd_rig.draw(view, pos, width, facing, rotation, pose, age, weapon, low_health, color, wheel_phase, avatar_context):
 		return
 	# Native artwork faces left. Scale the configured alpha hull around its
 	# original pivot and ground contact, without editing the source pixels.
@@ -68,7 +68,13 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	view.draw_texture_rect_region(paint_texture, rect, frame_rect(frame), color)
 	var rider := rider_offset(frame)
 	var origin := Vector2(0, ground - (contact_y - pivot.y) * amount)
-	var avatar_frame := int(view.elapsed * 10.0) % 11
+	if not avatar_context.is_empty():
+		var assembled = hd_rig.avatars
+		var transform := Transform2D(rotation,Vector2(-facing*amount,amount),0,pos) * Transform2D(0,origin/amount+rider)
+		# Rider coordinates are native; translation is in scaled mobile space.
+		if assembled.draw(view,avatar_context.get("equipment",{}),transform,float(avatar_context.get("age",age)),color):
+			return
+	var avatar_frame := int(age * 10.0) % 11
 	var body_rect := Rect2(origin + (rider - Vector2(22, 12)) * amount, Vector2(44, 28) * amount)
 	var head_rect := Rect2(origin + (rider + Vector2(7, -17) - Vector2(25, 12)) * amount, Vector2(38, 24) * amount)
 	var body_source := Rect2(avatar_frame * 44, 0, 44, 28)

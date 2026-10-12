@@ -1,6 +1,7 @@
 extends RefCounted
 ## Hit resolution. Match owns the actors and the event queue and calls in.
 
+const Attributes = preload("res://scripts/player_attributes.gd")
 const Combat = preload("res://scripts/combat.gd")
 
 static func deal_damage(actors: Array, events: Array, index: int, damage: int) -> int:
@@ -16,7 +17,7 @@ static func deal_damage(actors: Array, events: Array, index: int, damage: int) -
 		events.append({"type": "damage", "actor": index, "amount": remaining, "position": actors[index].pos})
 	return damage
 
-static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0) -> int:
+static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0, shooter: int = -1) -> int:
 	var dealt := 0
 	for index in range(actors.size()):
 		if int(actors[index].hp) <= 0:
@@ -25,5 +26,8 @@ static func blast(actors: Array, events: Array, position: Vector2, radius: float
 		if emp > 0 and distance <= emp + 22.0 and int(actors[index].shield) > 0:
 			events.append({"type": "shield_damage", "actor": index, "amount": actors[index].shield, "position": actors[index].pos})
 			actors[index].shield = 0
-		dealt += deal_damage(actors, events, index, Combat.damage_at(distance, damage, radius))
+		var hit := Combat.damage_at(distance, damage, radius)
+		if shooter >= 0:
+			hit = Attributes.damage(hit, Attributes.points(actors[shooter],0), Attributes.points(actors[index],2))
+		dealt += deal_damage(actors, events, index, hit)
 	return dealt

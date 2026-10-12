@@ -21,3 +21,16 @@ static func sanitize(values: Array, level: int = 19) -> Array:
 		result.append(points)
 		remaining -= points
 	return result
+static func damage(base: int, attack: int, defense: int) -> int:
+	return maxi(0, int(base * (1.0 + (attack - defense) / 100.0)))
+static func health(base: int, points: int) -> int:
+	return int(base * (1.0 + points / 100.0))
+static func heal(base: int, points: int) -> int:
+	return int(base * (1.0 + points / 100.0))
+static func delay(original: int, points: int) -> float:
+	return int(original * (1.0 - points / 100.0)) / 7.5
+static func crater(base: float, points: int) -> float:
+	return base * (1.0 + points / 100.0)
+static func points(actor: Dictionary, index: int) -> int:
+	var values: Array = actor.get("attributes", [])
+	return int(values[index]) if values.size() == COUNT else 0

@@ -1,6 +1,7 @@
 extends RefCounted
 ## Owns the entire combat lifecycle. Presentation consumes events, never decides damage.
 
+const Attributes = preload("res://scripts/player_attributes.gd")
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
 const Weather = preload("res://scripts/weather.gd")
@@ -51,7 +52,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, attributes_by_actor: Array = []) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -75,7 +76,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		# Search from just above the listed spawn so layered maps keep its platform.
 		var ground: float = terrain.surface_at(x, maxf(0.0, spawns[index].y - 80.0))
 		var shield := int(Mobiles.definition(kind).shield)
-		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false})
+		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
+		var max_health := Attributes.health(int(VEHICLES[kind].hp), int(values[1]))
+		actors.append({"attributes":values, "vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = PLAYER
 	winner = -1
@@ -116,7 +119,7 @@ func apply_weather(entry: Dictionary) -> void:
 		# WeatherDisplay: Protection regenerates every mobile (HealthRegenerationProtection 35).
 		for actor in actors:
 			if int(actor.hp) > 0:
-				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Weather.PROTECTION_HEAL)
+				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Attributes.heal(Weather.PROTECTION_HEAL, Attributes.points(actor,3)))
 	events.append({"type": "weather", "weather": entry.type, "extra": entry.extra, "queue": weather.queue.duplicate(true), "wind_force": weather.wind_force, "wind_angle": weather.wind_angle})
 
 func can_use_special(index: int) -> bool:
@@ -158,7 +161,11 @@ func body_rotation(index: int) -> float:
 	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
 
 func weapon_rules(index: int, weapon: int) -> Dictionary:
-	return Mobiles.weapon(actors[index].vehicle, weapon)
+	var rules: Dictionary = Mobiles.weapon(actors[index].vehicle, weapon).duplicate(true)
+	var points := Attributes.points(actors[index],4)
+	if points > 0:
+		rules.delay = Attributes.delay(roundi(float(rules.delay) * 7.5), points)
+	return rules
 
 func aim_limits(index: int, weapon: int = 0) -> Vector2:
 	return Mobiles.aim_limits(actors[index].vehicle, weapon)
@@ -309,18 +316,18 @@ func advance_projectiles(delta: float) -> void:
 
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
 	var weapon: Dictionary = weapon_rules(shot_actor, shot_weapon)
-	var removed: int = terrain.carve(position, float(weapon.radius))
+	var removed: int = terrain.carve(position, Attributes.crater(float(weapon.radius), Attributes.points(actors[shot_actor],6)))
 	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
 	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)))
+	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), shot_actor)
 	# OnExplodeAction order: Thor attached at launch, then Electricity.
 	if bool(projectile.get("thor", false)):
 		thor_strike(position)
 	if bool(projectile.get("electric", false)):
 		lightning_strike(position)
 
-func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0) -> int:
-	return Damage.blast(actors, events, position, radius, damage, emp)
+func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, shooter: int = -1) -> int:
+	return Damage.blast(actors, events, position, radius, damage, emp, shooter)
 
 func deal_damage(index: int, damage: int) -> int:
 	return Damage.deal_damage(actors, events, index, damage)

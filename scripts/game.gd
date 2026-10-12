@@ -3,6 +3,10 @@ extends Node2D
 
 const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
+const AvatarShop = preload("res://scripts/avatar_shop.gd")
+const ShopModel = preload("res://scripts/avatar_shop_model.gd")
+var shop
+var actor_avatars: Array = []
 const Profile = preload("res://scripts/profile.gd")
 const UIFactory = preload("res://scripts/ui.gd")
 const Sound = preload("res://scripts/sound.gd")
@@ -227,8 +231,23 @@ func show_menu() -> void:
 	)
 	ui.button(card, "INICIAR TREINO    →", Vector2(28, 484), Vector2(364, 52), start_match, true)
 	ui.label(card, "NÍVEL %d    ·    %d XP    ·    %d VITÓRIAS" % [profile.level(), profile.xp, profile.wins], Vector2(28, 555), Vector2(364, 26), 13, ui.MUTED, true)
+	ui.button(root, "Shop de avatar", Vector2(810,754), Vector2(200,30), show_shop)
 	ui.button(root, "Como jogar", Vector2(1030, 754), Vector2(190, 30), show_help)
 	select_vehicle(vehicle)
+	queue_redraw()
+
+func show_shop() -> void:
+	if screen == "menu" and is_instance_valid(nickname_input):
+		profile.nickname = profile.clean_nickname(nickname_input.text)
+	if not profile.save_profile():
+		return
+	discard_cpu_search()
+	sound.stop_music()
+	replace_root()
+	screen = "shop"
+	shop = AvatarShop.new()
+	root.add_child(shop)
+	shop.setup(self,ShopModel.new(profile))
 	queue_redraw()
 
 func weather_label() -> String:
@@ -248,7 +267,8 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new())
+	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new(), [profile.attributes, []])
+	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
 	sound.play_music()
 	art.reset(model.actors)
@@ -457,6 +477,7 @@ func actor_context(index: int) -> Dictionary:
 		"cpu_charging": model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty(),
 		"player_weapon": weapon,
 		"cpu_weapon": cpu_weapon,
+		"avatar_context": {"equipment":actor_avatars[index],"age":elapsed} if actor_avatars.size()==2 else {},
 		"atlas": sprite_for(int(model.actors[index].vehicle)),
 		"elapsed": elapsed,
 		"shadow": ui.box(Color(0.02, 0.04, 0.1, 0.28), 10),
@@ -560,6 +581,8 @@ func hud_state() -> Dictionary:
 		"player_name": profile.nickname, "weapon": weapon, "aim": angle, "paused_cpu": false}
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if screen == "shop":
+		return
 	if not event is InputEventKey or event.echo:
 		return
 	if event.pressed and event.physical_keycode == KEY_ESCAPE:
@@ -626,6 +649,9 @@ func show_result() -> void:
 
 func _draw() -> void:
 	if background == null:
+		return
+	if screen == "shop":
+		draw_rect(Rect2(0,0,1280,800),Color("11223c"))
 		return
 	var backdrop: Dictionary = map_background(model.map_id) if screen != "menu" and model.terrain != null else {}
 	if screen == "match" and not options.background:
@@ -819,4 +845,4 @@ func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: f
 	var body = sprite_for(kind)
 	if body == null:
 		return
-	body.draw(self, pos, width, facing, rotation, body.frame_index("idle", elapsed, 0, false), color)
+	body.draw(self, pos, width, facing, rotation, body.frame_index("idle", elapsed, 0, false), color, "idle", elapsed, 0, false, 0, {"equipment":profile.equipped_set(),"age":elapsed})

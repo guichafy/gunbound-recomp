@@ -91,7 +91,7 @@ func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionar
 	var weapon: int = int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
 	if state.pose == "recoil":
 		weapon = int(model.last_shots[index].get("weapon", 0))
-	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase)
+	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase, ctx.get("avatar_context",{}))
 
 func draw_explosion(view: Node2D, effect: Dictionary) -> void:
 	var age: float = effect.age

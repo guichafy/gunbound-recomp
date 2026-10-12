@@ -2,6 +2,7 @@ extends RefCounted
 ## Playable mobiles. IDs stay 1 (Mage) and 2 (Bigfoot). Removed ID 0 is absent.
 ## Combat reads this catalog; it does not branch on the numeric id.
 
+const Attributes = preload("res://scripts/player_attributes.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 
 const PLAYABLE := [1, 2]
@@ -82,4 +83,4 @@ static func on_turn(actor: Dictionary) -> void:
 	if int(spec.shield_regen) <= 0:
 		return
 	actor.max_shield = int(spec.shield) + int(actor.max_hp) - int(actor.hp)
-	actor.shield = mini(int(actor.max_shield), int(actor.shield) + int(spec.shield_regen))
+	actor.shield = mini(int(actor.max_shield), int(actor.shield) + Attributes.heal(int(spec.shield_regen), Attributes.points(actor,3)))
