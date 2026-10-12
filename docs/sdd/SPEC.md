@@ -194,3 +194,11 @@ REQ-31 com o popup em HD (GPT Images), conforme PERF_LIMITS_0_11.md.
 REQ-34: rádio Aiming Mode do popup ativo; Slice (padrão) mantém o Espaço,
 Drag liga o tiro por arraste do mouse, conforme AIMING_0_12.md. Mouse Speed
 fica desabilitado com TODO; Interface só com a skin Blue.
+
+## Itens de batalha 0.13 — escopo solicitado
+
+REQ-35 itens usáveis no turno (Dual, Dual+, Thunder, Energy Up 1/2, Team
+Teleport, Teleport, Blood, Bunge Shot, Power Up, Change Wind) com a lógica,
+física e custos de delay do OpenBound; REQ-36 seleção de 6 slots pelo
+`PopupSelectItem` original no menu; REQ-37 arte dos itens/Teleport em HD por
+GPT Images (Codex), conforme ITEMS_0_13.md. CPU sem itens neste corte.

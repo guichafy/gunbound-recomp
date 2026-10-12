@@ -285,3 +285,15 @@ vão para `mobiles.gd`. A previsão copia só a lista de `flight_snapshot.gd` (a
 Dano e agenda ficam em módulos chamados pelo Match. A cena delega mira, câmera
 e overlays e injeta a máscara em `start`. Papéis nomeados `PLAYER` e `CPU`; o
 treino continua 1×1, sem rede. Seeds 81–90 devem permanecer iguais.
+
+## Itens de batalha 0.13
+
+ADR-058 — adotada por solicitação explícita: itens do OpenBound na batalha
+(REQ-35..37, ITEMS_0_13.md). Custos de delay originais ÷ 7,5 (conversão de
+Mage/Bigfoot), cobrados no uso. Um item por turno; uso desabilita SS no turno;
+Ignorância trava a barra; clique fora do turno agenda o uso. Adaptações: os
+efeitos de turno terminam também ao passar/esgotar o tempo (no C# Attack/Dig
+só voltam no caminho do tiro); Energy Up limitado à vida máxima; teclas F1–F6
+como extra; carga padrão Dual, Teleport, Power Up, Energy Up 1 gravada com as
+opções. CPU não usa itens neste corte (seeds 81–90 preservadas). Arte nova em
+HD por GPT Images (Codex), originais preservados com fallback.
