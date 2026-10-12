@@ -1,0 +1,402 @@
+[
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Hat/Basic.png",
+    "file": "assets/openbound/avatars/Male/Hat/Basic.png",
+    "sha256": "aa7816d434bf658f861319104ce3d5ac0c39a6df72465ad1de9ef3b56b9dfdb0"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Hat/Basic.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Hat/Basic.png",
+    "sha256": "13a1a27f18158ac92b0487f67f892f3fc748d37e8837029adf428b28cccec60e"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Hat/Space Marine.png",
+    "file": "assets/openbound/avatars/Male/Hat/Space Marine.png",
+    "sha256": "20031cf1dbcd299b225fb36701c6ffc9e73e4044d2dfde7d375b14a019986f0a"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Hat/Space Marine.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Hat/Space Marine.png",
+    "sha256": "bfcd5921e020baa09b2285d10fb2ca66600df638d25fb9db4c3bac7a0beffadc"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Hat/Miner.png",
+    "file": "assets/openbound/avatars/Male/Hat/Miner.png",
+    "sha256": "02822c80f1a00ae19e49a3145ae0444647ef66d734ecd3571db319fee2cde14a"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Hat/Miner.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Hat/Miner.png",
+    "sha256": "997fcb96ded81ef6d64d902afdfca0811f8f6041d931eba3468497ab6738ee07"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Hat/Punk.png",
+    "file": "assets/openbound/avatars/Male/Hat/Punk.png",
+    "sha256": "d1c9245b0036e24f83daf686bc94ac7b677c7ed57339e7ea059a5396dd232ccc"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Hat/Punk.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Hat/Punk.png",
+    "sha256": "cafd2a762eba77bbf2d0ebbe88f60544b4ea97d674c7b1ff54e0a6026dd9da0f"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Hat/Kappa.png",
+    "file": "assets/openbound/avatars/Male/Hat/Kappa.png",
+    "sha256": "a48b040fc86a895a55b28760b814cef91e380378929bd9ae382118d93b635e0f"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Hat/Kappa.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Hat/Kappa.png",
+    "sha256": "ccecd880148feeb50f9c6535c4279d7de2d7561a55f6abe76287c356351d1c7c"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Body/Basic.png",
+    "file": "assets/openbound/avatars/Male/Body/Basic.png",
+    "sha256": "6ddec8d08d9e837c3a6bfbc14f23ae277dca37611852c8e38ee5d6626e0580b7"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Body/Basic.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Body/Basic.png",
+    "sha256": "7d1b7175d729bc93cefd2e708dc5ecd685633c3c24cbb373fa5e12ad472e1ced"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Body/Space Marine.png",
+    "file": "assets/openbound/avatars/Male/Body/Space Marine.png",
+    "sha256": "683abe2e8313e2158a9416d41c3e57be97fad99128be56c73febba7e95d02261"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Body/Space Marine.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Body/Space Marine.png",
+    "sha256": "5affdd2b136554429717c2ab1e3469cd77964d2970bfa3a07f00d74b20b2a493"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Body/Miner.png",
+    "file": "assets/openbound/avatars/Male/Body/Miner.png",
+    "sha256": "a1cbcfb04dba9377703e454bf84b65edf2599856f99a46b34f0f25e691f62bb3"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Body/Miner.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Body/Miner.png",
+    "sha256": "8ae1b04bc17e60884ab31983dfec1b4b44d9b8644420f495362d688d92a569c1"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Body/Punk.png",
+    "file": "assets/openbound/avatars/Male/Body/Punk.png",
+    "sha256": "f0fe0b5626f585f407581df2e00a7a96fc2910a2ca975d281909c0d047c58288"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Body/Punk.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Body/Punk.png",
+    "sha256": "8d84fcc96e88fa5335673a3edaa14b123df14c7788eae3e1b547c87eafc37e05"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Goggles/Pilot Goggles.png",
+    "file": "assets/openbound/avatars/Male/Goggles/Pilot Goggles.png",
+    "sha256": "4096bef12cdfe5c464aaa63b0a43067f63d2ea4e9b1864cb365d372d1fdad460"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Male/Portrait/Goggles/Pilot Goggles.png",
+    "file": "assets/openbound/avatars/Male/Portrait/Goggles/Pilot Goggles.png",
+    "sha256": "b1db4221c9f5386e138c856f9b832fad79bc595f62931cef9952a576a320ba67"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Female/Hat/Basic.png",
+    "file": "assets/openbound/avatars/Female/Hat/Basic.png",
+    "sha256": "734a6163ca4f119affbfce917ae58398b0dee18bff952744767d4516f928c413"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Female/Portrait/Hat/Basic.png",
+    "file": "assets/openbound/avatars/Female/Portrait/Hat/Basic.png",
+    "sha256": "90a2d6f0235492e8289ddb2226d8388ea5fe84a4c7967e492ce4f2ac8ee76b0c"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Female/Body/Basic.png",
+    "file": "assets/openbound/avatars/Female/Body/Basic.png",
+    "sha256": "ab54bc24d876bf21c4e36969fdde81719393fe0f2a6ac0c6a611b0ca5b108443"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Female/Portrait/Body/Basic.png",
+    "file": "assets/openbound/avatars/Female/Portrait/Body/Basic.png",
+    "sha256": "3d1cda55884b3629602665d79f63571fc181a18648676105f19a38900095e355"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Unissex/Portrait/Goggles/No Goggles.png",
+    "file": "assets/openbound/avatars/Unissex/Portrait/Goggles/No Goggles.png",
+    "sha256": "9ee48d8f9f8862b93ae7c951ec19c230abe71ce7a69bcaeffb507499f30c0937"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Unissex/Portrait/Flag/No Flag.png",
+    "file": "assets/openbound/avatars/Unissex/Portrait/Flag/No Flag.png",
+    "sha256": "9ee48d8f9f8862b93ae7c951ec19c230abe71ce7a69bcaeffb507499f30c0937"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Unissex/Flag/Blue Flag.png",
+    "file": "assets/openbound/avatars/Unissex/Flag/Blue Flag.png",
+    "sha256": "883d8ecc317bc4e23cbbba5491ce3b86b4d6214facfe65da1e03e4539e645f81"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Graphics/Avatar/Unissex/Portrait/Flag/Blue Flag.png",
+    "file": "assets/openbound/avatars/Unissex/Portrait/Flag/Blue Flag.png",
+    "sha256": "abbffe0bbee3d8f24e82a121f1167f335a832d8f80608f4b14007b75ecf83077"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/InGame/Scene/AvatarShop/Background.png",
+    "file": "assets/openbound/shop/InGame/Scene/AvatarShop/Background.png",
+    "sha256": "c1d0496c73c69f26bb08282ed6035914b8d8ba7c031774da5c9a4d5af233c0a6"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/InGame/Scene/AvatarShop/Foreground1.png",
+    "file": "assets/openbound/shop/InGame/Scene/AvatarShop/Foreground1.png",
+    "sha256": "578fc8b46f4346b0c5e7903c94ab858aa0392774d4c0c0728d178484ca770d78"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/InGame/Scene/AvatarShop/Foreground2.png",
+    "file": "assets/openbound/shop/InGame/Scene/AvatarShop/Foreground2.png",
+    "sha256": "3c9264eab73ff0a6da0835602f5918e3a7338424a09551d613e982fbb31b2cd6"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background.png",
+    "file": "assets/openbound/shop/InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background.png",
+    "sha256": "96bb82e7c8177ed5ab851eef5935e3ce06bbc0d56e7bdcbb67f96796dd92211b"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2.png",
+    "file": "assets/openbound/shop/InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2.png",
+    "sha256": "8351b141593d758cf0f5764db4465edd135e6a2609de5076ea55c81f3f1ca5f3"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Body.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Body.png",
+    "sha256": "8888f8a54ad0e218d9e8163d43e61d622b7624e9c4c1f12af679f8cbf4513e2f"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Buy.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Buy.png",
+    "sha256": "b640f77b7d62dccde7936008fcff788a1e2691cc2e8fd6c39e34904c3085d5ee"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/ExItem.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/ExItem.png",
+    "sha256": "a4c80f2fe6eab447c5661aff126c1f4156c2258a9d7a608e9d32928f087f0678"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Flag.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Flag.png",
+    "sha256": "39d705381653f7cbbd814b5ca549315887baee065d2ea0e9a11eaca932e0f73e"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Gift.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Gift.png",
+    "sha256": "24fb997343848e531817398c1b712ef85b242bf50332a9d40b1fe61d96a7cbf8"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Goggles.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Goggles.png",
+    "sha256": "2868d7f0eb2e0b00391047cd3ca63375c9c6e928655faa9555d6703a93b114f3"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Hat.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Hat.png",
+    "sha256": "d5dcef42f40faa9878565da7a8b96a80f692895543c76683f39eea54636d5fec"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Necklace.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Necklace.png",
+    "sha256": "81e2ac56fceb9b5a908fdfa546be6f8be424bba7c3aec10c7d406ca3016b9f45"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Pet.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Pet.png",
+    "sha256": "2fd1a123c1ce5ceae5527652b1335d6f0507e829ad9579b4dbc41521b72555d0"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Ring.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Ring.png",
+    "sha256": "a3d4ee8c5dd49178d9de92e22f93b9b95eb21246e89a0352331c67f83ad1fc7b"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/AnimatedButtons/AvatarShop/Try.png",
+    "file": "assets/openbound/shop/AnimatedButtons/AvatarShop/Try.png",
+    "sha256": "3f7237e3b20e0fc36ef4dedf8035a84bfca16e498b400dd22388ea3aa4fbe532"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/AvatarButton/Background.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/AvatarButton/Background.png",
+    "sha256": "8f2cf23a2c2bf2ee62454cbe351d088f2f26e39b3630bb252c42897fb1a3e725"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/AvatarButton/ButtonIcons.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/AvatarButton/ButtonIcons.png",
+    "sha256": "03633bdb968f626c8be64512eeff9c99466ce786ca1e344c1e677a18ecfbb863"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/AvatarButton/CashIcon.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/AvatarButton/CashIcon.png",
+    "sha256": "459d385a9c3536705a08e06c151d9a1538f4a90aeacbbcc42047d08c0208be9e"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/AvatarButton/EquipedIndicator.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/AvatarButton/EquipedIndicator.png",
+    "sha256": "045266480c6b7bcc923372e57cae9d47bd0ab2f969f80576de5b8f310f278ccf"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/AvatarButton/GoldIcon.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/AvatarButton/GoldIcon.png",
+    "sha256": "21e9bbe50821bb2f659c007adcd305bf50e5f13a6f5c126bf0827fa164a1b6e7"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/AvatarButton/NewItem.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/AvatarButton/NewItem.png",
+    "sha256": "65f0c7aa4b99f77068e54a7aa702f91d6089f166ee8153ce0f86c04c8cd9e0ac"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/AvatarButton/OwnedCheck.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/AvatarButton/OwnedCheck.png",
+    "sha256": "f9c92974351a8b25a7f1b2832829e611c1046f60f3fe5657a537e73325de20e9"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/Cash.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/Cash.png",
+    "sha256": "d41b8c67b5544d5abcb55f4947085332cd6a1892c188846b92e3299b4f638aaa"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/Gold.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/Gold.png",
+    "sha256": "02ebc42ebd9db229db1be0f046023ec6228f436d01300c5b86743540449970cf"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/AvatarShop/TabIndex.png",
+    "file": "assets/openbound/shop/StaticButtons/AvatarShop/TabIndex.png",
+    "sha256": "a39b7c3df30c906fad5d1aaca4f809f75a9a9a20574ac33f0b802c3d66de9188"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/Popup/Blue/Avatar/Buy.png",
+    "file": "assets/openbound/shop/Popup/Blue/Avatar/Buy.png",
+    "sha256": "f90644b8ecd283f97cdfca1b67b8b067ed40c86531b689c9e2b8d731c1f075d5"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/Popup/Blue/Avatar/Receive.png",
+    "file": "assets/openbound/shop/Popup/Blue/Avatar/Receive.png",
+    "sha256": "de7d25aa76ba7699f38e25df0e7373575b3745a881e634dbc4ab84a64a05d071"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/Popup/Blue/Avatar/Send.png",
+    "file": "assets/openbound/shop/Popup/Blue/Avatar/Send.png",
+    "sha256": "cf951b299ccfc4ec918ad25326e805390a2e6787c1a004686d177ed090ed791c"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/Spritefont/AvatarShop/AvatarStatusCounter.png",
+    "file": "assets/openbound/shop/Spritefont/AvatarShop/AvatarStatusCounter.png",
+    "sha256": "9e323c617101943e90afe0188bfabcb88281c1abb108d859ac71f7d2cca569b6"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/Accept.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/Accept.png",
+    "sha256": "986daad40b7d5e73bdc63d4a21305f40fa21d6bae93779fa132ad368006111a1"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/Cancel.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/Cancel.png",
+    "sha256": "908353ea21885844fa0bf470ad695e860d2022f0a17d9d907752f4efe20fa122"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/1v1.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/1v1.png",
+    "sha256": "b8f637d1d9db8108025ea98c6b7f3d2fdad7f45608116d1a602c910cbad7345d"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/2v2.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/2v2.png",
+    "sha256": "3dc15688abb8f5619602584fbf7c7382e61eca72b1b7857742f92c0eb877cf62"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/3v3.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/3v3.png",
+    "sha256": "cd31f85489d2138ee7cb32aea1a099dd7476e03035e29cf5ea771ff6fc685f7c"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/4v4.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/4v4.png",
+    "sha256": "ccada3782b15f6f37150c529b4576742cc4e7f32e7122d6967a13f0571cf3352"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/Jewel.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/Jewel.png",
+    "sha256": "5c9739878b982a626d49bd8a88a3b04b4a1cb3973195ff4c01463fb6f852ef2a"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/Score.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/Score.png",
+    "sha256": "e74f983b0e66f8e86fa973ce8bab7b0dd17dd2a3ee50c7e88e7b5e2b198a8220"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/Solo.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/Solo.png",
+    "sha256": "73e2e44e3213343d789441d340f912a7fb8f7193b586f8c0409ef92b73ad2b17"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/CreateRoom/Tag.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/CreateRoom/Tag.png",
+    "sha256": "74b8fc596467202d3fecc3af32746f44d4883e78856053532ff614be64205603"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/Blood.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/Blood.png",
+    "sha256": "2fe8e90d7c622e774965ed091788f7e9066b8bba73d22972ea40bff932a03897"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/BungeShot.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/BungeShot.png",
+    "sha256": "fd7311f804f2f7946c27e7cb97356d08978a1db006cf49921ea03677199eb350"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/ChangeWind.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/ChangeWind.png",
+    "sha256": "b1cacd5f857cffcbe3d4603f10470edb8d3d46fe4547ccbd9f4405c456708382"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/Dual.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/Dual.png",
+    "sha256": "dde772f9a98c37eb2909442be2b67e8f897b2c9eff1cb2eab8783f3e5b7e2af4"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/DualPlus.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/DualPlus.png",
+    "sha256": "475ef405b260e8f0d30b0bd8e827893582331ea7a481d8f707ae58c82b8d93cf"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/EnergyUp1.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/EnergyUp1.png",
+    "sha256": "978d5bc25d308e360858069b51a01e1f4fc67bf77b6c4926875e05841627e07b"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/EnergyUp2.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/EnergyUp2.png",
+    "sha256": "7ec8034496d2bbf26881d54a4afa1797c3ba07730677ce8d1060f511136e502d"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/PowerUp.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/PowerUp.png",
+    "sha256": "b0177172d148b99fcc276afac9667ec58ec8ec4b1d69f02de97520e699f348b1"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/TeamTeleport.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/TeamTeleport.png",
+    "sha256": "61f465f0a23bfc64eaff07c1a05464d4127ec18637d5f51dcc01c7adb527e4ad"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/Teleport.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/Teleport.png",
+    "sha256": "5766f4544aa32eddd080458271706e69a78538d471a568372216d6605e8792e1"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectItem/Thunder.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectItem/Thunder.png",
+    "sha256": "b5f65fa4b7682cc84731d8c54c2f347dcd14fe1d5a37314c977db1a8f077b157"
+  },
+  {
+    "source": "OpenBound-Assets/Game Assets/Interface/StaticButtons/Popup/SelectMobile/Mobile.png",
+    "file": "assets/openbound/shop/StaticButtons/Popup/SelectMobile/Mobile.png",
+    "sha256": "942752f89372ed0b4b8e9a02bd4daa6fbd2355879ad8500581a479401303f8ef"
+  }
+]

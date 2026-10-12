@@ -1,0 +1,302 @@
+[
+  {
+    "key": "0:0:0",
+    "gender": 0,
+    "category": 0,
+    "id": 0,
+    "name": "Basic",
+    "date": "2020-07-12",
+    "gold_price": 0,
+    "cash_price": 0,
+    "pivot": [
+      25,
+      12
+    ],
+    "frame_size": [
+      38,
+      24
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Hat/Basic.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Hat/Basic.png"
+  },
+  {
+    "key": "0:0:1",
+    "gender": 0,
+    "category": 0,
+    "id": 1,
+    "name": "Space Marine",
+    "date": "2020-07-12",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      18,
+      14
+    ],
+    "frame_size": [
+      32,
+      28
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Hat/Space Marine.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Hat/Space Marine.png"
+  },
+  {
+    "key": "0:0:2",
+    "gender": 0,
+    "category": 0,
+    "id": 2,
+    "name": "Miner",
+    "date": "2020-07-13",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      95,
+      52
+    ],
+    "frame_size": [
+      136,
+      78
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Hat/Miner.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Hat/Miner.png"
+  },
+  {
+    "key": "0:0:3",
+    "gender": 0,
+    "category": 0,
+    "id": 3,
+    "name": "Punk",
+    "date": "2020-07-13",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      23,
+      22
+    ],
+    "frame_size": [
+      38,
+      39
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Hat/Punk.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Hat/Punk.png"
+  },
+  {
+    "key": "0:0:138",
+    "gender": 0,
+    "category": 0,
+    "id": 138,
+    "name": "Kappa",
+    "date": "2020-07-13",
+    "gold_price": 99999999,
+    "cash_price": 99999999,
+    "pivot": [
+      18,
+      27
+    ],
+    "frame_size": [
+      39,
+      48
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Hat/Kappa.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Hat/Kappa.png"
+  },
+  {
+    "key": "0:1:0",
+    "gender": 0,
+    "category": 1,
+    "id": 0,
+    "name": "Basic",
+    "date": "2020-07-12",
+    "gold_price": 0,
+    "cash_price": 0,
+    "pivot": [
+      22,
+      12
+    ],
+    "frame_size": [
+      44,
+      28
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Body/Basic.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Body/Basic.png"
+  },
+  {
+    "key": "0:1:1",
+    "gender": 0,
+    "category": 1,
+    "id": 1,
+    "name": "Space Marine",
+    "date": "2020-07-13",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      15,
+      15
+    ],
+    "frame_size": [
+      34,
+      34
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Body/Space Marine.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Body/Space Marine.png"
+  },
+  {
+    "key": "0:1:2",
+    "gender": 0,
+    "category": 1,
+    "id": 2,
+    "name": "Miner",
+    "date": "2020-07-13",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      16,
+      15
+    ],
+    "frame_size": [
+      36,
+      34
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Body/Miner.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Body/Miner.png"
+  },
+  {
+    "key": "0:1:3",
+    "gender": 0,
+    "category": 1,
+    "id": 3,
+    "name": "Punk",
+    "date": "2020-07-13",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      15,
+      15
+    ],
+    "frame_size": [
+      34,
+      34
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Body/Punk.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Body/Punk.png"
+  },
+  {
+    "key": "0:2:1",
+    "gender": 0,
+    "category": 2,
+    "id": 1,
+    "name": "Pilot Goggles",
+    "date": "2020-07-13",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      18,
+      5
+    ],
+    "frame_size": [
+      26,
+      13
+    ],
+    "atlas": "res://assets/openbound/avatars/Male/Goggles/Pilot Goggles.png",
+    "portrait": "res://assets/openbound/avatars/Male/Portrait/Goggles/Pilot Goggles.png"
+  },
+  {
+    "key": "1:0:0",
+    "gender": 1,
+    "category": 0,
+    "id": 0,
+    "name": "Basic",
+    "date": "2020-07-12",
+    "gold_price": 0,
+    "cash_price": 0,
+    "pivot": [
+      28,
+      14
+    ],
+    "frame_size": [
+      41,
+      33
+    ],
+    "atlas": "res://assets/openbound/avatars/Female/Hat/Basic.png",
+    "portrait": "res://assets/openbound/avatars/Female/Portrait/Hat/Basic.png"
+  },
+  {
+    "key": "1:1:0",
+    "gender": 1,
+    "category": 1,
+    "id": 0,
+    "name": "Basic",
+    "date": "2020-07-12",
+    "gold_price": 0,
+    "cash_price": 0,
+    "pivot": [
+      22,
+      13
+    ],
+    "frame_size": [
+      34,
+      28
+    ],
+    "atlas": "res://assets/openbound/avatars/Female/Body/Basic.png",
+    "portrait": "res://assets/openbound/avatars/Female/Portrait/Body/Basic.png"
+  },
+  {
+    "key": "2:2:0",
+    "gender": 2,
+    "category": 2,
+    "id": 0,
+    "name": "No Goggles",
+    "date": "2020-07-13",
+    "gold_price": 0,
+    "cash_price": 0,
+    "pivot": [
+      0,
+      0
+    ],
+    "frame_size": [
+      1,
+      1
+    ],
+    "atlas": "",
+    "portrait": "res://assets/openbound/avatars/Unissex/Portrait/Goggles/No Goggles.png"
+  },
+  {
+    "key": "2:3:0",
+    "gender": 2,
+    "category": 3,
+    "id": 0,
+    "name": "No Flag",
+    "date": "2020-07-13",
+    "gold_price": 0,
+    "cash_price": 0,
+    "pivot": [
+      0,
+      0
+    ],
+    "frame_size": [
+      1,
+      1
+    ],
+    "atlas": "",
+    "portrait": "res://assets/openbound/avatars/Unissex/Portrait/Flag/No Flag.png"
+  },
+  {
+    "key": "2:3:1",
+    "gender": 2,
+    "category": 3,
+    "id": 1,
+    "name": "Blue Flag",
+    "date": "2020-07-13",
+    "gold_price": 100,
+    "cash_price": 100,
+    "pivot": [
+      11,
+      26
+    ],
+    "frame_size": [
+      40,
+      34
+    ],
+    "atlas": "res://assets/openbound/avatars/Unissex/Flag/Blue Flag.png",
+    "portrait": "res://assets/openbound/avatars/Unissex/Portrait/Flag/Blue Flag.png"
+  }
+]
