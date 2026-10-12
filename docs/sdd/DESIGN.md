@@ -389,3 +389,19 @@ Vestir/Vestido segundo posse e prévia. A compra não equipa automaticamente.
 Transição entre abas restaura a prévia do conjunto persistido. Game.start_match
 continua copiando Profile.equipped_set para actor_avatars; recarga e restart
 com as quatro categorias estão cobertos em test_avatar_continuity.
+
+## Avatar Shop clássico 0.14.5
+
+ADR-064: AvatarShop preserva a tela800×600 e escala uniforme; apresentação
+substituída pela grade3×3 (nove itens/página) da foto enviada. Inventário lateral
+lista todas as peças possuídas compatíveis com o gênero, independentemente de
+busca/categoria, e chama Profile.equip para vestir transacionalmente. Equipar
+atualiza a prévia e não debita saldo. Retratos HD126×78 centrados em janela146×90;
+StyleBoxTexture mantém bordas/header nativos ao ampliar card166×147.
+
+Atributos continuam no ShopModel/Profile, apresentados em modal separado:
+entrada bloqueada sob a camada escura, ESC/Cancelar descartam rascunho,
+Salvar fecha somente após transação bem-sucedida. Erro fica visível no painel.
+Shop/Inventário, compra Gold/Cash, gêneros, busca e animações originais mantidos.
+Essa seção substitui a descrição histórica do layout5×5; catálogo/preços e
+BattleArt/AvatarArt/AvatarHD permanecem os mesmos.

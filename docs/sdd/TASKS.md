@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Loja clássica 0.14.5 (ADR-064)
+
+- [x] Comparar as duas fotos e C#, reproduzir quatro diferenças da grade/retrato.
+- [x] Grade3×3, nove itens/página, retratos centrais e moedas coloridas.
+- [x] Inventário lateral vestível persistido e prévia/saldo compactos.
+- [x] Atributos em modal, cancelar/ESC, confirmar e feedback de falha/rollback.
+- [x] Regressão1758checks sem falhas; revisão independente sem Critical/Important.
+- [x] GPU1920×1080 e120frames60fps; fontes originais/hash preservados.
+- [x] App/ZIP0.14.5 assinados; PCK real compra/vestir/recarga/batalha passou.
+- [ ] Usuário validar fidelidade visual da composição e fluxo no app.
+
 ## Skill Gunbound Classic HD
 
 - [x] Consolidar referências/práticas comprovadas em skill reutilizável.

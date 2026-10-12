@@ -26,9 +26,9 @@ func filter(kind: int, text: String, owned_only: bool, requested: int = 0) -> Ar
 	for item in catalog.items(profile.gender,category):
 		if (query.is_empty() or str(item.name).to_lower().contains(query.to_lower())) and (not inventory or profile.owns(item.key)):
 			rows.append(item)
-	last_page = maxi(1, ceili(rows.size() / 25.0))
+	last_page = maxi(1, ceili(rows.size() / 9.0))
 	page = clampi(requested,0,last_page-1)
-	return rows.slice(page*25,mini(rows.size(),page*25+25))
+	return rows.slice(page*9,mini(rows.size(),page*9+9))
 func select(key: String) -> bool:
 	if not catalog.compatible(key,profile.gender):
 		return false

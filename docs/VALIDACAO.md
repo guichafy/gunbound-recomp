@@ -1,5 +1,23 @@
 # Validação funcional — Gunbound Recomp 0.7.0
 
+## Avatar Shop clássico 0.14.5
+
+Abra Avatar Shop e compare com a primeira imagem: três colunas, inventário
+lateral, prévia compacta e categorias no rodapé. Cabeças/corpos devem aparecer
+inteiros e centralizados, sem distorcer. O catálogo C# tem cinco cabeças
+masculinas, não os nove chapéus da foto, e mantém seus próprios preços.
+
+Compre uma peça, clique na sua linha em Meu Avatar e observe a prévia; volte
+para batalha, feche/reabra o aplicativo e confira o mesmo conjunto. Experimentar
+uma peça não possuída permanece temporário. Troque gênero, filtre nome e abra
+Inventário: a lista lateral continua acessível e mostra apenas peças compatíveis.
+Abra Atributos, altere e cancele/ESC; o perfil permanece igual. Repita e salve
+para levar os pontos à batalha. Confirme a prévia de Mage e Bigfoot.
+
+Capturas1920×1080 e sequência120frames/60fps em docs/avatar-shop-classic.
+Validação automatizada usa perfis isolados; aprovação visual/manual ainda pendente.
+
+
 ## Piloto e tiros 0.6.2
 
 Selecione Bigfoot e Mage. Mova/vire nos dois sentidos e observe o piloto em

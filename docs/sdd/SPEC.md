@@ -228,3 +228,7 @@ REQ-10/19/20/38/39: correção solicitada0.14.4 exige anatomia HD registrada,
 movimento contínuo nas mudanças de pose e ação Vestir no Shop para itens
 possuídos, persistida após recarga e usada na batalha. Plano/critério em
 AVATAR_SMOOTH_0_14_4.md; experimentar item não possuído continua temporário.
+
+REQ-20/38/39/40: loja0.14.5 segue a primeira foto de referência: grade3×3,
+inventário lateral sempre visível e vestível, prévia/saldo compactos, categorias
+no rodapé e atributos em painel separado. Critérios em AVATAR_SHOP_CLASSIC_0_14_5.md.

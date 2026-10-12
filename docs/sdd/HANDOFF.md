@@ -1,4 +1,46 @@
-# Hand-off — Gunbound Recomp 0.14.4
+# Hand-off — Gunbound Recomp 0.14.5
+
+## Loja clássica 0.14.5 — worktree
+
+Pedido atual: loja mais fiel à primeira foto; segunda foto mostra a adaptação
+anterior5×5, três grandes painéis laterais e pouco aproveitamento da grade.
+Worktree `codex/avatar-shop-classic`, baseada na main959db5f, em
+`/Users/guichafy/.codex/worktrees/avatar-shop-classic/DemoGame`.
+REQ-20/38/39/40; ADR-064, AVATAR_SHOP_CLASSIC_0_14_5.md.
+
+- Grade3×3/nove itens por página, cards166×147 com bordas/header preservados,
+  retratos126×78 centrados em janela146×90; Cash azul e Gold amarelo com milhares.
+- Meu Avatar sempre visível, oito linhas/rolagem, ícones por categoria e marcas
+  de equipamento. Clique veste/salva pela transação Profile, sem cobrar saldo,
+  e atualiza a prévia. Busca/categoria não escondem a lista de posse.
+- Prévia mobile/conjunto e saldo compactos no topo esquerdo; quatro categorias,
+  setas e ações originais no rodapé. Atributos em painel próprio com rascunho,
+  confirmação/cancelamento, ESC, bloqueio da interface e erro visível ao falhar.
+- Rig/peças HD/animação aprovados mantidos. Não regeneramos anatomia nesta mudança
+  de layout; skill gunbound-classic-hd orientou aspecto/registro/verificação.
+  Exit/LeftArrow/RightArrow originais copiados com SHA/source relativo; demais
+  sprites/fontes e PNGs originais preservados.
+
+Validação: RED reproduziu4diferenças de paginação/grade/recorte; GREEN final
+**1758checks, zero falhas** em check.sh --quick, incluindo25Shop e25classic.
+Cobertura de cliques reais, inventário entre categorias, gênero, busca vazia,
+rollback de equipamento/atributos, cancelamento ESC e recarga/batalha. Combate
+não alterado, partidas longas não repetidas. Revisão independente sem achados
+Critical/Important; busca/caption/moldura disabled e origem de manifest ajustados.
+
+GPU em docs/avatar-shop-classic: shop/body/inventory/attributes1920×1080,
+composição4:3 com barras laterais, vídeo120frames60fps. App/ZIP0.14.5 em builds
+da worktree reexportados, assinatura estrita válida. Smoke do PCK real passou
+com inventário/cliques,13derivadosHD, recarga e conjunto completo na batalha.
+Reprodução: copiar tests/capture_avatar_shop_classic_pck.gd para /private/tmp
+antes de executar Godot --main-pack <PCK> --script <script externo>.
+Perfis isolados e removidos; nunca o perfil real.
+
+Limites: catálogo C# tem15registros e só cinco cabeças masculinas; os nove
+chapéus da primeira foto não estão nessa fonte. Não adicionamos catálogo/preços
+fictícios, bônus por peça, venda/descarte, amigos ou presentes offline. Foto
+orienta composição; C# orienta dados/mecânicas. Main não foi integrada nesta
+entrega e não houve publicação. Validação visual/manual do usuário pendente.
 
 ## Aprendizado reutilizável
 

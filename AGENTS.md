@@ -248,3 +248,14 @@ Inclui prompts, distinção Full HD1920×1080/pixels úteis dos sprites, pivôs,
 montagem Body/mobile, transições, fallback e validação. Referências específicas
 do projeto ficam separadas das técnicas gerais. Não mudar combate/perfil como
 efeito de uma tarefa apenas de arte.
+
+
+## Shop clássico 0.14.5 — layout atual
+
+Ler AVATAR_SHOP_CLASSIC_0_14_5.md/ADR-064. Primeira foto do usuário define3×3,
+nove itens/página e inventário lateral vestível sempre visível. Fonte C# mantém
+catálogo/preços15registros; não inventar chapéus ou stats da imagem. Atributos
+em modal separado, confirmar/cancelar com rollback. Cards166×147, janela146×90,
+retratos126×78 com aspecto preservado. Test test_avatar_shop_classic e captura
+capture_avatar_shop_classic em1920×1080/120frames60Hz; smoke separado do PCK.
+Worktree codex/avatar-shop-classic parte da main; sem integração/publicação.

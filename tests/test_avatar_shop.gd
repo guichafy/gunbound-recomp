@@ -25,7 +25,7 @@ func run() -> void:
 		for i in range(60):
 			rows.append({"key":"0:0:%d" % i,"gender":0,"category":0,"id":i,"name":"Item %d" % i})
 		var f = load("res://scripts/avatar_shop_model.gd").new(p,load("res://scripts/avatar_catalog.gd").new(rows))
-		check(f.filter(0,"",false,1).size() == 25 and f.last_page == 3, "25 entries per page")
+		check(f.filter(0,"",false,1).size() == 9 and f.last_page == 7, "Classic nine entries per page")
 		check(f.filter(0,"Item 59",false,2).size() == 1 and f.page == 0, "Search clamps page")
 	var view = load("res://scenes/main.tscn").instantiate()
 	view.profile = load("res://scripts/profile.gd").new("res://.tools/shop-scene.json")
@@ -37,9 +37,13 @@ func run() -> void:
 	await process_frame
 	check(view.screen == "shop" and view.shop.cards.get_child_count() == 5, "Scene shop cards")
 	var shop = view.shop
+	var first = shop.cards.get_child(0)
+	var fourth = shop.cards.get_child(3)
+	check(first.position == Vector2(260,26) and fourth.position == Vector2(260,178), "Classic three-column grid starts at top with second row below")
+	check(first.size == Vector2(166,147), "Classic card proportions")
 	for child in shop.cards.get_child(1).get_children():
-		if child is TextureRect and child.texture is AtlasTexture:
-			check(child.size == Vector2(87,45), "HD portrait remains inside original card window")
+		if child is TextureRect and child.name == "Portrait":
+			check(child.size == Vector2(126,78), "HD portrait fits inside classic white window")
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	check(shop.model.selected_key == "0:0:1", "Real card click")

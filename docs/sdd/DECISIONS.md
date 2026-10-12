@@ -371,3 +371,11 @@ Na loja, Experimentar é temporário para não possuídos; Vestir equipa e salva
 possuídos, com rollback e confirmação. Compra continua separada de equipar.
 Critérios/evidências em AVATAR_SMOOTH_0_14_4.md; main local e app assinado,
 sem publicação. Gestos/olhos do original continuam limitação do HD constante.
+
+## ADR-064 — composição clássica do Avatar Shop
+
+A foto enviada pelo usuário orienta o layout3×3, substituindo a adaptação5×5
+da ADR-059. C# continua fonte de catálogo/preços/mecânicas; contém15 registros
+e não os nove avatares da imagem. Inventário lateral equipa itens possuídos;
+atributos ficam em painel modal sem mudar regras. UI recomposta com sprites
+originais e controles; HD aprovado mantém aspecto/pivôs/rig da ADR-063.
