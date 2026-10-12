@@ -1,6 +1,8 @@
 extends RefCounted
 ## Owns the entire combat lifecycle. Presentation consumes events, never decides damage.
 
+const GoldRewards = preload("res://scripts/gold_rewards.gd")
+var shot_gold: Dictionary = {}
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
@@ -78,7 +80,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		var shield := int(Mobiles.definition(kind).shield)
 		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
 		var max_health := Attributes.health(int(VEHICLES[kind].hp), int(values[1]))
-		actors.append({"attributes":values, "vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false})
+		actors.append({"gold_state":{"gold":0,"enemy_damage":0}, "attributes":values, "vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = PLAYER
 	winner = -1
@@ -89,6 +91,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	flight_elapsed = 0.0
 	projectiles.clear()
 	events.clear()
+	shot_gold = {}
 	last_shots = [{}, {}]
 	weather = Weather.new()
 	var preset: Array = Maps.get_map(map_id).weather if not map_id.is_empty() else PROCEDURAL_WEATHER
@@ -246,6 +249,8 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
 	projectiles = projectile_parameters(active, angle, power, weapon)
+	var launch_angle: float = rad_to_deg(-projectiles[0].velocity.angle())
+	shot_gold = {"enemy_damage":0,"ally_damage":0,"enemy_kills":0,"ally_kills":0,"angle":fposmod(launch_angle,360.0),"travelled":0.0,"tornado":false,"mirror":false,"boomer":false,"backward":false,"facing":actors[active].facing,"start":actors[active].pos,"dead":[actors[0].hp<=0,actors[1].hp<=0]}
 	phase = "flight"
 	accumulator = 0.0
 	flight_elapsed = 0.0
@@ -275,6 +280,7 @@ func tick(delta: float) -> void:
 		resolve_wait -= delta
 		if resolve_wait <= 0.0:
 			settle_actors()
+			finish_gold_shot()
 			if not check_end():
 				schedule(shot_actor, float(weapon_rules(shot_actor, shot_weapon).delay) + float(VEHICLES[actors[shot_actor].vehicle].delay))
 
@@ -315,6 +321,7 @@ func advance_projectiles(delta: float) -> void:
 		resolve_wait = 0.55
 
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
+	var event_start := events.size()
 	var weapon: Dictionary = weapon_rules(shot_actor, shot_weapon)
 	var removed: int = terrain.carve(position, Attributes.crater(float(weapon.radius), Attributes.points(actors[shot_actor],6)))
 	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
@@ -325,6 +332,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		thor_strike(position)
 	if bool(projectile.get("electric", false)):
 		lightning_strike(position)
+	collect_gold_damage(event_start,position,projectile)
 
 func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, shooter: int = -1) -> int:
 	return Damage.blast(actors, events, position, radius, damage, emp, shooter)
@@ -504,3 +512,30 @@ func finish_cpu_plan(plan: Dictionary) -> Dictionary:
 	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), 15.0, 100.0)
 	plan.snapshot = null
 	return best
+
+func collect_gold_damage(event_start: int, impact: Vector2, projectile: Dictionary) -> void:
+	if shot_gold.is_empty():
+		return
+	for event in events.slice(event_start):
+		if event.type in ["damage","shield_damage"] and not event.get("emp",false):
+			var key := "ally_damage" if int(event.actor)==shot_actor else "enemy_damage"
+			shot_gold[key] += int(event.amount)
+	shot_gold.travelled = maxf(float(shot_gold.travelled),float(projectile.get("age",0)))
+	for effect in projectile.get("influenced",[]):
+		if effect in ["tornado","mirror"]:
+			shot_gold[effect] = true
+	var dx: float = impact.x-Vector2(shot_gold.start).x
+	var angle := float(shot_gold.angle)
+	var facing := int(shot_gold.facing)
+	shot_gold.boomer = bool(shot_gold.boomer) or (facing==-1 and dx<0 and angle>90) or (facing==1 and dx>0 and angle<90)
+	shot_gold.backward = bool(shot_gold.backward) or (facing==-1 and dx>0) or (facing==1 and dx<0)
+func finish_gold_shot() -> void:
+	if shot_gold.is_empty():
+		return
+	for index in range(actors.size()):
+		if not bool(shot_gold.dead[index]) and int(actors[index].hp)<=0:
+			shot_gold["ally_kills" if index==shot_actor else "enemy_kills"] += 1
+	actors[shot_actor].gold_state = GoldRewards.apply_shot(actors[shot_actor].gold_state,shot_gold,Attributes.points(actors[shot_actor],7))
+	shot_gold = {}
+func player_gold_reward() -> int:
+	return int(actors[PLAYER].gold_state.gold)+GoldRewards.result_bonus(winner==PLAYER,winner==-1)

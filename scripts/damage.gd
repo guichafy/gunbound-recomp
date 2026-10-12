@@ -24,7 +24,7 @@ static func blast(actors: Array, events: Array, position: Vector2, radius: float
 			continue
 		var distance := position.distance_to(actors[index].pos)
 		if emp > 0 and distance <= emp + 22.0 and int(actors[index].shield) > 0:
-			events.append({"type": "shield_damage", "actor": index, "amount": actors[index].shield, "position": actors[index].pos})
+			events.append({"type": "shield_damage", "actor": index, "emp":true, "amount": actors[index].shield, "position": actors[index].pos})
 			actors[index].shield = 0
 		var hit := Combat.damage_at(distance, damage, radius)
 		if shooter >= 0:

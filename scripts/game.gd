@@ -7,6 +7,7 @@ const AvatarShop = preload("res://scripts/avatar_shop.gd")
 const ShopModel = preload("res://scripts/avatar_shop_model.gd")
 var shop
 var actor_avatars: Array = []
+var gold_reward := 0
 const Profile = preload("res://scripts/profile.gd")
 const UIFactory = preload("res://scripts/ui.gd")
 const Sound = preload("res://scripts/sound.gd")
@@ -279,6 +280,7 @@ func start_match() -> void:
 	weather_art.reset(Maps.get_map(model.map_id))
 	match_id = str(Time.get_unix_time_from_system()) + ":" + str(Time.get_ticks_usec())
 	reward = 0
+	gold_reward = 0
 	result_wait = -1.0
 	angle = clampf(45.0, model.aim_limits(Match.PLAYER).x, model.aim_limits(Match.PLAYER).y)
 	power = 0.0
@@ -536,7 +538,8 @@ func consume_events() -> void:
 				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, minf(float(model.actors[event.actor].pos.y), model.terrain.world_size().y) - 80.0), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
 			"finished":
 				charging = false
-				reward = profile.award(match_id, model.winner == Match.PLAYER, model.winner == -1)
+				gold_reward = model.player_gold_reward()
+				reward = profile.award(match_id, model.winner == Match.PLAYER, model.winner == -1, gold_reward)
 				result_wait = 1.7
 				sound.play("result")
 	model.events.clear()
@@ -577,7 +580,7 @@ func current_order() -> Array:
 ## State the HUD draws from; HudArt never reads game.gd internals directly.
 func hud_state() -> Dictionary:
 	return {"power": power, "angle": hud.hud_angle(model, angle, weapon),
-		"movement": model.movement_left / maxf(1.0, model.movement_budget()), "gold": reward, "queue": queue_entries,
+		"movement": model.movement_left / maxf(1.0, model.movement_budget()), "gold": maxi(0,int(model.actors[Match.PLAYER].gold_state.gold)), "queue": queue_entries,
 		"player_name": profile.nickname, "weapon": weapon, "aim": angle, "paused_cpu": false}
 
 func _unhandled_key_input(event: InputEvent) -> void:

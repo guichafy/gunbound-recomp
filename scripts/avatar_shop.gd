@@ -29,10 +29,13 @@ var left_button
 var right_button
 var search: LineEdit
 var elapsed := 0.0
+var texture_cache: Dictionary = {}
 var animated: Array = []
 var tab_buttons: Array = []
 func texture(path: String):
-	return load(Assets + path + ".png")
+	if not texture_cache.has(path):
+		texture_cache[path] = load(Assets + path + ".png")
+	return texture_cache[path]
 func atlas(path: String, cell: Vector2, frame: int) -> AtlasTexture:
 	var result := AtlasTexture.new()
 	result.atlas = texture(path)
@@ -57,8 +60,19 @@ func button(parent: Node, text: String, pos: Vector2, size: Vector2, action: Cal
 	node.position = pos
 	node.size = size
 	node.add_theme_font_size_override("font_size",11)
+	for state in ["normal","hover","pressed","disabled","focus"]:
+		var style := StyleBoxFlat.new()
+		style.bg_color = Color("344971") if state=="normal" else (Color("21304b") if state=="disabled" else Color("587baa"))
+		style.border_color = Color("a5bde1")
+		style.set_border_width_all(1)
+		style.content_margin_left = 0
+		style.content_margin_right = 0
+		style.content_margin_top = 0
+		style.content_margin_bottom = 0
+		node.add_theme_stylebox_override(state,style)
 	node.pressed.connect(action)
 	parent.add_child(node)
+	node.size = size
 	return node
 func sprite_button(parent: Node, path: String, cell: Vector2, pos: Vector2, action: Callable, normal: int = 0, hover: int = 1, pressed: int = 2, disabled: int = -1) -> TextureButton:
 	var node := TextureButton.new()
@@ -72,7 +86,7 @@ func sprite_button(parent: Node, path: String, cell: Vector2, pos: Vector2, acti
 	return node
 func animated_button(path: String, cell: Vector2, pos: Vector2, text: String, action: Callable, normal: int, hover_end: int, click_start: int, click_end: int, disabled: int, active: int = -1):
 	var node = sprite_button(content,"AnimatedButtons/AvatarShop/"+path,cell,pos,action,normal,0,click_start,disabled)
-	label(node,text,Vector2(-5,cell.y-3),Vector2(cell.x+10,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label(node,text,Vector2(-5,cell.y-12),Vector2(cell.x+10,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	animated.append({"node":node,"path":"AnimatedButtons/AvatarShop/"+path,"cell":cell,"normal":normal,"hover_end":hover_end,"click_start":click_start,"click_end":click_end,"disabled":disabled,"active":active,"selected":false,"age":0.0,"state":0})
 	return node
 func setup(owner, shop_model) -> void:
@@ -116,7 +130,7 @@ func setup(owner, shop_model) -> void:
 	var attr_names := ["Ataque","Vida","Defesa","Regen.","Atraso tiro","Atraso item","Cratera","Gold %"]
 	for i in range(8):
 		var pos := Vector2(10+(i%2)*107,75+int(i/2)*17)
-		label(content,attr_names[i],pos,Vector2(61,17),9)
+		label(content,attr_names[i],pos,Vector2(57,17),8)
 		remove_buttons.append(button(content,"−",pos+Vector2(58,0),Vector2(15,17),func(): adjust(i,-1)))
 		attribute_labels.append(label(content,"0",pos+Vector2(75,0),Vector2(18,17),10))
 		add_buttons.append(button(content,"+",pos+Vector2(92,0),Vector2(15,17),func(): adjust(i,1)))
@@ -192,7 +206,17 @@ func refresh(category: int, page: int) -> void:
 			marker = "● "
 		elif model.profile.owns(item.key):
 			marker = "✓ "
-		label(card,marker+str(int(item.gold_price))+" G / "+str(int(item.cash_price))+" C",Vector2(4,63),Vector2(101,16),9)
+		label(card,str(int(item.gold_price))+" G",Vector2(22,59),Vector2(78,11),8).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		label(card,str(int(item.cash_price))+" C",Vector2(22,70),Vector2(78,11),8).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		if not marker.is_empty():
+			var mark := TextureRect.new()
+			mark.texture = texture("StaticButtons/AvatarShop/AvatarButton/EquipedIndicator" if marker=="● " else "StaticButtons/AvatarShop/AvatarButton/OwnedCheck")
+			mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			mark.position = Vector2(1,32) if marker=="● " else Vector2(86,18)
+			mark.size = Vector2(12,17)
+			mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			card.add_child(mark)
 		if model.selected_key == item.key:
 			card.texture_normal = atlas("StaticButtons/AvatarShop/AvatarButton/Background",Vector2(105,83),2)
 	balance_label.text = "Gold: %d\nCash: %d" % [model.profile.gold,model.profile.cash]
@@ -300,7 +324,7 @@ func paint(view: Node2D) -> void:
 		var set_data: Dictionary = model.profile.equipped_set() if model.inventory else model.preview
 		art.draw(view,set_data,Transform2D(0,Vector2(-1.7,1.7),0,Vector2(120,269)),elapsed,Color.WHITE)
 		var sprite = host.sprite_for(host.vehicle)
-		sprite.draw(view,Vector2(117,422),115,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
+		sprite.draw(view,Vector2(117,436),92,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
 
 func block_controls(node: Node) -> void:
 	if node is BaseButton:
