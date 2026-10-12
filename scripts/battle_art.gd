@@ -84,6 +84,33 @@ func atlas_frame(model, index: int, ctx: Dictionary) -> int:
 	var weapon := selected_weapon(model, index, ctx)
 	return ctx.atlas.frame_index(state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)), float(state.pose_age), weapon, actor.hp <= actor.max_hp * 0.3)
 
+func presentation(index: int, rig, clock: float, weapon: int) -> Dictionary:
+	# A separate history per actor; interrupted transitions start at the last
+	# displayed geometry, not at an unrelated frame of the previous pose.
+	var state: Dictionary = motion[index]
+	var target: Dictionary = rig.sample(state.pose,float(state.pose_age),weapon,clock)
+	var visual: Dictionary = state.get("visual",{})
+	if visual.is_empty():
+		visual = {"pose":state.pose,"age":state.pose_age,"weapon":weapon,"started":clock-0.14,"from":target.duplicate(true),"current":target}
+		state.visual = visual
+	elif visual.pose != state.pose or visual.weapon != weapon or float(state.pose_age) < float(visual.age):
+		visual.from = visual.current.duplicate(true)
+		visual.started = clock
+		visual.pose = state.pose
+		visual.weapon = weapon
+	visual.age = state.pose_age
+	var weight := smoothstep(0.0,0.14,maxf(0.0,clock-float(visual.started)))
+	if weight >= 1.0:
+		visual.current = target
+		return target
+	var result := target.duplicate(true)
+	for field in ["body_offset","pilot_anchor"]:
+		result[field] = Vector2(visual.from[field]).lerp(target[field],weight)
+	for field in ["body_angle","barrel_angle","pilot_angle"]:
+		result[field] = lerp_angle(float(visual.from[field]),float(target[field]),weight)
+	visual.current = result
+	return result
+
 func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionary) -> void:
 	var actor: Dictionary = model.actors[index]
 	var state: Dictionary = motion[index]
@@ -105,7 +132,9 @@ func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionar
 	var weapon: int = int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
 	if state.pose == "recoil":
 		weapon = int(model.last_shots[index].get("weapon", 0))
-	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase, ctx.get("avatar_context",{}))
+	var avatar_context: Dictionary = ctx.get("avatar_context",{}).duplicate()
+	avatar_context.rig_state = presentation(index,atlas.hd_rig,time,weapon)
+	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase, avatar_context)
 
 func draw_explosion(view: Node2D, effect: Dictionary) -> void:
 	var age: float = effect.age

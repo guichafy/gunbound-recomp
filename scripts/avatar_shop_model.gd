@@ -34,11 +34,15 @@ func select(key: String) -> bool:
 		return false
 	selected_key = key
 	if inventory:
-		return profile.equip(key)
+		if not profile.equip(key):
+			return false
+		preview = profile.equipped_set()
 	return true
 func try_selected() -> bool:
 	var item: Dictionary = catalog.find(selected_key)
 	if inventory or item.is_empty():
+		return false
+	if profile.owns(selected_key) and not profile.equip(selected_key):
 		return false
 	preview[str(int(item.category))] = selected_key
 	return true

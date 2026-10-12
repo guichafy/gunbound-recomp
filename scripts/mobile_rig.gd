@@ -27,7 +27,7 @@ func available() -> bool:
 		if not sheet.region(row, column).has_area():
 			return false
 	return pilot.region(0, 0).has_area()
-func sample(pose: String, age: float, weapon: int) -> Dictionary:
+func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Dictionary:
 	age = maxf(0.0, age)
 	pose = "using" if pose == "using_item" else pose.get_slice("_", 0)
 	var offset := Vector2.ZERO
@@ -71,7 +71,8 @@ func sample(pose: String, age: float, weapon: int) -> Dictionary:
 	var pilot_size := Vector2(pilot_height * region.size.x / maxf(region.size.y, 1.0), pilot_height)
 	var pilot_rect := Rect2(-pilot_size * Vector2(0.78, 0.88), pilot_size)
 	var pilot_sway := Vector2.ZERO
-	var pilot_angle := sin(age * TAU * 1.5) * 0.014
+	# Breathing follows an uninterrupted clock, independent of pose restarts.
+	var pilot_angle := sin((age if idle_age < 0.0 else idle_age) * TAU * 1.5) * 0.014
 	var seat := Vector2(17, -20) if kind == "bigfoot" else Vector2(18, -28)
 	var body_size := Vector2(60, 24) if kind == "bigfoot" else Vector2(60, 36)
 	return {"body_size": body_size,
@@ -91,7 +92,9 @@ func piece(view: Node2D, atlas, row: int, column: int, transform: Transform2D, t
 func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> bool:
 	if not available():
 		return false
-	var state := sample(pose, age, weapon)
+	var state: Dictionary = avatar_context.get("rig_state",{})
+	if state.is_empty():
+		state = sample(pose,age,weapon,float(avatar_context.get("age",age)))
 	var scale := width / 60.0
 	var ground := 24.0 if width < 150.0 else width * 0.23
 	var basis := Transform2D(Vector2(-facing * scale, 0), Vector2(0, scale), Vector2.ZERO)

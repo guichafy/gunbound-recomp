@@ -18,6 +18,10 @@ func run() -> void:
 			var first: Dictionary = hd.piece(key,0)
 			check(not first.is_empty() and first.source.has_area(), "Valid HD source "+key)
 			check(first.source.size.x >= first.native.size.x*4 and first.source.size.y >= first.native.size.y*4, "At least4x native pixel density "+key)
+			var registered := true
+			for frame in range(22):
+				registered = registered and hd.piece(key,frame).native == first.native
+			check(registered, "Fixed HD anatomy never jumps between source silhouette bounds "+key)
 			for frame in [0,10,11,21]:
 				var region: Dictionary = hd.piece(key,frame)
 				check(is_equal_approx(region.source.size.x/region.source.size.y,region.native.size.x/region.native.size.y), "HD piece preserves intrinsic aspect")

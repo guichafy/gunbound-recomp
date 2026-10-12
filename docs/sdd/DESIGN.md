@@ -359,7 +359,8 @@ oculta pernas/corpo inferior; sem contexto, o piloto legado mantém seu draw.
 
 AvatarHD0.14.2: catálogo independente de recortes transparentes e janela/pivô
 nativos. Cada imagem é contida com aspecto original, preservando a posição
-normalizada do pivô; offsets por quadro deslocam o mesmo sprite fixo. AvatarArt
+normalizada do pivô; offsets por quadro deslocavam o mesmo sprite fixo (essa
+parte foi substituída pela continuidade0.14.4/ADR-063 abaixo). AvatarArt
 consulta HD antes da textura original; ausência/invalidez retorna ao original
 por peça. Retratos usam AtlasTexture da mesma região, dimensionados só depois
 do expand_mode para impedir minimum-size de texturas grandes na UI.
@@ -372,3 +373,19 @@ Damage.blast acrescenta shooter depois de attack para manter chamadas anteriores
 No projétil primário, fator(1+(Attack+bonus−Defense)/100); erosão usa Dig+bonus.
 Items.delay(id,reduction=0) reduz/trunca custo original antes÷7,5. Arm/previsão
 usam shot_shells para todas as salvas; Shadow Gold nunca escreve no perfil.
+## Continuidade e equipamento0.14.4
+
+REQ-10/19/20/38/39, ADR-063. AvatarHD mantém o recorte de referência no pivô
+nativo e não usa variação dos centros das silhuetas para animar peças HD.
+AvatarArt conserva relógio de quadros para fallback original; peças HD formam
+um grupo rígido. MobileRig recebe relógio absoluto do avatar para respiração.
+BattleArt.presentation guarda estado anterior/atual por ator e mistura só
+geometria visual durante0,14s; interrupção começa no estado exibido. MobileRig
+recebe esse retrato por avatar_context.rig_state. Modelo/CPU não o consultam.
+
+AvatarShopModel.try_selected experimenta não possuídos e equipa possuídos via
+Profile.equip (persistência/rollback existentes). UI troca Experimentar por
+Vestir/Vestido segundo posse e prévia. A compra não equipa automaticamente.
+Transição entre abas restaura a prévia do conjunto persistido. Game.start_match
+continua copiando Profile.equipped_set para actor_avatars; recarga e restart
+com as quatro categorias estão cobertos em test_avatar_continuity.

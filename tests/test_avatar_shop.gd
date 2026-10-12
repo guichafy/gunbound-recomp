@@ -54,11 +54,26 @@ func run() -> void:
 		click(shop.modal.get_node("GoldPurchase").get_global_rect().get_center())
 		await process_frame
 		check(view.profile.gold == 900 and view.profile.owns("0:0:1"), "Real Gold button")
+	click(shop.try_button.get_global_rect().get_center())
+	await process_frame
+	check(view.profile.equipped_set()["0"] == "0:0:1", "Owned Shop item can be dressed after temporary try and purchase")
+	var reloaded = load("res://scripts/profile.gd").new("res://.tools/shop-scene.json")
+	reloaded.load_profile()
+	check(reloaded.equipped_set()["0"] == "0:0:1", "Shop dress survives profile reload")
 	shop.switch_tab(true)
 	await process_frame
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	check(view.profile.equipped_set()["0"] == "0:0:1", "Real inventory equip")
+	shop.switch_tab(false)
+	shop.model.select("0:0:2")
+	shop.model.try_selected()
+	shop.model.select("0:0:1")
+	shop.refresh(0,0)
+	check(not shop.try_button.disabled and shop.try_caption.text == "Vestir", "Can restore dressed item over temporary unowned preview")
+	click(shop.try_button.get_global_rect().get_center())
+	await process_frame
+	check(shop.model.preview["0"] == "0:0:1" and shop.try_caption.text == "Vestido", "Dress clears temporary preview and confirms saved state")
 	shop.model.draft_attributes = [1,0,0,0,0,0,0,0]
 	view.show_menu()
 	view.start_match()

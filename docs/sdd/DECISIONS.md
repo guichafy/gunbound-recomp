@@ -360,3 +360,14 @@ os mesmos shell builders e dados copiados; dano climático anexado ao Teleport
 entra na contabilidade de Gold. Substitui o limite ItemDelay sem uso real de
 ADR-059/061. Suite combinada1584+10partidas e revisão independente sem bugs
 importantes. Integração local, sem publicação; worktree isolado preservado.
+ADR-063 — correção0.14.4 a pedido do usuário. O centro do bbox da silhueta de
+cada quadro não representa o pivô de uma peça constante HD: gerava saltos
+independentes de até16px. Registrar todas as peças na caixa de referência e
+animar o conjunto em transform contínuo substitui os deslocamentos por quadro
+da ADR-061. Metadados originais permanecem preservados para fallback/diagnóstico.
+Relógio do piloto independente do pose_age; histórico visual por ator mistura
+geometria por0,14s, incluindo interrupções. Física/tempo real das ações iguais.
+Na loja, Experimentar é temporário para não possuídos; Vestir equipa e salva
+possuídos, com rollback e confirmação. Compra continua separada de equipar.
+Critérios/evidências em AVATAR_SMOOTH_0_14_4.md; main local e app assinado,
+sem publicação. Gestos/olhos do original continuam limitação do HD constante.

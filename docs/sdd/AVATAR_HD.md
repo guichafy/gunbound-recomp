@@ -42,3 +42,12 @@ conferem encaixe e estilo. App0.14.2 exportado após as alterações.
 Resultado final:139checks HD,1454checks no harness quick, zero falhas;
 GPU de6famílias, inventory/poses e comparação original/HD conferidas. App0.14.2
 com assinatura estrita válida e smoke do PCK PASS (avatar2313pixels); ZIP101MB.
+
+## Correção de continuidade0.14.4
+
+ADR-063 substitui os deslocamentos de silhueta descritos acima: o registro HD
+agora é constante nos22quadros. Animar centros de bbox movia cabeça/corpo
+independentemente. O conjunto respira por transform contínuo, e mudanças de
+pose do mobile são interpoladas por ator. Metadados originais/fallback e PNGs
+permanecem preservados. Ver AVATAR_SMOOTH_0_14_4.md e vídeo GPU em
+`docs/avatar-motion/motion.mp4`; o HD continua sem reanimar olhos/gestos nativos.

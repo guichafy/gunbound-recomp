@@ -65,7 +65,8 @@ func piece(key: String, frame: int) -> Dictionary:
 	for number in offset:
 		if not (number is int or number is float) or not is_finite(float(number)):
 			return {}
-	native.position += Vector2(float(offset[0]),float(offset[1]))
+	# Silhouette centers vary with eyes, hair and cloth; they are not joints.
+	# The fixed HD image keeps its reference registration through all frames.
 	return {"texture":texture,"paint":paints[path],"source":source,"native":native}
 func portrait(key: String):
 	var data := piece(key,11 if int(key.get_slice(":",1))!=1 else 0)

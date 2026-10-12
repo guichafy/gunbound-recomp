@@ -23,6 +23,7 @@ var attribute_labels: Array = []
 var add_buttons: Array = []
 var remove_buttons: Array = []
 var try_button
+var try_caption: Label
 var buy_button
 var page_label: Label
 var left_button
@@ -151,12 +152,14 @@ func setup(owner, shop_model) -> void:
 	page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	right_button = button(content,"▶",Vector2(549,535),Vector2(30,27),func(): refresh(model.category,model.page+1))
 	try_button = animated_button("Try",Vector2(64,72),Vector2(614,524),"Experimentar",try_selected,13,43,45,70,71)
+	try_caption = try_button.get_child(0)
 	buy_button = animated_button("Buy",Vector2(64,73),Vector2(679,524),"Comprar",open_buy,0,23,26,45,46)
 	label(content,"Presente / recarga indisponíveis",Vector2(250,574),Vector2(300,18),10)
 	status_label = label(content,"Saldo de teste · sem dinheiro real",Vector2(12,514),Vector2(400,18),11)
 	refresh(0,0)
 func switch_tab(inventory: bool) -> void:
 	model.inventory = inventory
+	model.preview = model.profile.equipped_set()
 	model.selected_key = ""
 	refresh(model.category,0)
 func adjust(index: int, delta: int) -> void:
@@ -230,7 +233,10 @@ func refresh(category: int, page: int) -> void:
 	left_button.disabled = model.page == 0
 	right_button.disabled = model.page+1 >= model.last_page
 	var item: Dictionary = model.catalog.find(model.selected_key)
-	try_button.disabled = model.inventory or item.is_empty() or model.preview.get(str(category)) == model.selected_key
+	var owned: bool = not item.is_empty() and model.profile.owns(model.selected_key)
+	var dressed: bool = owned and model.profile.equipped_set().get(str(category)) == model.selected_key and model.preview.get(str(category)) == model.selected_key
+	try_caption.text = ("Vestido" if dressed else "Vestir") if owned else "Experimentar"
+	try_button.disabled = model.inventory or item.is_empty() or (dressed if owned else model.preview.get(str(category)) == model.selected_key)
 	buy_button.disabled = model.inventory or item.is_empty() or model.profile.owns(model.selected_key) or not can_buy(item)
 	for i in range(4):
 		animated[i].selected = i == category
@@ -241,7 +247,10 @@ func refresh(category: int, page: int) -> void:
 func can_buy(item: Dictionary) -> bool:
 	return (int(item.get("gold_price",0))>0 and model.profile.gold>=int(item.gold_price)) or (int(item.get("cash_price",0))>0 and model.profile.cash>=int(item.cash_price))
 func try_selected() -> void:
-	model.try_selected()
+	if model.try_selected():
+		status_label.text = "Avatar vestido e salvo" if model.profile.owns(model.selected_key) else "Prévia temporária · compre para vestir"
+	else:
+		status_label.text = "Não foi possível salvar o avatar"
 	refresh(model.category,model.page)
 func open_buy() -> void:
 	if is_instance_valid(modal) or buy_button.disabled:
@@ -329,7 +338,8 @@ func paint(view: Node2D) -> void:
 	view.draw_texture(texture("InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2"),Vector2(8,312))
 	var art = avatar_art
 	var set_data: Dictionary = model.profile.equipped_set() if model.inventory else model.preview
-	art.draw(view,set_data,Transform2D(0,Vector2(-1.7,1.7),0,Vector2(120,269)),elapsed,Color.WHITE)
+	# The assembled figure breathes around the Body pivot as one rigid group.
+	art.draw(view,set_data,Transform2D(0,Vector2(-1.7,1.7),0,Vector2(120,269))*Transform2D(sin(elapsed*TAU*1.5)*0.014,Vector2.ZERO),elapsed,Color.WHITE)
 	var sprite = host.sprite_for(host.vehicle)
 	sprite.draw(view,Vector2(117,436),92,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
 

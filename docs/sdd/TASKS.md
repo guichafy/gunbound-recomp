@@ -1,5 +1,14 @@
 # Entregas e próximos trabalhos
 
+## Avatar contínuo e Vestir0.14.4 (ADR-063)
+
+- [x] Reproduzir saltos de registro e ação de vestir ausente no Shop.
+- [x] Registro HD constante; respiração conjunta e transições por ator.
+- [x] Vestir possuído transacional, prévia temporária e recarga/batalha com4slots.
+- [x] 1731checks+10partidas, revisão independente sem achados, GPU360frames.
+- [x] App/ZIP0.14.4 assinados; smoke GPU do PCK com equipamento persistido.
+- [ ] Usuário validar suavidade e fluxo Vestir no aplicativo atualizado.
+
 ## Integração à main0.14.3 (ADR-062)
 
 - [x] Preservar entregas itens0.13 e Shop/HD0.14.2, resolvendo conflitos.

@@ -223,3 +223,8 @@ e originais preservados, fallback por peça; detalhes/adaptação em AVATAR_HD.m
 REQ-35/40/41: integração à main0.14.3 resolve ItemDelay pendente e compõe os
 modificadores de atributos com Power Up/Blood/Bunge sem multiplicação dupla.
 Critérios/evidências em INTEGRATION_MAIN_0_14_3.md e HANDOFF.md.
+
+REQ-10/19/20/38/39: correção solicitada0.14.4 exige anatomia HD registrada,
+movimento contínuo nas mudanças de pose e ação Vestir no Shop para itens
+possuídos, persistida após recarga e usada na batalha. Plano/critério em
+AVATAR_SMOOTH_0_14_4.md; experimentar item não possuído continua temporário.

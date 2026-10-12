@@ -1,4 +1,37 @@
-# Hand-off — Gunbound Recomp 0.14.3
+# Hand-off — Gunbound Recomp 0.14.4
+
+## Animação contínua e Vestir no Shop 0.14.4
+
+Relato do usuário: avatar/personagem parecem imagens diferentes alternadas;
+vestir no Shop deve persistir para batalha. REQ-10/19/20/38/39, ADR-063,
+AVATAR_SMOOTH_0_14_4.md. Correção local na main após a integração anterior.
+
+- Peças HD conservam registro/anatomia/aspecto: centros variáveis da silhueta
+  original não deslocam mais cabeça/corpo/acessórios a cada0,1s. Avatar respira
+  como conjunto no Shop; no mobile acompanha o corpo e o relógio contínuo.
+- BattleArt mantém histórico visual por ator e interpola mudanças/interrupções
+  de pose em0,14s. Repetir recuo também reinicia a partir da geometria exibida.
+  Pausa congela a interpolação; física, colisões e duração das ações preservadas.
+- Experimentar mantém item não possuído na prévia temporária. Após comprar,
+  Vestir salva o item e confirma “Avatar vestido e salvo”. Também restaura o
+  item vestido sobre uma prévia temporária. Inventário continua equipando ao
+  selecionar; falha de escrita reverte equipamento/prévia.
+
+Validação: RED reproduziu13registros instáveis e2falhas do fluxo Vestir;
+continuidade inicialmente ausente também reproduzida. GREEN: **1731checks e
+10partidas completas sem falhas** (42,1s partidas), incluindo130checks de
+continuidade/equipamento,23Shop,152HD. Testes usam apenas perfis isolados.
+Revisão independente sem achados. Captura GPU360frames/60fps em
+docs/avatar-motion/motion.mp4 inclui Mage/Bigfoot, sentidos, três conjuntos,
+idle/movimento/carga/recuo/dano e retorno ao idle.
+
+App/ZIP0.14.4 reexportados em builds, assinatura estrita válida. Smoke GPU do
+PCK passou: quatro peças vestidas pela ação do Shop, recarga de perfil,
+batalha com conjunto persistido, interpolação real e13peças HD registradas.
+Imagem do Shop em docs/avatar-motion/shop-vestido.png. Fonte C#, arte original
+e perfil real não modificados; sem publicação. Validação visual do usuário
+ainda pendente. HD preserva peças constantes; gestos/olhos originais não
+foram reanimados, fallback nativo mantém o flipbook original.
 
 ## Integração à main 0.14.3
 
