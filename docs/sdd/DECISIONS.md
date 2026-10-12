@@ -298,14 +298,20 @@ como extra; carga padrão Dual, Teleport, Power Up, Energy Up 1 gravada com as
 opções. CPU não usa itens neste corte (seeds 81–90 preservadas). Arte nova em
 HD por GPT Images (Codex), originais preservados com fallback.
 
-## Shop de avatar — revisão pendente
+## Shop de avatar — especificação aprovada
 
 ADR-059 — decisões confirmadas pelo usuário: portar cabeça/corpo/óculos/
 bandeira do Shop C# em worktree da main, usar Gold/Cash com saldo inicial de
 teste sem dinheiro real e incluir distribuição dos oito atributos com efeitos
 no combate. Proposta AVATAR_SHOP.md (REQ-38..41). A troca do servidor pelo
-perfil local é compatível com o treino offline vigente. Ainda em revisão:
+perfil local é compatível com o treino offline vigente. Aprovado pelo usuário em 2026-10-12:
 1.000 por moeda, orçamento min((nível local−1)×10,180), gênero/equipamento
 separados e preview nos mobiles existentes. Ranking permanece retirado;
 ItemDelay requer integração do trabalho de itens fora deste worktree.
 Nenhuma regra nova implementada nesta preparação.
+
+Auditoria para o plano: Gold do resultado 1×1 usa as constantes de XP4/1
+no fluxo C# apesar das constantes Gold10/5; Popularity multiplica o acumulado
+após cada tiro; branch2000 repete condição1000 e é inalcançável. O plano
+reproduz os caminhos executados, documentando essas peculiaridades. Empate
+mantém XP local e propõe Gold de resultado0 no fluxo existente do protótipo.

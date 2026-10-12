@@ -1,6 +1,6 @@
-# Shop de avatar — proposta de especificação
+# Shop de avatar — especificação aprovada
 
-Data: 2026-10-12. Estado: **proposta para revisão; código não implementado**.
+Data: 2026-10-12. Estado: **especificação aprovada pelo usuário; código não implementado**.
 Branch: `codex/avatar-shop`, worktree criado do commit de `main` disponível
 no início desta sessão. Alterações não commitadas da pasta principal não foram
 copiadas. A especificação de itens 0.13 já está no baseline; o código de itens
@@ -204,5 +204,5 @@ só pode ser declarado validado após a integração do código de itens em bran
 
 Worktree importado no Godot e baseline completo executado: **1114 checks +
 10 partidas, zero falhas** (partidas em ~41 s). Ainda não existem Shop nem
-modificadores implementados. Próximo passo: revisar esta proposta, fechar as
-adaptações de saldo/orçamento e preparar o plano de implementação.
+modificadores implementados. Usuário aprovou a especificação, saldo e orçamento
+em 2026-10-12. Plano em AVATAR_SHOP_PLAN.md, aguardando revisão para execução.

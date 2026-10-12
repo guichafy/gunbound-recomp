@@ -8,9 +8,10 @@ de oito atributos com efeitos. Catálogo C# auditado: 15 registros nas quatro
 categorias, atlas/retratos disponíveis. Importação e baseline completo: 1114
 checks + 10 partidas, zero falhas (~41 s nas partidas). Sem Shop implementado,
 sem imagens geradas, sem export. Alterações não commitadas de itens da pasta
-principal não foram copiadas. ItemDelay depende dessa integração. Próximo passo:
-revisão da proposta e plano de implementação; saldo 1.000 por moeda e orçamento
-pelo nível local ainda são adaptações propostas.
+principal não foram copiadas. ItemDelay depende dessa integração. Usuário
+aprovou a especificação, saldo 1.000 por moeda e orçamento pelo nível local em
+2026-10-12. AVATAR_SHOP_PLAN.md preparado; próximo passo: revisão do plano e
+escolha de execução. Nenhum código de produto alterado.
 
 ## Reorganização SOLID (mesma versão, sem export)
 
