@@ -9,13 +9,14 @@ medições em PERF_LIMITS_0_11.md.
 
 - **Travamento corrigido (REQ-32).** Causa medida: `choose_cpu_shot` avaliava
   a grade de mira inteira (105–168 previsões no laço de voo) num único frame
-  no início do turno da CPU, 90–314 ms. Agora `begin_cpu_plan` (thread
+  no início do turno da CPU (90–484 ms conforme o mobile da CPU). Agora `begin_cpu_plan` (thread
   principal: vira, sorteia arma, retrato da máscara/atores/vento/clima),
   `search_cpu_plan` (WorkerThreadPool, só lê o retrato) e `finish_cpu_plan`
   (thread principal: erros de mira). Mesmo plano e mesma ordem de RNG; seeds
-  81–90 com os mesmos tiros. Medido a 60 FPS no app com Metal: frames do turno
-  da CPU com máximo 18 ms (antes 160–185 ms) e disparo em 1,83–1,87 s (antes
-  1,88–1,90 s). O fatiamento em frames foi testado e descartado (disparo em
+  81–90 com os mesmos tiros. Medido a 60 FPS no app com Metal (M4 Pro): pior
+  frame do turno da CPU 17,8 ms; antes 160–185 ms com CPU Mage e
+  **336–484 ms com CPU Bigfoot** (salvas). Disparo da CPU em 1,83–1,87 s nos
+  dois casos (antes 1,88–2,20 s, atrasado pela própria trava). O fatiamento em frames foi testado e descartado (disparo em
   ~3,3 s). Recomeçar/menu/troca de turno/sair esperam a thread e descartam.
 - **BGM (REQ-33).** 12 temas originais `LevelScene/Theme*` em
   assets/openbound/music (SHA no manifest, ~17 MB): faixa aleatória ao iniciar
@@ -31,8 +32,8 @@ medições em PERF_LIMITS_0_11.md.
   implementação no OpenBound; cursor do sistema), Interface só tem a skin
   Blue no pacote, Consolas é proprietária e fora do pacote.
 
-Validação: `./scripts/check.sh` — **1083 checks + 10 partidas, zero falhas**
-(nova suíte test_performance 14: plano direto = em passos = em thread,
+Validação: `./scripts/check.sh` — **1088 checks + 10 partidas, zero falhas**
+(nova suíte test_performance 19, CPU Mage e CPU Bigfoot com T1/T2/SS: plano direto = em passos = em thread,
 retrato isolado, nenhum frame roda a busca, CPU dispara, descarte seguro;
 test_hud 140: HD/fallback do popup, BGM). App/ZIP **0.11.0 reexportados**
 (`build_macos.py`), assinatura estrita válida, ZIP ~102 MB (antes ~80 MB, pela

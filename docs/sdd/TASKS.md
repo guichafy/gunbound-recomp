@@ -8,7 +8,8 @@
       60 FPS sem picos no turno da CPU; disparo em ~1,85 s como antes.
 - [x] Popup HD por GPT Images (Codex), fallback e captura lado a lado.
 - [x] BGM com os 12 temas originais, slider ativo e gravado.
-- [x] check.sh 1083 checks + 10 partidas; app/ZIP 0.11.0 reexportados e assinados.
+- [x] check.sh 1088 checks + 10 partidas; app/ZIP 0.11.0 reexportados e assinados.
+- [x] Medido nos dois cenários: CPU Bigfoot travava 336–484 ms, agora ≤ 18 ms.
 - [ ] Usuário validar no app (troca de turno, música, popup HD).
 - [ ] Fora do escopo/limite: Aiming Mode, Mouse Speed, skins além da Blue,
       fonte Consolas; pico de carga no primeiro frame da partida.
