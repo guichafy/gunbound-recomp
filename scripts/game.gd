@@ -37,6 +37,7 @@ var profile = null
 var options
 var options_popup: Control
 var items_popup: Control
+var items_button: Button
 var sound = null
 var screen := "menu"
 var root: Control
@@ -233,7 +234,7 @@ func show_menu() -> void:
 		weather_button.text = weather_label()
 	)
 	# PopupSelectItem (REQ-36): the six equipped slots used in every match.
-	var items_button := ui.button(card, "Itens (%d/6)" % Items.used_slots(options.items), Vector2(276, 438), Vector2(116, 34), show_items)
+	items_button = ui.button(card, items_label(), Vector2(276, 438), Vector2(116, 34), show_items)
 	items_button.add_theme_font_size_override("font_size", 14)
 	items_button.tooltip_text = "Escolher os itens da barra F1–F6 (Select Item)"
 	ui.button(card, "INICIAR TREINO    →", Vector2(28, 484), Vector2(364, 52), start_match, true)
@@ -661,12 +662,16 @@ func accept_options() -> void:
 func show_items() -> void:
 	overlays.show_items(self)
 
+func items_label() -> String:
+	return "Itens (%d/6)" % Items.used_slots(options.items)
+
+## Closing the popup keeps the menu (and the nickname being typed) in place.
 func accept_items() -> void:
 	options.items = Items.sanitize(options.items)
 	options.save_options()
 	close_overlay()
-	if screen == "menu":
-		show_menu()
+	if is_instance_valid(items_button):
+		items_button.text = items_label()
 
 func show_pause() -> void:
 	overlays.show_pause(self)

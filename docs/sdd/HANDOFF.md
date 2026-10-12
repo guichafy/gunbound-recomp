@@ -22,7 +22,7 @@ Full HD pelo Codex com GPT Images. REQ-35..37, ADR-058, plano ITEMS_0_13.md.
   `scripts/build_items_hd.py` + Codex (5 folhas). Teleport2 é o Teleport1
   invertido (pixel a pixel), então as chamas usam 8 quadros-chave HD.
 
-Validação: `./scripts/check.sh` — **1202 checks + 10 partidas, zero falhas**.
+Validação: `./scripts/check.sh` — **1205 checks + 10 partidas, zero falhas**.
 Capturas GPU em docs/items. App/ZIP **0.13.0 reexportados**, assinatura
 estrita válida. Commits locais por fase, sem push.
 Limites: CPU não usa itens; sem teste manual de mouse/áudio no app; queda após

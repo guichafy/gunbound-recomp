@@ -31,6 +31,7 @@ func run() -> void:
 	check(scene.options.items == Items.DEFAULT_LOADOUT, "Without a saved file the loadout is Dual, Teleport, Power Up, Energy Up 1")
 
 	# PopupSelectItem: tabs, add within 6 slots, remove, Accept saves.
+	scene.nickname_input.text = "Novo Piloto"
 	scene.show_items()
 	var popup = scene.items_popup
 	check(popup != null and scene.overlay_kind == "items" and popup.grid_buttons.size() == 6, "Items opens Select Item on the 2-slot tab (six items)")
@@ -53,6 +54,7 @@ func run() -> void:
 	var reloaded = Options.new(options_path)
 	reloaded.load_options()
 	check(scene.overlay == null and reloaded.items == ["teleport", "power_up", "energy_up_1", "change_wind", "blood"], "Accept closes and saves the loadout next to the profile")
+	check(scene.nickname_input.text == "Novo Piloto" and scene.items_button.text == "Itens (6/6)", "Closing the popup keeps the typed nickname and updates the slot count")
 
 	# Battle: the bar follows the loadout and EquippedButtonBar spacing.
 	scene.options.items = ["dual", "teleport", "power_up", "energy_up_1"]
@@ -141,6 +143,13 @@ func run() -> void:
 	check(teleported, "The beacon teleports the player")
 	scene.item_art.tick(1.0)
 	check(scene.item_art.flames.is_empty(), "Flames last 19 frames at 30 fps")
+
+	# A match restarted without this loadout (capture tools) keeps the bar safe.
+	scene.model.start(2, 1, 4)
+	scene.update_hud()
+	check(not bar.buttons[0].visible and not bar.buttons[3].visible, "Buttons without an equipped item are hidden")
+	bar.press(scene, 2)
+	check(scene.model.actors[0].turn_item == "", "Pressing a stale button does nothing")
 
 	# Keyframe sampling and HD textures with fallback.
 	var ItemArt = load("res://scripts/item_art.gd")

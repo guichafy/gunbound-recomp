@@ -10,7 +10,7 @@
 - [x] Arte: 19 originais copiados; HD Full HD por Codex GPT Images (5 folhas).
 - [x] Cena: barra F1–F6, fila no turno adversário, ITEM LOCKED, popup
       Select Item no menu, sinalizador/chamas/sons, pose UsingItem.
-- [x] test_items (49), test_items_scene (39); check.sh 1202 checks + 10
+- [x] test_items (49), test_items_scene (42); check.sh 1205 checks + 10
       partidas; seeds 81–90 idênticas à 0.12; app/ZIP 0.13.0 assinados.
 - [ ] Usuário validar os itens no app.
 - [ ] CPU usar itens (exige rebaselinar seeds).

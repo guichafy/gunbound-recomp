@@ -131,8 +131,8 @@ Física e dano (Projectile.cs / Mobile.cs):
 ## Resultado (2026-10-12)
 
 - Fases A–E concluídas com commits locais por fase, sem push.
-- `./scripts/check.sh`: **1202 checks + 10 partidas, zero falhas**
-  (test_items 49, test_items_scene 39). Seeds 81–90 com vencedor, tiros e vida
+- `./scripts/check.sh`: **1205 checks + 10 partidas, zero falhas**
+  (test_items 49, test_items_scene 42). Seeds 81–90 com vencedor, tiros e vida
   restante idênticos aos da 0.12 (rodada da base num worktree temporário).
 - Geração HD: 5 folhas no Codex (`items2`, `items1`, `popup`, `beacon`,
   `flame`), origens em `assets/hd/GENERATION.json`, prompts em
