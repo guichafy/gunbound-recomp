@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Shop de avatar — preparação no worktree
+
+- [x] Worktree da main, branch codex/avatar-shop; alterações locais de itens preservadas na pasta principal.
+- [x] Auditoria do Shop/rider/catálogo/transações/atributos C#; 15 registros nas quatro categorias com assets presentes.
+- [x] Usuário confirmou saldo Gold/Cash de teste e os oito atributos com efeitos.
+- [x] Importação e baseline: 1114 checks + 10 partidas, zero falhas.
+- [ ] Revisar AVATAR_SHOP.md e suas adaptações propostas.
+- [ ] Preparar plano; implementar catálogo/perfil, loja, rider e atributos/recompensas.
+- [ ] Integrar ItemDelay ao trabalho de itens quando estiver disponível em branch.
+- [ ] Validar modelos/cena/partidas e capturas GPU; registrar limites e eventual export.
+
 ## Reorganização SOLID (ADR-057)
 
 - [x] Catálogo `mobiles.gd` no lugar dos ramos por ID.

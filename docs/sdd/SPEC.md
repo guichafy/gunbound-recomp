@@ -202,3 +202,12 @@ Teleport, Teleport, Blood, Bunge Shot, Power Up, Change Wind) com a lógica,
 física e custos de delay do OpenBound; REQ-36 seleção de 6 slots pelo
 `PopupSelectItem` original no menu; REQ-37 arte dos itens/Teleport em HD por
 GPT Images (Codex), conforme ITEMS_0_13.md. CPU sem itens neste corte.
+
+## Shop de avatar — proposta em revisão
+
+Pedido de 2026-10-12: REQ-38 Shop/compra local em Gold/Cash; REQ-39 composição
+de cabeça/corpo/óculos/bandeira; REQ-40 distribuição dos oito atributos; REQ-41
+modificadores no combate/previsão e Gold. Saldo inicial de teste e atributos
+confirmados pelo usuário. Detalhes e adaptações propostas em AVATAR_SHOP.md.
+Não implementado; requisitos em revisão. Relacionados REQ-02/04–10/12/19/20,
+REQ-32 (thread) e REQ-35 (dependência ItemDelay).

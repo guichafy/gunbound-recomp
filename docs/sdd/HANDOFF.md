@@ -1,5 +1,17 @@
 # Hand-off — Gunbound Recomp 0.12.0
 
+## Shop de avatar — preparação, sem código novo
+
+2026-10-12: worktree da main em codex/avatar-shop. Proposta AVATAR_SHOP.md
+(REQ-38..41); usuário confirmou saldo inicial Gold/Cash de teste e distribuição
+de oito atributos com efeitos. Catálogo C# auditado: 15 registros nas quatro
+categorias, atlas/retratos disponíveis. Importação e baseline completo: 1114
+checks + 10 partidas, zero falhas (~41 s nas partidas). Sem Shop implementado,
+sem imagens geradas, sem export. Alterações não commitadas de itens da pasta
+principal não foram copiadas. ItemDelay depende dessa integração. Próximo passo:
+revisão da proposta e plano de implementação; saldo 1.000 por moeda e orçamento
+pelo nível local ainda são adaptações propostas.
+
 ## Reorganização SOLID (mesma versão, sem export)
 
 Pedido: aplicar o plano de arquitetura SOLID, incluindo os três itens que

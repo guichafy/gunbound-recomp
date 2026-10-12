@@ -297,3 +297,15 @@ só voltam no caminho do tiro); Energy Up limitado à vida máxima; teclas F1–
 como extra; carga padrão Dual, Teleport, Power Up, Energy Up 1 gravada com as
 opções. CPU não usa itens neste corte (seeds 81–90 preservadas). Arte nova em
 HD por GPT Images (Codex), originais preservados com fallback.
+
+## Shop de avatar — revisão pendente
+
+ADR-059 — decisões confirmadas pelo usuário: portar cabeça/corpo/óculos/
+bandeira do Shop C# em worktree da main, usar Gold/Cash com saldo inicial de
+teste sem dinheiro real e incluir distribuição dos oito atributos com efeitos
+no combate. Proposta AVATAR_SHOP.md (REQ-38..41). A troca do servidor pelo
+perfil local é compatível com o treino offline vigente. Ainda em revisão:
+1.000 por moeda, orçamento min((nível local−1)×10,180), gênero/equipamento
+separados e preview nos mobiles existentes. Ranking permanece retirado;
+ItemDelay requer integração do trabalho de itens fora deste worktree.
+Nenhuma regra nova implementada nesta preparação.
