@@ -94,3 +94,12 @@ Layout, estados de botão, carga e mira portados de `HUD.cs`, `Crosshair.cs`,
 `SpriteNumericField.cs`, `Button.cs`, `ShotButton.cs` e `Mobile.cs` (GPL).
 Arquivos copiados sem edição; SHA-256 em `SOURCE_MANIFEST.json`. Derivados HD
 GPT Images em `assets/hd/hud/`.
+
+## Shop e avatar
+
+Os sprites do Shop, 13 atlas de avatar e15 retratos vieram de
+OpenBound-Assets/Game Assets, nas quatro categorias Hat/Body/Goggles/Flag.
+Catálogo normalizado conserva preços/IDs/pivôs da DatabaseSeed original.
+assets/openbound/avatars/manifest.json lista os caminhos fonte e SHA-256 dos
+80 arquivos copiados, com pixels intactos. Não são derivados GPT Images.
+Regras portadas do código OpenBound GPL-3.0-or-later, Copyright2020 Carlos H.M.S.

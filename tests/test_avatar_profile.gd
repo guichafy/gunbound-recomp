@@ -56,6 +56,13 @@ func run() -> void:
 		r = Profile.new(path)
 		r.load_profile()
 		check(r.gold == 1000 and r.nickname == "Legado" and r.xp == 600, "Legacy progress preserved")
+		for invalid in [null,[],"broken"]:
+			f = FileAccess.open(path,FileAccess.WRITE)
+			f.store_string(JSON.stringify({"version":2,"xp":600,"shop":invalid}))
+			f.close()
+			r = Profile.new(path)
+			r.load_profile()
+			check(r.gold == 0 and r.cash == 0 and r.xp == 600, "Invalid shop container cannot refill")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	print("AVATAR PROFILE CHECKS: ", checks, " | FAILURES: ", failures)
 	quit(0 if failures == 0 else 1)

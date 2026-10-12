@@ -52,8 +52,8 @@ func load_profile() -> void:
 		while awarded.size() > 64:
 			awarded.pop_front()
 
-	if data.get("shop") is Dictionary:
-		load_shop(data.shop)
+	if data.has("shop") or data.get("version",1) != 1:
+		load_shop(data.shop if data.get("shop") is Dictionary else {})
 
 func clean_nickname(value: String) -> String:
 	var result := value.strip_edges().replace("\n", " ").replace("\r", " ").replace("\t", " ").left(20)

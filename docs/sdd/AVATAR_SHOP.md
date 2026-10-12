@@ -1,6 +1,6 @@
 # Shop de avatar — especificação aprovada
 
-Data: 2026-10-12. Estado: **especificação aprovada pelo usuário; código não implementado**.
+Data: 2026-10-12. Estado: **implementado e validado no worktree (0.14.0); ItemDelay depende dos itens**.
 Branch: `codex/avatar-shop`, worktree criado do commit de `main` disponível
 no início desta sessão. Alterações não commitadas da pasta principal não foram
 copiadas. A especificação de itens 0.13 já está no baseline; o código de itens
@@ -200,9 +200,13 @@ só pode ser declarado validado após a integração do código de itens em bran
 10. Caso seja entregue app, reexportar com build_macos.py e verificar assinatura;
     não confundir execução do projeto com app atualizado. Nenhum push/publicação.
 
-## Estado observado nesta preparação
+## Resultado observado
 
-Worktree importado no Godot e baseline completo executado: **1114 checks +
-10 partidas, zero falhas** (partidas em ~41 s). Ainda não existem Shop nem
-modificadores implementados. Usuário aprovou a especificação, saldo e orçamento
-em 2026-10-12. Plano em AVATAR_SHOP_PLAN.md, aguardando revisão para execução.
+Baseline1114checks+10partidas antes do código. Entrega0.14: suite completa
+1282checks+10partidas e quick final1290checks após8checks adicionais de atributos,
+zero falhas. Sete capturas GPU; PCK com15itens e preview validado; app/ZIP
+reexportados e assinatura verificada. Revisão independente e testes de regressão
+corrigiram corrupção de Shop, ângulo de Gold e metadados de pellets sem dano.
+
+ItemDelay é fórmula/teste até integração dos itens. Arte original, sem GPT novo.
+Sem teste manual pelo usuário; detalhes e retomada em HANDOFF.md.

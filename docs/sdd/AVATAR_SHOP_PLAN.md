@@ -313,3 +313,14 @@ REQ38→1/2/4; REQ39→1/5/7; REQ40→2/4; REQ41→3/6/7; persistência REQ10→
 thread REQ32→3/6; dependência REQ35→3/7. Interfaces consistentes; casos de
 Review Focus associados a testes nas tarefas indicadas. Estado: plano escrito,
 sem execução de código novo; baseline previamente validado1114checks+10partidas.
+
+## Execução concluída no worktree
+
+Execução nativa aprovada; tarefas1–7 realizadas com testes RED→GREEN,
+revisão independente e correções. Interfaces concretas estão no código; detalhes
+observados e desvios registrados em HANDOFF/DECISIONS. Suite completa1282 e10
+partidas; quick1290 após8checks adicionais;7capturasGPU e PCK/App0.14 verificados.
+Dependência ItemDelay permanece explicitamente fora do uso real. Sem HD novo.
+App/ZIP ficam em builds do worktree para validação; branch mantida para posterior
+integração. Planos/fixtures são referência, não alegação de código já presente
+na fase de aprovação histórica.

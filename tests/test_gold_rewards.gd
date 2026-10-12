@@ -42,9 +42,24 @@ func run() -> void:
 		m.fire(30,65,0)
 		m.explode(m.actors[1].pos,1,m.projectiles[0])
 		check(m.shot_gold.enemy_damage == 90, "Live damage informs Gold")
+		m.explode(m.actors[1].pos,1,m.projectiles[1])
 		m.finish_gold_shot()
 		var before: int = m.actors[0].gold_state.gold
 		m.finish_gold_shot()
 		check(before > 0 and m.actors[0].gold_state.gold == before, "Shot credit once")
+		for mobile in [1,2]:
+			for facing in [1,-1]:
+				m.start(mobile,1,42,"")
+				m.terrain.cells.fill(0)
+				m.actors[0].pos = Vector2(240,100)
+				m.actors[0].facing = facing
+				m.fire(30,65,0)
+				check(is_equal_approx(float(m.shot_gold.angle),150.0 if facing==1 else 30.0), "Source HUD angle central trajectory")
+				m.events = [{"type":"damage","actor":1,"amount":200}]
+				m.collect_gold_damage(0,Vector2(240+100*facing,100),{"age":1,"influenced":[]})
+				check(not m.shot_gold.boomer and not m.shot_gold.backward, "Normal forward shot no Boomer")
+				m.events.clear()
+				m.collect_gold_damage(0,Vector2(240-100*facing,100),{"age":5,"influenced":["mirror","tornado"]})
+				check(m.shot_gold.travelled == 1 and not m.shot_gold.mirror and not m.shot_gold.tornado and not m.shot_gold.backward, "Zero damage pellet cannot contaminate bonuses")
 	print("GOLD REWARDS CHECKS: ", checks, " | FAILURES: ", failures)
 	quit(0 if failures == 0 else 1)

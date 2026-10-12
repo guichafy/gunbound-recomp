@@ -307,3 +307,28 @@ balão do relógio da CPU e contador de dano acumulado. Texturas HD 3× em
 Options e SkipTurn são `TextureButton` com as regiões de `Button.cs`. `game.gd`
 cuida do input original (carga 0→100 a +2/0,04 s, Tab, F8, ↑/↓ com repetição
 acelerada) e entrega um `hud_state()`; `match.gd` não mudou.
+
+## Shop de avatar 0.14 (REQ-38..41)
+
+Catalog e ShopModel separam dados, filtros e preview da tela original800×600
+(render uniforme4/3, margens laterais na viewport1280×800). Profile version2
+guarda moedas, posse por chave composta, conjuntos por gênero e atributos;
+compras/equipamento/confirmar/resultado usam snapshot, rename e rollback.
+A seção shop inválida não renova o saldo de teste.
+
+AvatarArt desenha os atlas originais com pivôs e10FPS, conservando grade real
+e profundidade Flag→Head→Goggles→Body. MobileRig troca o piloto no mesmo
+assento; sem contexto conserva o caminho anterior. BattleArt recebe contexto
+de equipamento da partida; não lê o perfil.
+
+PlayerAttributes guarda orçamento/modificadores puros; Match injeta atributos
+em atores antes do primeiro turno. Damage aplica ataque−defesa somente no
+projétil primário; Dig só aumenta erosão; delays/regen/HUD compartilham regras.
+FlightSnapshot copia atores/atributos/Gold em profundidade; simulação não toca
+perfil, moeda real ou estado vivo.
+
+GoldRewards reproduz os caminhos1×1 C#, com ângulo HUD=trajetória central+180.
+Só impactos com dano positivo entram nos metadados de Gold; boomer/backward
+consideram alvo inimigo. FinishGoldShot agrega salvo uma vez após acomodação;
+Profile.award recebe Gold junto do XP, usando awarded para impedir repetição.
+ItemDelay é contrato puro até integração da funcionalidade de itens.

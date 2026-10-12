@@ -249,7 +249,7 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
 	projectiles = projectile_parameters(active, angle, power, weapon)
-	var launch_angle: float = rad_to_deg(-projectiles[0].velocity.angle())
+	var launch_angle: float = rad_to_deg(shot_velocity(active,angle,power,weapon).angle())+180.0
 	shot_gold = {"enemy_damage":0,"ally_damage":0,"enemy_kills":0,"ally_kills":0,"angle":fposmod(launch_angle,360.0),"travelled":0.0,"tornado":false,"mirror":false,"boomer":false,"backward":false,"facing":actors[active].facing,"start":actors[active].pos,"dead":[actors[0].hp<=0,actors[1].hp<=0]}
 	phase = "flight"
 	accumulator = 0.0
@@ -516,14 +516,22 @@ func finish_cpu_plan(plan: Dictionary) -> Dictionary:
 func collect_gold_damage(event_start: int, impact: Vector2, projectile: Dictionary) -> void:
 	if shot_gold.is_empty():
 		return
+	var any_hit := false
+	var enemy_hit := false
 	for event in events.slice(event_start):
-		if event.type in ["damage","shield_damage"] and not event.get("emp",false):
+		if event.type in ["damage","shield_damage"] and not event.get("emp",false) and int(event.amount)>0:
 			var key := "ally_damage" if int(event.actor)==shot_actor else "enemy_damage"
 			shot_gold[key] += int(event.amount)
+			any_hit = true
+			enemy_hit = enemy_hit or int(event.actor)!=shot_actor
+	if not any_hit:
+		return
 	shot_gold.travelled = maxf(float(shot_gold.travelled),float(projectile.get("age",0)))
 	for effect in projectile.get("influenced",[]):
 		if effect in ["tornado","mirror"]:
 			shot_gold[effect] = true
+	if not enemy_hit:
+		return
 	var dx: float = impact.x-Vector2(shot_gold.start).x
 	var angle := float(shot_gold.angle)
 	var facing := int(shot_gold.facing)

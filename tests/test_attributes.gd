@@ -23,10 +23,11 @@ func run() -> void:
 		for mobile in [1,2]:
 			for weapon in range(3):
 				var m = Match.new()
-				var values := [[30,50,0,50,33,50,50,0],[0,0,20,0,0,0,0,0]]
+				var values := [[30,50,0,30,20,0,50,0],[0,0,20,0,0,0,0,0]]
 				m.start(mobile,1,42,"","original",null,values)
 				values[0][1] = 0
 				check(m.actors[0].hp == (1140 if mobile == 1 else 1650), "Copied max health")
+				check(m.actors[0].attributes[6] == 50, "Dig survives valid 180 point fixture")
 				check(m.actors[0].shield == (220 if mobile == 1 else 0), "Shield base")
 				m.actors[0].turns = 3
 				var sim = F.capture(m)
@@ -50,5 +51,12 @@ func run() -> void:
 		check(m.actors[0].shield == 130, "Mage regen times1.5")
 		m.apply_weather({"type":"protection","extra":""})
 		check(m.actors[0].hp == 552, "Protection regen times1.5")
+		m.start(1,1,42,"","original",null,[[30,0,0,0,0,0,0,0],[0,0,20,0,0,0,0,0]])
+		m.blast(m.actors[1].pos,25,200,0,0)
+		check(m.actors[1].hp == 880, "Live damage uses attack minus defense")
+		m.start(1,1,42,"","original",null,[[0,0,0,0,0,0,50,0]])
+		m.terrain.cells.fill(1)
+		m.explode(Vector2(400,200))
+		check(not m.terrain.is_solid(Vector2(432,200)) and m.terrain.is_solid(Vector2(440,200)), "Live Dig enlarges crater beyond damage radius")
 	print("ATTRIBUTES CHECKS: ", checks, " | FAILURES: ", failures)
 	quit(0 if failures == 0 else 1)

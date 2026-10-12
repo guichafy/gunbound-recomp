@@ -1,5 +1,21 @@
 extends SceneTree
 var scene
+class Poses extends Node2D:
+	var equipment: Dictionary
+	var sprites: Array = []
+	func _draw() -> void:
+		draw_rect(Rect2(0,0,1920,1200),Color("13243b"))
+		var font := ThemeDB.fallback_font
+		draw_string(font,Vector2(60,60),"Avatar equipado · Mage / Bigfoot · sentidos e encosta",HORIZONTAL_ALIGNMENT_LEFT,-1,28,Color.WHITE)
+		for row in range(2):
+			for column in range(3):
+				var pos := Vector2(300+column*630,400+row*570)
+				var sprite = sprites[row]
+				var pose: String = ["idle","recoil","hurt"][column]
+				var facing := -1 if column==1 else 1
+				var slope := deg_to_rad(-30.0) if column==2 else 0.0
+				sprite.draw(self,pos,210,facing,slope,sprite.frame_index(pose,0.3,2,false),Color.WHITE,pose,0.3,2,false,1.0,{"equipment":equipment,"age":0.3})
+				draw_string(font,pos+Vector2(-200,155),["Direita / idle","Esquerda / recuo","Encosta / dano"][column],HORIZONTAL_ALIGNMENT_LEFT,-1,22,Color.WHITE)
 func _initialize() -> void:
 	call_deferred("run")
 func snap(name: String) -> void:
@@ -46,7 +62,15 @@ func run() -> void:
 		scene.model.active = 0
 		scene.queue_redraw()
 		await snap("battle-"+str(mobile))
+	var gear: Dictionary = scene.profile.equipped_set()
 	scene.queue_free()
+	await process_frame
+	var poses := Poses.new()
+	poses.equipment = gear
+	poses.sprites = [load("res://scripts/mage_sprite.gd").new(),load("res://scripts/bigfoot_sprite.gd").new()]
+	root.add_child(poses)
+	await snap("poses")
+	poses.queue_free()
 	await process_frame
 	for path in ["res://.tools/avatar-capture.json","res://.tools/avatar-capture-options.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))

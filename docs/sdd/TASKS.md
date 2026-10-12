@@ -1,16 +1,18 @@
 # Entregas e próximos trabalhos
 
-## Shop de avatar — preparação no worktree
+## Shop de avatar 0.14.0 (ADR-059, REQ-38..41)
 
-- [x] Worktree da main, branch codex/avatar-shop; alterações locais de itens preservadas na pasta principal.
-- [x] Auditoria do Shop/rider/catálogo/transações/atributos C#; 15 registros nas quatro categorias com assets presentes.
-- [x] Usuário confirmou saldo Gold/Cash de teste e os oito atributos com efeitos.
-- [x] Importação e baseline: 1114 checks + 10 partidas, zero falhas.
-- [x] Usuário aprovou AVATAR_SHOP.md, saldo 1.000 por moeda e orçamento pelo nível local.
-- [x] Preparar AVATAR_SHOP_PLAN.md com contratos, testes e etapas.
-- [ ] Revisar plano/escolher execução; implementar catálogo/perfil, loja, rider e atributos/recompensas.
-- [ ] Integrar ItemDelay ao trabalho de itens quando estiver disponível em branch.
-- [ ] Validar modelos/cena/partidas e capturas GPU; registrar limites e eventual export.
+- [x] Worktree de main, branch codex/avatar-shop, especificação/plano aprovados.
+- [x] Catálogo15 e assets originais; migração perfil2 e compras/equipamento atômicos.
+- [x] Shop/Inventário, filtros/busca/páginas, experimentar e confirmação Gold/Cash.
+- [x] Composição de quatro peças nos previews/menu/arena, dois mobiles e sentidos.
+- [x] Oito atributos e distribuição; modificadores Match/CPU/previsão e Gold.
+- [x] Revisão independente e correções reproduzidas em RED→GREEN.
+- [x] Check completo1282+10partidas; quick final1290, zero falhas;7capturasGPU.
+- [x] App/ZIP0.14.0 exportados no worktree; PCKpreview/catálogo e assinatura válidos.
+- [ ] Integrar ItemDelay ao uso real quando código de itens estiver na branch.
+- [ ] Usuário validar aplicativo; decidir integração da branch posteriormente.
+- [ ] GPT Images permanece opção permitida; não solicitado como etapa obrigatória.
 
 ## Reorganização SOLID (ADR-057)
 

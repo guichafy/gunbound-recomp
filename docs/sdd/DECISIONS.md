@@ -315,3 +315,18 @@ no fluxo C# apesar das constantes Gold10/5; Popularity multiplica o acumulado
 após cada tiro; branch2000 repete condição1000 e é inalcançável. O plano
 reproduz os caminhos executados, documentando essas peculiaridades. Empate
 mantém XP local e propõe Gold de resultado0 no fluxo existente do protótipo.
+
+ADR-059 — implementada no worktree como0.14.0. Os PNGs originais e identidade
+composta foram preservados; currículo de pontos usa nível local, sem ranking.
+O renderer usa grade real dos atlas e limita recorte feminino à altura27px,
+conservando pivô declarado. Transações de perfil2 incluem rollback; seção
+Shop inválida não é tratada como ausência de perfil legado.
+
+Auditoria final confirmou ângulo Gold central+180 pela diferença de convenções
+entre Crosshair/Projectile C#. Duração/clima/boomer só agregam impactos com dano;
+boomer/backward apenas entradas inimigas. Candidato de falha no export .gd não
+se reproduziu no Godot4.7.2 (smoke PCK passou antes da alteração); removido gate
+redundante por robustez. Três achados Important reais reproduzidos/corrigidos.
+ItemDelay é limite assumido pela especificação aprovada, sem importar código
+não commitado de outra tarefa. Branch/worktree mantidos; aplicativo0.14.0
+exportado para validação local, sem integrar main nem publicar.

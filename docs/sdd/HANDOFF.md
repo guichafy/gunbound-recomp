@@ -1,17 +1,49 @@
-# Hand-off — Gunbound Recomp 0.12.0
+# Hand-off — Gunbound Recomp 0.14.0
 
-## Shop de avatar — preparação, sem código novo
+## Shop de avatar 0.14.0 — entregue no worktree
 
-2026-10-12: worktree da main em codex/avatar-shop. Proposta AVATAR_SHOP.md
-(REQ-38..41); usuário confirmou saldo inicial Gold/Cash de teste e distribuição
-de oito atributos com efeitos. Catálogo C# auditado: 15 registros nas quatro
-categorias, atlas/retratos disponíveis. Importação e baseline completo: 1114
-checks + 10 partidas, zero falhas (~41 s nas partidas). Sem Shop implementado,
-sem imagens geradas, sem export. Alterações não commitadas de itens da pasta
-principal não foram copiadas. ItemDelay depende dessa integração. Usuário
-aprovou a especificação, saldo 1.000 por moeda e orçamento pelo nível local em
-2026-10-12. AVATAR_SHOP_PLAN.md preparado; próximo passo: revisão do plano e
-escolha de execução. Nenhum código de produto alterado.
+Branch `codex/avatar-shop`, criada da `main`. Pedido/decisões aprovados em
+AVATAR_SHOP.md; execução AVATAR_SHOP_PLAN.md. REQ-38..41, ADR-059.
+
+- Catálogo original15 registros: cabeça/corpo/óculos/bandeira,15 retratos e
+ 13atlas.80arquivos originais/interface copiados com SHA, sem edição dos PNGs.
+- Shop/Inventário, busca, páginas25, gêneros/unissex, experimentação temporária,
+ compra Gold/Cash e popup modal. Primeiro perfil Shop tem1000por moeda;
+ transações com rollback, repetição sem débito e corrupção sem refill.
+- Perfil version2 conserva nickname/XP/wins/matches/awarded e guarda posse,
+ equipamento separado por gênero e oito atributos. Pontos pelo nível local:
+ min((nível−1)×10,180), até50cada; rascunho/confirmar/cancelar.
+- AvatarArt junta peças com pivôs/FPS/grade originais, substituindo o piloto no
+ assento do rig no menu/previews/arena; CPU básica. Caminho legado preservado
+ sem contexto. Atlas multi-row e altura feminina27vs metadata33 tratados.
+- Vida/dano/defesa/regen/atraso/Dig aplicados no Match/voo/previsão em cópias;
+ GoldRewards e Popularity seguem caminhos1×1 C#. Ângulo HUD=trajetória central
+ +180, sem dispersão do primeiro pellet; metadados Gold só de dano positivo.
+ Resultado4/1Gold e Popularity acumulada/branch2000 inalcançável são da fonte;
+ empate0é adaptação. XP local preservado; crédito final único com ID da partida.
+
+Validação final: check.sh completo **1282checks+10partidas, zero falhas**,40,5s
+nas partidas. Mais8 checks de atributos (fixture válida de180pontos, dano/cratera
+reais) passaram; check.sh --quick consolidou **1290checks, zero falhas**.
+Revisão independente encontrou3Important reproduzidos e corrigidos em RED→GREEN:
+shop inválido renovando saldo, ângulo Gold espelhado e pellets sem dano alterando
+bônus. Um quarto candidato sobre remap do .gd não se reproduziu neste Godot:
+PCK original já tinha preview1786pixels; gate redundante removido por robustez.
+
+Sete capturas GPU1920×1200 em docs/avatar-shop: loja, compra, inventário,
+atributos, Mage/Bigfoot e poses/sentidos/encosta. PCK do app exportado carregou
+catálogo15 e renderizou preview (1786pixels da figura, PASS), com perfil isolado.
+`capture_avatar_pck_smoke.gd` preserva reprodução: copiar o script para fora do
+projeto (ex.: /tmp) e executar Godot --main-pack <PCK> --script <script>.
+App/ZIP0.14.0 em builds do worktree, ZIP98MB; assinatura ad-hoc estrita válida.
+Nenhum teste usou o perfil real. Main e fonte C# não foram editadas nesta execução.
+
+Limites: **ItemDelay tem fórmula/teste, sem uso real até integrar código de itens**
+(a main tinha alterações não commitadas e não foram copiadas). Assets são
+originais; GPT Images opcional não gerado. Fonte/interface têm adaptações de
+viewport e controles nativos de texto. Sem teste manual do app por usuário;
+roteiro em docs/VALIDACAO.md. Próximo passo: usuário validar o app e decidir a
+integração da branch; worktree permanece disponível.
 
 ## Reorganização SOLID (mesma versão, sem export)
 

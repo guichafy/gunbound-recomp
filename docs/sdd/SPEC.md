@@ -209,5 +209,6 @@ Pedido de 2026-10-12: REQ-38 Shop/compra local em Gold/Cash; REQ-39 composição
 de cabeça/corpo/óculos/bandeira; REQ-40 distribuição dos oito atributos; REQ-41
 modificadores no combate/previsão e Gold. Saldo inicial de teste e atributos
 confirmados pelo usuário. Detalhes e adaptações aprovados em AVATAR_SHOP.md.
-Não implementado; plano AVATAR_SHOP_PLAN.md em revisão. Relacionados REQ-02/04–10/12/19/20,
+Implementado no worktree; plano AVATAR_SHOP_PLAN.md e evidências HANDOFF.md.
+ItemDelay aguarda integração dos itens; demais modificadores ativos. Relacionados REQ-02/04–10/12/19/20,
 REQ-32 (thread) e REQ-35 (dependência ItemDelay).

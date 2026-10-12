@@ -189,3 +189,17 @@ ADR-057. `match.gd` decide turno, dano e resultado. Catálogo em `mobiles.gd`
 `battle_art` não lê campos da cena: recebe o contexto de `actor_context`.
 Treino segue 1×1; não adicionar rede neste corte.
 
+
+## Shop de avatar 0.14 — caminho atual
+
+Ler AVATAR_SHOP.md e AVATAR_SHOP_PLAN.md. Quatro slots, catálogo original
+15registros, perfil version2 com saldo inicial1000Gold/Cash uma vez, conjuntos
+por gênero e unissex compartilhado. ShopModel mantém preview temporário;
+Profile valida/transaciona com rollback. PlayerAttributes:10por avanço do nível
+local,180total,50por atributo. Atores copiam atributos/equipamento no start;
+CPU/previsão usam mesmas regras. AvatarArt substitui piloto no rig quando
+recebe contexto; legado preservado sem contexto. GoldRewards segue fluxo C#
+4/1resultado, Popularity cumulativa; XP separado. ItemDelay fórmula apenas
+até integrar código de itens. Assets originais, sem novo HD. Suites
+test_avatar_catalog/profile/shop/art, test_attributes e test_gold_rewards;
+capture_avatar_shop gera capturas GPU e smoke separado confere PCK exportado.

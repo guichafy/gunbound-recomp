@@ -319,12 +319,13 @@ func _process(delta: float) -> void:
 func paint(view: Node2D) -> void:
 	view.draw_texture(texture("InGame/Scene/AvatarShop/Background"),Vector2.ZERO)
 	view.draw_texture(texture("InGame/Scene/AvatarShop/Foreground2" if model.inventory else "InGame/Scene/AvatarShop/Foreground1"),Vector2.ZERO)
-	if FileAccess.file_exists("res://scripts/avatar_art.gd"):
-		var art = avatar_art
-		var set_data: Dictionary = model.profile.equipped_set() if model.inventory else model.preview
-		art.draw(view,set_data,Transform2D(0,Vector2(-1.7,1.7),0,Vector2(120,269)),elapsed,Color.WHITE)
-		var sprite = host.sprite_for(host.vehicle)
-		sprite.draw(view,Vector2(117,436),92,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
+	view.draw_texture(texture("InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background"),Vector2(8,312))
+	view.draw_texture(texture("InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2"),Vector2(8,312))
+	var art = avatar_art
+	var set_data: Dictionary = model.profile.equipped_set() if model.inventory else model.preview
+	art.draw(view,set_data,Transform2D(0,Vector2(-1.7,1.7),0,Vector2(120,269)),elapsed,Color.WHITE)
+	var sprite = host.sprite_for(host.vehicle)
+	sprite.draw(view,Vector2(117,436),92,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
 
 func block_controls(node: Node) -> void:
 	if node is BaseButton:
