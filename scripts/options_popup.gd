@@ -33,8 +33,8 @@ const RADIOS := {
 	"interface": {"labels": ["Classic", "TH Blue", "TH White", "OpenBound"],
 		"centers": [Vector2(-90, 86), Vector2(30, 86), Vector2(-90, 106), Vector2(30, 106)]}}
 # Only these exist in this game; the rest keep the C# defaults, disabled.
-const ENABLED := ["scroll", "sfx", "background"]
-const FIXED := {"mouse": 50, "bgm": 0, "aiming": 1, "interface": 1}
+const ENABLED := ["scroll", "sfx", "bgm", "background"]
+const FIXED := {"mouse": 50, "aiming": 1, "interface": 1}
 const ACCEPT_OFFSET := Vector2(130, 144)
 const PAUSE_OFFSET := Vector2(-112, 144)
 

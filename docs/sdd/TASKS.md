@@ -1,5 +1,18 @@
 # Entregas e próximos trabalhos
 
+## Performance e limites 0.11.0
+
+- [x] Medir a trava: busca da CPU 90–314 ms num frame no início do turno dela.
+- [x] PERF_LIMITS_0_11.md, REQ-32/33, revisão de REQ-31, ADR-053..055.
+- [x] Busca da CPU em thread sobre retrato; plano idêntico; seeds 81–90 iguais;
+      60 FPS sem picos no turno da CPU; disparo em ~1,85 s como antes.
+- [x] Popup HD por GPT Images (Codex), fallback e captura lado a lado.
+- [x] BGM com os 12 temas originais, slider ativo e gravado.
+- [x] check.sh 1083 checks + 10 partidas; app/ZIP 0.11.0 reexportados e assinados.
+- [ ] Usuário validar no app (troca de turno, música, popup HD).
+- [ ] Fora do escopo/limite: Aiming Mode, Mouse Speed, skins além da Blue,
+      fonte Consolas; pico de carga no primeiro frame da partida.
+
 ## Popup de opções original 0.10.1
 
 - [x] Levantar PopupGameOptions/PopupMenu/SliderBar/RadioButtonSet/Accept no C#.
@@ -8,7 +21,7 @@
 - [x] options_popup.gd/options.gd; ESC/Options → popup, P/PAUSA → pausa;
       SFX, Scroll Speed e Background aplicados e gravados no Accept.
 - [x] test_hud +29 checks (116); check.sh 1045 checks + 10 partidas; captura docs/hud/hud-options-popup.png.
-- [ ] Reexportar app/ZIP 0.10.1 (`scripts/build_macos.py`) e o usuário validar.
+- [x] Reexportado junto da 0.11.0.
 - [ ] Fora do escopo: Aiming Mode, Mouse Speed, BGM (sem música), skins de HUD
       além da Blue, HD do popup.
 

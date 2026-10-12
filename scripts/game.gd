@@ -109,11 +109,12 @@ func show_menu() -> void:
 	screen = "menu"
 	model.phase = "menu"
 	discard_cpu_search()
+	sound.stop_music()
 	result_wait = -1.0
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.10.1", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.11.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -191,6 +192,8 @@ func start_match() -> void:
 		profile.save_profile()
 	screen = "match"
 	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode)
+	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
+	sound.play_music()
 	art.reset(model.actors)
 	camera_manual = false
 	dragging = false
@@ -596,6 +599,7 @@ func show_options() -> void:
 
 func apply_options() -> void:
 	sound.set_volume(options.sfx / 100.0)
+	sound.set_music_volume(options.bgm / 100.0)
 	queue_redraw()
 
 func accept_options() -> void:

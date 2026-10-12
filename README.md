@@ -17,6 +17,8 @@ Também é possível importar `project.godot` no Godot 4.7.2 e pressionar **F6**
 | F8 ou botão PASS | Passar o turno |
 | Esc ou botão ESC | Opções (popup original: SFX, rolagem, fundo) |
 | P ou PAUSA no popup | Pausa (recomeçar, menu, ajuda) |
+
+A batalha toca os temas originais do OpenBound (volume no BGM do popup).
 | F | Virar parado |
 | H | Ajuda |
 

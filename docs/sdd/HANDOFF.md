@@ -1,6 +1,49 @@
-# Hand-off — Gunbound Recomp 0.10.1
+# Hand-off — Gunbound Recomp 0.11.0
 
-## Entrega atual 0.10.1: popup de opções original (PopupGameOptions)
+## Entrega atual 0.11.0: performance da troca de turno, BGM e popup HD
+
+Pedido: "implementar e rever os limites" (exemplo: popup Full HD gerado no
+Codex com GPT Images) e melhorar a performance da batalha, que travava entre
+as trocas de turno. REQ-32/33 e revisão de REQ-31, ADR-053..055, plano e
+medições em PERF_LIMITS_0_11.md.
+
+- **Travamento corrigido (REQ-32).** Causa medida: `choose_cpu_shot` avaliava
+  a grade de mira inteira (105–168 previsões no laço de voo) num único frame
+  no início do turno da CPU, 90–314 ms. Agora `begin_cpu_plan` (thread
+  principal: vira, sorteia arma, retrato da máscara/atores/vento/clima),
+  `search_cpu_plan` (WorkerThreadPool, só lê o retrato) e `finish_cpu_plan`
+  (thread principal: erros de mira). Mesmo plano e mesma ordem de RNG; seeds
+  81–90 com os mesmos tiros. Medido a 60 FPS no app com Metal: frames do turno
+  da CPU com máximo 18 ms (antes 160–185 ms) e disparo em 1,83–1,87 s (antes
+  1,88–1,90 s). O fatiamento em frames foi testado e descartado (disparo em
+  ~3,3 s). Recomeçar/menu/troca de turno/sair esperam a thread e descartam.
+- **BGM (REQ-33).** 12 temas originais `LevelScene/Theme*` em
+  assets/openbound/music (SHA no manifest, ~17 MB): faixa aleatória ao iniciar
+  a batalha e outra ao terminar, para no menu. Slider BGM ativo (padrão 50,
+  gravado); "Som" da pausa silencia música e efeitos; testes mudos nunca
+  tocam. Reprodução real conferida fora do headless.
+- **Popup HD (REQ-31).** Folha `options` no `build_hud_hd.py`, gerada pelo
+  Codex `image_gen` (gpt-5.6-sol; origem em GENERATION.json, prompt em
+  HUD_PROMPTS.md); fundo, Accept e rádio 3× com alfa original; barra, moldura
+  e ponteiro ampliados direto; mipmaps; fallback ao original com regiões pela
+  densidade. Capturas `docs/hud/hud-options-popup(-original).png`.
+- **Limites revistos:** Aiming Mode e Mouse Speed seguem desabilitados (sem
+  implementação no OpenBound; cursor do sistema), Interface só tem a skin
+  Blue no pacote, Consolas é proprietária e fora do pacote.
+
+Validação: `./scripts/check.sh` — **1083 checks + 10 partidas, zero falhas**
+(nova suíte test_performance 14: plano direto = em passos = em thread,
+retrato isolado, nenhum frame roda a busca, CPU dispara, descarte seguro;
+test_hud 140: HD/fallback do popup, BGM). App/ZIP **0.11.0 reexportados**
+(`build_macos.py`), assinatura estrita válida, ZIP ~102 MB (antes ~80 MB, pela
+música); PCK contém músicas, HD do popup e BMP original, sem folhas brutas.
+Commits locais por fase, sem push. Limites: o pico de ~45 ms no primeiro frame
+da partida (carga de texturas) continua; sem teste manual de áudio/mouse no
+app.
+
+Próximo passo: usuário validar a troca de turno, a música e o popup no app.
+
+## Entrega anterior 0.10.1: popup de opções original (PopupGameOptions)
 
 Pedido: ESC/Options deve abrir o popup de configurações do OpenBound em vez da
 pausa própria, com os sprites originais, mantendo a pausa acessível e aplicando

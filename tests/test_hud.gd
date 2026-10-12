@@ -176,9 +176,16 @@ func run() -> void:
 	popup.set_slider_from_local("sfx", popup.point(Vector2(60, 7)).x)
 	check(scene.options.sfx == 50 and is_equal_approx(scene.sound.volume, 0.5), "SFX at the middle halves the effects volume")
 	check(is_equal_approx(scene.sound.players[0].volume_db, -19.0 + linear_to_db(0.5)), "SFX scales the −19 dB players linearly")
-	popup.pointer_down(popup.slider_rect("bgm").get_center())
+	popup.pointer_down(popup.slider_rect("mouse").get_center() + Vector2(60, 0))
 	popup.pointer_up()
-	check(popup.value_of("bgm") == 0 and popup.value_of("mouse") == 50 and popup.value_of("aiming") == 1 and popup.value_of("interface") == 1, "BGM, mouse, aiming and interface keep the original defaults, disabled")
+	check(popup.value_of("mouse") == 50 and popup.value_of("aiming") == 1 and popup.value_of("interface") == 1, "Mouse, aiming and interface keep the original defaults, disabled")
+	# REQ-33 BGM: the slider drives the battle music volume.
+	check(scene.sound.music_wanted and not scene.sound.music.playing, "The battle wants music, but muted tests never play it")
+	popup.pointer_down(Vector2(popup.slider_rect("bgm").position.x + 2.0, popup.slider_rect("bgm").get_center().y))
+	popup.pointer_up()
+	check(scene.options.bgm == 0 and scene.sound.music_volume == 0.0, "BGM at the start silences the music")
+	popup.set_slider_from_local("bgm", popup.point(Vector2(60, -13)).x)
+	check(scene.options.bgm == 50 and is_equal_approx(scene.sound.music.volume_db, -19.0 + linear_to_db(0.5)), "BGM at the middle sets half the music volume")
 	popup.pointer_down(popup.radio_rect("background", 1).get_center())
 	popup.pointer_up()
 	check(not scene.options.background, "Background radio Off turns the map backdrop off")
@@ -197,7 +204,7 @@ func run() -> void:
 	check(scene.overlay == null and not scene.paused and not scene.options_button.disabled, "ESC accepts and closes the popup, re-enabling Options")
 	var saved = load("res://scripts/options.gd").new(options_file)
 	saved.load_options()
-	check(saved.sfx == 50 and saved.scroll == 100 and not saved.background, "Accept saves the options next to the profile")
+	check(saved.sfx == 50 and saved.bgm == 50 and saved.scroll == 100 and not saved.background, "Accept saves the options next to the profile")
 	# Scroll speed scales the manual camera drag; 50 keeps the original 1×.
 	scene.camera = Vector2(100, 100)
 	var press := InputEventMouseButton.new()
@@ -250,7 +257,14 @@ func run() -> void:
 	scene.apply_options()
 	check(scene.sound.volume == 1.0, "SFX 100 restores the original effects volume")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(options_file))
-	check(Popup.ENABLED == ["scroll", "sfx", "background"], "Only scroll, SFX and background are live in this game")
+	check(Popup.ENABLED == ["scroll", "sfx", "bgm", "background"], "Scroll, SFX, BGM and background are live; aiming, mouse and skin stay disabled")
+	for track in scene.sound.BATTLE_MUSIC:
+		var stream = load("res://assets/openbound/music/%s.mp3" % track)
+		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original LevelScene theme that ends (then a random one follows)" % track)
+	scene.show_menu()
+	check(not scene.sound.music_wanted, "The menu stops the battle music")
+	scene.start_match()
+	player_turn(scene)
 
 	# REQ-30 timer, damage counter, life bar, compass, weather roulette.
 	scene.model.phase = "aim"

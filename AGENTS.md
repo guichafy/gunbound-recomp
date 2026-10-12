@@ -159,3 +159,12 @@ Popup de opções 0.10.1: ESC/Options abre PopupGameOptions original
 (options_popup.gd; valores em options.gd, gravados ao lado do perfil). Só SFX,
 Scroll Speed e Background têm efeito; demais esmaecidos. Pausa própria em P e
 no extra PAUSA. Ver seção 0.10.1 de HUD_0_10.md/ADR-052.
+
+## Performance, BGM e popup HD 0.11 — estado atual
+
+Ler PERF_LIMITS_0_11.md. Busca da CPU: begin_cpu_plan (principal) →
+search_cpu_plan (WorkerThreadPool, só o retrato) → finish_cpu_plan; plano
+idêntico a choose_cpu_shot (wrapper dos testes). Nunca ler estado vivo na
+thread; descartar com discard_cpu_search. BGM: temas LevelScene em
+assets/openbound/music, sound.play_music/stop_music, mudo cobre música.
+Popup HD pela folha options de build_hud_hd.py. Teste test_performance.gd.

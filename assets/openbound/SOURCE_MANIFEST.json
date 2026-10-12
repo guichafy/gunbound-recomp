@@ -383,5 +383,53 @@
   "hud/PopupAccept.png": {
     "source": "Interface/StaticButtons/Popup/Accept.png",
     "sha256": "986daad40b7d5e73bdc63d4a21305f40fa21d6bae93779fa132ad368006111a1"
+  },
+  "music/ThemeBeta-1.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeBeta-1.mp3",
+    "sha256": "15a044b85cb69d0c8fcb67d3d32f2284c15f37d62db1f49fa15d2b550029f7e1"
+  },
+  "music/ThemeBeta-2.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeBeta-2.mp3",
+    "sha256": "f42b53e10910187e8da4752fd245bcca40dc2b6e22403fcc496845370e1cd85d"
+  },
+  "music/ThemeS1-1.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS1-1.mp3",
+    "sha256": "b5636683bfce815afd017eb8d3c0759a2bcfe2fdd6b4e4ecd775d95d1c083157"
+  },
+  "music/ThemeS1-2.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS1-2.mp3",
+    "sha256": "e581722c47e30d11bdd7daa3286f212ff363fe3e10830133353f31f4b30607f9"
+  },
+  "music/ThemeS1-3.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS1-3.mp3",
+    "sha256": "f86c1ddf712ca5533e9260b1942a14b9e264a7913a907d79ef8e5684ab379ed9"
+  },
+  "music/ThemeS1-4.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS1-4.mp3",
+    "sha256": "0c69d915b4fc020f9955c8c0b0c099ac47fb87753906808a6e69646e9a6c519d"
+  },
+  "music/ThemeS1-5.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS1-5.mp3",
+    "sha256": "f74a24616d8e91845f94c1f5b121b09ecb09ff6ecc4205fc8c10daca14c89759"
+  },
+  "music/ThemeS1-6.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS1-6.mp3",
+    "sha256": "4c7764ef2bc39cddb61092a6e8ae48a00b9109ce5add302cd3d4ed68773a03f9"
+  },
+  "music/ThemeS2-1.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS2-1.mp3",
+    "sha256": "0cf3369837eb104e7b4b598be933824e451488c7115adc4a72c8af63642a683d"
+  },
+  "music/ThemeS2-2.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS2-2.mp3",
+    "sha256": "73e684b6b891316bd288925b19d63b4564c23c627b70722cf147290649cb5f53"
+  },
+  "music/ThemeS2-3.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS2-3.mp3",
+    "sha256": "d73fd96a404588a3cd076971ca8b162d27a5aece5c28733a59e81f3521b03472"
+  },
+  "music/ThemeS2-4.mp3": {
+    "source": "Audio/Music/LevelScene/ThemeS2-4.mp3",
+    "sha256": "5ca31d7724b0adcb062e0ca381398ac8204a2b2886c09e3c6170ff0bad3c1582"
   }
 }
