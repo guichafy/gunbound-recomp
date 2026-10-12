@@ -2,6 +2,7 @@
 
 ## Loja clássica 0.14.5 (ADR-064)
 
+- [x] Integrar à main por pedido explícito;1758checks+10partidas, app/ZIP e smoke PCK na pasta principal.
 - [x] Comparar as duas fotos e C#, reproduzir quatro diferenças da grade/retrato.
 - [x] Grade3×3, nove itens/página, retratos centrais e moedas coloridas.
 - [x] Inventário lateral vestível persistido e prévia/saldo compactos.

@@ -1,5 +1,25 @@
 # Hand-off — Gunbound Recomp 0.14.5
 
+## Integração da loja clássica à main 0.14.5
+
+Solicitação explícita do usuário: trazer as alterações da worktree para main.
+Integração fast-forward de959db5f para5dda3d8, preservando todo o commit da
+branch codex/avatar-shop-classic, sem conflitos ou alteração de comportamento.
+REQ-20/38/39/40 e ADR-064 permanecem os contratos desta entrega.
+
+Validação na main: check.sh completo passou com **1758checks e10partidas
+completas, zero falhas** (42,604s nas partidas). App/ZIP0.14.5 reexportados em
+`/Users/guichafy/Workspaces/DemoGame/builds`, assinatura estrita válida.
+Smoke GPU do PCK da pasta principal passou: layout clássico,13peçasHD,
+inventário com cliques reais, recarga do perfil e quatro peças na batalha.
+Somente perfis isolados de teste; fonte C# e perfil real preservados.
+
+Worktree/branch mantidos como referência; nenhum envio remoto. Capturas
+FullHD e vídeo estão agora também na pasta principal docs/avatar-shop-classic.
+Os parágrafos seguintes que descrevem main preservada retratam a etapa anterior
+no worktree; esta integração substitui essa condição. Validação visual/manual
+do usuário continua pendente.
+
 ## Loja clássica 0.14.5 — worktree
 
 Pedido atual: loja mais fiel à primeira foto; segunda foto mostra a adaptação

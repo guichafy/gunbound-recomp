@@ -44,3 +44,10 @@ App/ZIP0.14.5 reexportados e assinatura estrita validada; smoke GPU do pacote
 real confirmou cliques no inventário, perfil recarregado e quatro peças em
 batalha. Fonte C#/perfil real/rig originais não modificados. Usuário ainda não
 validou esta composição; main preservada até nova integração.
+
+## Integração à main solicitada posteriormente
+
+Fast-forward completo959db5f→5dda3d8, sem conflitos. Na main,1758checks e10
+partidas completas sem falhas; app/ZIP0.14.5 reexportados na pasta principal,
+assinatura estrita e smoke GPU do PCK válidos (inventário/recarga/batalha).
+Esta integração substitui a condição de main preservada da etapa anterior.

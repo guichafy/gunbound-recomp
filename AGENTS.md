@@ -258,4 +258,6 @@ catálogo/preços15registros; não inventar chapéus ou stats da imagem. Atribut
 em modal separado, confirmar/cancelar com rollback. Cards166×147, janela146×90,
 retratos126×78 com aspecto preservado. Test test_avatar_shop_classic e captura
 capture_avatar_shop_classic em1920×1080/120frames60Hz; smoke separado do PCK.
-Worktree codex/avatar-shop-classic parte da main; sem integração/publicação.
+Worktree codex/avatar-shop-classic integrada à main por solicitação explícita.
+1758checks+10partidas e smoke do PCK principal passaram; app/ZIP0.14.5 em builds.
+Branch/worktree preservados como referência, sem publicação.
