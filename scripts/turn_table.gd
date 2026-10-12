@@ -9,6 +9,8 @@ static func other(index: int) -> int:
 	return 1 - index
 
 static func schedule(model, index: int, delay: float) -> void:
+	# The turn is over: item effects are dismissed (also after a pass, ADR-058).
+	model.actors[index].turn_item = ""
 	model.actors[index].ready = maxf(float(model.actors[index].ready), model.clock) + delay
 	var difference := float(model.actors[PLAYER].ready) - float(model.actors[CPU].ready)
 	model.active = other(index) if is_zero_approx(difference) else (PLAYER if difference < 0.0 else CPU)

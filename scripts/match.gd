@@ -9,6 +9,7 @@ const Mobiles = preload("res://scripts/mobiles.gd")
 const FlightSnapshot = preload("res://scripts/flight_snapshot.gd")
 const Damage = preload("res://scripts/damage.gd")
 const TurnTable = preload("res://scripts/turn_table.gd")
+const Items = preload("res://scripts/items.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 # Training option "all": equal weight for every weather type, Thor included.
@@ -44,6 +45,8 @@ var resolve_wait := 0.0
 var flight_elapsed := 0.0
 var last_shots: Array = [{}, {}]
 var map_id := ""
+# Dual second volley start times (presentation event only; not in the snapshot).
+var volleys: Array = []
 
 static func normalize_vehicle(vehicle: int) -> int:
 	return Mobiles.normalize(vehicle)
@@ -51,7 +54,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = []) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -75,7 +78,12 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		# Search from just above the listed spawn so layered maps keep its platform.
 		var ground: float = terrain.surface_at(x, maxf(0.0, spawns[index].y - 80.0))
 		var shield := int(Mobiles.definition(kind).shield)
-		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false})
+		# Equipped items (EquippedButtonBar); the CPU plays without items for now.
+		var items: Array = []
+		for id in (Items.sanitize(loadout) if index == PLAYER else []):
+			items.append({"id": id, "used": false})
+		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false,
+			"items": items, "turn_item": ""})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = PLAYER
 	winner = -1
@@ -85,6 +93,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	resolve_wait = 0.0
 	flight_elapsed = 0.0
 	projectiles.clear()
+	volleys.clear()
 	events.clear()
 	last_shots = [{}, {}]
 	weather = Weather.new()
@@ -120,7 +129,51 @@ func apply_weather(entry: Dictionary) -> void:
 	events.append({"type": "weather", "weather": entry.type, "extra": entry.extra, "queue": weather.queue.duplicate(true), "wind_force": weather.wind_force, "wind_angle": weather.wind_angle})
 
 func can_use_special(index: int) -> bool:
-	return int(actors[index].turns) >= 3 and not bool(actors[index].special_used)
+	# HUD.DisableSS: using an item locks SS for the rest of the turn.
+	return int(actors[index].turns) >= 3 and not bool(actors[index].special_used) and str(actors[index].get("turn_item", "")).is_empty()
+
+## HUD.UnlockItem / WeatherDisplay: the Ignorance weather locks the item bar.
+func items_locked() -> bool:
+	return weather != null and not weather.queue.is_empty() and str(weather.queue[0].type) == "ignorance"
+
+func can_use_item(index: int, slot: int) -> bool:
+	if phase != "aim" or index != active or items_locked():
+		return false
+	var actor: Dictionary = actors[index]
+	var items: Array = actor.get("items", [])
+	# One item per turn: the whole bar is disabled after a use.
+	if slot < 0 or slot >= items.size() or bool(items[slot].used) or not str(actor.get("turn_item", "")).is_empty():
+		return false
+	return int(actor.hp) > 0
+
+## Mobile.UseItem plus MatchManager.ComputePlayerItem: the delay cost is
+## charged at once; instant items act now, turn items modify this turn's shot.
+func use_item(slot: int) -> bool:
+	if not can_use_item(active, slot):
+		return false
+	var actor: Dictionary = actors[active]
+	var id: String = actor.items[slot].id
+	actor.items[slot].used = true
+	actor.turn_item = id
+	actor.ready = maxf(float(actor.ready), clock) + Items.delay(id)
+	var event := {"type": "item", "actor": active, "item": id, "slot": slot, "position": actor.pos}
+	match id:
+		"energy_up_1", "energy_up_2":
+			# Mobile.Heal: percentage of the base health; shield untouched.
+			var percent := Items.ENERGY_UP_1 if id == "energy_up_1" else Items.ENERGY_UP_2
+			var before := int(actor.hp)
+			actor.hp = mini(int(actor.max_hp), before + int(minf(float(actor.max_hp), float(actor.max_hp) * percent / 100.0)))
+			event["amount"] = int(actor.hp) - before
+		"blood":
+			var before := int(actor.hp)
+			actor.hp = maxi(1, int(float(actor.hp) - float(actor.max_hp) * Items.BLOOD_HEALTH / 100.0))
+			event["amount"] = int(actor.hp) - before
+		"change_wind":
+			weather.wind_angle = (int(weather.wind_angle) + Items.CHANGE_WIND_DEGREES) % 360
+			wind = weather.wind_vector()
+			event["wind_angle"] = weather.wind_angle
+	events.append(event)
+	return true
 
 func move_actor(direction: float, delta: float) -> void:
 	if phase != "aim" or is_zero_approx(direction):
@@ -181,17 +234,51 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power) if spread_after else shot_velocity(index, angle + float(entry.angle), power, weapon)
 		result.append({"pos": initial, "hit_pos": initial, "velocity": velocity, "age": 0.0, "trail": [initial], "helix": float(rules.get("helix", 0)), "phase": float(component) * PI, "spawn_at": entry.spawn, "launched": false,
 			# Weather state per shell (Projectile.cs): base damage, columns touched, influences.
-			"damage": int(rules.damage), "launch_speed": velocity.length(), "inside": {}, "influenced": [], "electric": false, "thor": false, "tornado": {}})
+			"damage": int(rules.damage), "launch_speed": velocity.length(), "inside": {}, "influenced": [], "electric": false, "thor": false, "tornado": {},
+			"weapon": weapon, "volley": 0, "beacon": false, "wind_scale": 1.0})
 	return result
+
+## Mobile.ShootWithModifiers: the shells of a shot under this turn's item.
+## fire() and predict_shot() both build from here, so the CPU sees the same flight.
+func shot_shells(index: int, angle: float, power: float, weapon: int) -> Array:
+	var item: String = str(actors[index].get("turn_item", ""))
+	var shells := projectile_parameters(index, angle, power, weapon)
+	match item:
+		"dual", "dual_plus":
+			var last_spawn := 0.0
+			for shell in shells:
+				last_spawn = maxf(last_spawn, float(shell.spawn_at))
+			# Dual+: S2 after S1, S1 after anything else.
+			var second := weapon if item == "dual" else (1 if weapon == 0 else 0)
+			# InteractionTime (1 + last spawn of the first shot), then each SpawnTime.
+			for shell in projectile_parameters(index, angle, power, second):
+				shell.spawn_at = float(shell.spawn_at) + Items.DUAL_WAIT + last_spawn
+				shell.volley = 1
+				shells.append(shell)
+		"teleport":
+			# TeleportationBeacon replaces the shot: one shell, mass 10, no wind.
+			var beacon: Dictionary = shells[0]
+			var velocity := shot_velocity(index, angle, power, weapon) * Items.BEACON_SPEED
+			var initial := muzzle(index, angle, weapon)
+			beacon.merge({"pos": initial, "hit_pos": initial, "velocity": velocity, "trail": [initial], "helix": 0.0, "phase": 0.0,
+				"spawn_at": 0.0, "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND}, true)
+			shells = [beacon]
+		"thunder":
+			# An invisible Electricity column of scale 1000 around the mobile:
+			# every shell is electric once, and the weather column does not stack.
+			for shell in shells:
+				shell.electric = true
+				shell.influenced.append("electricity")
+	return shells
 
 func launch_projectile(projectile: Dictionary) -> void:
 	projectile.launched = true
 	# Thor intersects everything: every shell fired while active attaches to it.
 	projectile.thor = bool(weather.thor.active)
-	events.append({"type": "projectile_launch", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": shot_weapon, "time": projectile.spawn_at})
+	events.append({"type": "projectile_launch", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": int(projectile.get("weapon", shot_weapon)), "time": projectile.spawn_at, "beacon": bool(projectile.get("beacon", false))})
 
 func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictionary:
-	var shells := projectile_parameters(index, angle, power, weapon)
+	var shells := shot_shells(index, angle, power, weapon)
 	# Weather, Thor and salvo craters change the flight: always run the real
 	# flight loop on isolated copies of mask, actors, wind and weather.
 	var simulation = FlightSnapshot.capture(self)
@@ -204,12 +291,12 @@ func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictio
 	for frame in range(ceili((12.0 + last_spawn) / Combat.STEP) + 1):
 		simulation.advance_projectiles(Combat.STEP)
 		for event in simulation.events:
-			if event.type not in ["explosion", "miss"]:
+			if event.type not in ["explosion", "miss", "teleport"]:
 				continue
 			var score := Vector2(event.position).distance_to(actors[other(index)].pos)
 			if score < distance:
 				distance = score
-				closest = {"position": event.position, "actor": event.get("collided_actor", -1), "hit": event.type == "explosion"}
+				closest = {"position": event.position, "actor": event.get("collided_actor", -1), "hit": event.type != "miss"}
 		simulation.events.clear()
 		if simulation.phase != "flight":
 			break
@@ -238,7 +325,16 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	power = clampf(power, 15.0, 100.0)
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
-	projectiles = projectile_parameters(active, angle, power, weapon)
+	projectiles = shot_shells(active, angle, power, weapon)
+	volleys.clear()
+	for projectile in projectiles:
+		if int(projectile.volley) == 1:
+			var start := float(projectile.spawn_at)
+			for other_shell in projectiles:
+				if int(other_shell.volley) == 1:
+					start = minf(start, float(other_shell.spawn_at))
+			volleys = [{"time": start, "weapon": int(projectile.weapon)}]
+			break
 	phase = "flight"
 	accumulator = 0.0
 	flight_elapsed = 0.0
@@ -273,6 +369,10 @@ func tick(delta: float) -> void:
 
 func advance_projectiles(delta: float) -> void:
 	flight_elapsed += delta
+	# Dual: OnStartInteracting of the second shot plays the shooting animation.
+	if not volleys.is_empty() and flight_elapsed + 0.0000001 >= float(volleys[0].time):
+		events.append({"type": "volley", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": int(volleys[0].weapon)})
+		volleys.pop_front()
 	for i in range(projectiles.size() - 1, -1, -1):
 		var projectile: Dictionary = projectiles[i]
 		var travel_delta := delta
@@ -284,11 +384,14 @@ func advance_projectiles(delta: float) -> void:
 			if travel_delta <= 0.0000001:
 				continue
 		apply_weather_contact(projectile)
-		var next: Dictionary = tornado_step(projectile, travel_delta) if not projectile.tornado.is_empty() else Combat.advance(projectile.pos, projectile.velocity, wind, travel_delta)
+		var next: Dictionary = tornado_step(projectile, travel_delta) if not projectile.tornado.is_empty() else Combat.advance(projectile.pos, projectile.velocity, wind * float(projectile.get("wind_scale", 1.0)), travel_delta)
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
 		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
-		var hit: Dictionary = Combat.trace_segment(projectile.hit_pos, actual, terrain, actors, ignored)
+		# The teleportation beacon only collides with the ground.
+		var beacon := bool(projectile.get("beacon", false))
+		var hit: Dictionary = Combat.trace_segment(projectile.hit_pos, actual, terrain, [] if beacon else actors, ignored)
+		var previous: Vector2 = projectile.hit_pos
 		projectile.hit_pos = actual
 		projectile.age += travel_delta
 		projectile.pos = next.position
@@ -298,7 +401,10 @@ func advance_projectiles(delta: float) -> void:
 			if projectile.trail.size() > 28:
 				projectile.trail.pop_front()
 		if not hit.is_empty():
-			explode(hit.position, int(hit.actor), projectile)
+			if beacon:
+				land_beacon(hit.position, previous, projectile)
+			else:
+				explode(hit.position, int(hit.actor), projectile)
 			projectiles.remove_at(i)
 		elif Combat.out_of_bounds(projectile.pos, terrain) or projectile.age > 12.0:
 			events.append({"type": "miss", "position": projectile.hit_pos})
@@ -308,19 +414,43 @@ func advance_projectiles(delta: float) -> void:
 		resolve_wait = 0.55
 
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
-	var weapon: Dictionary = weapon_rules(shot_actor, shot_weapon)
-	var removed: int = terrain.carve(position, float(weapon.radius))
+	# Each shell keeps its own weapon (Dual+ mixes S1 and S2 in one turn).
+	var weapon_index := int(projectile.get("weapon", shot_weapon))
+	var weapon: Dictionary = weapon_rules(shot_actor, weapon_index)
+	var item: String = str(actors[shot_actor].get("turn_item", ""))
+	# Projectile.Explode: erosion radius × (1 + Owner.Dig / 100) (Bunge Shot).
+	var removed: int = terrain.carve(position, float(weapon.radius) * (1.0 + Items.dig(item) / 100.0))
 	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
-	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": shot_weapon, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)))
+	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
+	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item))
 	# OnExplodeAction order: Thor attached at launch, then Electricity.
 	if bool(projectile.get("thor", false)):
 		thor_strike(position)
 	if bool(projectile.get("electric", false)):
 		lightning_strike(position)
 
-func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0) -> int:
-	return Damage.blast(actors, events, position, radius, damage, emp)
+func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0) -> int:
+	return Damage.blast(actors, events, position, radius, damage, emp, attack)
+
+## TeleportationBeacon.Explode: explode actions (Thor, Electricity) first, then
+## the owner moves to previousPosition (the free point just before the contact)
+## and stands on the ground below it.
+func land_beacon(position: Vector2, previous: Vector2, projectile: Dictionary) -> void:
+	if bool(projectile.get("thor", false)):
+		thor_strike(position)
+	if bool(projectile.get("electric", false)):
+		lightning_strike(position)
+	var actor: Dictionary = actors[shot_actor]
+	if int(actor.hp) <= 0:
+		return
+	var origin: Vector2 = actor.pos
+	var x := clampf(previous.x, 24.0, terrain.world_size().x - 24.0)
+	var floor_y: float = terrain.surface_at(x, maxf(0.0, previous.y))
+	actor.pos = Vector2(x, floor_y - 24.0)
+	events.append({"type": "teleport", "actor": shot_actor, "from": origin, "to": actor.pos, "position": position})
+	if terrain.is_void(floor_y):
+		actor.hp = 0
+		events.append({"type": "fall", "actor": shot_actor})
 
 func deal_damage(index: int, damage: int) -> int:
 	return Damage.deal_damage(actors, events, index, damage)

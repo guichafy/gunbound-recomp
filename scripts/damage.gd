@@ -16,7 +16,9 @@ static func deal_damage(actors: Array, events: Array, index: int, damage: int) -
 		events.append({"type": "damage", "actor": index, "amount": remaining, "position": actors[index].pos})
 	return damage
 
-static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0) -> int:
+## attack: Owner.Attack of the turn (Power Up, Blood); Projectile.CalculateDamage
+## multiplies the final damage per target by (1 + attack / 100) and truncates.
+static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0) -> int:
 	var dealt := 0
 	for index in range(actors.size()):
 		if int(actors[index].hp) <= 0:
@@ -25,5 +27,8 @@ static func blast(actors: Array, events: Array, position: Vector2, radius: float
 		if emp > 0 and distance <= emp + 22.0 and int(actors[index].shield) > 0:
 			events.append({"type": "shield_damage", "actor": index, "amount": actors[index].shield, "position": actors[index].pos})
 			actors[index].shield = 0
-		dealt += deal_damage(actors, events, index, Combat.damage_at(distance, damage, radius))
+		var amount := Combat.damage_at(distance, damage, radius)
+		if attack != 0.0:
+			amount = int(amount * (1.0 + attack / 100.0))
+		dealt += deal_damage(actors, events, index, amount)
 	return dealt
