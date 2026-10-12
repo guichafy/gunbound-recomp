@@ -1,5 +1,21 @@
 # Entregas e próximos trabalhos
 
+## Itens de batalha 0.13.0 (ADR-058)
+
+- [x] Levantar Item.cs, Mobile.cs, MatchManager, HUD, EquippedButtonBar,
+      PopupSelectItem, TeleportationBeacon e SpecialEffectBuilder.
+- [x] ITEMS_0_13.md, REQ-35..37, ADR-058 antes do código.
+- [x] Modelo: 11 itens, custo ÷ 7,5, Dual/Dual+/Thunder/Teleport no voo e na
+      previsão, ataque/cavar, cura limitada, um item por turno, SS travado.
+- [x] Arte: 19 originais copiados; HD Full HD por Codex GPT Images (5 folhas).
+- [x] Cena: barra F1–F6, fila no turno adversário, ITEM LOCKED, popup
+      Select Item no menu, sinalizador/chamas/sons, pose UsingItem.
+- [x] test_items (49), test_items_scene (39); check.sh 1202 checks + 10
+      partidas; seeds 81–90 idênticas à 0.12; app/ZIP 0.13.0 assinados.
+- [ ] Usuário validar os itens no app.
+- [ ] CPU usar itens (exige rebaselinar seeds).
+- [ ] `ItemDelay` de avatar e preço em ouro (fora do treino).
+
 ## Reorganização SOLID (ADR-057)
 
 - [x] Catálogo `mobiles.gd` no lugar dos ramos por ID.

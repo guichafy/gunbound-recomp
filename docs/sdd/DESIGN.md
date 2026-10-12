@@ -307,3 +307,22 @@ balão do relógio da CPU e contador de dano acumulado. Texturas HD 3× em
 Options e SkipTurn são `TextureButton` com as regiões de `Button.cs`. `game.gd`
 cuida do input original (carga 0→100 a +2/0,04 s, Tab, F8, ↑/↓ com repetição
 acelerada) e entrega um `hud_state()`; `match.gd` não mudou.
+
+## Itens de batalha 0.13
+
+- `items.gd`: catálogo (ordem de `Item.ItemPresets`, slots, categoria, custo,
+  descrições). Delay = custo ÷ 7,5.
+- `match.gd`: `use_item(slot)` valida (fase de mira, ator ativo, um por turno,
+  Ignorância) e aplica cura/Blood/Change Wind na hora; efeitos de tiro ficam em
+  `actors[i].turn_item`. `shot_shells` monta Dual/Dual+/Teleport/Thunder e é a
+  única fonte de projéteis de `fire` e `predict_shot`. Cada projétil leva
+  `weapon`, `volley`, `beacon` e `wind_scale`; `explode` lê a arma do projétil,
+  o ataque (Power Up/Blood) e o cavar (Bunge Shot); `land_beacon` teletransporta.
+  `TurnTable.schedule` limpa o item ao fim do turno.
+- `damage.gd`: multiplicador de ataque após o decaimento, truncado.
+- Cena: `item_bar.gd` (EquippedButtonBar/UseItemAction/GrantTurn/LockItem),
+  `item_art.gd` (botões HD/originais, sinalizador, chamas e sons),
+  `select_item_popup.gd` (PopupSelectItem); carga em `options.items`.
+- `battle_art`: pose `using_item`, segunda rajada repete o recuo, teletransporte
+  sem deslizar. Eventos novos: `item`, `volley`, `teleport`.
+

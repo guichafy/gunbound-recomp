@@ -18,6 +18,7 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [BIGFOOT_0_3.md](BIGFOOT_0_3.md) | Recorte, plano e limites da integração Bigfoot 0.3 |
 | [MAGE_0_4.md](MAGE_0_4.md) | Mage: assets, ataques, escudo, adaptações e validação 0.4 |
 | [BIGFOOT_ATTACKS_0_5.md](BIGFOOT_ATTACKS_0_5.md) | T1/T2/SS Bigfoot: emitter, regras, áudio/Fx e validação 0.5 |
+| [ITEMS_0_13.md](ITEMS_0_13.md) | Itens de batalha: regras do OpenBound, Select Item, arte HD e validação 0.13 |
 
 Ordem de retomada: hand-off → especificação → design → tarefas → decisões.
 Para uma mudança, localizar o requisito, definir o delta da especificação,

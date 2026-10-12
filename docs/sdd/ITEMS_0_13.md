@@ -128,6 +128,23 @@ Física e dano (Projectile.cs / Mobile.cs):
 - `ItemDelay` (atributo de avatar) = 0. Team Teleport fica no catálogo com o
   comportamento 1×1 do original (sem aliado).
 
+## Resultado (2026-10-12)
+
+- Fases A–E concluídas com commits locais por fase, sem push.
+- `./scripts/check.sh`: **1202 checks + 10 partidas, zero falhas**
+  (test_items 49, test_items_scene 39). Seeds 81–90 com vencedor, tiros e vida
+  restante idênticos aos da 0.12 (rodada da base num worktree temporário).
+- Geração HD: 5 folhas no Codex (`items2`, `items1`, `popup`, `beacon`,
+  `flame`), origens em `assets/hd/GENERATION.json`, prompts em
+  `assets/hd/ITEMS_PROMPTS.md`; densidade 3× (UI) e 2× (efeitos).
+- Capturas GPU 1920×1200 em `docs/items/` (barra HD/original, Dual em uso,
+  ITEM LOCKED, Select Item HD/original, sinalizador, chamas).
+- App/ZIP 0.13.0 reexportados (`build_macos.py`), `codesign --verify --deep
+  --strict` válido; PCK com itens HD/originais e sem folhas brutas.
+- Limites: CPU sem itens; sem teste manual de mouse/áudio no app; queda
+  após teletransporte sob teto não aplica dano de queda (o mobile é apoiado
+  no chão da coluna); cor das bordas fracas das chamas vem do original.
+
 ## Fases
 
 A. Especificação, decisão e plano (este documento, REQ-35..37, ADR-058).

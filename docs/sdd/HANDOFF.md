@@ -1,4 +1,35 @@
-# Hand-off — Gunbound Recomp 0.12.0
+# Hand-off — Gunbound Recomp 0.13.0
+
+## Entrega atual 0.13.0: itens de batalha
+
+Pedido: implementar na batalha os itens usados nos turnos (como Dual), copiando
+lógica, física e características do OpenBound em C#; imagens regeneradas em
+Full HD pelo Codex com GPT Images. REQ-35..37, ADR-058, plano ITEMS_0_13.md.
+
+- 11 itens com custo de delay original ÷ 7,5 cobrado no uso: Dual (repete o
+  tiro 1 s após o último lançamento), Dual+ (S1↔S2), Thunder (todo projétil
+  elétrico), Teleport (sinalizador massa 10/sem vento, só terreno, leva o mobile
+  ao chão do ponto de contato), Power Up/Blood (dano final ×1,3/×1,33; Blood
+  −8 % da vida, mínimo 1), Bunge Shot (cratera ×1,25), Change Wind (+180°),
+  Energy Up 1/2 (12/30 %, limitado ao máximo), Team Teleport (no 1×1 só
+  efeito). Um por turno, trava o SS, Ignorância trava a barra.
+- Previsão e voo real usam `shot_shells`; efeitos no dicionário do ator. CPU
+  sem itens neste corte: seeds 81–90 idênticas à 0.12.
+- HUD: barra F1–F6 do OpenBound (clique ou F1–F6), clique no turno da máquina
+  agenda o uso, item usado sai da barra no turno seguinte, ITEM LOCKED.
+  Menu: botão Itens abre o Select Item original (6 slots, gravado nas opções).
+- Arte: originais em `assets/openbound/items`; HD em `assets/hd/items` via
+  `scripts/build_items_hd.py` + Codex (5 folhas). Teleport2 é o Teleport1
+  invertido (pixel a pixel), então as chamas usam 8 quadros-chave HD.
+
+Validação: `./scripts/check.sh` — **1202 checks + 10 partidas, zero falhas**.
+Capturas GPU em docs/items. App/ZIP **0.13.0 reexportados**, assinatura
+estrita válida. Commits locais por fase, sem push.
+Limites: CPU não usa itens; sem teste manual de mouse/áudio no app; queda após
+teletransporte sob teto não causa dano.
+
+Próximo passo: usuário validar os itens no app (roteiro em VALIDACAO.md).
+
 
 ## Reorganização SOLID (mesma versão, sem export)
 
