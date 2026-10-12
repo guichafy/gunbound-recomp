@@ -18,12 +18,18 @@ Também é possível importar `project.godot` no Godot 4.7.2 e pressionar **F6**
 | Esc ou botão ESC | Opções (popup original: SFX, rolagem, fundo) |
 | P ou PAUSA no popup | Pausa (recomeçar, menu, ajuda) |
 | Modo Drag (ESC → Aiming Mode) | Segurar o botão esquerdo no mapa e arrastar → define a força; soltar dispara. Botão direito olha o mapa |
+| Clique na barra F1–F6 ou F1–F6 | Usar um item (um por turno; trava o SS no turno). No turno da máquina, o clique agenda o uso para o início do seu turno |
+| Itens (menu) | Popup Select Item original: 6 slots, itens de 2 ou 1 slot; Accept grava |
 
 A batalha toca os temas originais do OpenBound (volume no BGM do popup).
 | F | Virar parado |
 | H | Ajuda |
 
 O HUD é o do OpenBound: barra de ação com botões S1/S2/SS, ângulo atual e LAST, barra de força com marcador do tiro anterior e um seletor arrastável (só referência), barra de movimento, previsão de clima, Delayboard (ordem e atraso), bússola, relógio do turno, mira com a faixa legal do mobile, barra de vida, nome e contador de dano. Botões pequenos acima da barra (← → F ●) permitem jogar só com mouse/toque; o ● segura para carregar. Ver [HUD_0_10.md](docs/sdd/HUD_0_10.md).
+
+## Itens 0.13
+
+Os 11 itens do OpenBound (Dual, Dual+, Thunder, Energy Up 1/2, Team Teleport, Teleport, Blood, Bunge Shot, Power Up, Change Wind) com a lógica, a física e o custo de delay originais (÷ 7,5, como as armas). Dual repete o tiro 1 s após o último lançamento; Dual+ alterna S1/S2; Teleport troca o tiro por um sinalizador mais rápido e sem vento que leva o mobile ao ponto onde toca o chão; Thunder eletrifica todos os projéteis; Power Up/Blood aumentam o dano em 30 %/33 % (Blood custa 8 % da vida); Bunge Shot amplia a cratera em 25 %; Change Wind inverte o vento. A máquina ainda não usa itens. Botões, ITEM LOCKED, popup e efeitos do Teleport em HD gerados no Codex (GPT Images). Ver [ITEMS_0_13.md](docs/sdd/ITEMS_0_13.md).
 
 ## Regras deste protótipo
 

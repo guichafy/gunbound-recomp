@@ -18,7 +18,7 @@ func available() -> bool:
 	return pilot.region(0, 0).has_area()
 func sample(pose: String, age: float, weapon: int) -> Dictionary:
 	age = maxf(0.0, age)
-	pose = pose.get_slice("_", 0)
+	pose = "using" if pose == "using_item" else pose.get_slice("_", 0)
 	var offset := Vector2.ZERO
 	var angle := 0.0
 	var barrel := 0.0
@@ -38,6 +38,11 @@ func sample(pose: String, age: float, weapon: int) -> Dictionary:
 		offset.x = kick * (9.0 if weapon == 2 else 6.0)
 		barrel = -kick * (0.65 if weapon == 2 else 0.45)
 		flash = sin(clampf(age / 0.16, 0.0, 1.0) * PI)
+	elif pose == "using":
+		# UsingItem: a short lift with the charge glow over its 20 frames.
+		var lift := sin(clampf(age / (20.0 / 19.0), 0.0, 1.0) * PI)
+		offset.y = -lift * 3.0
+		glow = lift * 0.55
 	elif pose == "hurt":
 		var envelope := sin(clampf(age / 1.05, 0.0, 1.0) * PI)
 		offset.x = sin(age * 40.0) * envelope * 1.7

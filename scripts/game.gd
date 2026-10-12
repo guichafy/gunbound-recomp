@@ -19,7 +19,13 @@ const Mobiles = preload("res://scripts/mobiles.gd")
 const AimControl = preload("res://scripts/aim_control.gd")
 const CameraRig = preload("res://scripts/camera_rig.gd")
 const MatchOverlay = preload("res://scripts/match_overlay.gd")
+const ItemArt = preload("res://scripts/item_art.gd")
+const ItemBar = preload("res://scripts/item_bar.gd")
+const SelectItemPopup = preload("res://scripts/select_item_popup.gd")
+const Items = preload("res://scripts/items.gd")
 var hud = HudArt.new()
+var item_art = ItemArt.new()
+var item_bar = ItemBar.new(item_art)
 var weather_art = WeatherArt.new()
 var mage = MageSprite.new()
 var bigfoot = BigfootSprite.new()
@@ -30,6 +36,7 @@ var profile = null
 # PopupGameOptions values; saved next to the profile (tests isolate both).
 var options
 var options_popup: Control
+var items_popup: Control
 var sound = null
 var screen := "menu"
 var root: Control
@@ -172,7 +179,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.12.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.13.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -218,13 +225,17 @@ func show_menu() -> void:
 		difficulty_buttons.append(button)
 		if index == cpu_difficulty:
 			button.add_theme_stylebox_override("normal", ui.box(Color("32666b"), 9, ui.TEAL))
-	var weather_button := ui.button(card, weather_label(), Vector2(28, 438), Vector2(364, 34), func(): pass)
+	var weather_button := ui.button(card, weather_label(), Vector2(28, 438), Vector2(240, 34), func(): pass)
 	weather_button.add_theme_font_size_override("font_size", 14)
 	weather_button.tooltip_text = "Original: pesos do mapa (Miramo A não tem Thor, Espelho nem Fraqueza).\nTodos: pesos iguais para todos os climas, Thor incluído."
 	weather_button.pressed.connect(func():
 		weather_mode = "all" if weather_mode == "original" else "original"
 		weather_button.text = weather_label()
 	)
+	# PopupSelectItem (REQ-36): the six equipped slots used in every match.
+	var items_button := ui.button(card, "Itens (%d/6)" % Items.used_slots(options.items), Vector2(276, 438), Vector2(116, 34), show_items)
+	items_button.add_theme_font_size_override("font_size", 14)
+	items_button.tooltip_text = "Escolher os itens da barra F1–F6 (Select Item)"
 	ui.button(card, "INICIAR TREINO    →", Vector2(28, 484), Vector2(364, 52), start_match, true)
 	ui.label(card, "NÍVEL %d    ·    %d XP    ·    %d VITÓRIAS" % [profile.level(), profile.xp, profile.wins], Vector2(28, 555), Vector2(364, 26), 13, ui.MUTED, true)
 	ui.button(root, "Como jogar", Vector2(1030, 754), Vector2(190, 30), show_help)
@@ -232,7 +243,7 @@ func show_menu() -> void:
 	queue_redraw()
 
 func weather_label() -> String:
-	return "Clima: " + ("original do mapa" if weather_mode == "original" else "todos os efeitos (Thor)")
+	return "Clima: " + ("original do mapa" if weather_mode == "original" else "todos (Thor)")
 
 func select_vehicle(index: int) -> void:
 	index = Match.normalize_vehicle(index)
@@ -248,7 +259,8 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new())
+	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new(), options.items)
+	item_art.clear()
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
 	sound.play_music()
 	art.reset(model.actors)
@@ -316,6 +328,7 @@ func build_hud() -> void:
 	for button in [move_left, move_right, flip_button, fire_button]:
 		button.add_theme_font_size_override("font_size", 15)
 		button.modulate = Color(1, 1, 1, 0.82)
+	item_bar.build(self, root)
 	select_weapon(0)
 
 func displayed_queue() -> Array:
@@ -360,6 +373,15 @@ func update_drag(x: float, relative_x: float) -> void:
 func release_drag() -> void:
 	aim.release_drag(self)
 
+## HUD.UseItemAction on the own turn: the match validates and applies the item;
+## DisableSS moves an SS selection to the second shot.
+func use_item(slot: int) -> bool:
+	if not player_can_act() or not model.use_item(slot):
+		return false
+	if weapon == Match.SPECIAL_WEAPON:
+		select_weapon(1)
+	return true
+
 func pass_turn() -> void:
 	if player_can_act():
 		charging = false
@@ -394,6 +416,7 @@ func _process(delta: float) -> void:
 		update_aim_keys(frame_delta)
 		aim.tick(self, frame_delta)
 	hud.tick(frame_delta, model, sound)
+	item_art.tick(frame_delta)
 	model.tick(frame_delta)
 	weather_art.tick(frame_delta, model)
 	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
@@ -470,7 +493,9 @@ func sprite_for(vehicle_id: int):
 
 func play_mobile_shot(event: Dictionary) -> void:
 	var id := int(event.vehicle) if event.has("vehicle") else int(model.actors[event.actor].vehicle)
-	if not Mobiles.has_id(id) or Mobiles.shot_sound_on(id) != event.type:
+	# A Dual second volley sounds like a new shot; the teleport beacon has its own.
+	var moment: String = "fire" if event.type == "volley" else event.type
+	if not Mobiles.has_id(id) or Mobiles.shot_sound_on(id) != moment or bool(event.get("beacon", false)) or event.get("item", "") == "teleport":
 		return
 	var body = sprite_for(id)
 	if body == null:
@@ -478,12 +503,15 @@ func play_mobile_shot(event: Dictionary) -> void:
 	sound.play("fire", body.shoot_sounds[event.weapon])
 
 func consume_events() -> void:
+	var granted := -1
 	for event in model.events:
 		art.react(event)
 		hud.react(event, model)
 		weather_art.react(event, model, sound)
+		item_art.react(event, sound)
 		match event.type:
 			"turn":
+				granted = int(event.actor)
 				camera_manual = false
 				last_impact = Vector2.INF
 				charging = false
@@ -498,6 +526,8 @@ func consume_events() -> void:
 					weapon = 0
 			"fire":
 				camera_manual = false
+				play_mobile_shot(event)
+			"volley":
 				play_mobile_shot(event)
 			"projectile_launch":
 				play_mobile_shot(event)
@@ -519,6 +549,9 @@ func consume_events() -> void:
 				result_wait = 1.7
 				sound.play("result")
 	model.events.clear()
+	# HUD.GrantTurn after the turn events: drop the used item, run a queued one.
+	if granted >= 0 and screen == "match":
+		item_bar.on_turn(self, granted)
 
 func update_hud() -> void:
 	if screen != "match":
@@ -531,6 +564,7 @@ func update_hud() -> void:
 	move_left.disabled = not enabled
 	move_right.disabled = not enabled
 	fire_button.disabled = not enabled
+	item_bar.sync(self)
 	for index in range(weapon_buttons.size()):
 		var button: TextureButton = weapon_buttons[index]
 		button.disabled = index == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER)
@@ -565,6 +599,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if event.pressed and event.physical_keycode == KEY_ESCAPE:
 		if overlay_kind == "options":
 			accept_options()
+		elif overlay_kind == "items":
+			accept_items()
 		elif overlay != null:
 			if overlay_kind != "result":
 				close_overlay()
@@ -576,6 +612,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	if event.pressed and event.physical_keycode == KEY_H:
 		show_help()
+		return
+	# F1–F6 press the item buttons (extra; also queues on the other turn).
+	if event.pressed and screen == "match" and overlay == null and event.physical_keycode >= KEY_F1 and event.physical_keycode <= KEY_F6:
+		item_bar.key(self, event.physical_keycode - KEY_F1)
 		return
 	if not player_can_act():
 		return
@@ -617,6 +657,16 @@ func apply_options() -> void:
 func accept_options() -> void:
 	options.save_options()
 	close_overlay()
+
+func show_items() -> void:
+	overlays.show_items(self)
+
+func accept_items() -> void:
+	options.items = Items.sanitize(options.items)
+	options.save_options()
+	close_overlay()
+	if screen == "menu":
+		show_menu()
 
 func show_pause() -> void:
 	overlays.show_pause(self)
@@ -663,16 +713,22 @@ func _draw() -> void:
 	for projectile in model.projectiles:
 		if not projectile.launched:
 			continue
+		if bool(projectile.get("beacon", false)):
+			item_art.draw_beacon(self, projectile, offset)
+			draw_set_transform(offset)
+			continue
 		var shooter := int(model.actors[model.shot_actor].vehicle)
 		var body = sprite_for(shooter)
 		if body == null:
 			continue
-		var color: Color = model.weapon_rules(model.shot_actor, model.shot_weapon).color
+		# Each shell keeps its weapon (Dual+ mixes S1 and S2 in one turn).
+		var shell_weapon := int(projectile.get("weapon", model.shot_weapon))
+		var color: Color = model.weapon_rules(model.shot_actor, shell_weapon).color
 		if Mobiles.generic_trail(shooter):
 			var trail: Array = projectile.trail
 			for index in range(1, trail.size()):
 				draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
-		body.draw_projectile(self, projectile, model.shot_weapon, offset)
+		body.draw_projectile(self, projectile, shell_weapon, offset)
 		draw_set_transform(offset)
 	draw_set_transform(Vector2.ZERO)
 	weather_art.draw_shell_marks(self, model, offset)
@@ -683,6 +739,7 @@ func _draw() -> void:
 		var body = sprite_for(int(effect.get("vehicle", -1)))
 		if body != null:
 			body.draw_effect(self, effect, offset)
+	item_art.draw_flames(self, offset)
 	draw_set_transform(offset)
 	for item in floating:
 		var pos: Vector2 = item.pos + Vector2(-22, -70 - float(item.age) * 34.0)

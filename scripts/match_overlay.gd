@@ -44,9 +44,9 @@ func close(host) -> void:
 func show_help(host) -> void:
 	var card := make(host, "help")
 	host.ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, host.ui.CREAM, true)
-	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "Modo Drag (ESC)    Arrastar → no mapa: força; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8  /  F                   Passar o turno  /  virar parado", "ESC  /  P                 Opções  /  pausa", "Arrastar a tela        Olhar o mapa (botão direito no Drag)"]
+	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "Modo Drag (ESC)    Arrastar → no mapa: força; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8  /  F                   Passar o turno  /  virar parado", "ESC  /  P                 Opções  /  pausa", "F1–F6 ou clique       Item da barra (um por turno; SS fica travado)", "Arrastar a tela        Olhar o mapa (botão direito no Drag)"]
 	for index in range(lines.size()):
-		host.ui.label(card, lines[index], Vector2(32, 88 + index * 31), Vector2(500, 30), 16)
+		host.ui.label(card, lines[index], Vector2(32, 86 + index * 28), Vector2(500, 28), 16)
 	host.ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 344), Vector2(500, 70), 14, host.ui.MUTED)
 	host.ui.button(card, "ENTENDI", Vector2(32, 424), Vector2(496, 42), host.close_overlay, true)
 
@@ -63,6 +63,19 @@ func show_options(host) -> void:
 	pause.add_theme_font_size_override("font_size", 13)
 	pause.modulate = Color(1, 1, 1, 0.82)
 	pause.tooltip_text = "Pausa, recomeçar ou voltar ao menu (P)"
+
+## Menu: PopupSelectItem over a shade; Accept or ESC saves the loadout.
+func show_items(host) -> void:
+	if host.screen != "menu":
+		return
+	var layer := open(host, "items")
+	var shade := ColorRect.new()
+	shade.size = Vector2(1280, 800)
+	shade.color = Color(0.025, 0.09, 0.12, 0.55)
+	layer.add_child(shade)
+	host.items_popup = host.SelectItemPopup.new(host.options, host.item_art)
+	host.items_popup.accepted.connect(host.accept_items)
+	layer.add_child(host.items_popup)
 
 func show_pause(host) -> void:
 	if host.screen != "match" or host.model.phase == "finished":

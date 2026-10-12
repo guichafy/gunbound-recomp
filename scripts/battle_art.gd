@@ -4,19 +4,30 @@ extends RefCounted
 const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 
+const USING_ITEM_TIME := 20.0 / 19.0
 var motion: Array = []
 
 func reset(actors: Array) -> void:
 	motion.clear()
 	for actor in actors:
 		var spec: Dictionary = Mobiles.definition(actor.vehicle)
-		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
+		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "using": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
 
 func react(event: Dictionary) -> void:
-	if event.type == "fire":
+	# A Dual second volley replays the shooting animation (OnStartInteracting).
+	if event.type in ["fire", "volley"]:
 		motion[event.actor].recoil = 1.16
 		motion[event.actor].pose = "recoil"
 		motion[event.actor].pose_age = 0.0
+	elif event.type == "item":
+		# Mobile.UseItem: ActorFlipbookState.UsingItem, 20 frames at 19 fps.
+		motion[event.actor].using = USING_ITEM_TIME
+		motion[event.actor].pose = "using_item"
+		motion[event.actor].pose_age = 0.0
+	elif event.type == "teleport":
+		# ForceChangePosition: the mobile appears at the beacon, no slide.
+		motion[event.actor].pos = Vector2(event.to)
+		motion[event.actor].previous = Vector2(event.to)
 	elif event.type in ["damage", "shield_damage"]:
 		motion[event.actor].hurt = float(motion[event.actor].hurt_time)
 		motion[event.actor].pose = "hurt"
@@ -33,6 +44,7 @@ func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0,
 		state.rotation = lerp_angle(float(state.rotation), model.body_rotation(index), 1.0 - exp(-delta * 18.0))
 		state.recoil = maxf(0.0, state.recoil - delta)
 		state.hurt = maxf(0.0, state.hurt - delta)
+		state.using = maxf(0.0, state.using - delta)
 		if actor.hp <= 0:
 			state.dead += delta
 		var pose := state_name(model, index, charging, cpu_charging)
@@ -51,6 +63,8 @@ func state_name(model, index: int, charging: bool, cpu_charging: bool = false) -
 		return "hurt"
 	if motion[index].recoil > 0.0:
 		return "recoil"
+	if motion[index].using > 0.0:
+		return "using_item"
 	if (charging and index == Match.PLAYER) or (cpu_charging and index == Match.CPU):
 		return "charging"
 	if motion[index].moving > 0.0:

@@ -17,6 +17,7 @@ const SEQUENCES := {
 	"recoil_1": [125, 146, 19.0, false],
 	"recoil_2": [274, 293, 20.0, false],
 	"hurt": [394, 418, 24.0, false],
+	"using_item": [234, 253, 19.0, false],
 	"destroyed": [202, 211, 19.0, false]
 }
 var bullets: Array[Texture2D] = []

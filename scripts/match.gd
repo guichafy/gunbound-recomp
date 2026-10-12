@@ -338,7 +338,7 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	phase = "flight"
 	accumulator = 0.0
 	flight_elapsed = 0.0
-	events.append({"type": "fire", "actor": active, "weapon": weapon})
+	events.append({"type": "fire", "actor": active, "weapon": weapon, "item": str(actors[active].get("turn_item", ""))})
 	for projectile in projectiles:
 		if float(projectile.spawn_at) <= 0.0:
 			launch_projectile(projectile)

@@ -25,8 +25,8 @@ integrado visualmente com piloto/quadros/projéteis em `assets/openbound/bigfoot
 Mage substitui Carapaça com escudo/regen, mira própria, duplo laser helicoidal e
 EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com4 bombas, T2 duas rajadas de3 e SS com8, com lançamentos
 temporizados, dados/Fx/áudio originais e adaptações descritas em
-`docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Demais mobiles, resistências, itens, clima/Thor
-e regenHP continuam pendentes.
+`docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Itens entraram em 0.13 (ver seção abaixo);
+demais mobiles, resistências e regenHP continuam pendentes.
 Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd/MAGE_0_4.md`.
 
 ## Referência C# em `~/Workspaces/Gunbound`
@@ -189,3 +189,17 @@ ADR-057. `match.gd` decide turno, dano e resultado. Catálogo em `mobiles.gd`
 `battle_art` não lê campos da cena: recebe o contexto de `actor_context`.
 Treino segue 1×1; não adicionar rede neste corte.
 
+
+## Itens de batalha 0.13 — estado atual
+
+Ler ITEMS_0_13.md (REQ-35..37, ADR-058). Catálogo `items.gd` (11 itens, custo
+original ÷ 7,5). Regras no `match.gd`: `use_item`, `shot_shells` (Dual/Dual+/
+Teleport/Thunder) usado por `fire` e `predict_shot`; efeito do turno em
+`actors[i].turn_item` (copiado pela previsão), limpo em `TurnTable.schedule`.
+Cada projétil guarda `weapon`; sinalizador (`beacon`) só colide com o terreno.
+CPU sem itens (seeds 81–90 iguais). Cena: `item_bar.gd` (barra F1–F6, fila no
+turno adversário, ITEM LOCKED na Ignorância), `item_art.gd` (botões, sinalizador,
+chamas; Teleport2 = Teleport1 invertido), `select_item_popup.gd` (menu "Itens";
+carga em `options.items`). Arte HD via `scripts/build_items_hd.py` e Codex
+(`refs`, gerar `gen_<folha>.png`, depois sem argumento). Testes test_items.gd e
+test_items_scene.gd; captura tests/capture_items.gd (docs/items).
