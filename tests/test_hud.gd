@@ -178,7 +178,8 @@ func run() -> void:
 	check(is_equal_approx(scene.sound.players[0].volume_db, -19.0 + linear_to_db(0.5)), "SFX scales the −19 dB players linearly")
 	popup.pointer_down(popup.slider_rect("mouse").get_center() + Vector2(60, 0))
 	popup.pointer_up()
-	check(popup.value_of("mouse") == 50 and popup.value_of("aiming") == 1 and popup.value_of("interface") == 1, "Mouse, aiming and interface keep the original defaults, disabled")
+	check(popup.value_of("mouse") == 50 and popup.value_of("interface") == 1, "Mouse speed and interface keep the original defaults, disabled")
+	check(popup.value_of("aiming") == 1, "Aiming Mode starts on Slice like the original AimType")
 	# REQ-33 BGM: the slider drives the battle music volume.
 	check(scene.sound.music_wanted and not scene.sound.music.playing, "The battle wants music, but muted tests never play it")
 	popup.pointer_down(Vector2(popup.slider_rect("bgm").position.x + 2.0, popup.slider_rect("bgm").get_center().y))
@@ -257,7 +258,7 @@ func run() -> void:
 	scene.apply_options()
 	check(scene.sound.volume == 1.0, "SFX 100 restores the original effects volume")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(options_file))
-	check(Popup.ENABLED == ["scroll", "sfx", "bgm", "background"], "Scroll, SFX, BGM and background are live; aiming, mouse and skin stay disabled")
+	check(Popup.ENABLED == ["aiming", "scroll", "sfx", "bgm", "background"], "Aiming, scroll, SFX, BGM and background are live; mouse speed and skin stay disabled")
 	for track in scene.sound.BATTLE_MUSIC:
 		var stream = load("res://assets/openbound/music/%s.mp3" % track)
 		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original LevelScene theme that ends (then a random one follows)" % track)

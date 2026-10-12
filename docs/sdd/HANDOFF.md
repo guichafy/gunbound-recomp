@@ -1,6 +1,42 @@
-# Hand-off — Gunbound Recomp 0.11.0
+# Hand-off — Gunbound Recomp 0.12.0
 
-## Entrega atual 0.11.0: performance da troca de turno, BGM e popup HD
+## Entrega atual 0.12.0: modo de mira Drag/Slice
+
+Pedido: implementar o Aiming Mode com opção de ligar/desligar no menu de
+configuração; Mouse Speed desabilitado com TODO; Interface só skin Blue.
+REQ-34, ADR-056, plano AIMING_0_12.md. O OpenBound não implementa o modo;
+o comportamento vem de guias do GunBound (StrategyWiki, GameFAQs).
+
+- Rádio Aiming Mode do popup ativo e gravado (`aiming`: 0 Drag, 1 Slice;
+  padrão Slice = comportamento anterior, como o `AimType` do original).
+- Drag (game.gd): no turno do jogador, botão esquerdo pressionado no mundo
+  zera a barra; força = deslocamento horizontal / 640 px (largura da barra de
+  força na tela), 0–100, voltar reduz; tremor ±2 a cada 0,04 s quando o
+  cursor não avança (`drag_rng` próprio); soltar dispara uma vez, inclusive
+  soltando sobre a barra do HUD (`_input`); clique sem arraste não atira; sem
+  disparo automático a 100. Popup, pausa, ajuda, troca de turno e recomeçar
+  cancelam (setter de `charging`). Espaço e arraste exclusivos; Espaço segue
+  ativo no Drag. Botão direito/meio olha o mapa nos dois modos; no Slice o
+  esquerdo continua só olhando o mapa.
+- Mouse Speed: desabilitado, `TODO(Mouse Speed)` em options_popup.gd e em
+  `DRAG_FULL_POWER` (game.gd). Interface: só Blue (decisão registrada).
+- Ajuda, README e VALIDACAO atualizados; AGENTS registra a exceção do Drag à
+  invariante da carga.
+
+Validação: `./scripts/check.sh` — **1114 checks + 10 partidas, zero falhas**
+(nova suíte test_aiming 25, com cliques reais pela viewport: Slice faz pan,
+rádio grava, 320 px = 50, voltar reduz, soltar dispara uma vez, clique parado
+não atira, soltura sobre o HUD e soltura perdida, exclusão com Espaço,
+tremor com seed, 100 sem auto-disparo, cancelamentos, botão direito; seeds
+81–90 inalteradas). Captura do popup com o rádio ativo. App/ZIP **0.12.0
+reexportados**, assinatura estrita válida. Commit local, sem push.
+Limites: amplitude do tremor e escala 640 px são adaptação (fontes não dão
+valores); com toque emulado, no Drag o próprio turno não permite olhar o
+mapa arrastando; sem teste manual de mouse no app.
+
+Próximo passo: usuário validar o Drag no aplicativo.
+
+## Entrega anterior 0.11.0: performance da troca de turno, BGM e popup HD
 
 Pedido: "implementar e rever os limites" (exemplo: popup Full HD gerado no
 Codex com GPT Images) e melhorar a performance da batalha, que travava entre

@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Modo de mira 0.12.0
+
+- [x] Pesquisa: OpenBound só declara AimType; Drag do GunBound por guias.
+- [x] AIMING_0_12.md, REQ-34, ADR-056 antes do código.
+- [x] Rádio Aiming Mode ativo e gravado; Drag com arraste, tremor, soltura
+      robusta, cancelamentos e pan no botão direito.
+- [x] test_aiming (25); check.sh 1114 checks + 10 partidas; app/ZIP 0.12.0.
+- [ ] Usuário validar o Drag no app.
+- [ ] TODO Mouse Speed: habilitar o slider e escalar `DRAG_FULL_POWER`.
+- [ ] Interface: só skin Blue (decisão do usuário).
+
 ## Performance e limites 0.11.0
 
 - [x] Medir a trava: busca da CPU 90–314 ms num frame no início do turno dela.

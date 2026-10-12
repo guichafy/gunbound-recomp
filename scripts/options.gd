@@ -6,11 +6,16 @@ var path: String
 var sfx := 100
 var bgm := 50
 var scroll := 50
+# Aiming Mode radio (GameClientSettingsInformation.AimType): 0 Drag, 1 Slice (default).
+var aiming := 1
 var background := true
 var last_save_ok := true
 
 func _init(save_path: String = "user://profile-options.json") -> void:
 	path = save_path
+
+func drag_aiming() -> bool:
+	return aiming == 0
 
 ## Camera drag multiplier: 0 → 0.5×, 50 → 1× (current behaviour), 100 → 2×.
 func scroll_factor() -> float:
@@ -32,6 +37,8 @@ func load_options() -> void:
 		bgm = clampi(int(data.bgm), 0, 100)
 	if data.get("scroll") is float or data.get("scroll") is int:
 		scroll = clampi(int(data.scroll), 0, 100)
+	if data.get("aiming") is float or data.get("aiming") is int:
+		aiming = clampi(int(data.aiming), 0, 1)
 	if data.get("background") is bool:
 		background = data.background
 
@@ -41,7 +48,7 @@ func save_options() -> bool:
 	if file == null:
 		last_save_ok = false
 		return false
-	file.store_string(JSON.stringify({"version": 1, "sfx": sfx, "bgm": bgm, "scroll": scroll, "background": background}, "\t"))
+	file.store_string(JSON.stringify({"version": 1, "sfx": sfx, "bgm": bgm, "scroll": scroll, "aiming": aiming, "background": background}, "\t"))
 	file.close()
 	last_save_ok = DirAccess.rename_absolute(ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(path)) == OK
 	return last_save_ok

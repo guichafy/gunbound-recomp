@@ -188,3 +188,9 @@ Conforme HUD_0_10.md. Altera a parte "Options abre a pausa" de REQ-27.
 REQ-32 troca de turno sem travar (busca da CPU fatiada em frames, plano
 idêntico), REQ-33 música de batalha original com o slider BGM, e revisão de
 REQ-31 com o popup em HD (GPT Images), conforme PERF_LIMITS_0_11.md.
+
+## Modo de mira 0.12 — escopo solicitado
+
+REQ-34: rádio Aiming Mode do popup ativo; Slice (padrão) mantém o Espaço,
+Drag liga o tiro por arraste do mouse, conforme AIMING_0_12.md. Mouse Speed
+fica desabilitado com TODO; Interface só com a skin Blue.

@@ -58,9 +58,9 @@ GPU (atualização da textura HD 2560×661), sem pico relevante. O pico de
 | Popup sem HD | Implementado (REQ-31 revisão) |
 | BGM sem música | Implementado (REQ-33) |
 | Travamento na troca de turno | Corrigido (REQ-32) |
-| Aiming Mode Drag/Slice | Mantido: não há implementação no OpenBound (desativado no C#) nem mira por mouse aqui |
-| Mouse Speed | Mantido: controla o cursor do sistema, que o jogo não altera |
-| Interface (skins) | Mantido: o pacote só tem a skin Blue em `Interface/InGame/HUD/` |
+| Aiming Mode Drag/Slice | Implementado na 0.12 por pedido do usuário (AIMING_0_12.md) |
+| Mouse Speed | Mantido desabilitado com TODO (0.12, decisão do usuário) |
+| Interface (skins) | Só skin Blue, por decisão do usuário (0.12) |
 | Fonte Consolas | Mantido: proprietária e fora do pacote; usa a monoespaçada do sistema |
 | Popup pausa o treino | Mantido por decisão (treino offline) |
 

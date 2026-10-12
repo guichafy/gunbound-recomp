@@ -261,3 +261,16 @@ ADR-055 — adotada por pedido explícito: o popup de opções ganha derivados H
 3× por GPT Images (Codex `image_gen`), como o HUD de ADR-051. Aiming Mode,
 Mouse Speed, skins e Consolas continuam como limite (sem implementação no
 original, cursor do sistema, só skin Blue no pacote, fonte proprietária).
+
+## Modo de mira 0.12
+
+ADR-056 — adotada por solicitação explícita: o rádio Aiming Mode liga o modo
+Drag (tiro por arraste do mouse, comportamento do GunBound original segundo
+guias de jogadores; o OpenBound não o implementa). Padrão Slice, idêntico ao
+comportamento anterior. Força = deslocamento horizontal / 640 px; tremor ±2 a
+cada 0,04 s quando o cursor não avança (RNG próprio, amplitude adaptada);
+clique sem arraste cancela; sem disparo automático a 100 no Drag (exceção à
+invariante da carga). Espaço continua ativo nos dois modos. Botão direito/meio
+olha o mapa. Mouse Speed desabilitado com TODO (escalará o arraste); skins:
+só Blue, por decisão do usuário. Substitui "Aiming Mode desabilitado" de
+ADR-052/055.

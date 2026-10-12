@@ -38,6 +38,7 @@ const CAMERA_DAMPENING := 25.0
 var camera := Vector2.ZERO
 var camera_manual := false
 var dragging := false
+var pan_mask := MOUSE_BUTTON_MASK_LEFT
 var last_impact := Vector2.INF
 var nickname_input: LineEdit
 var vehicle := 2
@@ -49,7 +50,22 @@ var vehicle_info: Label
 var angle := 45.0
 var power := 65.0
 var weapon := 0
-var charging := false
+# Any end of a charge (shot, cancel, overlay, turn change) also ends a Drag.
+var charging := false:
+	set(value):
+		charging = value
+		if not value:
+			drag_aiming = false
+# Drag aiming (REQ-34/ADR-056): hold the left button in the world and drag right;
+# the strength bar width on screen (400 × 1.6 px) is the full power; release fires.
+# TODO(Mouse Speed): scale DRAG_FULL_POWER by the popup's Mouse Speed slider.
+const DRAG_FULL_POWER := 640.0
+const DRAG_QUIVER := 2.0  # power wobble every 0.04 s while the cursor stops or goes back
+var drag_aiming := false
+var drag_origin_x := 0.0
+var drag_advanced := false
+var drag_quiver_timer := 0.0
+var drag_rng := RandomNumberGenerator.new()
 var paused := false
 var elapsed := 0.0
 var cpu_wait := 0.0
@@ -86,6 +102,7 @@ func _ready() -> void:
 	if options == null:
 		options = Options.new(profile.path.get_basename() + "-options.json")
 		options.load_options()
+	drag_rng.randomize()
 	sound = Sound.new()
 	add_child(sound)
 	apply_options()
@@ -114,7 +131,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.11.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.12.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -290,14 +307,37 @@ func cycle_weapon() -> void:
 
 func begin_charge() -> void:
 	# Mobile.Shoot: Space resets the strength bar and starts the shot sequence.
-	if player_can_act():
+	# A Drag in progress owns the shot; Space waits for it to end.
+	if player_can_act() and not drag_aiming:
 		charging = true
 		power = 0.0
 		charge_timer = 0.0
 
 func release_charge() -> void:
-	if charging:
+	if charging and not drag_aiming:
 		shoot()
+
+func begin_drag(x: float) -> void:
+	if player_can_act() and not charging:
+		charging = true
+		drag_aiming = true
+		power = 0.0
+		drag_origin_x = x
+		drag_advanced = false
+		drag_quiver_timer = 0.0
+
+func update_drag(x: float, relative_x: float) -> void:
+	power = clampf((x - drag_origin_x) / DRAG_FULL_POWER * 100.0, 0.0, 100.0)
+	if relative_x > 0.0:
+		drag_advanced = true
+
+## Releasing fires once; a click without a drag (power < 1) cancels.
+func release_drag() -> void:
+	if not (charging and drag_aiming):
+		return
+	if power >= 1.0:
+		shoot()
+	charging = false
 
 func pass_turn() -> void:
 	if player_can_act():
@@ -331,7 +371,14 @@ func _process(delta: float) -> void:
 		if not is_zero_approx(direction):
 			model.move_actor(direction, frame_delta)
 		update_aim_keys(frame_delta)
-		if charging:
+		if charging and drag_aiming:
+			drag_quiver_timer += frame_delta
+			while drag_quiver_timer >= 0.04:
+				drag_quiver_timer -= 0.04
+				if not drag_advanced:
+					power = clampf(power + drag_rng.randf_range(-DRAG_QUIVER, DRAG_QUIVER), 0.0, 100.0)
+				drag_advanced = false
+		elif charging:
 			# TimedProgressBar: +2 every 0.04 s while held; full bar fires.
 			charge_timer += frame_delta
 			while charge_timer > 0.04 and power < 100.0:
@@ -575,10 +622,10 @@ func close_overlay() -> void:
 func show_help() -> void:
 	var card := make_overlay("help")
 	ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, ui.CREAM, true)
-	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8                           Passar o turno", "ESC  /  P                 Opções  /  pausa", "Arrastar a tela        Olhar o mapa; F vira parado"]
+	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "Modo Drag (ESC)    Arrastar → no mapa: força; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8  /  F                   Passar o turno  /  virar parado", "ESC  /  P                 Opções  /  pausa", "Arrastar a tela        Olhar o mapa (botão direito no Drag)"]
 	for index in range(lines.size()):
-		ui.label(card, lines[index], Vector2(32, 92 + index * 34), Vector2(500, 32), 17)
-	ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 336), Vector2(500, 70), 14, ui.MUTED)
+		ui.label(card, lines[index], Vector2(32, 88 + index * 31), Vector2(500, 30), 16)
+	ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 344), Vector2(500, 70), 14, ui.MUTED)
 	ui.button(card, "ENTENDI", Vector2(32, 424), Vector2(496, 42), close_overlay, true)
 
 ## PopupGameOptions (HUD.cs GameOptionsOnClickAction): ESC/Options open it, Accept
@@ -808,19 +855,41 @@ func update_camera(delta: float) -> void:
 		camera = camera.lerp(clamp_camera(camera_goal()), follow)
 	camera = clamp_camera(camera)
 
+## Drag aiming sees the motion and the release before the HUD, so letting go
+## over the action bar (or a lost release) still ends the drag.
+func _input(event: InputEvent) -> void:
+	if not (charging and drag_aiming):
+		return
+	if event is InputEventMouseMotion:
+		if not (event.button_mask & MOUSE_BUTTON_MASK_LEFT):
+			release_drag()
+		else:
+			update_drag(event.position.x, event.relative.x)
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		release_drag()
+
 func _unhandled_input(event: InputEvent) -> void:
+	if screen != "match" or overlay != null:
+		return
+	# Drag mode: a left press in the world during the player's aim starts the shot.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and options.drag_aiming() and player_can_act() and event.position.y < VIEW_SIZE.y:
+		begin_drag(event.position.x)
+		dragging = false
+		return
 	# Drag the world (mouse or touch) to look around; tracking resumes next turn or shot.
-	if screen != "match" or overlay != null or camera_limits().size == Vector2.ZERO:
+	if camera_limits().size == Vector2.ZERO:
 		return
 	# Touch is emulated as mouse by default; handle only one source to avoid double panning.
 	var touch_as_mouse: bool = ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch", true)
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]:
+		# The right (or middle) button always looks around; Drag mode needs it.
 		dragging = event.pressed and event.position.y < VIEW_SIZE.y
+		pan_mask = {MOUSE_BUTTON_LEFT: MOUSE_BUTTON_MASK_LEFT, MOUSE_BUTTON_RIGHT: MOUSE_BUTTON_MASK_RIGHT, MOUSE_BUTTON_MIDDLE: MOUSE_BUTTON_MASK_MIDDLE}[event.button_index]
 	elif event is InputEventScreenTouch and not touch_as_mouse:
 		dragging = event.pressed and event.position.y < VIEW_SIZE.y
 	elif event is InputEventMouseMotion and dragging:
 		# A release consumed by the HUD must not leave the drag stuck on.
-		if not (event.button_mask & MOUSE_BUTTON_MASK_LEFT):
+		if not (event.button_mask & pan_mask):
 			dragging = false
 			return
 		camera_manual = true

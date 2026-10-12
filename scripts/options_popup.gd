@@ -33,8 +33,11 @@ const RADIOS := {
 	"interface": {"labels": ["Classic", "TH Blue", "TH White", "OpenBound"],
 		"centers": [Vector2(-90, 86), Vector2(30, 86), Vector2(-90, 106), Vector2(30, 106)]}}
 # Only these exist in this game; the rest keep the C# defaults, disabled.
-const ENABLED := ["scroll", "sfx", "bgm", "background"]
-const FIXED := {"mouse": 50, "aiming": 1, "interface": 1}
+const ENABLED := ["aiming", "scroll", "sfx", "bgm", "background"]
+# TODO(Mouse Speed): enable this slider and scale the Drag aiming distance
+# (game.gd DRAG_FULL_POWER) by it; kept disabled at the C# default for now.
+# Interface: only the Blue skin exists in this game (user decision, ADR-056).
+const FIXED := {"mouse": 50, "interface": 1}
 const ACCEPT_OFFSET := Vector2(130, 144)
 const PAUSE_OFFSET := Vector2(-112, 144)
 
@@ -131,6 +134,9 @@ func select_radio(key: String, index: int) -> void:
 		return
 	if key == "background" and options.background != (index == 0):
 		options.background = index == 0
+		changed.emit()
+	elif key == "aiming" and options.aiming != index:
+		options.aiming = index
 		changed.emit()
 	queue_redraw()
 

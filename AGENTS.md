@@ -60,6 +60,8 @@ extra da sessão quando necessário.
   inclinação e direção. HUD e CPU devem usar essas funções, sem duplicar geometria.
 - `battle_art.gd` guarda apenas animações. Não usar posições interpoladas para colisão.
 - Carga é crescente e dispara uma vez a 100%; a pausa cancela a carga sem atirar.
+  Exceção (ADR-056): no modo Drag a força segue o arraste (pode diminuir e
+  tremer) e só dispara ao soltar; ainda é um disparo único e cancelável.
 - Resultado não pode duplicar XP. Testes usam perfil isolado, nunca o perfil real.
 - Preserve imagens originais, arquivos `.gd.uid` e configurações `.png.import`.
 - `.godot/`, `.tools/` e `builds/` são locais e ignorados pelo Git.
@@ -168,3 +170,12 @@ idêntico a choose_cpu_shot (wrapper dos testes). Nunca ler estado vivo na
 thread; descartar com discard_cpu_search. BGM: temas LevelScene em
 assets/openbound/music, sound.play_music/stop_music, mudo cobre música.
 Popup HD pela folha options de build_hud_hd.py. Teste test_performance.gd.
+
+## Modo de mira 0.12 — estado atual
+
+Ler AIMING_0_12.md. Rádio Aiming Mode ativo (options.aiming: 0 Drag, 1 Slice
+padrão). Drag em game.gd: begin_drag no _unhandled_input (mundo, turno do
+jogador), update/release no _input (soltura sobre o HUD), tremor com
+drag_rng próprio. Setter de `charging` encerra o Drag. Botão direito/meio olha
+o mapa. Mouse Speed: TODO (escalar DRAG_FULL_POWER). Skins: só Blue.
+Teste test_aiming.gd.
