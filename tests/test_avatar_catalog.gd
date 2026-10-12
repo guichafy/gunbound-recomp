@@ -21,6 +21,6 @@ func run() -> void:
 			check(ResourceLoader.exists(item.portrait), "Portrait " + item.key)
 			if not item.atlas.is_empty():
 				var texture = load(item.atlas)
-				check(texture.get_width() >= int(item.frame_size[0]) * (11 if item.category == 1 else 22), "Frames " + item.key)
+				check(int(texture.get_width() / int(item.frame_size[0])) * ceili(float(texture.get_height()) / float(item.frame_size[1])) >= (11 if item.category == 1 else 22), "Frames " + item.key)
 	print("AVATAR CATALOG CHECKS: ", checks, " | FAILURES: ", failures)
 	quit(0 if failures == 0 else 1)

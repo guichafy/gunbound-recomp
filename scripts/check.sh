@@ -50,7 +50,7 @@ for suite in $suites; do
 	if [ -z "$summary" ]; then
 		summary="(sem resumo; ver $log)"
 	fi
-	if [ "$status" -ne 0 ] || printf '%s\n' "$output" | grep -q 'FAIL:'; then
+	if [ "$summary" = "(sem resumo; ver $log)" ] || [ "$status" -ne 0 ] || printf '%s\n' "$output" | grep -Eq 'FAIL:|SCRIPT ERROR:|^ERROR:'; then
 		echo "FAIL $suite -> $summary"
 		fail=$((fail + 1))
 	else
