@@ -431,5 +431,81 @@
   "music/ThemeS2-4.mp3": {
     "source": "Audio/Music/LevelScene/ThemeS2-4.mp3",
     "sha256": "5ca31d7724b0adcb062e0ca381398ac8204a2b2886c09e3c6170ff0bad3c1582"
+  },
+  "items/ItemDual.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/Dual.png",
+    "sha256": "dde772f9a98c37eb2909442be2b67e8f897b2c9eff1cb2eab8783f3e5b7e2af4"
+  },
+  "items/ItemDualPlus.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/DualPlus.png",
+    "sha256": "475ef405b260e8f0d30b0bd8e827893582331ea7a481d8f707ae58c82b8d93cf"
+  },
+  "items/ItemThunder.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/Thunder.png",
+    "sha256": "b5f65fa4b7682cc84731d8c54c2f347dcd14fe1d5a37314c977db1a8f077b157"
+  },
+  "items/ItemEnergyUp2.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/EnergyUp2.png",
+    "sha256": "7ec8034496d2bbf26881d54a4afa1797c3ba07730677ce8d1060f511136e502d"
+  },
+  "items/ItemTeamTeleport.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/TeamTeleport.png",
+    "sha256": "61f465f0a23bfc64eaff07c1a05464d4127ec18637d5f51dcc01c7adb527e4ad"
+  },
+  "items/ItemTeleport.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/Teleport.png",
+    "sha256": "5766f4544aa32eddd080458271706e69a78538d471a568372216d6605e8792e1"
+  },
+  "items/ItemBlood.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/Blood.png",
+    "sha256": "2fe8e90d7c622e774965ed091788f7e9066b8bba73d22972ea40bff932a03897"
+  },
+  "items/ItemBungeShot.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/BungeShot.png",
+    "sha256": "fd7311f804f2f7946c27e7cb97356d08978a1db006cf49921ea03677199eb350"
+  },
+  "items/ItemPowerUp.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/PowerUp.png",
+    "sha256": "b0177172d148b99fcc276afac9667ec58ec8ec4b1d69f02de97520e699f348b1"
+  },
+  "items/ItemChangeWind.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/ChangeWind.png",
+    "sha256": "b1cacd5f857cffcbe3d4603f10470edb8d3d46fe4547ccbd9f4405c456708382"
+  },
+  "items/ItemEnergyUp1.png": {
+    "source": "Interface/StaticButtons/Popup/SelectItem/EnergyUp1.png",
+    "sha256": "978d5bc25d308e360858069b51a01e1f4fc67bf77b6c4926875e05841627e07b"
+  },
+  "items/MatchStatus.png": {
+    "source": "Interface/InGame/HUD/Blue/ActionBar/MatchStatus.png",
+    "sha256": "2110b8fd525468262f40bd95e56683dfa8cee5da672e9d15900bd064b63b2e9d"
+  },
+  "items/SelectItemBackground.png": {
+    "source": "Interface/Popup/Blue/SelectItem/Background.png",
+    "sha256": "5546fdc512e4024977cd9645cd301a206a6e8bf4f3a26f31912aab3207e86045"
+  },
+  "items/TabIndex.png": {
+    "source": "Interface/StaticButtons/AvatarShop/TabIndex.png",
+    "sha256": "a39b7c3df30c906fad5d1aaca4f809f75a9a9a20574ac33f0b802c3d66de9188"
+  },
+  "items/TeleportBullet.png": {
+    "source": "Graphics/Tank/Common/TeleportBullet.png",
+    "sha256": "20a1826fa7f195382cbaaed01af20ee2b4b045ecd200c89971b4b95b0b9c422d"
+  },
+  "items/Teleport1.png": {
+    "source": "Graphics/Special Effects/General/Teleport1.png",
+    "sha256": "be21fc6fded91a96e921192dc493c3ddba9d08e8b53152d7fe820c552e7ce77f"
+  },
+  "items/Teleport2.png": {
+    "source": "Graphics/Special Effects/General/Teleport2.png",
+    "sha256": "43b954acc0fc784c8f15e5f60e16e548b48e451821cca0249776d68d40801cf8"
+  },
+  "items/ShootTeleport.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/Teleport.mp3",
+    "sha256": "c2b5aa2ce15b9ac41ee3b0d133a6cee3b550f72f209e758c1fd8dd0a8ffb4d5d"
+  },
+  "items/BlastTeleport.mp3": {
+    "source": "Audio/SFX/Tank/Blast/Teleport.mp3",
+    "sha256": "6619efff413006308fe52004f1a96a3da224e9453376842c24350fbc18240a5c"
   }
 }

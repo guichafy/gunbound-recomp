@@ -94,3 +94,20 @@ Layout, estados de botão, carga e mira portados de `HUD.cs`, `Crosshair.cs`,
 `SpriteNumericField.cs`, `Button.cs`, `ShotButton.cs` e `Mobile.cs` (GPL).
 Arquivos copiados sem edição; SHA-256 em `SOURCE_MANIFEST.json`. Derivados HD
 GPT Images em `assets/hd/hud/`.
+
+## Itens de batalha (0.13)
+
+Copiados sem edição de `.tools/source-assets/content/` para `items/`:
+
+- `ItemDual.png` … `ItemEnergyUp1.png` — 11 botões de
+  `Interface/StaticButtons/Popup/SelectItem/` (renomeados com prefixo `Item`).
+- `MatchStatus.png` (`Interface/InGame/HUD/Blue/ActionBar/`),
+  `SelectItemBackground.png` (`Interface/Popup/Blue/SelectItem/Background.png`),
+  `TabIndex.png` (`Interface/StaticButtons/AvatarShop/`).
+- `TeleportBullet.png` (`Graphics/Tank/Common/`), `Teleport1.png` e
+  `Teleport2.png` (`Graphics/Special Effects/General/`).
+- `ShootTeleport.mp3` / `BlastTeleport.mp3` — `Audio/SFX/Tank/{Shoot,Blast}/Teleport.mp3`.
+
+Regras de `Item.cs`, `Mobile.cs`, `MatchManager.cs`, `HUD.cs`, `EquippedButtonBar.cs`,
+`PopupSelectItem.cs` e `GenericProjectile.cs` do mesmo fork (GPL-3.0-or-later).
+Hashes em `SOURCE_MANIFEST.json` (chaves `items/…`). Derivados HD em `assets/hd/items/`.

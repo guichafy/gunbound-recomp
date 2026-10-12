@@ -155,5 +155,33 @@
       }
     },
     "note": "Folhas com layout fixo; build_hud_hd.py recorta cada sprite, 3× o original, alfa original. Faixas de mira, barras planas, moldura de vida e ponteiros ampliados direto (Lanczos)."
+  },
+  "items_0_13": {
+    "tool": "GPT Images via Codex CLI image_gen (gpt-5.6-sol)",
+    "prompts": "ITEMS_PROMPTS.md",
+    "source": "assets/openbound/items (originais OpenBound)",
+    "sheets": {
+      "items/source/gen_items2.png": {
+        "origin": "exec-30000294-b30c-473f-b1f3-595c14fca946.png",
+        "session": "01a12e70-6d28-7253-9e53-b97123fd8e9b"
+      },
+      "items/source/gen_items1.png": {
+        "origin": "exec-787b1dbd-b41b-40c0-9727-7a1ced7b3628.png",
+        "session": "01a12e6f-34ad-7033-9fbd-c35232198953"
+      },
+      "items/source/gen_popup.png": {
+        "origin": "exec-fee41927-78e5-4da0-a931-e494f03ae614.png",
+        "session": "01a12e70-6d3e-7b53-9e32-ec97c4768227"
+      },
+      "items/source/gen_beacon.png": {
+        "origin": "exec-fc411143-bbd5-4f48-8a8e-5f93b004e9bb.png",
+        "session": "01a12e70-6d72-7c81-9629-6a150b2a3244"
+      },
+      "items/source/gen_flame.png": {
+        "origin": "exec-e35bdf79-bd0c-4196-bc94-d95ab62b066c.png",
+        "session": "01a12e70-6d60-7ac2-abe4-1c7b8814a835"
+      }
+    },
+    "note": "UI 3x (botões, ITEM LOCKED, aba, popup Select Item) com alfa original; sinalizador e 8 quadros-chave da chama do Teleport 2x, cor recuperada pelo alfa original (Teleport2 = Teleport1 invertido)."
   }
 }
