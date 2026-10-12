@@ -297,3 +297,66 @@ só voltam no caminho do tiro); Energy Up limitado à vida máxima; teclas F1–
 como extra; carga padrão Dual, Teleport, Power Up, Energy Up 1 gravada com as
 opções. CPU não usa itens neste corte (seeds 81–90 preservadas). Arte nova em
 HD por GPT Images (Codex), originais preservados com fallback.
+
+## Shop de avatar — especificação aprovada
+
+ADR-059 — decisões confirmadas pelo usuário: portar cabeça/corpo/óculos/
+bandeira do Shop C# em worktree da main, usar Gold/Cash com saldo inicial de
+teste sem dinheiro real e incluir distribuição dos oito atributos com efeitos
+no combate. Proposta AVATAR_SHOP.md (REQ-38..41). A troca do servidor pelo
+perfil local é compatível com o treino offline vigente. Aprovado pelo usuário em 2026-10-12:
+1.000 por moeda, orçamento min((nível local−1)×10,180), gênero/equipamento
+separados e preview nos mobiles existentes. Ranking permanece retirado;
+ItemDelay requer integração do trabalho de itens fora deste worktree.
+Nenhuma regra nova implementada nesta preparação.
+
+Auditoria para o plano: Gold do resultado 1×1 usa as constantes de XP4/1
+no fluxo C# apesar das constantes Gold10/5; Popularity multiplica o acumulado
+após cada tiro; branch2000 repete condição1000 e é inalcançável. O plano
+reproduz os caminhos executados, documentando essas peculiaridades. Empate
+mantém XP local e propõe Gold de resultado0 no fluxo existente do protótipo.
+
+ADR-059 — implementada no worktree como0.14.0. Os PNGs originais e identidade
+composta foram preservados; currículo de pontos usa nível local, sem ranking.
+O renderer usa grade real dos atlas e limita recorte feminino à altura27px,
+conservando pivô declarado. Transações de perfil2 incluem rollback; seção
+Shop inválida não é tratada como ausência de perfil legado.
+
+Auditoria final confirmou ângulo Gold central+180 pela diferença de convenções
+entre Crosshair/Projectile C#. Duração/clima/boomer só agregam impactos com dano;
+boomer/backward apenas entradas inimigas. Candidato de falha no export .gd não
+se reproduziu no Godot4.7.2 (smoke PCK passou antes da alteração); removido gate
+redundante por robustez. Três achados Important reais reproduzidos/corrigidos.
+ItemDelay é limite assumido pela especificação aprovada, sem importar código
+não commitado de outra tarefa. Branch/worktree mantidos; aplicativo0.14.0
+exportado para validação local, sem integrar main nem publicar.
+
+ADR-060 — correção por relato do usuário no inventory.png. O avatar equipado
+usa o centro Body original, não o registro dos quadris do mestre HD. A montagem
+é calculada da configuração existente do MobileSprite (RiderPivot idle,
+contact_y−pivot_y e hull_width), transmitida ao rig. Todas as peças compartilham
+escala e transform; poses seguem movimento contínuo do chassis. O chassis
+passa a cobrir a parte inferior do avatar equipado, como a ordem de profundidade
+original. Isso substitui a adaptação arbitrária do assento usada no caminho
+AvatarArt da0.14.0; o piloto legado0.6.4 mantém as camadas anteriores. Sem
+mudanças de modelo/perfil/PNG. Evidências AVATAR_MOUNT_FIX.md, regressão24 eGPU.
+
+ADR-061 — pedido do usuário: aumentar qualidade dos avatares e aproximar dos
+mobiles HD.13peças visíveis em5folhas GPT Images,1254×1254RGBA, mantendo originais,
+IDs/preços e registro do avatar0.14.1. Peças constantes evitam deformar anatomia
+entre quadros gerados. Relógio e deslocamentos vêm dos quadros originais;
+adaptação não restaura todos os gestos/olhos. Recortes/catalogo/hashes permitem
+fallback e reprodução. Retratos compartilham as peças da arena. O pivô
+normalizado é preservado ao conter cada imagem com aspecto uniforme na caixa
+nativa. Source bruto fica fora do export; catalog.json e folhas finais entram.
+Substitui o limite “sem HD novo” da entrega0.14.0/0.14.1 para avatares.
+
+ADR-062 — solicitação explícita de integrar todo worktree à main. Itens0.13 e
+Shop/HD0.14.2 coexistem na0.14.3. Match.start recebe loadout7º e atributos8º,
+sem interpretar arrays ambiguamente. Attack persistente e bonus item somam
+antes de subtrair defesa e truncar; Dig também soma. ItemDelay atua no custo
+original do item, mantendo AttackDelay independente. Snapshot/previsão usam
+os mesmos shell builders e dados copiados; dano climático anexado ao Teleport
+entra na contabilidade de Gold. Substitui o limite ItemDelay sem uso real de
+ADR-059/061. Suite combinada1584+10partidas e revisão independente sem bugs
+importantes. Integração local, sem publicação; worktree isolado preservado.

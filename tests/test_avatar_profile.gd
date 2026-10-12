@@ -1,0 +1,68 @@
+extends SceneTree
+var checks := 0
+var failures := 0
+func check(ok: bool, label: String) -> void:
+	checks += 1
+	if not ok:
+		failures += 1
+		printerr("FAIL: ", label)
+func _initialize() -> void:
+	call_deferred("run")
+func run() -> void:
+	var Profile = load("res://scripts/profile.gd")
+	var path := "res://.tools/avatar-profile.json"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	var p = Profile.new(path)
+	check(p.has_method("purchase"), "Profile supports transactional purchase")
+	if failures == 0:
+		p.load_profile()
+		check(p.gold == 1000 and p.cash == 1000, "Initial test grant")
+		check(p.purchase("0:0:1", "gold") == "ok", "Gold purchase")
+		check(p.gold == 900 and p.owns("0:0:1"), "Debit and possession")
+		check(p.purchase("0:0:1", "cash") == "owned" and p.cash == 1000, "Duplicate purchase")
+		check(p.purchase("0:0:138", "gold") == "funds", "Kappa unaffordable")
+		check(p.purchase("0:0:0", "gold") != "ok", "Basic already owned")
+		check(not p.equip("0:0:2"), "Cannot equip unowned")
+		check(p.equip("0:0:1"), "Equip owned")
+		check(p.purchase("2:3:1", "cash") == "ok", "Shared flag")
+		check(p.set_gender(1) and p.equip("2:3:1"), "Unisex female")
+		check(p.set_gender(0) and p.equipped_set()["0"] == "0:0:1", "Male equipment retained")
+		var q = Profile.new(path)
+		q.load_profile()
+		q.load_profile()
+		check(q.gold == 900 and q.cash == 900 and q.owns("0:0:1"), "Reload does not grant")
+		check(not q.commit_attributes([1,0,0,0,0,0,0,0]), "No points at level1")
+		q.xp = 3600
+		check(q.commit_attributes([50,50,50,30,0,0,0,0]), "180 points at level19")
+		check(not q.commit_attributes([50,50,50,31,0,0,0,0]), "Budget enforced")
+		check(not q.commit_attributes([51,0,0,0,0,0,0,0]), "Per attribute cap")
+		var before: int = q.gold
+		q.award("shop-result", true, false, 44)
+		q.award("shop-result", true, false, 44)
+		check(q.gold == before + 44 and q.matches == 1, "Gold XP awarded once")
+		q.path = "res://.tools/missing-shop-directory/profile.json"
+		before = q.gold
+		check(q.purchase("0:1:1", "gold") == "save" and q.gold == before and not q.owns("0:1:1"), "Save failure rollback")
+		var f := FileAccess.open(path, FileAccess.WRITE)
+		f.store_string(JSON.stringify({"xp":400,"nickname":"Veterano","matches":2,"wins":1,"shop":{"gold":"bad","cash":20,"attributes":[99],"owned":["invalid"],"equipped":{}}}))
+		f.close()
+		var r = Profile.new(path)
+		r.load_profile()
+		check(r.gold == 0 and r.cash == 20 and r.xp == 400, "Damaged shop no refill")
+		check(r.equipped_set()["0"] == "0:0:0" and r.attributes.size() == 8, "Safe corrupt defaults")
+		f = FileAccess.open(path, FileAccess.WRITE)
+		f.store_string('{"xp":600,"nickname":"Legado","wins":1,"matches":3}')
+		f.close()
+		r = Profile.new(path)
+		r.load_profile()
+		check(r.gold == 1000 and r.nickname == "Legado" and r.xp == 600, "Legacy progress preserved")
+		for invalid in [null,[],"broken"]:
+			f = FileAccess.open(path,FileAccess.WRITE)
+			f.store_string(JSON.stringify({"version":2,"xp":600,"shop":invalid}))
+			f.close()
+			r = Profile.new(path)
+			r.load_profile()
+			check(r.gold == 0 and r.cash == 0 and r.xp == 600, "Invalid shop container cannot refill")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	print("AVATAR PROFILE CHECKS: ", checks, " | FAILURES: ", failures)
+	quit(0 if failures == 0 else 1)

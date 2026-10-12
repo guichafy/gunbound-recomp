@@ -174,3 +174,32 @@ O projeto passa a se chamar **Gunbound Recomp**: nome do projeto, menu,
 recomeça em `app_userdata/Gunbound Recomp/` — o perfil antigo não foi migrado
 nem apagado. `scripts/check.sh` consolidou o harness de testes. Regras, roster,
 arte e áudio são os mesmos de0.6.4.
+
+## Shop de avatar 0.14.0
+
+No menu, abra **Shop de avatar**. Cabeça, corpo, óculos e bandeira usam o
+catálogo e os preços do OpenBound. Experimente sem equipar; compre com Gold ou
+Cash; na aba Inventário, clique para equipar. Masculino/feminino mantêm seus
+conjuntos, com acessórios unissex compartilhados.
+
+O perfil recebe uma única vez 1.000 de cada moeda para teste. Os oito atributos
+liberam 10 pontos por avanço do nível local (teto 180, máximo 50 por atributo);
+confirme para aplicar na próxima partida. O combate e a CPU usam os mesmos
+modificadores. Gold da partida e bônus de Popularity seguem o fluxo C#; XP
+continua separado. ItemDelay tem fórmula, mas depende da integração dos itens.
+
+[Especificação](docs/sdd/AVATAR_SHOP.md), [capturas](docs/avatar-shop/inventory.png).
+Arte dos avatares/interface original; nenhum derivado GPT novo foi gerado.
+
+### Avatares HD0.14.2
+
+As13peças visíveis agora têm derivados GPT Images no mesmo acabamento2.5D dos
+mobiles. Retratos e piloto usam a mesma arte, com encaixe preservado.
+[Inventário HD](docs/avatar-shop/inventory.png) · [Conjuntos](docs/avatar-shop/hd-roster.png).
+Originais mantidos para referência/fallback; prompts em assets/hd/avatars/GENERATION.json.
+
+### Main integrada0.14.3
+
+Shop/avatares HD e itens de batalha estão juntos. Os atributos também afetam
+itens: ItemDelay reduz seu atraso, ataque soma com Power Up/Blood e Dig soma
+com Bunge Shot. Aplicativo atualizado em builds/Gunbound Recomp.app.

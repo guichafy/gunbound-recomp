@@ -62,9 +62,9 @@ static func definition(id: String) -> Dictionary:
 static func slots(id: String) -> int:
 	return int(DEFINITIONS[id].slots)
 
-## MatchManager.ComputePlayerItem with ItemDelay 0, in prototype delay units.
-static func delay(id: String) -> float:
-	return float(DEFINITIONS[id].cost) / DELAY_SCALE
+## MatchManager.ComputePlayerItem with the allocated ItemDelay, in prototype delay units.
+static func delay(id: String, reduction: int = 0) -> float:
+	return int(int(DEFINITIONS[id].cost)*(1.0-reduction/100.0)) / DELAY_SCALE
 
 static func color(id: String) -> Color:
 	return CATEGORY_COLORS[DEFINITIONS[id].category]

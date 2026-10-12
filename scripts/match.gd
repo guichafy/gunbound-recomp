@@ -1,6 +1,9 @@
 extends RefCounted
 ## Owns the entire combat lifecycle. Presentation consumes events, never decides damage.
 
+const GoldRewards = preload("res://scripts/gold_rewards.gd")
+var shot_gold: Dictionary = {}
+const Attributes = preload("res://scripts/player_attributes.gd")
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
 const Weather = preload("res://scripts/weather.gd")
@@ -54,7 +57,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = []) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = []) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -82,7 +85,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		var items: Array = []
 		for id in (Items.sanitize(loadout) if index == PLAYER else []):
 			items.append({"id": id, "used": false})
-		actors.append({"vehicle": kind, "hp": VEHICLES[kind].hp, "max_hp": VEHICLES[kind].hp, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false,
+		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
+		var max_health := Attributes.health(int(VEHICLES[kind].hp),int(values[1]))
+		actors.append({"gold_state":{"gold":0,"enemy_damage":0},"attributes":values,"vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false,
 			"items": items, "turn_item": ""})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = PLAYER
@@ -95,6 +100,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	projectiles.clear()
 	volleys.clear()
 	events.clear()
+	shot_gold = {}
 	last_shots = [{}, {}]
 	weather = Weather.new()
 	var preset: Array = Maps.get_map(map_id).weather if not map_id.is_empty() else PROCEDURAL_WEATHER
@@ -125,7 +131,7 @@ func apply_weather(entry: Dictionary) -> void:
 		# WeatherDisplay: Protection regenerates every mobile (HealthRegenerationProtection 35).
 		for actor in actors:
 			if int(actor.hp) > 0:
-				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Weather.PROTECTION_HEAL)
+				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Attributes.heal(Weather.PROTECTION_HEAL, Attributes.points(actor,3)))
 	events.append({"type": "weather", "weather": entry.type, "extra": entry.extra, "queue": weather.queue.duplicate(true), "wind_force": weather.wind_force, "wind_angle": weather.wind_angle})
 
 func can_use_special(index: int) -> bool:
@@ -155,7 +161,7 @@ func use_item(slot: int) -> bool:
 	var id: String = actor.items[slot].id
 	actor.items[slot].used = true
 	actor.turn_item = id
-	actor.ready = maxf(float(actor.ready), clock) + Items.delay(id)
+	actor.ready = maxf(float(actor.ready), clock) + Items.delay(id,Attributes.points(actor,5))
 	var event := {"type": "item", "actor": active, "item": id, "slot": slot, "position": actor.pos}
 	match id:
 		"energy_up_1", "energy_up_2":
@@ -211,7 +217,11 @@ func body_rotation(index: int) -> float:
 	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
 
 func weapon_rules(index: int, weapon: int) -> Dictionary:
-	return Mobiles.weapon(actors[index].vehicle, weapon)
+	var rules: Dictionary = Mobiles.weapon(actors[index].vehicle, weapon).duplicate(true)
+	var points := Attributes.points(actors[index],4)
+	if points > 0:
+		rules.delay = Attributes.delay(roundi(float(rules.delay) * 7.5), points)
+	return rules
 
 func aim_limits(index: int, weapon: int = 0) -> Vector2:
 	return Mobiles.aim_limits(actors[index].vehicle, weapon)
@@ -326,6 +336,8 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
 	projectiles = shot_shells(active, angle, power, weapon)
+	var launch_angle: float = rad_to_deg(shot_velocity(active,angle,power,weapon).angle())+180.0
+	shot_gold = {"enemy_damage":0,"ally_damage":0,"enemy_kills":0,"ally_kills":0,"angle":fposmod(launch_angle,360.0),"travelled":0.0,"tornado":false,"mirror":false,"boomer":false,"backward":false,"facing":actors[active].facing,"start":actors[active].pos,"dead":[actors[0].hp<=0,actors[1].hp<=0]}
 	volleys.clear()
 	for projectile in projectiles:
 		if int(projectile.volley) == 1:
@@ -364,6 +376,7 @@ func tick(delta: float) -> void:
 		resolve_wait -= delta
 		if resolve_wait <= 0.0:
 			settle_actors()
+			finish_gold_shot()
 			if not check_end():
 				schedule(shot_actor, float(weapon_rules(shot_actor, shot_weapon).delay) + float(VEHICLES[actors[shot_actor].vehicle].delay))
 
@@ -414,32 +427,36 @@ func advance_projectiles(delta: float) -> void:
 		resolve_wait = 0.55
 
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
+	var event_start := events.size()
 	# Each shell keeps its own weapon (Dual+ mixes S1 and S2 in one turn).
 	var weapon_index := int(projectile.get("weapon", shot_weapon))
 	var weapon: Dictionary = weapon_rules(shot_actor, weapon_index)
 	var item: String = str(actors[shot_actor].get("turn_item", ""))
 	# Projectile.Explode: erosion radius × (1 + Owner.Dig / 100) (Bunge Shot).
-	var removed: int = terrain.carve(position, float(weapon.radius) * (1.0 + Items.dig(item) / 100.0))
+	var removed: int = terrain.carve(position, Attributes.crater(float(weapon.radius),Attributes.points(actors[shot_actor],6)+int(Items.dig(item))))
 	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
 	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item))
+	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
 	# OnExplodeAction order: Thor attached at launch, then Electricity.
 	if bool(projectile.get("thor", false)):
 		thor_strike(position)
 	if bool(projectile.get("electric", false)):
 		lightning_strike(position)
+	collect_gold_damage(event_start,position,projectile)
 
-func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0) -> int:
-	return Damage.blast(actors, events, position, radius, damage, emp, attack)
+func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0, shooter: int = -1) -> int:
+	return Damage.blast(actors, events, position, radius, damage, emp, attack, shooter)
 
 ## TeleportationBeacon.Explode: explode actions (Thor, Electricity) first, then
 ## the owner moves to previousPosition (the free point just before the contact)
 ## and stands on the ground below it.
 func land_beacon(position: Vector2, previous: Vector2, projectile: Dictionary) -> void:
+	var event_start := events.size()
 	if bool(projectile.get("thor", false)):
 		thor_strike(position)
 	if bool(projectile.get("electric", false)):
 		lightning_strike(position)
+	collect_gold_damage(event_start,position,projectile)
 	var actor: Dictionary = actors[shot_actor]
 	if int(actor.hp) <= 0:
 		return
@@ -627,3 +644,38 @@ func finish_cpu_plan(plan: Dictionary) -> Dictionary:
 	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), 15.0, 100.0)
 	plan.snapshot = null
 	return best
+
+func collect_gold_damage(event_start: int, impact: Vector2, projectile: Dictionary) -> void:
+	if shot_gold.is_empty():
+		return
+	var any_hit := false
+	var enemy_hit := false
+	for event in events.slice(event_start):
+		if event.type in ["damage","shield_damage"] and not event.get("emp",false) and int(event.amount)>0:
+			var key := "ally_damage" if int(event.actor)==shot_actor else "enemy_damage"
+			shot_gold[key] += int(event.amount)
+			any_hit = true
+			enemy_hit = enemy_hit or int(event.actor)!=shot_actor
+	if not any_hit:
+		return
+	shot_gold.travelled = maxf(float(shot_gold.travelled),float(projectile.get("age",0)))
+	for effect in projectile.get("influenced",[]):
+		if effect in ["tornado","mirror"]:
+			shot_gold[effect] = true
+	if not enemy_hit:
+		return
+	var dx: float = impact.x-Vector2(shot_gold.start).x
+	var angle := float(shot_gold.angle)
+	var facing := int(shot_gold.facing)
+	shot_gold.boomer = bool(shot_gold.boomer) or (facing==-1 and dx<0 and angle>90) or (facing==1 and dx>0 and angle<90)
+	shot_gold.backward = bool(shot_gold.backward) or (facing==-1 and dx>0) or (facing==1 and dx<0)
+func finish_gold_shot() -> void:
+	if shot_gold.is_empty():
+		return
+	for index in range(actors.size()):
+		if not bool(shot_gold.dead[index]) and int(actors[index].hp)<=0:
+			shot_gold["ally_kills" if index==shot_actor else "enemy_kills"] += 1
+	actors[shot_actor].gold_state = GoldRewards.apply_shot(actors[shot_actor].gold_state,shot_gold,Attributes.points(actors[shot_actor],7))
+	shot_gold = {}
+func player_gold_reward() -> int:
+	return int(actors[PLAYER].gold_state.gold)+GoldRewards.result_bonus(winner==PLAYER,winner==-1)

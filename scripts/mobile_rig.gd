@@ -1,13 +1,24 @@
 extends RefCounted
 ## Stable HD pieces. Continuous presentation transforms; never changes combat.
+const AvatarArt = preload("res://scripts/avatar_art.gd")
+var avatars = AvatarArt.new()
 const Sheet = preload("res://scripts/hd_sheet.gd")
 var kind: String
 var sheet
 var pilot
+var avatar_mount := Transform2D.IDENTITY
+var avatar_registered := false
 func _init(mobile_kind: String) -> void:
 	kind = mobile_kind
 	sheet = Sheet.new("res://assets/hd/mobile_parts.png", 3, 2)
 	pilot = Sheet.new("res://assets/hd/pilot_side.png", 1, 1)
+func register_avatar(native_origin: Vector2, contact_offset: float, native_hull: float) -> void:
+	# RiderPivot is the body sprite origin, distinct from the HD master's hip.
+	var native_scale := 60.0 / native_hull
+	avatar_mount = Transform2D(0,Vector2.ONE*native_scale,0,(native_origin-Vector2(0,contact_offset))*native_scale)
+	avatar_registered = true
+func avatar_transform(state: Dictionary) -> Transform2D:
+	return Transform2D(state.body_angle,state.body_offset) * avatar_mount * Transform2D(state.pilot_angle,Vector2.ZERO)
 func available() -> bool:
 	if not sheet.available() or not sheet.catalog_valid or not pilot.available() or not pilot.catalog_valid:
 		return false
@@ -77,7 +88,7 @@ func piece(view: Node2D, atlas, row: int, column: int, transform: Transform2D, t
 	var source: Rect2 = atlas.region(row, column)
 	var fitted := source.size * minf(target.size.x / source.size.x, target.size.y / source.size.y)
 	view.draw_texture_rect_region(atlas.paint, Rect2(target.get_center() - fitted * 0.5, fitted), source, color)
-func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0) -> bool:
+func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> bool:
 	if not available():
 		return false
 	var state := sample(pose, age, weapon)
@@ -91,12 +102,17 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	if low_health:
 		tint *= Color(0.7, 0.7, 0.7)
 	var row := 0 if kind == "bigfoot" else 1
-	piece(view, sheet, row, 0, body, state.body_rect, tint)
 	var gun_pivot: Vector2 = state.gun_pivot
 	var gun := body * Transform2D(state.barrel_angle, gun_pivot)
 	# Entire seated anatomy rotates as one figure around the hips, no seam/stretch.
 	var seat: Vector2 = state.pilot_anchor - state.body_offset + state.pilot_sway
-	piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
+	var avatar_drawn := false
+	if avatar_registered and not avatar_context.is_empty():
+		avatar_drawn = avatars.draw(view,avatar_context.get("equipment",{}),support*avatar_transform(state),float(avatar_context.get("age",age)),tint)
+	# C# depth puts the mobile in front of equipped avatars, covering the legs.
+	piece(view, sheet, row, 0, body, state.body_rect, tint)
+	if not avatar_drawn:
+		piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
 	# Mounted weapon and near tires occlude the seated lower body naturally.
 	piece(view, sheet, row, 1, gun, state.gun_rect, tint)
 	if kind == "bigfoot":

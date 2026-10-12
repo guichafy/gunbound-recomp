@@ -326,3 +326,49 @@ acelerada) e entrega um `hud_state()`; `match.gd` não mudou.
 - `battle_art`: pose `using_item`, segunda rajada repete o recuo, teletransporte
   sem deslizar. Eventos novos: `item`, `volley`, `teleport`.
 
+## Shop de avatar 0.14 (REQ-38..41)
+
+Catalog e ShopModel separam dados, filtros e preview da tela original800×600
+(render uniforme4/3, margens laterais na viewport1280×800). Profile version2
+guarda moedas, posse por chave composta, conjuntos por gênero e atributos;
+compras/equipamento/confirmar/resultado usam snapshot, rename e rollback.
+A seção shop inválida não renova o saldo de teste.
+
+AvatarArt desenha os atlas originais com pivôs e10FPS, conservando grade real
+e profundidade Flag→Head→Goggles→Body. MobileRig troca o piloto no mesmo
+assento; sem contexto conserva o caminho anterior. BattleArt recebe contexto
+de equipamento da partida; não lê o perfil.
+
+PlayerAttributes guarda orçamento/modificadores puros; Match injeta atributos
+em atores antes do primeiro turno. Damage aplica ataque−defesa somente no
+projétil primário; Dig só aumenta erosão; delays/regen/HUD compartilham regras.
+FlightSnapshot copia atores/atributos/Gold em profundidade; simulação não toca
+perfil, moeda real ou estado vivo.
+
+GoldRewards reproduz os caminhos1×1 C#, com ângulo HUD=trajetória central+180.
+Só impactos com dano positivo entram nos metadados de Gold; boomer/backward
+consideram alvo inimigo. FinishGoldShot agrega salvo uma vez após acomodação;
+Profile.award recebe Gold junto do XP, usando awarded para impedir repetição.
+ItemDelay é contrato puro até integração da funcionalidade de itens.
+
+Registro0.14.1: MobileSprite.configure transmite RiderPivot idle e geometria
+nativa ao MobileRig.register_avatar. avatar_transform aplica escala60/hull e
+origem `(RiderPivot−(0,contact_y−pivot_y))×escala` ao conjunto; rotação/offset da
+pose envolvem esse ponto. Avatar equipado é desenhado antes do chassis, que
+oculta pernas/corpo inferior; sem contexto, o piloto legado mantém seu draw.
+
+AvatarHD0.14.2: catálogo independente de recortes transparentes e janela/pivô
+nativos. Cada imagem é contida com aspecto original, preservando a posição
+normalizada do pivô; offsets por quadro deslocam o mesmo sprite fixo. AvatarArt
+consulta HD antes da textura original; ausência/invalidez retorna ao original
+por peça. Retratos usam AtlasTexture da mesma região, dimensionados só depois
+do expand_mode para impedir minimum-size de texturas grandes na UI.
+
+## Integração0.14.3
+
+Atores recebem tanto items/turn_item quanto attributes/gold_state. Assinatura:
+Match.start(vehicle,difficulty,seed,map,weather,mask,loadout,attributes_by_actor).
+Damage.blast acrescenta shooter depois de attack para manter chamadas anteriores.
+No projétil primário, fator(1+(Attack+bonus−Defense)/100); erosão usa Dig+bonus.
+Items.delay(id,reduction=0) reduz/trunca custo original antes÷7,5. Arm/previsão
+usam shot_shells para todas as salvas; Shadow Gold nunca escreve no perfil.

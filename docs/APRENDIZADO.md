@@ -100,3 +100,20 @@ mobile_rig.gd articula peças constantes e piloto inteiro em perfil. A perna
 invisível é ocultada no próprio PNG, pois trocar a ordem de uma imagem inteira
 não muda a sobreposição dentro dela. O catálogo conserva o espaço transparente
 para manter mãos e assento na posição aprovada. Física não usa essas imagens.
+
+## Loja local, composição e atributos
+
+O catálogo preserva a chave gênero/categoria/ID: Basic0 masculino e feminino
+não são o mesmo item. A interface seleciona uma chave; o perfil resolve preço
+e valida saldo/propriedade, grava débito e posse juntos e restaura a cópia
+anterior se falhar. Experimentação vive no modelo da loja, não no perfil.
+
+O rider junta quatro camadas usando pivôs da fonte. Atlas têm grades diferentes;
+o quadro é convertido em coluna/linha, sem recentrar o recorte a cada frame.
+O rig do mobile aplica transformação conjunta e não modifica colisão.
+
+A partida copia atributos; dano e Dig são aplicados no laço comum ao tiro e à
+previsão. AttackDelay converte o inteiro original antes de dividir por7,5.
+Gold/Popularity ficam no modelo, e a concessão final usa o mesmo ID idempotente
+de XP. O fluxo C# multiplica Gold acumulado por tiro, usa4/1 Gold no resultado
+e tem a condição2000 inalcançável: peculiaridades preservadas e testadas.

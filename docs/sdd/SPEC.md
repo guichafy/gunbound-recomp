@@ -202,3 +202,24 @@ Teleport, Teleport, Blood, Bunge Shot, Power Up, Change Wind) com a lógica,
 física e custos de delay do OpenBound; REQ-36 seleção de 6 slots pelo
 `PopupSelectItem` original no menu; REQ-37 arte dos itens/Teleport em HD por
 GPT Images (Codex), conforme ITEMS_0_13.md. CPU sem itens neste corte.
+
+## Shop de avatar — especificação aprovada
+
+Pedido de 2026-10-12: REQ-38 Shop/compra local em Gold/Cash; REQ-39 composição
+de cabeça/corpo/óculos/bandeira; REQ-40 distribuição dos oito atributos; REQ-41
+modificadores no combate/previsão e Gold. Saldo inicial de teste e atributos
+confirmados pelo usuário. Detalhes e adaptações aprovados em AVATAR_SHOP.md.
+Implementado no worktree; plano AVATAR_SHOP_PLAN.md e evidências HANDOFF.md.
+ItemDelay aguarda integração dos itens; demais modificadores ativos. Relacionados REQ-02/04–10/12/19/20,
+REQ-32 (thread) e REQ-35 (dependência ItemDelay).
+
+REQ-39/19: correção0.14.1 do ponto Body/oclusão de chassis (ADR-060,
+AVATAR_MOUNT_FIX.md), validada com metadados originais, poses e ambos os sentidos.
+
+REQ-20/39: derivados GPT Images das13peças de avatar, próximos do estilo2.5D
+dos mobiles, integrados no menu, loja/inventário e arena. Registro/pivôs, aspecto
+e originais preservados, fallback por peça; detalhes/adaptação em AVATAR_HD.md.
+
+REQ-35/40/41: integração à main0.14.3 resolve ItemDelay pendente e compõe os
+modificadores de atributos com Power Up/Blood/Bunge sem multiplicação dupla.
+Critérios/evidências em INTEGRATION_MAIN_0_14_3.md e HANDOFF.md.

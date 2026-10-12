@@ -99,7 +99,7 @@ func show_result(host) -> void:
 	host.ui.label(card, result, Vector2(32, 72), Vector2(496, 65), 38, host.ui.CREAM, true)
 	host.ui.label(card, "Boa mira, %s." % host.profile.nickname if host.model.winner == Match.PLAYER else "Cada cratera ensina. Tente uma nova trajetória.", Vector2(32, 145), Vector2(496, 45), 17, host.ui.MUTED)
 	host.ui.panel(card, Vector2(32, 215), Vector2(496, 92), Color("23454d"), 12)
-	host.ui.label(card, "+%d XP" % host.reward, Vector2(53, 230), Vector2(215, 35), 28, host.ui.TEAL, true)
+	host.ui.label(card, "+%d XP · %d Gold" % [host.reward,host.gold_reward], Vector2(53, 230), Vector2(340, 35), 24, host.ui.TEAL, true)
 	host.ui.label(card, "NÍVEL %d   ·   %d XP TOTAL" % [host.profile.level(), host.profile.xp], Vector2(53, 270), Vector2(450, 24), 14, host.ui.CREAM)
 	host.ui.label(card, "%d turnos  ·  %s" % [host.model.total_turns, "progresso salvo neste Mac" if host.profile.last_save_ok else "não foi possível salvar o progresso"], Vector2(32, 324), Vector2(496, 35), 14, host.ui.MUTED)
 	host.ui.button(card, "REVANCHE", Vector2(32, 386), Vector2(496, 47), host.start_match, true)

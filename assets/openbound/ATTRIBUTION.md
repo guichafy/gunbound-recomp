@@ -111,3 +111,11 @@ Copiados sem edição de `.tools/source-assets/content/` para `items/`:
 Regras de `Item.cs`, `Mobile.cs`, `MatchManager.cs`, `HUD.cs`, `EquippedButtonBar.cs`,
 `PopupSelectItem.cs` e `GenericProjectile.cs` do mesmo fork (GPL-3.0-or-later).
 Hashes em `SOURCE_MANIFEST.json` (chaves `items/…`). Derivados HD em `assets/hd/items/`.
+## Shop e avatar
+
+Os sprites do Shop, 13 atlas de avatar e15 retratos vieram de
+OpenBound-Assets/Game Assets, nas quatro categorias Hat/Body/Goggles/Flag.
+Catálogo normalizado conserva preços/IDs/pivôs da DatabaseSeed original.
+assets/openbound/avatars/manifest.json lista os caminhos fonte e SHA-256 dos
+80 arquivos copiados, com pixels intactos. Não são derivados GPT Images.
+Regras portadas do código OpenBound GPL-3.0-or-later, Copyright2020 Carlos H.M.S.

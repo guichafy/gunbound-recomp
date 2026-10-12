@@ -1,4 +1,33 @@
-# Hand-off — Gunbound Recomp 0.13.0
+# Hand-off — Gunbound Recomp 0.14.3
+
+## Integração à main 0.14.3
+
+Pedido explícito: levar todo trabalho de codex/avatar-shop à main. Main já
+continha itens0.13; ambos preservados, incluindo histórico e correções. Merge
+local entre f76a6d0 (itens) e ca888f8 (Shop/HD), sem remoto configurado.
+REQ-35..41, ADR-062; INTEGRATION_MAIN_0_14_3.md.
+
+- Match.start conserva loadout7º e recebe atributos8º; cena passa ambos e
+ equipamento. Itens/menu/restart, Shop, Gold/perfil e avatares HD coexistem.
+- Ataque persistente+bonus de item−defesa formam fator único; Dig persistente+
+ Bunge somam antes de aumentar cratera. ItemDelay agora ativo no uso real,
+ com inteiro original reduzido/truncado antes÷7,5. AttackDelay só nos tiros.
+- Previsão e voo compartilham shot_shells, armas/tempos do Dual+ e modificadores
+ em cópias. Gold climático também agregado no caminho do sinalizador Teleport.
+
+Evidências: worktree pré-merge1454checks+10partidas sem falhas; árvore combinada
+**1584checks+10partidas, zero falhas**,43,3s nas partidas. Integração39checks cobre
+custo/preview, ataque+Power Up+defesa+escudo, Dig+Bunge, HP+Energy Up, Dual+,
+previsão isolada, Shop+itens e restart. Regressão de Gold climático do Teleport
+reproduzida e corrigida. Revisão independente antes do commit: nenhum
+Important/Critical. Perfis de teste isolados, nunca o perfil real.
+
+App/ZIP0.14.3 reexportados na pasta principal builds, assinatura estrita válida.
+Smoke GPU do PCK PASS: loja/catálogo15, derivados13, item HD e uso real com
+ItemDelay (12unidades para Power Up com40pontos); avatar2285pixels. Fonte C# não
+modificada. O histórico0.14.2 abaixo dizia que ItemDelay dependia dos itens;
+esta integração resolve essa dependência. Worktree anterior permanece como
+referência da entrega isolada, sem apagar histórico/artefatos antigos.
 
 ## Entrega atual 0.13.0: itens de batalha
 
@@ -30,6 +59,107 @@ teletransporte sob teto não causa dano.
 
 Próximo passo: usuário validar os itens no app (roteiro em VALIDACAO.md).
 
+## Histórico do worktree — 0.14.2
+
+## Avatares HD 0.14.2
+
+Pedido do usuário: melhorar qualidade dos assets para aproximar o design dos
+mobiles. REQ-20/39, ADR-061; AVATAR_HD.md.13peças em5folhas1254×1254RGBA geradas
+pela ferramenta integrada GPT Images: Space Marine+óculos/bandeira, Basic
+masculino/feminino, Miner, Punk e Kappa. PNGs originais intactos.
+
+AvatarHD valida recortes/catálogo/texturas, preserva a proporção intrínseca da
+imagem e posição normalizada do pivô dentro da janela original. AvatarArt usa
+peças HD fixas no menu/previews/arena, com relógio/deslocamentos originais e
+fallback original por peça. Loja usa as mesmas regiões nos retratos, com
+limites87×45 para impedir tamanho mínimo de textura alta ultrapassar o card.
+Encaixe/oclusão0.14.1 preservados; perfil/combate/IDs/preços não mudam.
+
+Evidências: teste HD139 (13peças, densidade≥4×, aspecto e tamanho estáveis,
+clock/pivô/fallback, offsets/regiões inválidas), regressão de retrato no Shop19.
+Harness quick final **1454checks, zero falhas**; partidas longas não repetidas
+porque só a arte/render mudaram. Capturas GPU inventory/poses/battle/hd-roster
+conferidas; comparação original/HD em hd-comparison.png. Pré-HD preservado em
+inventory-before-hd.png. App/ZIP0.14.2 reexportados, assinatura estrita válida,
+ZIP101MB; smoke GPU do PCK renderiza avatar (2313pixels, PASS). Perfis isolados.
+
+Prompts completos/origens/modo em assets/hd/avatars/GENERATION.json. Ativos:
+space.png/basic.png/miner.png/punk.png/kappa.png+catalog.json; source/.gdignore
+exclui referências do pacote. Regenerar metadados com catalog_avatar_hd.py ao
+trocar PNG. Originais gerados permanecem também na pasta padrão do image_gen.
+
+Limite: peças constantes preservam registros e evitam deformação entre quadros,
+mas gestos/olhos não são regenerados quadro a quadro. UI do Shop continua fonte
+original. ItemDelay segue dependendo da integração de itens. Usuário validar
+novo design no inventory/hd-roster e app; branch/worktree mantidos.
+
+## Correção de encaixe do avatar 0.14.1
+
+Relato do usuário: inventory.png mostrava corpo/cabeça/acessórios recuados e
+sem encaixe no mobile. REQ-39/19, ADR-060; AVATAR_MOUNT_FIX.md.
+
+Causa confirmada: centro Body do avatar aplicado no pivô dos quadris do piloto
+HD, com offset arbitrário(0,−8); camadas também desenhavam avatar sobre chassis,
+ao contrário de AvatarBody0.046/Mobile0.05 do C#. A montagem agora deriva de
+RiderPivot idle, contact_y/pivot_y e largura nativa: Bigfoot(3,−26)×60/49 e
+Mage(5,−26)×60/46. Chassis/arma/rodas ficam à frente das peças equipadas;
+piloto legado preserva seu caminho. Movimento contínuo e física preservados.
+
+Validação: test_avatar_mount vermelho2→verde24, registrando escala uniforme,
+ponto Body, flip, encosta e5poses. Suites pertinentes432checks; harness quick
+final1314checks, zero falhas. Não repetimos partidas longas porque só o render
+mudou. Comparação GPU original/HD (render Godot com metadados C#) em
+mount-comparison.png e inventory/poses atualizados. Prévia anterior preservada
+em inventory-before-mount-fix.png. App/ZIP0.14.1 reexportados, assinatura estrita
+válida; PCK renderiza preview, PASS. Sem uso do perfil real.
+
+Próximo passo: usuário conferir o encaixe na nova imagem/app. A inspeção anterior
+não cobria equivalência do ponto Body com a fonte; nova regressão cobre isso.
+
+## Shop de avatar 0.14.0 — entregue no worktree
+
+Branch `codex/avatar-shop`, criada da `main`. Pedido/decisões aprovados em
+AVATAR_SHOP.md; execução AVATAR_SHOP_PLAN.md. REQ-38..41, ADR-059.
+
+- Catálogo original15 registros: cabeça/corpo/óculos/bandeira,15 retratos e
+ 13atlas.80arquivos originais/interface copiados com SHA, sem edição dos PNGs.
+- Shop/Inventário, busca, páginas25, gêneros/unissex, experimentação temporária,
+ compra Gold/Cash e popup modal. Primeiro perfil Shop tem1000por moeda;
+ transações com rollback, repetição sem débito e corrupção sem refill.
+- Perfil version2 conserva nickname/XP/wins/matches/awarded e guarda posse,
+ equipamento separado por gênero e oito atributos. Pontos pelo nível local:
+ min((nível−1)×10,180), até50cada; rascunho/confirmar/cancelar.
+- AvatarArt junta peças com pivôs/FPS/grade originais, substituindo o piloto no
+ assento do rig no menu/previews/arena; CPU básica. Caminho legado preservado
+ sem contexto. Atlas multi-row e altura feminina27vs metadata33 tratados.
+- Vida/dano/defesa/regen/atraso/Dig aplicados no Match/voo/previsão em cópias;
+ GoldRewards e Popularity seguem caminhos1×1 C#. Ângulo HUD=trajetória central
+ +180, sem dispersão do primeiro pellet; metadados Gold só de dano positivo.
+ Resultado4/1Gold e Popularity acumulada/branch2000 inalcançável são da fonte;
+ empate0é adaptação. XP local preservado; crédito final único com ID da partida.
+
+Validação final: check.sh completo **1282checks+10partidas, zero falhas**,40,5s
+nas partidas. Mais8 checks de atributos (fixture válida de180pontos, dano/cratera
+reais) passaram; check.sh --quick consolidou **1290checks, zero falhas**.
+Revisão independente encontrou3Important reproduzidos e corrigidos em RED→GREEN:
+shop inválido renovando saldo, ângulo Gold espelhado e pellets sem dano alterando
+bônus. Um quarto candidato sobre remap do .gd não se reproduziu neste Godot:
+PCK original já tinha preview1786pixels; gate redundante removido por robustez.
+
+Sete capturas GPU1920×1200 em docs/avatar-shop: loja, compra, inventário,
+atributos, Mage/Bigfoot e poses/sentidos/encosta. PCK do app exportado carregou
+catálogo15 e renderizou preview (1786pixels da figura, PASS), com perfil isolado.
+`capture_avatar_pck_smoke.gd` preserva reprodução: copiar o script para fora do
+projeto (ex.: /tmp) e executar Godot --main-pack <PCK> --script <script>.
+App/ZIP0.14.0 em builds do worktree, ZIP98MB; assinatura ad-hoc estrita válida.
+Nenhum teste usou o perfil real. Main e fonte C# não foram editadas nesta execução.
+
+Limites: **ItemDelay tem fórmula/teste, sem uso real até integrar código de itens**
+(a main tinha alterações não commitadas e não foram copiadas). Assets são
+originais; GPT Images opcional não gerado. Fonte/interface têm adaptações de
+viewport e controles nativos de texto. Sem teste manual do app por usuário;
+roteiro em docs/VALIDACAO.md. Próximo passo: usuário validar o app e decidir a
+integração da branch; worktree permanece disponível.
 
 ## Reorganização SOLID (mesma versão, sem export)
 

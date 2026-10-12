@@ -203,3 +203,33 @@ chamas; Teleport2 = Teleport1 invertido), `select_item_popup.gd` (menu "Itens";
 carga em `options.items`). Arte HD via `scripts/build_items_hd.py` e Codex
 (`refs`, gerar `gen_<folha>.png`, depois sem argumento). Testes test_items.gd e
 test_items_scene.gd; captura tests/capture_items.gd (docs/items).
+## Shop de avatar 0.14 — caminho atual
+
+Ler AVATAR_SHOP.md e AVATAR_SHOP_PLAN.md. Quatro slots, catálogo original
+15registros, perfil version2 com saldo inicial1000Gold/Cash uma vez, conjuntos
+por gênero e unissex compartilhado. ShopModel mantém preview temporário;
+Profile valida/transaciona com rollback. PlayerAttributes:10por avanço do nível
+local,180total,50por atributo. Atores copiam atributos/equipamento no start;
+CPU/previsão usam mesmas regras. AvatarArt substitui piloto no rig quando
+recebe contexto; legado preservado sem contexto. GoldRewards segue fluxo C#
+4/1resultado, Popularity cumulativa; XP separado. ItemDelay fórmula apenas
+até integrar código de itens. Assets originais, sem novo HD. Suites
+test_avatar_catalog/profile/shop/art, test_attributes e test_gold_rewards;
+capture_avatar_shop gera capturas GPU e smoke separado confere PCK exportado.
+
+Encaixe0.14.1 (ADR-060): AvatarArt usa origem Body via registro nativo do
+MobileSprite no rig, não o pivô hip do pilot_side nem offset(0,−8). Chassis
+oculta parte inferior das peças equipadas como no C#. Ver AVATAR_MOUNT_FIX.md
+e test_avatar_mount24; comparação em docs/avatar-shop/mount-comparison.png.
+
+Avatares HD0.14.2 (ADR-061):13peças em5folhas GPT Images1254×1254, constantes
+com registro original. AvatarHD/catalog_avatar_hd.py guardam recortes,
+janela/pivô/deslocamentos; AvatarArt usa HD com fallback. Fontes originais
+preservadas. Regenerar catalog.json ao trocar PNG. Source/.gdignore exclui
+referências; preset inclui avatars/*.json. Tests test_avatar_hd e captura
+capture_avatar_hd_roster. Ver AVATAR_HD.md; não é geração quadro a quadro.
+
+Integração main0.14.3 (ADR-062): itens0.13 + Shop/HD0.14.2. Match.start recebe
+loadout7º, atributos8º. ItemDelay ativo no custo original truncado antes÷7,5;
+Attack/bonus−Defense e Dig/bonus somam. Isso substitui os limites antigos de
+ItemDelay acima. Test test_shop_items_integration39; suite1584+10partidas.

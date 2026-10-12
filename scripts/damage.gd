@@ -1,6 +1,7 @@
 extends RefCounted
 ## Hit resolution. Match owns the actors and the event queue and calls in.
 
+const Attributes = preload("res://scripts/player_attributes.gd")
 const Combat = preload("res://scripts/combat.gd")
 
 static func deal_damage(actors: Array, events: Array, index: int, damage: int) -> int:
@@ -18,17 +19,19 @@ static func deal_damage(actors: Array, events: Array, index: int, damage: int) -
 
 ## attack: Owner.Attack of the turn (Power Up, Blood); Projectile.CalculateDamage
 ## multiplies the final damage per target by (1 + attack / 100) and truncates.
-static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0) -> int:
+static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0, shooter: int = -1) -> int:
 	var dealt := 0
 	for index in range(actors.size()):
 		if int(actors[index].hp) <= 0:
 			continue
 		var distance := position.distance_to(actors[index].pos)
 		if emp > 0 and distance <= emp + 22.0 and int(actors[index].shield) > 0:
-			events.append({"type": "shield_damage", "actor": index, "amount": actors[index].shield, "position": actors[index].pos})
+			events.append({"type": "shield_damage", "actor": index, "emp":true, "amount": actors[index].shield, "position": actors[index].pos})
 			actors[index].shield = 0
 		var amount := Combat.damage_at(distance, damage, radius)
-		if attack != 0.0:
+		if shooter >= 0:
+			amount = Attributes.damage(amount,Attributes.points(actors[shooter],0)+int(attack),Attributes.points(actors[index],2))
+		elif attack != 0.0:
 			amount = int(amount * (1.0 + attack / 100.0))
 		dealt += deal_damage(actors, events, index, amount)
 	return dealt

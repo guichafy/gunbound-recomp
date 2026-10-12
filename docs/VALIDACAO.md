@@ -127,3 +127,39 @@ que a CPU recebe o outro. Vire os dois: piloto deve apresentar uma perna e um
 pé, sem perna distante atravessando o mobile. Confira encosta, carga, recuo,
 dano/morte e pausa. Proporção/assento permanecem0.6.3; tiros0.6.2 preservados.
 825checks e10partidas passaram; inspeção GPU não substitui aceitação visual.
+
+## Shop e atributos 0.14.0
+
+1. Abrir Shop no menu: confirmar 1.000 Gold/Cash na primeira abertura; sair e
+   abrir novamente sem renovação. Buscar nome, trocar categoria e gênero.
+2. Selecionar Space Marine e Experimentar: preview muda, equipamento não.
+   Abrir Comprar, Cancelar/ESC sem débito; comprar por Gold e outra peça por
+   Cash. Repetir clique não pode duplicar compra. Kappa permanece sem saldo.
+3. Inventário: equipar cabeça/corpo/óculos/bandeira; ID0 retira acessórios.
+   Trocar gênero e voltar deve conservar compras e conjuntos. Reiniciar app
+   deve preservar XP/partidas/saldos/equipamento.
+4. Nível1: zero pontos; após XP subir, usar +/−, cancelar, confirmar e sair com
+   rascunho. Valores não confirmados não entram no treino.
+5. Com cada mobile, observar equipamento nos dois sentidos, encostas, movimento,
+   carga/recuo/dano e pausa. Vida/dano/cratera/regen/atraso devem refletir pontos;
+   o escudo base Mage continua220. Popularity afeta Gold, não XP/Cash.
+6. Validar no app exportado (projeto aberto no editor não atualiza app).
+   ItemDelay não terá uso real até os itens serem integrados neste worktree.
+
+Testes automatizados usam perfis isolados. Capturas GPU e smoke do PCK não
+substituem este teste manual de experiência e áudio pelo usuário.
+
+## Avatares HD0.14.2
+
+Conferir Basic masculino/feminino, Space Marine, Miner, Punk, Kappa, óculos e
+bandeira na loja e no mobile. Comparar hd-roster.png; peças devem ter contornos
+suaves/material próximo do mobile, sem esticar ou mudar encaixe ao virar.
+Trocar equipamento/aba e abrir compra; retratos não ultrapassam cards.
+
+## Integração Shop+itens0.14.3
+
+No aplicativo da pasta principal, selecionar equipamento no Shop e pontos,
+voltar ao menu, escolher itens e iniciar treino. Verificar ambos presentes.
+Testar Power Up/Blood com ataque, Bunge com Cratera e Atraso item; recomeçar
+mantém equipamento/atributos/carga de itens, reiniciando consumo. ItemDelay agora
+funciona no uso real; limites anteriores0.14.0/0.14.2 ficam como histórico.

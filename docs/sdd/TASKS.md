@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Integração à main0.14.3 (ADR-062)
+
+- [x] Preservar entregas itens0.13 e Shop/HD0.14.2, resolvendo conflitos.
+- [x] ItemDelay ativo; ataque/Dig aditivos; contratos loadout/atributos separados.
+- [x] Integração39 e suite1584+10partidas sem falhas; revisão independente limpa.
+- [x] App/ZIP0.14.3 exportados na pasta principal, assinatura e smoke PCK válidos.
+- [ ] Usuário validar conjunto no aplicativo da pasta principal.
+
 ## Itens de batalha 0.13.0 (ADR-058)
 
 - [x] Levantar Item.cs, Mobile.cs, MatchManager, HUD, EquippedButtonBar,
@@ -14,7 +22,38 @@
       partidas; seeds 81–90 idênticas à 0.12; app/ZIP 0.13.0 assinados.
 - [ ] Usuário validar os itens no app.
 - [ ] CPU usar itens (exige rebaselinar seeds).
-- [ ] `ItemDelay` de avatar e preço em ouro (fora do treino).
+- [x] ItemDelay integrado ao uso real dos itens na0.14.3.
+- [ ] Preço em ouro de itens continua fora do treino (não é compra de avatar).
+## Avatares HD0.14.2 (ADR-061)
+
+- [x] Gerar13peças transparentes em5folhas GPT Images1254×1254, estilo dos mobiles.
+- [x] Preservar fontes; catálogo/hashes/janela/pivô/deslocamentos e fallback.
+- [x] Integrar no piloto e retratos; aspecto preservado e card87×45.
+- [x] HD139, Shop19 e quick1454sem falhas; capturasGPU das6famílias/poses.
+- [x] App/ZIP0.14.2, assinatura e PCK conferidos.
+- [ ] Usuário validar visual HD no inventário e aplicativo.
+
+## Encaixe do avatar 0.14.1
+
+- [x] Reproduzir desalinhamento do inventory.png e comparar registro C#.
+- [x] Montagem por RiderPivot/body origin, proporção nativa e oclusão por chassis.
+- [x] test_avatar_mount24; quick1314; GPU inventário/poses/comparação.
+- [x] App/ZIP0.14.1 e PCK/assinatura verificados.
+- [ ] Usuário conferir o novo encaixe.
+
+## Shop de avatar 0.14.0 (ADR-059, REQ-38..41)
+
+- [x] Worktree de main, branch codex/avatar-shop, especificação/plano aprovados.
+- [x] Catálogo15 e assets originais; migração perfil2 e compras/equipamento atômicos.
+- [x] Shop/Inventário, filtros/busca/páginas, experimentar e confirmação Gold/Cash.
+- [x] Composição de quatro peças nos previews/menu/arena, dois mobiles e sentidos.
+- [x] Oito atributos e distribuição; modificadores Match/CPU/previsão e Gold.
+- [x] Revisão independente e correções reproduzidas em RED→GREEN.
+- [x] Check completo1282+10partidas; quick final1290, zero falhas;7capturasGPU.
+- [x] App/ZIP0.14.0 exportados no worktree; PCKpreview/catálogo e assinatura válidos.
+- [x] ItemDelay integrado ao uso real na main0.14.3.
+- [ ] Usuário validar aplicativo; decidir integração da branch posteriormente.
+- [ ] GPT Images permanece opção permitida; não solicitado como etapa obrigatória.
 
 ## Reorganização SOLID (ADR-057)
 
