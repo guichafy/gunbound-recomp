@@ -1,0 +1,1475 @@
+{
+  "version": 1,
+  "scale": 4,
+  "sprites": {
+    "AnimatedButtons/AvatarShop/Hat": {
+      "file": "res://assets/hd/shop/AnimatedButtons/AvatarShop/Hat.png",
+      "size": [
+        980,
+        1344
+      ],
+      "native_size": [
+        245,
+        336
+      ],
+      "sha256": "1eb59c0250856abd4e73d7d74ef3dcd002ffadddf3096a83ca085f55dfac97e8",
+      "source_sha256": "d5dcef42f40faa9878565da7a8b96a80f692895543c76683f39eea54636d5fec"
+    },
+    "AnimatedButtons/AvatarShop/Body": {
+      "file": "res://assets/hd/shop/AnimatedButtons/AvatarShop/Body.png",
+      "size": [
+        2156,
+        468
+      ],
+      "native_size": [
+        539,
+        117
+      ],
+      "sha256": "d99fe9b5a3bd2df46d3e219d863c9a5da93922f9815d3bdd5f04b4b39f051bd7",
+      "source_sha256": "8888f8a54ad0e218d9e8163d43e61d622b7624e9c4c1f12af679f8cbf4513e2f"
+    },
+    "AnimatedButtons/AvatarShop/Goggles": {
+      "file": "res://assets/hd/shop/AnimatedButtons/AvatarShop/Goggles.png",
+      "size": [
+        3724,
+        368
+      ],
+      "native_size": [
+        931,
+        92
+      ],
+      "sha256": "8848de6a4c5d76999e4877a5a1f133e6584209163eef2d5b3f39d639fdba7353",
+      "source_sha256": "2868d7f0eb2e0b00391047cd3ca63375c9c6e928655faa9555d6703a93b114f3"
+    },
+    "AnimatedButtons/AvatarShop/Flag": {
+      "file": "res://assets/hd/shop/AnimatedButtons/AvatarShop/Flag.png",
+      "size": [
+        2688,
+        752
+      ],
+      "native_size": [
+        672,
+        188
+      ],
+      "sha256": "e4d607e10964e2a5ce4de60fa82aa4d9f2934eab681c822c409d613cf8a8fd53",
+      "source_sha256": "39d705381653f7cbbd814b5ca549315887baee065d2ea0e9a11eaca932e0f73e"
+    },
+    "AnimatedButtons/Exit": {
+      "file": "res://assets/hd/shop/AnimatedButtons/Exit.png",
+      "size": [
+        5280,
+        528
+      ],
+      "native_size": [
+        1320,
+        132
+      ],
+      "sha256": "fa06cb8751b41f4f452b298bc5cf27560a160c14be7a72946dd9d9c88e872c01",
+      "source_sha256": "6014b25a2cd4285702ac6470f520080e686d5a05502466a4028cc90d236761a3"
+    },
+    "AnimatedButtons/LeftArrow": {
+      "file": "res://assets/hd/shop/AnimatedButtons/LeftArrow.png",
+      "size": [
+        3680,
+        336
+      ],
+      "native_size": [
+        920,
+        84
+      ],
+      "sha256": "730eee026f8b626e10cfa9f900ab3b3bc5f02a27f728539f64bbba4b86423442",
+      "source_sha256": "b4b0c50c5ff9fa2a389b4193a44a9f8b0177df45cd0887b9912a8a0000cebe87"
+    },
+    "AnimatedButtons/RightArrow": {
+      "file": "res://assets/hd/shop/AnimatedButtons/RightArrow.png",
+      "size": [
+        3680,
+        336
+      ],
+      "native_size": [
+        920,
+        84
+      ],
+      "sha256": "e56ff49a242115a457cf2454b9522fed746045fa97b239971d14a53e32342f62",
+      "source_sha256": "b4cee90806b7059d48a1531a7b6dffd4a7172cf5c998d7755a02e1cb79283ac1"
+    },
+    "AnimatedButtons/AvatarShop/Gift": {
+      "file": "res://assets/hd/shop/AnimatedButtons/AvatarShop/Gift.png",
+      "size": [
+        3072,
+        1656
+      ],
+      "native_size": [
+        768,
+        414
+      ],
+      "sha256": "ed762f62eb671a327e4dc1c17644bcdeb8ab965982689395bb8f4e4f0eee7428",
+      "source_sha256": "24fb997343848e531817398c1b712ef85b242bf50332a9d40b1fe61d96a7cbf8"
+    },
+    "AnimatedButtons/AvatarShop/Buy": {
+      "file": "res://assets/hd/shop/AnimatedButtons/AvatarShop/Buy.png",
+      "size": [
+        2048,
+        1752
+      ],
+      "native_size": [
+        512,
+        438
+      ],
+      "sha256": "b81e9478a48e053fec263e8bef7001a9f6d2da39542aee0a698fd70d21341d02",
+      "source_sha256": "b640f77b7d62dccde7936008fcff788a1e2691cc2e8fd6c39e34904c3085d5ee"
+    },
+    "AnimatedButtons/AvatarShop/Try": {
+      "file": "res://assets/hd/shop/AnimatedButtons/AvatarShop/Try.png",
+      "size": [
+        3072,
+        1728
+      ],
+      "native_size": [
+        768,
+        432
+      ],
+      "sha256": "4c5175f677460838f6f9e665cc7ef56bb2d2f173edb30ff3b8a0793968c28f4a",
+      "source_sha256": "3f7237e3b20e0fc36ef4dedf8035a84bfca16e498b400dd22388ea3aa4fbe532"
+    },
+    "StaticButtons/AvatarShop/AvatarButton/ButtonIcons": {
+      "file": "res://assets/hd/shop/StaticButtons/AvatarShop/AvatarButton/ButtonIcons.png",
+      "size": [
+        624,
+        408
+      ],
+      "native_size": [
+        156,
+        102
+      ],
+      "sha256": "6bec5ee315517c2f92d1353dedc39014946b881840348940f106bc721cea7fde",
+      "source_sha256": "03633bdb968f626c8be64512eeff9c99466ce786ca1e344c1e677a18ecfbb863"
+    },
+    "StaticButtons/AvatarShop/AvatarButton/EquipedIndicator": {
+      "file": "res://assets/hd/shop/StaticButtons/AvatarShop/AvatarButton/EquipedIndicator.png",
+      "size": [
+        40,
+        68
+      ],
+      "native_size": [
+        10,
+        17
+      ],
+      "sha256": "a750481cdeb0b6d9dd842d47f99a2fa88647237203101622a82ba78621490070",
+      "source_sha256": "045266480c6b7bcc923372e57cae9d47bd0ab2f969f80576de5b8f310f278ccf"
+    },
+    "StaticButtons/AvatarShop/AvatarButton/OwnedCheck": {
+      "file": "res://assets/hd/shop/StaticButtons/AvatarShop/AvatarButton/OwnedCheck.png",
+      "size": [
+        108,
+        80
+      ],
+      "native_size": [
+        27,
+        20
+      ],
+      "sha256": "998dee6d5658ced1febabef265c8b1258e9bc1e980ebbfd7759ddf9f492ef430",
+      "source_sha256": "f9c92974351a8b25a7f1b2832829e611c1046f60f3fe5657a537e73325de20e9"
+    },
+    "StaticButtons/AvatarShop/AvatarButton/GoldIcon": {
+      "file": "res://assets/hd/shop/StaticButtons/AvatarShop/AvatarButton/GoldIcon.png",
+      "size": [
+        416,
+        84
+      ],
+      "native_size": [
+        104,
+        21
+      ],
+      "sha256": "6260b0d20182af2438ac81a9f5da2f6889db4ed39ce8f0879fee2638349ce472",
+      "source_sha256": "21e9bbe50821bb2f659c007adcd305bf50e5f13a6f5c126bf0827fa164a1b6e7"
+    },
+    "StaticButtons/AvatarShop/AvatarButton/CashIcon": {
+      "file": "res://assets/hd/shop/StaticButtons/AvatarShop/AvatarButton/CashIcon.png",
+      "size": [
+        416,
+        84
+      ],
+      "native_size": [
+        104,
+        21
+      ],
+      "sha256": "85e12ffe1114f819c249f615f49204c95ed20f6f28a4bde3e726a26b206dce93",
+      "source_sha256": "459d385a9c3536705a08e06c151d9a1538f4a90aeacbbcc42047d08c0208be9e"
+    },
+    "StaticButtons/AvatarShop/AvatarButton/Background": {
+      "file": "res://assets/hd/shop/StaticButtons/AvatarShop/AvatarButton/Background.png",
+      "size": [
+        1260,
+        332
+      ],
+      "native_size": [
+        315,
+        83
+      ],
+      "sha256": "5a03d1862aff93c15991bbef7acc7af4fe7f764f5291aa23d9e158aab15acd42",
+      "source_sha256": "8f2cf23a2c2bf2ee62454cbe351d088f2f26e39b3630bb252c42897fb1a3e725"
+    },
+    "Popup/Blue/Avatar/Buy": {
+      "file": "res://assets/hd/shop/Popup/Blue/Avatar/Buy.png",
+      "size": [
+        912,
+        1144
+      ],
+      "native_size": [
+        228,
+        286
+      ],
+      "sha256": "08af97709d8a12d3b798d67fb4fca6e7348d790be89bf9352d4e6f039d87b6d9",
+      "source_sha256": "f90644b8ecd283f97cdfca1b67b8b067ed40c86531b689c9e2b8d731c1f075d5"
+    },
+    "InGame/Scene/AvatarShop/Background": {
+      "file": "res://assets/hd/shop/InGame/Scene/AvatarShop/Background.png",
+      "size": [
+        3200,
+        2400
+      ],
+      "native_size": [
+        800,
+        600
+      ],
+      "sha256": "1a20cd90d052fe02bf1c2451bcc3641b51f18955349c0a0726edcce76e6543ee",
+      "source_sha256": "c1d0496c73c69f26bb08282ed6035914b8d8ba7c031774da5c9a4d5af233c0a6"
+    },
+    "InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background": {
+      "file": "res://assets/hd/shop/InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background.png",
+      "size": [
+        840,
+        576
+      ],
+      "native_size": [
+        210,
+        144
+      ],
+      "sha256": "2083f3391157b91f875dfb29bc59b70cc97d811f637934ef2d52adc9cfa42056",
+      "source_sha256": "96bb82e7c8177ed5ab851eef5935e3ce06bbc0d56e7bdcbb67f96796dd92211b"
+    },
+    "InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2": {
+      "file": "res://assets/hd/shop/InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2.png",
+      "size": [
+        840,
+        580
+      ],
+      "native_size": [
+        210,
+        145
+      ],
+      "sha256": "25e74a2c96ba189e9083a4b760bce24412f204531e315576b367571a80f7b5a3",
+      "source_sha256": "8351b141593d758cf0f5764db4465edd135e6a2609de5076ea55c81f3f1ca5f3"
+    }
+  },
+  "generations": {
+    "controls": {
+      "file": "assets/hd/shop/source/gen_controls.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "6bb4e4795237b7519e9729bdd420848222b16f441890273671b98c7fab53fef4"
+    },
+    "icons": {
+      "file": "assets/hd/shop/source/gen_icons.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "a88ecc15425b916175bb7b3bb61bc860aa72b59251fa2074e001a6166afb818c"
+    },
+    "chrome": {
+      "file": "assets/hd/shop/source/gen_chrome.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "16a79d1a53600903eedb44e326ac48ae598c9fd19d2f24f9d72d8a6ebffcbc82"
+    },
+    "scenery": {
+      "file": "assets/hd/shop/source/gen_scenery.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "f4058067fdee0be9aee3ff9147a2c8b168907fbaffc99004436aec8127b187ab"
+    }
+  },
+  "registration": {
+    "controls": [
+      {
+        "path": "AnimatedButtons/AvatarShop/Hat",
+        "rect": [
+          0,
+          0,
+          49,
+          48
+        ],
+        "cell": [
+          49,
+          48
+        ],
+        "disabled": 33,
+        "window": [
+          24,
+          24,
+          464,
+          336
+        ],
+        "target": [
+          84,
+          24,
+          343,
+          336
+        ],
+        "useful_generated_size": [
+          269,
+          174
+        ],
+        "generated_region": [
+          20,
+          20,
+          398,
+          294
+        ]
+      },
+      {
+        "path": "AnimatedButtons/AvatarShop/Body",
+        "rect": [
+          0,
+          0,
+          49,
+          39
+        ],
+        "cell": [
+          49,
+          39
+        ],
+        "disabled": 31,
+        "window": [
+          536,
+          24,
+          464,
+          336
+        ],
+        "target": [
+          557,
+          24,
+          422,
+          336
+        ],
+        "useful_generated_size": [
+          314,
+          220
+        ],
+        "generated_region": [
+          438,
+          20,
+          816,
+          294
+        ]
+      },
+      {
+        "path": "AnimatedButtons/AvatarShop/Goggles",
+        "rect": [
+          0,
+          0,
+          49,
+          46
+        ],
+        "cell": [
+          49,
+          46
+        ],
+        "disabled": 36,
+        "window": [
+          1048,
+          24,
+          464,
+          336
+        ],
+        "target": [
+          1101,
+          24,
+          358,
+          336
+        ],
+        "useful_generated_size": [
+          282,
+          187
+        ],
+        "generated_region": [
+          856,
+          20,
+          1234,
+          294
+        ]
+      },
+      {
+        "path": "AnimatedButtons/AvatarShop/Flag",
+        "rect": [
+          0,
+          0,
+          56,
+          47
+        ],
+        "cell": [
+          56,
+          47
+        ],
+        "disabled": 45,
+        "window": [
+          24,
+          408,
+          464,
+          336
+        ],
+        "target": [
+          56,
+          408,
+          400,
+          336
+        ],
+        "useful_generated_size": [
+          240,
+          236
+        ],
+        "generated_region": [
+          20,
+          333,
+          398,
+          607
+        ]
+      },
+      {
+        "path": "AnimatedButtons/Exit",
+        "rect": [
+          0,
+          0,
+          66,
+          66
+        ],
+        "cell": [
+          66,
+          66
+        ],
+        "disabled": 39,
+        "window": [
+          536,
+          408,
+          464,
+          336
+        ],
+        "target": [
+          600,
+          408,
+          336,
+          336
+        ],
+        "useful_generated_size": [
+          198,
+          225
+        ],
+        "generated_region": [
+          438,
+          333,
+          816,
+          607
+        ]
+      },
+      {
+        "path": "AnimatedButtons/LeftArrow",
+        "rect": [
+          0,
+          0,
+          46,
+          42
+        ],
+        "cell": [
+          46,
+          42
+        ],
+        "disabled": 31,
+        "window": [
+          1048,
+          408,
+          464,
+          336
+        ],
+        "target": [
+          1096,
+          408,
+          368,
+          336
+        ],
+        "useful_generated_size": [
+          267,
+          217
+        ],
+        "generated_region": [
+          856,
+          333,
+          1234,
+          607
+        ]
+      },
+      {
+        "path": "AnimatedButtons/RightArrow",
+        "rect": [
+          0,
+          0,
+          46,
+          42
+        ],
+        "cell": [
+          46,
+          42
+        ],
+        "disabled": 31,
+        "window": [
+          24,
+          792,
+          464,
+          336
+        ],
+        "target": [
+          72,
+          792,
+          368,
+          336
+        ],
+        "useful_generated_size": [
+          270,
+          217
+        ],
+        "generated_region": [
+          20,
+          647,
+          398,
+          921
+        ]
+      },
+      {
+        "path": "AnimatedButtons/AvatarShop/Gift",
+        "rect": [
+          0,
+          0,
+          64,
+          69
+        ],
+        "cell": [
+          64,
+          69
+        ],
+        "disabled": 71,
+        "window": [
+          536,
+          792,
+          464,
+          336
+        ],
+        "target": [
+          612,
+          792,
+          312,
+          336
+        ],
+        "useful_generated_size": [
+          209,
+          262
+        ],
+        "generated_region": [
+          438,
+          647,
+          816,
+          921
+        ]
+      },
+      {
+        "path": "AnimatedButtons/AvatarShop/Buy",
+        "rect": [
+          0,
+          0,
+          64,
+          73
+        ],
+        "cell": [
+          64,
+          73
+        ],
+        "disabled": 46,
+        "window": [
+          1048,
+          792,
+          464,
+          336
+        ],
+        "target": [
+          1132,
+          792,
+          295,
+          336
+        ],
+        "useful_generated_size": [
+          225,
+          263
+        ],
+        "generated_region": [
+          856,
+          647,
+          1234,
+          921
+        ]
+      },
+      {
+        "path": "AnimatedButtons/AvatarShop/Try",
+        "rect": [
+          64,
+          72,
+          64,
+          72
+        ],
+        "cell": [
+          64,
+          72
+        ],
+        "disabled": 71,
+        "window": [
+          24,
+          1176,
+          464,
+          336
+        ],
+        "target": [
+          106,
+          1176,
+          299,
+          336
+        ],
+        "useful_generated_size": [
+          214,
+          266
+        ],
+        "generated_region": [
+          20,
+          960,
+          398,
+          1234
+        ]
+      }
+    ],
+    "icons": [
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          0,
+          0,
+          26,
+          17
+        ],
+        "window": [
+          24,
+          24,
+          259,
+          336
+        ],
+        "target": [
+          24,
+          107,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          208,
+          166
+        ],
+        "generated_region": [
+          20,
+          20,
+          231,
+          294
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          26,
+          0,
+          26,
+          17
+        ],
+        "window": [
+          331,
+          24,
+          259,
+          336
+        ],
+        "target": [
+          331,
+          107,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          210,
+          166
+        ],
+        "generated_region": [
+          270,
+          20,
+          482,
+          294
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          52,
+          0,
+          26,
+          17
+        ],
+        "window": [
+          638,
+          24,
+          259,
+          336
+        ],
+        "target": [
+          638,
+          107,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          209,
+          140
+        ],
+        "generated_region": [
+          521,
+          20,
+          732,
+          294
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          78,
+          0,
+          26,
+          17
+        ],
+        "window": [
+          945,
+          24,
+          259,
+          336
+        ],
+        "target": [
+          945,
+          107,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          210,
+          144
+        ],
+        "generated_region": [
+          772,
+          20,
+          983,
+          294
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          104,
+          0,
+          26,
+          17
+        ],
+        "window": [
+          1252,
+          24,
+          259,
+          336
+        ],
+        "target": [
+          1252,
+          107,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          212,
+          107
+        ],
+        "generated_region": [
+          1022,
+          20,
+          1234,
+          294
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          130,
+          0,
+          26,
+          17
+        ],
+        "window": [
+          24,
+          408,
+          259,
+          336
+        ],
+        "target": [
+          24,
+          491,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          211,
+          109
+        ],
+        "generated_region": [
+          20,
+          333,
+          231,
+          607
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          0,
+          17,
+          26,
+          17
+        ],
+        "window": [
+          331,
+          408,
+          259,
+          336
+        ],
+        "target": [
+          331,
+          491,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          170,
+          192
+        ],
+        "generated_region": [
+          270,
+          333,
+          482,
+          607
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          26,
+          34,
+          26,
+          17
+        ],
+        "window": [
+          638,
+          408,
+          259,
+          336
+        ],
+        "target": [
+          638,
+          491,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          174,
+          185
+        ],
+        "generated_region": [
+          521,
+          333,
+          732,
+          607
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          130,
+          34,
+          26,
+          17
+        ],
+        "window": [
+          945,
+          408,
+          259,
+          336
+        ],
+        "target": [
+          945,
+          491,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          193,
+          170
+        ],
+        "generated_region": [
+          772,
+          333,
+          983,
+          607
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          78,
+          34,
+          26,
+          17
+        ],
+        "window": [
+          1252,
+          408,
+          259,
+          336
+        ],
+        "target": [
+          1252,
+          491,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          175,
+          189
+        ],
+        "generated_region": [
+          1022,
+          333,
+          1234,
+          607
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          130,
+          51,
+          26,
+          17
+        ],
+        "window": [
+          24,
+          792,
+          259,
+          336
+        ],
+        "target": [
+          24,
+          875,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          186,
+          194
+        ],
+        "generated_region": [
+          20,
+          647,
+          231,
+          921
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          78,
+          17,
+          26,
+          17
+        ],
+        "window": [
+          331,
+          792,
+          259,
+          336
+        ],
+        "target": [
+          331,
+          875,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          166,
+          189
+        ],
+        "generated_region": [
+          270,
+          647,
+          482,
+          921
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          26,
+          51,
+          26,
+          17
+        ],
+        "window": [
+          638,
+          792,
+          259,
+          336
+        ],
+        "target": [
+          638,
+          875,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          175,
+          192
+        ],
+        "generated_region": [
+          521,
+          647,
+          732,
+          921
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          78,
+          51,
+          26,
+          17
+        ],
+        "window": [
+          945,
+          792,
+          259,
+          336
+        ],
+        "target": [
+          945,
+          875,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          191,
+          187
+        ],
+        "generated_region": [
+          772,
+          647,
+          983,
+          921
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/ButtonIcons",
+        "rect": [
+          130,
+          17,
+          26,
+          17
+        ],
+        "window": [
+          1252,
+          792,
+          259,
+          336
+        ],
+        "target": [
+          1252,
+          875,
+          259,
+          169
+        ],
+        "useful_generated_size": [
+          179,
+          172
+        ],
+        "generated_region": [
+          1022,
+          647,
+          1234,
+          921
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/EquipedIndicator",
+        "rect": [
+          0,
+          0,
+          10,
+          17
+        ],
+        "window": [
+          24,
+          1176,
+          259,
+          336
+        ],
+        "target": [
+          54,
+          1176,
+          198,
+          336
+        ],
+        "useful_generated_size": [
+          157,
+          212
+        ],
+        "generated_region": [
+          20,
+          960,
+          231,
+          1234
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/OwnedCheck",
+        "rect": [
+          0,
+          0,
+          27,
+          20
+        ],
+        "window": [
+          331,
+          1176,
+          259,
+          336
+        ],
+        "target": [
+          331,
+          1248,
+          259,
+          192
+        ],
+        "useful_generated_size": [
+          207,
+          168
+        ],
+        "generated_region": [
+          270,
+          960,
+          482,
+          1234
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/GoldIcon",
+        "rect": [
+          0,
+          0,
+          26,
+          21
+        ],
+        "window": [
+          638,
+          1176,
+          259,
+          336
+        ],
+        "target": [
+          638,
+          1239,
+          259,
+          209
+        ],
+        "useful_generated_size": [
+          191,
+          151
+        ],
+        "generated_region": [
+          521,
+          960,
+          732,
+          1234
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/CashIcon",
+        "rect": [
+          0,
+          0,
+          26,
+          21
+        ],
+        "window": [
+          945,
+          1176,
+          259,
+          336
+        ],
+        "target": [
+          945,
+          1239,
+          259,
+          209
+        ],
+        "useful_generated_size": [
+          200,
+          152
+        ],
+        "generated_region": [
+          772,
+          960,
+          983,
+          1234
+        ]
+      }
+    ],
+    "chrome": [
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/Background",
+        "rect": [
+          0,
+          0,
+          105,
+          83
+        ],
+        "window": [
+          30,
+          30,
+          460,
+          390
+        ],
+        "target": [
+          30,
+          43,
+          460,
+          364
+        ],
+        "generated_region": [
+          0,
+          0,
+          418,
+          418
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/Background",
+        "rect": [
+          105,
+          0,
+          105,
+          83
+        ],
+        "window": [
+          538,
+          30,
+          460,
+          390
+        ],
+        "target": [
+          538,
+          43,
+          460,
+          364
+        ],
+        "generated_region": [
+          418,
+          0,
+          836,
+          418
+        ]
+      },
+      {
+        "path": "StaticButtons/AvatarShop/AvatarButton/Background",
+        "rect": [
+          210,
+          0,
+          105,
+          83
+        ],
+        "window": [
+          1046,
+          30,
+          460,
+          390
+        ],
+        "target": [
+          1046,
+          43,
+          460,
+          364
+        ],
+        "generated_region": [
+          836,
+          0,
+          1254,
+          418
+        ]
+      },
+      {
+        "path": "Popup/Blue/Avatar/Buy",
+        "rect": [
+          0,
+          0,
+          228,
+          286
+        ],
+        "window": [
+          400,
+          480,
+          736,
+          1000
+        ],
+        "target": [
+          400,
+          518,
+          736,
+          923
+        ],
+        "generated_region": [
+          251,
+          418,
+          1003,
+          1254
+        ]
+      }
+    ],
+    "scenery": [
+      {
+        "path": "InGame/Scene/AvatarShop/Background",
+        "rect": [
+          0,
+          520,
+          800,
+          80
+        ],
+        "window": [
+          40,
+          30,
+          1456,
+          180
+        ],
+        "target": [
+          40,
+          47,
+          1456,
+          146
+        ],
+        "generated_region": [
+          33,
+          38,
+          1221,
+          158
+        ]
+      },
+      {
+        "path": "InGame/Scene/AvatarShop/Background",
+        "rect": [
+          225,
+          0,
+          20,
+          600
+        ],
+        "window": [
+          40,
+          250,
+          80,
+          1220
+        ],
+        "target": [
+          59,
+          250,
+          41,
+          1220
+        ],
+        "generated_region": [
+          48,
+          204,
+          82,
+          1200
+        ]
+      },
+      {
+        "path": "InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background",
+        "rect": [
+          0,
+          0,
+          210,
+          144
+        ],
+        "window": [
+          160,
+          300,
+          640,
+          450
+        ],
+        "target": [
+          160,
+          305,
+          640,
+          439
+        ],
+        "generated_region": [
+          131,
+          249,
+          653,
+          607
+        ]
+      },
+      {
+        "path": "InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2",
+        "rect": [
+          0,
+          0,
+          210,
+          145
+        ],
+        "window": [
+          840,
+          300,
+          640,
+          450
+        ],
+        "target": [
+          840,
+          304,
+          640,
+          442
+        ],
+        "generated_region": [
+          686,
+          248,
+          1208,
+          609
+        ]
+      }
+    ]
+  }
+}

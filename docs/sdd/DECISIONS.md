@@ -404,3 +404,34 @@ da ADR-059. C# continua fonte de catálogo/preços/mecânicas; contém15 registr
 e não os nove avatares da imagem. Inventário lateral equipa itens possuídos;
 atributos ficam em painel modal sem mudar regras. UI recomposta com sprites
 originais e controles; HD aprovado mantém aspecto/pivôs/rig da ADR-063.
+
+## ADR-066 — fidelidade das regras OpenBound e interface Shop HD
+
+Auditoria solicitada pelo usuário compara código C# e Godot, preservando
+adaptações aprovadas ADR-063/064 (Vestir persistido e grade3×3). Catálogo,
+preços, ordem dos atributos e intervalos/FPS dos botões vêm do original;
+transação offline mantém validação/rollback em vez de reproduzir falhas C#.
+Popup passa a mostrar retrato/preços/categoria e centraliza moeda única.
+Regenerar UI raster consumida com GPT Images, mestres constantes/registro
+nativo/fallback; anatomia HD aprovada e combate preservados. Plano e
+matriz de diferenças em AVATAR_SHOP_PARITY_0_14_6.md.
+
+## ADR-067 — preço integrado à moldura e informação de efeito real
+
+Retirar ColorRect de preço que cobre os detalhes do card. ShopCardStyle
+compõe painel branco, faixa azul e acabamento inferior a partir da própria
+textura HD/nativa, conservando bordas/cantos/rebites. Retrato126×66 deixa
+linha para “Cosmético · sem bônus” e tooltip: melhorias via Atributos.
+AvatarMetadata C# não tem bônus por peça; imagem externa não autoriza
+inventar números/regras. Perfil/combate/PNG/anatomia permanecem preservados.
+
+## ADR-068 — centro nítido da faixa de preços
+
+Validação do usuário: o fundo dos preços ainda parece borrado. A faixa da
+ADR-067 esticava a linha nativa75..76 (4px HD) para27px lógicos, ampliando
+ruído/variações da textura. Substituir somente o centro desse recorte por
+retângulo vetorial azul uniforme, desenhado no próprio StyleBox. Laterais,
+borda branca e acabamento inferior/rebites preservados. Isso substitui a
+extração da tira para o preenchimento central da ADR-067; nenhum novo PNG,
+modificador, alteração de perfil ou reanimação necessária. Conferir GPU
+FullHD/versão nativa, suites de loja e aplicativo reexportado/assinado/PCK.

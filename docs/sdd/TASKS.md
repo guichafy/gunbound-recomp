@@ -10,13 +10,40 @@
 - [x] Skill `skills/gunbound-mobile-port` para o próximo porte.
 - [ ] Usuário validar a sensação do dano e do SS no aplicativo.
 
+## Fundo de preço sem blur0.14.8 (ADR-068)
+
+- [x] Substituir tira esticada por preenchimento vetorial central, mantendo moldura/rebites.
+- [x] GPUFullHD: fundo uniforme (527cores antes→1depois), incluindo confirmação no PCK.
+- [x] 1848checks rápidos sem falhas; app/ZIP0.14.8 assinados e smoke isolado passou.
+- [ ] Usuário validar o fundo nítido no aplicativo atualizado.
+
+## Moldura/preço e efeito dos avatares0.14.7 (ADR-067)
+
+- [x] Retirar faixa plana sobreposta e compor preços dentro da moldura HD/nativa.
+- [x] Explicitar “Cosmético · sem bônus”, tooltip/popup, sem inventar stats da imagem.
+- [x] 1848checks rápidos sem falhas, revisão independente sem achados.
+- [x] GPU1920×1080 HD/fallback/roster/compra,120frames60FPS; referência preservada.
+- [x] App/ZIP0.14.7 reexportados, assinatura estrita e smoke GPU/PCK isolado passaram.
+- [ ] Usuário validar os cards atualizados no app.
+
+## Auditoria OpenBound e UI HD0.14.6 (ADR-066)
+
+- [x] Comparar C#/JSON/80originais, catálogo15 sem diferenças; registrar adaptações vigentes.
+- [x] Corrigir ícones dos atributos, ciclos/FPS e clique após soltura com regressão real.
+- [x] Popup com retrato/categoria/preço/saldo e moeda única central, tamanho fixo.
+- [x] Regenerar quatro folhas1254×1254 por GPT Images;20texturas UI, alpha/registro/fallback.
+- [x] Corrigir escala de bordas/popup vista na GPU; revisão independente final sem achados.
+- [x] Harness1848checks+10partidas, zero falhas; GPU1920×1080/120frames60FPS.
+- [x] App/ZIP0.14.6, assinatura estrita e smoke GPU/PCK isolado fora do projeto passaram.
+- [ ] Usuário validar aparência/fluxo da interface HD no aplicativo.
+
 ## Aura UsingItem e saída do slot (ADR-065)
 
 - [x] No turno próprio o item sai do slot na hora, inclusive o que já estava marcado.
 - [x] Aura verde separada do corpo, 20 quadros a 19 fps, folhas 4× Bigfoot e Mage.
 - [x] test_items_scene 46 checks; captura `docs/items/using-item-12.png` (1920×1080).
-- [ ] Usuário ver o efeito no aplicativo (o export 0.14.5 ainda não inclui esta correção).
-- [ ] Suíte completa (`check.sh`) desta correção ainda não rodou.
+- [ ] Usuário ver o efeito no aplicativo (a aura está incluída no export0.14.6).
+- [x] Suíte completa repetida na0.14.6:1848checks+10partidas, zero falhas.
 
 ## Loja clássica 0.14.5 (ADR-064)
 

@@ -1,4 +1,82 @@
-# Hand-off — Gunbound Recomp 0.14.5
+# Hand-off — Gunbound Recomp 0.14.8
+
+## Fundo dos preços nítido0.14.8
+
+Usuário ainda viu borrado após0.14.7. REQ-20/38, ADR-068. Causa: linha da
+textura75..76 (4px HD) ampliada para27px lógicos espalhava suas variações
+em manchas. Centro da faixa agora é retângulo vetorial azul uniforme no
+StyleBox; recortes de laterais/borda branca/rebites preservados. Sem novo
+PNG, alteração de regras, retratos, layout, perfil ou atributos.
+
+GPU1920×1080 HD/fallback/compra/roster em docs/avatar-price-crisp. Amostra
+sem texto passou de527cores diferentes para1(RGB121/159/211); região do
+PCK1280×800 também tem essa única cor. Evidência em pixel-check.json.
+1848checks em check.sh --quick, zero falhas. Partidas longas não repetidas:
+alteração apenas visual,10passaram na0.14.6. App/ZIP0.14.8 reexportados,
+assinatura estrita válida e smoke GPU/PCK isolado em/tmp passou. Perfis
+isolados, fonte C#/arte original preservados; validação do usuário pendente.
+
+## Cards: preço e informação do avatar0.14.7
+
+Validação do usuário: retângulo dos preços cobria detalhes da moldura; imagem
+externa mostrava bônus. REQ-20/38/39, ADR-067, AVATAR_CARD_FIX_0_14_7.md.
+ColorRect foi retirado; a faixa azul agora é parte da composição da textura,
+mantendo a borda branca, laterais e acabamento inferior/rebites. Card166×147,
+retrato126×66 com aspecto preservado e linha “Cosmético · sem bônus”. Tooltip
+explica melhorias via Atributos; confirmação de compra também informa o efeito.
+
+Fonte conferida: AvatarMetadata.cs/JSON sem modificadores; Player.Attribute
+é do piloto e EquipAvatar só altera IDs. Vestir não aumenta ataque/mobile
+nesta versão do OpenBound, esclarecido na conversa. Não copiamos números de
+outra imagem. Nenhuma mudança de combate/perfil/preços/PNG/anatomia.
+
+1848checks em check.sh --quick, zero falhas; inclui280de loja/cena/continuidade.
+Partidas longas não repetidas porque só apresentação mudou (10passaram na0.14.6).
+Revisão independente sem achados. GPU HD/fallback/compra/roster em
+docs/avatar-card-fix,1920×1080 e120frames60FPS; imagem enviada pelo usuário
+preservada em before-cards.png. App/ZIP0.14.7 reexportados, assinatura estrita
+válida; smoke GPU do PCK isolado em/tmp passou (card/efeito/retrato/compra,
+20texturasHD, exclusão de brutos, vestir/recarga/batalha).
+Perfis de teste isolados; fonte C#/perfil real preservados. Sem publicação.
+
+## Auditoria OpenBound e UI Shop HD0.14.6
+
+Pedido: conferir implementação da Avatar Shop contra fonte C# e regenerar
+arte ainda sem HD pela skill gunbound-classic-hd. REQ-20/38/39/40, ADR-066;
+plano/matriz em AVATAR_SHOP_PARITY_0_14_6.md. Trabalho local na main.
+
+Catálogo15 e80arquivos originais idênticos à fonte (source-audit.json).
+Preservadas adaptações aprovadas: grade3×3/inventário lateral, Vestir
+persistido, perfil/gêneros/saldo/nível local e Bigfoot/Mage. Corrigidos ícones
+dos atributos e relógios/FPS/Foward/Cycle do C#; clique das setas continua
+após soltar. Popup mostra retrato/categoria/preço/saldo e centraliza moeda
+única. Transações/perfil/combate/13peças HD/rig aprovados não alterados.
+
+Quatro folhas GPT Images1254×1254RGBA, uma correção de estrela;20texturas
+da UI com catálogo/origem/prompt/alpha/registro4× e fallback. Fonte clássica
+é identidade; Space Marine HD aprovado é acabamento. Pixels úteis medidos
+em catálogo; janelas4× não significam4× detalhe gerado. source/.gdignore
+separa referências/brutos do runtime. GENERATION.json documenta geração.
+
+GPU inicial encontrou popup mínimo da textura e bordas4× maiores: corrigidos
+com expansão antes do tamanho e ShopCardStyle em nove recortes independentes.
+Revisão independente final sem achados. **1848checks+10partidas sem falhas**,
+42,1s partidas;40paridade/46UIHD/25Shop/25classic. Perfis isolados somente.
+Capturas1920×1080 e120frames60FPS em docs/avatar-shop-parity cobrem compra,
+moeda única, atributos, gêneros, Mage/Bigfoot e controles animados.
+
+App/ZIP0.14.6 reexportados em builds, assinatura estrita válida; ZIP127,4MB.
+Smoke GPU do PCK real passou:20texturasHD, popup/retrato/tamanho, cliques do
+inventário, recarga do perfil e quatro peças na batalha. Referências/brutos
+não estão no pacote. Verificação inicial de JSON emcwddo projeto deu falso
+positivo pelo filesystem local; repetir fora do projeto eliminou esse fallback.
+Filtro novo inclui explicitamente catalog.json/GENERATION.json. Reproduzir:
+copiar tests/capture_avatar_shop_parity_pck.gd para /private/tmp e executar
+Godot nessa pasta, com --path /private/tmp, --main-pack <PCKabsoluto> e
+--script <scriptabsoluto>. App inclui também a aura UsingItem do baseline;
+a suíte completa acima resolve a pendência de validação anterior. Sem push.
+Limite: mestres HD variam brilho pelos relógios; os gestos originais completos
+dos mascotes continuam no fallback. Validação visual do usuário pendente.
 
 ## Paridade Mage/Bigfoot com o C# (ADR-066)
 

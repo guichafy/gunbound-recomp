@@ -241,3 +241,17 @@ AVATAR_SMOOTH_0_14_4.md; experimentar item não possuído continua temporário.
 REQ-20/38/39/40: loja0.14.5 segue a primeira foto de referência: grade3×3,
 inventário lateral sempre visível e vestível, prévia/saldo compactos, categorias
 no rodapé e atributos em painel separado. Critérios em AVATAR_SHOP_CLASSIC_0_14_5.md.
+
+REQ-20/38/39/40: auditoria0.14.6 contra implementação OpenBound; catálogo,
+compra/equipamento/atributos e intervalos de interface conferidos, diferenças
+corrigidas e assets raster da UI regenerados em HD. Adaptações já aprovadas
+preservadas e explicitadas em AVATAR_SHOP_PARITY_0_14_6.md.
+
+REQ-20/38/39: correção0.14.7 preserva os detalhes da moldura sob os preços e
+mostra o efeito real de cada peça: cosmético/sem bônus neste catálogo OpenBound.
+Pontos de combate permanecem no painel Atributos do piloto. Plano
+AVATAR_CARD_FIX_0_14_7.md; sem novos bônus/regras inventados pela referência.
+
+REQ-20/38: correção0.14.8 retira o borrado do fundo dos preços. O centro da
+faixa recebe preenchimento vetorial uniforme; moldura, borda branca e rebites
+continuam nos recortes HD/nativos. Texto, retrato e regras preservados.

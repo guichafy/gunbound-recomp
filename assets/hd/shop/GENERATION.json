@@ -1,0 +1,51 @@
+{
+  "tool": "GPT Images via built-in image_gen",
+  "mode": "reference-based generation and targeted edit",
+  "date": "2026-10-13",
+  "identity_reference": "assets/hd/shop/source/ref_<group>.png (packed unmodified OpenBound native crops)",
+  "finish_reference": "assets/hd/avatars/space.png",
+  "generations": {
+    "controls": {
+      "prompt": "Use case: style-transfer. Regenerate a production sprite sheet for Gunbound Recomp Avatar Shop. Image 1 is the exact identity and POSITION reference; Image 2 only defines the polished HD finish. Preserve the square canvas, the THREE columns by FOUR rows and each cell's object center and relative size exactly. Keep bottom middle and bottom right cells EMPTY. Row1: beige baseball cap, beige white short sleeve shirt, dark lens brass goggles. Row2: small golden waving pennant on upright pole, closed blue-purple door, orange left arrow. Row3: orange right arrow, classic round-headed faceless beige mascot holding blue/gold gift, the same mascot holding red gold coin shopping bag. Row4 left: the same mascot in blue overall with red question mark. Rebuild every object with new detailed clean curves, polished 2.5D shading, crisp dark outlines and upper-left light, matching the approved second reference's finish without copying armor or faces. Keep original colors silhouette orientation proportions. Constant master, one of each object only, no frame variations, no text added, no floor, no external shadows. All empty space is genuine transparent alpha, no checkerboard rendered. Target 1536 square atlas, objects in the same exact windows of image1.",
+      "original_generator_output": "/Users/guichafy/.codex/generated_images/01a132b4-11fd-7b32-8897-ff491690e4c9/exec-d19a184a-4822-4f02-84e4-ee2d3ca4c221.png",
+      "raw": "assets/hd/shop/source/gen_controls.png",
+      "observed_size": [
+        1254,
+        1254
+      ]
+    },
+    "icons": {
+      "prompt": "Use case: style-transfer. Regenerate this exact UI icon atlas for classic Gunbound Avatar Shop in polished HD. Image1 fixes identity, arrangement, centers, colors and proportions. Image2 is finish only. Exactly FIVE columns and FOUR rows; last row last cell empty. Row1: blue shirt, pink shirt, blue cap, pink cap, blue eyeglasses. Row2: pink eyeglasses, green pennant, silver sword plus lavender plus sign, red heart plus lavender plus sign, blue golden shield plus lavender plus sign. Row3: blue shield plus lavender plus sign, golden hourglass plus lavender plus sign, green hourglass plus lavender plus sign, shovel plus lavender plus sign, gold five pointed star. Row4: orange equipped triangular arrow, green ownership checkmark, gold currency coin, blue cash coin, empty. Keep each complete object inside its source cell centered exactly, preserving source orientation geometry and color coding. Smooth dark contours, readable small-size forms, 2.5D soft volumes, metallic crisp highlights. Reconstruct details, do not just upscale pixels. Transparent RGBA background. No labels, no extra icons or symbols other than the existing plus sign, no ground or external shadows. Square sheet target1536x1536, match source cell positioning.",
+      "original_generator_output": "/Users/guichafy/.codex/generated_images/01a132b4-11fd-7b32-8897-ff491690e4c9/exec-885ab1b2-b725-4262-8738-c8ce2b4563cb.png",
+      "raw": "assets/hd/shop/source/gen_icons.png",
+      "observed_size": [
+        1254,
+        1254
+      ],
+      "correction": {
+        "prompt": "Edit only the gold star icon in row3 column5 of this EXACT sprite atlas: remove the lavender plus sign that currently overlaps its upper-left point. Keep the gold five-point star fully intact and complete, centered in the same source cell, polished smooth contours. The original classic Popularity icon is a STAR ALONE. All other 18 icons, their positions, proportions, colors, materials, alpha transparency and the entire canvas arrangement must remain unchanged. Real RGBA transparency, no checkerboard/no new background. Do not add anything else.",
+        "original_generator_output": "/Users/guichafy/.codex/generated_images/01a132b4-11fd-7b32-8897-ff491690e4c9/exec-34911223-cd88-426b-8723-53dee2fcfe07.png",
+        "preserved_initial": "assets/hd/shop/source/gen_icons_initial.png"
+      }
+    },
+    "chrome": {
+      "prompt": "Use case: style-transfer. Reconstruct the classic OpenBound Avatar Shop UI chrome at high definition, keeping the EXACT layout/centers/sizes/proportions in Image1. Top row THREE separate landscape card frames with dark blue header, white blank inset and pale blue bevel border: normal, hover brighter, selected brightest. Below centered is ONE tall blue-gray buy modal frame with blue header and angled notch on its right. Its exact header text is BUY AVATAR. All interiors remain EMPTY blank so real live labels and portraits will be overlaid by game engine. Reference2 defines polish only. Clean precise smooth bevels, crisp dark outlines, subtle metallic highlights, consistent rounded tiny corners, classic muted blue palette. No invented decorations, no controls, no characters or thumbnails, do not draw new text. Preserve whitespace and window edges EXACTLY to match reference crop bounds. Transparent RGBA outside the four frames; do not render checkerboard. Square1536x1536 target, not a complete screen or UI redesign.",
+      "original_generator_output": "/Users/guichafy/.codex/generated_images/01a132b4-11fd-7b32-8897-ff491690e4c9/exec-1c4402ad-52eb-4360-81e0-58a438efdfd9.png",
+      "raw": "assets/hd/shop/source/gen_chrome.png",
+      "observed_size": [
+        1254,
+        1254
+      ]
+    },
+    "scenery": {
+      "prompt": "Use case: style-transfer. Restore the provided classic Gunbound Shop scenery sprite sheet in clean high definition. Image1 fixes exact composition and crop windows, Image2 only gives polished 2.5D rendering finish. Preserve ALL FOUR disconnected pieces in EXACT positions/dimensions of source: very wide thin muted blue city strip across top; narrow vertical blue divider near left; rectangular icy white canyon with cyan pipe in middle left; snowy icy ground ledge with two decorative snowflakes and transparent air above in middle right. Keep each source piece's center/width/height exactly as drawn. City stays muted pale icy blue as background behind shop controls; add precise rocks, buildings, machinery linework without darkening palette. Canyon pipe remains on right of its rectangle. Ground ledge keeps the source top silhouette. Crisp smooth illustration detail, no pixelated interpolation, no people, avatars or labels. Every gap and region outside these exact pieces is transparent RGBA, not black or a drawn checkerboard. Target1536 square.",
+      "original_generator_output": "/Users/guichafy/.codex/generated_images/01a132b4-11fd-7b32-8897-ff491690e4c9/exec-9dc69c5b-853f-4f3c-94e8-5960a441106a.png",
+      "raw": "assets/hd/shop/source/gen_scenery.png",
+      "observed_size": [
+        1254,
+        1254
+      ]
+    }
+  },
+  "note": "Registered runtime PNGs are 4x native window size; useful generated pixels are measured in catalog.json. Four 1254x1254 sheets are not Full HD. GPU compositions are 1920x1080. Stable control masters with source clocks preserve identity, not every original gesture."
+}

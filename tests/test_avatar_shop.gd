@@ -43,7 +43,7 @@ func run() -> void:
 	check(first.size == Vector2(166,147), "Classic card proportions")
 	for child in shop.cards.get_child(1).get_children():
 		if child is TextureRect and child.name == "Portrait":
-			check(child.size == Vector2(126,78), "HD portrait fits inside classic white window")
+			check(child.size == Vector2(126,66), "HD portrait reserves effect information within classic white window")
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	check(shop.model.selected_key == "0:0:1", "Real card click")
