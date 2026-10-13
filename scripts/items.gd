@@ -16,6 +16,7 @@ const DEFAULT_LOADOUT := ["dual", "teleport", "power_up", "energy_up_1"]
 # InGameItem*Value; Bionic armour adds the Extra value (neither mobile is Bionic).
 const ENERGY_UP_1 := 12.0
 const ENERGY_UP_2 := 30.0
+const ENERGY_UP_EXTRA := 3.0
 const BLOOD_ATTACK := 33.0
 const BLOOD_HEALTH := 8.0
 const POWER_UP_ATTACK := 30.0

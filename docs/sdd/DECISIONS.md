@@ -372,6 +372,16 @@ possuídos, com rollback e confirmação. Compra continua separada de equipar.
 Critérios/evidências em AVATAR_SMOOTH_0_14_4.md; main local e app assinado,
 sem publicação. Gestos/olhos do original continuam limitação do HD constante.
 
+## ADR-066 — paridade de combate dos mobiles com o C#
+
+Pedido explícito de corrigir escudo, regeneração e os demais desvios achados
+contra o OpenBound, numa worktree da `main`. Regeneração de escudo passa a
+valer para todos os mobiles a cada turno. O SS segue a trava de quatro turnos
+próprios e abre no primeiro. O dano volta à fórmula inversa do `CalculateDamage`,
+com a caixa real de cada mobile. Queda curta deixa de tirar vida. O roteiro
+para os próximos portes fica na skill `gunbound-mobile-port`. Não se cria
+tabela de resistências: o C# não aplica os arquétipos de ataque no dano.
+
 ## ADR-065 — item some no uso e aura UsingItem
 
 Pedido do usuário: no turno próprio, ao selecionar um item (ou já tê-lo

@@ -77,7 +77,7 @@ Números de base, antes dos atributos:
 
 - **Mage:** 760 de vida, 220 de escudo, 90 de movimento, mira 15–50°. Regenera 20 de escudo no próprio turno.
 - **Bigfoot:** 1100 de vida, 90 de movimento, mira 18–40° (SS 23–35°).
-- O especial destrava no terceiro turno próprio e vale uma vez por partida.
+- O especial está liberado no primeiro turno. Depois de usá-lo, volta quatro turnos próprios depois.
 - Vitória 120 XP, derrota 45, empate 70. Um nível a cada 200 XP. Gold da partida é separado do XP.
 - A máquina usa a mesma física do disparo real. A dificuldade muda o erro de mira.
 

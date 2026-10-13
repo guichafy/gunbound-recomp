@@ -79,7 +79,7 @@ func _initialize() -> void:
 		model = fixture()
 		model.shot_weapon = weapon
 		model.shot_actor = 0
-		model.explode(model.actors[1].pos)
+		model.explode(Combat.full_hit(model.actors[1], 25.0))
 		check(model.actors[1].shield == [130, 150, 130][weapon] and model.actors[1].hp == 760, "Original per-bomb damage consumes Mage shield " + str(weapon))
 	model = fixture()
 	model.fire(85, 70, 0)

@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Paridade Mage/Bigfoot com o C# (ADR-066)
+
+- [x] Regeneração de escudo em todos os mobiles a cada turno, com teto do C#.
+- [x] SS aberto no primeiro turno e trava de quatro turnos próprios.
+- [x] Dano inverso, caixa por mobile, EMP pelo vão da caixa.
+- [x] Queda sem dano de vida, vento no ar, sinalizador 0,4 s no Bigfoot.
+- [x] Fumaça do Bigfoot e poses de segundo dano, choque, queda e parede.
+- [x] Skill `skills/gunbound-mobile-port` para o próximo porte.
+- [ ] Usuário validar a sensação do dano e do SS no aplicativo.
+
 ## Aura UsingItem e saída do slot (ADR-065)
 
 - [x] No turno próprio o item sai do slot na hora, inclusive o que já estava marcado.

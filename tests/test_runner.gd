@@ -40,17 +40,15 @@ func _initialize() -> void:
 	thin_terrain.cells[100 * 640 + 100] = 1
 	var corner: Dictionary = combat.trace_segment(Vector2(198.9, 201.3), Vector2(201.3, 198.9), thin_terrain, [], -1)
 	check(not corner.is_empty(), "Collision catches a short intersection at a pixel corner")
-	check(combat.damage_at(0.0, 160.0, 60.0) == 160, "Direct blast applies full damage")
-	check(combat.damage_at(100.0, 160.0, 60.0) == 0, "Blast cannot damage actors beyond radius plus hull")
+	check(combat.damage_at(60.0, 160.0, 60.0) == 160, "Damage at the explosion radius equals the base")
+	check(combat.damage_at(30.0, 160.0, 60.0) == 320, "Closer than the radius exceeds the base")
 	var match_model = match_script.new()
 	match_model.start(1, 1, 42)
 	check(match_model.active == 0, "Player starts the match")
 	check(match_model.phase == "aim", "Match starts in aiming phase")
-	check(not match_model.can_use_special(0), "Special is locked before third own turn")
-	match_model.actors[0].turns = 3
-	check(match_model.can_use_special(0), "Special unlocks on third own turn")
-	match_model.actors[0].special_used = true
-	check(not match_model.can_use_special(0), "Special cannot be used twice")
+	check(match_model.can_use_special(0), "SS is available on the first own turn")
+	match_model.actors[0].ss_lock = 4
+	check(not match_model.can_use_special(0), "SS stays locked after it is fired")
 	match_model.actors[0].ready = 0.0
 	match_model.actors[1].ready = 40.0
 	match_model.schedule(0, 30.0)
@@ -86,8 +84,9 @@ func _initialize() -> void:
 	for y in range(400):
 		for x in range(640):
 			match_model.terrain.cells[y * 640 + x] = 1 if y * 2 >= 480.0 - (x * 2 - 235.0) * tan(PI / 6.0) else 0
-	match_model.actors[0].pos.y = match_model.terrain.surface_at(235) - 24
-	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - 24
+	match_model.actors[0].pos.y = match_model.terrain.surface_at(235) - match_model.stance_of(0)
+	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - match_model.stance_of(1)
+	match_model.stamp_tilt()
 	match_model.wind = Vector2(-35, 0)
 	var returning: Dictionary = combat.predict(match_model.muzzle(0, 50.0), match_model.shot_velocity(0, 50.0, 15.0, 0), Vector2(-35, 0), match_model.terrain, match_model.actors, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")

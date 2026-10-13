@@ -11,7 +11,7 @@ func reset(actors: Array) -> void:
 	motion.clear()
 	for actor in actors:
 		var spec: Dictionary = Mobiles.definition(actor.vehicle)
-		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "using": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
+		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "hurt_pose": "hurt", "hurt_flip": false, "shock": 0.0, "falling": 0.0, "unable": 0.0, "using": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
 
 func react(event: Dictionary) -> void:
 	# A Dual second volley replays the shooting animation (OnStartInteracting).
@@ -29,8 +29,23 @@ func react(event: Dictionary) -> void:
 		motion[event.actor].pos = Vector2(event.to)
 		motion[event.actor].previous = Vector2(event.to)
 	elif event.type in ["damage", "shield_damage"]:
-		motion[event.actor].hurt = float(motion[event.actor].hurt_time)
-		motion[event.actor].pose = "hurt"
+		if str(event.get("kind", "")) == "shock":
+			motion[event.actor].shock = 1.0
+			motion[event.actor].pose = "shock"
+		else:
+			var alternate: bool = bool(motion[event.actor].hurt_flip)
+			motion[event.actor].hurt_flip = not alternate
+			motion[event.actor].hurt_pose = "hurt_2" if alternate else "hurt"
+			motion[event.actor].hurt = float(motion[event.actor].hurt_time)
+			motion[event.actor].pose = str(motion[event.actor].hurt_pose)
+		motion[event.actor].pose_age = 0.0
+	elif event.type == "fall":
+		motion[event.actor].falling = 1.0
+		motion[event.actor].pose = "falling"
+		motion[event.actor].pose_age = 0.0
+	elif event.type == "blocked":
+		motion[event.actor].unable = 1.0
+		motion[event.actor].pose = "unable"
 		motion[event.actor].pose_age = 0.0
 
 func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0, cpu_charging: bool = false, cpu_weapon: int = 0) -> void:
@@ -44,6 +59,9 @@ func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0,
 		state.rotation = lerp_angle(float(state.rotation), model.body_rotation(index), 1.0 - exp(-delta * 18.0))
 		state.recoil = maxf(0.0, state.recoil - delta)
 		state.hurt = maxf(0.0, state.hurt - delta)
+		state.shock = maxf(0.0, state.shock - delta)
+		state.falling = maxf(0.0, state.falling - delta)
+		state.unable = maxf(0.0, state.unable - delta)
 		state.using = maxf(0.0, state.using - delta)
 		if actor.hp <= 0:
 			state.dead += delta
@@ -59,8 +77,14 @@ func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0,
 func state_name(model, index: int, charging: bool, cpu_charging: bool = false) -> String:
 	if model.actors[index].hp <= 0:
 		return "destroyed"
+	if motion[index].shock > 0.0:
+		return "shock"
 	if motion[index].hurt > 0.0:
-		return "hurt"
+		return str(motion[index].hurt_pose)
+	if motion[index].falling > 0.0:
+		return "falling"
+	if motion[index].unable > 0.0:
+		return "unable"
 	if motion[index].recoil > 0.0:
 		return "recoil"
 	if motion[index].using > 0.0:
@@ -135,6 +159,9 @@ func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionar
 	var avatar_context: Dictionary = ctx.get("avatar_context",{}).duplicate()
 	avatar_context.rig_state = presentation(index,atlas.hd_rig,time,weapon)
 	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase, avatar_context)
+	if bool(Mobiles.definition(int(actor.vehicle)).smoke) and int(actor.hp) > 0 and float(actor.hp) <= float(actor.max_hp) * 0.3:
+		var puff := fposmod(time, 0.8) / 0.8
+		view.draw_circle(pos + offset + Vector2(8.0 * float(actor.facing), -20.0 - puff * 18.0), 2.5 + puff * 3.5, Color(0.78, 0.78, 0.8, (1.0 - puff) * 0.4))
 
 func draw_explosion(view: Node2D, effect: Dictionary) -> void:
 	var age: float = effect.age

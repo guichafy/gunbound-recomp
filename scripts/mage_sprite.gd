@@ -9,7 +9,10 @@ const SEQUENCES := {
 	"charging_2": [391, 409, 14.0, true],
 	"recoil_0": [100, 119, 19.0, false], "recoil_1": [100, 119, 21.0, false],
 	"recoil_2": [100, 119, 20.0, false],
-	"hurt": [341, 365, 24.0, false], "destroyed": [179, 203, 19.0, false],
+	"hurt": [341, 365, 24.0, false], "hurt_2": [366, 390, 24.0, false],
+	"shock": [120, 139, 19.0, false], "falling": [160, 178, 18.0, false],
+	"unable": [80, 99, 19.0, true],
+	"destroyed": [179, 203, 19.0, false],
 	"using_item": [243, 262, 19.0, false]
 }
 var laser_textures: Array[Texture2D] = []

@@ -595,7 +595,7 @@ func update_hud() -> void:
 		button.disabled = index == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER)
 		if bool(button.get_meta("activated")) != (index == weapon):
 			hud.style_button(button, index == weapon)
-	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = "%s: terceiro turno próprio; um uso por partida." % model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name
+	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = "%s: liberado no primeiro turno; depois do uso, volta em quatro turnos próprios." % model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name
 	var displayed_weapon: int = weapon if model.active == Match.PLAYER else int(cpu_plan.get("weapon", 0))
 	if model.phase == "finished":
 		queue_entries = []

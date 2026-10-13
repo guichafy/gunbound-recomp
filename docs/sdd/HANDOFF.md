@@ -1,5 +1,16 @@
 # Hand-off — Gunbound Recomp 0.14.5
 
+## Paridade Mage/Bigfoot com o C# (ADR-066)
+
+Worktree `mobile-csharp-parity`, a partir de `c20f040`. REQ-42. Escudo do Mage
+regenera em todo turno, SS abre no primeiro e recarrega em quatro turnos
+próprios, dano segue `base × raio / distância`, caixas 38×33 e 46×40, queda
+curta não tira vida, sinalizador do Bigfoot espera 0,4 s, fumaça e poses de
+dano/choque/queda/parede entram no catálogo. Skill
+`skills/gunbound-mobile-port/SKILL.md`. App não foi reexportado. Harness desta
+worktree: 1785 checks e 10 partidas, zero falhas. A `main` com a loja 0.14.6
+não foi misturada.
+
 ## Item no turno próprio — aura UsingItem (ADR-065)
 
 No turno do jogador, usar um item (clique agora ou marca feita no turno

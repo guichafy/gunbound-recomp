@@ -65,18 +65,19 @@ func run() -> void:
 	check((scene.weapon_buttons[2].position + scene.weapon_buttons[2].size * 0.5).is_equal_approx(HudArt.bar_point(Vector2(-285, -4))), "SS button sits at the original (−285, −4)")
 	check((scene.pass_button.position + scene.pass_button.size * 0.5).is_equal_approx(HudArt.bar_point(Vector2(-296, 26))), "SkipTurn button sits at the original (−296, 26)")
 	check(s1.get_meta("activated") and not scene.weapon_buttons[1].get_meta("activated"), "S1 starts activated like HUD.cs")
-	check(scene.weapon_buttons[2].disabled, "SS stays disabled until the special is unlocked")
+	check(not scene.weapon_buttons[2].disabled, "SS is available on the first turn")
 
-	# Tab cycles the shots and skips a disabled SS (ShotButton.UpdateKeyboard).
+	# Tab cycles S1, S2 and SS, and skips SS after it has been fired.
 	key(scene, KEY_TAB, true)
 	check(scene.weapon == 1 and scene.weapon_buttons[1].get_meta("activated"), "Tab selects S2")
 	key(scene, KEY_TAB, true)
-	check(scene.weapon == 0, "Tab skips the locked SS back to S1")
-	scene.model.actors[0].turns = 3
+	check(scene.weapon == 2, "Tab reaches SS on the first turn")
+	scene.model.actors[0].ss_lock = 4
+	scene.select_weapon(0)
 	scene.update_hud()
 	key(scene, KEY_TAB, true)
 	key(scene, KEY_TAB, true)
-	check(scene.weapon == 2 and not scene.weapon_buttons[2].disabled, "Unlocked SS joins the Tab cycle")
+	check(scene.weapon == 0 and scene.weapon_buttons[2].disabled, "Tab skips SS while its lock is active")
 	scene.select_weapon(0)
 
 	# REQ-28 strength bar: starts empty, +2 every 0.04 s, release fires once.

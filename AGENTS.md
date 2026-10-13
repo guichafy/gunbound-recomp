@@ -26,7 +26,10 @@ Mage substitui Carapaça com escudo/regen, mira própria, duplo laser helicoidal
 EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com4 bombas, T2 duas rajadas de3 e SS com8, com lançamentos
 temporizados, dados/Fx/áudio originais e adaptações descritas em
 `docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Itens entraram em 0.13 (ver seção abaixo);
-demais mobiles, resistências e regenHP continuam pendentes.
+demais mobiles continuam pendentes. A paridade de Mage e Bigfoot com o C#
+(escudo, SS, dano, caixa, queda) está em `docs/sdd/MOBILE_PARITY.md`. Ao portar
+outro mobile, siga `skills/gunbound-mobile-port/SKILL.md`. O C# não aplica uma
+tabela de resistências no dano; regen de vida é 0 nestes dois e 10 nos biônicos.
 Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd/MAGE_0_4.md`.
 
 ## Referência C# em `~/Workspaces/Gunbound`

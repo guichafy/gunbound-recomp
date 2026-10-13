@@ -8,6 +8,8 @@ const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 const PLAYABLE := [1, 2]
 const DEFAULT_ID := 2
 const SPECIAL := 2
+# NetworkObjectParameters.SSCooldownTimer + 1, applied when the SS is fired.
+const SS_LOCK := 4
 
 const MAGE_WEAPONS := [
 	{"name": "Laser", "damage": 150.0, "radius": 25.0, "delay": 100.0, "count": 1, "helix": 0.0, "emp": 0.0, "color": Color("b3ceff")},
@@ -19,14 +21,20 @@ const MAGE_AIM := [Vector2(15, 50), Vector2(15, 50), Vector2(15, 50)]
 const DEFINITIONS := {
 	1: {
 		"name": "Mage", "hp": 760, "move": 90.0, "delay": 0.0, "color": Color("a9b7ff"),
-		"shield": 220, "shield_regen": 20, "weapons": MAGE_WEAPONS, "aim_limits": MAGE_AIM,
+		"shield": 220, "shield_regen": 20, "hp_regen": 0, "protection": 35,
+		"box": Vector2(38, 33), "box_offset": Vector2(0, 10), "stance": 30.0,
+		"beacon_delay": 0.0, "smoke": false, "bionic": false,
+		"weapons": MAGE_WEAPONS, "aim_limits": MAGE_AIM,
 		"spread_after_clamp": false, "generic_trail": false, "shot_sound_on": "fire",
 		"death": 1.6, "hurt": 1.05, "special": SPECIAL,
 		"summary": "220 de escudo · duplo laser e especial EMP."
 	},
 	2: {
 		"name": "Bigfoot", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("71c0ff"),
-		"shield": 0, "shield_regen": 0, "weapons": BigfootAttacks.WEAPONS, "aim_limits": BigfootAttacks.AIM_LIMITS,
+		"shield": 0, "shield_regen": 0, "hp_regen": 0, "protection": 35,
+		"box": Vector2(46, 40), "box_offset": Vector2(0, 10), "stance": 25.0,
+		"beacon_delay": 0.4, "smoke": true, "bionic": false,
+		"weapons": BigfootAttacks.WEAPONS, "aim_limits": BigfootAttacks.AIM_LIMITS,
 		"spread_after_clamp": true, "generic_trail": true, "shot_sound_on": "projectile_launch",
 		"death": 1.15, "hurt": 1.05, "special": SPECIAL,
 		"summary": "T1: 4 bombas · T2: 6 · SS: 8 bombas."
@@ -78,9 +86,19 @@ static func emission(vehicle_id: int, weapon_index: int) -> Array:
 		result.append({"spawn": 0.0, "angle": 0.0, "power": 0.0})
 	return result
 
-static func on_turn(actor: Dictionary) -> void:
+## Mobile.Regenerate. The shield cap reads health from before this tick's heal.
+static func regenerate(actor: Dictionary) -> void:
 	var spec: Dictionary = DEFINITIONS[int(actor.vehicle)]
-	if int(spec.shield_regen) <= 0:
-		return
-	actor.max_shield = int(spec.shield) + int(actor.max_hp) - int(actor.hp)
-	actor.shield = mini(int(actor.max_shield), int(actor.shield) + Attributes.heal(int(spec.shield_regen), Attributes.points(actor,3)))
+	var points := Attributes.points(actor, 3)
+	var current_hp := int(actor.hp)
+	var cap := int(spec.shield) + int(actor.max_hp) - current_hp
+	actor.hp = mini(int(actor.max_hp), current_hp + Attributes.heal(int(spec.hp_regen), points))
+	actor.shield = mini(cap, int(actor.shield) + Attributes.heal(int(spec.shield_regen), points))
+	actor.max_shield = int(spec.shield)
+
+## Point bodies keep item fixtures that carry no vehicle id.
+static func body(actor: Dictionary) -> Dictionary:
+	if not actor.has("vehicle") or not DEFINITIONS.has(int(actor.vehicle)):
+		return {"box": Vector2.ZERO, "offset": Vector2.ZERO, "stance": 24.0}
+	var spec: Dictionary = DEFINITIONS[int(actor.vehicle)]
+	return {"box": spec.box, "offset": spec.box_offset, "stance": float(spec.stance)}

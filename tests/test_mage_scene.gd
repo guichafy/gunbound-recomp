@@ -36,7 +36,7 @@ func run() -> void:
 	scene.start_match()
 	scene.model.shot_actor = 1
 	scene.model.shot_weapon = 0
-	scene.model.explode(scene.model.actors[0].pos)
+	scene.model.explode(load("res://scripts/combat.gd").full_hit(scene.model.actors[0], 25.0))
 	scene.consume_events()
 	scene.update_hud()
 	check(scene.animation_state(0) == "hurt", "Shield impact animates Mage hurt pose")

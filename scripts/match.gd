@@ -80,6 +80,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		var x: float = spawns[index].x
 		# Search from just above the listed spawn so layered maps keep its platform.
 		var ground: float = terrain.surface_at(x, maxf(0.0, spawns[index].y - 80.0))
+		var stance := float(Mobiles.definition(kind).stance)
 		var shield := int(Mobiles.definition(kind).shield)
 		# Equipped items (EquippedButtonBar); the CPU plays without items for now.
 		var items: Array = []
@@ -87,7 +88,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 			items.append({"id": id, "used": false})
 		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
 		var max_health := Attributes.health(int(VEHICLES[kind].hp),int(values[1]))
-		actors.append({"gold_state":{"gold":0,"enemy_damage":0},"attributes":values,"vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - 24.0), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "special_used": false,
+		actors.append({"gold_state":{"gold":0,"enemy_damage":0},"attributes":values,"vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - stance), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "ss_lock": 0, "tilt": 0.0,
 			"items": items, "turn_item": ""})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = PLAYER
@@ -115,15 +116,26 @@ func movement_budget() -> float:
 func begin_turn() -> void:
 	phase = "aim"
 	turn_time = 30.0
-	movement_left = movement_budget()
-	Mobiles.on_turn(actors[active])
 	actors[active].turns += 1
 	total_turns += 1
 	# A round is two turns (RoomSize 2 in MatchMetadata.PassTurn).
+	# Weather, including Protection, is applied before Regenerate().
 	if total_turns > 1 and (total_turns - 1) % 2 == 0:
 		apply_weather(weather.next_round(rng))
+	for actor in actors:
+		Mobiles.regenerate(actor)
+	actors[active].ss_lock = maxi(int(actors[active].ss_lock) - 1, 0)
+	movement_left = movement_budget()
 	wind = weather.wind_vector()
+	stamp_tilt()
 	events.append({"type": "turn", "actor": active})
+
+func stance_of(index: int) -> float:
+	return float(Mobiles.definition(int(actors[index].vehicle)).stance)
+
+func stamp_tilt() -> void:
+	for index in range(actors.size()):
+		actors[index].tilt = body_rotation(index)
 
 func apply_weather(entry: Dictionary) -> void:
 	wind = weather.wind_vector()
@@ -131,12 +143,14 @@ func apply_weather(entry: Dictionary) -> void:
 		# WeatherDisplay: Protection regenerates every mobile (HealthRegenerationProtection 35).
 		for actor in actors:
 			if int(actor.hp) > 0:
-				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Attributes.heal(Weather.PROTECTION_HEAL, Attributes.points(actor,3)))
+				var heal := int(Mobiles.definition(int(actor.vehicle)).protection)
+				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Attributes.heal(heal, Attributes.points(actor,3)))
 	events.append({"type": "weather", "weather": entry.type, "extra": entry.extra, "queue": weather.queue.duplicate(true), "wind_force": weather.wind_force, "wind_angle": weather.wind_angle})
 
 func can_use_special(index: int) -> bool:
+	# SS starts open. Firing it adds SS_LOCK; each own turn decrements it.
 	# HUD.DisableSS: using an item locks SS for the rest of the turn.
-	return int(actors[index].turns) >= 3 and not bool(actors[index].special_used) and str(actors[index].get("turn_item", "")).is_empty()
+	return int(actors[index].get("ss_lock", 0)) <= 0 and str(actors[index].get("turn_item", "")).is_empty()
 
 ## HUD.UnlockItem / WeatherDisplay: the Ignorance weather locks the item bar.
 func items_locked() -> bool:
@@ -167,6 +181,8 @@ func use_item(slot: int) -> bool:
 		"energy_up_1", "energy_up_2":
 			# Mobile.Heal: percentage of the base health; shield untouched.
 			var percent := Items.ENERGY_UP_1 if id == "energy_up_1" else Items.ENERGY_UP_2
+			if bool(Mobiles.definition(int(actor.vehicle)).bionic):
+				percent += Items.ENERGY_UP_EXTRA
 			var before := int(actor.hp)
 			actor.hp = mini(int(actor.max_hp), before + int(minf(float(actor.max_hp), float(actor.max_hp) * percent / 100.0)))
 			event["amount"] = int(actor.hp) - before
@@ -193,11 +209,10 @@ func move_actor(direction: float, delta: float) -> void:
 	for i in range(steps):
 		var dx := signf(direction) * distance / steps
 		var next_x := clampf(float(actor.pos.x) + dx, 24.0, terrain.world_size().x - 24.0)
-		if absf(next_x - float(actors[other(active)].pos.x)) < 60.0:
-			break
 		var floor_y: float = terrain.surface_at(next_x, actor.pos.y + 8.0)
-		var next_y := floor_y - 24.0
-		if next_y < float(actor.pos.y) - 12.0:
+		var next_y := floor_y - stance_of(active)
+		if absf(next_x - float(actors[other(active)].pos.x)) < 60.0 or next_y < float(actor.pos.y) - 12.0:
+			events.append({"type": "blocked", "actor": active})
 			break
 		actor.pos = Vector2(next_x, next_y)
 		movement_left = maxf(0.0, movement_left - absf(dx))
@@ -210,9 +225,10 @@ func move_actor(direction: float, delta: float) -> void:
 func body_rotation(index: int) -> float:
 	# Nearby supports only: do not tilt toward a distant lower floor or the abyss.
 	var pos: Vector2 = actors[index].pos
+	var stance := stance_of(index)
 	var left: float = terrain.surface_at(pos.x - 18.0, pos.y - 16.0)
 	var right: float = terrain.surface_at(pos.x + 18.0, pos.y - 16.0)
-	if terrain.is_void(left) or terrain.is_void(right) or absf(left - pos.y - 24.0) > 60.0 or absf(right - pos.y - 24.0) > 60.0:
+	if terrain.is_void(left) or terrain.is_void(right) or absf(left - pos.y - stance) > 60.0 or absf(right - pos.y - stance) > 60.0:
 		return 0.0
 	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
 
@@ -271,7 +287,7 @@ func shot_shells(index: int, angle: float, power: float, weapon: int) -> Array:
 			var velocity := shot_velocity(index, angle, power, weapon) * Items.BEACON_SPEED
 			var initial := muzzle(index, angle, weapon)
 			beacon.merge({"pos": initial, "hit_pos": initial, "velocity": velocity, "trail": [initial], "helix": 0.0, "phase": 0.0,
-				"spawn_at": 0.0, "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND}, true)
+				"spawn_at": float(Mobiles.definition(int(actors[index].vehicle)).beacon_delay), "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND}, true)
 			shells = [beacon]
 		"thunder":
 			# An invisible Electricity column of scale 1000 around the mobile:
@@ -329,7 +345,7 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	shot_weapon = weapon
 	shot_actor = active
 	if Mobiles.is_special(actors[active].vehicle, weapon):
-		actors[active].special_used = true
+		actors[active].ss_lock = int(actors[active].ss_lock) + Mobiles.SS_LOCK
 	var limits := aim_limits(active, weapon)
 	angle = clampf(angle, limits.x, limits.y)
 	power = clampf(power, 15.0, 100.0)
@@ -381,6 +397,7 @@ func tick(delta: float) -> void:
 				schedule(shot_actor, float(weapon_rules(shot_actor, shot_weapon).delay) + float(VEHICLES[actors[shot_actor].vehicle].delay))
 
 func advance_projectiles(delta: float) -> void:
+	stamp_tilt()
 	flight_elapsed += delta
 	# Dual: OnStartInteracting of the second shot plays the shooting animation.
 	if not volleys.is_empty() and flight_elapsed + 0.0000001 >= float(volleys[0].time):
@@ -427,6 +444,8 @@ func advance_projectiles(delta: float) -> void:
 		resolve_wait = 0.55
 
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
+	# Tilt stays as stamped at the start of the step. A crater must not
+	# rotate the target before this explosion's damage is measured.
 	var event_start := events.size()
 	# Each shell keeps its own weapon (Dual+ mixes S1 and S2 in one turn).
 	var weapon_index := int(projectile.get("weapon", shot_weapon))
@@ -463,14 +482,14 @@ func land_beacon(position: Vector2, previous: Vector2, projectile: Dictionary) -
 	var origin: Vector2 = actor.pos
 	var x := clampf(previous.x, 24.0, terrain.world_size().x - 24.0)
 	var floor_y: float = terrain.surface_at(x, maxf(0.0, previous.y))
-	actor.pos = Vector2(x, floor_y - 24.0)
+	actor.pos = Vector2(x, floor_y - stance_of(shot_actor))
 	events.append({"type": "teleport", "actor": shot_actor, "from": origin, "to": actor.pos, "position": position})
 	if terrain.is_void(floor_y):
 		actor.hp = 0
 		events.append({"type": "fall", "actor": shot_actor})
 
-func deal_damage(index: int, damage: int) -> int:
-	return Damage.deal_damage(actors, events, index, damage)
+func deal_damage(index: int, damage: int, kind: String = "") -> int:
+	return Damage.deal_damage(actors, events, index, damage, kind)
 
 func thor_strike(impact: Vector2) -> void:
 	# ThorProjectile: beam from the satellite to the impact hits the first solid
@@ -497,8 +516,8 @@ func lightning_strike(impact: Vector2) -> void:
 		if int(actors[index].hp) <= 0:
 			continue
 		var closest := Geometry2D.get_closest_point_to_segment(Vector2(actors[index].pos), top, strike)
-		if Vector2(actors[index].pos).distance_to(closest) < 24.0 + Weather.LIGHTNING_SHOCK_RADIUS:
-			deal_damage(index, Weather.LIGHTNING_SHOCK_DAMAGE)
+		if Combat.box_gap(closest, actors[index]) < Weather.LIGHTNING_SHOCK_RADIUS:
+			deal_damage(index, Weather.LIGHTNING_SHOCK_DAMAGE, "shock")
 
 func apply_weather_contact(projectile: Dictionary) -> void:
 	# Weather.CheckProjectileInteraction: entering a column's inner rectangle
@@ -579,21 +598,36 @@ func tornado_step(projectile: Dictionary, delta: float) -> Dictionary:
 				return {"position": position, "velocity": direction * float(projectile.launch_speed)}
 	return {"position": position, "velocity": heading * float(state.speed)}
 
+func drift_fall(actor: Dictionary, drop: float) -> void:
+	# Movement.ApplyGravity: wind/45 accumulates until it moves the mobile one pixel.
+	var accumulator := 0.0
+	var x := float(actor.pos.x)
+	for _step in int(drop):
+		accumulator = clampf(accumulator + wind.x / 45.0, -1.0, 1.0)
+		if absf(accumulator) < 1.0:
+			continue
+		var next := clampf(x + float(int(accumulator)), 24.0, terrain.world_size().x - 24.0)
+		if not terrain.is_solid(Vector2(next, actor.pos.y)):
+			x = next
+		accumulator = 0.0
+	actor.pos.x = x
+
 func settle_actors() -> void:
 	for index in range(actors.size()):
 		var actor: Dictionary = actors[index]
 		if int(actor.hp) <= 0:
 			continue
+		var stance := stance_of(index)
 		var floor_y: float = terrain.surface_at(actor.pos.x, actor.pos.y + 10.0)
-		var drop := maxf(0.0, floor_y - 24.0 - float(actor.pos.y))
-		actor.pos.y = floor_y - 24.0
-		if terrain.is_void(floor_y):
+		var drop := maxf(0.0, floor_y - stance - float(actor.pos.y))
+		if drop > 0.0:
+			drift_fall(actor, drop)
+			floor_y = terrain.surface_at(actor.pos.x, actor.pos.y + 10.0)
+		actor.pos.y = floor_y - stance
+		if terrain.is_void(floor_y) or float(actor.pos.y) > terrain.world_size().y:
 			actor.hp = 0
 			events.append({"type": "fall", "actor": index})
-		elif drop > 70.0:
-			var damage := int((drop - 70.0) * 0.9)
-			actor.hp = maxi(0, int(actor.hp) - damage)
-			events.append({"type": "damage", "actor": index, "amount": damage, "position": actor.pos})
+	stamp_tilt()
 
 func check_end() -> bool:
 	return TurnTable.check_end(self)

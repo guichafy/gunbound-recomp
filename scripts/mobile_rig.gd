@@ -29,7 +29,10 @@ func available() -> bool:
 	return pilot.region(0, 0).has_area()
 func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Dictionary:
 	age = maxf(0.0, age)
-	pose = "using" if pose == "using_item" else pose.get_slice("_", 0)
+	if pose == "using_item":
+		pose = "using"
+	elif pose.begins_with("charging") or pose.begins_with("recoil"):
+		pose = pose.get_slice("_", 0)
 	var offset := Vector2.ZERO
 	var angle := 0.0
 	var barrel := 0.0
@@ -54,10 +57,18 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 		# overlay; the body only lifts, it does not grow a charge glow.
 		var lift := sin(clampf(age / (20.0 / 19.0), 0.0, 1.0) * PI)
 		offset.y = -lift * 3.0
-	elif pose == "hurt":
+	elif pose == "hurt" or pose == "hurt_2":
 		var envelope := sin(clampf(age / 1.05, 0.0, 1.0) * PI)
-		offset.x = sin(age * 40.0) * envelope * 1.7
-		angle = sin(age * 20.0) * envelope * 0.04
+		offset.x = sin(age * 40.0) * envelope * (2.2 if pose == "hurt_2" else 1.7)
+		angle = sin(age * 20.0) * envelope * (0.07 if pose == "hurt_2" else 0.04)
+	elif pose == "shock":
+		offset.x = sin(age * 60.0) * 1.4
+		angle = sin(age * 48.0) * 0.05
+	elif pose == "falling":
+		offset.y = clampf(age, 0.0, 1.0) * 6.0
+		angle = clampf(age, 0.0, 1.0) * 0.2
+	elif pose == "unable":
+		offset.x = sin(age * TAU * 6.0) * 0.8
 	elif pose == "destroyed":
 		var duration := 1.6 if kind == "mage" else 1.15
 		var progress := clampf(age / duration, 0.0, 1.0)

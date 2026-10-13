@@ -25,7 +25,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 | REQ-04 | Balística afetada por gravidade/vento, colisão com terreno e veículos, crateras | `combat.gd`, `terrain.gd`, `match.gd` | `test_runner.gd`, partidas completas |
 | REQ-05 | Vida, dano por explosão/queda, vitória, derrota e empate | `match.gd`, tela de resultado | Modelos, partidas e cena |
 | REQ-06 | Iniciativa por atraso, turno de 30 s, passagem voluntária/automática | `match.gd.schedule`, `pass_turn`, `tick` | Modelos e roteiro manual |
-| REQ-07 | Três armas; especial no terceiro turno próprio, uma vez por partida | `match.gd.weapon_rules/can_use_special` | Modelos + roteiro manual para apresentação da especial |
+| REQ-07 | Três armas; SS aberto no primeiro turno e travado por quatro turnos próprios depois do uso | `match.gd.can_use_special` | Modelos + roteiro manual para apresentação da especial |
 | REQ-08 | CPU joga com as mesmas regras; três dificuldades por erro de mira | `match.gd.choose_cpu_shot/predict_shot`, `combat.gd` | Modelos e dez partidas completas |
 | REQ-09 | Pausa congela relógio/voo; ajuda, resultado, revanche e menu navegáveis | `game.gd` | `test_scene.gd` + roteiro manual |
 | REQ-10 | Apelido, XP, nível e vitórias locais; recompensa uma vez por resultado | `profile.gd`, `game.gd` | Persistência/corrupção/idempotência e cena |
@@ -73,6 +73,13 @@ REQ-19 parcialmente atendido: Bigfoot selecionável com atlas, piloto padrão,
 quadros e projéteis originais na versão 0.3.0. Ver `BIGFOOT_0_3.md`. Vida 1100,
 movimento 90. Armas mantêm as regras do protótipo; salvas oficiais e outros
 mobiles pendentes. Todos os assets restantes estão em `.tools/source-assets/content/`.
+
+## Paridade Mage/Bigfoot com o C# — REQ-42
+
+REQ-05, REQ-07 e REQ-19. O contrato vigente de escudo, regeneração, SS, dano,
+queda, caixa, sinalizador e poses está em [MOBILE_PARITY.md](MOBILE_PARITY.md)
+e na skill `skills/gunbound-mobile-port/SKILL.md`. As frases de 0.4 e 0.5 sobre
+regen só no turno próprio, SS único e queda linear ficam como histórico.
 
 ## Mage 0.4
 
