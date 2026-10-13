@@ -58,8 +58,11 @@ Regras de uso (HUD.cs/Mobile.cs):
 - Clique num item durante o turno do adversário o marca (estado ativado);
   ele é usado automaticamente no início do próximo turno próprio. Novo
   clique desmarca; marcar outro troca.
-- O item usado sai da barra no início do próximo turno próprio
-  (`removeItemFromBarAction`).
+- No turno próprio, selecionar o item (ou já tê-lo marcado no turno
+  adversário) tira o botão do slot na hora e recompacta a barra
+  (ADR-065). No OpenBound a remoção esperava o próximo `GrantTurn`
+  (`removeItemFromBarAction`); o pedido atual antecipa esse sumiço para
+  o momento do uso. A barra segue desabilitada até o próximo turno próprio.
 - Clima Ignorância ativo trava a barra (sprite "ITEM LOCKED").
 - O custo de delay entra na hora do uso; Delayboard e fila mostram na hora.
 - Efeitos de turno (Dual, Dual+, Thunder, Teleport, Power Up, Blood, Bunge
@@ -119,7 +122,14 @@ Física e dano (Projectile.cs / Mobile.cs):
 - `MatchStatus` "ITEM LOCKED" sobre o painel quando Ignorância trava.
 - Extras discretos (adaptação, como ← → F ●): teclas F1–F6 acionam o botão
   na posição; o OpenBound só as liga na DebugScene.
-- Animação `UsingItem` (Bigfoot 234–253, Mage 243–262, 19 fps) ao usar.
+- Animação `UsingItem` (Bigfoot 234–253, Mage 243–262, 20 quadros a
+  19 fps) ao usar. O rig HD não troca o corpo: diamantes e feixes verdes
+  saem desses quadros e são redesenhados a 4× em
+  `assets/hd/items/UsingItem{Bigfoot,Mage}.png` (grade 5×4), com o mesmo
+  pivô e contato do atlas. Fallback: recorte colorido do original em
+  `assets/openbound/items/`. `scripts/build_using_item_fx.py` regenera
+  as duas folhas. GPT Images devolveu um diamante pixelizado e um feixe
+  JPEG sem alfa; essas tentativas não entram no jogo.
 
 ## Fora do escopo / limites
 

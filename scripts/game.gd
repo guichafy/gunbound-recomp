@@ -742,6 +742,10 @@ func _draw() -> void:
 	draw_set_transform(offset)
 	for index in range(model.actors.size()):
 		art.draw_actor(self, model, index, offset, actor_context(index))
+		if art.motion[index].pose == "using_item":
+			var body = sprite_for(int(model.actors[index].vehicle))
+			if body != null:
+				item_art.draw_using(self, body, art.motion[index], int(model.actors[index].facing), offset)
 	hud.draw_world(self, model, offset, hud_state())
 	draw_set_transform(offset)
 	for projectile in model.projectiles:

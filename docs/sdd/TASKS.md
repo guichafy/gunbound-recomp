@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Aura UsingItem e saída do slot (ADR-065)
+
+- [x] No turno próprio o item sai do slot na hora, inclusive o que já estava marcado.
+- [x] Aura verde separada do corpo, 20 quadros a 19 fps, folhas 4× Bigfoot e Mage.
+- [x] test_items_scene 46 checks; captura `docs/items/using-item-12.png` (1920×1080).
+- [ ] Usuário ver o efeito no aplicativo (o export 0.14.5 ainda não inclui esta correção).
+- [ ] Suíte completa (`check.sh`) desta correção ainda não rodou.
+
 ## Loja clássica 0.14.5 (ADR-064)
 
 - [x] Integrar à main por pedido explícito;1758checks+10partidas, app/ZIP e smoke PCK na pasta principal.

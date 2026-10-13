@@ -1,5 +1,15 @@
 # Prompts GPT Images — itens 0.13
 
+## Aura UsingItem (ADR-065)
+
+Tentativa com a ferramenta de imagem da sessão, referências o diamante e o
+feixe recortados dos quadros UsingItem do Bigfoot. O diamante voltou como
+ampliação pixelizada; o feixe, como JPEG com xadrez gravado, sem alfa real.
+Nenhum dos dois entrou no jogo. As folhas em `assets/hd/items/UsingItem*.png`
+são o redesenho 4× de `scripts/build_using_item_fx.py`: posições medidas nos
+quadros Bigfoot 234–253 e Mage 243–262, diamantes e feixes suaves, grade 5×4.
+O recorte colorido original fica em `assets/openbound/items/` como fallback.
+
 Gerados com o Codex CLI (`codex exec -m gpt-5.6-sol --sandbox read-only -i ref_<folha>.png`,
 prompt pela entrada padrão), ferramenta integrada `image_gen`, uma edição por folha.
 `scripts/build_items_hd.py refs` monta as referências; a imagem gerada vira

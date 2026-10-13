@@ -372,6 +372,21 @@ possuídos, com rollback e confirmação. Compra continua separada de equipar.
 Critérios/evidências em AVATAR_SMOOTH_0_14_4.md; main local e app assinado,
 sem publicação. Gestos/olhos do original continuam limitação do HD constante.
 
+## ADR-065 — item some no uso e aura UsingItem
+
+Pedido do usuário: no turno próprio, ao selecionar um item (ou já tê-lo
+marcado), o slot esvazia e o mobile recebe a animação de item do Gunbound.
+O OpenBound guardava o botão ativado até o `GrantTurn` seguinte
+(`removeItemFromBarAction`). Aqui o botão sai na hora do `use_item` e a
+barra recompacta; marcar durante o turno adversário continua válido e o
+consumo, com a mesma saída do slot, ocorre no início do turno próprio.
+A barra segue travada até esse próximo turno. A pose `using_item` permanece
+20 quadros a 19 fps. O rig HD não troca anatomia: diamantes e feixes verdes
+dos quadros Bigfoot 234–253 e Mage 243–262 viram uma camada separada a 4×,
+com o pivô e o contato do atlas. O brilho de carga na boca do canhão não
+entra nessa pose. GPT Images não entregou alfa utilizável; as folhas vêm de
+`scripts/build_using_item_fx.py`. Fallback é o recorte original.
+
 ## ADR-064 — composição clássica do Avatar Shop
 
 A foto enviada pelo usuário orienta o layout3×3, substituindo a adaptação5×5

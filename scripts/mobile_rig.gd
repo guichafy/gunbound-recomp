@@ -50,10 +50,10 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 		barrel = -kick * (0.65 if weapon == 2 else 0.45)
 		flash = sin(clampf(age / 0.16, 0.0, 1.0) * PI)
 	elif pose == "using":
-		# UsingItem: a short lift with the charge glow over its 20 frames.
+		# UsingItem lasts 20 frames at 19 fps. The green aura is a separate
+		# overlay; the body only lifts, it does not grow a charge glow.
 		var lift := sin(clampf(age / (20.0 / 19.0), 0.0, 1.0) * PI)
 		offset.y = -lift * 3.0
-		glow = lift * 0.55
 	elif pose == "hurt":
 		var envelope := sin(clampf(age / 1.05, 0.0, 1.0) * PI)
 		offset.x = sin(age * 40.0) * envelope * 1.7

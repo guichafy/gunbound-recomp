@@ -325,6 +325,10 @@ acelerada) e entrega um `hud_state()`; `match.gd` não mudou.
   `select_item_popup.gd` (PopupSelectItem); carga em `options.items`.
 - `battle_art`: pose `using_item`, segunda rajada repete o recuo, teletransporte
   sem deslizar. Eventos novos: `item`, `volley`, `teleport`.
+- ADR-065: o botão usado some do slot no uso (a barra recompacta) e
+  `item_art.draw_using` desenha a aura verde por cima do mobile, 20 quadros
+  a 19 fps, no pivô do atlas. O corpo HD só sobe um pouco; não ganha brilho
+  de carga.
 
 ## Shop de avatar 0.14 (REQ-38..41)
 

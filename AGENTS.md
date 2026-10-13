@@ -197,7 +197,8 @@ original ÷ 7,5). Regras no `match.gd`: `use_item`, `shot_shells` (Dual/Dual+/
 Teleport/Thunder) usado por `fire` e `predict_shot`; efeito do turno em
 `actors[i].turn_item` (copiado pela previsão), limpo em `TurnTable.schedule`.
 Cada projétil guarda `weapon`; sinalizador (`beacon`) só colide com o terreno.
-CPU sem itens (seeds 81–90 iguais). Cena: `item_bar.gd` (barra F1–F6, fila no
+CPU sem itens (seeds 81–90 iguais). No turno próprio o item sai do slot na
+hora (ADR-065) e a aura UsingItem HD acompanha o mobile. Cena: `item_bar.gd` (barra F1–F6, fila no
 turno adversário, ITEM LOCKED na Ignorância), `item_art.gd` (botões, sinalizador,
 chamas; Teleport2 = Teleport1 invertido), `select_item_popup.gd` (menu "Itens";
 carga em `options.items`). Arte HD via `scripts/build_items_hd.py` e Codex

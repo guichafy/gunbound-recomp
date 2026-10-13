@@ -1,5 +1,17 @@
 # Hand-off — Gunbound Recomp 0.14.5
 
+## Item no turno próprio — aura UsingItem (ADR-065)
+
+No turno do jogador, usar um item (clique agora ou marca feita no turno
+adversário) tira o botão do slot na hora e recompacta a barra. A aura verde
+de diamantes e feixes do `UsingItem` (Bigfoot 234–253, Mage 243–262, 20
+quadros a 19 fps) é desenhada sobre o mobile, em folhas 4× separadas do
+corpo. `test_items_scene.gd`: **46 checks, zero falhas**. Captura GPU
+1920×1080 em `docs/items/using-item-12.png`: aura verde sobre o Bigfoot,
+escala uniforme e botão do slot oculto. A suíte completa não foi repetida.
+O app 0.14.5 já exportado não inclui esta correção até um novo export.
+Detalhes em ITEMS_0_13.md.
+
 ## Integração da loja clássica à main 0.14.5
 
 Solicitação explícita do usuário: trazer as alterações da worktree para main.

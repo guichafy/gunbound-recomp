@@ -199,9 +199,11 @@ fica desabilitado com TODO; Interface só com a skin Blue.
 
 REQ-35 itens usáveis no turno (Dual, Dual+, Thunder, Energy Up 1/2, Team
 Teleport, Teleport, Blood, Bunge Shot, Power Up, Change Wind) com a lógica,
-física e custos de delay do OpenBound; REQ-36 seleção de 6 slots pelo
-`PopupSelectItem` original no menu; REQ-37 arte dos itens/Teleport em HD por
-GPT Images (Codex), conforme ITEMS_0_13.md. CPU sem itens neste corte.
+física e custos de delay do OpenBound. No turno próprio o item sai do slot
+na hora, marcado antes ou clicado agora, e a aura UsingItem acompanha o
+mobile (ADR-065). REQ-36 seleção de 6 slots pelo `PopupSelectItem` original
+no menu; REQ-37 arte dos itens/Teleport em HD por GPT Images (Codex) e a
+aura UsingItem em 4×, conforme ITEMS_0_13.md. CPU sem itens neste corte.
 
 ## Shop de avatar — especificação aprovada
 
