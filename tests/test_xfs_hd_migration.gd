@@ -24,6 +24,21 @@ func run() -> void:
 		var entry: Dictionary=art.xfs_hd.layers[key]
 		var data: Dictionary=art.xfs_hd.piece(entry.key,int(entry.layer))
 		check(not data.is_empty() and data.target.has_area() and data.source.has_area(),"Registered wearable/effect loads at real resolution: "+key)
+	var real_items:=0
+	var real_layers:=0
+	for candidate in catalog.entries.values():
+		if candidate.get("source")!="xfs" or candidate.get("layers",[]).is_empty():
+			continue
+		real_items+=1
+		real_layers+=candidate.layers.size()
+		check(art.xfs_hd.complete(candidate),"Every real XFS item has all equipped HD layers: "+candidate.key)
+		var gender: int=0 if int(candidate.gender)==2 else int(candidate.gender)
+		var gear: Dictionary=catalog.defaults(gender)
+		gear[str(int(candidate.category))]=candidate.key
+		var equipped: Array=art.sample(gear,0.5).filter(func(piece): return int(piece.category)==int(candidate.category))
+		check(equipped.size()==candidate.layers.size() and equipped.all(func(piece): return piece.hd and piece.has("xfs_layer")),"Actual equipped renderer has no hidden native/legacy fallback: "+candidate.key)
+	check(real_items==550 and real_layers==629,"Coverage retains all 550 real avatars and 629 layers")
+	check(art.xfs_hd.portraits.size()==532,"All 532 remaining portraits are registered separately from the 18 previous ones")
 	var item: Dictionary=catalog.find("xfs:0:0:4")
 	check(art.xfs_hd.complete(item),"Wing Helmet's base and effect both have HD masters")
 	var equipment: Dictionary=catalog.defaults(0)

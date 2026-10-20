@@ -297,3 +297,9 @@ animadas, além das miniaturas. Controle por registro/camada e critérios em
 AVATAR_HD_MIGRATION.md. Cobertura real:550avatares vestíveis/629camadas; padrões
 vazios/placeholders recebem motivo N/A. Regenerar e integrar todos os componentes
 reais, preservando registro, identidade, animação contínua e fallback validado.
+
+REQ-10/20/39 aceitos tecnicamente na0.17:550avatares/629camadas vestíveis e
+550miniaturas HD, com controle por registro, evidência GPU e auditoria sem
+fallback oculto.37lotes, ambos gêneros/mobiles/sentidos, poses e pausa; animação
+por masters constantes, sem reconstrução de cada gesto nativo.12N/A explícitos.
+Aplicativo exportado e smoke fora do projeto confirmam o mesmo catálogo/render.

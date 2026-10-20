@@ -527,3 +527,18 @@ não lê equipamentos vivos. Penalidades negativas também alteram atraso.
 A cobertura HD0.16 é parcial:18miniaturas novas e peças antigas equivalentes.
 A migração integral posterior usa controle por registro/camada, masters com
 registro constante e validação separada de miniaturas; AVATAR_HD_MIGRATION.md.
+
+## Avatares XFS HD0.17
+
+AvatarXfsHD lê assets/hd/avatars/xfs/catalog.json:629camadas e532retratos novos,
+38atlas com recortes/dimensões/hash e janela nativa por componente. AvatarArt
+prioriza o conjunto novo integral da peça; originais/13masters antigos ficam
+como fallback e compatibilidade. Shop consulta retratos separadamente.549bases
+e80L cobrem550itens (Ghost sóL);18retratos anteriores completam550miniaturas.
+
+Material translúcido preserva a opacidade nativa; camadas de luz convertem
+preto para ausência de emissão em textura de memória, sem editar PNGs. Pulsação
+segue material da fonte, não o sufixoL sozinho. Registro permanece fixo ao longo
+da animação do rig. Controle/aceite separado do runtime exige capturas atuais
+por lote, assinatura de recorte/registro/renderer e auditoria do consumidor real.
+12N/A são acessórios vazios/placeholders sem arte, com razão explícita.

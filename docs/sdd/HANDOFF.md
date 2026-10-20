@@ -1,33 +1,50 @@
-# Hand-off — Gunbound Recomp 0.16.0 / migração HD em andamento
+# Hand-off — Gunbound Recomp0.17.0 / avatares XFS integralmente HD
 
-## Migração HD integral — pedido atual20/10/2026
+## Migração HD integral — concluída20/10/2026
 
-Usuário apontou que só as miniaturas novas foram regeneradas, enquanto a
-maioria das peças vestidas continuava original. Solicitou controle e migração
-completa. Ler AVATAR_HD_MIGRATION.md; controle em docs/avatar-hd-migration.
-Não confundir retrato HD com personagem HD. Escopo:550registros com arte,
-629camadas; três acessórios vazios e nove placeholders N/A. Preservar regras,
-perfil e fontes. Preparação dos lotes e registro individual em andamento.
+REQ-10/20/39, ADR-073; ler AVATAR_HD_MIGRATION.md. Controle em
+[docs/avatar-hd-migration/index.html](../avatar-hd-migration/index.html), CSV e
+JSON. **550/550avatares reais,629/629camadas e550/550miniaturas validados**;
+três padrões vazios/nove placeholders N/A, todos com motivo. Não confundir
+miniatura com peça vestível: a auditoria confirmou os550registros consumindo
+masters HD no AvatarArt, sem fallback nativo/legado oculto.
 
-O controle encontrou erro do decodificador: ARGB4444 preto com alpha explícito
-era apagado, deixando cinco acessórios invisíveis. Teste reproduziu e passou
-após respeitar alpha; derivados corrigidos usam sufixo_alpha, sem apagar os
-PNGs anteriores nem os XFS. Importação0.17 ainda requer validação/export próprios.
+37lotes/1161componentes novos:629camadas e532miniaturas, além das18anteriores.
+As12bases reaproveitadas anteriormente também foram regeneradas no lote037.
+38atlas selecionados,145–942px na maior dimensão útil por componente, PNGs
+66.549.923bytes. Brutos/referências/prompts/ledger/recortes manuais preservados
+em assets/hd/avatars/xfs/source (.gdignore); fontes XFS/C# intocadas.
 
-37lotes/1161componentes preparados por prepare_xfs_avatar_hd.py.
-Fonte/jobs/prompts em assets/hd/avatars/xfs/source (.gdignore). Controle inicial:
-zero peças migradas validadas,18/550miniaturas anteriores. As12bases do HD
-anterior foram incluídas no lote037: reaproveitamento provisório não comprova
-migração XFS. Controle gerado é a fonte das contagens atuais, sem aceitar
-automaticamente uma imagem por ter sido gerada.
+AvatarXfsHD/AvatarArt usam registro constante, aspecto e materiais preservados,
+respiração/poses/transições do rig e efeitos separados. Não é restauração de
+cada gesto/piscada nativo. Fallback integral preservado por peça. Correções:
+ARGB4444 respeita preto com alpha explícito (cinco acessórios antes invisíveis);
+PNGs anteriores mantidos e derivados corrigidos em *_alpha.png. Cabeças usam
+repouso de olhos abertos; fases/referências incorretas foram rejeitadas. Recortes
+014/016/027/035 e reparo do Battle Goggle têm metadados reproduzíveis.
 
-AvatarXfsHD/AvatarArt consomem masters próprios, sem usar a miniatura como peça.
-Capturas por lote com fonte/HD/vestido/Mage+Bigfoot em docs/avatar-hd-migration/qa;
-audit_xfs_hd_runtime confirma uso real e registro constante por camada.
-Aceite exige hashes da arte e do renderer atuais. Lotes003–006 refeitos com
-olhos abertos; fase preta de fh46L rejeitada em favor da fase luminosa real.
-Transparência de luz adaptada em memória, sem modificar os PNGs fonte.
-112checks dirigidos passaram; migração integral/export0.17 ainda pendentes.
+37comparações GPU ×4instantes, ambos Mage/Bigfoot, sentidos e inclinação.
+Vídeo motion.mp4:1920×1080,360frames/60fps/6s, quatro conjuntos, poses,
+transições e30quadros de pausa idênticos. HTML mostra evidência do avatar
+vestido/mobile e permite busca/filtro. Aceite exige hashes atuais da arte,
+registro e renderer. Navegador interno bloqueia file://; CSV entregue como
+arquivo, sem contornar a política nem alegar prévia HTML verificada.
+
+Regressão completa após merge paralelo do Nak:3887checks+13partidas PASS.
+Depois:688checks dirigidos e1744checagens de cobertura HD integral PASS;
+Python11 PASS. Fixture de itens espera a thread sem consumir sua tarefa;
+nenhuma regra de combate mudou pela migração. Integração Nak preservada,
+sem regenerar o mobile cujo HD foi adiado pelo usuário.
+
+App/ZIP0.17.0 reexportados, versão e assinatura estrita confirmadas. Smoke
+real do PCK fora do projeto PASS:550peças/629camadas/550retratos, compra,
+vestir/recarga/atributos/batalha,1920×1080 e1280×800. Brutos/jobs ausentes.
+Capturas em docs/avatar-hd-migration/shop-exported*.png. Perfil real preservado;
+nenhum commit/push/publicação realizado por este trabalho. Merge/snapshot
+paralelo385d211/f87153e ocorreu durante a execução e foi mantido.
+
+Próximo passo: usuário reabrir builds/Gunbound Recomp.app0.17.0 e validar
+aparência no jogo. Controle técnico concluído; aceite visual do usuário pendente.
 
 ## Avatar Shop XFS0.16 — entrega funcional de referência
 

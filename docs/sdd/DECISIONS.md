@@ -493,6 +493,13 @@ Masters anatômicos constantes e efeitos separados conservam rig/animação
 aprovada; arte só gerada não conta como componente validado. Arte original,
 brutos e prompts preservados. AVATAR_HD_MIGRATION.md define o critério550/550.
 
+Concluído na0.17:37lotes/38atlas,629camadas e532miniaturas novas,18miniaturas
+anteriores. Controle exige captura com os hashes atuais da arte, registro e
+renderer, mais auditoria do uso efetivo nos550registros. Mestres constantes
+acompanham rig/poses/pausa; não equivalem a redesenhar todos os quadros nativos.
+Recortes de partículas e reparos individuais têm decisões reproduzíveis no
+ledger, sem alterar brutos.12N/A mantêm motivo explícito. App/PCK validado.
+
 ## ADR-074 — Nak com dados do cliente original sobre o OpenBound
 
 Pedido do usuário: novo mobile Nak "com base no OpenBound". O fork C# só tem

@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.16.0**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot e Mage, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.17.0**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,11 +8,11 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.16.0** — Avatar Shop XFS, catálogo completo e bônus por equipamento |
+| Versão | **0.17.0** — catálogo XFS e migração HD completa dos 550 avatares reais |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
-| Validação automática | **3163 verificações e 10 partidas completas, zero falhas** |
+| Validação automática | **3887 verificações e 13 partidas completas**; cobertura HD ampliada com **1744 checks**, mais 11 testes Python |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
-| Aceite visual | A suavidade dos avatares (0.14.4) foi confirmada. A interface HD da loja 0.16.0 ainda aguarda o seu olhar no aplicativo |
+| Aceite visual | Migração técnica concluída; aparência dos novos avatares aguarda sua validação no app 0.17.0 |
 
 O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). Este arquivo é o mapa do que existe hoje.
 
@@ -24,7 +24,7 @@ No menu, **Shop de avatar** abre a loja ciano do cliente XFS, com grade3×3 à e
 
 O primeiro perfil recebe, uma única vez, 1.000 Cash e 1.000 Gold de teste. Esse saldo não é dinheiro real.
 
-<img src="docs/avatar-shop-xfs/shop.png" width="720" alt="Loja de avatar Full HD com grade de cabeças e inventário lateral">
+<img src="docs/avatar-hd-migration/shop-exported.png" width="720" alt="Aplicativo exportado: loja XFS com avatares e bandeiras HD, bônus e inventário vestido">
 
 <img src="docs/avatar-shop-xfs/inventory.png" width="720" alt="Aba de corpos na loja, com o inventário lateral vestido">
 
@@ -32,13 +32,11 @@ O primeiro perfil recebe, uma única vez, 1.000 Cash e 1.000 Gold de teste. Esse
 
 <img src="docs/avatar-shop-xfs/attributes.png" width="720" alt="Painel de atributos do piloto sobre a loja">
 
-A migração HD completa das peças vestidas está em andamento. O [controle por avatar](docs/avatar-hd-migration/index.html) distingue miniatura, peça equipada, efeitos e validação de animação; a maioria das peças XFS ainda usa o fallback original até ser migrada.
+A migração HD está concluída: **550 avatares reais, 629 camadas vestíveis e 550 miniaturas**, com 12 registros N/A explicados. O [controle por avatar](docs/avatar-hd-migration/index.html) mostra fonte, avatar vestido/mobile, efeitos e validação; há também [CSV](docs/avatar-hd-migration/migration.csv). A renderização dos 550 foi auditada sem fallback oculto.
 
-<img src="docs/avatar-shop/hd-roster.png" width="720" alt="Seis conjuntos de avatar HD montados no Bigfoot">
+<img src="docs/avatar-hd-migration/motion/0000.png" width="960" alt="Quatro conjuntos XFS integralmente HD vestidos em Mage e Bigfoot nos dois sentidos">
 
-A animação abaixo é a captura atual: o avatar respira junto, acompanha o corpo e troca de pose (repouso, movimento, carga, recuo e dano) sem trocar a anatomia a cada quadro. O vídeo integral está em [docs/avatar-motion/motion.mp4](docs/avatar-motion/motion.mp4).
-
-<img src="docs/avatar-motion/motion.gif" width="720" alt="Animação contínua de Mage e Bigfoot com três conjuntos de avatar">
+O [vídeo atual em Full HD a 60 fps](docs/avatar-hd-migration/motion.mp4) mostra repouso, movimento, carga, pausa, recuo e dano. O avatar mantém a anatomia e acompanha o rig; efeitos ficam separados. É uma adaptação HD com peças fixas, sem redesenhar todos os gestos e piscadas originais.
 
 ### Batalha no Miramo Town
 
@@ -72,7 +70,9 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.10–0.12 | HUD original em HD, popup de opções, música, busca da CPU fora do quadro travado, mira Slice e Drag |
 | 0.13 | Onze itens de batalha, com custo de atraso, barra F1–F6 e menu Select Item |
 | 0.14–0.14.9 | Loja, compra, inventário, oito atributos, Gold da partida, avatares HD, animação contínua, vestir persistido e layout clássico 3×3 |
-| 0.16.0 | Loja em Full HD/16:9 baseada no vídeo, fundo e retrato de slot vazio regenerados, cards nítidos, inventário compacto e prévia Avatar/Mobile |
+| 0.15.0 | Loja Full HD/16:9 baseada no vídeo, inventário compacto e prévia Avatar/Mobile |
+| 0.16.0 | Design ciano XFS, catálogo 562/479 compráveis, bônus por equipamento e compatibilidade do perfil |
+| 0.17.0 | 550 avatares vestidos em HD, 629 camadas, controle individual e animação GPU 60 fps; preserva a integração paralela do Nak original |
 
 Números de base, antes dos atributos:
 
@@ -88,7 +88,7 @@ Números de base, antes dos atributos:
 
 - A máquina calcula o tiro e permanece parada. Ela também não gasta itens.
 - **Mouse Speed** continua desligado. A skin de interface é só a Blue.
-- Dos mobiles do pacote original, só Mage e Bigfoot estão no jogo. Resistências e regeneração de vida dos demais seguem de fora. O Mage já regenera escudo.
+- Mage e Bigfoot usam arte HD; Nak foi integrado com arte original e seu HD foi adiado. Outros mobiles continuam pendentes. O Mage já regenera escudo.
 - Existe um mapa: Miramo Town A. Outros mapas ficaram de fora por decisão explícita.
 - A arte de clima e do Thor ainda é a original, em resolução baixa.
 - Olhos e gestos dos avatares HD não foram reanimados quadro a quadro.
@@ -98,7 +98,7 @@ Números de base, antes dos atributos:
 - A colisão do terreno é amostrada a cada dois pixels. Pedaços de chão que ficam soltos permanecem no lugar; só os veículos caem.
 - O balanceamento é o do protótipo, com atrasos originais divididos por 7,5.
 - Builds de Windows, Linux, Android e iOS não foram gerados. A engine permite exportar esses alvos; só o macOS foi validado.
-- Vários fluxos — itens, mira Drag, música e a loja 0.16.0 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
+- Vários fluxos — itens, mira Drag, música e a loja 0.17.0 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
 ### Fora desta entrega
 
