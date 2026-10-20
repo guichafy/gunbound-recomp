@@ -28,7 +28,7 @@ func run() -> void:
 		if entry.actor == 0:
 			check(is_equal_approx(float(entry.ready),104.4), "HUD includes reduced item and shot costs")
 	check(model.fire(30,45,0), "Item-enhanced attributed shot")
-	model.explode(model.actors[1].pos,1,{"damage":200,"weapon":0,"age":1.0,"velocity":Vector2.RIGHT})
+	model.explode(load("res://scripts/combat.gd").full_hit(model.actors[1],25.0),1,{"damage":200,"weapon":0,"age":1.0,"velocity":Vector2.RIGHT})
 	check(model.actors[1].shield==0 and model.actors[1].hp==700, "200 times(1+30+30-20)/100 =280, not chained multipliers")
 	check(model.shot_gold.enemy_damage==280, "Gold sees composed damage once")
 	model = fresh(["bunge_shot"],values)

@@ -27,7 +27,7 @@ func _initialize() -> void:
 	# Real explosions exercise shield absorption, not a mocked damage handler.
 	model.shot_actor = 0
 	model.shot_weapon = 0
-	var target: Vector2 = model.actors[1].pos
+	var target: Vector2 = Combat.full_hit(model.actors[1], 25.0)
 	model.explode(target)
 	check(model.actors[1].hp == 760 and model.actors[1].shield == 130, "Shield absorbs an entire direct pulse")
 	model.explode(target)

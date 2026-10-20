@@ -27,12 +27,19 @@ const FLAME_FPS := 30.0
 const FLAME_KEYS := [0, 2, 4, 6, 8, 11, 14, 18]
 # The HD MatchStatus keeps only the ITEM LOCKED frame (217 of the 868 px sheet).
 const HD_SOURCE_WIDTH := {"MatchStatus.png": 217.0}
+# MobileFlipbook UsingItem: 20 frames at 19 fps. Sheets are 5×4 cells.
+# Bigfoot cell 129×130 (frames 234–253); Mage cell 109×150 (frames 243–262).
+const USING_FPS := 19.0
+const USING_FRAMES := 20
+const USING_COLUMNS := 5
+const USING_CELL := {"bigfoot": Vector2(129, 130), "mage": Vector2(109, 150)}
 
 var textures := {}
 var originals := {}
 var shoot_sound: AudioStream
 var blast_sound: AudioStream
 var flames: Array = []
+var using_textures := {}
 var rng := RandomNumberGenerator.new()
 
 func _init() -> void:
@@ -46,7 +53,20 @@ func _init() -> void:
 		textures["TeleportFlame.png"] = load(HD + "TeleportFlame.png")
 	shoot_sound = load(ORIGINALS + "ShootTeleport.mp3")
 	blast_sound = load(ORIGINALS + "BlastTeleport.mp3")
+	_load_using("bigfoot", "UsingItemBigfoot.png")
+	_load_using("mage", "UsingItemMage.png")
 	rng.randomize()
+
+func _load_using(kind: String, file_name: String) -> void:
+	var hd_path := HD + file_name
+	var original_path := ORIGINALS + file_name
+	if ResourceLoader.exists(hd_path):
+		using_textures[kind] = load(hd_path)
+	elif ResourceLoader.exists(original_path):
+		var canvas := CanvasTexture.new()
+		canvas.diffuse_texture = load(original_path)
+		canvas.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		using_textures[kind] = canvas
 
 static func button_file(id: String) -> String:
 	return "Item%s.png" % Items.definition(id).file
@@ -155,4 +175,37 @@ func draw_flames(view: CanvasItem, offset: Vector2) -> void:
 		else:
 			var frame := int(position)
 			view.draw_texture_rect_region(originals["Teleport1.png"], target, Rect2(Vector2(frame % 10, int(frame / 10)) * FLAME_CELL, FLAME_CELL))
+	view.draw_set_transform(Vector2.ZERO)
+
+## Frame of the 20-frame UsingItem aura (holds the last frame).
+static func using_frame(age: float) -> int:
+	return mini(USING_FRAMES - 1, maxi(0, int(floor(age * USING_FPS + 0.00001))))
+
+func using_density(kind: String) -> float:
+	var texture: Texture2D = using_textures.get(kind)
+	if texture == null:
+		return 1.0
+	var cell_width: float = USING_CELL[kind].x
+	return float(texture.get_width()) / (cell_width * float(USING_COLUMNS))
+
+## Green diamonds and beams over the mobile. Same cell, pivot and ground
+## contact as the original atlas, so the aura sits on the character.
+func draw_using(view: CanvasItem, body, state: Dictionary, facing: int, offset: Vector2) -> void:
+	var kind: String = body.hd_rig.kind
+	var texture: Texture2D = using_textures.get(kind)
+	if texture == null:
+		return
+	var cell: Vector2 = body.cell
+	var amount: float = 60.0 / float(body.hull_width)
+	var ground := 24.0
+	var frame := using_frame(float(state.pose_age))
+	var density := using_density(kind)
+	var source_cell := cell * density
+	view.draw_set_transform(Vector2(state.pos) + offset, float(state.rotation), Vector2(-facing, 1))
+	var pivot_x: float = body.pivot.x
+	var contact_y: float = body.contact_y
+	var target := Rect2(Vector2(-pivot_x * amount, ground - contact_y * amount), cell * amount)
+	var column := frame % USING_COLUMNS
+	var row := int(frame / USING_COLUMNS)
+	view.draw_texture_rect_region(texture, target, Rect2(Vector2(column, row) * source_cell, source_cell))
 	view.draw_set_transform(Vector2.ZERO)

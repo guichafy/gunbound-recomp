@@ -16,7 +16,9 @@ const SEQUENCES := {
 	"recoil_0": [125, 146, 19.0, false],
 	"recoil_1": [125, 146, 19.0, false],
 	"recoil_2": [274, 293, 20.0, false],
-	"hurt": [394, 418, 24.0, false],
+	"hurt": [394, 418, 24.0, false], "hurt_2": [419, 441, 24.0, false],
+	"shock": [147, 166, 19.0, false], "falling": [187, 201, 18.0, false],
+	"unable": [105, 124, 19.0, true],
 	"using_item": [234, 253, 19.0, false],
 	"destroyed": [202, 211, 19.0, false]
 }

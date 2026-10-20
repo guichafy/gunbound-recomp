@@ -227,7 +227,7 @@ func run() -> void:
 	check(teleports.size() == 1 and events_of(model, "explosion").is_empty() and int(model.actors[Match.CPU].hp) == cpu_hp, "The beacon teleports without explosion or damage")
 	check(model.terrain.cells.count(1) == cells_before, "The beacon leaves no crater")
 	var landed: Vector2 = model.actors[Match.PLAYER].pos
-	check(landed.distance_to(origin) > 40.0 and absf(landed.x - Vector2(teleports[0].position).x) < 8.0 and is_equal_approx(landed.y, model.terrain.surface_at(landed.x, landed.y) - 24.0), "The mobile stands on the ground where the beacon landed")
+	check(landed.distance_to(origin) > 40.0 and absf(landed.x - Vector2(teleports[0].position).x) < 8.0 and is_equal_approx(landed.y, model.terrain.surface_at(landed.x, landed.y) - model.stance_of(Match.PLAYER)), "The mobile stands on the ground where the beacon landed")
 	check(not predicted.is_empty() and Vector2(predicted.position).distance_to(teleports[0].position) < 0.01, "Prediction follows the beacon to the same landing point")
 	check(is_equal_approx(float(model.actors[Match.PLAYER].ready), 20.0 + 920.0 / 7.5), "Teleport turn costs 20 plus the selected shot delay")
 

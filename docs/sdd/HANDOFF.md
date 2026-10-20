@@ -1,4 +1,131 @@
-# Hand-off — Gunbound Recomp 0.14.5
+# Hand-off — Gunbound Recomp 0.15.0
+
+## Nak 0.15 — terceiro mobile (ADR-069)
+
+Pedido: novo mobile Nak com base no OpenBound; geração de imagens HD adiada
+pelo usuário. REQ-43, NAK_0_15.md. Worktree `claude/nak-mobile-openbound-7afece`,
+a partir de `699caff`. O fork C# não implementa o Nak; o usuário indicou
+jglim/gunbound-server (só o ID 0x02) e autorizou baixar o cliente original de
+jglim/gunbound-launcher para `.tools/gunbound-client/` (hash conferido com o
+GunBound-Decomp). Nada baixado foi executado; leitor e importador são próprios.
+
+- Arte original: 392 quadros do `tank3.img`, 25 estados do `tank3.epa`,
+  projéteis/brilhos/explosões; `RiderPivot.json` do fork confirmado como ponto
+  bruto do cliente. Correção de formato: blocos LZHUF de 4 KB por entrada.
+- Combate: dano/raio do characterdata (escolha do usuário); S2 e SS revertidos
+  do código ofuscado (vy ÷ 2 na entrada, 2× gravidade para cima, explode no
+  primeiro pixel livre; SS só colide com mobiles). Previsão = disparo real.
+- Apresentação: menu com três botões, Nak espelhado (atira pela cauda), bolha
+  no idle, miras originais 1×, piloto com RIDER_ADJUST (+5,+4). Sem rig HD.
+
+Validação: check.sh completo com 1948 checks e 13 partidas, zero falhas (`test_nak` 55);
+`test_matches` 13 partidas (81–90 idênticas ao baseline, 91–93 com Nak).
+`test_items_scene` é instável com seed aleatória: falhou 1 de 5 aqui e 1 de 6
+na cópia principal sem estas mudanças. GPU em docs/nak: framebuffer 1728×1080
+(tela 16:10 numa janela 1920×1080), MP4 60 fps e GIF ampliado. App não
+reexportado; sem publicação. Pendências: HD do Nak, validação do usuário.
+
+
+## Fundo dos preços nítido0.14.8
+
+Usuário ainda viu borrado após0.14.7. REQ-20/38, ADR-068. Causa: linha da
+textura75..76 (4px HD) ampliada para27px lógicos espalhava suas variações
+em manchas. Centro da faixa agora é retângulo vetorial azul uniforme no
+StyleBox; recortes de laterais/borda branca/rebites preservados. Sem novo
+PNG, alteração de regras, retratos, layout, perfil ou atributos.
+
+GPU1920×1080 HD/fallback/compra/roster em docs/avatar-price-crisp. Amostra
+sem texto passou de527cores diferentes para1(RGB121/159/211); região do
+PCK1280×800 também tem essa única cor. Evidência em pixel-check.json.
+1848checks em check.sh --quick, zero falhas. Partidas longas não repetidas:
+alteração apenas visual,10passaram na0.14.6. App/ZIP0.14.8 reexportados,
+assinatura estrita válida e smoke GPU/PCK isolado em/tmp passou. Perfis
+isolados, fonte C#/arte original preservados; validação do usuário pendente.
+
+## Cards: preço e informação do avatar0.14.7
+
+Validação do usuário: retângulo dos preços cobria detalhes da moldura; imagem
+externa mostrava bônus. REQ-20/38/39, ADR-067, AVATAR_CARD_FIX_0_14_7.md.
+ColorRect foi retirado; a faixa azul agora é parte da composição da textura,
+mantendo a borda branca, laterais e acabamento inferior/rebites. Card166×147,
+retrato126×66 com aspecto preservado e linha “Cosmético · sem bônus”. Tooltip
+explica melhorias via Atributos; confirmação de compra também informa o efeito.
+
+Fonte conferida: AvatarMetadata.cs/JSON sem modificadores; Player.Attribute
+é do piloto e EquipAvatar só altera IDs. Vestir não aumenta ataque/mobile
+nesta versão do OpenBound, esclarecido na conversa. Não copiamos números de
+outra imagem. Nenhuma mudança de combate/perfil/preços/PNG/anatomia.
+
+1848checks em check.sh --quick, zero falhas; inclui280de loja/cena/continuidade.
+Partidas longas não repetidas porque só apresentação mudou (10passaram na0.14.6).
+Revisão independente sem achados. GPU HD/fallback/compra/roster em
+docs/avatar-card-fix,1920×1080 e120frames60FPS; imagem enviada pelo usuário
+preservada em before-cards.png. App/ZIP0.14.7 reexportados, assinatura estrita
+válida; smoke GPU do PCK isolado em/tmp passou (card/efeito/retrato/compra,
+20texturasHD, exclusão de brutos, vestir/recarga/batalha).
+Perfis de teste isolados; fonte C#/perfil real preservados. Sem publicação.
+
+## Auditoria OpenBound e UI Shop HD0.14.6
+
+Pedido: conferir implementação da Avatar Shop contra fonte C# e regenerar
+arte ainda sem HD pela skill gunbound-classic-hd. REQ-20/38/39/40, ADR-066;
+plano/matriz em AVATAR_SHOP_PARITY_0_14_6.md. Trabalho local na main.
+
+Catálogo15 e80arquivos originais idênticos à fonte (source-audit.json).
+Preservadas adaptações aprovadas: grade3×3/inventário lateral, Vestir
+persistido, perfil/gêneros/saldo/nível local e Bigfoot/Mage. Corrigidos ícones
+dos atributos e relógios/FPS/Foward/Cycle do C#; clique das setas continua
+após soltar. Popup mostra retrato/categoria/preço/saldo e centraliza moeda
+única. Transações/perfil/combate/13peças HD/rig aprovados não alterados.
+
+Quatro folhas GPT Images1254×1254RGBA, uma correção de estrela;20texturas
+da UI com catálogo/origem/prompt/alpha/registro4× e fallback. Fonte clássica
+é identidade; Space Marine HD aprovado é acabamento. Pixels úteis medidos
+em catálogo; janelas4× não significam4× detalhe gerado. source/.gdignore
+separa referências/brutos do runtime. GENERATION.json documenta geração.
+
+GPU inicial encontrou popup mínimo da textura e bordas4× maiores: corrigidos
+com expansão antes do tamanho e ShopCardStyle em nove recortes independentes.
+Revisão independente final sem achados. **1848checks+10partidas sem falhas**,
+42,1s partidas;40paridade/46UIHD/25Shop/25classic. Perfis isolados somente.
+Capturas1920×1080 e120frames60FPS em docs/avatar-shop-parity cobrem compra,
+moeda única, atributos, gêneros, Mage/Bigfoot e controles animados.
+
+App/ZIP0.14.6 reexportados em builds, assinatura estrita válida; ZIP127,4MB.
+Smoke GPU do PCK real passou:20texturasHD, popup/retrato/tamanho, cliques do
+inventário, recarga do perfil e quatro peças na batalha. Referências/brutos
+não estão no pacote. Verificação inicial de JSON emcwddo projeto deu falso
+positivo pelo filesystem local; repetir fora do projeto eliminou esse fallback.
+Filtro novo inclui explicitamente catalog.json/GENERATION.json. Reproduzir:
+copiar tests/capture_avatar_shop_parity_pck.gd para /private/tmp e executar
+Godot nessa pasta, com --path /private/tmp, --main-pack <PCKabsoluto> e
+--script <scriptabsoluto>. App inclui também a aura UsingItem do baseline;
+a suíte completa acima resolve a pendência de validação anterior. Sem push.
+Limite: mestres HD variam brilho pelos relógios; os gestos originais completos
+dos mascotes continuam no fallback. Validação visual do usuário pendente.
+
+## Paridade Mage/Bigfoot com o C# (ADR-066)
+
+Worktree `mobile-csharp-parity`, a partir de `c20f040`. REQ-42. Escudo do Mage
+regenera em todo turno, SS abre no primeiro e recarrega em quatro turnos
+próprios, dano segue `base × raio / distância`, caixas 38×33 e 46×40, queda
+curta não tira vida, sinalizador do Bigfoot espera 0,4 s, fumaça e poses de
+dano/choque/queda/parede entram no catálogo. Skill
+`skills/gunbound-mobile-port/SKILL.md`. App não foi reexportado. Harness desta
+worktree: 1785 checks e 10 partidas, zero falhas. A `main` com a loja 0.14.6
+não foi misturada.
+
+## Item no turno próprio — aura UsingItem (ADR-065)
+
+No turno do jogador, usar um item (clique agora ou marca feita no turno
+adversário) tira o botão do slot na hora e recompacta a barra. A aura verde
+de diamantes e feixes do `UsingItem` (Bigfoot 234–253, Mage 243–262, 20
+quadros a 19 fps) é desenhada sobre o mobile, em folhas 4× separadas do
+corpo. `test_items_scene.gd`: **46 checks, zero falhas**. Captura GPU
+1920×1080 em `docs/items/using-item-12.png`: aura verde sobre o Bigfoot,
+escala uniforme e botão do slot oculto. A suíte completa não foi repetida.
+O app 0.14.5 já exportado não inclui esta correção até um novo export.
+Detalhes em ITEMS_0_13.md.
 
 ## Integração da loja clássica à main 0.14.5
 

@@ -9,8 +9,8 @@ Converse com o usuário em português.
 Protótipo 0.7.0 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
-desktop macOS, treino offline 1×1 contra CPU, apenas Bigfoot/Mage com derivados HD
-e progresso local. Escaravelho foi removido por solicitação do usuário.
+desktop macOS, treino offline 1×1 contra CPU, Bigfoot/Mage com derivados HD e Nak
+(0.15, arte original) e progresso local. Escaravelho foi removido por solicitação do usuário.
 O perfil recomeçou na pasta `app_userdata/Gunbound Recomp`, sem migração.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
 no roadmap; não os implemente sem uma nova solicitação. A engine deve preservar
@@ -26,7 +26,10 @@ Mage substitui Carapaça com escudo/regen, mira própria, duplo laser helicoidal
 EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com4 bombas, T2 duas rajadas de3 e SS com8, com lançamentos
 temporizados, dados/Fx/áudio originais e adaptações descritas em
 `docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Itens entraram em 0.13 (ver seção abaixo);
-demais mobiles, resistências e regenHP continuam pendentes.
+demais mobiles continuam pendentes. A paridade de Mage e Bigfoot com o C#
+(escudo, SS, dano, caixa, queda) está em `docs/sdd/MOBILE_PARITY.md`. Ao portar
+outro mobile, siga `skills/gunbound-mobile-port/SKILL.md`. O C# não aplica uma
+tabela de resistências no dano; regen de vida é 0 nestes dois e 10 nos biônicos.
 Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd/MAGE_0_4.md`.
 
 ## Referência C# em `~/Workspaces/Gunbound`
@@ -116,9 +119,9 @@ compara original/HD e poses em dois sentidos; docs/composition contém PNG/MP4/G
 
 ## Roster/perfil0.6.4 — estado atual
 
-Só Mage(ID1) e Bigfoot(ID2). Escaravelho retirado; não reintroduzir ID0.
+Mage(ID1) e Bigfoot(ID2); Nak(ID3) desde 0.15 (seção Nak). Escaravelho retirado; não reintroduzir ID0.
 VEHICLES é Dictionary; PLAYABLE_VEHICLES separa slots dos IDs. normalize_vehicle
-mapeia IDs inválidos para2; CPU sempre3−id. Não alterar IDs restantes.
+mapeia IDs inválidos para2; CPU por Mobiles.opponent (1↔2, Nak→Mage). Não alterar IDs restantes.
 Piloto ativo é pilot_side.png com perna distante oculta, mesmo registro/assento;
 ler SIDE_PILOT_ROSTER_0_6_4.md. PNG anterior preservado. Captura capture_side_pilot.gd
 144frames/PNG/MP4/GIF em docs/occlusion; test_roster.gd e suites existentes.
@@ -197,7 +200,8 @@ original ÷ 7,5). Regras no `match.gd`: `use_item`, `shot_shells` (Dual/Dual+/
 Teleport/Thunder) usado por `fire` e `predict_shot`; efeito do turno em
 `actors[i].turn_item` (copiado pela previsão), limpo em `TurnTable.schedule`.
 Cada projétil guarda `weapon`; sinalizador (`beacon`) só colide com o terreno.
-CPU sem itens (seeds 81–90 iguais). Cena: `item_bar.gd` (barra F1–F6, fila no
+CPU sem itens (seeds 81–90 iguais). No turno próprio o item sai do slot na
+hora (ADR-065) e a aura UsingItem HD acompanha o mobile. Cena: `item_bar.gd` (barra F1–F6, fila no
 turno adversário, ITEM LOCKED na Ignorância), `item_art.gd` (botões, sinalizador,
 chamas; Teleport2 = Teleport1 invertido), `select_item_popup.gd` (menu "Itens";
 carga em `options.items`). Arte HD via `scripts/build_items_hd.py` e Codex
@@ -261,3 +265,18 @@ capture_avatar_shop_classic em1920×1080/120frames60Hz; smoke separado do PCK.
 Worktree codex/avatar-shop-classic integrada à main por solicitação explícita.
 1758checks+10partidas e smoke do PCK principal passaram; app/ZIP0.14.5 em builds.
 Branch/worktree preservados como referência, sem publicação.
+
+## Nak 0.15 — estado atual
+
+Ler docs/sdd/NAK_0_15.md (REQ-43, ADR-069). Terceiro mobile, ID 3, contra o
+Mage na CPU; 1↔2 inalterado. Fork não tem o Nak: arte/flipbook/dano/voo vêm do
+cliente original (jglim/gunbound-launcher TestClient, baixado com autorização em
+`.tools/gunbound-client/`) lido por `scripts/gunbound_xfs.py` (entradas em blocos
+LZHUF de 4 KB) e `scripts/import_nak_assets.py`. S2 `burrow` (vy ÷ 2, sobe 2×
+gravidade, explode no primeiro pixel livre) e SS `ghost` (só mobiles) ficam no
+laço comum do `match.gd`. `nak_sprite.gd` espelha o desenho (atira pela cauda),
+bolha `emotion1` no idle e RIDER_ADJUST (+5,+4). Sem HD ainda (usuário adiou a
+geração): `HD_KINDS` do rig/projéteis só Bigfoot/Mage; miras Nak 1×. Dúvidas
+sobre o cliente original: perguntar ao usuário. Teste test_nak.gd; captura
+tests/capture_nak.gd (docs/nak). Seeds 91–93 de test_matches jogam com o Nak.
+

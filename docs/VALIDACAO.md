@@ -22,7 +22,7 @@ Validação automatizada usa perfis isolados; aprovação visual/manual ainda pe
 
 Selecione Bigfoot e Mage. Mova/vire nos dois sentidos e observe o piloto em
 encostas: cabeça e corpo devem continuar unidos, com apoio no assento.
-TesteT1/T2 e SS após terceiro turno próprio: cabeça do tiro não muda tamanho
+Teste T1/T2 e o SS já no primeiro turno: cabeça do tiro não muda tamanho
 ou identidade; Bigfoot aponta na direção do voo, chama fica atrás. MageT2 tem
 um rastro contínuo por laser em hélice; SS mantém orbe e círculo EMP constante.
 Impactos expandem/desaparecem sem saltos de centro. Pause durante voo/impacto:
@@ -35,7 +35,7 @@ aceitação visual do usuário ainda pendentes.
 
 Teste Bigfoot com mira30° e força75%: T1 lança4 bombas com intervalo0,2s; T2 duas
 rajadas de3 em0,2/0,4s, com forças ligeiramente diferentes; SS lança8 a cada0,125s
-(após terceiro turno próprio). Observe sprites, sons individuais e explosões.
+(já no primeiro turno). Observe sprites, sons individuais e explosões.
 Mira T1/T2 limitada18–40°; SS23–35°, com ajuste ao selecionar a arma. Pausar antes
 da primeira rajada deve impedir lançamentos até continuar. Auto-carga dispara
 uma salva, sem repetição na soltura. Próximo turno espera todas as bombas.
@@ -78,7 +78,7 @@ de 0.2 abaixo permanecem como histórico; o roteiro também serve para 0.3.
 3. Mova com ←/→ (ou A/D); a barra de movimento diminui e o deslocamento para ao esgotar. F vira parado.
 4. Ajuste a mira com ↑/↓: um toque muda 1°; segurar repete cada vez mais rápido. A moldura da mira gira com o chassi, o ponteiro anda dentro da faixa verde e o número ao lado mostra o ângulo no mundo, o mesmo da janela LAST.
 5. Segure Espaço: a barra vermelha enche de 0 a 100 em cerca de 2 s; soltar dispara, cheia dispara sozinha e soltar depois não cria outro tiro. O triângulo marca a força anterior e LAST guarda o ângulo anterior. Arraste o seletor amarelo na barra: ele só marca uma referência e não muda a força.
-6. Troque o tiro com Tab (ou 1/2/3 ou clique): o botão ativo fica com a aba amarela; SS fica cinza até o terceiro turno próprio e o Tab pula ele. A faixa verde da mira muda com o tiro (Bigfoot SS é mais estreita).
+6. Troque o tiro com Tab (ou 1/2/3 ou clique): o botão ativo fica com a aba amarela. O SS já pode ser escolhido no primeiro turno; depois de usá-lo, fica cinza por quatro turnos próprios e o Tab pula ele. A faixa verde da mira muda com o tiro (Bigfoot SS é mais estreita).
 7. No turno da máquina, o relógio some e um balão numerado aparece sobre ela nos últimos 20 s; o tique do relógio toca nos últimos 10 s.
 8. Ao acertar, o dano sobe como número vermelho e soma acertos seguidos; a barra de vida sob o mobile encolhe (azul = escudo do Mage; vermelha abaixo de 30%).
 9. F8 ou PASS passam o turno. ESC ou o botão ESC abre o popup OPTIONS original (o botão ESC fica desabilitado enquanto aberto): relógio, força e animações param e a carga é cancelada sem disparar. Arraste SFX (0 silencia), BGM (música de batalha; 0 silencia), Scroll Speed (arrastar o mapa fica mais lento/rápido) e Background Off (fundo preto); Aiming Mode, Mouse Speed e Interface aparecem esmaecidos. O popup aparece em HD. A barra de título arrasta a janela. Accept (✓) ou ESC fecham e gravam; reabra o jogo e confira que os valores voltam. P ou PAUSA abrem a pausa (recomeçar, menu, ajuda).

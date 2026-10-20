@@ -30,7 +30,8 @@ func _initialize() -> void:
 		for y in range(model.terrain.HEIGHT):
 			for x in range(model.terrain.WIDTH):
 				model.terrain.cells[y * model.terrain.WIDTH + x] = 1 if y * 2 >= 420.0 + (x * 2 - 640.0) * slope else 0
-		model.actors[0].pos = Vector2(640, model.terrain.surface_at(640) - 24)
+		model.actors[0].pos = Vector2(640, model.terrain.surface_at(640) - model.stance_of(0))
+		model.stamp_tilt()
 		var rotation: float = model.body_rotation(0)
 		check(absf(rotation - atan(slope)) < 0.06, "Support rotation follows measured slope " + str(slope))
 		for facing in [-1, 1]:

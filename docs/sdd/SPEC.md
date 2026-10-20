@@ -25,7 +25,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 | REQ-04 | Balística afetada por gravidade/vento, colisão com terreno e veículos, crateras | `combat.gd`, `terrain.gd`, `match.gd` | `test_runner.gd`, partidas completas |
 | REQ-05 | Vida, dano por explosão/queda, vitória, derrota e empate | `match.gd`, tela de resultado | Modelos, partidas e cena |
 | REQ-06 | Iniciativa por atraso, turno de 30 s, passagem voluntária/automática | `match.gd.schedule`, `pass_turn`, `tick` | Modelos e roteiro manual |
-| REQ-07 | Três armas; especial no terceiro turno próprio, uma vez por partida | `match.gd.weapon_rules/can_use_special` | Modelos + roteiro manual para apresentação da especial |
+| REQ-07 | Três armas; SS aberto no primeiro turno e travado por quatro turnos próprios depois do uso | `match.gd.can_use_special` | Modelos + roteiro manual para apresentação da especial |
 | REQ-08 | CPU joga com as mesmas regras; três dificuldades por erro de mira | `match.gd.choose_cpu_shot/predict_shot`, `combat.gd` | Modelos e dez partidas completas |
 | REQ-09 | Pausa congela relógio/voo; ajuda, resultado, revanche e menu navegáveis | `game.gd` | `test_scene.gd` + roteiro manual |
 | REQ-10 | Apelido, XP, nível e vitórias locais; recompensa uma vez por resultado | `profile.gd`, `game.gd` | Persistência/corrupção/idempotência e cena |
@@ -73,6 +73,24 @@ REQ-19 parcialmente atendido: Bigfoot selecionável com atlas, piloto padrão,
 quadros e projéteis originais na versão 0.3.0. Ver `BIGFOOT_0_3.md`. Vida 1100,
 movimento 90. Armas mantêm as regras do protótipo; salvas oficiais e outros
 mobiles pendentes. Todos os assets restantes estão em `.tools/source-assets/content/`.
+
+## Paridade Mage/Bigfoot com o C# — REQ-42
+
+REQ-05, REQ-07 e REQ-19. O contrato vigente de escudo, regeneração, SS, dano,
+queda, caixa, sinalizador e poses está em [MOBILE_PARITY.md](MOBILE_PARITY.md)
+e na skill `skills/gunbound-mobile-port/SKILL.md`. As frases de 0.4 e 0.5 sobre
+regen só no turno próprio, SS único e queda linear ficam como histórico.
+
+## Nak 0.15 — REQ-43
+
+Terceiro mobile jogável (ID 3), pedido explícito do usuário. O OpenBound não
+implementa o Nak: dados C# (HP, mira, delays, sons, miras, RiderPivot) mais
+arte, flipbook, dano e regras de voo do cliente original Thor's Hammer
+(jglim/gunbound-launcher), lidos com as notas do GunBound-Decomp — S2 entra no
+chão e explode ao emergir, SS atravessa o terreno e só explode em mobile.
+Contrato e números em [NAK_0_15.md](NAK_0_15.md), decisão ADR-069. A
+restrição "apenas Bigfoot/Mage" deixa de valer para o Nak; demais mobiles
+continuam fora. Arte HD do Nak adiada pelo usuário.
 
 ## Mage 0.4
 
@@ -199,9 +217,11 @@ fica desabilitado com TODO; Interface só com a skin Blue.
 
 REQ-35 itens usáveis no turno (Dual, Dual+, Thunder, Energy Up 1/2, Team
 Teleport, Teleport, Blood, Bunge Shot, Power Up, Change Wind) com a lógica,
-física e custos de delay do OpenBound; REQ-36 seleção de 6 slots pelo
-`PopupSelectItem` original no menu; REQ-37 arte dos itens/Teleport em HD por
-GPT Images (Codex), conforme ITEMS_0_13.md. CPU sem itens neste corte.
+física e custos de delay do OpenBound. No turno próprio o item sai do slot
+na hora, marcado antes ou clicado agora, e a aura UsingItem acompanha o
+mobile (ADR-065). REQ-36 seleção de 6 slots pelo `PopupSelectItem` original
+no menu; REQ-37 arte dos itens/Teleport em HD por GPT Images (Codex) e a
+aura UsingItem em 4×, conforme ITEMS_0_13.md. CPU sem itens neste corte.
 
 ## Shop de avatar — especificação aprovada
 
@@ -232,3 +252,17 @@ AVATAR_SMOOTH_0_14_4.md; experimentar item não possuído continua temporário.
 REQ-20/38/39/40: loja0.14.5 segue a primeira foto de referência: grade3×3,
 inventário lateral sempre visível e vestível, prévia/saldo compactos, categorias
 no rodapé e atributos em painel separado. Critérios em AVATAR_SHOP_CLASSIC_0_14_5.md.
+
+REQ-20/38/39/40: auditoria0.14.6 contra implementação OpenBound; catálogo,
+compra/equipamento/atributos e intervalos de interface conferidos, diferenças
+corrigidas e assets raster da UI regenerados em HD. Adaptações já aprovadas
+preservadas e explicitadas em AVATAR_SHOP_PARITY_0_14_6.md.
+
+REQ-20/38/39: correção0.14.7 preserva os detalhes da moldura sob os preços e
+mostra o efeito real de cada peça: cosmético/sem bônus neste catálogo OpenBound.
+Pontos de combate permanecem no painel Atributos do piloto. Plano
+AVATAR_CARD_FIX_0_14_7.md; sem novos bônus/regras inventados pela referência.
+
+REQ-20/38: correção0.14.8 retira o borrado do fundo dos preços. O centro da
+faixa recebe preenchimento vetorial uniforme; moldura, borda branca e rebites
+continuam nos recortes HD/nativos. Texto, retrato e regras preservados.

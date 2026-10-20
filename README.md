@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.14.5**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot e Mage, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.14.8**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot e Mage, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,11 +8,11 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.14.5** — loja clássica integrada à `main` |
+| Versão | **0.14.8** — cards da loja corrigidos e efeito dos avatares explicado |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
 | Validação automática | **1758 verificações e 10 partidas completas, zero falhas** |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
-| Aceite visual | A suavidade dos avatares (0.14.4) foi confirmada. A composição da loja 0.14.5 ainda aguarda o seu olhar no aplicativo |
+| Aceite visual | A suavidade dos avatares (0.14.4) foi confirmada. A interface HD da loja 0.14.8 ainda aguarda o seu olhar no aplicativo |
 
 O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). Este arquivo é o mapa do que existe hoje.
 
@@ -71,13 +71,13 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.8–0.9 | Miramo Town A, câmera rolante, vento 2D, clima, Thor e partículas de chão |
 | 0.10–0.12 | HUD original em HD, popup de opções, música, busca da CPU fora do quadro travado, mira Slice e Drag |
 | 0.13 | Onze itens de batalha, com custo de atraso, barra F1–F6 e menu Select Item |
-| 0.14–0.14.5 | Loja, compra, inventário, oito atributos, Gold da partida, avatares HD, animação contínua, vestir persistido e layout clássico 3×3 |
+| 0.14–0.14.8 | Loja, compra, inventário, oito atributos, Gold da partida, avatares HD, animação contínua, vestir persistido e layout clássico 3×3 |
 
 Números de base, antes dos atributos:
 
 - **Mage:** 760 de vida, 220 de escudo, 90 de movimento, mira 15–50°. Regenera 20 de escudo no próprio turno.
 - **Bigfoot:** 1100 de vida, 90 de movimento, mira 18–40° (SS 23–35°).
-- O especial destrava no terceiro turno próprio e vale uma vez por partida.
+- O especial está liberado no primeiro turno. Depois de usá-lo, volta quatro turnos próprios depois.
 - Vitória 120 XP, derrota 45, empate 70. Um nível a cada 200 XP. Gold da partida é separado do XP.
 - A máquina usa a mesma física do disparo real. A dificuldade muda o erro de mira.
 
@@ -97,7 +97,7 @@ Números de base, antes dos atributos:
 - A colisão do terreno é amostrada a cada dois pixels. Pedaços de chão que ficam soltos permanecem no lugar; só os veículos caem.
 - O balanceamento é o do protótipo, com atrasos originais divididos por 7,5.
 - Builds de Windows, Linux, Android e iOS não foram gerados. A engine permite exportar esses alvos; só o macOS foi validado.
-- Vários fluxos — itens, mira Drag, música e a loja 0.14.5 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
+- Vários fluxos — itens, mira Drag, música e a loja 0.14.8 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
 ### Fora desta entrega
 

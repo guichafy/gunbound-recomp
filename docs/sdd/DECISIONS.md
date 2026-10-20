@@ -372,6 +372,31 @@ possuídos, com rollback e confirmação. Compra continua separada de equipar.
 Critérios/evidências em AVATAR_SMOOTH_0_14_4.md; main local e app assinado,
 sem publicação. Gestos/olhos do original continuam limitação do HD constante.
 
+## ADR-066 — paridade de combate dos mobiles com o C#
+
+Pedido explícito de corrigir escudo, regeneração e os demais desvios achados
+contra o OpenBound, numa worktree da `main`. Regeneração de escudo passa a
+valer para todos os mobiles a cada turno. O SS segue a trava de quatro turnos
+próprios e abre no primeiro. O dano volta à fórmula inversa do `CalculateDamage`,
+com a caixa real de cada mobile. Queda curta deixa de tirar vida. O roteiro
+para os próximos portes fica na skill `gunbound-mobile-port`. Não se cria
+tabela de resistências: o C# não aplica os arquétipos de ataque no dano.
+
+## ADR-065 — item some no uso e aura UsingItem
+
+Pedido do usuário: no turno próprio, ao selecionar um item (ou já tê-lo
+marcado), o slot esvazia e o mobile recebe a animação de item do Gunbound.
+O OpenBound guardava o botão ativado até o `GrantTurn` seguinte
+(`removeItemFromBarAction`). Aqui o botão sai na hora do `use_item` e a
+barra recompacta; marcar durante o turno adversário continua válido e o
+consumo, com a mesma saída do slot, ocorre no início do turno próprio.
+A barra segue travada até esse próximo turno. A pose `using_item` permanece
+20 quadros a 19 fps. O rig HD não troca anatomia: diamantes e feixes verdes
+dos quadros Bigfoot 234–253 e Mage 243–262 viram uma camada separada a 4×,
+com o pivô e o contato do atlas. O brilho de carga na boca do canhão não
+entra nessa pose. GPT Images não entregou alfa utilizável; as folhas vêm de
+`scripts/build_using_item_fx.py`. Fallback é o recorte original.
+
 ## ADR-064 — composição clássica do Avatar Shop
 
 A foto enviada pelo usuário orienta o layout3×3, substituindo a adaptação5×5
@@ -379,3 +404,52 @@ da ADR-059. C# continua fonte de catálogo/preços/mecânicas; contém15 registr
 e não os nove avatares da imagem. Inventário lateral equipa itens possuídos;
 atributos ficam em painel modal sem mudar regras. UI recomposta com sprites
 originais e controles; HD aprovado mantém aspecto/pivôs/rig da ADR-063.
+
+## ADR-066 — fidelidade das regras OpenBound e interface Shop HD
+
+Auditoria solicitada pelo usuário compara código C# e Godot, preservando
+adaptações aprovadas ADR-063/064 (Vestir persistido e grade3×3). Catálogo,
+preços, ordem dos atributos e intervalos/FPS dos botões vêm do original;
+transação offline mantém validação/rollback em vez de reproduzir falhas C#.
+Popup passa a mostrar retrato/preços/categoria e centraliza moeda única.
+Regenerar UI raster consumida com GPT Images, mestres constantes/registro
+nativo/fallback; anatomia HD aprovada e combate preservados. Plano e
+matriz de diferenças em AVATAR_SHOP_PARITY_0_14_6.md.
+
+## ADR-067 — preço integrado à moldura e informação de efeito real
+
+Retirar ColorRect de preço que cobre os detalhes do card. ShopCardStyle
+compõe painel branco, faixa azul e acabamento inferior a partir da própria
+textura HD/nativa, conservando bordas/cantos/rebites. Retrato126×66 deixa
+linha para “Cosmético · sem bônus” e tooltip: melhorias via Atributos.
+AvatarMetadata C# não tem bônus por peça; imagem externa não autoriza
+inventar números/regras. Perfil/combate/PNG/anatomia permanecem preservados.
+
+## ADR-068 — centro nítido da faixa de preços
+
+Validação do usuário: o fundo dos preços ainda parece borrado. A faixa da
+ADR-067 esticava a linha nativa75..76 (4px HD) para27px lógicos, ampliando
+ruído/variações da textura. Substituir somente o centro desse recorte por
+retângulo vetorial azul uniforme, desenhado no próprio StyleBox. Laterais,
+borda branca e acabamento inferior/rebites preservados. Isso substitui a
+extração da tira para o preenchimento central da ADR-067; nenhum novo PNG,
+modificador, alteração de perfil ou reanimação necessária. Conferir GPU
+FullHD/versão nativa, suites de loja e aplicativo reexportado/assinado/PCK.
+
+## ADR-069 — Nak com dados do cliente original sobre o OpenBound
+
+Pedido do usuário: novo mobile Nak "com base no OpenBound". O fork C# só tem
+metadados (HP 1100, proteção 35, mira 10–50°, delays 760/910/1310), sons,
+miras, retrato e RiderPivot; não há classe, flipbook, folha nem projéteis. O
+usuário indicou jglim/gunbound-server e autorizou baixar o cliente original de
+jglim/gunbound-launcher; GunBound-Decomp documenta o formato. Decisões: ID 3
+sem alterar 1/2 nem o par 1↔2 da CPU (Nak contra Mage); arte original extraída
+por leitor próprio (blocos LZHUF de 4 KB) e flipbook do `tank3.epa` com o mesmo
+mapeamento que o fork usa para Bigfoot/Mage; dano/raio do characterdata
+(200/30, 350/35, 360/35, escolha do usuário); S2 e SS revertidos do código
+ofuscado: S2 entra no chão com `vy` ÷ 2, sobe com o dobro da gravidade sem vento
+e explode no primeiro pixel livre; SS ignora terreno. Vento comum (sem fator por
+tiro). Desenho espelhado: o Nak atira pela cauda. RiderPivot cru do fork recebe
+(+5, +4), média do registro de Bigfoot/Mage. HD adiado pelo usuário; Nak fica
+fora do rig HD até lá. Substitui a primeira versão deste ADR, que inventava
+números e uma gravidade invertida 3×.

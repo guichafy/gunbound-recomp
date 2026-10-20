@@ -325,6 +325,10 @@ acelerada) e entrega um `hud_state()`; `match.gd` não mudou.
   `select_item_popup.gd` (PopupSelectItem); carga em `options.items`.
 - `battle_art`: pose `using_item`, segunda rajada repete o recuo, teletransporte
   sem deslizar. Eventos novos: `item`, `volley`, `teleport`.
+- ADR-065: o botão usado some do slot no uso (a barra recompacta) e
+  `item_art.draw_using` desenha a aura verde por cima do mobile, 20 quadros
+  a 19 fps, no pivô do atlas. O corpo HD só sobe um pouco; não ganha brilho
+  de carga.
 
 ## Shop de avatar 0.14 (REQ-38..41)
 
@@ -405,3 +409,52 @@ Salvar fecha somente após transação bem-sucedida. Erro fica visível no paine
 Shop/Inventário, compra Gold/Cash, gêneros, busca e animações originais mantidos.
 Essa seção substitui a descrição histórica do layout5×5; catálogo/preços e
 BattleArt/AvatarArt/AvatarHD permanecem os mesmos.
+
+## Auditoria e UI HD0.14.6
+
+ADR-066, REQ-20/38/39/40. ShopHD valida catálogo/version/registro4× e dimensões
+das texturas; falha solicita o recurso nativo. AvatarShop converte somente
+recortes de textura pela densidade, sem alterar hitboxes ou dimensões lógicas.
+ShopCardStyle desenha nove recortes: bordas6/22/6/6 em pixels de UI, recortes
+correspondentes em pixels da textura. Popup define EXPAND_IGNORE_SIZE antes
+de receber a textura e conserva228×286×1,6. Retrato/categoria/preços e saldo
+identificam a compra; moeda única é centralizada.
+
+Ícones de atributo usam os índices13/17/15/23/9/19/21/11 de AttributeMenu.cs.
+animation_frame reproduz Foward (repetição) e Cycle (ida/volta, extremos
+duplicados) do FlipbookAnimation C#: Buy/Try usam Cycle no hover; setas1..19
+a28FPS, Exit hover23/click25FPS. Click começa em pressed (soltura), guarda
+click_age e completa até Normal enfileirado, mesmo depois de soltar o mouse.
+Categorias ativadas/controles desabilitados mantêm o respectivo quadro.
+
+build_shop_hd.py empacota fontes sem editar originais e registra mestres GPT
+Images em20texturas; source/.gdignore contém referências, brutos e prompts.
+GENERATION.json/catalog.json guardam origem, dimensão real1254×1254 de cada
+folha, hashes e recortes úteis. PNGs runtime são4× das janelas nativas, o que
+não significa4× detalhes gerados: a densidade útil varia por objeto.
+Cor/volume vêm da geração; alpha de cenário/molduras conserva a fonte.
+Mestres de botão permanecem fixos e variam brilho pelos quadros/relógios;
+gestos/desenhos específicos do flipbook original continuam no fallback.
+
+Export inclui explicitamente catalog.json/GENERATION.json da nova UI. O smoke
+deve executar fora do projeto com --path /private/tmp: FileAccess pode encontrar
+JSON solto no filesystem local mesmo ao usar --main-pack. Smoke isolado do
+PCK confirmou referências/brutos ausentes e todas as20texturasHD presentes.
+
+## Card/preço/efeito0.14.7
+
+ADR-067, REQ-20/38/39. ShopCardStyle divide a vertical em header, painel
+branco, sua borda inferior, faixa azul extraída da textura e acabamento
+inferior nativo (incluindo rebites). Preço é texto sobre essa composição;
+ColorRect sobreposto foi retirado. Card166×147 preservado, retrato126×66
+com aspecto constante e linha “Cosmético · sem bônus”. Tooltip explica que
+as melhorias de combate pertencem a Atributos; popup repete a informação.
+Catálogo C# não define bônus por peça; nenhum modificador foi inventado.
+
+## Fundo de preço nítido0.14.8
+
+ADR-068 substitui somente o preenchimento central da faixa0.14.7: em vez
+de ampliar a tira75..76 da imagem para27px de UI, ShopCardStyle desenha
+retângulo vetorial opaco RGB121/159/211 nesse destino. Demais recortes
+mantêm bordas branca/laterais/rebites. GPUFullHD e PCK real confirmam cor
+uniforme sem borrado; PNGs/mipmaps/arte dos retratos permanecem inalterados.

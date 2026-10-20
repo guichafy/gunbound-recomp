@@ -52,7 +52,7 @@ func run() -> void:
 		m.apply_weather({"type":"protection","extra":""})
 		check(m.actors[0].hp == 552, "Protection regen times1.5")
 		m.start(1,1,42,"","original",null,[],[[30,0,0,0,0,0,0,0],[0,0,20,0,0,0,0,0]])
-		m.blast(m.actors[1].pos,25,200,0,0,0)
+		m.blast(load("res://scripts/combat.gd").full_hit(m.actors[1], 25.0),25,200,0,0,0)
 		check(m.actors[1].hp == 880, "Live damage uses attack minus defense")
 		m.start(1,1,42,"","original",null,[],[[0,0,0,0,0,0,50,0]])
 		m.terrain.cells.fill(1)

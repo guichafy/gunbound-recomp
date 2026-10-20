@@ -18,7 +18,8 @@ var buttons: Array = []
 var lock_rect: TextureRect
 # Slot clicked during the other turn (used at the next own turn).
 var queued := -1
-# Slot used this turn; it leaves the bar at the next own turn.
+# Slot consumed on this own turn. It leaves the bar immediately; the flag
+# only remembers which button was used until the next GrantTurn.
 var removal := -1
 # EquippedButtonBar.Disable after a use, until the next own GrantTurn.
 var disabled_until_turn := false
@@ -57,12 +58,12 @@ func build(host, parent: Control) -> void:
 	parent.add_child(lock_rect)
 	layout(host)
 
-## Visible slots in bar order (used items leave at the next own turn).
+## Visible slots in bar order. A used item leaves as soon as it is consumed.
 func visible_slots(host) -> Array:
 	var result: Array = []
 	var items: Array = host.model.actors[Match.PLAYER].items
 	for slot in range(mini(items.size(), buttons.size())):
-		if not bool(items[slot].used) or slot == removal:
+		if not bool(items[slot].used):
 			result.append(slot)
 	return result
 
@@ -90,6 +91,7 @@ func press(host, slot: int) -> void:
 			removal = slot
 			queued = -1
 			disabled_until_turn = true
+			layout(host)
 		return
 	# Not this mobile's turn: toggle the activated face to use it at the turn start.
 	queued = -1 if queued == slot else slot
@@ -121,6 +123,7 @@ func sync(host) -> void:
 		if lock_rect != null:
 			lock_rect.visible = host.model.items_locked()
 		return
+	layout(host)
 	var items: Array = host.model.actors[Match.PLAYER].items
 	var locked := blocked(host)
 	var finished: bool = host.model.phase == "finished"

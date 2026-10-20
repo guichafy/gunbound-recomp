@@ -100,7 +100,7 @@ func run() -> void:
 		for point in right:
 			listed_b = listed_b or (is_equal_approx(point.x, b.x) and absf(point.y - b.y) < 80.0)
 		var ok: bool = model.map_id == Maps.DEFAULT and listed_a and listed_b
-		ok = ok and model.terrain.is_solid(a + Vector2(0, 26)) and model.terrain.is_solid(b + Vector2(0, 26))
+		ok = ok and model.terrain.is_solid(a + Vector2(0, model.stance_of(0) + 2.0)) and model.terrain.is_solid(b + Vector2(0, model.stance_of(1) + 2.0))
 		if not ok:
 			check(false, "Seed %d spawns on solid ground near its Map.cs point" % seed_value)
 	check(seen.size() >= 3, "Seeded matches draw different original spawns")
@@ -129,7 +129,8 @@ func run() -> void:
 
 	# Falling below the world eliminates (REQ-05).
 	model.start(1, 1, 9)
-	var foot: Vector2 = model.actors[1].pos + Vector2(0, 24)
+	model.wind = Vector2.ZERO
+	var foot: Vector2 = model.actors[1].pos + Vector2(0, model.stance_of(1))
 	for y in range(int(foot.y), 1820, 20):
 		model.terrain.carve(Vector2(foot.x, y), 60.0)
 	model.settle_actors()

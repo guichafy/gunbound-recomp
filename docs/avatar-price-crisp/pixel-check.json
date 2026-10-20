@@ -1,0 +1,40 @@
+{
+  "framebuffer": [
+    1920,
+    1080
+  ],
+  "sample_rect": [
+    750,
+    255,
+    900,
+    290
+  ],
+  "region": "Basic price center, excluding text and frame",
+  "before": {
+    "file": "docs/avatar-card-fix/shop.png",
+    "distinct_rgb_colors": 527
+  },
+  "after": {
+    "file": "docs/avatar-price-crisp/shop.png",
+    "distinct_rgb_colors": 1
+  },
+  "exported_pck": {
+    "version": "0.14.8",
+    "framebuffer": [
+      1280,
+      800
+    ],
+    "sample_rect": [
+      485,
+      185,
+      580,
+      200
+    ],
+    "distinct_rgb_colors": 1,
+    "rgb": [
+      121,
+      159,
+      211
+    ]
+  }
+}

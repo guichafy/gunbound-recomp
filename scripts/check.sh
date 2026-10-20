@@ -10,8 +10,8 @@ GODOT="${GODOT:-/Applications/Godot.app/Contents/MacOS/Godot}"
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$ROOT" || exit 2
 
-ALL="test_runner test_scene test_refinement test_refinement_scene test_bigfoot test_mage test_mage_scene test_bigfoot_attacks test_bigfoot_attacks_scene test_hd_assets test_mobile_animation test_pilot_projectiles test_roster test_map test_weather test_hud test_aiming test_performance test_items test_items_scene test_shop_items_integration test_avatar_catalog test_avatar_profile test_avatar_shop test_avatar_shop_classic test_avatar_art test_avatar_mount test_avatar_hd test_avatar_continuity test_attributes test_gold_rewards test_matches"
-QUICK="test_runner test_scene test_refinement test_refinement_scene test_bigfoot test_mage test_mage_scene test_bigfoot_attacks test_bigfoot_attacks_scene test_hd_assets test_mobile_animation test_pilot_projectiles test_roster test_map test_weather test_hud test_aiming test_performance test_items test_items_scene test_shop_items_integration test_avatar_catalog test_avatar_profile test_avatar_shop test_avatar_shop_classic test_avatar_art test_avatar_mount test_avatar_hd test_avatar_continuity test_attributes test_gold_rewards"
+ALL="test_runner test_scene test_refinement test_refinement_scene test_bigfoot test_mage test_mage_scene test_bigfoot_attacks test_bigfoot_attacks_scene test_hd_assets test_mobile_animation test_pilot_projectiles test_roster test_map test_weather test_hud test_aiming test_performance test_items test_items_scene test_shop_items_integration test_avatar_catalog test_avatar_profile test_avatar_shop test_avatar_shop_classic test_avatar_shop_parity test_shop_hd test_avatar_art test_avatar_mount test_avatar_hd test_avatar_continuity test_attributes test_gold_rewards test_mobile_parity test_nak test_matches"
+QUICK="test_runner test_scene test_refinement test_refinement_scene test_bigfoot test_mage test_mage_scene test_bigfoot_attacks test_bigfoot_attacks_scene test_hd_assets test_mobile_animation test_pilot_projectiles test_roster test_map test_weather test_hud test_aiming test_performance test_items test_items_scene test_shop_items_integration test_avatar_catalog test_avatar_profile test_avatar_shop test_avatar_shop_classic test_avatar_shop_parity test_shop_hd test_avatar_art test_avatar_mount test_avatar_hd test_avatar_continuity test_attributes test_gold_rewards test_mobile_parity test_nak"
 
 suites=""
 quick=0
@@ -43,7 +43,7 @@ for suite in $suites; do
 		continue
 	fi
 	log=".tools/check-logs/$suite.log"
-	output=$("$GODOT" --headless --path . --script "$script" 2>&1)
+	output=$("$GODOT" --headless --log-file "$ROOT/.tools/check-logs/$suite-engine.log" --path . --script "$script" 2>&1)
 	status=$?
 	printf '%s\n' "$output" >"$log"
 	summary=$(printf '%s\n' "$output" | grep -E 'CHECKS:|MATCHES:' | tail -1)

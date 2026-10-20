@@ -14,6 +14,7 @@ const Sound = preload("res://scripts/sound.gd")
 const BattleArt = preload("res://scripts/battle_art.gd")
 const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
 const MageSprite = preload("res://scripts/mage_sprite.gd")
+const NakSprite = preload("res://scripts/nak_sprite.gd")
 const Maps = preload("res://scripts/maps.gd")
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
@@ -34,6 +35,7 @@ var item_bar = ItemBar.new(item_art)
 var weather_art = WeatherArt.new()
 var mage = MageSprite.new()
 var bigfoot = BigfootSprite.new()
+var nak = NakSprite.new()
 var art = BattleArt.new()
 var ui = UIFactory.new()
 var model = Match.new()
@@ -148,6 +150,7 @@ func _ready() -> void:
 	background = load("res://assets/art/background.png")
 	sprites[1] = mage
 	sprites[2] = bigfoot
+	sprites[3] = nak
 	if profile == null:
 		profile = Profile.new()
 	profile.load_profile()
@@ -216,7 +219,8 @@ func show_menu() -> void:
 	vehicle_buttons.clear()
 	for slot in range(Match.PLAYABLE_VEHICLES.size()):
 		var index: int = Match.PLAYABLE_VEHICLES[slot]
-		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + slot * 186, 246), Vector2(178, 48), func(): select_vehicle(index))
+		# Three slots share the 364 px row, like the difficulty buttons below.
+		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + slot * 124, 246), Vector2(116, 48), func(): select_vehicle(index))
 		button.add_theme_font_size_override("font_size", 14)
 		vehicle_buttons.append(button)
 	vehicle_info = ui.label(card, "", Vector2(28, 303), Vector2(364, 50), 15, ui.MUTED)
@@ -595,7 +599,7 @@ func update_hud() -> void:
 		button.disabled = index == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER)
 		if bool(button.get_meta("activated")) != (index == weapon):
 			hud.style_button(button, index == weapon)
-	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = "%s: terceiro turno próprio; um uso por partida." % model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name
+	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = "%s: liberado no primeiro turno; depois do uso, volta em quatro turnos próprios." % model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name
 	var displayed_weapon: int = weapon if model.active == Match.PLAYER else int(cpu_plan.get("weapon", 0))
 	if model.phase == "finished":
 		queue_entries = []
@@ -742,6 +746,10 @@ func _draw() -> void:
 	draw_set_transform(offset)
 	for index in range(model.actors.size()):
 		art.draw_actor(self, model, index, offset, actor_context(index))
+		if art.motion[index].pose == "using_item":
+			var body = sprite_for(int(model.actors[index].vehicle))
+			if body != null:
+				item_art.draw_using(self, body, art.motion[index], int(model.actors[index].facing), offset)
 	hud.draw_world(self, model, offset, hud_state())
 	draw_set_transform(offset)
 	for projectile in model.projectiles:

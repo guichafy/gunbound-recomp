@@ -78,8 +78,13 @@ func run() -> void:
 	scene.update_hud()
 	check(scene.model.actors[0].turn_item == "dual" and is_equal_approx(float(scene.model.actors[0].ready) - ready_before, 80.0), "Clicking Dual uses it and charges 80")
 	check(scene.weapon == 1 and scene.weapon_buttons[2].disabled, "DisableSS: the selection moves to shot 2 and SS is disabled")
-	check(bar.buttons[0].get_meta("activated") and bar.buttons[1].disabled and bar.buttons[2].disabled, "Used button stays activated; the rest of the bar is disabled")
+	check(not bar.buttons[0].visible and not (0 in bar.visible_slots(scene)) and bar.buttons[1].position == origin, "Using Dual removes it from the slot and packs the bar")
+	check(bar.buttons[1].disabled and bar.buttons[2].disabled, "The rest of the bar stays disabled for this turn")
 	check(scene.art.state_name(scene.model, 0, false) == "using_item", "The mobile plays UsingItem")
+	for _step in range(6):
+		scene._process(0.1)
+	var aura_age := float(scene.art.motion[0].pose_age)
+	check(scene.art.motion[0].pose == "using_item" and scene.item_art.using_frame(aura_age) >= 8, "The UsingItem aura keeps playing on the mobile")
 	key(scene, KEY_F3)
 	check(scene.model.actors[0].items[2].used == false, "One item per turn, also by F-key")
 
@@ -104,8 +109,8 @@ func run() -> void:
 		if queued_checked and scene.model.phase == "aim" and scene.model.active == 0:
 			break
 	check(queued_checked and scene.model.active == 0, "The turn comes back to the player")
-	check(not (0 in bar.visible_slots(scene)) and bar.buttons.size() == 4 and not bar.buttons[0].visible, "The used Dual leaves the bar at the next own turn")
-	check(scene.model.actors[0].items[3].used and scene.model.actors[0].turn_item == "energy_up_1" and bar.removal == 3, "The queued Energy Up 1 is used at the turn start")
+	check(not bar.buttons[0].visible and not bar.buttons[3].visible, "Dual and the queued Energy Up stay off the bar once used")
+	check(scene.model.actors[0].items[3].used and scene.model.actors[0].turn_item == "energy_up_1" and bar.removal == 3, "The queued Energy Up 1 is used at the turn start and leaves its slot")
 	check(bar.buttons[1].position == origin, "Remaining buttons are packed from the bar start")
 
 	# Ignorance locks the bar with ITEM LOCKED.
@@ -159,6 +164,8 @@ func run() -> void:
 	var art = ItemArt.new()
 	check(art.textures["ItemDual.png"].get_width() == 292 * 3 and is_equal_approx(art.density("ItemDual.png"), 3.0) and is_equal_approx(art.density("MatchStatus.png"), 3.0), "HD item sprites are 3× the originals")
 	check(art.textures["TeleportBullet.png"].get_width() == 516 * 2 and art.textures.has("TeleportFlame.png"), "Teleport beacon and flame keyframes are 2× HD")
+	check(art.using_frame(0.0) == 0 and art.using_frame(10.0 / 19.0) == 10 and art.using_frame(5.0) == 19, "UsingItem samples 20 frames at 19 fps and holds the last")
+	check(art.using_textures["bigfoot"].get_width() == 129 * 4 * 5 and art.using_textures["mage"].get_height() == 150 * 4 * 4 and is_equal_approx(art.using_density("bigfoot"), 4.0), "UsingItem aura sheets are 4× HD")
 	check(art.textures["ItemDual.png"].get_image().has_mipmaps(), "HD UI item sprites are imported with mipmaps")
 	art.textures = art.originals.duplicate()
 	check(is_equal_approx(art.density("MatchStatus.png"), 1.0) and art.button_frame("dual", 3).region == Rect2(219, 0, 73, 36), "Originals keep the Button.cs rectangles")

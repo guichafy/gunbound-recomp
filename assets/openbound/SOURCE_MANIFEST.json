@@ -507,5 +507,93 @@
   "items/BlastTeleport.mp3": {
     "source": "Audio/SFX/Tank/Blast/Teleport.mp3",
     "sha256": "6619efff413006308fe52004f1a96a3da224e9453376842c24350fbc18240a5c"
+  },
+  "nak/ShootS1.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/NakS1.mp3",
+    "sha256": "89afb6588f66fcc3d513a0d2ab4de904a82477632732f62764137c8c3d903c11"
+  },
+  "nak/BlastS1.mp3": {
+    "source": "Audio/SFX/Tank/Blast/NakS1.mp3",
+    "sha256": "ca1a2bbc61a12e07438f62b7d8615babc0aa8a6bdadea77221d4c6c05eff8f0b"
+  },
+  "hud/CrosshairNakS1Ally.png": {
+    "source": "Interface/InGame/HUD/Crosshair/NakS1Ally.png",
+    "sha256": "d8643286f4b676272faabfcf1b7c69a5686bafbf87b06adb02939c31d978238c"
+  },
+  "hud/CrosshairNakS1Enemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/NakS1Enemy.png",
+    "sha256": "6417561b8b46b12062b9ae588c6b80b77136e303b38e436bbdd345173cf4b232"
+  },
+  "nak/ShootS2.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/NakS2.mp3",
+    "sha256": "d9b2a687cea7772194e040c4d3acf68fcbee1cc795d547a78e619041d25b12c8"
+  },
+  "nak/BlastS2.mp3": {
+    "source": "Audio/SFX/Tank/Blast/NakS2.mp3",
+    "sha256": "c19df36165f55cffff2e3eda20544f85c7dcf7bbf1af69e8520379efb94a3e15"
+  },
+  "hud/CrosshairNakS2Ally.png": {
+    "source": "Interface/InGame/HUD/Crosshair/NakS2Ally.png",
+    "sha256": "d8643286f4b676272faabfcf1b7c69a5686bafbf87b06adb02939c31d978238c"
+  },
+  "hud/CrosshairNakS2Enemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/NakS2Enemy.png",
+    "sha256": "6417561b8b46b12062b9ae588c6b80b77136e303b38e436bbdd345173cf4b232"
+  },
+  "nak/ShootSS.mp3": {
+    "source": "Audio/SFX/Tank/Shoot/NakSS.mp3",
+    "sha256": "89afb6588f66fcc3d513a0d2ab4de904a82477632732f62764137c8c3d903c11"
+  },
+  "nak/BlastSS.mp3": {
+    "source": "Audio/SFX/Tank/Blast/NakSS.mp3",
+    "sha256": "ca1a2bbc61a12e07438f62b7d8615babc0aa8a6bdadea77221d4c6c05eff8f0b"
+  },
+  "hud/CrosshairNakSSAlly.png": {
+    "source": "Interface/InGame/HUD/Crosshair/NakSSAlly.png",
+    "sha256": "d8643286f4b676272faabfcf1b7c69a5686bafbf87b06adb02939c31d978238c"
+  },
+  "hud/CrosshairNakSSEnemy.png": {
+    "source": "Interface/InGame/HUD/Crosshair/NakSSEnemy.png",
+    "sha256": "6417561b8b46b12062b9ae588c6b80b77136e303b38e436bbdd345173cf4b232"
+  },
+  "nak/RiderPivot.json": {
+    "source": "OpenBound/ContentMetadata/Mobile/Nak/RiderPivot.json (fork C#)",
+    "sha256": "5e5583b7bebe91ae96a4afc96766c8316c9f2443877d8a4d523c3611403721d9"
+  },
+  "nak/CharacterSpritesheet.png": {
+    "source": "TestClient/graphics.xfs:tank3.img",
+    "sha256": "affcd00f8fc936978bf57565315adcd7f72e2ba006e4f005c319b1d55966c43f"
+  },
+  "nak/Bullet1.png": {
+    "source": "TestClient/graphics.xfs:bullet3n.img",
+    "sha256": "7b2d6f2281ab0813f450c815726f6212cb6dfe081dfff81dc853bdd459efdf64"
+  },
+  "nak/Bullet1Light.png": {
+    "source": "TestClient/graphics.xfs:bullet3nl.img",
+    "sha256": "3c43096bcce26c5553fe9c6b671a933d248ef5f809983459930dbe9f1cb068f0"
+  },
+  "nak/Bullet2.png": {
+    "source": "TestClient/graphics.xfs:bullet3s.img",
+    "sha256": "5f266331a957bbc07f74048123d6334b11b3907f66a6ca4f1b990ec70e12a2c7"
+  },
+  "nak/Bullet2Light.png": {
+    "source": "TestClient/graphics.xfs:bullet3sl.img",
+    "sha256": "2d852063bc9bdcb2ac844aa2da4940536c6fb9bd4c758b5ca1c75d86cd152c89"
+  },
+  "nak/Bullet3.png": {
+    "source": "TestClient/graphics.xfs:bullet3pl.img",
+    "sha256": "8f337e20128c08d8c5d1b4834146a77b4f41becd1d324cda1b6ceb340fa410b0"
+  },
+  "nak/Flame1.png": {
+    "source": "TestClient/graphics.xfs:flame31.img",
+    "sha256": "ec614b307c02328820967e7cf711a4b25bf13c00568700855ed8091aca592dab"
+  },
+  "nak/Flame2.png": {
+    "source": "TestClient/graphics.xfs:flame32.img",
+    "sha256": "ec614b307c02328820967e7cf711a4b25bf13c00568700855ed8091aca592dab"
+  },
+  "nak/Flame3.png": {
+    "source": "TestClient/graphics.xfs:ssflame3.img",
+    "sha256": "b4bacd16d2ac3536e72ee1ab74d211b4df64a1c3142f5d266f53d165d53e5de5"
   }
 }

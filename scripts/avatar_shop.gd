@@ -1,6 +1,10 @@
 extends Control
 ## Original 800x600 Shop, fit uniformly into the current viewport.
 const Assets := "res://assets/openbound/shop/"
+const ShopHD = preload("res://scripts/shop_hd.gd")
+const CardStyle = preload("res://scripts/shop_card_style.gd")
+var hd = ShopHD.new()
+var use_hd := true
 const AvatarArt = preload("res://scripts/avatar_art.gd")
 var avatar_art = AvatarArt.new()
 const Attributes = preload("res://scripts/player_attributes.gd")
@@ -40,16 +44,25 @@ var gender_button: Button
 var gift_button
 var attributes_feedback: Label
 const CARD_SIZE := Vector2(166,147)
-const PORTRAIT_SIZE := Vector2(126,78)
+const PORTRAIT_SIZE := Vector2(126,66)
 const CASH_COLOR := Color("8bddff")
 const GOLD_COLOR := Color("ffe34e")
+# AttributeMenu.AddAttributePoints, original 6-column ButtonIcons sheet.
+const ATTRIBUTE_ICONS := [13,17,15,23,9,19,21,11]
 func texture(path: String):
+	if use_hd:
+		var derived = hd.texture(path)
+		if derived != null:
+			return derived
 	if not texture_cache.has(path):
 		texture_cache[path] = load(Assets + path + ".png")
 	return texture_cache[path]
+func density(path: String) -> float:
+	return 4.0 if use_hd and hd.texture(path) != null else 1.0
 func atlas(path: String, cell: Vector2, frame: int) -> AtlasTexture:
 	var result := AtlasTexture.new()
 	result.atlas = texture(path)
+	cell *= density(path)
 	var columns := int(result.atlas.get_width() / cell.x)
 	result.region = Rect2(Vector2(frame % columns, int(frame / columns)) * cell, cell)
 	return result
@@ -88,6 +101,9 @@ func button(parent: Node, text: String, pos: Vector2, size: Vector2, action: Cal
 func sprite_button(parent: Node, path: String, cell: Vector2, pos: Vector2, action: Callable, normal: int = 0, hover: int = 1, pressed: int = 2, disabled: int = -1) -> TextureButton:
 	var node := TextureButton.new()
 	node.position = pos
+	node.ignore_texture_size = true
+	node.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	node.size = cell
 	node.texture_normal = atlas(path,cell,normal)
 	node.texture_hover = atlas(path,cell,hover)
 	node.texture_pressed = atlas(path,cell,pressed)
@@ -99,6 +115,7 @@ func animated_button(path: String, cell: Vector2, pos: Vector2, text: String, ac
 	var node = sprite_button(content,"AnimatedButtons/AvatarShop/"+path,cell,pos,action,normal,0,click_start,disabled)
 	label(node,text,Vector2(-5,cell.y-15),Vector2(cell.x+10,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	animated.append({"node":node,"path":"AnimatedButtons/AvatarShop/"+path,"cell":cell,"normal":normal,"hover_end":hover_end,"click_start":click_start,"click_end":click_end,"disabled":disabled,"active":active,"selected":false,"age":0.0,"state":0})
+	track_click(animated.back())
 	return node
 func setup(owner, shop_model) -> void:
 	host = owner
@@ -177,7 +194,12 @@ func general_button(path: String, cell: Vector2, pos: Vector2, text: String, act
 	var node = sprite_button(content,"AnimatedButtons/"+path,cell,pos,action,normal,0,click_start,disabled)
 	label(node,text,Vector2(0,cell.y-12),Vector2(cell.x,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	animated.append({"node":node,"path":"AnimatedButtons/"+path,"cell":cell,"normal":normal,"hover_end":hover_end,"click_start":click_start,"click_end":click_end,"disabled":disabled,"active":-1,"selected":false,"age":0.0,"state":0})
+	track_click(animated.back())
 	return node
+
+func track_click(entry: Dictionary) -> void:
+	entry.click_age = -1.0
+	entry.node.pressed.connect(func(): entry.click_age = 0.0)
 
 func toggle_gender() -> void:
 	if model.profile.set_gender(1-model.profile.gender):
@@ -208,7 +230,8 @@ func build_attributes() -> void:
 	var attr_names := ["Ataque","Vida","Defesa","Regen.","Atraso tiro","Atraso item","Cratera","Gold %"]
 	for i in range(8):
 		var pos := Vector2(16+(i%2)*166,80+int(i/2)*25)
-		label(box,attr_names[i],pos,Vector2(84,22),11)
+		icon(box,atlas("StaticButtons/AvatarShop/AvatarButton/ButtonIcons",Vector2(26,17),ATTRIBUTE_ICONS[i]),pos+Vector2(0,3),Vector2(17,14)).name = "AttributeIcon%d" % i
+		label(box,attr_names[i],pos+Vector2(20,0),Vector2(65,22),10)
 		remove_buttons.append(button(box,"−",pos+Vector2(85,0),Vector2(22,22),func(): adjust(i,-1)))
 		attribute_labels.append(label(box,"0",pos+Vector2(110,0),Vector2(25,22),11))
 		add_buttons.append(button(box,"+",pos+Vector2(135,0),Vector2(22,22),func(): adjust(i,1)))
@@ -344,31 +367,26 @@ func refresh(category: int, page: int) -> void:
 		)
 		for state in ["normal","hover","pressed","focus","disabled"]:
 			var frame := 2 if model.selected_key == item.key or state=="pressed" else (1 if state=="hover" else 0)
-			var style := StyleBoxTexture.new()
-			style.texture = atlas("StaticButtons/AvatarShop/AvatarButton/Background",Vector2(105,83),frame)
-			style.texture_margin_left = 6
-			style.texture_margin_top = 22
-			style.texture_margin_right = 6
-			style.texture_margin_bottom = 6
+			var path := "StaticButtons/AvatarShop/AvatarButton/Background"
+			var style = CardStyle.new(atlas(path,Vector2(105,83),frame),density(path))
 			card.add_theme_stylebox_override(state,style)
 		card.size = CARD_SIZE
 		card.name = "Avatar"+str(index)
-		card.tooltip_text = item.name
+		card.tooltip_text = item.name+"\nEste avatar muda a aparência, sem bônus de combate.\nMelhorias de combate são definidas em Atributos."
 		icon(card,category_icon(category),Vector2(5,2),Vector2(16,12))
 		label(card,str(item.name).left(20),Vector2(24,2),Vector2(137,16),11)
 		var portrait_texture = avatar_art.hd.portrait(item.key)
 		if portrait_texture == null:
 			portrait_texture = load(item.portrait)
-		var portrait := icon(card,portrait_texture,Vector2(20,28),PORTRAIT_SIZE)
+		var portrait := icon(card,portrait_texture,Vector2(20,26),PORTRAIT_SIZE)
 		portrait.name = "Portrait"
 		portrait.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		card.clip_contents = true
-		var footer := ColorRect.new()
-		footer.position = Vector2(9,115)
-		footer.size = Vector2(148,27)
-		footer.color = Color("6296b3")
-		footer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		card.add_child(footer)
+		var effect := label(card,"Cosmético · sem bônus",Vector2(13,94),Vector2(140,13),9)
+		effect.name = "AvatarEffect"
+		effect.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		effect.add_theme_color_override("font_color",Color("395070"))
+		effect.add_theme_constant_override("outline_size",0)
 		var cash := int(item.get("cash_price",0))
 		var gold := int(item.get("gold_price",0))
 		var cash_text := format_number(cash)+"  Cash" if cash>0 else ""
@@ -422,21 +440,30 @@ func open_buy() -> void:
 	dim.size = modal.size
 	modal.add_child(dim)
 	var box := TextureRect.new()
-	box.texture = texture("Popup/Blue/Avatar/Buy")
-	box.position = Vector2(640,400)-box.texture.get_size()*0.8
-	box.size = box.texture.get_size()*1.6
+	box.name = "PurchasePanel"
 	box.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	box.texture = texture("Popup/Blue/Avatar/Buy")
+	box.position = Vector2(640,400)-Vector2(228,286)*0.8
+	box.size = Vector2(228,286)*1.6
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	modal.add_child(box)
-	label(modal,item.name,Vector2(490,256),Vector2(300,35),19).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label(modal,"Confirmar compra?",Vector2(490,330),Vector2(300,30),18).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	for currency in ["gold","cash"]:
+	label(modal,item.name,Vector2(490,220),Vector2(300,28),17).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var portrait_texture = avatar_art.hd.portrait(purchase_key)
+	if portrait_texture == null:
+		portrait_texture = load(item.portrait)
+	icon(modal,portrait_texture,Vector2(582,252),Vector2(116,72)).name = "PurchasePortrait"
+	label(modal,["Cabeça","Corpo","Óculos","Bandeira"][int(item.category)]+" · cosmético, sem bônus",Vector2(490,321),Vector2(300,20),12).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label(modal,"Confirmar compra?",Vector2(490,343),Vector2(300,26),17).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var currencies: Array = ["gold","cash"].filter(func(currency): return int(item.get(currency+"_price",0))>0)
+	for index in range(currencies.size()):
+		var currency: String = currencies[index]
 		var price := int(item.get(currency+"_price",0))
 		if price <= 0:
 			continue
 		var balance: int = model.profile.gold if currency == "gold" else model.profile.cash
-		var x := 500 if currency == "gold" else 650
-		label(modal,"%s\n%d → %d" % [currency.capitalize(),balance,balance-price],Vector2(x,378),Vector2(145,60),16)
+		var x := 570 if currencies.size()==1 else 495+index*150
+		var color := GOLD_COLOR if currency=="gold" else CASH_COLOR
+		label(modal,"%s · %s\n%s → %s" % [currency.capitalize(),format_number(price),format_number(balance),format_number(balance-price)],Vector2(x,378),Vector2(145,60),14).add_theme_color_override("font_color",color)
 		var b = button(modal,"Pagar "+currency.capitalize(),Vector2(x,455),Vector2(140,35),func():
 			if not is_instance_valid(modal):
 				return
@@ -476,22 +503,48 @@ func _process(delta: float) -> void:
 	elapsed += delta
 	for entry in animated:
 		var node = entry.node
-		var state := 3 if node.disabled else (2 if node.is_pressed() else (1 if node.is_hovered() else 0))
+		var state := 3 if node.disabled else (1 if node.is_hovered() else 0)
+		if state==3:
+			entry.click_age = -1.0
+		elif float(entry.click_age)>=0.0:
+			entry.click_age += delta
+			var duration: float = (int(entry.click_end)-int(entry.click_start)+1)/animation_fps(entry,2)
+			if float(entry.click_age)<duration:
+				state = 2
+			else:
+				entry.click_age = -1.0
+				state = 0
 		entry.age = 0.0 if state != entry.state else float(entry.age)+delta
 		entry.state = state
-		var frame := int(entry.normal)
-		if state == 3:
-			frame = entry.disabled
-		elif state == 2:
-			frame = mini(int(entry.click_end),int(entry.click_start)+int(entry.age*30.0))
-		elif state == 1:
-			frame = int(entry.age*30.0) % (int(entry.hover_end)+1)
-		elif entry.selected and int(entry.active)>=0:
-			frame = entry.active
+		var frame := animation_frame(entry,state,entry.click_age if state==2 else entry.age)
 		node.texture_normal = atlas(entry.path,entry.cell,frame)
 		node.texture_hover = node.texture_normal
 		node.texture_pressed = node.texture_normal
 	painter.queue_redraw()
+func animation_fps(entry: Dictionary, state: int) -> float:
+	var name: String = entry.path.get_file()
+	return (23.0 if state==1 else 25.0) if name=="Exit" else (28.0 if name in ["LeftArrow","RightArrow"] else 30.0)
+func animation_frame(entry: Dictionary, state: int, age: float) -> int:
+	var name: String = entry.path.get_file()
+	if state==3:
+		return int(entry.disabled)
+	if entry.selected and int(entry.active)>=0:
+		return int(entry.active)
+	if state in [1,2]:
+		var start: int = (1 if name in ["LeftArrow","RightArrow"] else 0) if state==1 else int(entry.click_start)
+		var end: int = int(entry.hover_end) if state==1 else int(entry.click_end)
+		var fps := animation_fps(entry,state)
+		var step := int(maxf(0.0,age)*fps)
+		var count := end-start+1
+		if state==2:
+			# AnimatedButton queues Normal behind Clicked, including Buy's Cycle.
+			return start+step if step<count else int(entry.normal)
+		if name in ["Buy","Try"]:
+			# OpenBound Cycle is ping-pong, with a repeated frame at both ends.
+			var phase := step%(2*count)
+			return start+(phase if phase<count else 2*count-1-phase)
+		return start+step%count
+	return int(entry.active) if entry.selected and int(entry.active)>=0 else int(entry.normal)
 func format_number(value: int) -> String:
 	var text := str(value)
 	var result := ""
@@ -502,14 +555,14 @@ func format_number(value: int) -> String:
 	return result
 
 func paint(view: Node2D) -> void:
-	var background = texture("InGame/Scene/AvatarShop/Background")
 	# Reuse only the source's sky/divider/city; its baked 5x5 pane is superseded.
 	view.draw_rect(Rect2(0,0,225,600),Color("b2c6e0"))
-	view.draw_texture_rect_region(background,Rect2(0,520,225,80),Rect2(0,520,225,80))
-	view.draw_texture_rect_region(background,Rect2(225,0,20,600),Rect2(225,0,20,600))
+	draw_region(view,"InGame/Scene/AvatarShop/Background",Rect2(0,520,225,80),Rect2(0,520,225,80))
+	draw_region(view,"InGame/Scene/AvatarShop/Background",Rect2(225,0,20,600),Rect2(225,0,20,600))
 	view.draw_rect(Rect2(245,0,555,600),Color("4e90cf"))
-	view.draw_texture_rect_region(background,Rect2(245,0,555,480),Rect2(245,0,555,28))
-	view.draw_texture_rect_region(background,Rect2(245,520,555,80),Rect2(245,520,555,80))
+	# Crisp code-native sky; raster city and divider are registered HD derivatives.
+	view.draw_rect(Rect2(245,0,555,480),Color("4e90cf"))
+	draw_region(view,"InGame/Scene/AvatarShop/Background",Rect2(245,520,555,80),Rect2(245,520,555,80))
 	view.draw_style_box(panel_style(Color("43577e")),Rect2(8,203,224,317))
 	view.draw_style_box(panel_style(Color("8daccc")),Rect2(8,5,211,171))
 	view.draw_texture_rect(texture("InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background"),Rect2(13,10,201,100),false)
@@ -521,8 +574,8 @@ func paint(view: Node2D) -> void:
 	var values: Array = model.profile.attributes
 	for i in range(8):
 		var pos := Vector2(40+(i%4)*43,112+int(i/4)*15)
-		var icon_index: int = [9,17,10,11,14,15,12,16][i]
-		view.draw_texture_rect_region(texture("StaticButtons/AvatarShop/AvatarButton/ButtonIcons"),Rect2(pos,Vector2(16,11)),Rect2(Vector2(icon_index%6,int(icon_index/6))*Vector2(26,17),Vector2(26,17)))
+		var icon_index: int = ATTRIBUTE_ICONS[i]
+		draw_region(view,"StaticButtons/AvatarShop/AvatarButton/ButtonIcons",Rect2(pos,Vector2(16,11)),Rect2(Vector2(icon_index%6,int(icon_index/6))*Vector2(26,17),Vector2(26,17)))
 		view.draw_string_outline(font,pos+Vector2(16,10),"%02d" % int(values[i]),HORIZONTAL_ALIGNMENT_LEFT,-1,9,1,Color.BLACK)
 		view.draw_string(font,pos+Vector2(16,10),"%02d" % int(values[i]),HORIZONTAL_ALIGNMENT_LEFT,-1,9,Color.WHITE)
 	for i in range(2):
@@ -530,6 +583,10 @@ func paint(view: Node2D) -> void:
 		var pos := Vector2(211-font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,11).x,153+i*14)
 		view.draw_string_outline(font,pos,text,HORIZONTAL_ALIGNMENT_LEFT,-1,11,2,Color("213148"))
 		view.draw_string(font,pos,text,HORIZONTAL_ALIGNMENT_LEFT,-1,11,CASH_COLOR if i==0 else GOLD_COLOR)
+
+func draw_region(view: Node2D, path: String, target: Rect2, source: Rect2) -> void:
+	var factor := density(path)
+	view.draw_texture_rect_region(texture(path),target,Rect2(source.position*factor,source.size*factor))
 
 func block_controls(node: Node, except_node: Node = null) -> void:
 	if node == except_node:
