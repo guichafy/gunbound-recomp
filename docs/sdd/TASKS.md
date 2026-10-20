@@ -43,6 +43,18 @@
 - [x] App/ZIP0.14.9 reexportados, versão conferida e assinatura estrita válida.
 - [ ] Usuário validar layout/fluxos no aplicativo atualizado.
 
+## Nak 0.15 (ADR-074)
+
+- [x] Catálogo ID 3 com dados do fork (HP, mira, delays, sons, miras, RiderPivot).
+- [x] Leitor próprio do cliente original; correção dos blocos LZHUF de 4 KB.
+- [x] Arte, flipbook (`tank3.epa`), projéteis e explosões originais importados.
+- [x] Dano/raio do characterdata; S2 subterrâneo e SS fantasma revertidos do cliente.
+- [x] Menu com três mobiles, miras do HUD, partidas 91–93 e test_nak (55 checks).
+- [x] Captura GPU em docs/nak (stills, MP4 60 fps, GIF ampliado).
+- [ ] Arte HD do Nak (skill gunbound-classic-hd), adiada pelo usuário.
+- [ ] Usuário validar sensação de S2/SS e encaixe do piloto no app.
+- [ ] Reexportar o app (agora 0.16.0) quando o usuário pedir a entrega.
+
 ## Paridade Mage/Bigfoot com o C# (ADR-066)
 
 - [x] Regeneração de escudo em todos os mobiles a cada turno, com teto do C#.

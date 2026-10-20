@@ -119,3 +119,20 @@ Catálogo normalizado conserva preços/IDs/pivôs da DatabaseSeed original.
 assets/openbound/avatars/manifest.json lista os caminhos fonte e SHA-256 dos
 80 arquivos copiados, com pixels intactos. Não são derivados GPT Images.
 Regras portadas do código OpenBound GPL-3.0-or-later, Copyright2020 Carlos H.M.S.
+
+## Nak (0.15)
+
+O fork OpenBound não tem arte nem classe do Nak. Copiados sem edição do fork:
+`nak/RiderPivot.json` (`ContentMetadata/Mobile/Nak`), `nak/Shoot{S1,S2,SS}.mp3`,
+`nak/Blast{S1,S2,SS}.mp3` e `hud/CrosshairNak{S1,S2,SS}{Ally,Enemy}.png`.
+Sprites do cliente original GunBound Thor's Hammer (Softnyx), `TestClient/graphics.xfs`
+de [jglim/gunbound-launcher](https://github.com/jglim/gunbound-launcher), extraídos
+por `scripts/import_nak_assets.py` com leitor próprio; formato documentado por
+[colemancda/GunBound-Decomp](https://github.com/colemancda/GunBound-Decomp):
+`nak/CharacterSpritesheet.png` (`tank3.img`), `nak/Bullet1.png` (`bullet3n`),
+`nak/Bullet1Light.png` (`bullet3nl`), `nak/Bullet2.png` (`bullet3s`),
+`nak/Bullet2Light.png` (`bullet3sl`), `nak/Bullet3.png` (`bullet3pl`),
+`nak/Flame1/2/3.png` (`flame31`, `flame32`, `ssflame3`). Pixels intactos, só
+reposicionados em células pelo hotspot de cada quadro; `nak/frames.json` guarda
+células, origens e o `tank3.epa`. Hashes em `SOURCE_MANIFEST.json` (`nak/…`).
+Recursos visuais de Gunbound, atribuídos a seus titulares; uso local de protótipo.

@@ -19,7 +19,11 @@ func register_avatar(native_origin: Vector2, contact_offset: float, native_hull:
 	avatar_registered = true
 func avatar_transform(state: Dictionary) -> Transform2D:
 	return Transform2D(state.body_angle,state.body_offset) * avatar_mount * Transform2D(state.pilot_angle,Vector2.ZERO)
+## Only Bigfoot and Mage have approved HD parts; other mobiles keep their original atlas.
+const HD_KINDS := ["bigfoot", "mage"]
 func available() -> bool:
+	if kind not in HD_KINDS:
+		return false
 	if not sheet.available() or not sheet.catalog_valid or not pilot.available() or not pilot.catalog_valid:
 		return false
 	var row := 0 if kind == "bigfoot" else 1

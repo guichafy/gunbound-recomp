@@ -14,6 +14,7 @@ const Sound = preload("res://scripts/sound.gd")
 const BattleArt = preload("res://scripts/battle_art.gd")
 const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
 const MageSprite = preload("res://scripts/mage_sprite.gd")
+const NakSprite = preload("res://scripts/nak_sprite.gd")
 const Maps = preload("res://scripts/maps.gd")
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
@@ -34,6 +35,7 @@ var item_bar = ItemBar.new(item_art)
 var weather_art = WeatherArt.new()
 var mage = MageSprite.new()
 var bigfoot = BigfootSprite.new()
+var nak = NakSprite.new()
 var art = BattleArt.new()
 var ui = UIFactory.new()
 var model = Match.new()
@@ -148,6 +150,7 @@ func _ready() -> void:
 	background = load("res://assets/art/background.png")
 	sprites[1] = mage
 	sprites[2] = bigfoot
+	sprites[3] = nak
 	if profile == null:
 		profile = Profile.new()
 	profile.load_profile()
@@ -216,7 +219,8 @@ func show_menu() -> void:
 	vehicle_buttons.clear()
 	for slot in range(Match.PLAYABLE_VEHICLES.size()):
 		var index: int = Match.PLAYABLE_VEHICLES[slot]
-		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + slot * 186, 246), Vector2(178, 48), func(): select_vehicle(index))
+		# Three slots share the 364 px row, like the difficulty buttons below.
+		var button := ui.button(card, Match.VEHICLES[index].name, Vector2(28 + slot * 124, 246), Vector2(116, 48), func(): select_vehicle(index))
 		button.add_theme_font_size_override("font_size", 14)
 		vehicle_buttons.append(button)
 	vehicle_info = ui.label(card, "", Vector2(28, 303), Vector2(364, 50), 15, ui.MUTED)

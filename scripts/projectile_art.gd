@@ -7,6 +7,8 @@ func _init() -> void:
 	sheet = Sheet.new("res://assets/hd/projectile_heads.png", 3, 2)
 	flames = Sheet.new("res://assets/hd/shots.png", 4, 6)
 func available(kind: String) -> bool:
+	if kind not in ["bigfoot", "mage"]:
+		return false
 	if not sheet.available() or not sheet.catalog_valid:
 		return false
 	if kind == "bigfoot":

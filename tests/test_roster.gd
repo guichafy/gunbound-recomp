@@ -11,19 +11,21 @@ func _initialize() -> void:
 func run() -> void:
 	var Match = load("res://scripts/match.gd")
 	var model = Match.new()
-	check(model.VEHICLES.size() == 2, "Roster contains only the two Gunbound mobiles")
-	for chosen in [1, 2]:
+	# Nak (ID 3, ADR-074) joins Mage and Bigfoot; the CPU pairs stay 1↔2 and Nak meets Mage.
+	var opponents := {1: 2, 2: 1, 3: 1}
+	check(model.VEHICLES.size() == 3, "Roster contains Mage, Bigfoot and Nak")
+	for chosen in [1, 2, 3]:
 		model.start(chosen, 1, 42)
-		check(model.actors[0].vehicle == chosen and model.actors[1].vehicle == 3 - chosen, "Choosing either mobile spawns the other as CPU")
+		check(model.actors[0].vehicle == chosen and model.actors[1].vehicle == opponents[chosen], "Each mobile meets its fixed CPU opponent")
 		check(model.actors[0].hp == (760 if chosen == 1 else 1100), "Stable IDs retain mobile life")
 		model.actors[0].turns = 3
 		for weapon in [0, 1, 2]:
 			model.phase = "aim"
 			model.actors[0].special_used = false
 			check(model.fire(30, 65, weapon), "Both mobiles retain all three attacks")
-			check(model.projectiles.size() == ([1, 2, 1][weapon] if chosen == 1 else [4, 6, 8][weapon]), "Attack uses its own mobile emitter")
+			check(model.projectiles.size() == {1: [1, 2, 1], 2: [4, 6, 8], 3: [1, 1, 1]}[chosen][weapon], "Attack uses its own mobile emitter")
 	for invalid in [0, -1, 99]:
-		if model.VEHICLES.size() == 2:
+		if model.VEHICLES.size() == 3:
 			model.start(invalid, 1, 42)
 			check(model.actors[0].vehicle == 2 and model.actors[1].vehicle == 1, "Removed/invalid ID normalizes to Bigfoot rather than resurrecting a vehicle")
 	var view = load("res://scenes/main.tscn").instantiate()
@@ -31,15 +33,17 @@ func run() -> void:
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
-	check(view.vehicle_buttons.size() == 2, "Menu displays only Mage and Bigfoot")
-	for id in [1, 2]:
+	check(view.vehicle_buttons.size() == 3, "Menu displays Mage, Bigfoot and Nak")
+	for button in view.vehicle_buttons:
+		check(button.position.x + button.size.x <= 392.0, "Vehicle button %s fits the menu card" % button.text)
+	for id in [1, 2, 3]:
 		view.show_menu()
 		for button in view.vehicle_buttons:
-			if button.text == ("Mage" if id == 1 else "Bigfoot"):
+			if button.text == {1: "Mage", 2: "Bigfoot", 3: "Nak"}[id]:
 				button.pressed.emit()
 		check(view.vehicle == id, "Button slot dispatches stable mobile ID")
 		view.start_match()
-		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == 3 - id, "Menu selection starts the correct duel")
+		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == opponents[id], "Menu selection starts the correct duel")
 	view.show_menu()
 	# Difficulty and weapons have three slots even though the roster has two.
 	var card = view.vehicle_buttons[0].get_parent()
@@ -48,7 +52,7 @@ func run() -> void:
 			if child is Button and child.text == label:
 				child.pressed.emit()
 		check(view.cpu_difficulty == ["Leve", "Normal", "Precisa"].find(label), "Difficulty slots stay independent of roster")
-	if view.vehicle_buttons.size() == 2:
+	if view.vehicle_buttons.size() == 3:
 		view.select_vehicle(0)
 		check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
 	var Rig = load("res://scripts/mobile_rig.gd")

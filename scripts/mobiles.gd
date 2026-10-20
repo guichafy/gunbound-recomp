@@ -1,11 +1,11 @@
 extends RefCounted
-## Playable mobiles. IDs stay 1 (Mage) and 2 (Bigfoot). Removed ID 0 is absent.
+## Playable mobiles. IDs stay 1 (Mage), 2 (Bigfoot) and 3 (Nak). Removed ID 0 is absent.
 ## Combat reads this catalog; it does not branch on the numeric id.
 
 const Attributes = preload("res://scripts/player_attributes.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 
-const PLAYABLE := [1, 2]
+const PLAYABLE := [1, 2, 3]
 const DEFAULT_ID := 2
 const SPECIAL := 2
 # NetworkObjectParameters.SSCooldownTimer + 1, applied when the SS is fired.
@@ -17,6 +17,19 @@ const MAGE_WEAPONS := [
 	{"name": "EMP", "damage": 200.0, "radius": 25.0, "delay": 1300.0 / 7.5, "count": 1, "helix": 0.0, "emp": 100.0, "color": Color("b6adff")}
 ]
 const MAGE_AIM := [Vector2(15, 50), Vector2(15, 50), Vector2(15, 50)]
+
+# Nak (ADR-074). The fork only has MobileMetadata, AimPresets and DelayPresets.
+# Damage is the first per-shot value of the original characterdata.dat record 2
+# and the radius half of the second (same reading that matches Bigfoot); the
+# flight rules come from the original client's Bullet3 classes (NAK_0_15.md).
+# "burrow": the shell enters the ground and explodes where it resurfaces.
+# "ghost": the shell crosses terrain and only collides with mobiles.
+const NAK_WEAPONS := [
+	{"name": "Esfera", "damage": 200.0, "radius": 30.0, "delay": 760.0 / 7.5, "count": 1, "color": Color("f0a060")},
+	{"name": "Bomba de oscilação", "damage": 350.0, "radius": 35.0, "delay": 910.0 / 7.5, "count": 1, "burrow": true, "color": Color("d0d0d8")},
+	{"name": "Mini Nak", "damage": 360.0, "radius": 35.0, "delay": 1310.0 / 7.5, "count": 1, "ghost": true, "color": Color("e8743a")}
+]
+const NAK_AIM := [Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)]
 
 const DEFINITIONS := {
 	1: {
@@ -38,6 +51,16 @@ const DEFINITIONS := {
 		"spread_after_clamp": true, "generic_trail": true, "shot_sound_on": "projectile_launch",
 		"death": 1.15, "hurt": 1.05, "special": SPECIAL,
 		"summary": "T1: 4 bombas · T2: 6 · SS: 8 bombas."
+	},
+	3: {
+		"name": "Nak", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("f2a65a"),
+		"shield": 0, "shield_regen": 0, "hp_regen": 0, "protection": 35,
+		"box": Vector2(46, 30), "box_offset": Vector2(0, 10), "stance": 25.0,
+		"beacon_delay": 0.0, "smoke": false, "bionic": false,
+		"weapons": NAK_WEAPONS, "aim_limits": NAK_AIM,
+		"spread_after_clamp": false, "generic_trail": false, "shot_sound_on": "fire",
+		"death": 1.15, "hurt": 1.05, "special": SPECIAL,
+		"summary": "S2 cava e emerge · SS atravessa o chão."
 	}
 }
 
