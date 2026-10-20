@@ -56,7 +56,11 @@ func run() -> void:
 	check(scene.VIEW_SIZE == Vector2(1280, 664) and is_equal_approx(732.0 - 85.0 * 1.6 * 0.5, 664.0), "World view ends where the 1280×136 action bar starts")
 	for name in hud.textures:
 		var factor: float = hud.density(name)
-		check(is_equal_approx(factor, 3.0), "%s uses the 3× HD sprite" % name)
+		# Nak crosshairs stay original until its HD pass (image generation deferred, NAK_0_15.md).
+		if name.begins_with("CrosshairNak"):
+			check(is_equal_approx(factor, 1.0) and hud.textures[name] == hud.originals[name], "%s falls back to the original sprite" % name)
+		else:
+			check(is_equal_approx(factor, 3.0), "%s uses the 3× HD sprite" % name)
 	scene.select_vehicle(2)
 	scene.start_match()
 	player_turn(scene)
@@ -307,7 +311,7 @@ func run() -> void:
 
 	# The original range wedges cover exactly the legal aim of every shot.
 	var Match = load("res://scripts/match.gd")
-	for vehicle in [1, 2]:
+	for vehicle in [1, 2, 3]:
 		var aim_model = Match.new()
 		aim_model.start(vehicle, 1, 4)
 		for shot in range(3):

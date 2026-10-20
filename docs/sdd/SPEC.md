@@ -81,6 +81,17 @@ queda, caixa, sinalizador e poses está em [MOBILE_PARITY.md](MOBILE_PARITY.md)
 e na skill `skills/gunbound-mobile-port/SKILL.md`. As frases de 0.4 e 0.5 sobre
 regen só no turno próprio, SS único e queda linear ficam como histórico.
 
+## Nak 0.15 — REQ-43
+
+Terceiro mobile jogável (ID 3), pedido explícito do usuário. O OpenBound não
+implementa o Nak: dados C# (HP, mira, delays, sons, miras, RiderPivot) mais
+arte, flipbook, dano e regras de voo do cliente original Thor's Hammer
+(jglim/gunbound-launcher), lidos com as notas do GunBound-Decomp — S2 entra no
+chão e explode ao emergir, SS atravessa o terreno e só explode em mobile.
+Contrato e números em [NAK_0_15.md](NAK_0_15.md), decisão ADR-069. A
+restrição "apenas Bigfoot/Mage" deixa de valer para o Nak; demais mobiles
+continuam fora. Arte HD do Nak adiada pelo usuário.
+
 ## Mage 0.4
 
 REQ-19: Carapaça substituído por Mage (índice 1), selecionável e adversário do

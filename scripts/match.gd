@@ -261,7 +261,9 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		result.append({"pos": initial, "hit_pos": initial, "velocity": velocity, "age": 0.0, "trail": [initial], "helix": float(rules.get("helix", 0)), "phase": float(component) * PI, "spawn_at": entry.spawn, "launched": false,
 			# Weather state per shell (Projectile.cs): base damage, columns touched, influences.
 			"damage": int(rules.damage), "launch_speed": velocity.length(), "inside": {}, "influenced": [], "electric": false, "thor": false, "tornado": {},
-			"weapon": weapon, "volley": 0, "beacon": false, "wind_scale": 1.0})
+			"weapon": weapon, "volley": 0, "beacon": false, "wind_scale": float(rules.get("wind_scale", 1.0)),
+			# Nak (ADR-069): S2 burrows and resurfaces, SS crosses the terrain.
+			"burrow": bool(rules.get("burrow", false)), "ghost": bool(rules.get("ghost", false)), "underground": false})
 	return result
 
 ## Mobile.ShootWithModifiers: the shells of a shot under this turn's item.
@@ -287,7 +289,7 @@ func shot_shells(index: int, angle: float, power: float, weapon: int) -> Array:
 			var velocity := shot_velocity(index, angle, power, weapon) * Items.BEACON_SPEED
 			var initial := muzzle(index, angle, weapon)
 			beacon.merge({"pos": initial, "hit_pos": initial, "velocity": velocity, "trail": [initial], "helix": 0.0, "phase": 0.0,
-				"spawn_at": float(Mobiles.definition(int(actors[index].vehicle)).beacon_delay), "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND}, true)
+				"spawn_at": float(Mobiles.definition(int(actors[index].vehicle)).beacon_delay), "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND, "burrow": false, "ghost": false}, true)
 			shells = [beacon]
 		"thunder":
 			# An invisible Electricity column of scale 1000 around the mobile:
@@ -413,14 +415,37 @@ func advance_projectiles(delta: float) -> void:
 			travel_delta = clampf(flight_elapsed - float(projectile.spawn_at), 0.0, delta)
 			if travel_delta <= 0.0000001:
 				continue
-		apply_weather_contact(projectile)
-		var next: Dictionary = tornado_step(projectile, travel_delta) if not projectile.tornado.is_empty() else Combat.advance(projectile.pos, projectile.velocity, wind * float(projectile.get("wind_scale", 1.0)), travel_delta)
+		var underground := bool(projectile.get("underground", false))
+		var next: Dictionary
+		if underground:
+			next = Combat.advance_buried(projectile.pos, projectile.velocity, travel_delta)
+		else:
+			apply_weather_contact(projectile)
+			next = tornado_step(projectile, travel_delta) if not projectile.tornado.is_empty() else Combat.advance(projectile.pos, projectile.velocity, wind * float(projectile.get("wind_scale", 1.0)), travel_delta)
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
 		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
 		# The teleportation beacon only collides with the ground.
 		var beacon := bool(projectile.get("beacon", false))
-		var hit: Dictionary = Combat.trace_segment(projectile.hit_pos, actual, terrain, [] if beacon else actors, ignored)
+		var hit: Dictionary
+		if bool(projectile.get("ghost", false)) or underground:
+			hit = Combat.trace_actors(projectile.hit_pos, actual, actors, ignored)
+			# A buried shell explodes on the first free pixel where it resurfaces.
+			if underground:
+				var exit: Dictionary = Combat.burrow_exit(terrain, projectile.hit_pos, actual)
+				if not exit.is_empty() and (hit.is_empty() or float(exit.fraction) < float(hit.fraction)):
+					hit = {"position": exit.position, "actor": -1}
+		else:
+			hit = Combat.trace_segment(projectile.hit_pos, actual, terrain, [] if beacon else actors, ignored)
+			# SimulateShot2_Bullet3: the first solid pixel switches the shell to its
+			# "special" underground state there and halves the vertical speed.
+			if bool(projectile.get("burrow", false)) and not hit.is_empty() and int(hit.actor) < 0:
+				projectile.underground = true
+				next.position = hit.position
+				next.velocity = Vector2(next.velocity.x, next.velocity.y * Combat.BURROW_ENTRY_DAMPING)
+				actual = hit.position
+				hit = {}
+				events.append({"type": "burrow", "position": actual})
 		var previous: Vector2 = projectile.hit_pos
 		projectile.hit_pos = actual
 		projectile.age += travel_delta

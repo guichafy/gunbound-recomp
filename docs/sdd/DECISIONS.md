@@ -435,3 +435,21 @@ borda branca e acabamento inferior/rebites preservados. Isso substitui a
 extração da tira para o preenchimento central da ADR-067; nenhum novo PNG,
 modificador, alteração de perfil ou reanimação necessária. Conferir GPU
 FullHD/versão nativa, suites de loja e aplicativo reexportado/assinado/PCK.
+
+## ADR-069 — Nak com dados do cliente original sobre o OpenBound
+
+Pedido do usuário: novo mobile Nak "com base no OpenBound". O fork C# só tem
+metadados (HP 1100, proteção 35, mira 10–50°, delays 760/910/1310), sons,
+miras, retrato e RiderPivot; não há classe, flipbook, folha nem projéteis. O
+usuário indicou jglim/gunbound-server e autorizou baixar o cliente original de
+jglim/gunbound-launcher; GunBound-Decomp documenta o formato. Decisões: ID 3
+sem alterar 1/2 nem o par 1↔2 da CPU (Nak contra Mage); arte original extraída
+por leitor próprio (blocos LZHUF de 4 KB) e flipbook do `tank3.epa` com o mesmo
+mapeamento que o fork usa para Bigfoot/Mage; dano/raio do characterdata
+(200/30, 350/35, 360/35, escolha do usuário); S2 e SS revertidos do código
+ofuscado: S2 entra no chão com `vy` ÷ 2, sobe com o dobro da gravidade sem vento
+e explode no primeiro pixel livre; SS ignora terreno. Vento comum (sem fator por
+tiro). Desenho espelhado: o Nak atira pela cauda. RiderPivot cru do fork recebe
+(+5, +4), média do registro de Bigfoot/Mage. HD adiado pelo usuário; Nak fica
+fora do rig HD até lá. Substitui a primeira versão deste ADR, que inventava
+números e uma gravidade invertida 3×.

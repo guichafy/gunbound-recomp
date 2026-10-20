@@ -5,9 +5,11 @@ var failures := 0
 
 func _initialize() -> void:
 	var started := Time.get_ticks_msec()
-	for seed_value in [81, 82, 83, 84, 85, 86, 87, 88, 89, 90]:
+	# Seeds 81–90 keep the Mage/Bigfoot baseline; 91–93 add Nak (ID 3, vs Mage).
+	var seeds := [81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93]
+	for seed_value in seeds:
 		var model = Match.new()
-		model.start(1 if seed_value % 2 else 2, seed_value % 3, seed_value)
+		model.start(3 if seed_value > 90 else (1 if seed_value % 2 else 2), seed_value % 3, seed_value)
 		var shots := 0
 		for frame in range(50000):
 			if model.phase == "finished":
@@ -25,5 +27,5 @@ func _initialize() -> void:
 			printerr("FAIL: Match did not reach result for seed ", seed_value)
 			failures += 1
 		print("MATCH seed=", seed_value, " shots=", shots, " winner=", model.winner, " remaining_hp=", [model.actors[0].hp, model.actors[1].hp])
-	print("COMPLETE MATCHES: 10 | FAILURES: ", failures, " | TIME MS: ", Time.get_ticks_msec() - started)
+	print("COMPLETE MATCHES: ", seeds.size(), " | FAILURES: ", failures, " | TIME MS: ", Time.get_ticks_msec() - started)
 	quit(0 if failures == 0 else 1)

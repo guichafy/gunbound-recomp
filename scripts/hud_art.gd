@@ -77,7 +77,7 @@ func _init() -> void:
 		"ShotSelector.png", "Options.png", "SkipTurn.png", "WeatherIcons.png"]
 	for font_spec in FONTS.values():
 		names.append(font_spec.file)
-	for mob in ["Mage", "Bigfoot"]:
+	for mob in ["Mage", "Bigfoot", "Nak"]:
 		for shot in ["S1", "S2", "SS"]:
 			for side in ["Ally", "Enemy"]:
 				names.append("Crosshair%s%s%s.png" % [mob, shot, side])

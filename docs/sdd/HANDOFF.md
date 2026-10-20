@@ -1,4 +1,30 @@
-# Hand-off — Gunbound Recomp 0.14.8
+# Hand-off — Gunbound Recomp 0.15.0
+
+## Nak 0.15 — terceiro mobile (ADR-069)
+
+Pedido: novo mobile Nak com base no OpenBound; geração de imagens HD adiada
+pelo usuário. REQ-43, NAK_0_15.md. Worktree `claude/nak-mobile-openbound-7afece`,
+a partir de `699caff`. O fork C# não implementa o Nak; o usuário indicou
+jglim/gunbound-server (só o ID 0x02) e autorizou baixar o cliente original de
+jglim/gunbound-launcher para `.tools/gunbound-client/` (hash conferido com o
+GunBound-Decomp). Nada baixado foi executado; leitor e importador são próprios.
+
+- Arte original: 392 quadros do `tank3.img`, 25 estados do `tank3.epa`,
+  projéteis/brilhos/explosões; `RiderPivot.json` do fork confirmado como ponto
+  bruto do cliente. Correção de formato: blocos LZHUF de 4 KB por entrada.
+- Combate: dano/raio do characterdata (escolha do usuário); S2 e SS revertidos
+  do código ofuscado (vy ÷ 2 na entrada, 2× gravidade para cima, explode no
+  primeiro pixel livre; SS só colide com mobiles). Previsão = disparo real.
+- Apresentação: menu com três botões, Nak espelhado (atira pela cauda), bolha
+  no idle, miras originais 1×, piloto com RIDER_ADJUST (+5,+4). Sem rig HD.
+
+Validação: check.sh completo com 1948 checks e 13 partidas, zero falhas (`test_nak` 55);
+`test_matches` 13 partidas (81–90 idênticas ao baseline, 91–93 com Nak).
+`test_items_scene` é instável com seed aleatória: falhou 1 de 5 aqui e 1 de 6
+na cópia principal sem estas mudanças. GPU em docs/nak: framebuffer 1728×1080
+(tela 16:10 numa janela 1920×1080), MP4 60 fps e GIF ampliado. App não
+reexportado; sem publicação. Pendências: HD do Nak, validação do usuário.
+
 
 ## Fundo dos preços nítido0.14.8
 

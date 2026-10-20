@@ -7,9 +7,18 @@ const STEP := 1.0 / 120.0
 
 # Wind is the OpenBound vector (force units, screen angle); 35 ≈ 45 px/s².
 const WIND_ACCELERATION := 1.3
+# Nak S2 underground (original DetonateShot2_Bullet3): vy -= 0xC400 / 100 each
+# step, twice the 98 gravity of the mobile, and no wind. Entering halves vy.
+const BURROW_GRAVITY := 2.0
+const BURROW_ENTRY_DAMPING := 0.5
 
 static func advance(position: Vector2, velocity: Vector2, wind: Vector2, delta: float) -> Dictionary:
 	var acceleration := Vector2(0.0, GRAVITY) + wind * WIND_ACCELERATION
+	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
+
+## Underground flight of a burrowing shell: reversed, stronger gravity, no wind.
+static func advance_buried(position: Vector2, velocity: Vector2, delta: float) -> Dictionary:
+	var acceleration := Vector2(0.0, -GRAVITY * BURROW_GRAVITY)
 	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
 
 static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0) -> Vector2:
@@ -21,14 +30,32 @@ static func trace_segment(from: Vector2, to: Vector2, terrain, actors: Array, ig
 	var terrain_hit: Dictionary = terrain.raycast(from, to)
 	var closest := float(terrain_hit.fraction) if not terrain_hit.is_empty() else INF
 	var hit: Dictionary = {"position": terrain_hit.position, "actor": -1} if not terrain_hit.is_empty() else {}
-	var direction := to - from
+	var actor_hit := trace_actors(from, to, actors, ignored)
+	if not actor_hit.is_empty() and float(actor_hit.fraction) < closest:
+		hit = {"position": actor_hit.position, "actor": actor_hit.actor}
+	return hit
+
+## First free point of a buried shell's step, scanned pixel by pixel like
+## SimulateShot2_Bullet3; outside the terrain grid also counts as free.
+static func burrow_exit(terrain, from: Vector2, to: Vector2) -> Dictionary:
+	var steps := maxi(1, ceili(from.distance_to(to)))
+	for index in range(1, steps + 1):
+		var point := from.lerp(to, float(index) / float(steps))
+		if not terrain.is_solid(point):
+			return {"position": point, "fraction": float(index) / float(steps)}
+	return {}
+
+## Closest mobile box crossed by the segment; terrain is not consulted.
+static func trace_actors(from: Vector2, to: Vector2, actors: Array, ignored: int) -> Dictionary:
+	var closest := INF
+	var hit: Dictionary = {}
 	for index in range(actors.size()):
 		if index == ignored or int(actors[index].hp) <= 0:
 			continue
 		var fraction := segment_box(from, to, actors[index])
 		if fraction < closest:
 			closest = fraction
-			hit = {"position": from + direction * fraction, "actor": index}
+			hit = {"position": from + (to - from) * fraction, "actor": index, "fraction": fraction}
 	return hit
 
 static func box_center(actor: Dictionary) -> Vector2:
