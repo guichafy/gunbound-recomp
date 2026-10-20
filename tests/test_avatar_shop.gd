@@ -11,8 +11,8 @@ func _initialize() -> void:
 func run() -> void:
 	check(FileAccess.file_exists("res://scripts/avatar_shop_model.gd"), "Shop model exists")
 	if failures == 0:
-		var p = load("res://scripts/profile.gd").new("res://.tools/shop-test.json")
-		var c = load("res://scripts/avatar_catalog.gd").new()
+		var p = load("res://tests/legacy_profile.gd").new("res://.tools/shop-test.json")
+		var c = load("res://scripts/avatar_catalog.gd").legacy()
 		var s = load("res://scripts/avatar_shop_model.gd").new(p,c)
 		check(s.select("0:0:1") and not p.owns("0:0:1"), "Select not buy")
 		check(s.try_selected() and s.preview["0"] == "0:0:1" and p.equipped_set()["0"] == "0:0:0", "Temporary try")
@@ -28,7 +28,7 @@ func run() -> void:
 		check(f.filter(0,"",false,1).size() == 9 and f.last_page == 7, "Classic nine entries per page")
 		check(f.filter(0,"Item 59",false,2).size() == 1 and f.page == 0, "Search clamps page")
 	var view = load("res://scenes/main.tscn").instantiate()
-	view.profile = load("res://scripts/profile.gd").new("res://.tools/shop-scene.json")
+	view.profile = load("res://tests/legacy_profile.gd").new("res://.tools/shop-scene.json")
 	root.size = Vector2i(1280,800)
 	root.add_child(view)
 	view.set_process(false)
@@ -39,11 +39,11 @@ func run() -> void:
 	var shop = view.shop
 	var first = shop.cards.get_child(0)
 	var fourth = shop.cards.get_child(3)
-	check(first.position == Vector2(260,26) and fourth.position == Vector2(260,178), "Classic three-column grid starts at top with second row below")
-	check(first.size == Vector2(166,147), "Classic card proportions")
+	check(first.position == Vector2(25,70) and fourth.position == Vector2(25,230), "XFS three-column grid starts below tabs with second row below")
+	check(first.size == Vector2(160,156), "XFS card proportions")
 	for child in shop.cards.get_child(1).get_children():
 		if child is TextureRect and child.name == "Portrait":
-			check(child.size == Vector2(126,66), "HD portrait reserves effect information within classic white window")
+			check(child.size == Vector2(84,76), "HD portrait reserves effect information within classic white window")
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	check(shop.model.selected_key == "0:0:1", "Real card click")
@@ -61,7 +61,7 @@ func run() -> void:
 	click(shop.try_button.get_global_rect().get_center())
 	await process_frame
 	check(view.profile.equipped_set()["0"] == "0:0:1", "Owned Shop item can be dressed after temporary try and purchase")
-	var reloaded = load("res://scripts/profile.gd").new("res://.tools/shop-scene.json")
+	var reloaded = load("res://tests/legacy_profile.gd").new("res://.tools/shop-scene.json")
 	reloaded.load_profile()
 	check(reloaded.equipped_set()["0"] == "0:0:1", "Shop dress survives profile reload")
 	shop.switch_tab(true)

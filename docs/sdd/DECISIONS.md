@@ -435,3 +435,60 @@ borda branca e acabamento inferior/rebites preservados. Isso substitui a
 extração da tira para o preenchimento central da ADR-067; nenhum novo PNG,
 modificador, alteração de perfil ou reanimação necessária. Conferir GPU
 FullHD/versão nativa, suites de loja e aplicativo reexportado/assinado/PCK.
+
+## ADR-069 — estado coerente e posicionamento da loja
+
+Revisão contra C#: usuário escolheu abas acima dos cards e rodapé na ordem
+Experimentar/Vestir→Comprar→Presente. Preservar grade3×3/lista lateral;
+alinhar legendas em áreas separadas do ícone, com hitbox incluindo o texto.
+Crop Miramo com proporção nativa, em vez de esticar imagem. Seleção ausente
+da página filtrada deve limpar ações; save falho ao vestir deve preservar
+seleção/equipamento/prévia e mostrar erro, incluindo clique pela grade.
+Não adicionar bônus por peça, novos assets/rig nem alterações de combate.
+
+## ADR-070 — loja Full HD orientada pelo vídeo
+
+Pedido19/10/2026 substitui a composição4:3 da loja pela adaptação16:9 da
+referência em vídeo: avatar sozinho/alternância mobile, grade3×3 e inventário
+compacto. Preservar as correções transacionais0.14.9; retratos e rig mantêm
+aspecto e âncoras. Fundo regenerado separado dos controles e textos. Imagens
+com atributos por peça não autorizam inventar bônus no catálogo C# atual.
+Geometria do layout antigo em ADR-064/069 é substituída; demais contratos
+permanecem. Ordem do rodapé segue resposta específica do usuário.
+
+Resposta explícita: seguir o vídeo, Presente→Comprar→Experimentar. Substitui
+a ordem do rodapé da ADR-069.
+
+
+Implementação0.15: a Window usa pixels físicos enquanto a loja está aberta e
+restaura stretch1280×800 na saída. Inspeção do PCK identificou um retrato
+nativo60×56 compartilhado pelos slots vazios No Goggles/No Flag; regenerá-lo
+como miniatura de apresentação, sem adicioná-lo às peças vestíveis do rig.
+
+
+## ADR-071 — design do cliente XFS
+
+Pedido20/10/2026 adota jglim/gunbound-server + launcher/graphics.xfs como fonte.
+Usar frames store_* comprovados pela captura do cliente, não avatarmode antigo.
+Preservar800×600 em FullHD, com catálogo à esquerda, inventário à direita,
+Try/Buy abaixo da grade e ações do inventário à direita. Substitui ADR-070
+quanto ao layout/ordem; preço vetorial uniforme preserva correção de blur.
+
+## ADR-072 — catálogo e modificadores XFS
+
+Após esclarecimento explícito do usuário, integrar562registros/479compráveis,
+preços e bônus reais. A interpretação anterior de somente design foi rejeitada.
+Namespaces separados e migração por identidade preservam compras/progresso;
+Pilot Goggle antigo1 corresponde ao XFS2. Kappa fica legado. Atributos do piloto
+mais equipamento são limitados a50por atributo, com negativos, copiados no
+start e compartilhados com previsão. Substitui restrição a cosméticos C# das
+ADR-067/069/070 para o catálogo XFS. Sem rede/contas neste corte.
+
+## ADR-073 — controle e migração HD completa
+
+Usuário apontou a diferença entre miniatura regenerada e peça vestida nativa.
+Registrar miniatura, base, efeito e QA separadamente para todos os562registros.
+550têm peças/629camadas; padrões vazios e placeholders recebem N/A com motivo.
+Masters anatômicos constantes e efeitos separados conservam rig/animação
+aprovada; arte só gerada não conta como componente validado. Arte original,
+brutos e prompts preservados. AVATAR_HD_MIGRATION.md define o critério550/550.

@@ -40,6 +40,7 @@ def main() -> None:
         "docs/GODOT_COPYRIGHT.txt": "GODOT_COPYRIGHT.txt",
         "assets/openbound/OPENBOUND_CODE_LICENSE.GPL": "OPENBOUND_CODE_LICENSE.GPL",
         "assets/openbound/ATTRIBUTION.md": "OPENBOUND_ATTRIBUTION.md",
+        "assets/xfs/ATTRIBUTION.md": "XFS_ATTRIBUTION.md",
     }
     for relative, name in notices.items():
         source = ROOT / relative

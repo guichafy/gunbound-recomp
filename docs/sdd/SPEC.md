@@ -255,3 +255,34 @@ AVATAR_CARD_FIX_0_14_7.md; sem novos bônus/regras inventados pela referência.
 REQ-20/38: correção0.14.8 retira o borrado do fundo dos preços. O centro da
 faixa recebe preenchimento vetorial uniforme; moldura, borda branca e rebites
 continuam nos recortes HD/nativos. Texto, retrato e regras preservados.
+
+REQ-20/38/39/40: revisão0.14.9 corrige estado de seleção/falhas de vestir,
+legendas sobrepostas e cenário deformado. Usuário confirmou abas sobre os
+cards e ordem Experimentar/Vestir→Comprar→Presente do C#. Grade3×3 e lista
+lateral mantidas. Plano/critério em AVATAR_SHOP_AUDIT_0_14_9.md.
+
+REQ-20/38/39/40: pedido posterior0.15 adota o vídeo GunboundWcLatam como
+referência principal de apresentação. Loja16:9/FullHD, grade3×3, avatar sozinho
+com alternância para mobile, inventário compacto com destaque do equipado,
+cenário claro regenerado e preços nítidos. Contratos transacionais preservados;
+critério/plano em AVATAR_SHOP_VIDEO_0_15.md. Substitui coordenadas0.14.5/0.14.9,
+sem mudar catálogo/combate ou atribuir bônus às peças.
+
+## Avatar Shop do cliente XFS 0.16
+
+REQ-20/38/39: reproduzir a interface ciano comprovada no cliente de referência
+jglim e nos frames store_* de graphics.xfs, com composição FullHD uniforme,
+compra/preview/equipamento funcionais e fallback original. Plano e escopo de
+dados em AVATAR_SHOP_XFS_0_16.md; substitui a composição do vídeo de0.15.
+
+REQ-38/39/40/41: esclarecimento posterior exige catálogo avatar.xfs completo,
+preços/disponibilidade e bônus de ataque/defesa/etc por equipamento. Exibir
+modificadores reais nos cards/conjunto e aplicá-los ao snapshot de combate,
+preservando progresso/posses antigas. Corrigir sobreposições de imagem/texto.
+A restrição anterior a quinze cosméticos fica substituída para o catálogo XFS.
+
+REQ-10/20/39: pedido posterior exige migração HD completa das peças vestidas e
+animadas, além das miniaturas. Controle por registro/camada e critérios em
+AVATAR_HD_MIGRATION.md. Cobertura real:550avatares vestíveis/629camadas; padrões
+vazios/placeholders recebem motivo N/A. Regenerar e integrar todos os componentes
+reais, preservando registro, identidade, animação contínua e fallback validado.

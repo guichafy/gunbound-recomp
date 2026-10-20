@@ -185,7 +185,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.14.5", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.16.0", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -280,7 +280,7 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []])
+	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []])
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.

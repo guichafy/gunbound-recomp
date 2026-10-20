@@ -1,7 +1,8 @@
 extends Control
-## Original 800x600 Shop, fit uniformly into the current viewport.
+## XFS client shop; native proportions are independent of arena transforms.
 const Assets := "res://assets/openbound/shop/"
 const ShopHD = preload("res://scripts/shop_hd.gd")
+const XfsStyle = preload("res://scripts/xfs_shop_style.gd")
 const CardStyle = preload("res://scripts/shop_card_style.gd")
 var hd = ShopHD.new()
 var use_hd := true
@@ -30,6 +31,7 @@ var try_button
 var try_caption: Label
 var buy_button
 var page_label: Label
+var empty_label: Label
 var left_button
 var right_button
 var search: LineEdit
@@ -42,11 +44,27 @@ var attributes_panel: Control
 var attributes_button: Button
 var gender_button: Button
 var gift_button
+var preview_mobile := false
+var category_buttons: Array = []
+var chrome_labels: Array = []
+var xfs_frames: Dictionary = {}
+var xfs_background: Texture2D
+var xfs_portraits: Dictionary = {}
+var backdrop: TextureRect
+var preview_buttons: Array = []
+var inventory_count: Label
+var wide_background: Texture2D
+var empty_slot_portrait: Texture2D
+var shop_font: Font
+var window_scale_state: Dictionary = {}
 var attributes_feedback: Label
-const CARD_SIZE := Vector2(166,147)
-const PORTRAIT_SIZE := Vector2(126,66)
-const CASH_COLOR := Color("8bddff")
-const GOLD_COLOR := Color("ffe34e")
+const CANVAS := Vector2(800,600)
+const GRID_ORIGIN := Vector2(25,70)
+const GRID_STEP := Vector2(164,160)
+const CARD_SIZE := Vector2(160,156)
+const PORTRAIT_SIZE := Vector2(84,76)
+const CASH_COLOR := Color("ffe34e")
+const GOLD_COLOR := Color("74edf1")
 # AttributeMenu.AddAttributePoints, original 6-column ButtonIcons sheet.
 const ATTRIBUTE_ICONS := [13,17,15,23,9,19,21,11]
 func texture(path: String):
@@ -66,6 +84,14 @@ func atlas(path: String, cell: Vector2, frame: int) -> AtlasTexture:
 	var columns := int(result.atlas.get_width() / cell.x)
 	result.region = Rect2(Vector2(frame % columns, int(frame / columns)) * cell, cell)
 	return result
+func button_texture(path: String, cell: Vector2, frame: int, icon_height: float, area: Vector2) -> AtlasTexture:
+	var result := atlas(path,cell,frame)
+	if icon_height>0:
+		# Transparent presentation padding reserves caption space without changing
+		# the native frame region, registration or animation clock.
+		var padding := Vector2(maxf(0,area.x-cell.x),cell.y*(area.y/icon_height-1))*density(path)
+		result.margin = Rect2(Vector2(padding.x*0.5,0),padding)
+	return result
 func label(parent: Node, text: String, pos: Vector2, size: Vector2, font_size: int = 11) -> Label:
 	var node := Label.new()
 	node.text = text
@@ -77,6 +103,9 @@ func label(parent: Node, text: String, pos: Vector2, size: Vector2, font_size: i
 	node.add_theme_color_override("font_outline_color",Color.BLACK)
 	node.add_theme_constant_override("outline_size",2)
 	parent.add_child(node)
+	# The default 16px font may have enlarged the label before the font override.
+	# Reapply its allocated box once the actual font and parent are known.
+	node.size = size
 	return node
 func button(parent: Node, text: String, pos: Vector2, size: Vector2, action: Callable) -> Button:
 	var node := Button.new()
@@ -84,116 +113,308 @@ func button(parent: Node, text: String, pos: Vector2, size: Vector2, action: Cal
 	node.position = pos
 	node.size = size
 	node.add_theme_font_size_override("font_size",11)
-	for state in ["normal","hover","pressed","disabled","focus"]:
-		var style := StyleBoxFlat.new()
-		style.bg_color = Color("344971") if state=="normal" else (Color("21304b") if state=="disabled" else Color("587baa"))
-		style.border_color = Color("a5bde1")
-		style.set_border_width_all(1)
-		style.content_margin_left = 0
-		style.content_margin_right = 0
-		style.content_margin_top = 0
-		style.content_margin_bottom = 0
-		node.add_theme_stylebox_override(state,style)
+	for i in range(4):
+		node.add_theme_stylebox_override(["normal","hover","pressed","disabled"][i],XfsStyle.new("button",i))
+	node.add_theme_stylebox_override("focus",StyleBoxEmpty.new())
+	node.add_theme_color_override("font_color",Color("003d57"))
+	node.add_theme_color_override("font_hover_color",Color("003d57"))
+	node.add_theme_color_override("font_pressed_color",Color("5a3700"))
+	node.add_theme_color_override("font_disabled_color",Color("535d5f"))
 	node.pressed.connect(action)
 	parent.add_child(node)
 	node.size = size
 	return node
-func sprite_button(parent: Node, path: String, cell: Vector2, pos: Vector2, action: Callable, normal: int = 0, hover: int = 1, pressed: int = 2, disabled: int = -1) -> TextureButton:
+func sprite_button(parent: Node, path: String, cell: Vector2, pos: Vector2, action: Callable, normal: int = 0, hover: int = 1, pressed: int = 2, disabled: int = -1, area: Vector2 = Vector2.ZERO, icon_height: float = 0.0) -> TextureButton:
 	var node := TextureButton.new()
 	node.position = pos
 	node.ignore_texture_size = true
 	node.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-	node.size = cell
-	node.texture_normal = atlas(path,cell,normal)
-	node.texture_hover = atlas(path,cell,hover)
-	node.texture_pressed = atlas(path,cell,pressed)
-	node.texture_disabled = atlas(path,cell,normal if disabled < 0 else disabled)
+	node.size = cell if area==Vector2.ZERO else area
+	node.texture_normal = button_texture(path,cell,normal,icon_height,node.size)
+	node.texture_hover = button_texture(path,cell,hover,icon_height,node.size)
+	node.texture_pressed = button_texture(path,cell,pressed,icon_height,node.size)
+	node.texture_disabled = button_texture(path,cell,normal if disabled < 0 else disabled,icon_height,node.size)
 	node.pressed.connect(action)
 	parent.add_child(node)
 	return node
 func animated_button(path: String, cell: Vector2, pos: Vector2, text: String, action: Callable, normal: int, hover_end: int, click_start: int, click_end: int, disabled: int, active: int = -1):
-	var node = sprite_button(content,"AnimatedButtons/AvatarShop/"+path,cell,pos,action,normal,0,click_start,disabled)
-	label(node,text,Vector2(-5,cell.y-15),Vector2(cell.x+10,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	animated.append({"node":node,"path":"AnimatedButtons/AvatarShop/"+path,"cell":cell,"normal":normal,"hover_end":hover_end,"click_start":click_start,"click_end":click_end,"disabled":disabled,"active":active,"selected":false,"age":0.0,"state":0})
+	var category := active>=0
+	var area := Vector2(62,46) if category else Vector2(82,64)
+	var icon_height := 29.0 if category else 47.0
+	var node = sprite_button(content,"AnimatedButtons/AvatarShop/"+path,cell,pos,action,normal,0,click_start,disabled,area,icon_height)
+	label(node,text,Vector2(0,31 if category else 49),Vector2(area.x,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	animated.append({"node":node,"path":"AnimatedButtons/AvatarShop/"+path,"cell":cell,"icon_height":icon_height,"normal":normal,"hover_end":hover_end,"click_start":click_start,"click_end":click_end,"disabled":disabled,"active":active,"selected":false,"age":0.0,"state":0})
 	track_click(animated.back())
 	return node
 func setup(owner, shop_model) -> void:
 	host = owner
 	model = shop_model
-	size = Vector2(1280,800)
+	# The arena uses a 1280x800 stretch canvas. Shop owns its native 4:3 fit directly
+	# in window pixels, then restores the host's settings on every exit path.
+	var window := get_window()
+	window_scale_state = {"window":window,"size":window.content_scale_size,"mode":window.content_scale_mode,"factor":window.content_scale_factor}
+	window.content_scale_size = Vector2i.ZERO
+	window.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	window.content_scale_factor = 1.0
+	set_as_top_level(true)
+	position = Vector2.ZERO
 	content = Control.new()
-	content.position = Vector2(106.6667,0)
-	content.scale = Vector2.ONE * (4.0/3.0)
-	content.size = Vector2(800,600)
+	# Rasterize this scaled UI's glyphs with enough samples for Full HD.
+	# Duplicate the font so battle/menu text and caches remain independent.
+	shop_font = ThemeDB.fallback_font.duplicate()
+	if shop_font is FontFile:
+		shop_font.oversampling = 3.0
+	content.theme = Theme.new()
+	content.theme.default_font = shop_font
+	content.size = CANVAS
 	content.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(content)
+	get_viewport().size_changed.connect(fit_viewport)
+	fit_viewport()
+	wide_background = load_registered_texture("res://assets/hd/shop/wide_background.json")
+	xfs_background = load_registered_texture("res://assets/hd/shop/xfs_landscape.json")
+	xfs_portraits = load_portrait_atlas("res://assets/hd/shop/xfs_portraits.json")
+	empty_slot_portrait = load_registered_texture("res://assets/hd/shop/empty_slot_portrait.json")
+	var frames = JSON.parse_string(FileAccess.get_file_as_string("res://assets/xfs/shop/catalog.json"))
+	if frames is Dictionary and frames.get("version")==1 and frames.get("frames") is Dictionary:
+		xfs_frames = frames.frames
+	backdrop = TextureRect.new()
+	backdrop.texture = xfs_background
+	backdrop.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	backdrop.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(backdrop)
+	move_child(backdrop,0)
+	fit_viewport()
 	painter = Paint.new()
 	painter.shop = self
 	content.add_child(painter)
-	label(content,"Avatar Shop",Vector2(430,-2),Vector2(200,26),19).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label(content,"Meu Avatar",Vector2(8,179),Vector2(215,24),16)
-	for index in range(2):
-		var tab = button(content,["Normal","Inventário"][index],Vector2(10+index*91,205),Vector2(90,20),func(): switch_tab(index == 1))
-		tab_buttons.append(tab)
-	var scroll := ScrollContainer.new()
-	scroll.position = Vector2(12,230)
-	scroll.size = Vector2(214,246)
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	content.add_child(scroll)
-	inventory_rows = VBoxContainer.new()
-	inventory_rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	inventory_rows.add_theme_constant_override("separation",2)
-	scroll.add_child(inventory_rows)
-	var names := ["Cabeça","Corpo","Óculos","Bandeira"]
-	var specs := [["Hat",Vector2(49,48),0,19,21,32,33,34],["Body",Vector2(49,39),0,19,20,30,31,32],["Goggles",Vector2(49,46),0,19,20,35,36,37],["Flag",Vector2(56,47),0,14,15,44,45,46]]
-	for i in range(4):
-		var spec: Array = specs[i]
-		animated_button(spec[0],spec[1],Vector2(290+i*55,478),names[i],func(): model.selected_key=""; refresh(i,0),spec[2],spec[3],spec[4],spec[5],spec[6],spec[7])
+	chrome_labels.append(label(content,"AVATAR",Vector2(35,19),Vector2(107,20),18))
+	chrome_labels.append(label(content,"SHOP",Vector2(78,37),Vector2(66,20),18))
+	chrome_labels.append(icon(content,category_icon(1),Vector2(17,25),Vector2(19,21)))
+	chrome_labels.append(label(content,"MY AVATAR",Vector2(585,7),Vector2(135,22),16))
+	chrome_labels.append(icon(content,category_icon(1),Vector2(565,8),Vector2(18,18)))
+	label(content,host.profile.nickname,Vector2(171,4),Vector2(175,16),11).clip_text=true
+	label(content,"Nível %d" % model.profile.level(),Vector2(344,4),Vector2(75,16),10).horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	search = LineEdit.new()
-	search.position = Vector2(675,3)
-	search.size = Vector2(105,21)
-	search.placeholder_text = "Buscar nome"
-	search.add_theme_font_size_override("font_size",9)
+	search.position = Vector2(170,21)
+	search.placeholder_text = "Buscar avatar"
+	search.add_theme_font_size_override("font_size",10)
+	search.add_theme_constant_override("minimum_character_width",1)
+	search.expand_to_text_length=false
 	var search_style := StyleBoxFlat.new()
-	search_style.bg_color = Color("344971")
-	search_style.border_color = Color("96b6d8")
-	search_style.set_border_width_all(1)
-	search_style.content_margin_left = 4
-	search_style.content_margin_right = 4
-	search_style.content_margin_top = 1
-	search_style.content_margin_bottom = 1
+	search_style.bg_color = Color("063343")
+	search_style.set_content_margin_all(1)
 	search.add_theme_stylebox_override("normal",search_style)
 	search.add_theme_stylebox_override("focus",search_style)
 	search.text_changed.connect(func(text): model.query=text; refresh(model.category,0))
 	content.add_child(search)
-	search.size = Vector2(105,21)
-	label(content,host.profile.nickname,Vector2(16,9),Vector2(155,17),11)
-	balance_label = label(content,"",Vector2(75,140),Vector2(136,30),11)
-	balance_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	balance_label.visible = false # Individual colors in the painted compact balance.
-	general_button("Exit",Vector2(66,66),Vector2(9,528),"Sair",host.show_menu,0,22,13,38,39)
-	gender_button = button(content,["Masculino","Feminino"][model.profile.gender],Vector2(82,551),Vector2(105,22),toggle_gender)
-	attributes_button = button(content,"Atributos",Vector2(13,489),Vector2(99,23),open_attributes)
-	label(content,"Nível %d" % model.profile.level(),Vector2(125,492),Vector2(98,20),11)
-	left_button = general_button("LeftArrow",Vector2(46,42),Vector2(521,480),"",func(): refresh(model.category,model.page-1),0,19,20,30,31)
-	right_button = general_button("RightArrow",Vector2(46,42),Vector2(572,480),"",func(): refresh(model.category,model.page+1),0,19,20,30,31)
-	page_label = label(content,"",Vector2(624,491),Vector2(68,20),11)
+	search.size = Vector2(245,17)
+	balance_label = label(content,"",Vector2(171,42),Vector2(248,14),10)
+	balance_label.visible = false
+	var charge = classic_button("CASH\nCHARGE",Vector2(472,7),Vector2(66,45),func(): pass)
+	charge.disabled = true
+	charge.tooltip_text = "Saldo local de teste; recarga com dinheiro real indisponível"
+	gender_button = classic_button("♂" if model.profile.gender==0 else "♀",Vector2(718,7),Vector2(26,20),toggle_gender)
+	gender_button.tooltip_text = "Alternar gênero do conjunto"
+	attributes_button = classic_button("▦",Vector2(746,7),Vector2(32,20),open_attributes)
+	attributes_button.tooltip_text = "Atributos do piloto"
+	# The preview itself is the toggle; presentation never changes equipment.
+	var avatar_toggle = Button.new()
+	avatar_toggle.position=Vector2(568,34)
+	avatar_toggle.size=Vector2(86,72)
+	avatar_toggle.flat=true
+	avatar_toggle.tooltip_text="Alternar prévia Avatar / Mobile"
+	avatar_toggle.pressed.connect(func(): set_preview_mode(not preview_mobile))
+	content.add_child(avatar_toggle)
+	preview_buttons=[avatar_toggle,avatar_toggle]
+	var scroll := ScrollContainer.new()
+	scroll.position = Vector2(569,110)
+	scroll.size = Vector2(176,238)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
+	content.add_child(scroll)
+	inventory_rows = VBoxContainer.new()
+	inventory_rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	inventory_rows.add_theme_constant_override("separation",0)
+	scroll.add_child(inventory_rows)
+	inventory_count=label(content,"",Vector2(568,350),Vector2(176,12),8)
+	inventory_count.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	classic_button("▲",Vector2(755,111),Vector2(26,26),func(): scroll.scroll_vertical-=68)
+	classic_button("▼",Vector2(755,323),Vector2(26,26),func(): scroll.scroll_vertical+=68)
+	chrome_labels.append(label(content,"EXITEM",Vector2(591,365),Vector2(150,24),19))
+	label(content,"Treino offline",Vector2(580,434),Vector2(155,16),10).horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	var names := ["Cabeça","Corpo","Óculos","Bandeira"]
+	for i in range(4):
+		var node = classic_button("",Vector2(38+i*53,556),Vector2(49,32),func(): model.selected_key=""; refresh(i,0))
+		node.tooltip_text=names[i]
+		icon(node,category_icon(i),Vector2(12,7),Vector2(25,18))
+		category_buttons.append(node)
+	left_button = classic_button("↑",Vector2(513,76),Vector2(22,52),func(): refresh(model.category,model.page-1))
+	right_button = classic_button("↓",Vector2(513,484),Vector2(22,52),func(): refresh(model.category,model.page+1))
+	page_label = label(content,"",Vector2(263,562),Vector2(78,20),11)
 	page_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	gift_button = animated_button("Gift",Vector2(64,69),Vector2(590,526),"Presente",func(): pass,0,14,31,62,71)
-	gift_button.disabled = true
-	gift_button.tooltip_text = "Presentes indisponíveis no treino offline"
-	buy_button = animated_button("Buy",Vector2(64,73),Vector2(655,526),"Comprar",open_buy,0,23,26,45,46)
-	try_button = animated_button("Try",Vector2(64,72),Vector2(720,526),"Experimentar",try_selected,13,43,45,70,71)
-	try_caption = try_button.get_child(0)
-	status_label = label(content,"Saldo de teste · sem dinheiro real",Vector2(260,558),Vector2(315,30),10)
-	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	try_button = classic_button("",Vector2(359,556),Vector2(81,33),try_selected)
+	try_caption = label(try_button,"Experimentar",Vector2(3,6),Vector2(75,21),10)
+	try_caption.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	try_caption.add_theme_color_override("font_color",Color("003d57"))
+	try_caption.add_theme_constant_override("outline_size",0)
+	buy_button = classic_button("Comprar",Vector2(448,556),Vector2(81,33),open_buy)
+	var sell=classic_button("Vender",Vector2(566,514),Vector2(68,27),func(): pass)
+	sell.disabled=true
+	sell.tooltip_text="Venda indisponível no catálogo local atual"
+	classic_button("Restaurar",Vector2(638,514),Vector2(68,27),func(): model.reset_preview(); refresh(model.category,model.page)).tooltip_text="Restaurar a prévia ao conjunto vestido"
+	gift_button=classic_button("Presente",Vector2(710,514),Vector2(68,27),func(): pass)
+	gift_button.disabled=true
+	gift_button.tooltip_text="Presentes indisponíveis no treino offline"
+	classic_button("▯  EXIT",Vector2(566,550),Vector2(107,45),host.show_menu)
+	var buddy=classic_button("♟  BUDDY",Vector2(683,550),Vector2(107,45),func(): pass)
+	buddy.disabled=true
+	buddy.tooltip_text="Amigos e contas ainda indisponíveis no treino offline"
+	status_label=label(content,"",Vector2(25,55),Vector2(477,14),9)
+	status_label.add_theme_color_override("font_color",Color("ffe999"))
+	empty_label=label(content,"Nenhum avatar encontrado",Vector2(38,266),Vector2(460,28),14)
+	empty_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	empty_label.visible=false
 	build_attributes()
 	refresh(0,0)
 
+func classic_button(text: String, pos: Vector2, area: Vector2, action: Callable) -> Button:
+	var node = button(content,text,pos,area,action)
+	for i in range(4):
+		node.add_theme_stylebox_override(["normal","hover","pressed","disabled"][i],XfsStyle.new("button",i))
+	node.add_theme_stylebox_override("focus",StyleBoxEmpty.new())
+	node.add_theme_font_size_override("font_size",10)
+	node.add_theme_color_override("font_color",Color("003d57"))
+	node.add_theme_color_override("font_hover_color",Color("003d57"))
+	node.add_theme_color_override("font_pressed_color",Color("5a3700"))
+	node.add_theme_color_override("font_disabled_color",Color("535d5f"))
+	node.size=area
+	return node
+
+func xfs_texture(name: String, frame: int = 0) -> Texture2D:
+	var entry: Dictionary=xfs_frames.get(name+":"+str(frame),{})
+	var path: String=str(entry.get("file",""))
+	if path.is_empty() or not ResourceLoader.exists(path):
+		return null
+	if not texture_cache.has(path):
+		texture_cache[path]=load(path)
+	return texture_cache[path]
+
+func fit_viewport() -> void:
+	size = get_viewport_rect().size
+	var factor := minf(size.x/CANVAS.x,size.y/CANVAS.y)
+	content.scale = Vector2.ONE*factor
+	content.position = (size-CANVAS*factor)*0.5
+	if is_instance_valid(backdrop):
+		backdrop.size=size
+
+func _exit_tree() -> void:
+	if get_viewport().size_changed.is_connected(fit_viewport):
+		get_viewport().size_changed.disconnect(fit_viewport)
+	if not window_scale_state.is_empty():
+		var window: Window = window_scale_state.window
+		if is_instance_valid(window):
+			window.content_scale_size = window_scale_state.size
+			window.content_scale_mode = window_scale_state.mode
+			window.content_scale_factor = window_scale_state.factor
+		window_scale_state.clear()
+
+func set_preview_mode(mobile: bool) -> void:
+	preview_mobile=mobile
+	if is_instance_valid(painter):
+		painter.queue_redraw()
+
+func load_registered_texture(manifest: String) -> Texture2D:
+	if not FileAccess.file_exists(manifest):
+		return null
+	var data = JSON.parse_string(FileAccess.get_file_as_string(manifest))
+	if not data is Dictionary or data.get("version")!=1:
+		return null
+	var dimensions = data.get("size")
+	if not dimensions is Array or dimensions.size()!=2:
+		return null
+	for value in dimensions:
+		if typeof(value) not in [TYPE_INT,TYPE_FLOAT] or value<=0:
+			return null
+	var path := str(data.get("file",""))
+	if not ResourceLoader.exists(path):
+		return null
+	var image = load(path)
+	if not image is Texture2D or image.get_size()!=Vector2(dimensions[0],dimensions[1]):
+		return null
+	if data.has("region"):
+		var region: Rect2 = avatar_art.hd.rectangle(data.region)
+		if not region.has_area() or not Rect2(Vector2.ZERO,image.get_size()).encloses(region):
+			return null
+		var portrait := AtlasTexture.new()
+		portrait.atlas = image
+		portrait.region = region
+		return portrait
+	return image
+
+func portrait_for(item: Dictionary) -> Texture2D:
+	if item.get("source")=="xfs":
+		# XFS shop portraits are separate assets (often just the helmet), not the
+		# equipped character's head. Never replace them with a different crop.
+		var migrated: Texture2D=avatar_art.xfs_hd.portrait(item.key) if use_hd else null
+		if migrated!=null:
+			return migrated
+		if use_hd and xfs_portraits.has(item.key):
+			return xfs_portraits[item.key]
+		return load(item.portrait)
+	if use_hd and str(item.key) in ["2:2:0","2:3:0"] and empty_slot_portrait != null:
+		return empty_slot_portrait
+	var portrait = avatar_art.hd.portrait(avatar_art.hd_key(item.key)) if use_hd else null
+	return portrait if portrait != null else load(item.portrait)
+
+func load_portrait_atlas(manifest: String) -> Dictionary:
+	var result := {}
+	var sheet = load_registered_texture(manifest)
+	if sheet==null:
+		return result
+	var data = JSON.parse_string(FileAccess.get_file_as_string(manifest))
+	if not data.get("regions") is Dictionary:
+		return result
+	for key in data.regions:
+		var region: Rect2=avatar_art.hd.rectangle(data.regions[key])
+		if not region.has_area() or not Rect2(Vector2.ZERO,sheet.get_size()).encloses(region):
+			continue
+		var portrait := AtlasTexture.new()
+		portrait.atlas=sheet
+		portrait.region=region
+		result[key]=portrait
+	return result
+
+func bonus_description(item: Dictionary) -> String:
+	var names := ["Ataque","Vida","Defesa","Regeneração","Atraso do tiro","Atraso do item","Cratera","Gold"]
+	var values: Array=item.get("bonuses",[])
+	var lines: PackedStringArray=[]
+	for i in range(values.size()):
+		if int(values[i])!=0:
+			lines.append("%s: %+d" % [names[i],int(values[i])])
+	return "\n".join(lines) if not lines.is_empty() else "Sem modificadores"
+
+func draw_bonus_labels(parent: Control, item: Dictionary, origin: Vector2, compact: bool = false) -> void:
+	var values: Array=item.get("bonuses",[])
+	var slot := 0
+	for i in range(values.size()):
+		if int(values[i])==0:
+			continue
+		var pos := origin+Vector2(slot*23,0) if compact else origin+Vector2(0,slot*17)
+		var image_size := Vector2(9,10) if compact else Vector2(14,13)
+		icon(parent,atlas("StaticButtons/AvatarShop/AvatarButton/ButtonIcons",Vector2(26,17),ATTRIBUTE_ICONS[i]),pos,image_size)
+		var value_label=label(parent,"%02d" % int(values[i]),pos+Vector2(image_size.x+1,-1),Vector2(14 if compact else 31,13),8 if compact else 10)
+		value_label.add_theme_color_override("font_color",Color("ff897b") if int(values[i])<0 else Color("f5ecc2"))
+		value_label.add_theme_constant_override("outline_size",1)
+		slot+=1
+
 func general_button(path: String, cell: Vector2, pos: Vector2, text: String, action: Callable, normal: int, hover_end: int, click_start: int, click_end: int, disabled: int):
-	var node = sprite_button(content,"AnimatedButtons/"+path,cell,pos,action,normal,0,click_start,disabled)
-	label(node,text,Vector2(0,cell.y-12),Vector2(cell.x,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	animated.append({"node":node,"path":"AnimatedButtons/"+path,"cell":cell,"normal":normal,"hover_end":hover_end,"click_start":click_start,"click_end":click_end,"disabled":disabled,"active":-1,"selected":false,"age":0.0,"state":0})
+	var area := cell if text.is_empty() else Vector2(cell.x,64)
+	var icon_height := 0.0 if text.is_empty() else 47.0
+	var node = sprite_button(content,"AnimatedButtons/"+path,cell,pos,action,normal,0,click_start,disabled,area,icon_height)
+	label(node,text,Vector2(0,cell.y-12 if text.is_empty() else 49),Vector2(cell.x,15),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	animated.append({"node":node,"path":"AnimatedButtons/"+path,"cell":cell,"icon_height":icon_height,"normal":normal,"hover_end":hover_end,"click_start":click_start,"click_end":click_end,"disabled":disabled,"active":-1,"selected":false,"age":0.0,"state":0})
 	track_click(animated.back())
 	return node
 
@@ -205,14 +426,14 @@ func toggle_gender() -> void:
 	if model.profile.set_gender(1-model.profile.gender):
 		model.preview = model.profile.equipped_set()
 		model.selected_key = ""
-		gender_button.text = ["Masculino","Feminino"][model.profile.gender]
+		gender_button.text = "♂" if model.profile.gender==0 else "♀"
 		refresh(model.category,0)
 	else:
 		status_label.text = "Não foi possível salvar o gênero"
 
 func build_attributes() -> void:
 	attributes_panel = Control.new()
-	attributes_panel.size = Vector2(800,600)
+	attributes_panel.size = CANVAS
 	attributes_panel.visible = false
 	content.add_child(attributes_panel)
 	var dim := ColorRect.new()
@@ -220,9 +441,9 @@ func build_attributes() -> void:
 	dim.size = attributes_panel.size
 	attributes_panel.add_child(dim)
 	var box := Panel.new()
-	box.position = Vector2(220,180)
 	box.size = Vector2(360,245)
-	box.add_theme_stylebox_override("panel",panel_style(Color("435d85")))
+	box.position = (CANVAS-box.size)*0.5
+	box.add_theme_stylebox_override("panel",XfsStyle.new())
 	box.name = "AttributeBox"
 	attributes_panel.add_child(box)
 	label(box,"Atributos do piloto",Vector2(16,12),Vector2(330,26),18)
@@ -291,31 +512,47 @@ func icon(parent: Node, tex: Texture2D, pos: Vector2, dimensions: Vector2) -> Te
 	node.size = dimensions
 	return node
 
+func inventory_style(color: Color) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color=color
+	style.border_color=Color("6ac7df")
+	style.border_width_bottom=1
+	return style
+
 func update_inventory() -> void:
 	for child in inventory_rows.get_children():
 		inventory_rows.remove_child(child)
 		child.queue_free()
 	var count := 0
 	for category in range(4):
-		for item in model.catalog.items(model.profile.gender,category):
+		for item in model.catalog.inventory_items(model.profile.gender,category):
 			if not model.profile.owns(item.key):
 				continue
-			var row := button(inventory_rows,"",Vector2.ZERO,Vector2(196,29),func(): equip_inventory(item.key))
-			row.custom_minimum_size = Vector2(196,29)
+			var row := button(inventory_rows,"",Vector2.ZERO,Vector2(176,17),func(): equip_inventory(item.key))
+			row.custom_minimum_size = Vector2(176,17)
 			row.name = "Owned_"+str(item.key).replace(":","_")
-			row.tooltip_text = "Vestir "+str(item.name)
+			row.tooltip_text = "Vestir "+str(item.name)+"\n"+bonus_description(item)
+			var equipped: bool = model.profile.equipped_set().get(str(category)) == item.key
 			for state in ["normal","hover","pressed","disabled"]:
-				row.add_theme_stylebox_override(state,panel_style(Color("aebdd3") if state in ["normal","disabled"] else Color("d1e2f0")))
-			icon(row,category_icon(category),Vector2(10,3),Vector2(20,14))
-			label(row,str(item.name),Vector2(32,3),Vector2(142,21),10).add_theme_color_override("font_color",Color("def2ff"))
+				row.add_theme_stylebox_override(state,inventory_style(Color("e3a85c") if equipped else (Color("1c99ca") if state in ["normal","disabled"] else Color("44bbe3"))))
+			icon(row,category_icon(category),Vector2(8,2),Vector2(16,12))
+			var item_label := label(row,str(item.name),Vector2(22,0),Vector2(80 if item.get("source")=="xfs" else 130,17),9)
+			item_label.clip_text=true
+			item_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
+			item_label.size=Vector2(80 if item.get("source")=="xfs" else 130,17)
+			item_label.add_theme_color_override("font_color",Color("e9ffff"))
+			item_label.add_theme_constant_override("outline_size",0)
 			if model.profile.equipped_set().get(str(category)) == item.key:
-				icon(row,texture("StaticButtons/AvatarShop/AvatarButton/EquipedIndicator"),Vector2(0,6),Vector2(10,17))
-				icon(row,texture("StaticButtons/AvatarShop/AvatarButton/OwnedCheck"),Vector2(176,8),Vector2(14,10))
+				icon(row,texture("StaticButtons/AvatarShop/AvatarButton/EquipedIndicator"),Vector2(0,1),Vector2(8,14))
+				if item.get("source")!="xfs":
+					icon(row,texture("StaticButtons/AvatarShop/AvatarButton/OwnedCheck"),Vector2(157,4),Vector2(12,9))
+			draw_bonus_labels(row,item,Vector2(104,3),true)
 			count += 1
-	for i in range(maxi(0,8-count)):
+	inventory_count.text = "%d peças" % count
+	for i in range(maxi(0,14-count)):
 		var empty := Panel.new()
-		empty.custom_minimum_size = Vector2(196,29)
-		empty.add_theme_stylebox_override("panel",panel_style(Color("aebdd3")))
+		empty.custom_minimum_size = Vector2(176,17)
+		empty.add_theme_stylebox_override("panel",inventory_style(Color("127da8")))
 		empty.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		inventory_rows.add_child(empty)
 
@@ -352,54 +589,76 @@ func update_attributes() -> void:
 		add_buttons[i].disabled = remaining <= 0 or int(model.draft_attributes[i]) >= 50
 		remove_buttons[i].disabled = int(model.draft_attributes[i]) <= 0
 func refresh(category: int, page: int) -> void:
+	for node in chrome_labels:
+		node.visible=use_hd or xfs_texture("store_back")==null
 	if is_instance_valid(cards):
 		content.remove_child(cards)
 		cards.queue_free()
 	cards = Control.new()
 	content.add_child(cards)
 	var rows: Array = model.filter(category,model.query,model.inventory,page)
+	empty_label.visible = rows.is_empty()
 	for index in range(rows.size()):
 		var item: Dictionary = rows[index]
-		var pos := Vector2(260+(index%3)*175,26+int(index/3)*152)
+		var pos := GRID_ORIGIN+Vector2(index%3,int(index/3))*GRID_STEP
 		var card = button(cards,"",pos,CARD_SIZE,func():
 			if model.select(item.key):
 				refresh(model.category,model.page)
+			else:
+				status_label.text = "Não foi possível salvar o avatar"
 		)
 		for state in ["normal","hover","pressed","focus","disabled"]:
 			var frame := 2 if model.selected_key == item.key or state=="pressed" else (1 if state=="hover" else 0)
 			var path := "StaticButtons/AvatarShop/AvatarButton/Background"
 			var style = CardStyle.new(atlas(path,Vector2(105,83),frame),density(path))
-			card.add_theme_stylebox_override(state,style)
+			if not use_hd and xfs_texture("store_avatar",0)!=null:
+				var native := StyleBoxTexture.new()
+				native.texture=xfs_texture("store_avatar",1 if frame>0 else 0)
+				card.add_theme_stylebox_override(state,native)
+			else:
+				card.add_theme_stylebox_override(state,style)
 		card.size = CARD_SIZE
 		card.name = "Avatar"+str(index)
-		card.tooltip_text = item.name+"\nEste avatar muda a aparência, sem bônus de combate.\nMelhorias de combate são definidas em Atributos."
-		icon(card,category_icon(category),Vector2(5,2),Vector2(16,12))
-		label(card,str(item.name).left(20),Vector2(24,2),Vector2(137,16),11)
-		var portrait_texture = avatar_art.hd.portrait(item.key)
-		if portrait_texture == null:
-			portrait_texture = load(item.portrait)
-		var portrait := icon(card,portrait_texture,Vector2(20,26),PORTRAIT_SIZE)
+		card.tooltip_text = item.name+"\n"+str(item.get("description",""))+"\n"+bonus_description(item)
+		icon(card,category_icon(category),Vector2(6,5),Vector2(14,10))
+		var name_label=label(card,str(item.name),Vector2(22,3),Vector2(103,16),9)
+		name_label.name="AvatarName"
+		name_label.clip_text=true
+		name_label.text_overrun_behavior=TextServer.OVERRUN_TRIM_ELLIPSIS
+		name_label.size=Vector2(103,16)
+		if int(item.gender)!=2:
+			var badge := ColorRect.new()
+			badge.position=Vector2(129,5)
+			badge.size=Vector2(25,11)
+			badge.color=Color("2351bd") if int(item.gender)==0 else Color("de503a")
+			badge.mouse_filter=Control.MOUSE_FILTER_IGNORE
+			card.add_child(badge)
+			var tag=label(badge,"BOY" if int(item.gender)==0 else "GIRL",Vector2.ZERO,Vector2(25,11),7)
+			tag.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		var portrait_texture = portrait_for(item)
+		var portrait := icon(card,portrait_texture,Vector2(8,25),PORTRAIT_SIZE)
 		portrait.name = "Portrait"
 		portrait.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		card.clip_contents = true
-		var effect := label(card,"Cosmético · sem bônus",Vector2(13,94),Vector2(140,13),9)
+		var effect := label(card,"" if item.get("source")=="xfs" else "Cosmético\nsem bônus",Vector2(99,30),Vector2(53,65),8)
 		effect.name = "AvatarEffect"
 		effect.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		effect.add_theme_color_override("font_color",Color("395070"))
+		effect.add_theme_color_override("font_color",Color("c3eaf1"))
 		effect.add_theme_constant_override("outline_size",0)
+		draw_bonus_labels(effect,item,Vector2.ZERO)
 		var cash := int(item.get("cash_price",0))
 		var gold := int(item.get("gold_price",0))
-		var cash_text := format_number(cash)+"  Cash" if cash>0 else ""
-		var gold_text := format_number(gold)+"  Gold" if gold>0 else ("Somente Cash" if cash>0 else "Básico")
-		label(card,cash_text,Vector2(10,114),Vector2(143,14),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		var cash_text := format_number(cash)+" CASH" if cash>0 else ""
+		var gold_text := format_number(gold)+" GOLD" if gold>0 else ("Somente Cash" if cash>0 else "Básico")
+		label(card,cash_text,Vector2(7,112),Vector2(CARD_SIZE.x-14,17),12).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		card.get_child(card.get_child_count()-1).add_theme_color_override("font_color",CASH_COLOR)
-		label(card,gold_text,Vector2(10,128),Vector2(143,14),10).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		label(card,gold_text,Vector2(7,130),Vector2(CARD_SIZE.x-14,17),12).horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		card.get_child(card.get_child_count()-1).add_theme_color_override("font_color",GOLD_COLOR)
 		var set_data: Dictionary = model.profile.equipped_set() if model.inventory else model.preview
 		if set_data.get(str(category)) == item.key:
 			icon(card,texture("StaticButtons/AvatarShop/AvatarButton/EquipedIndicator"),Vector2(1,64),Vector2(10,17))
 		if model.profile.owns(item.key):
-			icon(card,texture("StaticButtons/AvatarShop/AvatarButton/OwnedCheck"),Vector2(140,23),Vector2(17,13))
+			icon(card,texture("StaticButtons/AvatarShop/AvatarButton/OwnedCheck"),Vector2(75,27),Vector2(13,10))
 	balance_label.text = "Gold: %d\nCash: %d" % [model.profile.gold,model.profile.cash]
 	page_label.text = "%d / %d" % [model.page+1,model.last_page]
 	left_button.disabled = model.page == 0
@@ -410,14 +669,14 @@ func refresh(category: int, page: int) -> void:
 	try_caption.text = ("Vestido" if dressed else "Vestir") if owned else "Experimentar"
 	try_button.disabled = model.inventory or item.is_empty() or (dressed if owned else model.preview.get(str(category)) == model.selected_key)
 	buy_button.disabled = model.inventory or item.is_empty() or model.profile.owns(model.selected_key) or not can_buy(item)
-	for i in range(4):
-		animated[i].selected = i == category
-	for i in range(2):
-		tab_buttons[i].disabled = (i==1)==model.inventory
+	for i in range(category_buttons.size()):
+		category_buttons[i].add_theme_stylebox_override("normal",XfsStyle.new("button",2 if i==category else 0))
 	update_inventory()
 	update_attributes()
 	painter.queue_redraw()
 func can_buy(item: Dictionary) -> bool:
+	if item.get("source")=="xfs" and (not item.get("buyable",false) or not item.get("art_available",false)):
+		return false
 	return (int(item.get("gold_price",0))>0 and model.profile.gold>=int(item.gold_price)) or (int(item.get("cash_price",0))>0 and model.profile.cash>=int(item.cash_price))
 func try_selected() -> void:
 	if model.try_selected():
@@ -433,38 +692,33 @@ func open_buy() -> void:
 	purchase_key = model.selected_key
 	var item: Dictionary = model.catalog.find(purchase_key)
 	modal = Control.new()
-	modal.size = Vector2(1280,800)
-	add_child(modal)
+	modal.size = CANVAS
+	content.add_child(modal)
+	var center := CANVAS*0.5
 	var dim := ColorRect.new()
 	dim.color = Color(0,0,0,0.65)
 	dim.size = modal.size
 	modal.add_child(dim)
-	var box := TextureRect.new()
+	var box := Panel.new()
 	box.name = "PurchasePanel"
-	box.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	box.texture = texture("Popup/Blue/Avatar/Buy")
-	box.position = Vector2(640,400)-Vector2(228,286)*0.8
-	box.size = Vector2(228,286)*1.6
+	box.size = Vector2(313,187)*1.3
+	box.position = center-box.size*0.5
+	box.add_theme_stylebox_override("panel",XfsStyle.new())
 	box.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	modal.add_child(box)
-	label(modal,item.name,Vector2(490,220),Vector2(300,28),17).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var portrait_texture = avatar_art.hd.portrait(purchase_key)
-	if portrait_texture == null:
-		portrait_texture = load(item.portrait)
-	icon(modal,portrait_texture,Vector2(582,252),Vector2(116,72)).name = "PurchasePortrait"
-	label(modal,["Cabeça","Corpo","Óculos","Bandeira"][int(item.category)]+" · cosmético, sem bônus",Vector2(490,321),Vector2(300,20),12).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label(modal,"Confirmar compra?",Vector2(490,343),Vector2(300,26),17).horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label(modal,"COMPRAR AVATAR",center+Vector2(-180,-110),Vector2(360,25),16).horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	icon(modal,portrait_for(item),center+Vector2(-182,-75),Vector2(88,78)).name="PurchasePortrait"
+	label(modal,item.name,center+Vector2(-82,-71),Vector2(265,23),16)
+	var description=label(modal,bonus_description(item).replace("\n"," · "),center+Vector2(-82,-41),Vector2(265,45),10)
+	description.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	var currencies: Array = ["gold","cash"].filter(func(currency): return int(item.get(currency+"_price",0))>0)
 	for index in range(currencies.size()):
 		var currency: String = currencies[index]
 		var price := int(item.get(currency+"_price",0))
-		if price <= 0:
-			continue
 		var balance: int = model.profile.gold if currency == "gold" else model.profile.cash
-		var x := 570 if currencies.size()==1 else 495+index*150
-		var color := GOLD_COLOR if currency=="gold" else CASH_COLOR
-		label(modal,"%s · %s\n%s → %s" % [currency.capitalize(),format_number(price),format_number(balance),format_number(balance-price)],Vector2(x,378),Vector2(145,60),14).add_theme_color_override("font_color",color)
-		var b = button(modal,"Pagar "+currency.capitalize(),Vector2(x,455),Vector2(140,35),func():
+		var x: float = center.x-70 if currencies.size()==1 else center.x-151+index*162
+		label(modal,"%s %s · saldo %s" % [format_number(price),currency.capitalize(),format_number(balance)],Vector2(x-5,center.y+12),Vector2(150,22),10).horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+		var b = button(modal,"Pagar "+currency.capitalize(),Vector2(x,center.y+39),Vector2(140,30),func():
 			if not is_instance_valid(modal):
 				return
 			var result: String = model.confirm_buy(purchase_key,currency)
@@ -472,12 +726,17 @@ func open_buy() -> void:
 			status_label.text = "Compra concluída" if result == "ok" else "Compra não concluída: "+result
 			refresh(model.category,model.page)
 		)
+		for state in range(4):
+			b.add_theme_stylebox_override(["normal","hover","pressed","disabled"][state],XfsStyle.new("button",state))
+		b.add_theme_color_override("font_color",Color("003d57"))
+		b.add_theme_color_override("font_hover_color",Color("003d57"))
 		b.disabled = balance < price
 		b.name = currency.capitalize()+"Purchase"
-	button(modal,"Cancelar",Vector2(630,512),Vector2(150,32),close_buy)
+	button(modal,"Cancelar",center+Vector2(-62,81),Vector2(124,27),close_buy)
+
 func close_buy() -> void:
 	if is_instance_valid(modal):
-		remove_child(modal)
+		modal.get_parent().remove_child(modal)
 		modal.queue_free()
 	modal = null
 	restore_controls()
@@ -492,13 +751,14 @@ func restore_controls() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_ESCAPE:
+		# Mark handled while still in the tree; show_menu removes this shop.
+		get_viewport().set_input_as_handled()
 		if is_instance_valid(modal):
 			close_buy()
 		elif attributes_panel.visible:
 			close_attributes()
 		else:
 			host.show_menu()
-		get_viewport().set_input_as_handled()
 func _process(delta: float) -> void:
 	elapsed += delta
 	for entry in animated:
@@ -517,9 +777,11 @@ func _process(delta: float) -> void:
 		entry.age = 0.0 if state != entry.state else float(entry.age)+delta
 		entry.state = state
 		var frame := animation_frame(entry,state,entry.click_age if state==2 else entry.age)
-		node.texture_normal = atlas(entry.path,entry.cell,frame)
+		node.texture_normal = button_texture(entry.path,entry.cell,frame,entry.icon_height,node.size)
 		node.texture_hover = node.texture_normal
 		node.texture_pressed = node.texture_normal
+		if state==3:
+			node.texture_disabled = node.texture_normal
 	painter.queue_redraw()
 func animation_fps(entry: Dictionary, state: int) -> float:
 	var name: String = entry.path.get_file()
@@ -555,38 +817,56 @@ func format_number(value: int) -> String:
 	return result
 
 func paint(view: Node2D) -> void:
-	# Reuse only the source's sky/divider/city; its baked 5x5 pane is superseded.
-	view.draw_rect(Rect2(0,0,225,600),Color("b2c6e0"))
-	draw_region(view,"InGame/Scene/AvatarShop/Background",Rect2(0,520,225,80),Rect2(0,520,225,80))
-	draw_region(view,"InGame/Scene/AvatarShop/Background",Rect2(225,0,20,600),Rect2(225,0,20,600))
-	view.draw_rect(Rect2(245,0,555,600),Color("4e90cf"))
-	# Crisp code-native sky; raster city and divider are registered HD derivatives.
-	view.draw_rect(Rect2(245,0,555,480),Color("4e90cf"))
-	draw_region(view,"InGame/Scene/AvatarShop/Background",Rect2(245,520,555,80),Rect2(245,520,555,80))
-	view.draw_style_box(panel_style(Color("43577e")),Rect2(8,203,224,317))
-	view.draw_style_box(panel_style(Color("8daccc")),Rect2(8,5,211,171))
-	view.draw_texture_rect(texture("InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background"),Rect2(13,10,201,100),false)
-	view.draw_texture_rect(texture("InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2"),Rect2(13,10,201,100),false)
+	if not use_hd and xfs_texture("store_back")!=null:
+		view.draw_texture_rect(xfs_texture("store_back"),Rect2(Vector2.ZERO,CANVAS),false)
+		if xfs_texture("store_myavatar")!=null:
+			view.draw_texture_rect(xfs_texture("store_myavatar"),Rect2(552,104,240,437),false)
+	else:
+		view.draw_style_box(XfsStyle.new(),Rect2(8,15,538,579))
+		view.draw_style_box(XfsStyle.new(),Rect2(154,0,278,59))
+		view.draw_style_box(XfsStyle.new("well"),Rect2(162,4,260,52))
+		view.draw_style_box(XfsStyle.new(),Rect2(465,0,81,59))
+		view.draw_style_box(XfsStyle.new(),Rect2(552,0,240,548))
+		view.draw_rect(Rect2(560,5,224,22),Color("06b8d5"))
+		view.draw_style_box(XfsStyle.new("well"),Rect2(565,31,214,76))
+		view.draw_rect(Rect2(568,34,86,72),Color("008abe"))
+		view.draw_style_box(XfsStyle.new("well"),Rect2(567,109,180,240))
+		view.draw_style_box(XfsStyle.new("well"),Rect2(567,389,180,121))
+		for i in range(7):
+			view.draw_rect(Rect2(569,391+i*17,176,16),Color("1688b4") if i%2==0 else Color("209aca"))
+		for x in [438,454]:
+			view.draw_rect(Rect2(x,0,7,54),Color("005574"))
+			view.draw_rect(Rect2(x+2,0,2,54),Color("4bd8e9"))
+			view.draw_style_box(XfsStyle.new("button"),Rect2(x-6,18,19,21))
 	var set_data: Dictionary = model.profile.equipped_set() if model.inventory else model.preview
-	var sprite = host.sprite_for(host.vehicle)
-	sprite.draw(view,Vector2(118,81),66,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
-	var font := ThemeDB.fallback_font
-	var values: Array = model.profile.attributes
+	if preview_mobile:
+		for path in ["InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background","InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2"]:
+			view.draw_texture_rect_region(texture(path),Rect2(568,34,86,72),preview_region(path))
+		var sprite = host.sprite_for(host.vehicle)
+		sprite.draw(view,Vector2(612,90),44,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
+	else:
+		avatar_art.draw(view,set_data,Transform2D(0,Vector2(-0.95,0.95),0,Vector2(612,91+sin(elapsed*2.3)*0.5)),elapsed,Color.WHITE)
+	var values: Array = Attributes.with_equipment(model.profile.attributes,model.catalog.bonuses(set_data))
+	var order := [4,7,6,2,1,3,0,5]
 	for i in range(8):
-		var pos := Vector2(40+(i%4)*43,112+int(i/4)*15)
-		var icon_index: int = ATTRIBUTE_ICONS[i]
-		draw_region(view,"StaticButtons/AvatarShop/AvatarButton/ButtonIcons",Rect2(pos,Vector2(16,11)),Rect2(Vector2(icon_index%6,int(icon_index/6))*Vector2(26,17),Vector2(26,17)))
-		view.draw_string_outline(font,pos+Vector2(16,10),"%02d" % int(values[i]),HORIZONTAL_ALIGNMENT_LEFT,-1,9,1,Color.BLACK)
-		view.draw_string(font,pos+Vector2(16,10),"%02d" % int(values[i]),HORIZONTAL_ALIGNMENT_LEFT,-1,9,Color.WHITE)
+		var attribute: int=order[i]
+		var pos := Vector2(666+(i%2)*54,38+int(i/2)*18)
+		var icon_index: int = ATTRIBUTE_ICONS[attribute]
+		draw_region(view,"StaticButtons/AvatarShop/AvatarButton/ButtonIcons",Rect2(pos,Vector2(13,11)),Rect2(Vector2(icon_index%6,int(icon_index/6))*Vector2(26,17),Vector2(26,17)))
+		view.draw_string(shop_font,pos+Vector2(17,10),"%02d" % int(values[attribute]),HORIZONTAL_ALIGNMENT_LEFT,-1,10,Color("e8f1dc"))
 	for i in range(2):
-		var text := format_number(model.profile.cash if i==0 else model.profile.gold)+("  Cash" if i==0 else "  Gold")
-		var pos := Vector2(211-font.get_string_size(text,HORIZONTAL_ALIGNMENT_LEFT,-1,11).x,153+i*14)
-		view.draw_string_outline(font,pos,text,HORIZONTAL_ALIGNMENT_LEFT,-1,11,2,Color("213148"))
-		view.draw_string(font,pos,text,HORIZONTAL_ALIGNMENT_LEFT,-1,11,CASH_COLOR if i==0 else GOLD_COLOR)
+		var text := ("GOLD : " if i==0 else "CASH : ")+format_number(model.profile.gold if i==0 else model.profile.cash)
+		view.draw_string(shop_font,Vector2(172+i*126,54),text,HORIZONTAL_ALIGNMENT_LEFT,-1,9,Color("80e3e7"))
 
 func draw_region(view: Node2D, path: String, target: Rect2, source: Rect2) -> void:
 	var factor := density(path)
 	view.draw_texture_rect_region(texture(path),target,Rect2(source.position*factor,source.size*factor))
+
+func preview_region(path: String) -> Rect2:
+	var source_size: Vector2 = texture(path).get_size()
+	var scale := maxf(86.0/source_size.x,72.0/source_size.y)
+	var window := Vector2(86,72)/scale
+	return Rect2((source_size-window)*0.5,window)
 
 func block_controls(node: Node, except_node: Node = null) -> void:
 	if node == except_node:

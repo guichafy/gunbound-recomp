@@ -18,8 +18,10 @@ var matches := 0
 var awarded: Array = []
 var last_save_ok := true
 
-func _init(save_path: String = "user://profile.json") -> void:
+func _init(save_path: String = "user://profile.json", avatar_catalog = null) -> void:
 	path = save_path
+	if avatar_catalog!=null:
+		catalog=avatar_catalog
 	for kind in [0, 1]:
 		equipped[str(kind)] = catalog.defaults(kind)
 		for key in equipped[str(kind)].values():
@@ -95,7 +97,7 @@ func save_profile() -> bool:
 func shop_data() -> Dictionary:
 	return {"version":1,"gold":gold,"cash":cash,"gender":gender,"owned":owned.duplicate(),"equipped":equipped.duplicate(true),"attributes":attributes.duplicate()}
 func snapshot() -> Dictionary:
-	return {"version":2,"nickname":nickname,"xp":xp,"wins":wins,"matches":matches,"awarded":awarded.duplicate(),"shop":shop_data()}
+	return {"version":3,"nickname":nickname,"xp":xp,"wins":wins,"matches":matches,"awarded":awarded.duplicate(),"shop":shop_data()}
 func restore(data: Dictionary) -> void:
 	nickname = data.nickname
 	xp = data.xp
@@ -117,6 +119,8 @@ func load_shop(data: Dictionary) -> void:
 				owned.append(key)
 	if data.get("owned") is Array:
 		for key in data.owned:
+			if key is String:
+				key=catalog.canonical_key(key,gender)
 			if key is String and not catalog.find(key).is_empty() and key not in owned:
 				owned.append(key)
 	if data.get("equipped") is Dictionary:
@@ -125,13 +129,15 @@ func load_shop(data: Dictionary) -> void:
 			if not set_data is Dictionary:
 				continue
 			for category in range(4):
-				var key = set_data.get(str(category), "")
+				var key = catalog.canonical_key(str(set_data.get(str(category), "")),kind)
 				var item: Dictionary = catalog.find(str(key))
 				if key in owned and catalog.compatible(str(key), kind) and int(item.get("category", -1)) == category:
 					equipped[str(kind)][str(category)] = key
 	attributes = Attributes.sanitize(data.get("attributes", []) if data.get("attributes") is Array else [], level())
 func owns(key: String) -> bool:
-	return key in owned
+	return catalog.canonical_key(key,gender) in owned
+func equipment_bonuses(equipment: Dictionary = {}) -> Array:
+	return catalog.bonuses(equipped_set() if equipment.is_empty() else equipment)
 func equipped_set(kind: int = -1) -> Dictionary:
 	return equipped[str(gender if kind < 0 else clampi(kind,0,1))].duplicate(true)
 func persist(previous: Dictionary) -> bool:
@@ -140,11 +146,14 @@ func persist(previous: Dictionary) -> bool:
 	restore(previous)
 	return false
 func purchase(key: String, currency: String) -> String:
+	key=catalog.canonical_key(key,gender)
 	var item: Dictionary = catalog.find(key)
 	if not catalog.compatible(key, gender) or currency not in ["gold","cash"]:
 		return "invalid"
 	if owns(key):
 		return "owned"
+	if catalog.xfs_active and (item.get("source")!="xfs" or not item.get("buyable",false) or not item.get("art_available",false)):
+		return "invalid"
 	var price := int(item.get(currency + "_price", 0))
 	if price <= 0:
 		return "invalid"
@@ -158,6 +167,7 @@ func purchase(key: String, currency: String) -> String:
 	owned.append(key)
 	return "ok" if persist(previous) else "save"
 func equip(key: String) -> bool:
+	key=catalog.canonical_key(key,gender)
 	if not owns(key) or not catalog.compatible(key, gender):
 		return false
 	var previous := snapshot()

@@ -1,0 +1,149 @@
+{
+	"batch": "batch_019",
+	"components": [
+		{
+			"id": "xfs:1:1:49|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:50|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:50|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:51|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:51|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:52|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:52|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:53|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:53|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:54|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:54|layer:1",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:54|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:55|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:55|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:56|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:56|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:57|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:57|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:58|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:58|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:59|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:59|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:60|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:60|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:61|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:61|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:62|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:62|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:63|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:63|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:64|layer:0",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		},
+		{
+			"id": "xfs:1:1:64|portrait",
+			"sheet_hash": "babaedeecfbb8a790c9472687b856c801bf713b806145ecf1a48de882f311488"
+		}
+	],
+	"frames": [
+		0,
+		30,
+		90
+	],
+	"renderer_hashes": {
+		"scripts/avatar_art.gd": "cbe5da4cb68c1e8249f12dab1fc15f1050ecb08d9a403fc9202834e8fe5eb0c5",
+		"scripts/avatar_xfs_hd.gd": "bb13d3cb0fb19d0a303792a50f05b1f06deaedafaec5322059eb97eb0c0c0098",
+		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
+		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
+		"scripts/mobile_rig.gd": "69c10437e9f7034dabef70b7fac3a050faba17ddc456f41bb4d84c6286e37db2"
+	},
+	"size": [
+		1920,
+		1080
+	]
+}

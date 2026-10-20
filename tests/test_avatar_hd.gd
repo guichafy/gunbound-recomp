@@ -26,7 +26,7 @@ func run() -> void:
 				var region: Dictionary = hd.piece(key,frame)
 				check(is_equal_approx(region.source.size.x/region.source.size.y,region.native.size.x/region.native.size.y), "HD piece preserves intrinsic aspect")
 				check(region.native.size == first.native.size, "Stable size through original frame timing")
-		var c = load("res://scripts/avatar_catalog.gd").new()
+		var c = load("res://scripts/avatar_catalog.gd").legacy()
 		var native = load("res://scripts/avatar_art.gd").new(false)
 		var art = load("res://scripts/avatar_art.gd").new()
 		var set_data: Dictionary = c.defaults(0)

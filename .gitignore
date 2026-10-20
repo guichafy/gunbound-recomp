@@ -9,3 +9,7 @@ __pycache__/
 .env.*
 !.env.example
 export_credentials.cfg
+
+# Original GunBound client files live in ~/Workspaces/GunboundClassic (symlinked here)
+assets/xfs/reference/*.xfs
+assets/xfs/reference/*.dat

@@ -1,5 +1,48 @@
 # Entregas e próximos trabalhos
 
+## Migração HD integral dos avatares — pedido atual
+
+- [x] Medir escopo real:562registros,550com peças,629camadas,12N/A.
+- [x] Identificar/corrigir transparência ARGB4444 de cinco acessórios, RED→GREEN.
+- [x] Controle por registro: miniatura, peça vestível, efeito, registro e validação.
+- [x] Preparar36lotes com1149componentes pendentes; brutos/prompts excluídos do export.
+- [ ] Regenerar todos os componentes pendentes e conferir identidade por lote.
+- [ ] Consumir HD no personagem vestido, preservando rig/animação/registro.
+- [ ] Validar todos os registros/poses/fallback, capturasGPU60Hz e aplicativo.
+
+## Avatar Shop XFS0.16 (ADR-071/072)
+
+- [x] Extrair catálogo562/479compráveis, frames/pivôs/camadas L e retratos nativos.
+- [x] Layout XFS800×600, grade3×3, inventário à direita, preços sem blur/overposição.
+- [x] Compra/equipamento/perfil3 com migração por identidade e rollback.
+- [x] Bônus por peça nos cards/conjunto/combate/previsão, inclusive penalidade de delay.
+- [x] Fundo e18miniaturas regenerados; cobertura vestível limitada explicitada.
+- [x] 3163checks+10partidas;106checks após atlas, Python8, GPU/PCK passaram.
+- [x] App/ZIP0.16.0 assinados, smoke do PCK isolado e capturas1920×1080/60Hz.
+- [x] Usuário validou e apontou lacuna de HD no personagem: novo plano acima.
+
+## Avatar Shop Full HD pelo vídeo0.15 (ADR-070)
+
+- [x] Inspecionar vídeo/imagem e aplicar ordem confirmada Presente→Comprar→Experimentar.
+- [x] Composição16:9, grade3×3, inventário compacto amarelo e alternância Avatar/Mobile.
+- [x] Texto nítido, molduras vetoriais e preço uniforme verificado em GPU/PCK.
+- [x] Regenerar fundo e retrato compartilhado de slot vazio; metadados/fallback/mipmaps.
+- [x] Corrigir escala real da Window e restaurar menu/batalha, incluindo ESC/reentrada.
+- [x] 1949checks rápidos e10partidas completas sem falhas; achado da revisão corrigido.
+- [x] GPU1920×1080/120frames60Hz, app/ZIP0.15.0 assinados e smoke isolado do PCK.
+- [ ] Usuário validar a aparência e os fluxos no aplicativo reaberto.
+
+## Auditoria de estado/layout da loja0.14.9 (ADR-069)
+
+- [x] Conferir C# e aplicar escolha do usuário: abas sobre cards e Try→Buy→Gift.
+- [x] Corrigir seleção oculta, rollback/erro no clique da grade e mensagem de busca vazia.
+- [x] Separar arte/legenda/hitbox, alinhar categorias e corrigir size após fonte.
+- [x] Preservar proporção da prévia com crop uniforme e faixa de preço nítida.
+- [x] 1913checks+10partidas sem falhas; revisão independente sem achados.
+- [x] GPU1920×1080/120frames60Hz e smoke real do PCK em/tmp, incluindo batalha.
+- [x] App/ZIP0.14.9 reexportados, versão conferida e assinatura estrita válida.
+- [ ] Usuário validar layout/fluxos no aplicativo atualizado.
+
 ## Paridade Mage/Bigfoot com o C# (ADR-066)
 
 - [x] Regeneração de escudo em todos os mobiles a cada turno, com teto do C#.

@@ -1,0 +1,6 @@
+{
+  "xfs:1:1:0|portrait": {
+    "reuse": "xfs:1:1:0|layer:0",
+    "reason": "Rejected wrong glasses in batch015 cell18. Native fallback portrait is the seated body frame; use matching newly generated body master037."
+  }
+}

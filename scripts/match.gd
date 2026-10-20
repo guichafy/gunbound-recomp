@@ -57,7 +57,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = []) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = []) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -87,6 +87,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		for id in (Items.sanitize(loadout) if index == PLAYER else []):
 			items.append({"id": id, "used": false})
 		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
+		values=Attributes.with_equipment(values,gear_bonuses_by_actor[index] if index<gear_bonuses_by_actor.size() and gear_bonuses_by_actor[index] is Array else [])
 		var max_health := Attributes.health(int(VEHICLES[kind].hp),int(values[1]))
 		actors.append({"gold_state":{"gold":0,"enemy_damage":0},"attributes":values,"vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - stance), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "ss_lock": 0, "tilt": 0.0,
 			"items": items, "turn_item": ""})
@@ -235,7 +236,7 @@ func body_rotation(index: int) -> float:
 func weapon_rules(index: int, weapon: int) -> Dictionary:
 	var rules: Dictionary = Mobiles.weapon(actors[index].vehicle, weapon).duplicate(true)
 	var points := Attributes.points(actors[index],4)
-	if points > 0:
+	if points != 0:
 		rules.delay = Attributes.delay(roundi(float(rules.delay) * 7.5), points)
 	return rules
 

@@ -1,0 +1,149 @@
+{
+	"batch": "batch_009",
+	"components": [
+		{
+			"id": "xfs:1:0:52|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:53|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:53|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:54|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:54|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:55|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:55|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:56|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:56|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:57|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:57|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:58|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:58|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:59|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:59|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:60|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:60|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:61|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:61|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:62|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:62|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:63|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:63|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:64|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:64|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:65|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:65|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:66|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:66|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:67|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:67|portrait",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		},
+		{
+			"id": "xfs:1:0:68|layer:0",
+			"sheet_hash": "da82e32f99e5501d1dfd1e1172e3ae5439131527af0fd0d6dcc74a15e0aa2a56"
+		}
+	],
+	"frames": [
+		0,
+		30,
+		90
+	],
+	"renderer_hashes": {
+		"scripts/avatar_art.gd": "cbe5da4cb68c1e8249f12dab1fc15f1050ecb08d9a403fc9202834e8fe5eb0c5",
+		"scripts/avatar_xfs_hd.gd": "bb13d3cb0fb19d0a303792a50f05b1f06deaedafaec5322059eb97eb0c0c0098",
+		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
+		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
+		"scripts/mobile_rig.gd": "69c10437e9f7034dabef70b7fac3a050faba17ddc456f41bb4d84c6286e37db2"
+	},
+	"size": [
+		1920,
+		1080
+	]
+}

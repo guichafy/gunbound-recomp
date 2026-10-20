@@ -69,7 +69,7 @@ func run() -> void:
 	var path := "res://.tools/shop-items-integration-profile.json"
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path.get_basename()+"-options.json"))
-	view.profile = load("res://scripts/profile.gd").new(path)
+	view.profile = load("res://tests/legacy_profile.gd").new(path)
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true

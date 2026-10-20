@@ -21,6 +21,18 @@ static func sanitize(values: Array, level: int = 19) -> Array:
 		result.append(points)
 		remaining -= points
 	return result
+static func with_equipment(base: Array, bonuses: Array) -> Array:
+	# Pilot allocation keeps its budget; signed gear modifiers do not consume it.
+	# Preserve the existing 50-point per-stat combat ceiling after composition.
+	var result: Array=[]
+	for index in range(COUNT):
+		var own = base[index] if index<base.size() else 0
+		var gear = bonuses[index] if index<bonuses.size() else 0
+		var amount := int(own) if (own is int or own is float) and is_finite(float(own)) else 0
+		if (gear is int or gear is float) and is_finite(float(gear)):
+			amount+=int(gear)
+		result.append(clampi(amount,-50,50))
+	return result
 static func damage(base: int, attack: int, defense: int) -> int:
 	return maxi(0, int(base * (1.0 + (attack - defense) / 100.0)))
 static func health(base: int, points: int) -> int:

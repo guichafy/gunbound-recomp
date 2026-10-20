@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.14.8**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot e Mage, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.16.0**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot e Mage, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,11 +8,11 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.14.8** — cards da loja corrigidos e efeito dos avatares explicado |
+| Versão | **0.16.0** — Avatar Shop XFS, catálogo completo e bônus por equipamento |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
-| Validação automática | **1758 verificações e 10 partidas completas, zero falhas** |
+| Validação automática | **3163 verificações e 10 partidas completas, zero falhas** |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
-| Aceite visual | A suavidade dos avatares (0.14.4) foi confirmada. A interface HD da loja 0.14.8 ainda aguarda o seu olhar no aplicativo |
+| Aceite visual | A suavidade dos avatares (0.14.4) foi confirmada. A interface HD da loja 0.16.0 ainda aguarda o seu olhar no aplicativo |
 
 O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). Este arquivo é o mapa do que existe hoje.
 
@@ -20,19 +20,19 @@ O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/H
 
 ### Loja de avatar
 
-No menu, **Shop de avatar** abre a loja no layout clássico: grade 3×3, inventário lateral sempre visível e prévia do piloto no mobile. Cabeça, corpo, óculos e bandeira vêm do catálogo original (15 registros). **Experimentar** mostra uma peça ainda não comprada. **Comprar** gasta Cash ou Gold. Clicar um item possuído no inventário veste e grava. **Presente** permanece desligado: não há amigos nem presentes no treino offline.
+No menu, **Shop de avatar** abre a loja ciano do cliente XFS, com grade3×3 à esquerda e inventário à direita. O catálogo contém562registros,479compráveis, com preços e bônus originais. **Experimentar** mantém prévia temporária; **Comprar** gasta Cash ou Gold; clicar uma peça possuída veste e grava. Bônus aparecem nos cards/conjunto e são aplicados na próxima batalha. Ações de rede e venda continuam indisponíveis no treino offline.
 
 O primeiro perfil recebe, uma única vez, 1.000 Cash e 1.000 Gold de teste. Esse saldo não é dinheiro real.
 
-<img src="docs/avatar-shop-classic/shop.png" width="720" alt="Loja de avatar com grade de cabeças, inventário e prévia do Bigfoot">
+<img src="docs/avatar-shop-xfs/shop.png" width="720" alt="Loja de avatar Full HD com grade de cabeças e inventário lateral">
 
-<img src="docs/avatar-shop-classic/inventory.png" width="720" alt="Aba de corpos na loja, com o inventário lateral vestido">
+<img src="docs/avatar-shop-xfs/inventory.png" width="720" alt="Aba de corpos na loja, com o inventário lateral vestido">
 
 **Atributos** abre um painel separado. Cada avanço de nível local libera 10 pontos, até 180 no total e 50 por atributo. Salvar aplica na próxima partida; cancelar ou Esc descarta o rascunho. Ataque, defesa, vida, regeneração, atraso de tiro, atraso de item, cratera e Gold % entram no combate do jogador e da máquina, com as mesmas regras.
 
-<img src="docs/avatar-shop-classic/attributes.png" width="720" alt="Painel de atributos do piloto sobre a loja">
+<img src="docs/avatar-shop-xfs/attributes.png" width="720" alt="Painel de atributos do piloto sobre a loja">
 
-Os conjuntos visíveis em HD são Basic, Space Marine, Miner, Punk e Kappa, nos dois mobiles e nos dois sentidos.
+A migração HD completa das peças vestidas está em andamento. O [controle por avatar](docs/avatar-hd-migration/index.html) distingue miniatura, peça equipada, efeitos e validação de animação; a maioria das peças XFS ainda usa o fallback original até ser migrada.
 
 <img src="docs/avatar-shop/hd-roster.png" width="720" alt="Seis conjuntos de avatar HD montados no Bigfoot">
 
@@ -71,7 +71,8 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.8–0.9 | Miramo Town A, câmera rolante, vento 2D, clima, Thor e partículas de chão |
 | 0.10–0.12 | HUD original em HD, popup de opções, música, busca da CPU fora do quadro travado, mira Slice e Drag |
 | 0.13 | Onze itens de batalha, com custo de atraso, barra F1–F6 e menu Select Item |
-| 0.14–0.14.8 | Loja, compra, inventário, oito atributos, Gold da partida, avatares HD, animação contínua, vestir persistido e layout clássico 3×3 |
+| 0.14–0.14.9 | Loja, compra, inventário, oito atributos, Gold da partida, avatares HD, animação contínua, vestir persistido e layout clássico 3×3 |
+| 0.16.0 | Loja em Full HD/16:9 baseada no vídeo, fundo e retrato de slot vazio regenerados, cards nítidos, inventário compacto e prévia Avatar/Mobile |
 
 Números de base, antes dos atributos:
 
@@ -97,7 +98,7 @@ Números de base, antes dos atributos:
 - A colisão do terreno é amostrada a cada dois pixels. Pedaços de chão que ficam soltos permanecem no lugar; só os veículos caem.
 - O balanceamento é o do protótipo, com atrasos originais divididos por 7,5.
 - Builds de Windows, Linux, Android e iOS não foram gerados. A engine permite exportar esses alvos; só o macOS foi validado.
-- Vários fluxos — itens, mira Drag, música e a loja 0.14.8 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
+- Vários fluxos — itens, mira Drag, música e a loja 0.16.0 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
 ### Fora desta entrega
 

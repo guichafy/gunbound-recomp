@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "file": "res://assets/hd/shop/xfs_portraits.png",
+  "size": [
+    887,
+    1774
+  ],
+  "sha256": "bfc5454fc4bb639e292906c52dbf9db2162eb16d71b7aab998f8bfa1d72b0823",
+  "regions": {
+    "xfs:0:0:1": [
+      23,
+      70,
+      269,
+      201
+    ],
+    "xfs:0:0:2": [
+      321,
+      94,
+      252,
+      152
+    ],
+    "xfs:0:0:3": [
+      611,
+      40,
+      253,
+      244
+    ],
+    "xfs:0:0:4": [
+      29,
+      357,
+      253,
+      183
+    ],
+    "xfs:0:0:5": [
+      332,
+      330,
+      258,
+      239
+    ],
+    "xfs:0:0:6": [
+      632,
+      320,
+      231,
+      260
+    ],
+    "xfs:0:0:7": [
+      31,
+      664,
+      266,
+      175
+    ],
+    "xfs:0:0:8": [
+      335,
+      608,
+      237,
+      255
+    ],
+    "xfs:0:0:9": [
+      615,
+      625,
+      261,
+      218
+    ],
+    "xfs:1:0:1": [
+      25,
+      921,
+      266,
+      209
+    ],
+    "xfs:1:0:2": [
+      313,
+      936,
+      268,
+      170
+    ],
+    "xfs:1:0:3": [
+      616,
+      923,
+      245,
+      203
+    ],
+    "xfs:1:0:4": [
+      34,
+      1166,
+      227,
+      273
+    ],
+    "xfs:1:0:5": [
+      308,
+      1211,
+      271,
+      179
+    ],
+    "xfs:1:0:6": [
+      605,
+      1186,
+      261,
+      232
+    ],
+    "xfs:1:0:7": [
+      35,
+      1456,
+      240,
+      272
+    ],
+    "xfs:1:0:8": [
+      308,
+      1519,
+      260,
+      172
+    ],
+    "xfs:1:0:9": [
+      619,
+      1456,
+      239,
+      283
+    ]
+  },
+  "generator": "GPT Images / built-in imagegen",
+  "identity": "assets/hd/shop/source/xfs_0_16/head-portraits-reference.png",
+  "style": "assets/hd/avatars/space.png",
+  "prompt": "assets/hd/shop/source/xfs_0_16/portraits-prompt.txt",
+  "alpha_threshold": 8,
+  "note": "18 portraits only; these are not equipped rig pieces. All other XFS portraits retain original fallback."
+}

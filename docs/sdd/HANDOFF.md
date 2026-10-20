@@ -1,4 +1,115 @@
-# Hand-off — Gunbound Recomp 0.14.8
+# Hand-off — Gunbound Recomp 0.16.0 / migração HD em andamento
+
+## Migração HD integral — pedido atual20/10/2026
+
+Usuário apontou que só as miniaturas novas foram regeneradas, enquanto a
+maioria das peças vestidas continuava original. Solicitou controle e migração
+completa. Ler AVATAR_HD_MIGRATION.md; controle em docs/avatar-hd-migration.
+Não confundir retrato HD com personagem HD. Escopo:550registros com arte,
+629camadas; três acessórios vazios e nove placeholders N/A. Preservar regras,
+perfil e fontes. Preparação dos lotes e registro individual em andamento.
+
+O controle encontrou erro do decodificador: ARGB4444 preto com alpha explícito
+era apagado, deixando cinco acessórios invisíveis. Teste reproduziu e passou
+após respeitar alpha; derivados corrigidos usam sufixo_alpha, sem apagar os
+PNGs anteriores nem os XFS. Importação0.17 ainda requer validação/export próprios.
+
+37lotes/1161componentes preparados por prepare_xfs_avatar_hd.py.
+Fonte/jobs/prompts em assets/hd/avatars/xfs/source (.gdignore). Controle inicial:
+zero peças migradas validadas,18/550miniaturas anteriores. As12bases do HD
+anterior foram incluídas no lote037: reaproveitamento provisório não comprova
+migração XFS. Controle gerado é a fonte das contagens atuais, sem aceitar
+automaticamente uma imagem por ter sido gerada.
+
+AvatarXfsHD/AvatarArt consomem masters próprios, sem usar a miniatura como peça.
+Capturas por lote com fonte/HD/vestido/Mage+Bigfoot em docs/avatar-hd-migration/qa;
+audit_xfs_hd_runtime confirma uso real e registro constante por camada.
+Aceite exige hashes da arte e do renderer atuais. Lotes003–006 refeitos com
+olhos abertos; fase preta de fh46L rejeitada em favor da fase luminosa real.
+Transparência de luz adaptada em memória, sem modificar os PNGs fonte.
+112checks dirigidos passaram; migração integral/export0.17 ainda pendentes.
+
+## Avatar Shop XFS0.16 — entrega funcional de referência
+
+REQ-20/38/39/40/41, ADR-071/072; AVATAR_SHOP_XFS_0_16.md. Catálogo562ativo,
+479compráveis, preços/modificadores nativos, namespaces separados e Profile3.
+Migra apenas identidades verificadas; Pilot Goggle antigo1→XFS2, Kappa legado
+continua possuído. Saldo/XP preservados. Atributos do piloto+equipamento são
+copiados na partida, com teto50, penalidades assinadas e previsão compartilhada.
+
+Layout ciano800×600 do graphics.xfs, catálogo3×3 à esquerda/inventário à direita,
+centralizado1440×1080 em FullHD; laterais com fundo regenerado. Compras,
+vestir/recarga, filtros/páginas/gêneros e previews funcionam. Nome/badge,
+miniatura/stats e busca/saldo em áreas separadas. Preço vetorial uniforme
+RGB0/131/179, confirmado por amostra GPU. Controles sem regra local ficam
+indisponíveis com explicação. Sem rede/contas/amigos/presentes/venda nova.
+
+3163checks+10partidas passaram; após último atlas de retratos,106checks
+dirigidos e oito testes Python passaram. GPU1920×1080,120frames60Hz/MP4,
+compra/atributos/fallback/gêneros/mobiles/Ghost e três contatos de montagem
+em docs/avatar-shop-xfs. Smoke PCK fora do projeto PASS:562registros,
+assets/compra/vestir/recarga/batalha,1920×1080 e1280×800. App/ZIP0.16.0
+reexportados/assinados. Perfis isolados; C# intocado; sem commit/publicação.
+
+HD efetivo desta entrega: fundo1672×941,18miniaturas em atlas887×1774 e
+identidades vestíveis reaproveitadas do HD antigo. Demais peças/miniaturas
+mantêm fallback original; não é migração HD completa. Revisão inicial corrigiu
+seleção invisível no fallback; revisão final interrompida por limite de uso.
+Testes e inspeção local concluídos, sem segunda aprovação independente.
+
+## Avatar Shop Full HD pelo vídeo0.15 —20/10/2026
+
+REQ-20/38/39/40, ADR-070; ler AVATAR_SHOP_VIDEO_0_15.md. Usuário confirmou
+**Presente→Comprar→Experimentar**, substituindo a ordem C# da0.14.9.
+Loja16:9, grade3×3, cards240×140, inventário compacto/equipado amarelo, abas
+sobre a grade e prévia Avatar/Mobile. Preços vetoriais uniformes e fonte com
+oversampling local; no FullHD não há barras.1280×800 centra1280×720.
+
+Window salva/desativa/restaura o stretch da arena ao entrar/sair da loja.
+Revisão independente encontrou esse problema de escala; corrigido e coberto
+por input real, ESC, reentrada, redimensionamento e batalha. Rodada final do
+revisor interrompida por limite de uso, sem segunda aprovação independente.
+Capturas anteriores que desligavam stretch artificialmente foram substituídas.
+
+GPT Images/gunbound-classic-hd: fundo1672×941 e retrato No Goggles/No Flag
+1254×1254RGBA (recorte870×1076, mipmaps). Originais/brutos/prompts preservados;
+metadados validados com fallback. Retrato é só UI:15registros/13peças vestíveis
+mantidos. FullHD é a composiçãoGPU1920×1080; não confundir com tamanho do PNG.
+
+**1949checks rápidos sem falhas, incluindo36de test_shop_wide**. Dez partidas
+completas passaram nesta entrega antes do último ajuste só de retrato/loader.
+GPU1920×1080 e120frames/60Hz, MP4 de2s, estados de compra/inventário/atributos,
+categorias/gêneros/mobiles/fallback em docs/avatar-shop-video. Force_draw no
+harness evita espera da GPU quando a janela fica encoberta no macOS.
+Faixa de preço verificada:1corRGB121/159/211, tanto GPU quanto PCK.
+
+App/ZIP0.15.0 reexportados, versão e assinatura estrita conferidas. Smoke real
+do PCK isolado em/tmp passou com novos assets/metadados, exclusão de brutos,
+vestir/recarga/batalha e capturas1920×1080/1280×800. Perfil real e fonte C#
+preservados. Baseline0.14.9 sujo foi mantido; sem commit/push/publicação.
+Próximo passo: usuário reabrir builds/Gunbound Recomp.app e validar aparência.
+
+## Auditoria de estado e layout da loja0.14.9
+
+Pedido: investigar bugs/design/posicionamento usando o C#. REQ-20/38/39/40,
+ADR-069; AVATAR_SHOP_AUDIT_0_14_9.md. Usuário confirmou abas sobre os cards e
+ordem Experimentar/Vestir→Comprar→Presente. Inventário lateral/grade3×3 mantidos.
+
+Corrigidos seleção invisível após busca/página, seleção alterada antes de save,
+feedback ausente na grade e busca vazia sem explicação. Legendas separadas da
+arte com hitbox incluindo texto/baseline comum. Label reaplica size após fonte
+para evitar caixa mínima da fonte padrão16px. Prévia Miramo usa crop uniforme;
+rig/mobile/anatomia não alterados. Preço vetorial0.14.8 continua nítido: GPU e
+PCK com uma única cor RGB121/159/211 nas amostras sem texto.
+
+**1913checks+10partidas completas, zero falhas**, incluindo42da nova auditoria
+e40de paridade. Revisão independente sem achados. GPU1920×1080 HD/fallback,
+compra/moeda única, atributos, busca vazia, gêneros/mobiles e120frames60Hz em
+docs/avatar-shop-audit. App/ZIP0.14.9 reexportados, assinatura estrita válida;
+smoke do PCK isolado em/tmp passou com compra/vestir/recarga/batalha e assets.
+Versão do menu também atualizada (ainda mostrava0.14.5). Perfis isolados somente;
+sem publicação, alteração de combate/atributos, novo PNG de arte ou edição C#.
+Próximo passo: aceite visual/funcional do usuário no app0.14.9.
 
 ## Fundo dos preços nítido0.14.8
 

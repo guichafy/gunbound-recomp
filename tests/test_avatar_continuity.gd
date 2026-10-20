@@ -46,7 +46,7 @@ func run() -> void:
 			art.motion[1].pose_age = 0.0
 			check(art.presentation(1,rig,clock,0).body_offset == Vector2.ZERO, "CPU and player blend independently")
 	var path := "res://.tools/avatar-continuity-profile.json"
-	var profile = load("res://scripts/profile.gd").new(path)
+	var profile = load("res://tests/legacy_profile.gd").new(path)
 	var shop = load("res://scripts/avatar_shop_model.gd").new(profile)
 	var gear := {"0":"0:0:1","1":"0:1:1","2":"0:2:1","3":"2:3:1"}
 	for key in gear.values():
@@ -58,7 +58,7 @@ func run() -> void:
 	shop.select("0:0:0")
 	check(not shop.try_selected() and profile.equipped_set() == gear and shop.preview == saved_preview, "Failed dress save rolls back equipment and preview")
 	profile.path = path
-	var restored = load("res://scripts/profile.gd").new(path)
+	var restored = load("res://tests/legacy_profile.gd").new(path)
 	restored.load_profile()
 	check(restored.equipped_set() == gear, "All categories survive closing profile")
 	var view = load("res://scenes/main.tscn").instantiate()

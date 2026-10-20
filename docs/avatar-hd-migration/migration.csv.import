@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bn4gu30v5b0vc"
+
+[deps]
+
+files=["res://docs/avatar-hd-migration/migration.nome.translation", "res://docs/avatar-hd-migration/migration.genero.translation", "res://docs/avatar-hd-migration/migration.categoria.translation", "res://docs/avatar-hd-migration/migration.compravel.translation", "res://docs/avatar-hd-migration/migration.catalogo.translation", "res://docs/avatar-hd-migration/migration.vestivel.translation", "res://docs/avatar-hd-migration/migration.camadas.translation", "res://docs/avatar-hd-migration/migration.camadas.translation", "res://docs/avatar-hd-migration/migration.validacao.translation", "res://docs/avatar-hd-migration/migration.motivo.translation"]
+
+source_file="res://docs/avatar-hd-migration/migration.csv"
+dest_files=["res://docs/avatar-hd-migration/migration.nome.translation", "res://docs/avatar-hd-migration/migration.genero.translation", "res://docs/avatar-hd-migration/migration.categoria.translation", "res://docs/avatar-hd-migration/migration.compravel.translation", "res://docs/avatar-hd-migration/migration.catalogo.translation", "res://docs/avatar-hd-migration/migration.vestivel.translation", "res://docs/avatar-hd-migration/migration.camadas.translation", "res://docs/avatar-hd-migration/migration.camadas.translation", "res://docs/avatar-hd-migration/migration.validacao.translation", "res://docs/avatar-hd-migration/migration.motivo.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
