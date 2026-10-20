@@ -60,7 +60,7 @@ const DEFINITIONS := {
 		"weapons": NAK_WEAPONS, "aim_limits": NAK_AIM,
 		"spread_after_clamp": false, "generic_trail": false, "shot_sound_on": "fire",
 		"death": 1.15, "hurt": 1.05, "special": SPECIAL,
-		"summary": "Atira pela cauda · S2 cava e emerge · SS atravessa o chão."
+		"summary": "S2 cava e emerge · SS atravessa o chão."
 	}
 }
 

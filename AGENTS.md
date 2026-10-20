@@ -119,9 +119,9 @@ compara original/HD e poses em dois sentidos; docs/composition contém PNG/MP4/G
 
 ## Roster/perfil0.6.4 — estado atual
 
-Só Mage(ID1) e Bigfoot(ID2). Escaravelho retirado; não reintroduzir ID0.
+Mage(ID1) e Bigfoot(ID2); Nak(ID3) desde 0.15 (seção Nak). Escaravelho retirado; não reintroduzir ID0.
 VEHICLES é Dictionary; PLAYABLE_VEHICLES separa slots dos IDs. normalize_vehicle
-mapeia IDs inválidos para2; CPU sempre3−id. Não alterar IDs restantes.
+mapeia IDs inválidos para2; CPU por Mobiles.opponent (1↔2, Nak→Mage). Não alterar IDs restantes.
 Piloto ativo é pilot_side.png com perna distante oculta, mesmo registro/assento;
 ler SIDE_PILOT_ROSTER_0_6_4.md. PNG anterior preservado. Captura capture_side_pilot.gd
 144frames/PNG/MP4/GIF em docs/occlusion; test_roster.gd e suites existentes.

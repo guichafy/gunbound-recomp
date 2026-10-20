@@ -62,3 +62,11 @@ Os números Attack/Defence/Delay/Energy/Mobility e os arquétipos Laser/Fire/Hit
 `Mobile.Heal` soma a cura sem teto e pode passar da vida máxima. Este projeto limita à vida máxima. Mantenha o limite.
 
 Mage e Bigfoot compartilham massa 14 e influência de vento 1,2. A balística absoluta do protótipo (gravidade 260, vento × 1,3) continua a adaptação comum; não a reescreva ao adicionar um mobile, a menos que a massa ou o vento daquele tiro sejam outros.
+
+## Mobile ausente no fork
+
+Se o C# não tiver a classe/folha (caso do Nak), use o cliente original Thor's
+Hammer em `.tools/gunbound-client/` lido por `scripts/gunbound_xfs.py`
+(`tankN.img/.epa`, `bulletN*`, `flameN*`, `characterdata.dat`; índice = tipo + 1)
+e as notas do GunBound-Decomp. Exemplo completo: `scripts/import_nak_assets.py`
+e `docs/sdd/NAK_0_15.md`. Na dúvida sobre essa fonte, pergunte ao usuário.
