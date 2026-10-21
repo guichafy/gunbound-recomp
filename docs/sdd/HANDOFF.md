@@ -1,4 +1,37 @@
-# Hand-off — Gunbound Recomp0.18.0 / registro das luzes de avatar
+# Hand-off — Gunbound Recomp 0.18.2 / auditoria das regras de batalha
+
+## Release 0.18.2 — 21/10/2026 (branch `fix/0.18.2`, sem merge na main)
+
+Auditoria da 0.18.1 aprovada pelo usuário. Branch local a partir da `main`
+`3426129` (que já contém `fix/audit-0.18.1`). Sem push. Perfil real e fonte C#
+intocados.
+
+- CPU: tempo de pensar fixo de 2 s (`TurnTable.CPU_THINK_SECONDS`) no lugar do
+  relógio real, e `turn_time` congelado entre `begin_cpu_plan` e
+  `finish_cpu_plan` (`Match.cpu_thinking`): busca lenta não esgota o turno e a
+  mesma seed dá a mesma ordem (test_battle_rules, 47).
+- Fila do HUD antes da escolha da CPU vem de `TurnTable.current_order`
+  (empate a favor do outro, como a agenda).
+- Queda: deriva `wind.x / 45` por passo de gravidade (3 px, +0,15 por passo),
+  pela intenção do `Movement.ApplyGravity`, sem o reset literal (ADR-077).
+  Vento 35 em 100 px ≈ 18,7 px (test_mobile_parity, 27).
+- Vento em 0–359 (`posmod`); `HudArt.density` devolve 1,0 sem textura.
+- Docs: baseline da SPEC marcado como histórico/substituído, gravidade 196,
+  Mage 730/30, `ItemDelay`, faixas reais da perturbação do vento.
+- Validação: `check.sh` completo, 5287 checks + 13 partidas, zero falhas.
+  Novas referências de test_matches (opener/tiros/vencedor/HP): 81 0/30/1/[0,569],
+  82 1/24/0/[507,0], 83 1/7/0/[403,0], 84 0/15/0/[635,0], 85 1/17/0/[730,0],
+  86 0/8/0/[305,0], 87 0/16/1/[0,413], 88 0/11/0/[151,0], 89 0/3/1/[0,926],
+  90 0/12/0/[294,0], 91 1/5/0/[695,0], 92 0/6/1/[0,75], 93 1/22/0/[983,0].
+- App/ZIP 0.18.2 exportados com `build_macos.py` (Universal x86_64+arm64,
+  ad-hoc, `codesign --verify --deep --strict` OK, Info.plist 0.18.2). Smoke do
+  PCK fora do projeto (/private/tmp, `--main-pack`) PASS: gravidade 196, CPU
+  sem timeout em busca de 45 s, deriva 18,7 px, rótulo 0.18.2, menu e dois
+  turnos de partida. O binário exportado não aceita `--path`; o smoke usou o
+  editor 4.7.2 com o PCK exportado.
+- Pendências: validação manual de mira/alcance, recalibração do erro da CPU,
+  `game.gd` ainda define `model.phase = "menu"`.
+
 
 
 ## Paridade das regras de batalha — 20/10/2026 (REQ-44, ADR-076)

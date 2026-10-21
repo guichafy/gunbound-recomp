@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Release 0.18.2 (auditoria; ADR-076 complementos, ADR-077)
+
+- [x] CPU com tempo fixo de 2 s e relógio parado durante a busca; testes de seed/ordem.
+- [x] Fila do HUD em `TurnTable.current_order`; teste de empate.
+- [x] Deriva da queda por passo de gravidade (ADR-077); teste de magnitude.
+- [x] posmod do vento, guarda de `density`, docs de baseline/gravidade/Mage/ItemDelay.
+- [x] check.sh completo: 5287 checks + 13 partidas; App/ZIP 0.18.2 e smoke do PCK.
+- [ ] Usuário aprovar e fazer merge de `fix/0.18.2` na main.
+- [ ] Opcional: tirar `model.phase = "menu"` do `game.gd`; centralizar a espera da tarefa da CPU.
+
 ## Paridade das regras de batalha (REQ-44, ADR-076)
 
 - [x] Auditar Godot × C# × cliente original; engenharia reversa de ComputeTurnDelay/CommitTurnDelay e `.dat`.

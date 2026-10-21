@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.1**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.2**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,9 +8,9 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.18.1** — regras de batalha alinhadas ao cliente original e ao OpenBound |
+| Versão | **0.18.2** — CPU com tempo de pensar determinístico, deriva de queda por passo e documentação auditada |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
-| Validação automática | **5234 verificações e 13 partidas completas**, mais **13 testes Python** |
+| Validação automática | **5287 verificações e 13 partidas completas**, mais **13 testes Python** |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
 | Aceite visual | Great Devil Head e os 20 modelos de cabeça com efeito revisados; validação do usuário pendente |
 
@@ -77,6 +77,7 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.17.0 | 550 avatares vestidos em HD, 629 camadas, controle individual e animação GPU 60 fps; preserva a integração paralela do Nak original |
 | 0.18.0 | Luzes das cabeças no estado Normal, âncoras HD e reparo do Great Devil Head; histórico do PR1 preservado |
 | 0.18.1 | Regras de batalha (ADR-076): delay com tempo gasto, abertura sorteada, passe 200, balística do C#, Nak/Mage/itens do cliente original |
+| 0.18.2 | Auditoria: CPU paga 2 s fixos e congela o relógio durante a busca, fila do HUD na TurnTable, deriva do vento na queda por passo de gravidade (ADR-077), vento em 0–359 e docs de baseline marcados |
 
 Números de base, antes dos atributos:
 

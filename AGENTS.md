@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.18.1 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
+Protótipo 0.18.2 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
 desktop macOS, treino offline 1×1 contra CPU, Bigfoot/Mage com derivados HD e Nak
@@ -280,7 +280,7 @@ geração): `HD_KINDS` do rig/projéteis só Bigfoot/Mage; miras Nak 1×. Dúvid
 sobre o cliente original: perguntar ao usuário. Teste test_nak.gd; captura
 tests/capture_nak.gd (docs/nak). Seeds 91–93 de test_matches jogam com o Nak.
 
-## Regras de batalha 0.18.1 — estado atual
+## Regras de batalha 0.18.2 — estado atual
 
 Ler docs/sdd/BATTLE_RULES_AUDIT.md (REQ-44, ADR-076). Política do usuário:
 regra original comprovada por engenharia reversa (GunBound-Decomp + `.dat`
@@ -294,4 +294,8 @@ mantidos. Nak 770/920/1320, Mage 730/regen 30, itens do `itemdata.dat`.
 Mantidos: empate de iniciativa para o outro, empate por morte dupla, passe
 sem travar SS. As seeds de test_matches mudaram de propósito (valores no
 hand-off). Balística e dano originais em ponto fixo não foram portados.
+0.18.2: a CPU cobra 2 s fixos (`TurnTable.CPU_THINK_SECONDS`) e o relógio dela
+fica parado durante a busca (`Match.cpu_thinking`); a fila do HUD vem de
+`TurnTable.current_order`. Queda: deriva `wind.x / 45` por passo de gravidade
+(3 px, +0,15), ADR-077.
 

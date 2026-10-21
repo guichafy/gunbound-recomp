@@ -1,4 +1,4 @@
-# Especificação — Gunbound Recomp 0.18.1
+# Especificação — Gunbound Recomp 0.18.2
 
 As seções abaixo são cronológicas: o texto de cada versão fica como histórico
 quando uma seção posterior o substitui. A partir de 0.7.0 vale a seção mais nova
