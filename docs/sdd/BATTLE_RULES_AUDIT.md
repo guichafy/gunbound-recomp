@@ -78,7 +78,7 @@ decisão); **desconhecido** (a fonte não permite concluir).
 | 11 | Delay de item | custo C# × (1 − ItemDelay/100) ÷ 7,5, cobrado no uso | idem | `itemdata.dat`: Dual 600, Teleport **100**, Dual+ **250**, Energy Up 1 100, Energy Up 2 **300**, Team Teleport 50, Change Wind **150**, Power Up 150, Thunder 200, Bunge **50**, Blood 0 | igual ao C#; **5 itens divergem do original** |
 | 12 | Slots por item | 1/2 | 1/2 | flag `2 Slots` do `itemdata.dat` | igual nos três |
 | 13 | Atributo de delay do avatar | C# `× (1 − AttackDelay/100)` | idem | soma `atributo × 2,5` ao delay base | igual ao C#; modelo original diferente |
-| 14 | Vento | Força 0–34, ângulo 0–359; perturbação ±2/±3 com 50%; troca no clima Wind | idem (`MatchMetadata`) | não rastreado | igual + adaptação (vento sorteado no início, `weather.gd`) |
+| 14 | Vento | Força 0–34, ângulo 0–359; perturbação força −2..+1 e ângulo −3..+2 com 50% (`MatchMetadata.cs:153–154`); troca no clima Wind | idem (`MatchMetadata`) | não rastreado | igual + adaptação (vento sorteado no início, `weather.gd`) |
 | 15 | Clima por rodada | Fila de 4, avança a cada 2 turnos | idem (`PassTurn(RoomSize)`) | `SpawnWeatherHazards` em `BeginNewTurn` | igual (0.9) |
 | 16 | Morte súbita | Ausente | Só UI/música (`MatchSuddenDeathType`), sem regra | Há limite de turnos com aviso a 10 do fim e bônus a cada N turnos (`BeginNewTurn`) | **desconhecido** no original; ausente nos dois |
 | 17 | Empate (os dois morrem) | Empate (`winner = -1`, `turn_table.gd:44`) | **Não há empate**: vence o time de quem enviou o pedido (`CheckWinConditions`) | não rastreado | **divergente**; empate dá XP próprio (SPEC) |

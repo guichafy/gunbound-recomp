@@ -10,7 +10,8 @@ const RANDOMIZABLE := ["force", "tornado", "electricity", "weakness", "mirror"]
 # Column half-widths from each Weather constructor (collisionRectangleOffset.X).
 const HALF_WIDTH := {"force": 20.0, "tornado": 35.0, "electricity": 20.0, "weakness": 20.0, "mirror": 20.0, "random": 40.0}
 const OUTER_MARGIN := 10.0
-# NetworkObjectParameters: wind 0–35, disturbance ±2 force / ±3 degrees, 50% skip.
+# NetworkObjectParameters: wind 0–34, disturbance force −2..+1 / angle −3..+2 degrees
+# (MatchMetadata.cs: Next(0, 4) − 2 and Next(0, 6) − 3), 50% skip.
 const MAX_WIND := 35
 const WIND_FORCE_DISTURBANCE := 4
 const WIND_ANGLE_DISTURBANCE := 6

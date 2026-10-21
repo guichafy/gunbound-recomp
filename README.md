@@ -80,7 +80,7 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 
 Números de base, antes dos atributos:
 
-- **Mage:** 760 de vida, 220 de escudo, 90 de movimento, mira 15–50°. Regenera 20 de escudo no próprio turno.
+- **Mage:** 730 de vida, 220 de escudo, 90 de movimento, mira 15–50°. Regenera 30 de escudo no início de cada turno (ADR-076).
 - **Bigfoot:** 1100 de vida, 90 de movimento, mira 18–40° (SS 23–35°).
 - O especial está liberado no primeiro turno. Depois de usá-lo, volta quatro turnos próprios depois.
 - Vitória 120 XP, derrota 45, empate 70. Um nível a cada 200 XP. Gold da partida é separado do XP.
