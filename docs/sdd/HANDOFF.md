@@ -1,5 +1,45 @@
 # Hand-off — Gunbound Recomp 0.16.0 / migração HD em andamento
 
+
+## Paridade das regras de batalha — 20/10/2026 (REQ-44, ADR-075)
+
+Pedido: comparar a batalha com o C# e com o GunboundClassic, usando engenharia
+reversa. Ler BATTLE_RULES_AUDIT.md, que traz a matriz de 24 regras, as
+evidências e as decisões. Worktree `claude/battle-rules-parity` (a partir de
+`385d211`), sem commit nem publicação. Perfil real e fonte C# intocados.
+
+- Engenharia reversa: leitura do GunBound-Decomp pela API do GitHub e LZHUF
+  próprio dos `.dat`; nada foi executado. O delay original é
+  `[28] + custo [30/31/32] + segundos × [29]`; `base + custo` reproduz o C# em
+  12 dos 16 mobiles. O delay do Nak no C# é a linha de outro mobile.
+- `gunbound-server` (jglim) só repassa pacotes: não tem física, dano nem delay.
+- Aplicado por escolha do usuário:
+  - abertura sorteada;
+  - tempo gasto no delay do tiro, com turno de 30 s;
+  - passe 200;
+  - Nak 770/920/1320;
+  - Mage 730/30;
+  - itens do `itemdata.dat`;
+  - balística C# (196, massa 14, vento 1,2);
+  - CPU com refino local da busca.
+- Validação: `check.sh` completo, 3926 checks + 13 partidas, zero falhas. A
+  base antes da mudança tinha 3887 + 13. As partidas levam 215 s (antes 65 s)
+  porque ficaram mais longas. Na seed 81 (CPU fácil) foram 207 projéteis: 65
+  saíram pelas laterais e nenhum foi cortado por idade (máx. 5,1 s) ou pelo
+  topo. O erro de ±10 de força da CPU fácil agora desloca o alcance cerca de
+  1,7× mais, e a recalibração dos erros por dificuldade fica para decisão do
+  usuário.
+  Novas referências (opener/tiros/vencedor/HP): 81 0/65/1/[0,376],
+  82 1/34/1/[0,254], 83 1/7/0/[405,0], 84 0/15/0/[636,0], 85 1/12/0/[730,0],
+  86 0/8/0/[307,0], 87 0/22/0/[74,0], 88 0/11/0/[365,0], 89 0/3/1/[0,926],
+  90 0/12/0/[294,0], 91 1/5/0/[695,0], 92 0/4/0/[501,0], 93 1/18/0/[581,0].
+- Limites: não houve captura GPU nem app reexportado, e a sensação de mira
+  precisa de validação manual. Balística e dano originais em ponto fixo, termo
+  `[34]` e morte súbita ficaram pendentes. A worktree principal tem a migração
+  HD suja; `tests/test_items_scene.gd` mudou nas duas cópias (conflito
+  trivial na integração). Scripts `capture_*_pck.gd` usam
+  `set("opening", 0)` para continuar valendo contra builds antigos.
+
 ## Migração HD integral — pedido atual20/10/2026
 
 Usuário apontou que só as miniaturas novas foram regeneradas, enquanto a

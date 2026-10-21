@@ -94,6 +94,7 @@ func run() -> void:
 	var bounds: Rect2 = shop.content.get_global_rect()
 	ok = ok and bounds.size.distance_to(Vector2(1280,720))<0.01 and bounds.position.distance_to(Vector2(0,40))<0.01
 	assert(root.get_texture().get_image().save_png("/private/tmp/shop-video-pck-1280.png") == OK)
+	scene.set("opening", 0)
 	scene.start_match()
 	ok = ok and root.content_scale_size==Vector2i(1280,800) and root.content_scale_mode==Window.CONTENT_SCALE_MODE_CANVAS_ITEMS
 	ok = ok and scene.actor_avatars[0] == gear

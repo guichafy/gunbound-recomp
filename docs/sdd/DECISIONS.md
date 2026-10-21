@@ -511,3 +511,39 @@ tiro). Desenho espelhado: o Nak atira pela cauda. RiderPivot cru do fork recebe
 fora do rig HD até lá. Substitui a primeira versão deste ADR, que inventava
 números e uma gravidade invertida 3×. Publicado como ADR-069 no PR #1;
 renumerado para ADR-074 na integração à main, pois a loja local já usava 069–073.
+
+## ADR-075 — regras de batalha: original comprovado, depois C#
+
+Pedido de 20/10/2026: auditar a batalha contra o OpenBound C# e o cliente
+original Thor's Hammer ([BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md)).
+Política escolhida pelo usuário: quando a engenharia reversa comprova a regra
+original, ela prevalece; nos demais casos, vale o C#.
+
+A evidência principal vem de `ComputeTurnDelay`/`CommitTurnDelay` do
+GunBound-Decomp. O delay é `[28] + custo do tiro [30/31/32] + segundos gastos
+× [29]` do `characterdata.dat`. `base + custo` reproduz o `DelayPresets` do C#
+em 12 dos 16 mobiles. O Nak do C# (760/910/1310) é a linha de outro mobile.
+
+Escolhas do usuário:
+- abertura sorteada;
+- tempo gasto entra no delay do tiro, com turno de 30 s;
+- passe = 200, sem termo de tempo (o termo fixo `[34]` = 200 não foi atribuído
+  a um caminho e fica como hipótese);
+- Nak 770/920/1320;
+- Mage 730/30;
+- delays de item do `itemdata.dat`;
+- balística com os números do C# (196, massa 14, vento 1,2).
+
+Substitui:
+- as adaptações de gravidade/força/vento do ADR-024 e do ADR-026;
+- as regras de baseline do SPEC "Jogador começa" e "Passar custa 80";
+- os custos de Teleport, Dual+, Energy Up 2, Change Wind e Bunge do ADR-058;
+- os delays do Nak do ADR-074;
+- HP 760 e regeneração 20 do Mage (ADR-066);
+- a exigência de seeds 81–90 idênticas (ADR-057/058): as partidas de
+  referência mudam com esta decisão e passam a ter novos valores registrados.
+
+Não muda: empate por morte dupla, empate de iniciativa a favor do outro,
+passe sem trava de SS, dano C# (ADR-066) e clima. A balística original em
+ponto fixo e o dano original seguem sem engenharia reversa; ficam como
+pendência.

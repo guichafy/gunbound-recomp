@@ -17,7 +17,7 @@ func _initialize() -> void:
 	var mage: Dictionary = model.actors[1]
 	mage.shield = 100
 	model.begin_turn()
-	check(int(mage.shield) == 120, "Mage shield regenerates on the opponent's turn too")
+	check(int(mage.shield) == 130, "Mage shield regenerates 30 on the opponent's turn too")
 	check(Combat.box_gap(Combat.box_center(mage), mage) == 0.0, "A point inside the Mage box has no gap")
 	check(Combat.box_gap(Combat.box_center(mage) + Vector2(80, 0), mage) > 25.0, "Far hits miss the Mage box")
 	check(Combat.blast_damage(25.0, 90.0, 25.0) == 90, "Inverse damage equals the base at the radius")

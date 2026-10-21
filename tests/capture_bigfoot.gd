@@ -21,6 +21,7 @@ func run() -> void:
 	view.show_menu()
 	view.select_vehicle(2)
 	await snap("menu")
+	view.opening = 0
 	view.start_match()
 	view.model.start(2, 1, 42)
 	view.art.reset(view.model.actors)

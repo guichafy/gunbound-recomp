@@ -59,6 +59,7 @@ func run() -> void:
 	# Battle: the bar follows the loadout and EquippedButtonBar spacing.
 	scene.options.items = ["dual", "teleport", "power_up", "energy_up_1"]
 	scene.select_vehicle(2)
+	scene.opening = 0
 	scene.start_match()
 	await process_frame
 	if scene.model.active != 0:

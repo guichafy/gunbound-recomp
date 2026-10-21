@@ -18,6 +18,7 @@ func run() -> void:
 	view.show_menu()
 	view.select_vehicle(1)
 	await snap("menu")
+	view.opening = 0
 	view.start_match()
 	view.model.start(1, 1, 42)
 	view.art.reset(view.model.actors)
@@ -38,6 +39,7 @@ func run() -> void:
 	for frame in range(4):
 		view._process(0.1)
 	await snap("s2")
+	view.opening = 0
 	view.start_match()
 	view.model.actors[0].turns = 3
 	view.select_weapon(2)

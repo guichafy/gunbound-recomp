@@ -61,6 +61,7 @@ func run() -> void:
 	root.add_child(scene)
 	scene.set_process(false)
 	scene.sound.muted=true
+	scene.opening = 0
 	scene.start_match()
 	check(scene.model.actors[0].attributes==A.with_equipment(p.attributes,p.equipment_bonuses()),"Actual game scene passes equipped bonuses into battle")
 	scene.queue_free()

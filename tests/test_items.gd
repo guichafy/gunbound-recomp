@@ -50,7 +50,7 @@ func run() -> void:
 	for id in Items.ORDER:
 		two_slots += 1 if Items.slots(id) == 2 else 0
 	check(two_slots == 6, "Six 2-slot items and five 1-slot items")
-	check(is_equal_approx(Items.delay("dual"), 80.0) and is_equal_approx(Items.delay("dual_plus"), 60.0) and is_equal_approx(Items.delay("teleport"), 20.0) and is_equal_approx(Items.delay("blood"), 0.0) and is_equal_approx(Items.delay("thunder"), 200.0 / 7.5), "Delay cost is the original cost ÷ 7.5")
+	check(is_equal_approx(Items.delay("dual"), 80.0) and is_equal_approx(Items.delay("dual_plus"), 250.0 / 7.5) and is_equal_approx(Items.delay("teleport"), 100.0 / 7.5) and is_equal_approx(Items.delay("blood"), 0.0) and is_equal_approx(Items.delay("thunder"), 200.0 / 7.5), "Delay cost is the itemdata.dat cost ÷ 7.5 (ADR-075)")
 	check(Items.sanitize(["dual", "dual", "teleport", "power_up"]) == ["dual", "dual", "teleport"], "Loadout keeps at most 6 slots (later items that do not fit are skipped)")
 	check(Items.sanitize(["dual", "nope", 3, "blood", "blood"]) == ["dual", "blood", "blood"], "Unknown entries are dropped")
 	check(Items.used_slots(Items.DEFAULT_LOADOUT) == 6, "Default loadout fills the six slots")
@@ -86,12 +86,12 @@ func run() -> void:
 	mage.hp = 400
 	mage.shield = 50
 	model.use_item(0)
-	check(int(mage.hp) == 400 + int(760 * 0.12) and int(mage.shield) == 50, "Energy Up 1 heals 12% of max health, not the shield")
+	check(int(mage.hp) == 400 + int(730 * 0.12) and int(mage.shield) == 50, "Energy Up 1 heals 12% of max health, not the shield")
 	model.actors[Match.PLAYER].turn_item = ""
 	mage.hp = 700
 	model.use_item(1)
-	check(int(mage.hp) == 760, "Energy Up 2 (30%) never exceeds max health")
-	check(events_of(model, "item").size() == 2 and int(events_of(model, "item")[0].amount) == 91, "Item events carry the healed amount")
+	check(int(mage.hp) == 730, "Energy Up 2 (30%) never exceeds max health")
+	check(events_of(model, "item").size() == 2 and int(events_of(model, "item")[0].amount) == 87, "Item events carry the healed amount")
 
 	# Blood: −8% of max health (never below 1), +33 attack.
 	model = fresh(2, ["blood", "blood"])
@@ -229,7 +229,7 @@ func run() -> void:
 	var landed: Vector2 = model.actors[Match.PLAYER].pos
 	check(landed.distance_to(origin) > 40.0 and absf(landed.x - Vector2(teleports[0].position).x) < 8.0 and is_equal_approx(landed.y, model.terrain.surface_at(landed.x, landed.y) - model.stance_of(Match.PLAYER)), "The mobile stands on the ground where the beacon landed")
 	check(not predicted.is_empty() and Vector2(predicted.position).distance_to(teleports[0].position) < 0.01, "Prediction follows the beacon to the same landing point")
-	check(is_equal_approx(float(model.actors[Match.PLAYER].ready), 20.0 + 920.0 / 7.5), "Teleport turn costs 20 plus the selected shot delay")
+	check(is_equal_approx(float(model.actors[Match.PLAYER].ready), (100.0 + 920.0) / 7.5), "Teleport turn costs 100/7.5 plus the selected shot delay")
 
 	# Prediction with Dual equals the real flight (same shells, same craters).
 	model = fresh(2, ["dual"])

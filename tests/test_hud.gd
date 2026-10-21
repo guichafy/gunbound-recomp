@@ -62,6 +62,7 @@ func run() -> void:
 		else:
 			check(is_equal_approx(factor, 3.0), "%s uses the 3× HD sprite" % name)
 	scene.select_vehicle(2)
+	scene.opening = 0
 	scene.start_match()
 	player_turn(scene)
 	var s1: TextureButton = scene.weapon_buttons[0]
@@ -104,6 +105,7 @@ func run() -> void:
 	check(scene.model.last_shots[0] == shot_before and scene.model.projectiles.size() == shells_before, "A second release cannot fire again")
 
 	# Pause cancels a charge without firing.
+	scene.opening = 0
 	scene.start_match()
 	player_turn(scene)
 	key(scene, KEY_SPACE, true)
@@ -269,6 +271,7 @@ func run() -> void:
 		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original LevelScene theme that ends (then a random one follows)" % track)
 	scene.show_menu()
 	check(not scene.sound.music_wanted, "The menu stops the battle music")
+	scene.opening = 0
 	scene.start_match()
 	player_turn(scene)
 
@@ -332,6 +335,7 @@ func run() -> void:
 			check(inside, "%s covers the legal aim %s at both ends" % [wedge, legal])
 
 	# Delayboard data never invents a CPU weapon before the CPU chooses.
+	scene.opening = 0
 	scene.start_match()
 	player_turn(scene)
 	scene.update_hud()

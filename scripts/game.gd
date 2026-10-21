@@ -128,6 +128,8 @@ var cpu_plan: Dictionary = {}
 # snapshot; cpu_plan only appears when it is done and the initial wait is over.
 var cpu_search: Dictionary = {}
 var cpu_task := -1
+# Who opens the next match: Match.RANDOM_OPENING in play (ADR-075); tests pin a side.
+var opening := Match.RANDOM_OPENING
 var match_id := ""
 var reward := 0
 var result_wait := -1.0
@@ -284,7 +286,7 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []])
+	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening)
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.

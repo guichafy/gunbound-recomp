@@ -26,7 +26,7 @@ func run() -> void:
 				var values := [[30,50,0,30,20,0,50,0],[0,0,20,0,0,0,0,0]]
 				m.start(mobile,1,42,"","original",null,[],values)
 				values[0][1] = 0
-				check(m.actors[0].hp == (1140 if mobile == 1 else 1650), "Copied max health")
+				check(m.actors[0].hp == (1095 if mobile == 1 else 1650), "Copied max health")
 				check(m.actors[0].attributes[6] == 50, "Dig survives valid 180 point fixture")
 				check(m.actors[0].shield == (220 if mobile == 1 else 0), "Shield base")
 				m.actors[0].turns = 3
@@ -48,7 +48,7 @@ func run() -> void:
 		m.actors[0].hp = 500
 		m.actors[0].shield = 100
 		m.begin_turn()
-		check(m.actors[0].shield == 130, "Mage regen times1.5")
+		check(m.actors[0].shield == 145, "Mage regen 30 times1.5")
 		m.apply_weather({"type":"protection","extra":""})
 		check(m.actors[0].hp == 552, "Protection regen times1.5")
 		m.start(1,1,42,"","original",null,[],[[30,0,0,0,0,0,0,0],[0,0,20,0,0,0,0,0]])

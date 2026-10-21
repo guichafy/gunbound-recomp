@@ -122,6 +122,7 @@ func run() -> void:
 	scene.show_shop()
 	await process_frame
 	check(scene.shop.content.get_global_rect().size.distance_to(Vector2(1440,1080))<0.01,"Repeated entry uses the actual Full HD viewport")
+	scene.opening = 0
 	scene.start_match()
 	await process_frame
 	check(root.content_scale_size==Vector2i(1280,800) and root.content_scale_mode==Window.CONTENT_SCALE_MODE_CANVAS_ITEMS,"Transition to battle restores the original viewport")

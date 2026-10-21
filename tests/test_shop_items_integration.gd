@@ -29,7 +29,7 @@ func run() -> void:
 			check(is_equal_approx(float(entry.ready),104.4), "HUD includes reduced item and shot costs")
 	check(model.fire(30,45,0), "Item-enhanced attributed shot")
 	model.explode(load("res://scripts/combat.gd").full_hit(model.actors[1],25.0),1,{"damage":200,"weapon":0,"age":1.0,"velocity":Vector2.RIGHT})
-	check(model.actors[1].shield==0 and model.actors[1].hp==700, "200 times(1+30+30-20)/100 =280, not chained multipliers")
+	check(model.actors[1].shield==0 and model.actors[1].hp==670, "200 times(1+30+30-20)/100 =280, not chained multipliers (Mage 730, ADR-075)")
 	check(model.shot_gold.enemy_damage==280, "Gold sees composed damage once")
 	model = fresh(["bunge_shot"],values)
 	check(model.use_item(0), "Bunge usable with Dig points")
@@ -81,10 +81,12 @@ func run() -> void:
 	view.show_shop()
 	await process_frame
 	view.show_menu()
+	view.opening = 0
 	view.start_match()
 	await process_frame
 	check(view.model.actors[0].items[0].id=="power_up" and view.model.actors[0].attributes[5]==40 and view.actor_avatars[0]["0"]=="0:0:1", "Scene combines Shop gear, allocated points and selected item")
 	check(view.use_item(0) and is_equal_approx(float(view.model.actors[0].ready),12), "Scene use applies ItemDelay")
+	view.opening = 0
 	view.start_match()
 	await process_frame
 	check(view.item_bar.buttons.size()==1 and not view.model.actors[0].items[0].used and view.model.actors[0].attributes[5]==40, "Restart keeps loadout/attributes and resets consumption")

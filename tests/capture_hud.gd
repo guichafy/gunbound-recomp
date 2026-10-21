@@ -28,6 +28,7 @@ func run() -> void:
 	view.profile.nickname = "Piloto"
 	view.show_menu()
 	view.select_vehicle(2)
+	view.opening = 0
 	view.start_match()
 	view.model.start(2, 1, 4)
 	view.art.reset(view.model.actors)

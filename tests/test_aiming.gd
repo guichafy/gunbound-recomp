@@ -48,6 +48,7 @@ func player_turn() -> void:
 		scene._process(0.05)
 
 func fresh_turn() -> void:
+	scene.opening = 0
 	scene.start_match()
 	player_turn()
 

@@ -14,6 +14,7 @@ func run() -> void:
 	await process_frame
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png("res://docs/menu.png")
+	scene.opening = 0
 	scene.start_match()
 	scene.model.turn_time = 30.0
 	await process_frame
@@ -29,6 +30,7 @@ func run() -> void:
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png("res://docs/charge.png")
 	# Restart before the controlled trajectory and result presentation.
+	scene.opening = 0
 	scene.start_match()
 	scene.angle = 43.0
 	scene.power = 66.0

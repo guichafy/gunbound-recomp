@@ -66,8 +66,10 @@ func run() -> void:
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
+	view.opening = 0
 	view.start_match()
 	check(view.actor_avatars[0] == gear, "Fresh scene battle receives persisted four-slot equipment")
+	view.opening = 0
 	view.start_match()
 	check(view.actor_avatars[0] == gear, "Restart keeps equipment")
 	view.queue_free()

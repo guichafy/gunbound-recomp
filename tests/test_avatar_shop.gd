@@ -80,6 +80,7 @@ func run() -> void:
 	check(shop.model.preview["0"] == "0:0:1" and shop.try_caption.text == "Vestido", "Dress clears temporary preview and confirms saved state")
 	shop.model.draft_attributes = [1,0,0,0,0,0,0,0]
 	view.show_menu()
+	view.opening = 0
 	view.start_match()
 	check(view.actor_avatars[0]["0"] == "0:0:1" and view.model.actors[0].attributes[0] == 0, "Only confirmed set/attributes enter arena")
 	view.queue_free()

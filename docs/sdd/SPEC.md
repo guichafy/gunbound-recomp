@@ -34,7 +34,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 
 ## Regras concretas do baseline
 
-- Arena lateral única, 1280×800. Jogador começa; CPU recebe o outro veículo.
+- Arena lateral única, 1280×800. Jogador começa (substituído: abertura sorteada, REQ-44); CPU recebe o outro veículo.
 - Escaravelho: vida 580, movimento 110, atraso adicional 0.
   Carapaça: vida 700, movimento 80, atraso adicional 18.
 - Mira local 10–85°, força 15–100%. Movimento de 60 unidades/s limitado pelo orçamento.
@@ -47,7 +47,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
   Dano diminui com a distância, considerando o tamanho do veículo. Queda de mais
   de 70 unidades causa dano; perder suporte até abaixo da ilha elimina.
 - Próximo ator é o de menor disponibilidade acumulada; empate favorece o outro.
-  Passar custa 80 + atraso do veículo. Não existe alternância estrita obrigatória.
+  Passar custa 80 + atraso do veículo (substituído: 200 ÷ 7,5, REQ-44). Não existe alternância estrita obrigatória.
 - CPU calcula mira e dispara, sem se deslocar. Dificuldade altera o erro da mira,
   sem bônus de vida/dano. A simulação auxilia sua escolha, sem mostrar trajetória
   completa ao jogador; HUD mostra direção inicial e último tiro.
@@ -91,6 +91,34 @@ chão e explode ao emergir, SS atravessa o terreno e só explode em mobile.
 Contrato e números em [NAK_0_15.md](NAK_0_15.md), decisão ADR-074. A
 restrição "apenas Bigfoot/Mage" deixa de valer para o Nak; demais mobiles
 continuam fora. Arte HD do Nak adiada pelo usuário.
+
+## Paridade das regras de batalha — REQ-44
+
+Pedido de 20/10/2026: comparar a batalha com o OpenBound C# e com o cliente
+original Thor's Hammer (engenharia reversa do GunBound-Decomp e dos `.dat`).
+Auditoria e evidências em [BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md),
+decisão ADR-075. Política: **o original prevalece quando a engenharia reversa
+comprova a regra; senão, vale o C#.** Escolhas do usuário aplicadas:
+
+- **REQ-06**: quem abre a partida é sorteado. Cada segundo inteiro gasto no
+  turno até o disparo soma ao delay do tiro o valor `[29]` do mobile (10 em
+  Mage, Bigfoot e Nak). O turno continua com 30 s. Passar (voluntário ou por
+  tempo) custa 200, sem termo de tempo. A prévia de iniciativa usa o tempo ao
+  vivo. Empate de iniciativa continua favorecendo o outro.
+- **REQ-04**: balística do C#. Gravidade 196, velocidade = força × 100 / massa
+  (massa 14 nos tiros, 10 no sinalizador), vento × 1,2 por projétil. O piso de
+  força 15 e o relógio em tempo real ficam (o C# avança 0,015 s por quadro de
+  60 Hz).
+- **REQ-43**: delays do Nak do original, 770/920/1320.
+- **REQ-42**: Mage com 730 de vida e 30 de regeneração de escudo
+  (`characterdata.dat`).
+- **REQ-35**: delays dos itens do `itemdata.dat`: Teleport 100, Dual+ 250,
+  Energy Up 2 300, Change Wind 150, Bunge Shot 50. Os demais já coincidiam.
+
+Todos os delays seguem na escala ÷ 7,5. Ficam como estavam no Godot: empate
+por morte dupla e passe sem travar o SS (o C# trava). As seeds de
+`test_matches` mudam de propósito; os novos valores de referência estão no
+hand-off.
 
 ## Mage 0.4
 

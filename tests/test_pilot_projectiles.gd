@@ -86,6 +86,7 @@ func run() -> void:
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
+	view.opening = 0
 	view.start_match()
 	view.shoot()
 	view._process(0.05)

@@ -94,6 +94,7 @@ func run() -> void:
 	shop.model.query = ""
 	shop.refresh(0,0)
 	scene.show_menu()
+	scene.opening = 0
 	scene.start_match()
 	check(scene.actor_avatars[0]["0"] == "0:0:1" and scene.model.actors[0].attributes[0] == 1,"Lateral outfit and committed attributes enter battle")
 	scene.queue_free()

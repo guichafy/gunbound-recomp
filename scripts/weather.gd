@@ -14,7 +14,6 @@ const OUTER_MARGIN := 10.0
 const MAX_WIND := 35
 const WIND_FORCE_DISTURBANCE := 4
 const WIND_ANGLE_DISTURBANCE := 6
-const WIND_ACCELERATION := 1.3
 # Thor: x 10–90%, y 10–70% of the map; damage 40 + 20/level, XP table.
 const THOR_TABLE := [800, 1400, 2000, 2400, 3000]
 const THOR_RADIUS := 25.0
@@ -110,7 +109,7 @@ func change_wind(rng: RandomNumberGenerator) -> void:
 	wind_angle = rng.randi_range(0, 359)
 
 func wind_vector() -> Vector2:
-	# Screen angle (y down) times force; Combat scales it by WIND_ACCELERATION.
+	# Screen angle (y down) times force; Combat scales it by its WIND_ACCELERATION.
 	return Vector2(cos(deg_to_rad(wind_angle)), sin(deg_to_rad(wind_angle))) * float(wind_force)
 
 func add_column(type: String, x: float, scale: float, extra: String = "") -> Dictionary:

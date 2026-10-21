@@ -8,7 +8,7 @@ REQ-05, REQ-07, REQ-19 e REQ-42. ADR-066.
 ## Regras que passam a valer
 
 - `Regenerate()` roda em todos os mobiles vivos ou não no início de cada turno.
-  Mage soma 20 de escudo por turno de qualquer um, com o atributo Regeneração,
+  Mage soma 30 de escudo por turno de qualquer um (era 20 no C#; ADR-075 adota o `characterdata.dat`, que também dá 730 de vida), com o atributo Regeneração,
   teto `escudo base + vida máxima − vida atual` medido antes da cura de vida.
 - Vida de Mage e Bigfoot não regenera no turno (`HealthRegeneration` 0).
   Proteção cura 35, também com Regeneração, e não devolve escudo.

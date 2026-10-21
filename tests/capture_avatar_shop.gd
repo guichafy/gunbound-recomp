@@ -57,6 +57,7 @@ func run() -> void:
 	scene.profile.commit_attributes(scene.shop.model.draft_attributes)
 	for mobile in [1,2]:
 		scene.vehicle = mobile
+		scene.opening = 0
 		scene.start_match()
 		scene.model.phase = "aim"
 		scene.model.active = 0
