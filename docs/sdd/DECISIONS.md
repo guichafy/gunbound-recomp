@@ -578,3 +578,18 @@ Complemento (0.18.2): o modelo congela `turn_time` da CPU entre
 `begin_cpu_plan` e `finish_cpu_plan` (`cpu_thinking`). A busca não consome o
 turno de 30 s, então a CPU não passa por tempo esgotado em máquina lenta; a
 espera de apresentação depois da escolha continua contando.
+
+## ADR-077 — deriva do vento na queda pela intenção do C#
+
+21/10/2026, decisão do usuário. `Movement.ApplyGravity` (Movement.cs:170–193;
+Parameter.cs:123–126) cai `int(GravitySpeed)` px por passo, com
+`GravitySpeed` começando em 3 e somando 0,15, e soma `wind.x / 45` a um
+acumulador. O código literal zera esse acumulador quando o mobile **não**
+colide (troca de condição) e de novo ao passar de 1, o que torna a deriva
+irregular. O protótipo anterior acumulava por pixel caído e também zerava.
+
+Decisão: seguir a intenção. `Match.drift_fall` itera por passos de gravidade e
+aplica `wind.x / 45` uma vez por passo, sem acumulador nem reset; parede ou
+terreno sólido no próximo x bloqueia o empurrão do passo. Vento 35 numa queda
+de 100 px (24 passos) desloca ≈ 18,7 px. Substitui a deriva por pixel da
+paridade de MOBILE_PARITY.md (REQ-42). Teste: `test_mobile_parity`.

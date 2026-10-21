@@ -644,18 +644,27 @@ func tornado_step(projectile: Dictionary, delta: float) -> Dictionary:
 				return {"position": position, "velocity": direction * float(projectile.launch_speed)}
 	return {"position": position, "velocity": heading * float(state.speed)}
 
+# Movement.ApplyGravity (Parameter.cs TankMovementInitialGravity/GravityFactor).
+const FALL_INITIAL_SPEED := 3.0
+const FALL_SPEED_STEP := 0.15
+const FALL_WIND_DIVISOR := 45.0
+
 func drift_fall(actor: Dictionary, drop: float) -> void:
-	# Movement.ApplyGravity: wind/45 accumulates until it moves the mobile one pixel.
-	var accumulator := 0.0
+	# ADR-077: the C# intent, one wind push of wind.x / 45 per gravity step.
+	# Each step falls int(GravitySpeed) px (starting at 3, +0.15 per step); the
+	# literal C# accumulator reset is not reproduced. Walls stop the push.
 	var x := float(actor.pos.x)
-	for _step in int(drop):
-		accumulator = clampf(accumulator + wind.x / 45.0, -1.0, 1.0)
-		if absf(accumulator) < 1.0:
-			continue
-		var next := clampf(x + float(int(accumulator)), 24.0, terrain.world_size().x - 24.0)
-		if not terrain.is_solid(Vector2(next, actor.pos.y)):
+	var y := float(actor.pos.y)
+	var remaining := drop
+	var speed := FALL_INITIAL_SPEED
+	while remaining > 0.0:
+		var fall := minf(float(int(speed)), remaining)
+		var next := clampf(x + wind.x / FALL_WIND_DIVISOR, 24.0, terrain.world_size().x - 24.0)
+		if not terrain.is_solid(Vector2(next, y)):
 			x = next
-		accumulator = 0.0
+		y += fall
+		remaining -= fall
+		speed += FALL_SPEED_STEP
 	actor.pos.x = x
 
 func settle_actors() -> void:

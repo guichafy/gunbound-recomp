@@ -32,6 +32,21 @@ func _initialize() -> void:
 	model.wind = Vector2(90, 0)
 	model.settle_actors()
 	check(float(model.actors[0].pos.x) > parked, "Wind pushes a falling mobile sideways")
+	# ADR-077: one push of wind/45 per gravity step (3 px, +0.15 per step).
+	var mid := float(model.terrain.world_size().x) * 0.5
+	var sky := {"pos": Vector2(mid, 4.0)}
+	model.wind = Vector2(35, 0)
+	model.drift_fall(sky, 100.0)
+	var drift := float(sky.pos.x) - mid
+	check(drift > 14.0 and drift < 22.0, "Wind 35 drifts a 100 px fall about 17–19 px (got %.2f)" % drift)
+	sky = {"pos": Vector2(mid, 4.0)}
+	model.wind = Vector2(-35, 0)
+	model.drift_fall(sky, 100.0)
+	check(absf(float(sky.pos.x) - mid + drift) < 0.01, "Drift is symmetric with the wind direction")
+	sky = {"pos": Vector2(mid, 4.0)}
+	model.wind = Vector2(20, 0)
+	model.drift_fall(sky, 3.0)
+	check(absf(float(sky.pos.x) - mid - 20.0 / 45.0) < 0.01, "A one-step fall gets a single sub-pixel push")
 	model.start(2, 1, 8)
 	model.actors[0].turn_item = "teleport"
 	check(is_equal_approx(float(model.shot_shells(0, 40, 50, 0)[0].spawn_at), 0.4), "Bigfoot beacon waits 0.4 s")
