@@ -611,12 +611,9 @@ func update_hud() -> void:
 		queue_entries = model.initiative_preview(displayed_weapon)
 
 ## Turn order by current readiness only, while the CPU has not chosen a weapon.
+## The rule (tie favours the other side) lives in TurnTable.current_order.
 func current_order() -> Array:
-	var entries: Array = []
-	for index in range(2):
-		entries.append({"actor": index, "ready": float(model.actors[index].ready), "delay": maxf(0.0, float(model.actors[index].ready) - model.clock)})
-	entries.sort_custom(func(a, b): return a.ready < b.ready or (is_equal_approx(a.ready, b.ready) and a.actor == model.active))
-	return entries
+	return model.current_order()
 
 ## State the HUD draws from; HudArt never reads game.gd internals directly.
 func hud_state() -> Dictionary:

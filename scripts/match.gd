@@ -202,7 +202,7 @@ func use_item(slot: int) -> bool:
 			actor.hp = maxi(1, int(float(actor.hp) - float(actor.max_hp) * Items.BLOOD_HEALTH / 100.0))
 			event["amount"] = int(actor.hp) - before
 		"change_wind":
-			weather.wind_angle = (int(weather.wind_angle) + Items.CHANGE_WIND_DEGREES) % 360
+			weather.wind_angle = posmod(int(weather.wind_angle) + Items.CHANGE_WIND_DEGREES, 360)
 			wind = weather.wind_vector()
 			event["wind_angle"] = weather.wind_angle
 	events.append(event)
@@ -346,6 +346,9 @@ func cannon_pivot(index: int) -> Vector2:
 
 func muzzle(index: int, angle: float, weapon: int = 0) -> Vector2:
 	return cannon_pivot(index) + shot_velocity(index, angle, 100.0, weapon).normalized() * 38.0
+
+func current_order() -> Array:
+	return TurnTable.current_order(self)
 
 func initiative_preview(weapon: int) -> Array:
 	return TurnTable.initiative_preview(self, weapon)

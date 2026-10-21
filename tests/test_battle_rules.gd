@@ -93,6 +93,48 @@ func _initialize() -> void:
 	model.pass_turn()
 	check(model.active == Match.CPU, "Equal initiative favours the actor that did not just play")
 
+	# CPU think time (ADR-076): the CPU pays a fixed time, never its search wall clock.
+	var TurnTable = preload("res://scripts/turn_table.gd")
+	var cpu_ready := []
+	for spent in [0.4, 19.5]:
+		model = Match.new()
+		model.start(2, 1, 7, "", "original", null, [], [], [], Match.CPU)
+		model.tick(spent)
+		check(model.fire(45.0, 60.0, 0), "CPU fires after %.1f s of search" % spent)
+		check(int(model.shot_elapsed) == TurnTable.CPU_THINK_SECONDS, "CPU shot records the fixed think time")
+		resolve(model)
+		cpu_ready.append(float(model.actors[Match.CPU].ready))
+	check(is_equal_approx(cpu_ready[0], cpu_ready[1]) and is_equal_approx(cpu_ready[0], (float(Mobiles.weapon(1, 0).delay) * 7.5 + 10.0 * TurnTable.CPU_THINK_SECONDS) / 7.5),
+		"CPU delay = table + fixed think time, independent of the search duration")
+	# Same seed => same turn order, however long each CPU search takes.
+	var orders := []
+	for search in [0.2, 14.0]:
+		model = Match.new()
+		model.start(2, 2, 11, "", "original", null, [], [], [], -1)
+		var order := []
+		for _turn in range(8):
+			if model.phase == "finished":
+				break
+			order.append(model.active)
+			if model.active == Match.CPU:
+				var plan: Dictionary = model.choose_cpu_shot()
+				model.tick(search)
+				model.fire(plan.angle, plan.power, plan.weapon)
+				resolve(model)
+			else:
+				model.pass_turn()
+		orders.append(order)
+	check(orders[0] == orders[1] and orders[0].has(Match.CPU), "Same seed gives the same turn order regardless of CPU search time")
+	# HUD queue order lives in TurnTable: a tie favours the side that is not active.
+	model = Match.new()
+	model.start(2, 1, 7, "")
+	model.actors[Match.PLAYER].ready = 40.0
+	model.actors[Match.CPU].ready = 40.0
+	var queue: Array = model.current_order()
+	check(int(queue[0].actor) == Match.CPU and int(queue[1].actor) == Match.PLAYER, "Queue tie favours the actor that is not active")
+	model.actors[Match.CPU].ready = 41.0
+	check(int(model.current_order()[0].actor) == Match.PLAYER, "Queue puts the lower readiness first")
+
 	# Ballistics from the C# (Parameter.cs): gravity 9.8 × 20, speed = force × 100 / mass 14, wind × 1.2.
 	check(is_equal_approx(Combat.GRAVITY, 196.0), "Gravity 196")
 	check(is_equal_approx(Combat.launch_velocity(45.0, 70.0, 1).length(), 70.0 * 100.0 / 14.0), "Launch speed = force × 100 / 14")

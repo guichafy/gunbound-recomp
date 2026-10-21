@@ -8,6 +8,8 @@ const CPU := 1
 const DELAY_SCALE := 7.5
 # NetworkObjectParameters.TurnSkipDelayCost (ADR-076): passing pays no time term.
 const PASS_COST := 200.0 / DELAY_SCALE
+# Whole seconds charged for a CPU shot instead of its real search time (ADR-076).
+const CPU_THINK_SECONDS := 2
 
 static func other(index: int) -> int:
 	return 1 - index
@@ -29,7 +31,11 @@ static func pass_turn(model) -> void:
 	schedule(model, model.active, delay)
 
 ## Whole seconds of the turn spent so far (ComputeTurnDelay: (400 − clock) / 20 ticks).
+## The CPU does not read the wall clock: its search time depends on the machine
+## (worker thread, export target), so it pays a fixed think time (ADR-076).
 static func elapsed_seconds(model) -> int:
+	if int(model.active) == CPU:
+		return CPU_THINK_SECONDS
 	return maxi(0, floori(float(model.TURN_TIME) - float(model.turn_time) + 0.000001))
 
 ## Original delay of a shot (ADR-076): table cost (base + shot, C# attribute
@@ -48,6 +54,15 @@ static func initiative_preview(model, weapon: int) -> Array:
 		# SortTurnOrderByDelay previews with the live clock; after firing the spent time is fixed.
 		var elapsed: int = elapsed_seconds(model) if model.phase == "aim" else int(model.shot_elapsed)
 		ready[model.active] = maxf(ready[model.active], model.clock) + shot_cost(model, model.active, selected, elapsed)
+	var first := other(model.active) if is_zero_approx(ready[PLAYER] - ready[CPU]) else (PLAYER if ready[PLAYER] < ready[CPU] else CPU)
+	return [
+		{"actor": first, "ready": ready[first], "delay": maxf(0.0, ready[first] - model.clock)},
+		{"actor": other(first), "ready": ready[other(first)], "delay": maxf(0.0, ready[other(first)] - model.clock)}
+	]
+
+## Order by current readiness only (no pending shot), same tie rule as schedule().
+static func current_order(model) -> Array:
+	var ready := [float(model.actors[PLAYER].ready), float(model.actors[CPU].ready)]
 	var first := other(model.active) if is_zero_approx(ready[PLAYER] - ready[CPU]) else (PLAYER if ready[PLAYER] < ready[CPU] else CPU)
 	return [
 		{"actor": first, "ready": ready[first], "delay": maxf(0.0, ready[first] - model.clock)},
