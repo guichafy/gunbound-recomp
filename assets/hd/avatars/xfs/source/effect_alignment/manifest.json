@@ -1,0 +1,562 @@
+[
+  {
+    "key": "xfs:1:0:2",
+    "name": "Safety Helmet",
+    "cell": [
+      0,
+      0
+    ],
+    "original": "res://assets/xfs/avatars/fh00002l_alpha.png",
+    "source_name": "fh00002l.img",
+    "source_frame": 13,
+    "source_region": [
+      168,
+      64,
+      83,
+      63
+    ],
+    "native_rect": [
+      -85,
+      -60,
+      83,
+      63
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.25650474595198214,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:7",
+    "name": "Space Helmet A",
+    "cell": [
+      1,
+      0
+    ],
+    "original": "res://assets/xfs/avatars/fh00007l_alpha.png",
+    "source_name": "fh00007l.img",
+    "source_frame": 11,
+    "source_region": [
+      0,
+      29,
+      31,
+      29
+    ],
+    "native_rect": [
+      -10,
+      -34,
+      31,
+      29
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.829318899413622,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:8",
+    "name": "Wing Helmet",
+    "cell": [
+      2,
+      0
+    ],
+    "original": "res://assets/xfs/avatars/fh00008l.png",
+    "source_name": "fh00008l.img",
+    "source_frame": 21,
+    "source_region": [
+      280,
+      31,
+      28,
+      31
+    ],
+    "native_rect": [
+      -17,
+      -37,
+      28,
+      31
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.222264631043257,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:15",
+    "name": "Silver Crown",
+    "cell": [
+      3,
+      0
+    ],
+    "original": "res://assets/xfs/avatars/fh00015l_alpha.png",
+    "source_name": "fh00015l.img",
+    "source_frame": 15,
+    "source_region": [
+      100,
+      21,
+      21,
+      19
+    ],
+    "native_rect": [
+      4,
+      -40,
+      21,
+      19
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.4566176470588235,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:20",
+    "name": "Arabian Style",
+    "cell": [
+      0,
+      1
+    ],
+    "original": "res://assets/xfs/avatars/fh00020l_alpha.png",
+    "source_name": "fh00020l.img",
+    "source_frame": 16,
+    "source_region": [
+      125,
+      30,
+      15,
+      28
+    ],
+    "native_rect": [
+      -6,
+      -31,
+      15,
+      28
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.8899999999999999,
+    "pulsate": false,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:22",
+    "name": "Angel Hair",
+    "cell": [
+      1,
+      1
+    ],
+    "original": "res://assets/xfs/avatars/fh00022l_alpha.png",
+    "source_name": "fh00022L.img",
+    "source_frame": 11,
+    "source_region": [
+      0,
+      11,
+      29,
+      9
+    ],
+    "native_rect": [
+      -8,
+      -27,
+      29,
+      9
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.2891228070175439,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:25",
+    "name": "Pharaoh",
+    "cell": [
+      2,
+      1
+    ],
+    "original": "res://assets/xfs/avatars/fh00025l_alpha.png",
+    "source_name": "fh00025L.img",
+    "source_frame": 21,
+    "source_region": [
+      810,
+      86,
+      74,
+      86
+    ],
+    "native_rect": [
+      -49,
+      -69,
+      74,
+      86
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.3521346469622331,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:35",
+    "name": "Flamingo Hair",
+    "cell": [
+      3,
+      1
+    ],
+    "original": "res://assets/xfs/avatars/fh00035l_alpha.png",
+    "source_name": "fh00035L.img",
+    "source_frame": 19,
+    "source_region": [
+      64,
+      9,
+      5,
+      9
+    ],
+    "native_rect": [
+      -8,
+      -26,
+      5,
+      9
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.6857142857142857,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:38",
+    "name": "birthday Hat",
+    "cell": [
+      0,
+      2
+    ],
+    "original": "res://assets/xfs/avatars/fh00038l.png",
+    "source_name": "fh00038l.img",
+    "source_frame": 11,
+    "source_region": [
+      0,
+      11,
+      8,
+      8
+    ],
+    "native_rect": [
+      3,
+      -24,
+      8,
+      8
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.6725925925925926,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:41",
+    "name": "Black Noodle",
+    "cell": [
+      1,
+      2
+    ],
+    "original": "res://assets/xfs/avatars/fh00041l_alpha.png",
+    "source_name": "fh00041l.img",
+    "source_frame": 18,
+    "source_region": [
+      175,
+      8,
+      25,
+      7
+    ],
+    "native_rect": [
+      -5,
+      -28,
+      25,
+      7
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.3747276688453159,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:44",
+    "name": "Disco Hood",
+    "cell": [
+      2,
+      2
+    ],
+    "original": "res://assets/xfs/avatars/fh00044l.png",
+    "source_name": "fh00044l.img",
+    "source_frame": 18,
+    "source_region": [
+      63,
+      11,
+      9,
+      10
+    ],
+    "native_rect": [
+      5,
+      -27,
+      9,
+      10
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.6090395480225989,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:45",
+    "name": "Riding Hat",
+    "cell": [
+      3,
+      2
+    ],
+    "original": "res://assets/xfs/avatars/fh00045l_alpha.png",
+    "source_name": "fh00045L.img",
+    "source_frame": 18,
+    "source_region": [
+      175,
+      8,
+      25,
+      7
+    ],
+    "native_rect": [
+      -5,
+      -28,
+      25,
+      7
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.3747276688453159,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:46",
+    "name": "Picnic Hat",
+    "cell": [
+      0,
+      3
+    ],
+    "original": "res://assets/xfs/avatars/fh00046l_alpha.png",
+    "source_name": "fh00046L.img",
+    "source_frame": 15,
+    "source_region": [
+      464,
+      116,
+      26,
+      25
+    ],
+    "native_rect": [
+      -11,
+      -43,
+      26,
+      25
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.23390607101947308,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:1:0:47",
+    "name": "Bride Hair",
+    "cell": [
+      1,
+      3
+    ],
+    "original": "res://assets/xfs/avatars/fh00047l.png",
+    "source_name": "fh00047L.img",
+    "source_frame": 17,
+    "source_region": [
+      318,
+      64,
+      50,
+      64
+    ],
+    "native_rect": [
+      -12,
+      -55,
+      50,
+      64
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.24608843537414965,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:0:0:2",
+    "name": "Safety Helmet",
+    "cell": [
+      2,
+      3
+    ],
+    "original": "res://assets/xfs/avatars/mh00002l_alpha.png",
+    "source_name": "mh00002l.img",
+    "source_frame": 13,
+    "source_region": [
+      168,
+      64,
+      83,
+      63
+    ],
+    "native_rect": [
+      -87,
+      -59,
+      83,
+      63
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.25650474595198214,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:0:0:4",
+    "name": "Wing Helmet",
+    "cell": [
+      3,
+      3
+    ],
+    "original": "res://assets/xfs/avatars/mh00004l.png",
+    "source_name": "mh00004l.img",
+    "source_frame": 11,
+    "source_region": [
+      0,
+      87,
+      64,
+      74
+    ],
+    "native_rect": [
+      -38,
+      -59,
+      64,
+      74
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.22168350168350168,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:0:0:8",
+    "name": "Space Helmet A",
+    "cell": [
+      0,
+      4
+    ],
+    "original": "res://assets/xfs/avatars/mh00008l_alpha.png",
+    "source_name": "mh00008l.img",
+    "source_frame": 11,
+    "source_region": [
+      0,
+      29,
+      32,
+      29
+    ],
+    "native_rect": [
+      -9,
+      -34,
+      32,
+      29
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.8193029490616622,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:0:0:14",
+    "name": "Pharaoh",
+    "cell": [
+      1,
+      4
+    ],
+    "original": "res://assets/xfs/avatars/mh00014l_alpha.png",
+    "source_name": "mh00014l.img",
+    "source_frame": 21,
+    "source_region": [
+      810,
+      86,
+      74,
+      86
+    ],
+    "native_rect": [
+      -45,
+      -69,
+      74,
+      86
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.3521346469622331,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:0:0:45",
+    "name": "Duke Hair",
+    "cell": [
+      2,
+      4
+    ],
+    "original": "res://assets/xfs/avatars/mh00045l.png",
+    "source_name": "mh00045l.img",
+    "source_frame": 14,
+    "source_region": [
+      33,
+      11,
+      9,
+      10
+    ],
+    "native_rect": [
+      -14,
+      -25,
+      9,
+      10
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.4757575757575757,
+    "pulsate": true,
+    "reference_state": "normal"
+  },
+  {
+    "key": "xfs:0:0:71",
+    "name": "Great Devil Head",
+    "cell": [
+      3,
+      4
+    ],
+    "original": "res://assets/xfs/avatars/mh00071l_alpha.png",
+    "source_name": "mh00071l.img",
+    "source_frame": 19,
+    "source_region": [
+      360,
+      29,
+      25,
+      28
+    ],
+    "native_rect": [
+      -18,
+      -42,
+      25,
+      28
+    ],
+    "effect": true,
+    "frame_count": 22,
+    "native_mean_opacity": 0.5539503386004515,
+    "pulsate": true,
+    "reference_state": "normal"
+  }
+]

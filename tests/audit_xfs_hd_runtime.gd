@@ -9,7 +9,7 @@ func run() -> void:
 	var report: Dictionary={"covered":[],"pending":[],"errors":[],"failures":0,"sheet_hashes":{},"renderer_hashes":{},"registrations":{}}
 	for group in [art.xfs_hd.layers,art.xfs_hd.portraits]:
 		for entry in group.values():
-			report.registrations[entry.id]={"sheet":entry.sheet,"region":entry.region,"native_rect":entry.get("native_rect",[]),"effect":entry.get("effect",false),"pulsate":entry.get("pulsate",false)}
+			report.registrations[entry.id]={"sheet":entry.sheet,"region":entry.region,"native_rect":entry.get("native_rect",[]),"effect":entry.get("effect",false),"pulsate":entry.get("pulsate",false),"reference_state":entry.get("reference_state",""),"attachment":entry.get("attachment",{})}
 	for path in ["scripts/avatar_art.gd","scripts/avatar_xfs_hd.gd","scripts/mobile_rig.gd","scripts/mage_sprite.gd","scripts/bigfoot_sprite.gd"]:
 		report.renderer_hashes[path]=FileAccess.get_sha256("res://"+path)
 	for sheet in art.xfs_hd.sheets:

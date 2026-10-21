@@ -25,7 +25,7 @@ def renderer_hashes():
 
 
 def registration(entry):
-    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False)]}
+    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False),('reference_state',''),('attachment',{})]}
 
 
 def read(path):
@@ -56,7 +56,11 @@ def source_piece(row, number):
                 red,green,blue,alpha=crop(index).split()
                 light=ImageChops.lighter(red,ImageChops.lighter(green,blue))
                 return sum(ImageChops.multiply(light,alpha).histogram()[9:])
-            frame = max(range(count),key=light_pixels)
+            # Head L sprites have the same Normal/Staring strips as the
+            # anatomy. A frontal light can contain two horns while the
+            # constant side-view head only has one visible horn.
+            candidates=range(11,22) if row['category']==0 and count==22 else range(count)
+            frame = max(candidates,key=light_pixels)
         image = crop(frame)
         if not alpha_box(image):
             visible=[i for i in range(count) if alpha_box(crop(i))]
@@ -72,7 +76,8 @@ def source_piece(row, number):
     return image, dict(original=layer['atlas'],source_name=layer['source'],
                       source_frame=frame,source_region=layer['frames'][frame]['region'],
                       native_rect=[ox+box[0]-5,oy+box[1]-5,box[2]-box[0],box[3]-box[1]],
-                      effect=is_effect,frame_count=count,native_mean_opacity=opacity,pulsate=is_effect and opacity<0.85)
+                      effect=is_effect,frame_count=count,native_mean_opacity=opacity,pulsate=is_effect and opacity<0.85,
+                      reference_state='normal' if row['category']==0 and count==22 else 'cycle')
 
 
 def create_jobs(rows, aliases, portraits, accepted, only_ids=None, job_start=0):

@@ -1,0 +1,98 @@
+{
+  "generator": "built-in image_gen",
+  "mode": "transparent-reference-generation",
+  "identity": [
+    "reference_runtime.png",
+    "reference_effects.png"
+  ],
+  "style": "ref_style.png",
+  "selected": [
+    "gen_masters_v1.png",
+    "gen_effects_v1.png"
+  ],
+  "prompts": [
+    "prompt_masters.txt",
+    "prompt_effects.txt"
+  ],
+  "limitation": "Constant full-anatomy Nak master and procedural transforms; not all native gestures restored.",
+  "art_dimensions": {
+    "masters": [
+      1536,
+      1024
+    ],
+    "effects": [
+      1536,
+      1024
+    ]
+  },
+  "useful_dimensions": {
+    "masters": {
+      "mobile": [
+        794,
+        485
+      ],
+      "s1": [
+        367,
+        365
+      ],
+      "s2": [
+        361,
+        359
+      ],
+      "ss": [
+        567,
+        356
+      ]
+    },
+    "effects": {
+      "impact_0_0": [
+        238,
+        220
+      ],
+      "impact_0_1": [
+        231,
+        233
+      ],
+      "impact_0_2": [
+        306,
+        257
+      ],
+      "impact_1_0": [
+        236,
+        220
+      ],
+      "impact_1_1": [
+        234,
+        252
+      ],
+      "impact_1_2": [
+        300,
+        258
+      ],
+      "impact_2_0": [
+        178,
+        180
+      ],
+      "impact_2_1": [
+        331,
+        269
+      ],
+      "impact_2_2": [
+        294,
+        262
+      ],
+      "bubble": [
+        168,
+        166
+      ],
+      "light_s1": [
+        191,
+        183
+      ],
+      "light_s2": [
+        193,
+        171
+      ]
+    }
+  }
+}

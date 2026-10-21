@@ -38,18 +38,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/mh00002l_alpha.png",
     "source_name": "mh00002l.img",
-    "source_frame": 19,
+    "source_frame": 13,
     "source_region": [
-      672,
+      168,
       64,
-      84,
-      64
+      83,
+      63
     ],
     "native_rect": [
       -87,
       -59,
-      84,
-      64
+      83,
+      63
     ],
     "effect": true,
     "frame_count": 22,
@@ -76,9 +76,23 @@
     "registered_at": "2026-10-20T15:44:26.894079+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
     "pulsate": true,
-    "native_mean_opacity": 0.25379208287088423,
+    "native_mean_opacity": 0.25650474595198214,
     "generated_mean_opacity": 0.6740200111156571,
-    "evidence": "docs/avatar-hd-migration/qa/batch_001.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_001.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "lamp",
+      "base_uv": [
+        0.05,
+        0.28
+      ],
+      "effect_uv": [
+        0.96,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:0:0:4|layer:0": {
     "id": "xfs:0:0:4|layer:0",
@@ -136,18 +150,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/mh00004l.png",
     "source_name": "mh00004l.img",
-    "source_frame": 4,
+    "source_frame": 11,
     "source_region": [
-      304,
       0,
-      76,
-      87
+      87,
+      64,
+      74
     ],
     "native_rect": [
-      -37,
-      -65,
-      76,
-      87
+      -38,
+      -59,
+      64,
+      74
     ],
     "effect": true,
     "frame_count": 22,
@@ -174,9 +188,23 @@
     "registered_at": "2026-10-20T15:44:26.894084+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
     "pulsate": true,
-    "native_mean_opacity": 0.22589928057553957,
+    "native_mean_opacity": 0.22168350168350168,
     "generated_mean_opacity": 0.36266586463052974,
-    "evidence": "docs/avatar-hd-migration/qa/batch_001.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_001.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "red forehead jewel",
+      "base_uv": [
+        0.15,
+        0.36
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:0:0:5|layer:0": {
     "id": "xfs:0:0:5|layer:0",
@@ -381,15 +409,15 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/mh00008l_alpha.png",
     "source_name": "mh00008l.img",
-    "source_frame": 19,
+    "source_frame": 11,
     "source_region": [
-      256,
+      0,
       29,
       32,
       29
     ],
     "native_rect": [
-      -11,
+      -9,
       -34,
       32,
       29
@@ -419,9 +447,23 @@
     "registered_at": "2026-10-20T15:44:26.894091+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
     "pulsate": true,
-    "native_mean_opacity": 0.8176,
+    "native_mean_opacity": 0.8193029490616622,
     "generated_mean_opacity": 0.920807042465724,
-    "evidence": "docs/avatar-hd-migration/qa/batch_001.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_001.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "visor",
+      "base_uv": [
+        0.47,
+        0.3
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:0:0:9|layer:0": {
     "id": "xfs:0:0:9|layer:0",
@@ -852,17 +894,17 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/mh00014l_alpha.png",
     "source_name": "mh00014l.img",
-    "source_frame": 10,
+    "source_frame": 21,
     "source_region": [
       810,
-      0,
-      81,
+      86,
+      74,
       86
     ],
     "native_rect": [
-      -43,
-      -66,
-      81,
+      -45,
+      -69,
+      74,
       86
     ],
     "effect": true,
@@ -890,9 +932,23 @@
     "registered_at": "2026-10-20T15:44:26.894109+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
     "pulsate": true,
-    "native_mean_opacity": 0.3503283120896099,
+    "native_mean_opacity": 0.3521346469622331,
     "generated_mean_opacity": 0.42363392057330546,
-    "evidence": "docs/avatar-hd-migration/qa/batch_001.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_001.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "cobra jewel",
+      "base_uv": [
+        0.15,
+        0.28
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:0:0:14|portrait": {
     "id": "xfs:0:0:14|portrait",
@@ -7922,18 +7978,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/mh00045l.png",
     "source_name": "mh00045l.img",
-    "source_frame": 5,
+    "source_frame": 14,
     "source_region": [
-      55,
-      0,
-      10,
-      11
+      33,
+      11,
+      9,
+      10
     ],
     "native_rect": [
-      -11,
-      -28,
-      10,
-      11
+      -14,
+      -25,
+      9,
+      10
     ],
     "effect": true,
     "frame_count": 22,
@@ -7942,7 +7998,7 @@
       4
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.5535580524344569,
+    "native_mean_opacity": 0.4757575757575757,
     "region": [
       457,
       907,
@@ -7962,7 +8018,21 @@
     "generated_mean_opacity": 0.6004412930344993,
     "registered_at": "2026-10-20T16:10:57.607926+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_003.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_003.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "front jewel",
+      "base_uv": [
+        0.2,
+        0.5
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:0:0:45|portrait": {
     "id": "xfs:0:0:45|portrait",
@@ -10077,18 +10147,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/mh00071l_alpha.png",
     "source_name": "mh00071l.img",
-    "source_frame": 4,
+    "source_frame": 19,
     "source_region": [
-      180,
-      0,
-      45,
-      29
+      360,
+      29,
+      25,
+      28
     ],
     "native_rect": [
-      -22,
+      -18,
       -42,
-      45,
-      29
+      25,
+      28
     ],
     "effect": true,
     "frame_count": 22,
@@ -10097,26 +10167,40 @@
       1
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.5628378378378378,
+    "native_mean_opacity": 0.5539503386004515,
+    "reference_state": "normal",
     "region": [
-      798,
-      259,
-      191,
-      117
+      90,
+      17,
+      1094,
+      1173
     ],
-    "sheet": "batch_005",
+    "sheet": "batch_005_repair_008",
     "sheet_meta": {
-      "file": "res://assets/hd/avatars/xfs/batch_005.png",
+      "file": "res://assets/hd/avatars/xfs/batch_005_repair_008.png",
       "size": [
-        1024,
-        1536
+        1295,
+        1214
       ],
-      "sha256": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+      "sha256": "1322d9be2f84e576937fb6b9196d56ab96de88bd67d072d6337e17d08048b27c"
     },
     "state": "qa_passed",
-    "generated_mean_opacity": 0.8059376614334164,
-    "registered_at": "2026-10-20T16:11:00.120075+00:00",
+    "generated_mean_opacity": 0.7067312712627392,
+    "registered_at": "2026-10-20T23:42:26.013232+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
+    "attachment": {
+      "feature": "single profile horn",
+      "base_uv": [
+        0.17,
+        0.32
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    },
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
     "evidence": "docs/avatar-hd-migration/qa/batch_005.json"
   },
   "xfs:0:0:71|portrait": {
@@ -10693,18 +10777,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00002l_alpha.png",
     "source_name": "fh00002l.img",
-    "source_frame": 19,
+    "source_frame": 13,
     "source_region": [
-      672,
+      168,
       64,
-      84,
-      64
+      83,
+      63
     ],
     "native_rect": [
       -85,
       -60,
-      84,
-      64
+      83,
+      63
     ],
     "effect": true,
     "frame_count": 22,
@@ -10713,7 +10797,7 @@
       5
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.25379208287088423,
+    "native_mean_opacity": 0.25650474595198214,
     "region": [
       545,
       995,
@@ -10733,7 +10817,21 @@
     "generated_mean_opacity": 0.941244423865534,
     "registered_at": "2026-10-20T16:11:00.121198+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_005.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_005.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "lamp",
+      "base_uv": [
+        0.065,
+        0.32
+      ],
+      "effect_uv": [
+        0.96,
+        0.52
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:3|layer:0": {
     "id": "xfs:1:0:3|layer:0",
@@ -10987,17 +11085,17 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00007l_alpha.png",
     "source_name": "fh00007l.img",
-    "source_frame": 16,
+    "source_frame": 11,
     "source_region": [
-      160,
+      0,
       29,
-      32,
+      31,
       29
     ],
     "native_rect": [
-      -9,
+      -10,
       -34,
-      32,
+      31,
       29
     ],
     "effect": true,
@@ -11007,7 +11105,7 @@
       7
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.8116556291390729,
+    "native_mean_opacity": 0.829318899413622,
     "region": [
       38,
       1357,
@@ -11027,7 +11125,21 @@
     "generated_mean_opacity": 0.8596825201685513,
     "registered_at": "2026-10-20T16:11:00.121728+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_005.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_005.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "visor",
+      "base_uv": [
+        0.47,
+        0.39
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:8|layer:0": {
     "id": "xfs:1:0:8|layer:0",
@@ -11085,17 +11197,17 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00008l.png",
     "source_name": "fh00008l.img",
-    "source_frame": 8,
+    "source_frame": 21,
     "source_region": [
-      224,
-      0,
-      27,
+      280,
+      31,
+      28,
       31
     ],
     "native_rect": [
-      -14,
-      -38,
-      27,
+      -17,
+      -37,
+      28,
       31
     ],
     "effect": true,
@@ -11105,7 +11217,7 @@
       7
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.22180451127819548,
+    "native_mean_opacity": 0.222264631043257,
     "region": [
       546,
       1350,
@@ -11125,7 +11237,21 @@
     "generated_mean_opacity": 0.40082071739201514,
     "registered_at": "2026-10-20T16:11:00.121855+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_005.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_005.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "forehead jewel",
+      "base_uv": [
+        0.26,
+        0.32
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:9|layer:0": {
     "id": "xfs:1:0:9|layer:0",
@@ -11637,17 +11763,17 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00015l_alpha.png",
     "source_name": "fh00015l.img",
-    "source_frame": 3,
+    "source_frame": 15,
     "source_region": [
-      75,
-      0,
-      25,
+      100,
+      21,
+      21,
       19
     ],
     "native_rect": [
-      -4,
-      -43,
-      25,
+      4,
+      -40,
+      21,
       19
     ],
     "effect": true,
@@ -11657,7 +11783,7 @@
       2
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.4373411534701857,
+    "native_mean_opacity": 0.4566176470588235,
     "region": [
       682,
       485,
@@ -11677,7 +11803,21 @@
     "generated_mean_opacity": 0.7675818111496483,
     "registered_at": "2026-10-20T16:11:01.283025+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_006.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_006.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "crown",
+      "base_uv": [
+        0.66,
+        0.14
+      ],
+      "effect_uv": [
+        0.5,
+        0.6
+      ],
+      "scale": 0.6
+    }
   },
   "xfs:1:0:15|portrait": {
     "id": "xfs:1:0:15|portrait",
@@ -12091,18 +12231,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00020l_alpha.png",
     "source_name": "fh00020l.img",
-    "source_frame": 4,
+    "source_frame": 16,
     "source_region": [
-      100,
-      0,
-      23,
-      29
+      125,
+      30,
+      15,
+      28
     ],
     "native_rect": [
       -6,
       -31,
-      23,
-      29
+      15,
+      28
     ],
     "effect": true,
     "frame_count": 22,
@@ -12111,7 +12251,7 @@
       5
     ],
     "pulsate": false,
-    "native_mean_opacity": 0.9247747747747748,
+    "native_mean_opacity": 0.8899999999999999,
     "region": [
       479,
       1101,
@@ -12131,7 +12271,21 @@
     "generated_mean_opacity": 0.9522150864115401,
     "registered_at": "2026-10-20T16:11:01.283869+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_006.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_006.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "veil",
+      "base_uv": [
+        0.21,
+        0.46
+      ],
+      "effect_uv": [
+        0.35,
+        0.44
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:20|portrait": {
     "id": "xfs:1:0:20|portrait",
@@ -12342,7 +12496,21 @@
     "generated_mean_opacity": 0.519770313966356,
     "registered_at": "2026-10-20T16:11:01.284192+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_006.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_006.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "halo",
+      "base_uv": [
+        0.5,
+        0.3
+      ],
+      "effect_uv": [
+        0.5,
+        0.6
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:22|portrait": {
     "id": "xfs:1:0:22|portrait",
@@ -12594,17 +12762,17 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00025l_alpha.png",
     "source_name": "fh00025L.img",
-    "source_frame": 10,
+    "source_frame": 21,
     "source_region": [
       810,
-      0,
-      81,
+      86,
+      74,
       86
     ],
     "native_rect": [
-      -43,
+      -49,
       -69,
-      81,
+      74,
       86
     ],
     "effect": true,
@@ -12614,7 +12782,7 @@
       0
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.3503283120896099,
+    "native_mean_opacity": 0.3521346469622331,
     "region": [
       468,
       22,
@@ -12634,7 +12802,21 @@
     "generated_mean_opacity": 0.620791038816384,
     "registered_at": "2026-10-20T16:13:52.254656+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_007.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_007.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "cobra tip",
+      "base_uv": [
+        0.12,
+        0.3
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:25|portrait": {
     "id": "xfs:1:0:25|portrait",
@@ -13453,18 +13635,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00035l_alpha.png",
     "source_name": "fh00035L.img",
-    "source_frame": 5,
+    "source_frame": 19,
     "source_region": [
-      40,
-      0,
-      8,
-      8
+      64,
+      9,
+      5,
+      9
     ],
     "native_rect": [
-      -3,
-      -25,
-      8,
-      8
+      -8,
+      -26,
+      5,
+      9
     ],
     "effect": true,
     "frame_count": 22,
@@ -13473,7 +13655,7 @@
       5
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.6492063492063491,
+    "native_mean_opacity": 0.6857142857142857,
     "region": [
       696,
       1131,
@@ -13493,7 +13675,21 @@
     "generated_mean_opacity": 0.9266102360798599,
     "registered_at": "2026-10-20T16:13:52.256240+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_007.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_007.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "feather jewel",
+      "base_uv": [
+        0.33,
+        0.29
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:35|portrait": {
     "id": "xfs:1:0:35|portrait",
@@ -13745,18 +13941,18 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00038l.png",
     "source_name": "fh00038l.img",
-    "source_frame": 1,
+    "source_frame": 11,
     "source_region": [
-      30,
       0,
-      21,
-      9
+      11,
+      8,
+      8
     ],
     "native_rect": [
-      -2,
+      3,
       -24,
-      21,
-      9
+      8,
+      8
     ],
     "effect": true,
     "frame_count": 22,
@@ -13765,7 +13961,7 @@
       7
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.695582329317269,
+    "native_mean_opacity": 0.6725925925925926,
     "region": [
       468,
       1611,
@@ -13785,7 +13981,21 @@
     "generated_mean_opacity": 0.9236666323615175,
     "registered_at": "2026-10-20T16:13:52.256735+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_007.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_007.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "gold bangs",
+      "base_uv": [
+        0.33,
+        0.6
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:38|portrait": {
     "id": "xfs:1:0:38|portrait",
@@ -30987,9 +31197,9 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00041l_alpha.png",
     "source_name": "fh00041l.img",
-    "source_frame": 21,
+    "source_frame": 18,
     "source_region": [
-      250,
+      175,
       8,
       25,
       7
@@ -31007,7 +31217,7 @@
       1
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.3670886075949367,
+    "native_mean_opacity": 0.3747276688453159,
     "region": [
       283,
       278,
@@ -31027,7 +31237,21 @@
     "generated_mean_opacity": 0.6816097197343094,
     "registered_at": "2026-10-20T16:26:14.213483+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_008.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_008.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "silver cap",
+      "base_uv": [
+        0.5,
+        0.13
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:41|portrait": {
     "id": "xfs:1:0:41|portrait",
@@ -31279,9 +31503,9 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00044l.png",
     "source_name": "fh00044l.img",
-    "source_frame": 13,
+    "source_frame": 18,
     "source_region": [
-      18,
+      63,
       11,
       9,
       10
@@ -31299,7 +31523,7 @@
       3
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.5841807909604521,
+    "native_mean_opacity": 0.6090395480225989,
     "region": [
       34,
       590,
@@ -31319,7 +31543,21 @@
     "generated_mean_opacity": 0.5745214809202167,
     "registered_at": "2026-10-20T16:26:14.213998+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_008.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_008.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "gold ribbon stars",
+      "base_uv": [
+        0.6,
+        0.35
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 0.85
+    }
   },
   "xfs:1:0:44|portrait": {
     "id": "xfs:1:0:44|portrait",
@@ -31409,9 +31647,9 @@
     "role": "effect",
     "original": "res://assets/xfs/avatars/fh00045l_alpha.png",
     "source_name": "fh00045L.img",
-    "source_frame": 21,
+    "source_frame": 18,
     "source_region": [
-      250,
+      175,
       8,
       25,
       7
@@ -31429,7 +31667,7 @@
       3
     ],
     "pulsate": true,
-    "native_mean_opacity": 0.3670886075949367,
+    "native_mean_opacity": 0.3747276688453159,
     "region": [
       793,
       646,
@@ -31449,7 +31687,21 @@
     "generated_mean_opacity": 0.6787675070028011,
     "registered_at": "2026-10-20T16:26:14.214172+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_008.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_008.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "silver brim",
+      "base_uv": [
+        0.45,
+        0.5
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:45|portrait": {
     "id": "xfs:1:0:45|portrait",
@@ -31579,7 +31831,21 @@
     "generated_mean_opacity": 0.4420983461877902,
     "registered_at": "2026-10-20T16:26:14.214411+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_008.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_008.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "flower",
+      "base_uv": [
+        0.47,
+        0.33
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:46|portrait": {
     "id": "xfs:1:0:46|portrait",
@@ -31709,7 +31975,21 @@
     "generated_mean_opacity": 0.45030038246807036,
     "registered_at": "2026-10-20T16:26:14.214671+00:00",
     "visual_review": "identity/layout checked against batch reference before registration",
-    "evidence": "docs/avatar-hd-migration/qa/batch_008.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_008.json",
+    "reference_state": "normal",
+    "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
+    "attachment": {
+      "feature": "veil jewels",
+      "base_uv": [
+        0.66,
+        0.43
+      ],
+      "effect_uv": [
+        0.5,
+        0.5
+      ],
+      "scale": 1
+    }
   },
   "xfs:1:0:47|portrait": {
     "id": "xfs:1:0:47|portrait",

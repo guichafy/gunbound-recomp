@@ -1,6 +1,20 @@
 # Entregas e próximos trabalhos
 
-## Migração HD integral dos avatares — pedido atual
+## Revisão0.18 e sincronização main
+
+- [x] Preservar pendentes0.17 em3eb2b01; confirmar PR1 MERGED/ancestralidade.
+- [x] Reproduzir mistura Staring/Normal em L e corrigir preparação/fallback.
+- [x] Regenerar luz única do Great Devil; registrar20âncoras de cabeça HD.
+- [x] GPU20modelos/360frames60Hz/pausa e loja real1920×1080.
+- [x] Revisão independente, QA37lotes/550registros renovado.
+- [x] Regressão5234checks+13partidas e Python13 PASS.
+- [x] Export/PCK0.18, versão0.18.0 e assinatura estrita conferidos.
+- [ ] Confirmar push remoto (uploads HTTP expiraram; transporte em diagnóstico).
+- [ ] NakHD: confirmação explícita pedida pela revisão automática;21outputs/
+      patch preservados em source/pending_integration, runtime original ativo.
+- [ ] Após confirmação: corrigir separação S2/SS, testesHD/HUD, GPU/export Nak.
+
+## Migração HD integral dos avatares0.17
 
 - [x] Medir escopo real:562registros,550com peças,629camadas,12N/A.
 - [x] Identificar/corrigir transparência ARGB4444 de cinco acessórios, RED→GREEN.
@@ -55,7 +69,8 @@
 - [x] Dano/raio do characterdata; S2 subterrâneo e SS fantasma revertidos do cliente.
 - [x] Menu com três mobiles, miras do HUD, partidas 91–93 e test_nak (55 checks).
 - [x] Captura GPU em docs/nak (stills, MP4 60 fps, GIF ampliado).
-- [ ] Arte HD do Nak (skill gunbound-classic-hd), adiada pelo usuário.
+- [ ] Arte HD do Nak: pedido atual substitui adiamento; preparados masters/código.
+      Integração aguarda confirmação específica exigida pela revisão automática.
 - [ ] Usuário validar sensação de S2/SS e encaixe do piloto no app.
 - [x] App reexportado/assinado na entrega0.17 dos avatares HD, mantendo Nak original.
 

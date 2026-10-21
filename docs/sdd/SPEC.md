@@ -303,3 +303,9 @@ REQ-10/20/39 aceitos tecnicamente na0.17:550avatares/629camadas vestíveis e
 fallback oculto.37lotes, ambos gêneros/mobiles/sentidos, poses e pausa; animação
 por masters constantes, sem reconstrução de cada gesto nativo.12N/A explícitos.
 Aplicativo exportado e smoke fora do projeto confirmam o mesmo catálogo/render.
+
+REQ-10/20/39 — revisão0.18: luzes de cabeças animadas devem corresponder ao
+mesmo estado da cabeça HD (Normal), sem chifres/ornamentos de Staring deslocados.
+Auditar os20modelos de cabeça com camada L e preservar fallback coerente.
+Pedido atual também autoriza concluir o HD do Nak introduzido no PR1, substituindo
+o adiamento anterior. REQ-19/20 e plano NAK_HD.md; regras físicas preservadas.

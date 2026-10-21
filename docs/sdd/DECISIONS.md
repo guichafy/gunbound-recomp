@@ -518,3 +518,15 @@ tiro). Desenho espelhado: o Nak atira pela cauda. RiderPivot cru do fork recebe
 fora do rig HD até lá. Substitui a primeira versão deste ADR, que inventava
 números e uma gravidade invertida 3×. Publicado como ADR-069 no PR #1;
 renumerado para ADR-074 na integração à main, pois a loja local já usava 069–073.
+
+## ADR-075 — estado anatômico compartilhado por cabeça e efeito
+
+20/10/2026. Em0.17 o gerador escolheu o maior L dentre todos os quadros, mesmo
+quando a cabeça vinha de Normal11–21. Great Devil Head combina luz frontal
+com cabeça lateral. Preparação passa a selecionar Normal na cabeça e sua luz;
+arte defeituosa é regenerada, preservando fontes/brutos anteriores. O fallback
+respeita as faixas Normal/Staring da categoria. Metadados e QA devem comprovar
+o estado, além do registro constante. AVATAR_EFFECT_ALIGNMENT.md.
+
+O pedido de finalizar o PR1 com arte HD substitui o adiamento de HD do Nak na
+ADR-074; anatomia estável e efeitos próprios, sem mudanças de regras. NAK_HD.md.

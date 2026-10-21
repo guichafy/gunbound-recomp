@@ -1,4 +1,41 @@
-# Hand-off — Gunbound Recomp0.17.0 / avatares XFS integralmente HD
+# Hand-off — Gunbound Recomp0.18.0 / registro das luzes de avatar
+
+## Revisão20/10/2026 — validação final
+
+REQ-10/20/39, ADR-075; AVATAR_EFFECT_ALIGNMENT.md. Great Devil Head usava luz
+frontal (dois chifres) com cabeça Normal de perfil (um). Preparação agora
+seleciona11–21 para cabeça/L; fallback compartilha faixa Normal/Staring.
+Um novo mestre GPT Images de luz foi selecionado (1295×1214; recorte útil
+1094×1173); os outros19mestres aprovados foram preservados. Todos os20modelos
+com L receberam pontos fixos na anatomia HD, sem variar bbox por quadro.
+
+GPU:20modelos vestidos/mobile, dois sentidos e inclinação,1920×1080,
+360frames60fps/6s,30quadros pausados idênticos. Prévia real da loja em
+`docs/avatar-effects/shop-*.png`; vídeo/comparações na mesma pasta. Revisão
+independente sem bloqueadores. Os37lotes e auditoria550 foram renovados:
+550avatares/629camadas/550retratos,12N/A, nenhum fallback oculto.
+
+Regressão final:5234checks +13partidas PASS; Python13 PASS. Uma rodada anterior
+detectou expectativas de HUD ainda originais enquanto a preparação NakHD estava
+ativa; o runtime original foi restaurado e a rodada completa acima passou.
+Não houve mudança de combate/perfil. App/ZIP0.18.0 exportados, versão e assinatura estrita conferidas. Smoke do
+PCK correto fora do projeto PASS:550peças/629camadas/550retratos, compra,
+vestir, recarga, atributos e batalha em1920×1080 e1280×800.
+
+Git:0.17pendente foi preservado no commit3eb2b01. PR1 já está MERGED no GitHub
+(596e41e) e integrado localmente pelo merge385d211. Push inicial terminou com
+HTTP408; referência remota foi conferida, sem alegar sincronização ainda.
+
+NakHD: dois atlas1536×1024 e código foram preparados pelo pedido atual de
+regenerar imagens do PR1. A revisão automática rejeitou integrar/importar/
+testar por exigir confirmação específica, enviada ao usuário e ainda pendente.
+Para manter main executável, os21outputs novos e patch foram preservados em
+`assets/hd/nak/source/pending_integration`, com caminhos/hashes. Runtime Nak
+permanece original; nenhum trabalho foi perdido. Após confirmação, corrigir
+separação S2/SS da folha de efeitos, testes HD/HUD, GPU e export. NAK_HD.md.
+Esta pendência impede declarar todo o pedido de HD do PR finalizado.
+
+## Histórico da entrega0.17
 
 ## Migração HD integral — concluída20/10/2026
 

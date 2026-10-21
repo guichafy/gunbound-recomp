@@ -4,9 +4,11 @@
 		{
 			"id": "xfs:0:0:36|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					23.0,
 					28.0,
@@ -20,6 +22,7 @@
 		{
 			"id": "xfs:0:0:37|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -28,6 +31,7 @@
 					40.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					271.0,
 					28.0,
@@ -41,9 +45,11 @@
 		{
 			"id": "xfs:0:0:37|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					502.0,
 					28.0,
@@ -57,6 +63,7 @@
 		{
 			"id": "xfs:0:0:38|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-9.0,
@@ -65,6 +72,7 @@
 					29.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					693.0,
 					39.0,
@@ -78,9 +86,11 @@
 		{
 			"id": "xfs:0:0:38|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					18.0,
 					249.0,
@@ -94,6 +104,7 @@
 		{
 			"id": "xfs:0:0:39|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-8.0,
@@ -102,6 +113,7 @@
 					34.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					247.0,
 					254.0,
@@ -115,9 +127,11 @@
 		{
 			"id": "xfs:0:0:39|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					469.0,
 					254.0,
@@ -131,6 +145,7 @@
 		{
 			"id": "xfs:0:0:40|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-12.0,
@@ -139,6 +154,7 @@
 					27.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					690.0,
 					255.0,
@@ -152,9 +168,11 @@
 		{
 			"id": "xfs:0:0:40|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					23.0,
 					461.0,
@@ -168,6 +186,7 @@
 		{
 			"id": "xfs:0:0:41|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -176,6 +195,7 @@
 					40.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					246.0,
 					445.0,
@@ -189,9 +209,11 @@
 		{
 			"id": "xfs:0:0:41|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					451.0,
 					463.0,
@@ -205,6 +227,7 @@
 		{
 			"id": "xfs:0:0:42|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-9.0,
@@ -213,6 +236,7 @@
 					33.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					694.0,
 					461.0,
@@ -226,9 +250,11 @@
 		{
 			"id": "xfs:0:0:42|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					22.0,
 					683.0,
@@ -242,6 +268,7 @@
 		{
 			"id": "xfs:0:0:43|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -250,6 +277,7 @@
 					27.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					231.0,
 					707.0,
@@ -263,9 +291,11 @@
 		{
 			"id": "xfs:0:0:43|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					452.0,
 					704.0,
@@ -279,6 +309,7 @@
 		{
 			"id": "xfs:0:0:44|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -287,6 +318,7 @@
 					26.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					693.0,
 					690.0,
@@ -300,9 +332,11 @@
 		{
 			"id": "xfs:0:0:44|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					19.0,
 					906.0,
@@ -316,6 +350,7 @@
 		{
 			"id": "xfs:0:0:45|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-13.0,
@@ -324,6 +359,7 @@
 					42.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					259.0,
 					891.0,
@@ -337,14 +373,27 @@
 		{
 			"id": "xfs:0:0:45|layer:1",
 			"registration": {
+				"attachment": {
+					"base_uv": [
+						0.2,
+						0.5
+					],
+					"effect_uv": [
+						0.5,
+						0.5
+					],
+					"feature": "front jewel",
+					"scale": 1.0
+				},
 				"effect": true,
 				"native_rect": [
-					-11.0,
-					-28.0,
-					10.0,
-					11.0
+					-14.0,
+					-25.0,
+					9.0,
+					10.0
 				],
 				"pulsate": true,
+				"reference_state": "normal",
 				"region": [
 					457.0,
 					907.0,
@@ -358,9 +407,11 @@
 		{
 			"id": "xfs:0:0:45|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					696.0,
 					896.0,
@@ -374,6 +425,7 @@
 		{
 			"id": "xfs:0:0:46|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -382,6 +434,7 @@
 					27.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					19.0,
 					1127.0,
@@ -395,9 +448,11 @@
 		{
 			"id": "xfs:0:0:46|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					243.0,
 					1119.0,
@@ -411,6 +466,7 @@
 		{
 			"id": "xfs:0:0:47|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-13.0,
@@ -419,6 +475,7 @@
 					26.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					453.0,
 					1141.0,
@@ -432,9 +489,11 @@
 		{
 			"id": "xfs:0:0:47|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					680.0,
 					1126.0,
@@ -448,6 +507,7 @@
 		{
 			"id": "xfs:0:0:48|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -456,6 +516,7 @@
 					34.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					17.0,
 					1343.0,
@@ -469,9 +530,11 @@
 		{
 			"id": "xfs:0:0:48|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					243.0,
 					1355.0,
@@ -485,6 +548,7 @@
 		{
 			"id": "xfs:0:0:49|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -493,6 +557,7 @@
 					24.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					466.0,
 					1356.0,
@@ -506,9 +571,11 @@
 		{
 			"id": "xfs:0:0:49|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					695.0,
 					1342.0,
@@ -522,6 +589,7 @@
 		{
 			"id": "xfs:0:0:50|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -530,6 +598,7 @@
 					41.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					19.0,
 					1564.0,
@@ -543,9 +612,11 @@
 		{
 			"id": "xfs:0:0:50|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					231.0,
 					1568.0,
@@ -559,6 +630,7 @@
 		{
 			"id": "xfs:0:0:51|layer:0",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [
 					-7.0,
@@ -567,6 +639,7 @@
 					30.0
 				],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					458.0,
 					1568.0,
@@ -580,9 +653,11 @@
 		{
 			"id": "xfs:0:0:51|portrait",
 			"registration": {
+				"attachment": {},
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
+				"reference_state": "",
 				"region": [
 					679.0,
 					1565.0,
@@ -607,8 +682,8 @@
 		"Bigfoot esquerda"
 	],
 	"renderer_hashes": {
-		"scripts/avatar_art.gd": "cbe5da4cb68c1e8249f12dab1fc15f1050ecb08d9a403fc9202834e8fe5eb0c5",
-		"scripts/avatar_xfs_hd.gd": "bb13d3cb0fb19d0a303792a50f05b1f06deaedafaec5322059eb97eb0c0c0098",
+		"scripts/avatar_art.gd": "1c86afd04087b6434495fb5b7f829ea12ff0153553c09ddd263b45cc4f731e0f",
+		"scripts/avatar_xfs_hd.gd": "df8809fb2d5cce28eeee0b2b847500c2479b7813e19f5ff9b20aeda92a467181",
 		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
 		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
 		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"

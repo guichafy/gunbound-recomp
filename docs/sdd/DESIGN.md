@@ -542,3 +542,11 @@ segue material da fonte, não o sufixoL sozinho. Registro permanece fixo ao long
 da animação do rig. Controle/aceite separado do runtime exige capturas atuais
 por lote, assinatura de recorte/registro/renderer e auditoria do consumidor real.
 12N/A são acessórios vazios/placeholders sem arte, com razão explícita.
+
+## Revisão0.18 — estado de efeito e Nak HD
+
+Cabeça e L compartilham a faixa Normal da fonte na preparação de seus mestres.
+O fallback conserva faixa Normal/Staring por categoria, inclusive L; o HD não
+mistura formas frontais de Staring com mestre lateral. Ver ADR-075 e
+AVATAR_EFFECT_ALIGNMENT.md. Nak recebe renderer HD próprio delegado pelo rig,
+com geometria de combate preservada; NAK_HD.md documenta medição e fallback.

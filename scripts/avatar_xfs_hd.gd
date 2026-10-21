@@ -75,6 +75,29 @@ func piece(key: String, index: int) -> Dictionary:
 	var fitted: Vector2=data.source.size*minf(native.size.x/data.source.size.x,native.size.y/data.source.size.y)
 	var registration := -native.position/native.size
 	data.target=Rect2(-fitted*registration,fitted)
+	if entry.has("attachment"):
+		# Light attachment is measured on the selected HD anatomy, not the
+		# alpha center of an unrelated frontal frame or a changing silhouette.
+		var attachment=entry.attachment
+		if not attachment is Dictionary or index<=0 or not attachment.get("base_uv") is Array or not attachment.get("effect_uv") is Array:
+			return {}
+		if attachment.base_uv.size()!=2 or attachment.effect_uv.size()!=2:
+			return {}
+		for value in attachment.base_uv+attachment.effect_uv+[attachment.get("scale",1.0)]:
+			if typeof(value) not in [TYPE_INT,TYPE_FLOAT] or not is_finite(float(value)):
+				return {}
+		for value in attachment.base_uv+attachment.effect_uv:
+			if float(value)<0.0 or float(value)>1.0:
+				return {}
+		var factor: float=float(attachment.get("scale",1.0))
+		if factor<=0.0 or factor>2.0:
+			return {}
+		var base:=piece(key,0)
+		if base.is_empty():
+			return {}
+		fitted*=factor
+		var anchor: Vector2=base.target.position+base.target.size*Vector2(attachment.base_uv[0],attachment.base_uv[1])
+		data.target=Rect2(anchor-fitted*Vector2(attachment.effect_uv[0],attachment.effect_uv[1]),fitted)
 	data.effect=bool(entry.get("pulsate",false))
 	# Native glass/glows are translucent; a generated opaque dark center must
 	# not hide the face. Preserve the source material's average opacity.

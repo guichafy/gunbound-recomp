@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.17.0**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.0**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,11 +8,11 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.17.0** — catálogo XFS e migração HD completa dos 550 avatares reais |
+| Versão | **0.18.0** — 550 avatares HD e efeitos ligados à anatomia correta |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
-| Validação automática | **3887 verificações e 13 partidas completas**; cobertura HD ampliada com **1744 checks**, mais 11 testes Python |
+| Validação automática | **5234 verificações e 13 partidas completas**, mais **13 testes Python** |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
-| Aceite visual | Migração técnica concluída; aparência dos novos avatares aguarda sua validação no app 0.17.0 |
+| Aceite visual | Great Devil Head e os 20 modelos de cabeça com efeito revisados; validação do usuário pendente |
 
 O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). Este arquivo é o mapa do que existe hoje.
 
@@ -36,7 +36,9 @@ A migração HD está concluída: **550 avatares reais, 629 camadas vestíveis e
 
 <img src="docs/avatar-hd-migration/motion/0000.png" width="960" alt="Quatro conjuntos XFS integralmente HD vestidos em Mage e Bigfoot nos dois sentidos">
 
-O [vídeo atual em Full HD a 60 fps](docs/avatar-hd-migration/motion.mp4) mostra repouso, movimento, carga, pausa, recuo e dano. O avatar mantém a anatomia e acompanha o rig; efeitos ficam separados. É uma adaptação HD com peças fixas, sem redesenhar todos os gestos e piscadas originais.
+O [vídeo da migração em Full HD a 60 fps](docs/avatar-hd-migration/motion.mp4) mostra repouso, movimento, carga, pausa, recuo e dano. O avatar mantém a anatomia e acompanha o rig; efeitos ficam separados. É uma adaptação HD com peças fixas, sem redesenhar todos os gestos e piscadas originais.
+
+A revisão 0.18 corrige a mistura entre a cabeça de perfil e efeitos frontais. Os 20 modelos de cabeça com luz receberam âncoras próprias no HD. [Comparação atual a 60 fps](docs/avatar-effects/motion.mp4) · [Great Devil vestido na loja](docs/avatar-effects/shop-avatar.png).
 
 ### Batalha no Miramo Town
 
@@ -73,6 +75,7 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.15.0 | Loja Full HD/16:9 baseada no vídeo, inventário compacto e prévia Avatar/Mobile |
 | 0.16.0 | Design ciano XFS, catálogo 562/479 compráveis, bônus por equipamento e compatibilidade do perfil |
 | 0.17.0 | 550 avatares vestidos em HD, 629 camadas, controle individual e animação GPU 60 fps; preserva a integração paralela do Nak original |
+| 0.18.0 | Luzes das cabeças no estado Normal, âncoras HD e reparo do Great Devil Head; histórico do PR1 preservado |
 
 Números de base, antes dos atributos:
 
@@ -88,7 +91,7 @@ Números de base, antes dos atributos:
 
 - A máquina calcula o tiro e permanece parada. Ela também não gasta itens.
 - **Mouse Speed** continua desligado. A skin de interface é só a Blue.
-- Mage e Bigfoot usam arte HD; Nak foi integrado com arte original e seu HD foi adiado. Outros mobiles continuam pendentes. O Mage já regenera escudo.
+- Mage e Bigfoot usam arte HD; Nak conserva a arte original. Seus derivados HD estão preservados como fonte pendente de confirmação específica para integração. Outros mobiles continuam pendentes. O Mage já regenera escudo.
 - Existe um mapa: Miramo Town A. Outros mapas ficaram de fora por decisão explícita.
 - A arte de clima e do Thor ainda é a original, em resolução baixa.
 - Olhos e gestos dos avatares HD não foram reanimados quadro a quadro.
@@ -98,7 +101,7 @@ Números de base, antes dos atributos:
 - A colisão do terreno é amostrada a cada dois pixels. Pedaços de chão que ficam soltos permanecem no lugar; só os veículos caem.
 - O balanceamento é o do protótipo, com atrasos originais divididos por 7,5.
 - Builds de Windows, Linux, Android e iOS não foram gerados. A engine permite exportar esses alvos; só o macOS foi validado.
-- Vários fluxos — itens, mira Drag, música e a loja 0.17.0 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
+- Vários fluxos — itens, mira Drag, música e a loja 0.18.0 — passaram em teste automático e ainda esperam o roteiro manual em [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
 ### Fora desta entrega
 

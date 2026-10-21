@@ -100,3 +100,12 @@ novo para o mobile. App/ZIP0.17.0 exportados e assinatura estrita válida. Smoke
 GPU do PCK fora do projeto passou:550peças/629camadas realmente carregadas,
 550retratos, compra/vestir/recarga/atributos/batalha e telas1920×1080/1280×800.
 Brutos/jobs excluídos do pacote. Evidência em docs/avatar-hd-migration.
+
+## Revisão0.18 dos efeitos de cabeça
+
+A validação0.17 de bbox constante não detectou mistura de anatomia Normal e
+Staring no L. Great Devil foi corrigido com novo mestre de luz único;20cabeças
+receberam referência Normal/âncoras no HD. AVATAR_EFFECT_ALIGNMENT.md/ADR-075.
+Catálogo agora tem39atlas selecionados;550/629/550 e12N/A preservados.
+QA37lotes e auditoria550 renovadas no renderer final; comparação adicional
+GPU1920×1080/360frames60fps e prévia da loja em docs/avatar-effects.

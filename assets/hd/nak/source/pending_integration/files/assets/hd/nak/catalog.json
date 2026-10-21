@@ -1,0 +1,402 @@
+{
+  "version": 1,
+  "alpha_threshold": 8,
+  "registration": {
+    "native_cell": [
+      74,
+      57
+    ],
+    "native_pivot": [
+      37,
+      50
+    ],
+    "native_contact_y": 53,
+    "native_hull_width": 51,
+    "native_body_origin": [
+      -4,
+      -19
+    ],
+    "native_body_at_support": [
+      -4,
+      -22
+    ]
+  },
+  "masters": {
+    "path": "res://assets/hd/nak/masters.png",
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "aa627036c6f918530327f4e0d45e4dc62b7ceb9068fd4a7ba6fe1f6f725ff03c",
+    "sprites": {
+      "mobile": {
+        "window": [
+          0,
+          0,
+          950,
+          540
+        ],
+        "region": [
+          94,
+          36,
+          794,
+          485
+        ],
+        "native_rect": [
+          -23,
+          -33,
+          51,
+          33
+        ]
+      },
+      "s1": {
+        "window": [
+          950,
+          0,
+          1536,
+          520
+        ],
+        "region": [
+          1045,
+          116,
+          367,
+          365
+        ],
+        "native_rect": [
+          -7,
+          -7,
+          15,
+          14
+        ]
+      },
+      "s2": {
+        "window": [
+          0,
+          540,
+          768,
+          1024
+        ],
+        "region": [
+          252,
+          584,
+          361,
+          359
+        ],
+        "native_rect": [
+          -8,
+          -8,
+          16,
+          17
+        ]
+      },
+      "ss": {
+        "window": [
+          768,
+          540,
+          1536,
+          1024
+        ],
+        "region": [
+          856,
+          598,
+          567,
+          356
+        ],
+        "native_rect": [
+          -23,
+          -13,
+          29,
+          25
+        ]
+      }
+    }
+  },
+  "effects": {
+    "path": "res://assets/hd/nak/effects.png",
+    "sprites": {
+      "impact_0_0": {
+        "window": [
+          0,
+          0,
+          512,
+          276
+        ],
+        "region": [
+          178,
+          41,
+          238,
+          220
+        ],
+        "native_rect": [
+          -44,
+          -35,
+          85,
+          76
+        ]
+      },
+      "impact_0_1": {
+        "window": [
+          512,
+          0,
+          1024,
+          276
+        ],
+        "region": [
+          649,
+          24,
+          231,
+          233
+        ],
+        "native_rect": [
+          -29,
+          -35,
+          59,
+          71
+        ]
+      },
+      "impact_0_2": {
+        "window": [
+          1024,
+          0,
+          1536,
+          276
+        ],
+        "region": [
+          1053,
+          17,
+          306,
+          257
+        ],
+        "native_rect": [
+          -59,
+          -58,
+          118,
+          116
+        ]
+      },
+      "impact_1_0": {
+        "window": [
+          0,
+          276,
+          512,
+          537
+        ],
+        "region": [
+          178,
+          304,
+          236,
+          220
+        ],
+        "native_rect": [
+          -44,
+          -35,
+          85,
+          76
+        ]
+      },
+      "impact_1_1": {
+        "window": [
+          512,
+          276,
+          1024,
+          537
+        ],
+        "region": [
+          647,
+          285,
+          234,
+          252
+        ],
+        "native_rect": [
+          -29,
+          -35,
+          59,
+          71
+        ]
+      },
+      "impact_1_2": {
+        "window": [
+          1024,
+          276,
+          1536,
+          537
+        ],
+        "region": [
+          1071,
+          278,
+          300,
+          258
+        ],
+        "native_rect": [
+          -59,
+          -58,
+          118,
+          116
+        ]
+      },
+      "impact_2_0": {
+        "window": [
+          0,
+          537,
+          512,
+          812
+        ],
+        "region": [
+          209,
+          572,
+          178,
+          180
+        ],
+        "native_rect": [
+          -37,
+          -38,
+          72,
+          72
+        ]
+      },
+      "impact_2_1": {
+        "window": [
+          512,
+          537,
+          1024,
+          812
+        ],
+        "region": [
+          606,
+          537,
+          331,
+          269
+        ],
+        "native_rect": [
+          -86,
+          -92,
+          178,
+          183
+        ]
+      },
+      "impact_2_2": {
+        "window": [
+          1024,
+          537,
+          1536,
+          812
+        ],
+        "region": [
+          1075,
+          537,
+          294,
+          262
+        ],
+        "native_rect": [
+          -59,
+          -59,
+          112,
+          120
+        ]
+      },
+      "bubble": {
+        "window": [
+          0,
+          812,
+          512,
+          1024
+        ],
+        "region": [
+          214,
+          818,
+          168,
+          166
+        ]
+      },
+      "light_s1": {
+        "window": [
+          512,
+          812,
+          1024,
+          1024
+        ],
+        "region": [
+          671,
+          817,
+          191,
+          183
+        ]
+      },
+      "light_s2": {
+        "window": [
+          1024,
+          812,
+          1536,
+          1024
+        ],
+        "region": [
+          1144,
+          825,
+          193,
+          171
+        ]
+      }
+    },
+    "size": [
+      1536,
+      1024
+    ],
+    "sha256": "2d3cbd60f7849b4bb84bcc3a1ae612ccbde93ac13ccc7a71e29f62d730e2f5df"
+  },
+  "hud": {
+    "CrosshairNakS1Ally.png": {
+      "method": "flat-source-density-3x",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "450a0be20ca8e2e81f481293eec3470f1b86ebc6f73cbb39ca435feb6bd5c187",
+      "source_sha256": "d8643286f4b676272faabfcf1b7c69a5686bafbf87b06adb02939c31d978238c"
+    },
+    "CrosshairNakS1Enemy.png": {
+      "method": "flat-source-density-3x",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "e3bebde0220b7003fa098f836789a768c1521feee1df199715f495f41328a32a",
+      "source_sha256": "6417561b8b46b12062b9ae588c6b80b77136e303b38e436bbdd345173cf4b232"
+    },
+    "CrosshairNakS2Ally.png": {
+      "method": "flat-source-density-3x",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "450a0be20ca8e2e81f481293eec3470f1b86ebc6f73cbb39ca435feb6bd5c187",
+      "source_sha256": "d8643286f4b676272faabfcf1b7c69a5686bafbf87b06adb02939c31d978238c"
+    },
+    "CrosshairNakS2Enemy.png": {
+      "method": "flat-source-density-3x",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "e3bebde0220b7003fa098f836789a768c1521feee1df199715f495f41328a32a",
+      "source_sha256": "6417561b8b46b12062b9ae588c6b80b77136e303b38e436bbdd345173cf4b232"
+    },
+    "CrosshairNakSSAlly.png": {
+      "method": "flat-source-density-3x",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "450a0be20ca8e2e81f481293eec3470f1b86ebc6f73cbb39ca435feb6bd5c187",
+      "source_sha256": "d8643286f4b676272faabfcf1b7c69a5686bafbf87b06adb02939c31d978238c"
+    },
+    "CrosshairNakSSEnemy.png": {
+      "method": "flat-source-density-3x",
+      "size": [
+        249,
+        249
+      ],
+      "sha256": "e3bebde0220b7003fa098f836789a768c1521feee1df199715f495f41328a32a",
+      "source_sha256": "6417561b8b46b12062b9ae588c6b80b77136e303b38e436bbdd345173cf4b232"
+    }
+  }
+}
