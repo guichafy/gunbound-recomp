@@ -573,3 +573,8 @@ do relógio real, porque a duração da busca no worker depende da máquina e
 tornava a ordem de turnos não reproduzível com a mesma seed. A fila do HUD
 antes da escolha da CPU passa a vir de `TurnTable.current_order`, com o mesmo
 desempate a favor do outro (o `game.gd` antes desempatava a favor do ativo).
+
+Complemento (0.18.2): o modelo congela `turn_time` da CPU entre
+`begin_cpu_plan` e `finish_cpu_plan` (`cpu_thinking`). A busca não consome o
+turno de 30 s, então a CPU não passa por tempo esgotado em máquina lenta; a
+espera de apresentação depois da escolha continua contando.

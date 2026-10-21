@@ -125,6 +125,37 @@ func _initialize() -> void:
 				model.pass_turn()
 		orders.append(order)
 	check(orders[0] == orders[1] and orders[0].has(Match.CPU), "Same seed gives the same turn order regardless of CPU search time")
+	# CPU search freezes the turn clock (ADR-076): a slow search never times out.
+	model = Match.new()
+	model.start(2, 1, 7, "", "original", null, [], [], [], Match.CPU)
+	var slow_plan: Dictionary = model.begin_cpu_plan()
+	model.tick(45.0)
+	check(model.phase == "aim" and model.active == Match.CPU and is_equal_approx(model.turn_time, Match.TURN_TIME), "A 45 s CPU search neither expires the turn nor spends its clock")
+	Match.search_cpu_plan(slow_plan)
+	model.finish_cpu_plan(slow_plan)
+	model.tick(1.0)
+	check(is_equal_approx(model.turn_time, Match.TURN_TIME - 1.0), "The clock runs again once the plan is chosen")
+	var frozen_orders := []
+	for search in [0.1, 60.0]:
+		model = Match.new()
+		model.start(2, 2, 11, "", "original", null, [], [], [], -1)
+		var order := []
+		for _turn in range(8):
+			if model.phase == "finished":
+				break
+			order.append(model.active)
+			if model.active == Match.CPU:
+				var plan: Dictionary = model.begin_cpu_plan()
+				model.tick(search)
+				Match.search_cpu_plan(plan)
+				var best: Dictionary = model.finish_cpu_plan(plan)
+				model.fire(best.angle, best.power, best.weapon)
+				resolve(model)
+			else:
+				model.pass_turn()
+		frozen_orders.append(order)
+	check(frozen_orders[0] == frozen_orders[1] and frozen_orders[0].has(Match.CPU), "Same seed, same turn order with a 0.1 s or 60 s CPU search")
+
 	# HUD queue order lives in TurnTable: a tie favours the side that is not active.
 	model = Match.new()
 	model.start(2, 1, 7, "")

@@ -112,6 +112,9 @@ comprova a regra; senão, vale o C#.** Escolhas do usuário aplicadas:
   HUD (`TurnTable.current_order`). A CPU não paga o tempo real da busca, que
   depende da máquina: cada tiro dela cobra um tempo fixo de 2 s
   (`TurnTable.CPU_THINK_SECONDS`), e a mesma seed dá a mesma ordem de turnos.
+  Enquanto a busca da CPU roda, o relógio do turno fica parado
+  (`Match.cpu_thinking`, 0.18.2): uma busca lenta nunca esgota o tempo nem
+  vira passe.
 - **REQ-04**: balística do C#. Gravidade 196, velocidade = força × 100 / massa
   (massa 14 nos tiros, 10 no sinalizador), vento × 1,2 por projétil. O piso de
   força 15 e o relógio em tempo real ficam (o C# avança 0,015 s por quadro de

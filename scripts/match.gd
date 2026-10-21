@@ -50,6 +50,9 @@ var shot_weapon := 0
 var shot_actor := 0
 # Whole seconds spent before the last shot; charged with its delay (ADR-076).
 var shot_elapsed := 0
+# True while the CPU aim search runs: the turn clock is frozen (ADR-076), so a
+# slow machine can never make the CPU time out and pass.
+var cpu_thinking := false
 var resolve_wait := 0.0
 var flight_elapsed := 0.0
 var last_shots: Array = [{}, {}]
@@ -126,6 +129,7 @@ func movement_budget() -> float:
 
 func begin_turn() -> void:
 	phase = "aim"
+	cpu_thinking = false
 	turn_time = TURN_TIME
 	actors[active].turns += 1
 	total_turns += 1
@@ -397,6 +401,8 @@ func pass_turn() -> void:
 
 func tick(delta: float) -> void:
 	if phase == "aim":
+		if cpu_thinking and active == CPU:
+			return
 		turn_time = maxf(0.0, turn_time - delta)
 		if turn_time <= 0.0:
 			pass_turn()
@@ -690,6 +696,7 @@ func begin_cpu_plan() -> Dictionary:
 		weapon = 2
 	var snapshot = FlightSnapshot.capture(self)
 	snapshot.active = active
+	cpu_thinking = true
 	return {"actor": active, "weapon": weapon, "limits": aim_limits(active, weapon), "snapshot": snapshot,
 		"target": target.pos, "best": {"angle": 45.0, "power": 65.0, "weapon": weapon}}
 
@@ -728,6 +735,7 @@ func finish_cpu_plan(plan: Dictionary) -> Dictionary:
 	best.angle = clampf(float(best.angle) + rng.randf_range(-angle_error, angle_error), limits.x, limits.y)
 	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), 15.0, 100.0)
 	plan.snapshot = null
+	cpu_thinking = false
 	return best
 
 func collect_gold_damage(event_start: int, impact: Vector2, projectile: Dictionary) -> void:
