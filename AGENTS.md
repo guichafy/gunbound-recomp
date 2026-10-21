@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.7.0 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
+Protótipo 0.18.1 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
 desktop macOS, treino offline 1×1 contra CPU, Bigfoot/Mage com derivados HD e Nak
@@ -76,8 +76,8 @@ extra da sessão quando necessário.
 - Se entregar aplicativo atualizado, reexporte com `scripts/build_macos.py` e
   confira a assinatura. Rodar o projeto não atualiza o aplicativo já exportado.
 
-Não há remoto Git configurado no baseline. Não publique nem envie mudanças
-a um remoto sem solicitação do usuário.
+O remoto `origin` (github.com/guichafy/gunbound-recomp) existe desde o PR #1.
+Não publique nem envie mudanças a um remoto sem solicitação do usuário.
 
 ## Arte HD 0.6
 

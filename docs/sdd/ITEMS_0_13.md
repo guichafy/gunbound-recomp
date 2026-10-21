@@ -33,7 +33,8 @@ Full HD usando Codex gpt-image." (2026-10-12)
 
 Desde o ADR-076 os custos seguem a coluna de delay do `itemdata.dat` original; entre parênteses, o valor anterior do C#.
 Delay em unidades do protótipo: custo original ÷ 7,5 (mesma conversão de
-Mage/Bigfoot, ADR-058). `ItemDelay` do jogador = 0 no treino.
+Mage/Bigfoot, ADR-058). `ItemDelay` do jogador = `Attributes.points(actor, 5)` desde a 0.14.3
+(antes 0 no treino).
 
 | Item | Slots | Custo (orig. → protótipo) | Efeito |
 |---|---|---|---|
@@ -136,7 +137,8 @@ Física e dano (Projectile.cs / Mobile.cs):
 
 - CPU não usa itens neste corte (sem novos sorteios: seeds 81–90 iguais).
 - Ouro/preço em ouro não existe no treino; o popup mostra o custo de delay.
-- `ItemDelay` (atributo de avatar) = 0. Team Teleport fica no catálogo com o
+- `ItemDelay` (atributo de avatar) = `Attributes.points(actor, 5)`, aplicado
+  em `Items.delay` (0.14.3; antes 0). Team Teleport fica no catálogo com o
   comportamento 1×1 do original (sem aliado).
 
 ## Resultado (2026-10-12)

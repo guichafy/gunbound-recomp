@@ -16,6 +16,8 @@ Fork `cb2fc197dd6b0498390219750ca6251bf0582d63`, `Unit/Mage.cs`,
 - 760 HP + escudo inicial 220; movimento 90; escudo absorve explosões antes da
   vida. Regenera 20 no início do turno próprio, até `760 - HP + 220`, como o fork.
   Queda continua causando dano de vida/eliminando; escudo não impede cair.
+  **Substituído (ADR-076):** 730 HP e 30 de regeneração do escudo
+  (`characterdata.dat`), em todo início de turno (ADR-066); queda curta não fere.
 - Mira local 15–50°, S1 um laser (150/raio25), S2 dois lasers em hélice (200 por
   componente/raio25), SS orbe com explosão e EMP que zera escudo até raio100.
 - O construtor executado de SS no fork usa dano S2=200, embora exista constante
@@ -26,7 +28,7 @@ Fork `cb2fc197dd6b0498390219750ca6251bf0582d63`, `Unit/Mage.cs`,
 - Delays do Mage 750/900/1300 convertidos por 7,5 para as unidades atuais da fila:
   100/120/173,333. Proporções originais, sem tornar Mage 7,5 vezes mais lento que
   os veículos atuais. Gravidade/força/vento horizontal continuam adaptados à arena
-  do protótipo; não declarar equivalência integral do cliente C#/Gunbound.
+  do protótipo (substituído pelo ADR-076: números do C#, gravidade 196); não declarar equivalência integral do cliente C#/Gunbound.
 - SS mantém a disponibilidade atual (terceiro turno próprio, uma vez por partida).
   Interações com itens, clima especial/Thor e tabelas de resistências ficam fora.
 - Sprites de lasers/orbe/explosões e seis sons de disparo/impacto originais.

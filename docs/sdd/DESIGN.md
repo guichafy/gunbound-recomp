@@ -74,7 +74,8 @@ Não há backend, servidor, banco externo, serviço de conta ou dependência npm
 eventos `turn`, `pass`, `fire`, `explosion`, `damage`, `fall`, `finished` para
 som, partículas, texto e resultado. View não calcula dano nem ordena turnos.
 
-`Combat.advance` integra aceleração constante: `a=(vento×1,5, 260)`,
+`Combat.advance` integra aceleração constante: `a=(0, 196) + vento×1,2`
+(vento 2D em unidades de força; ADR-076, antes `(vento×1,5, 260)`),
 `p'=p+vΔt+aΔt²/2`, `v'=v+aΔt`. Previsão e voo real usam esse integrador e
 `trace_segment`: primeiro impacto entre máscara sólida e círculos dos veículos.
 O atirador é ignorado somente durante os primeiros 0,15 s em ambos os caminhos.

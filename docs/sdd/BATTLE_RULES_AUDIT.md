@@ -6,8 +6,9 @@ OpenBound (`~/Workspaces/Gunbound`) e com o GunboundClassic
 `.tools/gunbound-client/`), usando engenharia reversa quando preciso.
 A meta é fechar o entendimento das regras ligadas ao `AGENTS.md`.
 
-**Nenhuma regra de combate foi alterada nesta etapa.** As divergências
-abaixo aguardam decisão do usuário (seção "Decisões pendentes"). Requisitos
+**Resultado:** a auditoria terminou com as decisões do usuário aplicadas no
+ADR-076 (seção "Decisões do usuário"). A matriz abaixo registra o estado
+**anterior** às mudanças. Requisitos
 afetados: REQ-04, REQ-05, REQ-06, REQ-07, REQ-35, REQ-42 e REQ-43.
 
 ## Fontes e o que cada uma prova

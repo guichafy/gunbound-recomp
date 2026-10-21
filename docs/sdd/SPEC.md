@@ -1,4 +1,8 @@
-# Especificação — Gunbound Recomp 0.7.0
+# Especificação — Gunbound Recomp 0.18.1
+
+As seções abaixo são cronológicas: o texto de cada versão fica como histórico
+quando uma seção posterior o substitui. A partir de 0.7.0 vale a seção mais nova
+de cada requisito (batalha: REQ-44/ADR-076).
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;
@@ -35,7 +39,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 ## Regras concretas do baseline
 
 - Arena lateral única, 1280×800. Jogador começa (substituído: abertura sorteada, REQ-44); CPU recebe o outro veículo.
-- Escaravelho: vida 580, movimento 110, atraso adicional 0.
+- (Histórico: veículos substituídos por Bigfoot/Mage/Nak, REQ-19/43.) Escaravelho: vida 580, movimento 110, atraso adicional 0.
   Carapaça: vida 700, movimento 80, atraso adicional 18.
 - Mira local 10–85°, força 15–100%. Movimento de 60 unidades/s limitado pelo orçamento.
   Deslocar vira o veículo; `F` vira parado. A inclinação do apoio afeta a direção
@@ -43,9 +47,9 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 - Pulso: dano máximo 145, raio 46, atraso 100, um projétil.
   Impacto: dano máximo 210, raio 62, atraso 155, um projétil.
   Tempestade: dano máximo 105 por projétil, raio 43, atraso 210, três projéteis.
-- Vento inteiro entre −30 e +30 por turno; gravidade 260; integração 120 Hz.
+- Vento inteiro entre −30 e +30 por turno (substituído: força 0–34 e ângulo 0–359, REQ-23); gravidade 260 (substituído: 196, REQ-44/ADR-076); integração 120 Hz.
   Dano diminui com a distância, considerando o tamanho do veículo. Queda de mais
-  de 70 unidades causa dano; perder suporte até abaixo da ilha elimina.
+  de 70 unidades causa dano (substituído: queda curta não fere, REQ-42/MOBILE_PARITY.md); perder suporte até abaixo da ilha elimina.
 - Próximo ator é o de menor disponibilidade acumulada; empate favorece o outro.
   Passar custa 80 + atraso do veículo (substituído: 200 ÷ 7,5, REQ-44). Não existe alternância estrita obrigatória.
 - CPU calcula mira e dispara, sem se deslocar. Dificuldade altera o erro da mira,
@@ -104,7 +108,10 @@ comprova a regra; senão, vale o C#.** Escolhas do usuário aplicadas:
   turno até o disparo soma ao delay do tiro o valor `[29]` do mobile (10 em
   Mage, Bigfoot e Nak). O turno continua com 30 s. Passar (voluntário ou por
   tempo) custa 200, sem termo de tempo. A prévia de iniciativa usa o tempo ao
-  vivo. Empate de iniciativa continua favorecendo o outro.
+  vivo. Empate de iniciativa continua favorecendo o outro, também na fila do
+  HUD (`TurnTable.current_order`). A CPU não paga o tempo real da busca, que
+  depende da máquina: cada tiro dela cobra um tempo fixo de 2 s
+  (`TurnTable.CPU_THINK_SECONDS`), e a mesma seed dá a mesma ordem de turnos.
 - **REQ-04**: balística do C#. Gravidade 196, velocidade = força × 100 / massa
   (massa 14 nos tiros, 10 no sinalizador), vento × 1,2 por projétil. O piso de
   força 15 e o relógio em tempo real ficam (o C# avança 0,015 s por quadro de
@@ -129,7 +136,8 @@ escudo220 regenerando20 por turno próprio; S1/S2/SS e mira15–50° descritos e
 dois colliders em hélice; SS EMP zera escudos próximos antes do dano. Delays
 normalizados ao protótipo. Bigfoot permanece arena60/menu180 e armas atuais.
 Gravidade/força/vento e disponibilidade de SS continuam adaptados ao protótipo.
-Não reproduz itens, Thor, resistências ou cliente completo de Gunbound.
+Não reproduz itens, Thor, resistências ou cliente completo de Gunbound
+(histórico de 0.4: Thor entrou em REQ-25 e itens em REQ-35; resistências continuam fora).
 
 ## Ataques Bigfoot 0.5
 

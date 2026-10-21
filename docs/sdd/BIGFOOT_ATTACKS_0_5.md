@@ -29,7 +29,8 @@ real das imagens: BigfootFlame3 tem20 quadros, embora o fork solicite30.
 
 ## Adaptações explícitas
 
-Manter gravidade260, vento horizontal×1,5 e força/escala da arena do protótipo.
+Manter gravidade260, vento horizontal×1,5 e força/escala da arena do protótipo
+(substituído pelo ADR-076: gravidade 196, força × 100 / 14, vento 2D × 1,2).
 Não portar física mundial inteira, resistências, clima/Thor, itens ou regenHP35.
 Delays seguem conversão÷7,5 adotada para Mage. SS continua terceiro turno próprio,
 um uso por partida. Perfil/XP não mudam. Não anunciar clone completo Gunbound.

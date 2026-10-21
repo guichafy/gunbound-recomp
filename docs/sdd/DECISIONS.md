@@ -566,3 +566,10 @@ Não muda: empate por morte dupla, empate de iniciativa a favor do outro,
 passe sem trava de SS, dano C# (ADR-066) e clima. A balística original em
 ponto fixo e o dano original seguem sem engenharia reversa; ficam como
 pendência.
+
+Complemento (auditoria 0.18.1): o tempo gasto vale para o jogador. A CPU
+cobra um tempo fixo de 2 s por tiro (`TurnTable.CPU_THINK_SECONDS`) no lugar
+do relógio real, porque a duração da busca no worker depende da máquina e
+tornava a ordem de turnos não reproduzível com a mesma seed. A fila do HUD
+antes da escolha da CPU passa a vir de `TurnTable.current_order`, com o mesmo
+desempate a favor do outro (o `game.gd` antes desempatava a favor do ativo).
