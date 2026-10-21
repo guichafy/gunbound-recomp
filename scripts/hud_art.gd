@@ -94,6 +94,9 @@ static func bar_point(offset: Vector2) -> Vector2:
 	return (BAR_CENTER + offset) * K
 
 func density(name: String) -> float:
+	# A texture that failed to load (e.g. missing import cache) keeps the original scale.
+	if textures.get(name) == null or originals.get(name) == null or int(originals[name].get_width()) == 0:
+		return 1.0
 	return float(textures[name].get_width()) / float(originals[name].get_width())
 
 func original_size(name: String) -> Vector2:

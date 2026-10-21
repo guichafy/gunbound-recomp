@@ -102,7 +102,7 @@ func disturb_wind(rng: RandomNumberGenerator) -> void:
 	if rng.randf() <= 0.5:
 		return
 	wind_force = maxi(0, wind_force + rng.randi_range(0, WIND_FORCE_DISTURBANCE - 1) - WIND_FORCE_DISTURBANCE / 2)
-	wind_angle = (wind_angle + rng.randi_range(0, WIND_ANGLE_DISTURBANCE - 1) - WIND_ANGLE_DISTURBANCE / 2) % 360
+	wind_angle = posmod(wind_angle + rng.randi_range(0, WIND_ANGLE_DISTURBANCE - 1) - WIND_ANGLE_DISTURBANCE / 2, 360)
 
 func change_wind(rng: RandomNumberGenerator) -> void:
 	wind_force = rng.randi_range(0, MAX_WIND - 1)
