@@ -8,7 +8,7 @@ const ORDER := ["dual", "dual_plus", "thunder", "energy_up_2", "team_teleport", 
 	"blood", "bunge_shot", "power_up", "change_wind", "energy_up_1"]
 const MAX_SLOTS := 6
 # Same conversion as Mage/Bigfoot delays (MAGE_0_4.md): original units ÷ 7.5.
-# Costs are the delay column of the original itemdata.dat (ADR-075); Teleport,
+# Costs are the delay column of the original itemdata.dat (ADR-076); Teleport,
 # Dual+, Energy Up 2, Change Wind and Bunge Shot differ from the C# constants.
 const DELAY_SCALE := 7.5
 # Parameter.TextColorItem*.

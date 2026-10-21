@@ -1,0 +1,28 @@
+{
+  "generator": "builtin GPT Images",
+  "selected": "devil_light_generated.png",
+  "prompt": "prompt_devil_light.txt",
+  "size": [
+    1295,
+    1214
+  ],
+  "useful_box": [
+    90,
+    17,
+    1184,
+    1190
+  ],
+  "sha256": "1322d9be2f84e576937fb6b9196d56ab96de88bd67d072d6337e17d08048b27c",
+  "rejected": [
+    {
+      "file": "generated_effects_v1_rejected.png",
+      "reason": "Atlas not selected: opaque horn material and oversized halos. Retained19 approved masters; re-registered all20 on Normal anatomy."
+    }
+  ],
+  "changes": {
+    "regenerated": 1,
+    "anatomical_attachments": 20,
+    "normal_reference_count": 20
+  },
+  "validation": "docs/avatar-effects:1920x1080,360frames60fps,30pauseframesidentical;20heads bothfacing,actualshop;37batchQAand550runtimeaudit current"
+}

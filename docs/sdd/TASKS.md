@@ -1,6 +1,6 @@
 # Entregas e próximos trabalhos
 
-## Paridade das regras de batalha (REQ-44, ADR-075)
+## Paridade das regras de batalha (REQ-44, ADR-076)
 
 - [x] Auditar Godot × C# × cliente original; engenharia reversa de ComputeTurnDelay/CommitTurnDelay e `.dat`.
 - [x] Decisões do usuário: original comprovado > C#; tempo gasto no delay; abertura sorteada; passe 200.
@@ -12,14 +12,33 @@
 - [ ] Opcional: morte súbita do original (limite de turnos em BeginNewTurn).
 
 ## Migração HD integral dos avatares — pedido atual
+## Revisão0.18 e sincronização main
+
+- [x] Preservar pendentes0.17 em3eb2b01; confirmar PR1 MERGED/ancestralidade.
+- [x] Reproduzir mistura Staring/Normal em L e corrigir preparação/fallback.
+- [x] Regenerar luz única do Great Devil; registrar20âncoras de cabeça HD.
+- [x] GPU20modelos/360frames60Hz/pausa e loja real1920×1080.
+- [x] Revisão independente, QA37lotes/550registros renovado.
+- [x] Regressão5234checks+13partidas e Python13 PASS.
+- [x] Export/PCK0.18, versão0.18.0 e assinatura estrita conferidos.
+- [ ] Confirmar push remoto (uploads HTTP expiraram; transporte em diagnóstico).
+- [ ] NakHD: confirmação explícita pedida pela revisão automática;21outputs/
+      patch preservados em source/pending_integration, runtime original ativo.
+- [ ] Após confirmação: corrigir separação S2/SS, testesHD/HUD, GPU/export Nak.
+
+## Migração HD integral dos avatares0.17
 
 - [x] Medir escopo real:562registros,550com peças,629camadas,12N/A.
 - [x] Identificar/corrigir transparência ARGB4444 de cinco acessórios, RED→GREEN.
 - [x] Controle por registro: miniatura, peça vestível, efeito, registro e validação.
-- [x] Preparar36lotes com1149componentes pendentes; brutos/prompts excluídos do export.
-- [ ] Regenerar todos os componentes pendentes e conferir identidade por lote.
-- [ ] Consumir HD no personagem vestido, preservando rig/animação/registro.
-- [ ] Validar todos os registros/poses/fallback, capturasGPU60Hz e aplicativo.
+- [x] Preparar37lotes com1161componentes; brutos/prompts excluídos do export.
+- [x] Regenerar e conferir629camadas vestíveis +532miniaturas, além das18anteriores.
+- [x] Consumir HD no personagem vestido:550/550, sem fallback oculto; rig preservado.
+- [x] GPU por lote com ambos mobiles/sentidos;360frames60Hz, pausa idêntica.
+- [x] Controle HTML/CSV com prévia GPU vestida e motivos dos12N/A.
+- [x] Regressão3887checks+13partidas após integração Nak;1744checks de HD e11Python.
+- [x] App/ZIP0.17.0 assinados; smoke PCK externo passou:550peças/629camadas e fluxos.
+- [ ] Usuário validar a aparência final no aplicativo reaberto.
 
 ## Avatar Shop XFS0.16 (ADR-071/072)
 
@@ -62,9 +81,10 @@
 - [x] Dano/raio do characterdata; S2 subterrâneo e SS fantasma revertidos do cliente.
 - [x] Menu com três mobiles, miras do HUD, partidas 91–93 e test_nak (55 checks).
 - [x] Captura GPU em docs/nak (stills, MP4 60 fps, GIF ampliado).
-- [ ] Arte HD do Nak (skill gunbound-classic-hd), adiada pelo usuário.
+- [ ] Arte HD do Nak: pedido atual substitui adiamento; preparados masters/código.
+      Integração aguarda confirmação específica exigida pela revisão automática.
 - [ ] Usuário validar sensação de S2/SS e encaixe do piloto no app.
-- [ ] Reexportar o app (agora 0.16.0) quando o usuário pedir a entrega.
+- [x] App reexportado/assinado na entrega0.17 dos avatares HD, mantendo Nak original.
 
 ## Paridade Mage/Bigfoot com o C# (ADR-066)
 

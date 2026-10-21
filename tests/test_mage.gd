@@ -21,7 +21,7 @@ func _initialize() -> void:
 	if not model.has_method("weapon_rules") or not model.has_method("predict_shot"):
 		finish()
 		return
-	check(model.actors[1].hp == 730 and model.actors[1].shield == 220, "Mage starts with characterdata life and shield (ADR-075)")
+	check(model.actors[1].hp == 730 and model.actors[1].shield == 220, "Mage starts with characterdata life and shield (ADR-076)")
 	# Bigfoot's actual 90-damage bomb exercises Mage shield absorption.
 	model.start(2, 1, 42)
 	# Real explosions exercise shield absorption, not a mocked damage handler.

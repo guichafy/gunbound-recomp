@@ -97,7 +97,7 @@ continuam fora. Arte HD do Nak adiada pelo usuário.
 Pedido de 20/10/2026: comparar a batalha com o OpenBound C# e com o cliente
 original Thor's Hammer (engenharia reversa do GunBound-Decomp e dos `.dat`).
 Auditoria e evidências em [BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md),
-decisão ADR-075. Política: **o original prevalece quando a engenharia reversa
+decisão ADR-076. Política: **o original prevalece quando a engenharia reversa
 comprova a regra; senão, vale o C#.** Escolhas do usuário aplicadas:
 
 - **REQ-06**: quem abre a partida é sorteado. Cada segundo inteiro gasto no
@@ -325,3 +325,15 @@ animadas, além das miniaturas. Controle por registro/camada e critérios em
 AVATAR_HD_MIGRATION.md. Cobertura real:550avatares vestíveis/629camadas; padrões
 vazios/placeholders recebem motivo N/A. Regenerar e integrar todos os componentes
 reais, preservando registro, identidade, animação contínua e fallback validado.
+
+REQ-10/20/39 aceitos tecnicamente na0.17:550avatares/629camadas vestíveis e
+550miniaturas HD, com controle por registro, evidência GPU e auditoria sem
+fallback oculto.37lotes, ambos gêneros/mobiles/sentidos, poses e pausa; animação
+por masters constantes, sem reconstrução de cada gesto nativo.12N/A explícitos.
+Aplicativo exportado e smoke fora do projeto confirmam o mesmo catálogo/render.
+
+REQ-10/20/39 — revisão0.18: luzes de cabeças animadas devem corresponder ao
+mesmo estado da cabeça HD (Normal), sem chifres/ornamentos de Staring deslocados.
+Auditar os20modelos de cabeça com camada L e preservar fallback coerente.
+Pedido atual também autoriza concluir o HD do Nak introduzido no PR1, substituindo
+o adiamento anterior. REQ-19/20 e plano NAK_HD.md; regras físicas preservadas.

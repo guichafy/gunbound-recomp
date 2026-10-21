@@ -1,0 +1,684 @@
+{
+	"batch": "batch_034",
+	"components": [
+		{
+			"id": "xfs:2:3:129|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					16.0,
+					23.0,
+					195.0,
+					186.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:130|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					4.0,
+					-47.0,
+					46.0,
+					52.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					247.0,
+					18.0,
+					184.0,
+					200.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:130|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					483.0,
+					19.0,
+					162.0,
+					200.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:131|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					7.0,
+					-39.0,
+					38.0,
+					39.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					691.0,
+					25.0,
+					188.0,
+					188.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:131|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					23.0,
+					239.0,
+					188.0,
+					188.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:132|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": true,
+				"native_rect": [
+					4.0,
+					-38.0,
+					34.0,
+					41.0
+				],
+				"pulsate": true,
+				"reference_state": "",
+				"region": [
+					244.0,
+					242.0,
+					168.0,
+					184.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:132|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					472.0,
+					243.0,
+					168.0,
+					184.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:133|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-4.0,
+					-33.0,
+					48.0,
+					39.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					685.0,
+					247.0,
+					185.0,
+					177.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:133|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					16.0,
+					461.0,
+					188.0,
+					182.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:134|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					1.0,
+					-39.0,
+					38.0,
+					34.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					241.0,
+					466.0,
+					193.0,
+					176.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:134|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					455.0,
+					473.0,
+					197.0,
+					165.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:135|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					4.0,
+					-35.0,
+					39.0,
+					30.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					679.0,
+					482.0,
+					194.0,
+					150.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:135|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					14.0,
+					689.0,
+					202.0,
+					161.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:136|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					8.0,
+					-31.0,
+					28.0,
+					30.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					249.0,
+					681.0,
+					186.0,
+					177.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:136|layer:1",
+			"registration": {
+				"attachment": {},
+				"effect": true,
+				"native_rect": [
+					28.0,
+					-33.0,
+					14.0,
+					18.0
+				],
+				"pulsate": true,
+				"reference_state": "",
+				"region": [
+					487.0,
+					680.0,
+					156.0,
+					190.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:136|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					683.0,
+					676.0,
+					191.0,
+					190.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:137|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					5.0,
+					-44.0,
+					35.0,
+					44.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					21.0,
+					897.0,
+					162.0,
+					190.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:137|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					234.0,
+					897.0,
+					193.0,
+					185.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:138|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					4.0,
+					-39.0,
+					42.0,
+					34.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					454.0,
+					915.0,
+					194.0,
+					166.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:138|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					682.0,
+					905.0,
+					195.0,
+					179.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:139|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					17.0,
+					1123.0,
+					195.0,
+					152.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:139|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					240.0,
+					1118.0,
+					191.0,
+					158.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:140|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					1120.0,
+					188.0,
+					157.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:140|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					693.0,
+					1121.0,
+					185.0,
+					157.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:141|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					21.0,
+					1334.0,
+					191.0,
+					159.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:141|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					245.0,
+					1335.0,
+					188.0,
+					158.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:142|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					465.0,
+					1337.0,
+					193.0,
+					156.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:142|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					694.0,
+					1332.0,
+					182.0,
+					157.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:143|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					19.0,
+					1546.0,
+					201.0,
+					162.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:143|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					245.0,
+					1546.0,
+					198.0,
+					163.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:144|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					472.0,
+					1555.0,
+					193.0,
+					149.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		},
+		{
+			"id": "xfs:2:3:144|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					696.0,
+					1549.0,
+					175.0,
+					162.0
+				],
+				"sheet": "batch_034"
+			},
+			"sheet_hash": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054"
+		}
+	],
+	"frames": [
+		0,
+		30,
+		60,
+		90
+	],
+	"mobiles": [
+		"Mage direita",
+		"Bigfoot direita",
+		"Mage esquerda",
+		"Bigfoot esquerda"
+	],
+	"renderer_hashes": {
+		"scripts/avatar_art.gd": "1c86afd04087b6434495fb5b7f829ea12ff0153553c09ddd263b45cc4f731e0f",
+		"scripts/avatar_xfs_hd.gd": "df8809fb2d5cce28eeee0b2b847500c2479b7813e19f5ff9b20aeda92a467181",
+		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
+		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
+		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"
+	},
+	"size": [
+		1920,
+		1080
+	]
+}

@@ -55,7 +55,7 @@ validado e descartado.
 
 ## Matriz de regras
 
-Os status abaixo descrevem o estado **antes** do ADR-075. O que foi aplicado
+Os status abaixo descrevem o estado **antes** do ADR-076. O que foi aplicado
 está em "Decisões do usuário".
 
 Status: **igual**; **adaptação** (decisão registrada); **baseline** (regra
@@ -122,7 +122,7 @@ ligado. O custo do tiro só entra quando o bool `+0x8bae` está desligado
 `flag`, então o +200 fica como hipótese. Não foi aplicado ao tiro nem ao
 passe; ver decisão abaixo.
 
-## Decisões do usuário (20/10/2026) — ADR-075
+## Decisões do usuário (20/10/2026) — ADR-076
 
 | Tema | Decisão |
 |---|---|

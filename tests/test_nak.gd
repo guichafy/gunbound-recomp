@@ -50,7 +50,7 @@ func _initialize() -> void:
 	check(is_equal_approx(float(nak.beacon_delay), 0.0), "Base Mobile beacon interaction time")
 	for weapon in range(3):
 		check(Mobiles.aim_limits(3, weapon) == Vector2(10, 50), "AimPresets keep 10–50 for shot %d" % weapon)
-	# characterdata base [28] + shot [30/31/32] (ADR-075), not the fork's 760/910/1310 row.
+	# characterdata base [28] + shot [30/31/32] (ADR-076), not the fork's 760/910/1310 row.
 	var delays := [770.0, 920.0, 1320.0]
 	var power := [[200.0, 30.0], [350.0, 35.0], [360.0, 35.0]]
 	for weapon in range(3):

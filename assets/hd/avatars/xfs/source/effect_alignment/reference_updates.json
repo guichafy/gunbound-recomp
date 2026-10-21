@@ -1,0 +1,202 @@
+[
+  {
+    "id": "xfs:1:0:2|layer:1",
+    "source_frame": 13,
+    "native_rect": [
+      -85,
+      -60,
+      83,
+      63
+    ]
+  },
+  {
+    "id": "xfs:1:0:7|layer:1",
+    "source_frame": 11,
+    "native_rect": [
+      -10,
+      -34,
+      31,
+      29
+    ]
+  },
+  {
+    "id": "xfs:1:0:8|layer:1",
+    "source_frame": 21,
+    "native_rect": [
+      -17,
+      -37,
+      28,
+      31
+    ]
+  },
+  {
+    "id": "xfs:1:0:15|layer:1",
+    "source_frame": 15,
+    "native_rect": [
+      4,
+      -40,
+      21,
+      19
+    ]
+  },
+  {
+    "id": "xfs:1:0:20|layer:1",
+    "source_frame": 16,
+    "native_rect": [
+      -6,
+      -31,
+      15,
+      28
+    ]
+  },
+  {
+    "id": "xfs:1:0:22|layer:1",
+    "source_frame": 11,
+    "native_rect": [
+      -8,
+      -27,
+      29,
+      9
+    ]
+  },
+  {
+    "id": "xfs:1:0:25|layer:1",
+    "source_frame": 21,
+    "native_rect": [
+      -49,
+      -69,
+      74,
+      86
+    ]
+  },
+  {
+    "id": "xfs:1:0:35|layer:1",
+    "source_frame": 19,
+    "native_rect": [
+      -8,
+      -26,
+      5,
+      9
+    ]
+  },
+  {
+    "id": "xfs:1:0:38|layer:1",
+    "source_frame": 11,
+    "native_rect": [
+      3,
+      -24,
+      8,
+      8
+    ]
+  },
+  {
+    "id": "xfs:1:0:41|layer:1",
+    "source_frame": 18,
+    "native_rect": [
+      -5,
+      -28,
+      25,
+      7
+    ]
+  },
+  {
+    "id": "xfs:1:0:44|layer:1",
+    "source_frame": 18,
+    "native_rect": [
+      5,
+      -27,
+      9,
+      10
+    ]
+  },
+  {
+    "id": "xfs:1:0:45|layer:1",
+    "source_frame": 18,
+    "native_rect": [
+      -5,
+      -28,
+      25,
+      7
+    ]
+  },
+  {
+    "id": "xfs:1:0:46|layer:1",
+    "source_frame": 15,
+    "native_rect": [
+      -11,
+      -43,
+      26,
+      25
+    ]
+  },
+  {
+    "id": "xfs:1:0:47|layer:1",
+    "source_frame": 17,
+    "native_rect": [
+      -12,
+      -55,
+      50,
+      64
+    ]
+  },
+  {
+    "id": "xfs:0:0:2|layer:1",
+    "source_frame": 13,
+    "native_rect": [
+      -87,
+      -59,
+      83,
+      63
+    ]
+  },
+  {
+    "id": "xfs:0:0:4|layer:1",
+    "source_frame": 11,
+    "native_rect": [
+      -38,
+      -59,
+      64,
+      74
+    ]
+  },
+  {
+    "id": "xfs:0:0:8|layer:1",
+    "source_frame": 11,
+    "native_rect": [
+      -9,
+      -34,
+      32,
+      29
+    ]
+  },
+  {
+    "id": "xfs:0:0:14|layer:1",
+    "source_frame": 21,
+    "native_rect": [
+      -45,
+      -69,
+      74,
+      86
+    ]
+  },
+  {
+    "id": "xfs:0:0:45|layer:1",
+    "source_frame": 14,
+    "native_rect": [
+      -14,
+      -25,
+      9,
+      10
+    ]
+  },
+  {
+    "id": "xfs:0:0:71|layer:1",
+    "source_frame": 19,
+    "native_rect": [
+      -18,
+      -42,
+      25,
+      28
+    ]
+  }
+]

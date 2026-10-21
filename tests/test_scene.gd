@@ -23,7 +23,7 @@ func run() -> void:
 		quit(1)
 		return
 	check(scene.screen == "menu" and scene.nickname_input != null, "Menu shows nickname and vehicle controls")
-	check(scene.opening == -1, "Real matches draw who opens (ADR-075)")
+	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
 	scene.opening = 0
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
@@ -62,7 +62,7 @@ func run() -> void:
 	check(scene.overlay_kind == "result", "Closing help after match restores result actions")
 	scene.show_menu()
 	check(scene.screen == "menu" and scene.model.phase == "menu", "Return to menu leaves combat inactive")
-	# ADR-075: the opening is drawn in play, so the CPU may own the very first turn.
+	# ADR-076: the opening is drawn in play, so the CPU may own the very first turn.
 	scene.opening = 1
 	scene.start_match()
 	check(scene.model.active == 1 and scene.model.phase == "aim", "CPU can open the match")

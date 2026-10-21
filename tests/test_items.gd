@@ -50,7 +50,7 @@ func run() -> void:
 	for id in Items.ORDER:
 		two_slots += 1 if Items.slots(id) == 2 else 0
 	check(two_slots == 6, "Six 2-slot items and five 1-slot items")
-	check(is_equal_approx(Items.delay("dual"), 80.0) and is_equal_approx(Items.delay("dual_plus"), 250.0 / 7.5) and is_equal_approx(Items.delay("teleport"), 100.0 / 7.5) and is_equal_approx(Items.delay("blood"), 0.0) and is_equal_approx(Items.delay("thunder"), 200.0 / 7.5), "Delay cost is the itemdata.dat cost ÷ 7.5 (ADR-075)")
+	check(is_equal_approx(Items.delay("dual"), 80.0) and is_equal_approx(Items.delay("dual_plus"), 250.0 / 7.5) and is_equal_approx(Items.delay("teleport"), 100.0 / 7.5) and is_equal_approx(Items.delay("blood"), 0.0) and is_equal_approx(Items.delay("thunder"), 200.0 / 7.5), "Delay cost is the itemdata.dat cost ÷ 7.5 (ADR-076)")
 	check(Items.sanitize(["dual", "dual", "teleport", "power_up"]) == ["dual", "dual", "teleport"], "Loadout keeps at most 6 slots (later items that do not fit are skipped)")
 	check(Items.sanitize(["dual", "nope", 3, "blood", "blood"]) == ["dual", "blood", "blood"], "Unknown entries are dropped")
 	check(Items.used_slots(Items.DEFAULT_LOADOUT) == 6, "Default loadout fills the six slots")

@@ -3,144 +3,679 @@
 	"components": [
 		{
 			"id": "xfs:2:3:11|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					19.0,
+					31.0,
+					194.0,
+					165.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:11|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					240.0,
+					28.0,
+					184.0,
+					172.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:12|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					32.0,
+					193.0,
+					166.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:12|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					686.0,
+					28.0,
+					181.0,
+					172.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:13|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					21.0,
+					234.0,
+					194.0,
+					177.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:13|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					241.0,
+					230.0,
+					187.0,
+					184.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:14|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					236.0,
+					193.0,
+					176.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:14|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					690.0,
+					230.0,
+					180.0,
+					185.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:15|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					21.0,
+					445.0,
+					196.0,
+					179.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:15|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					242.0,
+					440.0,
+					187.0,
+					185.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:16|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					444.0,
+					195.0,
+					177.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:16|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					682.0,
+					440.0,
+					186.0,
+					183.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:17|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					21.0,
+					654.0,
+					194.0,
+					178.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:17|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					241.0,
+					653.0,
+					187.0,
+					182.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:18|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					656.0,
+					195.0,
+					178.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:18|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					684.0,
+					651.0,
+					184.0,
+					184.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:19|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					19.0,
+					871.0,
+					197.0,
+					179.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:19|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					241.0,
+					868.0,
+					187.0,
+					183.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:20|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					872.0,
+					194.0,
+					177.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:20|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					681.0,
+					869.0,
+					186.0,
+					182.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:21|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					20.0,
+					1086.0,
+					196.0,
+					179.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:21|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					242.0,
+					1082.0,
+					185.0,
+					187.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:22|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					1087.0,
+					196.0,
+					179.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:22|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					687.0,
+					1082.0,
+					182.0,
+					187.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:23|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					21.0,
+					1298.0,
+					195.0,
+					182.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:23|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					242.0,
+					1298.0,
+					187.0,
+					186.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:24|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					1301.0,
+					197.0,
+					181.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:24|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					687.0,
+					1297.0,
+					181.0,
+					187.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:25|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					20.0,
+					1519.0,
+					196.0,
+					181.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:25|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					241.0,
+					1518.0,
+					189.0,
+					186.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:26|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					29.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					464.0,
+					1520.0,
+					197.0,
+					181.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		},
 		{
 			"id": "xfs:2:3:26|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					687.0,
+					1517.0,
+					183.0,
+					189.0
+				],
+				"sheet": "batch_026"
+			},
 			"sheet_hash": "5f0cb1daaf5ca050daf5e9c75c1f3cc4f4a8ce394097b3cd38bfdea16255e054"
 		}
 	],
 	"frames": [
 		0,
 		30,
+		60,
 		90
 	],
+	"mobiles": [
+		"Mage direita",
+		"Bigfoot direita",
+		"Mage esquerda",
+		"Bigfoot esquerda"
+	],
 	"renderer_hashes": {
-		"scripts/avatar_art.gd": "cbe5da4cb68c1e8249f12dab1fc15f1050ecb08d9a403fc9202834e8fe5eb0c5",
-		"scripts/avatar_xfs_hd.gd": "bb13d3cb0fb19d0a303792a50f05b1f06deaedafaec5322059eb97eb0c0c0098",
+		"scripts/avatar_art.gd": "1c86afd04087b6434495fb5b7f829ea12ff0153553c09ddd263b45cc4f731e0f",
+		"scripts/avatar_xfs_hd.gd": "df8809fb2d5cce28eeee0b2b847500c2479b7813e19f5ff9b20aeda92a467181",
 		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
 		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
-		"scripts/mobile_rig.gd": "69c10437e9f7034dabef70b7fac3a050faba17ddc456f41bb4d84c6286e37db2"
+		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"
 	},
 	"size": [
 		1920,

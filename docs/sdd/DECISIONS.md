@@ -493,6 +493,13 @@ Masters anatômicos constantes e efeitos separados conservam rig/animação
 aprovada; arte só gerada não conta como componente validado. Arte original,
 brutos e prompts preservados. AVATAR_HD_MIGRATION.md define o critério550/550.
 
+Concluído na0.17:37lotes/38atlas,629camadas e532miniaturas novas,18miniaturas
+anteriores. Controle exige captura com os hashes atuais da arte, registro e
+renderer, mais auditoria do uso efetivo nos550registros. Mestres constantes
+acompanham rig/poses/pausa; não equivalem a redesenhar todos os quadros nativos.
+Recortes de partículas e reparos individuais têm decisões reproduzíveis no
+ledger, sem alterar brutos.12N/A mantêm motivo explícito. App/PCK validado.
+
 ## ADR-074 — Nak com dados do cliente original sobre o OpenBound
 
 Pedido do usuário: novo mobile Nak "com base no OpenBound". O fork C# só tem
@@ -512,7 +519,19 @@ fora do rig HD até lá. Substitui a primeira versão deste ADR, que inventava
 números e uma gravidade invertida 3×. Publicado como ADR-069 no PR #1;
 renumerado para ADR-074 na integração à main, pois a loja local já usava 069–073.
 
-## ADR-075 — regras de batalha: original comprovado, depois C#
+## ADR-075 — estado anatômico compartilhado por cabeça e efeito
+
+20/10/2026. Em0.17 o gerador escolheu o maior L dentre todos os quadros, mesmo
+quando a cabeça vinha de Normal11–21. Great Devil Head combina luz frontal
+com cabeça lateral. Preparação passa a selecionar Normal na cabeça e sua luz;
+arte defeituosa é regenerada, preservando fontes/brutos anteriores. O fallback
+respeita as faixas Normal/Staring da categoria. Metadados e QA devem comprovar
+o estado, além do registro constante. AVATAR_EFFECT_ALIGNMENT.md.
+
+O pedido de finalizar o PR1 com arte HD substitui o adiamento de HD do Nak na
+ADR-074; anatomia estável e efeitos próprios, sem mudanças de regras. NAK_HD.md.
+
+## ADR-076 — regras de batalha: original comprovado, depois C#
 
 Pedido de 20/10/2026: auditar a batalha contra o OpenBound C# e o cliente
 original Thor's Hammer ([BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md)).

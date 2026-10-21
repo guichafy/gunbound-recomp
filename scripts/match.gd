@@ -20,7 +20,7 @@ const ALL_WEATHER := [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 # Training slots. Index 0 is the human, index 1 is the CPU. The match stays 1×1.
 const PLAYER := 0
 const CPU := 1
-# TimePerPlayerTurn. The original clock is 20 s, but the user kept 30 (ADR-075).
+# TimePerPlayerTurn. The original clock is 20 s, but the user kept 30 (ADR-076).
 const TURN_TIME := 30.0
 # start(opening): draw the first actor from the match rng (real matches).
 const RANDOM_OPENING := -1
@@ -48,7 +48,7 @@ var total_turns := 0
 var accumulator := 0.0
 var shot_weapon := 0
 var shot_actor := 0
-# Whole seconds spent before the last shot; charged with its delay (ADR-075).
+# Whole seconds spent before the last shot; charged with its delay (ADR-076).
 var shot_elapsed := 0
 var resolve_wait := 0.0
 var flight_elapsed := 0.0
@@ -697,7 +697,7 @@ static func search_cpu_plan(plan: Dictionary) -> void:
 		for power in range(20, 101, 4):
 			score_cpu_shot(plan, angle, power)
 	# Refine around the best cell: range grows with force² under the C# ballistics
-	# (ADR-075), so a 4-point power step alone lands about 100 px apart.
+	# (ADR-076), so a 4-point power step alone lands about 100 px apart.
 	var coarse: Dictionary = plan.best
 	for angle in range(int(coarse.angle) - 4, int(coarse.angle) + 5, 2):
 		for power in range(int(coarse.power) - 3, int(coarse.power) + 4):

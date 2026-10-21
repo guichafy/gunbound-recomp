@@ -31,7 +31,7 @@ Full HD usando Codex gpt-image." (2026-10-12)
 
 ### REQ-35 — Itens usáveis no turno
 
-Desde o ADR-075 os custos seguem a coluna de delay do `itemdata.dat` original; entre parênteses, o valor anterior do C#.
+Desde o ADR-076 os custos seguem a coluna de delay do `itemdata.dat` original; entre parênteses, o valor anterior do C#.
 Delay em unidades do protótipo: custo original ÷ 7,5 (mesma conversão de
 Mage/Bigfoot, ADR-058). `ItemDelay` do jogador = 0 no treino.
 

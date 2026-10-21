@@ -6,7 +6,7 @@ const PLAYER := 0
 const CPU := 1
 # Delay units are the original ones ÷ 7.5 (MAGE_0_4.md).
 const DELAY_SCALE := 7.5
-# NetworkObjectParameters.TurnSkipDelayCost (ADR-075): passing pays no time term.
+# NetworkObjectParameters.TurnSkipDelayCost (ADR-076): passing pays no time term.
 const PASS_COST := 200.0 / DELAY_SCALE
 
 static func other(index: int) -> int:
@@ -32,7 +32,7 @@ static func pass_turn(model) -> void:
 static func elapsed_seconds(model) -> int:
 	return maxi(0, floori(float(model.TURN_TIME) - float(model.turn_time) + 0.000001))
 
-## Original delay of a shot (ADR-075): table cost (base + shot, C# attribute
+## Original delay of a shot (ADR-076): table cost (base + shot, C# attribute
 ## discount) + seconds spent before firing × characterdata [29]. Both the
 ## scheduler and the initiative preview read this, so they cannot disagree.
 static func shot_cost(model, index: int, weapon: int, elapsed: int) -> float:

@@ -6,7 +6,7 @@ var failures := 0
 
 func _initialize() -> void:
 	var started := Time.get_ticks_msec()
-	# Seeds 81–90 play Mage/Bigfoot, 91–93 Nak (ID 3, vs Mage). ADR-075 changed the
+	# Seeds 81–90 play Mage/Bigfoot, 91–93 Nak (ID 3, vs Mage). ADR-076 changed the
 	# rules on purpose (C# ballistics, time-spent delay, drawn opening), so the
 	# reference results in HANDOFF.md were recorded again.
 	var seeds := [81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93]

@@ -2,7 +2,7 @@ extends RefCounted
 ## Same integrator and swept collision are used by live shots and CPU aiming.
 
 const Mobiles = preload("res://scripts/mobiles.gd")
-# OpenBound Parameter.cs (ADR-075): ProjectileMovementGravity 9.8 × 20 and
+# OpenBound Parameter.cs (ADR-076): ProjectileMovementGravity 9.8 × 20 and
 # speed = force × ProjectileMovementForceFactor 100 / mass. Every Mage, Bigfoot
 # and Nak shell weighs 14 (the teleport beacon 10, Items.BEACON_SPEED).
 const GRAVITY := 196.0

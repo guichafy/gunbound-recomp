@@ -28,7 +28,7 @@ func sample_xfs(item: Dictionary, age: float, staring: bool) -> Array:
 		var start := 0
 		var length := count
 		var effect: bool=str(layer.source).to_lower().ends_with("l.img")
-		if not effect and count in [22,44]:
+		if count in [22,44]:
 			length=count/2
 			start=length if int(item.category)!=1 and not staring else 0
 		var step := int(maxf(0.0,age)*10.0)%(length*2)

@@ -22,7 +22,7 @@ const MAGE_AIM := [Vector2(15, 50), Vector2(15, 50), Vector2(15, 50)]
 # Damage is the first per-shot value of the original characterdata.dat record 2
 # and the radius half of the second (same reading that matches Bigfoot); the
 # flight rules come from the original client's Bullet3 classes (NAK_0_15.md).
-# Delays are base [28] + shot [30/31/32] of that record (ADR-075): the fork's
+# Delays are base [28] + shot [30/31/32] of that record (ADR-076): the fork's
 # 760/910/1310 Nak row belongs to another mobile.
 # "burrow": the shell enters the ground and explodes where it resurfaces.
 # "ghost": the shell crosses terrain and only collides with mobiles.
@@ -35,7 +35,7 @@ const NAK_AIM := [Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)]
 
 # time_delay: characterdata.dat [29], delay added per whole second spent before
 # firing (ComputeTurnDelay). Mage HP/shield regeneration also come from that
-# table (730/30), replacing the fork's 760/20 (ADR-075).
+# table (730/30), replacing the fork's 760/20 (ADR-076).
 const DEFINITIONS := {
 	1: {
 		"name": "Mage", "hp": 730, "move": 90.0, "delay": 0.0, "time_delay": 10, "color": Color("a9b7ff"),

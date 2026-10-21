@@ -25,7 +25,7 @@ def renderer_hashes():
 
 
 def registration(entry):
-    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False)]}
+    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False),('reference_state',''),('attachment',{})]}
 
 
 def read(path):
@@ -56,7 +56,11 @@ def source_piece(row, number):
                 red,green,blue,alpha=crop(index).split()
                 light=ImageChops.lighter(red,ImageChops.lighter(green,blue))
                 return sum(ImageChops.multiply(light,alpha).histogram()[9:])
-            frame = max(range(count),key=light_pixels)
+            # Head L sprites have the same Normal/Staring strips as the
+            # anatomy. A frontal light can contain two horns while the
+            # constant side-view head only has one visible horn.
+            candidates=range(11,22) if row['category']==0 and count==22 else range(count)
+            frame = max(candidates,key=light_pixels)
         image = crop(frame)
         if not alpha_box(image):
             visible=[i for i in range(count) if alpha_box(crop(i))]
@@ -72,7 +76,8 @@ def source_piece(row, number):
     return image, dict(original=layer['atlas'],source_name=layer['source'],
                       source_frame=frame,source_region=layer['frames'][frame]['region'],
                       native_rect=[ox+box[0]-5,oy+box[1]-5,box[2]-box[0],box[3]-box[1]],
-                      effect=is_effect,frame_count=count,native_mean_opacity=opacity,pulsate=is_effect and opacity<0.85)
+                      effect=is_effect,frame_count=count,native_mean_opacity=opacity,pulsate=is_effect and opacity<0.85,
+                      reference_state='normal' if row['category']==0 and count==22 else 'cycle')
 
 
 def create_jobs(rows, aliases, portraits, accepted, only_ids=None, job_start=0):
@@ -176,11 +181,18 @@ def render_control(rows,aliases,portraits,accepted,jobs):
         portrait_state='existing_hd' if row['key'] in portraits else state(row['key']+'|portrait','generated_unreviewed' if row['key']+'|portrait' in generated else 'pending')
         required=bool(layers)
         ready=required and all(layer['state']=='qa_passed' for layer in layers)
+        preview=None
+        if layers:
+            entry=accepted.get(layers[0]['id'],{})
+            evidence=entry.get('evidence','')
+            if evidence:
+                col,line=entry['cell']
+                preview=dict(file=evidence.removesuffix('.json')+'-000.png',region=[col*480+180,line*135+18,290,106])
         records.append(dict(key=row['key'],name=row['name'],gender=row['gender'],category=row['category'],
                             buyable=row['buyable'],portrait=portrait_state if required else 'not_applicable',
                             wearable='hd' if ready else ('pending' if required else 'not_applicable'),
                             layers=layers,qa=('qa_passed' if ready and portrait_state in ('existing_hd','qa_passed') and row['key'] in covered else 'pending') if required else 'not_applicable',
-                            native_portrait=row['portrait'],
+                            native_portrait=row['portrait'],preview=preview,
                             reason='' if required else ('Sem acessório (padrão)' if row['empty'] else 'Placeholder sem arte no XFS')))
     summary=dict(records=len(records),wearable_required=sum(bool(r['layers']) for r in records),
                  layers_required=sum(len(r['layers']) for r in records),
@@ -188,27 +200,28 @@ def render_control(rows,aliases,portraits,accepted,jobs):
                  layers_hd=sum(l['state'] in ('existing_hd','qa_passed') for r in records for l in r['layers']),
                  portraits_hd=sum(r['portrait'] in ('existing_hd','qa_passed') for r in records),
                  qa_passed=sum(r['qa']=='qa_passed' for r in records),not_applicable=sum(not r['layers'] for r in records),
-                 batches=len(jobs),generated_components=len(generated),registered_components=len(accepted),components_required=sum(len(job['variants']) for job in jobs),legacy_bridges=len(aliases),runtime_audit_valid=runtime_valid)
+                 batches=len(jobs),generated_components=len(generated),registered_components=len(accepted),components_required=sum(len(job['variants']) for job in jobs),legacy_bridges=sum(l['state']=='legacy_bridge' for r in records for l in r['layers']),runtime_audit_valid=runtime_valid)
     report=dict(version=1,summary=summary,records=records)
     (REPORT/'catalog.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     with (REPORT/'migration.csv').open('w',newline='') as target:
-        writer=csv.writer(target)
+        writer=csv.writer(target,lineterminator='\n')
         writer.writerow(['key','nome','genero','categoria','compravel','catalogo_hd','vestivel_hd','camadas_hd','camadas_total','validacao','motivo'])
         for r in records:
             writer.writerow([r['key'],r['name'],['Masculino','Feminino','Compartilhado'][r['gender']],NAMES[r['category']],r['buyable'],r['portrait'],r['wearable'],sum(l['state'] in ('existing_hd','qa_passed') for l in r['layers']),len(r['layers']),r['qa'],r['reason']])
     payload=json.dumps(report,ensure_ascii=False).replace('<','\\u003c')
     page='''<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Migração Avatar HD</title>
-<style>body{font:15px system-ui;background:#102532;color:#e8f6ff;margin:32px}h1{margin-bottom:6px}p{max-width:1000px;color:#b9d5df}input,select{padding:10px;margin:8px;background:#e5f5fa;border:0;border-radius:4px}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px;border-bottom:1px solid #315466}th{position:sticky;top:0;background:#174156}img{width:48px;height:45px;object-fit:contain;image-rendering:pixelated;background:#dbe5e5}.stats{font-size:20px;color:#79e3ff}small{color:#c8d9df}</style>
+<style>body{font:15px system-ui;background:#102532;color:#e8f6ff;margin:32px}h1{margin-bottom:6px}p{max-width:1000px;color:#b9d5df}input,select{padding:10px;margin:8px;background:#e5f5fa;border:0;border-radius:4px}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:9px;border-bottom:1px solid #315466}th{position:sticky;top:0;background:#174156}img{width:48px;height:45px;object-fit:contain;image-rendering:pixelated;background:#dbe5e5}svg{width:145px;height:53px;border-radius:3px}.stats{font-size:20px;color:#79e3ff}small{color:#c8d9df}a{color:#79e3ff}video{display:block;width:min(960px,100%);border-radius:6px;margin:20px 0}</style>
 <h1>Controle da migração de avatares HD</h1><p>Miniatura da loja, peça vestida e validação de animação são etapas separadas. “HD existente” identifica arte aprovada anterior; arquivos novos só contam após aceite e validação. Padrões vazios e placeholders têm motivo N/A.</p><p class="stats" id="summary"></p><p id="progress"></p>
+<video controls preload="metadata" poster="motion/0000.png" src="motion.mp4"></video><p><a href="migration.csv">Baixar controle CSV</a> · As prévias abaixo vêm da GPU: avatar vestido e mobile, com link para a comparação completa. A animação usa peças fixas com rig contínuo e efeitos separados.</p>
 <input id="query" placeholder="Buscar nome ou ID"><select id="filter"><option value="all">Todos</option><option value="pending">Peça vestível pendente</option><option value="hd">Peça vestível HD</option><option value="not_applicable">N/A</option></select><span id="count"></span>
-<table><thead><tr><th>Fonte</th><th>Avatar / ID</th><th>Tipo</th><th>Catálogo</th><th>Peça vestida</th><th>Camadas</th><th>Animação / QA</th><th>Observação</th></tr></thead><tbody id="rows"></tbody></table>
+<table><thead><tr><th>Fonte</th><th>Vestido / mobile HD</th><th>Avatar / ID</th><th>Tipo</th><th>Catálogo</th><th>Peça vestida</th><th>Camadas</th><th>Animação / QA</th><th>Observação</th></tr></thead><tbody id="rows"></tbody></table>
 <script id="data" type="application/json">DATA</script><script>
 const data=JSON.parse(document.getElementById('data').textContent),s=data.summary;
 document.getElementById('summary').textContent=`${s.wearable_hd}/${s.wearable_required} peças vestíveis HD · ${s.layers_hd}/${s.layers_required} camadas HD · ${s.portraits_hd}/${s.wearable_required} miniaturas HD · ${s.qa_passed}/${s.wearable_required} validados · ${s.not_applicable} N/A`;
 document.getElementById('progress').textContent=`${s.generated_components}/${s.components_required} componentes gerados · ${s.registered_components} registrados · ${s.batches} lotes · Auditoria de uso real: ${s.runtime_audit_valid?'atualizada':'pendente'}`;
 const labels={existing_hd:'HD anterior',qa_passed:'Validado',registered:'Integrado, aguarda QA',generated_unreviewed:'Gerado, aguarda revisão',legacy_bridge:'HD anterior provisório',pending:'Pendente',not_applicable:'N/A',hd:'HD validado'};
 const query=document.getElementById('query'),filter=document.getElementById('filter');
-function draw(){const rows=data.records.filter(r=>(r.name+' '+r.key).toLowerCase().includes(query.value.toLowerCase())&&(filter.value==='all'||r.wearable===filter.value));document.getElementById('count').textContent=rows.length+' registros';const body=document.getElementById('rows');body.replaceChildren();for(const r of rows){const tr=document.createElement('tr'),pic=document.createElement('td'),img=document.createElement('img');img.src='../../'+r.native_portrait.replace('res://','');pic.append(img);tr.append(pic);for(const value of [r.name+' / '+r.key,['Cabeça','Corpo','Óculos','Bandeira'][r.category],labels[r.portrait],labels[r.wearable],r.layers.filter(l=>['existing_hd','qa_passed'].includes(l.state)).length+'/'+r.layers.length,labels[r.qa],r.reason]){const cell=document.createElement('td');cell.textContent=value;tr.append(cell)}body.append(tr)}}query.oninput=draw;filter.onchange=draw;draw();</script></html>'''
+function draw(){const rows=data.records.filter(r=>(r.name+' '+r.key).toLowerCase().includes(query.value.toLowerCase())&&(filter.value==='all'||r.wearable===filter.value));document.getElementById('count').textContent=rows.length+' registros';const body=document.getElementById('rows');body.replaceChildren();for(const r of rows){const tr=document.createElement('tr'),pic=document.createElement('td'),img=document.createElement('img');img.src='../../'+r.native_portrait.replace('res://','');img.loading='lazy';pic.append(img);tr.append(pic);const proof=document.createElement('td');if(r.preview){const link=document.createElement('a'),svg=document.createElementNS('http://www.w3.org/2000/svg','svg'),art=document.createElementNS('http://www.w3.org/2000/svg','image');link.href='../../'+r.preview.file;link.title='Ver comparação completa na GPU';svg.setAttribute('viewBox',r.preview.region.join(' '));art.setAttribute('href',link.href);art.setAttribute('width','1920');art.setAttribute('height','1080');svg.append(art);link.append(svg);proof.append(link)}tr.append(proof);for(const value of [r.name+' / '+r.key,['Cabeça','Corpo','Óculos','Bandeira'][r.category],labels[r.portrait],labels[r.wearable],r.layers.filter(l=>['existing_hd','qa_passed'].includes(l.state)).length+'/'+r.layers.length,labels[r.qa],r.reason]){const cell=document.createElement('td');cell.textContent=value;tr.append(cell)}body.append(tr)}}query.oninput=draw;filter.onchange=draw;draw();</script></html>'''
     (REPORT/'index.html').write_text(page.replace('DATA',payload))
     print(json.dumps(summary,ensure_ascii=False))
 

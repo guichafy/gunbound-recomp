@@ -12,6 +12,14 @@ func run() -> void:
 	var art=load("res://scripts/avatar_art.gd").new()
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
 	check(not art.xfs_hd.layers.is_empty(),"Equipped XFS masters have their own registered catalog")
+	var native_art=load("res://scripts/avatar_art.gd").new(false)
+	for candidate in catalog.entries.values():
+		if candidate.get("source")!="xfs" or int(candidate.category)!=0 or candidate.get("layers",[]).size()!=2:
+			continue
+		for staring in [false,true]:
+			for age in [0.0,0.5,1.1,1.8,2.17]:
+				var native_pieces: Array=native_art.sample_xfs(candidate,age,staring)
+				check(native_pieces.all(func(p): return p.frame<11 if staring else p.frame>=11),"Head and light use the same native anatomy state: "+candidate.key)
 	var material:=Image.create(2,1,false,Image.FORMAT_RGBA8)
 	material.set_pixel(0,0,Color.BLACK)
 	material.set_pixel(1,0,Color.RED)
@@ -24,6 +32,40 @@ func run() -> void:
 		var entry: Dictionary=art.xfs_hd.layers[key]
 		var data: Dictionary=art.xfs_hd.piece(entry.key,int(entry.layer))
 		check(not data.is_empty() and data.target.has_area() and data.source.has_area(),"Registered wearable/effect loads at real resolution: "+key)
+	var real_items:=0
+	var real_layers:=0
+	for candidate in catalog.entries.values():
+		if candidate.get("source")!="xfs" or candidate.get("layers",[]).is_empty():
+			continue
+		real_items+=1
+		real_layers+=candidate.layers.size()
+		check(art.xfs_hd.complete(candidate),"Every real XFS item has all equipped HD layers: "+candidate.key)
+		var gender: int=0 if int(candidate.gender)==2 else int(candidate.gender)
+		var gear: Dictionary=catalog.defaults(gender)
+		gear[str(int(candidate.category))]=candidate.key
+		var equipped: Array=art.sample(gear,0.5).filter(func(piece): return int(piece.category)==int(candidate.category))
+		check(equipped.size()==candidate.layers.size() and equipped.all(func(piece): return piece.hd and piece.has("xfs_layer")),"Actual equipped renderer has no hidden native/legacy fallback: "+candidate.key)
+	check(real_items==550 and real_layers==629,"Coverage retains all 550 real avatars and 629 layers")
+	check(art.xfs_hd.portraits.size()==532,"All 532 remaining portraits are registered separately from the 18 previous ones")
+	var devil: Dictionary=art.xfs_hd.layers["xfs:0:0:71|layer:1"]
+	var devil_light: Dictionary=art.xfs_hd.piece("xfs:0:0:71",1)
+	var devil_head: Dictionary=art.xfs_hd.piece("xfs:0:0:71",0)
+	check(devil.source_frame>=11 and devil.reference_state=="normal","Great Devil light is sourced from the one-horn profile state")
+	check(devil_light.source.size.x/devil_light.source.size.y<1.1,"Great Devil master has one profile crescent, not the two-horn frontal pair")
+	check(devil_light.target.end.x<devil_head.target.position.x+devil_head.target.size.x*.55,"Horn light stays in the horn half of the head instead of crossing the hair")
+	var attachments:=0
+	for candidate in catalog.entries.values():
+		if candidate.get("source")!="xfs" or int(candidate.category)!=0 or candidate.get("layers",[]).size()!=2:
+			continue
+		var entry: Dictionary=art.xfs_hd.layers[candidate.key+"|layer:1"]
+		check(entry.get("reference_state")=="normal" and int(entry.source_frame)>=11,"All head effects share the Normal anatomy reference: "+candidate.key)
+		check(entry.has("attachment") and not art.xfs_hd.piece(candidate.key,1).is_empty(),"All twenty effects have a measured HD feature attachment: "+candidate.key)
+		attachments+=1
+	check(attachments==20,"Alignment review covers all twenty animated heads")
+	var saved_attachment: Dictionary=devil.attachment.duplicate(true)
+	devil.attachment.base_uv=[NAN,.3]
+	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Invalid anatomical attachment triggers complete native fallback")
+	devil.attachment=saved_attachment
 	var item: Dictionary=catalog.find("xfs:0:0:4")
 	check(art.xfs_hd.complete(item),"Wing Helmet's base and effect both have HD masters")
 	var equipment: Dictionary=catalog.defaults(0)

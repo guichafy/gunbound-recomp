@@ -280,9 +280,9 @@ geração): `HD_KINDS` do rig/projéteis só Bigfoot/Mage; miras Nak 1×. Dúvid
 sobre o cliente original: perguntar ao usuário. Teste test_nak.gd; captura
 tests/capture_nak.gd (docs/nak). Seeds 91–93 de test_matches jogam com o Nak.
 
-## Regras de batalha 0.16.1 — estado atual
+## Regras de batalha 0.18.1 — estado atual
 
-Ler docs/sdd/BATTLE_RULES_AUDIT.md (REQ-44, ADR-075). Política do usuário:
+Ler docs/sdd/BATTLE_RULES_AUDIT.md (REQ-44, ADR-076). Política do usuário:
 regra original comprovada por engenharia reversa (GunBound-Decomp + `.dat`
 do cliente) prevalece; senão vale o C#. Delay original = `[28]` base + custo
 do tiro `[30/31/32]` + segundos inteiros gastos até o disparo × `[29]` (10).

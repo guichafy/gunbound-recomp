@@ -1,5 +1,5 @@
 extends SceneTree
-## Battle rules parity (REQ-44, ADR-075): original rule when reverse engineering
+## Battle rules parity (REQ-44, ADR-076): original rule when reverse engineering
 ## proves it, OpenBound C# otherwise. Evidence in docs/sdd/BATTLE_RULES_AUDIT.md.
 
 const Match = preload("res://scripts/match.gd")
