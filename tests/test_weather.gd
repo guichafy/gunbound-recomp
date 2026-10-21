@@ -49,7 +49,7 @@ func run() -> void:
 		var force: int = weather.wind_force
 		var angle: int = weather.wind_angle
 		weather.next_round(rng)
-		bounded = bounded and absi(weather.wind_force - force) <= 2 and absi(weather.wind_angle - angle) <= 3 and weather.wind_force >= 0
+		bounded = bounded and absi(weather.wind_force - force) <= 2 and mini(posmod(weather.wind_angle - angle, 360), posmod(angle - weather.wind_angle, 360)) <= 3 and weather.wind_angle >= 0 and weather.wind_angle < 360 and weather.wind_force >= 0
 	check(bounded, "Wind disturbance stays within ±2 force / ±3 degrees")
 	weather.change_wind(rng)
 	check(weather.wind_force >= 0 and weather.wind_force < 35 and weather.wind_angle >= 0 and weather.wind_angle < 360, "Wind weather re-rolls force and angle")
