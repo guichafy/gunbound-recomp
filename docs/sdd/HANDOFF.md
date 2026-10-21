@@ -34,12 +34,19 @@ usuário. Versão 0.18.1. Perfil real e fonte C# intocados; sem push.
   82 1/34/1/[0,254], 83 1/7/0/[405,0], 84 0/15/0/[636,0], 85 1/12/0/[730,0],
   86 0/8/0/[307,0], 87 0/22/0/[74,0], 88 0/11/0/[365,0], 89 0/3/1/[0,926],
   90 0/12/0/[294,0], 91 1/5/0/[695,0], 92 0/4/0/[501,0], 93 1/18/0/[581,0].
-- Limites: não houve captura GPU nem app reexportado, e a sensação de mira
-  precisa de validação manual. Balística e dano originais em ponto fixo, termo
-  `[34]` e morte súbita ficaram pendentes. A worktree principal tem a migração
-  HD suja; `tests/test_items_scene.gd` mudou nas duas cópias (conflito
-  trivial na integração). Scripts `capture_*_pck.gd` usam
-  `set("opening", 0)` para continuar valendo contra builds antigos.
+- Integração: `main` 0.18.0 trazida para a branch (o ADR de efeitos de avatar
+  ficou com o 075 e este virou ADR-076), depois `main` avançou por fast-forward
+  até `a25a471`. Árvore integrada: 5273 checks + 13 partidas, zero falhas, com
+  as mesmas referências acima.
+- App/ZIP 0.18.1 reexportados da `main` com `build_macos.py`. Versão no
+  `Info.plist` e assinatura estrita conferidas. Smoke do PCK exportado fora do
+  projeto passou: física/dados novos, abertura sorteada, rótulo 0.18.1, menu e
+  uma partida completa.
+- Limites: não houve captura GPU, e a sensação de mira precisa de validação
+  manual. Balística e dano originais em ponto fixo, termo `[34]`, morte súbita
+  e recalibração do erro da CPU ficaram pendentes. Scripts
+  `capture_*_pck.gd` usam `set("opening", 0)` para continuar valendo contra
+  builds antigos. Sem push.
 
 ## Revisão20/10/2026 — validação final
 

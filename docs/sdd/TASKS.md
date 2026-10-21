@@ -7,7 +7,8 @@
 - [x] Nak 770/920/1320, Mage 730/30, delays de item do itemdata, balística C# (196/14/1,2).
 - [x] CPU com refino local; teste de cena da CPU abrindo; test_battle_rules (36).
 - [x] check.sh completo: 3926 checks + 13 partidas, zero falhas (worktree `claude/battle-rules-parity`).
-- [ ] Usuário validar a sensação de mira/alcance no jogo; reexportar app quando aprovado.
+- [x] Integrar à main (a25a471) e reexportar App/ZIP 0.18.1, assinatura e smoke do PCK conferidos.
+- [ ] Usuário validar a sensação de mira/alcance no app 0.18.1; decidir recalibração do erro da CPU.
 - [ ] Opcional: engenharia reversa da balística em ponto fixo e do dano original; termo `[34]` = 200.
 - [ ] Opcional: morte súbita do original (limite de turnos em BeginNewTurn).
 
