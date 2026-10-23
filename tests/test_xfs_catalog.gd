@@ -37,6 +37,8 @@ func run() -> void:
 	var path := "res://.tools/xfs-catalog-profile.json"
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	var p=load("res://scripts/profile.gd").new(path)
+	p.gold=1000
+	p.cash=1000
 	check(p.equipped_set()["0"]=="xfs:0:0:0","New profiles use native defaults")
 	if not marine.is_empty():
 		check(p.purchase(marine.key,"gold")=="funds","Native price respects existing balance")

@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Saldo de teste0.18.5 (REQ-38, ADR-080)
+
+- [x] Definir999.999.999 Gold/Cash no perfil padrão e concessão única na carteira existente válida.
+- [x] Preservar progresso/posses/equipamento, persistir gastos e reverter concessão em falha de gravação.
+- [x] Perfil isolado compra e veste todos479registros compráveis;14checks de carteira/migração PASS.
+- [x] Regressões5313checks+13Python, revisão independente e app/ZIP0.18.5 assinados.
+- [x] PCK fora do projeto: saldo, Gold/Cash, vestir/reabrir/batalha e catálogo550/629 PASS.
+
 ## Curva do chifre0.18.4 (REQ-10/20/39, ADR-079)
 
 - [x] Reproduzir perda perceptível da0.18.3 no tamanho real da prévia (teste GPU vermelho).

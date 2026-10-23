@@ -562,3 +562,9 @@ textura L anterior sobre a cabeça, com opacidade/pulsação anteriores. Nove
 marcos medidos na cabeça e na luz produzem64faixas UV constantes em ArrayMesh,
 com pivô/flip/inclinação comuns. Só geometria muda; cache sem relógio. A máscara
 0.18.3 fica preservada para comparação histórica, sem entrada no catálogo ativo.
+
+Saldo de teste0.18.5/ADR-080: Profile usa 999.999.999 em cada moeda como padrão.
+`game._ready` chama a concessão única após `load_profile`; carteira legível
+sem marcador recebe o novo saldo e marcador na mesma transação. Snapshots
+carregam o marcador para rollback. Carteiras inválidas não ganham recarga por
+essa migração. Fixture explícita do catálogo legado conserva 1000 por moeda.

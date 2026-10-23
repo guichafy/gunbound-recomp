@@ -357,3 +357,10 @@ Correção do aceite0.18.3: o usuário rejeitou a perda perceptível do brilho e
 da animação. Preservar a faixa luminosa HD anterior, sua opacidade e pulsação;
 corrigir somente a curva/encaixe sobre o chifre. A exigência de máscara atrás
 da cabeça fica substituída. Validar a animação no tamanho real da loja.
+
+REQ-38 — pedido de saldo para testar compras: o perfil padrão inicia com
+999.999.999 Gold e 999.999.999 Cash. Perfis existentes com carteira válida
+recebem esse saldo uma vez ao iniciar o aplicativo atualizado, preservando
+progresso/posses/equipamento. Gravar marcador junto à carteira; gastos e
+recargas posteriores preservam o saldo salvo. Falha de gravação reverte a
+concessão. Não liberar itens indisponíveis nem alterar preços/bônus.

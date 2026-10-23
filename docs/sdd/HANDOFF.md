@@ -1,4 +1,27 @@
-# Hand-off — Gunbound Recomp 0.18.4 / curva corrigida, brilho preservado
+# Hand-off — Gunbound Recomp 0.18.5 / saldo de teste
+
+## Carteira para testar todos os avatares — 23/10/2026 (REQ-38, ADR-080)
+
+Pedido: perfil padrão com **999.999.999 Gold e 999.999.999 Cash**, commit e push.
+Novos perfis começam com esse saldo. Ao abrir a versão atual, carteira existente
+válida sem `test_funds_granted` recebe a quantia uma única vez. Saldo e marcador
+são gravados juntos; falha reverte ambos. XP, partidas, posses e equipamento
+preservados. Carteiras inválidas não recebem essa migração. Gastos posteriores
+persistem normalmente; abrir o jogo novamente não repõe o dinheiro.
+
+- Teste inicial falhou por saldo antigo, ausência da concessão e orçamento
+  insuficiente. Após implementar, **14 checks** verificam padrão, migração,
+  preservação, reload, rollback e compra/uso dos **479 avatares compráveis**
+  entre ambos os gêneros, sempre com perfil isolado.
+- `check.sh --quick`: **5313 checks**, zero falhas; **13 testes Python** PASS.
+  Revisão independente sem achados relevantes. Fixture do catálogo legado
+  mantém1000 por moeda para testar limites; preços/bônus/indisponíveis intactos.
+- App/ZIP **0.18.5** reexportados; versão e assinatura estrita conferidas.
+  PCK fora do projeto PASS para concessão no startup, compra em Gold/Cash,
+  vestir, reabrir sem recarga e uso em batalha. Smoke550/629/loja/reload/batalha
+  também passou. Evidência Full HD em `docs/shop-test-funds/`.
+- Arte e regras de combate preservadas; não foi necessário repetir partidas
+  completas. Para aplicar ao perfil atual do usuário: reabrir o app0.18.5.
 
 ## Curva do chifre — 23/10/2026 (REQ-10/20/39, ADR-079)
 

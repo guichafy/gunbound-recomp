@@ -3,3 +3,5 @@ extends "res://scripts/profile.gd"
 ## Production and XFS integration tests use Profile directly.
 func _init(save_path: String) -> void:
 	super(save_path,load("res://scripts/avatar_catalog.gd").legacy())
+	gold=1000
+	cash=1000

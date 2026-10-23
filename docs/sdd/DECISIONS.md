@@ -613,3 +613,13 @@ o chifre, opacidade e pulsação anteriores. Corrigir curva por uma malha UV
 constante, medida nos pixels da cabeça e da luz, sem gerar outra aparência.
 Teste deve medir variação visível no tamanho da prévia, além de encaixe,
 sentidos/inclinação e pausa. Sem mudanças nos demais19efeitos ou regras.
+
+## ADR-080 — saldo alto de teste e concessão única no perfil existente
+
+Usuário pediu999.999.999 Gold e Cash no perfil padrão para comprar/vestir todos
+os avatares e solicitou commit/push. Padrão vale para novos perfis; inicialização
+do jogo aplica a mesma quantia uma única vez a carteiras existentes válidas,
+com marcador persistido e rollback em falha. Não reabastecer a cada abertura
+nem perder progresso/posses. Plano: testar padrão, concessão/reload/rollback,
+comprar e vestir os479registros compráveis em perfil isolado, regressões e PCK
+exportado. Itens N/A/indisponíveis e preços originais continuam sob suas regras.

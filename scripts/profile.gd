@@ -3,9 +3,11 @@ extends RefCounted
 
 const Catalog = preload("res://scripts/avatar_catalog.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
+const INITIAL_TEST_BALANCE := 999999999
 var catalog = Catalog.new()
-var gold := 1000
-var cash := 1000
+var gold := INITIAL_TEST_BALANCE
+var cash := INITIAL_TEST_BALANCE
+var test_funds_granted := true
 var gender := 0
 var owned: Array = []
 var equipped: Dictionary = {}
@@ -95,7 +97,7 @@ func save_profile() -> bool:
 	return last_save_ok
 
 func shop_data() -> Dictionary:
-	return {"version":1,"gold":gold,"cash":cash,"gender":gender,"owned":owned.duplicate(),"equipped":equipped.duplicate(true),"attributes":attributes.duplicate()}
+	return {"version":1,"gold":gold,"cash":cash,"test_funds_granted":test_funds_granted,"gender":gender,"owned":owned.duplicate(),"equipped":equipped.duplicate(true),"attributes":attributes.duplicate()}
 func snapshot() -> Dictionary:
 	return {"version":3,"nickname":nickname,"xp":xp,"wins":wins,"matches":matches,"awarded":awarded.duplicate(),"shop":shop_data()}
 func restore(data: Dictionary) -> void:
@@ -108,6 +110,10 @@ func restore(data: Dictionary) -> void:
 func balance(value) -> int:
 	return clampi(int(value), 0, 1000000000) if (value is int or value is float) and is_finite(float(value)) else 0
 func load_shop(data: Dictionary) -> void:
+	var saved_gold=data.get("gold")
+	var saved_cash=data.get("cash")
+	var valid_wallet: bool=(saved_gold is int or saved_gold is float) and (saved_cash is int or saved_cash is float) and is_finite(float(saved_gold)) and is_finite(float(saved_cash)) and saved_gold>=0 and saved_cash>=0
+	test_funds_granted=not valid_wallet or data.get("test_funds_granted",false)==true
 	gold = balance(data.get("gold", 0))
 	cash = balance(data.get("cash", 0))
 	gender = 1 if data.get("gender") == 1 else 0
@@ -145,6 +151,14 @@ func persist(previous: Dictionary) -> bool:
 		return true
 	restore(previous)
 	return false
+func grant_test_funds() -> bool:
+	if test_funds_granted:
+		return true
+	var previous:=snapshot()
+	gold=INITIAL_TEST_BALANCE
+	cash=INITIAL_TEST_BALANCE
+	test_funds_granted=true
+	return persist(previous)
 func purchase(key: String, currency: String) -> String:
 	key=catalog.canonical_key(key,gender)
 	var item: Dictionary = catalog.find(key)

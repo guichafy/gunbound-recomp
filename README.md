@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.4**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.5**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,9 +8,9 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.18.4** — brilho anterior do Great Devil Head preservado, com curva ajustada ao chifre; inclui a auditoria de batalha 0.18.2 |
+| Versão | **0.18.5** — saldo de 999.999.999 Gold/Cash para testar a loja; preserva o brilho/curva 0.18.4 e a auditoria de batalha 0.18.2 |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
-| Validação automática | **5299 verificações rápidas e 13 testes Python** na 0.18.4; as **13 partidas completas** foram validadas na 0.18.2 |
+| Validação automática | **5313 verificações rápidas e 13 testes Python** na 0.18.5; as **13 partidas completas** foram validadas na 0.18.2 |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
 | Validação visual | Usuário testou o Great Devil Head 0.18.4, relatou melhora e pediu consolidação; 20 modelos com efeito revisados |
 
@@ -22,7 +22,7 @@ O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/H
 
 No menu, **Shop de avatar** abre a loja ciano do cliente XFS, com grade3×3 à esquerda e inventário à direita. O catálogo contém562registros,479compráveis, com preços e bônus originais. **Experimentar** mantém prévia temporária; **Comprar** gasta Cash ou Gold; clicar uma peça possuída veste e grava. Bônus aparecem nos cards/conjunto e são aplicados na próxima batalha. Ações de rede e venda continuam indisponíveis no treino offline.
 
-O primeiro perfil recebe, uma única vez, 1.000 Cash e 1.000 Gold de teste. Esse saldo não é dinheiro real.
+O perfil padrão inicia com **999.999.999 Cash e 999.999.999 Gold de teste**. Perfis existentes recebem o novo saldo uma única vez ao abrir a versão 0.18.5, preservando progresso e avatares. Compras posteriores continuam descontando o saldo salvo. Esse saldo não é dinheiro real.
 
 <img src="docs/avatar-hd-migration/shop-exported.png" width="720" alt="Aplicativo exportado: loja XFS com avatares e bandeiras HD, bônus e inventário vestido">
 
@@ -80,6 +80,7 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.18.2 | Auditoria: CPU paga 2 s fixos e congela o relógio durante a busca, fila do HUD na TurnTable, deriva do vento na queda por passo de gravidade (ADR-077), vento em 0–359 e docs de baseline marcados |
 | 0.18.3 | Great Devil Head: aura pulsante derivada do contorno da cabeça HD, pivô compartilhado e ouro preservado; main inclui o merge do PR2 |
 | 0.18.4 | Restaura brilho, opacidade e pulsação anteriores do Great Devil; corrige somente a curva por geometria UV constante após rejeição do halo discreto da 0.18.3 |
+| 0.18.5 | Carteira padrão com 999.999.999 Gold/Cash e concessão única no perfil existente; teste compra e veste todos os 479 avatares compráveis |
 
 Números de base, antes dos atributos:
 

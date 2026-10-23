@@ -1,0 +1,20 @@
+{
+  "version": "0.18.5",
+  "verified_at": "2026-10-23T23:07:19.136231+00:00",
+  "initial_gold": 999999999,
+  "initial_cash": 999999999,
+  "existing_wallet": "one-time persisted grant; ownership/equipment/progress preserved",
+  "model_checks": 14,
+  "purchased_and_equipped_buyable_avatars": 479,
+  "quick_checks": 5313,
+  "python_tests": 13,
+  "code_hashes": {
+    "scripts/profile.gd": "1c505c79ee1cc456ea8f904741af10dbb2c99bb6215d9f0ce12fe7a93f3a6a6d",
+    "scripts/game.gd": "7b03c20f95b076e03c4d3816f51bcbd9ba813b7054417ed28367675010ee3b3d"
+  },
+  "pck_sha256": "32b0a17420a5c1cda1f8fd66349e8bee60e59710009e89b8a7d8fed595c2d427",
+  "signature": "codesign --verify --deep --strict PASS",
+  "pck_smoke": "startup grant / Gold+Cash purchases / equip / reopen without refill / battle PASS",
+  "catalog_smoke": "550 equipped / 629 layers / shop / reload / battle PASS",
+  "test_profiles": "isolated; real user profile not accessed by tests"
+}
