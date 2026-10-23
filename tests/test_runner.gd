@@ -88,7 +88,7 @@ func _initialize() -> void:
 	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - match_model.stance_of(1)
 	match_model.stamp_tilt()
 	match_model.wind = Vector2(-35, 0)
-	var returning: Dictionary = combat.predict(match_model.muzzle(0, 50.0), match_model.shot_velocity(0, 50.0, 15.0, 0), Vector2(-35, 0), match_model.terrain, match_model.actors, 0)
+	var returning: Dictionary = match_model.predict_shot(0, 50.0, 15.0, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")
 	match_model.fire(50.0, 15.0, 0)
 	for i in range(1600):

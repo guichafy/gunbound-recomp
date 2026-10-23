@@ -132,22 +132,3 @@ static func ignored_shooter(age: float, shooter: int) -> int:
 static func sample_position(position: Vector2, velocity: Vector2, age: float, amplitude: float = 0.0, phase: float = 0.0) -> Vector2:
 	return position + Vector2(-velocity.y, velocity.x).normalized() * amplitude * sin(age * TAU + phase)
 
-static func predict(origin: Vector2, velocity: Vector2, wind: Vector2, terrain, actors: Array, ignored: int, amplitude: float = 0.0, phase: float = 0.0) -> Dictionary:
-	var position := origin
-	var speed := velocity
-	var age := 0.0
-	var actual := origin
-	for i in range(1440):
-		var next := advance(position, speed, wind, STEP)
-		var next_actual := sample_position(next.position, next.velocity, age + STEP, amplitude, phase)
-		var hit := trace_segment(actual, next_actual, terrain, actors, ignored_shooter(age, ignored))
-		if not hit.is_empty():
-			hit["hit"] = true
-			return hit
-		actual = next_actual
-		position = next.position
-		speed = next.velocity
-		age += STEP
-		if out_of_bounds(position, terrain):
-			return {"position": position, "actor": -1, "hit": false}
-	return {"position": position, "actor": -1, "hit": false}

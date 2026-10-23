@@ -41,7 +41,7 @@ func _initialize() -> void:
 			check(velocity.normalized().distance_to(expected) < 0.01, "World launch direction matches slope and facing")
 			var pivot: Vector2 = model.actors[0].pos + Vector2(0, -14).rotated(rotation)
 			check((model.muzzle(0, 45) - pivot).normalized().distance_to(expected) < 0.01, "Muzzle matches launch direction")
-			var predicted: Dictionary = Combat.predict(model.muzzle(0, 45), velocity, model.wind, model.terrain, model.actors, 0)
+			var predicted: Dictionary = model.predict_shot(0, 45, 25, 0)
 			model.phase = "aim"
 			model.events.clear()
 			model.fire(45, 25, 0)

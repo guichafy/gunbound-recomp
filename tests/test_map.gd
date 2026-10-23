@@ -15,7 +15,6 @@ func run() -> void:
 	var Maps = load("res://scripts/maps.gd")
 	var Terrain = load("res://scripts/terrain.gd")
 	var Match = load("res://scripts/match.gd")
-	var Combat = load("res://scripts/combat.gd")
 	var map: Dictionary = Maps.get_map(Maps.DEFAULT)
 	check(Maps.DEFAULT == "miramo_town_a" and not map.is_empty(), "Default arena is Miramo Town A")
 	check(map.openbound_id == 20 and map.type == "A" and map.spawns.size() == 11, "Catalog mirrors Map.cs ID20 and its 11 spawn points")
@@ -112,7 +111,7 @@ func run() -> void:
 	var power := 15.0
 	var predicted: Dictionary = {}
 	while power <= 100.0:
-		predicted = Combat.predict(model.muzzle(0, 45.0), model.shot_velocity(0, 45.0, power, 0), Vector2.ZERO, model.terrain, model.actors, 0)
+		predicted = model.predict_shot(0, 45.0, power, 0)
 		if bool(predicted.get("hit", false)):
 			break
 		power += 5.0
