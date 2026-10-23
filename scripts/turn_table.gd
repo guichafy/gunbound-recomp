@@ -4,8 +4,9 @@ extends RefCounted
 const Mobiles = preload("res://scripts/mobiles.gd")
 const PLAYER := 0
 const CPU := 1
-# Delay units are the original ones ÷ 7.5 (MAGE_0_4.md).
-const DELAY_SCALE := 7.5
+const DelayUnits = preload("res://scripts/delay_units.gd")
+# Delay units are the original ones ÷ 7.5 (delay_units.gd, MAGE_0_4.md).
+const DELAY_SCALE := DelayUnits.SCALE
 # NetworkObjectParameters.TurnSkipDelayCost (ADR-076): passing pays no time term.
 const PASS_COST := 200.0 / DELAY_SCALE
 # Whole seconds charged for a CPU shot instead of its real search time (ADR-076).

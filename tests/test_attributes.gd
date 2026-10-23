@@ -10,6 +10,7 @@ func _initialize() -> void:
 	call_deferred("run")
 func run() -> void:
 	var A = load("res://scripts/player_attributes.gd")
+	var Mobiles = load("res://scripts/mobiles.gd")
 	check(A.has_method("damage"), "Combat modifiers exist")
 	if failures == 0:
 		check(A.damage(200,30,20) == 220, "Attack minus defense")
@@ -40,7 +41,7 @@ func run() -> void:
 					sim.advance_projectiles(1.0/120.0)
 				check(m.actors[1].hp == sim.actors[1].hp and m.actors[0].shield == sim.actors[0].shield, "Live and prediction damage equal")
 				check(m.terrain.cells == sim.terrain.cells, "Live and prediction craters equal")
-				check(m.weapon_rules(0,weapon).delay < m.VEHICLES[mobile].weapons[weapon].delay, "Shot delay decreased")
+				check(m.weapon_rules(0,weapon).delay < Mobiles.weapon(mobile,weapon).delay, "Shot delay decreased")
 				sim.actors[0].attributes[0] = 0
 				check(m.actors[0].attributes[0] == 30, "Snapshot attributes isolated")
 		var m = Match.new()

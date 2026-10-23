@@ -4,6 +4,7 @@ extends RefCounted
 
 const Attributes = preload("res://scripts/player_attributes.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
+const DelayUnits = preload("res://scripts/delay_units.gd")
 
 const PLAYABLE := [1, 2, 3]
 const DEFAULT_ID := 2
@@ -11,10 +12,11 @@ const SPECIAL := 2
 # NetworkObjectParameters.SSCooldownTimer + 1, applied when the SS is fired.
 const SS_LOCK := 4
 
+# "cost" is the OpenBound DelayPresets value; weapon() adds "delay" in turn units.
 const MAGE_WEAPONS := [
-	{"name": "Laser", "damage": 150.0, "radius": 25.0, "delay": 100.0, "count": 1, "helix": 0.0, "emp": 0.0, "color": Color("b3ceff")},
-	{"name": "Duplo laser", "damage": 200.0, "radius": 25.0, "delay": 120.0, "count": 2, "helix": 15.0, "emp": 0.0, "color": Color("d43e70")},
-	{"name": "EMP", "damage": 200.0, "radius": 25.0, "delay": 1300.0 / 7.5, "count": 1, "helix": 0.0, "emp": 100.0, "color": Color("b6adff")}
+	{"name": "Laser", "damage": 150.0, "radius": 25.0, "cost": 750, "count": 1, "helix": 0.0, "emp": 0.0, "color": Color("b3ceff")},
+	{"name": "Duplo laser", "damage": 200.0, "radius": 25.0, "cost": 900, "count": 2, "helix": 15.0, "emp": 0.0, "color": Color("d43e70")},
+	{"name": "EMP", "damage": 200.0, "radius": 25.0, "cost": 1300, "count": 1, "helix": 0.0, "emp": 100.0, "color": Color("b6adff")}
 ]
 const MAGE_AIM := [Vector2(15, 50), Vector2(15, 50), Vector2(15, 50)]
 
@@ -27,9 +29,9 @@ const MAGE_AIM := [Vector2(15, 50), Vector2(15, 50), Vector2(15, 50)]
 # "burrow": the shell enters the ground and explodes where it resurfaces.
 # "ghost": the shell crosses terrain and only collides with mobiles.
 const NAK_WEAPONS := [
-	{"name": "Esfera", "damage": 200.0, "radius": 30.0, "delay": 770.0 / 7.5, "count": 1, "color": Color("f0a060")},
-	{"name": "Bomba de oscilação", "damage": 350.0, "radius": 35.0, "delay": 920.0 / 7.5, "count": 1, "burrow": true, "color": Color("d0d0d8")},
-	{"name": "Mini Nak", "damage": 360.0, "radius": 35.0, "delay": 1320.0 / 7.5, "count": 1, "ghost": true, "color": Color("e8743a")}
+	{"name": "Esfera", "damage": 200.0, "radius": 30.0, "cost": 770, "count": 1, "color": Color("f0a060")},
+	{"name": "Bomba de oscilação", "damage": 350.0, "radius": 35.0, "cost": 920, "count": 1, "burrow": true, "color": Color("d0d0d8")},
+	{"name": "Mini Nak", "damage": 360.0, "radius": 35.0, "cost": 1320, "count": 1, "ghost": true, "color": Color("e8743a")}
 ]
 const NAK_AIM := [Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)]
 
@@ -84,8 +86,11 @@ static func opponent(vehicle_id: int) -> int:
 static func definition(vehicle_id: int) -> Dictionary:
 	return DEFINITIONS[vehicle_id]
 
-static func weapon(vehicle_id: int, weapon_index: int) -> Dictionary:
-	return DEFINITIONS[vehicle_id].weapons[weapon_index]
+## Copy of the catalog shot with "delay" = cost reduced by AttackDelay points.
+static func weapon(vehicle_id: int, weapon_index: int, delay_points: int = 0) -> Dictionary:
+	var rules: Dictionary = DEFINITIONS[vehicle_id].weapons[weapon_index].duplicate()
+	rules.delay = DelayUnits.from_original(int(rules.cost), delay_points)
+	return rules
 
 static func weapon_count(vehicle_id: int) -> int:
 	return DEFINITIONS[vehicle_id].weapons.size()
@@ -117,7 +122,7 @@ static func emission(vehicle_id: int, weapon_index: int) -> Array:
 ## Mobile.Regenerate. The shield cap reads health from before this tick's heal.
 static func regenerate(actor: Dictionary) -> void:
 	var spec: Dictionary = DEFINITIONS[int(actor.vehicle)]
-	var points := Attributes.points(actor, 3)
+	var points := Attributes.points(actor, Attributes.REGEN)
 	var current_hp := int(actor.hp)
 	var cap := int(spec.shield) + int(actor.max_hp) - current_hp
 	actor.hp = mini(int(actor.max_hp), current_hp + Attributes.heal(int(spec.hp_regen), points))

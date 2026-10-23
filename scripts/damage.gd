@@ -36,7 +36,7 @@ static func blast(actors: Array, events: Array, position: Vector2, radius: float
 			var center := position.distance_to(Combat.box_center(actors[index]))
 			hp_damage = Combat.blast_damage(center, damage, radius)
 			if shooter >= 0:
-				hp_damage = Attributes.damage(hp_damage, Attributes.points(actors[shooter], 0) + int(attack), Attributes.points(actors[index], 2))
+				hp_damage = Attributes.damage(hp_damage, Attributes.points(actors[shooter], Attributes.ATTACK) + int(attack), Attributes.points(actors[index], Attributes.DEFENSE))
 			elif attack != 0.0:
 				hp_damage = int(hp_damage * (1.0 + attack / 100.0))
 		var shield_bonus := int(actors[index].shield) if emp > 0.0 and gap < emp else 0

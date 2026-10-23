@@ -1,5 +1,8 @@
 extends RefCounted
 ## OpenBound attribute order, caps and modifiers. No scene/profile reads.
+const DelayUnits = preload("res://scripts/delay_units.gd")
+## Order of Player.Attribute (AttributeMenu.cs) and of the saved profile array.
+enum { ATTACK, HEALTH, DEFENSE, REGEN, SHOT_DELAY, ITEM_DELAY, DIG, POPULARITY }
 const COUNT := 8
 static func budget(level: int) -> int:
 	return mini(maxi(level - 1, 0) * 10, 180)
@@ -40,7 +43,7 @@ static func health(base: int, points: int) -> int:
 static func heal(base: int, points: int) -> int:
 	return int(base * (1.0 + points / 100.0))
 static func delay(original: int, points: int) -> float:
-	return int(original * (1.0 - points / 100.0)) / 7.5
+	return DelayUnits.from_original(original, points)
 static func crater(base: float, points: int) -> float:
 	return base * (1.0 + points / 100.0)
 static func points(actor: Dictionary, index: int) -> int:

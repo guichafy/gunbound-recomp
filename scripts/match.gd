@@ -97,7 +97,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 			items.append({"id": id, "used": false})
 		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
 		values=Attributes.with_equipment(values,gear_bonuses_by_actor[index] if index<gear_bonuses_by_actor.size() and gear_bonuses_by_actor[index] is Array else [])
-		var max_health := Attributes.health(int(VEHICLES[kind].hp),int(values[1]))
+		var max_health := Attributes.health(int(VEHICLES[kind].hp), int(values[Attributes.HEALTH]))
 		actors.append({"gold_state":{"gold":0,"enemy_damage":0},"attributes":values,"vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - stance), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "ss_lock": 0, "tilt": 0.0,
 			"items": items, "turn_item": ""})
 	difficulty = clampi(cpu_difficulty, 0, 2)
@@ -159,7 +159,7 @@ func apply_weather(entry: Dictionary) -> void:
 		for actor in actors:
 			if int(actor.hp) > 0:
 				var heal := int(Mobiles.definition(int(actor.vehicle)).protection)
-				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Attributes.heal(heal, Attributes.points(actor,3)))
+				actor.hp = mini(int(actor.max_hp), int(actor.hp) + Attributes.heal(heal, Attributes.points(actor, Attributes.REGEN)))
 	events.append({"type": "weather", "weather": entry.type, "extra": entry.extra, "queue": weather.queue.duplicate(true), "wind_force": weather.wind_force, "wind_angle": weather.wind_angle})
 
 func can_use_special(index: int) -> bool:
@@ -190,7 +190,7 @@ func use_item(slot: int) -> bool:
 	var id: String = actor.items[slot].id
 	actor.items[slot].used = true
 	actor.turn_item = id
-	actor.ready = maxf(float(actor.ready), clock) + Items.delay(id,Attributes.points(actor,5))
+	actor.ready = maxf(float(actor.ready), clock) + Items.delay(id, Attributes.points(actor, Attributes.ITEM_DELAY))
 	var event := {"type": "item", "actor": active, "item": id, "slot": slot, "position": actor.pos}
 	match id:
 		"energy_up_1", "energy_up_2":
@@ -248,11 +248,7 @@ func body_rotation(index: int) -> float:
 	return clampf(atan2(right - left, 36.0), -PI / 6.0, PI / 6.0)
 
 func weapon_rules(index: int, weapon: int) -> Dictionary:
-	var rules: Dictionary = Mobiles.weapon(actors[index].vehicle, weapon).duplicate(true)
-	var points := Attributes.points(actors[index],4)
-	if points != 0:
-		rules.delay = Attributes.delay(roundi(float(rules.delay) * 7.5), points)
-	return rules
+	return Mobiles.weapon(actors[index].vehicle, weapon, Attributes.points(actors[index], Attributes.SHOT_DELAY))
 
 func aim_limits(index: int, weapon: int = 0) -> Vector2:
 	return Mobiles.aim_limits(actors[index].vehicle, weapon)
@@ -498,7 +494,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var weapon: Dictionary = weapon_rules(shot_actor, weapon_index)
 	var item: String = str(actors[shot_actor].get("turn_item", ""))
 	# Projectile.Explode: erosion radius × (1 + Owner.Dig / 100) (Bunge Shot).
-	var removed: int = terrain.carve(position, Attributes.crater(float(weapon.radius),Attributes.points(actors[shot_actor],6)+int(Items.dig(item))))
+	var removed: int = terrain.carve(position, Attributes.crater(float(weapon.radius),Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
 	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
 	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
 	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
@@ -777,7 +773,7 @@ func finish_gold_shot() -> void:
 	for index in range(actors.size()):
 		if not bool(shot_gold.dead[index]) and int(actors[index].hp)<=0:
 			shot_gold["ally_kills" if index==shot_actor else "enemy_kills"] += 1
-	actors[shot_actor].gold_state = GoldRewards.apply_shot(actors[shot_actor].gold_state,shot_gold,Attributes.points(actors[shot_actor],7))
+	actors[shot_actor].gold_state = GoldRewards.apply_shot(actors[shot_actor].gold_state,shot_gold,Attributes.points(actors[shot_actor], Attributes.POPULARITY))
 	shot_gold = {}
 func player_gold_reward() -> int:
 	return int(actors[PLAYER].gold_state.gold)+GoldRewards.result_bonus(winner==PLAYER,winner==-1)

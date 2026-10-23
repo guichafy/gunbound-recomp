@@ -4,9 +4,9 @@ extends RefCounted
 ## Exact reference and adaptations: docs/sdd/BIGFOOT_ATTACKS_0_5.md.
 
 const WEAPONS := [
-	{"name": "T1 · Bombas", "damage": 90.0, "radius": 25.0, "delay": 770.0 / 7.5, "count": 4, "color": Color("ffd18a")},
-	{"name": "T2 · Rajadas", "damage": 70.0, "radius": 25.0, "delay": 920.0 / 7.5, "count": 6, "color": Color("ffa15a")},
-	{"name": "SS · Bombardeio", "damage": 90.0, "radius": 25.0, "delay": 1320.0 / 7.5, "count": 8, "color": Color("f5bd68")}
+	{"name": "T1 · Bombas", "damage": 90.0, "radius": 25.0, "cost": 770, "count": 4, "color": Color("ffd18a")},
+	{"name": "T2 · Rajadas", "damage": 70.0, "radius": 25.0, "cost": 920, "count": 6, "color": Color("ffa15a")},
+	{"name": "SS · Bombardeio", "damage": 90.0, "radius": 25.0, "cost": 1320, "count": 8, "color": Color("f5bd68")}
 ]
 const AIM_LIMITS := [Vector2(18, 40), Vector2(18, 40), Vector2(23, 35)]
 

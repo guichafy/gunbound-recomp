@@ -7,10 +7,10 @@ extends RefCounted
 const ORDER := ["dual", "dual_plus", "thunder", "energy_up_2", "team_teleport", "teleport",
 	"blood", "bunge_shot", "power_up", "change_wind", "energy_up_1"]
 const MAX_SLOTS := 6
-# Same conversion as Mage/Bigfoot delays (MAGE_0_4.md): original units ÷ 7.5.
 # Costs are the delay column of the original itemdata.dat (ADR-076); Teleport,
 # Dual+, Energy Up 2, Change Wind and Bunge Shot differ from the C# constants.
-const DELAY_SCALE := 7.5
+# Delay = cost ÷ 7.5, converted once in delay_units.gd.
+const DelayUnits = preload("res://scripts/delay_units.gd")
 # Parameter.TextColorItem*.
 const CATEGORY_COLORS := {"red": Color8(156, 56, 16), "green": Color8(98, 149, 74),
 	"blue": Color8(82, 121, 164), "purple": Color8(131, 105, 131)}
@@ -67,7 +67,7 @@ static func slots(id: String) -> int:
 
 ## MatchManager.ComputePlayerItem with the allocated ItemDelay, in prototype delay units.
 static func delay(id: String, reduction: int = 0) -> float:
-	return int(int(DEFINITIONS[id].cost)*(1.0-reduction/100.0)) / DELAY_SCALE
+	return DelayUnits.from_original(int(DEFINITIONS[id].cost), reduction)
 
 static func color(id: String) -> Color:
 	return CATEGORY_COLORS[DEFINITIONS[id].category]
