@@ -193,7 +193,7 @@ func show_menu() -> void:
 	effects.clear()
 	floating.clear()
 	replace_root()
-	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   0.18.5", Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
+	var tag := ui.label(root, "TREINO DE ARTILHARIA   /   " + version(), Vector2(80, 74), Vector2(530, 24), 14, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	var title := ui.label(root, "GUNBOUND\nRECOMP", Vector2(74, 130), Vector2(650, 235), 80, ui.CREAM, true)
@@ -257,6 +257,10 @@ func show_menu() -> void:
 	ui.button(root, "Como jogar", Vector2(1030, 754), Vector2(190, 30), show_help)
 	select_vehicle(vehicle)
 	queue_redraw()
+
+## Single source of the version: application/config/version (ADR-070).
+static func version() -> String:
+	return str(ProjectSettings.get_setting("application/config/version", ""))
 
 func show_shop() -> void:
 	if screen == "menu" and is_instance_valid(nickname_input):

@@ -25,6 +25,11 @@ func run() -> void:
 	check(scene.screen == "menu" and scene.nickname_input != null, "Menu shows nickname and vehicle controls")
 	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
 	scene.opening = 0
+	var version: String = ProjectSettings.get_setting("application/config/version", "")
+	var shows_version := false
+	for node in scene.root.get_children():
+		shows_version = shows_version or (node is Label and node.text.ends_with("/   " + version))
+	check(not version.is_empty() and shows_version, "Menu shows the single-source project version")
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
 	check(scene.weapon_buttons.size() == 3 and scene.pass_button is TextureButton and scene.options_button is TextureButton, "Original S1/S2/SS, Options and SkipTurn sprite buttons")
