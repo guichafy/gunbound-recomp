@@ -11,6 +11,8 @@ const DEFAULT_ID := 2
 const SPECIAL := 2
 # NetworkObjectParameters.SSCooldownTimer + 1, applied when the SS is fired.
 const SS_LOCK := 4
+# Low-health share: damaged idle/move frames and the Bigfoot smoke.
+const LOW_HEALTH := 0.3
 
 # "cost" is the OpenBound DelayPresets value; weapon() adds "delay" in turn units.
 const MAGE_WEAPONS := [
@@ -128,6 +130,9 @@ static func regenerate(actor: Dictionary) -> void:
 	actor.hp = mini(int(actor.max_hp), current_hp + Attributes.heal(int(spec.hp_regen), points))
 	actor.shield = mini(cap, int(actor.shield) + Attributes.heal(int(spec.shield_regen), points))
 	actor.max_shield = int(spec.shield)
+
+static func low_health(actor: Dictionary) -> bool:
+	return float(actor.hp) <= float(actor.max_hp) * LOW_HEALTH
 
 ## Point bodies keep item fixtures that carry no vehicle id.
 static func body(actor: Dictionary) -> Dictionary:

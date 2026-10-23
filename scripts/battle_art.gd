@@ -106,7 +106,7 @@ func atlas_frame(model, index: int, ctx: Dictionary) -> int:
 	var actor: Dictionary = model.actors[index]
 	var state: Dictionary = motion[index]
 	var weapon := selected_weapon(model, index, ctx)
-	return ctx.atlas.frame_index(state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)), float(state.pose_age), weapon, actor.hp <= actor.max_hp * 0.3)
+	return ctx.atlas.frame_index(state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)), float(state.pose_age), weapon, Mobiles.low_health(actor))
 
 func presentation(index: int, rig, clock: float, weapon: int) -> Dictionary:
 	# A separate history per actor; interrupted transitions start at the last
@@ -158,29 +158,7 @@ func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionar
 		weapon = int(model.last_shots[index].get("weapon", 0))
 	var avatar_context: Dictionary = ctx.get("avatar_context",{}).duplicate()
 	avatar_context.rig_state = presentation(index,atlas.hd_rig,time,weapon)
-	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase, avatar_context)
-	if bool(Mobiles.definition(int(actor.vehicle)).smoke) and int(actor.hp) > 0 and float(actor.hp) <= float(actor.max_hp) * 0.3:
+	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, Mobiles.low_health(actor), state.wheel_phase, avatar_context)
+	if bool(Mobiles.definition(int(actor.vehicle)).smoke) and int(actor.hp) > 0 and Mobiles.low_health(actor):
 		var puff := fposmod(time, 0.8) / 0.8
 		view.draw_circle(pos + offset + Vector2(8.0 * float(actor.facing), -20.0 - puff * 18.0), 2.5 + puff * 3.5, Color(0.78, 0.78, 0.8, (1.0 - puff) * 0.4))
-
-func draw_explosion(view: Node2D, effect: Dictionary) -> void:
-	var age: float = effect.age
-	var pos: Vector2 = effect.pos
-	var radius: float = effect.radius
-	var flash := maxf(0.0, 1.0 - age / 0.32)
-	view.draw_circle(pos, radius * (0.3 + age * 2.0), Color(1, 0.55, 0.16, flash * 0.48))
-	view.draw_circle(pos, radius * 0.45 * flash, Color(1, 0.97, 0.78, flash))
-	view.draw_arc(pos, radius * (0.3 + age * 1.8), 0, TAU, 48, Color(1, 0.85, 0.45, flash), maxf(1, flash * 5), true)
-	for i in range(18):
-		var direction := Vector2.from_angle(PI + float(i) * PI / 17.0)
-		var speed := radius * (1.1 + float(i % 4) * 0.25)
-		var point := pos + direction * speed * age + Vector2(0, age * age * 150.0)
-		var opacity := maxf(0.0, 1.0 - age / 1.2)
-		var color := Color(Color("c49863") if i % 3 else Color("e7d497"), opacity)
-		view.draw_set_transform(point, age * (i + 1))
-		view.draw_rect(Rect2(-3, -3, 6, 4), color)
-	view.draw_set_transform(Vector2.ZERO)
-	for i in range(6):
-		var point := pos + Vector2((i - 2.5) * 11.0, -age * (38 + i * 5))
-		var opacity := maxf(0.0, 1.0 - age / 1.5) * 0.28
-		view.draw_circle(point, 8 + age * (15 + i), Color(0.2, 0.22, 0.26, opacity))

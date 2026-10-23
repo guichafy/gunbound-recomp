@@ -24,12 +24,16 @@ const CPU := 1
 const TURN_TIME := 30.0
 # start(opening): draw the first actor from the match rng (real matches).
 const RANDOM_OPENING := -1
+# Lateral distance a mobile keeps from the world edges (move, teleport, drift).
+const WORLD_MARGIN := 24.0
+# Wait between the last shell and settling the mobiles.
+const RESOLVE_WAIT := 0.55
+# Tolerance when comparing the salvo clock with a spawn time.
+const TIME_EPSILON := 0.0000001
 const SPECIAL_WEAPON := Mobiles.SPECIAL
 # Stable mobile IDs are independent of menu slots. Removed ID 0 is not playable.
 const PLAYABLE_VEHICLES := Mobiles.PLAYABLE
 const VEHICLES := Mobiles.DEFINITIONS
-# Original Mage metadata lives in mobiles.gd. Kept here so older notes still resolve.
-const MAGE_WEAPONS := Mobiles.MAGE_WEAPONS
 var terrain
 var actors: Array = []
 var projectiles: Array = []
@@ -223,7 +227,7 @@ func move_actor(direction: float, delta: float) -> void:
 	var steps := maxi(1, int(ceil(distance / 2.0)))
 	for i in range(steps):
 		var dx := signf(direction) * distance / steps
-		var next_x := clampf(float(actor.pos.x) + dx, 24.0, terrain.world_size().x - 24.0)
+		var next_x := clampf(float(actor.pos.x) + dx, WORLD_MARGIN, terrain.world_size().x - WORLD_MARGIN)
 		var floor_y: float = terrain.surface_at(next_x, actor.pos.y + 8.0)
 		var next_y := floor_y - stance_of(active)
 		if absf(next_x - float(actors[other(active)].pos.x)) < 60.0 or next_y < float(actor.pos.y) - 12.0:
@@ -327,7 +331,7 @@ func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictio
 	var last_spawn := 0.0
 	for shell in shells:
 		last_spawn = maxf(last_spawn, float(shell.spawn_at))
-	for frame in range(ceili((12.0 + last_spawn) / Combat.STEP) + 1):
+	for frame in range(ceili((Combat.MAX_FLIGHT_AGE + last_spawn) / Combat.STEP) + 1):
 		simulation.advance_projectiles(Combat.STEP)
 		for event in simulation.events:
 			if event.type not in ["explosion", "miss", "teleport"]:
@@ -365,7 +369,7 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 		actors[active].ss_lock = int(actors[active].ss_lock) + Mobiles.SS_LOCK
 	var limits := aim_limits(active, weapon)
 	angle = clampf(angle, limits.x, limits.y)
-	power = clampf(power, 15.0, 100.0)
+	power = clampf(power, Combat.MIN_POWER, Combat.MAX_POWER)
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
 	projectiles = shot_shells(active, angle, power, weapon)
@@ -419,18 +423,18 @@ func advance_projectiles(delta: float) -> void:
 	stamp_tilt()
 	flight_elapsed += delta
 	# Dual: OnStartInteracting of the second shot plays the shooting animation.
-	if not volleys.is_empty() and flight_elapsed + 0.0000001 >= float(volleys[0].time):
+	if not volleys.is_empty() and flight_elapsed + TIME_EPSILON >= float(volleys[0].time):
 		events.append({"type": "volley", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": int(volleys[0].weapon)})
 		volleys.pop_front()
 	for i in range(projectiles.size() - 1, -1, -1):
 		var projectile: Dictionary = projectiles[i]
 		var travel_delta := delta
 		if not projectile.launched:
-			if float(projectile.spawn_at) > flight_elapsed + 0.0000001:
+			if float(projectile.spawn_at) > flight_elapsed + TIME_EPSILON:
 				continue
 			launch_projectile(projectile)
 			travel_delta = clampf(flight_elapsed - float(projectile.spawn_at), 0.0, delta)
-			if travel_delta <= 0.0000001:
+			if travel_delta <= TIME_EPSILON:
 				continue
 		var underground := bool(projectile.get("underground", false))
 		var next: Dictionary
@@ -478,12 +482,12 @@ func advance_projectiles(delta: float) -> void:
 			else:
 				explode(hit.position, int(hit.actor), projectile)
 			projectiles.remove_at(i)
-		elif Combat.out_of_bounds(projectile.pos, terrain) or projectile.age > 12.0:
+		elif Combat.out_of_bounds(projectile.pos, terrain) or projectile.age > Combat.MAX_FLIGHT_AGE:
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
 	if projectiles.is_empty():
 		phase = "settle"
-		resolve_wait = 0.55
+		resolve_wait = RESOLVE_WAIT
 
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
 	# Tilt stays as stamped at the start of the step. A crater must not
@@ -522,7 +526,7 @@ func land_beacon(position: Vector2, previous: Vector2, projectile: Dictionary) -
 	if int(actor.hp) <= 0:
 		return
 	var origin: Vector2 = actor.pos
-	var x := clampf(previous.x, 24.0, terrain.world_size().x - 24.0)
+	var x := clampf(previous.x, WORLD_MARGIN, terrain.world_size().x - WORLD_MARGIN)
 	var floor_y: float = terrain.surface_at(x, maxf(0.0, previous.y))
 	actor.pos = Vector2(x, floor_y - stance_of(shot_actor))
 	events.append({"type": "teleport", "actor": shot_actor, "from": origin, "to": actor.pos, "position": position})
@@ -655,7 +659,7 @@ func drift_fall(actor: Dictionary, drop: float) -> void:
 	var speed := FALL_INITIAL_SPEED
 	while remaining > 0.0:
 		var fall := minf(float(int(speed)), remaining)
-		var next := clampf(x + wind.x / FALL_WIND_DIVISOR, 24.0, terrain.world_size().x - 24.0)
+		var next := clampf(x + wind.x / FALL_WIND_DIVISOR, WORLD_MARGIN, terrain.world_size().x - WORLD_MARGIN)
 		if not terrain.is_solid(Vector2(next, y)):
 			x = next
 		y += fall
@@ -738,7 +742,7 @@ func finish_cpu_plan(plan: Dictionary) -> Dictionary:
 	var angle_error: float = [5.0, 2.5, 0.7][difficulty]
 	var power_error: float = [10.0, 4.0, 1.0][difficulty]
 	best.angle = clampf(float(best.angle) + rng.randf_range(-angle_error, angle_error), limits.x, limits.y)
-	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), 15.0, 100.0)
+	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), Combat.MIN_POWER, Combat.MAX_POWER)
 	plan.snapshot = null
 	cpu_thinking = false
 	return best

@@ -367,6 +367,7 @@ func build_hud() -> void:
 	item_bar.build(self, root)
 	select_weapon(0)
 
+## Test API (test_refinement_scene, test_hud): the Delayboard entries shown now.
 func displayed_queue() -> Array:
 	return queue_entries
 
@@ -522,6 +523,7 @@ func actor_context(index: int) -> Dictionary:
 		"shadow": ui.box(Color(0.02, 0.04, 0.1, 0.28), 10),
 	}
 
+## Test API (test_mage_scene, test_bigfoot): atlas frame drawn for an actor.
 func actor_frame(index: int) -> int:
 	return art.atlas_frame(model, index, actor_context(index))
 
@@ -673,9 +675,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 ## Full-screen layer that pauses the match and blocks the HUD below it.
 func open_overlay(kind: String) -> Control:
 	return overlays.open(self, kind)
-
-func make_overlay(kind: String) -> Panel:
-	return overlays.make(self, kind)
 
 func close_overlay() -> void:
 	overlays.close(self)
@@ -920,7 +919,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_manual = true
 		camera = clamp_camera(camera - event.relative * options.scroll_factor())
 
-func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, _scale_amount: Vector2 = Vector2.ONE, color: Color = Color.WHITE) -> void:
+func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, color: Color = Color.WHITE) -> void:
 	var body = sprite_for(kind)
 	if body == null:
 		return
