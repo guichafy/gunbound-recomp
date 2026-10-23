@@ -1,6 +1,6 @@
 extends RefCounted
 ## Presentation catalog per mobile: sprite script, HD rig layout, HD projectile
-## style and UsingItem aura (ADR-070). Rules stay in mobiles.gd; combat never
+## style and UsingItem aura (ADR-081). Rules stay in mobiles.gd; combat never
 ## reads this file. Adding a mobile adds an entry here instead of branches in
 ## the rig, the projectile art, the item art and the scene.
 

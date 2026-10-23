@@ -25,7 +25,7 @@ static func arm(sim, shot_actor: int, shot_weapon: int, shells: Array) -> void:
 	sim.shot_actor = shot_actor
 	sim.shot_weapon = shot_weapon
 	sim.projectiles = shells
-	sim.phase = "flight"
+	sim.phase = sim.PHASE_FLIGHT
 	sim.flight_elapsed = 0.0
 	sim.events = []
 	sim.resolve_wait = 0.0

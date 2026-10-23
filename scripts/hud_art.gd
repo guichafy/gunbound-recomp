@@ -269,7 +269,7 @@ func tick(delta: float, model, sound) -> void:
 		last_second = seconds
 
 func display_seconds(model) -> int:
-	if model.phase != "aim":
+	if model.phase != Match.PHASE_AIM:
 		return -1
 	return clampi(int(model.turn_time + 0.9), 0, TURN_TIME)
 
@@ -405,9 +405,9 @@ func draw_world(view, model, offset: Vector2, state: Dictionary) -> void:
 		draw_health(view, actor, Vector2(actor.pos) + offset)
 		var name: String = state.player_name if index == Match.PLAYER else "Autômato"
 		draw_nameplate(view, name, TEAM_BLUE if index == Match.PLAYER else TEAM_RED, Vector2(actor.pos) + offset + Vector2(0, 70))
-	if model.phase == "aim" and model.active == Match.PLAYER and not state.paused_cpu:
+	if model.phase == Match.PHASE_AIM and model.active == Match.PLAYER and not state.paused_cpu:
 		draw_crosshair(view, model, offset, state)
-	if model.phase == "aim" and model.active == Match.CPU:
+	if model.phase == Match.PHASE_AIM and model.active == Match.CPU:
 		draw_balloon(view, model, offset)
 	for entry in floats:
 		var rise := 40.0 * (1.0 - pow(1.0 - minf(1.0, entry.age / 0.6), 2.0))

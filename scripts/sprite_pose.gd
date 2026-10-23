@@ -1,5 +1,5 @@
 extends RefCounted
-## Parameter object of MobileSprite.draw and MobileRig.draw (ADR-070): where and
+## Parameter object of MobileSprite.draw and MobileRig.draw (ADR-081): where and
 ## how one mobile is drawn. Presentation only; built per draw call.
 ##
 ##     sprite.draw(view, SpritePose.new(pos, 60.0, facing, {"pose": "idle", "age": t}))

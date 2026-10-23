@@ -15,17 +15,29 @@ const CPU_THINK_SECONDS := 2
 static func other(index: int) -> int:
 	return 1 - index
 
+## The one ordering rule: lowest readiness first; equal readiness puts
+## `first_on_tie` ahead. Entries carry the delay still to wait from `clock`.
+static func order(ready: Array, clock: float, first_on_tie: int) -> Array:
+	var first := first_on_tie if is_zero_approx(float(ready[PLAYER]) - float(ready[CPU])) else (PLAYER if float(ready[PLAYER]) < float(ready[CPU]) else CPU)
+	return [
+		{"actor": first, "ready": float(ready[first]), "delay": maxf(0.0, float(ready[first]) - clock)},
+		{"actor": other(first), "ready": float(ready[other(first)]), "delay": maxf(0.0, float(ready[other(first)]) - clock)}
+	]
+
+static func readiness(model) -> Array:
+	return [float(model.actors[PLAYER].ready), float(model.actors[CPU].ready)]
+
 static func schedule(model, index: int, delay: float) -> void:
 	# The turn is over: item effects are dismissed (also after a pass, ADR-058).
 	model.actors[index].turn_item = ""
 	model.actors[index].ready = maxf(float(model.actors[index].ready), model.clock) + delay
-	var difference := float(model.actors[PLAYER].ready) - float(model.actors[CPU].ready)
-	model.active = other(index) if is_zero_approx(difference) else (PLAYER if difference < 0.0 else CPU)
+	# Equal readiness favours the other actor: no strict alternation (REQ-06).
+	model.active = order(readiness(model), model.clock, other(index))[0].actor
 	model.clock = float(model.actors[model.active].ready)
 	model.begin_turn()
 
 static func pass_turn(model) -> void:
-	if model.phase != "aim":
+	if model.phase != model.PHASE_AIM:
 		return
 	model.events.append({"type": "pass", "actor": model.active})
 	var delay := PASS_COST + float(model.VEHICLES[model.actors[model.active].vehicle].delay)
@@ -48,27 +60,18 @@ static func shot_cost(model, index: int, weapon: int, elapsed: int) -> float:
 	return float(model.weapon_rules(index, weapon).delay) + float(vehicle.delay) + time_term
 
 static func initiative_preview(model, weapon: int) -> Array:
-	var ready := [float(model.actors[PLAYER].ready), float(model.actors[CPU].ready)]
-	if model.phase in ["aim", "flight", "settle"]:
+	var ready := readiness(model)
+	if model.phase in [model.PHASE_AIM, model.PHASE_FLIGHT, model.PHASE_SETTLE]:
 		var count := Mobiles.weapon_count(model.actors[model.active].vehicle)
-		var selected: int = clampi(weapon, 0, count - 1) if model.phase == "aim" else int(model.shot_weapon)
+		var selected: int = clampi(weapon, 0, count - 1) if model.phase == model.PHASE_AIM else int(model.shot_weapon)
 		# SortTurnOrderByDelay previews with the live clock; after firing the spent time is fixed.
-		var elapsed: int = elapsed_seconds(model) if model.phase == "aim" else int(model.shot_elapsed)
+		var elapsed: int = elapsed_seconds(model) if model.phase == model.PHASE_AIM else int(model.shot_elapsed)
 		ready[model.active] = maxf(ready[model.active], model.clock) + shot_cost(model, model.active, selected, elapsed)
-	var first := other(model.active) if is_zero_approx(ready[PLAYER] - ready[CPU]) else (PLAYER if ready[PLAYER] < ready[CPU] else CPU)
-	return [
-		{"actor": first, "ready": ready[first], "delay": maxf(0.0, ready[first] - model.clock)},
-		{"actor": other(first), "ready": ready[other(first)], "delay": maxf(0.0, ready[other(first)] - model.clock)}
-	]
+	return order(ready, model.clock, other(model.active))
 
 ## Order by current readiness only (no pending shot), same tie rule as schedule().
 static func current_order(model) -> Array:
-	var ready := [float(model.actors[PLAYER].ready), float(model.actors[CPU].ready)]
-	var first := other(model.active) if is_zero_approx(ready[PLAYER] - ready[CPU]) else (PLAYER if ready[PLAYER] < ready[CPU] else CPU)
-	return [
-		{"actor": first, "ready": ready[first], "delay": maxf(0.0, ready[first] - model.clock)},
-		{"actor": other(first), "ready": ready[other(first)], "delay": maxf(0.0, ready[other(first)] - model.clock)}
-	]
+	return order(readiness(model), model.clock, other(model.active))
 
 static func check_end(model) -> bool:
 	if int(model.actors[PLAYER].hp) > 0 and int(model.actors[CPU].hp) > 0:
@@ -76,7 +79,7 @@ static func check_end(model) -> bool:
 	var player_alive := int(model.actors[PLAYER].hp) > 0
 	var cpu_alive := int(model.actors[CPU].hp) > 0
 	model.winner = -1 if not player_alive and not cpu_alive else (PLAYER if player_alive else CPU)
-	model.phase = "finished"
+	model.phase = model.PHASE_FINISHED
 	model.projectiles.clear()
 	model.events.append({"type": "finished", "winner": model.winner})
 	return true

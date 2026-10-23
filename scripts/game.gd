@@ -142,7 +142,7 @@ var move_left: Button
 var move_right: Button
 var weapon_buttons: Array[TextureButton] = []
 var queue_entries: Array = []
-# One sprite per mobile, from the presentation catalog (ADR-070).
+# One sprite per mobile, from the presentation catalog (ADR-081).
 var sprites := build_sprites()
 
 static func build_sprites() -> Dictionary:
@@ -186,7 +186,7 @@ func replace_root() -> void:
 
 func show_menu() -> void:
 	screen = "menu"
-	model.phase = "menu"
+	model.phase = Match.PHASE_MENU
 	discard_cpu_search()
 	sound.stop_music()
 	result_wait = -1.0
@@ -258,7 +258,7 @@ func show_menu() -> void:
 	select_vehicle(vehicle)
 	queue_redraw()
 
-## Single source of the version: application/config/version (ADR-070).
+## Single source of the version: application/config/version (ADR-081).
 static func version() -> String:
 	return str(ProjectSettings.get_setting("application/config/version", ""))
 
@@ -372,10 +372,10 @@ func displayed_queue() -> Array:
 	return queue_entries
 
 func animation_state(index: int) -> String:
-	return art.state_name(model, index, charging, model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty())
+	return art.state_name(model, index, charging, model.phase == Match.PHASE_AIM and model.active == Match.CPU and not cpu_plan.is_empty())
 
 func player_can_act() -> bool:
-	return screen == "match" and model.phase == "aim" and model.active == Match.PLAYER and not paused
+	return screen == "match" and model.phase == Match.PHASE_AIM and model.active == Match.PLAYER and not paused
 
 func select_weapon(index: int) -> void:
 	if screen != "match" or not player_can_act():
@@ -456,9 +456,9 @@ func _process(delta: float) -> void:
 	item_art.tick(frame_delta)
 	model.tick(frame_delta)
 	weather_art.tick(frame_delta, model)
-	art.tick(model, frame_delta, charging, weapon, model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
+	art.tick(model, frame_delta, charging, weapon, model.phase == Match.PHASE_AIM and model.active == Match.CPU and not cpu_plan.is_empty(), int(cpu_plan.get("weapon", 0)))
 	consume_events()
-	if model.phase == "aim" and model.active == Match.CPU:
+	if model.phase == Match.PHASE_AIM and model.active == Match.CPU:
 		if cpu_plan.is_empty() and cpu_search.is_empty():
 			start_cpu_search()
 		cpu_wait -= frame_delta
@@ -514,7 +514,7 @@ func actor_context(index: int) -> Dictionary:
 	var cpu_weapon := int(cpu_plan.get("weapon", model.last_shots[index].get("weapon", 0)))
 	return {
 		"charging": charging,
-		"cpu_charging": model.phase == "aim" and model.active == Match.CPU and not cpu_plan.is_empty(),
+		"cpu_charging": model.phase == Match.PHASE_AIM and model.active == Match.CPU and not cpu_plan.is_empty(),
 		"player_weapon": weapon,
 		"cpu_weapon": cpu_weapon,
 		"avatar_context": {"equipment":actor_avatars[index],"age":elapsed} if actor_avatars.size()==2 else {},
@@ -612,9 +612,9 @@ func update_hud() -> void:
 			hud.style_button(button, index == weapon)
 	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = "%s: liberado no primeiro turno; depois do uso, volta em quatro turnos próprios." % model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name
 	var displayed_weapon: int = weapon if model.active == Match.PLAYER else int(cpu_plan.get("weapon", 0))
-	if model.phase == "finished":
+	if model.phase == Match.PHASE_FINISHED:
 		queue_entries = []
-	elif model.phase == "aim" and model.active == Match.CPU and cpu_plan.is_empty():
+	elif model.phase == Match.PHASE_AIM and model.active == Match.CPU and cpu_plan.is_empty():
 		queue_entries = current_order()
 	else:
 		queue_entries = model.initiative_preview(displayed_weapon)

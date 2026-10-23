@@ -57,7 +57,7 @@ const DEFINITIONS := {
 		"box": Vector2(46, 40), "box_offset": Vector2(0, 10), "stance": 25.0,
 		"beacon_delay": 0.4, "smoke": true, "bionic": false,
 		"weapons": BigfootAttacks.WEAPONS, "aim_limits": BigfootAttacks.AIM_LIMITS,
-		"spread_after_clamp": true, "generic_trail": true, "shot_sound_on": "projectile_launch",
+		"spread_after_clamp": true, "salvo": true, "generic_trail": true, "shot_sound_on": "projectile_launch",
 		"death": 1.15, "hurt": 1.05, "special": SPECIAL,
 		"summary": "T1: 4 bombas · T2: 6 · SS: 8 bombas."
 	},
@@ -112,8 +112,9 @@ static func generic_trail(vehicle_id: int) -> bool:
 static func shot_sound_on(vehicle_id: int) -> String:
 	return str(DEFINITIONS[vehicle_id].shot_sound_on)
 
+## Shells of one shot: the Bigfoot emitter salvo, else "count" shells at once.
 static func emission(vehicle_id: int, weapon_index: int) -> Array:
-	if spread_after_clamp(vehicle_id):
+	if bool(DEFINITIONS[vehicle_id].get("salvo", false)):
 		return BigfootAttacks.salvo(weapon_index)
 	var rules: Dictionary = weapon(vehicle_id, weapon_index)
 	var result: Array = []

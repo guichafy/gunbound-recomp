@@ -38,7 +38,7 @@ func close(host) -> void:
 	host.paused = false
 	if is_instance_valid(host.options_button):
 		host.options_button.disabled = false
-	if host.screen == "match" and host.model.phase == "finished":
+	if host.screen == "match" and host.model.phase == Match.PHASE_FINISHED:
 		show_result(host)
 
 func show_help(host) -> void:
@@ -51,7 +51,7 @@ func show_help(host) -> void:
 	host.ui.button(card, "ENTENDI", Vector2(32, 424), Vector2(496, 42), host.close_overlay, true)
 
 func show_options(host) -> void:
-	if host.screen != "match" or host.model.phase == "finished":
+	if host.screen != "match" or host.model.phase == Match.PHASE_FINISHED:
 		return
 	var layer := open(host, "options")
 	host.options_popup = host.OptionsPopup.new(host.options)
@@ -78,7 +78,7 @@ func show_items(host) -> void:
 	layer.add_child(host.items_popup)
 
 func show_pause(host) -> void:
-	if host.screen != "match" or host.model.phase == "finished":
+	if host.screen != "match" or host.model.phase == Match.PHASE_FINISHED:
 		return
 	var card := make(host, "pause")
 	host.ui.label(card, "Uma pausa no combate.", Vector2(32, 27), Vector2(496, 55), 30, host.ui.CREAM, true)
@@ -91,7 +91,7 @@ func show_pause(host) -> void:
 	host.ui.label(card, "Seu progresso de partidas concluídas fica salvo.", Vector2(32, 438), Vector2(496, 28), 14, host.ui.MUTED)
 
 func show_result(host) -> void:
-	if host.screen != "match" or host.model.phase != "finished":
+	if host.screen != "match" or host.model.phase != Match.PHASE_FINISHED:
 		return
 	var card := make(host, "result")
 	var result := "VITÓRIA!" if host.model.winner == Match.PLAYER else ("EMPATE" if host.model.winner == -1 else "A MÁQUINA VENCEU")

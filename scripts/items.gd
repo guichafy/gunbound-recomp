@@ -31,28 +31,32 @@ const BEACON_WIND := 0.0
 # Mobile.ShootWithModifiers: the second shot starts 1 s after the last spawn.
 const DUAL_WAIT := 1.0
 
+# Behaviour is data: "effect" (instant: heal, health_cost, turn_wind) and "shot"
+# (second_volley, beacon, electric) are applied by item_effects.gd; "attack" and
+# "dig" add to the owner for this turn's shot.
 const DEFINITIONS := {
-	"dual": {"name": "Dual", "file": "Dual", "slots": 2, "category": "red", "cost": 600, "turn": true,
+	"dual": {"name": "Dual", "file": "Dual", "slots": 2, "category": "red", "cost": 600, "turn": true, "shot": "second_volley",
 		"description": "A mobile shoots two of the same primary projectiles.\nYou will not be able to use SS this turn. Effects\nare dismissed when the turn is over."},
-	"dual_plus": {"name": "Dual+", "file": "DualPlus", "slots": 2, "category": "red", "cost": 250, "turn": true,
+	"dual_plus": {"name": "Dual+", "file": "DualPlus", "slots": 2, "category": "red", "cost": 250, "turn": true, "shot": "second_volley", "mixed": true,
 		"description": "A mobile shoots two different primary projectiles,\nthe first is always the one you have selected. You\nwill not be able to use SS this turn. Effects are\ndismissed when the turn is over."},
-	"thunder": {"name": "Thunder", "file": "Thunder", "slots": 2, "category": "red", "cost": 200, "turn": true,
+	"thunder": {"name": "Thunder", "file": "Thunder", "slots": 2, "category": "red", "cost": 200, "turn": true, "shot": "electric",
 		"description": "Embodies thunder property on each fired shot. Does\nnot stack with weather's thunder. You will not be\nable to use SS this turn. Effects are dismissed\nwhen the turn is over."},
-	"energy_up_2": {"name": "Energy Up 2", "file": "EnergyUp2", "slots": 2, "category": "green", "cost": 300, "turn": false,
+	"energy_up_2": {"name": "Energy Up 2", "file": "EnergyUp2", "slots": 2, "category": "green", "cost": 300, "turn": false, "effect": "heal", "heal_percent": ENERGY_UP_2,
 		"description": "Recovers 30% of the mobile's maximum energy. Does\nnot replenish shield. Bionic mobiles receive an\nextra 3% of health at no extra cost."},
+	# No teammate in the 1×1 training: only the delay, flames and sound (ITEMS_0_13.md).
 	"team_teleport": {"name": "Team Teleport", "file": "TeamTeleport", "slots": 2, "category": "purple", "cost": 50, "turn": false,
 		"description": "Switches position with the most wounded teammate\n(Remaining energy), excluding yourself. Shields are\nnot accounted for."},
-	"teleport": {"name": "Teleport", "file": "Teleport", "slots": 2, "category": "purple", "cost": 100, "turn": true,
+	"teleport": {"name": "Teleport", "file": "Teleport", "slots": 2, "category": "purple", "cost": 100, "turn": true, "shot": "beacon",
 		"description": "Turns the projectile into a Teleportation beacon.\nThe mobile is teleported to the position where the\nbeacon has hit the floor. Effects are dismissed\nwhen the turn is over."},
-	"blood": {"name": "Blood", "file": "Blood", "slots": 1, "category": "red", "cost": 0, "turn": true,
+	"blood": {"name": "Blood", "file": "Blood", "slots": 1, "category": "red", "cost": 0, "turn": true, "effect": "health_cost", "health_cost": BLOOD_HEALTH, "attack": BLOOD_ATTACK,
 		"description": "Exchanges 8% of mobile's energy for an extra 33%\nprojectile power. This item can not set user's\nenergy to 0. You will not be able to use SS this\nturn. Effects are dismissed when the turn is over."},
-	"bunge_shot": {"name": "Bunge Shot", "file": "BungeShot", "slots": 1, "category": "red", "cost": 50, "turn": true,
+	"bunge_shot": {"name": "Bunge Shot", "file": "BungeShot", "slots": 1, "category": "red", "cost": 50, "turn": true, "dig": BUNGE_SHOT_DIG,
 		"description": "Increases the explosion's area of influence by 25%.\nNot increasing damage but destroying more land."},
-	"power_up": {"name": "Power Up", "file": "PowerUp", "slots": 1, "category": "red", "cost": 150, "turn": true,
+	"power_up": {"name": "Power Up", "file": "PowerUp", "slots": 1, "category": "red", "cost": 150, "turn": true, "attack": POWER_UP_ATTACK,
 		"description": "Increases a projectile destructible power. Adds 30%\nmore damage into the next projectile."},
-	"change_wind": {"name": "Change Wind", "file": "ChangeWind", "slots": 1, "category": "blue", "cost": 150, "turn": false,
+	"change_wind": {"name": "Change Wind", "file": "ChangeWind", "slots": 1, "category": "blue", "cost": 150, "turn": false, "effect": "turn_wind", "wind_degrees": CHANGE_WIND_DEGREES,
 		"description": "Instantly changes the wind to it's opposite\ndirection."},
-	"energy_up_1": {"name": "Energy Up 1", "file": "EnergyUp1", "slots": 1, "category": "green", "cost": 100, "turn": false,
+	"energy_up_1": {"name": "Energy Up 1", "file": "EnergyUp1", "slots": 1, "category": "green", "cost": 100, "turn": false, "effect": "heal", "heal_percent": ENERGY_UP_1,
 		"description": "Recovers 12% of the mobile's maximum energy. Does\nnot replenish shield. Bionic mobiles receive an\nextra 3% of health at no extra cost."},
 }
 
@@ -74,11 +78,11 @@ static func color(id: String) -> Color:
 
 ## Owner.Attack added for the turn (Projectile.CalculateDamage multiplier).
 static func attack(id: String) -> float:
-	return POWER_UP_ATTACK if id == "power_up" else (BLOOD_ATTACK if id == "blood" else 0.0)
+	return float(DEFINITIONS[id].get("attack", 0.0)) if DEFINITIONS.has(id) else 0.0
 
 ## Owner.Dig added for the turn (crater radius multiplier).
 static func dig(id: String) -> float:
-	return BUNGE_SHOT_DIG if id == "bunge_shot" else 0.0
+	return float(DEFINITIONS[id].get("dig", 0.0)) if DEFINITIONS.has(id) else 0.0
 
 static func used_slots(loadout: Array) -> int:
 	var total := 0

@@ -48,7 +48,7 @@ func run() -> void:
 		view.select_vehicle(0)
 		check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
 	var Rig = load("res://scripts/mobile_rig.gd")
-	# Presentation catalog (ADR-070): one look per playable mobile, no id branches.
+	# Presentation catalog (ADR-081): one look per playable mobile, no id branches.
 	var Looks = load("res://scripts/mobile_looks.gd")
 	var Mobiles = load("res://scripts/mobiles.gd")
 	var looks_ok := true
