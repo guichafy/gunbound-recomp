@@ -1,0 +1,21 @@
+{
+  "version": "0.18.3",
+  "branch": "main",
+  "source_base": "59a676d",
+  "verified_at": "2026-10-23T22:30:01.400534+00:00",
+  "renderer_hashes": {
+    "scripts/avatar_art.gd": "ed046d2e1848c714568cceeb39deb5fea2115c0afdc969d1fbedfd604904240d",
+    "scripts/avatar_xfs_hd.gd": "45cfea85b1e7062dbce70a662b91d9f4d77748dae7ad546a1514ce35dce4e94c",
+    "scripts/avatar_contour_glow.gd": "3b3fb2582f488787fb2615bed8bfdbb70f6920d49cc080a2216c048b4b3077d2",
+    "scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010",
+    "scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
+    "scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54"
+  },
+  "pck_sha256": "f972fd2fced0c6639473fb72a99acda2a25dacc755fb2a1584e6109d8073d4e3",
+  "quick_checks": 5296,
+  "python_tests": 13,
+  "signature": "codesign --verify --deep --strict: PASS",
+  "exported_pck_smoke": "550 equipped / 629 layers / shop / reload / battle: PASS",
+  "great_devil_shop": "Avatar and Mobile rendered from exported PCK; contour_derived assertion PASS",
+  "visual_acceptance": "pending user test"
+}

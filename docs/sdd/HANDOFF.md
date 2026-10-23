@@ -1,6 +1,34 @@
-# Hand-off — Gunbound Recomp 0.18.2 / auditoria das regras de batalha
+# Hand-off — Gunbound Recomp 0.18.3 / aura aderente ao chifre
 
-## Release 0.18.2 — 21/10/2026 (branch `fix/0.18.2`, sem merge na main)
+## Aura do Great Devil Head — 23/10/2026 (REQ-10/20/39, ADR-078)
+
+Pedido atual: aura pulsante ao redor do chifre, sem luz distante da peça;
+entrega para teste na branch atual. Ler HORN_AURA_FIX.md. A main foi atualizada
+por fast-forward para o merge PR2 `59a676d` antes de aplicar este reparo; regras
+de batalha 0.18.2 preservadas. A seção histórica abaixo registra a auditoria
+antes do merge.
+
+- A luz do Great Devil agora deriva dos pixels dourados da própria cabeça HD,
+  com origem/escala compartilhadas e composição atrás da anatomia. Halo em
+  cache, pulsação existente e pausa preservadas; PNGs originais e gerados intactos.
+- Metadado somente Great Devil L; demais19efeitos mantêm suas âncoras. Perfil
+  inválido na base rejeitado antes de recursão, com fallback integral e teste.
+- Validação na main: `check.sh --quick`, **5296 checks**, zero falhas; Python
+  **13 testes** PASS. Sem mudança em regras de combate; partidas completas não
+  foram repetidas nesta correção de arte (13 da 0.18.2 permanecem histórico).
+- GPU: **162 quadros/60fps/1920×1080**, ambos os sentidos e inclinação;30quadros
+  pausados idênticos. **2804amostras** de ouro, zero violações do limite de alpha
+  da própria fonte. Razão pico/vale do halo1,66838. Evidência em `docs/horn-aura/`.
+- QA37lotes renovado com hashes atuais; auditoria runtime **550confirmados,
+  zero pendentes/falhas**,629camadas e12N/A. Controle individual atualizado.
+- App/ZIP **0.18.3** reexportados na main; assinatura `--deep --strict` e versão
+  conferidas. Smoke do PCK em `/private/tmp` PASS para catálogo550/629,
+  loja/compra/vestir/reload/batalha. Capturas Avatar/Mobile do Great Devil usam
+  o PCK exportado, incluindo assertiva de contorno derivado.
+- Pendente: **aceite visual do usuário no app0.18.3**. Esta entrega deixa a
+  versão pronta para teste; a aparência ainda depende dessa validação.
+
+## Release 0.18.2 — 21/10/2026 (histórico anterior ao merge PR2)
 
 Auditoria da 0.18.1 aprovada pelo usuário. Branch local a partir da `main`
 `3426129` (que já contém `fix/audit-0.18.1`). Sem push. Perfil real e fonte C#

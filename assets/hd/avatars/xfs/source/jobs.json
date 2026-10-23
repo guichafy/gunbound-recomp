@@ -3016,6 +3016,18 @@
               0.5
             ],
             "scale": 1
+          },
+          "draw_behind": true,
+          "contour_glow": {
+            "uv_region": [
+              0,
+              0,
+              0.42,
+              0.66
+            ],
+            "radius": 18,
+            "sigma": 5.0,
+            "strength": 0.8
           }
         },
         {

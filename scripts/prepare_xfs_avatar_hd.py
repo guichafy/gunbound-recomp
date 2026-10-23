@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT/'assets/hd/avatars/xfs/source'
 REPORT = ROOT/'docs/avatar-hd-migration'
 NAMES = ['Cabeça','Corpo','Óculos','Bandeira']
-RENDER_FILES = ['scripts/avatar_art.gd','scripts/avatar_xfs_hd.gd','scripts/mobile_rig.gd','scripts/mage_sprite.gd','scripts/bigfoot_sprite.gd']
+RENDER_FILES = ['scripts/avatar_art.gd','scripts/avatar_xfs_hd.gd','scripts/avatar_contour_glow.gd','scripts/mobile_rig.gd','scripts/mage_sprite.gd','scripts/bigfoot_sprite.gd']
 
 
 def renderer_hashes():
@@ -25,7 +25,7 @@ def renderer_hashes():
 
 
 def registration(entry):
-    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False),('reference_state',''),('attachment',{})]}
+    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False),('reference_state',''),('attachment',{}),('draw_behind',False),('contour_glow',{})]}
 
 
 def read(path):

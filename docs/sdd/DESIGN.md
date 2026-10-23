@@ -551,3 +551,8 @@ O fallback conserva faixa Normal/Staring por categoria, inclusive L; o HD não
 mistura formas frontais de Staring com mestre lateral. Ver ADR-075 e
 AVATAR_EFFECT_ALIGNMENT.md. Nak recebe renderer HD próprio delegado pelo rig,
 com geometria de combate preservada; NAK_HD.md documenta medição e fallback.
+
+Aura Great Devil: avatar_contour_glow.gd gera e guarda em memória uma máscara
+de ouro na janela do chifre do próprio mestre HD. Distância de contorno gera
+aura com recorte/origem/escala compartilhados. draw_behind compõe antes da
+cabeça, preservando a superfície; efeito separado original continua preservado.

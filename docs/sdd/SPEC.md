@@ -348,3 +348,7 @@ mesmo estado da cabeça HD (Normal), sem chifres/ornamentos de Staring deslocado
 Auditar os20modelos de cabeça com camada L e preservar fallback coerente.
 Pedido atual também autoriza concluir o HD do Nak introduzido no PR1, substituindo
 o adiamento anterior. REQ-19/20 e plano NAK_HD.md; regras físicas preservadas.
+
+REQ-10/20/39: validação do Great Devil exige aura pulsante junto ao contorno
+do chifre, com ouro/segmentos preservados. Máscara derivada da peça HD, registro
+compartilhado e pausa contínua; HORN_AURA_FIX.md.

@@ -22,6 +22,7 @@ func run() -> void:
 	var shop=scene.shop
 	var horn: Dictionary=shop.avatar_art.xfs_hd.piece("xfs:0:0:71",1)
 	assert(not horn.is_empty() and horn.source.size.x/horn.source.size.y<1.1)
+	assert(horn.get("contour_derived",false))
 	shop.set_process(false)
 	shop.search.text="Great Devil"
 	shop.model.query=shop.search.text

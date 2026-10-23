@@ -43,6 +43,9 @@ def main():
         identity=row['key']+'|layer:1';entry=accepted[identity]
         feature,base_uv,effect_uv,scale=ATTACHMENTS[row['key']]
         meta['attachment']=dict(feature=feature,base_uv=base_uv,effect_uv=effect_uv,scale=scale)
+        if row['key']=='xfs:0:0:71':
+            meta['draw_behind']=True
+            meta['contour_glow']=dict(uv_region=[0,0,.42,.66],radius=18,sigma=5.0,strength=.8)
         changed=any(entry.get(k)!=v for k,v in meta.items())
         entry.update(meta)
         entry['normal_reference']='assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png'

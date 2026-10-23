@@ -1,0 +1,15 @@
+{
+	"fps": 60,
+	"frames": 162,
+	"gold_samples": 2804,
+	"halo_peak_energy": 1803.62746260921,
+	"halo_trough_energy": 1081.06275202194,
+	"max_gold_channel_delta": 0.0392156839370728,
+	"pause_frames": 30,
+	"rejected_overlay_changed_samples": 2505,
+	"size": [
+		1920,
+		1080
+	],
+	"source_alpha_bound_violations": 0
+}

@@ -10201,7 +10201,19 @@
       "scale": 1
     },
     "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
-    "evidence": "docs/avatar-hd-migration/qa/batch_005.json"
+    "evidence": "docs/avatar-hd-migration/qa/batch_005.json",
+    "draw_behind": true,
+    "contour_glow": {
+      "uv_region": [
+        0,
+        0,
+        0.42,
+        0.66
+      ],
+      "radius": 18,
+      "sigma": 5.0,
+      "strength": 0.8
+    }
   },
   "xfs:0:0:71|portrait": {
     "id": "xfs:0:0:71|portrait",

@@ -50,9 +50,19 @@ func run() -> void:
 	var devil: Dictionary=art.xfs_hd.layers["xfs:0:0:71|layer:1"]
 	var devil_light: Dictionary=art.xfs_hd.piece("xfs:0:0:71",1)
 	var devil_head: Dictionary=art.xfs_hd.piece("xfs:0:0:71",0)
+	check(devil_light.get("contour_derived",false),"Horn aura must derive its contour from the actual HD horn, not a separately positioned crescent")
 	check(devil.source_frame>=11 and devil.reference_state=="normal","Great Devil light is sourced from the one-horn profile state")
 	check(devil_light.source.size.x/devil_light.source.size.y<1.1,"Great Devil master has one profile crescent, not the two-horn frontal pair")
 	check(devil_light.target.end.x<devil_head.target.position.x+devil_head.target.size.x*.55,"Horn light stays in the horn half of the head instead of crossing the hair")
+	var devil_gear: Dictionary=catalog.defaults(0)
+	devil_gear["0"]="xfs:0:0:71"
+	var devil_pieces: Array=art.sample(devil_gear,0.3).filter(func(p): return p.category==0)
+	check(devil_pieces.size()==2 and devil_pieces[0].xfs_layer==1 and devil_pieces[1].xfs_layer==0,"Horn aura is behind opaque gold: white light must not erase the horn surface")
+	var aura_image: Image=devil_light.paint.diffuse_texture.get_image()
+	for point in [Vector2(28,11),Vector2(13,29),Vector2(18,49),Vector2(35,68),Vector2(62,83)]:
+		var local: Vector2=devil_head.target.position+point/devil_head.source.size*devil_head.target.size
+		var aura_pixel:=Vector2i((local-devil_light.target.position)/devil_light.target.size*devil_light.source.size)
+		check(aura_image.get_pixelv(aura_pixel).a>.75,"Aura touches actual gold feature, without an independently positioned crescent: "+str(point))
 	var attachments:=0
 	for candidate in catalog.entries.values():
 		if candidate.get("source")!="xfs" or int(candidate.category)!=0 or candidate.get("layers",[]).size()!=2:
@@ -66,6 +76,13 @@ func run() -> void:
 	devil.attachment.base_uv=[NAN,.3]
 	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Invalid anatomical attachment triggers complete native fallback")
 	devil.attachment=saved_attachment
+	var base_entry: Dictionary=art.xfs_hd.layers["xfs:0:0:71|layer:0"]
+	base_entry.draw_behind=true
+	base_entry.contour_glow=devil.contour_glow.duplicate(true)
+	check(art.xfs_hd.piece("xfs:0:0:71",0).is_empty(),"A contour profile on the base layer is rejected instead of recursing")
+	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Invalid base contour triggers complete native fallback")
+	base_entry.erase("draw_behind")
+	base_entry.erase("contour_glow")
 	var item: Dictionary=catalog.find("xfs:0:0:4")
 	check(art.xfs_hd.complete(item),"Wing Helmet's base and effect both have HD masters")
 	var equipment: Dictionary=catalog.defaults(0)

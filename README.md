@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.2**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.3**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,9 +8,9 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.18.2** — CPU com tempo de pensar determinístico, deriva de queda por passo e documentação auditada |
+| Versão | **0.18.3** — aura do Great Devil Head ligada ao contorno real do chifre; inclui a auditoria de batalha 0.18.2 |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
-| Validação automática | **5287 verificações e 13 partidas completas**, mais **13 testes Python** |
+| Validação automática | **5296 verificações rápidas e 13 testes Python** na 0.18.3; as **13 partidas completas** foram validadas na 0.18.2 |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
 | Aceite visual | Great Devil Head e os 20 modelos de cabeça com efeito revisados; validação do usuário pendente |
 
@@ -38,7 +38,7 @@ A migração HD está concluída: **550 avatares reais, 629 camadas vestíveis e
 
 O [vídeo da migração em Full HD a 60 fps](docs/avatar-hd-migration/motion.mp4) mostra repouso, movimento, carga, pausa, recuo e dano. O avatar mantém a anatomia e acompanha o rig; efeitos ficam separados. É uma adaptação HD com peças fixas, sem redesenhar todos os gestos e piscadas originais.
 
-A revisão 0.18 corrige a mistura entre a cabeça de perfil e efeitos frontais. Os 20 modelos de cabeça com luz receberam âncoras próprias no HD. [Comparação atual a 60 fps](docs/avatar-effects/motion.mp4) · [Great Devil vestido na loja](docs/avatar-effects/shop-avatar.png).
+A revisão 0.18 corrige a mistura entre a cabeça de perfil e efeitos frontais. Os 20 modelos de cabeça com luz receberam âncoras próprias no HD. A 0.18.3 substitui o posicionamento independente da luz do Great Devil por uma aura derivada do próprio contorno dourado, atrás da cabeça e com pulsação. [Comparação atual a 60 fps](docs/horn-aura/motion.mp4) · [Validação gráfica](docs/horn-aura/validation.json).
 
 ### Batalha no Miramo Town
 
@@ -78,6 +78,7 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.18.0 | Luzes das cabeças no estado Normal, âncoras HD e reparo do Great Devil Head; histórico do PR1 preservado |
 | 0.18.1 | Regras de batalha (ADR-076): delay com tempo gasto, abertura sorteada, passe 200, balística do C#, Nak/Mage/itens do cliente original |
 | 0.18.2 | Auditoria: CPU paga 2 s fixos e congela o relógio durante a busca, fila do HUD na TurnTable, deriva do vento na queda por passo de gravidade (ADR-077), vento em 0–359 e docs de baseline marcados |
+| 0.18.3 | Great Devil Head: aura pulsante derivada do contorno da cabeça HD, pivô compartilhado e ouro preservado; main inclui o merge do PR2 |
 
 Números de base, antes dos atributos:
 

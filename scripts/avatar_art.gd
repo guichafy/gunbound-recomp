@@ -47,9 +47,15 @@ func sample(equipment: Dictionary, age: float, staring: bool = false) -> Array:
 			return []
 		if item.get("source")=="xfs":
 			if use_hd and xfs_hd.complete(item):
+				var hd_group: Array=[]
 				for index in range(item.layers.size()):
 					var data: Dictionary=xfs_hd.piece(item.key,index)
-					result.append({"category":category,"frame":0,"texture":data.paint,"source":data.source,"target":data.target,"hd":true,"effect":data.effect,"opacity":data.opacity,"xfs_layer":index})
+					var part: Dictionary={"category":category,"frame":0,"texture":data.paint,"source":data.source,"target":data.target,"hd":true,"effect":data.effect,"opacity":data.opacity,"xfs_layer":index}
+					if data.draw_behind:
+						hd_group.push_front(part)
+					else:
+						hd_group.append(part)
+				result.append_array(hd_group)
 				continue
 			var alias: String=hd_key(item.key)
 			if use_hd and not hd.piece(alias,0).is_empty() and catalog.entries.has(alias):

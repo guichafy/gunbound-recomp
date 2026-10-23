@@ -5,6 +5,8 @@
 			"id": "xfs:0:1:36|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-15.0,
@@ -28,6 +30,8 @@
 			"id": "xfs:0:1:36|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -46,6 +50,8 @@
 			"id": "xfs:0:1:37|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -69,6 +75,8 @@
 			"id": "xfs:0:1:37|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -87,6 +95,8 @@
 			"id": "xfs:0:1:38|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -110,6 +120,8 @@
 			"id": "xfs:0:1:38|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -128,6 +140,8 @@
 			"id": "xfs:0:1:39|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -151,6 +165,8 @@
 			"id": "xfs:0:1:39|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -169,6 +185,8 @@
 			"id": "xfs:0:1:40|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -192,6 +210,8 @@
 			"id": "xfs:0:1:40|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -210,6 +230,8 @@
 			"id": "xfs:0:1:41|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -233,6 +255,8 @@
 			"id": "xfs:0:1:41|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -251,6 +275,8 @@
 			"id": "xfs:0:1:42|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -274,6 +300,8 @@
 			"id": "xfs:0:1:42|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -292,6 +320,8 @@
 			"id": "xfs:0:1:43|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -315,6 +345,8 @@
 			"id": "xfs:0:1:43|layer:1",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": true,
 				"native_rect": [
 					-8.0,
@@ -338,6 +370,8 @@
 			"id": "xfs:0:1:43|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -356,6 +390,8 @@
 			"id": "xfs:0:1:44|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -379,6 +415,8 @@
 			"id": "xfs:0:1:44|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -397,6 +435,8 @@
 			"id": "xfs:0:1:45|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -420,6 +460,8 @@
 			"id": "xfs:0:1:45|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -438,6 +480,8 @@
 			"id": "xfs:0:1:46|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -461,6 +505,8 @@
 			"id": "xfs:0:1:46|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -479,6 +525,8 @@
 			"id": "xfs:0:1:47|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -502,6 +550,8 @@
 			"id": "xfs:0:1:47|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -520,6 +570,8 @@
 			"id": "xfs:0:1:48|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-15.0,
@@ -543,6 +595,8 @@
 			"id": "xfs:0:1:48|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -561,6 +615,8 @@
 			"id": "xfs:0:1:49|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -584,6 +640,8 @@
 			"id": "xfs:0:1:49|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -602,6 +660,8 @@
 			"id": "xfs:0:1:50|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -625,6 +685,8 @@
 			"id": "xfs:0:1:50|portrait",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [],
 				"pulsate": false,
@@ -643,6 +705,8 @@
 			"id": "xfs:0:1:51|layer:0",
 			"registration": {
 				"attachment": {},
+				"contour_glow": {},
+				"draw_behind": false,
 				"effect": false,
 				"native_rect": [
 					-14.0,
@@ -676,8 +740,9 @@
 		"Bigfoot esquerda"
 	],
 	"renderer_hashes": {
-		"scripts/avatar_art.gd": "1c86afd04087b6434495fb5b7f829ea12ff0153553c09ddd263b45cc4f731e0f",
-		"scripts/avatar_xfs_hd.gd": "df8809fb2d5cce28eeee0b2b847500c2479b7813e19f5ff9b20aeda92a467181",
+		"scripts/avatar_art.gd": "ed046d2e1848c714568cceeb39deb5fea2115c0afdc969d1fbedfd604904240d",
+		"scripts/avatar_contour_glow.gd": "3b3fb2582f488787fb2615bed8bfdbb70f6920d49cc080a2216c048b4b3077d2",
+		"scripts/avatar_xfs_hd.gd": "45cfea85b1e7062dbce70a662b91d9f4d77748dae7ad546a1514ce35dce4e94c",
 		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
 		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
 		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"

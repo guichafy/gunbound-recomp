@@ -593,3 +593,12 @@ aplica `wind.x / 45` uma vez por passo, sem acumulador nem reset; parede ou
 terreno sólido no próximo x bloqueia o empurrão do passo. Vento 35 numa queda
 de 100 px (24 passos) desloca ≈ 18,7 px. Substitui a deriva por pixel da
 paridade de MOBILE_PARITY.md (REQ-42). Teste: `test_mobile_parity`.
+
+## ADR-078 — aura ligada ao contorno real do chifre
+
+Usuário confirmou aura pulsante externa e rejeitou a luz afastada. O halo é
+derivado em memória do ouro da própria peça HD, na janela fixa do chifre,
+e compartilha sua origem/escala; fica atrás da anatomia. Sem centros alpha
+por quadro e sem mover a peça. Outros19efeitos/combate/perfil preservados.
+Aceite: pontos reais do ouro coincidem com a máscara, comparação GPU nos dois
+sentidos e pausa. HORN_AURA_FIX.md.

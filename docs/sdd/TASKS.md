@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Aura do Great Devil Head 0.18.3 (REQ-10/20/39, ADR-078)
+
+- [x] Derivar o halo do ouro da própria cabeça HD, usando origem e escala compartilhadas.
+- [x] Desenhar a aura atrás da anatomia e manter pulsação/pausa; originais preservados.
+- [x] GPU 1920×1080: 162 quadros, dois sentidos, inclinação e 30 quadros pausados idênticos; ouro dentro do limite físico de transparência da fonte.
+- [x] Revisão independente e guarda contra perfil de contorno inválido na camada base.
+- [x] Main: 5296 checks +13Python; QA37lotes/550avatares/629camadas e auditoria runtime sem pendências.
+- [x] App/ZIP0.18.3 exportados, assinatura estrita e smoke PCK fora do projeto PASS; prévias Avatar/Mobile conferidas no PCK.
+- [ ] Usuário validar a aparência do chifre no aplicativo 0.18.3.
+
 ## Release 0.18.2 (auditoria; ADR-076 complementos, ADR-077)
 
 - [x] CPU com tempo fixo de 2 s e relógio parado durante a busca; testes de seed/ordem.
@@ -7,7 +17,7 @@
 - [x] Deriva da queda por passo de gravidade (ADR-077); teste de magnitude.
 - [x] posmod do vento, guarda de `density`, docs de baseline/gravidade/Mage/ItemDelay.
 - [x] check.sh completo: 5287 checks + 13 partidas; App/ZIP 0.18.2 e smoke do PCK.
-- [ ] Usuário aprovar e fazer merge de `fix/0.18.2` na main.
+- [x] PR2 mesclado à main (`59a676d`); integrado à árvore local antes da entrega 0.18.3.
 - [ ] Opcional: tirar `model.phase = "menu"` do `game.gd`; centralizar a espera da tarefa da CPU.
 
 ## Paridade das regras de batalha (REQ-44, ADR-076)
@@ -32,7 +42,7 @@
 - [x] Revisão independente, QA37lotes/550registros renovado.
 - [x] Regressão5234checks+13partidas e Python13 PASS.
 - [x] Export/PCK0.18, versão0.18.0 e assinatura estrita conferidos.
-- [ ] Confirmar push remoto (uploads HTTP expiraram; transporte em diagnóstico).
+- [x] Histórico da migração preservado na main remota; confirmado ao atualizar a árvore local para o merge PR2 `59a676d`.
 - [ ] NakHD: confirmação explícita pedida pela revisão automática;21outputs/
       patch preservados em source/pending_integration, runtime original ativo.
 - [ ] Após confirmação: corrigir separação S2/SS, testesHD/HUD, GPU/export Nak.

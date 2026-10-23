@@ -1,4 +1,5 @@
 extends RefCounted
+const ContourGlow = preload("res://scripts/avatar_contour_glow.gd")
 ## Masters of equipped XFS pieces. Separate from shop-only portrait assets.
 var sheets: Dictionary={}
 var layers: Dictionary={}
@@ -99,13 +100,26 @@ func piece(key: String, index: int) -> Dictionary:
 		var anchor: Vector2=base.target.position+base.target.size*Vector2(attachment.base_uv[0],attachment.base_uv[1])
 		data.target=Rect2(anchor-fitted*Vector2(attachment.effect_uv[0],attachment.effect_uv[1]),fitted)
 	data.effect=bool(entry.get("pulsate",false))
+	data.draw_behind=bool(entry.get("draw_behind",false))
 	# Native glass/glows are translucent; a generated opaque dark center must
 	# not hide the face. Preserve the source material's average opacity.
 	var native_opacity: float=float(entry.get("native_mean_opacity",1.0))
 	var generated_opacity: float=float(entry.get("generated_mean_opacity",1.0))
 	var translucent: bool=bool(entry.get("effect",false)) or int(key.get_slice(":",2))==2
 	data.opacity=minf(1.0,native_opacity/maxf(0.01,generated_opacity)) if translucent else 1.0
-	if bool(entry.get("effect",false)):
+	if entry.has("contour_glow"):
+		if index<=0 or not data.draw_behind:return {}
+		var base:=piece(key,0)
+		if base.is_empty():return {}
+		var glow:=ContourGlow.build(base.texture,base.source,entry.contour_glow,key+str(layers[key+"|layer:0"].sheet))
+		if glow.is_empty():return {}
+		var scale: Vector2=base.target.size/base.source.size
+		data.paint=glow.paint
+		data.source=glow.source
+		data.target=Rect2(base.target.position+glow.pixel_offset*scale,glow.pixel_size*scale)
+		data.opacity=1.0
+		data.contour_derived=true
+	elif bool(entry.get("effect",false)):
 		var light:=light_layer(data.texture,data.source,"hd:"+key+":"+str(index)+":"+str(entry.sheet))
 		data.paint=light.paint
 		data.source=light.source
