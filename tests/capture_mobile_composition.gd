@@ -1,5 +1,6 @@
 extends SceneTree
 ## Real GPU comparison and slope/pose coverage, without writing the user profile.
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Preview extends Node2D:
 	var elapsed := 0.0
 	var sprites := []
@@ -26,7 +27,7 @@ class Preview extends Node2D:
 				var texture = sprites[row].hd_rig.sheet.texture
 				if original:
 					sprites[row].hd_rig.sheet.texture = null
-				sprites[row].draw(self, pos, 150, facing, deg_to_rad(slope), frame, Color.WHITE, pose, time, 2, false, age * 4 if pose == "moving" else 0)
+				sprites[row].draw(self, SpritePose.new(pos, 150, facing, {"rotation": deg_to_rad(slope), "frame": frame, "pose": pose, "age": time, "weapon": 2, "wheel_phase": float(age * 4 if pose == "moving" else 0)}))
 				sprites[row].hd_rig.sheet.texture = texture
 				draw_string(font, pos + Vector2(-150, 140), ["Original — referência", "HD — composição corrigida", "HD — encosta −30°", "HD — virado / +30°"][column], HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Color.WHITE)
 var preview

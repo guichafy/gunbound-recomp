@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class ProjectileDemo extends Node2D:
 	var mobile
 	var kind := "bigfoot"
@@ -39,7 +40,7 @@ class Gallery extends Node2D:
 					var facing := -1 if column == 3 else 1
 					var pose := "recoil" if column == 3 else "idle"
 					var frame: int = mobiles[row].frame_index(pose, 0.15, 2, false)
-					mobiles[row].draw(self, center, 150, facing, deg_to_rad(slope), frame, Color.WHITE, pose, 0.15, 2)
+					mobiles[row].draw(self, SpritePose.new(center, 150, facing, {"rotation": deg_to_rad(slope), "frame": frame, "pose": pose, "age": 0.15, "weapon": 2}))
 					draw_string(font, center + Vector2(-100, 120), ("Recuo / esquerda" if column == 3 else "Apoio %+.0f°" % slope), HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Color.WHITE)
 				else:
 					draw_string(font, center + Vector2(-230, 150), ["T1", "T2", "SS"][column] + " — voo (4×) e impacto", HORIZONTAL_ALIGNMENT_LEFT, -1, 23, Color.WHITE)

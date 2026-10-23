@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Preview extends Node2D:
 	var sprites: Array=[]
 	var animation=load("res://scripts/battle_art.gd").new()
@@ -26,7 +27,7 @@ class Preview extends Node2D:
 				animation.motion[index].pose_age=pose_age
 				var state: Dictionary=animation.presentation(index,sprite.hd_rig,clock,2)
 				var facing:=1 if col<2 else -1
-				sprite.draw(self,pos,120,facing,deg_to_rad(8*facing),0,Color.WHITE,pose,pose_age,2,false,clock*3,{"equipment":sets[row],"age":clock,"rig_state":state})
+				sprite.draw(self,SpritePose.new(pos,120,facing,{"rotation":deg_to_rad(8*facing),"pose":pose,"age":float(pose_age),"weapon":2,"wheel_phase":float(clock*3),"avatar_context":{"equipment":sets[row],"age":clock,"rig_state":state}}))
 func _initialize() -> void:
 	call_deferred("run")
 func run() -> void:

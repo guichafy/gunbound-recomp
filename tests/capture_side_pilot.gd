@@ -1,5 +1,6 @@
 extends SceneTree
 ## GPU captures of the assembled pilot/mobile, in both directions and on slopes.
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Preview extends Node2D:
 	var elapsed := 0.0
 	var sprites := []
@@ -18,7 +19,7 @@ class Preview extends Node2D:
 				var pose: String = "idle" if not animated else ["idle", "moving", "charging", "recoil", "hurt", "destroyed"][mini(5, int(age))]
 				var time := fmod(age, 1.0) if animated else 0.0
 				var frame: int = sprites[row].frame_index(pose, time, 2, false)
-				sprites[row].draw(self, pos, 210, facing, rotation, frame, Color.WHITE, pose, time, 2, false, age * 4 if pose == "moving" else 0)
+				sprites[row].draw(self, SpritePose.new(pos, 210, facing, {"rotation": float(rotation), "frame": frame, "pose": pose, "age": time, "weapon": 2, "wheel_phase": float(age * 4 if pose == "moving" else 0)}))
 				draw_string(font, pos + Vector2(-150, 130), ["Perfil / direita", "Perfil / esquerda", "Encosta −30°"][column], HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color.WHITE)
 var preview
 func _initialize() -> void:

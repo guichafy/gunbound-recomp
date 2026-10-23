@@ -3,6 +3,11 @@ extends RefCounted
 ## Reference data: OpenBound; notices in assets/openbound/ATTRIBUTION.md.
 
 const COLUMNS := 20
+# Shot/impact sound suffixes and explosion sheet numbers, by weapon slot.
+const SHOT_KEYS := ["S1", "S2", "SS"]
+# The original default rider (body + head) ships once, in the Bigfoot folder.
+const LEGACY_RIDER := "res://assets/openbound/bigfoot/"
+const EFFECT_FPS := 30.0
 var cell: Vector2
 var pivot: Vector2
 var hull_width: float
@@ -16,6 +21,16 @@ var rider_offsets: Array = []
 const HDSheet = preload("res://scripts/hd_sheet.gd")
 var hd_rig
 const MobileRig = preload("res://scripts/mobile_rig.gd")
+# Filled by load_shot_assets(): original sounds and explosion sheets per weapon.
+var shoot_sounds: Array[AudioStream] = []
+var blast_sounds: Array[AudioStream] = []
+var effects: Array[Texture2D] = []
+const ProjectileArt = preload("res://scripts/projectile_art.gd")
+# HD shots/impacts (GPT Images derivatives); null for a mobile without HD.
+var projectile_art
+var hd_shots
+var hd_effects
+var effect_sizes: Array[Vector2] = []
 
 func configure(folder: String, frame_size: Vector2, anchor: Vector2, animations: Dictionary, hull: float, ground_contact: float) -> void:
 	cell = frame_size
@@ -25,13 +40,46 @@ func configure(folder: String, frame_size: Vector2, anchor: Vector2, animations:
 	contact_y = ground_contact
 	texture = load(folder + "/CharacterSpritesheet.png")
 	paint_texture = pixel_texture(texture)
-	rider_body = pixel_texture(load("res://assets/openbound/bigfoot/RiderBody.png"))
-	rider_head = pixel_texture(load("res://assets/openbound/bigfoot/RiderHead.png"))
+	rider_body = pixel_texture(load(LEGACY_RIDER + "RiderBody.png"))
+	rider_head = pixel_texture(load(LEGACY_RIDER + "RiderHead.png"))
 	var text := FileAccess.get_file_as_string(folder + "/RiderPivot.json").strip_edges()
 	text = text.trim_suffix("]").strip_edges().trim_suffix(",") + "]"
 	rider_offsets = JSON.parse_string(text)
 	hd_rig = MobileRig.new(folder.get_file())
 	hd_rig.register_avatar(rider_offset(0),contact_y-pivot.y,hull_width)
+
+## Shared loading step of every mobile: Shoot/Blast S1/S2/SS sounds and the
+## Flame1..3 explosion sheets of its folder.
+func load_shot_assets(folder: String) -> void:
+	for key in SHOT_KEYS:
+		shoot_sounds.append(load("%s/Shoot%s.mp3" % [folder, key]))
+		blast_sounds.append(load("%s/Blast%s.mp3" % [folder, key]))
+	for number in range(1, SHOT_KEYS.size() + 1):
+		effects.append(pixel_texture(load("%s/Flame%d.png" % [folder, number])))
+
+## HD shots and impacts shared by the mobiles with approved derivatives. The
+## original explosion occupancy is measured once to keep its size in HD.
+func load_hd_shots() -> void:
+	projectile_art = ProjectileArt.new()
+	hd_shots = projectile_art.sheet
+	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)
+	for weapon in range(effects.size()):
+		effect_sizes.append(ProjectileArt.effect_size(effects[weapon], effect_cell(weapon)))
+
+## Explosion cell of a weapon on a regular grid sheet (subclasses with grids).
+func effect_cell(_weapon: int) -> Vector2:
+	return Vector2.ZERO
+
+## Frames in the explosion sheet; grid sheets count whole cells.
+func effect_capacity(weapon: int) -> int:
+	var size := effect_cell(weapon)
+	return int(effects[weapon].get_width() / size.x) * int(effects[weapon].get_height() / size.y)
+
+## Source rectangle of a grid explosion frame.
+func effect_source(weapon: int, frame: int) -> Rect2:
+	var size := effect_cell(weapon)
+	var columns := int(effects[weapon].get_width() / size.x)
+	return Rect2(Vector2(frame % columns, int(frame / columns)) * size, size)
 
 func rider_offset(frame: int) -> Vector2:
 	var point: Array = rider_offsets[clampi(frame, 0, rider_offsets.size() - 1)]
@@ -57,9 +105,18 @@ func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int
 func frame_rect(index: int) -> Rect2:
 	return Rect2(Vector2(index % COLUMNS, int(index / COLUMNS)) * cell, cell)
 
-func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, frame: int, color: Color = Color.WHITE, pose: String = "idle", age: float = 0.0, weapon: int = 0, low_health: bool = false, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> void:
-	if hd_rig.draw(view, pos, width, facing, rotation, pose, age, weapon, low_health, color, wheel_phase, avatar_context):
+## `request` is a SpritePose: position, width, facing and the animation state.
+func draw(view: Node2D, request) -> void:
+	if hd_rig.draw(view, request):
 		return
+	var pos: Vector2 = request.pos
+	var width: float = request.width
+	var facing: int = request.facing
+	var rotation: float = request.rotation
+	var frame: int = request.frame
+	var color: Color = request.color
+	var age: float = request.age
+	var avatar_context: Dictionary = request.avatar_context
 	# Native artwork faces left. Scale the configured alpha hull around its
 	# original pivot and ground contact, without editing the source pixels.
 	var amount := width / hull_width

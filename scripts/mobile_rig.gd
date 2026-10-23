@@ -114,9 +114,20 @@ func piece(view: Node2D, atlas, row: int, column: int, transform: Transform2D, t
 	var source: Rect2 = atlas.region(row, column)
 	var fitted := source.size * minf(target.size.x / source.size.x, target.size.y / source.size.y)
 	view.draw_texture_rect_region(atlas.paint, Rect2(target.get_center() - fitted * 0.5, fitted), source, color)
-func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> bool:
+## `request` is a SpritePose; false when this mobile has no HD parts.
+func draw(view: Node2D, request) -> bool:
 	if not available():
 		return false
+	var pos: Vector2 = request.pos
+	var width: float = request.width
+	var facing: int = request.facing
+	var rotation: float = request.rotation
+	var pose: String = request.pose
+	var age: float = request.age
+	var weapon: int = request.weapon
+	var color: Color = request.color
+	var wheel_phase: float = request.wheel_phase
+	var avatar_context: Dictionary = request.avatar_context
 	var state: Dictionary = avatar_context.get("rig_state",{})
 	if state.is_empty():
 		state = sample(pose,age,weapon,float(avatar_context.get("age",age)))
@@ -127,7 +138,7 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	var support := world * Transform2D(0, Vector2(0, ground / scale))
 	var body := support * Transform2D(state.body_angle, state.body_offset)
 	var tint := Color(color, color.a * state.alpha)
-	if low_health:
+	if request.low_health:
 		tint *= Color(0.7, 0.7, 0.7)
 	var parts := layout()
 	var row := int(parts.row)

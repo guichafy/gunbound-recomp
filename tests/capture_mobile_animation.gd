@@ -1,5 +1,6 @@
 extends SceneTree
 ## GPU sequence and storyboard of the actual articulated renderer.
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Preview extends Node2D:
 	var elapsed := 0.0
 	var sprites := []
@@ -22,7 +23,7 @@ class Preview extends Node2D:
 				var pose: String = poses[column] if storyboard else phase
 				var time := 0.5 if storyboard else age
 				var frame: int = sprites[row].frame_index(pose, time, 2, false)
-				sprites[row].draw(self, center, 120, 1, 0, frame, Color.WHITE, pose, time, 2 if storyboard else weapon, false, wheel)
+				sprites[row].draw(self, SpritePose.new(center, 120, 1, {"frame": frame, "pose": pose, "age": time, "weapon": 2 if storyboard else weapon, "wheel_phase": float(wheel)}))
 				draw_string(font, center + Vector2(-80, 95), labels[column] if storyboard else phase, HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Color.WHITE)
 var preview
 func _initialize() -> void:

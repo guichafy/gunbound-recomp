@@ -3,6 +3,7 @@ extends RefCounted
 
 const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 
 const USING_ITEM_TIME := 20.0 / 19.0
 var motion: Array = []
@@ -158,7 +159,9 @@ func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionar
 		weapon = int(model.last_shots[index].get("weapon", 0))
 	var avatar_context: Dictionary = ctx.get("avatar_context",{}).duplicate()
 	avatar_context.rig_state = presentation(index,atlas.hd_rig,time,weapon)
-	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, Mobiles.low_health(actor), state.wheel_phase, avatar_context)
+	atlas.draw(view, SpritePose.new(pos + offset, 60.0, actor.facing, {"rotation": rotation, "frame": atlas_frame(model, index, ctx),
+		"color": color, "pose": state.pose, "age": state.pose_age, "weapon": weapon, "low_health": Mobiles.low_health(actor),
+		"wheel_phase": state.wheel_phase, "avatar_context": avatar_context}))
 	if bool(Mobiles.definition(int(actor.vehicle)).smoke) and int(actor.hp) > 0 and Mobiles.low_health(actor):
 		var puff := fposmod(time, 0.8) / 0.8
 		view.draw_circle(pos + offset + Vector2(8.0 * float(actor.facing), -20.0 - puff * 18.0), 2.5 + puff * 3.5, Color(0.78, 0.78, 0.8, (1.0 - puff) * 0.4))

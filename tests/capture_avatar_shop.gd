@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 var scene
 class Poses extends Node2D:
 	var equipment: Dictionary
@@ -14,7 +15,7 @@ class Poses extends Node2D:
 				var pose: String = ["idle","recoil","hurt"][column]
 				var facing := -1 if column==1 else 1
 				var slope := deg_to_rad(-30.0) if column==2 else 0.0
-				sprite.draw(self,pos,210,facing,slope,sprite.frame_index(pose,0.3,2,false),Color.WHITE,pose,0.3,2,false,1.0,{"equipment":equipment,"age":0.3})
+				sprite.draw(self,SpritePose.new(pos,210,facing,{"rotation":float(slope),"frame":sprite.frame_index(pose,0.3,2,false),"pose":pose,"age":0.3,"weapon":2,"wheel_phase":1.0,"avatar_context":{"equipment":equipment,"age":0.3}}))
 				draw_string(font,pos+Vector2(-200,155),["Direita / idle","Esquerda / recuo","Encosta / dano"][column],HORIZONTAL_ALIGNMENT_LEFT,-1,22,Color.WHITE)
 func _initialize() -> void:
 	call_deferred("run")

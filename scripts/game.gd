@@ -13,6 +13,7 @@ const UIFactory = preload("res://scripts/ui.gd")
 const Sound = preload("res://scripts/sound.gd")
 const BattleArt = preload("res://scripts/battle_art.gd")
 const MobileLooks = preload("res://scripts/mobile_looks.gd")
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 const Maps = preload("res://scripts/maps.gd")
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
@@ -922,4 +923,5 @@ func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: f
 	var body = sprite_for(kind)
 	if body == null:
 		return
-	body.draw(self, pos, width, facing, rotation, body.frame_index("idle", elapsed, 0, false), color, "idle", elapsed, 0, false, 0, {"equipment":profile.equipped_set(),"age":elapsed})
+	body.draw(self, SpritePose.new(pos, width, facing, {"rotation": rotation, "frame": body.frame_index("idle", elapsed, 0, false),
+		"color": color, "age": elapsed, "avatar_context": {"equipment": profile.equipped_set(), "age": elapsed}}))
