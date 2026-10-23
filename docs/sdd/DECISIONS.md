@@ -623,3 +623,17 @@ com marcador persistido e rollback em falha. Não reabastecer a cada abertura
 nem perder progresso/posses. Plano: testar padrão, concessão/reload/rollback,
 comprar e vestir os479registros compráveis em perfil isolado, regressões e PCK
 exportado. Itens N/A/indisponíveis e preços originais continuam sob suas regras.
+
+## ADR-081 — revisão de qualidade sem mudar regras
+
+Pedido do usuário: analisar a Spec e o código (SOLID, repetição, code smells)
+e executar todos os pontos P1–P4 de `QUALITY_REVIEW.md`. Decisões: refatorar
+atrás das fachadas existentes (`Match`, `game.gd`), mantendo os métodos usados
+pelos testes; provar ausência de mudança de combate com golden master de 26
+partidas (eventos + campos do ator) além das seeds 81–93; versão em fonte única
+(`application/config/version`), lida pelo menu e gravada no Info.plist pelo
+`build_macos.py`; apresentação por mobile num catálogo próprio
+(`mobile_looks.gd`), separado de `mobiles.gd` para o modelo não conhecer
+scripts de desenho; delays guardados na unidade original do C# e convertidos uma
+vez (`delay_units.gd`). Tipagem completa de ator/projétil adiada (motivos no
+plano): fábricas de estado no lugar. Nak sem aura UsingItem até haver arte.
