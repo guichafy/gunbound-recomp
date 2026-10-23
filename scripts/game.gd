@@ -78,6 +78,8 @@ var vehicle := 2
 var cpu_difficulty := 1
 # Training option: the map's original weather preset or every effect (Thor included).
 var weather_mode := "original"
+# Match RNG seed; -1 draws a new one. Tests pin it to replay a scene (REQ-12).
+var match_seed := -1
 var vehicle_buttons: Array[Button] = []
 var vehicle_info: Label
 var angle: float:
@@ -287,7 +289,7 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, -1, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening)
+	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening)
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.

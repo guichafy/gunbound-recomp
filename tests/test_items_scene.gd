@@ -60,6 +60,9 @@ func run() -> void:
 	scene.options.items = ["dual", "teleport", "power_up", "energy_up_1"]
 	scene.select_vehicle(2)
 	scene.opening = 0
+	# Pinned: a random seed can spawn the mobiles so close that the first Dual
+	# shot ends the match before the CPU turn this scenario needs (seed 28).
+	scene.match_seed = 1
 	scene.start_match()
 	await process_frame
 	if scene.model.active != 0:
