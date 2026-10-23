@@ -8,6 +8,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-8.0,
 					-29.0,
@@ -33,6 +34,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-9.0,
 					-30.0,
@@ -58,6 +60,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-13.0,
 					-31.0,
@@ -83,6 +86,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-10.0,
 					-34.0,
@@ -108,6 +112,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-7.0,
 					-30.0,
@@ -133,6 +138,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-14.0,
 					-11.0,
@@ -158,6 +164,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-14.0,
 					-12.0,
@@ -183,6 +190,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-14.0,
 					-11.0,
@@ -208,6 +216,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-14.0,
 					-12.0,
@@ -233,6 +242,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-14.0,
 					-11.0,
@@ -258,6 +268,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					-6.0,
 					-18.0,
@@ -283,6 +294,7 @@
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": false,
+				"light_curve": [],
 				"native_rect": [
 					9.0,
 					-40.0,
@@ -315,9 +327,9 @@
 		"Bigfoot esquerda"
 	],
 	"renderer_hashes": {
-		"scripts/avatar_art.gd": "ed046d2e1848c714568cceeb39deb5fea2115c0afdc969d1fbedfd604904240d",
+		"scripts/avatar_art.gd": "b7ad7e03b75854bbb4401ab816a9a680a0c344b605e311027b7dfd77e268b7d7",
 		"scripts/avatar_contour_glow.gd": "3b3fb2582f488787fb2615bed8bfdbb70f6920d49cc080a2216c048b4b3077d2",
-		"scripts/avatar_xfs_hd.gd": "45cfea85b1e7062dbce70a662b91d9f4d77748dae7ad546a1514ce35dce4e94c",
+		"scripts/avatar_xfs_hd.gd": "33cdaa12e563c12134b5ad02b0937f3cc3ce9044a640e72550ae1e9431e10a9b",
 		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
 		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
 		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"

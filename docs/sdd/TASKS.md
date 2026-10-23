@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Curva do chifre0.18.4 (REQ-10/20/39, ADR-079)
+
+- [x] Reproduzir perda perceptível da0.18.3 no tamanho real da prévia (teste GPU vermelho).
+- [x] Restaurar textura L/opacidade/pulsação anteriores; corrigir somente curva via mesh UV fixa.
+- [x] Conferir pontos reais do chifre, dois sentidos, inclinação,162frames e30pausados idênticos.
+- [x] Medir brilho na loja Avatar/Mobile contra referência sem luz; revisão independente sem achados.
+- [x] Regressões5299checks+13Python e QA37lotes/550avatares/629camadas sem pendências.
+- [x] App/ZIP0.18.4 exportados/assinados; PCK fora do projeto PASS e pulso confirmado nas duas prévias.
+- [ ] Usuário validar a curva e a animação da0.18.4.
+
 ## Aura do Great Devil Head 0.18.3 (REQ-10/20/39, ADR-078)
 
 - [x] Derivar o halo do ouro da própria cabeça HD, usando origem e escala compartilhadas.
@@ -8,7 +18,7 @@
 - [x] Revisão independente e guarda contra perfil de contorno inválido na camada base.
 - [x] Main: 5296 checks +13Python; QA37lotes/550avatares/629camadas e auditoria runtime sem pendências.
 - [x] App/ZIP0.18.3 exportados, assinatura estrita e smoke PCK fora do projeto PASS; prévias Avatar/Mobile conferidas no PCK.
-- [ ] Usuário validar a aparência do chifre no aplicativo 0.18.3.
+- [x] Usuário testou0.18.3 e rejeitou brilho/animação imperceptíveis; substituída pela0.18.4 acima.
 
 ## Release 0.18.2 (auditoria; ADR-076 complementos, ADR-077)
 

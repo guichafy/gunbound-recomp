@@ -1,4 +1,5 @@
 extends SceneTree
+## Historical 0.18.3 fixture, rejected by the user. Current acceptance is capture_horn_curve.gd.
 class Gallery extends Node2D:
 	var art=load("res://scripts/avatar_art.gd").new()
 	var previous=load("res://scripts/avatar_art.gd").new()
@@ -7,6 +8,9 @@ class Gallery extends Node2D:
 	var age:=0.0
 	func _init() -> void:
 		gear["0"]="xfs:0:0:71"
+		for renderer in [art,previous,reference]:renderer.xfs_hd.layers["xfs:0:0:71|layer:1"].erase("light_curve")
+		art.xfs_hd.layers["xfs:0:0:71|layer:1"].draw_behind=true
+		art.xfs_hd.layers["xfs:0:0:71|layer:1"].contour_glow={"uv_region":[0,0,.42,.66],"radius":18,"sigma":5.0,"strength":.8}
 		previous.xfs_hd.layers["xfs:0:0:71|layer:1"].draw_behind=false
 		previous.xfs_hd.layers["xfs:0:0:71|layer:1"].erase("contour_glow")
 		reference.xfs_hd.layers["xfs:0:0:71|layer:1"].erase("contour_glow")

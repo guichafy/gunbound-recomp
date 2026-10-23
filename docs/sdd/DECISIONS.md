@@ -596,9 +596,20 @@ paridade de MOBILE_PARITY.md (REQ-42). Teste: `test_mobile_parity`.
 
 ## ADR-078 — aura ligada ao contorno real do chifre
 
+Substituída pela ADR-079: o usuário rejeitou a perda de brilho/animação.
+
 Usuário confirmou aura pulsante externa e rejeitou a luz afastada. O halo é
 derivado em memória do ouro da própria peça HD, na janela fixa do chifre,
 e compartilha sua origem/escala; fica atrás da anatomia. Sem centros alpha
 por quadro e sem mover a peça. Outros19efeitos/combate/perfil preservados.
 Aceite: pontos reais do ouro coincidem com a máscara, comparação GPU nos dois
 sentidos e pausa. HORN_AURA_FIX.md.
+
+## ADR-079 — preservar o brilho e corrigir somente sua curva
+
+Substitui ADR-078 após rejeição explícita do usuário: o halo da0.18.3 ficou
+imperceptível no tamanho real da loja. Restaurar textura L, composição sobre
+o chifre, opacidade e pulsação anteriores. Corrigir curva por uma malha UV
+constante, medida nos pixels da cabeça e da luz, sem gerar outra aparência.
+Teste deve medir variação visível no tamanho da prévia, além de encaixe,
+sentidos/inclinação e pausa. Sem mudanças nos demais19efeitos ou regras.

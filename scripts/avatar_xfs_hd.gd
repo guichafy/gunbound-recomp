@@ -6,6 +6,7 @@ var layers: Dictionary={}
 var portraits: Dictionary={}
 var textures: Dictionary={}
 var paints: Dictionary={}
+var curved_lights: Dictionary={}
 static var light_textures: Dictionary={}
 static func light_layer(texture: Texture2D, region: Rect2, identity: String) -> Dictionary:
 	# XFS L layers encode emitted light: black contributes no light. Convert
@@ -123,7 +124,64 @@ func piece(key: String, index: int) -> Dictionary:
 		var light:=light_layer(data.texture,data.source,"hd:"+key+":"+str(index)+":"+str(entry.sheet))
 		data.paint=light.paint
 		data.source=light.source
+	if entry.has("light_curve"):
+		if index<=0 or data.draw_behind or not data.effect:return {}
+		var base:=piece(key,0)
+		if base.is_empty():return {}
+		var curved:=curve_light(base.target,entry.light_curve)
+		if curved.is_empty():return {}
+		data.mesh=curved.mesh
+		data.target=curved.bounds
 	return data
+func curve_light(base: Rect2, knots) -> Dictionary:
+	# Fixed UV strips bend the existing luminous master onto the horn.
+	# Texture, material opacity, animation clock and anatomy stay unchanged.
+	if not knots is Array or knots.size()<2 or knots.size()>32:return {}
+	var last_v: float=-1.0
+	var last_y: float=-1.0
+	for knot in knots:
+		if not knot is Array or knot.size()!=5:return {}
+		for value in knot:
+			if typeof(value) not in [TYPE_INT,TYPE_FLOAT] or not is_finite(float(value)):return {}
+		if knot[0]<=last_v or knot[0]<0 or knot[0]>1 or knot[1]<0 or knot[1]>1 or knot[2]<-.5 or knot[2]>1.5 or knot[3]<=last_y or knot[3]<-.5 or knot[3]>1.5 or knot[4]<=0 or knot[4]>2:return {}
+		last_v=knot[0]
+		last_y=knot[3]
+	if knots[0][0]!=0 or knots[-1][0]!=1:return {}
+	var identity:=str(base)+JSON.stringify(knots)
+	if curved_lights.has(identity):return curved_lights[identity]
+	var vertices:=PackedVector3Array()
+	var uvs:=PackedVector2Array()
+	var indices:=PackedInt32Array()
+	var bounds:=Rect2()
+	var segment:=0
+	for row in range(65):
+		var v:=row/64.0
+		while segment<knots.size()-2 and v>knots[segment+1][0]:segment+=1
+		var a: Array=knots[segment]
+		var b: Array=knots[segment+1]
+		var t: float=(v-a[0])/(b[0]-a[0])
+		var source_x: float=lerpf(a[1],b[1],t)
+		var target_x: float=lerpf(a[2],b[2],t)
+		var target_y: float=lerpf(a[3],b[3],t)
+		var width: float=lerpf(a[4],b[4],t)
+		for u in [0.0,1.0]:
+			var point:=base.position+base.size*Vector2(target_x+(u-source_x)*width,target_y)
+			if vertices.is_empty():bounds=Rect2(point,Vector2.ZERO)
+			else:bounds=bounds.expand(point)
+			vertices.append(Vector3(point.x,point.y,0))
+			uvs.append(Vector2(u,v))
+		if row<64:
+			var i:=row*2
+			indices.append_array(PackedInt32Array([i,i+1,i+2,i+1,i+3,i+2]))
+	var arrays:=[]
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX]=vertices
+	arrays[Mesh.ARRAY_TEX_UV]=uvs
+	arrays[Mesh.ARRAY_INDEX]=indices
+	var mesh:=ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
+	curved_lights[identity]={"mesh":mesh,"bounds":bounds}
+	return curved_lights[identity]
 func complete(item: Dictionary) -> bool:
 	var native_layers: Array=item.get("layers",[])
 	if native_layers.is_empty():

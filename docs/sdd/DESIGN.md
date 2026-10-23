@@ -556,3 +556,9 @@ Aura Great Devil: avatar_contour_glow.gd gera e guarda em memória uma máscara
 de ouro na janela do chifre do próprio mestre HD. Distância de contorno gera
 aura com recorte/origem/escala compartilhados. draw_behind compõe antes da
 cabeça, preservando a superfície; efeito separado original continua preservado.
+
+Correção0.18.4/ADR-079 substitui essa composição: Great Devil volta a usar a
+textura L anterior sobre a cabeça, com opacidade/pulsação anteriores. Nove
+marcos medidos na cabeça e na luz produzem64faixas UV constantes em ArrayMesh,
+com pivô/flip/inclinação comuns. Só geometria muda; cache sem relógio. A máscara
+0.18.3 fica preservada para comparação histórica, sem entrada no catálogo ativo.

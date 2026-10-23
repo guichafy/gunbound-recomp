@@ -352,3 +352,8 @@ o adiamento anterior. REQ-19/20 e plano NAK_HD.md; regras físicas preservadas.
 REQ-10/20/39: validação do Great Devil exige aura pulsante junto ao contorno
 do chifre, com ouro/segmentos preservados. Máscara derivada da peça HD, registro
 compartilhado e pausa contínua; HORN_AURA_FIX.md.
+
+Correção do aceite0.18.3: o usuário rejeitou a perda perceptível do brilho e
+da animação. Preservar a faixa luminosa HD anterior, sua opacidade e pulsação;
+corrigir somente a curva/encaixe sobre o chifre. A exigência de máscara atrás
+da cabeça fica substituída. Validar a animação no tamanho real da loja.

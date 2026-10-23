@@ -1,0 +1,20 @@
+{
+	"fps": 60,
+	"frames": 162,
+	"pause_frames": 30,
+	"pulse_energy_original_dimmed_corrected": [
+		487.799998609815,
+		82.847059413325,
+		353.184312819038
+	],
+	"shop_scale": 2.0,
+	"size": [
+		1920,
+		1080
+	],
+	"visible_animated_pixels_original_dimmed_corrected": [
+		1021,
+		325,
+		861
+	]
+}

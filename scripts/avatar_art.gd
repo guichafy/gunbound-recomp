@@ -51,6 +51,7 @@ func sample(equipment: Dictionary, age: float, staring: bool = false) -> Array:
 				for index in range(item.layers.size()):
 					var data: Dictionary=xfs_hd.piece(item.key,index)
 					var part: Dictionary={"category":category,"frame":0,"texture":data.paint,"source":data.source,"target":data.target,"hd":true,"effect":data.effect,"opacity":data.opacity,"xfs_layer":index}
+					if data.has("mesh"):part.mesh=data.mesh
 					if data.draw_behind:
 						hd_group.push_front(part)
 					else:
@@ -104,6 +105,9 @@ func draw(view: Node2D, equipment: Dictionary, transform: Transform2D, age: floa
 			var light: Dictionary=XfsHD.light_layer(paint,source,piece.light_key)
 			paint=light.paint
 			source=light.source
-		view.draw_texture_rect_region(paint,piece.target,source,piece_tint)
+		if piece.has("mesh"):
+			view.draw_mesh(piece.mesh,paint,Transform2D.IDENTITY,piece_tint)
+		else:
+			view.draw_texture_rect_region(paint,piece.target,source,piece_tint)
 	view.draw_set_transform(Vector2.ZERO)
 	return true

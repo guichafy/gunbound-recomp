@@ -22,20 +22,51 @@ func run() -> void:
 	var shop=scene.shop
 	var horn: Dictionary=shop.avatar_art.xfs_hd.piece("xfs:0:0:71",1)
 	assert(not horn.is_empty() and horn.source.size.x/horn.source.size.y<1.1)
-	assert(horn.get("contour_derived",false))
+	assert(horn.get("mesh") is ArrayMesh and horn.effect and not horn.draw_behind)
 	shop.set_process(false)
 	shop.search.text="Great Devil"
 	shop.model.query=shop.search.text
 	shop.refresh(0,0)
+	var renderers: Array=[shop.avatar_art,scene.sprite_for(scene.vehicle).hd_rig.avatars]
+	var energies: Dictionary={}
+	var corner: Vector2=shop.painter.get_global_transform()*Vector2(568,34)
+	var end: Vector2=shop.painter.get_global_transform()*Vector2(654,106)
+	var preview:=Rect2i(corner,end-corner)
 	for mobile in [false,true]:
 		shop.set_preview_mode(mobile)
-		shop.elapsed=.3
-		shop.painter.queue_redraw()
-		await process_frame
-		RenderingServer.force_draw()
-		var image:=root.get_texture().get_image()
-		assert(image.get_size()==Vector2i(1920,1080))
-		assert(image.save_png(destination+"/shop-%s.png" % ("mobile" if mobile else "avatar"))==OK)
+		var mode:="mobile" if mobile else "avatar"
+		var energy:=[]
+		for phase in [17.0/60,50.0/60]:
+			shop.elapsed=phase
+			shop.painter.queue_redraw()
+			await process_frame
+			RenderingServer.force_draw()
+			var image:=root.get_texture().get_image()
+			assert(image.get_size()==Vector2i(1920,1080))
+			var label:="peak" if energy.is_empty() else "trough"
+			assert(image.save_png(destination+"/shop-%s-%s.png" % [mode,label])==OK)
+			if energy.is_empty():assert(image.save_png(destination+"/shop-%s.png" % mode)==OK)
+			var opacity:=[]
+			for renderer in renderers:
+				var entry: Dictionary=renderer.xfs_hd.layers["xfs:0:0:71|layer:1"]
+				opacity.append(entry.native_mean_opacity)
+				entry.native_mean_opacity=0.0
+			shop.painter.queue_redraw()
+			await process_frame
+			RenderingServer.force_draw()
+			var reference:=root.get_texture().get_image()
+			var amount:=0.0
+			for y in range(preview.position.y,preview.end.y):
+				for x in range(preview.position.x,preview.end.x):
+					var delta:=image.get_pixel(x,y)-reference.get_pixel(x,y)
+					amount+=absf(delta.r)+absf(delta.g)+absf(delta.b)
+			energy.append(amount)
+			for i in range(renderers.size()):renderers[i].xfs_hd.layers["xfs:0:0:71|layer:1"].native_mean_opacity=opacity[i]
+		assert(energy[0]>150 and energy[0]>energy[1]*1.3,"Shine remains visible and animated in the actual "+mode+" shop preview")
+		energies[mode]=energy
+	var report:=FileAccess.open(destination+"/shop-pulse.json",FileAccess.WRITE)
+	report.store_string(JSON.stringify(energies,"\t"))
+	report.close()
 	DirAccess.remove_absolute(path)
-	print("GREAT DEVIL SHOP GPU: actual equipped preview in1920x1080")
+	print("GREAT DEVIL SHOP GPU: actual equipped preview in1920x1080; pulse peak/trough: ",JSON.stringify(energies))
 	quit()

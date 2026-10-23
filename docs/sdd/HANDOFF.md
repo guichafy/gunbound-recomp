@@ -1,6 +1,31 @@
-# Hand-off — Gunbound Recomp 0.18.3 / aura aderente ao chifre
+# Hand-off — Gunbound Recomp 0.18.4 / curva corrigida, brilho preservado
 
-## Aura do Great Devil Head — 23/10/2026 (REQ-10/20/39, ADR-078)
+## Curva do chifre — 23/10/2026 (REQ-10/20/39, ADR-079)
+
+O usuário rejeitou0.18.3: brilho/animação ficaram imperceptíveis; pediu somente
+correção da curva. A0.18.4 restaura textura L anterior, composição sobre o
+chifre, opacidade0,78382033 e pulsação0,8+0,2sin(ageTAU/1,1). Nove marcos
+medidos produzem64faixas UV constantes, ligadas à cabeça e guardadas em cache.
+Sem regenerar PNGs, alterar os demais19efeitos, anatomia, combate ou perfil.
+Ler HORN_AURA_FIX.md; ADR-079 substitui ADR-078. Tudo na main atual.
+
+- Teste GPU reproduziu o relato antes da mudança: energia animada82,847 contra
+  487,8 do brilho anterior na escala da loja. Curva corrigida:353,184 e861pixels
+  variando;162frames/60fps/1920×1080, sentidos/inclinação e30pausados idênticos.
+  Comparação em `docs/horn-curve/motion.mp4`; detalhe640×520 em `current.mp4`.
+- Teste real Avatar/Mobile compara cada pose com referência sem luz: pico/vale
+  642,094/386,729 e543,667/328,580. Resultado confirmado no **PCK exportado**
+  fora do projeto, em `/private/tmp`, com assertivas de mesh/efeito/composição.
+- Main: **5299checks** (`check.sh --quick`), **13Python**, revisão independente
+  sem achados;37lotes GPU/QA renovados. Runtime550confirmados/zero pendentes,
+  629camadas. Partidas completas não repetidas (regras intactas).
+- App/ZIP **0.18.4** reexportados; versão e assinatura estrita conferidas.
+  Smoke PCK550/629/loja/vestir/reload/batalha PASS. Capturas/relatórios da loja
+  em `docs/horn-curve/` vêm do pacote exportado.
+- **Pendente:** usuário validar curva e animação no aplicativo0.18.4; a0.18.3
+  abaixo é histórico rejeitado, não o critério visual atual.
+
+## Aura0.18.3 — histórico rejeitado (REQ-10/20/39, ADR-078)
 
 Pedido atual: aura pulsante ao redor do chifre, sem luz distante da peça;
 entrega para teste na branch atual. Ler HORN_AURA_FIX.md. A main foi atualizada

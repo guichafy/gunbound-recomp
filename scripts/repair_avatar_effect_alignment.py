@@ -44,15 +44,25 @@ def main():
         feature,base_uv,effect_uv,scale=ATTACHMENTS[row['key']]
         meta['attachment']=dict(feature=feature,base_uv=base_uv,effect_uv=effect_uv,scale=scale)
         if row['key']=='xfs:0:0:71':
-            meta['draw_behind']=True
-            meta['contour_glow']=dict(uv_region=[0,0,.42,.66],radius=18,sigma=5.0,strength=.8)
+            meta['draw_behind']=False
+            # [light V, light center U, head center X/Y, width in head UV].
+            # Measured on the existing masters; only bend their geometry.
+            meta['light_curve']=[
+                [0,.49,.20,-.035,.75],[.05,.445,.17,.02,.75],
+                [.15,.295,.11,.10,.65],[.30,.204,.087,.23,.65],
+                [.45,.22,.14,.34,.72],[.60,.39,.22,.46,.50],
+                [.73,.57,.26,.53,.35],[.87,.65,.27,.58,.26],
+                [1,.70,.28,.64,.26]]
+            entry.pop('contour_glow',None)
         changed=any(entry.get(k)!=v for k,v in meta.items())
         entry.update(meta)
         entry['normal_reference']='assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png'
         if changed:entry['state']='registered'
         for job in jobs['jobs']:
             for variant in job['variants']:
-                if variant['id']==identity:variant.update(meta)
+                if variant['id']==identity:
+                    variant.pop('contour_glow',None)
+                    variant.update(meta)
         updates.append(dict(id=identity,source_frame=meta['source_frame'],native_rect=meta['native_rect']))
     (SOURCE/'jobs.json').write_text(json.dumps(jobs,ensure_ascii=False,indent=2)+'\n')
     (SOURCE/'accepted.json').write_text(json.dumps(accepted,ensure_ascii=False,indent=2)+'\n')

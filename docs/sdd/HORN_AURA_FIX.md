@@ -35,3 +35,32 @@ versão conferidas. Smoke PCK fora do projeto PASS (loja/550avatares/629camadas/
 compra/vestir/reload/batalha); capturas shop-avatar/mobile vêm desse PCK e
 confirmam `contour_derived`. Sem novos testes de partidas completas por ser
 reparo visual. Aceite da aparência pelo usuário continua pendente.
+
+## Correção após teste do usuário — 23/10/2026
+
+0.18.3 foi rejeitada: brilho e animação ficaram imperceptíveis. O halo atrás
+da anatomia mudou a aparência além do pedido. Plano REQ-10/20/39: reproduzir
+a perda no tamanho real da loja; restaurar a textura L anterior sobre a peça,
+com mesma opacidade e relógio; ajustar apenas sua curva por geometria de UV
+constante, ancorada na cabeça. Conferir pico/vale no próprio ouro, ambos os
+sentidos/inclinação, pausa e prévias Avatar/Mobile do aplicativo exportado.
+Originais e demais19efeitos preservados. ADR-079 substitui ADR-078.
+
+Implementação0.18.4: `AvatarXfsHD.curve_light` registra nove marcos em64faixas
+UV constantes sobre a textura L existente. Mesh reutilizada no cache; mesmo
+transform da anatomia, composição sobre a peça e opacidade0,78382033. Fórmula
+de pulsação0,8+0,2sin(ageTAU/1,1) preservada; nenhum PNG regenerado/editado.
+
+Teste GPU antes da implementação reproduziu o relato: energia animada82,847
+contra487,8 do efeito anterior no tamanho da loja. Depois do ajuste353,184 e
+861pixels variando; o efeito segue os pontos reais do ouro na curva.162quadros,
+ambos sentidos/escalas, inclinação e30quadros pausados idênticos. Vídeo/PNGs
+em `docs/horn-curve/`; metadado `light_curve` somente Great Devil L.
+
+Prévia real: Avatar pico642,094/vale386,729 e Mobile543,667/328,580, isolando o
+brilho de cada pose contra referência sem luz. Revisão independente sem achados.
+`check.sh --quick`5299checks e13Python PASS; QA37lotes e550avatares/629camadas
+atualizados, zero pendentes/falhas no audit runtime. App/ZIP0.18.4 exportados e
+assinatura estrita/versão conferidas. Smoke PCK550/629/loja/vestir/reload/batalha
+PASS fora do projeto. Pico/vale Avatar/Mobile acima reproduzidos no PCK; capturas
+e relatório em `docs/horn-curve/`. Aceite visual do usuário permanece pendente.
