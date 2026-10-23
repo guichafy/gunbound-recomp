@@ -65,7 +65,7 @@ func run() -> void:
 				quit(1)
 				return
 	# Same scene/pose, original renderer only, for honest visual comparison.
-	for mobile in [view.bigfoot, view.mage]:
+	for mobile in [view.sprite_for(2), view.sprite_for(1)]:
 		mobile.hd_rig.sheet.texture = null
 		for sheet in [mobile.hd_shots, mobile.hd_effects]:
 			sheet.texture = null

@@ -5,6 +5,7 @@ extends RefCounted
 ## Reference logic: OpenBound, Copyright (C) 2020, Carlos H.M.S.; GPL-3.0-or-later.
 
 const Items = preload("res://scripts/items.gd")
+const MobileLooks = preload("res://scripts/mobile_looks.gd")
 
 const ORIGINALS := "res://assets/openbound/items/"
 const HD := "res://assets/hd/items/"
@@ -27,12 +28,11 @@ const FLAME_FPS := 30.0
 const FLAME_KEYS := [0, 2, 4, 6, 8, 11, 14, 18]
 # The HD MatchStatus keeps only the ITEM LOCKED frame (217 of the 868 px sheet).
 const HD_SOURCE_WIDTH := {"MatchStatus.png": 217.0}
-# MobileFlipbook UsingItem: 20 frames at 19 fps. Sheets are 5×4 cells.
-# Bigfoot cell 129×130 (frames 234–253); Mage cell 109×150 (frames 243–262).
+# MobileFlipbook UsingItem: 20 frames at 19 fps. Sheets are 5×4 cells; the
+# file and cell of each mobile live in MobileLooks ("using").
 const USING_FPS := 19.0
 const USING_FRAMES := 20
 const USING_COLUMNS := 5
-const USING_CELL := {"bigfoot": Vector2(129, 130), "mage": Vector2(109, 150)}
 
 var textures := {}
 var originals := {}
@@ -53,8 +53,10 @@ func _init() -> void:
 		textures["TeleportFlame.png"] = load(HD + "TeleportFlame.png")
 	shoot_sound = load(ORIGINALS + "ShootTeleport.mp3")
 	blast_sound = load(ORIGINALS + "BlastTeleport.mp3")
-	_load_using("bigfoot", "UsingItemBigfoot.png")
-	_load_using("mage", "UsingItemMage.png")
+	for vehicle_id in MobileLooks.ids():
+		var look: Dictionary = MobileLooks.look(vehicle_id)
+		if not look.using.is_empty():
+			_load_using(look.kind, look.using.file)
 	rng.randomize()
 
 func _load_using(kind: String, file_name: String) -> void:
@@ -185,11 +187,12 @@ func using_density(kind: String) -> float:
 	var texture: Texture2D = using_textures.get(kind)
 	if texture == null:
 		return 1.0
-	var cell_width: float = USING_CELL[kind].x
+	var cell_width: float = MobileLooks.using_aura(kind).cell.x
 	return float(texture.get_width()) / (cell_width * float(USING_COLUMNS))
 
 ## Green diamonds and beams over the mobile. Same cell, pivot and ground
-## contact as the original atlas, so the aura sits on the character.
+## contact as the original atlas, so the aura sits on the character. A mobile
+## without a "using" look (Nak) has no aura sheet and draws nothing.
 func draw_using(view: CanvasItem, body, state: Dictionary, facing: int, offset: Vector2) -> void:
 	var kind: String = body.hd_rig.kind
 	var texture: Texture2D = using_textures.get(kind)

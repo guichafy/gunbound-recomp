@@ -12,9 +12,7 @@ const Profile = preload("res://scripts/profile.gd")
 const UIFactory = preload("res://scripts/ui.gd")
 const Sound = preload("res://scripts/sound.gd")
 const BattleArt = preload("res://scripts/battle_art.gd")
-const BigfootSprite = preload("res://scripts/bigfoot_sprite.gd")
-const MageSprite = preload("res://scripts/mage_sprite.gd")
-const NakSprite = preload("res://scripts/nak_sprite.gd")
+const MobileLooks = preload("res://scripts/mobile_looks.gd")
 const Maps = preload("res://scripts/maps.gd")
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
@@ -33,9 +31,6 @@ var hud = HudArt.new()
 var item_art = ItemArt.new()
 var item_bar = ItemBar.new(item_art)
 var weather_art = WeatherArt.new()
-var mage = MageSprite.new()
-var bigfoot = BigfootSprite.new()
-var nak = NakSprite.new()
 var art = BattleArt.new()
 var ui = UIFactory.new()
 var model = Match.new()
@@ -146,15 +141,19 @@ var move_left: Button
 var move_right: Button
 var weapon_buttons: Array[TextureButton] = []
 var queue_entries: Array = []
-var sprites := {}
+# One sprite per mobile, from the presentation catalog (ADR-070).
+var sprites := build_sprites()
+
+static func build_sprites() -> Dictionary:
+	var result := {}
+	for vehicle_id in MobileLooks.ids():
+		result[vehicle_id] = load(MobileLooks.look(vehicle_id).sprite).new()
+	return result
 
 func _ready() -> void:
 	# HUD HD sprites (3×) are drawn smaller than their pixels; mipmaps keep 1 px borders.
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	background = load("res://assets/art/background.png")
-	sprites[1] = mage
-	sprites[2] = bigfoot
-	sprites[3] = nak
 	if profile == null:
 		profile = Profile.new()
 	profile.load_profile()

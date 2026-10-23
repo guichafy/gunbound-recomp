@@ -47,9 +47,9 @@ func run() -> void:
 	view.opening = 0
 	view.start_match()
 	check(view.model.projectiles.is_empty() and view.effects.is_empty() and view.model.flight_elapsed == 0, "Restart clears pending salvo and effects")
-	check(view.bigfoot.get("shoot_sounds") != null and view.bigfoot.get("effects") != null, "Bigfoot original audio and explosions loaded")
-	if view.bigfoot.get("shoot_sounds") != null:
-		for stream in view.bigfoot.shoot_sounds + view.bigfoot.blast_sounds:
+	check(view.sprite_for(2).get("shoot_sounds") != null and view.sprite_for(2).get("effects") != null, "Bigfoot original audio and explosions loaded")
+	if view.sprite_for(2).get("shoot_sounds") != null:
+		for stream in view.sprite_for(2).shoot_sounds + view.sprite_for(2).blast_sounds:
 			check(stream != null and stream.get_length() > 0, "Original Bigfoot sound is playable")
 	view.model.actors[0].turns = 3
 	view.select_weapon(2)

@@ -57,6 +57,20 @@ func run() -> void:
 		view.select_vehicle(0)
 		check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
 	var Rig = load("res://scripts/mobile_rig.gd")
+	# Presentation catalog (ADR-070): one look per playable mobile, no id branches.
+	var Looks = load("res://scripts/mobile_looks.gd")
+	var Mobiles = load("res://scripts/mobiles.gd")
+	var looks_ok := true
+	for vehicle_id in Mobiles.PLAYABLE:
+		var look: Dictionary = Looks.look(vehicle_id)
+		looks_ok = looks_ok and not look.is_empty() and ResourceLoader.exists(look.sprite) and view.sprite_for(vehicle_id) != null
+		looks_ok = looks_ok and Looks.id_of(look.kind) == vehicle_id
+	check(looks_ok and Looks.ids().size() == Mobiles.PLAYABLE.size(), "Every playable mobile has one presentation look and sprite")
+	for kind in ["bigfoot", "mage"]:
+		var rig = Rig.new(kind)
+		var death := float(Mobiles.definition(Looks.id_of(kind)).death)
+		check(rig.available() and rig.sample("destroyed", death, 0).alpha == 0.0 and rig.sample("destroyed", death * 0.5, 0).alpha > 0.0, kind + " HD death fades over the catalog death time")
+	check(not Rig.new("nak").available() and Looks.using_aura("nak").is_empty(), "Nak keeps the original atlas and has no UsingItem aura")
 	for kind in ["bigfoot", "mage"]:
 		var rig = Rig.new(kind)
 		check(rig.pilot.texture.resource_path.ends_with("pilot_side.png"), "Both mobiles use the occluded side-view master")

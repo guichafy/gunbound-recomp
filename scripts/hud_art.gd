@@ -77,7 +77,8 @@ func _init() -> void:
 		"ShotSelector.png", "Options.png", "SkipTurn.png", "WeatherIcons.png"]
 	for font_spec in FONTS.values():
 		names.append(font_spec.file)
-	for mob in ["Mage", "Bigfoot", "Nak"]:
+	for vehicle_id in Match.PLAYABLE_VEHICLES:
+		var mob: String = Match.VEHICLES[vehicle_id].name
 		for shot in ["S1", "S2", "SS"]:
 			for side in ["Ally", "Enemy"]:
 				names.append("Crosshair%s%s%s.png" % [mob, shot, side])
