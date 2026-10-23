@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, message: String) -> void:
-	checks+=1
-	if not ok:
-		failures+=1
-		printerr("FAIL: ",message)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func light_at(data: Dictionary, point: Vector2) -> Color:
 	if not data.get("mesh") is ArrayMesh:return Color.TRANSPARENT
 	var arrays: Array=data.mesh.surface_get_arrays(0)
@@ -137,5 +128,4 @@ func run() -> void:
 	art.xfs_hd.layers[item.key+"|layer:0"]=saved
 	var empty=load("res://scripts/avatar_xfs_hd.gd").new("res://.tools/missing-xfs-hd.json")
 	check(not empty.complete(item) and empty.portrait(item.key)==null,"Missing migration metadata preserves original fallback")
-	print("XFS HD MIGRATION CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("XFS HD MIGRATION CHECKS")

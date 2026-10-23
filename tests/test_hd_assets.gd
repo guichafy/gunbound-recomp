@@ -1,17 +1,8 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	check(ResourceLoader.exists("res://scripts/hd_sheet.gd"), "HD atlas renderer exists")
 	if not ResourceLoader.exists("res://scripts/hd_sheet.gd"):
-		print("HD CHECKS: ", checks, " | FAILURES: ", failures)
+		report("HD CHECKS")
 		quit(1)
 		return
 	var Sheet = load("res://scripts/hd_sheet.gd")
@@ -48,5 +39,4 @@ func run() -> void:
 	var sheet = Sheet.new("res://assets/hd/bigfoot.png", 4, 8)
 	var rect: Rect2 = sheet.destination(texture, Rect2(0, 0, 10, 10), Rect2(-50, -70, 100, 100))
 	check(rect == Rect2(-20, -30, 40, 50), "HD draw preserves original opaque footprint and contact")
-	print("HD CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("HD CHECKS")

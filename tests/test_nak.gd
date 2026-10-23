@@ -1,17 +1,9 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## Nak (ID 3, REQ-43, ADR-074): catalog, S2 burrow, SS ghost, shared prediction, frames.
 
 const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
-var checks := 0
-var failures := 0
-
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
 
 func shell(model, weapon: int, at: Vector2, velocity: Vector2) -> Dictionary:
 	var rules: Dictionary = Mobiles.weapon(3, weapon)
@@ -152,5 +144,4 @@ func _initialize() -> void:
 	check(sprite.frame_index("idle", 5.5, 0, true) == sprite.frame_index("idle_low", 5.5, 0, true), "Low health idle skips the bubble")
 	check(sprite.effect_capacity(0) == 11 and sprite.effect_capacity(2) == 25, "Original impact lengths")
 	check(sprite.shoot_sounds.size() == 3 and sprite.blast_sounds.size() == 3, "Original Nak sounds")
-	print("NAK CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("NAK CHECKS")

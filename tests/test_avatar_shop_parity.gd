@@ -1,14 +1,5 @@
-extends SceneTree
-var checks := 0
-var failures := 0
+extends "res://tests/support/suite.gd"
 const PATH := "res://.tools/shop-parity-profile.json"
-func check(ok: bool, description: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",description)
-func _initialize() -> void:
-	call_deferred("run")
 func animation(shop, name: String) -> Dictionary:
 	for entry in shop.animated:
 		if str(entry.path).get_file()==name:
@@ -93,5 +84,4 @@ func run() -> void:
 	await process_frame
 	for file in [PATH,"res://.tools/shop-parity-profile-options.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(file))
-	print("SHOP PARITY CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("SHOP PARITY CHECKS")

@@ -1,13 +1,4 @@
-extends SceneTree
-var checks:=0
-var failures:=0
-func check(ok: bool, message: String) -> void:
-	checks+=1
-	if not ok:
-		failures+=1
-		printerr("FAIL: ",message)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var Profile=load("res://scripts/profile.gd")
 	var path:="res://.tools/shop-test-funds.json"
@@ -56,5 +47,4 @@ func run() -> void:
 	check(bought==479 and dressed==479,"Requested starting funds buy and equip all 479 available avatars across both genders")
 	check(all.gold>=0 and all.cash>=0,"Full catalog remains within the requested budget")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	print("SHOP TEST FUNDS CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("SHOP TEST FUNDS CHECKS")

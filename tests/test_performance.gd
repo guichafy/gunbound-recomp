@@ -1,18 +1,7 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-32: the CPU aim search runs on a worker thread over a snapshot, gives the
 ## same plan as the one-shot search and never blocks the battle frame.
 
-var failures := 0
-var checks := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 ## Player vehicle 2 → CPU Mage; player vehicle 1 → CPU Bigfoot (bomb salvos).
 func cpu_model(seed_value: int, vehicle: int = 2, special: bool = false):
@@ -108,6 +97,6 @@ func run() -> void:
 	check(scene.cpu_task == -1 and scene.cpu_search.is_empty() and scene.cpu_plan.is_empty(), "Restarting drops a running search safely")
 	scene.show_menu()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/performance-test-profile.json"))
-	print("PERFORMANCE CHECKS: ", checks, " | FAILURES: ", failures)
+	report("PERFORMANCE CHECKS")
 	scene.queue_free()
-	quit(1 if failures > 0 else 0)
+	quit(exit_code())

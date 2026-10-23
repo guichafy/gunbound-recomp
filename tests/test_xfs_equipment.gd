@@ -1,14 +1,5 @@
-extends SceneTree
-var checks := 0
-var failures := 0
+extends "res://tests/support/suite.gd"
 const PROFILE := "res://.tools/xfs-equipment-test.json"
-func check(ok: bool, message: String) -> void:
-	checks+=1
-	if not ok:
-		failures+=1
-		printerr("FAIL: ",message)
-func _initialize() -> void:
-	call_deferred("run")
 func run() -> void:
 	var P=load("res://scripts/profile.gd")
 	var A=load("res://scripts/player_attributes.gd")
@@ -68,5 +59,4 @@ func run() -> void:
 	await process_frame
 	for path in [PROFILE,PROFILE.get_basename()+"-options.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	print("XFS EQUIPMENT CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("XFS EQUIPMENT CHECKS")

@@ -1,16 +1,6 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-35..37 in the scene: item bar, queued use, Ignorance lock, PopupSelectItem,
 ## teleport presentation and HD/fallback textures (ITEMS_0_13.md).
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
-
 func key(scene, code: Key) -> void:
 	var event := InputEventKey.new()
 	event.physical_keycode = code
@@ -183,5 +173,4 @@ func run() -> void:
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(profile_path))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(options_path))
-	print("ITEMS SCENE CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("ITEMS SCENE CHECKS")

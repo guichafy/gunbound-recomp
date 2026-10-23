@@ -1,16 +1,5 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 
-var failures := 0
-var checks := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
@@ -83,8 +72,8 @@ func run() -> void:
 	check(cpu_fired, "The CPU plans and fires on the opening turn")
 	scene.show_menu()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/smoke-profile.json"))
-	print("SCENE CHECKS: ", checks, " | FAILURES: ", failures)
+	report("SCENE CHECKS")
 	scene.queue_free()
 	await process_frame
 	await process_frame
-	quit(0 if failures == 0 else 1)
+	quit(exit_code())

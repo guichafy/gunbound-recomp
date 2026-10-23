@@ -1,16 +1,8 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## Requirements 14/15: launch geometry and initiative preview remain model-owned.
 
 const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
-var checks := 0
-var failures := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
 
 func _initialize() -> void:
 	var model = Match.new()
@@ -23,7 +15,7 @@ func _initialize() -> void:
 	check(model.has_method("shot_velocity"), "CPU and live shots share support-aware velocity")
 	check(model.has_method("initiative_preview"), "Model owns initiative preview")
 	if not model.has_method("body_rotation") or not model.has_method("shot_velocity") or not model.has_method("initiative_preview"):
-		finish()
+		finish("REFINEMENT MODEL CHECKS")
 		return
 	# A real custom mask with a known slope, not a mocked collision/rotation function.
 	for slope in [-0.4, 0.4]:
@@ -73,8 +65,4 @@ func _initialize() -> void:
 	model.start(1, 1, 42)
 	model.actors[1].ready = 100.0
 	check(model.initiative_preview(0)[0].actor == 1, "Initiative ties favor the other actor")
-	finish()
-
-func finish() -> void:
-	print("REFINEMENT MODEL CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("REFINEMENT MODEL CHECKS")

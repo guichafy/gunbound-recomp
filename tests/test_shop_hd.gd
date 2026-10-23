@@ -1,11 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, description: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",description)
+extends "res://tests/support/suite.gd"
 func _initialize() -> void:
 	check(ResourceLoader.exists("res://scripts/shop_hd.gd"),"Registered HD interface loader exists")
 	if failures == 0:
@@ -28,5 +21,4 @@ func _initialize() -> void:
 		hd.sprites["AnimatedButtons/Exit"] = data
 		hd.sprites["AnimatedButtons/Exit"].file = "res://assets/hd/shop/missing.png"
 		check(hd.texture("AnimatedButtons/Exit")==null,"Absent raster requests fallback")
-	print("SHOP HD CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("SHOP HD CHECKS")

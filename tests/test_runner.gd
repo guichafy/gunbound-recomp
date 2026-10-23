@@ -1,20 +1,11 @@
-extends SceneTree
-
-var failures: Array[String] = []
-var checks: int = 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures.append(description)
-		printerr("FAIL: ", description)
+extends "res://tests/support/suite.gd"
 
 func _initialize() -> void:
 	var paths := ["res://scripts/terrain.gd", "res://scripts/combat.gd", "res://scripts/match.gd"]
 	for path in paths:
 		check(ResourceLoader.exists(path), "Required gameplay model exists: " + path)
-	if not failures.is_empty():
-		finish()
+	if failures > 0:
+		finish("CHECKS")
 		return
 	var terrain_script = load(paths[0])
 	var combat = load(paths[1])
@@ -133,8 +124,4 @@ func _initialize() -> void:
 		loaded.xp = 450
 		check(loaded.level() == 3, "Level derives from accumulated XP")
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(profile_path))
-	finish()
-
-func finish() -> void:
-	print("CHECKS: ", checks, " | FAILURES: ", failures.size())
-	quit(0 if failures.is_empty() else 1)
+	finish("CHECKS")

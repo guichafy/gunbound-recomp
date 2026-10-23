@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var A = load("res://scripts/player_attributes.gd")
 	var Mobiles = load("res://scripts/mobiles.gd")
@@ -59,5 +50,4 @@ func run() -> void:
 		m.terrain.cells.fill(1)
 		m.explode(Vector2(400,200))
 		check(not m.terrain.is_solid(Vector2(432,200)) and m.terrain.is_solid(Vector2(440,200)), "Live Dig enlarges crater beyond damage radius")
-	print("ATTRIBUTES CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("ATTRIBUTES CHECKS")

@@ -1,19 +1,8 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-27..30: original OpenBound battle HUD (layout, buttons, strength bar,
 ## keyboard, crosshair, compass, timer, Delayboard, life bar, damage counter) and
 ## REQ-31 PopupGameOptions (SFX, scroll speed, background, pause access).
 
-var failures := 0
-var checks := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 func key(scene, code: int, pressed: bool) -> void:
 	var event := InputEventKey.new()
@@ -341,6 +330,6 @@ func run() -> void:
 	scene.update_hud()
 	check(scene.displayed_queue().size() == 2, "Delayboard lists both players")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/hud-test-profile.json"))
-	print("HUD CHECKS: ", checks, " | FAILURES: ", failures)
+	report("HUD CHECKS")
 	scene.queue_free()
-	quit(1 if failures > 0 else 0)
+	quit(exit_code())

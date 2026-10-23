@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var Match = load("res://scripts/match.gd")
 	var model = Match.new()
@@ -78,5 +69,4 @@ func run() -> void:
 	view.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/roster-test-profile.json"))
-	print("ROSTER/SIDE PILOT CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("ROSTER/SIDE PILOT CHECKS")

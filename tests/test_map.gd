@@ -1,16 +1,6 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-21/22: Miramo Town A in native coordinates — collision from the original
 ## alpha, HD visual in agreement, spawns, craters, prediction, camera and fallback.
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
-
 func run() -> void:
 	var Maps = load("res://scripts/maps.gd")
 	var Terrain = load("res://scripts/terrain.gd")
@@ -191,5 +181,4 @@ func run() -> void:
 	scene.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/map-test-profile.json"))
-	print("MAP CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("MAP CHECKS")

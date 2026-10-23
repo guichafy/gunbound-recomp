@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
 	scene.profile = load("res://scripts/profile.gd").new("res://.tools/mage-scene-profile.json")
@@ -85,5 +76,4 @@ func run() -> void:
 	await process_frame
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/mage-scene-profile.json"))
-	print("MAGE SCENE CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("MAGE SCENE CHECKS")

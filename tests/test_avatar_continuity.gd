@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var model = load("res://scripts/match.gd").new()
 	model.start(2,1,42,"")
@@ -76,5 +67,4 @@ func run() -> void:
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/avatar-continuity-profile-options.json"))
-	print("AVATAR CONTINUITY CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures == 0 else 1)
+	finish("AVATAR CONTINUITY CHECKS")

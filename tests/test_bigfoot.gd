@@ -1,16 +1,5 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 
-var checks := 0
-var failures := 0
-
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
@@ -90,5 +79,4 @@ func run() -> void:
 	await process_frame
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/bigfoot-profile.json"))
-	print("BIGFOOT CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("BIGFOOT CHECKS")

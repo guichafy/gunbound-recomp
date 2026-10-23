@@ -1,14 +1,5 @@
-extends SceneTree
-var checks := 0
-var failures := 0
+extends "res://tests/support/suite.gd"
 const PROFILE_PATH := "res://.tools/shop-audit-profile.json"
-func check(ok: bool, description: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",description)
-func _initialize() -> void:
-	call_deferred("run")
 func click(point: Vector2) -> void:
 	for pressed in [true,false]:
 		var event := InputEventMouseButton.new()
@@ -122,5 +113,4 @@ func run() -> void:
 	await process_frame
 	for path in [PROFILE_PATH,"res://.tools/shop-audit-profile-options.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	print("SHOP AUDIT CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("SHOP AUDIT CHECKS")

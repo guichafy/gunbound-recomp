@@ -1,14 +1,5 @@
-extends SceneTree
-var checks := 0
-var failures := 0
+extends "res://tests/support/suite.gd"
 const PROFILE_PATH := "res://.tools/classic-shop-test.json"
-func check(ok: bool, description: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",description)
-func _initialize() -> void:
-	call_deferred("run")
 func click(point: Vector2) -> void:
 	for pressed in [true,false]:
 		var event := InputEventMouseButton.new()
@@ -114,5 +105,4 @@ func run() -> void:
 		for entry in rows:
 			keys.append(entry.key)
 	check(keys.size() == 20 and keys == entries.map(func(item): return item.key),"Pagination never duplicates or skips avatars")
-	print("CLASSIC SHOP CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("CLASSIC SHOP CHECKS")

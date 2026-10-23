@@ -1,22 +1,11 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 
-var checks := 0
-var failures := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
 
 func key(scene, pressed: bool, code: Key = KEY_SPACE) -> void:
 	var event := InputEventKey.new()
 	event.physical_keycode = code
 	event.pressed = pressed
 	scene._unhandled_key_input(event)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
@@ -113,5 +102,4 @@ func run() -> void:
 	await process_frame
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/refinement-profile.json"))
-	print("REFINEMENT SCENE CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("REFINEMENT SCENE CHECKS")

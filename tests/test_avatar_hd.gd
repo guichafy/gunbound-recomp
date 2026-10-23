@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	check(FileAccess.file_exists("res://scripts/avatar_hd.gd"), "HD avatar renderer catalog exists")
 	if failures == 0:
@@ -45,5 +36,4 @@ func run() -> void:
 		hd.pieces["0:0:1"] = saved
 		hd.pieces["0:0:1"].region = [-1,0,5,5]
 		check(hd.piece("0:0:1",11).is_empty(), "Outside texture region must fall back")
-	print("AVATAR HD CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures == 0 else 1)
+	finish("AVATAR HD CHECKS")

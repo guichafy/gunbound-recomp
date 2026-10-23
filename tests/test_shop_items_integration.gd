@@ -1,15 +1,6 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 const Match = preload("res://scripts/match.gd")
 const Snapshot = preload("res://scripts/flight_snapshot.gd")
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",label)
-func _initialize() -> void:
-	call_deferred("run")
 func fresh(loadout: Array, values: Array):
 	var model = Match.new()
 	model.start(2,1,42,"","original",null,loadout,values)
@@ -94,5 +85,4 @@ func run() -> void:
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path.get_basename()+"-options.json"))
-	print("SHOP ITEMS INTEGRATION CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("SHOP ITEMS INTEGRATION CHECKS")

@@ -1,15 +1,5 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-23/24/25: OpenBound wind, weather columns and Thor in the shared flight loop.
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
-
 func run() -> void:
 	var Weather = load("res://scripts/weather.gd")
 	var Match = load("res://scripts/match.gd")
@@ -286,5 +276,4 @@ func run() -> void:
 	scene.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/weather-test-profile.json"))
-	print("WEATHER CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("WEATHER CHECKS")

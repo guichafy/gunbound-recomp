@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	check(FileAccess.file_exists("res://scripts/avatar_catalog.gd"), "Avatar catalog exists")
 	if failures == 0:
@@ -22,5 +13,4 @@ func run() -> void:
 			if not item.atlas.is_empty():
 				var texture = load(item.atlas)
 				check(int(texture.get_width() / int(item.frame_size[0])) * ceili(float(texture.get_height()) / float(item.frame_size[1])) >= (11 if item.category == 1 else 22), "Frames " + item.key)
-	print("AVATAR CATALOG CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("AVATAR CATALOG CHECKS")

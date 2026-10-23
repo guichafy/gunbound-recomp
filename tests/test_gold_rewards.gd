@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	check(FileAccess.file_exists("res://scripts/gold_rewards.gd"), "Gold scoring exists")
 	if failures == 0:
@@ -62,5 +53,4 @@ func run() -> void:
 				m.events.clear()
 				m.collect_gold_damage(0,Vector2(240-100*facing,100),{"age":5,"influenced":["mirror","tornado"]})
 				check(m.shot_gold.travelled == 1 and not m.shot_gold.mirror and not m.shot_gold.tornado and not m.shot_gold.backward, "Zero damage pellet cannot contaminate bonuses")
-	print("GOLD REWARDS CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("GOLD REWARDS CHECKS")

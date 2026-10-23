@@ -1,17 +1,8 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	if not ResourceLoader.exists("res://scripts/projectile_art.gd"):
 		check(false, "Continuous projectile renderer exists")
-		print("PILOT/SHOTS CHECKS: ", checks, " | FAILURES: ", failures)
+		report("PILOT/SHOTS CHECKS")
 		quit(1)
 		return
 	var Art = load("res://scripts/projectile_art.gd")
@@ -116,5 +107,4 @@ func run() -> void:
 	view.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/pilot-shots-test-profile.json"))
-	print("PILOT/SHOTS CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("PILOT/SHOTS CHECKS")

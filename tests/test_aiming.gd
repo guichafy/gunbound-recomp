@@ -1,19 +1,8 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-34: Aiming Mode Drag/Slice. Slice keeps Space; Drag shoots with a
 ## left-button drag in the world (power = distance / 640 px), fires on release.
 
-var failures := 0
-var checks := 0
 var scene
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 func key(code: int, pressed: bool) -> void:
 	var event := InputEventKey.new()
@@ -177,6 +166,6 @@ func run() -> void:
 
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(scene.options.path))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/aiming-test-profile.json"))
-	print("AIMING CHECKS: ", checks, " | FAILURES: ", failures)
+	report("AIMING CHECKS")
 	scene.queue_free()
-	quit(1 if failures > 0 else 0)
+	quit(exit_code())

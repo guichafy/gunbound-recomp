@@ -1,15 +1,7 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 
 const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
-var checks := 0
-var failures := 0
-
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
 
 func _initialize() -> void:
 	var model = Match.new()
@@ -72,5 +64,4 @@ func _initialize() -> void:
 	check(bigfoot_frames.frame_index("falling", 0, 0, false) == 187, "Bigfoot falling frame")
 	check(bigfoot_frames.frame_index("unable", 0, 0, false) == 105, "Bigfoot unable-to-move frame")
 	check(bool(load("res://scripts/mobiles.gd").definition(2).smoke) and not bool(load("res://scripts/mobiles.gd").definition(1).smoke), "Only Bigfoot smokes at low health")
-	print("MOBILE PARITY CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("MOBILE PARITY CHECKS")
