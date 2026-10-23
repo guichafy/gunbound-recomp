@@ -12,7 +12,7 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
 | Validação automática | **5299 verificações rápidas e 13 testes Python** na 0.18.4; as **13 partidas completas** foram validadas na 0.18.2 |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
-| Aceite visual | Great Devil Head e os 20 modelos de cabeça com efeito revisados; validação do usuário pendente |
+| Validação visual | Usuário testou o Great Devil Head 0.18.4, relatou melhora e pediu consolidação; 20 modelos com efeito revisados |
 
 O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). Este arquivo é o mapa do que existe hoje.
 

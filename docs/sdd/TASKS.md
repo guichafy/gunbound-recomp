@@ -8,7 +8,7 @@
 - [x] Medir brilho na loja Avatar/Mobile contra referência sem luz; revisão independente sem achados.
 - [x] Regressões5299checks+13Python e QA37lotes/550avatares/629camadas sem pendências.
 - [x] App/ZIP0.18.4 exportados/assinados; PCK fora do projeto PASS e pulso confirmado nas duas prévias.
-- [ ] Usuário validar a curva e a animação da0.18.4.
+- [x] Usuário testou a 0.18.4, relatou melhora e solicitou revisão/commit/envio à main remota.
 
 ## Aura do Great Devil Head 0.18.3 (REQ-10/20/39, ADR-078)
 

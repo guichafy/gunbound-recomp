@@ -63,4 +63,5 @@ brilho de cada pose contra referência sem luz. Revisão independente sem achado
 atualizados, zero pendentes/falhas no audit runtime. App/ZIP0.18.4 exportados e
 assinatura estrita/versão conferidas. Smoke PCK550/629/loja/vestir/reload/batalha
 PASS fora do projeto. Pico/vale Avatar/Mobile acima reproduzidos no PCK; capturas
-e relatório em `docs/horn-curve/`. Aceite visual do usuário permanece pendente.
+e relatório em `docs/horn-curve/`. Em 23/10/2026 o usuário relatou que a
+implementação ficou melhor e solicitou revisão, commit e envio à main remota.

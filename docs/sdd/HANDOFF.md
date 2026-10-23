@@ -22,8 +22,14 @@ Ler HORN_AURA_FIX.md; ADR-079 substitui ADR-078. Tudo na main atual.
 - App/ZIP **0.18.4** reexportados; versão e assinatura estrita conferidas.
   Smoke PCK550/629/loja/vestir/reload/batalha PASS. Capturas/relatórios da loja
   em `docs/horn-curve/` vêm do pacote exportado.
-- **Pendente:** usuário validar curva e animação no aplicativo0.18.4; a0.18.3
-  abaixo é histórico rejeitado, não o critério visual atual.
+- **Retorno do usuário (23/10/2026):** testou a 0.18.4, relatou que a implementação
+  ficou melhor e pediu revisão, commit e envio à main remota. A0.18.3 abaixo
+  permanece como histórico rejeitado, não como critério visual atual.
+- Reconferência para consolidação: **2140 checks dirigidos** de catálogo,
+  composição e continuidade passaram. Hashes do renderer e PCK coincidem com
+  a entrega validada; versão 0.18.4 e assinatura estrita continuam íntegras.
+  Revisão final independente sem achados relevantes: somente Great Devil L
+  muda no catálogo; demais19efeitos e atlas preservados. Python13 PASS.
 
 ## Aura0.18.3 — histórico rejeitado (REQ-10/20/39, ADR-078)
 
