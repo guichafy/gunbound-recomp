@@ -149,6 +149,7 @@ func run() -> void:
 	root.add_child(scene)
 	if scene.get("sound") != null:
 		scene.sound.muted = true
+	scene.opening = 0
 	scene.start_match()
 	await process_frame
 	var limits: Rect2 = scene.camera_limits()

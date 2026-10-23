@@ -11,7 +11,7 @@ func _initialize() -> void:
 func run() -> void:
 	check(FileAccess.file_exists("res://scripts/avatar_catalog.gd"), "Avatar catalog exists")
 	if failures == 0:
-		var c = load("res://scripts/avatar_catalog.gd").new()
+		var c = load("res://scripts/avatar_catalog.gd").legacy()
 		check(c.entries.size() == 15, "Source has 15 avatars")
 		check(c.items(0, 0).size() == 5 and c.items(1, 0).size() == 1, "Gender catalogs")
 		check(c.items(1, 3).size() == 2, "Unisex flag")

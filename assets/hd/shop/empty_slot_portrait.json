@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "file": "res://assets/hd/shop/empty_slot_portrait.png",
+  "size": [
+    1254,
+    1254
+  ],
+  "region": [
+    209,
+    71,
+    870,
+    1076
+  ],
+  "alpha_threshold": 8,
+  "sha256": "1b56de20c1a77fb539595ad224c6a2f61688864da8886e0f9071e36fa2437699",
+  "tool": "GPT Images built-in imagegen",
+  "references": [
+    "assets/openbound/avatars/Unissex/Portrait/Goggles/No Goggles.png",
+    "assets/hd/avatars/space.png"
+  ],
+  "keys": [
+    "2:2:0",
+    "2:3:0"
+  ],
+  "source": "assets/hd/shop/source/video_0_15/generated_empty_slot.png",
+  "purpose": "Shared shop thumbnail only; no wearable piece or rig changes."
+}

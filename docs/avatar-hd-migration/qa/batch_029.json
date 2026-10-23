@@ -1,0 +1,689 @@
+{
+	"batch": "batch_029",
+	"components": [
+		{
+			"id": "xfs:2:3:55|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					7.0,
+					-46.0,
+					36.0,
+					48.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					34.0,
+					21.0,
+					176.0,
+					200.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:55|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					256.0,
+					20.0,
+					178.0,
+					201.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:56|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					8.0,
+					-45.0,
+					32.0,
+					47.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					495.0,
+					24.0,
+					164.0,
+					200.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:56|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					713.0,
+					25.0,
+					163.0,
+					197.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:57|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					9.0,
+					-46.0,
+					24.0,
+					43.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					61.0,
+					243.0,
+					123.0,
+					201.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:57|layer:1",
+			"registration": {
+				"attachment": {},
+				"effect": true,
+				"native_rect": [
+					13.0,
+					-50.0,
+					13.0,
+					16.0
+				],
+				"pulsate": true,
+				"reference_state": "",
+				"region": [
+					258.0,
+					264.0,
+					158.0,
+					165.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:57|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					492.0,
+					242.0,
+					143.0,
+					199.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:58|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					3.0,
+					-47.0,
+					33.0,
+					38.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					696.0,
+					243.0,
+					174.0,
+					200.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:58|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					30.0,
+					462.0,
+					174.0,
+					197.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:59|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					8.0,
+					-39.0,
+					23.0,
+					33.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					268.0,
+					461.0,
+					154.0,
+					198.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:59|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					493.0,
+					461.0,
+					150.0,
+					198.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:60|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					7.0,
+					-46.0,
+					23.0,
+					42.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					724.0,
+					458.0,
+					129.0,
+					202.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:60|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					55.0,
+					678.0,
+					131.0,
+					197.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:61|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					36.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					240.0,
+					685.0,
+					206.0,
+					164.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:61|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					470.0,
+					685.0,
+					200.0,
+					164.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:62|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					682.0,
+					685.0,
+					197.0,
+					164.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:62|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					16.0,
+					902.0,
+					199.0,
+					163.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:63|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					240.0,
+					903.0,
+					204.0,
+					163.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:63|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					467.0,
+					903.0,
+					203.0,
+					162.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:64|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					683.0,
+					903.0,
+					196.0,
+					162.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:64|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					17.0,
+					1114.0,
+					198.0,
+					165.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:65|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					244.0,
+					1115.0,
+					200.0,
+					161.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:65|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					467.0,
+					1115.0,
+					198.0,
+					161.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:66|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					36.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					685.0,
+					1115.0,
+					193.0,
+					162.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:66|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					18.0,
+					1319.0,
+					201.0,
+					167.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:67|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					36.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					243.0,
+					1319.0,
+					204.0,
+					165.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:67|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					465.0,
+					1319.0,
+					204.0,
+					165.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:68|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					683.0,
+					1319.0,
+					196.0,
+					165.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:68|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					17.0,
+					1531.0,
+					200.0,
+					168.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:69|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					241.0,
+					1533.0,
+					203.0,
+					165.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:69|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					465.0,
+					1533.0,
+					201.0,
+					165.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		},
+		{
+			"id": "xfs:2:3:70|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					10.0,
+					-42.0,
+					37.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					682.0,
+					1533.0,
+					198.0,
+					166.0
+				],
+				"sheet": "batch_029"
+			},
+			"sheet_hash": "81e295b7c47a0f1ddaecea1718f2c95423dfdf92de97642fd71774b60de0d548"
+		}
+	],
+	"frames": [
+		0,
+		30,
+		60,
+		90
+	],
+	"mobiles": [
+		"Mage direita",
+		"Bigfoot direita",
+		"Mage esquerda",
+		"Bigfoot esquerda"
+	],
+	"renderer_hashes": {
+		"scripts/avatar_art.gd": "1c86afd04087b6434495fb5b7f829ea12ff0153553c09ddd263b45cc4f731e0f",
+		"scripts/avatar_xfs_hd.gd": "df8809fb2d5cce28eeee0b2b847500c2479b7813e19f5ff9b20aeda92a467181",
+		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
+		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
+		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"
+	},
+	"size": [
+		1920,
+		1080
+	]
+}

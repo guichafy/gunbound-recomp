@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.7.0 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
+Protótipo 0.18.2 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
 desktop macOS, treino offline 1×1 contra CPU, Bigfoot/Mage com derivados HD e Nak
@@ -76,8 +76,8 @@ extra da sessão quando necessário.
 - Se entregar aplicativo atualizado, reexporte com `scripts/build_macos.py` e
   confira a assinatura. Rodar o projeto não atualiza o aplicativo já exportado.
 
-Não há remoto Git configurado no baseline. Não publique nem envie mudanças
-a um remoto sem solicitação do usuário.
+O remoto `origin` (github.com/guichafy/gunbound-recomp) existe desde o PR #1.
+Não publique nem envie mudanças a um remoto sem solicitação do usuário.
 
 ## Arte HD 0.6
 
@@ -200,7 +200,7 @@ original ÷ 7,5). Regras no `match.gd`: `use_item`, `shot_shells` (Dual/Dual+/
 Teleport/Thunder) usado por `fire` e `predict_shot`; efeito do turno em
 `actors[i].turn_item` (copiado pela previsão), limpo em `TurnTable.schedule`.
 Cada projétil guarda `weapon`; sinalizador (`beacon`) só colide com o terreno.
-CPU sem itens (seeds 81–90 iguais). No turno próprio o item sai do slot na
+CPU sem itens. No turno próprio o item sai do slot na
 hora (ADR-065) e a aura UsingItem HD acompanha o mobile. Cena: `item_bar.gd` (barra F1–F6, fila no
 turno adversário, ITEM LOCKED na Ignorância), `item_art.gd` (botões, sinalizador,
 chamas; Teleport2 = Teleport1 invertido), `select_item_popup.gd` (menu "Itens";
@@ -268,7 +268,7 @@ Branch/worktree preservados como referência, sem publicação.
 
 ## Nak 0.15 — estado atual
 
-Ler docs/sdd/NAK_0_15.md (REQ-43, ADR-069). Terceiro mobile, ID 3, contra o
+Ler docs/sdd/NAK_0_15.md (REQ-43, ADR-074). Terceiro mobile, ID 3, contra o
 Mage na CPU; 1↔2 inalterado. Fork não tem o Nak: arte/flipbook/dano/voo vêm do
 cliente original (jglim/gunbound-launcher TestClient, baixado com autorização em
 `.tools/gunbound-client/`) lido por `scripts/gunbound_xfs.py` (entradas em blocos
@@ -279,4 +279,23 @@ bolha `emotion1` no idle e RIDER_ADJUST (+5,+4). Sem HD ainda (usuário adiou a
 geração): `HD_KINDS` do rig/projéteis só Bigfoot/Mage; miras Nak 1×. Dúvidas
 sobre o cliente original: perguntar ao usuário. Teste test_nak.gd; captura
 tests/capture_nak.gd (docs/nak). Seeds 91–93 de test_matches jogam com o Nak.
+
+## Regras de batalha 0.18.2 — estado atual
+
+Ler docs/sdd/BATTLE_RULES_AUDIT.md (REQ-44, ADR-076). Política do usuário:
+regra original comprovada por engenharia reversa (GunBound-Decomp + `.dat`
+do cliente) prevalece; senão vale o C#. Delay original = `[28]` base + custo
+do tiro `[30/31/32]` + segundos inteiros gastos até o disparo × `[29]` (10).
+`TurnTable.shot_cost` serve à agenda e à prévia. Turno 30 s; passe 200 sem
+tempo; abertura sorteada (`Match.RANDOM_OPENING`; fixtures usam o padrão
+PLAYER e testes de cena fixam `opening = 0`). Balística do C#: gravidade
+196, força × 100 / massa 14, vento × 1,2; piso de força 15 e relógio real
+mantidos. Nak 770/920/1320, Mage 730/regen 30, itens do `itemdata.dat`.
+Mantidos: empate de iniciativa para o outro, empate por morte dupla, passe
+sem travar SS. As seeds de test_matches mudaram de propósito (valores no
+hand-off). Balística e dano originais em ponto fixo não foram portados.
+0.18.2: a CPU cobra 2 s fixos (`TurnTable.CPU_THINK_SECONDS`) e o relógio dela
+fica parado durante a busca (`Match.cpu_thinking`); a fila do HUD vem de
+`TurnTable.current_order`. Queda: deriva `wind.x / 45` por passo de gravidade
+(3 px, +0,15), ADR-077.
 

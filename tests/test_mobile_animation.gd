@@ -66,6 +66,7 @@ func run() -> void:
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
+	view.opening = 0
 	view.start_match()
 	view.model.start(2, 1, 42)
 	view.art.reset(view.model.actors)

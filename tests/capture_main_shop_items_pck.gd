@@ -27,6 +27,7 @@ func run() -> void:
 			if color.r>color.b+0.12 and color.g>color.b+0.02:
 				brown += 1
 	ok = ok and brown>30 and view.profile.catalog.entries.size()==15 and view.shop.avatar_art.hd.pieces.size()==13
+	view.set("opening", 0)
 	view.start_match()
 	await process_frame
 	ok = ok and view.item_bar.buttons.size()==1 and view.use_item(0) and is_equal_approx(float(view.model.actors[0].ready),12.0)

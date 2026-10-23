@@ -15,6 +15,7 @@ func run() -> void:
 	scene.set_process(false)
 	scene.sound.muted = true
 	scene.select_vehicle(1)
+	scene.opening = 0
 	scene.start_match()
 	check(scene.model.aim_limits(0, scene.weapon) == Vector2(15, 50) and scene.hud.crosshair_name(scene.model, 0, 0) == "CrosshairMageS1Ally.png", "Mage HUD uses legal aim range and Mage crosshair")
 	check(scene.weapon_buttons[0].tooltip_text.begins_with("Laser"), "HUD uses Mage weapon names")
@@ -33,6 +34,7 @@ func run() -> void:
 	scene._process(0.5)
 	check(scene.art.motion[0].pose_age == age, "Pause freezes Mage animation")
 	scene.close_overlay()
+	scene.opening = 0
 	scene.start_match()
 	scene.model.shot_actor = 1
 	scene.model.shot_weapon = 0
@@ -41,6 +43,7 @@ func run() -> void:
 	scene.update_hud()
 	check(scene.animation_state(0) == "hurt", "Shield impact animates Mage hurt pose")
 	check(scene.model.actors[0].shield == 130 and scene.hud.health_segments(scene.model.actors[0]).y < full.y, "HUD life bar shrinks the shield after real impact")
+	scene.opening = 0
 	scene.start_match()
 	check(scene.model.actors[0].shield == 220 and scene.effects.is_empty(), "Restart resets shield and effects")
 	scene.select_weapon(1)
@@ -52,6 +55,7 @@ func run() -> void:
 	scene.model.schedule(0, 120)
 	scene.consume_events()
 	check(scene.actor_frame(0) >= 100 and scene.actor_frame(0) <= 119, "Turn change preserves Mage recoil")
+	scene.opening = 0
 	scene.start_match()
 	scene.model.actors[0].hp = 0
 	scene.model.check_end()
@@ -60,6 +64,7 @@ func run() -> void:
 		scene._process(0.1)
 	check(scene.overlay == null, "Full Mage death animation precedes result")
 	scene.select_vehicle(2)
+	scene.opening = 0
 	scene.start_match()
 	scene.model.active = 1
 	scene.model.begin_turn()

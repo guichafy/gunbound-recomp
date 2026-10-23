@@ -1,6 +1,259 @@
-# Hand-off — Gunbound Recomp 0.15.0
+# Hand-off — Gunbound Recomp 0.18.2 / auditoria das regras de batalha
 
-## Nak 0.15 — terceiro mobile (ADR-069)
+## Release 0.18.2 — 21/10/2026 (branch `fix/0.18.2`, sem merge na main)
+
+Auditoria da 0.18.1 aprovada pelo usuário. Branch local a partir da `main`
+`3426129` (que já contém `fix/audit-0.18.1`). Sem push. Perfil real e fonte C#
+intocados.
+
+- CPU: tempo de pensar fixo de 2 s (`TurnTable.CPU_THINK_SECONDS`) no lugar do
+  relógio real, e `turn_time` congelado entre `begin_cpu_plan` e
+  `finish_cpu_plan` (`Match.cpu_thinking`): busca lenta não esgota o turno e a
+  mesma seed dá a mesma ordem (test_battle_rules, 47).
+- Fila do HUD antes da escolha da CPU vem de `TurnTable.current_order`
+  (empate a favor do outro, como a agenda).
+- Queda: deriva `wind.x / 45` por passo de gravidade (3 px, +0,15 por passo),
+  pela intenção do `Movement.ApplyGravity`, sem o reset literal (ADR-077).
+  Vento 35 em 100 px ≈ 18,7 px (test_mobile_parity, 27).
+- Vento em 0–359 (`posmod`); `HudArt.density` devolve 1,0 sem textura.
+- Docs: baseline da SPEC marcado como histórico/substituído, gravidade 196,
+  Mage 730/30, `ItemDelay`, faixas reais da perturbação do vento.
+- Validação: `check.sh` completo, 5287 checks + 13 partidas, zero falhas.
+  Novas referências de test_matches (opener/tiros/vencedor/HP): 81 0/30/1/[0,569],
+  82 1/24/0/[507,0], 83 1/7/0/[403,0], 84 0/15/0/[635,0], 85 1/17/0/[730,0],
+  86 0/8/0/[305,0], 87 0/16/1/[0,413], 88 0/11/0/[151,0], 89 0/3/1/[0,926],
+  90 0/12/0/[294,0], 91 1/5/0/[695,0], 92 0/6/1/[0,75], 93 1/22/0/[983,0].
+- App/ZIP 0.18.2 exportados com `build_macos.py` (Universal x86_64+arm64,
+  ad-hoc, `codesign --verify --deep --strict` OK, Info.plist 0.18.2). Smoke do
+  PCK fora do projeto (/private/tmp, `--main-pack`) PASS: gravidade 196, CPU
+  sem timeout em busca de 45 s, deriva 18,7 px, rótulo 0.18.2, menu e dois
+  turnos de partida. O binário exportado não aceita `--path`; o smoke usou o
+  editor 4.7.2 com o PCK exportado.
+- Pendências: validação manual de mira/alcance, recalibração do erro da CPU,
+  `game.gd` ainda define `model.phase = "menu"`.
+
+
+
+## Paridade das regras de batalha — 20/10/2026 (REQ-44, ADR-076)
+
+Pedido: comparar a batalha com o C# e com o GunboundClassic, usando engenharia
+reversa. Ler BATTLE_RULES_AUDIT.md, que traz a matriz de 24 regras, as
+evidências e as decisões. Feito na branch `claude/battle-rules-parity`
+(a partir de `385d211`), integrada à `main` sobre a 0.18.0 por pedido do
+usuário. Versão 0.18.1. Perfil real e fonte C# intocados; sem push.
+
+- Engenharia reversa: leitura do GunBound-Decomp pela API do GitHub e LZHUF
+  próprio dos `.dat`; nada foi executado. O delay original é
+  `[28] + custo [30/31/32] + segundos × [29]`; `base + custo` reproduz o C# em
+  12 dos 16 mobiles. O delay do Nak no C# é a linha de outro mobile.
+- `gunbound-server` (jglim) só repassa pacotes: não tem física, dano nem delay.
+- Aplicado por escolha do usuário:
+  - abertura sorteada;
+  - tempo gasto no delay do tiro, com turno de 30 s;
+  - passe 200;
+  - Nak 770/920/1320;
+  - Mage 730/30;
+  - itens do `itemdata.dat`;
+  - balística C# (196, massa 14, vento 1,2);
+  - CPU com refino local da busca.
+- Validação: `check.sh` completo, 3926 checks + 13 partidas, zero falhas. A
+  base antes da mudança tinha 3887 + 13. As partidas levam 215 s (antes 65 s)
+  porque ficaram mais longas. Na seed 81 (CPU fácil) foram 207 projéteis: 65
+  saíram pelas laterais e nenhum foi cortado por idade (máx. 5,1 s) ou pelo
+  topo. O erro de ±10 de força da CPU fácil agora desloca o alcance cerca de
+  1,7× mais, e a recalibração dos erros por dificuldade fica para decisão do
+  usuário.
+  Novas referências (opener/tiros/vencedor/HP): 81 0/65/1/[0,376],
+  82 1/34/1/[0,254], 83 1/7/0/[405,0], 84 0/15/0/[636,0], 85 1/12/0/[730,0],
+  86 0/8/0/[307,0], 87 0/22/0/[74,0], 88 0/11/0/[365,0], 89 0/3/1/[0,926],
+  90 0/12/0/[294,0], 91 1/5/0/[695,0], 92 0/4/0/[501,0], 93 1/18/0/[581,0].
+- Integração: `main` 0.18.0 trazida para a branch (o ADR de efeitos de avatar
+  ficou com o 075 e este virou ADR-076), depois `main` avançou por fast-forward
+  até `a25a471`. Árvore integrada: 5273 checks + 13 partidas, zero falhas, com
+  as mesmas referências acima.
+- App/ZIP 0.18.1 reexportados da `main` com `build_macos.py`. Versão no
+  `Info.plist` e assinatura estrita conferidas. Smoke do PCK exportado fora do
+  projeto passou: física/dados novos, abertura sorteada, rótulo 0.18.1, menu e
+  uma partida completa.
+- Limites: não houve captura GPU, e a sensação de mira precisa de validação
+  manual. Balística e dano originais em ponto fixo, termo `[34]`, morte súbita
+  e recalibração do erro da CPU ficaram pendentes. Scripts
+  `capture_*_pck.gd` usam `set("opening", 0)` para continuar valendo contra
+  builds antigos. Sem push.
+
+## Revisão20/10/2026 — validação final
+
+REQ-10/20/39, ADR-075; AVATAR_EFFECT_ALIGNMENT.md. Great Devil Head usava luz
+frontal (dois chifres) com cabeça Normal de perfil (um). Preparação agora
+seleciona11–21 para cabeça/L; fallback compartilha faixa Normal/Staring.
+Um novo mestre GPT Images de luz foi selecionado (1295×1214; recorte útil
+1094×1173); os outros19mestres aprovados foram preservados. Todos os20modelos
+com L receberam pontos fixos na anatomia HD, sem variar bbox por quadro.
+
+GPU:20modelos vestidos/mobile, dois sentidos e inclinação,1920×1080,
+360frames60fps/6s,30quadros pausados idênticos. Prévia real da loja em
+`docs/avatar-effects/shop-*.png`; vídeo/comparações na mesma pasta. Revisão
+independente sem bloqueadores. Os37lotes e auditoria550 foram renovados:
+550avatares/629camadas/550retratos,12N/A, nenhum fallback oculto.
+
+Regressão final:5234checks +13partidas PASS; Python13 PASS. Uma rodada anterior
+detectou expectativas de HUD ainda originais enquanto a preparação NakHD estava
+ativa; o runtime original foi restaurado e a rodada completa acima passou.
+Não houve mudança de combate/perfil. App/ZIP0.18.0 exportados, versão e assinatura estrita conferidas. Smoke do
+PCK correto fora do projeto PASS:550peças/629camadas/550retratos, compra,
+vestir, recarga, atributos e batalha em1920×1080 e1280×800.
+
+Git:0.17pendente foi preservado no commit3eb2b01. PR1 já está MERGED no GitHub
+(596e41e) e integrado localmente pelo merge385d211. Push inicial terminou com
+HTTP408; referência remota foi conferida, sem alegar sincronização ainda.
+
+NakHD: dois atlas1536×1024 e código foram preparados pelo pedido atual de
+regenerar imagens do PR1. A revisão automática rejeitou integrar/importar/
+testar por exigir confirmação específica, enviada ao usuário e ainda pendente.
+Para manter main executável, os21outputs novos e patch foram preservados em
+`assets/hd/nak/source/pending_integration`, com caminhos/hashes. Runtime Nak
+permanece original; nenhum trabalho foi perdido. Após confirmação, corrigir
+separação S2/SS da folha de efeitos, testes HD/HUD, GPU e export. NAK_HD.md.
+Esta pendência impede declarar todo o pedido de HD do PR finalizado.
+
+## Histórico da entrega0.17
+
+## Migração HD integral — concluída20/10/2026
+
+REQ-10/20/39, ADR-073; ler AVATAR_HD_MIGRATION.md. Controle em
+[docs/avatar-hd-migration/index.html](../avatar-hd-migration/index.html), CSV e
+JSON. **550/550avatares reais,629/629camadas e550/550miniaturas validados**;
+três padrões vazios/nove placeholders N/A, todos com motivo. Não confundir
+miniatura com peça vestível: a auditoria confirmou os550registros consumindo
+masters HD no AvatarArt, sem fallback nativo/legado oculto.
+
+37lotes/1161componentes novos:629camadas e532miniaturas, além das18anteriores.
+As12bases reaproveitadas anteriormente também foram regeneradas no lote037.
+38atlas selecionados,145–942px na maior dimensão útil por componente, PNGs
+66.549.923bytes. Brutos/referências/prompts/ledger/recortes manuais preservados
+em assets/hd/avatars/xfs/source (.gdignore); fontes XFS/C# intocadas.
+
+AvatarXfsHD/AvatarArt usam registro constante, aspecto e materiais preservados,
+respiração/poses/transições do rig e efeitos separados. Não é restauração de
+cada gesto/piscada nativo. Fallback integral preservado por peça. Correções:
+ARGB4444 respeita preto com alpha explícito (cinco acessórios antes invisíveis);
+PNGs anteriores mantidos e derivados corrigidos em *_alpha.png. Cabeças usam
+repouso de olhos abertos; fases/referências incorretas foram rejeitadas. Recortes
+014/016/027/035 e reparo do Battle Goggle têm metadados reproduzíveis.
+
+37comparações GPU ×4instantes, ambos Mage/Bigfoot, sentidos e inclinação.
+Vídeo motion.mp4:1920×1080,360frames/60fps/6s, quatro conjuntos, poses,
+transições e30quadros de pausa idênticos. HTML mostra evidência do avatar
+vestido/mobile e permite busca/filtro. Aceite exige hashes atuais da arte,
+registro e renderer. Navegador interno bloqueia file://; CSV entregue como
+arquivo, sem contornar a política nem alegar prévia HTML verificada.
+
+Regressão completa após merge paralelo do Nak:3887checks+13partidas PASS.
+Depois:688checks dirigidos e1744checagens de cobertura HD integral PASS;
+Python11 PASS. Fixture de itens espera a thread sem consumir sua tarefa;
+nenhuma regra de combate mudou pela migração. Integração Nak preservada,
+sem regenerar o mobile cujo HD foi adiado pelo usuário.
+
+App/ZIP0.17.0 reexportados, versão e assinatura estrita confirmadas. Smoke
+real do PCK fora do projeto PASS:550peças/629camadas/550retratos, compra,
+vestir/recarga/atributos/batalha,1920×1080 e1280×800. Brutos/jobs ausentes.
+Capturas em docs/avatar-hd-migration/shop-exported*.png. Perfil real preservado;
+nenhum commit/push/publicação realizado por este trabalho. Merge/snapshot
+paralelo385d211/f87153e ocorreu durante a execução e foi mantido.
+
+Próximo passo: usuário reabrir builds/Gunbound Recomp.app0.17.0 e validar
+aparência no jogo. Controle técnico concluído; aceite visual do usuário pendente.
+
+## Avatar Shop XFS0.16 — entrega funcional de referência
+
+REQ-20/38/39/40/41, ADR-071/072; AVATAR_SHOP_XFS_0_16.md. Catálogo562ativo,
+479compráveis, preços/modificadores nativos, namespaces separados e Profile3.
+Migra apenas identidades verificadas; Pilot Goggle antigo1→XFS2, Kappa legado
+continua possuído. Saldo/XP preservados. Atributos do piloto+equipamento são
+copiados na partida, com teto50, penalidades assinadas e previsão compartilhada.
+
+Layout ciano800×600 do graphics.xfs, catálogo3×3 à esquerda/inventário à direita,
+centralizado1440×1080 em FullHD; laterais com fundo regenerado. Compras,
+vestir/recarga, filtros/páginas/gêneros e previews funcionam. Nome/badge,
+miniatura/stats e busca/saldo em áreas separadas. Preço vetorial uniforme
+RGB0/131/179, confirmado por amostra GPU. Controles sem regra local ficam
+indisponíveis com explicação. Sem rede/contas/amigos/presentes/venda nova.
+
+3163checks+10partidas passaram; após último atlas de retratos,106checks
+dirigidos e oito testes Python passaram. GPU1920×1080,120frames60Hz/MP4,
+compra/atributos/fallback/gêneros/mobiles/Ghost e três contatos de montagem
+em docs/avatar-shop-xfs. Smoke PCK fora do projeto PASS:562registros,
+assets/compra/vestir/recarga/batalha,1920×1080 e1280×800. App/ZIP0.16.0
+reexportados/assinados. Perfis isolados; C# intocado; sem commit/publicação.
+
+HD efetivo desta entrega: fundo1672×941,18miniaturas em atlas887×1774 e
+identidades vestíveis reaproveitadas do HD antigo. Demais peças/miniaturas
+mantêm fallback original; não é migração HD completa. Revisão inicial corrigiu
+seleção invisível no fallback; revisão final interrompida por limite de uso.
+Testes e inspeção local concluídos, sem segunda aprovação independente.
+
+## Avatar Shop Full HD pelo vídeo0.15 —20/10/2026
+
+REQ-20/38/39/40, ADR-070; ler AVATAR_SHOP_VIDEO_0_15.md. Usuário confirmou
+**Presente→Comprar→Experimentar**, substituindo a ordem C# da0.14.9.
+Loja16:9, grade3×3, cards240×140, inventário compacto/equipado amarelo, abas
+sobre a grade e prévia Avatar/Mobile. Preços vetoriais uniformes e fonte com
+oversampling local; no FullHD não há barras.1280×800 centra1280×720.
+
+Window salva/desativa/restaura o stretch da arena ao entrar/sair da loja.
+Revisão independente encontrou esse problema de escala; corrigido e coberto
+por input real, ESC, reentrada, redimensionamento e batalha. Rodada final do
+revisor interrompida por limite de uso, sem segunda aprovação independente.
+Capturas anteriores que desligavam stretch artificialmente foram substituídas.
+
+GPT Images/gunbound-classic-hd: fundo1672×941 e retrato No Goggles/No Flag
+1254×1254RGBA (recorte870×1076, mipmaps). Originais/brutos/prompts preservados;
+metadados validados com fallback. Retrato é só UI:15registros/13peças vestíveis
+mantidos. FullHD é a composiçãoGPU1920×1080; não confundir com tamanho do PNG.
+
+**1949checks rápidos sem falhas, incluindo36de test_shop_wide**. Dez partidas
+completas passaram nesta entrega antes do último ajuste só de retrato/loader.
+GPU1920×1080 e120frames/60Hz, MP4 de2s, estados de compra/inventário/atributos,
+categorias/gêneros/mobiles/fallback em docs/avatar-shop-video. Force_draw no
+harness evita espera da GPU quando a janela fica encoberta no macOS.
+Faixa de preço verificada:1corRGB121/159/211, tanto GPU quanto PCK.
+
+App/ZIP0.15.0 reexportados, versão e assinatura estrita conferidas. Smoke real
+do PCK isolado em/tmp passou com novos assets/metadados, exclusão de brutos,
+vestir/recarga/batalha e capturas1920×1080/1280×800. Perfil real e fonte C#
+preservados. Baseline0.14.9 sujo foi mantido; sem commit/push/publicação.
+Próximo passo: usuário reabrir builds/Gunbound Recomp.app e validar aparência.
+
+## Auditoria de estado e layout da loja0.14.9
+
+Pedido: investigar bugs/design/posicionamento usando o C#. REQ-20/38/39/40,
+ADR-069; AVATAR_SHOP_AUDIT_0_14_9.md. Usuário confirmou abas sobre os cards e
+ordem Experimentar/Vestir→Comprar→Presente. Inventário lateral/grade3×3 mantidos.
+
+Corrigidos seleção invisível após busca/página, seleção alterada antes de save,
+feedback ausente na grade e busca vazia sem explicação. Legendas separadas da
+arte com hitbox incluindo texto/baseline comum. Label reaplica size após fonte
+para evitar caixa mínima da fonte padrão16px. Prévia Miramo usa crop uniforme;
+rig/mobile/anatomia não alterados. Preço vetorial0.14.8 continua nítido: GPU e
+PCK com uma única cor RGB121/159/211 nas amostras sem texto.
+
+**1913checks+10partidas completas, zero falhas**, incluindo42da nova auditoria
+e40de paridade. Revisão independente sem achados. GPU1920×1080 HD/fallback,
+compra/moeda única, atributos, busca vazia, gêneros/mobiles e120frames60Hz em
+docs/avatar-shop-audit. App/ZIP0.14.9 reexportados, assinatura estrita válida;
+smoke do PCK isolado em/tmp passou com compra/vestir/recarga/batalha e assets.
+Versão do menu também atualizada (ainda mostrava0.14.5). Perfis isolados somente;
+sem publicação, alteração de combate/atributos, novo PNG de arte ou edição C#.
+Próximo passo: aceite visual/funcional do usuário no app0.14.9.
+
+## Nak 0.15 — terceiro mobile (ADR-074)
+
+Integrado à main em 20/10/2026 pelo merge do PR #1, junto da loja XFS 0.16;
+o ADR publicado como 069 virou 074. Validação da integração (worktree limpo,
+import novo): `scripts/check.sh` completo com 3887 checks e 13 partidas, zero
+falhas, mais `tests/test_xfs_import.py`. Os números abaixo são da branch. O XFS
+e os DATs do cliente ficam fora do Git, em ~/Workspaces/GunboundClassic/avatar-xfs,
+com symlinks ignorados em assets/xfs/reference. App não reexportado.
 
 Pedido: novo mobile Nak com base no OpenBound; geração de imagens HD adiada
 pelo usuário. REQ-43, NAK_0_15.md. Worktree `claude/nak-mobile-openbound-7afece`,

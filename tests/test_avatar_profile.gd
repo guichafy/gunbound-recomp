@@ -9,7 +9,7 @@ func check(ok: bool, label: String) -> void:
 func _initialize() -> void:
 	call_deferred("run")
 func run() -> void:
-	var Profile = load("res://scripts/profile.gd")
+	var Profile = load("res://tests/legacy_profile.gd")
 	var path := "res://.tools/avatar-profile.json"
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	var p = Profile.new(path)

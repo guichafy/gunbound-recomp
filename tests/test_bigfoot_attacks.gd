@@ -80,7 +80,7 @@ func _initialize() -> void:
 		model.shot_weapon = weapon
 		model.shot_actor = 0
 		model.explode(Combat.full_hit(model.actors[1], 25.0))
-		check(model.actors[1].shield == [130, 150, 130][weapon] and model.actors[1].hp == 760, "Original per-bomb damage consumes Mage shield " + str(weapon))
+		check(model.actors[1].shield == [130, 150, 130][weapon] and model.actors[1].hp == 730, "Original per-bomb damage consumes Mage shield " + str(weapon))
 	model = fixture()
 	model.fire(85, 70, 0)
 	check(model.last_shots[0].angle == 40, "Bigfoot T1 uses original max aim")

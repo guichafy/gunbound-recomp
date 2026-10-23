@@ -48,6 +48,7 @@ func run() -> void:
 	view.item_art.textures = hd
 	view.accept_items()
 	view.select_vehicle(2)
+	view.opening = 0
 	view.start_match()
 	if view.model.active != 0:
 		view.model.pass_turn()

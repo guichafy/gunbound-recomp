@@ -24,7 +24,7 @@ func escape() -> void:
 	event.physical_keycode = KEY_ESCAPE
 	root.push_input(event)
 func run() -> void:
-	var profile = load("res://scripts/profile.gd").new(PROFILE_PATH)
+	var profile = load("res://tests/legacy_profile.gd").new(PROFILE_PATH)
 	profile.xp = 2200
 	var scene = load("res://scenes/main.tscn").instantiate()
 	scene.profile = profile
@@ -35,7 +35,7 @@ func run() -> void:
 	scene.show_shop()
 	await process_frame
 	var shop = scene.shop
-	check(shop.inventory_rows.get_child_count() == 8,"Eight compact inventory rows including empty slots")
+	check(shop.inventory_rows.get_child_count() == 14,"Fourteen compact inventory rows including empty slots")
 	check(shop.inventory_rows.get_node_or_null("Owned_0_0_0") != null and shop.inventory_rows.get_node_or_null("Owned_0_1_0") != null,"Owned head/body always visible independently of shop filter")
 	check(shop.search.position.y+shop.search.size.y <= shop.cards.get_child(2).position.y,"Search stays above third avatar card")
 	check(not shop.attributes_panel.visible,"Attributes do not occupy main shop")
@@ -47,7 +47,7 @@ func run() -> void:
 	await process_frame
 	check(profile.equipped_set()["0"] == "0:0:1" and shop.model.preview["0"] == "0:0:1","Lateral inventory equips and updates preview from different category")
 	check(profile.gold == 900,"Lateral equip does not charge again")
-	var reloaded = load("res://scripts/profile.gd").new(PROFILE_PATH)
+	var reloaded = load("res://tests/legacy_profile.gd").new(PROFILE_PATH)
 	reloaded.load_profile()
 	check(reloaded.equipped_set()["0"] == "0:0:1","Lateral equip persists")
 	var saved_preview: Dictionary = shop.model.preview.duplicate(true)
@@ -94,6 +94,7 @@ func run() -> void:
 	shop.model.query = ""
 	shop.refresh(0,0)
 	scene.show_menu()
+	scene.opening = 0
 	scene.start_match()
 	check(scene.actor_avatars[0]["0"] == "0:0:1" and scene.model.actors[0].attributes[0] == 1,"Lateral outfit and committed attributes enter battle")
 	scene.queue_free()

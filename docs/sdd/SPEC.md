@@ -1,4 +1,8 @@
-# Especificação — Gunbound Recomp 0.7.0
+# Especificação — Gunbound Recomp 0.18.2
+
+As seções abaixo são cronológicas: o texto de cada versão fica como histórico
+quando uma seção posterior o substitui. A partir de 0.7.0 vale a seção mais nova
+de cada requisito (batalha: REQ-44/ADR-076).
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;
@@ -34,8 +38,8 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 
 ## Regras concretas do baseline
 
-- Arena lateral única, 1280×800. Jogador começa; CPU recebe o outro veículo.
-- Escaravelho: vida 580, movimento 110, atraso adicional 0.
+- Arena lateral única, 1280×800. Jogador começa (substituído: abertura sorteada, REQ-44); CPU recebe o outro veículo.
+- (Histórico: veículos substituídos por Bigfoot/Mage/Nak, REQ-19/43.) Escaravelho: vida 580, movimento 110, atraso adicional 0.
   Carapaça: vida 700, movimento 80, atraso adicional 18.
 - Mira local 10–85°, força 15–100%. Movimento de 60 unidades/s limitado pelo orçamento.
   Deslocar vira o veículo; `F` vira parado. A inclinação do apoio afeta a direção
@@ -43,11 +47,11 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 - Pulso: dano máximo 145, raio 46, atraso 100, um projétil.
   Impacto: dano máximo 210, raio 62, atraso 155, um projétil.
   Tempestade: dano máximo 105 por projétil, raio 43, atraso 210, três projéteis.
-- Vento inteiro entre −30 e +30 por turno; gravidade 260; integração 120 Hz.
+- Vento inteiro entre −30 e +30 por turno (substituído: força 0–34 e ângulo 0–359, REQ-23); gravidade 260 (substituído: 196, REQ-44/ADR-076); integração 120 Hz.
   Dano diminui com a distância, considerando o tamanho do veículo. Queda de mais
-  de 70 unidades causa dano; perder suporte até abaixo da ilha elimina.
+  de 70 unidades causa dano (substituído: queda curta não fere, REQ-42/MOBILE_PARITY.md); perder suporte até abaixo da ilha elimina.
 - Próximo ator é o de menor disponibilidade acumulada; empate favorece o outro.
-  Passar custa 80 + atraso do veículo. Não existe alternância estrita obrigatória.
+  Passar custa 80 + atraso do veículo (substituído: 200 ÷ 7,5, REQ-44). Não existe alternância estrita obrigatória.
 - CPU calcula mira e dispara, sem se deslocar. Dificuldade altera o erro da mira,
   sem bônus de vida/dano. A simulação auxilia sua escolha, sem mostrar trajetória
   completa ao jogador; HUD mostra direção inicial e último tiro.
@@ -88,9 +92,43 @@ implementa o Nak: dados C# (HP, mira, delays, sons, miras, RiderPivot) mais
 arte, flipbook, dano e regras de voo do cliente original Thor's Hammer
 (jglim/gunbound-launcher), lidos com as notas do GunBound-Decomp — S2 entra no
 chão e explode ao emergir, SS atravessa o terreno e só explode em mobile.
-Contrato e números em [NAK_0_15.md](NAK_0_15.md), decisão ADR-069. A
+Contrato e números em [NAK_0_15.md](NAK_0_15.md), decisão ADR-074. A
 restrição "apenas Bigfoot/Mage" deixa de valer para o Nak; demais mobiles
 continuam fora. Arte HD do Nak adiada pelo usuário.
+
+## Paridade das regras de batalha — REQ-44
+
+Pedido de 20/10/2026: comparar a batalha com o OpenBound C# e com o cliente
+original Thor's Hammer (engenharia reversa do GunBound-Decomp e dos `.dat`).
+Auditoria e evidências em [BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md),
+decisão ADR-076. Política: **o original prevalece quando a engenharia reversa
+comprova a regra; senão, vale o C#.** Escolhas do usuário aplicadas:
+
+- **REQ-06**: quem abre a partida é sorteado. Cada segundo inteiro gasto no
+  turno até o disparo soma ao delay do tiro o valor `[29]` do mobile (10 em
+  Mage, Bigfoot e Nak). O turno continua com 30 s. Passar (voluntário ou por
+  tempo) custa 200, sem termo de tempo. A prévia de iniciativa usa o tempo ao
+  vivo. Empate de iniciativa continua favorecendo o outro, também na fila do
+  HUD (`TurnTable.current_order`). A CPU não paga o tempo real da busca, que
+  depende da máquina: cada tiro dela cobra um tempo fixo de 2 s
+  (`TurnTable.CPU_THINK_SECONDS`), e a mesma seed dá a mesma ordem de turnos.
+  Enquanto a busca da CPU roda, o relógio do turno fica parado
+  (`Match.cpu_thinking`, 0.18.2): uma busca lenta nunca esgota o tempo nem
+  vira passe.
+- **REQ-04**: balística do C#. Gravidade 196, velocidade = força × 100 / massa
+  (massa 14 nos tiros, 10 no sinalizador), vento × 1,2 por projétil. O piso de
+  força 15 e o relógio em tempo real ficam (o C# avança 0,015 s por quadro de
+  60 Hz).
+- **REQ-43**: delays do Nak do original, 770/920/1320.
+- **REQ-42**: Mage com 730 de vida e 30 de regeneração de escudo
+  (`characterdata.dat`).
+- **REQ-35**: delays dos itens do `itemdata.dat`: Teleport 100, Dual+ 250,
+  Energy Up 2 300, Change Wind 150, Bunge Shot 50. Os demais já coincidiam.
+
+Todos os delays seguem na escala ÷ 7,5. Ficam como estavam no Godot: empate
+por morte dupla e passe sem travar o SS (o C# trava). As seeds de
+`test_matches` mudam de propósito; os novos valores de referência estão no
+hand-off.
 
 ## Mage 0.4
 
@@ -101,7 +139,8 @@ escudo220 regenerando20 por turno próprio; S1/S2/SS e mira15–50° descritos e
 dois colliders em hélice; SS EMP zera escudos próximos antes do dano. Delays
 normalizados ao protótipo. Bigfoot permanece arena60/menu180 e armas atuais.
 Gravidade/força/vento e disponibilidade de SS continuam adaptados ao protótipo.
-Não reproduz itens, Thor, resistências ou cliente completo de Gunbound.
+Não reproduz itens, Thor, resistências ou cliente completo de Gunbound
+(histórico de 0.4: Thor entrou em REQ-25 e itens em REQ-35; resistências continuam fora).
 
 ## Ataques Bigfoot 0.5
 
@@ -266,3 +305,46 @@ AVATAR_CARD_FIX_0_14_7.md; sem novos bônus/regras inventados pela referência.
 REQ-20/38: correção0.14.8 retira o borrado do fundo dos preços. O centro da
 faixa recebe preenchimento vetorial uniforme; moldura, borda branca e rebites
 continuam nos recortes HD/nativos. Texto, retrato e regras preservados.
+
+REQ-20/38/39/40: revisão0.14.9 corrige estado de seleção/falhas de vestir,
+legendas sobrepostas e cenário deformado. Usuário confirmou abas sobre os
+cards e ordem Experimentar/Vestir→Comprar→Presente do C#. Grade3×3 e lista
+lateral mantidas. Plano/critério em AVATAR_SHOP_AUDIT_0_14_9.md.
+
+REQ-20/38/39/40: pedido posterior0.15 adota o vídeo GunboundWcLatam como
+referência principal de apresentação. Loja16:9/FullHD, grade3×3, avatar sozinho
+com alternância para mobile, inventário compacto com destaque do equipado,
+cenário claro regenerado e preços nítidos. Contratos transacionais preservados;
+critério/plano em AVATAR_SHOP_VIDEO_0_15.md. Substitui coordenadas0.14.5/0.14.9,
+sem mudar catálogo/combate ou atribuir bônus às peças.
+
+## Avatar Shop do cliente XFS 0.16
+
+REQ-20/38/39: reproduzir a interface ciano comprovada no cliente de referência
+jglim e nos frames store_* de graphics.xfs, com composição FullHD uniforme,
+compra/preview/equipamento funcionais e fallback original. Plano e escopo de
+dados em AVATAR_SHOP_XFS_0_16.md; substitui a composição do vídeo de0.15.
+
+REQ-38/39/40/41: esclarecimento posterior exige catálogo avatar.xfs completo,
+preços/disponibilidade e bônus de ataque/defesa/etc por equipamento. Exibir
+modificadores reais nos cards/conjunto e aplicá-los ao snapshot de combate,
+preservando progresso/posses antigas. Corrigir sobreposições de imagem/texto.
+A restrição anterior a quinze cosméticos fica substituída para o catálogo XFS.
+
+REQ-10/20/39: pedido posterior exige migração HD completa das peças vestidas e
+animadas, além das miniaturas. Controle por registro/camada e critérios em
+AVATAR_HD_MIGRATION.md. Cobertura real:550avatares vestíveis/629camadas; padrões
+vazios/placeholders recebem motivo N/A. Regenerar e integrar todos os componentes
+reais, preservando registro, identidade, animação contínua e fallback validado.
+
+REQ-10/20/39 aceitos tecnicamente na0.17:550avatares/629camadas vestíveis e
+550miniaturas HD, com controle por registro, evidência GPU e auditoria sem
+fallback oculto.37lotes, ambos gêneros/mobiles/sentidos, poses e pausa; animação
+por masters constantes, sem reconstrução de cada gesto nativo.12N/A explícitos.
+Aplicativo exportado e smoke fora do projeto confirmam o mesmo catálogo/render.
+
+REQ-10/20/39 — revisão0.18: luzes de cabeças animadas devem corresponder ao
+mesmo estado da cabeça HD (Normal), sem chifres/ornamentos de Staring deslocados.
+Auditar os20modelos de cabeça com camada L e preservar fallback coerente.
+Pedido atual também autoriza concluir o HD do Nak introduzido no PR1, substituindo
+o adiamento anterior. REQ-19/20 e plano NAK_HD.md; regras físicas preservadas.

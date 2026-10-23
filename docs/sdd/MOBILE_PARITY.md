@@ -8,7 +8,7 @@ REQ-05, REQ-07, REQ-19 e REQ-42. ADR-066.
 ## Regras que passam a valer
 
 - `Regenerate()` roda em todos os mobiles vivos ou não no início de cada turno.
-  Mage soma 20 de escudo por turno de qualquer um, com o atributo Regeneração,
+  Mage soma 30 de escudo por turno de qualquer um (era 20 no C#; ADR-076 adota o `characterdata.dat`, que também dá 730 de vida), com o atributo Regeneração,
   teto `escudo base + vida máxima − vida atual` medido antes da cura de vida.
 - Vida de Mage e Bigfoot não regenera no turno (`HealthRegeneration` 0).
   Proteção cura 35, também com Regeneração, e não devolve escudo.
@@ -22,7 +22,10 @@ REQ-05, REQ-07, REQ-19 e REQ-42. ADR-066.
 - A constante `ProjectileMageSSBaseDamage` 300 não é a do construtor. O SS
   usa 200 e raio 25.
 - Queda curta não tira vida. Sair do chão (vazio ou abaixo do mapa) mata.
-  Enquanto cai, o vento empurra no eixo X como `Movement.ApplyGravity`.
+  Enquanto cai, o vento empurra no eixo X uma vez por passo de gravidade
+  (`wind.x / 45` por passo; o passo cai `int(GravitySpeed)` px, começando em 3
+  e somando 0,15), conforme a intenção de `Movement.ApplyGravity` (ADR-077).
+  Vento 35 desloca cerca de 18,7 px numa queda de 100 px.
 - Caixas: Mage 38×33, Bigfoot 46×40, deslocamento (0, 10). Apoio no chão:
   Mage 30, Bigfoot 25. A barra de vida usa vida base + escudo base.
 - Sinalizador: Mage 0 s, Bigfoot 0,4 s.

@@ -30,6 +30,7 @@ func run() -> void:
 	await snap("mage-menu")
 	for mobile in [2, 1]:
 		for weapon in [0, 1, 2]:
+			view.opening = 0
 			view.start_match()
 			view.model.start(mobile, 1, 42)
 			view.art.reset(view.model.actors)

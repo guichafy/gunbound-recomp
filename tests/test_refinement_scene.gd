@@ -23,6 +23,7 @@ func run() -> void:
 	scene.profile = load("res://scripts/profile.gd").new("res://.tools/refinement-profile.json")
 	root.add_child(scene)
 	scene.sound.muted = true
+	scene.opening = 0
 	scene.start_match()
 	key(scene, true)
 	for i in range(22):
@@ -33,6 +34,7 @@ func run() -> void:
 	var count: int = scene.model.projectiles.size()
 	key(scene, false)
 	check(scene.model.projectiles.size() == count, "Late release does not create a second shot")
+	scene.opening = 0
 	scene.start_match()
 	key(scene, true)
 	scene._process(0.1)
@@ -55,6 +57,7 @@ func run() -> void:
 	check(scene.has_method("animation_state"), "Presentation exposes distinct animation states")
 	if scene.has_method("animation_state"):
 		check(scene.animation_state(0) == "recoil", "Shot gives immediate recoil feedback")
+	scene.opening = 0
 	scene.start_match()
 	key(scene, true)
 	if scene.has_method("animation_state"):
@@ -62,6 +65,7 @@ func run() -> void:
 	scene.model.turn_time = 0.01
 	scene._process(0.1)
 	check(not scene.charging and scene.model.active == 1, "Timeout cancels pending player charge")
+	scene.opening = 0
 	scene.start_match()
 	scene.model.actors[0].pos = Vector2(235, 510)
 	scene.update_hud()
@@ -71,6 +75,7 @@ func run() -> void:
 		if node is Panel and node.get_rect().intersects(Rect2(Vector2.ZERO, scene.VIEW_SIZE)):
 			covered = true
 	check(not covered, "No opaque panel covers the battlefield during combat")
+	scene.opening = 0
 	scene.start_match()
 	check(scene.has_method("displayed_queue"), "HUD exposes displayed turn prediction")
 	if scene.has_method("displayed_queue"):
@@ -79,6 +84,7 @@ func run() -> void:
 		scene.update_hud()
 		var cpu_entry: Dictionary = scene.displayed_queue().filter(func(entry): return entry.actor == 1)[0]
 		check(is_equal_approx(cpu_entry.delay, maxf(0.0, scene.model.actors[1].ready - scene.model.clock)), "HUD does not invent a CPU weapon before it is chosen")
+		scene.opening = 0
 		scene.start_match()
 		scene.model.actors[0].ready = 100.0
 		scene.model.actors[1].ready = 215.0
@@ -98,6 +104,7 @@ func run() -> void:
 	scene.consume_events()
 	if scene.has_method("animation_state"):
 		check(scene.animation_state(0) == "destroyed", "Elimination remains visible as destruction")
+	scene.opening = 0
 	scene.start_match()
 	if scene.has_method("animation_state"):
 		check(scene.animation_state(0) == "idle", "Restart clears previous animation states")

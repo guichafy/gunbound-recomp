@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "file": "res://assets/hd/shop/xfs_landscape.png",
+  "size": [
+    1672,
+    941
+  ],
+  "sha256": "c61bf7a3d49edce36eec30329e44490d84b8a565387d7c8d0b83f16b911cbf85",
+  "generator": "GPT Images / built-in imagegen",
+  "output": "/Users/guichafy/.codex/generated_images/01a15772-ba46-75a0-9baa-0bcba52bac0d/call_a8d8b283314e4fa5a00d0b6ebf78152d.png",
+  "identity": "assets/hd/shop/source/xfs_0_16/reference.png",
+  "style": "assets/hd/shop/wide_background.png",
+  "note": "Full HD is the rendered 1920x1080 composition; raw image dimensions are measured separately. Artistic reconstruction of the mostly occluded scenery."
+}

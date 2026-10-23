@@ -59,6 +59,7 @@ func run() -> void:
 	# Battle: the bar follows the loadout and EquippedButtonBar spacing.
 	scene.options.items = ["dual", "teleport", "power_up", "energy_up_1"]
 	scene.select_vehicle(2)
+	scene.opening = 0
 	scene.start_match()
 	await process_frame
 	if scene.model.active != 0:
@@ -96,6 +97,11 @@ func run() -> void:
 	for frame in range(1200):
 		scene._process(0.05)
 		await process_frame
+		# This fixture advances simulated time much faster than wall time. Let
+		# the real worker finish before advancing another accelerated frame;
+		# otherwise machine load can exhaust 1200 frames before the CPU acts.
+		while scene.cpu_task>=0 and not WorkerThreadPool.is_task_completed(scene.cpu_task):
+			await create_timer(0.005).timeout
 		if scene.model.phase == "aim" and scene.model.active == 1 and not queued_checked:
 			queued_checked = true
 			check(bar.buttons[1].disabled, "After a use the bar stays disabled until the next own turn")

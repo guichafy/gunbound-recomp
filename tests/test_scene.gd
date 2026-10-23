@@ -23,6 +23,8 @@ func run() -> void:
 		quit(1)
 		return
 	check(scene.screen == "menu" and scene.nickname_input != null, "Menu shows nickname and vehicle controls")
+	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
+	scene.opening = 0
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
 	check(scene.weapon_buttons.size() == 3 and scene.pass_button is TextureButton and scene.options_button is TextureButton, "Original S1/S2/SS, Options and SkipTurn sprite buttons")
@@ -45,6 +47,7 @@ func run() -> void:
 	space.pressed = false
 	scene._unhandled_key_input(space)
 	check(scene.model.phase == "flight", "HUD fire command launches a real projectile")
+	scene.opening = 0
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.model.projectiles.is_empty(), "Restart clears in-flight projectile and resets turn")
 	scene.model.actors[1].hp = 0
@@ -59,6 +62,21 @@ func run() -> void:
 	check(scene.overlay_kind == "result", "Closing help after match restores result actions")
 	scene.show_menu()
 	check(scene.screen == "menu" and scene.model.phase == "menu", "Return to menu leaves combat inactive")
+	# ADR-076: the opening is drawn in play, so the CPU may own the very first turn.
+	scene.opening = 1
+	scene.start_match()
+	check(scene.model.active == 1 and scene.model.phase == "aim", "CPU can open the match")
+	var cpu_fired := false
+	for _frame in range(600):
+		scene._process(0.05)
+		await process_frame
+		while scene.cpu_task >= 0 and not WorkerThreadPool.is_task_completed(scene.cpu_task):
+			await create_timer(0.005).timeout
+		if scene.model.phase == "flight" and scene.model.shot_actor == 1:
+			cpu_fired = true
+			break
+	check(cpu_fired, "The CPU plans and fires on the opening turn")
+	scene.show_menu()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/smoke-profile.json"))
 	print("SCENE CHECKS: ", checks, " | FAILURES: ", failures)
 	scene.queue_free()

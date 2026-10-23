@@ -2,11 +2,18 @@ extends RefCounted
 ## Same integrator and swept collision are used by live shots and CPU aiming.
 
 const Mobiles = preload("res://scripts/mobiles.gd")
-const GRAVITY := 260.0
+# OpenBound Parameter.cs (ADR-076): ProjectileMovementGravity 9.8 × 20 and
+# speed = force × ProjectileMovementForceFactor 100 / mass. Every Mage, Bigfoot
+# and Nak shell weighs 14 (the teleport beacon 10, Items.BEACON_SPEED).
+const GRAVITY := 196.0
+const FORCE_FACTOR := 100.0
+const SHELL_MASS := 14.0
+const MIN_POWER := 15.0
 const STEP := 1.0 / 120.0
 
-# Wind is the OpenBound vector (force units, screen angle); 35 ≈ 45 px/s².
-const WIND_ACCELERATION := 1.3
+# Wind is the OpenBound vector (force units, screen angle) times the shells'
+# wind influence 1.2 (Projectile*WindInfluence); 35 = 42 px/s².
+const WIND_ACCELERATION := 1.2
 # Nak S2 underground (original DetonateShot2_Bullet3): vy -= 0xC400 / 100 each
 # step, twice the 98 gravity of the mobile, and no wind. Entering halves vy.
 const BURROW_GRAVITY := 2.0
@@ -22,7 +29,8 @@ static func advance_buried(position: Vector2, velocity: Vector2, delta: float) -
 	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
 
 static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0) -> Vector2:
-	var speed := lerpf(180.0, 660.0, (clampf(power, 15.0, 100.0) + power_offset) / 100.0)
+	# Projectile.InitializeMovement: the emitter's force modifier joins before the mass.
+	var speed := (clampf(power, MIN_POWER, 100.0) + power_offset) * FORCE_FACTOR / SHELL_MASS
 	var radians := deg_to_rad(clampf(angle, 10.0, 85.0))
 	return Vector2(cos(radians) * facing, -sin(radians)).rotated(rotation) * speed
 

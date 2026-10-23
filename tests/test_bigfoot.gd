@@ -25,6 +25,7 @@ func run() -> void:
 		quit(1)
 		return
 	scene.select_vehicle(2)
+	scene.opening = 0
 	scene.start_match()
 	check(scene.model.VEHICLES[scene.model.actors[0].vehicle].name == "Bigfoot", "Selection starts match with Bigfoot")
 	check(scene.model.actors[1].vehicle == 1, "Bigfoot faces Mage")
@@ -58,11 +59,13 @@ func run() -> void:
 	scene._process(0.5)
 	check(scene.art.motion[0].pose_age == age, "Pause freezes atlas animation time")
 	scene.close_overlay()
+	scene.opening = 0
 	scene.start_match()
 	check(scene.animation_state(0) == "idle", "Restart returns Bigfoot to idle")
 	scene.shoot()
 	scene.consume_events()
 	check(scene.animation_state(0) == "recoil", "Firing enters original fire animation")
+	scene.opening = 0
 	scene.start_match()
 	scene.model.actors[0].turns = 3
 	scene.select_weapon(2)
@@ -74,6 +77,7 @@ func run() -> void:
 	scene.consume_events()
 	var rendered_frame: int = scene.actor_frame(0)
 	check(rendered_frame >= 274 and rendered_frame <= 293, "Fast turn transition preserves special firing frames")
+	scene.opening = 0
 	scene.start_match()
 	key.pressed = true
 	scene._unhandled_key_input(key)

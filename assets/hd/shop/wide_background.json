@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "file": "res://assets/hd/shop/wide_background.png",
+  "size": [
+    1672,
+    941
+  ],
+  "sha256": "6dde8095b7c44f563f4c8727988e151d8eaefdbfb86ed09bd2bfd615e3c558cb",
+  "tool": "GPT Images built-in imagegen",
+  "purpose": "Widescreen shop backdrop. Full HD refers to final GPU1920x1080, not source pixel dimensions.",
+  "references": [
+    "assets/hd/shop/source/video_0_15/reference_video.png",
+    "assets/hd/shop/source/gen_scenery.png"
+  ],
+  "source": "assets/hd/shop/source/video_0_15/generated_background.png"
+}

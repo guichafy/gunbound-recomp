@@ -11,13 +11,13 @@ func _initialize() -> void:
 func run() -> void:
 	var Match = load("res://scripts/match.gd")
 	var model = Match.new()
-	# Nak (ID 3, ADR-069) joins Mage and Bigfoot; the CPU pairs stay 1↔2 and Nak meets Mage.
+	# Nak (ID 3, ADR-074) joins Mage and Bigfoot; the CPU pairs stay 1↔2 and Nak meets Mage.
 	var opponents := {1: 2, 2: 1, 3: 1}
 	check(model.VEHICLES.size() == 3, "Roster contains Mage, Bigfoot and Nak")
 	for chosen in [1, 2, 3]:
 		model.start(chosen, 1, 42)
 		check(model.actors[0].vehicle == chosen and model.actors[1].vehicle == opponents[chosen], "Each mobile meets its fixed CPU opponent")
-		check(model.actors[0].hp == (760 if chosen == 1 else 1100), "Stable IDs retain mobile life")
+		check(model.actors[0].hp == (730 if chosen == 1 else 1100), "Stable IDs retain mobile life")
 		model.actors[0].turns = 3
 		for weapon in [0, 1, 2]:
 			model.phase = "aim"
@@ -42,6 +42,7 @@ func run() -> void:
 			if button.text == {1: "Mage", 2: "Bigfoot", 3: "Nak"}[id]:
 				button.pressed.emit()
 		check(view.vehicle == id, "Button slot dispatches stable mobile ID")
+		view.opening = 0
 		view.start_match()
 		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == opponents[id], "Menu selection starts the correct duel")
 	view.show_menu()

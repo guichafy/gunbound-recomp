@@ -31,21 +31,23 @@ Full HD usando Codex gpt-image." (2026-10-12)
 
 ### REQ-35 — Itens usáveis no turno
 
+Desde o ADR-076 os custos seguem a coluna de delay do `itemdata.dat` original; entre parênteses, o valor anterior do C#.
 Delay em unidades do protótipo: custo original ÷ 7,5 (mesma conversão de
-Mage/Bigfoot, ADR-058). `ItemDelay` do jogador = 0 no treino.
+Mage/Bigfoot, ADR-058). `ItemDelay` do jogador = `Attributes.points(actor, 5)` desde a 0.14.3
+(antes 0 no treino).
 
 | Item | Slots | Custo (orig. → protótipo) | Efeito |
 |---|---|---|---|
 | Dual | 2 | 600 → 80 | Dispara duas vezes o tiro selecionado; o 2º começa 1 s após o último lançamento do 1º |
-| Dual+ | 2 | 450 → 60 | 1º = tiro selecionado; 2º = S2 se S1, senão S1 |
+| Dual+ | 2 | 250 → 33,33 (C# 450) | 1º = tiro selecionado; 2º = S2 se S1, senão S1 |
 | Thunder | 2 | 200 → 26,67 | Todo projétil do turno ganha a propriedade elétrica (não acumula com a coluna Elétrico) |
-| Energy Up 2 | 2 | 350 → 46,67 | Cura 30 % da vida máxima (sem escudo); Bionic +3 % (nenhum dos dois mobiles) |
+| Energy Up 2 | 2 | 300 → 40 (C# 350) | Cura 30 % da vida máxima (sem escudo); Bionic +3 % (nenhum dos dois mobiles) |
 | Team Teleport | 2 | 50 → 6,67 | Troca com o aliado mais ferido; sem aliado no 1×1: só chamas e som |
-| Teleport | 2 | 150 → 20 | O tiro vira um sinalizador; o mobile vai para onde ele toca o chão |
+| Teleport | 2 | 100 → 13,33 (C# 150) | O tiro vira um sinalizador; o mobile vai para onde ele toca o chão |
 | Blood | 1 | 0 → 0 | Ataque +33 % no turno; perde 8 % da vida máxima (nunca abaixo de 1) |
-| Bunge Shot | 1 | 80 → 10,67 | Cratera × 1,25 (dano e raio de dano inalterados) |
+| Bunge Shot | 1 | 50 → 6,67 (C# 80) | Cratera × 1,25 (dano e raio de dano inalterados) |
 | Power Up | 1 | 150 → 20 | Ataque +30 % no turno |
-| Change Wind | 1 | 120 → 16 | Ângulo do vento + 180° (força igual) |
+| Change Wind | 1 | 150 → 20 (C# 120) | Ângulo do vento + 180° (força igual) |
 | Energy Up 1 | 1 | 100 → 13,33 | Cura 12 % da vida máxima (sem escudo) |
 
 Regras de uso (HUD.cs/Mobile.cs):
@@ -135,7 +137,8 @@ Física e dano (Projectile.cs / Mobile.cs):
 
 - CPU não usa itens neste corte (sem novos sorteios: seeds 81–90 iguais).
 - Ouro/preço em ouro não existe no treino; o popup mostra o custo de delay.
-- `ItemDelay` (atributo de avatar) = 0. Team Teleport fica no catálogo com o
+- `ItemDelay` (atributo de avatar) = `Attributes.points(actor, 5)`, aplicado
+  em `Items.delay` (0.14.3; antes 0). Team Teleport fica no catálogo com o
   comportamento 1×1 do original (sem aliado).
 
 ## Resultado (2026-10-12)

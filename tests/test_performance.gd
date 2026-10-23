@@ -70,6 +70,7 @@ func run() -> void:
 	scene.set_process(false)
 	scene.sound.muted = true
 	scene.select_vehicle(2)
+	scene.opening = 0
 	scene.start_match()
 	if scene.model.active == 0:
 		scene.model.pass_turn()
@@ -95,12 +96,14 @@ func run() -> void:
 	check(Time.get_ticks_msec() - started_at < 15000, "The CPU fires well before the turn timer")
 
 	# Restarting during a search waits for the worker and drops it.
+	scene.opening = 0
 	scene.start_match()
 	if scene.model.active == 0:
 		scene.model.pass_turn()
 		scene.consume_events()
 	scene._process(1.0 / 60.0)
 	check(scene.cpu_task >= 0, "A new CPU turn starts a new search")
+	scene.opening = 0
 	scene.start_match()
 	check(scene.cpu_task == -1 and scene.cpu_search.is_empty() and scene.cpu_plan.is_empty(), "Restarting drops a running search safely")
 	scene.show_menu()

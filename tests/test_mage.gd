@@ -21,7 +21,7 @@ func _initialize() -> void:
 	if not model.has_method("weapon_rules") or not model.has_method("predict_shot"):
 		finish()
 		return
-	check(model.actors[1].hp == 760 and model.actors[1].shield == 220, "Mage starts with original life and shield")
+	check(model.actors[1].hp == 730 and model.actors[1].shield == 220, "Mage starts with characterdata life and shield (ADR-076)")
 	# Bigfoot's actual 90-damage bomb exercises Mage shield absorption.
 	model.start(2, 1, 42)
 	# Real explosions exercise shield absorption, not a mocked damage handler.
@@ -29,13 +29,13 @@ func _initialize() -> void:
 	model.shot_weapon = 0
 	var target: Vector2 = Combat.full_hit(model.actors[1], 25.0)
 	model.explode(target)
-	check(model.actors[1].hp == 760 and model.actors[1].shield == 130, "Shield absorbs an entire direct pulse")
+	check(model.actors[1].hp == 730 and model.actors[1].shield == 130, "Shield absorbs an entire direct pulse")
 	model.explode(target)
 	model.explode(target)
-	check(model.actors[1].shield == 0 and model.actors[1].hp == 710, "Damage overflow reaches health")
+	check(model.actors[1].shield == 0 and model.actors[1].hp == 680, "Damage overflow reaches health")
 	model.active = 1
 	model.begin_turn()
-	check(model.actors[1].shield == 20, "Mage regenerates shield on its own turn")
+	check(model.actors[1].shield == 30, "Mage regenerates 30 shield on its own turn")
 	model.actors[1].shield = 260
 	model.begin_turn()
 	check(model.actors[1].shield == 270, "Shield cap compensates missing health as in the fork")

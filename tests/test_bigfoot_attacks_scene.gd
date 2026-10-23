@@ -15,6 +15,7 @@ func run() -> void:
 	view.set_process(false)
 	view.sound.muted = true
 	view.select_vehicle(2)
+	view.opening = 0
 	view.start_match()
 	check(view.angle <= 40 and view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.hud.crosshair_name(view.model, 0, view.weapon) == "CrosshairBigfootS1Ally.png", "Bigfoot starts with legal T1 aim and its original range sprite")
 	view.model.actors[0].turns = 3
@@ -25,6 +26,7 @@ func run() -> void:
 	view.select_weapon(0)
 	view.update_hud()
 	check(view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.weapon_buttons[0].get_meta("activated"), "Returning to T1 restores its wider aim range and active S1 button")
+	view.opening = 0
 	view.start_match()
 	view.select_weapon(1)
 	view.shoot()
@@ -42,6 +44,7 @@ func run() -> void:
 		if bomb.launched:
 			launched += 1
 	check(launched == 3, "Continuing releases first T2 burst at its original time")
+	view.opening = 0
 	view.start_match()
 	check(view.model.projectiles.is_empty() and view.effects.is_empty() and view.model.flight_elapsed == 0, "Restart clears pending salvo and effects")
 	check(view.bigfoot.get("shoot_sounds") != null and view.bigfoot.get("effects") != null, "Bigfoot original audio and explosions loaded")

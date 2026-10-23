@@ -68,6 +68,7 @@ func run() -> void:
 	var screenshot := root.get_texture().get_image()
 	ok = ok and screenshot.get_size() == Vector2i(1280,800)
 	assert(screenshot.save_png("/private/tmp/parity-shop-pck.png") == OK)
+	scene.set("opening", 0)
 	scene.start_match()
 	ok = ok and scene.actor_avatars[0] == gear
 	scene.queue_free()

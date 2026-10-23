@@ -436,7 +436,71 @@ extração da tira para o preenchimento central da ADR-067; nenhum novo PNG,
 modificador, alteração de perfil ou reanimação necessária. Conferir GPU
 FullHD/versão nativa, suites de loja e aplicativo reexportado/assinado/PCK.
 
-## ADR-069 — Nak com dados do cliente original sobre o OpenBound
+## ADR-069 — estado coerente e posicionamento da loja
+
+Revisão contra C#: usuário escolheu abas acima dos cards e rodapé na ordem
+Experimentar/Vestir→Comprar→Presente. Preservar grade3×3/lista lateral;
+alinhar legendas em áreas separadas do ícone, com hitbox incluindo o texto.
+Crop Miramo com proporção nativa, em vez de esticar imagem. Seleção ausente
+da página filtrada deve limpar ações; save falho ao vestir deve preservar
+seleção/equipamento/prévia e mostrar erro, incluindo clique pela grade.
+Não adicionar bônus por peça, novos assets/rig nem alterações de combate.
+
+## ADR-070 — loja Full HD orientada pelo vídeo
+
+Pedido19/10/2026 substitui a composição4:3 da loja pela adaptação16:9 da
+referência em vídeo: avatar sozinho/alternância mobile, grade3×3 e inventário
+compacto. Preservar as correções transacionais0.14.9; retratos e rig mantêm
+aspecto e âncoras. Fundo regenerado separado dos controles e textos. Imagens
+com atributos por peça não autorizam inventar bônus no catálogo C# atual.
+Geometria do layout antigo em ADR-064/069 é substituída; demais contratos
+permanecem. Ordem do rodapé segue resposta específica do usuário.
+
+Resposta explícita: seguir o vídeo, Presente→Comprar→Experimentar. Substitui
+a ordem do rodapé da ADR-069.
+
+
+Implementação0.15: a Window usa pixels físicos enquanto a loja está aberta e
+restaura stretch1280×800 na saída. Inspeção do PCK identificou um retrato
+nativo60×56 compartilhado pelos slots vazios No Goggles/No Flag; regenerá-lo
+como miniatura de apresentação, sem adicioná-lo às peças vestíveis do rig.
+
+
+## ADR-071 — design do cliente XFS
+
+Pedido20/10/2026 adota jglim/gunbound-server + launcher/graphics.xfs como fonte.
+Usar frames store_* comprovados pela captura do cliente, não avatarmode antigo.
+Preservar800×600 em FullHD, com catálogo à esquerda, inventário à direita,
+Try/Buy abaixo da grade e ações do inventário à direita. Substitui ADR-070
+quanto ao layout/ordem; preço vetorial uniforme preserva correção de blur.
+
+## ADR-072 — catálogo e modificadores XFS
+
+Após esclarecimento explícito do usuário, integrar562registros/479compráveis,
+preços e bônus reais. A interpretação anterior de somente design foi rejeitada.
+Namespaces separados e migração por identidade preservam compras/progresso;
+Pilot Goggle antigo1 corresponde ao XFS2. Kappa fica legado. Atributos do piloto
+mais equipamento são limitados a50por atributo, com negativos, copiados no
+start e compartilhados com previsão. Substitui restrição a cosméticos C# das
+ADR-067/069/070 para o catálogo XFS. Sem rede/contas neste corte.
+
+## ADR-073 — controle e migração HD completa
+
+Usuário apontou a diferença entre miniatura regenerada e peça vestida nativa.
+Registrar miniatura, base, efeito e QA separadamente para todos os562registros.
+550têm peças/629camadas; padrões vazios e placeholders recebem N/A com motivo.
+Masters anatômicos constantes e efeitos separados conservam rig/animação
+aprovada; arte só gerada não conta como componente validado. Arte original,
+brutos e prompts preservados. AVATAR_HD_MIGRATION.md define o critério550/550.
+
+Concluído na0.17:37lotes/38atlas,629camadas e532miniaturas novas,18miniaturas
+anteriores. Controle exige captura com os hashes atuais da arte, registro e
+renderer, mais auditoria do uso efetivo nos550registros. Mestres constantes
+acompanham rig/poses/pausa; não equivalem a redesenhar todos os quadros nativos.
+Recortes de partículas e reparos individuais têm decisões reproduzíveis no
+ledger, sem alterar brutos.12N/A mantêm motivo explícito. App/PCK validado.
+
+## ADR-074 — Nak com dados do cliente original sobre o OpenBound
 
 Pedido do usuário: novo mobile Nak "com base no OpenBound". O fork C# só tem
 metadados (HP 1100, proteção 35, mira 10–50°, delays 760/910/1310), sons,
@@ -452,4 +516,80 @@ e explode no primeiro pixel livre; SS ignora terreno. Vento comum (sem fator por
 tiro). Desenho espelhado: o Nak atira pela cauda. RiderPivot cru do fork recebe
 (+5, +4), média do registro de Bigfoot/Mage. HD adiado pelo usuário; Nak fica
 fora do rig HD até lá. Substitui a primeira versão deste ADR, que inventava
-números e uma gravidade invertida 3×.
+números e uma gravidade invertida 3×. Publicado como ADR-069 no PR #1;
+renumerado para ADR-074 na integração à main, pois a loja local já usava 069–073.
+
+## ADR-075 — estado anatômico compartilhado por cabeça e efeito
+
+20/10/2026. Em0.17 o gerador escolheu o maior L dentre todos os quadros, mesmo
+quando a cabeça vinha de Normal11–21. Great Devil Head combina luz frontal
+com cabeça lateral. Preparação passa a selecionar Normal na cabeça e sua luz;
+arte defeituosa é regenerada, preservando fontes/brutos anteriores. O fallback
+respeita as faixas Normal/Staring da categoria. Metadados e QA devem comprovar
+o estado, além do registro constante. AVATAR_EFFECT_ALIGNMENT.md.
+
+O pedido de finalizar o PR1 com arte HD substitui o adiamento de HD do Nak na
+ADR-074; anatomia estável e efeitos próprios, sem mudanças de regras. NAK_HD.md.
+
+## ADR-076 — regras de batalha: original comprovado, depois C#
+
+Pedido de 20/10/2026: auditar a batalha contra o OpenBound C# e o cliente
+original Thor's Hammer ([BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md)).
+Política escolhida pelo usuário: quando a engenharia reversa comprova a regra
+original, ela prevalece; nos demais casos, vale o C#.
+
+A evidência principal vem de `ComputeTurnDelay`/`CommitTurnDelay` do
+GunBound-Decomp. O delay é `[28] + custo do tiro [30/31/32] + segundos gastos
+× [29]` do `characterdata.dat`. `base + custo` reproduz o `DelayPresets` do C#
+em 12 dos 16 mobiles. O Nak do C# (760/910/1310) é a linha de outro mobile.
+
+Escolhas do usuário:
+- abertura sorteada;
+- tempo gasto entra no delay do tiro, com turno de 30 s;
+- passe = 200, sem termo de tempo (o termo fixo `[34]` = 200 não foi atribuído
+  a um caminho e fica como hipótese);
+- Nak 770/920/1320;
+- Mage 730/30;
+- delays de item do `itemdata.dat`;
+- balística com os números do C# (196, massa 14, vento 1,2).
+
+Substitui:
+- as adaptações de gravidade/força/vento do ADR-024 e do ADR-026;
+- as regras de baseline do SPEC "Jogador começa" e "Passar custa 80";
+- os custos de Teleport, Dual+, Energy Up 2, Change Wind e Bunge do ADR-058;
+- os delays do Nak do ADR-074;
+- HP 760 e regeneração 20 do Mage (ADR-066);
+- a exigência de seeds 81–90 idênticas (ADR-057/058): as partidas de
+  referência mudam com esta decisão e passam a ter novos valores registrados.
+
+Não muda: empate por morte dupla, empate de iniciativa a favor do outro,
+passe sem trava de SS, dano C# (ADR-066) e clima. A balística original em
+ponto fixo e o dano original seguem sem engenharia reversa; ficam como
+pendência.
+
+Complemento (auditoria 0.18.1): o tempo gasto vale para o jogador. A CPU
+cobra um tempo fixo de 2 s por tiro (`TurnTable.CPU_THINK_SECONDS`) no lugar
+do relógio real, porque a duração da busca no worker depende da máquina e
+tornava a ordem de turnos não reproduzível com a mesma seed. A fila do HUD
+antes da escolha da CPU passa a vir de `TurnTable.current_order`, com o mesmo
+desempate a favor do outro (o `game.gd` antes desempatava a favor do ativo).
+
+Complemento (0.18.2): o modelo congela `turn_time` da CPU entre
+`begin_cpu_plan` e `finish_cpu_plan` (`cpu_thinking`). A busca não consome o
+turno de 30 s, então a CPU não passa por tempo esgotado em máquina lenta; a
+espera de apresentação depois da escolha continua contando.
+
+## ADR-077 — deriva do vento na queda pela intenção do C#
+
+21/10/2026, decisão do usuário. `Movement.ApplyGravity` (Movement.cs:170–193;
+Parameter.cs:123–126) cai `int(GravitySpeed)` px por passo, com
+`GravitySpeed` começando em 3 e somando 0,15, e soma `wind.x / 45` a um
+acumulador. O código literal zera esse acumulador quando o mobile **não**
+colide (troca de condição) e de novo ao passar de 1, o que torna a deriva
+irregular. O protótipo anterior acumulava por pixel caído e também zerava.
+
+Decisão: seguir a intenção. `Match.drift_fall` itera por passos de gravidade e
+aplica `wind.x / 45` uma vez por passo, sem acumulador nem reset; parede ou
+terreno sólido no próximo x bloqueia o empurrão do passo. Vento 35 numa queda
+de 100 px (24 passos) desloca ≈ 18,7 px. Substitui a deriva por pixel da
+paridade de MOBILE_PARITY.md (REQ-42). Teste: `test_mobile_parity`.

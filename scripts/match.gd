@@ -20,6 +20,10 @@ const ALL_WEATHER := [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 # Training slots. Index 0 is the human, index 1 is the CPU. The match stays 1×1.
 const PLAYER := 0
 const CPU := 1
+# TimePerPlayerTurn. The original clock is 20 s, but the user kept 30 (ADR-076).
+const TURN_TIME := 30.0
+# start(opening): draw the first actor from the match rng (real matches).
+const RANDOM_OPENING := -1
 const SPECIAL_WEAPON := Mobiles.SPECIAL
 # Stable mobile IDs are independent of menu slots. Removed ID 0 is not playable.
 const PLAYABLE_VEHICLES := Mobiles.PLAYABLE
@@ -36,7 +40,7 @@ var phase := "menu"
 var wind := Vector2.ZERO
 var weather
 var clock := 0.0
-var turn_time := 30.0
+var turn_time := TURN_TIME
 var movement_left := 90.0
 var difficulty := 1
 var winner := -1
@@ -44,6 +48,11 @@ var total_turns := 0
 var accumulator := 0.0
 var shot_weapon := 0
 var shot_actor := 0
+# Whole seconds spent before the last shot; charged with its delay (ADR-076).
+var shot_elapsed := 0
+# True while the CPU aim search runs: the turn clock is frozen (ADR-076), so a
+# slow machine can never make the CPU time out and pass.
+var cpu_thinking := false
 var resolve_wait := 0.0
 var flight_elapsed := 0.0
 var last_shots: Array = [{}, {}]
@@ -57,7 +66,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = []) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = [], opening: int = PLAYER) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -87,11 +96,13 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		for id in (Items.sanitize(loadout) if index == PLAYER else []):
 			items.append({"id": id, "used": false})
 		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
+		values=Attributes.with_equipment(values,gear_bonuses_by_actor[index] if index<gear_bonuses_by_actor.size() and gear_bonuses_by_actor[index] is Array else [])
 		var max_health := Attributes.health(int(VEHICLES[kind].hp),int(values[1]))
 		actors.append({"gold_state":{"gold":0,"enemy_damage":0},"attributes":values,"vehicle": kind, "hp": max_health, "max_hp": max_health, "pos": Vector2(x, ground - stance), "facing": 1 if index == PLAYER else -1, "shield": shield, "max_shield": shield, "ready": 0.0, "turns": 0, "ss_lock": 0, "tilt": 0.0,
 			"items": items, "turn_item": ""})
 	difficulty = clampi(cpu_difficulty, 0, 2)
 	active = PLAYER
+	shot_elapsed = 0
 	winner = -1
 	clock = 0.0
 	total_turns = 0
@@ -108,6 +119,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	if weather_mode == "all":
 		preset = ALL_WEATHER
 	apply_weather(weather.setup(preset, terrain.world_size(), rng))
+	# The server draws the turn order (MatchManager / jglim start_game); fixtures
+	# pass an explicit side so their first shot stays the player's.
+	active = rng.randi_range(PLAYER, CPU) if opening == RANDOM_OPENING else clampi(opening, PLAYER, CPU)
 	begin_turn()
 
 func movement_budget() -> float:
@@ -115,7 +129,8 @@ func movement_budget() -> float:
 
 func begin_turn() -> void:
 	phase = "aim"
-	turn_time = 30.0
+	cpu_thinking = false
+	turn_time = TURN_TIME
 	actors[active].turns += 1
 	total_turns += 1
 	# A round is two turns (RoomSize 2 in MatchMetadata.PassTurn).
@@ -191,7 +206,7 @@ func use_item(slot: int) -> bool:
 			actor.hp = maxi(1, int(float(actor.hp) - float(actor.max_hp) * Items.BLOOD_HEALTH / 100.0))
 			event["amount"] = int(actor.hp) - before
 		"change_wind":
-			weather.wind_angle = (int(weather.wind_angle) + Items.CHANGE_WIND_DEGREES) % 360
+			weather.wind_angle = posmod(int(weather.wind_angle) + Items.CHANGE_WIND_DEGREES, 360)
 			wind = weather.wind_vector()
 			event["wind_angle"] = weather.wind_angle
 	events.append(event)
@@ -235,7 +250,7 @@ func body_rotation(index: int) -> float:
 func weapon_rules(index: int, weapon: int) -> Dictionary:
 	var rules: Dictionary = Mobiles.weapon(actors[index].vehicle, weapon).duplicate(true)
 	var points := Attributes.points(actors[index],4)
-	if points > 0:
+	if points != 0:
 		rules.delay = Attributes.delay(roundi(float(rules.delay) * 7.5), points)
 	return rules
 
@@ -262,7 +277,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 			# Weather state per shell (Projectile.cs): base damage, columns touched, influences.
 			"damage": int(rules.damage), "launch_speed": velocity.length(), "inside": {}, "influenced": [], "electric": false, "thor": false, "tornado": {},
 			"weapon": weapon, "volley": 0, "beacon": false, "wind_scale": float(rules.get("wind_scale", 1.0)),
-			# Nak (ADR-069): S2 burrows and resurfaces, SS crosses the terrain.
+			# Nak (ADR-074): S2 burrows and resurfaces, SS crosses the terrain.
 			"burrow": bool(rules.get("burrow", false)), "ghost": bool(rules.get("ghost", false)), "underground": false})
 	return result
 
@@ -336,6 +351,9 @@ func cannon_pivot(index: int) -> Vector2:
 func muzzle(index: int, angle: float, weapon: int = 0) -> Vector2:
 	return cannon_pivot(index) + shot_velocity(index, angle, 100.0, weapon).normalized() * 38.0
 
+func current_order() -> Array:
+	return TurnTable.current_order(self)
+
 func initiative_preview(weapon: int) -> Array:
 	return TurnTable.initiative_preview(self, weapon)
 
@@ -346,6 +364,7 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 		return false
 	shot_weapon = weapon
 	shot_actor = active
+	shot_elapsed = TurnTable.elapsed_seconds(self)
 	if Mobiles.is_special(actors[active].vehicle, weapon):
 		actors[active].ss_lock = int(actors[active].ss_lock) + Mobiles.SS_LOCK
 	var limits := aim_limits(active, weapon)
@@ -382,6 +401,8 @@ func pass_turn() -> void:
 
 func tick(delta: float) -> void:
 	if phase == "aim":
+		if cpu_thinking and active == CPU:
+			return
 		turn_time = maxf(0.0, turn_time - delta)
 		if turn_time <= 0.0:
 			pass_turn()
@@ -396,7 +417,7 @@ func tick(delta: float) -> void:
 			settle_actors()
 			finish_gold_shot()
 			if not check_end():
-				schedule(shot_actor, float(weapon_rules(shot_actor, shot_weapon).delay) + float(VEHICLES[actors[shot_actor].vehicle].delay))
+				schedule(shot_actor, TurnTable.shot_cost(self, shot_actor, shot_weapon, shot_elapsed))
 
 func advance_projectiles(delta: float) -> void:
 	stamp_tilt()
@@ -623,18 +644,27 @@ func tornado_step(projectile: Dictionary, delta: float) -> Dictionary:
 				return {"position": position, "velocity": direction * float(projectile.launch_speed)}
 	return {"position": position, "velocity": heading * float(state.speed)}
 
+# Movement.ApplyGravity (Parameter.cs TankMovementInitialGravity/GravityFactor).
+const FALL_INITIAL_SPEED := 3.0
+const FALL_SPEED_STEP := 0.15
+const FALL_WIND_DIVISOR := 45.0
+
 func drift_fall(actor: Dictionary, drop: float) -> void:
-	# Movement.ApplyGravity: wind/45 accumulates until it moves the mobile one pixel.
-	var accumulator := 0.0
+	# ADR-077: the C# intent, one wind push of wind.x / 45 per gravity step.
+	# Each step falls int(GravitySpeed) px (starting at 3, +0.15 per step); the
+	# literal C# accumulator reset is not reproduced. Walls stop the push.
 	var x := float(actor.pos.x)
-	for _step in int(drop):
-		accumulator = clampf(accumulator + wind.x / 45.0, -1.0, 1.0)
-		if absf(accumulator) < 1.0:
-			continue
-		var next := clampf(x + float(int(accumulator)), 24.0, terrain.world_size().x - 24.0)
-		if not terrain.is_solid(Vector2(next, actor.pos.y)):
+	var y := float(actor.pos.y)
+	var remaining := drop
+	var speed := FALL_INITIAL_SPEED
+	while remaining > 0.0:
+		var fall := minf(float(int(speed)), remaining)
+		var next := clampf(x + wind.x / FALL_WIND_DIVISOR, 24.0, terrain.world_size().x - 24.0)
+		if not terrain.is_solid(Vector2(next, y)):
 			x = next
-		accumulator = 0.0
+		y += fall
+		remaining -= fall
+		speed += FALL_SPEED_STEP
 	actor.pos.x = x
 
 func settle_actors() -> void:
@@ -675,24 +705,36 @@ func begin_cpu_plan() -> Dictionary:
 		weapon = 2
 	var snapshot = FlightSnapshot.capture(self)
 	snapshot.active = active
+	cpu_thinking = true
 	return {"actor": active, "weapon": weapon, "limits": aim_limits(active, weapon), "snapshot": snapshot,
 		"target": target.pos, "best": {"angle": 45.0, "power": 65.0, "weapon": weapon}}
 
 static func search_cpu_plan(plan: Dictionary) -> void:
-	var index: int = plan.actor
 	var limits: Vector2 = plan.limits
-	var best_score := INF
+	plan.best_score = INF
 	for angle in range(int(maxf(15, limits.x)), int(minf(80, limits.y)) + 1, 5):
 		for power in range(20, 101, 4):
-			var impact: Dictionary = plan.snapshot.predict_shot(index, angle, power, plan.weapon)
-			var score := Vector2(impact.position).distance_to(plan.target)
-			if int(impact.actor) == other(index):
-				score -= 20.0
-			elif int(impact.actor) == index:
-				score += 500.0
-			if score < best_score:
-				best_score = score
-				plan.best = {"angle": float(angle), "power": float(power), "weapon": plan.weapon}
+			score_cpu_shot(plan, angle, power)
+	# Refine around the best cell: range grows with force² under the C# ballistics
+	# (ADR-076), so a 4-point power step alone lands about 100 px apart.
+	var coarse: Dictionary = plan.best
+	for angle in range(int(coarse.angle) - 4, int(coarse.angle) + 5, 2):
+		for power in range(int(coarse.power) - 3, int(coarse.power) + 4):
+			if angle >= limits.x and angle <= limits.y and power >= 15 and power <= 100:
+				score_cpu_shot(plan, angle, power)
+
+## Predicts one grid cell on the plan snapshot and keeps it if it lands closer.
+static func score_cpu_shot(plan: Dictionary, angle: int, power: int) -> void:
+	var index: int = plan.actor
+	var impact: Dictionary = plan.snapshot.predict_shot(index, angle, power, plan.weapon)
+	var score := Vector2(impact.position).distance_to(plan.target)
+	if int(impact.actor) == other(index):
+		score -= 20.0
+	elif int(impact.actor) == index:
+		score += 500.0
+	if score < float(plan.best_score):
+		plan.best_score = score
+		plan.best = {"angle": float(angle), "power": float(power), "weapon": plan.weapon}
 
 func finish_cpu_plan(plan: Dictionary) -> Dictionary:
 	var best: Dictionary = plan.best
@@ -702,6 +744,7 @@ func finish_cpu_plan(plan: Dictionary) -> Dictionary:
 	best.angle = clampf(float(best.angle) + rng.randf_range(-angle_error, angle_error), limits.x, limits.y)
 	best.power = clampf(float(best.power) + rng.randf_range(-power_error, power_error), 15.0, 100.0)
 	plan.snapshot = null
+	cpu_thinking = false
 	return best
 
 func collect_gold_damage(event_start: int, impact: Vector2, projectile: Dictionary) -> void:

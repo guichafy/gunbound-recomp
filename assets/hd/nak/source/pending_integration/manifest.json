@@ -1,0 +1,112 @@
+{
+  "status": "pending_explicit_integration_approval",
+  "files": [
+    {
+      "original": "scripts/nak_hd.gd",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/scripts/nak_hd.gd",
+      "sha256": "49485cb8c87f51b09b3d76b2ac9eafaec559e266a10108a8daf6eac5b1b63925"
+    },
+    {
+      "original": "scripts/nak_hd.gd.uid",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/scripts/nak_hd.gd.uid",
+      "sha256": "a95bcd8d9f05a06eece0750357aeeff3ab355b999c0acf29653b61aadcd8cb43"
+    },
+    {
+      "original": "scripts/build_nak_hd.py",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/scripts/build_nak_hd.py",
+      "sha256": "1e88dcda094de731cb99ad83f153270a547325b6b69c15ac984039d51af4a39b"
+    },
+    {
+      "original": "assets/hd/nak/masters.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/nak/masters.png.import",
+      "sha256": "13de6f1d7d74d3e140936778a42d010d448059930e7c7dd98f9809b50779de82"
+    },
+    {
+      "original": "assets/hd/nak/GENERATION.json",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/nak/GENERATION.json",
+      "sha256": "5224b7ffb70f0c90893be167a8b4b4cce6b4e1a6b3a1cb558cf146dc7affb0d5"
+    },
+    {
+      "original": "assets/hd/nak/masters.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/nak/masters.png",
+      "sha256": "aa627036c6f918530327f4e0d45e4dc62b7ceb9068fd4a7ba6fe1f6f725ff03c"
+    },
+    {
+      "original": "assets/hd/nak/catalog.json",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/nak/catalog.json",
+      "sha256": "fde410569598ff442006511e4290cc3eda8c24c91f55af8917985a6bd2b11f21"
+    },
+    {
+      "original": "assets/hd/nak/effects.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/nak/effects.png.import",
+      "sha256": "cb2c60e6a7887385c664b08ff33b12ff96c7ce929cf33b60b21d534a170b0cf2"
+    },
+    {
+      "original": "assets/hd/nak/effects.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/nak/effects.png",
+      "sha256": "2d3cbd60f7849b4bb84bcc3a1ae612ccbde93ac13ccc7a71e29f62d730e2f5df"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakSSAlly.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakSSAlly.png",
+      "sha256": "450a0be20ca8e2e81f481293eec3470f1b86ebc6f73cbb39ca435feb6bd5c187"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS2Enemy.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS2Enemy.png",
+      "sha256": "e3bebde0220b7003fa098f836789a768c1521feee1df199715f495f41328a32a"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS1Enemy.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS1Enemy.png.import",
+      "sha256": "6b95aeb844d6ba06ef61db3fbecf18e63755f19fa334f5642ba32cc5395c86d3"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakSSEnemy.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakSSEnemy.png",
+      "sha256": "e3bebde0220b7003fa098f836789a768c1521feee1df199715f495f41328a32a"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakSSAlly.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakSSAlly.png.import",
+      "sha256": "4fc4d453b9d1bc5f693fdf967fdb25cd01155a31c7cbe509b24f5a18b9bdd977"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS1Ally.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS1Ally.png",
+      "sha256": "450a0be20ca8e2e81f481293eec3470f1b86ebc6f73cbb39ca435feb6bd5c187"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakSSEnemy.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakSSEnemy.png.import",
+      "sha256": "abfbd27636bfbe01d21e602c15ba32bf8373b7c38cf30b79a1073d015b9159a7"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS2Ally.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS2Ally.png.import",
+      "sha256": "67feb4f29993a83899deb909583d93e05f322b539942d877db8b95f8031a9e32"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS2Ally.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS2Ally.png",
+      "sha256": "450a0be20ca8e2e81f481293eec3470f1b86ebc6f73cbb39ca435feb6bd5c187"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS1Ally.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS1Ally.png.import",
+      "sha256": "1f8377064e6caa5e551d298d8981ef23922d81dd5fd31dc59a537b84282bdc14"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS1Enemy.png",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS1Enemy.png",
+      "sha256": "e3bebde0220b7003fa098f836789a768c1521feee1df199715f495f41328a32a"
+    },
+    {
+      "original": "assets/hd/hud/CrosshairNakS2Enemy.png.import",
+      "checkpoint": "assets/hd/nak/source/pending_integration/files/assets/hd/hud/CrosshairNakS2Enemy.png.import",
+      "sha256": "f8d06126f96ef14e1d8f9aee460abcc37e0a221348605670150476d97ece00d4"
+    }
+  ],
+  "patch": "integration.patch.gz",
+  "patch_encoding": "gzip; decompress before applying"
+}

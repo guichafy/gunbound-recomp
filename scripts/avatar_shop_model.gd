@@ -12,7 +12,7 @@ var preview: Dictionary = {}
 var draft_attributes: Array = []
 func _init(player_profile, avatar_catalog = null) -> void:
 	profile = player_profile
-	catalog = avatar_catalog if avatar_catalog != null else Catalog.new()
+	catalog = avatar_catalog if avatar_catalog != null else profile.catalog
 	reset_preview()
 func reset_preview() -> void:
 	preview = profile.equipped_set()
@@ -23,20 +23,25 @@ func filter(kind: int, text: String, owned_only: bool, requested: int = 0) -> Ar
 	query = text
 	inventory = owned_only
 	var rows: Array = []
-	for item in catalog.items(profile.gender,category):
+	for item in (catalog.inventory_items(profile.gender,category) if inventory else catalog.items(profile.gender,category)):
+		if not inventory and item.get("source")=="xfs" and not item.get("buyable",false):
+			continue
 		if (query.is_empty() or str(item.name).to_lower().contains(query.to_lower())) and (not inventory or profile.owns(item.key)):
 			rows.append(item)
 	last_page = maxi(1, ceili(rows.size() / 9.0))
 	page = clampi(requested,0,last_page-1)
-	return rows.slice(page*9,mini(rows.size(),page*9+9))
+	var visible: Array = rows.slice(page*9,mini(rows.size(),page*9+9))
+	if not selected_key.is_empty() and not visible.any(func(item): return item.key==selected_key):
+		selected_key = ""
+	return visible
 func select(key: String) -> bool:
 	if not catalog.compatible(key,profile.gender):
 		return false
-	selected_key = key
 	if inventory:
 		if not profile.equip(key):
 			return false
 		preview = profile.equipped_set()
+	selected_key = key
 	return true
 func try_selected() -> bool:
 	var item: Dictionary = catalog.find(selected_key)

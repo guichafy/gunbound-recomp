@@ -1,6 +1,90 @@
 # Entregas e próximos trabalhos
 
-## Nak 0.15 (ADR-069)
+## Release 0.18.2 (auditoria; ADR-076 complementos, ADR-077)
+
+- [x] CPU com tempo fixo de 2 s e relógio parado durante a busca; testes de seed/ordem.
+- [x] Fila do HUD em `TurnTable.current_order`; teste de empate.
+- [x] Deriva da queda por passo de gravidade (ADR-077); teste de magnitude.
+- [x] posmod do vento, guarda de `density`, docs de baseline/gravidade/Mage/ItemDelay.
+- [x] check.sh completo: 5287 checks + 13 partidas; App/ZIP 0.18.2 e smoke do PCK.
+- [ ] Usuário aprovar e fazer merge de `fix/0.18.2` na main.
+- [ ] Opcional: tirar `model.phase = "menu"` do `game.gd`; centralizar a espera da tarefa da CPU.
+
+## Paridade das regras de batalha (REQ-44, ADR-076)
+
+- [x] Auditar Godot × C# × cliente original; engenharia reversa de ComputeTurnDelay/CommitTurnDelay e `.dat`.
+- [x] Decisões do usuário: original comprovado > C#; tempo gasto no delay; abertura sorteada; passe 200.
+- [x] Nak 770/920/1320, Mage 730/30, delays de item do itemdata, balística C# (196/14/1,2).
+- [x] CPU com refino local; teste de cena da CPU abrindo; test_battle_rules (36).
+- [x] check.sh completo: 3926 checks + 13 partidas, zero falhas (worktree `claude/battle-rules-parity`).
+- [x] Integrar à main (a25a471) e reexportar App/ZIP 0.18.1, assinatura e smoke do PCK conferidos.
+- [ ] Usuário validar a sensação de mira/alcance no app 0.18.1; decidir recalibração do erro da CPU.
+- [ ] Opcional: engenharia reversa da balística em ponto fixo e do dano original; termo `[34]` = 200.
+- [ ] Opcional: morte súbita do original (limite de turnos em BeginNewTurn).
+
+## Migração HD integral dos avatares — pedido atual
+## Revisão0.18 e sincronização main
+
+- [x] Preservar pendentes0.17 em3eb2b01; confirmar PR1 MERGED/ancestralidade.
+- [x] Reproduzir mistura Staring/Normal em L e corrigir preparação/fallback.
+- [x] Regenerar luz única do Great Devil; registrar20âncoras de cabeça HD.
+- [x] GPU20modelos/360frames60Hz/pausa e loja real1920×1080.
+- [x] Revisão independente, QA37lotes/550registros renovado.
+- [x] Regressão5234checks+13partidas e Python13 PASS.
+- [x] Export/PCK0.18, versão0.18.0 e assinatura estrita conferidos.
+- [ ] Confirmar push remoto (uploads HTTP expiraram; transporte em diagnóstico).
+- [ ] NakHD: confirmação explícita pedida pela revisão automática;21outputs/
+      patch preservados em source/pending_integration, runtime original ativo.
+- [ ] Após confirmação: corrigir separação S2/SS, testesHD/HUD, GPU/export Nak.
+
+## Migração HD integral dos avatares0.17
+
+- [x] Medir escopo real:562registros,550com peças,629camadas,12N/A.
+- [x] Identificar/corrigir transparência ARGB4444 de cinco acessórios, RED→GREEN.
+- [x] Controle por registro: miniatura, peça vestível, efeito, registro e validação.
+- [x] Preparar37lotes com1161componentes; brutos/prompts excluídos do export.
+- [x] Regenerar e conferir629camadas vestíveis +532miniaturas, além das18anteriores.
+- [x] Consumir HD no personagem vestido:550/550, sem fallback oculto; rig preservado.
+- [x] GPU por lote com ambos mobiles/sentidos;360frames60Hz, pausa idêntica.
+- [x] Controle HTML/CSV com prévia GPU vestida e motivos dos12N/A.
+- [x] Regressão3887checks+13partidas após integração Nak;1744checks de HD e11Python.
+- [x] App/ZIP0.17.0 assinados; smoke PCK externo passou:550peças/629camadas e fluxos.
+- [ ] Usuário validar a aparência final no aplicativo reaberto.
+
+## Avatar Shop XFS0.16 (ADR-071/072)
+
+- [x] Extrair catálogo562/479compráveis, frames/pivôs/camadas L e retratos nativos.
+- [x] Layout XFS800×600, grade3×3, inventário à direita, preços sem blur/overposição.
+- [x] Compra/equipamento/perfil3 com migração por identidade e rollback.
+- [x] Bônus por peça nos cards/conjunto/combate/previsão, inclusive penalidade de delay.
+- [x] Fundo e18miniaturas regenerados; cobertura vestível limitada explicitada.
+- [x] 3163checks+10partidas;106checks após atlas, Python8, GPU/PCK passaram.
+- [x] App/ZIP0.16.0 assinados, smoke do PCK isolado e capturas1920×1080/60Hz.
+- [x] Usuário validou e apontou lacuna de HD no personagem: novo plano acima.
+
+## Avatar Shop Full HD pelo vídeo0.15 (ADR-070)
+
+- [x] Inspecionar vídeo/imagem e aplicar ordem confirmada Presente→Comprar→Experimentar.
+- [x] Composição16:9, grade3×3, inventário compacto amarelo e alternância Avatar/Mobile.
+- [x] Texto nítido, molduras vetoriais e preço uniforme verificado em GPU/PCK.
+- [x] Regenerar fundo e retrato compartilhado de slot vazio; metadados/fallback/mipmaps.
+- [x] Corrigir escala real da Window e restaurar menu/batalha, incluindo ESC/reentrada.
+- [x] 1949checks rápidos e10partidas completas sem falhas; achado da revisão corrigido.
+- [x] GPU1920×1080/120frames60Hz, app/ZIP0.15.0 assinados e smoke isolado do PCK.
+- [ ] Usuário validar a aparência e os fluxos no aplicativo reaberto.
+
+## Auditoria de estado/layout da loja0.14.9 (ADR-069)
+
+- [x] Conferir C# e aplicar escolha do usuário: abas sobre cards e Try→Buy→Gift.
+- [x] Corrigir seleção oculta, rollback/erro no clique da grade e mensagem de busca vazia.
+- [x] Separar arte/legenda/hitbox, alinhar categorias e corrigir size após fonte.
+- [x] Preservar proporção da prévia com crop uniforme e faixa de preço nítida.
+- [x] 1913checks+10partidas sem falhas; revisão independente sem achados.
+- [x] GPU1920×1080/120frames60Hz e smoke real do PCK em/tmp, incluindo batalha.
+- [x] App/ZIP0.14.9 reexportados, versão conferida e assinatura estrita válida.
+- [ ] Usuário validar layout/fluxos no aplicativo atualizado.
+
+## Nak 0.15 (ADR-074)
 
 - [x] Catálogo ID 3 com dados do fork (HP, mira, delays, sons, miras, RiderPivot).
 - [x] Leitor próprio do cliente original; correção dos blocos LZHUF de 4 KB.
@@ -8,9 +92,10 @@
 - [x] Dano/raio do characterdata; S2 subterrâneo e SS fantasma revertidos do cliente.
 - [x] Menu com três mobiles, miras do HUD, partidas 91–93 e test_nak (55 checks).
 - [x] Captura GPU em docs/nak (stills, MP4 60 fps, GIF ampliado).
-- [ ] Arte HD do Nak (skill gunbound-classic-hd), adiada pelo usuário.
+- [ ] Arte HD do Nak: pedido atual substitui adiamento; preparados masters/código.
+      Integração aguarda confirmação específica exigida pela revisão automática.
 - [ ] Usuário validar sensação de S2/SS e encaixe do piloto no app.
-- [ ] Reexportar app 0.15.0 quando o usuário pedir a entrega.
+- [x] App reexportado/assinado na entrega0.17 dos avatares HD, mantendo Nak original.
 
 ## Paridade Mage/Bigfoot com o C# (ADR-066)
 

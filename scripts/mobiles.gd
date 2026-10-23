@@ -18,23 +18,28 @@ const MAGE_WEAPONS := [
 ]
 const MAGE_AIM := [Vector2(15, 50), Vector2(15, 50), Vector2(15, 50)]
 
-# Nak (ADR-069). The fork only has MobileMetadata, AimPresets and DelayPresets.
+# Nak (ADR-074). The fork only has MobileMetadata, AimPresets and DelayPresets.
 # Damage is the first per-shot value of the original characterdata.dat record 2
 # and the radius half of the second (same reading that matches Bigfoot); the
 # flight rules come from the original client's Bullet3 classes (NAK_0_15.md).
+# Delays are base [28] + shot [30/31/32] of that record (ADR-076): the fork's
+# 760/910/1310 Nak row belongs to another mobile.
 # "burrow": the shell enters the ground and explodes where it resurfaces.
 # "ghost": the shell crosses terrain and only collides with mobiles.
 const NAK_WEAPONS := [
-	{"name": "Esfera", "damage": 200.0, "radius": 30.0, "delay": 760.0 / 7.5, "count": 1, "color": Color("f0a060")},
-	{"name": "Bomba de oscilação", "damage": 350.0, "radius": 35.0, "delay": 910.0 / 7.5, "count": 1, "burrow": true, "color": Color("d0d0d8")},
-	{"name": "Mini Nak", "damage": 360.0, "radius": 35.0, "delay": 1310.0 / 7.5, "count": 1, "ghost": true, "color": Color("e8743a")}
+	{"name": "Esfera", "damage": 200.0, "radius": 30.0, "delay": 770.0 / 7.5, "count": 1, "color": Color("f0a060")},
+	{"name": "Bomba de oscilação", "damage": 350.0, "radius": 35.0, "delay": 920.0 / 7.5, "count": 1, "burrow": true, "color": Color("d0d0d8")},
+	{"name": "Mini Nak", "damage": 360.0, "radius": 35.0, "delay": 1320.0 / 7.5, "count": 1, "ghost": true, "color": Color("e8743a")}
 ]
 const NAK_AIM := [Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)]
 
+# time_delay: characterdata.dat [29], delay added per whole second spent before
+# firing (ComputeTurnDelay). Mage HP/shield regeneration also come from that
+# table (730/30), replacing the fork's 760/20 (ADR-076).
 const DEFINITIONS := {
 	1: {
-		"name": "Mage", "hp": 760, "move": 90.0, "delay": 0.0, "color": Color("a9b7ff"),
-		"shield": 220, "shield_regen": 20, "hp_regen": 0, "protection": 35,
+		"name": "Mage", "hp": 730, "move": 90.0, "delay": 0.0, "time_delay": 10, "color": Color("a9b7ff"),
+		"shield": 220, "shield_regen": 30, "hp_regen": 0, "protection": 35,
 		"box": Vector2(38, 33), "box_offset": Vector2(0, 10), "stance": 30.0,
 		"beacon_delay": 0.0, "smoke": false, "bionic": false,
 		"weapons": MAGE_WEAPONS, "aim_limits": MAGE_AIM,
@@ -43,7 +48,7 @@ const DEFINITIONS := {
 		"summary": "220 de escudo · duplo laser e especial EMP."
 	},
 	2: {
-		"name": "Bigfoot", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("71c0ff"),
+		"name": "Bigfoot", "hp": 1100, "move": 90.0, "delay": 0.0, "time_delay": 10, "color": Color("71c0ff"),
 		"shield": 0, "shield_regen": 0, "hp_regen": 0, "protection": 35,
 		"box": Vector2(46, 40), "box_offset": Vector2(0, 10), "stance": 25.0,
 		"beacon_delay": 0.4, "smoke": true, "bionic": false,
@@ -53,7 +58,7 @@ const DEFINITIONS := {
 		"summary": "T1: 4 bombas · T2: 6 · SS: 8 bombas."
 	},
 	3: {
-		"name": "Nak", "hp": 1100, "move": 90.0, "delay": 0.0, "color": Color("f2a65a"),
+		"name": "Nak", "hp": 1100, "move": 90.0, "delay": 0.0, "time_delay": 10, "color": Color("f2a65a"),
 		"shield": 0, "shield_regen": 0, "hp_regen": 0, "protection": 35,
 		"box": Vector2(46, 30), "box_offset": Vector2(0, 10), "stance": 25.0,
 		"beacon_delay": 0.0, "smoke": false, "bionic": false,

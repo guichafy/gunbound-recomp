@@ -1,0 +1,758 @@
+{
+	"batch": "batch_005",
+	"components": [
+		{
+			"id": "xfs:0:0:68|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-6.0,
+					-31.0,
+					25.0,
+					28.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					51.0,
+					31.0,
+					177.0,
+					175.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:68|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					298.0,
+					27.0,
+					173.0,
+					181.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:69|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-10.0,
+					-38.0,
+					37.0,
+					37.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					549.0,
+					25.0,
+					188.0,
+					183.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:69|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					803.0,
+					26.0,
+					178.0,
+					182.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:70|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-10.0,
+					-37.0,
+					31.0,
+					32.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					41.0,
+					222.0,
+					182.0,
+					180.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:70|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					294.0,
+					224.0,
+					193.0,
+					173.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:71|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-14.0,
+					-39.0,
+					48.0,
+					36.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					546.0,
+					235.0,
+					198.0,
+					153.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:71|layer:1",
+			"registration": {
+				"attachment": {
+					"base_uv": [
+						0.17,
+						0.32
+					],
+					"effect_uv": [
+						0.5,
+						0.5
+					],
+					"feature": "single profile horn",
+					"scale": 1.0
+				},
+				"effect": true,
+				"native_rect": [
+					-18.0,
+					-42.0,
+					25.0,
+					28.0
+				],
+				"pulsate": true,
+				"reference_state": "normal",
+				"region": [
+					90.0,
+					17.0,
+					1094.0,
+					1173.0
+				],
+				"sheet": "batch_005_repair_008"
+			},
+			"sheet_hash": "1322d9be2f84e576937fb6b9196d56ab96de88bd67d072d6337e17d08048b27c"
+		},
+		{
+			"id": "xfs:0:0:71|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					35.0,
+					424.0,
+					202.0,
+					166.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:72|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-9.0,
+					-38.0,
+					28.0,
+					32.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					307.0,
+					422.0,
+					164.0,
+					177.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:72|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					556.0,
+					423.0,
+					181.0,
+					168.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:73|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-7.0,
+					-31.0,
+					24.0,
+					26.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					810.0,
+					424.0,
+					182.0,
+					169.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:73|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					44.0,
+					621.0,
+					184.0,
+					153.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:74|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-9.0,
+					-33.0,
+					31.0,
+					28.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					302.0,
+					615.0,
+					191.0,
+					164.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:74|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					551.0,
+					615.0,
+					191.0,
+					174.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:75|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-16.0,
+					-38.0,
+					37.0,
+					36.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					803.0,
+					620.0,
+					189.0,
+					167.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:75|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					40.0,
+					803.0,
+					195.0,
+					170.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:76|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-16.0,
+					-46.0,
+					49.0,
+					41.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					285.0,
+					806.0,
+					210.0,
+					166.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:0:0:76|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					541.0,
+					803.0,
+					210.0,
+					171.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:0|portrait",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					810.0,
+					803.0,
+					181.0,
+					164.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:1|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-6.0,
+					-30.0,
+					26.0,
+					25.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					37.0,
+					986.0,
+					191.0,
+					166.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:2|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-10.0,
+					-32.0,
+					32.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					297.0,
+					999.0,
+					194.0,
+					149.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:2|layer:1",
+			"registration": {
+				"attachment": {
+					"base_uv": [
+						0.065,
+						0.32
+					],
+					"effect_uv": [
+						0.96,
+						0.52
+					],
+					"feature": "lamp",
+					"scale": 1.0
+				},
+				"effect": true,
+				"native_rect": [
+					-85.0,
+					-60.0,
+					83.0,
+					63.0
+				],
+				"pulsate": true,
+				"reference_state": "normal",
+				"region": [
+					545.0,
+					995.0,
+					191.0,
+					152.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:3|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-7.0,
+					-28.0,
+					28.0,
+					23.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					803.0,
+					994.0,
+					198.0,
+					154.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:4|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-7.0,
+					-42.0,
+					33.0,
+					41.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					55.0,
+					1163.0,
+					164.0,
+					181.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:5|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-10.0,
+					-35.0,
+					33.0,
+					39.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					297.0,
+					1168.0,
+					178.0,
+					182.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:6|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-6.0,
+					-32.0,
+					25.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					546.0,
+					1162.0,
+					193.0,
+					182.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:7|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-7.0,
+					-30.0,
+					30.0,
+					31.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					809.0,
+					1171.0,
+					193.0,
+					172.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:7|layer:1",
+			"registration": {
+				"attachment": {
+					"base_uv": [
+						0.47,
+						0.39
+					],
+					"effect_uv": [
+						0.5,
+						0.5
+					],
+					"feature": "visor",
+					"scale": 1.0
+				},
+				"effect": true,
+				"native_rect": [
+					-10.0,
+					-34.0,
+					31.0,
+					29.0
+				],
+				"pulsate": true,
+				"reference_state": "normal",
+				"region": [
+					38.0,
+					1357.0,
+					186.0,
+					169.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:8|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-7.0,
+					-32.0,
+					31.0,
+					27.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					302.0,
+					1355.0,
+					190.0,
+					158.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:8|layer:1",
+			"registration": {
+				"attachment": {
+					"base_uv": [
+						0.26,
+						0.32
+					],
+					"effect_uv": [
+						0.5,
+						0.5
+					],
+					"feature": "forehead jewel",
+					"scale": 1.0
+				},
+				"effect": true,
+				"native_rect": [
+					-17.0,
+					-37.0,
+					28.0,
+					31.0
+				],
+				"pulsate": true,
+				"reference_state": "normal",
+				"region": [
+					546.0,
+					1350.0,
+					192.0,
+					184.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		},
+		{
+			"id": "xfs:1:0:9|layer:0",
+			"registration": {
+				"attachment": {},
+				"effect": false,
+				"native_rect": [
+					-6.0,
+					-44.0,
+					31.0,
+					43.0
+				],
+				"pulsate": false,
+				"reference_state": "",
+				"region": [
+					832.0,
+					1344.0,
+					154.0,
+					180.0
+				],
+				"sheet": "batch_005"
+			},
+			"sheet_hash": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf"
+		}
+	],
+	"frames": [
+		0,
+		30,
+		60,
+		90
+	],
+	"mobiles": [
+		"Mage direita",
+		"Bigfoot direita",
+		"Mage esquerda",
+		"Bigfoot esquerda"
+	],
+	"renderer_hashes": {
+		"scripts/avatar_art.gd": "1c86afd04087b6434495fb5b7f829ea12ff0153553c09ddd263b45cc4f731e0f",
+		"scripts/avatar_xfs_hd.gd": "df8809fb2d5cce28eeee0b2b847500c2479b7813e19f5ff9b20aeda92a467181",
+		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
+		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
+		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"
+	},
+	"size": [
+		1920,
+		1080
+	]
+}

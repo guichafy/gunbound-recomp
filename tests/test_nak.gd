@@ -1,5 +1,5 @@
 extends SceneTree
-## Nak (ID 3, REQ-43, ADR-069): catalog, S2 burrow, SS ghost, shared prediction, frames.
+## Nak (ID 3, REQ-43, ADR-074): catalog, S2 burrow, SS ghost, shared prediction, frames.
 
 const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
@@ -50,11 +50,12 @@ func _initialize() -> void:
 	check(is_equal_approx(float(nak.beacon_delay), 0.0), "Base Mobile beacon interaction time")
 	for weapon in range(3):
 		check(Mobiles.aim_limits(3, weapon) == Vector2(10, 50), "AimPresets keep 10–50 for shot %d" % weapon)
-	var delays := [760.0, 910.0, 1310.0]
+	# characterdata base [28] + shot [30/31/32] (ADR-076), not the fork's 760/910/1310 row.
+	var delays := [770.0, 920.0, 1320.0]
 	var power := [[200.0, 30.0], [350.0, 35.0], [360.0, 35.0]]
 	for weapon in range(3):
 		var rules: Dictionary = Mobiles.weapon(3, weapon)
-		check(is_equal_approx(float(rules.delay), delays[weapon] / 7.5), "DelayPresets for shot %d" % weapon)
+		check(is_equal_approx(float(rules.delay), delays[weapon] / 7.5), "Original delay for shot %d" % weapon)
 		check(float(rules.damage) == power[weapon][0] and float(rules.radius) == power[weapon][1], "characterdata power and radius for shot %d" % weapon)
 		check(float(rules.get("wind_scale", 1.0)) == 1.0, "Original shots share the common wind influence")
 	check(bool(Mobiles.weapon(3, 1).get("burrow", false)) and bool(Mobiles.weapon(3, 2).get("ghost", false)), "S2 burrows and SS ghosts")

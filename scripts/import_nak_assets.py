@@ -1,4 +1,4 @@
-"""Extract the original Nak sprites from the Thor's Hammer client (ADR-069).
+"""Extract the original Nak sprites from the Thor's Hammer client (ADR-074).
 
     python3 scripts/import_nak_assets.py [--xfs .tools/gunbound-client/graphics.xfs]
 

@@ -27,6 +27,7 @@ func run() -> void:
 	view.sound.muted = true
 	view.options.items = ["dual", "teleport", "power_up", "energy_up_1"]
 	view.select_vehicle(2)
+	view.opening = 0
 	view.start_match()
 	if view.model.active != 0:
 		view.model.pass_turn()

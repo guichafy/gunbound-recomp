@@ -74,7 +74,8 @@ Não há backend, servidor, banco externo, serviço de conta ou dependência npm
 eventos `turn`, `pass`, `fire`, `explosion`, `damage`, `fall`, `finished` para
 som, partículas, texto e resultado. View não calcula dano nem ordena turnos.
 
-`Combat.advance` integra aceleração constante: `a=(vento×1,5, 260)`,
+`Combat.advance` integra aceleração constante: `a=(0, 196) + vento×1,2`
+(vento 2D em unidades de força; ADR-076, antes `(vento×1,5, 260)`),
 `p'=p+vΔt+aΔt²/2`, `v'=v+aΔt`. Previsão e voo real usam esse integrador e
 `trace_segment`: primeiro impacto entre máscara sólida e círculos dos veículos.
 O atirador é ignorado somente durante os primeiros 0,15 s em ambos os caminhos.
@@ -458,3 +459,95 @@ de ampliar a tira75..76 da imagem para27px de UI, ShopCardStyle desenha
 retângulo vetorial opaco RGB121/159/211 nesse destino. Demais recortes
 mantêm bordas branca/laterais/rebites. GPUFullHD e PCK real confirmam cor
 uniforme sem borrado; PNGs/mipmaps/arte dos retratos permanecem inalterados.
+
+## Estado e composição da loja0.14.9
+
+ADR-069, REQ-20/38/39/40. ShopModel.filter limpa selected_key quando o item
+não está na página visível; select confirma a seleção depois de Profile.equip
+bem-sucedido. A grade mostra erro de persistência e mantém seleção/prévia ao
+falhar. Busca vazia mostra mensagem fora do container de cards.
+
+Abas Loja/Inventário ficam acima da grade que filtram. Rodapé segue
+Experimentar/Vestir → Comprar → Presente, escolha explícita do usuário baseada
+no C#. Inventário lateral e grade3×3 permanecem. Botões reservam altura própria
+para arte e legenda usando margin transparente de AtlasTexture; região nativa,
+relógios e fallback preservados. Hitbox contém também o texto. Categorias têm
+baseline comum, e Label reaplica size depois do override de fonte, evitando
+mínimo herdado da fonte padrão16px. Prévia Miramo usa crop central e escala
+uniforme, preservando aspecto sem alterar rig/mobile/pivô. Faixa de preço0.14.8
+continua vetorial, sem novo PNG ou mudança de combate/perfil/atributos.
+
+
+## Avatar Shop em16:9 / vídeo0.15
+
+ADR-070 substitui as coordenadas da loja0.14.5/0.14.9. Canvas virtual
+1066⅔×600; em1920×1080 escala uniforme1,8. Cards240×140, passo252×148,
+origem(308,42), retrato172×68; grade3×3/nove por página. Inventário de oito
+linhas visíveis, destaque amarelo nos slots vestidos. Abas/busca ficam acima
+da grade; categorias abaixo; rodapé Presente→Comprar→Experimentar/Vestir.
+
+A loja salva content_scale_size/mode/factor da Window, usa pixels da janela
+com top_level e restaura essas propriedades no _exit_tree, inclusive saída
+por ESC/reentrada/batalha. Isso evita somar o stretch1280×800 da arena ao
+encaixe16:9. Em1280×800 a loja fica1280×720, centralizada com40px verticais.
+Modais são filhos da composição e acompanham o mesmo encaixe. ESC marca o
+input tratado antes de remover a loja. Testes e capturas usam config real.
+
+Prévia padrão mostra o conjunto de avatar, com pivô constante e respiração;
+Avatar/Mobile alterna só apresentação. Mobile preserva montagem/rig e crop
+uniforme do cenário. Tipografia duplica a fonte local com oversampling3 para
+renderizar texto nítido na escala FullHD, sem alterar fontes da batalha/menu.
+Molduras angulares e faixa de preço são vetoriais; mantêm corRGB121/159/211.
+
+Novos PNGs gerados via GPT Images/gunbound-classic-hd: fundo1672×941 e retrato
+compartilhado No Goggles/No Flag1254×1254RGBA (recorte útil870×1076). JSONs
+registram tamanho/hash/origem e crop estável, validados no carregamento.
+Metadados ausentes/inválidos retornam fallback nativo. Retrato é só catálogo:
+nenhuma peça foi adicionada ao rig;15registros e13peças continuam iguais.
+Referências/brutos/prompts ficam em shop/source/video_0_15, excluídos do PCK.
+FullHD descreve a composição final1920×1080, não as dimensões dos PNGs fonte.
+
+
+## Avatar Shop XFS0.16 — estado atual
+
+ADR-071/072 substituem coordenadas e restrição do catálogo0.15. Canvas800×600
+centrado1440×1080 em1920×1080; fundo cobre laterais. Cards160×156, origem25/70,
+passo164×160; retratos84×76 e stats em coluna separada. Inventário à direita.
+
+Catálogo XFS562/479compráveis e camadas/retratos extraídos offline; runtime
+consome JSON/PNGs, sem protocolo de rede. IDs xfs:gênero:categoria:id são
+separados do C#. Profile3 converte identidades verificadas (Pilot Goggle1→2),
+conserva Kappa como legado, não concede saldo novamente e mantém rollback.
+Bandeiras mf compartilhadas; ff vazio. Ghost aceita camada L sem base.
+
+Atributos do piloto e bônus assinados por peça são compostos uma vez em
+Match.start (nono argumento), teto50por atributo sem consumir orçamento do
+piloto. O snapshot fechado copia valores para previsão/CPU; partida já aberta
+não lê equipamentos vivos. Penalidades negativas também alteram atraso.
+
+A cobertura HD0.16 é parcial:18miniaturas novas e peças antigas equivalentes.
+A migração integral posterior usa controle por registro/camada, masters com
+registro constante e validação separada de miniaturas; AVATAR_HD_MIGRATION.md.
+
+## Avatares XFS HD0.17
+
+AvatarXfsHD lê assets/hd/avatars/xfs/catalog.json:629camadas e532retratos novos,
+38atlas com recortes/dimensões/hash e janela nativa por componente. AvatarArt
+prioriza o conjunto novo integral da peça; originais/13masters antigos ficam
+como fallback e compatibilidade. Shop consulta retratos separadamente.549bases
+e80L cobrem550itens (Ghost sóL);18retratos anteriores completam550miniaturas.
+
+Material translúcido preserva a opacidade nativa; camadas de luz convertem
+preto para ausência de emissão em textura de memória, sem editar PNGs. Pulsação
+segue material da fonte, não o sufixoL sozinho. Registro permanece fixo ao longo
+da animação do rig. Controle/aceite separado do runtime exige capturas atuais
+por lote, assinatura de recorte/registro/renderer e auditoria do consumidor real.
+12N/A são acessórios vazios/placeholders sem arte, com razão explícita.
+
+## Revisão0.18 — estado de efeito e Nak HD
+
+Cabeça e L compartilham a faixa Normal da fonte na preparação de seus mestres.
+O fallback conserva faixa Normal/Staring por categoria, inclusive L; o HD não
+mistura formas frontais de Staring com mestre lateral. Ver ADR-075 e
+AVATAR_EFFECT_ALIGNMENT.md. Nak recebe renderer HD próprio delegado pelo rig,
+com geometria de combate preservada; NAK_HD.md documenta medição e fallback.

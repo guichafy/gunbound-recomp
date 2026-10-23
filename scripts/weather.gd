@@ -10,11 +10,11 @@ const RANDOMIZABLE := ["force", "tornado", "electricity", "weakness", "mirror"]
 # Column half-widths from each Weather constructor (collisionRectangleOffset.X).
 const HALF_WIDTH := {"force": 20.0, "tornado": 35.0, "electricity": 20.0, "weakness": 20.0, "mirror": 20.0, "random": 40.0}
 const OUTER_MARGIN := 10.0
-# NetworkObjectParameters: wind 0–35, disturbance ±2 force / ±3 degrees, 50% skip.
+# NetworkObjectParameters: wind 0–34, disturbance force −2..+1 / angle −3..+2 degrees
+# (MatchMetadata.cs: Next(0, 4) − 2 and Next(0, 6) − 3), 50% skip.
 const MAX_WIND := 35
 const WIND_FORCE_DISTURBANCE := 4
 const WIND_ANGLE_DISTURBANCE := 6
-const WIND_ACCELERATION := 1.3
 # Thor: x 10–90%, y 10–70% of the map; damage 40 + 20/level, XP table.
 const THOR_TABLE := [800, 1400, 2000, 2400, 3000]
 const THOR_RADIUS := 25.0
@@ -103,14 +103,14 @@ func disturb_wind(rng: RandomNumberGenerator) -> void:
 	if rng.randf() <= 0.5:
 		return
 	wind_force = maxi(0, wind_force + rng.randi_range(0, WIND_FORCE_DISTURBANCE - 1) - WIND_FORCE_DISTURBANCE / 2)
-	wind_angle = (wind_angle + rng.randi_range(0, WIND_ANGLE_DISTURBANCE - 1) - WIND_ANGLE_DISTURBANCE / 2) % 360
+	wind_angle = posmod(wind_angle + rng.randi_range(0, WIND_ANGLE_DISTURBANCE - 1) - WIND_ANGLE_DISTURBANCE / 2, 360)
 
 func change_wind(rng: RandomNumberGenerator) -> void:
 	wind_force = rng.randi_range(0, MAX_WIND - 1)
 	wind_angle = rng.randi_range(0, 359)
 
 func wind_vector() -> Vector2:
-	# Screen angle (y down) times force; Combat scales it by WIND_ACCELERATION.
+	# Screen angle (y down) times force; Combat scales it by its WIND_ACCELERATION.
 	return Vector2(cos(deg_to_rad(wind_angle)), sin(deg_to_rad(wind_angle))) * float(wind_force)
 
 func add_column(type: String, x: float, scale: float, extra: String = "") -> Dictionary:
