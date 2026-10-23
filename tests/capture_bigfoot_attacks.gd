@@ -26,8 +26,8 @@ func run() -> void:
 		view.model.actors[0].turns = 3
 		view.consume_events()
 		view.select_weapon(weapon)
-		view.angle = 30
-		view.power = 75
+		view.aim.angle = 30
+		view.aim.power = 75
 		view.update_hud()
 		if weapon == 0:
 			await snap("arena")

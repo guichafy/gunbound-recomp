@@ -143,23 +143,23 @@ func run() -> void:
 	await process_frame
 	var limits: Rect2 = scene.camera_limits()
 	check(limits.position == Vector2.ZERO and limits.end == Vector2(520, 1136), "Camera range shows the whole 1800×1800 world above the HUD")
-	var player_screen: Vector2 = Vector2(scene.model.actors[0].pos) - scene.camera
+	var player_screen: Vector2 = Vector2(scene.model.actors[0].pos) - scene.rig.position
 	check(Rect2(Vector2.ZERO, scene.VIEW_SIZE).has_point(player_screen), "Match opens with the player on screen")
 	scene.update_hud()
-	player_screen = Vector2(scene.model.actors[0].pos) - scene.camera
+	player_screen = Vector2(scene.model.actors[0].pos) - scene.rig.position
 	check(Rect2(Vector2.ZERO, scene.VIEW_SIZE).has_point(player_screen + Vector2(0, 40)), "Life bar (actor + 40 px, drawn in world space) stays above the action bar")
 	var backdrop: Dictionary = scene.map_background(scene.model.map_id)
 	check(not backdrop.is_empty() and backdrop.texture.resource_path == map.background_hd and backdrop.texture.get_size() == Vector2(1920, 1536), "Arena prefers the stitched HD background (1920×1536)")
-	scene.camera = Vector2(0, 0)
+	scene.rig.position = Vector2(0, 0)
 	var top_region: Rect2 = scene.background_region(backdrop)
-	scene.camera = Vector2(520, 1136)
+	scene.rig.position = Vector2(520, 1136)
 	var bottom_region: Rect2 = scene.background_region(backdrop)
 	check(is_equal_approx(top_region.size.x / top_region.size.y, 1.6) and top_region.position.y == 0.0, "Parallax starts at the top of the HD coverage")
 	check(bottom_region.end.y <= 1536.5 and bottom_region.position.y > top_region.position.y, "Parallax slides down within the HD coverage")
-	scene.camera_manual = false
-	var before: Vector2 = scene.camera
+	scene.rig.manual = false
+	var before: Vector2 = scene.rig.position
 	scene.update_camera(1.0 / 60.0)
-	check(scene.camera.distance_to(before) > 0.0, "Camera eases toward the active actor")
+	check(scene.rig.position.distance_to(before) > 0.0, "Camera eases toward the active actor")
 	var drag := InputEventMouseButton.new()
 	drag.button_index = MOUSE_BUTTON_LEFT
 	drag.pressed = true
@@ -168,15 +168,15 @@ func run() -> void:
 	var motion := InputEventMouseMotion.new()
 	motion.relative = Vector2(120, 40)
 	motion.button_mask = MOUSE_BUTTON_MASK_LEFT
-	scene.camera = Vector2(300, 600)
+	scene.rig.position = Vector2(300, 600)
 	scene._unhandled_input(motion)
-	check(scene.camera == Vector2(180, 560) and scene.camera_manual, "Dragging pans the camera and pauses tracking")
+	check(scene.rig.position == Vector2(180, 560) and scene.rig.manual, "Dragging pans the camera and pauses tracking")
 	scene.update_camera(1.0 / 60.0)
-	check(scene.camera == Vector2(180, 560), "Manual camera holds until the next turn or shot")
+	check(scene.rig.position == Vector2(180, 560), "Manual camera holds until the next turn or shot")
 	var hover := InputEventMouseMotion.new()
 	hover.relative = Vector2(50, 50)
 	scene._unhandled_input(hover)
-	check(scene.camera == Vector2(180, 560) and not scene.dragging, "Motion without a pressed button never pans (release eaten by the HUD)")
+	check(scene.rig.position == Vector2(180, 560) and not scene.dragging, "Motion without a pressed button never pans (release eaten by the HUD)")
 	check(scene.model.terrain.visual_texture != null, "Arena draws the HD foreground texture")
 	scene.queue_free()
 	await process_frame

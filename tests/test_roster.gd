@@ -24,12 +24,12 @@ func run() -> void:
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
-	check(view.vehicle_buttons.size() == 3, "Menu displays Mage, Bigfoot and Nak")
-	for button in view.vehicle_buttons:
+	check(view.menu.vehicle_buttons.size() == 3, "Menu displays Mage, Bigfoot and Nak")
+	for button in view.menu.vehicle_buttons:
 		check(button.position.x + button.size.x <= 392.0, "Vehicle button %s fits the menu card" % button.text)
 	for id in [1, 2, 3]:
 		view.show_menu()
-		for button in view.vehicle_buttons:
+		for button in view.menu.vehicle_buttons:
 			if button.text == {1: "Mage", 2: "Bigfoot", 3: "Nak"}[id]:
 				button.pressed.emit()
 		check(view.vehicle == id, "Button slot dispatches stable mobile ID")
@@ -38,13 +38,13 @@ func run() -> void:
 		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == opponents[id], "Menu selection starts the correct duel")
 	view.show_menu()
 	# Difficulty and weapons have three slots even though the roster has two.
-	var card = view.vehicle_buttons[0].get_parent()
+	var card = view.menu.vehicle_buttons[0].get_parent()
 	for label in ["Leve", "Normal", "Precisa"]:
 		for child in card.get_children():
 			if child is Button and child.text == label:
 				child.pressed.emit()
 		check(view.cpu_difficulty == ["Leve", "Normal", "Precisa"].find(label), "Difficulty slots stay independent of roster")
-	if view.vehicle_buttons.size() == 3:
+	if view.menu.vehicle_buttons.size() == 3:
 		view.select_vehicle(0)
 		check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
 	var Rig = load("res://scripts/mobile_rig.gd")

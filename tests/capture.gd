@@ -32,8 +32,8 @@ func run() -> void:
 	# Restart before the controlled trajectory and result presentation.
 	scene.opening = 0
 	scene.start_match()
-	scene.angle = 43.0
-	scene.power = 66.0
+	scene.aim.angle = 43.0
+	scene.aim.power = 66.0
 	scene.shoot()
 	for i in range(1600):
 		await process_frame

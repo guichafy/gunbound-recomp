@@ -21,10 +21,10 @@ func run() -> void:
 	check(scene.options.items == Items.DEFAULT_LOADOUT, "Without a saved file the loadout is Dual, Teleport, Power Up, Energy Up 1")
 
 	# PopupSelectItem: tabs, add within 6 slots, remove, Accept saves.
-	scene.nickname_input.text = "Novo Piloto"
+	scene.menu.nickname_input.text = "Novo Piloto"
 	scene.show_items()
-	var popup = scene.items_popup
-	check(popup != null and scene.overlay_kind == "items" and popup.grid_buttons.size() == 6, "Items opens Select Item on the 2-slot tab (six items)")
+	var popup = scene.overlays.items_popup
+	check(popup != null and scene.overlays.kind == "items" and popup.grid_buttons.size() == 6, "Items opens Select Item on the 2-slot tab (six items)")
 	popup.select_tab(1)
 	check(popup.grid_buttons.size() == 5 and popup.tab_buttons[1].disabled and not popup.tab_buttons[0].disabled, "The 1-slot tab lists five items and shows as selected")
 	var before: Array = scene.options.items.duplicate()
@@ -43,8 +43,8 @@ func run() -> void:
 	popup.accepted.emit()
 	var reloaded = Options.new(options_path)
 	reloaded.load_options()
-	check(scene.overlay == null and reloaded.items == ["teleport", "power_up", "energy_up_1", "change_wind", "blood"], "Accept closes and saves the loadout next to the profile")
-	check(scene.nickname_input.text == "Novo Piloto" and scene.items_button.text == "Itens (6/6)", "Closing the popup keeps the typed nickname and updates the slot count")
+	check(scene.overlays.layer == null and reloaded.items == ["teleport", "power_up", "energy_up_1", "change_wind", "blood"], "Accept closes and saves the loadout next to the profile")
+	check(scene.menu.nickname_input.text == "Novo Piloto" and scene.menu.items_button.text == "Itens (6/6)", "Closing the popup keeps the typed nickname and updates the slot count")
 
 	# Battle: the bar follows the loadout and EquippedButtonBar spacing.
 	scene.options.items = ["dual", "teleport", "power_up", "energy_up_1"]
@@ -65,13 +65,13 @@ func run() -> void:
 	check(bar.buttons[0].size.is_equal_approx(Vector2(73, 36) * 1.6) and bar.buttons[2].size.is_equal_approx(Vector2(37, 36) * 1.6), "2-slot and 1-slot button sizes")
 	scene.model.actors[0].turns = 3
 	scene.select_weapon(2)
-	check(scene.weapon == 2, "SS is selectable before using an item")
+	check(scene.aim.weapon == 2, "SS is selectable before using an item")
 	var ready_before := float(scene.model.actors[0].ready)
 	bar.buttons[0].pressed.emit()
 	scene.consume_events()
 	scene.update_hud()
 	check(scene.model.actors[0].turn_item == "dual" and is_equal_approx(float(scene.model.actors[0].ready) - ready_before, 80.0), "Clicking Dual uses it and charges 80")
-	check(scene.weapon == 1 and scene.weapon_buttons[2].disabled, "DisableSS: the selection moves to shot 2 and SS is disabled")
+	check(scene.aim.weapon == 1 and scene.weapon_buttons[2].disabled, "DisableSS: the selection moves to shot 2 and SS is disabled")
 	check(not bar.buttons[0].visible and not (0 in bar.visible_slots(scene)) and bar.buttons[1].position == origin, "Using Dual removes it from the slot and packs the bar")
 	check(bar.buttons[1].disabled and bar.buttons[2].disabled, "The rest of the bar stays disabled for this turn")
 	check(scene.art.state_name(scene.model, 0, false) == "using_item", "The mobile plays UsingItem")
@@ -83,8 +83,8 @@ func run() -> void:
 	check(scene.model.actors[0].items[2].used == false, "One item per turn, also by F-key")
 
 	# Fire, then queue Energy Up 1 on the CPU turn by clicking it.
-	scene.angle = 30.0
-	scene.power = 40.0
+	scene.aim.angle = 30.0
+	scene.aim.power = 40.0
 	scene.shoot()
 	var queued_checked := false
 	for frame in range(1200):
@@ -93,7 +93,7 @@ func run() -> void:
 		# This fixture advances simulated time much faster than wall time. Let
 		# the real worker finish before advancing another accelerated frame;
 		# otherwise machine load can exhaust 1200 frames before the CPU acts.
-		while scene.cpu_task>=0 and not WorkerThreadPool.is_task_completed(scene.cpu_task):
+		while scene.cpu.task>=0 and not WorkerThreadPool.is_task_completed(scene.cpu.task):
 			await create_timer(0.005).timeout
 		if scene.model.phase == "aim" and scene.model.active == 1 and not queued_checked:
 			queued_checked = true
@@ -127,9 +127,9 @@ func run() -> void:
 	# Teleport presentation: beacon art, sounds and both flames; no slide.
 	key(scene, KEY_F1)
 	check(scene.model.actors[0].turn_item == "teleport", "F1 presses the first visible button (Teleport)")
-	scene.weapon = 1
-	scene.angle = 28.0
-	scene.power = 30.0
+	scene.aim.weapon = 1
+	scene.aim.angle = 28.0
+	scene.aim.power = 30.0
 	scene.shoot()
 	var teleported := false
 	for frame in range(400):

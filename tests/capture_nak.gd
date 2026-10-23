@@ -57,9 +57,9 @@ func run() -> void:
 		if frame == 60:
 			view.model.move_actor(1, 0.4)
 		if frame == 90:
-			view.charging = true
+			view.aim.charging = true
 		if frame == 125:
-			view.charging = false
+			view.aim.charging = false
 			launch(0, 35.0, 55.0)
 		step(1.0 / 60.0)
 		view.queue_redraw()

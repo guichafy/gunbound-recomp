@@ -67,7 +67,7 @@ func run() -> void:
 	check(absf(wheel_phase) > 0.1, "Wheel phase follows travel")
 	view.art.tick(view.model, 0.5)
 	check(is_equal_approx(view.art.motion[0].get("wheel_phase", 0.0), wheel_phase), "Stopping never resets wheel phase")
-	view.charging = true
+	view.aim.charging = true
 	view.art.tick(view.model, 0.2, true, 2)
 	view.art.tick(view.model, 0.2, true, 2)
 	check(view.art.motion[0].pose == "charging_2" and view.art.motion[0].pose_age > 0.0, "Charge clock is shared with articulated renderer")

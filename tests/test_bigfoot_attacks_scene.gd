@@ -8,15 +8,15 @@ func run() -> void:
 	view.select_vehicle(2)
 	view.opening = 0
 	view.start_match()
-	check(view.angle <= 40 and view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.hud.crosshair_name(view.model, 0, view.weapon) == "CrosshairBigfootS1Ally.png", "Bigfoot starts with legal T1 aim and its original range sprite")
+	check(view.aim.angle <= 40 and view.model.aim_limits(0, view.aim.weapon) == Vector2(18, 40) and view.hud.crosshair_name(view.model, 0, view.aim.weapon) == "CrosshairBigfootS1Ally.png", "Bigfoot starts with legal T1 aim and its original range sprite")
 	view.model.actors[0].turns = 3
-	view.angle = 18
+	view.aim.angle = 18
 	view.select_weapon(2)
 	view.update_hud()
-	check(view.angle == 23 and view.model.aim_limits(0, view.weapon) == Vector2(23, 35) and view.hud.crosshair_name(view.model, 0, view.weapon) == "CrosshairBigfootSSAlly.png", "Selecting SS adjusts value, legal range and crosshair sprite")
+	check(view.aim.angle == 23 and view.model.aim_limits(0, view.aim.weapon) == Vector2(23, 35) and view.hud.crosshair_name(view.model, 0, view.aim.weapon) == "CrosshairBigfootSSAlly.png", "Selecting SS adjusts value, legal range and crosshair sprite")
 	view.select_weapon(0)
 	view.update_hud()
-	check(view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.weapon_buttons[0].get_meta("activated"), "Returning to T1 restores its wider aim range and active S1 button")
+	check(view.model.aim_limits(0, view.aim.weapon) == Vector2(18, 40) and view.weapon_buttons[0].get_meta("activated"), "Returning to T1 restores its wider aim range and active S1 button")
 	view.opening = 0
 	view.start_match()
 	view.select_weapon(1)

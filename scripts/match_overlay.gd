@@ -1,45 +1,62 @@
 extends RefCounted
-## Help, options, pause and result. The scene opens them and stays the input target.
+## Help, options, item selection, pause and result layers (ADR-070). Owns the
+## open layer and its popups; the scene reacts to `opened`/`closed` (pause,
+## charge, Options button) and the builders below only read the scene.
 
 const Match = preload("res://scripts/match.gd")
 
-func open(host, kind: String) -> Control:
-	if host.overlay_kind == "options" and kind != "options":
-		host.options.save_options()
-	if is_instance_valid(host.overlay):
-		host.root.remove_child(host.overlay)
-		host.overlay.queue_free()
-	host.charging = false
-	host.paused = true
-	host.overlay_kind = kind
-	host.overlay = Control.new()
-	host.overlay.size = Vector2(1280, 800)
-	host.root.add_child(host.overlay)
-	host.options_popup = null
-	if is_instance_valid(host.options_button):
-		host.options_button.disabled = kind == "options"
-	return host.overlay
+signal opened(kind: String)
+signal closed
 
-func make(host, kind: String) -> Panel:
-	open(host, kind)
+var root: Control
+var options
+var kind := ""
+var layer: Control = null
+var options_popup: Control = null
+var items_popup: Control = null
+
+## A new screen root: nothing is open on it.
+func attach(new_root: Control, saved_options) -> void:
+	root = new_root
+	options = saved_options
+	layer = null
+	kind = ""
+	options_popup = null
+
+func is_open() -> bool:
+	return layer != null
+
+## Full-screen layer that pauses the match and blocks the HUD below it.
+func open(kind_name: String) -> Control:
+	if kind == "options" and kind_name != "options":
+		options.save_options()
+	if is_instance_valid(layer):
+		root.remove_child(layer)
+		layer.queue_free()
+	kind = kind_name
+	layer = Control.new()
+	layer.size = Vector2(1280, 800)
+	root.add_child(layer)
+	options_popup = null
+	opened.emit(kind_name)
+	return layer
+
+func make(host, kind_name: String) -> Panel:
+	open(kind_name)
 	var shade := ColorRect.new()
 	shade.size = Vector2(1280, 800)
 	shade.color = Color(0.025, 0.09, 0.12, 0.73)
-	host.overlay.add_child(shade)
-	return host.ui.panel(host.overlay, Vector2(360, 155), Vector2(560, 490), host.ui.INK, 22)
+	layer.add_child(shade)
+	return host.ui.panel(layer, Vector2(360, 155), Vector2(560, 490), host.ui.INK, 22)
 
-func close(host) -> void:
-	if is_instance_valid(host.overlay):
-		host.root.remove_child(host.overlay)
-		host.overlay.queue_free()
-	host.overlay = null
-	host.overlay_kind = ""
-	host.options_popup = null
-	host.paused = false
-	if is_instance_valid(host.options_button):
-		host.options_button.disabled = false
-	if host.screen == "match" and host.model.phase == Match.PHASE_FINISHED:
-		show_result(host)
+func close() -> void:
+	if is_instance_valid(layer):
+		root.remove_child(layer)
+		layer.queue_free()
+	layer = null
+	kind = ""
+	options_popup = null
+	closed.emit()
 
 func show_help(host) -> void:
 	var card := make(host, "help")
@@ -53,13 +70,13 @@ func show_help(host) -> void:
 func show_options(host) -> void:
 	if host.screen != "match" or host.model.phase == Match.PHASE_FINISHED:
 		return
-	var layer := open(host, "options")
-	host.options_popup = host.OptionsPopup.new(host.options)
-	host.options_popup.changed.connect(host.apply_options)
-	host.options_popup.accepted.connect(host.accept_options)
-	layer.add_child(host.options_popup)
+	open("options")
+	options_popup = host.OptionsPopup.new(options)
+	options_popup.changed.connect(host.apply_options)
+	options_popup.accepted.connect(host.accept_options)
+	layer.add_child(options_popup)
 	var pause_size := Vector2(84, 30)
-	var pause: Button = host.ui.button(host.options_popup, "PAUSA", host.options_popup.point(host.OptionsPopup.PAUSE_OFFSET) - pause_size * 0.5, pause_size, host.show_pause)
+	var pause: Button = host.ui.button(options_popup, "PAUSA", options_popup.point(host.OptionsPopup.PAUSE_OFFSET) - pause_size * 0.5, pause_size, host.show_pause)
 	pause.add_theme_font_size_override("font_size", 13)
 	pause.modulate = Color(1, 1, 1, 0.82)
 	pause.tooltip_text = "Pausa, recomeçar ou voltar ao menu (P)"
@@ -68,14 +85,14 @@ func show_options(host) -> void:
 func show_items(host) -> void:
 	if host.screen != "menu":
 		return
-	var layer := open(host, "items")
+	open("items")
 	var shade := ColorRect.new()
 	shade.size = Vector2(1280, 800)
 	shade.color = Color(0.025, 0.09, 0.12, 0.55)
 	layer.add_child(shade)
-	host.items_popup = host.SelectItemPopup.new(host.options, host.item_art)
-	host.items_popup.accepted.connect(host.accept_items)
-	layer.add_child(host.items_popup)
+	items_popup = host.SelectItemPopup.new(options, host.item_art)
+	items_popup.accepted.connect(host.accept_items)
+	layer.add_child(items_popup)
 
 func show_pause(host) -> void:
 	if host.screen != "match" or host.model.phase == Match.PHASE_FINISHED:

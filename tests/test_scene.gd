@@ -11,7 +11,7 @@ func run() -> void:
 	if not scene.has_method("start_match"):
 		quit(1)
 		return
-	check(scene.screen == "menu" and scene.nickname_input != null, "Menu shows nickname and vehicle controls")
+	check(scene.screen == "menu" and scene.menu.nickname_input != null, "Menu shows nickname and vehicle controls")
 	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
 	scene.opening = 0
 	var version: String = ProjectSettings.get_setting("application/config/version", "")
@@ -30,14 +30,14 @@ func run() -> void:
 	scene.close_overlay()
 	scene._process(0.1)
 	check(scene.model.turn_time < before, "Resuming restores turn clock")
-	scene.angle = 45.0
-	scene.power = 70.0
+	scene.aim.angle = 45.0
+	scene.aim.power = 70.0
 	var space := InputEventKey.new()
 	space.physical_keycode = KEY_SPACE
 	space.pressed = true
 	scene._unhandled_key_input(space)
 	scene._process(0.1)
-	check(scene.charging and is_equal_approx(scene.power, 4.0), "Holding Space charges from 0 in steps of 2 every 0.04 s (original)")
+	check(scene.aim.charging and is_equal_approx(scene.aim.power, 4.0), "Holding Space charges from 0 in steps of 2 every 0.04 s (original)")
 	space.pressed = false
 	scene._unhandled_key_input(space)
 	check(scene.model.phase == "flight", "HUD fire command launches a real projectile")
@@ -53,7 +53,7 @@ func run() -> void:
 	check(scene.profile.xp == 120, "Reopening result cannot duplicate reward")
 	scene.show_help()
 	scene.close_overlay()
-	check(scene.overlay_kind == "result", "Closing help after match restores result actions")
+	check(scene.overlays.kind == "result", "Closing help after match restores result actions")
 	scene.show_menu()
 	check(scene.screen == "menu" and scene.model.phase == "menu", "Return to menu leaves combat inactive")
 	# ADR-076: the opening is drawn in play, so the CPU may own the very first turn.
@@ -64,7 +64,7 @@ func run() -> void:
 	for _frame in range(600):
 		scene._process(0.05)
 		await process_frame
-		while scene.cpu_task >= 0 and not WorkerThreadPool.is_task_completed(scene.cpu_task):
+		while scene.cpu.task >= 0 and not WorkerThreadPool.is_task_completed(scene.cpu.task):
 			await create_timer(0.005).timeout
 		if scene.model.phase == "flight" and scene.model.shot_actor == 1:
 			cpu_fired = true

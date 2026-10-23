@@ -37,8 +37,8 @@ func run() -> void:
 			view.model.actors[0].turns = 3
 			view.consume_events()
 			view.select_weapon(weapon)
-			view.angle = 30
-			view.power = 65 if mobile == 1 else 75
+			view.aim.angle = 30
+			view.aim.power = 65 if mobile == 1 else 75
 			view.update_hud()
 			var name: String = ("bigfoot" if mobile == 2 else "mage") + "-" + ["t1", "t2", "ss"][weapon]
 			if mobile == 2 and weapon == 0:

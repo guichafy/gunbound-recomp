@@ -39,7 +39,7 @@ func run() -> void:
 		view.model.pass_turn()
 		view.consume_events()
 		advance(0.5)
-	view.angle = 32
+	view.aim.angle = 32
 	view.hud.selector_x = 60.0
 	view.hud.previous_power = 72.0
 	view.hud.previous_angle = 41
@@ -54,9 +54,9 @@ func run() -> void:
 	view.show_options()
 	await snap("hud-options-popup")
 	# Same popup with the original sprites, for a side-by-side check.
-	view.options_popup.textures = view.options_popup.originals.duplicate()
-	view.options_popup.style_accept()
-	view.options_popup.queue_redraw()
+	view.overlays.options_popup.textures = view.overlays.options_popup.originals.duplicate()
+	view.overlays.options_popup.style_accept()
+	view.overlays.options_popup.queue_redraw()
 	await snap("hud-options-popup-original")
 	view.close_overlay()
 	var space := InputEventKey.new()
