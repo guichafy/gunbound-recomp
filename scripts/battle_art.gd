@@ -5,7 +5,8 @@ const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 const SpritePose = preload("res://scripts/sprite_pose.gd")
 
-const USING_ITEM_TIME := 20.0 / 19.0
+const MobileLooks = preload("res://scripts/mobile_looks.gd")
+const USING_ITEM_TIME := MobileLooks.USING_ITEM_TIME
 var motion: Array = []
 
 func reset(actors: Array) -> void:
@@ -14,40 +15,36 @@ func reset(actors: Array) -> void:
 		var spec: Dictionary = Mobiles.definition(actor.vehicle)
 		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "hurt_pose": "hurt", "hurt_flip": false, "shock": 0.0, "falling": 0.0, "unable": 0.0, "using": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
 
+## Starts `pose` now and arms its timer (`timer` field of the motion state).
+func start_pose(index: int, pose: String, timer: String, duration: float) -> void:
+	motion[index][timer] = duration
+	motion[index].pose = pose
+	motion[index].pose_age = 0.0
+
 func react(event: Dictionary) -> void:
 	# A Dual second volley replays the shooting animation (OnStartInteracting).
 	if event.type in ["fire", "volley"]:
-		motion[event.actor].recoil = 1.16
-		motion[event.actor].pose = "recoil"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "recoil", "recoil", MobileLooks.RECOIL_TIME)
 	elif event.type == "item":
 		# Mobile.UseItem: ActorFlipbookState.UsingItem, 20 frames at 19 fps.
-		motion[event.actor].using = USING_ITEM_TIME
-		motion[event.actor].pose = "using_item"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "using_item", "using", USING_ITEM_TIME)
 	elif event.type == "teleport":
 		# ForceChangePosition: the mobile appears at the beacon, no slide.
 		motion[event.actor].pos = Vector2(event.to)
 		motion[event.actor].previous = Vector2(event.to)
 	elif event.type in ["damage", "shield_damage"]:
 		if str(event.get("kind", "")) == "shock":
-			motion[event.actor].shock = 1.0
-			motion[event.actor].pose = "shock"
+			start_pose(event.actor, "shock", "shock", 1.0)
 		else:
+			# Two hurt animations alternate (MobileFlipbook second damage).
 			var alternate: bool = bool(motion[event.actor].hurt_flip)
 			motion[event.actor].hurt_flip = not alternate
 			motion[event.actor].hurt_pose = "hurt_2" if alternate else "hurt"
-			motion[event.actor].hurt = float(motion[event.actor].hurt_time)
-			motion[event.actor].pose = str(motion[event.actor].hurt_pose)
-		motion[event.actor].pose_age = 0.0
+			start_pose(event.actor, str(motion[event.actor].hurt_pose), "hurt", float(motion[event.actor].hurt_time))
 	elif event.type == "fall":
-		motion[event.actor].falling = 1.0
-		motion[event.actor].pose = "falling"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "falling", "falling", 1.0)
 	elif event.type == "blocked":
-		motion[event.actor].unable = 1.0
-		motion[event.actor].pose = "unable"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "unable", "unable", 1.0)
 
 func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0, cpu_charging: bool = false, cpu_weapon: int = 0) -> void:
 	for index in range(motion.size()):
@@ -97,11 +94,14 @@ func state_name(model, index: int, charging: bool, cpu_charging: bool = false) -
 	return "idle"
 
 func selected_weapon(model, index: int, ctx: Dictionary) -> int:
-	var pose := state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging))
-	var weapon: int = int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
+	return weapon_for_pose(model, index, ctx, state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)))
+
+## Weapon an actor shows: its selection, or during the recoil the shot it fired
+## (last_shots), so a short turn cannot swap the SS recoil for S1.
+func weapon_for_pose(model, index: int, ctx: Dictionary, pose: String) -> int:
 	if pose == "recoil":
-		weapon = int(model.last_shots[index].get("weapon", 0))
-	return weapon
+		return int(model.last_shots[index].get("weapon", 0))
+	return int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
 
 func atlas_frame(model, index: int, ctx: Dictionary) -> int:
 	var actor: Dictionary = model.actors[index]
@@ -154,9 +154,7 @@ func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionar
 	var alpha := clampf(1.0 - dead / death_duration, 0.0, 1.0) if actor.hp <= 0 else 1.0
 	var color := Color(1, 0.65, 0.6, alpha) if state.hurt > 0.0 and int(time * 24.0) % 2 == 0 else Color(1, 1, 1, alpha)
 	var atlas = ctx.atlas
-	var weapon: int = int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
-	if state.pose == "recoil":
-		weapon = int(model.last_shots[index].get("weapon", 0))
+	var weapon := weapon_for_pose(model, index, ctx, state.pose)
 	var avatar_context: Dictionary = ctx.get("avatar_context",{}).duplicate()
 	avatar_context.rig_state = presentation(index,atlas.hd_rig,time,weapon)
 	atlas.draw(view, SpritePose.new(pos + offset, 60.0, actor.facing, {"rotation": rotation, "frame": atlas_frame(model, index, ctx),

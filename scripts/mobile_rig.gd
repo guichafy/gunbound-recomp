@@ -61,7 +61,7 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 		barrel = sin(age * TAU * 2.0) * 0.025
 		glow = (1.0 - exp(-age * 8.0)) * (0.65 + sin(age * TAU * 2.0) * 0.15)
 	elif pose == "recoil":
-		var progress := clampf(age / 1.16, 0.0, 1.0)
+		var progress := clampf(age / MobileLooks.RECOIL_TIME, 0.0, 1.0)
 		var kick := sin(progress * PI) * exp(-progress * 3.0)
 		offset.x = kick * (9.0 if weapon == 2 else 6.0)
 		barrel = -kick * (0.65 if weapon == 2 else 0.45)
@@ -69,10 +69,10 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 	elif pose == "using":
 		# UsingItem lasts 20 frames at 19 fps. The green aura is a separate
 		# overlay; the body only lifts, it does not grow a charge glow.
-		var lift := sin(clampf(age / (20.0 / 19.0), 0.0, 1.0) * PI)
+		var lift := sin(clampf(age / MobileLooks.USING_ITEM_TIME, 0.0, 1.0) * PI)
 		offset.y = -lift * 3.0
 	elif pose == "hurt" or pose == "hurt_2":
-		var envelope := sin(clampf(age / 1.05, 0.0, 1.0) * PI)
+		var envelope := sin(clampf(age / float(Mobiles.definition(MobileLooks.id_of(kind)).hurt), 0.0, 1.0) * PI)
 		offset.x = sin(age * 40.0) * envelope * (2.2 if pose == "hurt_2" else 1.7)
 		angle = sin(age * 20.0) * envelope * (0.07 if pose == "hurt_2" else 0.04)
 	elif pose == "shock":

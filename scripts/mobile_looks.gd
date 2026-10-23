@@ -4,6 +4,11 @@ extends RefCounted
 ## reads this file. Adding a mobile adds an entry here instead of branches in
 ## the rig, the projectile art, the item art and the scene.
 
+# Pose clocks shared by BattleArt (pose timers) and MobileRig (HD motion).
+const RECOIL_TIME := 1.16
+# MobileFlipbook UsingItem: 20 frames at 19 fps.
+const USING_ITEM_TIME := 20.0 / 19.0
+
 # The approved HD parts (mobile_parts.png, projectile_heads.png) have one row
 # per mobile. A look without "rig"/"projectile" draws only its original atlas.
 const LOOKS := {
