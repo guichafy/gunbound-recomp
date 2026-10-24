@@ -1,0 +1,18 @@
+{
+	"fps": 60,
+	"frames": 162,
+	"pause_frames": 30,
+	"pulse_energy_curved_new": [
+		353.184312819038,
+		635.862745419145
+	],
+	"shop_scale": 2.0,
+	"size": [
+		1920,
+		1080
+	],
+	"visible_animated_pixels_curved_new": [
+		861,
+		1503
+	]
+}

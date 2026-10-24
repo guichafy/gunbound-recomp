@@ -27,7 +27,7 @@ ATTACHMENTS={
  'xfs:0:0:8':('visor', [.47,.3],[.5,.5],1),
  'xfs:0:0:14':('cobra jewel', [.15,.28],[.5,.5],1),
  'xfs:0:0:45':('front jewel', [.2,.50],[.5,.5],1),
- 'xfs:0:0:71':('single profile horn', [.17,.32],[.5,.5],1),
+ 'xfs:0:0:71':('single profile horn', None,None,None),
 }
 
 def main():
@@ -42,18 +42,13 @@ def main():
         _,meta=source_piece(row,1)
         identity=row['key']+'|layer:1';entry=accepted[identity]
         feature,base_uv,effect_uv,scale=ATTACHMENTS[row['key']]
-        meta['attachment']=dict(feature=feature,base_uv=base_uv,effect_uv=effect_uv,scale=scale)
         if row['key']=='xfs:0:0:71':
+            # Horn light is derived from the HD horn itself; see
+            # build_devil_horn_light.py. Never restore the bent crescent.
             meta['draw_behind']=False
-            # [light V, light center U, head center X/Y, width in head UV].
-            # Measured on the existing masters; only bend their geometry.
-            meta['light_curve']=[
-                [0,.49,.20,-.035,.75],[.05,.445,.17,.02,.75],
-                [.15,.295,.11,.10,.65],[.30,.204,.087,.23,.65],
-                [.45,.22,.14,.34,.72],[.60,.39,.22,.46,.50],
-                [.73,.57,.26,.53,.35],[.87,.65,.27,.58,.26],
-                [1,.70,.28,.64,.26]]
-            entry.pop('contour_glow',None)
+            for name in ('attachment','light_curve','contour_glow'):entry.pop(name,None)
+        else:
+            meta['attachment']=dict(feature=feature,base_uv=base_uv,effect_uv=effect_uv,scale=scale)
         changed=any(entry.get(k)!=v for k,v in meta.items())
         entry.update(meta)
         entry['normal_reference']='assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png'
@@ -62,6 +57,8 @@ def main():
             for variant in job['variants']:
                 if variant['id']==identity:
                     variant.pop('contour_glow',None)
+                    if row['key']=='xfs:0:0:71':
+                        for name in ('attachment','light_curve'):variant.pop(name,None)
                     variant.update(meta)
         updates.append(dict(id=identity,source_frame=meta['source_frame'],native_rect=meta['native_rect']))
     (SOURCE/'jobs.json').write_text(json.dumps(jobs,ensure_ascii=False,indent=2)+'\n')

@@ -15,6 +15,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -36,6 +37,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -62,6 +64,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -83,6 +86,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -109,6 +113,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -130,6 +135,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -156,6 +162,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -177,6 +184,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -203,6 +211,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -224,6 +233,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -250,6 +260,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -271,6 +282,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -297,6 +309,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -318,6 +331,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -344,6 +358,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -365,6 +380,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -391,6 +407,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -412,6 +429,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -438,6 +456,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -459,6 +478,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -485,6 +505,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -506,6 +527,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -532,6 +554,7 @@
 					29.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -553,6 +576,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -579,6 +603,7 @@
 					34.0,
 					44.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -605,6 +630,7 @@
 					59.0,
 					23.0
 				],
+				"overlay_base": {},
 				"pulsate": true,
 				"reference_state": "",
 				"region": [
@@ -626,6 +652,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -652,6 +679,7 @@
 					28.0,
 					34.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -678,6 +706,7 @@
 					22.0,
 					22.0
 				],
+				"overlay_base": {},
 				"pulsate": true,
 				"reference_state": "",
 				"region": [
@@ -699,6 +728,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -725,6 +755,7 @@
 					33.0,
 					44.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -751,6 +782,7 @@
 					26.0,
 					23.0
 				],
+				"overlay_base": {},
 				"pulsate": true,
 				"reference_state": "",
 				"region": [
@@ -779,10 +811,10 @@
 	"renderer_hashes": {
 		"scripts/avatar_art.gd": "b7ad7e03b75854bbb4401ab816a9a680a0c344b605e311027b7dfd77e268b7d7",
 		"scripts/avatar_contour_glow.gd": "3b3fb2582f488787fb2615bed8bfdbb70f6920d49cc080a2216c048b4b3077d2",
-		"scripts/avatar_xfs_hd.gd": "33cdaa12e563c12134b5ad02b0937f3cc3ce9044a640e72550ae1e9431e10a9b",
-		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
-		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
-		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"
+		"scripts/avatar_xfs_hd.gd": "3beb9adae9b68a87d977c3ce2e0e9e3a83e34f0503628c77bf13ac1d27d975aa",
+		"scripts/bigfoot_sprite.gd": "5da73fe21956be9776ed87b613371f14af4bc6e448f3c8ff76277e2ca6488fdc",
+		"scripts/mage_sprite.gd": "b6e75b544418fe9bcee7e07c8167037171040e60c039678ec7706e5c679a430b",
+		"scripts/mobile_rig.gd": "4c12532295a17a7475b5176e0154272558cd034e66f8d8a775d8dbe37ab286eb"
 	},
 	"size": [
 		1920,

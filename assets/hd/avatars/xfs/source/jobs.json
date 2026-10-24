@@ -3005,84 +3005,26 @@
           "pulsate": true,
           "native_mean_opacity": 0.5539503386004515,
           "reference_state": "normal",
-          "attachment": {
-            "feature": "single profile horn",
-            "base_uv": [
-              0.17,
-              0.32
-            ],
-            "effect_uv": [
-              0.5,
-              0.5
-            ],
-            "scale": 1
-          },
           "draw_behind": false,
-          "light_curve": [
-            [
-              0,
-              0.49,
-              0.2,
-              -0.035,
-              0.75
+          "overlay_base": {
+            "feature": "single profile horn",
+            "base_sheet": "batch_005",
+            "base_region": [
+              546,
+              235,
+              198,
+              153
             ],
-            [
-              0.05,
-              0.445,
-              0.17,
-              0.02,
-              0.75
+            "offset": [
+              -20,
+              -20
             ],
-            [
-              0.15,
-              0.295,
-              0.11,
-              0.1,
-              0.65
-            ],
-            [
-              0.3,
-              0.204,
-              0.087,
-              0.23,
-              0.65
-            ],
-            [
-              0.45,
-              0.22,
-              0.14,
-              0.34,
-              0.72
-            ],
-            [
-              0.6,
-              0.39,
-              0.22,
-              0.46,
-              0.5
-            ],
-            [
-              0.73,
-              0.57,
-              0.26,
-              0.53,
-              0.35
-            ],
-            [
-              0.87,
-              0.65,
-              0.27,
-              0.58,
-              0.26
-            ],
-            [
-              1,
-              0.7,
-              0.28,
-              0.64,
-              0.26
-            ]
-          ]
+            "derivation": "HD horn silhouette + classic mh00071l profile",
+            "core_alpha": 187,
+            "rim_grow": 4,
+            "rim_blur": 5,
+            "outline": 3
+          }
         },
         {
           "id": "xfs:0:0:71|portrait",

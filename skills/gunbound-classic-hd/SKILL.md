@@ -1,6 +1,6 @@
 ---
 name: gunbound-classic-hd
-description: "Use quando a tarefa envolver regenerar imagens ou sprites de Gunbound Classic/OpenBound em alta resolução ou Full HD, animar mobiles/personagens/avatares, ou corrigir tremor, troca de anatomia, proporção e encaixe dessas peças."
+description: "Use quando a tarefa envolver regenerar imagens ou sprites de Gunbound Classic/OpenBound em alta resolução ou Full HD, animar mobiles/personagens/avatares, refazer brilho/aura/contorno de uma peça, ou corrigir tremor, troca de anatomia, proporção e encaixe dessas peças."
 ---
 
 # Gunbound Classic: arte HD e animação contínua
@@ -26,7 +26,8 @@ a tela transparente ou interpolar pixels não reconstrói detalhes.
 Leia [geração e prompts](references/generation.md) quando criar/substituir arte.
 Inspecione a fonte e um asset HD aprovado como referências distintas: a fonte
 define identidade/geometria, o aprovado define acabamento. Preserve direção,
-silhueta, cores, pose e proporções. Gere peças estáveis e efeitos separados.
+silhueta, cores, pose e proporções. Gere peças estáveis e efeitos em camadas
+separadas.
 Use GPT Images no fluxo aprendido neste projeto, respeitando outra escolha
 explícita do usuário e a ferramenta de imagens disponível. Preserve originais,
 brutos, alpha real, prompts e dimensões observadas; copie o resultado escolhido
@@ -36,6 +37,15 @@ Para personagem sem equipamento modular, prefira anatomia inteira. Para
 avatares vestíveis, cabeça/corpo/óculos/bandeira continuam separados, ligados
 por âncoras constantes. Não gere uma cabeça diferente em cada pose nem
 redimensione partes conforme os efeitos crescem.
+
+## Efeitos colados à anatomia
+
+Leia [efeitos presos à anatomia](references/effects.md) antes de refazer brilho,
+aura ou contorno de uma peça. Se o efeito clássico for a silhueta da própria
+peça, derive-o da máscara do mestre HD com o perfil medido no clássico, em vez
+de gerar uma luz solta: gerada à parte, ela não coincide com o HD, e entortá-la
+só desloca o erro. Registre-o na janela da peça base e aceite por cobertura,
+vazamento e visibilidade na prévia real, lado a lado com o clássico.
 
 ## Registrar e animar
 

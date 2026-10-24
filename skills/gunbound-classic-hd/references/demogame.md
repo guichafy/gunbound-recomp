@@ -29,6 +29,17 @@ essa cópia do projeto para princípios de geração/registro/animação.
 | Interrupção e mistura por ator | scripts/battle_art.gd: presentation |
 | Piloto não modular / partes do mobile | assets/hd/pilot_side.png, mobile_parts.png |
 | Tiros, impactos e orientação | scripts/projectile_art.gd |
+| Efeito derivado da anatomia (`overlay_base`) | scripts/build_devil_horn_light.py, avatar_xfs_hd.gd, tests/capture_horn_classic.gd |
+
+Brilho do Great Devil (ADR-082, validado pelo usuário em 24/10/2026): o L
+clássico é a silhueta do chifre. `build_devil_horn_light.py` deriva o PNG da
+cabeça HD e registra `overlay_base`; rodar de novo após trocar a cabeça ou
+reexecutar `register_xfs_avatar_hd.py batch_005`. Mudar `avatar_xfs_hd.gd` ou
+`avatar_art.gd` altera `renderer_hashes`: recapturar os 37 lotes com
+`tests/capture_xfs_hd_migration.gd -- batch_NNN`, registrar `--qa`, rodar
+`tests/audit_xfs_hd_runtime.gd` e `prepare_xfs_avatar_hd.py`. Os outros 19
+efeitos de cabeça ainda usam âncoras de luz gerada; aplique effects.md se o
+usuário apontar forma errada neles.
 
 Use os catalogadores existentes em vez de redescobrir o layout:
 
