@@ -53,7 +53,7 @@ func run() -> void:
 	var negative: Array=p.catalog.find("xfs:1:1:5").bonuses
 	model.start(1,1,42,"","original",null,[],[],[negative,[]])
 	check(model.actors[0].attributes[4]==-3,"Negative delay survives combat snapshot sanitization")
-	check(model.weapon_rules(0,0).delay>model.VEHICLES[1].weapons[0].delay,"Negative delay modifier increases actual shot delay")
+	check(model.weapon_rules(0,0).delay>load("res://scripts/mobiles.gd").weapon(1,0).delay,"Negative delay modifier increases actual shot delay")
 	var capped: Array=A.with_equipment([50,0,0,0,0,0,0,0],[21,18,-5,6,0,0,0,18])
 	check(capped==[50,18,-5,6,0,0,0,18],"Gear is capped per statistic without spending the pilot point budget")
 	var scene=load("res://scenes/main.tscn").instantiate()
