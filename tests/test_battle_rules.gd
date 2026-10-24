@@ -20,7 +20,8 @@ func _initialize() -> void:
 	for weapon in range(3):
 		check(is_equal_approx(float(Mobiles.weapon(3, weapon).delay), nak_delays[weapon] / 7.5), "Nak shot %d uses the original delay" % weapon)
 	for id in Mobiles.PLAYABLE:
-		check(int(Mobiles.definition(id).time_delay) == 10, "characterdata [29]: 10 delay per second spent for mobile %d" % id)
+		var expected := 12 if id == 12 else 10
+		check(int(Mobiles.definition(id).time_delay) == expected, "characterdata [29]: delay per second for mobile %d" % id)
 	var mage: Dictionary = Mobiles.definition(1)
 	check(int(mage.hp) == 730 and int(mage.shield) == 220 and int(mage.shield_regen) == 30, "Mage keeps the original 730 HP and 30 shield regeneration")
 

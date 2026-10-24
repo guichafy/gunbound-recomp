@@ -1,4 +1,61 @@
-# Hand-off — Gunbound Recomp 0.18.6 / revisão de qualidade
+# Hand-off — Gunbound Recomp 0.19.0 / roster clássico
+
+## Roster clássico 0.19.0 (REQ-45, ADR-083)
+
+Os 16 mobiles do `characterdata.dat` entram no treino. IDs 1–3 preservados.
+Arte original em `assets/openbound/` (pastas armor, trico, boomer, raon,
+lightning, jd, asate, ice, turtle, grub, dragon, knight, aduka), extraída
+por `scripts/import_classic_mobiles.py`. Menu em grade 4×4. Crosshair novo
+fica no sprite original; Mage e Bigfoot continuam no HD.
+
+Voo especial no laço comum: Armor SS, Trico S2/SS, Raon S1 e minas, Lightning,
+Ice S2 e Turtle S2/SS. O raio do Lightning sobe 3 px por passo a partir do
+impacto (ângulo π/2 no S1, quatro diagonais no S2) e o choque extra fica nos
+mobiles depois do último sólido. A mina do S2 do Raon anda até 90 px na superfície em direção ao mobile
+mais perto e só estoura ao encostar na caixa. A do SS segue em frente (até
+360 px), vira num vão e estoura no mobile ou quando o passo acaba. As duas
+e o cristal do JD são desenhados com `rayonmine.img`, `srayonmine.img` e
+`crystal.img`. A mina do S2 fica em `normal` além de 90 px e em `active`
+dentro dessa distância; a do SS usa `move` enquanto anda. O brilho
+`rayonminel.img` acompanha a mina do S2. Boomer, JD,
+A.Sate, Grub, Knight e o Aduka ainda usam o projétil comum com os
+números da tabela. O SS do Dragon, ao detonar, solta cinco tiros filhos
+(`ExplodeSuperShot_Bullet14`). O S2 e o SS do JD soltam um cristal no
+impacto (`SpawnCrystalShot` / `SpawnSuperCrystalShot`). A tabela de métodos
+desse cristal é o simulador comum e a detonação comum, com velocidade 0, então
+ele cai do ponto do impacto e não aplica um segundo dano. Os S2/SS do
+Aduka continuam com poder 0 na tabela; ele atira pelas costas. O SS do Boomer troca de quadro
+como o `bullet6p.epa`: normal, change e depois cnormal. A.Sate, Knight
+e o S2 do Aduka usam o simulador comum de projétil no cliente. O S1 e o
+S2 do Dragon seguem esse passo e espalham faíscas de -4 a +4 px ao longo do
+trajeto (`FUN_00436fd0`). `tank14/15/16` são Dragon, Knight e Aduka.
+O menu usa a mesma escala de pixel do Trico (casco 60). O SS do Grub (`SimulateSuperShot_Bullet13`) não
+consulta mobiles: atravessa quem estiver no caminho e só estoura no terreno.
+
+Validação: `check.sh` completo antes da correção dos nomes, **5564 checks** e **13 partidas**.
+Depois dela, `test_classic_mobiles` 136, `test_hud` 228 e `test_roster` 63, zero falhas.
+App/ZIP **0.19.0** reexportado em `builds/`; `codesign --verify --deep --strict` válido.
+
+## Hand-off anterior — 0.18.7 / brilho clássico do chifre
+
+## Brilho do Great Devil Head 0.18.7 (ADR-082)
+
+Pedido: refazer o brilho dos chifres a partir do clássico, na posição e no
+formato do chifre como na baixa resolução. O L original é a silhueta do chifre
+embranquecida por cima; a meia-lua HD curvada (0.18.4) não seguia o chifre.
+Agora `scripts/build_devil_horn_light.py` deriva `great_devil_horn_light.png`
+da máscara do chifre HD com o perfil medido no clássico, registrada sobre a
+cabeça (`overlay_base`). Detalhes, números e limites em `HORN_AURA_FIX.md`;
+evidência GPU em `docs/horn-classic/`.
+
+Validação: suítes de avatar/loja/migração (2405 checks), testes Python de
+efeito, QA dos 37 lotes e auditoria runtime 550/0/0. Limites: app não
+reexportado e `check.sh` completo não rodado, porque outra sessão alterava ao
+mesmo tempo regras de combate e assets de novos mobiles nesta pasta; isso não
+faz parte desta entrega. Validação visual: usuário validou na main em
+24/10/2026 ("funcionou muito melhor"); lições na skill `gunbound-classic-hd`
+(`references/effects.md`: derivar da máscara da peça, medir o clássico).
+
 
 ## Revisão de qualidade 0.18.6 (ADR-081)
 

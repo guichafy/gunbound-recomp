@@ -18,6 +18,7 @@ static func capture(source):
 	sim.shot_gold = source.shot_gold.duplicate(true)
 	sim.wind = source.wind
 	sim.weather = source.weather.copy()
+	sim.mines = source.mines.duplicate(true)
 	return sim
 
 static func arm(sim, shot_actor: int, shot_weapon: int, shells: Array) -> void:

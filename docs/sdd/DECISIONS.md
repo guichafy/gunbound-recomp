@@ -607,6 +607,8 @@ sentidos e pausa. HORN_AURA_FIX.md.
 
 ## ADR-079 — preservar o brilho e corrigir somente sua curva
 
+Substituída pela ADR-082: a faixa curvada continuou fora do formato do chifre.
+
 Substitui ADR-078 após rejeição explícita do usuário: o halo da0.18.3 ficou
 imperceptível no tamanho real da loja. Restaurar textura L, composição sobre
 o chifre, opacidade e pulsação anteriores. Corrigir curva por uma malha UV
@@ -637,3 +639,37 @@ partidas (eventos + campos do ator) além das seeds 81–93; versão em fonte ú
 scripts de desenho; delays guardados na unidade original do C# e convertidos uma
 vez (`delay_units.gd`). Tipagem completa de ator/projétil adiada (motivos no
 plano): fábricas de estado no lugar. Nak sem aura UsingItem até haver arte.
+
+## ADR-082 — brilho do chifre a partir do L clássico
+
+Substitui ADR-079. Usuário pediu refazer o brilho do Great Devil Head a partir
+do clássico: posição e formato iguais aos da baixa resolução. O L original
+(`mh00071l`) é a silhueta do próprio chifre, embranquecida e desenhada por
+cima: núcleo 187/255 sobre o chifre inteiro (contorno incluso) e borda de ~4 px
+nativos. Uma luz gerada à parte (meia-lua 0.18.0/0.18.4) nunca coincide com o
+chifre HD, mesmo curvada. Decisão: derivar a luz da máscara de ouro do mestre HD
+(componente principal, sulcos fechados, contorno incluso) com o perfil medido
+no clássico, assada em `great_devil_horn_light.png` por
+`scripts/build_devil_horn_light.py`, sem nova geração GPT Images. Registro
+`overlay_base`: mesma origem e escala da cabeça, margem de 20 px para a borda,
+opacidade do material 1 (o PNG carrega o alfa clássico). Pulsação e relógio
+anteriores mantidos. Masters, originais e os outros 19 efeitos preservados.
+
+## ADR-083 — roster dos 16 mobiles do cliente
+
+Pedido: implementar todos os mobiles do cliente clássico, no padrão atual,
+com as características originais, e entregar com testes e build. IDs 1 Mage,
+2 Bigfoot e 3 Nak não mudam (o 0 continua fora). Os IDs 4–16 seguem a ordem
+do cliente a partir do Armor. Números de vida, escudo, mira, delay e tempo
+saem do `characterdata.dat` decodificado. Dano e raio seguem a leitura já
+usada no Nak. Arte de `graphics.xfs`, sem HD novo. Onde o OpenBound tem a
+classe do tiro, o voo especial entra no laço comum (`classic_flight.gd`).
+Onde não tem (Boomer, JD, A.Sate, Grub, Knight e o Aduka), o tiro é
+o projétil comum com os números da tabela, até a simulação do cliente desses
+tiros ser portada. A loja de avatares não entra nesta decisão.
+
+Correção posterior: `tank14.img`, `tank15.img` e `tank16.img` são Dragon,
+Knight e Aduka. Os nomes Kalsiddon e J.Frog não correspondem a esses arquivos
+nem a estes 16 registros. O menu desenha o atlas numa escala única (casco 60,
+a mesma largura do combate), com o pé opaco do quadro parado no chão.
+

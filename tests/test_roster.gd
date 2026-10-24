@@ -4,7 +4,7 @@ func run() -> void:
 	var model = Match.new()
 	# Nak (ID 3, ADR-074) joins Mage and Bigfoot; the CPU pairs stay 1↔2 and Nak meets Mage.
 	var opponents := {1: 2, 2: 1, 3: 1}
-	check(model.VEHICLES.size() == 3, "Roster contains Mage, Bigfoot and Nak")
+	check(model.VEHICLES.size() == 16 and model.VEHICLES[1].name == "Mage" and model.VEHICLES[2].name == "Bigfoot" and model.VEHICLES[3].name == "Nak", "Roster keeps Mage, Bigfoot and Nak and adds the classic mobiles")
 	for chosen in [1, 2, 3]:
 		model.start(chosen, 1, 42)
 		check(model.actors[0].vehicle == chosen and model.actors[1].vehicle == opponents[chosen], "Each mobile meets its fixed CPU opponent")
@@ -16,15 +16,14 @@ func run() -> void:
 			check(model.fire(30, 65, weapon), "Both mobiles retain all three attacks")
 			check(model.projectiles.size() == {1: [1, 2, 1], 2: [4, 6, 8], 3: [1, 1, 1]}[chosen][weapon], "Attack uses its own mobile emitter")
 	for invalid in [0, -1, 99]:
-		if model.VEHICLES.size() == 3:
-			model.start(invalid, 1, 42)
-			check(model.actors[0].vehicle == 2 and model.actors[1].vehicle == 1, "Removed/invalid ID normalizes to Bigfoot rather than resurrecting a vehicle")
+		model.start(invalid, 1, 42)
+		check(model.actors[0].vehicle == 2 and model.actors[1].vehicle == 1, "Removed/invalid ID normalizes to Bigfoot rather than resurrecting a vehicle")
 	var view = load("res://scenes/main.tscn").instantiate()
 	view.profile = load("res://scripts/profile.gd").new("res://.tools/roster-test-profile.json")
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
-	check(view.menu.vehicle_buttons.size() == 3, "Menu displays Mage, Bigfoot and Nak")
+	check(view.menu.vehicle_buttons.size() == 16, "Menu displays the full classic roster")
 	for button in view.menu.vehicle_buttons:
 		check(button.position.x + button.size.x <= 392.0, "Vehicle button %s fits the menu card" % button.text)
 	for id in [1, 2, 3]:
@@ -44,9 +43,8 @@ func run() -> void:
 			if child is Button and child.text == label:
 				child.pressed.emit()
 		check(view.cpu_difficulty == ["Leve", "Normal", "Precisa"].find(label), "Difficulty slots stay independent of roster")
-	if view.menu.vehicle_buttons.size() == 3:
-		view.select_vehicle(0)
-		check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
+	view.select_vehicle(0)
+	check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
 	var Rig = load("res://scripts/mobile_rig.gd")
 	# Presentation catalog (ADR-081): one look per playable mobile, no id branches.
 	var Looks = load("res://scripts/mobile_looks.gd")

@@ -31,7 +31,7 @@ da execução inicial. O conjunto `docs/sdd/` consolida o contexto atual.
 O [README principal](../../README.md), o [guia de aprendizado](../APRENDIZADO.md),
 o [roteiro funcional](../VALIDACAO.md) e a [origem da arte](../ART.md) o complementam.
 
-Baseline inicial: **0.1.0**; versão atual **0.18.6**, em **2026-10-24** (fonte única:
+Baseline inicial: **0.1.0**; versão atual **0.19.0**, em **2026-10-24** (fonte única:
 `application/config/version`). O histórico Git identifica as revisões; não manter
 hashes de commits dentro destes documentos. Os parágrafos abaixo sobre "entrega
 atual" descrevem a época de cada versão; o estado vigente está no topo da SPEC.

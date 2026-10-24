@@ -44,35 +44,37 @@ func build(root: Control, factory, info: Dictionary, actions: Dictionary) -> voi
 	nickname_input.add_theme_stylebox_override("normal", ui.box(Color("203e4b"), 8, Color("49636c")))
 	nickname_input.add_theme_stylebox_override("focus", ui.box(Color("203e4b"), 8, ui.TEAL, 2))
 	card.add_child(nickname_input)
-	ui.label(card, "ESCOLHA SEU VEÍCULO", Vector2(28, 214), Vector2(364, 22), 12, ui.TEAL, true)
+	ui.label(card, "ESCOLHA SEU VEÍCULO", Vector2(28, 206), Vector2(364, 18), 12, ui.TEAL, true)
 	vehicle_buttons.clear()
+	# Four columns keep every classic mobile inside the 364 px card.
 	for slot in range(Mobiles.PLAYABLE.size()):
 		var id: int = Mobiles.PLAYABLE[slot]
-		# Three slots share the 364 px row, like the difficulty buttons below.
-		var button: Button = ui.button(card, Mobiles.definition(id).name, Vector2(28 + slot * 124, 246), Vector2(116, 48), func(): actions.select_vehicle.call(id))
-		button.add_theme_font_size_override("font_size", 14)
+		var column := slot % 4
+		var row := int(slot / 4)
+		var button: Button = ui.button(card, Mobiles.definition(id).name, Vector2(28 + column * 92, 228 + row * 32), Vector2(86, 28), func(): actions.select_vehicle.call(id))
+		button.add_theme_font_size_override("font_size", 11)
 		vehicle_buttons.append(button)
-	vehicle_info = ui.label(card, "", Vector2(28, 303), Vector2(364, 50), 15, ui.MUTED)
-	ui.label(card, "DIFICULDADE DA MÁQUINA", Vector2(28, 360), Vector2(364, 22), 12, ui.TEAL, true)
+	vehicle_info = ui.label(card, "", Vector2(28, 360), Vector2(364, 36), 13, ui.MUTED)
+	ui.label(card, "DIFICULDADE DA MÁQUINA", Vector2(28, 400), Vector2(364, 18), 12, ui.TEAL, true)
 	difficulty_buttons.clear()
 	for index in range(DIFFICULTIES.size()):
-		var button: Button = ui.button(card, DIFFICULTIES[index], Vector2(28 + index * 124, 388), Vector2(116, 40), func():
+		var button: Button = ui.button(card, DIFFICULTIES[index], Vector2(28 + index * 124, 422), Vector2(116, 36), func():
 			actions.select_difficulty.call(index)
 			highlight(difficulty_buttons, index)
 		)
 		difficulty_buttons.append(button)
 		if index == int(info.difficulty):
 			button.add_theme_stylebox_override("normal", selected_box(true))
-	var weather_button: Button = ui.button(card, info.weather_label, Vector2(28, 438), Vector2(240, 34), func(): pass)
+	var weather_button: Button = ui.button(card, info.weather_label, Vector2(28, 466), Vector2(240, 32), func(): pass)
 	weather_button.add_theme_font_size_override("font_size", 14)
 	weather_button.tooltip_text = "Original: pesos do mapa (Miramo A não tem Thor, Espelho nem Fraqueza).\nTodos: pesos iguais para todos os climas, Thor incluído."
 	weather_button.pressed.connect(func(): weather_button.text = actions.toggle_weather.call())
 	# PopupSelectItem (REQ-36): the six equipped slots used in every match.
-	items_button = ui.button(card, info.items_label, Vector2(276, 438), Vector2(116, 34), actions.show_items)
+	items_button = ui.button(card, info.items_label, Vector2(276, 466), Vector2(116, 32), actions.show_items)
 	items_button.add_theme_font_size_override("font_size", 14)
 	items_button.tooltip_text = "Escolher os itens da barra F1–F6 (Select Item)"
-	ui.button(card, "INICIAR TREINO    →", Vector2(28, 484), Vector2(364, 52), actions.start, true)
-	ui.label(card, "NÍVEL %d    ·    %d XP    ·    %d VITÓRIAS" % [info.level, info.xp, info.wins], Vector2(28, 555), Vector2(364, 26), 13, ui.MUTED, true)
+	ui.button(card, "INICIAR TREINO    →", Vector2(28, 508), Vector2(364, 48), actions.start, true)
+	ui.label(card, "NÍVEL %d    ·    %d XP    ·    %d VITÓRIAS" % [info.level, info.xp, info.wins], Vector2(28, 564), Vector2(364, 22), 12, ui.MUTED, true)
 	ui.button(root, "Shop de avatar", Vector2(810, 754), Vector2(200, 30), actions.show_shop)
 	ui.button(root, "Como jogar", Vector2(1030, 754), Vector2(190, 30), actions.show_help)
 

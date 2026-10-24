@@ -6,12 +6,15 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.18.6 em Godot 4.7.2 + GDScript (versão única em
+Protótipo 0.19.0 em Godot 4.7.2 + GDScript (versão única em
 `application/config/version` do `project.godot`), identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
-desktop macOS, treino offline 1×1 contra CPU, Bigfoot/Mage com derivados HD e Nak
-(0.15, arte original) e progresso local. Escaravelho foi removido por solicitação do usuário.
+desktop macOS, treino offline 1×1 contra CPU. O elenco jogável é o dos 16
+mobiles do cliente (REQ-45, ADR-083): IDs 1 Mage, 2 Bigfoot e 3 Nak preservados;
+4–16 são Armor, Trico, Boomer, Raon, Lightning, JD, ASate, Ice, Turtle, Grub,
+Dragon, Knight e Aduka, com arte original. Bigfoot e Mage mantêm o HD já
+aprovado. Escaravelho foi removido por solicitação do usuário.
 O perfil recomeçou na pasta `app_userdata/Gunbound Recomp`, sem migração.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
 no roadmap; não os implemente sem uma nova solicitação. A engine deve preservar
@@ -318,4 +321,14 @@ Match, `json_store.gd`, `Attributes.ATTACK..POPULARITY` no lugar dos índices,
 limita cada suíte (`SUITE_TIMEOUT`). Atores/projéteis seguem Dictionary (motivo
 no plano), com fábricas em `actor_state.gd`/`shell_state.gd`. Fases são
 `Match.PHASE_*` (strings).
+
+## Brilho do Great Devil 0.18.7 — estado atual
+
+ADR-082 substitui ADR-079. A luz do chifre (`xfs:0:0:71|layer:1`) é
+`great_devil_horn_light.png`, derivada da silhueta do chifre HD por
+`scripts/build_devil_horn_light.py` com o perfil do L clássico, registrada sobre
+a cabeça via `overlay_base`. Não regerar uma luz solta nem reativar
+`light_curve`. Rodar o script se a cabeça HD mudar ou se `register_xfs_avatar_hd.py batch_005`
+for reexecutado (ele devolve a célula gerada à camada); depois recapturar o QA.
+Evidência em `docs/horn-classic`; ver HORN_AURA_FIX.md.
 

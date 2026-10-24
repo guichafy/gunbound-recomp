@@ -86,7 +86,12 @@ var sprites := build_sprites()
 static func build_sprites() -> Dictionary:
 	var result := {}
 	for vehicle_id in MobileLooks.ids():
-		result[vehicle_id] = load(MobileLooks.look(vehicle_id).sprite).new()
+		var look: Dictionary = MobileLooks.look(vehicle_id)
+		var sprite = load(look.sprite).new()
+		if sprite.has_method("setup"):
+			sprite.setup(str(look.kind))
+			sprite.rear = bool(Mobiles.definition(vehicle_id).get("rear", false))
+		result[vehicle_id] = sprite
 	return result
 
 func _ready() -> void:
@@ -623,6 +628,7 @@ func _draw() -> void:
 				item_art.draw_using(self, body, art.motion[index], int(model.actors[index].facing), offset)
 	hud.draw_world(self, model, offset, hud_state())
 	draw_projectiles(offset)
+	draw_mines(offset)
 	draw_set_transform(Vector2.ZERO)
 	weather_art.draw_shell_marks(self, model, offset)
 	weather_art.draw_beams(self, offset)
@@ -661,6 +667,15 @@ func draw_projectiles(offset: Vector2) -> void:
 				draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
 		body.draw_projectile(self, projectile, shell_weapon, offset)
 		draw_set_transform(offset)
+
+func draw_mines(offset: Vector2) -> void:
+	var body = sprite_for(7)
+	if body != null and body.has_method("draw_placed"):
+		var marks: Array = model.mines.duplicate()
+		for projectile in model.projectiles:
+			if bool(projectile.get("crystal_body", false)):
+				marks.append({"pos": projectile.get("hit_pos", projectile.pos), "crystal": true})
+		body.draw_placed(self, marks, model.actors, offset)
 
 ## Rising texts ("QUEDA!") that fade over 1.5 s.
 func draw_floating(offset: Vector2) -> void:

@@ -38,6 +38,19 @@ const LOOKS := {
 		"kind": "nak", "sprite": "res://scripts/nak_sprite.gd",
 		"rig": {}, "projectile": {}, "using": {},
 	},
+	4: {"kind": "armor", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	5: {"kind": "trico", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	6: {"kind": "boomer", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	7: {"kind": "raon", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	8: {"kind": "lightning", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	9: {"kind": "jd", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	10: {"kind": "asate", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	11: {"kind": "ice", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	12: {"kind": "turtle", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	13: {"kind": "grub", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	14: {"kind": "dragon", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	15: {"kind": "knight", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	16: {"kind": "aduka", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 }
 
 static func ids() -> Array:

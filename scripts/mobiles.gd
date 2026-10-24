@@ -4,9 +4,11 @@ extends RefCounted
 
 const Attributes = preload("res://scripts/player_attributes.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
+const ClassicMobiles = preload("res://scripts/classic_mobiles.gd")
 const DelayUnits = preload("res://scripts/delay_units.gd")
 
-const PLAYABLE := [1, 2, 3]
+# 1 Mage, 2 Bigfoot, 3 Nak stay first so opponent() keeps 1↔2 and Nak→Mage.
+const PLAYABLE := [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 const DEFAULT_ID := 2
 const SPECIAL := 2
 # NetworkObjectParameters.SSCooldownTimer + 1, applied when the SS is fired.
@@ -73,11 +75,20 @@ const DEFINITIONS := {
 	}
 }
 
+# DEFINITIONS is the original three. ALL adds the classic roster at load.
+static var ALL := {}
+
+static func _static_init() -> void:
+	ALL = DEFINITIONS.duplicate(true)
+	var extra: Dictionary = ClassicMobiles.definitions()
+	for id in extra:
+		ALL[id] = extra[id]
+
 static func has_id(vehicle_id: int) -> bool:
-	return DEFINITIONS.has(vehicle_id)
+	return ALL.has(vehicle_id)
 
 static func normalize(vehicle_id: int) -> int:
-	return vehicle_id if DEFINITIONS.has(vehicle_id) else DEFAULT_ID
+	return vehicle_id if ALL.has(vehicle_id) else DEFAULT_ID
 
 static func opponent(vehicle_id: int) -> int:
 	for other_id in PLAYABLE:
@@ -86,37 +97,39 @@ static func opponent(vehicle_id: int) -> int:
 	return DEFAULT_ID
 
 static func definition(vehicle_id: int) -> Dictionary:
-	return DEFINITIONS[vehicle_id]
+	return ALL[vehicle_id]
 
 ## Copy of the catalog shot with "delay" = cost reduced by AttackDelay points.
 static func weapon(vehicle_id: int, weapon_index: int, delay_points: int = 0) -> Dictionary:
-	var rules: Dictionary = DEFINITIONS[vehicle_id].weapons[weapon_index].duplicate()
+	var rules: Dictionary = ALL[vehicle_id].weapons[weapon_index].duplicate()
 	rules.delay = DelayUnits.from_original(int(rules.cost), delay_points)
 	return rules
 
 static func weapon_count(vehicle_id: int) -> int:
-	return DEFINITIONS[vehicle_id].weapons.size()
+	return ALL[vehicle_id].weapons.size()
 
 static func aim_limits(vehicle_id: int, weapon_index: int) -> Vector2:
-	return DEFINITIONS[vehicle_id].aim_limits[weapon_index]
+	return ALL[vehicle_id].aim_limits[weapon_index]
 
 static func is_special(vehicle_id: int, weapon_index: int) -> bool:
-	return weapon_index == int(DEFINITIONS[vehicle_id].special)
+	return weapon_index == int(ALL[vehicle_id].special)
 
 static func spread_after_clamp(vehicle_id: int) -> bool:
-	return bool(DEFINITIONS[vehicle_id].spread_after_clamp)
+	return bool(ALL[vehicle_id].spread_after_clamp)
 
 static func generic_trail(vehicle_id: int) -> bool:
-	return bool(DEFINITIONS[vehicle_id].generic_trail)
+	return bool(ALL[vehicle_id].generic_trail)
 
 static func shot_sound_on(vehicle_id: int) -> String:
-	return str(DEFINITIONS[vehicle_id].shot_sound_on)
+	return str(ALL[vehicle_id].shot_sound_on)
 
 ## Shells of one shot: the Bigfoot emitter salvo, else "count" shells at once.
 static func emission(vehicle_id: int, weapon_index: int) -> Array:
-	if bool(DEFINITIONS[vehicle_id].get("salvo", false)):
+	if bool(ALL[vehicle_id].get("salvo", false)):
 		return BigfootAttacks.salvo(weapon_index)
 	var rules: Dictionary = weapon(vehicle_id, weapon_index)
+	if rules.has("shells"):
+		return ClassicMobiles.emission(rules)
 	var result: Array = []
 	for _component in range(int(rules.get("count", 1))):
 		result.append({"spawn": 0.0, "angle": 0.0, "power": 0.0})
@@ -124,7 +137,7 @@ static func emission(vehicle_id: int, weapon_index: int) -> Array:
 
 ## Mobile.Regenerate. The shield cap reads health from before this tick's heal.
 static func regenerate(actor: Dictionary) -> void:
-	var spec: Dictionary = DEFINITIONS[int(actor.vehicle)]
+	var spec: Dictionary = ALL[int(actor.vehicle)]
 	var points := Attributes.points(actor, Attributes.REGEN)
 	var current_hp := int(actor.hp)
 	var cap := int(spec.shield) + int(actor.max_hp) - current_hp
@@ -137,7 +150,7 @@ static func low_health(actor: Dictionary) -> bool:
 
 ## Point bodies keep item fixtures that carry no vehicle id.
 static func body(actor: Dictionary) -> Dictionary:
-	if not actor.has("vehicle") or not DEFINITIONS.has(int(actor.vehicle)):
+	if not actor.has("vehicle") or not ALL.has(int(actor.vehicle)):
 		return {"box": Vector2.ZERO, "offset": Vector2.ZERO, "stance": 24.0}
-	var spec: Dictionary = DEFINITIONS[int(actor.vehicle)]
+	var spec: Dictionary = ALL[int(actor.vehicle)]
 	return {"box": spec.box, "offset": spec.box_offset, "stance": float(spec.stance)}

@@ -8,11 +8,11 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.18.5** — saldo de 999.999.999 Gold/Cash para testar a loja; preserva o brilho/curva 0.18.4 e a auditoria de batalha 0.18.2 |
+| Versão | **0.19.0** — os 16 mobiles do cliente clássico no treino; inclui o brilho 0.18.7 e a revisão 0.18.6 |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
 | Validação automática | **5313 verificações rápidas e 13 testes Python** na 0.18.5; as **13 partidas completas** foram validadas na 0.18.2 |
 | Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
-| Validação visual | Usuário testou o Great Devil Head 0.18.4, relatou melhora e pediu consolidação; 20 modelos com efeito revisados |
+| Validação visual | Usuário validou o brilho do Great Devil Head 0.18.7 na main (24/10/2026); 20 modelos com efeito revisados |
 
 O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). Este arquivo é o mapa do que existe hoje.
 
@@ -38,7 +38,7 @@ A migração HD está concluída: **550 avatares reais, 629 camadas vestíveis e
 
 O [vídeo da migração em Full HD a 60 fps](docs/avatar-hd-migration/motion.mp4) mostra repouso, movimento, carga, pausa, recuo e dano. O avatar mantém a anatomia e acompanha o rig; efeitos ficam separados. É uma adaptação HD com peças fixas, sem redesenhar todos os gestos e piscadas originais.
 
-A revisão 0.18 corrige a mistura entre a cabeça de perfil e efeitos frontais. Os 20 modelos de cabeça com luz receberam âncoras próprias no HD. A 0.18.4 preserva o brilho e a pulsação anteriores do Great Devil, corrigindo a curva da faixa luminosa sobre o chifre. O halo discreto da 0.18.3 foi rejeitado pelo usuário. [Comparação atual a 60 fps](docs/horn-curve/motion.mp4) · [Validação no tamanho da loja](docs/horn-curve/validation.json).
+A revisão 0.18 corrige a mistura entre a cabeça de perfil e efeitos frontais. Os 20 modelos de cabeça com luz receberam âncoras próprias no HD. A 0.18.7 refaz o brilho do Great Devil a partir do clássico: a luz é a silhueta do próprio chifre HD, com o núcleo branco e a borda curta do original, mantendo a pulsação. Substitui a meia-lua curvada da 0.18.4 e o halo da 0.18.3. [Comparação a 60 fps](docs/horn-classic/motion.mp4) · [Validação](docs/horn-classic/validation.json).
 
 ### Batalha no Miramo Town
 
@@ -80,6 +80,8 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.18.2 | Auditoria: CPU paga 2 s fixos e congela o relógio durante a busca, fila do HUD na TurnTable, deriva do vento na queda por passo de gravidade (ADR-077), vento em 0–359 e docs de baseline marcados |
 | 0.18.3 | Great Devil Head: aura pulsante derivada do contorno da cabeça HD, pivô compartilhado e ouro preservado; main inclui o merge do PR2 |
 | 0.18.4 | Restaura brilho, opacidade e pulsação anteriores do Great Devil; corrige somente a curva por geometria UV constante após rejeição do halo discreto da 0.18.3 |
+| 0.19.0 | Roster dos 16 mobiles do cliente (ADR-083). IDs 1–3 preservados; arte original nos demais |
+| 0.18.7 | Brilho do Great Devil Head derivado da silhueta do chifre HD com o perfil do L clássico (ADR-082); substitui a meia-lua curvada da 0.18.4 |
 | 0.18.5 | Carteira padrão com 999.999.999 Gold/Cash e concessão única no perfil existente; teste compra e veste todos os 479 avatares compráveis |
 
 Números de base, antes dos atributos:

@@ -47,7 +47,7 @@ static func modify_shells(model, index: int, angle: float, power: float, weapon:
 			var velocity: Vector2 = model.shot_velocity(index, angle, power, weapon) * Items.BEACON_SPEED
 			var initial: Vector2 = model.muzzle(index, angle, weapon)
 			beacon.merge({"pos": initial, "hit_pos": initial, "velocity": velocity, "trail": [initial], "helix": 0.0, "phase": 0.0,
-				"spawn_at": float(Mobiles.definition(int(model.actors[index].vehicle)).beacon_delay), "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND, "burrow": false, "ghost": false}, true)
+				"spawn_at": float(Mobiles.definition(int(model.actors[index].vehicle)).beacon_delay), "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND, "burrow": false, "ghost": false, "flight": ""}, true)
 			shells = [beacon]
 		"electric":
 			# An invisible Electricity column of scale 1000 around the mobile:

@@ -1,5 +1,28 @@
 # Entregas e próximos trabalhos
 
+## Roster clássico 0.19.0 (REQ-45, ADR-083)
+
+- [x] Catálogo dos 16 mobiles com vida, escudo, mira e delay do `characterdata.dat`.
+- [x] Arte original, sprites, mira e menu em grade.
+- [x] Voo especial de Armor, Trico, Raon, Lightning, Ice e Turtle no laço comum.
+- [ ] Simulação própria de Boomer, JD, A.Sate, Grub, Dragon, Knight e Aduka.
+- [x] Feixe do Lightning sobe a partir do impacto; mina do Raon anda na superfície e estoura na caixa.
+- [ ] Mina do Raon como mobile próprio (folha e turno em cadeia).
+- [x] Suíte completa: 5536 checks e 13 partidas, zero falhas.
+- [x] App/ZIP 0.19.0 exportados; assinatura ad-hoc válida.
+
+## Entregas anteriores
+
+## Brilho clássico do chifre 0.18.7 (REQ-10/20/39, ADR-082)
+
+- [x] Medir o L clássico (`mh00071l`): núcleo 187/255 sobre o chifre, borda ~4 px nativos.
+- [x] Derivar a luz da silhueta do chifre HD (`build_devil_horn_light.py`) e registrar `overlay_base`.
+- [x] RED no catálogo 0.18.4; GREEN `test_xfs_hd_migration` e suítes de avatar/loja.
+- [x] GPU 1920×1080/60fps (`docs/horn-classic`), prévia real Avatar/Mobile, 37 lotes de QA e auditoria runtime.
+- [ ] App/ZIP 0.18.7 não reexportados: outra sessão alterava `match.gd`/`mobiles.gd` e assets de novos mobiles na mesma pasta.
+- [x] Usuário validou na main em 24/10/2026: "funcionou muito melhor".
+- [x] Lições registradas na skill `gunbound-classic-hd` (`references/effects.md`).
+
 ## Revisão de qualidade 0.18.6 (ADR-081)
 
 - [x] Análise SPEC × código e plano P1–P4 com portões (QUALITY_REVIEW.md).

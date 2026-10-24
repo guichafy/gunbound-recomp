@@ -1,10 +1,10 @@
-# Especificação — Gunbound Recomp 0.18.6
+# Especificação — Gunbound Recomp 0.19.0
 
 As seções abaixo são cronológicas: o texto de cada versão fica como histórico
 quando uma seção posterior o substitui. A partir de 0.7.0 vale a seção mais nova
 de cada requisito (batalha: REQ-44/ADR-076).
 
-## Índice vivo de requisitos (0.18.6)
+## Índice vivo de requisitos (0.19.0)
 
 Versão em fonte única: `application/config/version` em `project.godot` (ADR-081).
 Este índice resume o requisito vigente e onde ele está; as seções seguintes
@@ -13,7 +13,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | ID | Requisito vigente | Documento | Estado |
 |---|---|---|---|
 | REQ-01 | Engine multiplataforma; entrega executável no Mac | este arquivo, `build_macos.py` | macOS entregue; Windows/Linux/Android/iOS não testados |
-| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente (Mage, Bigfoot, Nak) |
+| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente; 16 mobiles (REQ-45) |
 | REQ-03 | Mira, força e movimento; teclado e extras na tela | HUD_0_10, AIMING_0_12 | Vigente; console original substituído por REQ-27..30 |
 | REQ-04 | Balística, colisão e crateras | BATTLE_RULES_AUDIT, MOBILE_PARITY | Vigente; gravidade/força do C# (REQ-44) |
 | REQ-05 | Vida, dano, queda e resultado | MOBILE_PARITY, BATTLE_RULES_AUDIT | Vigente; deriva na queda ADR-077 |
@@ -25,8 +25,8 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-11 | Arte original própria | — | Substituído por REQ-19/20 |
 | REQ-12 | Código, documentação e app para validar e aprender | QUALITY_REVIEW | Vigente; revisão de qualidade 0.18.6 |
 | REQ-13..18 | Refinamento 0.2 (HUD, fila, inclinação, carga, animações, impacto) | REFINEMENT_0_2 | HUD/console substituídos por REQ-27..30; demais vigentes |
-| REQ-19 | Mobiles e assets reais | BIGFOOT_0_3, MAGE_0_4, NAK_0_15 | Parcial: Mage, Bigfoot, Nak; demais mobiles pendentes |
-| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD | Vigente; HD do Nak gerado e pendente de integração |
+| REQ-19 | Mobiles e assets reais | BIGFOOT_0_3, MAGE_0_4, NAK_0_15, REQ-45 | Vigente nos 16 do cliente Thor's Hammer |
+| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD, HORN_AURA_FIX | Vigente; HD do Nak gerado e pendente de integração; brilho do Great Devil derivado do chifre (ADR-082) |
 | REQ-21..26 | Mapa Miramo A, câmera 1:1, vento 2D, clima, Thor, partícula | MAP_0_8, WEATHER_CAMERA_0_9 | Vigente |
 | REQ-27..31 | HUD original e popup de opções | HUD_0_10 | Vigente; Mouse Speed desabilitado |
 | REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |
@@ -36,6 +36,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-42 | Paridade Mage/Bigfoot com o C# | MOBILE_PARITY | Vigente, com os ajustes de REQ-44 |
 | REQ-43 | Nak (ID 3) com dados do cliente original | NAK_0_15 | Vigente; aura UsingItem ausente (sem arte original) |
 | REQ-44 | Regras de batalha: cliente original comprovado, depois C# | BATTLE_RULES_AUDIT | Vigente |
+| REQ-45 | Os 16 mobiles do cliente, IDs 1–3 preservados | este arquivo, ADR-083 | Vigente; tiros sem classe C# ainda são o projétil comum |
 
 ## Histórico da especificação
 
@@ -164,6 +165,25 @@ Todos os delays seguem na escala ÷ 7,5. Ficam como estavam no Godot: empate
 por morte dupla e passe sem travar o SS (o C# trava). As seeds de
 `test_matches` mudam de propósito; os novos valores de referência estão no
 hand-off.
+
+## Roster clássico 0.19.0 — REQ-45
+
+O `GunBound.gme` carrega 16 registros de `characterdata.dat` (`tank1`…`tank16`).
+Mage permanece no ID 1, Bigfoot no 2 e Nak no 3. Os outros entram nos IDs 4–16:
+Armor, Trico, Boomer, Raon, Lightning, JD, ASate, Ice, Turtle, Grub, Dragon,
+Knight e Aduka. Vida, escudo, regeneração de escudo, mira, delay e o fator
+de tempo vêm dessa tabela. O dano e o raio usam a mesma leitura do Nak
+(`[44]/[57]/[70]` e metade de `[47]/[60]/[73]`). A arte é o atlas original, sem
+HD novo. A CPU dos IDs novos enfrenta o Mage; 1↔2 e Nak→Mage ficam.
+
+Tiros com classe no C#: Armor SS abre aos 2 s; Trico S2 orbita em três e o SS
+explode oito vezes; Raon S1 orbita em quatro, S2/SS plantam mina que anda até
+90 px e estoura a 90 px; Lightning soma o raio elétrico; Ice S2 tira 5 de
+defesa; Turtle S2 são dois projéteis e o SS, depois de 1,5 s, parte em seis.
+Boomer, JD, A.Sate, Grub, Knight e o Aduka ainda disparam o projétil
+comum com os números da tabela. O SS do Dragon solta cinco filhos. O SS do JD
+e os S2/SS do Aduka têm poder 0 nessa tabela. O Aduka atira pelas costas.
+Kalsiddon e J.Frog não estão nestes 16 registros.
 
 ## Mage 0.4
 

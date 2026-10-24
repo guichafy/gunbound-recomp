@@ -17,6 +17,7 @@ const GoldTracker = preload("res://scripts/gold_tracker.gd")
 const CpuPlanner = preload("res://scripts/cpu_planner.gd")
 const ActorState = preload("res://scripts/actor_state.gd")
 const ShellState = preload("res://scripts/shell_state.gd")
+const ClassicFlight = preload("res://scripts/classic_flight.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 # Training option "all": equal weight for every weather type, Thor included.
@@ -43,7 +44,11 @@ const TIME_EPSILON := 0.0000001
 const SPECIAL_WEAPON := Mobiles.SPECIAL
 # Stable mobile IDs are independent of menu slots. Removed ID 0 is not playable.
 const PLAYABLE_VEHICLES := Mobiles.PLAYABLE
-const VEHICLES := Mobiles.DEFINITIONS
+static var VEHICLES := {}
+var mines: Array = []
+
+static func _static_init() -> void:
+	VEHICLES = Mobiles.ALL
 var terrain
 var actors: Array = []
 var projectiles: Array = []
@@ -123,6 +128,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	resolve_wait = 0.0
 	flight_elapsed = 0.0
 	projectiles.clear()
+	mines.clear()
 	volleys.clear()
 	events.clear()
 	shot_gold = {}
@@ -154,6 +160,8 @@ func begin_turn() -> void:
 		Mobiles.regenerate(actor)
 	actors[active].ss_lock = maxi(int(actors[active].ss_lock) - 1, 0)
 	movement_left = movement_budget()
+	ClassicFlight.walk_mines(self)
+	ClassicFlight.detonate_mines(self)
 	wind = weather.wind_vector()
 	stamp_tilt()
 	events.append({"type": "turn", "actor": active})
@@ -265,7 +273,9 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		var entry: Dictionary = emission[component]
 		var initial := muzzle(index, angle if spread_after else angle + float(entry.angle), weapon)
 		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power) if spread_after else shot_velocity(index, angle + float(entry.angle), power, weapon)
-		result.append(ShellState.create(initial, velocity, entry.spawn, rules, weapon, component))
+		var shell := ShellState.create(initial, velocity, entry.spawn, rules, weapon, component)
+		ClassicFlight.prepare(shell, entry)
+		result.append(shell)
 	return result
 
 ## Mobile.ShootWithModifiers: the shells of a shot under this turn's item.
@@ -362,6 +372,7 @@ func pass_turn() -> void:
 	TurnTable.pass_turn(self)
 
 func tick(delta: float) -> void:
+	ClassicFlight.crawl_mines(self, delta)
 	if phase == PHASE_AIM:
 		if cpu_thinking and active == CPU:
 			return
@@ -398,6 +409,16 @@ func advance_projectiles(delta: float) -> void:
 			travel_delta = clampf(flight_elapsed - float(projectile.spawn_at), 0.0, delta)
 			if travel_delta <= TIME_EPSILON:
 				continue
+		if ClassicFlight.hold(projectile, travel_delta):
+			continue
+		if bool(projectile.get("chaining", false)):
+			if ClassicFlight.tick_chain(projectile, travel_delta):
+				if float(projectile.chain_wait) <= 0.0:
+					var link: Vector2 = ClassicFlight.advance_chain(projectile)
+					explode(link, -1, projectile)
+					if int(projectile.chain_left) <= 0:
+						projectiles.remove_at(i)
+			continue
 		var underground := bool(projectile.get("underground", false))
 		var next: Dictionary
 		if underground:
@@ -407,7 +428,9 @@ func advance_projectiles(delta: float) -> void:
 			next = tornado_step(projectile, travel_delta) if not projectile.tornado.is_empty() else Combat.advance(projectile.pos, projectile.velocity, wind * float(projectile.get("wind_scale", 1.0)), travel_delta)
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
-		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
+		ClassicFlight.open_shell(projectile)
+		var carrier: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
+		var actual: Vector2 = ClassicFlight.hit_point(projectile, carrier)
 		# The teleportation beacon only collides with the ground.
 		var beacon := bool(projectile.get("beacon", false))
 		var hit: Dictionary
@@ -419,7 +442,8 @@ func advance_projectiles(delta: float) -> void:
 				if not exit.is_empty() and (hit.is_empty() or float(exit.fraction) < float(hit.fraction)):
 					hit = {"position": exit.position, "actor": -1}
 		else:
-			hit = Combat.trace_segment(projectile.hit_pos, actual, terrain, [] if beacon else actors, ignored)
+			var bodies: Array = [] if beacon or bool(projectile.get("skip_actors", false)) else actors
+			hit = Combat.trace_segment(projectile.hit_pos, actual, terrain, bodies, ignored)
 			# SimulateShot2_Bullet3: the first solid pixel switches the shell to its
 			# "special" underground state there and halves the vertical speed.
 			if bool(projectile.get("burrow", false)) and not hit.is_empty() and int(hit.actor) < 0:
@@ -441,9 +465,12 @@ func advance_projectiles(delta: float) -> void:
 		if not hit.is_empty():
 			if beacon:
 				land_beacon(hit.position, previous, projectile)
+				projectiles.remove_at(i)
+			elif ClassicFlight.begin_chain(projectile, hit.position, float(actors[shot_actor].facing)):
+				explode(hit.position, int(hit.actor), projectile)
 			else:
 				explode(hit.position, int(hit.actor), projectile)
-			projectiles.remove_at(i)
+				projectiles.remove_at(i)
 		elif Combat.out_of_bounds(projectile.pos, terrain) or projectile.age > Combat.MAX_FLIGHT_AGE:
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
@@ -460,10 +487,22 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var weapon: Dictionary = weapon_rules(shot_actor, weapon_index)
 	var item: String = str(actors[shot_actor].get("turn_item", ""))
 	# Projectile.Explode: erosion radius × (1 + Owner.Dig / 100) (Bunge Shot).
-	var removed: int = terrain.carve(position, Attributes.crater(float(weapon.radius),Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
-	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
-	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
+	var radius := float(weapon.radius)
+	if projectile.has("blast_radius"):
+		radius = float(projectile.blast_radius)
+	var removed: int = terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
+	var heading := PI * 0.5
+	var velocity := Vector2.ZERO
+	if projectile.has("velocity"):
+		velocity = projectile.velocity
+		heading = velocity.angle()
+	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
+	blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
+	if not projectile.is_empty():
+		ClassicFlight.bolts(self, projectile, position)
+		ClassicFlight.chill(self, projectile, event_start)
+		ClassicFlight.plant_mine(self, projectile, position)
+		ClassicFlight.burst(self, projectile, position, velocity)
 	explode_actions(position, projectile, event_start)
 
 ## OnExplodeAction order: Thor attached at launch, then Electricity; then the

@@ -1,6 +1,6 @@
 # Design implementado
 
-Estado vigente: 0.18.6. O contrato atual são as seções «Arquitetura SOLID» e
+Estado vigente: 0.19.0 (roster clássico: ADR-083; brilho do Great Devil: ADR-082). O contrato atual são as seções «Arquitetura SOLID» e
 «Revisão de qualidade 0.18.6» (logo abaixo), as regras de batalha de
 `BATTLE_RULES_AUDIT.md` e `HANDOFF.md`. As demais seções guardam o histórico de
 cada entrega: terreno 640×400, força a 65 pontos/s, gravidade 260, CPU com
@@ -599,6 +599,14 @@ textura L anterior sobre a cabeça, com opacidade/pulsação anteriores. Nove
 marcos medidos na cabeça e na luz produzem64faixas UV constantes em ArrayMesh,
 com pivô/flip/inclinação comuns. Só geometria muda; cache sem relógio. A máscara
 0.18.3 fica preservada para comparação histórica, sem entrada no catálogo ativo.
+
+Brilho clássico 0.18.7/ADR-082 substitui a malha curvada no catálogo: a camada
+L do Great Devil usa `overlay_base` e um PNG derivado da silhueta do chifre HD
+(`build_devil_horn_light.py`). `AvatarXfsHD.piece` registra a luz na janela da
+cabeça (deslocamento −20 px na fonte, mesma escala), exige tamanho igual ao da
+cabeça mais a margem e opacidade em 0–1; qualquer desvio cai no fallback
+original completo. `curve_light`/`light_curve` e a máscara 0.18.3 ficam como
+histórico sem entrada ativa.
 
 Saldo de teste0.18.5/ADR-080: Profile usa 999.999.999 em cada moeda como padrão.
 `game._ready` chama a concessão única após `load_profile`; carteira legível
