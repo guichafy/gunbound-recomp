@@ -1,18 +1,7 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-32: the CPU aim search runs on a worker thread over a snapshot, gives the
 ## same plan as the one-shot search and never blocks the battle frame.
 
-var failures := 0
-var checks := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 ## Player vehicle 2 → CPU Mage; player vehicle 1 → CPU Bigfoot (bomb salvos).
 func cpu_model(seed_value: int, vehicle: int = 2, special: bool = false):
@@ -84,15 +73,15 @@ func run() -> void:
 		scene._process(1.0 / 60.0)
 		worst = maxi(worst, Time.get_ticks_usec() - before)
 		if first_task == -2:
-			first_task = scene.cpu_task
-			check(first_task >= 0 and scene.cpu_plan.is_empty(), "The CPU turn starts the search on a worker thread")
+			first_task = scene.cpu.task
+			check(first_task >= 0 and scene.cpu.plan.is_empty(), "The CPU turn starts the search on a worker thread")
 		if scene.model.phase != "aim" or scene.model.active != 1:
 			fired = true
 			break
 		OS.delay_msec(4)
 	check(fired, "The CPU still fires after the threaded search")
 	check(worst < 40000, "No battle frame runs the CPU search (worst %.1f ms)" % (worst / 1000.0))
-	check(scene.cpu_task == -1 and scene.cpu_search.is_empty(), "The finished search is collected")
+	check(scene.cpu.task == -1 and scene.cpu.search.is_empty(), "The finished search is collected")
 	check(Time.get_ticks_msec() - started_at < 15000, "The CPU fires well before the turn timer")
 
 	# Restarting during a search waits for the worker and drops it.
@@ -102,12 +91,12 @@ func run() -> void:
 		scene.model.pass_turn()
 		scene.consume_events()
 	scene._process(1.0 / 60.0)
-	check(scene.cpu_task >= 0, "A new CPU turn starts a new search")
+	check(scene.cpu.task >= 0, "A new CPU turn starts a new search")
 	scene.opening = 0
 	scene.start_match()
-	check(scene.cpu_task == -1 and scene.cpu_search.is_empty() and scene.cpu_plan.is_empty(), "Restarting drops a running search safely")
+	check(scene.cpu.task == -1 and scene.cpu.search.is_empty() and scene.cpu.plan.is_empty(), "Restarting drops a running search safely")
 	scene.show_menu()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/performance-test-profile.json"))
-	print("PERFORMANCE CHECKS: ", checks, " | FAILURES: ", failures)
+	report("PERFORMANCE CHECKS")
 	scene.queue_free()
-	quit(1 if failures > 0 else 0)
+	quit(exit_code())

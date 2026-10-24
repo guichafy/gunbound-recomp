@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Preview extends Node2D:
 	var sprites: Array=[]
 	var outfits: Array=[]
@@ -12,7 +13,7 @@ class Preview extends Node2D:
 				var sprite=sprites[row]
 				var pos := Vector2(240+col*480,330+row*470)
 				var facing := 1 if col%2==0 else -1
-				sprite.draw(self,pos,180,facing,deg_to_rad(-12 if col%2==0 else 12),0,Color.WHITE,"idle",age,0,false,0,{"equipment":outfits[col],"age":age})
+				sprite.draw(self,SpritePose.new(pos,180,facing,{"rotation":deg_to_rad(-12 if col%2==0 else 12),"age":age,"avatar_context":{"equipment":outfits[col],"age":age}}))
 				draw_string(font,pos+Vector2(-190,135),["Marine / HD aprovado","Pucca / peças XFS","Ghost / camada L","Óculos de 44 quadros"][col],HORIZONTAL_ALIGNMENT_LEFT,-1,22,Color.WHITE)
 func _initialize() -> void:
 	call_deferred("run")

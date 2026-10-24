@@ -58,9 +58,9 @@ func run() -> void:
 	weather.wind_force = 12
 	weather.wind_angle = 200
 	view.model.wind = weather.wind_vector()
-	view.angle = 40
+	view.aim.angle = 40
 	# Pick the power whose shared-physics prediction lands near the CPU.
-	view.power = 60.0
+	view.aim.power = 60.0
 	var best := INF
 	for power in range(30, 100, 2):
 		var landing: Dictionary = view.model.predict_shot(0, 40.0, float(power), 0)
@@ -69,7 +69,7 @@ func run() -> void:
 		var distance: float = Vector2(landing.position).distance_to(cpu)
 		if distance < best:
 			best = distance
-			view.power = float(power)
+			view.aim.power = float(power)
 	view.update_hud()
 	advance(1.5)
 	await snap("weather-columns")

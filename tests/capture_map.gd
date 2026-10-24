@@ -38,14 +38,13 @@ func run() -> void:
 	view.model.start(2, 1, 4)
 	view.art.reset(view.model.actors)
 	view.consume_events()
-	view.angle = 35
-	# Pick the power whose shared-physics prediction lands on the map.
-	var Combat = load("res://scripts/combat.gd")
-	view.power = 30.0
+	view.aim.angle = 35
+	# Pick the power whose prediction (the real flight loop) lands on the map.
+	view.aim.power = 30.0
 	for power in range(30, 80, 2):
-		var landing: Dictionary = Combat.predict(view.model.muzzle(0, 35.0), view.model.shot_velocity(0, 35.0, float(power), 0), view.model.wind, view.model.terrain, view.model.actors, 0)
+		var landing: Dictionary = view.model.predict_shot(0, 35.0, float(power), 0)
 		if bool(landing.get("hit", false)) and absf(Vector2(landing.position).x - view.model.actors[1].pos.x) < 260.0:
-			view.power = float(power)
+			view.aim.power = float(power)
 			break
 	view.update_hud()
 	for frame in range(30):

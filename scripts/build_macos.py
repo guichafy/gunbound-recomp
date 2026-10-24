@@ -11,6 +11,18 @@ APP = ROOT / "builds" / "Gunbound Recomp.app"
 GODOT = Path("/Applications/Godot.app/Contents/MacOS/Godot")
 
 
+def project_version() -> str:
+    """Single source of the version: application/config/version in project.godot."""
+    section = ""
+    for line in (ROOT / "project.godot").read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line.startswith("["):
+            section = line
+        elif section == "[application]" and line.startswith("config/version="):
+            return line.split("=", 1)[1].strip().strip('"')
+    raise SystemExit("project.godot has no application/config/version")
+
+
 def run(*arguments: str) -> None:
     subprocess.run(arguments, cwd=ROOT, check=True)
 
@@ -33,6 +45,9 @@ def main() -> None:
         (contents / "Resources" / (original + ".pck")).rename(contents / "Resources" / (internal + ".pck"))
     info["CFBundleExecutable"] = internal
     info["CFBundleDisplayName"] = "Gunbound Recomp"
+    version = project_version()
+    info["CFBundleShortVersionString"] = version
+    info["CFBundleVersion"] = version
     with plist_path.open("wb") as target:
         plistlib.dump(info, target)
     notices = {

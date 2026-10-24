@@ -1,18 +1,8 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-35: OpenBound items in the shared turn/flight rules (ITEMS_0_13.md).
-var checks := 0
-var failures := 0
 var Match
 var Items
 var Damage
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
-
 ## Procedural arena, no wind and no weather columns; player Bigfoot (2) or Mage (1).
 func fresh(vehicle: int, loadout: Array, seed_value: int = 5):
 	var model = Match.new()
@@ -255,5 +245,4 @@ func run() -> void:
 	b.pass_turn()
 	check(a.choose_cpu_shot() == b.choose_cpu_shot(), "The loadout does not change the CPU plan")
 
-	print("ITEMS CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("ITEMS CHECKS")

@@ -1,14 +1,5 @@
-extends SceneTree
-var checks := 0
-var failures := 0
+extends "res://tests/support/suite.gd"
 const PROFILE := "res://.tools/xfs-equipment-test.json"
-func check(ok: bool, message: String) -> void:
-	checks+=1
-	if not ok:
-		failures+=1
-		printerr("FAIL: ",message)
-func _initialize() -> void:
-	call_deferred("run")
 func run() -> void:
 	var P=load("res://scripts/profile.gd")
 	var A=load("res://scripts/player_attributes.gd")
@@ -53,7 +44,7 @@ func run() -> void:
 	var negative: Array=p.catalog.find("xfs:1:1:5").bonuses
 	model.start(1,1,42,"","original",null,[],[],[negative,[]])
 	check(model.actors[0].attributes[4]==-3,"Negative delay survives combat snapshot sanitization")
-	check(model.weapon_rules(0,0).delay>model.VEHICLES[1].weapons[0].delay,"Negative delay modifier increases actual shot delay")
+	check(model.weapon_rules(0,0).delay>load("res://scripts/mobiles.gd").weapon(1,0).delay,"Negative delay modifier increases actual shot delay")
 	var capped: Array=A.with_equipment([50,0,0,0,0,0,0,0],[21,18,-5,6,0,0,0,18])
 	check(capped==[50,18,-5,6,0,0,0,18],"Gear is capped per statistic without spending the pilot point budget")
 	var scene=load("res://scenes/main.tscn").instantiate()
@@ -68,5 +59,4 @@ func run() -> void:
 	await process_frame
 	for path in [PROFILE,PROFILE.get_basename()+"-options.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	print("XFS EQUIPMENT CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("XFS EQUIPMENT CHECKS")

@@ -1,5 +1,6 @@
 extends Control
 ## XFS client shop; native proportions are independent of arena transforms.
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 const Assets := "res://assets/openbound/shop/"
 const ShopHD = preload("res://scripts/shop_hd.gd")
 const XfsStyle = preload("res://scripts/xfs_shop_style.gd")
@@ -843,7 +844,7 @@ func paint(view: Node2D) -> void:
 		for path in ["InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background","InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2"]:
 			view.draw_texture_rect_region(texture(path),Rect2(568,34,86,72),preview_region(path))
 		var sprite = host.sprite_for(host.vehicle)
-		sprite.draw(view,Vector2(612,90),44,1,0,sprite.frame_index("idle",elapsed,0,false),Color.WHITE,"idle",elapsed,0,false,0,{"equipment":set_data,"age":elapsed})
+		sprite.draw(view,SpritePose.new(Vector2(612,90),44,1,{"frame":sprite.frame_index("idle",elapsed,0,false),"age":elapsed,"avatar_context":{"equipment":set_data,"age":elapsed}}))
 	else:
 		avatar_art.draw(view,set_data,Transform2D(0,Vector2(-0.95,0.95),0,Vector2(612,91+sin(elapsed*2.3)*0.5)),elapsed,Color.WHITE)
 	var values: Array = Attributes.with_equipment(model.profile.attributes,model.catalog.bonuses(set_data))

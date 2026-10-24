@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Gallery extends Node2D:
 	var art
 	var mobile
@@ -18,7 +19,7 @@ class Gallery extends Node2D:
 				gear["3"] = "2:3:1"
 			draw_string(font,origin+Vector2(30,45),entry[0],HORIZONTAL_ALIGNMENT_LEFT,-1,24,Color.WHITE)
 			art.draw(self,gear,Transform2D(0,Vector2(-2.4,2.4),0,origin+Vector2(210,200)),0.0,Color.WHITE)
-			mobile.draw(self,origin+Vector2(350,385),150,1,0,0,Color.WHITE,"idle",0.0,0,false,0,{"equipment":gear,"age":0.0})
+			mobile.draw(self,SpritePose.new(origin+Vector2(350,385),150,1,{"avatar_context":{"equipment":gear,"age":0.0}}))
 func _initialize() -> void:
 	call_deferred("run")
 func run() -> void:

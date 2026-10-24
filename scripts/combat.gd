@@ -8,8 +8,12 @@ const Mobiles = preload("res://scripts/mobiles.gd")
 const GRAVITY := 196.0
 const FORCE_FACTOR := 100.0
 const SHELL_MASS := 14.0
-const MIN_POWER := 15.0
 const STEP := 1.0 / 120.0
+# Legal shot strength, in percent of the bar.
+const MIN_POWER := 15.0
+const MAX_POWER := 100.0
+# A shell still flying after this many seconds is a miss (live shot and prediction).
+const MAX_FLIGHT_AGE := 12.0
 
 # Wind is the OpenBound vector (force units, screen angle) times the shells'
 # wind influence 1.2 (Projectile*WindInfluence); 35 = 42 px/s².
@@ -30,7 +34,7 @@ static func advance_buried(position: Vector2, velocity: Vector2, delta: float) -
 
 static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0) -> Vector2:
 	# Projectile.InitializeMovement: the emitter's force modifier joins before the mass.
-	var speed := (clampf(power, MIN_POWER, 100.0) + power_offset) * FORCE_FACTOR / SHELL_MASS
+	var speed := (clampf(power, MIN_POWER, MAX_POWER) + power_offset) * FORCE_FACTOR / SHELL_MASS
 	var radians := deg_to_rad(clampf(angle, 10.0, 85.0))
 	return Vector2(cos(radians) * facing, -sin(radians)).rotated(rotation) * speed
 
@@ -132,22 +136,3 @@ static func ignored_shooter(age: float, shooter: int) -> int:
 static func sample_position(position: Vector2, velocity: Vector2, age: float, amplitude: float = 0.0, phase: float = 0.0) -> Vector2:
 	return position + Vector2(-velocity.y, velocity.x).normalized() * amplitude * sin(age * TAU + phase)
 
-static func predict(origin: Vector2, velocity: Vector2, wind: Vector2, terrain, actors: Array, ignored: int, amplitude: float = 0.0, phase: float = 0.0) -> Dictionary:
-	var position := origin
-	var speed := velocity
-	var age := 0.0
-	var actual := origin
-	for i in range(1440):
-		var next := advance(position, speed, wind, STEP)
-		var next_actual := sample_position(next.position, next.velocity, age + STEP, amplitude, phase)
-		var hit := trace_segment(actual, next_actual, terrain, actors, ignored_shooter(age, ignored))
-		if not hit.is_empty():
-			hit["hit"] = true
-			return hit
-		actual = next_actual
-		position = next.position
-		speed = next.velocity
-		age += STEP
-		if out_of_bounds(position, terrain):
-			return {"position": position, "actor": -1, "hit": false}
-	return {"position": position, "actor": -1, "hit": false}

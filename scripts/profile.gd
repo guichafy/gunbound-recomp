@@ -3,6 +3,7 @@ extends RefCounted
 
 const Catalog = preload("res://scripts/avatar_catalog.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
+const JsonStore = preload("res://scripts/json_store.gd")
 const INITIAL_TEST_BALANCE := 999999999
 var catalog = Catalog.new()
 var gold := INITIAL_TEST_BALANCE
@@ -31,24 +32,15 @@ func _init(save_path: String = "user://profile.json", avatar_catalog = null) -> 
 				owned.append(key)
 
 func load_profile() -> void:
-	if not FileAccess.file_exists(path):
+	var data = JsonStore.read_dict(path)
+	if data == null:
 		return
-	var file := FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		return
-	var parser := JSON.new()
-	if parser.parse(file.get_as_text()) != OK or not parser.data is Dictionary:
-		return
-	var data: Dictionary = parser.data
 	awarded.clear()
 	if data.get("nickname") is String:
 		nickname = clean_nickname(data.nickname)
-	if data.get("xp") is float or data.get("xp") is int:
-		xp = clampi(int(data.xp), 0, 1000000000)
-	if data.get("matches") is float or data.get("matches") is int:
-		matches = clampi(int(data.matches), 0, 1000000000)
-	if data.get("wins") is float or data.get("wins") is int:
-		wins = clampi(int(data.wins), 0, matches)
+	xp = JsonStore.read_int(data, "xp", 0, 1000000000, xp)
+	matches = JsonStore.read_int(data, "matches", 0, 1000000000, matches)
+	wins = JsonStore.read_int(data, "wins", 0, matches, wins)
 	if data.get("awarded") is Array:
 		for item in data.awarded:
 			if item is String:
@@ -86,14 +78,7 @@ func award(match_id: String, victory: bool, draw: bool = false, gold_delta: int 
 
 func save_profile() -> bool:
 	nickname = clean_nickname(nickname)
-	var temporary := path + ".tmp"
-	var file := FileAccess.open(temporary, FileAccess.WRITE)
-	if file == null:
-		last_save_ok = false
-		return false
-	file.store_string(JSON.stringify(snapshot(), "\t"))
-	file.close()
-	last_save_ok = DirAccess.rename_absolute(ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(path)) == OK
+	last_save_ok = JsonStore.write_atomic(path, snapshot())
 	return last_save_ok
 
 func shop_data() -> Dictionary:

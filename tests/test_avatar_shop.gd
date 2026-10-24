@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	check(FileAccess.file_exists("res://scripts/avatar_shop_model.gd"), "Shop model exists")
 	if failures == 0:
@@ -88,8 +79,7 @@ func run() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/shop-scene.json"))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/shop-scene-options.json"))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/shop-test.json"))
-	print("AVATAR SHOP CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("AVATAR SHOP CHECKS")
 
 func click(point: Vector2) -> void:
 	for pressed in [true,false]:

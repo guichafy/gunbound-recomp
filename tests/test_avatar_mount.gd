@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var sprites := [load("res://scripts/bigfoot_sprite.gd").new(),load("res://scripts/mage_sprite.gd").new()]
 	for sprite in sprites:
@@ -32,5 +23,4 @@ func run() -> void:
 				var pose_transform: Transform2D = rig.avatar_transform(state)
 				var body := Transform2D(state.body_angle,state.body_offset)
 				check(pose_transform.origin.is_equal_approx(body*centers[index]), "Pose follows chassis without hip/body offset")
-	print("AVATAR MOUNT CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures == 0 else 1)
+	finish("AVATAR MOUNT CHECKS")

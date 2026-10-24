@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, message: String) -> void:
-	checks+=1
-	if not ok:
-		failures+=1
-		printerr("FAIL: ",message)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
 	var rows: Array=catalog.entries.values().filter(func(row): return row.get("source")=="xfs")
@@ -56,5 +47,4 @@ func run() -> void:
 		var before: int=p.cash
 		check(p.purchase("xfs:0:0:2","cash")=="save" and p.cash==before and not p.owns("xfs:0:0:2"),"XFS failed save rolls back currency and ownership")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	print("XFS CATALOG CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("XFS CATALOG CHECKS")

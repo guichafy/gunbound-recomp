@@ -26,12 +26,12 @@ func fit(terrain, value: Vector2) -> Vector2:
 
 func goal(model) -> Vector2:
 	var focus: Vector2 = model.actors[model.active].pos + Vector2(0, -60) if not model.actors.is_empty() else Vector2.ZERO
-	if model.phase == "flight":
+	if model.phase == model.PHASE_FLIGHT:
 		for projectile in model.projectiles:
 			if bool(projectile.launched):
 				focus = projectile.pos
 				break
-	elif model.phase in ["settle", "finished"] and last_impact != Vector2.INF:
+	elif model.phase in [model.PHASE_SETTLE, model.PHASE_FINISHED] and last_impact != Vector2.INF:
 		focus = last_impact
 	return focus - VIEW_SIZE * 0.5
 

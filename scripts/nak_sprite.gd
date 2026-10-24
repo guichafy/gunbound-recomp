@@ -31,28 +31,21 @@ const BUBBLE_PERIOD := 6.0
 # fields). For Bigfoot and Mage the fork's values sit (+7, +5) and (+2, +4) px
 # from that raw point to fit its avatar registration; Nak takes the mean.
 const RIDER_ADJUST := Vector2(5, 4)
-const EFFECT_FPS := 30.0
 const SHOT_FPS := 20.0
+const FOLDER := "res://assets/openbound/nak"
 
 var meta: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []
-var effects: Array = []
-var shoot_sounds: Array[AudioStream] = []
-var blast_sounds: Array[AudioStream] = []
 
 func _init() -> void:
-	configure("res://assets/openbound/nak", CELL, PIVOT, SEQUENCES, 51.0, 53.0)
-	meta = JSON.parse_string(FileAccess.get_file_as_string("res://assets/openbound/nak/frames.json"))
+	configure(FOLDER, CELL, PIVOT, SEQUENCES, 51.0, 53.0)
+	meta = JSON.parse_string(FileAccess.get_file_as_string(FOLDER + "/frames.json"))
+	load_shot_assets(FOLDER)
 	for name in ["Bullet1", "Bullet2", "Bullet3"]:
-		bullets.append(pixel_texture(load("res://assets/openbound/nak/%s.png" % name)))
+		bullets.append(pixel_texture(load(FOLDER + "/%s.png" % name)))
 	for name in ["Bullet1Light", "Bullet2Light"]:
-		lights.append(pixel_texture(load("res://assets/openbound/nak/%s.png" % name)))
-	for number in range(1, 4):
-		effects.append(pixel_texture(load("res://assets/openbound/nak/Flame%d.png" % number)))
-	for key in ["S1", "S2", "SS"]:
-		shoot_sounds.append(load("res://assets/openbound/nak/Shoot%s.mp3" % key))
-		blast_sounds.append(load("res://assets/openbound/nak/Blast%s.mp3" % key))
+		lights.append(pixel_texture(load(FOLDER + "/%s.png" % name)))
 
 func rider_offset(frame: int) -> Vector2:
 	return super.rider_offset(frame) + RIDER_ADJUST
@@ -67,8 +60,8 @@ func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int
 
 ## The Nak fires from its tail: the original aims 130–170° from the way the
 ## head looks, so the art is mirrored against the aiming side.
-func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, frame: int, color: Color = Color.WHITE, pose: String = "idle", age: float = 0.0, weapon: int = 0, low_health: bool = false, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> void:
-	super.draw(view, pos, width, -facing, rotation, frame, color, pose, age, weapon, low_health, wheel_phase, avatar_context)
+func draw(view: Node2D, request) -> void:
+	super.draw(view, request.mirrored())
 
 func sheet(name: String) -> Dictionary:
 	return meta.sheets[name]
@@ -105,6 +98,7 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 		view.draw_texture_rect_region(bullets[weapon], body[1], body[0])
 	view.draw_set_transform(Vector2.ZERO)
 
+## Nak explosions are irregular client sheets: frame count from frames.json.
 func effect_capacity(weapon: int) -> int:
 	return int(sheet("Flame%d.png" % (weapon + 1)).frames)
 

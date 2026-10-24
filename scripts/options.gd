@@ -4,6 +4,7 @@ extends RefCounted
 ## The equipped items (PopupSelectItem, REQ-36) are kept here too.
 
 const Items = preload("res://scripts/items.gd")
+const JsonStore = preload("res://scripts/json_store.gd")
 
 var path: String
 var sfx := 100
@@ -27,35 +28,18 @@ func scroll_factor() -> float:
 	return pow(2.0, (scroll - 50) / 50.0)
 
 func load_options() -> void:
-	if not FileAccess.file_exists(path):
+	var data = JsonStore.read_dict(path)
+	if data == null:
 		return
-	var file := FileAccess.open(path, FileAccess.READ)
-	if file == null:
-		return
-	var parser := JSON.new()
-	if parser.parse(file.get_as_text()) != OK or not parser.data is Dictionary:
-		return
-	var data: Dictionary = parser.data
-	if data.get("sfx") is float or data.get("sfx") is int:
-		sfx = clampi(int(data.sfx), 0, 100)
-	if data.get("bgm") is float or data.get("bgm") is int:
-		bgm = clampi(int(data.bgm), 0, 100)
-	if data.get("scroll") is float or data.get("scroll") is int:
-		scroll = clampi(int(data.scroll), 0, 100)
-	if data.get("aiming") is float or data.get("aiming") is int:
-		aiming = clampi(int(data.aiming), 0, 1)
+	sfx = JsonStore.read_int(data, "sfx", 0, 100, sfx)
+	bgm = JsonStore.read_int(data, "bgm", 0, 100, bgm)
+	scroll = JsonStore.read_int(data, "scroll", 0, 100, scroll)
+	aiming = JsonStore.read_int(data, "aiming", 0, 1, aiming)
 	if data.get("background") is bool:
 		background = data.background
 	if data.get("items") is Array:
 		items = Items.sanitize(data.items)
 
 func save_options() -> bool:
-	var temporary := path + ".tmp"
-	var file := FileAccess.open(temporary, FileAccess.WRITE)
-	if file == null:
-		last_save_ok = false
-		return false
-	file.store_string(JSON.stringify({"version": 1, "sfx": sfx, "bgm": bgm, "scroll": scroll, "aiming": aiming, "background": background, "items": items}, "\t"))
-	file.close()
-	last_save_ok = DirAccess.rename_absolute(ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(path)) == OK
+	last_save_ok = JsonStore.write_atomic(path, {"version": 1, "sfx": sfx, "bgm": bgm, "scroll": scroll, "aiming": aiming, "background": background, "items": items})
 	return last_save_ok

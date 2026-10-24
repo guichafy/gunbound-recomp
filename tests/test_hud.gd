@@ -1,19 +1,8 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## REQ-27..30: original OpenBound battle HUD (layout, buttons, strength bar,
 ## keyboard, crosshair, compass, timer, Delayboard, life bar, damage counter) and
 ## REQ-31 PopupGameOptions (SFX, scroll speed, background, pause access).
 
-var failures := 0
-var checks := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 func key(scene, code: int, pressed: bool) -> void:
 	var event := InputEventKey.new()
@@ -74,28 +63,28 @@ func run() -> void:
 
 	# Tab cycles S1, S2 and SS, and skips SS after it has been fired.
 	key(scene, KEY_TAB, true)
-	check(scene.weapon == 1 and scene.weapon_buttons[1].get_meta("activated"), "Tab selects S2")
+	check(scene.aim.weapon == 1 and scene.weapon_buttons[1].get_meta("activated"), "Tab selects S2")
 	key(scene, KEY_TAB, true)
-	check(scene.weapon == 2, "Tab reaches SS on the first turn")
+	check(scene.aim.weapon == 2, "Tab reaches SS on the first turn")
 	scene.model.actors[0].ss_lock = 4
 	scene.select_weapon(0)
 	scene.update_hud()
 	key(scene, KEY_TAB, true)
 	key(scene, KEY_TAB, true)
-	check(scene.weapon == 0 and scene.weapon_buttons[2].disabled, "Tab skips SS while its lock is active")
+	check(scene.aim.weapon == 0 and scene.weapon_buttons[2].disabled, "Tab skips SS while its lock is active")
 	scene.select_weapon(0)
 
 	# REQ-28 strength bar: starts empty, +2 every 0.04 s, release fires once.
-	check(scene.power == 0.0, "Strength bar starts the player turn empty")
+	check(scene.aim.power == 0.0, "Strength bar starts the player turn empty")
 	key(scene, KEY_SPACE, true)
 	scene._process(0.1)
 	scene._process(0.1)
-	check(scene.charging and is_equal_approx(scene.power, 10.0), "0.2 s of charge = 5 steps of 2")
+	check(scene.aim.charging and is_equal_approx(scene.aim.power, 10.0), "0.2 s of charge = 5 steps of 2")
 	hud.set_selector_from_screen(HudArt.bar_point(Vector2(100, 17)).x)
-	check(is_equal_approx(hud.selector_x, 100.0) and is_equal_approx(scene.power, 10.0), "Dragging the selector marks the bar without changing power")
+	check(is_equal_approx(hud.selector_x, 100.0) and is_equal_approx(scene.aim.power, 10.0), "Dragging the selector marks the bar without changing power")
 	hud.set_selector_from_screen(5000.0)
 	check(hud.selector_x == 240.0, "Selector is clamped to the bar like the original")
-	var expected_angle: int = hud.hud_angle(scene.model, scene.angle, scene.weapon)
+	var expected_angle: int = hud.hud_angle(scene.model, scene.aim.angle, scene.aim.weapon)
 	key(scene, KEY_SPACE, false)
 	check(scene.model.phase == "flight", "Releasing Space fires")
 	check(is_equal_approx(hud.previous_power, 10.0) and hud.previous_angle == expected_angle, "Previous shot marker and LAST angle record the shot")
@@ -111,42 +100,42 @@ func run() -> void:
 	key(scene, KEY_SPACE, true)
 	scene._process(0.1)
 	scene.show_pause()
-	check(not scene.charging and scene.model.phase == "aim", "Pause cancels the charge without firing")
+	check(not scene.aim.charging and scene.model.phase == "aim", "Pause cancels the charge without firing")
 	scene.close_overlay()
 
 	# REQ-29 crosshair keys: one whole degree per press, accelerating repeat.
-	scene.angle = 30.0
+	scene.aim.angle = 30.0
 	var up := InputEventKey.new()
 	up.physical_keycode = KEY_UP
 	up.pressed = true
 	Input.parse_input_event(up)
 	Input.flush_buffered_events()
 	scene.update_aim_keys(0.01)
-	check(scene.angle == 31.0, "Pressing ↑ changes the aim by exactly one degree")
+	check(scene.aim.angle == 31.0, "Pressing ↑ changes the aim by exactly one degree")
 	scene.update_aim_keys(0.1)
-	check(scene.angle == 31.0, "No repeat before 0.15 s")
+	check(scene.aim.angle == 31.0, "No repeat before 0.15 s")
 	var steps := 0
 	for frame in range(40):
-		var previous: float = scene.angle
+		var previous: float = scene.aim.angle
 		scene.update_aim_keys(0.02)
-		if scene.angle != previous:
+		if scene.aim.angle != previous:
 			steps += 1
-	check(steps >= 6 and scene.aim_limit < 0.15 and fmod(scene.angle, 1.0) == 0.0, "Holding ↑ repeats faster in whole degrees")
+	check(steps >= 6 and scene.aim.aim_limit < 0.15 and fmod(scene.aim.angle, 1.0) == 0.0, "Holding ↑ repeats faster in whole degrees")
 	up.pressed = false
 	Input.parse_input_event(up)
 	Input.flush_buffered_events()
 	scene.update_aim_keys(0.01)
-	check(scene.aim_direction == 0, "Releasing ↑ stops the repeat")
-	var limits: Vector2 = scene.model.aim_limits(0, scene.weapon)
-	scene.angle = limits.y
+	check(scene.aim.aim_direction == 0, "Releasing ↑ stops the repeat")
+	var limits: Vector2 = scene.model.aim_limits(0, scene.aim.weapon)
+	scene.aim.angle = limits.y
 	scene.step_angle(1)
-	check(scene.angle == limits.y, "Aim stays inside the legal range")
+	check(scene.aim.angle == limits.y, "Aim stays inside the legal range")
 	check(hud.crosshair_name(scene.model, 0, 1) == "CrosshairBigfootS2Ally.png" and hud.crosshair_name(scene.model, 1, 0) == "CrosshairMageS1Enemy.png", "Crosshair range sprite per mobile, shot and side (CPU is the other mobile)")
 	scene.model.events.append({"type": "turn", "actor": 0})
 	scene.consume_events()
 	check(hud.crosshair_age == 0.0, "Each player turn replays the crosshair intro")
-	var direction: Vector2 = scene.model.shot_velocity(0, scene.angle, 100.0, scene.weapon).normalized()
-	check(hud.hud_angle(scene.model, scene.angle, scene.weapon) == roundi(rad_to_deg(atan2(-direction.y, absf(direction.x)))), "HUD angle is the real shot direction over the horizon")
+	var direction: Vector2 = scene.model.shot_velocity(0, scene.aim.angle, 100.0, scene.aim.weapon).normalized()
+	check(hud.hud_angle(scene.model, scene.aim.angle, scene.aim.weapon) == roundi(rad_to_deg(atan2(-direction.y, absf(direction.x)))), "HUD angle is the real shot direction over the horizon")
 
 	# F8 passes the turn.
 	player_turn(scene)
@@ -161,9 +150,9 @@ func run() -> void:
 	key(scene, KEY_SPACE, true)
 	scene._process(0.1)
 	scene.options_button.pressed.emit()
-	var popup = scene.options_popup
-	check(scene.overlay_kind == "options" and popup != null and scene.paused, "Options opens the original options popup and pauses the training")
-	check(not scene.charging and scene.model.phase == "aim", "Opening the options cancels the charge without firing")
+	var popup = scene.overlays.options_popup
+	check(scene.overlays.kind == "options" and popup != null and scene.paused, "Options opens the original options popup and pauses the training")
+	check(not scene.aim.charging and scene.model.phase == "aim", "Opening the options cancels the charge without firing")
 	check(scene.options_button.disabled, "Options stays disabled while its popup is open (HUD.cs)")
 	check(popup.size.is_equal_approx(Vector2(323, 328) * 1.6) and (popup.position + popup.size * 0.5).distance_to(Vector2(640, 400)) <= 0.6, "Popup background 323×328 × 1.6 centred on the screen")
 	for name in popup.textures:
@@ -209,12 +198,12 @@ func run() -> void:
 	popup.pointer_up()
 	check(popup.position.x == roundf(1280.0 - popup.size.x) and popup.position.y == 0.0 and popup.position.x + popup.size.x <= 1280.0, "The dragged popup stays on the screen")
 	key(scene, KEY_ESCAPE, true)
-	check(scene.overlay == null and not scene.paused and not scene.options_button.disabled, "ESC accepts and closes the popup, re-enabling Options")
+	check(scene.overlays.layer == null and not scene.paused and not scene.options_button.disabled, "ESC accepts and closes the popup, re-enabling Options")
 	var saved = load("res://scripts/options.gd").new(options_file)
 	saved.load_options()
 	check(saved.sfx == 50 and saved.bgm == 50 and saved.scroll == 100 and not saved.background, "Accept saves the options next to the profile")
 	# Scroll speed scales the manual camera drag; 50 keeps the original 1×.
-	scene.camera = Vector2(100, 100)
+	scene.rig.position = Vector2(100, 100)
 	var press := InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_LEFT
 	press.pressed = true
@@ -224,42 +213,42 @@ func run() -> void:
 	motion.button_mask = MOUSE_BUTTON_MASK_LEFT
 	motion.relative = Vector2(-10, -5)
 	scene._unhandled_input(motion)
-	check(scene.camera.is_equal_approx(Vector2(120, 110)), "Scroll speed 100 moves the camera twice the drag")
+	check(scene.rig.position.is_equal_approx(Vector2(120, 110)), "Scroll speed 100 moves the camera twice the drag")
 	scene.options.scroll = 50
 	scene._unhandled_input(motion)
-	check(scene.camera.is_equal_approx(Vector2(130, 115)), "Scroll speed 50 keeps the 1:1 drag")
+	check(scene.rig.position.is_equal_approx(Vector2(130, 115)), "Scroll speed 50 keeps the 1:1 drag")
 	press.pressed = false
 	scene._unhandled_input(press)
 	# The pause stays reachable: P from the match, P or "PAUSA" from the popup.
 	key(scene, KEY_ESCAPE, true)
-	check(scene.overlay_kind == "options", "ESC opens the options popup")
-	scene.options_popup.set_slider_from_local("sfx", scene.options_popup.slider_rect("sfx").position.x)
+	check(scene.overlays.kind == "options", "ESC opens the options popup")
+	scene.overlays.options_popup.set_slider_from_local("sfx", scene.overlays.options_popup.slider_rect("sfx").position.x)
 	key(scene, KEY_P, true)
-	check(scene.overlay_kind == "pause" and not scene.options_button.disabled, "P opens the pause from the popup")
+	check(scene.overlays.kind == "pause" and not scene.options_button.disabled, "P opens the pause from the popup")
 	saved.load_options()
 	check(saved.sfx == 0, "Leaving the popup for the pause keeps its values like Accept")
 	key(scene, KEY_ESCAPE, true)
-	check(scene.overlay == null, "ESC closes the pause")
+	check(scene.overlays.layer == null, "ESC closes the pause")
 	key(scene, KEY_P, true)
-	check(scene.overlay_kind == "pause", "P opens the pause during the match")
+	check(scene.overlays.kind == "pause", "P opens the pause during the match")
 	scene.close_overlay()
 	scene.show_options()
 	var pause_button: Button = null
-	for child in scene.options_popup.get_children():
+	for child in scene.overlays.options_popup.get_children():
 		if child is Button and child.text == "PAUSA":
 			pause_button = child
-	check(pause_button != null and Rect2(Vector2.ZERO, scene.options_popup.size).encloses(Rect2(pause_button.position, pause_button.size)), "Discreet PAUSA extra sits inside the popup")
+	check(pause_button != null and Rect2(Vector2.ZERO, scene.overlays.options_popup.size).encloses(Rect2(pause_button.position, pause_button.size)), "Discreet PAUSA extra sits inside the popup")
 	pause_button.pressed.emit()
-	check(scene.overlay_kind == "pause", "PAUSA opens the pause menu")
+	check(scene.overlays.kind == "pause", "PAUSA opens the pause menu")
 	scene.close_overlay()
 	# Real mouse clicks routed by the viewport reach the slider and Accept.
 	scene.show_options()
-	var sfx_point: Vector2 = scene.options_popup.global_position + scene.options_popup.slider_rect("sfx").get_center()
+	var sfx_point: Vector2 = scene.overlays.options_popup.global_position + scene.overlays.options_popup.slider_rect("sfx").get_center()
 	click(sfx_point + Vector2(40, 0))
 	check(scene.options.sfx > 50 and scene.options.sfx < 80, "A real click on the SFX bar sets the volume (%d)" % scene.options.sfx)
-	var accept_point: Vector2 = scene.options_popup.accept_button.global_position + scene.options_popup.accept_button.size * 0.5
+	var accept_point: Vector2 = scene.overlays.options_popup.accept_button.global_position + scene.overlays.options_popup.accept_button.size * 0.5
 	click(accept_point)
-	check(scene.overlay == null, "A real click on Accept closes the popup")
+	check(scene.overlays.layer == null, "A real click on Accept closes the popup")
 	scene.options.sfx = 100
 	scene.options.background = true
 	scene.apply_options()
@@ -341,6 +330,6 @@ func run() -> void:
 	scene.update_hud()
 	check(scene.displayed_queue().size() == 2, "Delayboard lists both players")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/hud-test-profile.json"))
-	print("HUD CHECKS: ", checks, " | FAILURES: ", failures)
+	report("HUD CHECKS")
 	scene.queue_free()
-	quit(1 if failures > 0 else 0)
+	quit(exit_code())

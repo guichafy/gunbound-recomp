@@ -1,5 +1,22 @@
 # Entregas e próximos trabalhos
 
+## Revisão de qualidade 0.18.6 (ADR-081)
+
+- [x] Análise SPEC × código e plano P1–P4 com portões (QUALITY_REVIEW.md).
+- [x] Golden master local de 26 partidas e parse de todos os scripts/capturas.
+- [x] P1: versão única, teste instável (seed 28), `Combat.predict` removido,
+      atributos nomeados, custo de delay original, literais e código morto.
+- [x] P2: `mobile_looks.gd`, Template Method nos sprites, `SpritePose`,
+      efeitos de item por dados, `JsonStore`, ordem de turno única,
+      duplicações menores, base das suítes e `check.sh` com parse e timeout.
+- [x] P3: clima/Gold/CPU fora do Match (fachada mantida), fases nomeadas,
+      cena sem proxies, overlay dono do estado, menu e turno da CPU extraídos.
+- [x] P4: índice vivo REQ-01..44, DESIGN/AGENTS/README/HANDOFF atualizados.
+- [x] Reaplicado sobre a `main` 0.18.5 com golden/seeds/capturas iguais.
+- [ ] Tipagem completa de ator/projétil (adiada; motivos no plano).
+- [ ] Aura UsingItem do Nak (sem arte original; aguarda HD/decisão do usuário).
+- [ ] Usuário validar o app 0.18.6 (não reexportado nesta entrega).
+
 ## Saldo de teste0.18.5 (REQ-38, ADR-080)
 
 - [x] Definir999.999.999 Gold/Cash no perfil padrão e concessão única na carteira existente válida.

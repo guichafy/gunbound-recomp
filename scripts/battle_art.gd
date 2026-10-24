@@ -3,8 +3,10 @@ extends RefCounted
 
 const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 
-const USING_ITEM_TIME := 20.0 / 19.0
+const MobileLooks = preload("res://scripts/mobile_looks.gd")
+const USING_ITEM_TIME := MobileLooks.USING_ITEM_TIME
 var motion: Array = []
 
 func reset(actors: Array) -> void:
@@ -13,40 +15,36 @@ func reset(actors: Array) -> void:
 		var spec: Dictionary = Mobiles.definition(actor.vehicle)
 		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "hurt_pose": "hurt", "hurt_flip": false, "shock": 0.0, "falling": 0.0, "unable": 0.0, "using": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
 
+## Starts `pose` now and arms its timer (`timer` field of the motion state).
+func start_pose(index: int, pose: String, timer: String, duration: float) -> void:
+	motion[index][timer] = duration
+	motion[index].pose = pose
+	motion[index].pose_age = 0.0
+
 func react(event: Dictionary) -> void:
 	# A Dual second volley replays the shooting animation (OnStartInteracting).
 	if event.type in ["fire", "volley"]:
-		motion[event.actor].recoil = 1.16
-		motion[event.actor].pose = "recoil"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "recoil", "recoil", MobileLooks.RECOIL_TIME)
 	elif event.type == "item":
 		# Mobile.UseItem: ActorFlipbookState.UsingItem, 20 frames at 19 fps.
-		motion[event.actor].using = USING_ITEM_TIME
-		motion[event.actor].pose = "using_item"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "using_item", "using", USING_ITEM_TIME)
 	elif event.type == "teleport":
 		# ForceChangePosition: the mobile appears at the beacon, no slide.
 		motion[event.actor].pos = Vector2(event.to)
 		motion[event.actor].previous = Vector2(event.to)
 	elif event.type in ["damage", "shield_damage"]:
 		if str(event.get("kind", "")) == "shock":
-			motion[event.actor].shock = 1.0
-			motion[event.actor].pose = "shock"
+			start_pose(event.actor, "shock", "shock", 1.0)
 		else:
+			# Two hurt animations alternate (MobileFlipbook second damage).
 			var alternate: bool = bool(motion[event.actor].hurt_flip)
 			motion[event.actor].hurt_flip = not alternate
 			motion[event.actor].hurt_pose = "hurt_2" if alternate else "hurt"
-			motion[event.actor].hurt = float(motion[event.actor].hurt_time)
-			motion[event.actor].pose = str(motion[event.actor].hurt_pose)
-		motion[event.actor].pose_age = 0.0
+			start_pose(event.actor, str(motion[event.actor].hurt_pose), "hurt", float(motion[event.actor].hurt_time))
 	elif event.type == "fall":
-		motion[event.actor].falling = 1.0
-		motion[event.actor].pose = "falling"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "falling", "falling", 1.0)
 	elif event.type == "blocked":
-		motion[event.actor].unable = 1.0
-		motion[event.actor].pose = "unable"
-		motion[event.actor].pose_age = 0.0
+		start_pose(event.actor, "unable", "unable", 1.0)
 
 func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0, cpu_charging: bool = false, cpu_weapon: int = 0) -> void:
 	for index in range(motion.size()):
@@ -96,17 +94,20 @@ func state_name(model, index: int, charging: bool, cpu_charging: bool = false) -
 	return "idle"
 
 func selected_weapon(model, index: int, ctx: Dictionary) -> int:
-	var pose := state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging))
-	var weapon: int = int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
+	return weapon_for_pose(model, index, ctx, state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)))
+
+## Weapon an actor shows: its selection, or during the recoil the shot it fired
+## (last_shots), so a short turn cannot swap the SS recoil for S1.
+func weapon_for_pose(model, index: int, ctx: Dictionary, pose: String) -> int:
 	if pose == "recoil":
-		weapon = int(model.last_shots[index].get("weapon", 0))
-	return weapon
+		return int(model.last_shots[index].get("weapon", 0))
+	return int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
 
 func atlas_frame(model, index: int, ctx: Dictionary) -> int:
 	var actor: Dictionary = model.actors[index]
 	var state: Dictionary = motion[index]
 	var weapon := selected_weapon(model, index, ctx)
-	return ctx.atlas.frame_index(state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)), float(state.pose_age), weapon, actor.hp <= actor.max_hp * 0.3)
+	return ctx.atlas.frame_index(state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)), float(state.pose_age), weapon, Mobiles.low_health(actor))
 
 func presentation(index: int, rig, clock: float, weapon: int) -> Dictionary:
 	# A separate history per actor; interrupted transitions start at the last
@@ -153,34 +154,12 @@ func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionar
 	var alpha := clampf(1.0 - dead / death_duration, 0.0, 1.0) if actor.hp <= 0 else 1.0
 	var color := Color(1, 0.65, 0.6, alpha) if state.hurt > 0.0 and int(time * 24.0) % 2 == 0 else Color(1, 1, 1, alpha)
 	var atlas = ctx.atlas
-	var weapon: int = int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
-	if state.pose == "recoil":
-		weapon = int(model.last_shots[index].get("weapon", 0))
+	var weapon := weapon_for_pose(model, index, ctx, state.pose)
 	var avatar_context: Dictionary = ctx.get("avatar_context",{}).duplicate()
 	avatar_context.rig_state = presentation(index,atlas.hd_rig,time,weapon)
-	atlas.draw(view, pos + offset, 60.0, actor.facing, rotation, atlas_frame(model, index, ctx), color, state.pose, state.pose_age, weapon, actor.hp <= actor.max_hp * 0.3, state.wheel_phase, avatar_context)
-	if bool(Mobiles.definition(int(actor.vehicle)).smoke) and int(actor.hp) > 0 and float(actor.hp) <= float(actor.max_hp) * 0.3:
+	atlas.draw(view, SpritePose.new(pos + offset, 60.0, actor.facing, {"rotation": rotation, "frame": atlas_frame(model, index, ctx),
+		"color": color, "pose": state.pose, "age": state.pose_age, "weapon": weapon, "low_health": Mobiles.low_health(actor),
+		"wheel_phase": state.wheel_phase, "avatar_context": avatar_context}))
+	if bool(Mobiles.definition(int(actor.vehicle)).smoke) and int(actor.hp) > 0 and Mobiles.low_health(actor):
 		var puff := fposmod(time, 0.8) / 0.8
 		view.draw_circle(pos + offset + Vector2(8.0 * float(actor.facing), -20.0 - puff * 18.0), 2.5 + puff * 3.5, Color(0.78, 0.78, 0.8, (1.0 - puff) * 0.4))
-
-func draw_explosion(view: Node2D, effect: Dictionary) -> void:
-	var age: float = effect.age
-	var pos: Vector2 = effect.pos
-	var radius: float = effect.radius
-	var flash := maxf(0.0, 1.0 - age / 0.32)
-	view.draw_circle(pos, radius * (0.3 + age * 2.0), Color(1, 0.55, 0.16, flash * 0.48))
-	view.draw_circle(pos, radius * 0.45 * flash, Color(1, 0.97, 0.78, flash))
-	view.draw_arc(pos, radius * (0.3 + age * 1.8), 0, TAU, 48, Color(1, 0.85, 0.45, flash), maxf(1, flash * 5), true)
-	for i in range(18):
-		var direction := Vector2.from_angle(PI + float(i) * PI / 17.0)
-		var speed := radius * (1.1 + float(i % 4) * 0.25)
-		var point := pos + direction * speed * age + Vector2(0, age * age * 150.0)
-		var opacity := maxf(0.0, 1.0 - age / 1.2)
-		var color := Color(Color("c49863") if i % 3 else Color("e7d497"), opacity)
-		view.draw_set_transform(point, age * (i + 1))
-		view.draw_rect(Rect2(-3, -3, 6, 4), color)
-	view.draw_set_transform(Vector2.ZERO)
-	for i in range(6):
-		var point := pos + Vector2((i - 2.5) * 11.0, -age * (38 + i * 5))
-		var opacity := maxf(0.0, 1.0 - age / 1.5) * 0.28
-		view.draw_circle(point, 8 + age * (15 + i), Color(0.2, 0.22, 0.26, opacity))

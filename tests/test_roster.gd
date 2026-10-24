@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var Match = load("res://scripts/match.gd")
 	var model = Match.new()
@@ -33,12 +24,12 @@ func run() -> void:
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
-	check(view.vehicle_buttons.size() == 3, "Menu displays Mage, Bigfoot and Nak")
-	for button in view.vehicle_buttons:
+	check(view.menu.vehicle_buttons.size() == 3, "Menu displays Mage, Bigfoot and Nak")
+	for button in view.menu.vehicle_buttons:
 		check(button.position.x + button.size.x <= 392.0, "Vehicle button %s fits the menu card" % button.text)
 	for id in [1, 2, 3]:
 		view.show_menu()
-		for button in view.vehicle_buttons:
+		for button in view.menu.vehicle_buttons:
 			if button.text == {1: "Mage", 2: "Bigfoot", 3: "Nak"}[id]:
 				button.pressed.emit()
 		check(view.vehicle == id, "Button slot dispatches stable mobile ID")
@@ -47,16 +38,30 @@ func run() -> void:
 		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == opponents[id], "Menu selection starts the correct duel")
 	view.show_menu()
 	# Difficulty and weapons have three slots even though the roster has two.
-	var card = view.vehicle_buttons[0].get_parent()
+	var card = view.menu.vehicle_buttons[0].get_parent()
 	for label in ["Leve", "Normal", "Precisa"]:
 		for child in card.get_children():
 			if child is Button and child.text == label:
 				child.pressed.emit()
 		check(view.cpu_difficulty == ["Leve", "Normal", "Precisa"].find(label), "Difficulty slots stay independent of roster")
-	if view.vehicle_buttons.size() == 3:
+	if view.menu.vehicle_buttons.size() == 3:
 		view.select_vehicle(0)
 		check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
 	var Rig = load("res://scripts/mobile_rig.gd")
+	# Presentation catalog (ADR-081): one look per playable mobile, no id branches.
+	var Looks = load("res://scripts/mobile_looks.gd")
+	var Mobiles = load("res://scripts/mobiles.gd")
+	var looks_ok := true
+	for vehicle_id in Mobiles.PLAYABLE:
+		var look: Dictionary = Looks.look(vehicle_id)
+		looks_ok = looks_ok and not look.is_empty() and ResourceLoader.exists(look.sprite) and view.sprite_for(vehicle_id) != null
+		looks_ok = looks_ok and Looks.id_of(look.kind) == vehicle_id
+	check(looks_ok and Looks.ids().size() == Mobiles.PLAYABLE.size(), "Every playable mobile has one presentation look and sprite")
+	for kind in ["bigfoot", "mage"]:
+		var rig = Rig.new(kind)
+		var death := float(Mobiles.definition(Looks.id_of(kind)).death)
+		check(rig.available() and rig.sample("destroyed", death, 0).alpha == 0.0 and rig.sample("destroyed", death * 0.5, 0).alpha > 0.0, kind + " HD death fades over the catalog death time")
+	check(not Rig.new("nak").available() and Looks.using_aura("nak").is_empty(), "Nak keeps the original atlas and has no UsingItem aura")
 	for kind in ["bigfoot", "mage"]:
 		var rig = Rig.new(kind)
 		check(rig.pilot.texture.resource_path.ends_with("pilot_side.png"), "Both mobiles use the occluded side-view master")
@@ -64,5 +69,4 @@ func run() -> void:
 	view.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/roster-test-profile.json"))
-	print("ROSTER/SIDE PILOT CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("ROSTER/SIDE PILOT CHECKS")

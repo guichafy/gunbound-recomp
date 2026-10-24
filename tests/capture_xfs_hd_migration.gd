@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Gallery extends Node2D:
 	var entries: Array=[]
 	var native_textures: Dictionary={}
@@ -42,7 +43,7 @@ class Gallery extends Node2D:
 			art.draw(self,gear,transform,age,Color.WHITE)
 			var sprite=sprites[sample_mode%2]
 			var facing:=1 if sample_mode<2 else -1
-			sprite.draw(self,origin+Vector2(379,75),82,facing,deg_to_rad(10*facing),0,Color.WHITE,"idle",age,0,false,0,{"equipment":gear,"age":age})
+			sprite.draw(self,SpritePose.new(origin+Vector2(379,75),82,facing,{"rotation":deg_to_rad(10*facing),"age":age,"avatar_context":{"equipment":gear,"age":age}}))
 			draw_string(font,origin+Vector2(5,130),"Fonte   |   HD   |   Vestido   |   Mobile",HORIZONTAL_ALIGNMENT_LEFT,-1,9,Color("a7d1e3"))
 func _initialize() -> void:
 	call_deferred("run")

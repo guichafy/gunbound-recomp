@@ -6,7 +6,8 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.18.2 em Godot 4.7.2 + GDScript, identidade "Gunbound Recomp"
+Protótipo 0.18.6 em Godot 4.7.2 + GDScript (versão única em
+`application/config/version` do `project.godot`), identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
 desktop macOS, treino offline 1×1 contra CPU, Bigfoot/Mage com derivados HD e Nak
@@ -23,7 +24,7 @@ não veta essa nova solicitação. Ver `docs/sdd/ORIGINAL_ASSETS.md`: pacote ext
 recebido e validado em `.tools/source-assets/content/`, 813 arquivos. Bigfoot já
 integrado visualmente com piloto/quadros/projéteis em `assets/openbound/bigfoot/`.
 Mage substitui Carapaça com escudo/regen, mira própria, duplo laser helicoidal e
-EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com4 bombas, T2 duas rajadas de3 e SS com8, com lançamentos
+EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com 4 bombas, T2 duas rajadas de 3 e SS com 8, com lançamentos
 temporizados, dados/Fx/áudio originais e adaptações descritas em
 `docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Itens entraram em 0.13 (ver seção abaixo);
 demais mobiles continuam pendentes. A paridade de Mage e Bigfoot com o C#
@@ -185,8 +186,8 @@ Teste test_aiming.gd.
 
 ## Arquitetura SOLID — estado atual
 
-ADR-057. `match.gd` decide turno, dano e resultado. Catálogo em `mobiles.gd`
-(IDs 1 e 2). Previsão só pelos campos de `flight_snapshot.gd`. Dano em
+ADR-057. `match.gd` decide turno, dano e resultado. Catálogo de regras em
+`mobiles.gd` (IDs 1, 2 e 3); apresentação por mobile em `mobile_looks.gd`. Previsão só pelos campos de `flight_snapshot.gd`. Dano em
 `damage.gd`, agenda em `turn_table.gd`. Cena delega a `aim_control.gd`,
 `camera_rig.gd` e `match_overlay.gd`. Papéis `Match.PLAYER` e `Match.CPU`.
 `battle_art` não lê campos da cena: recebe o contexto de `actor_context`.
@@ -298,4 +299,23 @@ hand-off). Balística e dano originais em ponto fixo não foram portados.
 fica parado durante a busca (`Match.cpu_thinking`); a fila do HUD vem de
 `TurnTable.current_order`. Queda: deriva `wind.x / 45` por passo de gravidade
 (3 px, +0,15), ADR-077.
+
+## Revisão de qualidade 0.18.6 — estado atual
+
+Ler QUALITY_REVIEW.md (ADR-081). Sem mudança de regra: golden master local de
+26 partidas (eventos + campos do ator) idêntico à `main` 0.18.5, além das
+seeds 81–93. Pontos de extensão: `mobile_looks.gd` (sprite, layout HD do rig,
+estilo do projétil HD, aura UsingItem e relógios de pose por mobile; Nak declara
+"sem aura"), `sprite_pose.gd` (parâmetros de `MobileSprite.draw`/`MobileRig.draw`),
+`delay_units.gd` (única conversão ÷7,5; catálogos guardam o custo original em
+`cost`), `item_effects.gd` (efeitos por tipo "effect"/"shot" de `items.gd`),
+`weather_contact.gd`, `gold_tracker.gd`, `cpu_planner.gd` atrás da fachada do
+Match, `json_store.gd`, `Attributes.ATTACK..POPULARITY` no lugar dos índices,
+`TurnTable.order` como regra única de ordem. Cena: `scene.aim.*`/`scene.rig.*`
+(sem proxies), `scene.cpu` (`cpu_turn.gd`), `scene.menu` (`menu_screen.gd`),
+`scene.overlays.kind/layer/options_popup` (sinais opened/closed). Suítes herdam
+`tests/support/suite.gd`; `check.sh` compila todos os scripts e capturas e
+limita cada suíte (`SUITE_TIMEOUT`). Atores/projéteis seguem Dictionary (motivo
+no plano), com fábricas em `actor_state.gd`/`shell_state.gd`. Fases são
+`Match.PHASE_*` (strings).
 

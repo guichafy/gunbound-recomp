@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Preview extends Node2D:
 	var sprites: Array = []
 	var animation = load("res://scripts/battle_art.gd").new()
@@ -22,7 +23,7 @@ class Preview extends Node2D:
 				animation.motion[index].pose_age = pose_age
 				var state: Dictionary = animation.presentation(index,sprite.hd_rig,clock,2)
 				var facing := 1 if col == 0 else -1
-				sprite.draw(self,pos,180,facing,0,0,Color.WHITE,pose,pose_age,2,false,clock*3.0,{"equipment":sets[row],"age":clock,"rig_state":state})
+				sprite.draw(self,SpritePose.new(pos,180,facing,{"pose":pose,"age":float(pose_age),"weapon":2,"wheel_phase":clock*3.0,"avatar_context":{"equipment":sets[row],"age":clock,"rig_state":state}}))
 				var breathing := Transform2D(sin(clock*TAU*1.5)*0.014,Vector2.ZERO)
 				sprite.hd_rig.avatars.draw(self,sets[row],Transform2D(0,Vector2(-2,2),0,pos+Vector2(-245,-30))*breathing,clock,Color.WHITE)
 				draw_string(font,pos+Vector2(-100,90),["Mage","Bigfoot"][col],HORIZONTAL_ALIGNMENT_LEFT,-1,22,Color.WHITE)

@@ -84,7 +84,7 @@ func press(host, slot: int) -> void:
 		return
 	var model = host.model
 	var items: Array = model.actors[Match.PLAYER].items
-	if slot >= items.size() or model.phase == "finished" or bool(items[slot].used) or blocked(host):
+	if slot >= items.size() or model.phase == Match.PHASE_FINISHED or bool(items[slot].used) or blocked(host):
 		return
 	if host.player_can_act():
 		if host.use_item(slot):
@@ -126,7 +126,7 @@ func sync(host) -> void:
 	layout(host)
 	var items: Array = host.model.actors[Match.PLAYER].items
 	var locked := blocked(host)
-	var finished: bool = host.model.phase == "finished"
+	var finished: bool = host.model.phase == Match.PHASE_FINISHED
 	# A match restarted without this loadout leaves extra buttons: hide them.
 	for slot in range(items.size(), buttons.size()):
 		buttons[slot].visible = false

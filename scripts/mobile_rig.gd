@@ -3,6 +3,12 @@ extends RefCounted
 const AvatarArt = preload("res://scripts/avatar_art.gd")
 var avatars = AvatarArt.new()
 const Sheet = preload("res://scripts/hd_sheet.gd")
+const MobileLooks = preload("res://scripts/mobile_looks.gd")
+const Mobiles = preload("res://scripts/mobiles.gd")
+# Geometry for a mobile without approved HD parts: sample() still feeds the
+# pose blend, but draw() falls back to the original atlas.
+const NO_LAYOUT := {"row": -1, "parts": 0, "hull": 60.0, "seat": Vector2.ZERO, "body_size": Vector2.ZERO,
+	"body_top": 0.0, "gun_pivot": Vector2.ZERO, "gun_rect": Rect2(), "tip": Vector2.ZERO, "wheels": false}
 var kind: String
 var sheet
 var pilot
@@ -19,20 +25,24 @@ func register_avatar(native_origin: Vector2, contact_offset: float, native_hull:
 	avatar_registered = true
 func avatar_transform(state: Dictionary) -> Transform2D:
 	return Transform2D(state.body_angle,state.body_offset) * avatar_mount * Transform2D(state.pilot_angle,Vector2.ZERO)
-## Only Bigfoot and Mage have approved HD parts; other mobiles keep their original atlas.
-const HD_KINDS := ["bigfoot", "mage"]
+## HD layout of this mobile (MobileLooks); empty when it has no approved HD parts.
+func layout() -> Dictionary:
+	return MobileLooks.rig_layout(kind)
 func available() -> bool:
-	if kind not in HD_KINDS:
+	var parts := layout()
+	if parts.is_empty():
 		return false
 	if not sheet.available() or not sheet.catalog_valid or not pilot.available() or not pilot.catalog_valid:
 		return false
-	var row := 0 if kind == "bigfoot" else 1
-	for column in range(3 if kind == "bigfoot" else 2):
-		if not sheet.region(row, column).has_area():
+	for column in range(int(parts.parts)):
+		if not sheet.region(int(parts.row), column).has_area():
 			return false
 	return pilot.region(0, 0).has_area()
 func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Dictionary:
 	age = maxf(0.0, age)
+	var parts := layout()
+	if parts.is_empty():
+		parts = NO_LAYOUT
 	if pose == "using_item":
 		pose = "using"
 	elif pose.begins_with("charging") or pose.begins_with("recoil"):
@@ -51,7 +61,7 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 		barrel = sin(age * TAU * 2.0) * 0.025
 		glow = (1.0 - exp(-age * 8.0)) * (0.65 + sin(age * TAU * 2.0) * 0.15)
 	elif pose == "recoil":
-		var progress := clampf(age / 1.16, 0.0, 1.0)
+		var progress := clampf(age / MobileLooks.RECOIL_TIME, 0.0, 1.0)
 		var kick := sin(progress * PI) * exp(-progress * 3.0)
 		offset.x = kick * (9.0 if weapon == 2 else 6.0)
 		barrel = -kick * (0.65 if weapon == 2 else 0.45)
@@ -59,10 +69,10 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 	elif pose == "using":
 		# UsingItem lasts 20 frames at 19 fps. The green aura is a separate
 		# overlay; the body only lifts, it does not grow a charge glow.
-		var lift := sin(clampf(age / (20.0 / 19.0), 0.0, 1.0) * PI)
+		var lift := sin(clampf(age / MobileLooks.USING_ITEM_TIME, 0.0, 1.0) * PI)
 		offset.y = -lift * 3.0
 	elif pose == "hurt" or pose == "hurt_2":
-		var envelope := sin(clampf(age / 1.05, 0.0, 1.0) * PI)
+		var envelope := sin(clampf(age / float(Mobiles.definition(MobileLooks.id_of(kind)).hurt), 0.0, 1.0) * PI)
 		offset.x = sin(age * 40.0) * envelope * (2.2 if pose == "hurt_2" else 1.7)
 		angle = sin(age * 20.0) * envelope * (0.07 if pose == "hurt_2" else 0.04)
 	elif pose == "shock":
@@ -74,7 +84,7 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 	elif pose == "unable":
 		offset.x = sin(age * TAU * 6.0) * 0.8
 	elif pose == "destroyed":
-		var duration := 1.6 if kind == "mage" else 1.15
+		var duration := float(Mobiles.definition(MobileLooks.id_of(kind)).death)
 		var progress := clampf(age / duration, 0.0, 1.0)
 		offset.y = progress * progress * 14.0
 		angle = progress * 0.65
@@ -82,18 +92,18 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 	var region: Rect2 = pilot.region(0, 0)
 	# Native idle body+head union: 44px tall against the 49/46px hulls.
 	# One shared composition scale, rather than unrelated pilot/vehicle boxes.
-	var pilot_height := 44.0 * 60.0 / (49.0 if kind == "bigfoot" else 46.0)
+	var pilot_height := 44.0 * 60.0 / float(parts.hull)
 	var pilot_size := Vector2(pilot_height * region.size.x / maxf(region.size.y, 1.0), pilot_height)
 	var pilot_rect := Rect2(-pilot_size * Vector2(0.78, 0.88), pilot_size)
 	var pilot_sway := Vector2.ZERO
 	# Breathing follows an uninterrupted clock, independent of pose restarts.
 	var pilot_angle := sin((age if idle_age < 0.0 else idle_age) * TAU * 1.5) * 0.014
-	var seat := Vector2(17, -20) if kind == "bigfoot" else Vector2(18, -28)
-	var body_size := Vector2(60, 24) if kind == "bigfoot" else Vector2(60, 36)
+	var seat: Vector2 = parts.seat
+	var body_size: Vector2 = parts.body_size
 	return {"body_size": body_size,
-		"body_rect": Rect2(Vector2(-30, -31 if kind == "bigfoot" else -36), body_size),
-		"gun_pivot": Vector2(-17, -37) if kind == "bigfoot" else Vector2(-19, -34),
-		"gun_rect": Rect2(-13, -18, 25, 21) if kind == "bigfoot" else Rect2(-17, -23, 29, 23),
+		"body_rect": Rect2(Vector2(-30, float(parts.body_top)), body_size),
+		"gun_pivot": parts.gun_pivot,
+		"gun_rect": parts.gun_rect,
 		"wheel_radius": 12.0,
 		"pilot_size": pilot_size, "pilot_rect": pilot_rect, "pilot_sway": pilot_sway, "pilot_angle": pilot_angle,
 		"body_offset": offset, "body_angle": angle, "barrel_angle": barrel,
@@ -104,9 +114,20 @@ func piece(view: Node2D, atlas, row: int, column: int, transform: Transform2D, t
 	var source: Rect2 = atlas.region(row, column)
 	var fitted := source.size * minf(target.size.x / source.size.x, target.size.y / source.size.y)
 	view.draw_texture_rect_region(atlas.paint, Rect2(target.get_center() - fitted * 0.5, fitted), source, color)
-func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float, pose: String, age: float, weapon: int, low_health: bool, color: Color, wheel_phase: float = 0.0, avatar_context: Dictionary = {}) -> bool:
+## `request` is a SpritePose; false when this mobile has no HD parts.
+func draw(view: Node2D, request) -> bool:
 	if not available():
 		return false
+	var pos: Vector2 = request.pos
+	var width: float = request.width
+	var facing: int = request.facing
+	var rotation: float = request.rotation
+	var pose: String = request.pose
+	var age: float = request.age
+	var weapon: int = request.weapon
+	var color: Color = request.color
+	var wheel_phase: float = request.wheel_phase
+	var avatar_context: Dictionary = request.avatar_context
 	var state: Dictionary = avatar_context.get("rig_state",{})
 	if state.is_empty():
 		state = sample(pose,age,weapon,float(avatar_context.get("age",age)))
@@ -117,9 +138,10 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 	var support := world * Transform2D(0, Vector2(0, ground / scale))
 	var body := support * Transform2D(state.body_angle, state.body_offset)
 	var tint := Color(color, color.a * state.alpha)
-	if low_health:
+	if request.low_health:
 		tint *= Color(0.7, 0.7, 0.7)
-	var row := 0 if kind == "bigfoot" else 1
+	var parts := layout()
+	var row := int(parts.row)
 	var gun_pivot: Vector2 = state.gun_pivot
 	var gun := body * Transform2D(state.barrel_angle, gun_pivot)
 	# Entire seated anatomy rotates as one figure around the hips, no seam/stretch.
@@ -133,12 +155,12 @@ func draw(view: Node2D, pos: Vector2, width: float, facing: int, rotation: float
 		piece(view, pilot, 0, 0, body * Transform2D(state.pilot_angle, seat), state.pilot_rect, tint)
 	# Mounted weapon and near tires occlude the seated lower body naturally.
 	piece(view, sheet, row, 1, gun, state.gun_rect, tint)
-	if kind == "bigfoot":
+	if bool(parts.wheels):
 		var radius: float = state.wheel_radius
 		for x in [-18.0, 18.0]:
-			piece(view, sheet, 0, 2, support * Transform2D(-facing * wheel_phase, Vector2(x, -radius)), Rect2(-radius, -radius, radius * 2, radius * 2), tint)
+			piece(view, sheet, row, 2, support * Transform2D(-facing * wheel_phase, Vector2(x, -radius)), Rect2(-radius, -radius, radius * 2, radius * 2), tint)
 	view.draw_set_transform_matrix(gun)
-	var tip := Vector2(-12, -13) if kind == "bigfoot" else Vector2(-13, -15)
+	var tip: Vector2 = parts.tip
 	if state.glow > 0.001:
 		var aura := Color("66cfff") if weapon == 2 else Color("ffbd51")
 		view.draw_arc(tip, 7 + state.glow * 3, age * 3, age * 3 + TAU * 0.8, 24, Color(aura, tint.a * state.glow * 0.65), 1.2, true)

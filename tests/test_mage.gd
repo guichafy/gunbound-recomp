@@ -1,15 +1,7 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 
 const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
-var checks := 0
-var failures := 0
-
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
 
 func _initialize() -> void:
 	var model = Match.new()
@@ -19,7 +11,7 @@ func _initialize() -> void:
 	check(model.has_method("predict_shot"), "CPU predicts actual per-mobile shots")
 	check(ResourceLoader.exists("res://scripts/mage_sprite.gd"), "Mage sprite renderer exists")
 	if not model.has_method("weapon_rules") or not model.has_method("predict_shot"):
-		finish()
+		finish("MAGE CHECKS")
 		return
 	check(model.actors[1].hp == 730 and model.actors[1].shield == 220, "Mage starts with characterdata life and shield (ADR-076)")
 	# Bigfoot's actual 90-damage bomb exercises Mage shield absorption.
@@ -129,8 +121,4 @@ func _initialize() -> void:
 		check(atlas.frame_index("destroyed", 10, 0, false) == 203, "Mage death holds its last frame")
 		for weapon in [0, 1, 2]:
 			check(atlas.effect_frame(weapon, 100) < atlas.effect_capacity(weapon), "Effect indices stay inside actual texture")
-	finish()
-
-func finish() -> void:
-	print("MAGE CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("MAGE CHECKS")

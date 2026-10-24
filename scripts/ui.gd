@@ -68,15 +68,6 @@ func metal_box(color: Color = Color("284c72"), edge: Color = STEEL) -> StyleBoxT
 	metal_styles[key] = style
 	return style
 
-func metal_panel(parent: Node, position: Vector2, size: Vector2, color: Color = Color("284c72")) -> Panel:
-	var node := Panel.new()
-	node.position = position
-	node.size = size
-	node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	node.add_theme_stylebox_override("panel", metal_box(color))
-	parent.add_child(node)
-	return node
-
 func label(parent: Node, text: String, position: Vector2, size: Vector2, font_size: int = 18, color: Color = CREAM, strong: bool = false) -> Label:
 	var node := Label.new()
 	node.text = text

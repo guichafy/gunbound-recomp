@@ -1,4 +1,4 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## Battle rules parity (REQ-44, ADR-076): original rule when reverse engineering
 ## proves it, OpenBound C# otherwise. Evidence in docs/sdd/BATTLE_RULES_AUDIT.md.
 
@@ -6,14 +6,6 @@ const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 const Items = preload("res://scripts/items.gd")
-var checks := 0
-var failures := 0
-
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
 
 ## Ticks the live model until the shot is scheduled (or the match ends).
 func resolve(model) -> void:
@@ -179,5 +171,4 @@ func _initialize() -> void:
 	var beacon: Array = model.shot_shells(Match.PLAYER, 45.0, 60.0, 0)
 	check(beacon.size() == 1 and is_equal_approx(Vector2(beacon[0].velocity).length(), 60.0 * 100.0 / 10.0), "Beacon mass 10")
 
-	print("BATTLE RULES CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("BATTLE RULES CHECKS")

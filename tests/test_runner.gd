@@ -1,20 +1,11 @@
-extends SceneTree
-
-var failures: Array[String] = []
-var checks: int = 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures.append(description)
-		printerr("FAIL: ", description)
+extends "res://tests/support/suite.gd"
 
 func _initialize() -> void:
 	var paths := ["res://scripts/terrain.gd", "res://scripts/combat.gd", "res://scripts/match.gd"]
 	for path in paths:
 		check(ResourceLoader.exists(path), "Required gameplay model exists: " + path)
-	if not failures.is_empty():
-		finish()
+	if failures > 0:
+		finish("CHECKS")
 		return
 	var terrain_script = load(paths[0])
 	var combat = load(paths[1])
@@ -88,7 +79,7 @@ func _initialize() -> void:
 	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - match_model.stance_of(1)
 	match_model.stamp_tilt()
 	match_model.wind = Vector2(-35, 0)
-	var returning: Dictionary = combat.predict(match_model.muzzle(0, 50.0), match_model.shot_velocity(0, 50.0, 15.0, 0), Vector2(-35, 0), match_model.terrain, match_model.actors, 0)
+	var returning: Dictionary = match_model.predict_shot(0, 50.0, 15.0, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")
 	match_model.fire(50.0, 15.0, 0)
 	for i in range(1600):
@@ -133,8 +124,4 @@ func _initialize() -> void:
 		loaded.xp = 450
 		check(loaded.level() == 3, "Level derives from accumulated XP")
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(profile_path))
-	finish()
-
-func finish() -> void:
-	print("CHECKS: ", checks, " | FAILURES: ", failures.size())
-	quit(0 if failures.is_empty() else 1)
+	finish("CHECKS")

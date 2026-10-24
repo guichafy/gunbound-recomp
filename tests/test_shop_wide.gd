@@ -1,14 +1,5 @@
-extends SceneTree
-var checks := 0
-var failures := 0
+extends "res://tests/support/suite.gd"
 const PATH := "res://.tools/shop-wide-test.json"
-func check(ok: bool, message: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ",message)
-func _initialize() -> void:
-	call_deferred("run")
 func click(point: Vector2) -> void:
 	for pressed in [true,false]:
 		var event := InputEventMouseButton.new()
@@ -130,5 +121,4 @@ func run() -> void:
 	await process_frame
 	for path in [PATH,PATH.get_basename()+"-options.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	print("WIDE SHOP CHECKS: ",checks," | FAILURES: ",failures)
-	quit(0 if failures==0 else 1)
+	finish("WIDE SHOP CHECKS")

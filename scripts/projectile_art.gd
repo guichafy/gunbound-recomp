@@ -1,24 +1,27 @@
 extends RefCounted
 ## Stable HD heads and continuous effects. Physics/trail/collider are read-only.
 const Sheet = preload("res://scripts/hd_sheet.gd")
+const MobileLooks = preload("res://scripts/mobile_looks.gd")
 var sheet
 var flames
 func _init() -> void:
 	sheet = Sheet.new("res://assets/hd/projectile_heads.png", 3, 2)
 	flames = Sheet.new("res://assets/hd/shots.png", 4, 6)
+## Head row and style ("flame" bombs, "ribbon" lasers) come from MobileLooks.
 func available(kind: String) -> bool:
-	if kind not in ["bigfoot", "mage"]:
+	var look := MobileLooks.projectile_style(kind)
+	if look.is_empty():
 		return false
 	if not sheet.available() or not sheet.catalog_valid:
 		return false
-	if kind == "bigfoot":
+	if look.style == "flame":
 		if not flames.available() or not flames.catalog_valid:
 			return false
 		for key in ["t1_flame", "ss_flame"]:
 			var area: Rect2 = flames.components.get(key, Rect2())
 			if not area.has_area():
 				return false
-	var row := 0 if kind == "bigfoot" else 1
+	var row := int(look.row)
 	for weapon in range(3):
 		if not sheet.region(row, weapon).has_area():
 			return false
@@ -30,19 +33,21 @@ static func fit_rect(size: Vector2, source: Rect2) -> Rect2:
 	var fitted := source.size * amount
 	return Rect2(-fitted / 2.0, fitted)
 func sample(kind: String, weapon: int, shot: Dictionary) -> Dictionary:
-	var row := 0 if kind == "bigfoot" else 1
-	var size: Vector2 = [Vector2(14, 11), Vector2(8, 6), Vector2(18, 12)][weapon] if row == 0 else [Vector2(6, 10), Vector2(6, 10), Vector2(28, 28)][weapon]
+	var look := MobileLooks.projectile_style(kind)
+	var row := int(look.row)
+	var ribbon: bool = look.style == "ribbon"
+	var size: Vector2 = look.sizes[weapon]
 	var age: float = shot.age
 	var phase: float = shot.get("phase", 0.0)
 	var position: Vector2 = shot.get("hit_pos", shot.pos)
 	var rotation := Vector2(shot.velocity).angle()
 	var flame := 0.0
-	if row == 0 and weapon != 1:
+	if look.style == "flame" and weapon != 1:
 		flame = (22.0 if weapon == 0 else 27.0) + sin(age * TAU * 10.0 + phase) * 3.0
 	var tint := Color("dcd2ff")
-	if row == 1 and weapon == 1:
+	if ribbon and weapon == 1:
 		tint = Color("d43e70") if phase < 1.0 else Color("99a5de")
-	return {"position": position, "rotation": rotation, "source": Vector2i(weapon, row),
+	return {"position": position, "ribbon": ribbon, "rotation": rotation, "source": Vector2i(weapon, row),
 		"body_rect": fit_rect(size, sheet.region(row, weapon)), "flame_length": flame,
 		"flame_tip": position + Vector2(-flame - size.x / 2.0, 0).rotated(rotation),
 		"pulse": 0.75 + sin(age * TAU * 6.0 + phase) * 0.15,
@@ -54,7 +59,8 @@ func draw(view: Node2D, kind: String, shot: Dictionary, weapon: int, offset: Vec
 		return true
 	var state := sample(kind, weapon, shot)
 	var row: int = state.source.y
-	if row == 1 and weapon < 2:
+	var ribbon: bool = state.ribbon
+	if ribbon and weapon < 2:
 		# Continuous ribbon follows actual helix/collision samples; no head duplicates.
 		var points := PackedVector2Array(shot.get("trail", []))
 		view.draw_set_transform(offset)
@@ -77,12 +83,12 @@ func draw(view: Node2D, kind: String, shot: Dictionary, weapon: int, offset: Vec
 		var source: Rect2 = flames.components["t1_flame" if weapon == 0 else "ss_flame"]
 		var height: float = 13.0 + state.pulse * 3.0
 		view.draw_texture_rect_region(flames.paint, Rect2(rear - length, -height / 2.0, length, height), source, Color(1, 1, 1, state.pulse))
-	if row == 1:
+	if ribbon:
 		var radius := 17.0 if weapon == 2 else 6.0
 		view.draw_circle(Vector2.ZERO, radius, Color(state.tint if weapon < 2 else Color("5de9ff"), state.pulse * 0.16))
 		if weapon == 2:
 			view.draw_arc(Vector2.ZERO, 16.5, state.ring_angle, state.ring_angle + PI * 1.5, 36, Color("ff9cf4"), 1.0, true)
-	var tint: Color = state.tint if row == 1 and weapon == 1 else Color.WHITE
+	var tint: Color = state.tint if ribbon and weapon == 1 else Color.WHITE
 	view.draw_texture_rect_region(sheet.paint, rect, sheet.region(row, weapon), tint)
 	view.draw_set_transform(Vector2.ZERO)
 	return true

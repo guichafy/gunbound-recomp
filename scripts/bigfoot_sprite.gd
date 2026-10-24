@@ -22,30 +22,15 @@ const SEQUENCES := {
 	"using_item": [234, 253, 19.0, false],
 	"destroyed": [202, 211, 19.0, false]
 }
+const FOLDER := "res://assets/openbound/bigfoot"
 var bullets: Array[Texture2D] = []
-var effects: Array[Texture2D] = []
-var shoot_sounds: Array[AudioStream] = []
-var blast_sounds: Array[AudioStream] = []
-const ProjectileArt = preload("res://scripts/projectile_art.gd")
-var projectile_art
-var effect_sizes: Array[Vector2] = []
-var hd_shots
-var hd_effects
 
 func _init() -> void:
-	configure("res://assets/openbound/bigfoot", CELL, PIVOT, SEQUENCES, 49.0, 119.0)
-	projectile_art = ProjectileArt.new()
-	hd_shots = projectile_art.sheet
-	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)
+	configure(FOLDER, CELL, PIVOT, SEQUENCES, 49.0, 119.0)
+	load_shot_assets(FOLDER)
+	load_hd_shots()
 	for number in range(1, 4):
-		bullets.append(pixel_texture(load("res://assets/openbound/bigfoot/Bullet%d.png" % number)))
-		effects.append(pixel_texture(load("res://assets/openbound/bigfoot/Flame%d.png" % number)))
-	for key in ["S1", "S2", "SS"]:
-		shoot_sounds.append(load("res://assets/openbound/bigfoot/Shoot%s.mp3" % key))
-		blast_sounds.append(load("res://assets/openbound/bigfoot/Blast%s.mp3" % key))
-
-	for weapon in range(3):
-		effect_sizes.append(ProjectileArt.effect_size(effects[weapon], effect_cell(weapon)))
+		bullets.append(pixel_texture(load(FOLDER + "/Bullet%d.png" % number)))
 
 func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: Vector2 = Vector2.ZERO) -> void:
 	if projectile_art.draw(view, "bigfoot", projectile, weapon, offset):
@@ -63,22 +48,15 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 func effect_cell(weapon: int) -> Vector2:
 	return [Vector2(166, 158), Vector2(175, 183), Vector2(192, 192)][weapon]
 
-func effect_capacity(weapon: int) -> int:
-	var size := effect_cell(weapon)
-	return int(effects[weapon].get_width() / size.x) * int(effects[weapon].get_height() / size.y)
-
 func draw_effect(view: Node2D, effect: Dictionary, offset: Vector2 = Vector2.ZERO) -> void:
 	var weapon: int = effect.weapon
 	var size := effect_cell(weapon)
 	var count := effect_capacity(weapon)
-	if projectile_art.draw_effect(view, effect, hd_effects, weapon, effect_sizes[weapon], count / 30.0, offset):
+	if projectile_art.draw_effect(view, effect, hd_effects, weapon, effect_sizes[weapon], count / EFFECT_FPS, offset):
 		return
-	var frame := int(float(effect.age) * 30.0)
+	var frame := int(float(effect.age) * EFFECT_FPS)
 	if frame >= count:
 		return
-	var columns := int(effects[weapon].get_width() / size.x)
 	view.draw_set_transform(effect.pos + offset)
-	var target := Rect2(-size / 2, size)
-	var source := Rect2(Vector2(frame % columns, int(frame / columns)) * size, size)
-	view.draw_texture_rect_region(effects[weapon], target, source)
+	view.draw_texture_rect_region(effects[weapon], Rect2(-size / 2, size), effect_source(weapon, frame))
 	view.draw_set_transform(Vector2.ZERO)

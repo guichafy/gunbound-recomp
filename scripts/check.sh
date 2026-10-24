@@ -1,9 +1,12 @@
 #!/bin/sh
 # Harness de qualidade: roda todas as suites headless e consolida o resultado.
 # Uso: scripts/check.sh [--quick] [suite ...]
-#   --quick   omite test_matches (dez partidas completas, ~30s)
+#   --quick   omite test_matches (13 partidas completas, ~70s)
+# Sem suites nomeadas, antes roda --check-only em scripts/*.gd e tests/**/*.gd,
+# incluindo as capturas GPU que nao entram no harness.
 #   suite     roda apenas as suites informadas (nomes sem tests/ nem .gd)
 # GODOT=/caminho/do/Godot sobrepoe o binario padrao do macOS.
+# SUITE_TIMEOUT=segundos limita cada suite (padrao 900).
 set -u
 
 GODOT="${GODOT:-/Applications/Godot.app/Contents/MacOS/Godot}"
@@ -11,15 +14,18 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$ROOT" || exit 2
 
 ALL="test_runner test_scene test_refinement test_refinement_scene test_bigfoot test_mage test_mage_scene test_bigfoot_attacks test_bigfoot_attacks_scene test_hd_assets test_mobile_animation test_pilot_projectiles test_roster test_map test_weather test_hud test_aiming test_performance test_items test_items_scene test_shop_items_integration test_avatar_catalog test_avatar_profile test_avatar_shop test_avatar_shop_classic test_avatar_shop_parity test_shop_audit test_shop_wide test_shop_xfs test_xfs_catalog test_shop_test_funds test_xfs_equipment test_xfs_hd_migration test_shop_hd test_avatar_art test_avatar_mount test_avatar_hd test_avatar_continuity test_attributes test_gold_rewards test_mobile_parity test_nak test_battle_rules test_matches"
-QUICK="test_runner test_scene test_refinement test_refinement_scene test_bigfoot test_mage test_mage_scene test_bigfoot_attacks test_bigfoot_attacks_scene test_hd_assets test_mobile_animation test_pilot_projectiles test_roster test_map test_weather test_hud test_aiming test_performance test_items test_items_scene test_shop_items_integration test_avatar_catalog test_avatar_profile test_avatar_shop test_avatar_shop_classic test_avatar_shop_parity test_shop_audit test_shop_wide test_shop_xfs test_xfs_catalog test_shop_test_funds test_xfs_equipment test_xfs_hd_migration test_shop_hd test_avatar_art test_avatar_mount test_avatar_hd test_avatar_continuity test_attributes test_gold_rewards test_mobile_parity test_nak test_battle_rules"
+# --quick: todas as suites menos as partidas completas.
+QUICK=$(printf '%s\n' $ALL | grep -vx test_matches | tr '\n' ' ')
 
 suites=""
 quick=0
+named=0
 for arg in "$@"; do
 	if [ "$arg" = "--quick" ]; then
 		quick=1
 	else
 		suites="$suites $arg"
+		named=1
 	fi
 done
 if [ -z "$suites" ]; then
@@ -35,6 +41,21 @@ mkdir -p .tools/check-logs
 
 fail=0
 total_checks=0
+if [ "$named" -eq 0 ]; then
+	parse_fail=0
+	for script in scripts/*.gd tests/*.gd tests/*/*.gd; do
+		output=$("$GODOT" --headless --path . --check-only --script "$script" 2>&1)
+		if printf '%s\n' "$output" | grep -Eq 'Parse Error|SCRIPT ERROR|Failed to load script'; then
+			echo "FAIL parse $script"
+			printf '%s\n' "$output" | grep -E 'Parse Error|SCRIPT ERROR' | head -3
+			parse_fail=$((parse_fail + 1))
+		fi
+	done
+	if [ "$parse_fail" -eq 0 ]; then
+		echo "OK   parse -> todos os scripts e capturas compilam"
+	fi
+	fail=$((fail + parse_fail))
+fi
 for suite in $suites; do
 	script="tests/$suite.gd"
 	if [ ! -f "$script" ]; then
@@ -43,14 +64,27 @@ for suite in $suites; do
 		continue
 	fi
 	log=".tools/check-logs/$suite.log"
-	output=$("$GODOT" --headless --log-file "$ROOT/.tools/check-logs/$suite-engine.log" --path . --script "$script" 2>&1)
+	# Um SCRIPT ERROR deixa o Godot headless aberto em vez de sair: cada suite
+	# tem SUITE_TIMEOUT segundos (padrao 900) e depois conta como falha.
+	"$GODOT" --headless --log-file "$ROOT/.tools/check-logs/$suite-engine.log" --path . --script "$script" >"$log" 2>&1 &
+	pid=$!
+	waited=0
+	while kill -0 "$pid" 2>/dev/null && [ "$waited" -lt "${SUITE_TIMEOUT:-900}" ]; do
+		sleep 1
+		waited=$((waited + 1))
+	done
+	if kill -0 "$pid" 2>/dev/null; then
+		kill "$pid"
+		echo "TIMEOUT: ${SUITE_TIMEOUT:-900} s sem terminar" >>"$log"
+	fi
+	wait "$pid"
 	status=$?
-	printf '%s\n' "$output" >"$log"
+	output=$(cat "$log")
 	summary=$(printf '%s\n' "$output" | grep -E 'CHECKS:|MATCHES:' | tail -1)
 	if [ -z "$summary" ]; then
 		summary="(sem resumo; ver $log)"
 	fi
-	if [ "$summary" = "(sem resumo; ver $log)" ] || [ "$status" -ne 0 ] || printf '%s\n' "$output" | grep -Eq 'FAIL:|SCRIPT ERROR:|^ERROR:'; then
+	if [ "$summary" = "(sem resumo; ver $log)" ] || [ "$status" -ne 0 ] || printf '%s\n' "$output" | grep -Eq 'FAIL:|SCRIPT ERROR:|^ERROR:|^TIMEOUT:'; then
 		echo "FAIL $suite -> $summary"
 		fail=$((fail + 1))
 	else

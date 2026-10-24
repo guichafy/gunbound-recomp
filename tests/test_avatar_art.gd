@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	check(FileAccess.file_exists("res://scripts/avatar_art.gd"), "Composed avatar renderer exists")
 	if failures == 0:
@@ -27,5 +18,4 @@ func run() -> void:
 		check(pieces[1].source.position == Vector2(0,28), "Multi-row normal head")
 		check(art.sample(c.defaults(1),0.0)[0].source.size.y == 27, "Female mismatched source clamped")
 		check(art.sample({"0":"invalid"},0.0).is_empty(), "Missing set cannot partially draw")
-	print("AVATAR ART CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("AVATAR ART CHECKS")

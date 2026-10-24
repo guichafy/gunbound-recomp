@@ -1,13 +1,4 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var view = load("res://scenes/main.tscn").instantiate()
 	view.profile = load("res://scripts/profile.gd").new("res://.tools/bigfoot-attacks-scene-profile.json")
@@ -17,15 +8,15 @@ func run() -> void:
 	view.select_vehicle(2)
 	view.opening = 0
 	view.start_match()
-	check(view.angle <= 40 and view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.hud.crosshair_name(view.model, 0, view.weapon) == "CrosshairBigfootS1Ally.png", "Bigfoot starts with legal T1 aim and its original range sprite")
+	check(view.aim.angle <= 40 and view.model.aim_limits(0, view.aim.weapon) == Vector2(18, 40) and view.hud.crosshair_name(view.model, 0, view.aim.weapon) == "CrosshairBigfootS1Ally.png", "Bigfoot starts with legal T1 aim and its original range sprite")
 	view.model.actors[0].turns = 3
-	view.angle = 18
+	view.aim.angle = 18
 	view.select_weapon(2)
 	view.update_hud()
-	check(view.angle == 23 and view.model.aim_limits(0, view.weapon) == Vector2(23, 35) and view.hud.crosshair_name(view.model, 0, view.weapon) == "CrosshairBigfootSSAlly.png", "Selecting SS adjusts value, legal range and crosshair sprite")
+	check(view.aim.angle == 23 and view.model.aim_limits(0, view.aim.weapon) == Vector2(23, 35) and view.hud.crosshair_name(view.model, 0, view.aim.weapon) == "CrosshairBigfootSSAlly.png", "Selecting SS adjusts value, legal range and crosshair sprite")
 	view.select_weapon(0)
 	view.update_hud()
-	check(view.model.aim_limits(0, view.weapon) == Vector2(18, 40) and view.weapon_buttons[0].get_meta("activated"), "Returning to T1 restores its wider aim range and active S1 button")
+	check(view.model.aim_limits(0, view.aim.weapon) == Vector2(18, 40) and view.weapon_buttons[0].get_meta("activated"), "Returning to T1 restores its wider aim range and active S1 button")
 	view.opening = 0
 	view.start_match()
 	view.select_weapon(1)
@@ -47,9 +38,9 @@ func run() -> void:
 	view.opening = 0
 	view.start_match()
 	check(view.model.projectiles.is_empty() and view.effects.is_empty() and view.model.flight_elapsed == 0, "Restart clears pending salvo and effects")
-	check(view.bigfoot.get("shoot_sounds") != null and view.bigfoot.get("effects") != null, "Bigfoot original audio and explosions loaded")
-	if view.bigfoot.get("shoot_sounds") != null:
-		for stream in view.bigfoot.shoot_sounds + view.bigfoot.blast_sounds:
+	check(view.sprite_for(2).get("shoot_sounds") != null and view.sprite_for(2).get("effects") != null, "Bigfoot original audio and explosions loaded")
+	if view.sprite_for(2).get("shoot_sounds") != null:
+		for stream in view.sprite_for(2).shoot_sounds + view.sprite_for(2).blast_sounds:
 			check(stream != null and stream.get_length() > 0, "Original Bigfoot sound is playable")
 	view.model.actors[0].turns = 3
 	view.select_weapon(2)
@@ -68,5 +59,4 @@ func run() -> void:
 	await process_frame
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/bigfoot-attacks-scene-profile.json"))
-	print("BIGFOOT ATTACK SCENE CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("BIGFOOT ATTACK SCENE CHECKS")

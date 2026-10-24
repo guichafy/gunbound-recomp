@@ -7,8 +7,8 @@ func _initialize() -> void:
 	call_deferred("run")
 func snap(name: String) -> void:
 	view.queue_redraw()
-	if view.items_popup != null:
-		view.items_popup.redraw()
+	if view.overlays.items_popup != null:
+		view.overlays.items_popup.redraw()
 	await process_frame
 	await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png("res://docs/items/" + name + ".png")
@@ -36,14 +36,14 @@ func run() -> void:
 	# PopupSelectItem in the menu, hovering Dual (HD, then the originals).
 	view.show_menu()
 	view.show_items()
-	view.items_popup.hover("dual")
+	view.overlays.items_popup.hover("dual")
 	await snap("select-item")
 	var hd: Dictionary = view.item_art.textures.duplicate()
 	view.item_art.textures = view.item_art.originals.duplicate()
 	view.accept_items()
 	view.show_items()
-	view.items_popup.select_tab(1)
-	view.items_popup.hover("change_wind")
+	view.overlays.items_popup.select_tab(1)
+	view.overlays.items_popup.hover("change_wind")
 	await snap("select-item-original")
 	view.item_art.textures = hd
 	view.accept_items()
@@ -76,9 +76,9 @@ func run() -> void:
 	view.model.weather.wind_force = 0
 	view.model.wind = Vector2.ZERO
 	view.use_item(1)
-	view.weapon = 1
-	view.angle = 28.0
-	view.power = 30.0
+	view.aim.weapon = 1
+	view.aim.angle = 28.0
+	view.aim.power = 30.0
 	view.shoot()
 	advance(0.45)
 	await snap("teleport-beacon")

@@ -1,15 +1,7 @@
-extends SceneTree
-var checks := 0
-var failures := 0
-func check(ok: bool, label: String) -> void:
-	checks += 1
-	if not ok:
-		failures += 1
-		printerr("FAIL: ", label)
-func _initialize() -> void:
-	call_deferred("run")
+extends "res://tests/support/suite.gd"
 func run() -> void:
 	var A = load("res://scripts/player_attributes.gd")
+	var Mobiles = load("res://scripts/mobiles.gd")
 	check(A.has_method("damage"), "Combat modifiers exist")
 	if failures == 0:
 		check(A.damage(200,30,20) == 220, "Attack minus defense")
@@ -40,7 +32,7 @@ func run() -> void:
 					sim.advance_projectiles(1.0/120.0)
 				check(m.actors[1].hp == sim.actors[1].hp and m.actors[0].shield == sim.actors[0].shield, "Live and prediction damage equal")
 				check(m.terrain.cells == sim.terrain.cells, "Live and prediction craters equal")
-				check(m.weapon_rules(0,weapon).delay < m.VEHICLES[mobile].weapons[weapon].delay, "Shot delay decreased")
+				check(m.weapon_rules(0,weapon).delay < Mobiles.weapon(mobile,weapon).delay, "Shot delay decreased")
 				sim.actors[0].attributes[0] = 0
 				check(m.actors[0].attributes[0] == 30, "Snapshot attributes isolated")
 		var m = Match.new()
@@ -58,5 +50,4 @@ func run() -> void:
 		m.terrain.cells.fill(1)
 		m.explode(Vector2(400,200))
 		check(not m.terrain.is_solid(Vector2(432,200)) and m.terrain.is_solid(Vector2(440,200)), "Live Dig enlarges crater beyond damage radius")
-	print("ATTRIBUTES CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("ATTRIBUTES CHECKS")

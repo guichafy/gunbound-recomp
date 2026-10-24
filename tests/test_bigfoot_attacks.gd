@@ -1,13 +1,6 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 const Match = preload("res://scripts/match.gd")
 const Combat = preload("res://scripts/combat.gd")
-var checks := 0
-var failures := 0
-func check(value: bool, description: String) -> void:
-	checks += 1
-	if not value:
-		failures += 1
-		printerr("FAIL: ", description)
 func launches(model) -> Array:
 	var result: Array = []
 	for event in model.events:
@@ -33,7 +26,7 @@ func _initialize() -> void:
 		check(model.projectiles.size() == [4, 6, 8][weapon], "Real shot builds original number of bombs " + str(weapon))
 	if model.projectiles.is_empty() or not model.projectiles[0].has("spawn_at"):
 		check(false, "Bomb schedule is available to the live flight")
-		finish()
+		finish("BIGFOOT ATTACK CHECKS")
 		return
 	var times := [[0.0, 0.2, 0.4, 0.6], [0.2, 0.2, 0.2, 0.4, 0.4, 0.4], [0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875]]
 	for weapon in [0, 1, 2]:
@@ -117,7 +110,4 @@ func _initialize() -> void:
 			closest = minf(closest, position.distance_to(predicted.position))
 		check(closest < 0.1 and positions.size() == [4, 6, 8][weapon], "Prediction matches live salvo through wall " + str(weapon))
 		check(model.phase == "settle", "Entire salvo terminates flight " + str(weapon))
-	finish()
-func finish() -> void:
-	print("BIGFOOT ATTACK CHECKS: ", checks, " | FAILURES: ", failures)
-	quit(0 if failures == 0 else 1)
+	finish("BIGFOOT ATTACK CHECKS")

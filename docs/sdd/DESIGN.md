@@ -1,9 +1,10 @@
 # Design implementado
 
-Estado vigente: 0.12 mais a reorganização abaixo. As seções anteriores a
-«Integração Mage 0.4» guardam o histórico: terreno 640×400, força a 65 pontos/s,
-CPU com Carapaça e som só PCM não descrevem o jogo atual. O contrato que o
-código segue é esta seção e `HANDOFF.md`.
+Estado vigente: 0.18.6. O contrato atual são as seções «Arquitetura SOLID» e
+«Revisão de qualidade 0.18.6» (logo abaixo), as regras de batalha de
+`BATTLE_RULES_AUDIT.md` e `HANDOFF.md`. As demais seções guardam o histórico de
+cada entrega: terreno 640×400, força a 65 pontos/s, gravidade 260, CPU com
+Carapaça, som só PCM e `Combat.predict` não descrevem o jogo atual.
 
 ## Arquitetura SOLID
 
@@ -13,7 +14,7 @@ orquestra e não decide dano. Papéis do treino 1×1: `Match.PLAYER` (0) e
 
 | Arquivo | Responsabilidade |
 |---|---|
-| `scripts/mobiles.gd` | Catálogo Mage/Bigfoot: armas, mira, escudo, som e texto. Sem ramo por ID |
+| `scripts/mobiles.gd` | Catálogo de regras Mage/Bigfoot/Nak: armas (custo original), mira, escudo, som e texto. Sem ramo por ID |
 | `scripts/flight_snapshot.gd` | Lista fechada copiada por `predict_shot` e pela busca da CPU |
 | `scripts/damage.gd` | `blast` e `deal_damage`; o Match chama e guarda os eventos |
 | `scripts/turn_table.gd` | Agenda, passe, previsão de iniciativa e fim de partida |
@@ -27,6 +28,42 @@ A máscara entra em `Match.start(..., mask)`. Sem máscara, o Match cria o
 terreno, como os testes. Som e perfil são criados em `game.gd._ready` quando
 a cena ainda não os recebeu. `weather.gd` e `combat.gd` seguem concretos:
 previsão e tiro real compartilham os dois.
+
+## Revisão de qualidade 0.18.6
+
+ADR-081, plano em `QUALITY_REVIEW.md`. Nenhuma regra mudou (golden master de
+26 partidas idêntico à `main` 0.18.5). Pontos de extensão e responsabilidades:
+
+| Arquivo | Responsabilidade |
+|---|---|
+| `scripts/mobile_looks.gd` | Apresentação por mobile: script do sprite, layout HD do rig, estilo do projétil HD ("flame"/"ribbon"), aura UsingItem e relógios de pose compartilhados. Rig, projéteis, itens, cena e miras do HUD leem daqui |
+| `scripts/sprite_pose.gd` | Objeto de parâmetros de `MobileSprite.draw`/`MobileRig.draw` (posição, largura, lado e estado da animação, campos opcionais nomeados) |
+| `scripts/delay_units.gd` | Única conversão custo original → unidade de atraso (÷7,5), com redução de atributo truncada como no C#; `TurnTable.DELAY_SCALE` aponta para ela |
+| `scripts/item_effects.gd` | Efeitos de item por tipo do catálogo: instantâneos (`heal`, `health_cost`, `turn_wind`) e de tiro (`second_volley`, `beacon`, `electric`) |
+| `scripts/weather_contact.gd` | Contato projétil × colunas de clima e trajeto do tornado |
+| `scripts/gold_tracker.gd` | Metadados de Gold do tiro: início, coleta por explosão e fechamento |
+| `scripts/cpu_planner.gd` | Plano da CPU em três passos (grade + refino ADR-076); liga/desliga `cpu_thinking`; a busca roda na thread só sobre o snapshot |
+| `scripts/actor_state.gd`, `scripts/shell_state.gd` | Fábricas únicas do formato de ator e de projétil (Dictionary) |
+| `scripts/json_store.gd` | Leitura tolerante e gravação atômica do perfil e das opções |
+| `scripts/cpu_turn.gd` | Turno da CPU na cena: espera, tarefa no WorkerThreadPool, disparo |
+| `scripts/menu_screen.gd` | Montagem do menu inicial; recebe dados e callbacks, não a cena |
+| `tests/support/suite.gd` | Base das suítes: `check`, `report`, `finish` no formato lido pelo `check.sh` |
+
+`TurnTable.order` é a única regra de ordem (agenda, prévia com `shot_cost`,
+`current_order` da fila do HUD). `Match` continua a fachada: `weather_interact`,
+`tornado_step`, `apply_weather_contact`, `begin/search/score/finish_cpu_plan`,
+`blast`, `deal_damage`, `schedule`, `pass_turn` e `current_order` delegam aos
+módulos acima. Fases são `Match.PHASE_MENU/AIM/FLIGHT/SETTLE/FINISHED`
+(strings, por compatibilidade com eventos e testes). `MatchOverlay` guarda a
+camada aberta (`kind`, `layer`, popups) e avisa a cena por sinais; a cena não
+expõe mais propriedades que só repassavam `AimControl`/`CameraRig`
+(`scene.aim.*`, `scene.rig.*`). `check.sh` compila todos os scripts e capturas
+antes das suítes e limita cada suíte a `SUITE_TIMEOUT` segundos.
+
+Adiado com motivo: classes tipadas para ator/projétil. `duplicate(true)` não
+copia Objects (o snapshot da CPU compartilharia atores vivos com a thread),
+`Object.get(k, padrão)` não existe e as suítes montam fixtures como
+Dictionary. As fábricas concentram o formato até essa migração.
 
 ## Componentes e responsabilidades
 

@@ -15,61 +15,38 @@ const SEQUENCES := {
 	"destroyed": [179, 203, 19.0, false],
 	"using_item": [243, 262, 19.0, false]
 }
+const FOLDER := "res://assets/openbound/mage"
 var laser_textures: Array[Texture2D] = []
 var orb: Texture2D
-var effects: Array[Texture2D] = []
-var shoot_sounds: Array[AudioStream] = []
-var blast_sounds: Array[AudioStream] = []
-const ProjectileArt = preload("res://scripts/projectile_art.gd")
-var projectile_art
-var effect_sizes: Array[Vector2] = []
-var hd_shots
-var hd_effects
 var hd_emp
 
 func _init() -> void:
-	configure("res://assets/openbound/mage", Vector2(109, 150), Vector2(52, 85), SEQUENCES, 46.0, 117.0)
-	projectile_art = ProjectileArt.new()
-	hd_shots = projectile_art.sheet
-	hd_effects = HDSheet.new("res://assets/hd/effects.png", 6, 6)
+	configure(FOLDER, Vector2(109, 150), Vector2(52, 85), SEQUENCES, 46.0, 117.0)
+	load_shot_assets(FOLDER)
+	load_hd_shots()
 	hd_emp = HDSheet.new("res://assets/hd/emp.png", 1, 1)
 	for number in [1, 2]:
-		laser_textures.append(pixel_texture(load("res://assets/openbound/mage/S%dT.png" % number)))
-	orb = pixel_texture(load("res://assets/openbound/mage/Bullet3.png"))
-	for number in [1, 2, 3]:
-		effects.append(pixel_texture(load("res://assets/openbound/mage/Flame%d.png" % number)))
-	for key in ["S1", "S2", "SS"]:
-		shoot_sounds.append(load("res://assets/openbound/mage/Shoot%s.mp3" % key))
-		blast_sounds.append(load("res://assets/openbound/mage/Blast%s.mp3" % key))
-
-	for weapon in range(3):
-		effect_sizes.append(ProjectileArt.effect_size(effects[weapon], effect_cell(weapon)))
+		laser_textures.append(pixel_texture(load(FOLDER + "/S%dT.png" % number)))
+	orb = pixel_texture(load(FOLDER + "/Bullet3.png"))
 
 func effect_cell(weapon: int) -> Vector2:
 	return [Vector2(193, 192), Vector2(143, 142), Vector2(385, 384)][weapon]
 
-func effect_capacity(weapon: int) -> int:
-	var size := effect_cell(weapon)
-	return int(effects[weapon].get_width() / size.x) * int(effects[weapon].get_height() / size.y)
-
 func effect_frame(weapon: int, age: float) -> int:
-	return clampi(int(age * 30.0), 0, effect_capacity(weapon) - 1)
+	return clampi(int(age * EFFECT_FPS), 0, effect_capacity(weapon) - 1)
 
 func draw_effect(view: Node2D, effect: Dictionary, offset: Vector2 = Vector2.ZERO) -> void:
 	var weapon: int = effect.weapon
 	var size := effect_cell(weapon)
-	var columns := int(effects[weapon].get_width() / size.x)
 	var frame := effect_frame(weapon, effect.age)
-	var duration := float(effect_capacity(weapon)) / 30.0
+	var duration := float(effect_capacity(weapon)) / EFFECT_FPS
 	if effect.age >= duration:
 		return
 	if projectile_art.draw_effect(view, effect, hd_effects, weapon + 3, effect_sizes[weapon], duration, offset, hd_emp if weapon == 2 else null):
 		return
 	var alpha := 1.0 - float(effect.age) / duration
 	view.draw_set_transform(effect.pos + offset, float(effect.age) * PI if weapon == 2 else 0.0)
-	var target := Rect2(-size / 2, size)
-	var source := Rect2(Vector2(frame % columns, int(frame / columns)) * size, size)
-	view.draw_texture_rect_region(effects[weapon], target, source, Color(1, 1, 1, alpha))
+	view.draw_texture_rect_region(effects[weapon], Rect2(-size / 2, size), effect_source(weapon, frame), Color(1, 1, 1, alpha))
 	view.draw_set_transform(Vector2.ZERO)
 
 func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: Vector2 = Vector2.ZERO) -> void:

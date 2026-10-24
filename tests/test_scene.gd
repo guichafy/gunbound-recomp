@@ -1,16 +1,5 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 
-var failures := 0
-var checks := 0
-
-func check(condition: bool, description: String) -> void:
-	checks += 1
-	if not condition:
-		failures += 1
-		printerr("FAIL: ", description)
-
-func _initialize() -> void:
-	call_deferred("run")
 
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
@@ -22,9 +11,14 @@ func run() -> void:
 	if not scene.has_method("start_match"):
 		quit(1)
 		return
-	check(scene.screen == "menu" and scene.nickname_input != null, "Menu shows nickname and vehicle controls")
+	check(scene.screen == "menu" and scene.menu.nickname_input != null, "Menu shows nickname and vehicle controls")
 	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
 	scene.opening = 0
+	var version: String = ProjectSettings.get_setting("application/config/version", "")
+	var shows_version := false
+	for node in scene.root.get_children():
+		shows_version = shows_version or (node is Label and node.text.ends_with("/   " + version))
+	check(not version.is_empty() and shows_version, "Menu shows the single-source project version")
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
 	check(scene.weapon_buttons.size() == 3 and scene.pass_button is TextureButton and scene.options_button is TextureButton, "Original S1/S2/SS, Options and SkipTurn sprite buttons")
@@ -36,14 +30,14 @@ func run() -> void:
 	scene.close_overlay()
 	scene._process(0.1)
 	check(scene.model.turn_time < before, "Resuming restores turn clock")
-	scene.angle = 45.0
-	scene.power = 70.0
+	scene.aim.angle = 45.0
+	scene.aim.power = 70.0
 	var space := InputEventKey.new()
 	space.physical_keycode = KEY_SPACE
 	space.pressed = true
 	scene._unhandled_key_input(space)
 	scene._process(0.1)
-	check(scene.charging and is_equal_approx(scene.power, 4.0), "Holding Space charges from 0 in steps of 2 every 0.04 s (original)")
+	check(scene.aim.charging and is_equal_approx(scene.aim.power, 4.0), "Holding Space charges from 0 in steps of 2 every 0.04 s (original)")
 	space.pressed = false
 	scene._unhandled_key_input(space)
 	check(scene.model.phase == "flight", "HUD fire command launches a real projectile")
@@ -59,7 +53,7 @@ func run() -> void:
 	check(scene.profile.xp == 120, "Reopening result cannot duplicate reward")
 	scene.show_help()
 	scene.close_overlay()
-	check(scene.overlay_kind == "result", "Closing help after match restores result actions")
+	check(scene.overlays.kind == "result", "Closing help after match restores result actions")
 	scene.show_menu()
 	check(scene.screen == "menu" and scene.model.phase == "menu", "Return to menu leaves combat inactive")
 	# ADR-076: the opening is drawn in play, so the CPU may own the very first turn.
@@ -70,7 +64,7 @@ func run() -> void:
 	for _frame in range(600):
 		scene._process(0.05)
 		await process_frame
-		while scene.cpu_task >= 0 and not WorkerThreadPool.is_task_completed(scene.cpu_task):
+		while scene.cpu.task >= 0 and not WorkerThreadPool.is_task_completed(scene.cpu.task):
 			await create_timer(0.005).timeout
 		if scene.model.phase == "flight" and scene.model.shot_actor == 1:
 			cpu_fired = true
@@ -78,8 +72,8 @@ func run() -> void:
 	check(cpu_fired, "The CPU plans and fires on the opening turn")
 	scene.show_menu()
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/smoke-profile.json"))
-	print("SCENE CHECKS: ", checks, " | FAILURES: ", failures)
+	report("SCENE CHECKS")
 	scene.queue_free()
 	await process_frame
 	await process_frame
-	quit(0 if failures == 0 else 1)
+	quit(exit_code())

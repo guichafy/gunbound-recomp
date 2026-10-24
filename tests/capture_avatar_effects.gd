@@ -1,4 +1,5 @@
 extends SceneTree
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Gallery extends Node2D:
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
 	var hd=load("res://scripts/avatar_art.gd").new()
@@ -29,7 +30,7 @@ class Gallery extends Node2D:
 			hd.draw(self,gear,Transform2D(angle,scale,0,p+Vector2(250,160)),age,Color.WHITE)
 			var sprite=sprites[(frame/90)%2]
 			var pose: String="moving" if frame<120 else ("charging" if frame<240 else "recoil")
-			sprite.draw(self,p+Vector2(392,148),86,facing,angle,12,Color.WHITE,pose,age,age,false,age*10,{"equipment":gear,"age":age,"motion_age":age})
+			sprite.draw(self,SpritePose.new(p+Vector2(392,148),86,facing,{"rotation":angle,"frame":12,"pose":pose,"age":age,"weapon":int(age),"wheel_phase":age*10,"avatar_context":{"equipment":gear,"age":age,"motion_age":age}}))
 			draw_string(font,p+Vector2(8,207),"Nativo Normal       HD vestido          HD no mobile",HORIZONTAL_ALIGNMENT_LEFT,-1,12,Color("a8cddd"))
 func _initialize() -> void:
 	call_deferred("run")
