@@ -19,6 +19,7 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [MAGE_0_4.md](MAGE_0_4.md) | Mage: assets, ataques, escudo, adaptações e validação 0.4 |
 | [BIGFOOT_ATTACKS_0_5.md](BIGFOOT_ATTACKS_0_5.md) | T1/T2/SS Bigfoot: emitter, regras, áudio/Fx e validação 0.5 |
 | [ITEMS_0_13.md](ITEMS_0_13.md) | Itens de batalha: regras do OpenBound, Select Item, arte HD e validação 0.13 |
+| [QUALITY_REVIEW.md](QUALITY_REVIEW.md) | Revisão de qualidade 0.18.6: achados P1–P4, plano, portões e escopo reduzido |
 
 Ordem de retomada: hand-off → especificação → design → tarefas → decisões.
 Para uma mudança, localizar o requisito, definir o delta da especificação,
@@ -30,8 +31,10 @@ da execução inicial. O conjunto `docs/sdd/` consolida o contexto atual.
 O [README principal](../../README.md), o [guia de aprendizado](../APRENDIZADO.md),
 o [roteiro funcional](../VALIDACAO.md) e a [origem da arte](../ART.md) o complementam.
 
-Baseline inicial: **0.1.0**; versão atual **0.6.4**, em **2026-10-11**. O histórico Git
-identifica as revisões; não manter hashes de commits dentro destes documentos.
+Baseline inicial: **0.1.0**; versão atual **0.18.6**, em **2026-10-24** (fonte única:
+`application/config/version`). O histórico Git identifica as revisões; não manter
+hashes de commits dentro destes documentos. Os parágrafos abaixo sobre "entrega
+atual" descrevem a época de cada versão; o estado vigente está no topo da SPEC.
 
 Assets HD atuais: [HD_ASSETS_0_6.md](HD_ASSETS_0_6.md), GPT Images e aparência
 clássica; metadados/prompts em assets/hd e capturas1920×1080 em docs/hd.

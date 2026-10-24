@@ -1,8 +1,43 @@
-# Especificação — Gunbound Recomp 0.18.2
+# Especificação — Gunbound Recomp 0.18.6
 
 As seções abaixo são cronológicas: o texto de cada versão fica como histórico
 quando uma seção posterior o substitui. A partir de 0.7.0 vale a seção mais nova
 de cada requisito (batalha: REQ-44/ADR-076).
+
+## Índice vivo de requisitos (0.18.6)
+
+Versão em fonte única: `application/config/version` em `project.godot` (ADR-081).
+Este índice resume o requisito vigente e onde ele está; as seções seguintes
+guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aqui.
+
+| ID | Requisito vigente | Documento | Estado |
+|---|---|---|---|
+| REQ-01 | Engine multiplataforma; entrega executável no Mac | este arquivo, `build_macos.py` | macOS entregue; Windows/Linux/Android/iOS não testados |
+| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente (Mage, Bigfoot, Nak) |
+| REQ-03 | Mira, força e movimento; teclado e extras na tela | HUD_0_10, AIMING_0_12 | Vigente; console original substituído por REQ-27..30 |
+| REQ-04 | Balística, colisão e crateras | BATTLE_RULES_AUDIT, MOBILE_PARITY | Vigente; gravidade/força do C# (REQ-44) |
+| REQ-05 | Vida, dano, queda e resultado | MOBILE_PARITY, BATTLE_RULES_AUDIT | Vigente; deriva na queda ADR-077 |
+| REQ-06 | Iniciativa por atraso, turno de 30 s, passe | BATTLE_RULES_AUDIT | Vigente; custo por tempo gasto e passe 200 ÷ 7,5 (REQ-44) |
+| REQ-07 | Três tiros; SS aberto no 1º turno, trava de 4 turnos | MOBILE_PARITY | Vigente |
+| REQ-08 | CPU com as mesmas regras e três dificuldades | PERF_LIMITS_0_11, BATTLE_RULES_AUDIT | Vigente; CPU não se move nem usa itens |
+| REQ-09 | Pausa, ajuda, resultado, revanche e menu | HUD_0_10 | Vigente |
+| REQ-10 | Perfil local sem duplicar recompensa | AVATAR_SHOP, AVATAR_HD_MIGRATION | Vigente; saldo de teste ADR-080 |
+| REQ-11 | Arte original própria | — | Substituído por REQ-19/20 |
+| REQ-12 | Código, documentação e app para validar e aprender | QUALITY_REVIEW | Vigente; revisão de qualidade 0.18.6 |
+| REQ-13..18 | Refinamento 0.2 (HUD, fila, inclinação, carga, animações, impacto) | REFINEMENT_0_2 | HUD/console substituídos por REQ-27..30; demais vigentes |
+| REQ-19 | Mobiles e assets reais | BIGFOOT_0_3, MAGE_0_4, NAK_0_15 | Parcial: Mage, Bigfoot, Nak; demais mobiles pendentes |
+| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD | Vigente; HD do Nak gerado e pendente de integração |
+| REQ-21..26 | Mapa Miramo A, câmera 1:1, vento 2D, clima, Thor, partícula | MAP_0_8, WEATHER_CAMERA_0_9 | Vigente |
+| REQ-27..31 | HUD original e popup de opções | HUD_0_10 | Vigente; Mouse Speed desabilitado |
+| REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |
+| REQ-34 | Aiming Mode Drag/Slice | AIMING_0_12 | Vigente; TODO Mouse Speed |
+| REQ-35..37 | Itens de batalha, Select Item, arte HD | ITEMS_0_13 | Vigente; custos do `itemdata.dat`; CPU sem itens; Team Teleport sem aliado no 1×1 |
+| REQ-38..41 | Loja, composição, atributos e modificadores | AVATAR_SHOP_XFS_0_16, AVATAR_HD_MIGRATION | Vigente; catálogo XFS com bônus por equipamento |
+| REQ-42 | Paridade Mage/Bigfoot com o C# | MOBILE_PARITY | Vigente, com os ajustes de REQ-44 |
+| REQ-43 | Nak (ID 3) com dados do cliente original | NAK_0_15 | Vigente; aura UsingItem ausente (sem arte original) |
+| REQ-44 | Regras de batalha: cliente original comprovado, depois C# | BATTLE_RULES_AUDIT | Vigente |
+
+## Histórico da especificação
 
 Status: implementado; validação funcional pelo usuário pendente de relato.
 Correção solicitada: estabilidade visual das animações HD de Bigfoot/Mage;

@@ -1,6 +1,9 @@
-# Revisão de qualidade e design — base 0.15.0
+# Revisão de qualidade e design — 0.18.6
 
-Data: 2026-10-23. Branch `claude/spec-code-quality-review-4c786a` (a partir de `596e41e`).
+Data: 2026-10-23. Análise feita na base 0.15.0 (branch
+`claude/spec-code-quality-review-4c786a`); a execução foi reaplicada sobre a
+`main` 0.18.5 na branch `claude/quality-review-0186`. As referências
+`arquivo:linha` dos achados abaixo são da base 0.15.0 e servem de histórico.
 REQ-12 (aprender lendo o código) com REQ-01, REQ-35 e REQ-43 afetados;
 ADR-081. Primeiro a análise; o usuário pediu em seguida executar P1–P4 e abrir PR.
 A seção «Plano de execução» no fim define escopo, portões e reduções de escopo.
@@ -193,7 +196,7 @@ Um commit por item ou grupo pequeno, para isolar regressões.
   projeção explícita dos campos do ator. Determinístico em duas execuções.
   Commits que tocam o modelo exigem hashes idênticos.
 - `check.sh --quick` a cada commit; contagem por suíte igual à baseline
-  (1948 checks + 13 partidas), salvo checks novos documentados.
+  (na `main` 0.18.5: 5313 checks + 13 partidas), salvo checks novos documentados.
 - Parse de todos os `tests/*.gd`, incluindo `capture_*` fora do harness.
 - Commits de apresentação: suítes de cena e capturas GPU comparadas (imagens
   regeneradas não entram no PR).
@@ -216,3 +219,26 @@ Um commit por item ou grupo pequeno, para isolar regressões.
   primeiro Dual vence antes do turno da CPU); suposição do teste, não bug. A
   cena ganha `match_seed` e a suíte fixa a seed.
 - App não reexportado; nada em `builds/` nem novas imagens em `docs/`.
+
+### Resultado
+
+Reaplicado sobre a `main` 0.18.5 (regras de batalha ADR-076/077, loja XFS)
+em commits pequenos, um por item ou grupo. Adaptações ao que a `main` mudou:
+custos de delay do Nak 770/920/1320 e dos itens do `itemdata.dat` entram como
+`cost`; `TurnTable.DELAY_SCALE` usa `DelayUnits.SCALE`; `TurnTable.order` passa
+a ser a regra única também de `current_order`/`shot_cost`; `CpuPlanner` leva o
+refino da busca e o congelamento do relógio (`cpu_thinking`); `ItemEffects`
+usa `posmod` no Change Wind; suítes e capturas novas da `main` migradas para a
+base de suítes e para o `SpritePose`. Um `SCRIPT ERROR` deixava o Godot
+headless aberto e travava o `check.sh` por horas: cada suíte agora tem
+`SUITE_TIMEOUT`.
+
+Portões finais: parse de todos os scripts e capturas; 5318 checks (5313 da
+`main` + 1 de versão + 4 do catálogo de apresentação) e 13 partidas com seeds
+81–93 idênticas à `main`; golden de 26 partidas idêntico ao gravado na `main`
+0.18.5; quadro de partida com seed fixa e folha de sprites dos três mobiles
+pixel-idênticos à `main`. `match.gd` 783 → 609 linhas; `game.gd` 921 → 801.
+O extra «WorldRenderer» virou Extract Method (`draw_projectiles`,
+`draw_floating`); as builders de `MatchOverlay` ainda recebem a cena, só para
+ler dados e chamar ações.
+

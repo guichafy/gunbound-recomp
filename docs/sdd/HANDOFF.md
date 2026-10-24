@@ -1,4 +1,42 @@
-# Hand-off — Gunbound Recomp 0.18.5 / saldo de teste
+# Hand-off — Gunbound Recomp 0.18.6 / revisão de qualidade
+
+## Revisão de qualidade 0.18.6 (ADR-081)
+
+Pedido: analisar SPEC × código com foco em design (SOLID, repetição, code
+smells) e executar todos os pontos P1–P4, abrindo PR. Plano, achados e escopo
+reduzido em `QUALITY_REVIEW.md`. A análise foi feita na base 0.15.0; a execução
+foi reaplicada sobre a `main` 0.18.5 na branch `claude/quality-review-0186`
+(a sincronização da branch original foi recusada pelo app por trazer arquivos
+protegidos `.claude/skills` de uma origem ainda não confirmada).
+
+- P1: versão única (`application/config/version`; menu e preset repetiam o
+  número); `test_items_scene` instável explicado (seed 28: o primeiro Dual vence
+  antes do turno da CPU) e fixado via `match_seed`; `Combat.predict` removido
+  (testes usam `predict_shot`); atributos nomeados; custo de delay original com
+  uma única conversão; literais nomeados; código morto removido.
+- P2: `mobile_looks.gd` tira os ramos "bigfoot"/"mage" do rig, projéteis,
+  itens, cena e HUD; Template Method nos sprites; `SpritePose`; itens como
+  dados + `item_effects.gd`; `json_store.gd`; `TurnTable.order` único;
+  `start_pose`/`weapon_for_pose`; base `tests/support/suite.gd`; `check.sh`
+  com parse de tudo e tempo limite por suíte.
+- P3: `match.gd` 783 → 609 linhas (clima, Gold, CPU, itens em módulos atrás da
+  fachada; fábricas de ator/projétil; `Match.PHASE_*`). `game.gd` 921 → 801
+  (sem proxies; `MatchOverlay` dono da camada com sinais; `cpu_turn.gd`;
+  `menu_screen.gd`; camadas de desenho em métodos).
+- P4: índice vivo REQ-01..44 no topo da SPEC; DESIGN, AGENTS, README, TASKS.
+
+Validação: `check.sh` completo com parse OK, 5318 checks (5313 da `main` + 1 de
+versão + 4 do catálogo de apresentação) e 13 partidas com seeds 81–93
+idênticas à `main`. Golden master local (`.tools/golden/`, fora do Git): 26
+partidas CPU×CPU com clima "todos", atributos e os 11 itens, hash de eventos e
+campos do ator idêntico ao gravado na `main` 0.18.5. Apresentação: quadro de
+partida com seed fixa e folha de sprites (Bigfoot/Mage/Nak, 7 poses × 2 lados,
+tiros e explosões) pixel-idênticos à `main`. Achado na integração: um
+`SCRIPT ERROR` deixa o Godot headless aberto e travava o `check.sh` por horas;
+agora vira falha após `SUITE_TIMEOUT`. Limites: `capture_hd_assets` já falhava
+na base 0.15.0; capturas com sorteio (`capture_nak`, HUD, itens) não são
+determinísticas. App não reexportado; build não executado. Pendências: tipagem
+completa de ator/projétil, aura UsingItem do Nak, validação do usuário.
 
 ## Carteira para testar todos os avatares — 23/10/2026 (REQ-38, ADR-080)
 
