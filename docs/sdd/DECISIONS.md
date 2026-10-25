@@ -916,3 +916,52 @@ apoio/parede, posicionamento inicial do Thor e partes da agenda S2 mantêm
 adaptação/C# identificados; não alegar paridade integral do cliente.
 O efeito extra `ssflame7` e áudio `10s3fire.xes` ausentes no pacote não são
 inventados nem substituídos por recursos de outro tiro.
+
+## ADR-096 — lobby clássico como entrada
+
+25/10/2026. A entrada deixa de ser a sala 1×1 (ADR-092) e passa a ser o lobby
+do cliente clássico. Create abre essa sala. Buddy não é colocado: o buraco do
+botão é preenchido com a cor da moldura. Ranking e Join ficam desabilitados.
+Não há rede, contas, multiplayer nem salas para entrar.
+
+A arte vem do `graphics.xfs` do TestClient jglim (SHA
+a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08): fundo
+`gamelist_back.img` e sala `ready_back.img`, não as variantes cartoon
+`gamelistmode`/`readymode`. Rank e GP do cartão são o nível e o XP locais do
+perfil, não um rank de servidor. O mapa segue Miramo Town A. Jewel, Death e
+Big Bomb não entram como regra; o treino continua offline 1×1. O botão SOLO
+só indica o modo vigente.
+
+EXIT do lobby encerra o jogo. EXIT da sala volta ao lobby. A loja volta à
+tela que a abriu. ESC na sala sem popup volta ao lobby e não abre as opções
+de combate. Knight e Aduka não têm botão neste XFS (`mobile15` é RANDOM);
+os ícones usam o quadro 0 das folhas já integradas sobre o fundo azul de um
+botão de mobile. A grade 8×2 cabe no painel medido, menor que 63 px nativos.
+
+A correção seguinte torna a grade a única escolha de mobile. O popup de
+mobile e o da CPU saem; o de CHANGE (apelido, dificuldade, clima) fica.
+Clicar no lugar B não abre painel: marca “Escolhendo: máquina” e o próximo
+clique da grade aplica o ID na CPU. `pick_vehicle` segue o modo. Os lugares
+ocupados desenham o mobile acima do fundo opaco e atrás dos nomes: o piloto
+com o avatar equipado do perfil, a CPU com o piloto padrão, sem inventar
+equipamento. O casco da sala é 52 px nativos para não sair do lugar.
+
+## ADR-097 — itens da sala nos seis lugares
+
+25/10/2026. O painel direito desenhava retângulos e o nome do item abaixo dos
+seis lugares já pintados em `ready_back`, e o PopupSelectItem podia desenhar
+controles fora da janela. A carga passa a aparecer como ícone dentro de cada
+lugar. O catálogo fica no poço desse painel, limitado aos 6 slots de
+`items.gd`. A troca grava `options.items` na hora. Não muda catálogo, custo,
+CPU, combate nem rede.
+
+## ADR-098 — ícones de Knight/Aduka e peça de 2 slots
+
+25/10/2026. O botão de Knight e de Aduka usava o quadro 0 do atlas por cima
+do `b_ready_mobile01` inteiro, então o Armor desse botão aparecia junto.
+O quadro do atlas é um mobile só; o lugar da sala segue o desenho dos outros
+clássicos (um atlas e um avatar). O fundo do botão perde o glifo antes da
+colagem. Não se usa o RANDOM nem o placeholder. Item de 2 slots deixa de
+repetir o ícone em cada lugar: um controle cobre os dois retângulos e o vão,
+e o clique tira o item inteiro. Item de 1 slot permanece em um lugar.
+Catálogo, `options.items` e o teto de 6 slots não mudam. CPU continua sem itens.

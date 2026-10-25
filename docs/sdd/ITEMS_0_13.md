@@ -94,6 +94,11 @@ Física e dano (Projectile.cs / Mobile.cs):
 
 ### REQ-36 — Seleção de itens (PopupSelectItem)
 
+A sala clássica não abre mais esse modal: o ícone fica dentro de cada um dos
+seis lugares de `ready_back`, e o catálogo (abas e grade) fica no poço do
+mesmo painel. A troca grava `options.items` na hora. O texto abaixo descreve
+o popup original, que a sala deixou de usar.
+
 - No menu, "Itens" abre o `PopupSelectItem` original: fundo SelectItem, abas
   "2 Slots"/"1 Slot" (TabIndex), grade de itens (4 por linha nos de 2 slots,
   9 nos de 1 slot), nome com a cor da categoria, custo de delay e descrição

@@ -136,7 +136,8 @@ ADR-081, plano em `QUALITY_REVIEW.md`. Nenhuma regra mudou (golden master de
 | `scripts/actor_state.gd`, `scripts/shell_state.gd` | Fábricas únicas do formato de ator e de projétil (Dictionary) |
 | `scripts/json_store.gd` | Leitura tolerante e gravação atômica do perfil e das opções |
 | `scripts/cpu_turn.gd` | Turno da CPU na cena: espera, tarefa no WorkerThreadPool, disparo |
-| `scripts/menu_screen.gd` | Sala inicial 1×1 e popups do mobile, da CPU e da partida; recebe dados e callbacks, não a cena |
+| `scripts/lobby_screen.gd` | Lobby clássico (entrada): Create abre a sala, Avatar abre a loja, EXIT encerra; arte em `classic_chrome.gd` |
+| `scripts/menu_screen.gd` | Sala 1×1 no `ready_back`, alcançada pelo Create; popups do mobile, da CPU e da partida, com a API anterior |
 | `tests/support/suite.gd` | Base das suítes: `check`, `report`, `finish` no formato lido pelo `check.sh` |
 
 `TurnTable.order` é a única regra de ordem (agenda, prévia com `shot_cost`,

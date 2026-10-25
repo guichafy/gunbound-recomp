@@ -268,7 +268,7 @@ func setup(owner, shop_model) -> void:
 	gift_button=classic_button("Presente",Vector2(710,514),Vector2(68,27),func(): pass)
 	gift_button.disabled=true
 	gift_button.tooltip_text="Presentes indisponíveis no treino offline"
-	classic_button("▯  EXIT",Vector2(566,550),Vector2(107,45),host.show_menu)
+	classic_button("▯  EXIT",Vector2(566,550),Vector2(107,45),host.leave_shop)
 	var buddy=classic_button("♟  BUDDY",Vector2(683,550),Vector2(107,45),func(): pass)
 	buddy.disabled=true
 	buddy.tooltip_text="Amigos e contas ainda indisponíveis no treino offline"
@@ -752,14 +752,14 @@ func restore_controls() -> void:
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_ESCAPE:
-		# Mark handled while still in the tree; show_menu removes this shop.
+		# Mark handled while still in the tree; leave_shop removes this shop.
 		get_viewport().set_input_as_handled()
 		if is_instance_valid(modal):
 			close_buy()
 		elif attributes_panel.visible:
 			close_attributes()
 		else:
-			host.show_menu()
+			host.leave_shop()
 func _process(delta: float) -> void:
 	elapsed += delta
 	for entry in animated:

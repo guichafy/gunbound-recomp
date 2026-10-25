@@ -147,14 +147,28 @@ func run() -> void:
 	for spark_index in 12:
 		var spark: Vector2 = ClassicSprite.spark_offset(spark_index)
 		check(absi(int(spark.x)) <= 4 and absi(int(spark.y)) <= 4, "Dragon spark stays inside the client's -4..+4 scatter")
+	if view.screen == "lobby":
+		view.show_menu()
+	var by_id := {}
+	var placed: Array[Rect2] = []
+	for button in view.menu.grid_buttons:
+		var vehicle_id := int(button.get_meta("vehicle_id"))
+		var rect := Rect2(button.position, button.size)
+		var clear := true
+		for other in placed:
+			clear = clear and not rect.intersects(other)
+		placed.append(rect)
+		by_id[vehicle_id] = button
+		check(view.menu.GRID_PANEL.encloses(rect) and clear, "Grid cell %s does not overlap its neighbor" % button.tooltip_text)
+	check(view.menu.grid_buttons.size() == 16, "The room grid has one button per playable mobile")
 	for id in names:
-		var button_found := false
-		for button in view.menu.vehicle_buttons:
-			if button.text == names[id]:
-				button_found = true
-				var popup_size: Vector2 = view.menu.mobile_popup.size
-				check(button.position.x + button.size.x <= popup_size.x and button.position.y + button.size.y <= popup_size.y, "%s fits the mobile popup" % names[id])
-		check(button_found, "Menu lists %s" % names[id])
+		check(by_id.has(id) and by_id[id].tooltip_text == names[id], "Menu lists %s" % names[id])
+	view.menu.choose_player_side()
+	by_id[4].pressed.emit()
+	check(view.vehicle == 4 and view.menu.player_mobile.text == "Armor", "Clicking Armor in the grid selects the pilot")
+	view.menu.choose_cpu_side()
+	by_id[12].pressed.emit()
+	check(view.cpu_vehicle == 12 and view.menu.cpu_mobile.text == "Turtle", "Clicking Turtle in the grid selects the CPU")
 	view.queue_free()
 	await process_frame
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/classic-mobiles-profile.json"))

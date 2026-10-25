@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Lobby clássico e sala — REQ-02, ADR-096
+
+- [x] Extrair `gamelist_back`/`ready_back` e os botões EPA para `assets/classic`.
+- [x] Abrir o lobby na entrada; Create chega à sala 1×1 já existente.
+- [x] Deixar Buddy de fora; Ranking e Join desabilitados; sem rede.
+- [x] Conservar mobile, CPU, itens, apelido, dificuldade, clima e Iniciar.
+- [x] Loja volta à tela que a abriu. EXIT do lobby encerra; EXIT da sala volta ao lobby.
+- [x] Suítes de cena: 336 checks, 0 falhas (`test_scene`, `test_items_scene`, `test_roster`, `test_bigfoot`, `test_classic_mobiles`, `test_shop_wide`).
+- [x] A grade é a única escolha de mobile; lugares A/B mostram avatar do perfil e mobile. Sem modal de mobile.
+- [x] Ícone de Knight e Aduka sem o Armor por baixo; item de 2 slots é uma peça só nos dois lugares.
+- [ ] Aceite visual do lobby e da sala, e escuta. App não reexportado. Cliente original não executado.
+
 ## ASate/JD/Aduka/Raon 0.20.5 — ADR-094
 
 - [x] Investigar os quatro mobiles com Ghidra/ASM/dados e fixtures independentes.

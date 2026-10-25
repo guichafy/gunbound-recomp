@@ -1,6 +1,17 @@
 extends "res://tests/support/suite.gd"
 
 
+func tree_has_buddy(node: Node) -> bool:
+	var blob := node.name.to_lower()
+	if node is Button:
+		blob += " " + node.text.to_lower()
+	if blob.contains("buddy"):
+		return true
+	for child in node.get_children():
+		if tree_has_buddy(child):
+			return true
+	return false
+
 func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
 	scene.profile = load("res://scripts/profile.gd").new("res://.tools/smoke-profile.json")
@@ -11,7 +22,11 @@ func run() -> void:
 	if not scene.has_method("start_match"):
 		quit(1)
 		return
-	check(scene.screen == "menu" and scene.menu.nickname_input != null, "Menu shows nickname and vehicle controls")
+	check(scene.screen == "lobby" and scene.lobby != null and scene.lobby.create_button != null, "Entry opens the classic lobby")
+	check(not tree_has_buddy(scene.root), "Lobby has no Buddy button")
+	check(scene.root.find_child("Join", true, false).disabled and scene.root.find_child("Ranking", true, false).disabled, "Join and ranking stay disabled without network rooms")
+	scene.lobby.create_button.pressed.emit()
+	check(scene.screen == "menu" and scene.menu.nickname_input != null and not tree_has_buddy(scene.root), "Create opens the 1×1 room without a Buddy button")
 	var saved_name: String = scene.menu.nickname_input.text
 	scene.menu.open_settings()
 	scene.menu.nickname_input.text = "Sala Temp"
@@ -26,9 +41,12 @@ func run() -> void:
 	check(scene.screen == "menu" and scene.cpu_difficulty == 2 and scene.weather_mode == "all" and scene.menu.weather_caption.text.begins_with("Clima:"), "Aceitar grava dificuldade e clima e permanece na sala")
 	scene.cpu_difficulty = 1
 	scene.weather_mode = "original"
-	scene.menu.open_mobile()
+	scene.menu.choose_player_side()
 	scene.menu.pick_vehicle(1)
-	check(scene.vehicle == 1 and not scene.menu.popup_open() and scene.menu.portrait_name.text == "Mage", "Mobile aplica na hora e fecha o popup")
+	for button in scene.menu.grid_buttons:
+		if int(button.get_meta("vehicle_id")) == 1:
+			button.pressed.emit()
+	check(scene.vehicle == 1 and not scene.menu.popup_open() and scene.menu.portrait_name.text == "Mage" and scene.menu.choice_label.text == "Escolhendo: piloto", "O clique na grade aplica o Mage no piloto, sem popup")
 	scene.select_vehicle(2)
 	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
 	scene.opening = 0
@@ -38,9 +56,12 @@ func run() -> void:
 		shows_version = shows_version or (node is Label and node.text.ends_with("/   " + version))
 	check(not version.is_empty() and shows_version, "Menu shows the single-source project version")
 	check(scene.cpu_vehicle < 0 and scene.resolved_cpu_id() == 1, "Until a pick, Bigfoot still trains against Mage")
-	scene.menu.open_cpu_mobile()
+	scene.menu.choose_cpu_side()
 	scene.menu.pick_vehicle(4)
-	check(scene.cpu_vehicle == 4 and not scene.menu.popup_open() and scene.menu.cpu_mobile.text == "Armor", "CPU mobile applies on click and closes the popup")
+	for button in scene.menu.grid_buttons:
+		if int(button.get_meta("vehicle_id")) == 4:
+			button.pressed.emit()
+	check(scene.cpu_vehicle == 4 and scene.vehicle == 2 and not scene.menu.popup_open() and scene.menu.cpu_mobile.text == "Armor" and scene.menu.choice_label.text == "Escolhendo: máquina", "O clique na grade aplica o Armor na CPU, sem popup")
 	scene.opening = 0
 	scene.start_match()
 	check(int(scene.model.actors[1].vehicle) == 4 and int(scene.model.actors[0].vehicle) == 2, "The match drives the mobile chosen for the machine")

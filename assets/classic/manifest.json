@@ -1,0 +1,1354 @@
+{
+  "source": "jglim/gunbound-launcher TestClient graphics.xfs",
+  "archive": "graphics.xfs",
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "note": "Lobby clássico (gamelist_back, não gamelistmode) e sala (ready_back, não readymode). Buddy não é exportado: o buraco do botão é preenchido com a cor da moldura. Rank e GP do cartão são o nível e o XP locais do perfil, não um rank de servidor. mobile15 (RANDOM) fica de fora.",
+  "images": {
+    "lobby_back": {
+      "file": "lobby/back.png",
+      "entry": "gamelist_back.img",
+      "frame": 0,
+      "entry_sha256": "6836760e636dffe9bcde41442ac637875212540cc363e7c93f1dad4840ba29c8",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "lobby_chat": {
+      "file": "lobby/chat.png",
+      "entry": "gamelist_chat.img",
+      "frame": 0,
+      "entry_sha256": "274900df455c7f54d07459a6dd9354cab21ecccbc67129848437a38bb55967a4",
+      "size": [
+        549,
+        259
+      ]
+    },
+    "lobby_channel": {
+      "file": "lobby/channel.png",
+      "entry": "gamelist_channel.img",
+      "frame": 0,
+      "entry_sha256": "c45f70ee7423c7ecf0232775e9d28d9e98a84a60c1118e44b35385deab231cd5",
+      "size": [
+        207,
+        259
+      ]
+    },
+    "room_back": {
+      "file": "room/back.png",
+      "entry": "ready_back.img",
+      "frame": 0,
+      "entry_sha256": "d1042b8a8913a0c5ccbf5dfa7b6b7193116b38abad941c6329e8f230f9c021b9",
+      "size": [
+        800,
+        600
+      ]
+    },
+    "lobby_buddy_fill": {
+      "file": "lobby/buddy_fill.png",
+      "entry": "gamelist_back.img",
+      "note": "Amostrado da moldura em volta do buraco x=163 y=551 107×45. Não usa b_gamelist_buddy.",
+      "size": [
+        107,
+        45
+      ]
+    }
+  },
+  "strips": {
+    "b_gamelist_exit": {
+      "file": "lobby/b_gamelist_exit.png",
+      "entry": "b_gamelist_exit.img",
+      "entry_sha256": "c9102ad7390e65420f8a8ad8147633f4a5e1f0bb3f32e7090fd24fd78924fb8b",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_gamelist_exit.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_gamelist_ranking": {
+      "file": "lobby/b_gamelist_ranking.png",
+      "entry": "b_gamelist_ranking.img",
+      "entry_sha256": "c00eede7867625976045b2a7040dd7909d2d6fa7d72e8689d2e963726143c470",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_gamelist_ranking.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_gamelist_avatar": {
+      "file": "lobby/b_gamelist_avatar.png",
+      "entry": "b_gamelist_avatar.img",
+      "entry_sha256": "4af1d866a317538f4de4d1ff947d8f9f27204831439b7afad5989f6152f4c473",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_gamelist_avatar.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_gamelist_create": {
+      "file": "lobby/b_gamelist_create.png",
+      "entry": "b_gamelist_create.img",
+      "entry_sha256": "2e911d68e0fcb0ba804b6c2feb8c41e9519f0ae34936531a0d0c2d1e4de11fd0",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_gamelist_create.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_gamelist_join": {
+      "file": "lobby/b_gamelist_join.png",
+      "entry": "b_gamelist_join.img",
+      "entry_sha256": "bdb7c8a85c4ad0d869e392ef9c1ffbc99e3c13d2e61f1186e67874590cf5e797",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_gamelist_join.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_gamelist_viewall": {
+      "file": "lobby/b_gamelist_viewall.png",
+      "entry": "b_gamelist_viewall.img",
+      "entry_sha256": "630ae35df67c0b6521f46e31b090735c83f1f7a599a72eaa80d3d66107f09223",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        81,
+        33
+      ],
+      "frames": 5,
+      "epa": "b_gamelist_viewall.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ],
+        "active": [
+          4
+        ]
+      }
+    },
+    "b_gamelist_wait": {
+      "file": "lobby/b_gamelist_wait.png",
+      "entry": "b_gamelist_wait.img",
+      "entry_sha256": "3a3316997b2a6b2f22ce671591077042e917d0101313f92a04fa2f0291beee09",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        81,
+        33
+      ],
+      "frames": 5,
+      "epa": "b_gamelist_wait.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ],
+        "active": [
+          4
+        ]
+      }
+    },
+    "b_gamelist_friend": {
+      "file": "lobby/b_gamelist_friend.png",
+      "entry": "b_gamelist_friend.img",
+      "entry_sha256": "9e6aed8ff4dfe32468d7ff3b8265b0842bc7767de66246336ed2c55c64e886f7",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        82,
+        33
+      ],
+      "frames": 5,
+      "epa": "b_gamelist_friend.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ],
+        "active": [
+          4
+        ]
+      },
+      "note": "O quadro active mede 82×33; a tira alinha todos em 82."
+    },
+    "b_gamelist_directgo": {
+      "file": "lobby/b_gamelist_directgo.png",
+      "entry": "b_gamelist_directgo.img",
+      "entry_sha256": "eece8798c40efcbe49596ae8441ea3a8fda6ee46bda1f27f0dd260333c3862fa",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        82,
+        33
+      ],
+      "frames": 5,
+      "epa": "b_gamelist_directgo.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      },
+      "note": "O EPA não declara active; o quadro 4 entra assim mesmo, como no pedido."
+    },
+    "b_gamelist_prev": {
+      "file": "lobby/b_gamelist_prev.png",
+      "entry": "b_gamelist_prev.img",
+      "entry_sha256": "d7b9f6111868a281c837f38ebd50f1eb460cf69333e38826cf7e0c8d40705d6f",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        49,
+        33
+      ],
+      "frames": 4,
+      "epa": "b_gamelist_prev.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_gamelist_next": {
+      "file": "lobby/b_gamelist_next.png",
+      "entry": "b_gamelist_next.img",
+      "entry_sha256": "c24193b43b90732e506959e534359521bee6b5b2fb75e5a0c68a89a83648b8df",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        49,
+        33
+      ],
+      "frames": 4,
+      "epa": "b_gamelist_next.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_ready_exit": {
+      "file": "room/b_ready_exit.png",
+      "entry": "b_ready_exit.img",
+      "entry_sha256": "256217065a98e848822eafff1577ecd6af5e90369b9a2f04f8f619d758b12b63",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_ready_exit.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_ready_changeteam": {
+      "file": "room/b_ready_changeteam.png",
+      "entry": "b_ready_changeteam.img",
+      "entry_sha256": "8951c0afbb3261c2cbbb546093077e4eafaedfcdaaee771d7ceea8947b539484",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_ready_changeteam.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      }
+    },
+    "b_ready_start": {
+      "file": "room/b_ready_start.png",
+      "entry": "b_ready_start.img",
+      "entry_sha256": "d9348fa9822167db948d71fe2e763299257f46f72e061bebda2efa3be30d0a96",
+      "img_indices": [
+        0,
+        1,
+        6,
+        9
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        124,
+        38
+      ],
+      "frames": 4,
+      "epa": "b_ready_start.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          6,
+          7,
+          8
+        ],
+        "mouse": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "disable": [
+          9
+        ],
+        "select": [
+          0
+        ]
+      },
+      "note": "EPA: normal 0, hover 1, push 6, disable 9. A tira guarda o primeiro quadro de cada estado."
+    },
+    "b_ready_mapprev": {
+      "file": "room/b_ready_mapprev.png",
+      "entry": "b_ready_mapprev.img",
+      "entry_sha256": "eb093388475042d93fc20ef60e4333295bef988a540b453e2f64764a1076b094",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        28,
+        28
+      ],
+      "frames": 4,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA."
+    },
+    "b_ready_mapnext": {
+      "file": "room/b_ready_mapnext.png",
+      "entry": "b_ready_mapnext.img",
+      "entry_sha256": "b638933b5d88d4eaef43e49e979a3ff8048172588e125147a6501f110343f44b",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        28,
+        28
+      ],
+      "frames": 4,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA."
+    },
+    "b_ready_solo": {
+      "file": "room/b_ready_solo.png",
+      "entry": "b_ready_solo.img",
+      "entry_sha256": "e49ad854629ebd6158490a2ce168d968ef21278576c7e87b75f189c1aba708ea",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        81,
+        24
+      ],
+      "frames": 4,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Mostrado como modo vigente, sem regra extra."
+    },
+    "b_gamechat_ch1": {
+      "file": "lobby/b_gamechat_ch1.png",
+      "entry": "b_gamechat_ch1.img",
+      "entry_sha256": "70cbda41070c9f145fe1506a791752123ec7adbb0c351d5d7cbc5de9c36a3dee",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_gamechat_ch2": {
+      "file": "lobby/b_gamechat_ch2.png",
+      "entry": "b_gamechat_ch2.img",
+      "entry_sha256": "ebf2517ed507304895df8d5e8c9817fb6c9bfe19d0cc8de73e13e4e6682416bf",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_gamechat_ch3": {
+      "file": "lobby/b_gamechat_ch3.png",
+      "entry": "b_gamechat_ch3.img",
+      "entry_sha256": "1fc43d108acf6bf9a7adf700482bafa3e915e6a2a8aa0c271708151a48509780",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_gamechat_ch4": {
+      "file": "lobby/b_gamechat_ch4.png",
+      "entry": "b_gamechat_ch4.img",
+      "entry_sha256": "3e66e1619727ea31ae669b0be2d3e01b721948cbdffdbf39b86450c3635de7a0",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_gamechat_ch5": {
+      "file": "lobby/b_gamechat_ch5.png",
+      "entry": "b_gamechat_ch5.img",
+      "entry_sha256": "3a4883819f8bbaae2a64a51d3637087ea0ebe0afaf05cd8ef39ab87c6bc5733b",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_gamechat_ch6": {
+      "file": "lobby/b_gamechat_ch6.png",
+      "entry": "b_gamechat_ch6.img",
+      "entry_sha256": "e04044e029a7edf417a9849cfc1702156b9fa64cea291dc065666d0c491976f7",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_gamechat_ch7": {
+      "file": "lobby/b_gamechat_ch7.png",
+      "entry": "b_gamechat_ch7.img",
+      "entry_sha256": "c0f295bab2fa9adae55be3757f52b90dd37313a65e5a091b6fa88212a83f4974",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_gamechat_ch8": {
+      "file": "lobby/b_gamechat_ch8.png",
+      "entry": "b_gamechat_ch8.img",
+      "entry_sha256": "2c516daa4ae18a34cdae74554ea64f3866effed7efaa85d49922563cd21c9a35",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        22,
+        22
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+    },
+    "b_ready_mobile01": {
+      "file": "room/b_ready_mobile01.png",
+      "entry": "b_ready_mobile01.img",
+      "entry_sha256": "9f4230ea4ca41e23e90d4fddd77663fb206d15ed39cbe7412a9309017cdd06f0",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile02": {
+      "file": "room/b_ready_mobile02.png",
+      "entry": "b_ready_mobile02.img",
+      "entry_sha256": "ebf0aaa7b2e38056ce83cc63387779fe9a0e04cc93182dc8b3801911292b1990",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile03": {
+      "file": "room/b_ready_mobile03.png",
+      "entry": "b_ready_mobile03.img",
+      "entry_sha256": "2629a646ff60521df23ee09fed520d18c85499f068d5d74774a3477b5d7b2613",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile04": {
+      "file": "room/b_ready_mobile04.png",
+      "entry": "b_ready_mobile04.img",
+      "entry_sha256": "caa95bced6fe4d658ba1641a72a3e111b67fb59f84dc94a2ad4700591346c6fb",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile05": {
+      "file": "room/b_ready_mobile05.png",
+      "entry": "b_ready_mobile05.img",
+      "entry_sha256": "7dd8d5788bc5ea4998f9ab5deb9bc54c3c6562bd993bc0a133d7903d2906811a",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile06": {
+      "file": "room/b_ready_mobile06.png",
+      "entry": "b_ready_mobile06.img",
+      "entry_sha256": "adfb770e003f128a6bf1b8d600ebbe6113ec0253f2079bfc9be9a6efc94b2711",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile07": {
+      "file": "room/b_ready_mobile07.png",
+      "entry": "b_ready_mobile07.img",
+      "entry_sha256": "dc690c7f470ee07a2a380a5448f1dd8d66103b4813797aed9dbd053461c940ad",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile08": {
+      "file": "room/b_ready_mobile08.png",
+      "entry": "b_ready_mobile08.img",
+      "entry_sha256": "120b7755087177d2b4d4e687e37a3446162e585cfd38de9beb869ef64f6bde26",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile09": {
+      "file": "room/b_ready_mobile09.png",
+      "entry": "b_ready_mobile09.img",
+      "entry_sha256": "33fc65e84550be5f196078d5e43c1312dfc3f8cc5443931d09be87276466e24d",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile10": {
+      "file": "room/b_ready_mobile10.png",
+      "entry": "b_ready_mobile10.img",
+      "entry_sha256": "ddf3f4864c8ba40583c763f1dff7897666c73fed74d849624591735d0fcc6606",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile11": {
+      "file": "room/b_ready_mobile11.png",
+      "entry": "b_ready_mobile11.img",
+      "entry_sha256": "9286fc546a586a549e1aa7b6603e7b412eabf8b1dc0cd660db9a2a09be3d6cb0",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile12": {
+      "file": "room/b_ready_mobile12.png",
+      "entry": "b_ready_mobile12.img",
+      "entry_sha256": "fa63ae46ffce788776e39b79bdc3a53363034b0c481046cf060de6d7574ff263",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile13": {
+      "file": "room/b_ready_mobile13.png",
+      "entry": "b_ready_mobile13.img",
+      "entry_sha256": "75ff53c39a0250f67ae3cc9e639336f286a721549806f163e132da16fc8eaf9a",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile14": {
+      "file": "room/b_ready_mobile14.png",
+      "entry": "b_ready_mobile14.img",
+      "entry_sha256": "b817befdf524c027c7e03f712d02b98a4ce2113b4fa97123d4af9e8a78c01fd1",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+    },
+    "b_ready_mobile_knight": {
+      "file": "room/b_ready_mobile_knight.png",
+      "entry": null,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Quadro 0 de CharacterSpritesheet.png (célula 81x72) sobre o fundo dos cinco quadros de b_ready_mobile01.img, sem o Armor desse botão. O XFS não tem botão de Knight nem de Aduka; mobile15 é RANDOM e não entra.",
+      "source_sheet": "assets/openbound/knight/CharacterSpritesheet.png",
+      "source_cell": [
+        81,
+        72
+      ],
+      "background_entry": "b_ready_mobile01.img"
+    },
+    "b_ready_mobile_aduka": {
+      "file": "room/b_ready_mobile_aduka.png",
+      "entry": null,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Quadro 0 de CharacterSpritesheet.png (célula 73x62) sobre o fundo dos cinco quadros de b_ready_mobile01.img, sem o Armor desse botão. O XFS não tem botão de Knight nem de Aduka; mobile15 é RANDOM e não entra.",
+      "source_sheet": "assets/openbound/aduka/CharacterSpritesheet.png",
+      "source_cell": [
+        73,
+        62
+      ],
+      "background_entry": "b_ready_mobile01.img"
+    },
+    "b_ready_mobile_dragon": {
+      "file": "room/b_ready_mobile_dragon.png",
+      "entry": null,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "img_indices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "frame_size": [
+        63,
+        47
+      ],
+      "frames": 5,
+      "note": "Quadro 0 de CharacterSpritesheet.png (célula 82x76) sobre o fundo dos cinco quadros de b_ready_mobile01.img, sem o Armor desse botão. O XFS não tem botão de Knight nem de Aduka; mobile15 é RANDOM e não entra.",
+      "source_sheet": "assets/openbound/dragon/CharacterSpritesheet.png",
+      "source_cell": [
+        82,
+        76
+      ],
+      "background_entry": "b_ready_mobile01.img"
+    }
+  }
+}

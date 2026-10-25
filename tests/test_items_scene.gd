@@ -1,5 +1,5 @@
 extends "res://tests/support/suite.gd"
-## REQ-35..37 in the scene: item bar, queued use, Ignorance lock, PopupSelectItem,
+## REQ-35..37 in the scene: item bar, queued use, Ignorance lock, room item panel,
 ## teleport presentation and HD/fallback textures (ITEMS_0_13.md).
 func key(scene, code: Key) -> void:
 	var event := InputEventKey.new()
@@ -19,32 +19,33 @@ func run() -> void:
 	root.add_child(scene)
 	scene.sound.muted = true
 	check(scene.options.items == Items.DEFAULT_LOADOUT, "Without a saved file the loadout is Dual, Teleport, Power Up, Energy Up 1")
+	if scene.screen == "lobby":
+		scene.show_menu()
 
-	# PopupSelectItem: tabs, add within 6 slots, remove, Accept saves.
+	# Room panel: icons inside the six painted slots, catalog in the well, save on change.
 	scene.menu.nickname_input.text = "Novo Piloto"
-	scene.show_items()
-	var popup = scene.overlays.items_popup
-	check(popup != null and scene.overlays.kind == "items" and popup.grid_buttons.size() == 6, "Items opens Select Item on the 2-slot tab (six items)")
-	popup.select_tab(1)
-	check(popup.grid_buttons.size() == 5 and popup.tab_buttons[1].disabled and not popup.tab_buttons[0].disabled, "The 1-slot tab lists five items and shows as selected")
+	var panel = scene.menu
+	check(panel.item_grid_buttons.size() == 6 and panel.item_tab == 0 and panel.catalog_inside_panel() and panel.icons_inside_slots(), "The room lists six 2-slot items inside the right panel")
+	check(panel.item_slot_buttons[0].position == Vector2(524, 365) and panel.item_slot_buttons[0].size == Vector2(69, 29) and panel.item_slot_buttons[0].get_child_count() == 0 and not panel.item_slot_buttons[1].visible and panel.item_slot_buttons[1].texture_normal == null, "Dual is one rectangle over both painted slots, without a second icon")
+	panel.select_item_tab(1)
+	check(panel.item_grid_buttons.size() == 5 and panel.item_tab_buttons[1].disabled and not panel.item_tab_buttons[0].disabled and panel.catalog_inside_panel(), "The 1-slot list has five items, stays in the panel and shows as selected")
 	var before: Array = scene.options.items.duplicate()
-	popup.add_item("blood")
+	panel.item_grid_buttons[0].pressed.emit()
 	check(scene.options.items == before, "A full bar ignores new items")
-	popup.remove_item(0)
-	check(scene.options.items == ["teleport", "power_up", "energy_up_1"] and popup.equipped_buttons.size() == 3, "Clicking an equipped item removes it")
-	popup.add_item("change_wind")
-	popup.add_item("blood")
+	panel.item_slot_buttons[0].pressed.emit()
+	check(scene.options.items == ["teleport", "power_up", "energy_up_1"] and panel.equipped_buttons.size() == 3, "Clicking an equipped slot removes that item")
+	panel.item_grid_buttons[3].pressed.emit()
+	panel.item_grid_buttons[0].pressed.emit()
 	check(Items.used_slots(scene.options.items) == 6 and scene.options.items.back() == "blood", "Freed slots accept 1-slot items")
-	var first_x: float = popup.equipped_buttons[0].position.x
-	var second_x: float = popup.equipped_buttons[1].position.x
-	check(absf(second_x - first_x - 72.0 * 1.6) <= 1.0, "Equipped buttons sit side by side (width − 1) × K")
-	popup.hover("dual_plus")
-	check(popup.hovered == "dual_plus", "Hover shows the item name, delay and description")
-	popup.accepted.emit()
+	var span: int = Items.slots(str(scene.options.items[0]))
+	check(panel.equipped_buttons.size() == scene.options.items.size() and absf(panel.equipped_buttons[1].position.x - panel.equipped_buttons[0].position.x - 36.0 * span) <= 1.0 and panel.equipped_buttons[0].size == Vector2(69, 29) and panel.equipped_buttons[1].size == Vector2(33, 29) and panel.icons_inside_slots(), "A 2-slot piece covers both places, a 1-slot piece covers one, and the next item starts after that span")
+	panel.hover_item("dual_plus")
+	var line: Dictionary = panel.hover_line()
+	check(panel.item_hovered == "dual_plus" and line.name == "Dual+" and line.delay == str(roundi(Items.delay("dual_plus"))) and line.description == Items.definition("dual_plus").description, "Hover keeps the item name, delay and description")
 	var reloaded = Options.new(options_path)
 	reloaded.load_options()
-	check(scene.overlays.layer == null and reloaded.items == ["teleport", "power_up", "energy_up_1", "change_wind", "blood"], "Accept closes and saves the loadout next to the profile")
-	check(scene.menu.nickname_input.text == "Novo Piloto" and scene.menu.items_button.text == "Itens (6/6)", "Closing the popup keeps the typed nickname and updates the slot count")
+	check(scene.overlays.layer == null and reloaded.items == ["teleport", "power_up", "energy_up_1", "change_wind", "blood"], "Changing the loadout saves it next to the profile and does not open a modal")
+	check(scene.menu.nickname_input.text == "Novo Piloto" and Items.used_slots(scene.options.items) == 6 and panel.filled_slot_count() == 6, "Editing items keeps the typed nickname and the six-slot count")
 
 	# Battle: the bar follows the loadout and EquippedButtonBar spacing.
 	scene.options.items = ["dual", "teleport", "power_up", "energy_up_1"]

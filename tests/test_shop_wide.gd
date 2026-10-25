@@ -108,7 +108,7 @@ func run() -> void:
 	escape.physical_keycode=KEY_ESCAPE
 	root.push_input(escape)
 	await process_frame
-	check(scene.screen=="menu" and root.content_scale_size==Vector2i(1280,800) and root.content_scale_mode==Window.CONTENT_SCALE_MODE_CANVAS_ITEMS,"ESC leaves shop and restores arena/menu stretch settings")
+	check(scene.screen=="lobby" and root.content_scale_size==Vector2i(1280,800) and root.content_scale_mode==Window.CONTENT_SCALE_MODE_CANVAS_ITEMS,"ESC leaves shop back to the screen that opened it and restores stretch settings")
 	root.size=Vector2i(1920,1080)
 	scene.show_shop()
 	await process_frame

@@ -1,5 +1,79 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Sala — ícone do Dragon
+
+`b_ready_mobile14` do cliente é o Aduka, o mobile que vem depois do Grub.
+A grade entregava esse botão ao Dragon (ID 14). O Dragon passa a usar o
+quadro 0 do atlas `tank14` (`b_ready_mobile_dragon`); o Aduka (ID 16) fica
+com o botão original 14. Sem mudança de ID, de combate ou de versão.
+
+## Sala — Knight, Aduka e item de 2 slots
+
+O ícone de Knight e de Aduka colava o quadro 0 do atlas por cima do botão
+inteiro de `b_ready_mobile01`, que já traz o Armor. O recorte do spritesheet
+é um só mobile; o lugar A/B também desenha um atlas e um avatar, o mesmo
+caminho dos outros clássicos, sem empilhar casco, arma e piloto. O fundo do
+botão agora perde o Armor antes da colagem. Item de 2 slots é um retângulo
+só (os dois lugares e o vão); item de 1 slot continua em um. Clique na peça
+remove o item inteiro. Catálogo, gravação e o limite de 6 slots permanecem.
+CPU sem itens. Sem rede, sem commit, sem reexportar e sem mudar a versão.
+
+Suítes: `scripts/check.sh test_items_scene test_scene test_roster`.
+Resultado: **154 checks, 0 falhas** (itens 47, cena 27, roster 80).
+Aceite visual da sala ainda depende do olhar do usuário. O cliente original
+não foi executado. Sem captura nova.
+
+## Sala — grade, lugares e avatar — ADR-096
+
+A grade 8×2 é a única escolha de mobile. Cada ícone cabe na própria célula
+do poço (36×28, passo 41×40); o PNG de 63×47 não invade o vizinho. O clique
+aplica no piloto. O lugar B só muda o modo (“Escolhendo: máquina”) e o
+próximo clique da mesma grade vale para a CPU. O modal de mobile saiu; o
+popup de CHANGE permanece.
+
+Os lugares A e B desenham o mobile num nó acima do fundo e atrás dos nomes.
+O piloto usa o avatar equipado do perfil, no mesmo encaixe da arena. A CPU
+fica com o piloto padrão, sem as peças do perfil. O casco na sala é 52 px
+nativos para o cell mais largo caber nos 124 px do lugar. Sem rede, sem
+commit, sem reexportar e sem mudar a versão.
+
+Suítes: `scripts/check.sh test_scene test_roster test_bigfoot test_classic_mobiles test_items_scene`.
+Resultado: **324 checks, 0 falhas** (cena 27, roster 80, Bigfoot 28, clássicos 142, itens 47).
+
+Pendente: aceite visual do usuário (pés na base, cabeça abaixo do nome, sentido). Sem captura nova. O cliente original não foi executado.
+
+## Lobby clássico e sala — ADR-096
+
+A entrada passou a ser o lobby (`gamelist_back`). Create abre a sala 1×1
+(`ready_back`), que conserva mobile, CPU, itens, apelido, dificuldade, clima
+e Iniciar. Buddy não entra. Ranking e Join ficam desabilitados. Sem rede.
+Rank/GP do cartão são nível e XP locais. O mapa segue Miramo Town A. Jewel,
+Death e Big Bomb não viram regra. A loja volta à tela que a abriu. O app não
+foi reexportado e a versão do `project.godot` não mudou.
+
+Extração: `python3 scripts/import_classic_lobby.py` (SHA do XFS conferido).
+Suítes: `scripts/check.sh test_scene test_items_scene test_roster test_bigfoot test_classic_mobiles test_shop_wide`.
+
+Resultado: **336 checks, 0 falhas** (cena 27, itens 46, roster 63, Bigfoot 28,
+clássicos 136, loja larga 36). O ESC da loja aberta na entrada volta ao lobby;
+`test_shop_wide` foi ajustado para essa volta, sem afrouxar o resto.
+
+Pendente: aceite visual do lobby e da sala, escuta, e o cliente original não
+foi executado. Sem captura nova. A grade de mobiles cabe no painel medido, então
+os ícones de 63×47 aparecem reduzidos. Importação Godot dos PNG concluiu;
+gravar `editor_settings` falhou por permissão ambiental, como nas entregas anteriores.
+
+## Itens da sala no painel direito
+
+Os seis lugares pintados em `ready_back` mostram o ícone do item. O nome
+deixou de ser um rótulo no poço abaixo desses retângulos, onde vazava para
+fora. A escolha fica nesse painel, grava em `options.items` ao mudar e não
+abre o modal Select Item. Sem rede, sem regra nova de combate e sem app novo.
+
+Suítes: `scripts/check.sh test_items_scene test_scene` — **74 checks, 0 falhas**
+(itens 47, cena 27). Sem captura da sala nesta correção; o cliente original
+não foi executado e não houve validação de escuta nem de mouse.
+
 ## Correções ASate/JD/Aduka/Raon — ADR-094
 
 Ler SPECIAL_MOBILES_CLASSIC_FIX.md e os quatro registros CLASSIC_FIX.

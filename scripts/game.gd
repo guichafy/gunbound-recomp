@@ -4,6 +4,7 @@ extends Node2D
 const Match = preload("res://scripts/match.gd")
 const CpuTurn = preload("res://scripts/cpu_turn.gd")
 const MenuScreen = preload("res://scripts/menu_screen.gd")
+const LobbyScreen = preload("res://scripts/lobby_screen.gd")
 const Combat = preload("res://scripts/combat.gd")
 const AvatarShop = preload("res://scripts/avatar_shop.gd")
 const ShopModel = preload("res://scripts/avatar_shop_model.gd")
@@ -41,7 +42,7 @@ var profile = null
 # PopupGameOptions values; saved next to the profile (tests isolate both).
 var options
 var sound = null
-var screen := "menu"
+var screen := "lobby"
 var root: Control
 var background: Texture2D
 var map_backgrounds := {}
@@ -52,8 +53,11 @@ var aim := AimControl.new()
 var overlays := MatchOverlay.new()
 var dragging := false
 var pan_mask := MOUSE_BUTTON_MASK_LEFT
-# Start menu (MenuScreen): its controls live there, built from data and callbacks.
+# Lobby (entrada) e sala 1×1. Os controles vivem nesses objetos, não na cena.
+var lobby = null
 var menu = null
+# A loja volta para a tela que a abriu (lobby ou sala).
+var shop_return := "lobby"
 var vehicle := 2
 # -1 follows Mobiles.opponent. A room pick stores that mobile until changed.
 var cpu_vehicle := -1
@@ -115,7 +119,7 @@ func _ready() -> void:
 	apply_options()
 	overlays.opened.connect(_on_overlay_opened)
 	overlays.closed.connect(_on_overlay_closed)
-	show_menu()
+	show_lobby()
 
 ## An overlay pauses the match, drops a charge and locks the Options button.
 func _on_overlay_opened(kind: String) -> void:
@@ -144,24 +148,50 @@ func replace_root() -> void:
 	paused = false
 	aim.charging = false
 
-func show_menu() -> void:
+## Drops the room controls after replace_root has queued them for deletion.
+func _clear_front() -> void:
+	if screen == "menu" and menu != null and is_instance_valid(menu.nickname_input):
+		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
+		profile.save_profile()
 	weather_art.native_beam_art.clear()
-	screen = "menu"
-	model.phase = Match.PHASE_MENU
 	cpu.discard()
 	sound.stop_music()
 	result_wait = -1.0
 	effects.clear()
 	floating.clear()
 	replace_root()
+	menu = null
+	lobby = null
+
+func show_lobby() -> void:
+	_clear_front()
+	screen = "lobby"
+	model.phase = Match.PHASE_MENU
+	lobby = LobbyScreen.new()
+	lobby.build(root, ui, {"version": version(), "nickname": profile.nickname, "level": profile.level(),
+		"xp": profile.xp, "gold": profile.gold, "cash": profile.cash},
+		{"create": show_menu, "show_shop": show_shop, "quit": quit_game})
+	queue_redraw()
+
+func show_menu() -> void:
+	_clear_front()
+	screen = "menu"
+	model.phase = Match.PHASE_MENU
 	menu = MenuScreen.new()
 	menu.build(root, ui, {"version": version(), "nickname": profile.nickname, "difficulty": cpu_difficulty,
 		"weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
-		"level": profile.level(), "xp": profile.xp, "wins": profile.wins, "cpu_vehicle": resolved_cpu_id()},
+		"items": options.items.duplicate(), "level": profile.level(), "xp": profile.xp, "wins": profile.wins,
+		"cpu_vehicle": resolved_cpu_id(), "item_art": item_art},
 		{"select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
-		"set_weather": set_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop, "show_help": show_help})
+		"set_weather": set_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop,
+		"show_help": show_help, "leave": show_lobby, "commit_items": commit_items})
+	menu.figures.paint = draw_room_figures
 	select_vehicle(vehicle)
+	menu.figures.queue_redraw()
 	queue_redraw()
+
+func quit_game() -> void:
+	get_tree().quit()
 
 ## Single source of the version: application/config/version (ADR-081).
 static func version() -> String:
@@ -172,14 +202,27 @@ func show_shop() -> void:
 		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
 	if not profile.save_profile():
 		return
+	if screen == "lobby" or screen == "menu":
+		shop_return = screen
 	cpu.discard()
 	sound.stop_music()
 	replace_root()
+	menu = null
+	lobby = null
 	screen = "shop"
 	shop = AvatarShop.new()
 	root.add_child(shop)
 	shop.setup(self,ShopModel.new(profile))
 	queue_redraw()
+
+## Volta à tela que abriu a loja (lobby ou sala).
+func leave_shop() -> void:
+	var back := shop_return
+	shop_return = "lobby"
+	if back == "menu":
+		show_menu()
+	else:
+		show_lobby()
 
 ## Training option: the map's original weather weights or every effect.
 ## The room popup sets the mode on Accept; it does not flip a live button.
@@ -363,6 +406,8 @@ func _process(delta: float) -> void:
 	if not paused:
 		elapsed += minf(delta, 0.1)
 	queue_redraw()
+	if screen == "menu" and menu != null and is_instance_valid(menu.figures):
+		menu.figures.queue_redraw()
 	if screen != "match" or paused:
 		return
 	var frame_delta := minf(delta, 0.1)
@@ -547,6 +592,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				close_overlay()
 		elif screen == "menu" and menu != null and menu.popup_open():
 			menu.cancel_popup()
+		elif screen == "menu":
+			show_lobby()
 		elif screen == "match":
 			show_options()
 		return
@@ -596,19 +643,23 @@ func accept_options() -> void:
 	options.save_options()
 	close_overlay()
 
+## A sala grava a carga no painel direito. Não abre o modal Select Item.
 func show_items() -> void:
-	overlays.show_items(self)
+	pass
 
 func items_label() -> String:
 	return "Itens (%d/6)" % Items.used_slots(options.items)
 
-## Closing the popup keeps the menu (and the nickname being typed) in place.
-func accept_items() -> void:
-	options.items = Items.sanitize(options.items)
+func commit_items(next: Array) -> void:
+	options.items = Items.sanitize(next)
 	options.save_options()
+	if menu != null:
+		menu.show_loadout(options.items)
+
+## ESC ainda grava se um modal de itens antigo estiver aberto.
+func accept_items() -> void:
+	commit_items(options.items)
 	close_overlay()
-	if menu != null and is_instance_valid(menu.items_button):
-		menu.items_button.text = items_label()
 
 func show_pause() -> void:
 	overlays.show_pause(self)
@@ -616,13 +667,33 @@ func show_pause() -> void:
 func show_result() -> void:
 	overlays.show_result(self)
 
-func _draw() -> void:
-	if background == null:
+## Margins beside the 800×600 stage. The stage itself draws the classic art.
+func _draw_classic_front() -> void:
+	var origin_x := (1280.0 - 800.0 * 4.0 / 3.0) * 0.5
+	var stage_right := origin_x + 800.0 * 4.0 / 3.0
+	draw_rect(Rect2(0, 0, origin_x, 800), Color("6a8dac"))
+	draw_rect(Rect2(stage_right, 0, 1280.0 - stage_right, 800), Color("4a446a"))
+
+## Dois mobiles da sala, no nó que fica acima do fundo e atrás dos botões.
+## O piloto usa o equipamento do perfil. A CPU fica com o piloto padrão.
+func draw_room_figures(canvas: Node2D) -> void:
+	if menu == null:
 		return
+	var bob := roundf(sin(elapsed * 1.6) * 2.0)
+	draw_figure(canvas, vehicle, menu.player_anchor + Vector2(0, bob), 1, profile.equipped_set())
+	var cpu_bob := roundf(sin(elapsed * 1.6 + 1.4) * 2.0)
+	draw_figure(canvas, resolved_cpu_id(), menu.cpu_anchor + Vector2(0, cpu_bob), -1, {})
+
+func _draw() -> void:
 	if screen == "shop":
 		draw_rect(Rect2(0,0,1280,800),Color("11223c"))
 		return
-	var backdrop: Dictionary = map_background(model.map_id) if screen != "menu" and model.terrain != null else {}
+	if screen == "lobby" or screen == "menu":
+		_draw_classic_front()
+		return
+	if background == null:
+		return
+	var backdrop: Dictionary = map_background(model.map_id) if model.terrain != null else {}
 	if screen == "match" and not options.background:
 		# PopupGameOptions "Background: Off" hides the map backdrop.
 		draw_rect(Rect2(0, 0, 1280, 800), Color.BLACK)
@@ -630,14 +701,6 @@ func _draw() -> void:
 		draw_texture_rect(background, Rect2(0, 0, 1280, 800), false)
 	else:
 		draw_texture_rect_region(backdrop.texture, Rect2(0, 0, 1280, 800), background_region(backdrop))
-	if screen == "menu":
-		var bob := roundf(sin(elapsed * 1.6) * 2.0)
-		var player_at: Vector2 = menu.player_anchor if menu != null else Vector2(226, 420)
-		draw_sprite(vehicle, (player_at + Vector2(0, bob)).round(), MenuScreen.MOBILE_WIDTH, 1)
-		if menu != null:
-			var cpu_bob := roundf(sin(elapsed * 1.6 + 1.4) * 2.0)
-			draw_sprite(resolved_cpu_id(), (menu.cpu_anchor + Vector2(0, cpu_bob)).round(), MenuScreen.MOBILE_WIDTH, -1)
-		return
 	if model.terrain == null:
 		return
 	var offset := (Vector2(sin(elapsed * 81.0), cos(elapsed * 74.0)) * shake - rig.position).round()
@@ -852,9 +915,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		rig.manual = true
 		rig.position = clamp_camera(rig.position - event.relative * options.scroll_factor())
 
-func draw_sprite(kind: int, pos: Vector2, width: float, facing: int, rotation: float = 0.0, color: Color = Color.WHITE) -> void:
+func draw_figure(canvas: Node2D, kind: int, pos: Vector2, facing: int, equipment: Dictionary) -> void:
 	var body = sprite_for(kind)
 	if body == null:
 		return
-	body.draw(self, SpritePose.new(pos, width, facing, {"rotation": rotation, "frame": body.frame_index("idle", elapsed, 0, false),
-		"color": color, "age": elapsed, "avatar_context": {"equipment": profile.equipped_set(), "age": elapsed}}))
+	var context := {}
+	if not equipment.is_empty():
+		context = {"equipment": equipment, "age": elapsed}
+	body.draw(canvas, SpritePose.new(pos.round(), MenuScreen.MOBILE_WIDTH, facing, {
+		"frame": body.frame_index("idle", elapsed, 0, false),
+		"age": elapsed,
+		"avatar_context": context,
+	}))

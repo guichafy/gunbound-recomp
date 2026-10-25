@@ -6,9 +6,14 @@ func run() -> void:
 	scene.profile = load("res://scripts/profile.gd").new("res://.tools/bigfoot-profile.json")
 	root.add_child(scene)
 	scene.sound.muted = true
-	check(scene.menu.vehicle_buttons.size() == 16, "Menu offers the classic roster, Bigfoot included")
+	if scene.screen == "lobby":
+		scene.show_menu()
+	var bigfoot_in_grid := false
+	for button in scene.menu.grid_buttons:
+		bigfoot_in_grid = bigfoot_in_grid or int(button.get_meta("vehicle_id")) == 2
+	check(scene.menu.grid_buttons.size() == 16 and bigfoot_in_grid, "Menu offers the classic roster, Bigfoot included")
 	check(ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"), "Original atlas animation renderer is available")
-	if scene.menu.vehicle_buttons.size() < 2 or not ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"):
+	if scene.menu.grid_buttons.size() < 2 or not ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"):
 		scene.queue_free()
 		await process_frame
 		quit(1)

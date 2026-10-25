@@ -23,18 +23,39 @@ func run() -> void:
 	root.add_child(view)
 	view.set_process(false)
 	view.sound.muted = true
-	check(view.menu.vehicle_buttons.size() == 16, "Menu displays the full classic roster")
-	for button in view.menu.vehicle_buttons:
-		check(button.position.x + button.size.x <= view.menu.mobile_popup.size.x and button.position.y + button.size.y <= view.menu.mobile_popup.size.y, "Vehicle button %s fits the mobile popup" % button.text)
+	if view.screen == "lobby":
+		view.show_menu()
+	var seen := {}
+	var placed: Array[Rect2] = []
+	check(view.menu.grid_buttons.size() == 16, "Menu displays the full classic roster")
+	check(view.menu.grid_keys[13] == "b_ready_mobile_dragon" and view.menu.grid_keys[15] == "b_ready_mobile14", "Dragon uses its own icon; the client button 14 stays on Aduka")
+	for button in view.menu.grid_buttons:
+		var id := int(button.get_meta("vehicle_id"))
+		var rect := Rect2(button.position, button.size)
+		var clear := true
+		for other in placed:
+			clear = clear and not rect.intersects(other)
+		placed.append(rect)
+		seen[id] = button
+		check(view.menu.GRID_PANEL.encloses(rect) and clear and button.get_parent() == view.menu.figures.get_parent(), "Vehicle button %s sits in its own grid cell" % button.tooltip_text)
+	for playable_id in range(1, 17):
+		check(seen.has(playable_id), "Grid has a button for mobile %s" % playable_id)
 	for id in [1, 2, 3]:
 		view.show_menu()
-		for button in view.menu.vehicle_buttons:
-			if button.text == {1: "Mage", 2: "Bigfoot", 3: "Nak"}[id]:
+		view.menu.choose_player_side()
+		for button in view.menu.grid_buttons:
+			if int(button.get_meta("vehicle_id")) == id:
 				button.pressed.emit()
-		check(view.vehicle == id, "Button slot dispatches stable mobile ID")
+		check(view.vehicle == id and view.menu.choice_label.text == "Escolhendo: piloto", "Button slot dispatches stable mobile ID")
 		view.opening = 0
 		view.start_match()
 		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == opponents[id], "Menu selection starts the correct duel")
+	view.show_menu()
+	view.menu.choose_cpu_side()
+	for button in view.menu.grid_buttons:
+		if int(button.get_meta("vehicle_id")) == 4:
+			button.pressed.emit()
+	check(view.cpu_vehicle == 4 and view.menu.cpu_mobile.text == "Armor" and view.menu.choice_label.text == "Escolhendo: máquina", "The same grid applies the clicked mobile to the CPU")
 	view.show_menu()
 	# Room settings apply the selected difficulty on Accept (ADR-092).
 	for slot in 3:

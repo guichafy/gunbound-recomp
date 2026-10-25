@@ -1,5 +1,13 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Skill HD: restauração fiel — REQ-12/19/20
+
+A solicitação atual torna a restauração conservadora o padrão da skill
+`gunbound-classic-hd`: fonte visual única, mesma composição/estados/paleta e
+alpha, alvo 4× por dimensão quando suportado. Não reconstruir detalhes
+ambíguos. Ensaiar com `assets/classic` sem substituir arte ativa. Plano e
+critérios em `CLASSIC_HD_RESTORATION_SKILL.md`.
+
 ## Correções ASate/JD/Aduka/Raon — REQ-04/05/07/08/09/19/44/45
 
 Restaurar comportamentos e animações dos tiros T1/T2/SS dos quatro mobiles
@@ -83,7 +91,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | ID | Requisito vigente | Documento | Estado |
 |---|---|---|---|
 | REQ-01 | Engine multiplataforma; entrega executável no Mac | este arquivo, `build_macos.py` | macOS entregue; Windows/Linux/Android/iOS não testados |
-| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente; sala 1×1 (ADR-092); 16 mobiles (REQ-45) |
+| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente; lobby clássico e sala pelo Create (ADR-096); 16 mobiles (REQ-45) |
 | REQ-03 | Mira, força e movimento; teclado e extras na tela | HUD_0_10, AIMING_0_12 | Vigente; console original substituído por REQ-27..30 |
 | REQ-04 | Balística, colisão e crateras | CLASSIC_BALLISTICS_0_20, BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY | Física comum 20 Hz/24.8 e onda Turtle T2 implementadas; colisão/dano continuam adaptações declaradas |
 | REQ-05 | Vida, dano, queda e resultado | MOBILE_PARITY, BATTLE_RULES_AUDIT, BATTLE_FIDELITY_0_20 | Vigente; autoria/Gold de minas corrigidos; deriva na queda ADR-077 |
@@ -109,19 +117,40 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS | Boomer, onda Turtle T2 e cronologia48 implementados; demais limites/portes explícitos |
 | REQ-46 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
 
-## Sala inicial 1×1 — ADR-092
+## Lobby clássico e sala — ADR-096
 
-A entrada do treino é a sala, no lugar do cartão que empilhava todos os
-ajustes. Dois lugares (piloto e máquina), Miramo Town A no centro, retrato do
-mobile escolhido e Iniciar. Iniciar usa o ajuste já gravado.
+A entrada é o lobby do `gamelist_back.img` (gelo e torre azul), não o
+`gamelistmode.img`. Create abre a sala 1×1 do `ready_back.img`. EXIT do lobby
+encerra o jogo; EXIT da sala volta ao lobby. AVATAR abre a loja já existente
+e a saída da loja volta à tela que a abriu. Buddy não é colocado. Ranking e
+Join ficam desabilitados. Não há rede, contas nem multiplayer.
+
+O cartão mostra o apelido do perfil. Rank é `profile.level()` e GP é o XP
+local, não um rank de servidor. O chat é local: uma linha de sistema e o eco
+do que o jogador digita, sem nome de servidor. A lista do canal tem só o
+jogador. O mapa continua Miramo Town A, com as setas visíveis e desabilitadas.
+O botão SOLO aparece como modo vigente. Jewel, Death e Big Bomb não entram
+como regra. O palco é 800×600 com escala 4/3, filtro NEAREST, centralizado
+na viewport 1280×800. Na sala, o casco do mobile cabe no lugar clássico
+(cerca de 67 px na cena); a arena não muda.
+
+## Sala 1×1 — ADR-092 (histórico; alcançada pelo Create)
+
+Histórico da sala, agora aberta pelo Create do lobby (ADR-096). Dois lugares
+(piloto e máquina), Miramo Town A no centro, retrato do mobile escolhido e
+Iniciar. Iniciar usa o ajuste já gravado.
 
 Configurações da partida reúne apelido, dificuldade e clima. Aceitar grava e
-volta à sala; Cancelar restaura o que estava aberto. O mobile da sala usa o
-casco nativo de 60 px, o mesmo da arena (ADR-095), porque essa arte ainda não
-tem folha HD. Mobile abre a grade dos 16 e aplica no clique. CPU abre a mesma
-grade para a máquina e também aplica no clique; sem essa escolha, o pareamento
-segue o de sempre (1↔2, Nak contra Mage, os demais contra Mage). Itens continua
-no PopupSelectItem. Som, rolagem e fundo permanecem no popup de opções do
+volta à sala; Cancelar restaura o que estava aberto. O casco de 60 px
+(ADR-095) ficou na arena. Na sala o casco é 52 px nativos, para o cell mais
+largo caber no lugar de 124 px. A grade dos 16 é a única escolha: o clique
+aplica no piloto, e o lugar B só muda o modo para a CPU aplicar o clique
+seguinte. Sem essa escolha, o pareamento segue o de sempre (1↔2, Nak contra
+Mage, os demais contra Mage). O lugar mostra um mobile e, no piloto, o avatar
+equipado do perfil. Knight e Aduka usam o quadro 0 do atlas sobre o fundo
+do botão, sem o Armor de `b_ready_mobile01`. Itens da sala
+ficam nos seis lugares do painel direito, com o catálogo no mesmo painel.
+Item de 2 slots cobre os dois lugares com um ícone; item de 1 slot cobre um. Som, rolagem e fundo permanecem no popup de opções do
 cliente. Não há troca de mapa.
 
 ## Base da batalha 0.20 e validação histórica
@@ -171,7 +200,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 | ID | Requisito / critério de aceitação | Implementação | Evidência |
 |---|---|---|---|
 | REQ-01 | Engine com suporte a macOS, Windows, Linux, Android e iOS; entrega inicial executável no Mac | Godot 4.7.2, Compatibility; `project.godot`, preset macOS, `build_macos.py` | Aplicativo Universal e assinatura; demais alvos ainda não testados |
-| REQ-02 | Iniciar treino offline 1×1; escolher apelido, veículo e dificuldade | Sala de `menu_screen.gd`; popup da partida; `match.gd.start` | `test_scene.gd` + roteiro manual |
+| REQ-02 | Iniciar treino offline 1×1; escolher apelido, veículo e dificuldade | Lobby `lobby_screen.gd`, sala `menu_screen.gd` pelo Create; popup da partida; `match.gd.start` | `test_scene.gd` + roteiro manual |
 | REQ-03 | Mirar, escolher força e mover com limite por turno; teclado e controles na tela | `game.gd`, `ui.gd`, `match.gd.move_actor` | Modelos, cena/input e roteiro manual |
 | REQ-04 | Balística afetada por gravidade/vento, colisão com terreno e veículos, crateras | `combat.gd`, `terrain.gd`, `match.gd` | `test_runner.gd`, partidas completas |
 | REQ-05 | Vida, dano por explosão/queda, vitória, derrota e empate | `match.gd`, tela de resultado | Modelos, partidas e cena |
@@ -442,8 +471,8 @@ REQ-35 itens usáveis no turno (Dual, Dual+, Thunder, Energy Up 1/2, Team
 Teleport, Teleport, Blood, Bunge Shot, Power Up, Change Wind) com a lógica,
 física e custos de delay do OpenBound. No turno próprio o item sai do slot
 na hora, marcado antes ou clicado agora, e a aura UsingItem acompanha o
-mobile (ADR-065). REQ-36 seleção de 6 slots pelo `PopupSelectItem` original
-no menu; REQ-37 arte dos itens/Teleport em HD por GPT Images (Codex) e a
+mobile (ADR-065). REQ-36 limita a carga a 6 slots; na sala clássica a escolha
+é o painel direito, não o modal. REQ-37 arte dos itens/Teleport em HD por GPT Images (Codex) e a
 aura UsingItem em 4×, conforme ITEMS_0_13.md. CPU sem itens neste corte.
 
 ## Shop de avatar — especificação aprovada

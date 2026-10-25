@@ -33,20 +33,10 @@ func run() -> void:
 	view.sound.muted = true
 	view.profile.nickname = "Piloto"
 	view.options.items = ["dual", "teleport", "power_up", "energy_up_1"]
-	# PopupSelectItem in the menu, hovering Dual (HD, then the originals).
+	# The room draws the loadout in the six right-hand slots. No Select Item modal.
 	view.show_menu()
-	view.show_items()
-	view.overlays.items_popup.hover("dual")
-	await snap("select-item")
 	var hd: Dictionary = view.item_art.textures.duplicate()
-	view.item_art.textures = view.item_art.originals.duplicate()
-	view.accept_items()
-	view.show_items()
-	view.overlays.items_popup.select_tab(1)
-	view.overlays.items_popup.hover("change_wind")
-	await snap("select-item-original")
-	view.item_art.textures = hd
-	view.accept_items()
+	await snap("room-items")
 	view.select_vehicle(2)
 	view.opening = 0
 	view.start_match()
@@ -88,7 +78,7 @@ func run() -> void:
 			break
 	advance(0.2)
 	await snap("teleport-flames")
-	print("ITEM CAPTURES: 8 | FLAMES ", view.item_art.flames.size(), " | HD ", view.item_art.textures["ItemDual.png"].get_width())
+	print("ITEM CAPTURES: 7 | FLAMES ", view.item_art.flames.size(), " | HD ", view.item_art.textures["ItemDual.png"].get_width())
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/items-capture-profile.json"))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/items-capture-profile-options.json"))
 	quit()
