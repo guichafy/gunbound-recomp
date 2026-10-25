@@ -1,5 +1,26 @@
 # Hand-off — Gunbound Recomp 0.20.3 / Bigfoot e Mage originais
 
+## Ghidra adotado na skill — ADR-091
+
+gunbound-client-port agora prefere Ghidra headless direto, com
+`scripts/run_ghidra.py`, `scripts/ExportClientEvidence.java` e
+`references/ghidra.md` na própria skill. Não depende dos scripts temporários
+da avaliação anterior. Importação nova, seeding explícito de entradas
+comprovadas, referências/vtable/dados e reabertura testados;22extratos
+idênticos. Função ausente retorna falha apesar do exit0 do launcher.
+
+Ponte estática→Godot: float8/LUTs extraídos e8checks independentes de
+ângulo/seção passaram; suites dirigidas1368/0. Runner5testes Python
+aprovados, incluindo descendente resistente ao TERM após timeout; validator,
+links/UI/alias aprovados. Testes independentes antes/depois da skill;
+detalhes, hashes, limites e evidência em GHIDRA_SKILL_VALIDATION.md.
+Não executamos o cliente original/GUI nem QA visual novo. Esta tarefa não
+conclui a implementação0.20.4 preexistente. Sem mudança de runtime/build.
+Versionamento local autorizado posteriormente pelo usuário, após pull/merge
+da main. Revisão final: cinco testes Python do runner aprovados; alterações
+da skill e registros preparados para commit local, sem push. Override de
+certificados permanece local e excluído do versionamento.
+
 ## Avaliação de ferramenta — Ghidra 12.2
 
 Pedido atual: avaliar Ghidra após problemas no Hopper. Resultado em

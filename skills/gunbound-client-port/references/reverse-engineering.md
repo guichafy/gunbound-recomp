@@ -24,7 +24,16 @@ do jogo; servidor não comprova sozinho animação/física do cliente. Quando
 fontes discordarem, localizar o ramo ativo e registrar a divergência.
 Não misturar constantes de builds diferentes.
 
-## Investigar com REA
+## Escolher o caminho de análise
+
+Preferir Ghidra headless direto e os recursos de [ghidra.md](ghidra.md).
+Esse fluxo exporta ASM, pseudocódigo, referências e bytes sem depender de
+GUI ou de um conector. Descobrir a compatibilidade atual antes de usar MCP:
+`GHIDRA_INSTALL_DIR` aponta à raiz que contém `support/analyzeHeadless`,
+não ao launcher `bin/ghidraRun`. REA6.7.0 aceita12.1.x e recusa12.2; conferir
+novamente se a versão mudar. Falha do conector não significa falha do Ghidra.
+
+## Investigar com REA/MCP compatível
 
 Descobrir as ferramentas REA disponíveis e ler seus schemas atuais. Abrir o
 caminho absoluto conhecido com `open_binary`; usar strings de recurso ou
@@ -33,6 +42,12 @@ vtable/dispatch, chamadores e consumidores até a rotina ativa. Pedir
 pseudocódigo para orientação e assembly para confirmar a operação. Salvar
 extratos relevantes, IDs de evidência e limitações do provedor. Ausência de
 xrefs com cobertura parcial não prova ausência de comportamento.
+
+Em Ghidra direto, os extratos têm manifesto/hash/logs, sem IDs de evidência
+REA. Registrar esse caminho explicitamente; não inventar IDs de MCP.
+Indicar entradas ausentes somente com evidência de chamada/dispatch/ASM.
+`decompileCompleted=true` não comprova assinatura, unidade ou fórmula: casts
+de ponteiros e `unaff_*` exigem seguir ABI/helpers e confirmar instruções.
 
 Registrar endereço como **VA, RVA ou offset de arquivo**, image base,
 arquitetura e hash. Endereço é local àquela build. Conferir branch,

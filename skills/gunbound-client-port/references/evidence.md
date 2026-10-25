@@ -9,6 +9,7 @@ grandes e binários na área local de pesquisa.
 | Escopo | REQ, mobile/arma/sistema, comportamento e build alvo |
 | Origem | Caminho/repositório, commit ou SHA-256, recurso e versão |
 | Localização | Função/VA/RVA/offset identificado, image base e trecho relevante |
+| Ferramenta e cobertura | Versão Ghidra/REA, manifesto/comando/logs, entrada automática ou indicada; no fluxo direto, caminhos/hash em vez de IDs REA |
 | Contrato | Entradas, unidades, tipos, relógio, ordem e transições |
 | Confiança | Observado em execução / derivado de estática / inferido |
 | Decisão de porte | Comprovado / C# / adaptação / pendente; arquivos afetados |

@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import re
+import signal
 import subprocess
 import sys
 
@@ -73,7 +74,27 @@ def main():
     status = 1
     try:
         with (output / "console.log").open("w") as log:
-            status = subprocess.run(command, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=args.timeout).returncode
+            process = subprocess.Popen(command, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+            try:
+                status = process.wait(timeout=args.timeout)
+            except (subprocess.TimeoutExpired, KeyboardInterrupt):
+                # The launcher forks Java; terminate our whole process group, not just bash.
+                try:
+                    os.killpg(process.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
+                try:
+                    process.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    pass
+                # The shell may exit before a resistant Java/descendant process.
+                # Always finish cleanup of our group, even after its leader exits.
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                process.wait()
+                raise
     except subprocess.TimeoutExpired:
         run["error"] = "headless timeout; inspect logs before reopening the project"
     run["exit_code"] = status

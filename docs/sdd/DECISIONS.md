@@ -849,3 +849,19 @@ mobiles. Este catálogo usa ADR-089 e REQ-46.
 Nota de integração: ADR-089 foi usado independentemente pela restauração de
 Bigfoot/Mage e pelo catálogo clássico de avatares. Ambos os registros e suas
 referências foram preservados neste merge; distinguir pelo título.
+
+## ADR-091 — Ghidra headless na skill de porte
+
+24/10/2026. Por solicitação do usuário, adotar Ghidra headless diretamente
+como caminho preferencial da gunbound-client-port, com runner Python3 e
+exportador Java incluídos na skill. Perfil/cache/projeto isolados, origem
+fixada por hash, entradas explícitas quando comprovadas, referências/bytes/
+ASM/pseudocódigo e falhas observáveis. REA/MCP continua utilizável quando
+compatível: a6.7.0 instalada aceita12.1.x e recusa12.2, embora a12.2 direta
+funcione. Não alterar a política do provedor nem configuração global.
+
+O export não é tradução automática para GDScript nem prova de paridade
+integral. Aritmética/ABI/FPU, despacho, unidades, relógios e consumidores
+precisam de prova, seguida de fixtures independentes, execução/previsão e
+QA apropriado. Preservar elenco, avatares, perfil e limites offline.
+Plano/validação: GHIDRA_SKILL_VALIDATION.md. Sem nova regra/arte/build.

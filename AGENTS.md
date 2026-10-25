@@ -58,6 +58,11 @@ validação; complementa gunbound-mobile-port e gunbound-classic-hd.
 O usuário autorizou engenharia reversa do binário client-side para informar
 e ajustar o porte. Cliente original comprovado prevalece; onde faltar prova,
 manter C#/adaptação identificados, sem anunciar paridade integral.
+Ghidra headless é o caminho preferencial da skill, com runner/exportador
+incluídos. Ler `references/ghidra.md` e `docs/sdd/GHIDRA_SKILL_VALIDATION.md`.
+Ghidra12.2 direto funciona; REA6.7.0 aceita apenas12.1.x. Não confundir a
+compatibilidade do conector com a análise direta, nem copiar C decompilado
+sem confirmar ABI, ASM, LUTs e consumidores.
 Referências: jglim/gunbound-launcher (TestClient) e jglim/gunbound-server;
 servidor não comprova sozinho o render do cliente nem amplia o escopo offline.
 Preservar todos os 16 mobiles, avatares/equipamentos e HD já aprovados.

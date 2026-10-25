@@ -1,6 +1,6 @@
 ---
 name: gunbound-client-port
-description: "Use when porting GunBound Thor's Hammer client behavior to Godot/GDScript, investigating fidelity differences with REA and the client binary, comparing OpenBound C# with native rules, or correcting mobile, projectile, avatar, EPA, XFS, timing, animation or rendering discrepancies."
+description: "Use when porting GunBound Thor's Hammer client behavior to Godot/GDScript, analyzing its binary with Ghidra or REA, comparing OpenBound C# with native rules, or correcting mobile, projectile, avatar, EPA, XFS, timing, animation or rendering discrepancies."
 ---
 
 # GunBound client → Godot
@@ -24,7 +24,9 @@ comprovada prevalece sobre aproximações dessas referências.
 ## Investigar e portar
 
 1. Fixar hash/versão de binário, arquivos de dados e fontes consultadas.
-   Usar [REA e evidência](references/reverse-engineering.md): seguir o
+   Preferir [Ghidra headless](references/ghidra.md), com os scripts desta skill;
+   usar REA/MCP quando sua versão aceitar a instalação. Seguir
+   [REA e evidência](references/reverse-engineering.md): localizar o
    consumidor real do dado, confirmar ASM e registrar lacunas.
 2. Produzir uma matriz por comportamento: fonte, unidade, ordem, confiança,
    implementação e validação. Classificar cada célula como comprovada,

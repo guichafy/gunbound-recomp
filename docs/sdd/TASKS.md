@@ -1,5 +1,19 @@
 # Entregas e próximos trabalhos
 
+## Ghidra na skill de porte — REQ-12/19/44/45, ADR-091
+
+- [x] Adotar Ghidra headless direto e incluir runner/exportador reproduzíveis.
+- [x] Validar importação nova, entradas indicadas, dados/vtable e22extratos
+      idênticos na reabertura; ausência de função retorna falha explícita.
+- [x] Validar5testes do runner e8checks independentes de LUT/seção no Godot;
+      suites dirigidas1368/0. Estrutura/links/UI/alias conferidos.
+- [x] Aplicar a skill em contexto independente antes e depois da atualização;
+      reproduzir/corrigir cleanup de descendentes resistentes ao timeout.
+- [x] Revisão para commit local autorizada após pull/merge: cinco testes do
+      runner aprovados; override local excluído do versionamento.
+
+Registro: GHIDRA_SKILL_VALIDATION.md. Sem port/runtime/build novo nesta tarefa.
+
 ## Avaliação Ghidra — REQ-12/19/44/45
 
 - [x] Testar instalação12.2/Java25 no PE local, com hash preservado.

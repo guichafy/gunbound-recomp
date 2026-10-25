@@ -17,6 +17,17 @@ não pedir novamente ZIP/link já disponível. OpenBound C# fica na pasta
 adicional Gunbound, somente leitura. Repositórios jglim são fontes auxiliares
 identificadas em reverse-engineering.md.
 
+Ghidra direto: ler `references/ghidra.md`. Instalação avaliada:
+`/opt/homebrew/Cellar/ghidra/12.2/libexec`, JDK25 Homebrew. PE local existente:
+`.tools/mobile-animation-port/GunBound.gme`, SHA-256
+`4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde`.
+Essa cópia complementa `.tools/gunbound-client/`, que contém XFS/DAT;
+não pedir o binário novamente. Usar `builds/ghidra-work` ou `/tmp/...` como
+work-dir; manter extratos em `.tools/` e resumos essenciais em docs/sdd.
+Ler `GHIDRA_EVALUATION.md` e `GHIDRA_SKILL_VALIDATION.md` para resultados
+locais. Endereços Mage `0x004a6200`/`0x004a6840`, vtable `0x005564f0` são
+sementes desta build, não identidades universais de função.
+
 Consultar `BATTLE_SHOT_MATRIX.md`, `BATTLE_ASSET_MATRIX.md` e
 `BATTLE_MOBILE_FAMILY_PLANS.md`. Elenco completo e pesquisa de 48 tiros não
 significam especiais, dano, colisão ou tornado integralmente nativos.
