@@ -61,11 +61,12 @@ func sample(pose: String, age: float, weapon: int, idle_age: float = -1.0) -> Di
 		barrel = sin(age * TAU * 2.0) * 0.025
 		glow = (1.0 - exp(-age * 8.0)) * (0.65 + sin(age * TAU * 2.0) * 0.15)
 	elif pose == "recoil":
-		var progress := clampf(age / MobileLooks.RECOIL_TIME, 0.0, 1.0)
+		var progress := clampf(age / Mobiles.ShotTiming.pose_duration(MobileLooks.id_of(kind), weapon), 0.0, 1.0)
 		var kick := sin(progress * PI) * exp(-progress * 3.0)
 		offset.x = kick * (9.0 if weapon == 2 else 6.0)
 		barrel = -kick * (0.65 if weapon == 2 else 0.45)
-		flash = sin(clampf(age / 0.16, 0.0, 1.0) * PI)
+		for spawn in Mobiles.ShotTiming.shot(MobileLooks.id_of(kind), weapon).get("spawn_seconds", [0.0]):
+			flash = maxf(flash, sin(clampf((age-float(spawn)) / 0.16, 0.0, 1.0) * PI))
 	elif pose == "using":
 		# UsingItem lasts 20 frames at 19 fps. The green aura is a separate
 		# overlay; the body only lifts, it does not grow a charge glow.

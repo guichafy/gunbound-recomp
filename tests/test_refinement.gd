@@ -17,6 +17,13 @@ func _initialize() -> void:
 	if not model.has_method("body_rotation") or not model.has_method("shot_velocity") or not model.has_method("initiative_preview"):
 		finish("REFINEMENT MODEL CHECKS")
 		return
+	# Literal FP vectors from the independent PE sine fixture: the mask below
+	# measures support ±atan(14/36), yielding theta66/156 or23/113. Mage25%
+	# quantizes P112; muzzle uses P450, whose truncated direction differs slightly.
+	var reference := {
+		-1: {-1:[Vector2i(-2611,-1152),Vector2i(-10521,-4684)],1:[Vector2i(1152,-2611),Vector2i(4684,-10521)]},
+		1: {-1:[Vector2i(-1100,-2636),Vector2i(-4480,-10598)],1:[Vector2i(2636,-1100),Vector2i(10598,-4480)]},
+	}
 	# A real custom mask with a known slope, not a mocked collision/rotation function.
 	for slope in [-0.4, 0.4]:
 		for y in range(model.terrain.HEIGHT):
@@ -29,10 +36,12 @@ func _initialize() -> void:
 		for facing in [-1, 1]:
 			model.actors[0].facing = facing
 			var velocity: Vector2 = model.shot_velocity(0, 45, 25, 0)
-			var expected := Vector2(facing, -1).normalized().rotated(rotation)
-			check(velocity.normalized().distance_to(expected) < 0.01, "World launch direction matches slope and facing")
+			var row: Array = reference[int(signf(slope))][facing]
+			var expected_velocity := Vector2(row[0]) / (256.0 * 0.05)
+			var expected_muzzle := Vector2(row[1]).normalized()
+			check(velocity.distance_to(expected_velocity) < 0.001, "Native FP launch matches literal slope/facing reference")
 			var pivot: Vector2 = model.actors[0].pos + Vector2(0, -14).rotated(rotation)
-			check((model.muzzle(0, 45) - pivot).normalized().distance_to(expected) < 0.01, "Muzzle matches launch direction")
+			check((model.muzzle(0, 45) - pivot).distance_to(expected_muzzle * 38.0) < 0.001, "Muzzle matches launch direction")
 			var predicted: Dictionary = model.predict_shot(0, 45, 25, 0)
 			model.phase = "aim"
 			model.events.clear()

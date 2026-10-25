@@ -3,6 +3,7 @@ extends "res://tests/support/suite.gd"
 ## proves it, OpenBound C# otherwise. Evidence in docs/sdd/BATTLE_RULES_AUDIT.md.
 
 const Match = preload("res://scripts/match.gd")
+const Physics = preload("res://scripts/classic_ballistics.gd")
 const Combat = preload("res://scripts/combat.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 const Items = preload("res://scripts/items.gd")
@@ -159,17 +160,16 @@ func _initialize() -> void:
 	model.actors[Match.CPU].ready = 41.0
 	check(int(model.current_order()[0].actor) == Match.PLAYER, "Queue puts the lower readiness first")
 
-	# Ballistics from the C# (Parameter.cs): gravity 9.8 × 20, speed = force × 100 / mass 14, wind × 1.2.
-	check(is_equal_approx(Combat.GRAVITY, 196.0), "Gravity 196")
-	check(is_equal_approx(Combat.launch_velocity(45.0, 70.0, 1).length(), 70.0 * 100.0 / 14.0), "Launch speed = force × 100 / 14")
-	check(is_equal_approx(Combat.launch_velocity(45.0, 50.0, 1, 0.0, 4.0).length(), 54.0 * 100.0 / 14.0), "Emitter force offset joins before the mass division")
-	check(is_equal_approx(Combat.launch_velocity(45.0, 0.0, 1).length(), 15.0 * 100.0 / 14.0), "Power floor stays at 15")
-	var step: Dictionary = Combat.advance(Vector2.ZERO, Vector2.ZERO, Vector2(10.0, 0.0), 1.0)
-	check(is_equal_approx(step.velocity.x, 12.0) and is_equal_approx(step.velocity.y, 196.0), "Wind accelerates by force × 1.2")
+	# ADR-084 replaces common C# ballistics; retain agenda/CPU2s rules above.
+	check(is_equal_approx(Combat.STEP, 0.05), "Original20Hz step")
+	check(Combat.launch_velocity_fp(45,70,1) == Vector2i(5299,-5299), "Bigfoot70percent nativeP294 with PE sine")
+	check(Combat.launch_velocity_fp(45,50,1,0,4) == Vector2i(4070,-4070), "Emitter adapter offset before native quantization")
+	check(Combat.launch_velocity_fp(45,0,1) == Vector2i.ZERO, "P1 diagonal is zero, no15percent floor")
+	check(Physics.acceleration_fp(98,10,0) == Vector2i(25,250), "Native wind10 gravity98 fixed acceleration")
 	model = Match.new()
 	model.start(2, 1, 7, "", "original", null, ["teleport"])
 	check(model.use_item(0), "Teleport is used")
 	var beacon: Array = model.shot_shells(Match.PLAYER, 45.0, 60.0, 0)
-	check(beacon.size() == 1 and is_equal_approx(Vector2(beacon[0].velocity).length(), 60.0 * 100.0 / 10.0), "Beacon mass 10")
+	check(beacon.size() == 1 and Vector2(beacon[0].velocity).is_equal_approx(model.shot_velocity(0,45,60,0) * Items.BEACON_SPEED), "Beacon preserves the explicit C# speed adapter1.4")
 
 	finish("BATTLE RULES CHECKS")

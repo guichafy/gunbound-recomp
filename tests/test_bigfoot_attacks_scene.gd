@@ -30,6 +30,7 @@ func run() -> void:
 	check(view.model.projectiles == shells and view.model.flight_elapsed == time, "Pause freezes pending and launched bombs")
 	view.close_overlay()
 	view._process(0.1)
+	view._process(0.1)
 	var launched := 0
 	for bomb in view.model.projectiles:
 		if bomb.launched:
@@ -48,8 +49,8 @@ func run() -> void:
 	key.physical_keycode = KEY_SPACE
 	key.pressed = true
 	view._unhandled_key_input(key)
-	# Original strength bar: 50 steps of 0.04 s = 2 s to fill.
-	for frame in range(22):
+	# Original full charge:3 seconds (ADR-084), then first SS tick3.
+	for frame in range(31):
 		view._process(0.1)
 	var count: int = view.model.projectiles.size()
 	key.pressed = false

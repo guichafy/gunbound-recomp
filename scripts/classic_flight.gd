@@ -4,10 +4,10 @@ extends RefCounted
 ## that mobile exists there, and from characterdata where it does not.
 ##
 ## open: Armor SS waits 2 s, pauses while the shell opens, then adds the extra
-##   damage (ProjectileArmorSSTransformTime / SSE damage). Turtle SS waits 1.5 s
-##   and, once open, bursts into 6 fragments.
+##   damage (ProjectileArmorSSTransformTime / SSE damage). Turtle SS starts
+##   change at tick44; after10 EPA ticks it divides into6 and removes its parent.
 ## chain: Trico SS, 8 blasts, 20 px and ±45° every 0.1 s.
-## orbit: Trico S2, Raon S1 and Turtle S2. The carrier flies; the hit point spins.
+## orbit: Trico S2 and Raon S1. Turtle S2 uses its native integer wave schedule.
 ## mine: Raon S2/SS leaves a mine. It walks up to 90 px on its owner's turn and
 ##   explodes inside 90 px (ProjectileRaonLauncherS2MineSquaredProximityRange).
 ## bolt: Lightning electricity added at the impact.
@@ -16,6 +16,9 @@ extends RefCounted
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Combat = preload("res://scripts/combat.gd")
 const Damage = preload("res://scripts/damage.gd")
+const ShellState = preload("res://scripts/shell_state.gd")
+const GoldTracker = preload("res://scripts/gold_tracker.gd")
+const TurtleFlight = preload("res://scripts/turtle_flight.gd")
 const MINE_RANGE := 90.0
 const MINE_STEPS := 90
 
@@ -23,30 +26,69 @@ static func prepare(projectile: Dictionary, entry: Dictionary) -> void:
 	projectile.orbit = entry.get("orbit", Vector2.ZERO)
 	projectile.spin = float(entry.get("spin", 0.0))
 	projectile.phase_orbit = float(entry.get("phase", 0.0))
+	if str(projectile.get("flight","")) == TurtleFlight.MODE:
+		TurtleFlight.prepare(projectile,int(entry.get("wave_phase",0)))
 
 static func hit_point(projectile: Dictionary, carrier: Vector2) -> Vector2:
+	if str(projectile.get("flight","")) == TurtleFlight.MODE:
+		return TurtleFlight.hit_point(projectile,carrier)
 	var orbit: Vector2 = projectile.get("orbit", Vector2.ZERO)
 	if orbit == Vector2.ZERO:
 		return carrier
 	return carrier + orbit.rotated(float(projectile.phase_orbit) + float(projectile.age) * float(projectile.spin))
 
+static func finish_tick(projectile: Dictionary) -> void:
+	if str(projectile.get("flight","")) == TurtleFlight.MODE:
+		TurtleFlight.finish_tick(projectile)
+
 static func hold(projectile: Dictionary, travel: float) -> bool:
 	var remaining := float(projectile.get("hold", 0.0))
-	if remaining <= 0.0:
+	if remaining <= 0.0000001:
 		return false
-	projectile.hold = maxf(0.0, remaining - travel)
+	# The frozen model has no new movement endpoints. Reusing the arrival
+	# segment would make the renderer replay that segment once every20Hz tick.
+	projectile.previous_draw_pos = projectile.pos
+	projectile.previous_hit_pos = projectile.hit_pos
+	projectile.hold = 0.0 if remaining-travel <= 0.0000001 else remaining-travel
+	# Armor resumes in cnormal; Turtle's EPA finishes the parent and the common
+	# simulation replaces it with its children. Never fly a terminal change frame.
+	if str(projectile.get("flight", "")) == "open" and bool(projectile.get("opened", false)) and not bool(projectile.get("boomer", false)):
+		if float(projectile.hold) <= 0.0:
+			projectile.ss_state = "split" if int(projectile.get("burst",0)) > 0 else "cnormal"
+			projectile.ss_state_tick = 0
+		else:
+			projectile.ss_state_tick = int(projectile.get("ss_state_tick", 0)) + 1
 	projectile.age += travel
 	return true
 
 static func open_shell(projectile: Dictionary) -> void:
-	if str(projectile.get("flight", "")) != "open" or bool(projectile.get("opened", false)):
+	if str(projectile.get("flight", "")) != "open":
 		return
-	if float(projectile.age) < float(projectile.get("transform_at", 0.0)):
+	if bool(projectile.get("opened", false)):
+		if not bool(projectile.get("boomer", false)) and str(projectile.get("ss_state", "normal")) == "cnormal":
+			projectile.ss_state_tick = int(projectile.get("ss_state_tick", 0)) + 1
+		return
+	var transform_ticks := int(projectile.get("transform_ticks",0))
+	if transform_ticks > 0:
+		if int(projectile.get("flight_ticks",0)) < transform_ticks:
+			return
+	elif float(projectile.age) < float(projectile.get("transform_at", 0.0)):
 		return
 	projectile.opened = true
+	if not bool(projectile.get("boomer", false)):
+		projectile.ss_state = "change"
+		projectile.ss_state_tick = 0
 	projectile.damage = int(projectile.damage) + int(projectile.get("extra_damage", 0))
 	projectile.blast_radius = float(projectile.get("extra_radius", 0.0))
-	projectile.hold = 0.73
+	projectile.hold = float(projectile.get("transform_hold",0.73))
+
+static func split_open_shell(model, projectile: Dictionary) -> bool:
+	if str(projectile.get("ss_state","")) != "split":
+		return false
+	# Division is a stage transition, not an impact: no terrain carving,
+	# blast damage, Gold attribution or extra explosion sound in the air.
+	burst(model,projectile,projectile.hit_pos,projectile.velocity)
+	return true
 
 static func begin_chain(projectile: Dictionary, position: Vector2, facing: float) -> bool:
 	if str(projectile.get("flight", "")) != "chain" or bool(projectile.get("chaining", false)):
@@ -91,15 +133,11 @@ static func plant_mine(model, projectile: Dictionary, position: Vector2) -> void
 	# InitProjectile leaves velocity at 0 and SpawnCrystalShot only writes the
 	# impact position, so the crystal falls from that point and bursts on land.
 	if flight == "crystal":
-		model.projectiles.append({
-			"pos": position, "hit_pos": position, "velocity": Vector2.ZERO, "age": 0.0, "trail": [position],
-			"helix": 0.0, "phase": 0.0, "spawn_at": 0.0, "launched": true,
-			"damage": 0, "launch_speed": 0.0, "inside": {}, "influenced": [],
-			"electric": false, "thor": false, "tornado": {}, "weapon": int(projectile.weapon), "volley": 0,
-			"beacon": false, "wind_scale": 1.0, "burrow": false, "ghost": false, "skip_actors": false,
-			"underground": false, "flight": "", "orbit": Vector2.ZERO, "spin": 0.0, "phase_orbit": 0.0,
-			"hold": 0.0, "crystal_body": true, "blast_radius": 0.0,
-		})
+		var crystal := ShellState.create(position, Vector2.ZERO, 0.0, {"damage": 0, "radius": 0.0}, int(projectile.weapon), 0)
+		prepare(crystal, {})
+		crystal.launched = true
+		crystal.crystal_body = true
+		model.projectiles.append(crystal)
 		return
 	var damage := int(projectile.damage)
 	var radius := float(projectile.get("blast_radius", projectile.get("extra_radius", 21.0)))
@@ -139,9 +177,11 @@ static func _mine_hits(model, mine: Dictionary) -> int:
 static func _detonate_mine(model, index: int) -> void:
 	var mine: Dictionary = model.mines[index]
 	model.mines.remove_at(index)
-	model.shot_actor = int(mine.owner)
+	var dead: Array = model.actors.map(func(actor): return int(actor.hp) <= 0)
+	var event_start: int = model.events.size()
 	model.blast(Vector2(mine.pos), float(mine.radius), float(mine.damage), 0.0, 0.0, int(mine.owner))
-	model.events.append({"type": "explosion", "position": mine.pos, "radius": mine.radius, "weapon": mine.weapon, "vehicle": mine.vehicle, "collided_actor": -1, "removed": 0, "angle": 0.0})
+	GoldTracker.collect_mine(model, event_start, int(mine.owner), dead)
+	model.events.append({"type": "explosion", "actor": int(mine.owner), "position": mine.pos, "radius": mine.radius, "weapon": mine.weapon, "vehicle": mine.vehicle, "collided_actor": -1, "removed": 0, "angle": 0.0})
 
 static func walk_mines(model) -> void:
 	var owner: int = int(model.active)
@@ -271,7 +311,7 @@ static func burst(model, projectile: Dictionary, position: Vector2, velocity: Ve
 	var flight := str(projectile.get("flight", ""))
 	# Dragon SS (ExplodeSuperShot_Bullet14) spawns five child shots at the
 	# impact. Turtle SS only bursts after the shell has opened.
-	if flight == "open" and not bool(projectile.get("opened", false)):
+	if flight == "open" and str(projectile.get("ss_state","")) != "split":
 		return
 	if flight != "open" and flight != "split":
 		return
@@ -283,12 +323,9 @@ static func burst(model, projectile: Dictionary, position: Vector2, velocity: Ve
 	var spread := deg_to_rad(float(projectile.get("burst_spread", 12.0)))
 	for index in count:
 		var angle := base + (float(index) - float(count - 1) * 0.5) * spread
-		var shell := {
-			"pos": position, "hit_pos": position, "velocity": Vector2.from_angle(angle) * speed,
-			"age": 0.0, "trail": [position], "helix": 0.0, "phase": 0.0, "spawn_at": 0.0, "launched": true,
-			"damage": int(projectile.damage), "launch_speed": speed, "inside": {}, "influenced": [],
-			"electric": false, "thor": false, "tornado": {}, "weapon": projectile.weapon, "volley": 0,
-			"beacon": false, "wind_scale": 1.0, "burrow": false, "ghost": false, "underground": false,
-			"flight": "", "orbit": Vector2.ZERO, "spin": 0.0, "phase_orbit": 0.0, "hold": 0.0,
-		}
+		var rules := {"damage": int(projectile.damage), "radius": float(projectile.get("blast_radius", model.weapon_rules(model.shot_actor, int(projectile.weapon)).radius))}
+		var shell := ShellState.create(position, Vector2.from_angle(angle) * speed, 0.0, rules, int(projectile.weapon), 0)
+		prepare(shell, {})
+		shell.child = true
+		shell.launched = true
 		model.projectiles.append(shell)

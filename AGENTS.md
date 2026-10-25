@@ -6,7 +6,7 @@ Converse com o usuário em português.
 
 ## Estado e escopo
 
-Protótipo 0.19.0 em Godot 4.7.2 + GDScript (versão única em
+Protótipo 0.20.2 em Godot 4.7.2 + GDScript (versão única em
 `application/config/version` do `project.godot`), identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
@@ -30,11 +30,90 @@ Mage substitui Carapaça com escudo/regen, mira própria, duplo laser helicoidal
 EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com 4 bombas, T2 duas rajadas de 3 e SS com 8, com lançamentos
 temporizados, dados/Fx/áudio originais e adaptações descritas em
 `docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Itens entraram em 0.13 (ver seção abaixo);
-demais mobiles continuam pendentes. A paridade de Mage e Bigfoot com o C#
+o roster completo entrou em 0.19 e os portes especiais restantes estão nos planos por família. A paridade de Mage e Bigfoot com o C#
 (escudo, SS, dano, caixa, queda) está em `docs/sdd/MOBILE_PARITY.md`. Ao portar
 outro mobile, siga `skills/gunbound-mobile-port/SKILL.md`. O C# não aplica uma
 tabela de resistências no dano; regen de vida é 0 nestes dois e 10 nos biônicos.
 Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd/MAGE_0_4.md`.
+
+## Porte fiel do cliente e próxima modernização
+
+Usar `skills/gunbound-client-port/SKILL.md` (`$gunbound-client-port`) ao
+reescrever comportamento do cliente no Godot ou investigar diferenças de
+fidelidade. A skill reúne REA, evidência, aritmética, animação/raster e
+validação; complementa gunbound-mobile-port e gunbound-classic-hd.
+O usuário autorizou engenharia reversa do binário client-side para informar
+e ajustar o porte. Cliente original comprovado prevalece; onde faltar prova,
+manter C#/adaptação identificados, sem anunciar paridade integral.
+Referências: jglim/gunbound-launcher (TestClient) e jglim/gunbound-server;
+servidor não comprova sozinho o render do cliente nem amplia o escopo offline.
+Preservar todos os 16 mobiles, avatares/equipamentos e HD já aprovados.
+Modernização do design de mobile/avatar fica para uma etapa posterior
+solicitada pelo usuário. Não substituir a aparência atual durante o porte.
+
+## Turtle T2 0.20.2 — caminho atual
+
+Ler `docs/sdd/TURTLE_T2_FIDELITY.md` e ADR-087. `turtle_flight.gd` usa
+fase 0/180, amplitude 1000, avanço 5 e contador 0 por projétil: dez ticks de
+crescimento, depois decaimento. Onda/colisão usa heading pré-aceleração;
+seções ±10 usam heading pós-aceleração e pixel inteiro. Carrier não acumula
+o offset. `water_sides` acompanha o histórico copiado pela previsão; renderer
+interpola cópias e envia dois triângulos explícitos por quad T2 para aceitar
+seções cruzadas. T1 mantém draw_polygon; T1/SS e avatares preservados.
+
+Suíte T2 final 588/0, revisão SPEC/qualidade aprovada após P2 de raster;
+probes independentes 28667+46+32 sem falhas. Harness 8020 checks Godot + 16 Python
++ 29 partidas, parse aprovado. GPU temporal 1920×1080/60 FPS, 270 quadros,
+normal/P1/Tornado nos dois sentidos e pausa 30 quadros idênticos. App/ZIP
+0.20.2 assinados/conferidos; fonte 163/0, PCK isolado 179/0/exit0, ressalvas
+ambientais CA/editor_settings explícitas e override ausente do ROOT/PCK.
+Cliente original não executado; escuta/mouse sem validação registrada.
+Aceite visual do T2 confirmado pelo usuário: “Agora funcionou”. Tornado, colisão/dano e física dos filhos SS continuam
+adaptações. Não usar resultados das versões abaixo como prova desta entrega.
+
+## Turtle 0.20.1 — base preservada
+
+Ler `docs/sdd/TURTLE_ANIMATION_FIX.md` e ADR-086. WaterEffect usa UV 1/8,
+alpha(255−16i)/255 e seções compartilhadas; interpolar somente cópia visual
+do histórico. Turtle SS: normal até 43, change no 44 por dez ticks, seis filhos
+bullet12c e remoção do pai sem explosão aérea. `burst` exige `split` para
+flight=open. Hold estabiliza endpoints visuais; evento/efeito preserva
+child/ss_state. Pai normal usa Flame3+SSFlame, change/filhos somente Flame3.
+
+Revisão focal aprovada após três P2; suíte 158/0 e probe 18 cenários/4628 checks
+sem falhas. Captura real 1920×1080/60 FPS, 270 quadros, pausa 30 quadros validada;
+escuta/mouse pendentes. Harness final 7432 checks Godot + 16 Python + 29 partidas
+sem falhas, parse aprovado. App/ZIP 0.20.1 assinados/conferidos; PCK 170/0
+com erro ambiental de CA explícito, sem SCRIPT ERROR/leaks. Override ausente
+do ROOT/PCK. Resultados/logs no registro Turtle. Os números
+0.20.0 abaixo são históricos. HUD/limites/trava SS preservados; dano e física
+numérica dos filhos permanecem adaptações, sem alegação de porte integral.
+
+## Base da fidelidade0.20 — histórico da entrega
+
+Ler `docs/sdd/BATTLE_FIDELITY_0_20.md`, `CLASSIC_BALLISTICS_0_20.md` e
+ADR-084/085. Tarefas 1–7 implementadas; tarefa 8 é pesquisa de 48 tiros e planos
+por família, não porte integral. Código integrado; harness final 7287 checks Godot,
+16 Python/29 partidas, sem falhas. App/ZIP 0.20.0 assinados; PCK 160 checks
+sem falhas de assertiva, erro ambiental de CA explicitado. QA tem limite de
+resolução; recaptura Full HD/escuta pendentes. Detalhes no registro 0.20. Não usar números históricos como
+validação desta versão nem presumir que o app anterior foi atualizado.
+
+`classic_ballistics.gd`: 20 Hz/24.8, LUTs pré-aquecidas, aceleração congelada,
+força nativa convertida uma vez; Slice3 s e P mínimo 1. `boomer_flight.gd`
+decide SS normal/change/cnormal (freeze36–45, retomada 46); não inferir por
+idade visual. `classic_shot_timing.gd` guarda48timelines/grupos; som em
+projectile_launch, pose Dual separada. `classic_projectile_art.gd` desenha
+WaterEffect sem cabeça Armor. Minas mantêm autoria/Gold e compartilham o
+passo com a previsão; filhos/cristais passam por ShellState. Colisão nunca
+usa interpolação. Na0.20.0, `open/hold` do Armor/Turtle publicava estado visual
+sem alterar a mecânica; paraTurtle isso foi substituído pelaADR-086. Contato ASate0 → −3 é mudança visual registrada.
+
+Dano/colisão refinada/tornado e famílias ASate/JD/Aduka/Grub/Knight não são
+paridade nativa completa; seguir `BATTLE_MOBILE_FAMILY_PLANS.md` em novo porte.
+Preservar originais/HD, perfil real e C#. Override local de certificados não
+pode ser exportado. Rodar harness com modelos, cenas e 29 partidas previstas
+(13 seeds+16 mobiles); `--quick` omite as duas suítes de partidas.
 
 ## Referência C# em `~/Workspaces/Gunbound`
 

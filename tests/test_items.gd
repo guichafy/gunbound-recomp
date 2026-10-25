@@ -143,11 +143,11 @@ func run() -> void:
 	model.use_item(0)
 	check(model.weather.wind_angle == 120 and model.wind.distance_to(-old_wind) < 0.001 and model.weather.wind_force == 20, "Change Wind turns the wind 180°")
 
-	# Dual (Mage S1): two lasers, the second 1 s after the first spawn.
+	# Dual (Mage S1): two lasers, pose2 at1.05 then source tick1 at1.10.
 	model = fresh(1, ["dual"])
 	model.use_item(0)
 	model.fire(40.0, 70.0, 0)
-	check(model.projectiles.size() == 2 and is_equal_approx(float(model.projectiles[1].spawn_at), 1.0) and int(model.projectiles[1].weapon) == 0, "Dual fires the same shot twice, 1 s apart")
+	check(model.projectiles.size() == 2 and is_equal_approx(float(model.projectiles[1].spawn_at), 1.1) and int(model.projectiles[1].weapon) == 0, "Dual fires source tick1 at0.05 and1.10 (pose2 at1.05)")
 	check(not model.projectiles[1].launched, "The second shot waits for its interaction time")
 	fly(model)
 	check(events_of(model, "volley").size() == 1 and events_of(model, "fire").size() == 1, "The second volley emits its own shooting event")
@@ -155,7 +155,7 @@ func run() -> void:
 	check(is_equal_approx(float(model.actors[Match.PLAYER].ready), 80.0 + 100.0), "Dual turn costs the item plus one shot delay")
 	check(str(model.actors[Match.PLAYER].turn_item).is_empty(), "Shot turn end dismisses the item")
 
-	# Dual with a Bigfoot salvo: InteractionTime 1 + 0.6, then each SpawnTime.
+	# Dual with a Bigfoot salvo: InteractionTime1 + last source spawn0.85, then each source tick.
 	model = fresh(2, ["dual", "dual_plus"])
 	model.use_item(0)
 	model.fire(30.0, 60.0, 0)
@@ -163,7 +163,7 @@ func run() -> void:
 	for shell in model.projectiles:
 		if int(shell.volley) == 1:
 			spawns.append(snappedf(float(shell.spawn_at), 0.001))
-	check(model.projectiles.size() == 8 and spawns == [1.6, 1.8, 2.0, 2.2], "Bigfoot T1 Dual: second salvo at 1.6/1.8/2.0/2.2 s")
+	check(model.projectiles.size() == 8 and spawns == [2.0, 2.2, 2.45, 2.7], "Bigfoot T1 Dual: second salvo at2.0/2.2/2.45/2.7s (MainAction3/7/12/17)")
 
 	# Dual+: S1 then S2, S2 then S1, each shell with its own weapon.
 	model = fresh(2, ["dual_plus", "dual_plus"])

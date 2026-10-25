@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. A versão atual é a **0.18.5**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com Bigfoot, Mage e Nak, HUD de batalha, clima, itens e loja de avatar.
+Protótipo de artilharia 2D por turnos, em **Godot 4.7.2 + GDScript**. O código atual é a **0.20.2**: treino offline **1×1 contra o computador no macOS**, no mapa Miramo Town, com os 16 mobiles do cliente clássico, HUD de batalha, clima, itens e loja de avatar.
 
 O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local `~/Workspaces/Gunbound`), com arte HD própria. **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem publicação, notarização ou distribuição.
 
@@ -8,11 +8,11 @@ O jogo reescreve, em Godot, mecânicas e assets do OpenBound em C# (pasta local 
 
 | | |
 |---|---|
-| Versão | **0.19.0** — os 16 mobiles do cliente clássico no treino; inclui o brilho 0.18.7 e a revisão 0.18.6 |
+| Versão do código | **0.20.2** — onda original e rastro do Turtle T2 |
 | O que dá para jogar | Menu, loja, uma partida 1×1, pausa, resultado, revanche e perfil local |
-| Validação automática | **5313 verificações rápidas e 13 testes Python** na 0.18.5; as **13 partidas completas** foram validadas na 0.18.2 |
-| Aplicativo | `builds/Gunbound Recomp.app` (Universal, assinatura ad-hoc para teste local) |
-| Validação visual | Usuário validou o brilho do Great Devil Head 0.18.7 na main (24/10/2026); 20 modelos com efeito revisados |
+| Validação automática | **8020 checks Godot, 16 testes Python e 29 partidas**, zero falhas; [registro 0.20.2](docs/sdd/TURTLE_T2_FIDELITY.md) |
+| Aplicativo | App/ZIP **0.20.2** assinados e conferidos; PCK **179 checks/0 falhas**, com ressalva ambiental de CA. [Registro](docs/sdd/TURTLE_T2_FIDELITY.md) |
+| Validação visual | T2 normal, força mínima e Tornado: captura temporal 1920×1080/60 FPS inspecionada; escuta, mouse manual e aceite visual pendentes |
 
 O relato passo a passo de cada entrega está em [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md). Este arquivo é o mapa do que existe hoje.
 
@@ -46,7 +46,7 @@ A arena é o Miramo Town A em escala nativa, com câmera que segue o mobile, o t
 
 <img src="docs/map/miramo-shot.png" width="720" alt="Bigfoot disparando uma salva sobre o Miramo Town, com a barra de força cheia">
 
-O HUD é o de batalha do OpenBound: armas 1, 2 e SS, ângulo, força, movimento, previsão do clima, ordem dos turnos, bússola, relógio e vida. A carga vai de 0 a 100 em 2 segundos. Itens ocupam a barra F1–F6.
+O HUD é o de batalha do OpenBound: armas 1, 2 e SS, ângulo, força, movimento, previsão do clima, ordem dos turnos, bússola, relógio e vida. A carga Slice chega a100% em 3 segundos, com força mínima nativa do mobile. Itens ocupam a barra F1–F6.
 
 <img src="docs/items/items-bar.png" width="720" alt="Partida com Bigfoot e Mage, tornado e quatro itens equipados na barra">
 
@@ -55,6 +55,21 @@ O clima muda em colunas no mapa: Força, Fraqueza, Espelho, Tornado, Elétrico, 
 <img src="docs/weather/weather-columns.png" width="720" alt="Colunas de clima e um tornado no Miramo Town durante o turno">
 
 ### Tiros
+
+A 0.20.2 substitui a órbita aproximada do Turtle T2 pela onda comprovada no
+cliente: duas faixas oscilam e depois se aproximam da trajetória central.
+[Vídeo Full HD](docs/turtle-t2/turtle-t2.mp4) ·
+[Contrato, testes e limites](docs/sdd/TURTLE_T2_FIDELITY.md).
+
+
+A 0.20.1 corrige os tiros do Turtle: a água permanece contínua nas curvas e o
+SS abre antes de se dividir em seis bolhas menores. A captura temporal usa o
+modelo e os sprites reais nos dois sentidos, incluindo pausa.
+[Vídeo Full HD](docs/turtle-projectiles/turtle-shots.mp4) ·
+[Correções, testes e limites](docs/sdd/TURTLE_ANIMATION_FIX.md).
+
+
+A 0.20 usa o passo balístico original a 20 Hz e ponto fixo 24.8, com força/gravidade por mobile e vento quantizado. Boomer S 2 emite quatro tiros temporizados e seu SS congela durante a transformação. Turtle S 1/S 2 usa a faixa WaterEffect original. As 48 combinações têm cronologia de emissão/áudio documentada; dano, colisão refinada e várias mecânicas especiais continuam adaptações ou portes futuros. [Escopo e evidências](docs/sdd/BATTLE_FIDELITY_0_20.md).
 
 Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no tiro 2 e oito no SS. Mage dispara laser, dois lasers em hélice e um orbe que zera escudos próximos. A folha abaixo isola o voo e o impacto de cada arma; o título gravado na imagem ainda é o da entrega 0.6.2.
 
@@ -80,6 +95,9 @@ Bigfoot solta bombas em sequência: quatro no tiro 1, duas rajadas de três no t
 | 0.18.2 | Auditoria: CPU paga 2 s fixos e congela o relógio durante a busca, fila do HUD na TurnTable, deriva do vento na queda por passo de gravidade (ADR-077), vento em 0–359 e docs de baseline marcados |
 | 0.18.3 | Great Devil Head: aura pulsante derivada do contorno da cabeça HD, pivô compartilhado e ouro preservado; main inclui o merge do PR2 |
 | 0.18.4 | Restaura brilho, opacidade e pulsação anteriores do Great Devil; corrige somente a curva por geometria UV constante após rejeição do halo discreto da 0.18.3 |
+| 0.20.2 | Turtle T2: agenda nativa de fase/amplitude, largura e orientação próprias; raster de dois triângulos e QA temporal Full HD |
+| 0.20.1 | TurtleT1/T2 com água contínua; SS com abertura, seis bolhas próprias e impactos por estágio; captura temporal Full HD |
+| 0.20.0 | Minas/fábrica corrigidas, balística comum20Hz/24.8, carga3s/mínimo original, Boomer, WaterEffect e cronologia audiovisual48; pesquisa e planos dos especiais restantes |
 | 0.19.0 | Roster dos 16 mobiles do cliente (ADR-083). IDs 1–3 preservados; arte original nos demais |
 | 0.18.7 | Brilho do Great Devil Head derivado da silhueta do chifre HD com o perfil do L clássico (ADR-082); substitui a meia-lua curvada da 0.18.4 |
 | 0.18.5 | Carteira padrão com 999.999.999 Gold/Cash e concessão única no perfil existente; teste compra e veste todos os 479 avatares compráveis |
@@ -98,11 +116,11 @@ Números de base, antes dos atributos:
 
 - A máquina calcula o tiro e permanece parada. Ela também não gasta itens.
 - **Mouse Speed** continua desligado. A skin de interface é só a Blue.
-- Mage e Bigfoot usam arte HD; Nak conserva a arte original. Seus derivados HD estão preservados como fonte pendente de confirmação específica para integração. Outros mobiles continuam pendentes. O Mage já regenera escudo.
+- Mage e Bigfoot usam arte HD; Nak conserva a arte original. Seus derivados HD estão preservados como fonte pendente de confirmação específica para integração. Os 16 mobiles já são selecionáveis; mecânicas especiais ainda não portadas constam nos [planos por família](docs/sdd/BATTLE_MOBILE_FAMILY_PLANS.md). O Mage já regenera escudo.
 - Existe um mapa: Miramo Town A. Outros mapas ficaram de fora por decisão explícita.
 - A arte de clima e do Thor ainda é a original, em resolução baixa.
 - Olhos e gestos dos avatares HD não foram reanimados quadro a quadro.
-- A loja lista os 15 registros do catálogo em C#. Chapéus que aparecem só na foto de referência não foram inventados.
+- A loja usa o catálogo XFS de 562 registros/479 compráveis; ações de rede continuam indisponíveis.
 - Itens de batalha não se compram com Gold. O ouro da loja é o dos avatares.
 - Uma queda depois do teleporte, quando o mobile nasce sob um teto, não causa dano.
 - A colisão do terreno é amostrada a cada dois pixels. Pedaços de chão que ficam soltos permanecem no lugar; só os veículos caem.
@@ -124,13 +142,13 @@ Estes itens estão no roadmap e só entram com um pedido novo:
 
 ## Como jogar
 
-Abra **`builds/Gunbound Recomp.app`**. Escolha apelido, veículo e dificuldade e inicie o treino. Também dá para importar `project.godot` no Godot 4.7.2 e rodar `scenes/main.tscn`.
+Abra **`builds/Gunbound Recomp.app`** (0.20.0) ou importe `project.godot` no Godot 4.7.2 e rode `scenes/main.tscn`. Escolha apelido, veículo e dificuldade e inicie o treino. [Validação do aplicativo](docs/sdd/BATTLE_FIDELITY_0_20.md).
 
 | Controle | Ação |
 |---|---|
 | A/D ou ←/→ | Mover e virar, gastando a barra de movimento |
 | W/S ou ↑/↓ | Mirar 1° por toque; segurar acelera a repetição |
-| Espaço | Segurar enche a força de 0 a 100 em 2 s; soltar dispara; no 100 dispara sozinho |
+| Espaço | Segurar chega a 100% em 3 s; soltar dispara; no 100 dispara sozinho; mínimo nativo por mobile |
 | Tab ou 1/2/3 | Trocar tiro 1, tiro 2 e SS |
 | F1–F6 ou clique na barra | Usar um item. Um por turno, e o SS fica travado nesse turno. No turno da máquina, o clique agenda o item para o seu próximo turno |
 | F8 ou PASS | Passar o turno |

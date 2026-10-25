@@ -1,0 +1,14 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "sine": {
+    "va": "0x54c240",
+    "size": 1440,
+    "sha256": "6e40fa45f367eda31c6b03f9cf76af99ab1cf97bace9c856eca44357416dfa7a"
+  },
+  "angle": {
+    "center_va": "0x598e7e",
+    "first_va": "0x588f80",
+    "size": 131072,
+    "sha256": "41734b41c43ff4e760a3a11a830c208493446dd1aef3a72f2a760e9b0bce3ffb"
+  }
+}

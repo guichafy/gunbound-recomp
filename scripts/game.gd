@@ -411,12 +411,12 @@ func play_mobile_shot(event: Dictionary) -> void:
 	var id := int(event.vehicle) if event.has("vehicle") else int(model.actors[event.actor].vehicle)
 	# A Dual second volley sounds like a new shot; the teleport beacon has its own.
 	var moment: String = "fire" if event.type == "volley" else event.type
-	if not Mobiles.has_id(id) or Mobiles.shot_sound_on(id) != moment or bool(event.get("beacon", false)) or event.get("item", "") == "teleport":
+	if not Mobiles.has_id(id) or Mobiles.shot_sound_on(id) != moment or not bool(event.get("sound", true)) or bool(event.get("beacon", false)) or event.get("item", "") == "teleport":
 		return
 	var body = sprite_for(id)
 	if body == null:
 		return
-	sound.play("fire", body.shoot_sounds[event.weapon])
+	sound.play("fire", Mobiles.ShotTiming.stream(id, int(event.weapon), "fire"))
 
 func consume_events() -> void:
 	var granted := -1
@@ -448,12 +448,12 @@ func consume_events() -> void:
 			"explosion":
 				rig.last_impact = event.position
 				var vehicle_id := int(event.get("vehicle", Mobiles.DEFAULT_ID))
-				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "age": 0.0})
+				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "child":bool(event.get("child",false)), "ss_state":str(event.get("ss_state","normal")), "age": 0.0, "angle":float(event.get("angle",0.0))})
 				shake = 7.0
 				var original: AudioStream = null
 				var body = sprite_for(vehicle_id)
 				if body != null:
-					original = body.blast_sounds[event.weapon]
+					original = Mobiles.ShotTiming.stream(vehicle_id, int(event.weapon), "blast")
 				sound.play("explosion", original)
 			"fall":
 				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, minf(float(model.actors[event.actor].pos.y), model.terrain.world_size().y) - 80.0), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
@@ -648,7 +648,12 @@ func _draw() -> void:
 ## S1 and S2 in one turn); the beacon has its own art.
 func draw_projectiles(offset: Vector2) -> void:
 	draw_set_transform(offset)
-	for projectile in model.projectiles:
+	for source_projectile in model.projectiles:
+		var projectile: Dictionary = source_projectile.duplicate()
+		var blend := clampf(float(model.accumulator)/0.05,0.0,1.0)
+		projectile.draw_fraction = blend
+		projectile.hit_pos = Vector2(projectile.get("previous_hit_pos",projectile.hit_pos)).lerp(projectile.hit_pos,blend)
+		projectile.pos = Vector2(projectile.get("previous_draw_pos",projectile.pos)).lerp(projectile.pos,blend)
 		if not projectile.launched:
 			continue
 		if bool(projectile.get("beacon", false)):

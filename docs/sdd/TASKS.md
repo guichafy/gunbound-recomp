@@ -1,11 +1,132 @@
 # Entregas e próximos trabalhos
 
+## Aprendizado do porte — REQ-12/19/20/38–41/44/45
+
+- [x] Registrar aceite visual do T2 e autorização de REA client-side (ADR-088).
+- [x] Consolidar skill gunbound-client-port com REA, fontes, aritmética,
+      animação/raster e registro de evidência; preservar roster/avatares/HD.
+- [x] Validar estrutura, referências/UI e dois cenários com subagentes;
+      conferir dez hashes anteriores de runtime/testes/captura preservados.
+- [ ] Versionar a skill: sandbox bloqueia `.git/index.lock`; arquivos locais
+      preservados e nenhuma publicação realizada.
+- [ ] Modernizar design de mobile/avatar em etapa posterior solicitada.
+
+## Turtle T2 0.20.2 — onda original
+
+REQ-04/08/19/44/45, ADR-087; [registro](TURTLE_T2_FIDELITY.md).
+
+- [x] Substituir órbita constante por fase/amplitude inteiras do cliente.
+- [x] Separar trajetória central, ponto de colisão e seções pós-aceleração.
+- [x] Usar meia largura 10 e raster T2 de dois triângulos; preservar T1/SS.
+- [x] Oráculos 32 estados/98 geometrias; RED 426/327 → GREEN 520/0, suíte final 588/0.
+- [x] Fechar P2 de raster (RED 584/1), com revisão SPEC/qualidade aprovadas;
+      probes independentes 28667+46+32 sem falhas.
+- [x] Harness final 8020 checks Godot + 16 Python + 29 partidas, zero falhas;
+      parse completo aprovado, log `.tools/turtle-t2/full-check.log`.
+- [x] GPU 1920×1080/60 FPS, 270 quadros: normal/P1/Tornado nos dois sentidos,
+      pausa 30 quadros idênticos e inspeção da oscilação/aproximação.
+- [x] Revalidar parse após recorte dos seis painéis no script de captura.
+- [x] App/ZIP 0.20.2 exportados, assinatura estrita/CRC/Info.plist válidos;
+      fonte 163/0 e PCK isolado 179/0/exit0, override/TLS local ausentes.
+      Ressalvas ambientais CA/editor_settings registradas.
+- [x] Aceite visual do T2 pelo usuário: “Agora funcionou”.
+- [ ] Escuta e mouse manual, sem validação registrada.
+
+Tornado, colisão/dano e física dos filhos SS não são paridade integral.
+Os resultados 0.20.1 abaixo permanecem históricos.
+
+## Turtle 0.20.1 — histórico
+
+REQ-04/07/19/45, ADR-086; [registro e limites](TURTLE_ANIMATION_FIX.md).
+
+- [x] Corrigir UV 1/8, alpha, junções e interpolação visual de T1/T2.
+- [x] Importar bullet12c e separar a apresentação dos filhos SS.
+- [x] Tick 44→dez ticks change→seis filhos/remoção do pai no laço real/previsão.
+- [x] Corrigir os três P2 da revisão: impacto no 44, hold visual e SSFlame por estado.
+- [x] RED→GREEN 158/0 e probe independente 18 cenários/4628 verificações/0 falhas;
+      gates de especificação e qualidade focal aprovados.
+- [x] Captura temporal GPU 1920×1080/60 FPS, 270 quadros, ambos os sentidos,
+      pausa 30 quadros byte-idênticos; inspeção dos estados e faixas contínuas.
+- [x] Harness integral: 7432 checks Godot, 16 testes Python, 29 partidas,
+      zero falhas e parse aprovado; probe de recursos na fonte 154/0.
+- [x] App/ZIP 0.20.1 exportados, assinatura estrita/CRC/Info.plist válidos;
+      PCK isolado 170/0/exit0, sem SCRIPT ERROR/leaks; ressalvas ambientais
+      de CA/editor_settings registradas, override ausente do ROOT/PCK.
+- [ ] Escuta, mouse manual e aceite do usuário.
+
+HUD/limites/trava SS preservados. Física numérica integral dos filhos e demais
+portes especiais não fazem parte desta correção. Os totais abaixo pertencem
+à entrega 0.20.0 e não substituem os resultados 0.20.1.
+
+## Fidelidade da batalha 0.20 —24/10/2026
+
+REQ-03/04/05/06/07/08/09/10/19/23/28/34/44/45, ADR-084/085.
+Estado/evidência em [BATTLE_FIDELITY_0_20.md](BATTLE_FIDELITY_0_20.md).
+
+- [x] Tarefa 1: minas com autoria, avanço comum, Gold e resultado idempotente.
+- [x] Tarefa 2: fábrica completa, raio/Lightning e filhos/cristais.
+- [x] Tarefa 3: mira única, CPU nos extremos e HUD coerente.
+- [x] Tarefa 4: matriz 48, assets/sons originais, WaterEffect e contato exportável.
+- [x] Tarefa 5: núcleo 20 Hz/24.8, vento, mínimo nativo e carga 3 s.
+- [x] Tarefa 6: curva, quatro emissões S2 e transformação/freeze do Boomer.
+- [x] Tarefa 7: EPA/pose/emissão/som, Dual, pausa e mudo; fix Armor/Turtle SS.
+- [x] Tarefa 8: pesquisa 48 tiros/44 classes e planos de porte por família.
+- [x] Revisões independentes de especificação/qualidade aprovadas após fixes;
+      probe 48 voos/0 divergências e assets 49/0 revalidados.
+- [x] Migrar fixtures legadas e corrigir teardown AudioServer somente no teste.
+- [x] Harness final limpo: 7287 checks Godot, 16 testes Python, 29 partidas
+      completas e parse aprovado; `final-full-check-3.log`.
+- [x] Registrar composição/timeline do editor nativo e inspeção: 3004×1805,
+      quadro 1920×1080 no canto; não equivale a Full HD.
+- [ ] Recapturar Full HD; escuta, mouse manual e aceite do usuário pendentes.
+- [x] App/ZIP 0.20.0, Info.plist e assinatura estrita conferidos; PCK isolado
+      160 checks/0 falhas/exit0. Erros ambientais CA/editor_settings registrados
+      separadamente; não alegar logs de export/smoke limpos.
+
+O registro da entrega concentra resultados e pendências de recaptura Full HD,
+escuta e validação manual. Não reutilizar totais/builds de versões antigas.
+ASate contato0 → −3 é diferença visual a inspecionar; combate preservado.
+
+Próximas implementações, **fora desta entrega**: seguir
+[BATTLE_MOBILE_FAMILY_PLANS.md](BATTLE_MOBILE_FAMILY_PLANS.md) para
+satélites ASate/Knight, atração JD, Thor Aduka, ricochetes Grub, dois impactos
+Armor e demais geometrias/estágios. Refinamento nativo de colisão/dano/tornado
+não foi entregue. Poder 0 não autoriza inventar dano nem remover a cadeia.
+
+## Histórico anterior à0.20
+
+## Planejamento anterior ao porte —24/10/2026 (histórico)
+
+REQ-03/04/05/06/07/08/09/19/23/28/44/45. Plano e evidências em
+[BATTLE_FIDELITY_PLAN.md](BATTLE_FIDELITY_PLAN.md); investigação histórica em
+[BATTLE_FIDELITY_HANDOFF.md](BATTLE_FIDELITY_HANDOFF.md).
+
+- [x] Revisar HEAD `c796154` e roster `6038d0a`; recuperar relatórios temporários.
+- [x] Reproduzir perda Lightning, minas Raon sem raio e troca de autoria fora da previsão.
+- [x] Corrigir o plano para Dragon/Knight/Aduka e recuperar a pesquisa parcial do Boomer.
+- [ ] Corrigir autoria/avanço de minas no caminho comum, com testes de estado e resultado.
+- [ ] Preservar parâmetros na fábrica e construir filhos pelo mesmo contrato.
+- [ ] Remover cortes conflitantes de mira no integrador/CPU.
+- [ ] Fechar matriz de arte/áudio, importação e comportamento no PCK.
+- [ ] Investigar/corrigir composição visual Turtle T1 (relato: igual a Armor
+  T1); bala base é idêntica já no XFS, mas o C# acrescenta rastro próprio.
+- [x] Usuário escolheu física original, carga de 3 s e força mínima original (ADR-084).
+- [ ] Especificar interfaces/fixtures e portar o passo original conforme ADR-084.
+- [ ] Portar curva, salvas e transformação do Boomer conforme evidência.
+- [ ] Sincronizar pose/emissão/som por arma, incluindo Dual e pausa.
+- [ ] Completar RE dos demais tiros antes de atribuir dano/efeitos desconhecidos.
+- [ ] Revalidar harness sem erro de certificados; depois suítes/partidas completas na implementação.
+
+Nesta revisão: quatro suítes somam 2268 checks sem falhas de assertiva, mas
+harness falhou por erro Godot de certificados; dois testes Python passaram.
+Sem mudança de comportamento, app ou versão.
+
 ## Roster clássico 0.19.0 (REQ-45, ADR-083)
 
 - [x] Catálogo dos 16 mobiles com vida, escudo, mira e delay do `characterdata.dat`.
 - [x] Arte original, sprites, mira e menu em grade.
 - [x] Voo especial de Armor, Trico, Raon, Lightning, Ice e Turtle no laço comum.
-- [ ] Simulação própria de Boomer, JD, A.Sate, Grub, Dragon, Knight e Aduka.
+- [ ] Simulação própria de Boomer, JD, A.Sate, Grub, Dragon, Knight e Aduka (estado da0.19; Boomer implementado na0.20, demais conforme planos por família).
 - [x] Feixe do Lightning sobe a partir do impacto; mina do Raon anda na superfície e estoura na caixa.
 - [ ] Mina do Raon como mobile próprio (folha e turno em cadeia).
 - [x] Suíte completa: 5536 checks e 13 partidas, zero falhas.
@@ -96,7 +217,7 @@
 - [x] Preservar pendentes0.17 em3eb2b01; confirmar PR1 MERGED/ancestralidade.
 - [x] Reproduzir mistura Staring/Normal em L e corrigir preparação/fallback.
 - [x] Regenerar luz única do Great Devil; registrar20âncoras de cabeça HD.
-- [x] GPU20modelos/360frames60Hz/pausa e loja real1920×1080.
+- [x] GPU20modelos/360frames60Hz/pausa e loja real 1920×1080.
 - [x] Revisão independente, QA37lotes/550registros renovado.
 - [x] Regressão5234checks+13partidas e Python13 PASS.
 - [x] Export/PCK0.18, versão0.18.0 e assinatura estrita conferidos.
@@ -138,7 +259,7 @@
 - [x] Regenerar fundo e retrato compartilhado de slot vazio; metadados/fallback/mipmaps.
 - [x] Corrigir escala real da Window e restaurar menu/batalha, incluindo ESC/reentrada.
 - [x] 1949checks rápidos e10partidas completas sem falhas; achado da revisão corrigido.
-- [x] GPU1920×1080/120frames60Hz, app/ZIP0.15.0 assinados e smoke isolado do PCK.
+- [x] GPU 1920×1080/120frames60Hz, app/ZIP0.15.0 assinados e smoke isolado do PCK.
 - [ ] Usuário validar a aparência e os fluxos no aplicativo reaberto.
 
 ## Auditoria de estado/layout da loja0.14.9 (ADR-069)
@@ -148,7 +269,7 @@
 - [x] Separar arte/legenda/hitbox, alinhar categorias e corrigir size após fonte.
 - [x] Preservar proporção da prévia com crop uniforme e faixa de preço nítida.
 - [x] 1913checks+10partidas sem falhas; revisão independente sem achados.
-- [x] GPU1920×1080/120frames60Hz e smoke real do PCK em/tmp, incluindo batalha.
+- [x] GPU 1920×1080/120frames60Hz e smoke real do PCK em/tmp, incluindo batalha.
 - [x] App/ZIP0.14.9 reexportados, versão conferida e assinatura estrita válida.
 - [ ] Usuário validar layout/fluxos no aplicativo atualizado.
 
@@ -187,7 +308,7 @@
 - [x] Retirar faixa plana sobreposta e compor preços dentro da moldura HD/nativa.
 - [x] Explicitar “Cosmético · sem bônus”, tooltip/popup, sem inventar stats da imagem.
 - [x] 1848checks rápidos sem falhas, revisão independente sem achados.
-- [x] GPU1920×1080 HD/fallback/roster/compra,120frames60FPS; referência preservada.
+- [x] GPU 1920×1080 HD/fallback/roster/compra,120frames60 FPS; referência preservada.
 - [x] App/ZIP0.14.7 reexportados, assinatura estrita e smoke GPU/PCK isolado passaram.
 - [ ] Usuário validar os cards atualizados no app.
 
@@ -198,7 +319,7 @@
 - [x] Popup com retrato/categoria/preço/saldo e moeda única central, tamanho fixo.
 - [x] Regenerar quatro folhas1254×1254 por GPT Images;20texturas UI, alpha/registro/fallback.
 - [x] Corrigir escala de bordas/popup vista na GPU; revisão independente final sem achados.
-- [x] Harness1848checks+10partidas, zero falhas; GPU1920×1080/120frames60FPS.
+- [x] Harness1848checks+10partidas, zero falhas; GPU 1920×1080/120frames60 FPS.
 - [x] App/ZIP0.14.6, assinatura estrita e smoke GPU/PCK isolado fora do projeto passaram.
 - [ ] Usuário validar aparência/fluxo da interface HD no aplicativo.
 
@@ -218,7 +339,7 @@
 - [x] Inventário lateral vestível persistido e prévia/saldo compactos.
 - [x] Atributos em modal, cancelar/ESC, confirmar e feedback de falha/rollback.
 - [x] Regressão1758checks sem falhas; revisão independente sem Critical/Important.
-- [x] GPU1920×1080 e120frames60fps; fontes originais/hash preservados.
+- [x] GPU 1920×1080 e120frames60fps; fontes originais/hash preservados.
 - [x] App/ZIP0.14.5 assinados; PCK real compra/vestir/recarga/batalha passou.
 - [ ] Usuário validar fidelidade visual da composição e fluxo no app.
 

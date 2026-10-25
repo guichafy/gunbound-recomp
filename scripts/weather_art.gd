@@ -97,7 +97,7 @@ func emit_ground(position: Vector2, removed_cells: int, angle: float, model) -> 
 	# Projectile.cs: removed pixels / 32 particles (one cell is 2×2 pixels).
 	if ground == null or ground_frames <= 0 or removed_cells <= 0:
 		return
-	var wind: Vector2 = Vector2(cos(deg_to_rad(model.weather.wind_angle)), sin(deg_to_rad(model.weather.wind_angle))) * float(model.weather.wind_force) * PARTICLE_WIND
+	var wind: Vector2 = model.weather.wind_vector() * PARTICLE_WIND
 	var count := mini(PARTICLE_CAP, removed_cells * 4 / 32)
 	for i in range(count):
 		var spread := float(i % PARTICLE_SPREAD + 1)
@@ -107,7 +107,7 @@ func emit_ground(position: Vector2, removed_cells: int, angle: float, model) -> 
 		particles.append({
 			"origin": position, "age": 0.0, "frame": noise.randi_range(0, ground_frames - 1),
 			"speed": Vector2(amount * PARTICLE_MAX_SPEED * trajectory.x, PARTICLE_Y_SPEED + amount * PARTICLE_MAX_SPEED * trajectory.y),
-			"acceleration": Vector2(wind.x, PARTICLE_Y_ACCELERATION - wind.y),
+			"acceleration": Vector2(wind.x, PARTICLE_Y_ACCELERATION + wind.y),
 			"rotation": direction, "spin": (noise.randf() - 0.5) * PARTICLE_ROTATION,
 			"growth": (noise.randf() - 0.5) * PARTICLE_SCALE,
 		})

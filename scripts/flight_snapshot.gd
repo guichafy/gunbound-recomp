@@ -1,12 +1,13 @@
 extends RefCounted
 ## Closed copy of the state the flight loop reads.
-## predict_shot and the CPU snapshot copy only these fields. A new Match field
-## stays out of the prediction until it is added here.
+## capture copies persistent state (including placed mines); arm initializes
+## the proposed shot and derives its presentation volleys from its own shells.
+## A new Match field stays out of prediction until explicitly handled here.
 
 const FLIGHT_FIELDS := [
 	"terrain", "actors", "wind", "weather",
 	"shot_actor", "shot_weapon", "projectiles", "phase",
-	"flight_elapsed", "events", "resolve_wait", "shot_gold"
+	"flight_elapsed", "events", "resolve_wait", "shot_gold", "mines", "volleys"
 ]
 
 static func capture(source):
@@ -26,6 +27,7 @@ static func arm(sim, shot_actor: int, shot_weapon: int, shells: Array) -> void:
 	sim.shot_actor = shot_actor
 	sim.shot_weapon = shot_weapon
 	sim.projectiles = shells
+	sim.volleys = sim.second_volley(shells)
 	sim.phase = sim.PHASE_FLIGHT
 	sim.flight_elapsed = 0.0
 	sim.events = []

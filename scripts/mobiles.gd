@@ -5,6 +5,7 @@ extends RefCounted
 const Attributes = preload("res://scripts/player_attributes.gd")
 const BigfootAttacks = preload("res://scripts/bigfoot_attacks.gd")
 const ClassicMobiles = preload("res://scripts/classic_mobiles.gd")
+const ShotTiming = preload("res://scripts/classic_shot_timing.gd")
 const DelayUnits = preload("res://scripts/delay_units.gd")
 
 # 1 Mage, 2 Bigfoot, 3 Nak stay first so opponent() keeps 1↔2 and Nak→Mage.
@@ -79,6 +80,7 @@ const DEFINITIONS := {
 static var ALL := {}
 
 static func _static_init() -> void:
+	ShotTiming.prewarm()
 	ALL = DEFINITIONS.duplicate(true)
 	var extra: Dictionary = ClassicMobiles.definitions()
 	for id in extra:
@@ -121,19 +123,19 @@ static func generic_trail(vehicle_id: int) -> bool:
 	return bool(ALL[vehicle_id].generic_trail)
 
 static func shot_sound_on(vehicle_id: int) -> String:
-	return str(ALL[vehicle_id].shot_sound_on)
+	return "projectile_launch"
 
 ## Shells of one shot: the Bigfoot emitter salvo, else "count" shells at once.
 static func emission(vehicle_id: int, weapon_index: int) -> Array:
 	if bool(ALL[vehicle_id].get("salvo", false)):
-		return BigfootAttacks.salvo(weapon_index)
+		return ShotTiming.emission(vehicle_id, weapon_index, BigfootAttacks.salvo(weapon_index))
 	var rules: Dictionary = weapon(vehicle_id, weapon_index)
 	if rules.has("shells"):
-		return ClassicMobiles.emission(rules)
+		return ShotTiming.emission(vehicle_id, weapon_index, ClassicMobiles.emission(rules))
 	var result: Array = []
 	for _component in range(int(rules.get("count", 1))):
 		result.append({"spawn": 0.0, "angle": 0.0, "power": 0.0})
-	return result
+	return ShotTiming.emission(vehicle_id, weapon_index, result)
 
 ## Mobile.Regenerate. The shield cap reads health from before this tick's heal.
 static func regenerate(actor: Dictionary) -> void:
@@ -154,3 +156,13 @@ static func body(actor: Dictionary) -> Dictionary:
 		return {"box": Vector2.ZERO, "offset": Vector2.ZERO, "stance": 24.0}
 	var spec: Dictionary = ALL[int(actor.vehicle)]
 	return {"box": spec.box, "offset": spec.box_offset, "stance": float(spec.stance)}
+
+# characterdata.dat [25]/[40], in stable playable ID order (ADR-084).
+const FORCE_MAX := {1:45, 2:42, 3:41, 4:46, 5:43, 6:35, 7:44, 8:47, 9:50, 10:45, 11:50, 12:46, 13:50, 14:50, 15:48, 16:48}
+const GRAVITY_NATIVE := {1:90, 2:98, 3:98, 4:98, 5:98, 6:98, 7:98, 8:90, 9:98, 10:98, 11:98, 12:98, 13:98, 14:90, 15:98, 16:94}
+static func force_max(vehicle_id: int) -> int:
+	return FORCE_MAX[vehicle_id]
+static func gravity_native(vehicle_id: int) -> int:
+	return GRAVITY_NATIVE[vehicle_id]
+static func minimum_power(vehicle_id: int) -> float:
+	return 10.0 / force_max(vehicle_id)
