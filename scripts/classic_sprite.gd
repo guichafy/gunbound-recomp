@@ -6,11 +6,14 @@ extends "res://scripts/mobile_sprite.gd"
 const SHOT_FPS := 20.0
 const Timing = preload("res://scripts/classic_shot_timing.gd")
 const ClassicProjectileArt = preload("res://scripts/classic_projectile_art.gd")
+const SmoothArt = preload("res://scripts/mobile_smooth_art.gd")
 var classic_art = ClassicProjectileArt.new()
 var meta: Dictionary = {}
 var mobile_kind := ""
 var asset_folder := ""
 var placed: Dictionary = {}
+# Texels per native pixel of each validated4× sheet (ADR-104).
+var sheet_density: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []
 var rear := false
@@ -42,6 +45,26 @@ func setup(kind: String) -> void:
 	for name in ["Bullet1", "Bullet2", "Bullet3"]:
 		bullets.append(_optional(folder, name))
 		lights.append(_optional(folder, name + "Light"))
+	load_smooth(str(preload("res://scripts/mobile_looks.gd").by_kind(kind).get("smooth", "")))
+
+## Swap in the validated4× sheets; geometry stays in native pixels.
+func load_smooth(root: String) -> void:
+	if root.is_empty():
+		return
+	var native := {SmoothArt.ATLAS: texture}
+	for name in meta.get("sheets", {}):
+		var path := "%s/%s" % [asset_folder, name]
+		if ResourceLoader.exists(path):
+			native[name] = load(path)
+	var sheets := SmoothArt.load_sheets(root, mobile_kind, asset_folder, meta, native)
+	for name in sheets:
+		if name == SmoothArt.ATLAS:
+			texture = sheets[name]
+			paint_texture = pixel_texture(texture)
+			density = SmoothArt.DENSITY
+		else:
+			placed[name] = pixel_texture(sheets[name])
+			sheet_density[name] = SmoothArt.DENSITY
 
 func _optional(folder: String, name: String) -> CanvasTexture:
 	var path := "%s/%s.png" % [folder, name]
@@ -113,7 +136,8 @@ func cell_frame(name: String, index: int) -> Array:
 		return [Rect2(), Rect2()]
 	var cell := Vector2(info.cell[0], info.cell[1])
 	var columns := int(info.columns)
-	return [Rect2(Vector2(index % columns, int(index / columns)) * cell, cell), Rect2(-Vector2(info.origin[0], info.origin[1]), cell)]
+	var texels := float(sheet_density.get(name, 1.0))
+	return [Rect2(Vector2(index % columns, int(index / columns)) * cell * texels, cell * texels), Rect2(-Vector2(info.origin[0], info.origin[1]), cell)]
 
 func projectile_sheet(projectile: Dictionary, weapon: int) -> String:
 	if mobile_kind in ["turtle","dragon"] and bool(projectile.get("child",false)):

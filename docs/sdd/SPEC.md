@@ -144,7 +144,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-12 | Código, documentação e app para validar e aprender | QUALITY_REVIEW | Vigente; revisão de qualidade 0.18.6 |
 | REQ-13..18 | Refinamento 0.2 (HUD, fila, inclinação, carga, animações, impacto) | REFINEMENT_0_2 | HUD/console substituídos por REQ-27..30; demais vigentes |
 | REQ-19 | Mobiles e assets reais | BIGFOOT_0_3, MAGE_0_4, NAK_0_15, REQ-45 | Vigente nos 16 do cliente Thor's Hammer |
-| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD, HORN_AURA_FIX | Vigente; HD do Nak gerado e pendente de integração; brilho do Great Devil derivado do chifre (ADR-082) |
+| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD, HORN_AURA_FIX, BIGFOOT_SMOOTH_4X | Vigente; HD do Nak gerado e pendente de integração; brilho do Great Devil derivado do chifre (ADR-082); Bigfoot original com acabamento4× (ADR-104) |
 | REQ-21..26 | Mapa Miramo A, câmera 1: 1, vento 2D, clima, Thor, partícula | MAP_0_8, WEATHER_CAMERA_0_9 | Vigente |
 | REQ-27..31 | HUD original e popup de opções | HUD_0_10, BATTLE_FIDELITY_0_20 | Carga 3 s/mínimo nativo (REQ-28); bússola/vento coerentes; Mouse Speed desabilitado |
 | REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |

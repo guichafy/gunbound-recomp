@@ -1,5 +1,20 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Bigfoot com acabamento4× — ADR-104
+
+Pedido: aplicar ao Bigfoot a suavização BICUBIC4× aprovada nos botões/lobby.
+Nove folhas de `bigfoot/original` (corpo, tiros, luzes, Flame1–3) em
+`assets/hd/classic/mobiles_smooth_4x/bigfoot`, por quadro, alpha nearest.
+`MobileLooks` liga só no Bigfoot (`smooth`); `ClassicSprite` valida catálogo
+(`mobile_smooth_art.gd`) e multiplica apenas recortes de origem. Destino, pivô,
+contato, avatar, regras e demais mobiles nativos; folha inválida volta ao nativo.
+
+`test_bigfoot_smooth` 70/0; regressões dirigidas 1196/0 + 1772/0; 21 Python.
+GPU1920×1080/60Hz: galeria 210 quadros com pausa idêntica e sala/arena reais
+em escala de uso (nativo×4×, movimento). PCK isolado 30/0/exit0. Atlas4×
+custa 172 MB descomprimido. Sem app novo, versão ou commit. Aceite visual pendente.
+Registro/limites: `BIGFOOT_SMOOTH_4X.md`; evidência em `docs/bigfoot-smooth-4x`.
+
 ## Lobby com acabamento4× completo — ADR-103
 
 Correção chat/GM versionada em5732568. Fundo, molduras chat/canal,

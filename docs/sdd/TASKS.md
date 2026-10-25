@@ -1,5 +1,14 @@
 # Entregas e próximos trabalhos
 
+## Bigfoot com acabamento4× — 25/10/2026, ADR-104
+
+- [x] Plano SDD e ADR antes do código; escopo nas nove folhas originais.
+- [x] Gerar BICUBIC4× por quadro com o helper da skill, catálogo e relatórios.
+- [x] Integrar densidade só nos recortes de origem, opt-in e fallback por folha.
+- [x] test_bigfoot_smooth70/0, regressões1196/0+1772/0, GPU galeria/sala/arena e PCK30/0.
+- [ ] Aceite visual do usuário; app novo somente em entrega solicitada.
+- [ ] Avaliar o mesmo acabamento para piloto padrão, aura, Mage e demais mobiles se pedido.
+
 ## Lobby com acabamento4× — 25/10/2026
 
 - [x] Versionar correção chat/GM:5732568,735checks/0 repetidos antes do commit.

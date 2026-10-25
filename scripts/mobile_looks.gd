@@ -29,6 +29,8 @@ const LOOKS := {
 	2: {
 		"kind": "bigfoot", "sprite": "res://scripts/classic_sprite.gd",
 		"assets": "res://assets/openbound/bigfoot/original", "native_animation": true,
+		# Approved conservative 4× finish of the same sheets (ADR-104).
+		"smooth": "res://assets/hd/classic/mobiles_smooth_4x/bigfoot",
 		"rig": {"row": 0, "parts": 3, "hull": 49.0, "seat": Vector2(17, -20), "body_size": Vector2(60, 24),
 			"body_top": -31.0, "gun_pivot": Vector2(-17, -37), "gun_rect": Rect2(-13, -18, 25, 21),
 			"tip": Vector2(-12, -13), "wheels": true},

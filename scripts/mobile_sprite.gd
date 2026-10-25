@@ -17,6 +17,8 @@ var contact_y: float
 var sequences: Dictionary
 var texture: Texture2D
 var paint_texture: CanvasTexture
+# Texels per native atlas pixel; only source rectangles use it (ADR-104).
+var density := 1.0
 var rider_body: CanvasTexture
 var rider_head: CanvasTexture
 var rider_offsets: Array = []
@@ -105,7 +107,7 @@ func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int
 	return int(sequence[0]) + (step % count if sequence[3] else mini(step, count - 1))
 
 func frame_rect(index: int) -> Rect2:
-	return Rect2(Vector2(index % COLUMNS, int(index / COLUMNS)) * cell, cell)
+	return Rect2(Vector2(index % COLUMNS, int(index / COLUMNS)) * cell * density, cell * density)
 
 ## `request` is a SpritePose: position, width, facing and the animation state.
 func draw(view: Node2D, request) -> void:

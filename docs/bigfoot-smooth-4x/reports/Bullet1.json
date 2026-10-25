@@ -1,0 +1,191 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/.claude/worktrees/gunbound-mobile-bigfoot-241309/assets/openbound/bigfoot/original/Bullet1.png",
+    "sha256": "ff9ee7544fe1887f9ce80fe6b1e35feac8e5e660b75c343c70458ad7d4172a54",
+    "size": [
+      144,
+      12
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/.claude/worktrees/gunbound-mobile-bigfoot-241309/assets/hd/classic/mobiles_smooth_4x/bigfoot/Bullet1.png",
+    "sha256": "7b3bb403059321cdf579c3970fff39747171972276d8e9e2b28d41b703c3a72e",
+    "size": [
+      576,
+      48
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    8,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    576,
+    48
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 2661,
+      "max_rgba_delta": 111,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 6.345997,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ]
+    },
+    {
+      "column": 1,
+      "row": 0,
+      "rgba_changed_pixels": 2676,
+      "max_rgba_delta": 110,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 6.440636,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ]
+    },
+    {
+      "column": 2,
+      "row": 0,
+      "rgba_changed_pixels": 2693,
+      "max_rgba_delta": 106,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 6.474611,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ]
+    },
+    {
+      "column": 3,
+      "row": 0,
+      "rgba_changed_pixels": 2683,
+      "max_rgba_delta": 94,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 6.528256,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ]
+    },
+    {
+      "column": 4,
+      "row": 0,
+      "rgba_changed_pixels": 2695,
+      "max_rgba_delta": 94,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 6.411837,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        18,
+        12
+      ]
+    },
+    {
+      "column": 5,
+      "row": 0,
+      "rgba_changed_pixels": 0,
+      "max_rgba_delta": 0,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 0,
+      "source_alpha_bbox_native": null,
+      "candidate_alpha_bbox_native": null
+    },
+    {
+      "column": 6,
+      "row": 0,
+      "rgba_changed_pixels": 0,
+      "max_rgba_delta": 0,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 0,
+      "source_alpha_bbox_native": null,
+      "candidate_alpha_bbox_native": null
+    },
+    {
+      "column": 7,
+      "row": 0,
+      "rgba_changed_pixels": 0,
+      "max_rgba_delta": 0,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 0,
+      "source_alpha_bbox_native": null,
+      "candidate_alpha_bbox_native": null
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

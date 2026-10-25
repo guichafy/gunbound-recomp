@@ -29,6 +29,13 @@ recortes de textura; hitboxes/layout continuam nativos. Fontes em
 a partir da fonte por quadro, nunca reamostrar o HD. Consultar
 `docs/sdd/CLASSIC_BUTTONS_SMOOTHING.md` e ADR-101 para catálogo/validação.
 
+Mobile original: Bigfoot usa o mesmo acabamento (ADR-104) em
+`assets/hd/classic/mobiles_smooth_4x/bigfoot`, gerado por
+`scripts/build_bigfoot_smooth_hd.py` a partir de `bigfoot/original` com a grade
+do `frames.json`. `MobileLooks.smooth` liga por mobile; `mobile_smooth_art.gd`
+valida o catálogo e `ClassicSprite` multiplica só recortes de origem. Para outro
+mobile, gerar destino novo e repetir `test_bigfoot_smooth` adaptado.
+
 | Tema | Implementação existente |
 |---|---|
 | Arte do avatar / fallback original | scripts/avatar_art.gd, avatar_hd.gd |

@@ -1068,3 +1068,16 @@ combate ou versão. PCKincluiJSON/PNGs; não há novo aplicativo exportado.
 GPU1920×1080 confirma mesmas áreas de clique e salaRGBAidêntica. PCK223/0/exit0,
 sem override/TLSlocal. Evidência/limites: LOBBY_ART_HD.md e docs/lobby-art-hd.
 Commit local solicitado, sem envio ao remoto.
+
+## ADR-104 — Bigfoot original com acabamento4×
+
+25/10/2026, REQ-12/19/20/45. Pedido do usuário aplica ao Bigfoot a suavização
+aprovada na ADR-101/103. As nove folhas de `bigfoot/original` recebem BICUBIC
+4× por quadro, alpha nearest, em `assets/hd/classic/mobiles_smooth_4x/bigfoot`.
+Complementa a ADR-089: a fonte ativa continua sendo o tank5/EPA original; só a
+densidade da textura muda. Mage e demais mobiles permanecem nativos.
+
+ClassicSprite valida catálogo por folha e multiplica apenas recortes de origem;
+destino, pivô, contato, RiderPivot, avatar, tiros e regras ficam nativos.
+Folha inválida volta ao original. Piloto padrão compartilhado, aura e avatares
+fora do escopo. Plano/evidência em `BIGFOOT_SMOOTH_4X.md`.
