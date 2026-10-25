@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "archive": "graphics.xfs",
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "entry": "LaserEffect.xtf",
+  "entry_sha256": "ebcac751b73557e377b3ad233b1084c7bb59af2c16da210ccae0a624e66ffec3",
+  "image": "ThorEffect.png",
+  "image_sha256": "71ebc386de15aea7f34b6707083837c4cf4d181abd1d2c6543390561dfd204cd",
+  "size": [
+    256,
+    256
+  ],
+  "format": "ARGB4444 -> RGBA8888, channel *17, unchanged pixels",
+  "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "consumer": "0x4c45e4..0x4c46f3",
+  "columns": 16,
+  "used_columns": 8,
+  "rows": 1,
+  "uv": {
+    "u0": "tick%8 /16",
+    "u1": "(tick%8+1)/16",
+    "v0": 1,
+    "v1": 0
+  },
+  "blend": "native additive SRCALPHA/ONE (render states 19=5,20=2)",
+  "notes": "ThorTexture1/2 are not the beam selected by this consumer. Texture is shared with Mage; existing assets preserved."
+}

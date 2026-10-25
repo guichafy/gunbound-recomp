@@ -1,4 +1,14 @@
-# Especificação — Gunbound Recomp 0.20.3
+# Especificação — Gunbound Recomp 0.20.5
+
+## Correções ASate/JD/Aduka/Raon — REQ-04/05/07/08/09/19/44/45
+
+Restaurar comportamentos e animações dos tiros T1/T2/SS dos quatro mobiles
+com evidência do cliente clássico. ASate usa guia, Ion e filhos; JD T2 atrai
+e SS aplica seu efeito numérico; Aduka T2/SS acionam Thor independentemente
+do clima; Raon preserva composição e estados próprios de tiros/minas.
+Execução e previsão compartilham efeitos e cópias profundas. Preservar
+elenco, avatares, equipamentos e HD aprovado. Plano e limites:
+`SPECIAL_MOBILES_CLASSIC_FIX.md` e registros por família.
 
 ## Ferramenta do porte — REQ-12/19/44/45
 

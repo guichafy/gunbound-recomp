@@ -145,6 +145,7 @@ func replace_root() -> void:
 	aim.charging = false
 
 func show_menu() -> void:
+	weather_art.native_beam_art.clear()
 	screen = "menu"
 	model.phase = Match.PHASE_MENU
 	cpu.discard()
@@ -436,6 +437,12 @@ func play_mobile_shot(event: Dictionary) -> void:
 	var body = sprite_for(id)
 	if body == null:
 		return
+	if id == 10 and bool(event.get("child",false)):
+		var original: AudioStream = body.satellite_sounds[clampi(int(event.weapon),0,2)]
+		# The PE names10s3fire.xes, but this XFS build does not contain it.
+		if original.get_length() > 0.0:
+			sound.play("fire",original)
+		return
 	sound.play("fire", Mobiles.ShotTiming.stream(id, int(event.weapon), "fire"))
 
 func consume_events() -> void:
@@ -468,7 +475,7 @@ func consume_events() -> void:
 			"explosion":
 				rig.last_impact = event.position
 				var vehicle_id := int(event.get("vehicle", Mobiles.DEFAULT_ID))
-				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "child":bool(event.get("child",false)), "ss_state":str(event.get("ss_state","normal")), "age": 0.0, "angle":float(event.get("angle",0.0))})
+				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "child":bool(event.get("child",false)), "raon_mine":bool(event.get("raon_mine",false)), "ss_state":str(event.get("ss_state","normal")), "age": 0.0, "angle":float(event.get("angle",0.0))})
 				shake = 7.0
 				var original: AudioStream = null
 				var body = sprite_for(vehicle_id)
@@ -645,6 +652,9 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO)
 	weather_art.draw_columns(self, model, offset)
 	weather_art.draw_thor(self, model, offset)
+	var satellite_sprite = sprite_for(10)
+	for satellite in model.satellites.values():
+		satellite_sprite.satellite_art.draw_satellite(self,satellite,offset,clampf(float(model.accumulator)/0.05,0,1))
 	draw_set_transform(offset)
 	for index in range(model.actors.size()):
 		art.draw_actor(self, model, index, offset, actor_context(index))
@@ -706,6 +716,9 @@ func draw_mines(offset: Vector2) -> void:
 		for projectile in model.projectiles:
 			if bool(projectile.get("crystal_body", false)):
 				marks.append({"pos": projectile.get("hit_pos", projectile.pos), "crystal": true})
+		for effect in model.battle_effects:
+			if str(effect.kind) == "jd_crystal":
+				marks.append(effect)
 		body.draw_placed(self, marks, model.actors, offset)
 
 ## Rising texts ("QUEDA!") that fade over 1.5 s.

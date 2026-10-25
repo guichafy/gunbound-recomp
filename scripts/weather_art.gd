@@ -4,6 +4,7 @@ extends RefCounted
 ## reads match.gd state and events. Pause freezes it because game.gd stops ticking.
 
 const Weather = preload("res://scripts/weather.gd")
+var native_beam_art = preload("res://scripts/aduka_beam_art.gd").new()
 # Weather.cs: frames 128×64 (pivot 64,32), 8 frames at 15 fps, columns scroll 50 px/s.
 const FRAME := Vector2(128, 64)
 const SCROLL_SPEED := 50.0
@@ -63,6 +64,7 @@ func _init() -> void:
 	}
 
 func reset(map: Dictionary) -> void:
+	native_beam_art.clear()
 	particles.clear()
 	beams.clear()
 	column_age.clear()
@@ -78,7 +80,9 @@ func react(event: Dictionary, model, sound) -> void:
 		"explosion":
 			emit_ground(event.position, int(event.get("removed", 0)), float(event.get("angle", PI * 0.5)), model)
 		"thor":
-			beams.append({"kind": "thor", "from": event.from, "to": event.position, "age": 0.0, "level": int(event.level)})
+			beams.append({"kind": "thor", "from": event.from, "to": event.position, "age": 0.0, "level": int(event.level),"native":bool(event.get("native",false)),"ttl":float(event.get("ttl",0.6)),"period":int(event.get("period",1000)),"rgb":int(event.get("rgb",0x00ff00))})
+			if event.has("native_angle"):
+				beams[-1].native_angle = int(event.native_angle)
 			thor_shot = 0.0
 			emit_ground(event.position, int(event.removed), (Vector2(event.position) - Vector2(event.from)).angle(), model)
 			sound.play("explosion", sounds.thor)
@@ -131,7 +135,7 @@ func tick(delta: float, model) -> void:
 			particles.remove_at(i)
 	for i in range(beams.size() - 1, -1, -1):
 		beams[i].age += delta
-		if beams[i].age > 0.6:
+		if beams[i].age > float(beams[i].get("ttl",0.6)):
 			beams.remove_at(i)
 	# ThorSatellite.SetPosition eases with a sine over a quarter period.
 	var target: Vector2 = model.weather.thor.pos
@@ -169,7 +173,7 @@ func draw_columns(view: Node2D, model, offset: Vector2) -> void:
 			segment += 1
 
 func draw_thor(view: Node2D, model, offset: Vector2) -> void:
-	if not model.weather.thor.active or thor_position == Vector2.INF:
+	if not (model.weather.thor.active or bool(model.weather.thor.get("present",false))) or thor_position == Vector2.INF:
 		return
 	# Stand 0–19, Active 20–39, ShootingS1 40–55 (ThorSatellite presets, 15 fps).
 	var frame := 20 + int(clock * 15.0) % 20
@@ -192,7 +196,16 @@ func draw_thor(view: Node2D, model, offset: Vector2) -> void:
 	view.draw_string(font, thor_position + offset + Vector2(30, 70), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("9cff8a"))
 
 func draw_beams(view: Node2D, offset: Vector2) -> void:
+	var native_beams: Array = []
 	for beam in beams:
+		if bool(beam.get("native",false)):
+			var native: Dictionary = beam.duplicate()
+			native.position = native.to
+			native_beams.append(native)
+	native_beam_art.draw(view,native_beams,offset)
+	for beam in beams:
+		if bool(beam.get("native",false)):
+			continue
 		var from: Vector2 = Vector2(beam.from) + offset
 		var to: Vector2 = Vector2(beam.to) + offset
 		var length := from.distance_to(to)

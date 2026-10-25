@@ -20,10 +20,16 @@ const ShellState = preload("res://scripts/shell_state.gd")
 const GoldTracker = preload("res://scripts/gold_tracker.gd")
 const MageFlight = preload("res://scripts/mage_flight.gd")
 const TurtleFlight = preload("res://scripts/turtle_flight.gd")
+const RaonEffect = preload("res://scripts/raon_effect.gd")
+const AsateEffect = preload("res://scripts/asate_effect.gd")
+const AdukaEffect = preload("res://scripts/aduka_effect.gd")
 const MINE_RANGE := 90.0
 const MINE_STEPS := 90
 
 static func prepare(projectile: Dictionary, entry: Dictionary) -> void:
+	AdukaEffect.prepare(projectile)
+	if RaonEffect.active(projectile):
+		RaonEffect.prepare(projectile,entry)
 	if MageFlight.active(projectile):
 		MageFlight.prepare(projectile,int(round(float(projectile.phase)*180.0/PI)))
 	projectile.orbit = entry.get("orbit", Vector2.ZERO)
@@ -33,6 +39,8 @@ static func prepare(projectile: Dictionary, entry: Dictionary) -> void:
 		TurtleFlight.prepare(projectile,int(entry.get("wave_phase",0)))
 
 static func hit_point(projectile: Dictionary, carrier: Vector2) -> Vector2:
+	if RaonEffect.active(projectile):
+		return RaonEffect.hit_point(projectile,carrier)
 	if MageFlight.active(projectile):
 		return MageFlight.hit_point(projectile,carrier)
 	if str(projectile.get("flight","")) == TurtleFlight.MODE:
@@ -43,6 +51,8 @@ static func hit_point(projectile: Dictionary, carrier: Vector2) -> Vector2:
 	return carrier + orbit.rotated(float(projectile.phase_orbit) + float(projectile.age) * float(projectile.spin))
 
 static func finish_tick(projectile: Dictionary) -> void:
+	AsateEffect.finish_child_tick(projectile)
+	RaonEffect.finish_tick(projectile)
 	if MageFlight.active(projectile):
 		MageFlight.finish_tick(projectile)
 	if str(projectile.get("flight","")) == TurtleFlight.MODE:
@@ -133,32 +143,11 @@ static func advance_chain(projectile: Dictionary) -> Vector2:
 	return point
 
 static func plant_mine(model, projectile: Dictionary, position: Vector2) -> void:
-	var flight := str(projectile.get("flight", ""))
-	if flight != "mine" and flight != "crystal":
+	if str(projectile.get("flight", "")) != "mine":
 		return
-	# The crystal vtable uses the common simulator and the common detonate.
-	# InitProjectile leaves velocity at 0 and SpawnCrystalShot only writes the
-	# impact position, so the crystal falls from that point and bursts on land.
-	if flight == "crystal":
-		var crystal := ShellState.create(position, Vector2.ZERO, 0.0, {"damage": 0, "radius": 0.0}, int(projectile.weapon), 0)
-		prepare(crystal, {})
-		crystal.launched = true
-		crystal.crystal_body = true
-		model.projectiles.append(crystal)
-		return
-	var damage := int(projectile.damage)
-	var radius := float(projectile.get("blast_radius", projectile.get("extra_radius", 21.0)))
-	var direction := signf(float(Vector2(projectile.get("velocity", Vector2.RIGHT)).x))
-	if direction == 0.0:
-		direction = float(model.actors[model.shot_actor].facing)
-	model.mines.append({
-		"pos": position, "owner": model.shot_actor,
-		"radius": radius,
-		"damage": damage, "weapon": int(projectile.weapon),
-		"vehicle": model.actors[model.shot_actor].vehicle, "crystal": flight == "crystal",
-		"crawl": bool(projectile.get("mine_crawl", false)), "dir": direction,
-		"steps": int(projectile.get("mine_steps", 0)), "debt": 0.0,
-	})
+	var owner := int(projectile.get("owner",model.shot_actor))
+	model.mines.append(RaonEffect.create_mine(projectile,position,owner,int(projectile.get("vehicle",model.actors[owner].vehicle)),float(model.actors[owner].facing)))
+	model.events.append({"type":"mine_plant","position":position,"actor":owner,"weapon":int(projectile.weapon),"vehicle":int(projectile.get("vehicle",7))})
 
 static func _nearest_actor(model, mine: Dictionary) -> int:
 	var closest := -1
@@ -188,11 +177,15 @@ static func _detonate_mine(model, index: int) -> void:
 	var event_start: int = model.events.size()
 	model.blast(Vector2(mine.pos), float(mine.radius), float(mine.damage), 0.0, 0.0, int(mine.owner))
 	GoldTracker.collect_mine(model, event_start, int(mine.owner), dead)
-	model.events.append({"type": "explosion", "actor": int(mine.owner), "position": mine.pos, "radius": mine.radius, "weapon": mine.weapon, "vehicle": mine.vehicle, "collided_actor": -1, "removed": 0, "angle": 0.0})
+	var removed: int = model.terrain.carve(Vector2(mine.pos),float(mine.radius))
+	model.events.append({"type": "explosion", "actor": int(mine.owner), "position": mine.pos, "radius": mine.radius, "weapon": mine.weapon, "vehicle": mine.vehicle, "raon_mine":true, "collided_actor": -1, "removed": removed, "angle": 0.0})
 
 static func walk_mines(model) -> void:
 	var owner: int = int(model.active)
+	RaonEffect.begin_turn(model.mines,model.actors,owner)
 	for mine in model.mines:
+		if bool(mine.get("raon_mine",false)):
+			continue
 		if int(mine.owner) != owner or bool(mine.get("crystal", false)) or bool(mine.get("crawl", false)):
 			continue
 		var target := _nearest_actor(model, mine)
@@ -214,9 +207,13 @@ static func walk_mines(model) -> void:
 ## Raon SS mine: keep walking the way it faces, flip at a gap, burst on a
 ## mobile or when the 360-step budget ends.
 static func crawl_mines(model, delta: float) -> void:
+	for index in RaonEffect.step_mines(model.mines,model.actors,model.terrain,delta):
+		_detonate_mine(model,index)
 	var spent: Array[int] = []
 	for index in range(model.mines.size()):
 		var mine: Dictionary = model.mines[index]
+		if bool(mine.get("raon_mine",false)):
+			continue
 		if not bool(mine.get("crawl", false)) or int(mine.get("steps", 0)) <= 0:
 			continue
 		mine.debt = float(mine.get("debt", 0.0)) + delta * 60.0

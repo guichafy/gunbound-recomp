@@ -1,0 +1,139 @@
+extends RefCounted
+## Aduka guides request Thor even outside Thor weather (PE0x4398e0).
+## Native tables/SETG thresholds/beam raster: ADUKA_CLASSIC_FIX.md.
+## Combat.trace_segment, blast arithmetic and initial placement are adapters.
+
+const Combat = preload("res://scripts/combat.gd")
+const Physics = preload("res://scripts/classic_ballistics.gd")
+const Attributes = preload("res://scripts/player_attributes.gd")
+const Items = preload("res://scripts/items.gd")
+const POWER := [100,140,180,220,260,300]
+const DIMENSION := [44,46,48,50,52,54]
+const PERIOD := [1000,800,700,600,500,400]
+const RGB := [0x00ff00,0x00c040,0x008080,0x0040c0,0x0000ff,0xffffff]
+const XP := [0,200,600,1600,3600,6600]
+
+static func active(projectile: Dictionary) -> bool:
+	return str(projectile.get("flight","")) == "aduka"
+
+static func prepare(projectile: Dictionary) -> void:
+	if not active(projectile):
+		return
+	projectile.damage = 0
+	projectile.blast_radius = 0.0
+	projectile.thor = false
+	projectile.aduka_struck = false
+
+static func parameters(level: int) -> Dictionary:
+	var index := clampi(level,1,6)-1
+	return {"power":POWER[index],"dimension":DIMENSION[index],"period":PERIOD[index],"rgb":RGB[index]}
+
+static func level_for_xp(experience: int) -> int:
+	var level := 1
+	for index in XP.size():
+		if experience > XP[index]:
+			level = index+1
+	return level
+
+static func ensure_thor(model) -> void:
+	var thor: Dictionary = model.weather.thor
+	# The client receives this position from outside its factory. The offline
+	# fallback is deterministic and consumes no match RNG or camera position.
+	if not bool(thor.get("present",false)) and not bool(thor.get("active",false)) and Vector2(thor.get("pos",Vector2.ZERO)) == Vector2.ZERO:
+		var world: Vector2 = model.terrain.world_size()
+		thor.pos = Vector2(floor(world.x*0.5),floor(world.y*0.15))
+	thor.present = true
+	thor.level = clampi(int(thor.get("level",1)),1,6)
+	thor.xp = maxi(0,int(thor.get("xp",0)))
+
+static func cannon(thor_position: Vector2, target: Vector2) -> Vector2:
+	# 0x4f1f10 takes integer deltas directly (EAX=x,ECX=y), halves toward
+	# zero into [-127,128], and reads a signed WORD. It does NOT perform the
+	# flight heading's /100 and rounding to three degrees.
+	Physics.warmup()
+	var delta := target-thor_position
+	if delta == Vector2.ZERO:
+		return thor_position
+	var heading := target_angle(Vector2i(delta))
+	return thor_position + Vector2(-int(Physics.s(heading+90)*-50.0),-int(Physics.s(heading)*50.0))
+
+static func target_angle(delta: Vector2i) -> int:
+	Physics.warmup()
+	var x := delta.x
+	var y := delta.y
+	while x < -127 or x > 128 or y < -127 or y > 128:
+		x = Physics.quot(x,2)
+		y = Physics.quot(y,2)
+	return Physics.angles.decode_s16(2*(x+127+256*(y+127)))
+
+static func impact(model, projectile: Dictionary, position: Vector2) -> bool:
+	if not active(projectile) or bool(projectile.get("aduka_struck",false)):
+		return false
+	projectile.aduka_struck = true
+	projectile.thor = false
+	ensure_thor(model)
+	var thor: Dictionary = model.weather.thor
+	var level := int(thor.level)
+	var data := parameters(level)
+	var owner := int(projectile.get("owner",model.shot_actor))
+	var weapon := int(projectile.get("weapon",1))
+	var origin := cannon(Vector2(thor.pos),position)
+	# Shared offline contact adapter; both native callers force the same gate.
+	var contact := Combat.trace_segment(origin,position,model.terrain,model.actors,-1)
+	var strike: Vector2 = contact.get("position",position)
+	var radius := float(data.dimension)*0.5
+	var item := str(model.actors[owner].get("turn_item","")) if owner>=0 and owner<model.actors.size() else ""
+	var dig := Attributes.points(model.actors[owner],Attributes.DIG) if owner>=0 and owner<model.actors.size() else 0
+	var removed: int = model.terrain.carve(strike,Attributes.crater(radius,dig+int(Items.dig(item))))
+	var dealt: int = model.blast(strike,radius,float(data.power),0.0,Items.attack(item),owner)
+	# Keep damage credit and XP separate from the zero-power guide. Resolution
+	# remains the existing Damage adapter; its return value feeds native levels.
+	thor.xp = int(thor.xp)+maxi(0,dealt)
+	thor.level = level_for_xp(int(thor.xp))
+	var color := Color8((int(data.rgb)>>16)&255,(int(data.rgb)>>8)&255,int(data.rgb)&255)
+	var effect := {"kind":"aduka","tick":-1,"owner":owner,"weapon":weapon,"vehicle":16,
+		"from":origin,"position":strike,"target":position,"level":level,"period":data.period,"rgb":data.rgb,
+		"native_angle":target_angle(Vector2i(position)-Vector2i(thor.pos))}
+	model.battle_effects.append(effect)
+	model.events.append({"type":"thor","native":true,"source":"aduka","actor":owner,
+		"owner":owner,"weapon":weapon,"vehicle":16,"from":origin,"position":strike,
+		"target":position,"removed":removed,"level":level,"new_level":thor.level,
+		"xp":thor.xp,"guide_power":0,"power":data.power,"radius":radius,
+		"ttl":1.0,"width":32.0,"period":data.period,"color":color,"rgb":data.rgb,
+		"native_angle":effect.native_angle})
+	return true
+
+## Return whether the effect remains alive. The match owns deletion, and
+## calls once per shared20Hz tick; a paused scene never advances this clock.
+static func tick(_model, effect: Dictionary) -> bool:
+	effect.tick = int(effect.get("tick",-1))+1
+	return int(effect.tick)<=19
+
+## Native0x4aacd0 draws a colored expanding quad and a white shrinking quad.
+## half_width and alpha are integers; callers may build triangles without
+## changing contact points. Each quad uses the same tick%8 UV phase.
+static func beam_layers(effect: Dictionary, tick_value: int) -> Array:
+	var count := clampi(tick_value,0,19)
+	var period := maxi(1,int(effect.get("period",parameters(int(effect.get("level",1))).period)))
+	return [{"half_width":16+int(count*count*100/period),"alpha":maxi(1,255-count*16),
+		"rgb":int(effect.get("rgb",0x00ff00)),"uv_frame":count%8},
+		{"half_width":maxi(1,int(16/maxi(1,count))),"alpha":255 if count<10 else maxi(1,455-count*20),
+		"rgb":0xffffff,"uv_frame":count%8}]
+
+static func beam_quads(effect: Dictionary, tick_value: int) -> Array:
+	Physics.warmup()
+	var heading := int(effect.get("native_angle",target_angle(Vector2i(Vector2(effect.position)-Vector2(effect.from)))))
+	var origin := Vector2(effect.from)
+	var target := Vector2(effect.position)
+	var quads: Array = []
+	for layer in beam_layers(effect,tick_value):
+		var width: int = layer.half_width
+		# 0x4aada1..4aae60: truncate each complete float32-LUT product.
+		var side_a := Vector2(int(width*Physics.s(heading+180)),int(-width*Physics.s(heading+90)))
+		var side_b := Vector2(int(width*Physics.s(heading)),int(-width*Physics.s(heading-90)))
+		var u := float(layer.uv_frame)/16.0
+		var rgb := int(layer.rgb)
+		quads.append({"points":PackedVector2Array([origin+side_a,target+side_a,target+side_b,origin+side_b]),
+			"uv":PackedVector2Array([Vector2(u,1),Vector2(u,0),Vector2(u+1.0/16.0,0),Vector2(u+1.0/16.0,1)]),
+			"color":Color8((rgb>>16)&255,(rgb>>8)&255,rgb&255,int(layer.alpha))})
+	return quads

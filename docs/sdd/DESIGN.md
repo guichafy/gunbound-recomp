@@ -1,5 +1,24 @@
 # Design implementado
 
+## ASate/JD/Aduka/Raon 0.20.5
+
+`AsateEffect`, `JDEffect`, `AdukaEffect` e `RaonEffect` isolam o estado de
+família. `Match.battle_effects` retém efeitos após o guia e `satellites`
+guarda Ion por dono; ambos têm cópia profunda no FlightSnapshot. Filhos
+ASate usam ShellState e aceleração própria, com seções históricas para o
+renderer. Guias não substituem o dano dos filhos/Thor/minas. Um cristal JD
+por dono: novo impacto substitui o anterior. Ações anexas de item/clima
+ocorrem no guia uma vez; não se multiplicam pelos filhos do Ion.
+
+Minas novas preservam dono/arma e relógios privados; SS retém o turno até a
+detonação. A fase `mines` resolve a agenda S2 antes de liberar `aim`, sem
+consumir o relógio do piloto ou aceitar passe/disparo. Predição reconhece
+`mine_plant` e `thor` como candidatos, além de explosão/miss/teleport.
+`AsateArt` desenha Ion/laser originais e `AdukaBeamArt` usa CanvasItem aditivo
+próprio, sem trocar o material do jogo. EPA controla poses dos quatro.
+Fontes, adaptações e validação: SPECIAL_MOBILES_CLASSIC_FIX.md e registros
+por família. Não é declaração de paridade integral do combate nativo.
+
 ## Apresentação original Bigfoot/Mage 0.20.3
 
 Catálogo ativo encaminha Bigfoot/Mage ao atlas original/EPA/contato nativo.

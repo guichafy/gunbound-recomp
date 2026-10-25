@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "source": "jglim/gunbound-launcher TestClient/sound.xfs",
+  "source_archive_sha256": "081c1b9f5751c486512a9df1a894f6db7a5ed891b8ebdad9fbce1b9169901023",
+  "source_pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "consumer_va": "0x00480310",
+  "play_helper_va": "0x004ee9b0",
+  "conversion": "XES WAVEFORMAT16 header removed; PCM bytes copied unchanged into WAV",
+  "records": [
+    {
+      "weapon": 0,
+      "entry": "10s1fire.xes",
+      "present": true,
+      "resource": "res://assets/openbound/asate/Satellite1.wav",
+      "string_va": "0x00556140",
+      "trigger": "Ion emission, once per emitted child",
+      "source_sha256": "2300d4652a3e9814f519b9858c38298f653efcb986271296387315f2185edd9b",
+      "pcm_sha256": "80e34f27cc4a34057a6c5c145624da737a4c16c838ac71deafa3d2a73f564c78",
+      "wav_sha256": "65a6694f0cbe8f2845183b1fd06ec02ecf40e652a6511ceb9fac546bb3862a22",
+      "pcm_bytes": 124672,
+      "channels": 2,
+      "sample_rate": 22050,
+      "bits": 16,
+      "frames": 31168
+    },
+    {
+      "weapon": 1,
+      "entry": "10s2fire.xes",
+      "present": true,
+      "resource": "res://assets/openbound/asate/Satellite2.wav",
+      "string_va": "0x00556130",
+      "trigger": "Ion emission, once per emitted child",
+      "source_sha256": "6de236b4088f4351df49eb341745417eb9a8d8b8814df842edf729e09fc5f077",
+      "pcm_sha256": "d6f7a70378b2831f2559501b6886f1c9dd1dba739f5cf57d2fb5c9867b25a8dc",
+      "wav_sha256": "fce5d79de87e9e11b15bac11ffdb6c4256250f5895416d354476ebe6c51db05a",
+      "pcm_bytes": 126464,
+      "channels": 2,
+      "sample_rate": 22050,
+      "bits": 16,
+      "frames": 31616
+    },
+    {
+      "weapon": 2,
+      "entry": "10s3fire.xes",
+      "present": false,
+      "resource": "",
+      "string_va": "0x00556150",
+      "trigger": "Ion emission, once per emitted child",
+      "reason": "PE references this name; entry absent from the pinned sound.xfs TOC"
+    }
+  ]
+}

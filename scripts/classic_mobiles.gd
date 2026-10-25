@@ -37,10 +37,9 @@ static func definitions() -> Dictionary:
 			[Vector2(10, 90), Vector2(10, 90), Vector2(10, 90)],
 			"1000 de vida · mira larga 10–90°."),
 		7: _body("Raon", "raon", 1050, 0, 0, 10, false, Vector2(30, 38), 20.0, 0.7, true,
-			[shot("Tiro 1", 90, 27, 750, {"shells": [orbit(Vector2(12, 0), PI * 0.5, 0.0), orbit(Vector2(12, 0), PI, 0.0), orbit(Vector2(12, 0), PI * 1.5, 0.0), orbit(Vector2(12, 0), PI * 2.0, 0.0)]}),
-			shot("Tiro 2", 200, 21, 900, {"flight": "mine", "shells": [{"spawn": 0.0, "angle": 3.0, "power": 0.0}, {"spawn": 0.0, "angle": -3.0, "power": 0.0}]}),
-			# SS mine walks its facing way (up to 90×4 steps) and bursts at a wall's end or on contact.
-			shot("SS", 400, 21, 1300, {"flight": "mine", "mine_crawl": true, "mine_steps": 360})],
+			[shot("Tiro 1", 90, 27, 750, {"flight":"raon_orbit","shells": [{"spawn":0.0,"angle":0.0,"power":0.0,"raon_component":0},{"spawn":0.0,"angle":0.0,"power":0.0,"raon_component":1},{"spawn":0.0,"angle":0.0,"power":0.0,"raon_component":2}]}),
+			shot("Tiro 2", 0, 0, 900, {"flight": "mine", "mine_damage":200,"mine_radius":21.0,"shells": [{"spawn": 0.0, "angle": 3.0, "power": 0.0}, {"spawn": 0.0, "angle": -3.0, "power": 0.0}]}),
+			shot("SS", 0, 0, 1300, {"flight": "mine", "mine_damage":400,"mine_radius":21.0,"mine_crawl":true})],
 			[Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)],
 			"1050 de vida · S2 e SS plantam mina."),
 		8: _body("Lightning", "lightning", 750, 300, 20, 10, false, Vector2(41, 30), 23.0, 0.0, true,
@@ -51,15 +50,15 @@ static func definitions() -> Dictionary:
 			"750 de vida · 300 de escudo · raio no impacto."),
 		9: _body("JD", "jd", 700, 250, 30, 10, false, Vector2(40, 34), 25.0, 0.0, false,
 			[shot("Tiro 1", 180, 32, 740),
-			# DetonateShot2_Bullet9 spawns one crystal. Its vtable simulates and
-			# detonates with the common projectile; velocity stays 0.
+			# JD's specialized crystal animation applies attraction/SS repulsion;
+			# it is a stationary model effect, not a falling common projectile.
 			shot("Tiro 2", 240, 27, 830, {"flight": "crystal"}),
 			# Slots [70..72] are 0. DetonateSuperShot_Bullet9 spawns the same kind of crystal.
 			shot("SS", 0, 15, 1290, {"flight": "crystal"})],
 			[Vector2(15, 55), Vector2(15, 55), Vector2(15, 55)],
 			"700 de vida · 250 de escudo."),
 		10: _body("ASate", "asate", 750, 200, 30, 10, false, Vector2(40, 34), 25.0, 0.0, false,
-			[shot("Tiro 1", 190, 27, 730), shot("Tiro 2", 160, 23, 880), shot("SS", 140, 22, 1280)],
+			[shot("Tiro 1", 0, 27, 730, {"flight":"asate_guide","child_damage":190}), shot("Tiro 2", 0, 23, 880, {"flight":"asate_guide","child_damage":160}), shot("SS", 0, 22, 1280, {"flight":"asate_guide","child_damage":140})],
 			[Vector2(20, 60), Vector2(20, 60), Vector2(25, 55)],
 			"750 de vida · 200 de escudo."),
 		11: _body("Ice", "ice", 1200, 0, 0, 10, true, Vector2(40, 33), 25.0, 0.7, false,
@@ -93,7 +92,7 @@ static func definitions() -> Dictionary:
 		# tank16.img is the Aduka. It aims 130–170°, so the art faces the other way.
 		# Power slots [57..82] of this row are 0.
 		16: _body("Aduka", "aduka", 1000, 0, 0, 10, false, Vector2(40, 34), 25.0, 0.0, false,
-			[shot("Tiro 1", 152, 32, 760), shot("Tiro 2", 0, 0, 910), shot("SS", 0, 0, 1310)],
+			[shot("Tiro 1", 152, 32, 760), shot("Tiro 2", 0, 0, 910, {"flight":"aduka"}), shot("SS", 0, 0, 1310, {"flight":"aduka"})],
 			[Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)],
 			"1000 de vida · atira pelas costas.", true),
 	}

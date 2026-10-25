@@ -7,7 +7,7 @@ extends RefCounted
 const FLIGHT_FIELDS := [
 	"terrain", "actors", "wind", "weather",
 	"shot_actor", "shot_weapon", "projectiles", "phase",
-	"flight_elapsed", "events", "resolve_wait", "shot_gold", "mines", "volleys"
+	"flight_elapsed", "events", "resolve_wait", "shot_gold", "mines", "volleys", "battle_effects", "satellites"
 ]
 
 static func capture(source):
@@ -20,6 +20,8 @@ static func capture(source):
 	sim.wind = source.wind
 	sim.weather = source.weather.copy()
 	sim.mines = source.mines.duplicate(true)
+	sim.battle_effects = source.battle_effects.duplicate(true)
+	sim.satellites = source.satellites.duplicate(true)
 	return sim
 
 static func arm(sim, shot_actor: int, shot_weapon: int, shells: Array) -> void:

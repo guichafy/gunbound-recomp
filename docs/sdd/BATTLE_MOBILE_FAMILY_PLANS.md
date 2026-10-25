@@ -1,5 +1,11 @@
 # Planos por família de tiros — tarefa 8
 
+Atualização0.20.5: ASate/JD/Aduka/Raon receberam implementação delimitada
+pela ADR-094; ver SPECIAL_MOBILES_CLASSIC_FIX.md e os quatro registros
+CLASSIC_FIX. Os planos abaixo preservam a pesquisa anterior e não substituem
+os contratos/limites mais novos. Knight e demais famílias não entram nessa
+correção. Parte das minas/apoio/colisão continua adaptação identificada.
+
 REQ-44/45. Complemento de BATTLE_SHOT_MATRIX.md, 24/10/2026. Planos de pesquisa/implementação; nenhum item abaixo afirma implementação concluída. Original comprovado prevalece; C# só preenche regra ainda não comprovada e realmente equivalente ao mobile. Identidades type13 Dragon,14 Knight,15 Aduka preservadas.
 
 ## Pré-requisitos comuns

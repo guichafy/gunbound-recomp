@@ -894,3 +894,25 @@ sprite mais a placa, e a placa do mapa acompanha essa faixa; o céu acima
 permanece livre. A animação de espera anda em pixels inteiros. A arena, o
 HUD e o filtro da cena não mudam. Quando houver folha HD dessa vista, o
 tamanho pode subir sem reaproveitar este aumento.
+
+## ADR-094 — efeitos próprios ASate/JD/Aduka/Raon
+
+25/10/2026, REQ-04/05/07/08/09/19/44/45. O pedido atual substitui as
+aproximações dessas famílias no catálogo0.19/0.20. ASate usa guia, Ion e
+1/3/6 filhos; JD usa cristal fixo de atração T2 e repulsão/dano SS; Aduka
+aciona Thor fora do clima correspondente, com tabelas/laser próprios; Raon
+usa carrier e ondas T1 nativos e minas com autoria/estado/clocks separados.
+Estado e emissão pertencem ao passo comum real/previsão, nunca ao renderer.
+
+Nenhum guia de ASate/Aduka ou pouso de mina Raon recebe dano compensatório.
+Preservam-se ações anexas de item/clima no guia, uma vez. Mina SS conclui
+antes de agendar o próximo ator; S2 resolve sua agenda antes do input do
+dono. Apenas um cristal JD por dono. Predição inclui Thor e plantio no
+contrato de candidato da CPU. Originais, avatares, HD e perfil preservados.
+
+Fontes ASM/tabelas e limites por comportamento estão nos quatro registros
+CLASSIC_FIX e no plano SPECIAL_MOBILES_CLASSIC_FIX. Dano/colisão comum,
+apoio/parede, posicionamento inicial do Thor e partes da agenda S2 mantêm
+adaptação/C# identificados; não alegar paridade integral do cliente.
+O efeito extra `ssflame7` e áudio `10s3fire.xes` ausentes no pacote não são
+inventados nem substituídos por recursos de outro tiro.

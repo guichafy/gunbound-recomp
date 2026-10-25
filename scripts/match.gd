@@ -20,6 +20,9 @@ const CpuPlanner = preload("res://scripts/cpu_planner.gd")
 const ActorState = preload("res://scripts/actor_state.gd")
 const ShellState = preload("res://scripts/shell_state.gd")
 const ClassicFlight = preload("res://scripts/classic_flight.gd")
+const AsateEffect = preload("res://scripts/asate_effect.gd")
+const JDEffect = preload("res://scripts/jd_effect.gd")
+const AdukaEffect = preload("res://scripts/aduka_effect.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 # Training option "all": equal weight for every weather type, Thor included.
@@ -31,6 +34,7 @@ const CPU := 1
 # Phases of the match. Strings, because events, the scene and the suites read them.
 const PHASE_MENU := "menu"
 const PHASE_AIM := "aim"
+const PHASE_MINES := "mines"
 const PHASE_FLIGHT := "flight"
 const PHASE_SETTLE := "settle"
 const PHASE_FINISHED := "finished"
@@ -48,6 +52,8 @@ const SPECIAL_WEAPON := Mobiles.SPECIAL
 const PLAYABLE_VEHICLES := Mobiles.PLAYABLE
 static var VEHICLES := {}
 var mines: Array = []
+var battle_effects: Array = []
+var satellites: Dictionary = {}
 var projectile_accumulator := 0.0
 
 static func _static_init() -> void:
@@ -136,6 +142,8 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	projectile_accumulator = 0.0
 	projectiles.clear()
 	mines.clear()
+	battle_effects.clear()
+	satellites.clear()
 	volleys.clear()
 	events.clear()
 	shot_gold = {}
@@ -145,6 +153,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	if weather_mode == "all":
 		preset = ALL_WEATHER
 	apply_weather(weather.setup(preset, terrain.world_size(), rng))
+	for actor_index in actors.size():
+		if int(actors[actor_index].vehicle) == 10:
+			AsateEffect.ensure_satellite(self,actor_index)
 	# The server draws the turn order (MatchManager / jglim start_game); fixtures
 	# pass an explicit side so their first shot stays the player's.
 	active = rng.randi_range(PLAYER, CPU) if opening == RANDOM_OPENING else clampi(opening, PLAYER, CPU)
@@ -175,6 +186,8 @@ func begin_turn() -> void:
 		return
 	wind = weather.wind_vector()
 	stamp_tilt()
+	if mines.any(func(mine):return bool(mine.get("raon_mine",false)) and bool(mine.get("queued",false))):
+		phase = PHASE_MINES
 	events.append({"type": "turn", "actor": active})
 
 func stance_of(index: int) -> float:
@@ -293,6 +306,8 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		var initial := muzzle(index, angle if spread_after else angle + float(entry.angle), weapon)
 		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power) if spread_after else shot_velocity(index, angle + float(entry.angle), power, weapon)
 		var shell := ShellState.create(initial, velocity, entry.spawn, rules, weapon, component)
+		shell.owner = index
+		shell.vehicle = vehicle_id
 		shell.sound_group = int(entry.get("sound_group", component))
 		shell.sound = bool(entry.get("sound", true))
 		shell.pose_start_at = float(entry.get("pose_start_at", 0.0))
@@ -315,8 +330,9 @@ func launch_projectile(projectile: Dictionary) -> void:
 	projectile.launched = true
 	seed_projectile(projectile)
 	# Thor intersects everything: every shell fired while active attaches to it.
-	projectile.thor = bool(weather.thor.active)
-	events.append({"type": "projectile_launch", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": int(projectile.get("weapon", shot_weapon)), "time": projectile.spawn_at, "beacon": bool(projectile.get("beacon", false)), "sound": bool(projectile.get("sound", true)), "sound_group": int(projectile.get("sound_group", 0)), "volley": int(projectile.get("volley", 0))})
+	if not bool(projectile.get("child",false)):
+		projectile.thor = bool(weather.thor.active)
+	events.append({"type": "projectile_launch", "actor": int(projectile.get("owner",shot_actor)), "vehicle": int(projectile.get("vehicle",actors[shot_actor].vehicle)), "weapon": int(projectile.get("weapon", shot_weapon)), "time": projectile.spawn_at, "beacon": bool(projectile.get("beacon", false)), "child":bool(projectile.get("child",false)), "sound": bool(projectile.get("sound", true)), "sound_group": int(projectile.get("sound_group", 0)), "volley": int(projectile.get("volley", 0))})
 
 func seed_projectile(projectile: Dictionary) -> void:
 	if bool(projectile.get("fp_ready", false)):
@@ -342,10 +358,12 @@ func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictio
 	FlightSnapshot.arm(simulation, index, weapon, shells)
 	var closest: Dictionary = {}
 	var distance := INF
-	for frame in range(ceili((Combat.MAX_FLIGHT_AGE + ShellState.last_spawn(shells)) / Combat.STEP) + 1):
+	# A guide can use its complete lifetime before a satellite starts its
+	# own children. The per-shell age guard still limits each flight to12s.
+	for frame in range(ceili((Combat.MAX_FLIGHT_AGE * 3.0 + ShellState.last_spawn(shells)) / Combat.STEP) + 1):
 		simulation.advance_projectiles(Combat.STEP)
 		for event in simulation.events:
-			if event.type not in ["explosion", "miss", "teleport"]:
+			if event.type not in ["explosion", "miss", "teleport", "thor", "mine_plant"]:
 				continue
 			var score := Vector2(event.position).distance_to(actors[other(index)].pos)
 			if score < distance:
@@ -415,16 +433,21 @@ func pass_turn() -> void:
 	TurnTable.pass_turn(self)
 
 func tick(delta: float) -> void:
-	if phase in [PHASE_AIM, PHASE_SETTLE]:
+	if phase in [PHASE_AIM, PHASE_SETTLE, PHASE_MINES]:
 		# Placed mines use the same fixed clock even while no shell is flying.
 		accumulator += delta
 		while accumulator + TIME_EPSILON >= Combat.STEP:
 			accumulator = maxf(0.0, accumulator - Combat.STEP)
 			ClassicFlight.crawl_mines(self, Combat.STEP)
+			AsateEffect.step_satellites(self)
 			if int(actors[PLAYER].hp) <= 0 or int(actors[CPU].hp) <= 0:
 				finish_gold_shot()
 				check_end()
 				return
+	if phase == PHASE_MINES:
+		if not mines.any(func(mine):return bool(mine.get("raon_mine",false)) and bool(mine.get("queued",false))):
+			phase = PHASE_AIM
+		return
 	if phase == PHASE_AIM:
 		if cpu_thinking and active == CPU:
 			return
@@ -454,6 +477,8 @@ func advance_projectiles(delta: float) -> void:
 
 func advance_projectile_tick(delta: float) -> void:
 	ClassicFlight.crawl_mines(self, delta)
+	AsateEffect.step_satellites(self)
+	advance_battle_effects()
 	stamp_tilt()
 	flight_elapsed += delta
 	# Dual: OnStartInteracting of the second shot plays the shooting animation.
@@ -564,11 +589,60 @@ func advance_projectile_tick(delta: float) -> void:
 		if hit.is_empty() and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
-	if projectiles.is_empty():
+	var pending_supermine := mines.any(func(mine):return bool(mine.get("raon_mine",false)) and bool(mine.get("crawl",false)) and int(mine.get("owner",-1)) == shot_actor)
+	if projectiles.is_empty() and battle_effects.is_empty() and not pending_supermine:
 		phase = PHASE_SETTLE
 		resolve_wait = RESOLVE_WAIT
 
+func advance_battle_effects() -> void:
+	var asate_owners := {}
+	var finished: Array[int] = []
+	for effect_index in battle_effects.size():
+		var effect: Dictionary = battle_effects[effect_index]
+		var alive := false
+		if str(effect.kind) == "asate":
+			# One Ion belongs to each actor. Dual queues the second request;
+			# it cannot advance the same satellite twice in one physical tick.
+			if asate_owners.has(int(effect.owner)):
+				continue
+			asate_owners[int(effect.owner)] = true
+			alive = AsateEffect.step(effect,self)
+		elif str(effect.kind) == "jd_crystal":
+			var event_start := events.size()
+			alive = JDEffect.step(effect,actors,mines,terrain,events)
+			collect_gold_damage(event_start,Vector2(effect.pos),effect.projectile)
+		elif str(effect.kind) == "aduka":
+			alive = AdukaEffect.tick(self,effect)
+		if not alive:
+			finished.append(effect_index)
+	finished.reverse()
+	for effect_index in finished:
+		battle_effects.remove_at(effect_index)
+	for mine_index in range(mines.size()-1,-1,-1):
+		if bool(mines[mine_index].get("jd_detonate",false)):
+			ClassicFlight._detonate_mine(self,mine_index)
+
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
+	if AdukaEffect.active(projectile):
+		var effect_start := events.size()
+		if AdukaEffect.impact(self,projectile,position):
+			explode_actions(position,projectile,effect_start)
+		return
+	if AsateEffect.guide(projectile):
+		var guide_start := events.size()
+		var effect := AsateEffect.begin(self,projectile,position)
+		# Item/weather actions belong to this guide, once. Copying them to
+		# every satellite child would multiply Thunder by three or six.
+		effect.electric = false
+		effect.thor = false
+		battle_effects.append(effect)
+		explode_actions(position,projectile,guide_start)
+		return
+	if str(projectile.get("flight","")) == "mine" and not bool(projectile.get("beacon",false)):
+		var mine_start := events.size()
+		ClassicFlight.plant_mine(self,projectile,position)
+		explode_actions(position,projectile,mine_start)
+		return
 	# Tilt stays as stamped at the start of the step. A crater must not
 	# rotate the target before this explosion's damage is measured.
 	var event_start := events.size()
@@ -593,6 +667,12 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		ClassicFlight.chill(self, projectile, event_start)
 		ClassicFlight.plant_mine(self, projectile, position)
 		ClassicFlight.burst(self, projectile, position, velocity)
+		if str(projectile.get("flight","")) == "crystal":
+			var owner := int(projectile.get("owner",shot_actor))
+			for index in range(battle_effects.size()-1,-1,-1):
+				if str(battle_effects[index].kind) == "jd_crystal" and int(battle_effects[index].owner) == owner:
+					battle_effects.remove_at(index)
+			battle_effects.append(JDEffect.create(projectile,position,owner))
 	explode_actions(position, projectile, event_start)
 
 ## OnExplodeAction order: Thor attached at launch, then Electricity; then the

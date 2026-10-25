@@ -1,4 +1,29 @@
-# Hand-off — Gunbound Recomp 0.20.3 / Bigfoot e Mage originais
+# Hand-off — Gunbound Recomp 0.20.5
+
+## Correções ASate/JD/Aduka/Raon — ADR-094
+
+Ler SPECIAL_MOBILES_CLASSIC_FIX.md e os quatro registros CLASSIC_FIX.
+Módulos próprios integrados ao passo real/previsão: Ion com1/3/6 filhos;
+JD T2 atrai, SS repele e causa dano por tick; Aduka T2/SS chamam Thor fora
+do clima Thor; Raon T1 três componentes e minas com autoria/clocks próprios.
+Minas SS concluem antes da troca de turno; fase `mines` resolve S2 antes
+do input. CPU reconhece plantio/Thor. Thunder preservado uma vez no guia.
+Cristal JD novo substitui o anterior do mesmo dono. Render EPA/arte original,
+laser Thor aditivo e PCM Ion T1/T2; SS Ion sem stream porque fonte ausente.
+
+Verificação final: **11493 checks Godot +29 testes Python +29 partidas**,
+zero falhas; parse aprovado. Integração nova263/0, revisão independente
+tratada. App/ZIP0.20.5 reexportados e assinados, versão/CRC conferidos;
+probe PCK isolado68/0/exit0, com ressalva ambiental de CA. Export/import
+registram CA/editor_settings sem permissão; sem SCRIPT ERROR/leaks no PCK.
+Após o último ajuste simultâneo da sala, seis suites dirigidas184/0 e nova
+exportação/PCK confirmam a composição final, sem runtime mais novo que o pacote.
+QA GPU não executou: SIGABRT/FontRegistry antes do primeiro quadro;
+LaunchServices também falhou. Script temporal pronto e parse aprovado,
+sem captura nem aceite visual/escuta novos. Detalhes/hashes/logs no registro.
+Dano/colisão comum, apoio/parede e partes de minas S2 continuam adaptações
+declaradas. Perfil, avatares/HD e mudanças locais da sala preservados.
+Commit local autorizado pelo usuário em25/10/2026, sem envio ao remoto.
 
 ## Sala inicial 1×1 — ADR-092
 

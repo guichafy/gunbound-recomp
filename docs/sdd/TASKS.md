@@ -1,5 +1,20 @@
 # Entregas e próximos trabalhos
 
+## ASate/JD/Aduka/Raon 0.20.5 — ADR-094
+
+- [x] Investigar os quatro mobiles com Ghidra/ASM/dados e fixtures independentes.
+- [x] Corrigir Ion/filhos, cristais JD, Thor Aduka e tiros/minas Raon.
+- [x] Integrar autoria, cópia profunda, fim de efeito/turno e candidatos da CPU.
+- [x] Preservar Thunder/Thor anexos e impedir multiplicação por filhos.
+- [x] Resolver minas S2 antes do input; SS mantém o turno até detonar.
+- [x] EPA, recursos originais e laser Thor aditivo; PCM Ion T1/T2 separado.
+- [x] Harness completo11493 checks Godot/29 Python/29 partidas e parse sem falhas.
+- [x] App/ZIP0.20.5 assinados, versão/CRC e PCK isolado68/0 conferidos.
+- [ ] Executar captura GPU: script pronto, bloqueio FontRegistry/LaunchServices antes do primeiro quadro.
+- [ ] Aceite visual do usuário e escuta manual; cliente original não executado.
+
+Plano e limites: SPECIAL_MOBILES_CLASSIC_FIX.md e quatro registros por família.
+
 ## Sala inicial 1×1 — REQ-02/09/36, ADR-092
 
 - [x] Trocar o cartão “Preparar treino” pela sala com piloto, máquina e Miramo.

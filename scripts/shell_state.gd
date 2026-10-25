@@ -33,6 +33,7 @@ static func create(position: Vector2, velocity: Vector2, spawn_at: float, rules:
 		"chill": int(rules.get("chill", 0)), "crystal_damage": int(rules.get("crystal_damage", 0)),
 		"crystal_radius": float(rules.get("crystal_radius", 0.0)),
 		"mine_crawl": bool(rules.get("mine_crawl", false)),
+		"mine_damage":int(rules.get("mine_damage",rules.damage)), "mine_radius":float(rules.get("mine_radius",rules.get("radius",0.0))),
 		"mine_steps": int(rules.get("mine_steps", 0)),
 		"burst": int(rules.get("burst", 0)),
 		"burst_spread": float(rules.get("burst_spread", 12.0)),

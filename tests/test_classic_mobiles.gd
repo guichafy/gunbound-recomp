@@ -85,16 +85,16 @@ func run() -> void:
 	jd.phase = "aim"
 	check(jd.fire(32, 22, 1), "JD S2 fires")
 	var saw_crystal := false
-	var crystal_damage := -1
+	var crystal_fixed := false
 	for _step in range(900):
-		for shell in jd.projectiles:
-			if bool(shell.get("crystal_body", false)):
+		for effect in jd.battle_effects:
+			if str(effect.kind) == "jd_crystal":
 				saw_crystal = true
-				crystal_damage = int(shell.damage)
+				crystal_fixed = not jd.projectiles.any(func(shell):return bool(shell.get("crystal_body",false)))
 		if jd.phase != "flight":
 			break
 		jd.advance_projectiles(1.0 / 60.0)
-	check(saw_crystal and crystal_damage == 0, "JD S2 spawns the crystal at the impact with the common projectile and no extra damage")
+	check(saw_crystal and crystal_fixed, "JD S2 spawns its stationary attraction effect rather than a falling zero-power projectile")
 	var grub = Match.new()
 	grub.start(13, 1, 2, "")
 	var Shell = load("res://scripts/shell_state.gd")

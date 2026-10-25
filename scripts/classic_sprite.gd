@@ -14,9 +14,16 @@ var placed: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []
 var rear := false
+var satellite_art
+var satellite_sounds: Array = []
 
 func setup(kind: String) -> void:
 	mobile_kind = kind
+	if kind == "asate":
+		satellite_art = preload("res://scripts/asate_art.gd").new()
+		for number in range(1,4):
+			var audio_path := "res://assets/openbound/asate/Satellite%d.wav" % number
+			satellite_sounds.append(load(audio_path) if ResourceLoader.exists(audio_path) else AudioStreamWAV.new())
 	original_art = true
 	native_animation = bool(preload("res://scripts/mobile_looks.gd").by_kind(kind).get("native_animation",false))
 	var folder := str(preload("res://scripts/mobile_looks.gd").by_kind(kind).get("assets", "res://assets/openbound/" + kind))
@@ -116,6 +123,9 @@ func projectile_sheet(projectile: Dictionary, weapon: int) -> String:
 func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: Vector2 = Vector2.ZERO) -> void:
 	if not projectile.get("launched", true) or weapon < 0 or weapon >= bullets.size():
 		return
+	if mobile_kind == "asate" and bool(projectile.get("child",false)):
+		satellite_art.draw_child(view,projectile,weapon,offset)
+		return
 	if mobile_kind == "turtle" and weapon < 2:
 		classic_art.draw_water(view,projectile,offset)
 		return
@@ -163,6 +173,8 @@ func _placed_texture(name: String) -> CanvasTexture:
 ## flipbook). SS plays "move" while it still has steps. The crystal stays on
 ## the "normal" state SpawnCrystalShot selects.
 static func placed_state(mine: Dictionary, actors: Array) -> String:
+	if mine.has("state"):
+		return str(mine.state)
 	if bool(mine.get("crystal", false)):
 		return "normal"
 	if bool(mine.get("crawl", false)) and int(mine.get("steps", 0)) > 0:
@@ -177,7 +189,6 @@ static func placed_state(mine: Dictionary, actors: Array) -> String:
 
 ## Original crystal.img, rayonmine.img and srayonmine.img.
 func draw_placed(view: Node2D, mines: Array, actors: Array, offset: Vector2) -> void:
-	var clock := int(Time.get_ticks_msec() / 50)
 	for mine in mines:
 		var file := "crystal.png" if bool(mine.get("crystal", false)) else ("MineSS.png" if bool(mine.get("crawl", false)) else "Mine.png")
 		var state := placed_state(mine, actors)
@@ -190,9 +201,11 @@ func draw_placed(view: Node2D, mines: Array, actors: Array, offset: Vector2) -> 
 			frames = info.get("states", {}).get("normal", [])
 		if frames.is_empty():
 			continue
-		var index := int(frames[clock % frames.size()])
+		var age := float(mine.get("state_age",mine.get("age",0.0)))
+		var index := Timing.frame(frames,info.get("durations",{}).get(state,[]),age,true)
 		var parts := cell_frame(file, index)
-		view.draw_set_transform(Vector2(mine.pos) + offset)
+		var facing := -1.0 if float(mine.get("dir",1.0)) < 0.0 else 1.0
+		view.draw_set_transform(Vector2(mine.pos) + offset,0.0,Vector2(facing,1))
 		if file == "Mine.png":
 			var glow: CanvasTexture = _placed_texture("MineLight.png")
 			if glow != null and sheet("MineLight.png").has("cell"):
