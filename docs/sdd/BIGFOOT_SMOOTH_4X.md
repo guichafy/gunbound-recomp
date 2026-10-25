@@ -1,8 +1,15 @@
-# Bigfoot — acabamento bicúbico4× (ADR-104)
+# Bigfoot — acabamento bicúbico4× (ADR-115)
 
 REQ-12/19/20/45. Pedido de 25/10/2026: aplicar ao Bigfoot a melhoria já
 aprovada nos botões e no lobby (ADR-101/103), a suavização conservadora
 BICUBIC4× por quadro. Não é redesenho nem nova arte gerada.
+
+Numeração: criada como ADR-104 no commit 5f86a74; ao mesclar na `main`, que
+já usava ADR-104…114 para a sala, passou a ADR-115. No mesmo merge,
+`room_random_sprite.gd` (ADR-106, Random 4× da sala) deixou de redeclarar
+`density`: o membro agora vem de `MobileSprite`, com o mesmo significado
+(texels por pixel nativo); sem a remoção o parse falhava. A legenda gravada em
+`docs/bigfoot-smooth-4x/composition.png` e no MP4 ainda mostra o número antigo.
 
 ## Escopo
 

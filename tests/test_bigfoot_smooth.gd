@@ -1,5 +1,5 @@
 extends "res://tests/support/suite.gd"
-## ADR-104: Bigfoot draws its native sheets at4× density. Only source
+## ADR-115: Bigfoot draws its native sheets at4× density. Only source
 ## rectangles change; geometry, pivots and the other mobiles stay native.
 const Classic = preload("res://scripts/classic_sprite.gd")
 const SmoothArt = preload("res://scripts/mobile_smooth_art.gd")

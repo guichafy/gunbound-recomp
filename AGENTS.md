@@ -17,7 +17,7 @@ Harness 8059 checks +17 Python +29 partidas aprovado; galeria GPU210 frames,
 pausa30 idênticos; app/ZIP0.20.3 assinados, PCK44/0. Aceite visual do usuário,
 escuta/mouse e captura específica menu/loja/arena pendentes (timeout UI).
 
-Bigfoot 4× (ADR-104): folhas originais com BICUBIC4× por quadro em
+Bigfoot 4× (ADR-115): folhas originais com BICUBIC4× por quadro em
 assets/hd/classic/mobiles_smooth_4x/bigfoot; MobileLooks `smooth` e
 mobile_smooth_art.gd validam/caem no nativo; só recortes de origem ×4. Ler
 docs/sdd/BIGFOOT_SMOOTH_4X.md. Regenerar com scripts/build_bigfoot_smooth_hd.py.

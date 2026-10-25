@@ -17,7 +17,7 @@ var contact_y: float
 var sequences: Dictionary
 var texture: Texture2D
 var paint_texture: CanvasTexture
-# Texels per native atlas pixel; only source rectangles use it (ADR-104).
+# Texels per native atlas pixel; only source rectangles use it (ADR-115).
 var density := 1.0
 var rider_body: CanvasTexture
 var rider_head: CanvasTexture

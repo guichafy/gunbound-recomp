@@ -12,7 +12,7 @@ var meta: Dictionary = {}
 var mobile_kind := ""
 var asset_folder := ""
 var placed: Dictionary = {}
-# Texels per native pixel of each validated4× sheet (ADR-104).
+# Texels per native pixel of each validated4× sheet (ADR-115).
 var sheet_density: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []

@@ -1,5 +1,5 @@
 extends Node
-## ADR-104 GPU evidence at the real use scale: room seat (52 px hull) and
+## ADR-115 GPU evidence at the real use scale: room seat (52 px hull) and
 ## arena (60 px hull) under the project's canvas_items stretch. The window
 ## of 1920×1080 keeps 1280×800 aspect: 1728×1080 canvas, padded later.
 const OUT := "res://docs/bigfoot-smooth-4x/scene/"

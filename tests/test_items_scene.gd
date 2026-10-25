@@ -25,20 +25,21 @@ func run() -> void:
 	# Room panel: icons inside the six painted slots, catalog in the well, save on change.
 	scene.menu.nickname_input.text = "Novo Piloto"
 	var panel = scene.menu
-	check(panel.item_grid_buttons.size() == 6 and panel.item_tab == 0 and panel.catalog_inside_panel() and panel.icons_inside_slots(), "The room lists six 2-slot items inside the right panel")
-	check(panel.item_slot_buttons[0].position == Vector2(524, 365) and panel.item_slot_buttons[0].size == Vector2(69, 29) and panel.item_slot_buttons[0].get_child_count() == 0 and not panel.item_slot_buttons[1].visible and panel.item_slot_buttons[1].texture_normal == null, "Dual is one rectangle over both painted slots, without a second icon")
-	panel.select_item_tab(1)
-	check(panel.item_grid_buttons.size() == 5 and panel.item_tab_buttons[1].disabled and not panel.item_tab_buttons[0].disabled and panel.catalog_inside_panel(), "The 1-slot list has five items, stays in the panel and shows as selected")
+	check(panel.item_grid_buttons.size() == 11 and panel.item_tab_buttons.is_empty() and panel.catalog_inside_panel() and panel.icons_inside_slots(), "The room lists all11items in one scrollable panel")
+	check(panel.item_slot_buttons[0].position == Vector2(524, 365) and panel.item_slot_buttons[0].size == Vector2(71, 31) and panel.item_slot_buttons[0].get_child_count() == 0 and not panel.item_slot_buttons[1].visible and panel.item_slot_buttons[1].texture_normal == null, "Dual is one rectangle over both painted slots, without a second icon")
+	check(panel.item_grid_buttons.size() == 11 and panel.catalog_inside_panel(), "Both slot sizes share the same catalog")
 	var before: Array = scene.options.items.duplicate()
 	panel.item_grid_buttons[0].pressed.emit()
 	check(scene.options.items == before, "A full bar ignores new items")
 	panel.item_slot_buttons[0].pressed.emit()
 	check(scene.options.items == ["teleport", "power_up", "energy_up_1"] and panel.equipped_buttons.size() == 3, "Clicking an equipped slot removes that item")
-	panel.item_grid_buttons[3].pressed.emit()
-	panel.item_grid_buttons[0].pressed.emit()
+	for id in ["change_wind","blood"]:
+		for button in panel.item_grid_buttons:
+			if button.get_meta("item_id")==id:
+				button.pressed.emit()
 	check(Items.used_slots(scene.options.items) == 6 and scene.options.items.back() == "blood", "Freed slots accept 1-slot items")
 	var span: int = Items.slots(str(scene.options.items[0]))
-	check(panel.equipped_buttons.size() == scene.options.items.size() and absf(panel.equipped_buttons[1].position.x - panel.equipped_buttons[0].position.x - 36.0 * span) <= 1.0 and panel.equipped_buttons[0].size == Vector2(69, 29) and panel.equipped_buttons[1].size == Vector2(33, 29) and panel.icons_inside_slots(), "A 2-slot piece covers both places, a 1-slot piece covers one, and the next item starts after that span")
+	check(panel.equipped_buttons.size() == scene.options.items.size() and absf(panel.equipped_buttons[1].position.x - panel.equipped_buttons[0].position.x - 36.0 * span) <= 1.0 and panel.equipped_buttons[0].size == Vector2(71, 31) and panel.equipped_buttons[1].size == Vector2(35, 31) and panel.icons_inside_slots(), "A 2-slot piece covers both places, a 1-slot piece covers one, and the next item starts after that span")
 	panel.hover_item("dual_plus")
 	var line: Dictionary = panel.hover_line()
 	check(panel.item_hovered == "dual_plus" and line.name == "Dual+" and line.delay == str(roundi(Items.delay("dual_plus"))) and line.description == Items.definition("dual_plus").description, "Hover keeps the item name, delay and description")

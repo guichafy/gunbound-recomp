@@ -1349,6 +1349,47 @@
         76
       ],
       "background_entry": "b_ready_mobile01.img"
+    },
+    "b_ready_startgame": {
+      "file": "room/b_ready_startgame.png",
+      "entry": "b_ready_startgame.img",
+      "entry_sha256": "30b5607370c701138386c97eb007db0af580c3fb652e59914a4432f882f2f543",
+      "img_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4,
+      "epa": "b_ready_startgame.epa",
+      "epa_states": {
+        "ready": [
+          0
+        ],
+        "push": [
+          2
+        ],
+        "mouse": [
+          1
+        ],
+        "disable": [
+          3
+        ],
+        "select": [
+          0
+        ]
+      },
+      "note": "START azul no padrão EXIT/CHANGE (ADR-108)."
     }
   }
 }

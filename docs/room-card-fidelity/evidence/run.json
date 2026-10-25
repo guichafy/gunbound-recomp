@@ -1,0 +1,37 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+    "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "program": "GunBound.gme"
+  },
+  "ghidra_properties": "application.revision.ghidra-Ghidra_12.2_build=\napplication.build.date=2026-Oct-23 0156 GMT\napplication.build.date.short=20261023\napplication.name=Ghidra\napplication.version=12.2\napplication.release.name=PUBLIC\napplication.layout.version=3\napplication.gradle.min=9.1\napplication.gradle.max=\napplication.java.min=25\napplication.java.max=\napplication.java.compiler=25\napplication.python.supported=3.15, 3.14, 3.13, 3.12, 3.11, 3.10, 3.9\n",
+  "command": [
+    "/opt/homebrew/Cellar/ghidra/12.2/libexec/support/analyzeHeadless",
+    "/private/tmp/gunbound-skill-forward-20261024/projects",
+    "GunboundClient",
+    "-process",
+    "GunBound.gme",
+    "-noanalysis",
+    "-max-cpu",
+    "2",
+    "-scriptPath",
+    "/Users/guichafy/Workspaces/DemoGame/skills/gunbound-client-port/scripts",
+    "-postScript",
+    "ExportClientEvidence.java",
+    "/Users/guichafy/Workspaces/DemoGame/.tools/room-contact/ghidra",
+    "seed",
+    "0x004dba80,0x004dbb50",
+    "-",
+    "-log",
+    "/Users/guichafy/Workspaces/DemoGame/.tools/room-contact/ghidra/analysis.log",
+    "-scriptlog",
+    "/Users/guichafy/Workspaces/DemoGame/.tools/room-contact/ghidra/scripts.log"
+  ],
+  "java_home": "/opt/homebrew/Cellar/openjdk@25/25.0.5.0.2/libexec/openjdk.jdk/Contents/Home",
+  "isolated_java_options": " \"-Duser.home=/private/tmp/gunbound-skill-forward-20261024/profile\" \"-Dapplication.cachedir=/private/tmp/gunbound-skill-forward-20261024/cache\" \"-Dapplication.tempdir=/private/tmp/gunbound-skill-forward-20261024/tmp\" \"-Djava.io.tmpdir=/private/tmp/gunbound-skill-forward-20261024/tmp\"",
+  "reused_project": true,
+  "exit_code": 0,
+  "source_unchanged": true,
+  "analysis_timed_out": false,
+  "ok": true
+}

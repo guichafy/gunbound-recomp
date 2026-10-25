@@ -1,0 +1,434 @@
+{
+  "version": 1,
+  "scale": 4,
+  "method": "BICUBIC per native frame/window; alpha NEAREST",
+  "assets": {
+    "room_random": {
+      "file": "room/reference/room_random.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_random.png",
+        "sha256": "1493a11b3251d6fc89eb9fdf6ca0bf9a7b8be2c9aa6ca561cf96c2e74fd03e70",
+        "record": {
+          "file": "room/reference/room_random.png",
+          "size": [
+            315,
+            47
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5
+        },
+        "entry": "b_ready_mobile15.img",
+        "img_indices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "entry_sha256": "32bb855ae0a3ee5d6e43a2191c56bd338a251b078d78c216306da1b65bcfbe8a",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        1260,
+        188
+      ],
+      "columns": 5,
+      "rows": 1,
+      "sha256": "91fa4ee51b7ca114e118f0d2123e18a714df67b9a7af6935e24fe25df9d91f53"
+    },
+    "room_team_a": {
+      "file": "room/reference/room_team_a.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_team_a.png",
+        "sha256": "1a856c78c86ae504d5e3edf5bd31f2168363d86302ca1032674c50f8b4946131",
+        "record": {
+          "file": "room/reference/room_team_a.png",
+          "size": [
+            127,
+            71
+          ],
+          "frame_size": [
+            127,
+            71
+          ],
+          "frames": 1
+        },
+        "entry": "ready_back.img",
+        "img_indices": [
+          1
+        ],
+        "entry_sha256": "d1042b8a8913a0c5ccbf5dfa7b6b7193116b38abad941c6329e8f230f9c021b9",
+        "hotspots": [
+          [
+            0,
+            -22
+          ]
+        ]
+      },
+      "size": [
+        508,
+        284
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "1b1108d95dfc6c8081709c7ddeffa71cb131bad83a6182dae743457a987c3de2"
+    },
+    "room_team_b": {
+      "file": "room/reference/room_team_b.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_team_b.png",
+        "sha256": "40d98230d5d443f9b6b3043d213fed951a732aea75a0939e9859628669fdc98e",
+        "record": {
+          "file": "room/reference/room_team_b.png",
+          "size": [
+            127,
+            72
+          ],
+          "frame_size": [
+            127,
+            72
+          ],
+          "frames": 1
+        },
+        "entry": "ready_back.img",
+        "img_indices": [
+          2
+        ],
+        "entry_sha256": "d1042b8a8913a0c5ccbf5dfa7b6b7193116b38abad941c6329e8f230f9c021b9",
+        "hotspots": [
+          [
+            0,
+            -23
+          ]
+        ]
+      },
+      "size": [
+        508,
+        288
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "6f95069277dd38ade5c77ed4c8d1d35d5e444a6698f5618f1fdd16f5e272b697"
+    },
+    "room_item_up_0": {
+      "file": "room/reference/room_item_up_0.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_up_0.png",
+        "sha256": "9cef959c7ad50ab0eb1deede46eac625fcd931f365fa6755493ff028be869289",
+        "record": {
+          "file": "room/reference/room_item_up_0.png",
+          "size": [
+            16,
+            48
+          ],
+          "frame_size": [
+            16,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemup.img",
+        "img_indices": [
+          0
+        ],
+        "entry_sha256": "319e05aed8f626f53589d0ed602e27522f5a749aa02a1c952054dc7b1c1796df",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        64,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "e437a521274a9db748661d7624f7bdbf4dc9765d47a9d6f04c31491f7ffd3ba0"
+    },
+    "room_item_up_1": {
+      "file": "room/reference/room_item_up_1.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_up_1.png",
+        "sha256": "c32d25e308d93cba74fa3bf819df99515e091915c06645abfde2a284ca9328e2",
+        "record": {
+          "file": "room/reference/room_item_up_1.png",
+          "size": [
+            16,
+            48
+          ],
+          "frame_size": [
+            16,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemup.img",
+        "img_indices": [
+          1
+        ],
+        "entry_sha256": "319e05aed8f626f53589d0ed602e27522f5a749aa02a1c952054dc7b1c1796df",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        64,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "87a1eb668219fb7ededbadb114055e3101695aeb8b1f8f15ffc93fcee5acf454"
+    },
+    "room_item_up_2": {
+      "file": "room/reference/room_item_up_2.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_up_2.png",
+        "sha256": "bdccc41fbd5029378c24722b505a3506c48329ff7bb88fae8e4c75d6865700e4",
+        "record": {
+          "file": "room/reference/room_item_up_2.png",
+          "size": [
+            17,
+            48
+          ],
+          "frame_size": [
+            17,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemup.img",
+        "img_indices": [
+          2
+        ],
+        "entry_sha256": "319e05aed8f626f53589d0ed602e27522f5a749aa02a1c952054dc7b1c1796df",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        68,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "375ac358af1a90034811b54de06b53ab0d8b3690dd5cbbaf7c005efb54ef8ab2"
+    },
+    "room_item_up_3": {
+      "file": "room/reference/room_item_up_3.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_up_3.png",
+        "sha256": "cdba8f826b6a8acc8d414ba028b7d9068d91f357455899a3ab5dd28d2a6b4aa5",
+        "record": {
+          "file": "room/reference/room_item_up_3.png",
+          "size": [
+            16,
+            48
+          ],
+          "frame_size": [
+            16,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemup.img",
+        "img_indices": [
+          3
+        ],
+        "entry_sha256": "319e05aed8f626f53589d0ed602e27522f5a749aa02a1c952054dc7b1c1796df",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        64,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "fc03002743ca912d5993d5471db388d5de39a89dfe4e201514a4d705b5dcc60f"
+    },
+    "room_item_down_0": {
+      "file": "room/reference/room_item_down_0.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_down_0.png",
+        "sha256": "95703ca40dce9ee22a41b0ca9361718341f9225202549626ceba992191781c18",
+        "record": {
+          "file": "room/reference/room_item_down_0.png",
+          "size": [
+            16,
+            48
+          ],
+          "frame_size": [
+            16,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemdown.img",
+        "img_indices": [
+          0
+        ],
+        "entry_sha256": "b98c8b0d41a84004cb8efd81d30162fe124cd79475a997a900225f02b4eade54",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        64,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "14250bc79538ba10d5fbe493c3d3b528e75c2ee57705492198f9900d67473e31"
+    },
+    "room_item_down_1": {
+      "file": "room/reference/room_item_down_1.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_down_1.png",
+        "sha256": "d1608680547f447bcb9f2d1c79cfc4f4850e5ab3d6cb26fe8d011ffbb045b0cc",
+        "record": {
+          "file": "room/reference/room_item_down_1.png",
+          "size": [
+            16,
+            48
+          ],
+          "frame_size": [
+            16,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemdown.img",
+        "img_indices": [
+          1
+        ],
+        "entry_sha256": "b98c8b0d41a84004cb8efd81d30162fe124cd79475a997a900225f02b4eade54",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        64,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "f9359ad06edc1db5cb31327608b3ba0242922896a41dfcb23db43c0ae0ba2c72"
+    },
+    "room_item_down_2": {
+      "file": "room/reference/room_item_down_2.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_down_2.png",
+        "sha256": "2c161c12b863e3a90d30bac906ffa3aae2d77c8f706ce25f1cc155f6694bff7d",
+        "record": {
+          "file": "room/reference/room_item_down_2.png",
+          "size": [
+            17,
+            48
+          ],
+          "frame_size": [
+            17,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemdown.img",
+        "img_indices": [
+          2
+        ],
+        "entry_sha256": "b98c8b0d41a84004cb8efd81d30162fe124cd79475a997a900225f02b4eade54",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        68,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "9cf28ac6e94e140e8478f7e27274fbdf38cf9c75954bea7cc01e469beafec4a7"
+    },
+    "room_item_down_3": {
+      "file": "room/reference/room_item_down_3.png",
+      "source": {
+        "file": "assets/classic/room/reference/room_item_down_3.png",
+        "sha256": "6b26d9ce505858bcf82665f5fbe71643b129f1ae7379438524fcfcbe5d2cc94f",
+        "record": {
+          "file": "room/reference/room_item_down_3.png",
+          "size": [
+            16,
+            48
+          ],
+          "frame_size": [
+            16,
+            48
+          ],
+          "frames": 1
+        },
+        "entry": "b_ready_itemdown.img",
+        "img_indices": [
+          3
+        ],
+        "entry_sha256": "b98c8b0d41a84004cb8efd81d30162fe124cd79475a997a900225f02b4eade54",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        64,
+        192
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "dcdf468a1d0419e56971d3c2b1294111a8c1f8b8309b41b6754287e182cd7e2b"
+    }
+  }
+}

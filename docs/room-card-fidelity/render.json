@@ -1,0 +1,21 @@
+{
+	"anchors_fixed": true,
+	"held_time_identical": true,
+	"idle_variants": 20,
+	"indicator_textures": {
+		"CpuReady": "res://assets/hd/classic/room_status_4x/room/status/room_status.png",
+		"PlayerReady": "res://assets/hd/classic/room_status_4x/room/status/room_status.png",
+		"RoomDeath": "res://assets/hd/classic/room_status_4x/room/status/room_death.png",
+		"RoomItems": "res://assets/hd/classic/room_status_4x/room/status/room_items.png",
+		"RoomMapSide": "res://assets/hd/classic/room_status_4x/room/status/room_map_side.png",
+		"RoomMasterKey": "res://assets/hd/classic/room_status_4x/room/status/room_master_key.png",
+		"RoomMode": "res://assets/hd/classic/room_status_4x/room/status/room_mode.png",
+		"RoomSize": "res://assets/hd/classic/room_status_4x/room/status/room_size.png"
+	},
+	"mobile_names_hidden": true,
+	"roster": 17,
+	"size": [
+		1920,
+		1080
+	]
+}

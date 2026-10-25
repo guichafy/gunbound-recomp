@@ -1,0 +1,13 @@
+{
+  "checks": 132,
+  "failures": 0,
+  "pngs": 22,
+  "windows": 44,
+  "preserved_tracked_assets": 359,
+  "previous_reference_pngs_preserved": 11,
+  "source_archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "random_frames": 12,
+  "random_source_and_alpha_validated": true,
+  "total_new_pngs": 23,
+  "total_native_windows": 56
+}

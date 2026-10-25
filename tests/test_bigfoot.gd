@@ -11,7 +11,7 @@ func run() -> void:
 	var bigfoot_in_grid := false
 	for button in scene.menu.grid_buttons:
 		bigfoot_in_grid = bigfoot_in_grid or int(button.get_meta("vehicle_id")) == 2
-	check(scene.menu.grid_buttons.size() == 16 and bigfoot_in_grid, "Menu offers the classic roster, Bigfoot included")
+	check(scene.menu.grid_buttons.size() == 15 and bigfoot_in_grid, "Menu offers the classic roster, Bigfoot included")
 	check(ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"), "Original atlas animation renderer is available")
 	if scene.menu.grid_buttons.size() < 2 or not ResourceLoader.exists("res://scripts/bigfoot_sprite.gd"):
 		scene.queue_free()

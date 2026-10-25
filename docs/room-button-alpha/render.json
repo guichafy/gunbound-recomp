@@ -1,0 +1,11 @@
+{
+	"native_fallback": true,
+	"outside_corners_show_live_background": true,
+	"settings_opens_modal": true,
+	"size": [
+		1920,
+		1080
+	],
+	"start_approved_lettering_identical": true,
+	"states": 4
+}

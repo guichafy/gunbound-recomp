@@ -1,0 +1,139 @@
+{
+  "baseline_commit": "5c1c3b6",
+  "preserved_existing_asset_files": 359,
+  "method": "BICUBIC4x per native window; alpha NEAREST",
+  "images": 11,
+  "windows": 15,
+  "grid": [
+    5,
+    3
+  ],
+  "direct_common_mobiles": 14,
+  "random_ui_sentinel": -2,
+  "random_pool": [
+    14,
+    15
+  ],
+  "random_resolution": "match start, independent RNG",
+  "item_catalog_count": 11,
+  "team_markers": 8,
+  "godot_checks": 1669,
+  "godot_failures": 0,
+  "room_reference_checks": 209,
+  "python_skill_tests": 21,
+  "independent_checks": {
+    "regression": 455,
+    "behavior_probes": 7,
+    "art": 81
+  },
+  "pck_checks": 53,
+  "pck_failures": 0,
+  "pck_exit": 0,
+  "pck_bytes": 175357320,
+  "app_reexported": false,
+  "version_changed": false,
+  "original_client_executed": false,
+  "user_visual_accepted": false,
+  "source": {
+    "assets/classic/room/reference/catalog.json": "1ec9a356c78b8a93985b89e4ab1d093dc886039c5f972fd00f5876b90d99a09c",
+    "assets/classic/room/reference/room_item_down_0.png": "95703ca40dce9ee22a41b0ca9361718341f9225202549626ceba992191781c18",
+    "assets/classic/room/reference/room_item_down_0.png.import": "b02bbae558c8194c4b48fde5e29d125c806f3f4ddc2431b32c805160d6dcd3d7",
+    "assets/classic/room/reference/room_item_down_1.png": "d1608680547f447bcb9f2d1c79cfc4f4850e5ab3d6cb26fe8d011ffbb045b0cc",
+    "assets/classic/room/reference/room_item_down_1.png.import": "01a5fc0ad36794abacb3e1fa90c94fb2c85808e332837fecf30bec878da4e9ca",
+    "assets/classic/room/reference/room_item_down_2.png": "2c161c12b863e3a90d30bac906ffa3aae2d77c8f706ce25f1cc155f6694bff7d",
+    "assets/classic/room/reference/room_item_down_2.png.import": "41ee9908ed50bde34d8ebe1c7079cfe17ce41467e5370a7655934341b8b5213f",
+    "assets/classic/room/reference/room_item_down_3.png": "6b26d9ce505858bcf82665f5fbe71643b129f1ae7379438524fcfcbe5d2cc94f",
+    "assets/classic/room/reference/room_item_down_3.png.import": "718f4110262b4f8be0cb76456cbbe5d718e3edafc32cd6dcf213d63feae012bb",
+    "assets/classic/room/reference/room_item_up_0.png": "9cef959c7ad50ab0eb1deede46eac625fcd931f365fa6755493ff028be869289",
+    "assets/classic/room/reference/room_item_up_0.png.import": "bf183e4ec9b1e85cfa2dfdf7937dfe18bd9cc220da8a55944222ea1a969d699b",
+    "assets/classic/room/reference/room_item_up_1.png": "c32d25e308d93cba74fa3bf819df99515e091915c06645abfde2a284ca9328e2",
+    "assets/classic/room/reference/room_item_up_1.png.import": "e3a79f869d2098d28e8015564b706685e99d53379cbf7e0bc3f9cb89d8273ec2",
+    "assets/classic/room/reference/room_item_up_2.png": "bdccc41fbd5029378c24722b505a3506c48329ff7bb88fae8e4c75d6865700e4",
+    "assets/classic/room/reference/room_item_up_2.png.import": "b9d8fe991039b08775da6a21a6cbad27c8dcda593be70bc8df9a09a81cdc0878",
+    "assets/classic/room/reference/room_item_up_3.png": "cdba8f826b6a8acc8d414ba028b7d9068d91f357455899a3ab5dd28d2a6b4aa5",
+    "assets/classic/room/reference/room_item_up_3.png.import": "9fa47f7112c0720552e6719701b874f744dbbe5e01f3c9223f0f0e79bbb3c740",
+    "assets/classic/room/reference/room_random.png": "1493a11b3251d6fc89eb9fdf6ca0bf9a7b8be2c9aa6ca561cf96c2e74fd03e70",
+    "assets/classic/room/reference/room_random.png.import": "7a8187d751871fa1a67665bde7b8f52146f7d0fa817c133389b9a65b0eaa8e04",
+    "assets/classic/room/reference/room_team_a.png": "1a856c78c86ae504d5e3edf5bd31f2168363d86302ca1032674c50f8b4946131",
+    "assets/classic/room/reference/room_team_a.png.import": "1ebe0b54244cf5d3039dff694363b0cfd6d0177d6294c912f31649f2a9e83c22",
+    "assets/classic/room/reference/room_team_b.png": "40d98230d5d443f9b6b3043d213fed951a732aea75a0939e9859628669fdc98e",
+    "assets/classic/room/reference/room_team_b.png.import": "cc3e93100fbe18cf7f24f84e235c68f049f1e3aa71f27ba05d723306fe695d53",
+    "assets/hd/classic/room_reference_4x/catalog.json": "ecc87e0bff7f12acc0f618e3f4524eb61ce07a4033f5920e3ffcaba50e63911c",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_0.png": "14250bc79538ba10d5fbe493c3d3b528e75c2ee57705492198f9900d67473e31",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_0.png.import": "dc734f8135476639b551b494eff67eeaf6a0d65057acfeaf94e6a5c216fbed5b",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_1.png": "f9359ad06edc1db5cb31327608b3ba0242922896a41dfcb23db43c0ae0ba2c72",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_1.png.import": "ce81d7ede6a5428c743793b3c13f0c0df846d1ceed2c3cc60a42e389ebf7f712",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_2.png": "9cf28ac6e94e140e8478f7e27274fbdf38cf9c75954bea7cc01e469beafec4a7",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_2.png.import": "19b6ef8e5e0378b6fd35213a4cf7747cc5a6f8ef9fce29e359ed75ced010528d",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_3.png": "dcdf468a1d0419e56971d3c2b1294111a8c1f8b8309b41b6754287e182cd7e2b",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_down_3.png.import": "5666620006d8f374be9c8069013b222c51b6275efe566bad4b2b93889e129cf6",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_0.png": "e437a521274a9db748661d7624f7bdbf4dc9765d47a9d6f04c31491f7ffd3ba0",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_0.png.import": "f58e24b6c3830b31ffd847f0fef1039d13b10eb40f9a3545680eb27fe80d5baa",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_1.png": "87a1eb668219fb7ededbadb114055e3101695aeb8b1f8f15ffc93fcee5acf454",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_1.png.import": "baf022dcef70dae9dcc8b383390eba63d471074024823f604651f2c3f8b7fbdd",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_2.png": "375ac358af1a90034811b54de06b53ab0d8b3690dd5cbbaf7c005efb54ef8ab2",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_2.png.import": "0347912af766d7e314e41ce97ba7b47c9bfca6cd745ad7ee657922fb8cf4bec2",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_3.png": "fc03002743ca912d5993d5471db388d5de39a89dfe4e201514a4d705b5dcc60f",
+    "assets/hd/classic/room_reference_4x/room/reference/room_item_up_3.png.import": "87796afc9148bee84cff094794903b7f673c55c7f5af4523517aaf57230edb3b",
+    "assets/hd/classic/room_reference_4x/room/reference/room_random.png": "91fa4ee51b7ca114e118f0d2123e18a714df67b9a7af6935e24fe25df9d91f53",
+    "assets/hd/classic/room_reference_4x/room/reference/room_random.png.import": "1a06856094b345d547ae1d53a000a2596245b4c947397245840b9f64831116d9",
+    "assets/hd/classic/room_reference_4x/room/reference/room_team_a.png": "1b1108d95dfc6c8081709c7ddeffa71cb131bad83a6182dae743457a987c3de2",
+    "assets/hd/classic/room_reference_4x/room/reference/room_team_a.png.import": "6f16729562356bd84eb984c6998909b1485dcb462be363309f76be056ce43a81",
+    "assets/hd/classic/room_reference_4x/room/reference/room_team_b.png": "6f95069277dd38ade5c77ed4c8d1d35d5e444a6698f5618f1fdd16f5e272b697",
+    "assets/hd/classic/room_reference_4x/room/reference/room_team_b.png.import": "141917ab3b12f5ad9a18401e78e9371f7e7269a45d0be22085b559ca3ac99ba3"
+  },
+  "artifacts": {
+    "docs/room-reference/render.json": "97402404cc0836e3420be8d5070222b3f7704dca4dcdbc7e19ef1f30a2cf7793",
+    "docs/room-reference/reports/room_item_down_0.json": "369abe90aa94ef15e5c02d10c83f34c94bd2920e83620102ac29d8de0ac3c0a0",
+    "docs/room-reference/reports/room_item_down_1.json": "5a1fafef20e6a86cf295fa4a177c967ed0902cc0a2cf06040eb79331848eddd6",
+    "docs/room-reference/reports/room_item_down_2.json": "c50c1a6e5839c26c56bf653e0664ddc7cf7b995a6caad550a8e9e819e6899ce0",
+    "docs/room-reference/reports/room_item_down_3.json": "a40d1fae498cce42ceaec11908351d23f8ccca9c77ccb1d56494f2e498588785",
+    "docs/room-reference/reports/room_item_up_0.json": "ce77f53b24b9e199ae835b85e2c8a82ac85a6d95ce8bd6bdc9b0ee6be73d3324",
+    "docs/room-reference/reports/room_item_up_1.json": "00c3e376b9a98354f11e817c8f880adc397c07762ffd0c6352fc66abda80bbe4",
+    "docs/room-reference/reports/room_item_up_2.json": "1ee8052e7ba53ed0ce846f45f2c18603aaac11c3740f77899716a4471aa56638",
+    "docs/room-reference/reports/room_item_up_3.json": "f3468befc5ab3d0dbce20168a212a20db14e339777e59c1008a4871f84cff7ed",
+    "docs/room-reference/reports/room_random.json": "0234774f4e9d6be2268f1b836d230fe165a8e758830dc5c2acbd774ef197d4f2",
+    "docs/room-reference/reports/room_team_a.json": "4508cea2da5bd654c219305e554a2b99173af0475daec0b6dfaba4be4781e55e",
+    "docs/room-reference/reports/room_team_b.json": "a4be3b53bebcfe21e335b417114bf2fdc8bf220e05eb69b6caef74a2f03c769d",
+    "docs/room-reference/room-grid-hd.png": "4dccbf94ef1f9164282ffacac99af5ad680558a373b4fcbc1ad8d9586de42770",
+    "docs/room-reference/room-grid-native.png": "965a74ce17462e65c4edf42498ef6652d06e8e75d3951d70ae12d4f59690b832",
+    "docs/room-reference/room-items-bottom-hd.png": "74fd1e48b96a290f143b744ee95e23a377c50dd716684209b0e6c4e8091760b5",
+    "docs/room-reference/room-items-bottom-native.png": "1460a3db880ada35eea1f6f02cd610161510f253fd9a850695e77dfdd064a941",
+    "docs/room-reference/room-random-hd.png": "b57e10eeb782559d0c0b3bd20c030d72527af1811cfdc7974ae75936dd2e5a65",
+    "docs/room-reference/room-random-native.png": "85aa1b90afdd1149782050739ae8a9a098acd3a6dccf9e3eaa6419b0588c0c07",
+    "docs/room-reference/room-settings.png": "df72ac098ad2023838a3c780787468487bb6014d2a23e40f14b2a5e51b9b6ce0"
+  },
+  "gpu": [
+    {
+      "images_differ": true,
+      "same_layout_hitboxes": true,
+      "screen": "room-grid",
+      "size": [
+        1920,
+        1080
+      ],
+      "state_textures": 85
+    },
+    {
+      "images_differ": true,
+      "same_layout_hitboxes": true,
+      "screen": "room-random",
+      "size": [
+        1920,
+        1080
+      ],
+      "state_textures": 85
+    },
+    {
+      "images_differ": true,
+      "same_layout_hitboxes": true,
+      "screen": "room-items-bottom",
+      "size": [
+        1920,
+        1080
+      ],
+      "state_textures": 85
+    }
+  ],
+  "reference_image_sha256": "9b2813e8eca2be7a2562b17887e415152d69c32f36c3ac8cd39dbdba80ce4b74"
+}

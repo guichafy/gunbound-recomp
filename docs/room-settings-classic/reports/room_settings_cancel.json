@@ -1,0 +1,133 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/room/settings/room_settings_cancel.png",
+    "sha256": "6670e8350b367427b1c0219df1c0ab33ea5f4d15db5e14458596241bc8742983",
+    "size": [
+      328,
+      34
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/room_settings_4x/room/settings/room_settings_cancel.png",
+    "sha256": "4ed85b1efc1eb68dbb46f9bf5343e312e0a970a02175519cc7cb15bf7b342acc",
+    "size": [
+      1312,
+      136
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    4,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    1312,
+    136
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 41902,
+      "max_rgba_delta": 145,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 5.790292,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ]
+    },
+    {
+      "column": 1,
+      "row": 0,
+      "rgba_changed_pixels": 41205,
+      "max_rgba_delta": 116,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 4.88032,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ]
+    },
+    {
+      "column": 2,
+      "row": 0,
+      "rgba_changed_pixels": 42261,
+      "max_rgba_delta": 116,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 4.507054,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ]
+    },
+    {
+      "column": 3,
+      "row": 0,
+      "rgba_changed_pixels": 40960,
+      "max_rgba_delta": 99,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 5.582616,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        82,
+        34
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

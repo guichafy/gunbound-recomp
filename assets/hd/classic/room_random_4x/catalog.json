@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "scale": 4,
+  "method": "BICUBIC per native frame; alpha NEAREST",
+  "assets": {
+    "room_random_mobile": {
+      "file": "CharacterSpritesheet.png",
+      "source": {
+        "file": "assets/openbound/random/CharacterSpritesheet.png",
+        "sha256": "1e744e6906f60252c874e2e1d566a40e617683f1bc51174e1bfb26e3fccf3cc9",
+        "record": {
+          "file": "CharacterSpritesheet.png",
+          "size": [
+            336,
+            47
+          ],
+          "frame_size": [
+            28,
+            47
+          ],
+          "frames": 12
+        }
+      },
+      "size": [
+        1344,
+        188
+      ],
+      "columns": 12,
+      "rows": 1,
+      "sha256": "1651e59270dd238d3b5180b213e0c82ab41dc473f3e9b26cb09b6f25b25f9c26"
+    }
+  }
+}

@@ -1,5 +1,74 @@
 # Design implementado
 
+## Registro vertical dos T de SETTINGS
+
+Implementado em `SETTINGS_BASELINE.md`: compensação óptica de1pixel nativo para
+baixo nos dois T, aplicada antes do contorno/ampliação, sem mover as outras letras.
+
+## Contorno unificado de SETTINGS
+
+Implementado em `SETTINGS_WORD_FINISH.md`: manter faces raster nativas, montar
+uma base azul única com alpha suave para a palavra e reduzir espaço para2px.
+Casca transparente e START aprovados permanecem iguais.
+
+## Casca com alpha e letras nativas da sala
+
+Implementado em `ROOM_BUTTON_ALPHA.md`: quatro texturas de casca realmente
+transparentes nas bordas; palavra SETTINGS com janelas de glifo corrigidas
+e T proveniente de START, mantendo a superfície nativa de cada estado.
+
+## SETTINGS comRGBA original
+
+Contrato em `SETTINGS_ORIGINAL_LETTERS.md`: cópia direta da superfície e
+contorno nativos, montagem de contornos antes das letras, limpeza só de
+fundo/junções. Substitui a reconstrução de traços daADR-110.
+
+## Rótulo único de SETTINGS
+
+Contrato em `SETTINGS_LETTERING_FIX.md`: composição prévia dos glifos sobre
+alpha, contorno e baseline comuns, quatro estados e fallback. Render usa
+uma textura por palavra. Caminho doSTART aprovado preservado.
+
+## SETTINGS e modal clássico
+
+Contrato em `ROOM_SETTINGS_CLASSIC.md`: casca de botão azul por estado com
+texto centralizado, janela azul composta de recortes nativos, rádios e
+OK/Cancel clássicos. Estados/configuração/entrada preservados.
+
+## Dificuldade, contadores e START da sala
+
+Contrato em `ROOM_FINAL_POLISH.md`: cardCPU apresenta dificuldade confirmada;
+base laranja amostrada da textura ativa cobre somente os oito poços do clima;
+Labels brancos transparentes. Chrome usa STARTGAME nativo,107×45/quatro estados.
+
+## Cards e indicadores da sala
+
+Contrato/plano em `ROOM_CARD_FIDELITY.md`: posição nativa da composição
+convertida para a âncora do renderer, sem nomes de mobiles nos cards;
+hastes Ready/chave e placas de configuração vindas do XFS, com fallback.
+Apelido/CPU, idle/avatar, Random e regras offline preservados.
+
+## Correções de catálogo, apoio e mapa da sala — REQ-02/12/19/20/36
+
+Ver `ROOM_POLISH.md`: catálogo nativo uniforme, equipamento de1/2slots,
+setas encaixadas, mobiles apoiados e somente título/setas laterais nativos.
+Sem novos mapas ou alterações de combate/perfil.
+
+## Sala conforme foto
+
+EscolhaRandom é estado de interface separado dos IDs e do RNG de combate.
+Sorteio restrito14/15 acontece noStart, com piloto/CPU independentes. Grade5×3,
+catálogo único rolável e faixasA/B originais. VerROOM_REFERENCE_LAYOUT.md.
+
+
+## Sala: composição e texturas4×
+
+ClassicRoomArt valida catálogo/fonte/grade/dimensões e seleciona texturaHD
+ou fallback nativo. Mapa/retrato usam janelas originais; itens da sala usam
+fontes clássicas separadas da arte de batalha. Cabeçalho e clima refletem
+perfil/configuração locais. Contrato: ROOM_UI_FIDELITY.md.
+
+
 ## Texturas do lobby4×
 
 Imagens estáticas e insígnias usam derivados conservadores registrados em

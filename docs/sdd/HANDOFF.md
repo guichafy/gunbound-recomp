@@ -1,6 +1,6 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
-## Bigfoot com acabamento4× — ADR-104
+## Bigfoot com acabamento4× — ADR-115
 
 Pedido: aplicar ao Bigfoot a suavização BICUBIC4× aprovada nos botões/lobby.
 Nove folhas de `bigfoot/original` (corpo, tiros, luzes, Flame1–3) em
@@ -12,8 +12,209 @@ contato, avatar, regras e demais mobiles nativos; folha inválida volta ao nativ
 `test_bigfoot_smooth` 70/0; regressões dirigidas 1196/0 + 1772/0; 21 Python.
 GPU1920×1080/60Hz: galeria 210 quadros com pausa idêntica e sala/arena reais
 em escala de uso (nativo×4×, movimento). PCK isolado 30/0/exit0. Atlas4×
-custa 172 MB descomprimido. Sem app novo, versão ou commit. Aceite visual pendente.
+custa 172 MB descomprimido. Commit local 5f86a74 mesclado na `main` local
+(sem push); sem app novo ou versão. Aceite visual pendente.
+Merge com a sala (ADR-104…114): ADR renumerada para 115 e `density` do
+Random herdada de MobileSprite. Harness `--quick` após o merge: parse limpo,
+76 suítes, 12974 checks Godot/0 + Python. Sete falhas iniciais eram do
+worktree novo (pastas `.tools/missing-*` criadas por engano e referências XFS
+locais ausentes); corrigido o ambiente, todas passaram. Partidas completas
+não repetidas: regras de combate não mudaram.
 Registro/limites: `BIGFOOT_SMOOTH_4X.md`; evidência em `docs/bigfoot-smooth-4x`.
+
+## Aceite e commit local dos ajustes da sala — 25/10/2026
+
+Usuário aprovou o resultado final ("Agora ficou bom") e autorizou o commit
+de todos os ajustes pendentes da sala: ADR-107 a114, incluindo cards/Ready,
+dificuldade da CPU, clima, START/SETTINGS, modal/fonte, alpha e alinhamento.
+Código, fontes/derivados preservados, testes e evidências reunidos na main.
+
+Verificação repetida para o versionamento:1350checksGodot/0 em8suítes,
+21testesPython/0 da skillHD,24hashes dos catálogos novos conferidos e
+git diff --check limpo. Aceite visual final confirmado; a versão aprovada
+é `room_settings_word_baseline`. Sem push, nova versão ou nova exportação
+de app/ZIP/PCK; os resultados de pacotes anteriores são históricos.
+
+## Alinhamento visual dos T de SETTINGS — ADR-114
+
+Usuário apontou TT acima deSE/INGS. Compensação óptica de+1pixel nativo
+somente nos dois T, nos quatro estados, em `room_settings_word_baseline`
+78×22. Usa a linha superior visível, incluindo suavização, em vez de alinhar
+apenas a caixa de pixels fortes. Fonte/1436facesRGBA, espaços, acabamento,
+transparência, demais letras e START aprovados preservados.
+
+988checksGodot/0; dois novos checks reproduziram o erro anterior. GPUFullHD
+e revisão aprovadas: START inteiro idêntico, bordas transparentes, estados,
+fallback e clique/modal. Ver `SETTINGS_BASELINE.md` e `docs/settings-baseline`.
+Sem nova exportação/PCK/app, versão, commit/push. Aceite visual separado.
+
+## Acabamento único da palavra SETTINGS — ADR-113
+
+Usuário aprovou alpha daADR-112 mas rejeitou os recortes. Agora
+word_polished78×22/quatro estados mantém1436facesRGBA nativas exatas, com
+espaço2px e um contorno azul único2px/alpha suave0,15px. RGBBICUBIC4×;
+fallbackRGB nativo/alpha de áreaBOX semringing. Todas4bordas transparentes.
+Casca eSTART aprovados intactos; topo absoluto das faces continua18.
+
+986checksGodot/0 em4suítes. GPUFullHD confirmaSTART inteiro idêntico àADR112,
+cenário nos cantos,4estados/fallback da palavra e clique/modal preservados.
+Revisão final aprovada;PCK96/0/exit0, semoverride, ressalvas ambientais
+CA/editor_settings registradas.
+VerSETTINGS_WORD_FINISH.md e docs/settings-word-finish. Semapp/ZIP,versão,
+commit/push; aceite visual do usuário separado.
+
+## Alpha real e composição de SETTINGS — ADR-112
+
+Casca107×45 `room_footer_shell_clear` nas texturas reais deSTART/SETTINGS:
+cantos externos transparentes, sem cenário gravado no sprite. FonteSTART
+aprovada preservada em camada separada. SETTINGS83×20 `word_isolated`, Tdo
+START,IsemfragmentoX, espaçamento3px e topo18 comum; componente8conexa remove
+fragmentos do A vizinho nosTs.1436pixels de faceRGBA exatos às fontes.
+
+1344checksGodot/0 em8suítes. GPUFullHD: cenário nos cantos, letteringSTART
+idêntico, quatro estados/fallback da palavra e cliqueSETTINGS preservados.
+Revisão final aprovada;PCK96/0/exit0,semoverride, ressalvas ambientaisCA/
+editor_settings registradas. Fontes/derivados anteriores mantidos. VerROOM_BUTTON_ALPHA.md e
+docs/room-button-alpha. Semapp/ZIP,versão,commit/push; aceite visual separado.
+
+## SETTINGS retorna aos pixels completos da fonte — ADR-111
+
+Usuário rejeitou a reconstrução daADR-110 porque alterou a fonte. Registro
+ativo room_settings_word agora aponta aWordComplete74×20/quatro estados,
+copiandoRGBA completo dos glifos/contornos nativos. Limpar fundo/vizinhos e
+ajustar junções; não recriar preenchimento ou traço. Versões rejeitadas
+preservadas. START aprovado, modal e fonteASCII permanecem iguais.
+
+969checksGodot/0;629núcleos e3156contornos exclusivosRGBA idênticos às fontes.
+GPUFullHD:START aprovado idêntico,4estados/fallback eSETTINGS abre modal.
+Revisão aprovada após corrigir margem do push;4364pixels de stencil dentro
+dos limites. PCK79/0/exit0,semoverride,comressalvas ambientais registradas.
+Contrato/evidência:SETTINGS_ORIGINAL_LETTERS.md e docs/settings-lettering-original.
+Semapp/ZIP,versão,commit/push; aceite visual do usuário separado.
+
+## Acabamento de SETTINGS; START aprovado preservado — ADR-110
+
+Usuário aprovouSTART e rejeitou emendas deSETTINGS daADR-109. SETTINGS agora
+usa palavraRGBA única81×17, recuperada dos glifos nativos, com altura/espaço/
+contorno comuns e acabamento4×; não usaSystemFont. Quatro estados e fallback,
+sem retângulos opacos dos recortes. Originais,modal efonteASCII preservados.
+
+965checksGodot/0, revisão aprovada com reproduçãoRGBA dos dois atlas; GPU
+FullHD dos4estados/fallback/clique real. START aprovadoRGBA idêntico na mesma
+cena congelada. VerSETTINGS_LETTERING_FIX.md e docs/settings-lettering-fix.
+Sem novoapp/ZIP,versão,commit/push; aceite visual permanece separado.
+
+## SETTINGS, modal clássico e fonte preservada — ADR-109
+
+START semseta eCHANGE substituído porSETTINGS semsetacircular. Bordas azuis
+recortadas doSTARTGAME; START conserva palavra raster eSETTINGS usa letras
+dos sprites originais, conforme correção do usuário que rejeitouSystemFont.
+Modal azul560×470 com moldura nativa, rádios eOK/Cancel;95glifosASCII8×12 do
+font.fnt original, fallbackexistente para caracteres fora desse repertório.
+Layout é adaptação solicitada, sem novos modos/regras/perfil.
+
+1317checksGodot/0 em8suítes (modal25/0),21Python/0. GPUFullHD comprova fonte
+visível/corouro, botões/modal eidle;9quadrosRGBA/95glifos/9120bits conferidos.
+Revisão aprovada após correção deESC com foco noLineEdit; cancelar/aceitar e
+Start testados com cliques reais. VerROOM_SETTINGS_CLASSIC.md e captura atual
+docs/room-settings-classic; versões intermediárias de fonte foram descartadas.
+PCK isolado70/0/exit0,semoverride,comressalvasCA/editor_settings ambientais;
+semapp/ZIP,versão,commit/push. Aceite visual,
+mouse físico eescuta separados das verificações automatizadas.
+
+## Ajustes finais da sala — ADR-108
+
+Dificuldade agora aparece comoCPU · Normal/Leve/Precisa no card da máquina,
+atualizada só aoAceitar. Oito pesos brancos têm base laranja restaurada por
+amostra da textura ativa, sem poços escuros; fontePNG original intacta.
+START usaSTARTGAME azul nativo107×45/quatro estados em660,552, no padrão
+EXIT/CHANGE. CatálogoChrome43registros; START verde e42anteriores preservados.
+
+1286checks Godot/0 em7suítes,752/0 na repetição final,21Python/0. GPUFullHD
+confirma8baseslaranja,Normal/Precisa,estadosSTART eidle preservado. Revisão
+independente aprovada.4quadros/alpha conferidos;222PNGs prévios intactos.
+PCK isolado55/0/exit0,semoverride;CA/editor_settings ambientais registrados.
+Contrato/resultados:ROOM_FINAL_POLISH.md e docs/room-final-polish. Sem novoapp,
+ZIP,versão,commit/push; app exportado anterior não atualizado.
+
+## Cards da sala, Ready e configuração do mapa — ADR-107
+
+Pedido posterior corrige apoio144 daADR-106: composição em105/563,155,
+encaixada na faixa nativa. Nomes dos mobiles ocultos nos dois cards, incluindo
+Random; apelido/CPU,avatar/idle preservados. Ready/chave e cinco placas
+SOLO/1:1/A SIDE/NODEATH/BASIC usam arteXFS,4×conservador/fallback. Placas
+refletem somente regras existentes; nenhum modo novo. Chave não cobre nome.
+
+7PNGs/25janelas,64checks independentes deRGBA/alpha/hash;456assets prévios
+intactos. Regresso1093Godot/0 em10suítes,21Python/0. GPU1920×1080,17escolhas
+nos dois lados,Nak equipado,24quadros20Hz/20variações,âncorasfixas/heldtime
+idêntico. Revisão aprovada apósP2: Ready usaIGNORE e preserva clique no card,
+com cliques reais de viewport e probe negativoPASS reproduzindo2falhas.
+PCK40/0/exit0,semoverride; ressalvas ambientaisCA/editor_settings registradas.
+VerROOM_CARD_FIDELITY.md e docs/room-card-fidelity. Sem novoapp/ZIP,versão,
+commit/push; app anterior não atualizado. Aceite visual/mouse físico/escuta
+separados das verificações automatizadas.
+
+## Versionamento e push solicitados — 25/10/2026
+
+Usuário autorizou versionar todas as correções pendentes da sala e enviar ao
+origin. Preparação na main, incluindo ADR-105/106, assets nativos/4×, Random
+com avatar, idle ativo, catálogo/slots e evidências/testes. Verificação repetida:
+1027checks Godot/0 em10suítes deUI/avatar/animação,21testes Python da skill,
+100hashes do manifest conferidos e git diff --check limpo. Fetch confirmou
+origin/main como ancestral, com3commits locais anteriores ainda não enviados;
+o envio solicitado inclui esses ancestrais. Sem novoapp/ZIP ou versão.
+
+## Sala corrigida, Random com piloto e idle ativo — ADR-106
+
+Catálogo agora usa tiles nativos uniformes64×43 com símbolos1/2slots; barra
+usa35/71×31, seis posições. Setas encaixadas. Mobile tem âncora fixa no chão144,
+faixaA/B atrás e nome à frente; idle/avatares recebem elapsed, sem seno adicional.
+Random usa corpo original OpenBound12quadros, avatar equipado e4×/fallback;
+UI−2 e sorteio14/15 noStart intactos. Nome/mapa duplicados removidos, só setas
+laterais nativas; inativas enquanto MiramoTownA for o único mapa implementado.
+
+23PNGs/56janelas,132checks de arte +Randomfonte/alpha/hash conferidos;
+359arquivos anteriores e11PNGs da etapa anterior intactos. Regressão1720/0,
+rodada finalUI/animação1027/0,21Python. GPU24quadros com animação/âncoras fixas,
+avatarRandom altera só piloto/semRNG. PCK109/0/exit0 semoverride/TLSlocal,
+CA/editor_settings ambientais registrados. VerROOM_POLISH.md e docs/room-polish.
+Sem novoapp/versão/commit/publicação; aceite visual/mouse/escuta separados.
+
+
+## Sala conforme foto — ADR-105
+
+Pedido substitui grade8×2/abas daADR104:14mobiles comuns+Random em5×3.
+Knight/Dragon não têm botões diretos;Random−2 é apenas escolhaUI e sorteia
+14/15 aoStart, com RNGprivado e flags independentes piloto/CPU. Mantém seleção
+na sala/loja. Catálogo único11itens com roda/setas,6slots preservados.
+Oito lugares têm faixasA/B nativas,nomes na base e mobiles acima delas.
+
+11PNGs/15janelas4× novas emroom_reference_4x,alpha nearest; source eHD anteriores
+intactos. Setaspressed17px versusnormal16 são PNGs separados, sem padding.
+1669checks Godot/0,21Python; revisão455+7+81semfalhas. GPU1920×1080 ePCK53/0/exit0,
+semoverride/TLSlocal. Fonte/hash/limites:ROOM_REFERENCE_LAYOUT.md;
+capturas emdocs/room-reference. Sem novoapp/versão/push/commit solicitado.
+Perfil/batalha/recompensas preservados. Aceite visual,escuta/mouse físico
+permanecem separados das verificações automatizadas.
+
+
+## Sala clássica e acabamento4× — ADR-104
+
+Trabalho anterior já versionado emd8b50c7. Sala usa mapa/retratos nativos,
+fundo e11folhas de itens em BICUBIC4× (14PNGs/84células,alpha nearest).
+Ghidra confirma janelas332,51/378,390. CabeçalhoGM, pesos de clima, avisos e
+contenção dos textos implementados. Dragon/Knight ficam textuais, pois a
+fonte éRandom. Grade8×2,16mobiles,estados/hitboxes e6slots preservados.
+ItemArt de batalha e perfil/combate/versão intactos. Fallback nativo validado.
+
+1256checks Godot/0,21Python, revisão final172/0 e auditoria95/0. GPU real
+1920×1080 normal/stress, mesma geometria; galeria16retratos. PCK183/0/exit0,
+semoverride/TLSlocal. Fonte/PNG/catálogos incluídos, commitlocal autorizado.
+Limites ambientais e escopo adaptado em ROOM_UI_FIDELITY.md; capturas/hashes
+emdocs/room-ui. Sem push/appnovo; app previamente exportado continua anterior.
+Aceite visual/escuta/mouse físico permanecem separados.
+
 
 ## Lobby com acabamento4× completo — ADR-103
 

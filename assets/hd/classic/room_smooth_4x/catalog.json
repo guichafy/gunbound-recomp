@@ -1,0 +1,545 @@
+{
+  "version": 1,
+  "scale": 4,
+  "method": "BICUBIC per frame; native alpha NEAREST",
+  "pillow": "11.3.0",
+  "assets": {
+    "room_maps": {
+      "file": "room/details/maps.png",
+      "source": {
+        "file": "assets/classic/room/details/maps.png",
+        "sha256": "c5ee57384cc94a0c87ad8adae58d99c12439caf3c57c55924e42551ee5a35982",
+        "record": {
+          "file": "room/details/maps.png",
+          "size": [
+            2992,
+            84
+          ],
+          "frame_size": [
+            136,
+            84
+          ],
+          "frames": 22
+        },
+        "entry": "ready_selectmap.img",
+        "entry_sha256": "2c4a6f7c43adff51c24a5bd4c264914d434091159ed14e2518df018c09b7dfb5",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        11968,
+        336
+      ],
+      "columns": 22,
+      "rows": 1,
+      "sha256": "8d0fd9618ad4882ed7764992a27f112cb27b2a591137112db393b75bcc0406f7"
+    },
+    "room_portraits": {
+      "file": "room/details/portraits.png",
+      "source": {
+        "file": "assets/classic/room/details/portraits.png",
+        "sha256": "de95e2741a66ca46d928d51b60c25215763d2aaf79b2c971f7d76cd204e03ff2",
+        "record": {
+          "file": "room/details/portraits.png",
+          "size": [
+            1921,
+            146
+          ],
+          "frame_size": [
+            113,
+            146
+          ],
+          "frames": 17
+        },
+        "entry": "ready_selectcharacter.img",
+        "entry_sha256": "10fec636cee82a5a7fc64aef45015b862863b1f551b87d9ead58d777ee419b83",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        7684,
+        584
+      ],
+      "columns": 17,
+      "rows": 1,
+      "sha256": "192eb401a918a44fcc2c5f4585966c9a3ab6a54c26bc022b83c4692525143923"
+    },
+    "room_back": {
+      "file": "room/back.png",
+      "source": {
+        "file": "assets/classic/room/back.png",
+        "sha256": "b0eb29b20c615f7abc80b7c313d010dc80ad4240eabae179d328a756d3c7f99a",
+        "record": {
+          "file": "room/back.png",
+          "entry": "ready_back.img",
+          "frame": 0,
+          "entry_sha256": "d1042b8a8913a0c5ccbf5dfa7b6b7193116b38abad941c6329e8f230f9c021b9",
+          "size": [
+            800,
+            600
+          ]
+        }
+      },
+      "size": [
+        3200,
+        2400
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "d5f3a4439ca95a938036b175c90e1c28569b68eb50e0741a8778e96f004e710f"
+    },
+    "item_Dual": {
+      "file": "items/ItemDual.png",
+      "source": {
+        "file": "assets/openbound/items/ItemDual.png",
+        "sha256": "dde772f9a98c37eb2909442be2b67e8f897b2c9eff1cb2eab8783f3e5b7e2af4",
+        "record": {
+          "file": "items/ItemDual.png",
+          "size": [
+            292,
+            36
+          ],
+          "frame_size": [
+            73,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        1168,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "51fa5981de1d217a80933b1673ec7f949841484ae1274154055dd89144edd19e"
+    },
+    "item_DualPlus": {
+      "file": "items/ItemDualPlus.png",
+      "source": {
+        "file": "assets/openbound/items/ItemDualPlus.png",
+        "sha256": "475ef405b260e8f0d30b0bd8e827893582331ea7a481d8f707ae58c82b8d93cf",
+        "record": {
+          "file": "items/ItemDualPlus.png",
+          "size": [
+            292,
+            36
+          ],
+          "frame_size": [
+            73,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        1168,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "b1d5c60f515e5c5c37d6b56722a9482b4cc388501788bd2530c05b8aee94e99f"
+    },
+    "item_Thunder": {
+      "file": "items/ItemThunder.png",
+      "source": {
+        "file": "assets/openbound/items/ItemThunder.png",
+        "sha256": "b5f65fa4b7682cc84731d8c54c2f347dcd14fe1d5a37314c977db1a8f077b157",
+        "record": {
+          "file": "items/ItemThunder.png",
+          "size": [
+            292,
+            36
+          ],
+          "frame_size": [
+            73,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        1168,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "6ce61e3620930658c60d5d7b8679fa86a6fe5f9b5bdd19eedd7faca704d70dc6"
+    },
+    "item_EnergyUp2": {
+      "file": "items/ItemEnergyUp2.png",
+      "source": {
+        "file": "assets/openbound/items/ItemEnergyUp2.png",
+        "sha256": "7ec8034496d2bbf26881d54a4afa1797c3ba07730677ce8d1060f511136e502d",
+        "record": {
+          "file": "items/ItemEnergyUp2.png",
+          "size": [
+            292,
+            36
+          ],
+          "frame_size": [
+            73,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        1168,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "35bf2f1a6b34bc7b7d8e1bc459202e4fb9903644fe00dc84198ca53ae2db2538"
+    },
+    "item_TeamTeleport": {
+      "file": "items/ItemTeamTeleport.png",
+      "source": {
+        "file": "assets/openbound/items/ItemTeamTeleport.png",
+        "sha256": "61f465f0a23bfc64eaff07c1a05464d4127ec18637d5f51dcc01c7adb527e4ad",
+        "record": {
+          "file": "items/ItemTeamTeleport.png",
+          "size": [
+            292,
+            36
+          ],
+          "frame_size": [
+            73,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        1168,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "a99d482345059b48ac99488474cdedae11896423db45677b7f96c90dad08247b"
+    },
+    "item_Teleport": {
+      "file": "items/ItemTeleport.png",
+      "source": {
+        "file": "assets/openbound/items/ItemTeleport.png",
+        "sha256": "5766f4544aa32eddd080458271706e69a78538d471a568372216d6605e8792e1",
+        "record": {
+          "file": "items/ItemTeleport.png",
+          "size": [
+            292,
+            36
+          ],
+          "frame_size": [
+            73,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        1168,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "ece1e675ded5d2f3e4506eefa434a7cc38393ee900b41250d0a6af7e677c5071"
+    },
+    "item_Blood": {
+      "file": "items/ItemBlood.png",
+      "source": {
+        "file": "assets/openbound/items/ItemBlood.png",
+        "sha256": "2fe8e90d7c622e774965ed091788f7e9066b8bba73d22972ea40bff932a03897",
+        "record": {
+          "file": "items/ItemBlood.png",
+          "size": [
+            148,
+            36
+          ],
+          "frame_size": [
+            37,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        592,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "b935107b15647f85de3e8d9b91c0f053e4022e62c2d515bd73a7709a7e3970d2"
+    },
+    "item_BungeShot": {
+      "file": "items/ItemBungeShot.png",
+      "source": {
+        "file": "assets/openbound/items/ItemBungeShot.png",
+        "sha256": "fd7311f804f2f7946c27e7cb97356d08978a1db006cf49921ea03677199eb350",
+        "record": {
+          "file": "items/ItemBungeShot.png",
+          "size": [
+            148,
+            36
+          ],
+          "frame_size": [
+            37,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        592,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "4923e964582e036f0973746f2925f3553bd30267a7685b89edacfe95f90be94a"
+    },
+    "item_PowerUp": {
+      "file": "items/ItemPowerUp.png",
+      "source": {
+        "file": "assets/openbound/items/ItemPowerUp.png",
+        "sha256": "b0177172d148b99fcc276afac9667ec58ec8ec4b1d69f02de97520e699f348b1",
+        "record": {
+          "file": "items/ItemPowerUp.png",
+          "size": [
+            148,
+            36
+          ],
+          "frame_size": [
+            37,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        592,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "40d1adf1bd877f633f26019cbceebb13ff321dfa05d75f22271fbbd6a384ea5f"
+    },
+    "item_ChangeWind": {
+      "file": "items/ItemChangeWind.png",
+      "source": {
+        "file": "assets/openbound/items/ItemChangeWind.png",
+        "sha256": "b1cacd5f857cffcbe3d4603f10470edb8d3d46fe4547ccbd9f4405c456708382",
+        "record": {
+          "file": "items/ItemChangeWind.png",
+          "size": [
+            148,
+            36
+          ],
+          "frame_size": [
+            37,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        592,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "7026a55d9297cc5e6d7e3597c99f152f3d2513f2089530d3db1228bc82f5f762"
+    },
+    "item_EnergyUp1": {
+      "file": "items/ItemEnergyUp1.png",
+      "source": {
+        "file": "assets/openbound/items/ItemEnergyUp1.png",
+        "sha256": "978d5bc25d308e360858069b51a01e1f4fc67bf77b6c4926875e05841627e07b",
+        "record": {
+          "file": "items/ItemEnergyUp1.png",
+          "size": [
+            148,
+            36
+          ],
+          "frame_size": [
+            37,
+            36
+          ],
+          "frames": 4
+        },
+        "reference": "OpenBound native button sheet, normal/hover/push/disabled"
+      },
+      "size": [
+        592,
+        144
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "a901e940647ea3a49e8b0cf2326495bf162c5db2cba444cf3cf3a2d253e35dbd"
+    }
+  }
+}

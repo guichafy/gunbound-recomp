@@ -1,0 +1,29 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "assets": {
+    "room_maps": {
+      "file": "room/details/maps.png",
+      "size": [
+        2992,
+        84
+      ],
+      "frame_size": [
+        136,
+        84
+      ],
+      "frames": 22
+    },
+    "room_portraits": {
+      "file": "room/details/portraits.png",
+      "size": [
+        1921,
+        146
+      ],
+      "frame_size": [
+        113,
+        146
+      ],
+      "frames": 17
+    }
+  }
+}

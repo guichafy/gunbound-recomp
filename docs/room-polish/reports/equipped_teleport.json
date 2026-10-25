@@ -1,0 +1,89 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/room/polish/equipped_teleport.png",
+    "sha256": "535ef7939b352ec07abdf78404d9917d6e6da5114eb52b8c41a954b96d720bfe",
+    "size": [
+      142,
+      31
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/room_polish_4x/room/polish/equipped_teleport.png",
+    "sha256": "38279748e7f07544b71c7f958be2736261e98bb32b4533971397061f3d856a57",
+    "size": [
+      568,
+      124
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    2,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    568,
+    124
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 32592,
+      "max_rgba_delta": 139,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 7.181887,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ]
+    },
+    {
+      "column": 1,
+      "row": 0,
+      "rgba_changed_pixels": 32655,
+      "max_rgba_delta": 129,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 6.144783,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

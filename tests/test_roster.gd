@@ -27,8 +27,8 @@ func run() -> void:
 		view.show_menu()
 	var seen := {}
 	var placed: Array[Rect2] = []
-	check(view.menu.grid_buttons.size() == 16, "Menu displays the full classic roster")
-	check(view.menu.grid_keys[13] == "b_ready_mobile_dragon" and view.menu.grid_keys[15] == "b_ready_mobile14", "Dragon uses its own icon; the client button 14 stays on Aduka")
+	check(view.menu.grid_buttons.size() == 15, "Menu shows14common choices andRandom")
+	check(view.menu.grid_keys[13] == "b_ready_mobile14" and view.menu.grid_keys[14] == "room_random", "Aduka is followed byRandom; special mobiles have no direct buttons")
 	for button in view.menu.grid_buttons:
 		var id := int(button.get_meta("vehicle_id"))
 		var rect := Rect2(button.position, button.size)
@@ -38,7 +38,7 @@ func run() -> void:
 		placed.append(rect)
 		seen[id] = button
 		check(view.menu.GRID_PANEL.encloses(rect) and clear and button.get_parent() == view.menu.figures.get_parent(), "Vehicle button %s sits in its own grid cell" % button.tooltip_text)
-	for playable_id in range(1, 17):
+	for playable_id in [1,2,3,4,5,6,7,8,9,10,11,12,13,16,-2]:
 		check(seen.has(playable_id), "Grid has a button for mobile %s" % playable_id)
 	for id in [1, 2, 3]:
 		view.show_menu()

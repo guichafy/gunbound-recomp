@@ -1,0 +1,17 @@
+{
+  "source_entry": "font.fnt",
+  "entry_sha256": "58c73cb6009ef505e72ed3949d99a4faf5e7e481945611b998e41f749bb1ae07",
+  "entry_size": 787968,
+  "ascii_layout": "128 characters x 12 row bytes; msb first,8x12",
+  "exported_codepoints": [
+    32,
+    126
+  ],
+  "glyphs": 95,
+  "atlas_size": [
+    128,
+    72
+  ],
+  "atlas_sha256": "62df27b5effd523e7db9e7d2df1dbc3d0ad06c0c2932fe4e3a16c09890fba03f",
+  "unsupported_characters": "existing room font fallback; no invented glyphs"
+}

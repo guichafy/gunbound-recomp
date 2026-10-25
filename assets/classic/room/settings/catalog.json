@@ -1,0 +1,65 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "assets": {
+    "room_settings_frame": {
+      "file": "room/settings/room_settings_frame.png",
+      "size": [
+        313,
+        160
+      ],
+      "frame_size": [
+        313,
+        160
+      ],
+      "frames": 1
+    },
+    "room_settings_ok": {
+      "file": "room/settings/room_settings_ok.png",
+      "size": [
+        328,
+        34
+      ],
+      "frame_size": [
+        82,
+        34
+      ],
+      "frames": 4
+    },
+    "room_settings_cancel": {
+      "file": "room/settings/room_settings_cancel.png",
+      "size": [
+        328,
+        34
+      ],
+      "frame_size": [
+        82,
+        34
+      ],
+      "frames": 4
+    },
+    "room_settings_word": {
+      "file": "room/settings/room_settings_word_baseline.png",
+      "size": [
+        312,
+        22
+      ],
+      "frame_size": [
+        78,
+        22
+      ],
+      "frames": 4
+    },
+    "room_footer_shell": {
+      "file": "room/settings/room_footer_shell_clear.png",
+      "size": [
+        428,
+        45
+      ],
+      "frame_size": [
+        107,
+        45
+      ],
+      "frames": 4
+    }
+  }
+}

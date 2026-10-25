@@ -1,4 +1,4 @@
-"""Build the Bigfoot original sheets at 4x using the approved skill recipe (ADR-104)."""
+"""Build the Bigfoot original sheets at 4x using the approved skill recipe (ADR-115)."""
 import hashlib
 import json
 from pathlib import Path

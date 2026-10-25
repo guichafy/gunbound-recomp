@@ -1,5 +1,72 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Alinhamento visual de SETTINGS — REQ-02/12/19/20
+
+Corrigir os dois T que aparecem acima de SE/INGS, preservando fonte e
+acabamento aprovados. Contrato: `SETTINGS_BASELINE.md`.
+
+## Acabamento da palavra SETTINGS — REQ-02/12/19/20
+
+Preservar transparência aprovada e fonte original; eliminar emendas do
+contorno e ajustar espaços conforme START. Ver `SETTINGS_WORD_FINISH.md`.
+
+## Alpha e composição dos botões — REQ-02/12/19/20
+
+Remover cenário opaco fora dos cantos arredondados de START/SETTINGS e
+refinar as letras de SETTINGS comparando com START, preservando a fonte.
+Contrato: `ROOM_BUTTON_ALPHA.md`, posterior à ADR-111.
+
+## Letras completas de SETTINGS — REQ-02/12/19/20
+
+Pedido posterior rejeita a reconstrução daADR-110. Restaurar pixels completos
+dos glifos/contornos nativos e lapidar somente fundo/junções. START aprovado
+preservado. Contrato: `SETTINGS_ORIGINAL_LETTERS.md`.
+
+## Acabamento de SETTINGS — REQ-02/12/19/20
+
+START aprovado deve permanecer idêntico. SETTINGS conserva as formas nativas,
+com fundo transparente, baseline/espaçamento e contorno uniformes, sem emendas
+dos recortes. Plano: `SETTINGS_LETTERING_FIX.md`, substitui composição daADR-109.
+
+## SETTINGS e modal clássico — REQ-02/12/19/20
+
+START sem seta; CHANGE substituído porSETTINGS sem seta circular. Modal de
+apelido/dificuldade/clima com moldura, cores e controles clássicos, mantendo
+rascunho/aceite/cancelamento. Adaptação solicitada: `ROOM_SETTINGS_CLASSIC.md`.
+
+## Acabamento final da sala — REQ-02/12/19/20
+
+Dificuldade aparece ao lado deCPU no card da máquina; números do clima
+brancos, sem poços escuros; START usa o botão azul clássico no padrão de
+EXIT/CHANGE. Plano: `ROOM_FINAL_POLISH.md`. Demais elementos daADR-107 mantidos.
+
+## Cards e indicadores da sala — REQ-02/12/19/20
+
+Pedido posterior corrige encaixe do mobile na faixa, retira o nome do mobile
+dos cards e restaura Ready/placas do mapa com arte nativa. Configurações
+exibidas refletem o treino offline existente. Plano: `ROOM_CARD_FIDELITY.md`.
+Substitui o contato144 daADR-106; preserva idle, avatar e Random.
+
+## Correções de catálogo, apoio e mapa da sala — REQ-02/12/19/20/36
+
+Ver `ROOM_POLISH.md`: catálogo nativo uniforme, equipamento de1/2slots,
+setas encaixadas, mobiles apoiados e somente título/setas laterais nativos.
+Sem novos mapas ou alterações de combate/perfil.
+
+## Sala conforme foto — REQ-02/12/19/20/36
+
+Pedido posterior substitui grade8×2 por5×3 e abas por catálogo único.
+Quatorze escolhas comuns+Random, que sorteia sóDragon/Knight noStart.
+Oito lugares identificadosA/B por arte nativa. VerROOM_REFERENCE_LAYOUT.md.
+
+
+## Sala clássica e acabamento4× — REQ-02/12/19/20/36
+
+Pedido25/10/2026 autoriza corrigir composição com mapas/retratos/itens
+originais e BICUBIC4× conservador. Preservar grade8×2,16mobiles, estados
+e hitboxes, perfil/combate/versão. Contrato/plano: ROOM_UI_FIDELITY.md.
+
+
 ## Acabamento restante do lobby — REQ-02/12/19/20
 
 Pedido25/10/2026 autoriza BICUBIC4× no fundo/molduras e insígnias nativas,
@@ -144,7 +211,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-12 | Código, documentação e app para validar e aprender | QUALITY_REVIEW | Vigente; revisão de qualidade 0.18.6 |
 | REQ-13..18 | Refinamento 0.2 (HUD, fila, inclinação, carga, animações, impacto) | REFINEMENT_0_2 | HUD/console substituídos por REQ-27..30; demais vigentes |
 | REQ-19 | Mobiles e assets reais | BIGFOOT_0_3, MAGE_0_4, NAK_0_15, REQ-45 | Vigente nos 16 do cliente Thor's Hammer |
-| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD, HORN_AURA_FIX, BIGFOOT_SMOOTH_4X | Vigente; HD do Nak gerado e pendente de integração; brilho do Great Devil derivado do chifre (ADR-082); Bigfoot original com acabamento4× (ADR-104) |
+| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD, HORN_AURA_FIX, BIGFOOT_SMOOTH_4X | Vigente; HD do Nak gerado e pendente de integração; brilho do Great Devil derivado do chifre (ADR-082); Bigfoot original com acabamento4× (ADR-115) |
 | REQ-21..26 | Mapa Miramo A, câmera 1: 1, vento 2D, clima, Thor, partícula | MAP_0_8, WEATHER_CAMERA_0_9 | Vigente |
 | REQ-27..31 | HUD original e popup de opções | HUD_0_10, BATTLE_FIDELITY_0_20 | Carga 3 s/mínimo nativo (REQ-28); bússola/vento coerentes; Mouse Speed desabilitado |
 | REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |

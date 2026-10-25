@@ -1,5 +1,5 @@
 extends RefCounted
-## Conservative4× sheets of a native mobile (ADR-104). frames.json owns the
+## Conservative4× sheets of a native mobile (ADR-115). frames.json owns the
 ## geometry; a sheet whose catalog record, grid or size disagrees stays native.
 const DENSITY := 4.0
 const ATLAS := "CharacterSpritesheet.png"

@@ -1,0 +1,466 @@
+{
+  "asset": {
+    "file": "room/settings/room_settings_word_finished.png",
+    "size": [
+      1216,
+      80
+    ],
+    "columns": 4,
+    "rows": 1,
+    "sha256": "0dceae8d7790a4589b68d27e154fa8c042acb369783d8a9e0a2a21bcdaa8dcb5",
+    "source": {
+      "file": "assets/classic/room/settings/room_settings_word_finished.png",
+      "sha256": "a183c79f22a0e1a41a8dca8a5380bd512faf3d6f3b045986879cf53e6fe0c053",
+      "record": {
+        "file": "room/settings/room_settings_word_finished.png",
+        "size": [
+          304,
+          20
+        ],
+        "frame_size": [
+          76,
+          20
+        ],
+        "frames": 4
+      }
+    },
+    "method": "Original native RGBA faces; 2px spacing; one START-blue outline radius2px, edge blur0.15px; RGB BICUBIC4x; derived alpha/fallback",
+    "native_face_rgba_checks": 1436
+  },
+  "states": [
+    {
+      "state": 0,
+      "ink_rgb": [
+        0,
+        89,
+        164
+      ],
+      "placements": [
+        {
+          "letter": "S",
+          "core_x": 3,
+          "core_y": 4,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        },
+        {
+          "letter": "E",
+          "core_x": 12,
+          "core_y": 4,
+          "source_core_bounds": [
+            84,
+            17,
+            91,
+            26
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 21,
+          "core_y": 4,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 31,
+          "core_y": 4,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "I",
+          "core_x": 41,
+          "core_y": 4,
+          "source_core_bounds": [
+            67,
+            17,
+            68,
+            26
+          ]
+        },
+        {
+          "letter": "N",
+          "core_x": 44,
+          "core_y": 4,
+          "source_core_bounds": [
+            64,
+            17,
+            72,
+            26
+          ]
+        },
+        {
+          "letter": "G",
+          "core_x": 54,
+          "core_y": 4,
+          "source_core_bounds": [
+            74,
+            17,
+            82,
+            27
+          ]
+        },
+        {
+          "letter": "S",
+          "core_x": 64,
+          "core_y": 4,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        }
+      ],
+      "partly_transparent_edge_pixels": 3323
+    },
+    {
+      "state": 1,
+      "ink_rgb": [
+        49,
+        121,
+        180
+      ],
+      "placements": [
+        {
+          "letter": "S",
+          "core_x": 3,
+          "core_y": 4,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        },
+        {
+          "letter": "E",
+          "core_x": 12,
+          "core_y": 4,
+          "source_core_bounds": [
+            84,
+            17,
+            91,
+            26
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 21,
+          "core_y": 4,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 31,
+          "core_y": 4,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "I",
+          "core_x": 41,
+          "core_y": 4,
+          "source_core_bounds": [
+            67,
+            17,
+            68,
+            26
+          ]
+        },
+        {
+          "letter": "N",
+          "core_x": 44,
+          "core_y": 4,
+          "source_core_bounds": [
+            64,
+            17,
+            72,
+            26
+          ]
+        },
+        {
+          "letter": "G",
+          "core_x": 54,
+          "core_y": 4,
+          "source_core_bounds": [
+            74,
+            17,
+            82,
+            27
+          ]
+        },
+        {
+          "letter": "S",
+          "core_x": 64,
+          "core_y": 4,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        }
+      ],
+      "partly_transparent_edge_pixels": 3323
+    },
+    {
+      "state": 2,
+      "ink_rgb": [
+        49,
+        121,
+        180
+      ],
+      "placements": [
+        {
+          "letter": "S",
+          "core_x": 4,
+          "core_y": 5,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        },
+        {
+          "letter": "E",
+          "core_x": 13,
+          "core_y": 5,
+          "source_core_bounds": [
+            84,
+            17,
+            91,
+            26
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 22,
+          "core_y": 5,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 32,
+          "core_y": 5,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "I",
+          "core_x": 42,
+          "core_y": 5,
+          "source_core_bounds": [
+            67,
+            17,
+            68,
+            26
+          ]
+        },
+        {
+          "letter": "N",
+          "core_x": 45,
+          "core_y": 5,
+          "source_core_bounds": [
+            64,
+            17,
+            72,
+            26
+          ]
+        },
+        {
+          "letter": "G",
+          "core_x": 55,
+          "core_y": 5,
+          "source_core_bounds": [
+            74,
+            17,
+            82,
+            27
+          ]
+        },
+        {
+          "letter": "S",
+          "core_x": 65,
+          "core_y": 5,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        }
+      ],
+      "partly_transparent_edge_pixels": 3323
+    },
+    {
+      "state": 3,
+      "ink_rgb": [
+        82,
+        80,
+        82
+      ],
+      "placements": [
+        {
+          "letter": "S",
+          "core_x": 3,
+          "core_y": 4,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        },
+        {
+          "letter": "E",
+          "core_x": 12,
+          "core_y": 4,
+          "source_core_bounds": [
+            84,
+            17,
+            91,
+            26
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 21,
+          "core_y": 4,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "T",
+          "core_x": 31,
+          "core_y": 4,
+          "source_core_bounds": [
+            51,
+            18,
+            59,
+            27
+          ]
+        },
+        {
+          "letter": "I",
+          "core_x": 41,
+          "core_y": 4,
+          "source_core_bounds": [
+            67,
+            17,
+            68,
+            26
+          ]
+        },
+        {
+          "letter": "N",
+          "core_x": 44,
+          "core_y": 4,
+          "source_core_bounds": [
+            64,
+            17,
+            72,
+            26
+          ]
+        },
+        {
+          "letter": "G",
+          "core_x": 54,
+          "core_y": 4,
+          "source_core_bounds": [
+            74,
+            17,
+            82,
+            27
+          ]
+        },
+        {
+          "letter": "S",
+          "core_x": 64,
+          "core_y": 4,
+          "source_core_bounds": [
+            43,
+            18,
+            50,
+            27
+          ]
+        }
+      ],
+      "partly_transparent_edge_pixels": 3323
+    }
+  ],
+  "native_sources": {
+    "startgame": "6754483173a2a87bdbdf2200a73a57952e165ddd91c11ace591b3b22626404f2",
+    "exit": "4f9482e7d3fb0040510a620a27a2134a2159655ec7256e4683d5fb8eff3a3726",
+    "changeteam": "d52f20ff946ea538786d832de49637bb9dc3c49650243345e17d35ebcbb94118"
+  },
+  "glyph_windows": {
+    "S": [
+      "startgame",
+      43,
+      51
+    ],
+    "E": [
+      "changeteam",
+      83,
+      92
+    ],
+    "T": [
+      "startgame",
+      51,
+      59
+    ],
+    "I": [
+      "exit",
+      67,
+      69
+    ],
+    "N": [
+      "changeteam",
+      64,
+      72
+    ],
+    "G": [
+      "changeteam",
+      74,
+      83
+    ]
+  },
+  "spacing": 2
+}

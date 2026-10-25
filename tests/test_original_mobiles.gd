@@ -9,7 +9,7 @@ func run() -> void:
 		if not sprite is Classic:
 			continue
 		check(sprite.original_art, "Original mobile bypasses the generated rig")
-		# Bigfoot draws the same native sheets at the approved4x density (ADR-104).
+		# Bigfoot draws the same native sheets at the approved4x density (ADR-115).
 		var active_texture: String = sprite.texture.resource_path
 		check(active_texture.contains("/original/") if id == 1 else active_texture.contains("mobiles_smooth_4x/bigfoot/"), "Active texture is extracted from original client")
 		check(sprite.hull_width == 60.0, "One native pixel per world pixel matches classic roster")

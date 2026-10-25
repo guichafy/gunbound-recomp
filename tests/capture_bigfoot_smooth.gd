@@ -1,5 +1,5 @@
 extends Node
-## ADR-104 GPU evidence: native Bigfoot sheets (top) and the4x finish (bottom)
+## ADR-115 GPU evidence: native Bigfoot sheets (top) and the4x finish (bottom)
 ## with the same SpritePose, both facings, slopes, shots, impacts and a pause.
 const Pose = preload("res://scripts/sprite_pose.gd")
 const Classic = preload("res://scripts/classic_sprite.gd")
@@ -17,7 +17,7 @@ class Board extends Node2D:
 	var font := ThemeDB.fallback_font
 	func _draw() -> void:
 		draw_rect(Rect2(0,0,1920,1080),Color("182a3a"))
-		draw_string(font,Vector2(35,45),"Bigfoot | folhas originais do cliente | acabamento BICUBIC 4× por quadro (ADR-104)",HORIZONTAL_ALIGNMENT_LEFT,-1,27)
+		draw_string(font,Vector2(35,45),"Bigfoot | folhas originais do cliente | acabamento BICUBIC 4× por quadro (ADR-115)",HORIZONTAL_ALIGNMENT_LEFT,-1,27)
 		draw_string(font,Vector2(35,80),"Mesma pose, pivô, contato e avatar; só a densidade da textura muda. Alpha/silhueta nativos.",HORIZONTAL_ALIGNMENT_LEFT,-1,20)
 		for row in 2:
 			var sprite = host.native_sprite if row == 0 else host.smooth_sprite
