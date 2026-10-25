@@ -180,7 +180,7 @@ func show_menu() -> void:
 	menu = MenuScreen.new()
 	menu.build(root, ui, {"version": version(), "nickname": profile.nickname, "difficulty": cpu_difficulty,
 		"weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
-		"items": options.items.duplicate(), "level": profile.level(), "xp": profile.xp, "wins": profile.wins,
+		"items": options.items.duplicate(), "rank": profile.rank, "level": profile.level(), "xp": profile.xp, "wins": profile.wins,
 		"cpu_vehicle": resolved_cpu_id(), "item_art": item_art},
 		{"select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
 		"set_weather": set_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop,

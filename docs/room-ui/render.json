@@ -1,0 +1,22 @@
+[
+	{
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "room",
+		"size": [
+			1920,
+			1080
+		],
+		"state_textures": 43
+	},
+	{
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "room-stress",
+		"size": [
+			1920,
+			1080
+		],
+		"state_textures": 39
+	}
+]

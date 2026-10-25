@@ -19,7 +19,7 @@ func run() -> void:
 		for code in range(-4,21):
 			var icon: AtlasTexture = Ranks.icon(code, horizontal)
 			check(icon.atlas.resource_path.begins_with(HD) and icon.region == Rect2(Vector2((code+4)*cell.x,0)*4,cell*4), "Rank%d horizontal%s keeps code+4 in4x atlas" % [code,horizontal])
-	check(chrome.image("room_back").resource_path == "res://assets/classic/room/back.png", "Room backdrop remains native")
+	check(chrome.image("room_back").resource_path == "res://assets/hd/classic/room_smooth_4x/room/back.png", "Room uses its independent conservative catalog")
 	for info in chrome.lobby_art.catalog.assets.values():
 		var imported: Image = load(HD + str(info.file)).get_image()
 		var png := Image.load_from_file(HD + str(info.file))

@@ -5,6 +5,11 @@ extends RefCounted
 ## Os itens ficam nos 6 lugares do painel direito; a troca grava na hora.
 
 const Mobiles = preload("res://scripts/mobiles.gd")
+const Ranks = preload("res://scripts/classic_ranks.gd")
+const Maps = preload("res://scripts/maps.gd")
+const Weather = preload("res://scripts/weather.gd")
+const MatchRules = preload("res://scripts/match.gd")
+const RoomArt = preload("res://scripts/classic_room_art.gd")
 const Items = preload("res://scripts/items.gd")
 const Chrome = preload("res://scripts/classic_chrome.gd")
 const DIFFICULTIES := ["Leve", "Normal", "Precisa"]
@@ -35,6 +40,12 @@ const GRID := [
 ]
 
 var ui
+var room_art = RoomArt.new()
+var portrait: TextureRect
+var owner_label: Label
+var status_line: Label
+var climate_weights: Array[Label] = []
+var owner_rank := Ranks.GM
 var chrome
 var nickname_input: LineEdit
 var difficulty_buttons: Array[Button] = []
@@ -92,12 +103,14 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	draft_weather = saved_weather
 	player_anchor = slot_anchor(PLAYER_SLOT)
 	cpu_anchor = slot_anchor(CPU_SLOT)
-	var tag: Label = ui.label(root, "TREINO OFFLINE   /   " + str(info.version), Vector2(6, 8), Vector2(96, 150), 11, ui.CREAM, true)
+	var tag: Label = ui.label(root, "TREINO OFFLINE\n/   " + str(info.version), Vector2(6, 8), Vector2(96, 42), 10, ui.CREAM, true)
 	tag.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tag.add_theme_constant_override("outline_size", 3)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
+	tag.size = Vector2(96,42)
 	var stage: Control = Chrome.mount(root)
 	chrome.place(stage, "room_back", Vector2.ZERO)
+	build_header(stage,info)
 	figures = preload("res://scripts/room_figures.gd").new()
 	figures.name = "RoomFigures"
 	stage.add_child(figures)
@@ -128,8 +141,10 @@ func caption(parent: Node, text: String, pos: Vector2, size: Vector2, font_size:
 	var node: Label = ui.label(parent, text, pos, size, font_size, color, true)
 	node.add_theme_constant_override("outline_size", 2)
 	node.add_theme_color_override("font_outline_color", Color("061018"))
-	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	node.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if size.y > 24 else TextServer.AUTOWRAP_OFF
 	node.clip_text = true
+	node.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	node.size = size
 	if center:
 		node.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	return node
@@ -161,6 +176,16 @@ func build_slots(stage: Control) -> void:
 	cpu_mobile = caption(stage, "", CPU_SLOT.position + Vector2(6, 20), Vector2(112, 14), 11, Color("ffe08a"))
 
 func build_centre(stage: Control, weather_label: String) -> void:
+	var preview := texture_rect(stage, "RoomMapPreview", room_art.frame("room_maps",1), Vector2(332,51),Vector2(136,84))
+	preview.mouse_filter = Control.MOUSE_FILTER_PASS
+	preview.tooltip_text = "Miramo Town A — mapa fixo do treino"
+	climate_weights.clear()
+	for index in 8:
+		var counter := caption(stage,"",Vector2(339+(index%4)*37,161+int(index/4.0)*39),Vector2(11,13),9,Color.WHITE,true)
+		counter.name = "WeatherWeight%d" % index
+		counter.mouse_filter = Control.MOUSE_FILTER_PASS
+		climate_weights.append(counter)
+	refresh_climate()
 	var previous: TextureButton = chrome.button(stage, "b_ready_mapprev", Vector2(316, 224))
 	var following: TextureButton = chrome.button(stage, "b_ready_mapnext", Vector2(456, 224))
 	previous.disabled = true
@@ -179,6 +204,8 @@ func build_centre(stage: Control, weather_label: String) -> void:
 	weather_caption = caption(stage, weather_label, Vector2(312, 320), Vector2(176, 18), 11, Color("9dffe2"), true)
 
 func build_grid(stage: Control) -> void:
+	status_line = caption(stage,"Selecione o mobile do piloto ou da máquina.",Vector2(76,364),Vector2(408,15),10)
+	status_line.name = "RoomStatus"
 	grid_buttons.clear()
 	grid_keys.clear()
 	choice_label = caption(stage, "Escolhendo: piloto", Vector2(72, 398), Vector2(270, 18), 12, Color("edf5ff"), true)
@@ -204,6 +231,8 @@ func build_grid(stage: Control) -> void:
 		button.size = GRID_ICON
 
 func build_portrait(stage: Control) -> void:
+	portrait = texture_rect(stage,"RoomPortrait",room_art.frame("room_portraits",5),Vector2(378,390),Vector2(113,146))
+	portrait.mouse_filter = Control.MOUSE_FILTER_PASS
 	portrait_name = caption(stage, "", Vector2(378, 406), Vector2(110, 40), 13)
 	portrait_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vehicle_info = caption(stage, "", Vector2(378, 448), Vector2(110, 80), 11, Color("c5d7ea"))
@@ -311,7 +340,7 @@ func select_item_tab(index: int) -> void:
 		button.position = origin + Vector2(column, row) * step
 		button.custom_minimum_size = icon
 		button.size = icon
-		item_art.style_button(button, captured, false)
+		room_art.style_item(button, captured)
 		button.tooltip_text = item_tip(captured)
 		button.pressed.connect(func(): add_item(captured))
 		button.mouse_entered.connect(func(): hover_item(captured))
@@ -355,6 +384,8 @@ func commit_loadout(next: Array) -> void:
 
 func hover_item(id: String) -> void:
 	item_hovered = id
+	if status_line != null:
+		status_line.text = "%s · Atraso %d · %d slot(s)" % [Items.definition(id).name,roundi(Items.delay(id)),Items.slots(id)]
 
 func hover_line() -> Dictionary:
 	if not Items.has_id(item_hovered):
@@ -526,9 +557,12 @@ func accept_settings() -> void:
 	var label: String = str(actions.set_weather.call(saved_weather))
 	actions.select_difficulty.call(saved_difficulty)
 	weather_caption.text = label
+	refresh_climate()
 	cpu_detail.text = "Dificuldade: " + DIFFICULTIES[saved_difficulty]
 	var shown := nickname_input.text.strip_edges()
 	player_name.text = shown if not shown.is_empty() else "Piloto"
+	owner_label.text = player_name.text + " · " + Ranks.title(owner_rank)
+	owner_label.tooltip_text = player_name.text + " · " + Ranks.description(owner_rank)
 	close_popup()
 
 func pick_vehicle(id: int) -> void:
@@ -564,6 +598,13 @@ func show_vehicle(id: int) -> void:
 	player_vehicle_id = id
 	var data: Dictionary = Mobiles.definition(id)
 	portrait_name.text = str(data.name)
+	var native_card := RoomArt.PORTRAITS.has(id)
+	portrait.visible = native_card
+	portrait_name.visible = not native_card
+	vehicle_info.visible = not native_card
+	if native_card:
+		portrait.texture = room_art.frame("room_portraits",int(RoomArt.PORTRAITS[id]))
+	portrait.tooltip_text = "%s · %d de vida · %d de movimento\n%s" % [data.name,data.hp,int(data.move),data.summary]
 	player_mobile.text = str(data.name)
 	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), str(data.summary)]
 	refresh_choice()
@@ -577,6 +618,8 @@ func refresh_choice() -> void:
 	var picking_cpu := mobile_for == "cpu"
 	if choice_label != null:
 		choice_label.text = "Escolhendo: máquina" if picking_cpu else "Escolhendo: piloto"
+	if status_line != null:
+		status_line.text = "Selecionando %s · %s" % ["máquina" if picking_cpu else "piloto",Mobiles.definition(cpu_vehicle_id if picking_cpu else player_vehicle_id).name]
 	mark_grid(cpu_vehicle_id if picking_cpu else player_vehicle_id)
 
 func _clear_item_button(button: TextureButton, index: int) -> void:
@@ -610,7 +653,7 @@ func show_loadout(next: Array) -> void:
 		var head: TextureButton = item_slot_buttons[unit]
 		head.set_meta("item_id", id)
 		head.set_meta("item_index", index)
-		item_art.style_button(head, id, false)
+		room_art.style_item(head, id)
 		head.position = cover.position
 		head.custom_minimum_size = cover.size
 		head.size = cover.size
@@ -635,3 +678,35 @@ func highlight(buttons: Array[Button], chosen: int) -> void:
 
 func selected_box(selected: bool) -> StyleBoxFlat:
 	return ui.box(Color("32666b") if selected else Color("24444e"), 9, ui.TEAL if selected else Color("47626a"))
+
+
+func texture_rect(parent: Node, key: String, texture: Texture2D, at: Vector2, bounds: Vector2) -> TextureRect:
+	var node := TextureRect.new()
+	node.name = key
+	node.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	node.stretch_mode = TextureRect.STRETCH_SCALE
+	node.texture = texture
+	node.position = at
+	node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	parent.add_child(node)
+	node.size = bounds
+	return node
+
+func build_header(stage: Control, info: Dictionary) -> void:
+	owner_rank = Ranks.normalize(info.get("rank",Ranks.GM))
+	var title := caption(stage,"Treino offline",Vector2(86,12),Vector2(184,17),11)
+	title.name = "RoomTitle"
+	var capacity := caption(stage,"1 × 1",Vector2(302,12),Vector2(52,17),11,Color("ffe08a"),true)
+	capacity.name = "RoomCapacity"
+	var owner := caption(stage,str(info.nickname)+" · "+Ranks.title(owner_rank),Vector2(599,12),Vector2(155,17),11)
+	owner.name = "RoomOwner"
+	owner.mouse_filter = Control.MOUSE_FILTER_PASS
+	owner_label = owner
+	owner.tooltip_text = str(info.nickname)+" · "+Ranks.description(owner_rank)
+	texture_rect(stage,"RoomRankIcon",Ranks.icon(owner_rank,true),Vector2(568,12),Vector2(25,15))
+
+func refresh_climate() -> void:
+	var weights: Array = MatchRules.ALL_WEATHER if saved_weather=="all" else Maps.get_map(Maps.DEFAULT).weather
+	for index in climate_weights.size():
+		climate_weights[index].text = str(weights[index])
+		climate_weights[index].tooltip_text = "%s: peso %d\nEspelho: %d · Aleatório: %d" % [Weather.TYPES[index],weights[index],weights[8],weights[9]]

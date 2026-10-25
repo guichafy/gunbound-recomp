@@ -1,5 +1,12 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Sala clássica e acabamento4× — REQ-02/12/19/20/36
+
+Pedido25/10/2026 autoriza corrigir composição com mapas/retratos/itens
+originais e BICUBIC4× conservador. Preservar grade8×2,16mobiles, estados
+e hitboxes, perfil/combate/versão. Contrato/plano: ROOM_UI_FIDELITY.md.
+
+
 ## Acabamento restante do lobby — REQ-02/12/19/20
 
 Pedido25/10/2026 autoriza BICUBIC4× no fundo/molduras e insígnias nativas,

@@ -1,5 +1,13 @@
 # Design implementado
 
+## Sala: composição e texturas4×
+
+ClassicRoomArt valida catálogo/fonte/grade/dimensões e seleciona texturaHD
+ou fallback nativo. Mapa/retrato usam janelas originais; itens da sala usam
+fontes clássicas separadas da arte de batalha. Cabeçalho e clima refletem
+perfil/configuração locais. Contrato: ROOM_UI_FIDELITY.md.
+
+
 ## Texturas do lobby4×
 
 Imagens estáticas e insígnias usam derivados conservadores registrados em

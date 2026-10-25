@@ -1068,3 +1068,22 @@ combate ou versão. PCKincluiJSON/PNGs; não há novo aplicativo exportado.
 GPU1920×1080 confirma mesmas áreas de clique e salaRGBAidêntica. PCK223/0/exit0,
 sem override/TLSlocal. Evidência/limites: LOBBY_ART_HD.md e docs/lobby-art-hd.
 Commit local solicitado, sem envio ao remoto.
+
+
+## ADR-104 — sala com composição clássica e acabamento4×
+
+25/10/2026,REQ-02/12/19/20/36. Aplicar o mesmo acabamento conservador ao fundo,
+mapas/retratos e11botões de itens da sala.14PNGs/84células, alpha nearest;
+originais e botões previamente aprovados preservados. Ghidra/ASM confirma
+mapa332,51 e retrato378,390. Dragon/Knight não usam os placeholdersRandom.
+
+CabeçalhoGM, pesos de clima e faixa de avisos refletem os dados locais.
+Texto contido e atributos acessíveis por hover. Grade8×2,16mobiles, estados,
+slots/hitboxes e modalidadeoffline1×1 permanecem. Itens usam fontes clássicas
+OpenBound apenas na sala; apresentaçãoHD da batalha não muda. Sem novas regras,
+perfil, versão ou rede. Não representa porte integral do multiplayer original.
+
+1256checks Godot/0,21Python, revisão172/0 e auditoria95/0 após correçãoP2
+(tooltips). GPU1920×1080 confirma mesmos retângulos; PCK183/0/exit0 semoverride.
+Evidência/limites em ROOM_UI_FIDELITY.md. Versionamento local solicitado,
+sem publicação nem novo aplicativo exportado.

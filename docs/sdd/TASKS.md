@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Sala clássica e acabamento4× — 25/10/2026
+
+- [x] Confirmar base anterior versionadad8b50c7 e árvorelimpa.
+- [x] Conferir recursos/posições viaGhidra/ASM e extrair39quadros nativos.
+- [x] Gerar14PNGs/84células conservadores, catálogo/fallback e fonte preservada.
+- [x] Completar mapa/retratos, cabeçalhoGM, clima, avisos e textos/tooltip.
+- [x] Preservar grade8×2/16mobiles,estados,6slots,hitboxes e arte de batalha.
+- [x] Validar1256checks Godot,21Python, revisão172/0+auditoria95/0,
+  GPU1920×1080 ePCK183/0/exit0; documentar/versionar localmente.
+- [ ] Aceite visual do usuário; appnovo somente quando solicitado.
+
+
 ## Lobby com acabamento4× — 25/10/2026
 
 - [x] Versionar correção chat/GM:5732568,735checks/0 repetidos antes do commit.

@@ -4,6 +4,8 @@ extends RefCounted
 
 const LobbyArt = preload("res://scripts/classic_lobby_art.gd")
 var lobby_art = LobbyArt.new()
+const RoomArt = preload("res://scripts/classic_room_art.gd")
+var room_art = RoomArt.new()
 
 const ROOT := "res://assets/classic/"
 const HD_ROOT := "res://assets/hd/classic/buttons_smooth_4x/"
@@ -41,6 +43,8 @@ static func mount(parent: Node) -> Control:
 	return stage
 
 func image(key: String) -> Texture2D:
+	if key == "room_back":
+		return room_art.image(key)
 	var info: Dictionary = manifest.get("images", {}).get(key, {})
 	var hd: Texture2D = lobby_art.texture(key, info) if key.begins_with("lobby_") else null
 	return hd if hd != null else _load_sheet(str(info.get("file", "")))

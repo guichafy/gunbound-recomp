@@ -1,5 +1,22 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Sala clássica e acabamento4× — ADR-104
+
+Trabalho anterior já versionado emd8b50c7. Sala usa mapa/retratos nativos,
+fundo e11folhas de itens em BICUBIC4× (14PNGs/84células,alpha nearest).
+Ghidra confirma janelas332,51/378,390. CabeçalhoGM, pesos de clima, avisos e
+contenção dos textos implementados. Dragon/Knight ficam textuais, pois a
+fonte éRandom. Grade8×2,16mobiles,estados/hitboxes e6slots preservados.
+ItemArt de batalha e perfil/combate/versão intactos. Fallback nativo validado.
+
+1256checks Godot/0,21Python, revisão final172/0 e auditoria95/0. GPU real
+1920×1080 normal/stress, mesma geometria; galeria16retratos. PCK183/0/exit0,
+semoverride/TLSlocal. Fonte/PNG/catálogos incluídos, commitlocal autorizado.
+Limites ambientais e escopo adaptado em ROOM_UI_FIDELITY.md; capturas/hashes
+emdocs/room-ui. Sem push/appnovo; app previamente exportado continua anterior.
+Aceite visual/escuta/mouse físico permanecem separados.
+
+
 ## Lobby com acabamento4× completo — ADR-103
 
 Correção chat/GM versionada em5732568. Fundo, molduras chat/canal,

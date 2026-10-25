@@ -53,7 +53,7 @@ func test_atlases() -> void:
 	live_exit.convert(Image.FORMAT_RGBA8)
 	check(live_exit.get_data() == approved.get_data(), "Live EXIT exactly matches the user-approved bicubic preview")
 	check(chrome.image("lobby_back").resource_path == "res://assets/hd/classic/lobby_smooth_4x/lobby/back.png", "The lobby background uses independent conservative HD")
-	check(chrome.image("room_back").get_size() == Vector2(800, 600), "The room background retains its own size")
+	check(chrome.image("room_back").get_size() == Vector2(3200, 2400), "Room background has true4x density")
 	var stage := Chrome.mount(root)
 	var button: TextureButton = chrome.button(stage, "b_gamelist_create", Vector2(532, 551))
 	check(button.position == Vector2(532, 551) and button.size == Vector2(107, 45), "CREATE keeps its position and click rectangle")
