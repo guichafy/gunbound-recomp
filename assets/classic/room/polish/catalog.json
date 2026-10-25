@@ -1,0 +1,269 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "assets": {
+    "catalog_blood": {
+      "file": "room/polish/catalog_blood.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_blood": {
+      "file": "room/polish/equipped_blood.png",
+      "size": [
+        70,
+        31
+      ],
+      "frame_size": [
+        35,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_bunge_shot": {
+      "file": "room/polish/catalog_bunge_shot.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_bunge_shot": {
+      "file": "room/polish/equipped_bunge_shot.png",
+      "size": [
+        70,
+        31
+      ],
+      "frame_size": [
+        35,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_power_up": {
+      "file": "room/polish/catalog_power_up.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_power_up": {
+      "file": "room/polish/equipped_power_up.png",
+      "size": [
+        70,
+        31
+      ],
+      "frame_size": [
+        35,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_energy_up_1": {
+      "file": "room/polish/catalog_energy_up_1.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_energy_up_1": {
+      "file": "room/polish/equipped_energy_up_1.png",
+      "size": [
+        70,
+        31
+      ],
+      "frame_size": [
+        35,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_change_wind": {
+      "file": "room/polish/catalog_change_wind.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_change_wind": {
+      "file": "room/polish/equipped_change_wind.png",
+      "size": [
+        70,
+        31
+      ],
+      "frame_size": [
+        35,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_dual": {
+      "file": "room/polish/catalog_dual.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_dual": {
+      "file": "room/polish/equipped_dual.png",
+      "size": [
+        142,
+        31
+      ],
+      "frame_size": [
+        71,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_dual_plus": {
+      "file": "room/polish/catalog_dual_plus.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_dual_plus": {
+      "file": "room/polish/equipped_dual_plus.png",
+      "size": [
+        142,
+        31
+      ],
+      "frame_size": [
+        71,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_thunder": {
+      "file": "room/polish/catalog_thunder.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_thunder": {
+      "file": "room/polish/equipped_thunder.png",
+      "size": [
+        142,
+        31
+      ],
+      "frame_size": [
+        71,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_energy_up_2": {
+      "file": "room/polish/catalog_energy_up_2.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_energy_up_2": {
+      "file": "room/polish/equipped_energy_up_2.png",
+      "size": [
+        142,
+        31
+      ],
+      "frame_size": [
+        71,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_teleport": {
+      "file": "room/polish/catalog_teleport.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_teleport": {
+      "file": "room/polish/equipped_teleport.png",
+      "size": [
+        142,
+        31
+      ],
+      "frame_size": [
+        71,
+        31
+      ],
+      "frames": 2
+    },
+    "catalog_team_teleport": {
+      "file": "room/polish/catalog_team_teleport.png",
+      "size": [
+        128,
+        43
+      ],
+      "frame_size": [
+        64,
+        43
+      ],
+      "frames": 2
+    },
+    "equipped_team_teleport": {
+      "file": "room/polish/equipped_team_teleport.png",
+      "size": [
+        142,
+        31
+      ],
+      "frame_size": [
+        71,
+        31
+      ],
+      "frames": 2
+    }
+  }
+}

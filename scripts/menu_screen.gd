@@ -4,6 +4,8 @@ extends RefCounted
 ## o clique vale para o piloto, e o lugar B passa o próximo clique à CPU.
 ## Os itens ficam nos 6 lugares do painel direito; a troca grava na hora.
 
+const Choice = preload("res://scripts/room_choice.gd")
+const RANDOM_CHOICE := Choice.RANDOM
 const Mobiles = preload("res://scripts/mobiles.gd")
 const Ranks = preload("res://scripts/classic_ranks.gd")
 const Maps = preload("res://scripts/maps.gd")
@@ -27,16 +29,14 @@ const NATIVE_GROUND := 24.0
 # Poço escuro da grade em ready_back, x=28–367 e y=394–530. O PNG do
 # ícone mede 63×47; cada botão fica menor que o passo para não invadir.
 const GRID_PANEL := Rect2(28, 394, 340, 136)
-const GRID_ORIGIN := Vector2(36, 424)
-const GRID_STEP := Vector2(41, 40)
-const GRID_ICON := Vector2(36, 28)
+const GRID_ORIGIN := Vector2(33, 396)
+const GRID_STEP := Vector2(66, 44)
+const GRID_ICON := Vector2(63, 44)
 const GRID := [
 	[4, "b_ready_mobile01"], [1, "b_ready_mobile02"], [3, "b_ready_mobile03"], [5, "b_ready_mobile04"],
 	[2, "b_ready_mobile05"], [6, "b_ready_mobile06"], [7, "b_ready_mobile07"], [8, "b_ready_mobile08"],
 	[9, "b_ready_mobile09"], [10, "b_ready_mobile10"], [11, "b_ready_mobile11"], [12, "b_ready_mobile12"],
-	# b_ready_mobile14 do cliente é o Aduka (depois do Grub). O Dragon não
-	# tem botão nesse XFS; o ícone sai do quadro 0 do atlas tank14.
-	[13, "b_ready_mobile13"], [14, "b_ready_mobile_dragon"], [15, "b_ready_mobile_knight"], [16, "b_ready_mobile14"],
+	[13, "b_ready_mobile13"], [16, "b_ready_mobile14"], [RANDOM_CHOICE, "room_random"],
 ]
 
 var ui
@@ -56,12 +56,18 @@ var grid_keys: Array[String] = []
 var vehicle_info: Label
 var item_art
 var loadout: Array = []
-var item_catalog: Control
+var item_catalog: ScrollContainer
+var item_content: Control
+var item_up: TextureButton
+var item_down: TextureButton
+var player_random_preview: TextureRect
+var cpu_random_preview: TextureRect
+var player_random := false
+var cpu_random := false
 var item_slot_buttons: Array[TextureButton] = []
 var equipped_buttons: Array = []
 var item_grid_buttons: Array = []
 var item_tab_buttons: Array = []
-var item_tab := 0
 var item_hovered := ""
 var player_name: Label
 var player_mobile: Label
@@ -113,7 +119,6 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	build_header(stage,info)
 	figures = preload("res://scripts/room_figures.gd").new()
 	figures.name = "RoomFigures"
-	stage.add_child(figures)
 	build_slots(stage)
 	build_centre(stage, str(info.weather_label))
 	build_grid(stage)
@@ -133,8 +138,9 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	show_loadout(info.get("items", []))
 
 func slot_anchor(rect: Rect2) -> Vector2:
-	# Coordenadas do palco. O contato do sprite fica 24 px abaixo da âncora.
-	var floor_native := Vector2(rect.position.x + rect.size.x * 0.5, rect.position.y + rect.size.y)
+	# A faixa de identificação ocupa a base; contato44px acima do fundo.
+	# O sprite mantém seu registro: contato24px abaixo da âncora.
+	var floor_native := Vector2(rect.position.x + rect.size.x * 0.5, rect.position.y + rect.size.y - 44.0)
 	return floor_native - Vector2(0, NATIVE_GROUND)
 
 func caption(parent: Node, text: String, pos: Vector2, size: Vector2, font_size: int, color: Color = Color("edf5ff"), center: bool = false) -> Label:
@@ -164,16 +170,31 @@ func ghost(parent: Node, rect: Rect2, callback: Callable, tip: String) -> Button
 	return node
 
 func build_slots(stage: Control) -> void:
-	var player_slot := ghost(stage, PLAYER_SLOT, choose_player_side, "A grade passa a escolher o mobile do piloto")
+	for team in ["A","B"]:
+		for index in 4:
+			var x := (39 if team=="A" else 497) + (index%2)*138
+			var bottom := 188 + int(index/2.0)*152
+			var height := 71 if team=="A" else 72
+			texture_rect(stage,"Team%s%d"%[team,index],room_art.image("room_team_a" if team=="A" else "room_team_b"),Vector2(x-1,bottom+1-height),Vector2(127,height))
+	# Team strips include opaque blue above the floor; draw the mobile over them.
+	stage.add_child(figures)
+	var player_slot := ghost(stage, PLAYER_SLOT, choose_player_side, "Escolher mobile do piloto — time A")
 	player_slot.name = "PlayerSlot"
 	room_buttons.append(player_slot)
-	player_name = caption(stage, "", PLAYER_SLOT.position + Vector2(6, 4), Vector2(112, 16), 12)
-	player_mobile = caption(stage, "", PLAYER_SLOT.position + Vector2(6, 20), Vector2(112, 14), 11, Color("ffe08a"))
-	var cpu_slot := ghost(stage, CPU_SLOT, choose_cpu_side, "A grade passa a escolher o mobile da máquina")
+	player_name = caption(stage,"",Vector2(PLAYER_SLOT.position.x+19,172),Vector2(101,14),10,Color("063342"))
+	player_name.add_theme_constant_override("outline_size",0)
+	player_mobile = caption(stage,"",PLAYER_SLOT.position+Vector2(6,4),Vector2(112,14),10,Color("ffe08a"))
+	texture_rect(stage,"PlayerTeamRank",Ranks.icon(owner_rank,false),Vector2(PLAYER_SLOT.position.x+3,164),Vector2(10,17))
+	var cpu_slot := ghost(stage, CPU_SLOT, choose_cpu_side, "Escolher mobile da máquina — time B")
 	cpu_slot.name = "CpuSlot"
 	room_buttons.append(cpu_slot)
-	caption(stage, "CPU", CPU_SLOT.position + Vector2(6, 4), Vector2(112, 16), 12)
-	cpu_mobile = caption(stage, "", CPU_SLOT.position + Vector2(6, 20), Vector2(112, 14), 11, Color("ffe08a"))
+	var cpu_name := caption(stage,"CPU",Vector2(CPU_SLOT.position.x+6,172),Vector2(112,14),10,Color("063342"))
+	cpu_name.add_theme_constant_override("outline_size",0)
+	cpu_mobile = caption(stage,"",CPU_SLOT.position+Vector2(6,4),Vector2(112,14),10,Color("ffe08a"))
+	player_random_preview = texture_rect(stage,"PlayerRandomPreview",room_art.frame("room_random",0),Vector2(69,91),Vector2(63,47))
+	cpu_random_preview = texture_rect(stage,"CpuRandomPreview",room_art.frame("room_random",0),Vector2(527,91),Vector2(63,47))
+	player_random_preview.visible = false
+	cpu_random_preview.visible = false
 
 func build_centre(stage: Control, weather_label: String) -> void:
 	var preview := texture_rect(stage, "RoomMapPreview", room_art.frame("room_maps",1), Vector2(332,51),Vector2(136,84))
@@ -186,13 +207,14 @@ func build_centre(stage: Control, weather_label: String) -> void:
 		counter.mouse_filter = Control.MOUSE_FILTER_PASS
 		climate_weights.append(counter)
 	refresh_climate()
-	var previous: TextureButton = chrome.button(stage, "b_ready_mapprev", Vector2(316, 224))
-	var following: TextureButton = chrome.button(stage, "b_ready_mapnext", Vector2(456, 224))
+	# The source preview/backdrop already draws the sole arrow pair. Transparent
+	# controls sit exactly over them; no duplicate graphics below the preview.
+	var previous := ghost(stage,Rect2(322,94,24,24),func():pass,"O mapa segue Miramo Town A.")
+	var following := ghost(stage,Rect2(454,94,24,24),func():pass,"O mapa segue Miramo Town A.")
+	previous.name = "MapPrevious"
+	following.name = "MapNext"
 	previous.disabled = true
 	following.disabled = true
-	previous.tooltip_text = "O mapa segue Miramo Town A."
-	following.tooltip_text = "O mapa segue Miramo Town A."
-	caption(stage, "Miramo Town A", Vector2(344, 226), Vector2(112, 24), 12, Color("edf5ff"), true)
 	caption(stage, "Solo · 1×1", Vector2(320, 256), Vector2(160, 16), 11, Color("edf5ff"), true)
 	var solo: TextureButton = chrome.button(stage, "b_ready_solo", Vector2(359, 274))
 	solo.texture_hover = solo.texture_normal
@@ -209,20 +231,22 @@ func build_grid(stage: Control) -> void:
 	grid_buttons.clear()
 	grid_keys.clear()
 	choice_label = caption(stage, "Escolhendo: piloto", Vector2(72, 398), Vector2(270, 18), 12, Color("edf5ff"), true)
+	choice_label.visible = false
 	for index in GRID.size():
 		var id := int(GRID[index][0])
 		var key := str(GRID[index][1])
 		var captured := id
-		var column := index % 8
-		var row := int(index / 8.0)
-		var button: TextureButton = chrome.button(stage, key, GRID_ORIGIN + Vector2(column, row) * GRID_STEP)
+		var column := index % 5
+		var row := int(index / 5.0)
+		var at := GRID_ORIGIN + Vector2(column,row)*GRID_STEP
+		var button: TextureButton = reference_button(stage,key,at,GRID_ICON) if id==RANDOM_CHOICE else chrome.button(stage,key,at)
 		button.name = "MobileGrid%d" % id
 		button.ignore_texture_size = true
 		button.clip_contents = true
 		button.custom_minimum_size = GRID_ICON
 		button.size = GRID_ICON
 		button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
-		button.tooltip_text = str(Mobiles.definition(id).name)
+		button.tooltip_text = "Random — sorteia Knight ou Dragon ao iniciar" if id==RANDOM_CHOICE else str(Mobiles.definition(id).name)
 		button.set_meta("vehicle_id", id)
 		button.pressed.connect(func(): pick_vehicle(captured))
 		grid_buttons.append(button)
@@ -242,8 +266,8 @@ func build_portrait(stage: Control) -> void:
 # era ali que o nome "Dual" vazava para fora do lugar.
 const ITEM_SLOT_ORIGIN := Vector2(524, 365)
 const ITEM_SLOT_STEP := 36.0
-const ITEM_SLOT_SIZE := Vector2(33, 29)
-const ITEM_CATALOG := Rect2(522, 402, 216, 128)
+const ITEM_SLOT_SIZE := Vector2(35, 31)
+const ITEM_CATALOG := Rect2(522, 402, 216, 134)
 
 func build_items(stage: Control, _info: Dictionary) -> void:
 	item_slot_buttons.clear()
@@ -265,71 +289,21 @@ func build_items(stage: Control, _info: Dictionary) -> void:
 		stage.add_child(button)
 		button.size = ITEM_SLOT_SIZE
 		item_slot_buttons.append(button)
-	item_catalog = Control.new()
+	item_catalog = ScrollContainer.new()
 	item_catalog.name = "ItemCatalog"
 	item_catalog.position = ITEM_CATALOG.position
 	item_catalog.size = ITEM_CATALOG.size
 	item_catalog.clip_contents = true
-	item_catalog.mouse_filter = Control.MOUSE_FILTER_STOP
+	item_catalog.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	item_catalog.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
 	stage.add_child(item_catalog)
+	item_content = Control.new()
+	item_content.custom_minimum_size = Vector2(216,180)
+	item_catalog.add_child(item_content)
 	item_tab_buttons.clear()
-	for index in 2:
-		var captured_tab := index
-		var label := "2 slots" if index == 0 else "1 slot"
-		item_tab_buttons.append(plain_tab(item_catalog, label, Vector2(4 + index * 108, 4), Vector2(100, 16), func(): select_item_tab(captured_tab)))
-	select_item_tab(0)
-
-func plain_tab(parent: Node, text: String, pos: Vector2, size: Vector2, action: Callable) -> Button:
-	var node := Button.new()
-	node.text = text
-	node.position = pos
-	node.focus_mode = Control.FOCUS_NONE
-	node.clip_text = true
-	node.custom_minimum_size = size
-	node.add_theme_font_override("font", ui.font)
-	node.add_theme_font_size_override("font_size", 10)
-	node.add_theme_color_override("font_color", Color("edf5ff"))
-	node.add_theme_color_override("font_hover_color", Color("edf5ff"))
-	node.add_theme_color_override("font_pressed_color", Color("edf5ff"))
-	node.add_theme_color_override("font_disabled_color", Color("ffe08a"))
-	var box := tab_box()
-	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
-		node.add_theme_stylebox_override(state, box)
-	node.pressed.connect(action)
-	parent.add_child(node)
-	node.size = size
-	return node
-
-func tab_box() -> StyleBoxFlat:
-	var box := StyleBoxFlat.new()
-	box.bg_color = Color("0d3a52")
-	box.set_corner_radius_all(2)
-	box.content_margin_left = 2
-	box.content_margin_right = 2
-	box.content_margin_top = 0
-	box.content_margin_bottom = 0
-	return box
-
-func select_item_tab(index: int) -> void:
-	item_tab = clampi(index, 0, 1)
-	for j in item_tab_buttons.size():
-		item_tab_buttons[j].disabled = j == item_tab
-	for button in item_grid_buttons:
-		if is_instance_valid(button):
-			button.queue_free()
-	item_grid_buttons.clear()
-	var slots := 2 if item_tab == 0 else 1
-	var columns := 3 if slots == 2 else 5
-	var origin := Vector2(6, 24)
-	var step := Vector2(70, 50) if slots == 2 else Vector2(42, 44)
-	var icon := Vector2(64, 32) if slots == 2 else Vector2(36, 36)
-	var shown := 0
-	for id in Items.ORDER:
-		if Items.slots(id) != slots:
-			continue
-		var captured: String = str(id)
-		var column := shown % columns
-		var row := int(shown / float(columns))
+	var order := ["dual","dual_plus","energy_up_2","energy_up_1","blood","change_wind","team_teleport","bunge_shot","power_up","teleport","thunder"]
+	for index in order.size():
+		var id: String = order[index]
 		var button := TextureButton.new()
 		button.focus_mode = Control.FOCUS_NONE
 		button.ignore_texture_size = true
@@ -337,17 +311,53 @@ func select_item_tab(index: int) -> void:
 		button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		button.clip_contents = true
 		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		button.position = origin + Vector2(column, row) * step
-		button.custom_minimum_size = icon
-		button.size = icon
-		room_art.style_item(button, captured)
-		button.tooltip_text = item_tip(captured)
-		button.pressed.connect(func(): add_item(captured))
-		button.mouse_entered.connect(func(): hover_item(captured))
-		item_catalog.add_child(button)
-		button.size = icon
+		button.position = Vector2(4+(index%3)*70,int(index/3.0)*45)
+		button.custom_minimum_size = Vector2(64,43)
+		room_art.style_item(button,id,true)
+		button.set_meta("item_id",id)
+		button.tooltip_text = item_tip(id)
+		button.pressed.connect(func():add_item(id))
+		button.mouse_entered.connect(func():hover_item(id))
+		item_content.add_child(button)
+		button.size = Vector2(64,43)
 		item_grid_buttons.append(button)
-		shown += 1
+		var delay := caption(item_content,str(Items.definition(id).cost),button.position+Vector2(43,33),Vector2(20,9),7,Color.WHITE)
+		delay.name = "ItemCost_"+id
+		delay.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		delay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	item_up = reference_button(stage,"room_item_up",Vector2(750,404),Vector2(17,48))
+	item_down = reference_button(stage,"room_item_down",Vector2(750,487),Vector2(17,48))
+	item_up.name = "ItemScrollUp"
+	item_down.name = "ItemScrollDown"
+	item_up.pressed.connect(func():item_catalog.scroll_vertical -= 45)
+	item_down.pressed.connect(func():item_catalog.scroll_vertical += 45)
+	room_buttons.append(item_up)
+	room_buttons.append(item_down)
+	var bar := item_catalog.get_v_scroll_bar()
+	bar.changed.connect(sync_item_scroll)
+	bar.value_changed.connect(func(_value):sync_item_scroll())
+	call_deferred("sync_item_scroll")
+
+func sync_item_scroll() -> void:
+	if item_up==null or item_down==null:
+		return
+	var bar := item_catalog.get_v_scroll_bar()
+	item_up.disabled = popup_open() or bar.value<=bar.min_value
+	item_down.disabled = popup_open() or bar.value>=bar.max_value-bar.page
+
+func reference_button(stage: Control, key: String, at: Vector2, bounds: Vector2) -> TextureButton:
+	var button := TextureButton.new()
+	button.ignore_texture_size = true
+	button.focus_mode = Control.FOCUS_NONE
+	button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	button.position = at
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	room_art.style_reference(button,key)
+	stage.add_child(button)
+	button.custom_minimum_size = bounds
+	button.size = bounds
+	return button
 
 func item_tip(id: String) -> String:
 	var data: Dictionary = Items.definition(id)
@@ -447,7 +457,7 @@ func catalog_inside_panel() -> bool:
 		return false
 	if not item_catalog.clip_contents:
 		return false
-	var bounds := Rect2(Vector2.ZERO, item_catalog.size)
+	var bounds := Rect2(Vector2.ZERO, item_content.custom_minimum_size)
 	for button in item_tab_buttons:
 		if not rect_inside(bounds, Rect2(button.position, button.size)):
 			return false
@@ -593,8 +603,11 @@ func close_popup() -> void:
 		nickname_input.release_focus()
 	for button in room_buttons:
 		button.disabled = false
+	sync_item_scroll()
 
 func show_vehicle(id: int) -> void:
+	player_random = false
+	player_random_preview.visible = false
 	player_vehicle_id = id
 	var data: Dictionary = Mobiles.definition(id)
 	portrait_name.text = str(data.name)
@@ -610,6 +623,8 @@ func show_vehicle(id: int) -> void:
 	refresh_choice()
 
 func show_cpu(id: int) -> void:
+	cpu_random = false
+	cpu_random_preview.visible = false
 	cpu_vehicle_id = id
 	cpu_mobile.text = str(Mobiles.definition(id).name)
 	refresh_choice()
@@ -619,8 +634,8 @@ func refresh_choice() -> void:
 	if choice_label != null:
 		choice_label.text = "Escolhendo: máquina" if picking_cpu else "Escolhendo: piloto"
 	if status_line != null:
-		status_line.text = "Selecionando %s · %s" % ["máquina" if picking_cpu else "piloto",Mobiles.definition(cpu_vehicle_id if picking_cpu else player_vehicle_id).name]
-	mark_grid(cpu_vehicle_id if picking_cpu else player_vehicle_id)
+		status_line.text = "Selecionando %s · %s" % ["máquina" if picking_cpu else "piloto",("Random" if (cpu_random if picking_cpu else player_random) else Mobiles.definition(cpu_vehicle_id if picking_cpu else player_vehicle_id).name)]
+	mark_grid(RANDOM_CHOICE if (cpu_random if picking_cpu else player_random) else (cpu_vehicle_id if picking_cpu else player_vehicle_id))
 
 func _clear_item_button(button: TextureButton, index: int) -> void:
 	var rect := slot_rect(index)
@@ -670,7 +685,10 @@ func show_loadout(next: Array) -> void:
 func mark_grid(id: int) -> void:
 	for index in grid_buttons.size():
 		var chosen := int(GRID[index][0]) == id
-		chrome.paint(grid_buttons[index], grid_keys[index], 4 if chosen else 0)
+		if int(GRID[index][0])==RANDOM_CHOICE:
+			room_art.style_reference(grid_buttons[index],grid_keys[index],4 if chosen else 0)
+		else:
+			chrome.paint(grid_buttons[index], grid_keys[index], 4 if chosen else 0)
 
 func highlight(buttons: Array[Button], chosen: int) -> void:
 	for j in range(buttons.size()):
@@ -710,3 +728,20 @@ func refresh_climate() -> void:
 	for index in climate_weights.size():
 		climate_weights[index].text = str(weights[index])
 		climate_weights[index].tooltip_text = "%s: peso %d\nEspelho: %d · Aleatório: %d" % [Weather.TYPES[index],weights[index],weights[8],weights[9]]
+
+
+func show_random(side: String) -> void:
+	if side=="cpu":
+		cpu_random = true
+		cpu_random_preview.visible = false
+		cpu_mobile.text = "Random"
+	else:
+		player_random = true
+		player_random_preview.visible = false
+		player_mobile.text = "Random"
+		portrait.visible = true
+		portrait.texture = room_art.frame("room_portraits",0)
+		portrait.tooltip_text = "Random — Knight ou Dragon, sorteado ao iniciar"
+		portrait_name.visible = false
+		vehicle_info.visible = false
+	refresh_choice()

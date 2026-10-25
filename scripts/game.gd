@@ -58,6 +58,11 @@ var lobby = null
 var menu = null
 # A loja volta para a tela que a abriu (lobby ou sala).
 var shop_return := "lobby"
+const RoomChoice = preload("res://scripts/room_choice.gd")
+var room_random_sprite = preload("res://scripts/room_random_sprite.gd").new()
+var player_random := false
+var cpu_random := false
+var room_rng := RandomNumberGenerator.new()
 var vehicle := 2
 # -1 follows Mobiles.opponent. A room pick stores that mobile until changed.
 var cpu_vehicle := -1
@@ -101,6 +106,7 @@ static func build_sprites() -> Dictionary:
 	return result
 
 func _ready() -> void:
+	room_rng.randomize()
 	# HUD HD sprites (3×) are drawn smaller than their pixels; mipmaps keep 1 px borders.
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	background = load("res://assets/art/background.png")
@@ -186,7 +192,11 @@ func show_menu() -> void:
 		"set_weather": set_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop,
 		"show_help": show_help, "leave": show_lobby, "commit_items": commit_items})
 	menu.figures.paint = draw_room_figures
-	select_vehicle(vehicle)
+	menu.show_vehicle(vehicle)
+	if player_random:
+		menu.show_random("player")
+	if cpu_random:
+		menu.show_random("cpu")
 	menu.figures.queue_redraw()
 	queue_redraw()
 
@@ -241,15 +251,29 @@ func resolved_cpu_id() -> int:
 	return cpu_vehicle if cpu_vehicle >= 0 else Mobiles.opponent(vehicle)
 
 func select_vehicle(index: int) -> void:
+	if index==RoomChoice.RANDOM:
+		player_random = true
+		if menu != null:
+			menu.show_random("player")
+		queue_redraw()
+		return
+	player_random = false
 	index = Match.normalize_vehicle(index)
 	vehicle = index
 	if menu != null and is_instance_valid(menu.vehicle_info):
 		menu.show_vehicle(index)
-		if cpu_vehicle < 0:
+		if cpu_vehicle < 0 and not cpu_random:
 			menu.show_cpu(Mobiles.opponent(vehicle))
 	queue_redraw()
 
 func select_cpu_vehicle(index: int) -> void:
+	if index==RoomChoice.RANDOM:
+		cpu_random = true
+		if menu != null:
+			menu.show_random("cpu")
+		queue_redraw()
+		return
+	cpu_random = false
 	cpu_vehicle = Match.normalize_vehicle(index)
 	if menu != null and is_instance_valid(menu.cpu_mobile):
 		menu.show_cpu(cpu_vehicle)
@@ -259,6 +283,10 @@ func start_match() -> void:
 	if screen == "menu" and menu != null and is_instance_valid(menu.nickname_input):
 		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
 		profile.save_profile()
+	if player_random:
+		vehicle = RoomChoice.roll(room_rng)
+	if cpu_random:
+		cpu_vehicle = RoomChoice.roll(room_rng)
 	screen = "match"
 	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle)
 	item_art.clear()
@@ -679,10 +707,8 @@ func _draw_classic_front() -> void:
 func draw_room_figures(canvas: Node2D) -> void:
 	if menu == null:
 		return
-	var bob := roundf(sin(elapsed * 1.6) * 2.0)
-	draw_figure(canvas, vehicle, menu.player_anchor + Vector2(0, bob), 1, profile.equipped_set())
-	var cpu_bob := roundf(sin(elapsed * 1.6 + 1.4) * 2.0)
-	draw_figure(canvas, resolved_cpu_id(), menu.cpu_anchor + Vector2(0, cpu_bob), -1, {})
+	draw_figure(canvas, RoomChoice.RANDOM if player_random else vehicle, menu.player_anchor, 1, profile.equipped_set())
+	draw_figure(canvas, RoomChoice.RANDOM if cpu_random else resolved_cpu_id(), menu.cpu_anchor, -1, {})
 
 func _draw() -> void:
 	if screen == "shop":
@@ -916,7 +942,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		rig.position = clamp_camera(rig.position - event.relative * options.scroll_factor())
 
 func draw_figure(canvas: Node2D, kind: int, pos: Vector2, facing: int, equipment: Dictionary) -> void:
-	var body = sprite_for(kind)
+	var body = room_random_sprite if kind==RoomChoice.RANDOM else sprite_for(kind)
 	if body == null:
 		return
 	var context := {}

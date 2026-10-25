@@ -1,5 +1,18 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Correções de catálogo, apoio e mapa da sala — REQ-02/12/19/20/36
+
+Ver `ROOM_POLISH.md`: catálogo nativo uniforme, equipamento de1/2slots,
+setas encaixadas, mobiles apoiados e somente título/setas laterais nativos.
+Sem novos mapas ou alterações de combate/perfil.
+
+## Sala conforme foto — REQ-02/12/19/20/36
+
+Pedido posterior substitui grade8×2 por5×3 e abas por catálogo único.
+Quatorze escolhas comuns+Random, que sorteia sóDragon/Knight noStart.
+Oito lugares identificadosA/B por arte nativa. VerROOM_REFERENCE_LAYOUT.md.
+
+
 ## Sala clássica e acabamento4× — REQ-02/12/19/20/36
 
 Pedido25/10/2026 autoriza corrigir composição com mapas/retratos/itens

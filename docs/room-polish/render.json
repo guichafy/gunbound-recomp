@@ -1,0 +1,70 @@
+[
+	{
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "room-grid",
+		"size": [
+			1920,
+			1080
+		],
+		"state_textures": 85
+	},
+	{
+		"idle_animation_active": true,
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "stationary",
+		"size": [
+			1920,
+			1080
+		]
+	},
+	{
+		"anchors_fixed": true,
+		"avatar_variants": 20,
+		"body_variants": 20,
+		"held_time_identical": true,
+		"idle_animation_active": true,
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "idle-temporal",
+		"size": [
+			1920,
+			1080
+		]
+	},
+	{
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "room-random",
+		"size": [
+			1920,
+			1080
+		],
+		"state_textures": 85
+	},
+	{
+		"avatar_equipped": true,
+		"cpu_pixels_unchanged": true,
+		"idle_animation_active": true,
+		"images_differ": true,
+		"player_pixels_changed": true,
+		"rng_unchanged": true,
+		"same_layout_hitboxes": true,
+		"screen": "random-avatar",
+		"size": [
+			1920,
+			1080
+		]
+	},
+	{
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "room-items-bottom",
+		"size": [
+			1920,
+			1080
+		],
+		"state_textures": 85
+	}
+]

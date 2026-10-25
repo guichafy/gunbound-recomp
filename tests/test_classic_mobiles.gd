@@ -160,8 +160,11 @@ func run() -> void:
 		placed.append(rect)
 		by_id[vehicle_id] = button
 		check(view.menu.GRID_PANEL.encloses(rect) and clear, "Grid cell %s does not overlap its neighbor" % button.tooltip_text)
-	check(view.menu.grid_buttons.size() == 16, "The room grid has one button per playable mobile")
+	check(view.menu.grid_buttons.size() == 15, "The room grid shows14common mobiles andRandom")
 	for id in names:
+		if id in [14,15]:
+			check(not by_id.has(id),"Special mobile is reached throughRandom")
+			continue
 		check(by_id.has(id) and by_id[id].tooltip_text == names[id], "Menu lists %s" % names[id])
 	view.menu.choose_player_side()
 	by_id[4].pressed.emit()

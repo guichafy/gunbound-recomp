@@ -1,0 +1,89 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/room/polish/equipped_blood.png",
+    "sha256": "24e2f5f93abc1066b8b5b371a92586a4fe4d9aa606044d08f84a3c9e9042eca2",
+    "size": [
+      70,
+      31
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/room_polish_4x/room/polish/equipped_blood.png",
+    "sha256": "dc819aec757d3e2bf6e48a4eda97d5d572a85b27fe3f179199dc428df285bf60",
+    "size": [
+      280,
+      124
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    2,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    280,
+    124
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 16206,
+      "max_rgba_delta": 146,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 10.39447,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        35,
+        31
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        35,
+        31
+      ]
+    },
+    {
+      "column": 1,
+      "row": 0,
+      "rgba_changed_pixels": 16107,
+      "max_rgba_delta": 137,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 9.242089,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        35,
+        31
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        35,
+        31
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

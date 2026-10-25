@@ -1087,3 +1087,41 @@ perfil, versão ou rede. Não representa porte integral do multiplayer original.
 (tooltips). GPU1920×1080 confirma mesmos retângulos; PCK183/0/exit0 semoverride.
 Evidência/limites em ROOM_UI_FIDELITY.md. Versionamento local solicitado,
 sem publicação nem novo aplicativo exportado.
+
+
+## ADR-105 — sala5×3,Random restrito,catálogo único e timesA/B
+
+25/10/2026,REQ-02/12/19/20/36. A foto enviada substitui8×2 e abas de itens
+preservados pelaADR104. Quatorze mobiles comuns+Random,cinco por linha/três
+linhas. Knight/Dragon sem escolha direta; IDs14/15 continuam no modelo.
+Random é sentinelaUI−2 separada dos IDs, resolvida aoStart somente entre14/15,
+com RNGprivado e lados independentes. Preservar seleção ao reabrir sala/loja.
+
+Onze itens em um catálogo rolável3colunas,semabas,com setas nativas;
+equipamento mantém6slots. Oito faixas nativasA/B,nomes na base e mobiles acima.
+Novos11PNGs/15janelas em4× conservador; setas de16/17px processadas por estado,
+sem inventar padding uniforme. Originais/HD anteriores e batalha preservados.
+
+1669checks Godot/0,21Python,revisão455+7+81semfalhas;GPU1920×1080 ePCK53/0.
+Contrato/resultados:ROOM_REFERENCE_LAYOUT.md. Sem novoapp/versão/rede/publicação
+ou commit solicitado nesta etapa. Aceite visual do usuário permanece separado.
+
+## ADR-106 — catálogo nativo, apoio fixo com idle e avatar noRandom
+
+25/10/2026,REQ-02/12/19/20/36. O pedido corrige a apresentação daADR105:
+catálogo uniforme64×43 com ready_itemshop1/2 e indicação nativa de1/2slots;
+equipamento35/71×31 com ready_item1/2. Setas encaixadas nos poços. FaixasA/B
+atrás dos mobiles, contato144, nomes à frente. Remover somente oscilação
+adicionada; sequências idle e avatares continuam com elapsed. O requisito
+posterior do usuário rejeita congelar animação para estabilizar a posição.
+
+Random exibe sprite original OpenBound e avatar equipado via renderer comum,
+com registro/pivô nativos,12quadros e4× conservador/fallback. Nenhum novo ID
+jogável;UI−2/sorteioKnight/Dragon noStart preservados. Mapa tem título único e
+controles apenas nas setas laterais nativas; continuam inativos com um só mapa.
+Sem novos mapas, regras ou mudanças de perfil.
+
+1720checks dirigidos/0 e rodada finalUI/animação1027/0,21Python, GPU24quadros
+com idle/avatares ativos e âncoras fixas;PCK109/0/exit0. Fontes/alpha/arte anterior
+preservados. VerROOM_POLISH.md para evidência, limites e ressalvas ambientais.
+Sem novoapp,versão,commit ou publicação solicitados nesta etapa.

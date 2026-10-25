@@ -1,0 +1,18 @@
+{
+  "image_source": ".tools/source-assets/content/Graphics/Tank/Random/CharacterSpritesheet.png",
+  "image_sha256": "1e744e6906f60252c874e2e1d566a40e617683f1bc51174e1bfb26e3fccf3cc9",
+  "rider_source": "/Users/guichafy/Workspaces/Gunbound/OpenBound/ContentMetadata/Mobile/Random/RiderPivot.json",
+  "rider_sha256": "57b317ae4f885e0ea356ffd48087ab34878931a490fd04c5baf4f2be454f941b",
+  "cell": [
+    28,
+    47
+  ],
+  "pivot": [
+    14,
+    23.5
+  ],
+  "contact": 45,
+  "contact_evidence": "last opaque row of source frame0",
+  "registration_evidence": "OpenBound MobileFlipbook.cs Random and RiderPivot.json",
+  "scope": "room presentation only; no playable Random ID"
+}

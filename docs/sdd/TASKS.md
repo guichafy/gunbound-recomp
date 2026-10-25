@@ -1,5 +1,31 @@
 # Entregas e próximos trabalhos
 
+## Sala: itens, apoio, mapa e Random — ADR-106
+
+- [x] Catálogo nativo uniforme64×43 com indicação1/2slots e custo.
+- [x] Equipamento35/71×31 sobre seis posições; setas encaixadas/rolagem.
+- [x] Mobile sobre faixaA/B no chão144 e abaixo do nome, sem seno adicional.
+- [x] Idle e avatar animados por elapsed; posição não congelada nem oscilante.
+- [x] Random original com avatar real,12quadros4×/fallback e sorteio só noStart.
+- [x] Somente título/setas laterais da prévia; um único mapa disponível.
+- [x] Regressão1720/0 + rodada final1027/0,21Python, GPU24quadros ePCK109/0.
+- [ ] Aceite visual do usuário; escuta/mouse físico separados. Semapp novo.
+
+Evidência e limites: ROOM_POLISH.md e docs/room-polish/render.json.
+
+
+## Sala conforme foto — 25/10/2026
+
+- [x] Grade5×3 com14comuns+Random; esconder escolhas diretas14/15.
+- [x] Random independente para piloto/CPU, sorteado noStart apenas14/15.
+- [x] Catálogo único11itens,rolagem/setas,semabas e6slots preservados.
+- [x] FaixasA/B nativas nos8lugares,nomes na base e mobiles acima.
+- [x] Extrair11PNGs/15janelas conservadoras4×,sem sobrescrever fontes/HD.
+- [x] Validar1669checks Godot,21Python,revisão455+7+81,GPU ePCK53/0.
+- [x] AtualizarSDD/metadata, sem novoapp/versão/commit/publicação solicitados.
+- [ ] Aceite visual do usuário.
+
+
 ## Sala clássica e acabamento4× — 25/10/2026
 
 - [x] Confirmar base anterior versionadad8b50c7 e árvorelimpa.

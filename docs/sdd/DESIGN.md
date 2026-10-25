@@ -1,5 +1,18 @@
 # Design implementado
 
+## Correções de catálogo, apoio e mapa da sala — REQ-02/12/19/20/36
+
+Ver `ROOM_POLISH.md`: catálogo nativo uniforme, equipamento de1/2slots,
+setas encaixadas, mobiles apoiados e somente título/setas laterais nativos.
+Sem novos mapas ou alterações de combate/perfil.
+
+## Sala conforme foto
+
+EscolhaRandom é estado de interface separado dos IDs e do RNG de combate.
+Sorteio restrito14/15 acontece noStart, com piloto/CPU independentes. Grade5×3,
+catálogo único rolável e faixasA/B originais. VerROOM_REFERENCE_LAYOUT.md.
+
+
 ## Sala: composição e texturas4×
 
 ClassicRoomArt valida catálogo/fonte/grade/dimensões e seleciona texturaHD

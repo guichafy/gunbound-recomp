@@ -1,0 +1,89 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/room/polish/equipped_team_teleport.png",
+    "sha256": "e5fee09b8f93c28080df9bccd79634341c21ed28c0b4f37e73b43fb5a119f019",
+    "size": [
+      142,
+      31
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/room_polish_4x/room/polish/equipped_team_teleport.png",
+    "sha256": "57c541995ea352e767e190818ec54bb560c9ec896ed5e8ba51e86aa0c31c8ae8",
+    "size": [
+      568,
+      124
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    2,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    568,
+    124
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 30784,
+      "max_rgba_delta": 133,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 8.660154,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ]
+    },
+    {
+      "column": 1,
+      "row": 0,
+      "rgba_changed_pixels": 30467,
+      "max_rgba_delta": 129,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 8.019082,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        71,
+        31
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

@@ -2,6 +2,7 @@ extends "res://tests/support/suite.gd"
 const Art = preload("res://scripts/classic_room_art.gd")
 const Items = preload("res://scripts/items.gd")
 const HD := "res://assets/hd/classic/room_smooth_4x/"
+const POLISH := "res://assets/hd/classic/room_polish_4x/"
 const PATH := "res://.tools/room-ui/test-profile.json"
 
 func click(point: Vector2) -> void:
@@ -30,7 +31,7 @@ func run() -> void:
 	check(panel.chrome.image("room_back").resource_path == HD + "room/back.png", "Room uses true4x conservative backdrop")
 	for name in ["RoomTitle","RoomCapacity","RoomOwner","RoomMapPreview","RoomPortrait","RoomStatus","RoomRankIcon"]:
 		check(scene.root.find_child(name,true,false) != null,name + " is implemented")
-	check(panel.item_grid_buttons[0].texture_normal.atlas.resource_path.begins_with(HD),"Room item buttons use conservative classic originals")
+	check(panel.item_grid_buttons[0].texture_normal.atlas.resource_path.begins_with(POLISH),"Room item buttons use conservative classic originals")
 	var preview: TextureRect = scene.root.find_child("RoomMapPreview",true,false)
 	check(preview.position == Vector2(332,51) and preview.size == Vector2(136,84),"Map uses proven native window332,51")
 	check(preview.mouse_filter == Control.MOUSE_FILTER_PASS and preview.tooltip_text.contains("Miramo"),"Fixed map remains discoverable by hover")
@@ -76,7 +77,7 @@ func run() -> void:
 	click(button.get_global_rect().get_center())
 	await process_frame
 	check(scene.vehicle == 1 and panel.portrait.texture.region.position.x == 904,"Actual grid click selects Mage and updates native portrait")
-	check(panel.grid_buttons.size()==16 and button.size==Vector2(36,28) and button.position==Vector2(77,424),"Existing8x2 grid and click geometry preserved")
+	check(panel.grid_buttons.size()==15 and button.size==Vector2(63,44) and button.position==Vector2(99,396),"Requested5x3 grid uses correctly aligned hitboxes")
 	check(panel.icons_inside_slots() and panel.catalog_inside_panel(),"Item geometry stays in six slots and catalog")
 	check(scene.item_art.textures["ItemDual.png"].resource_path == "res://assets/hd/items/ItemDual.png","Battle item artwork is preserved")
 	test_resources(panel.room_art)
@@ -93,10 +94,10 @@ func test_resources(art) -> void:
 			var frame: AtlasTexture = art.frame(key,index)
 			check(frame.atlas.resource_path.begins_with(HD) and frame.region == Rect2(Vector2(index*cell.x,0)*4,cell*4),key+" frame%d stays registered"%index)
 	for id in Items.ORDER:
-		var width := 73 if Items.slots(id)==2 else 37
+		var width := 71 if Items.slots(id)==2 else 35
 		for state in 4:
 			var texture: AtlasTexture = art.item_frame(id,state)
-			check(texture.atlas.resource_path.begins_with(HD) and texture.region==Rect2(state*width*4,0,width*4,144),"%s state%d retains slot/state order"%[id,state])
+			check(texture.atlas.resource_path.begins_with(POLISH) and texture.region==Rect2((1 if state==3 else 0)*width*4,0,width*4,124),"%s state%d retains slot/state order"%[id,state])
 	for info in art.art.catalog.assets.values():
 		var imported: Image = load(HD+str(info.file)).get_image()
 		var png := Image.load_from_file(HD+str(info.file))
@@ -115,7 +116,7 @@ func test_resources(art) -> void:
 	check(art.frame("room_portraits",5).region==Rect2(565,0,113,146),"Incomplete portrait atlas falls back")
 	check(art.image("room_back").resource_path.begins_with(HD),"Invalid portrait leaves valid room art active")
 	art.art.catalog = baseline
-	art.item_art.catalog = {}
+	art.polish_art.catalog = {}
 	for id in Items.ORDER:
-		var width := 73 if Items.slots(id)==2 else 37
-		check(art.item_frame(id,3).atlas.resource_path.begins_with("res://assets/openbound/items/") and art.item_frame(id,3).region==Rect2(width*3,0,width,36),"Native item fallback keeps disabled state and span")
+		var width := 71 if Items.slots(id)==2 else 35
+		check(art.item_frame(id,3).atlas.resource_path.begins_with("res://assets/classic/room/polish/") and art.item_frame(id,3).region==Rect2(width,0,width,31),"Native item fallback keeps disabled state and span")

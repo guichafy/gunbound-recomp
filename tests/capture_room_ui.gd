@@ -81,7 +81,7 @@ func run() -> void:
 	view.menu.accept_settings()
 	view.select_vehicle(14)
 	view.select_cpu_vehicle(15)
-	view.menu.select_item_tab(1)
+	view.menu.item_catalog.ensure_control_visible(view.menu.item_grid_buttons.back())
 	report.append(await compare("room-stress"))
 	view.menu.open_settings()
 	await snap("room-settings")

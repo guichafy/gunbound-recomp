@@ -1,5 +1,49 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Versionamento e push solicitados — 25/10/2026
+
+Usuário autorizou versionar todas as correções pendentes da sala e enviar ao
+origin. Preparação na main, incluindo ADR-105/106, assets nativos/4×, Random
+com avatar, idle ativo, catálogo/slots e evidências/testes. Verificação repetida:
+1027checks Godot/0 em10suítes deUI/avatar/animação,21testes Python da skill,
+100hashes do manifest conferidos e git diff --check limpo. Fetch confirmou
+origin/main como ancestral, com3commits locais anteriores ainda não enviados;
+o envio solicitado inclui esses ancestrais. Sem novoapp/ZIP ou versão.
+
+## Sala corrigida, Random com piloto e idle ativo — ADR-106
+
+Catálogo agora usa tiles nativos uniformes64×43 com símbolos1/2slots; barra
+usa35/71×31, seis posições. Setas encaixadas. Mobile tem âncora fixa no chão144,
+faixaA/B atrás e nome à frente; idle/avatares recebem elapsed, sem seno adicional.
+Random usa corpo original OpenBound12quadros, avatar equipado e4×/fallback;
+UI−2 e sorteio14/15 noStart intactos. Nome/mapa duplicados removidos, só setas
+laterais nativas; inativas enquanto MiramoTownA for o único mapa implementado.
+
+23PNGs/56janelas,132checks de arte +Randomfonte/alpha/hash conferidos;
+359arquivos anteriores e11PNGs da etapa anterior intactos. Regressão1720/0,
+rodada finalUI/animação1027/0,21Python. GPU24quadros com animação/âncoras fixas,
+avatarRandom altera só piloto/semRNG. PCK109/0/exit0 semoverride/TLSlocal,
+CA/editor_settings ambientais registrados. VerROOM_POLISH.md e docs/room-polish.
+Sem novoapp/versão/commit/publicação; aceite visual/mouse/escuta separados.
+
+
+## Sala conforme foto — ADR-105
+
+Pedido substitui grade8×2/abas daADR104:14mobiles comuns+Random em5×3.
+Knight/Dragon não têm botões diretos;Random−2 é apenas escolhaUI e sorteia
+14/15 aoStart, com RNGprivado e flags independentes piloto/CPU. Mantém seleção
+na sala/loja. Catálogo único11itens com roda/setas,6slots preservados.
+Oito lugares têm faixasA/B nativas,nomes na base e mobiles acima delas.
+
+11PNGs/15janelas4× novas emroom_reference_4x,alpha nearest; source eHD anteriores
+intactos. Setaspressed17px versusnormal16 são PNGs separados, sem padding.
+1669checks Godot/0,21Python; revisão455+7+81semfalhas. GPU1920×1080 ePCK53/0/exit0,
+semoverride/TLSlocal. Fonte/hash/limites:ROOM_REFERENCE_LAYOUT.md;
+capturas emdocs/room-reference. Sem novoapp/versão/push/commit solicitado.
+Perfil/batalha/recompensas preservados. Aceite visual,escuta/mouse físico
+permanecem separados das verificações automatizadas.
+
+
 ## Sala clássica e acabamento4× — ADR-104
 
 Trabalho anterior já versionado emd8b50c7. Sala usa mapa/retratos nativos,

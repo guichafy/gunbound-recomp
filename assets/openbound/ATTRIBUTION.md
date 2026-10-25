@@ -157,3 +157,13 @@ docs/sdd/ORIGINAL_MAGE_BIGFOOT.md.
 `LaserEffect.xtf` do mesmo graphics.xfs acima. Manifesto em frames.json/ribbons.
 Composição/faixas/onda e poses: docs/sdd/MAGE_BIGFOOT_ANIMATION_PORT.md.
 S1T/S2T e todos os derivados HD anteriores continuam preservados.
+
+## Random na sala
+
+`random/CharacterSpritesheet.png` copiado sem edição do mesmo pacote original
+(`Graphics/Tank/Random/`);12quadros28×47. `random/RiderPivot.json` vem do
+OpenBound `ContentMetadata/Mobile/Random/`, sob os avisos de código acima.
+Pivô14/23.5 de MobileFlipbook.cs, contato na última linha opaca45.
+Usado somente na prévia da sala, com avatar do perfil e piloto padrão daCPU.
+Derivado conservador4× em `assets/hd/classic/room_random_4x`; não é novo
+mobile jogável nem arte gerada. Fonte/hashes: docs/room-polish/random-source.json.

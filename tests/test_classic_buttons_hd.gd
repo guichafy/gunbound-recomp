@@ -108,12 +108,12 @@ func test_screens() -> void:
 	if scene.screen != "menu":
 		scene.free()
 		return
-	check(scene.menu.grid_buttons.size() == 16, "The room retains all 16 clickable mobile choices")
+	check(scene.menu.grid_buttons.size() == 15, "The room offers14common mobiles andRandom")
 	for index in scene.menu.grid_buttons.size():
 		var button: TextureButton = scene.menu.grid_buttons[index]
-		var expected := Vector2(36 + (index % 8) * 41, 424 + int(index / 8.0) * 40)
-		check(button.position == expected and button.size == Vector2(36, 28), "Grid button %d retains its native rectangle" % index)
-		check(button.texture_normal.atlas.resource_path.begins_with(HD), "Grid button %d uses HD states" % index)
+		var expected := Vector2(33 + (index % 5) * 66, 396 + int(index / 5.0) * 44)
+		check(button.position == expected and button.size == Vector2(63, 44), "Grid button %d retains its native rectangle" % index)
+		check(button.texture_normal.atlas.resource_path.begins_with(HD if index<14 else "res://assets/hd/classic/room_reference_4x/"), "Grid button %d uses HD states" % index)
 	click(scene.menu.grid_buttons[1].get_global_rect().get_center())
 	await process_frame
 	check(scene.vehicle == 1 and scene.menu.grid_buttons[1].texture_normal.region.position.x == 1008, "The same grid hitbox selects Mage and retains active state 4")
@@ -122,7 +122,7 @@ func test_screens() -> void:
 	await process_frame
 	click(scene.menu.grid_buttons[13].get_global_rect().get_center())
 	await process_frame
-	check(scene.cpu_vehicle == 14, "CPU selection uses the same slot and Dragon hitboxes")
+	check(scene.cpu_vehicle == 16, "CPU selection uses the same slot and Aduka hitboxes")
 	scene.free()
 	await process_frame
 	for path in [PROFILE, PROFILE.get_basename() + "-options.json"]:
