@@ -1,5 +1,21 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Suavização dos botões aprovada — REQ-02/12/19/20
+
+O usuário aprovou o EXIT BICUBIC e pediu aplicar a abordagem e adotá-la na
+skill. Gerar os42atlas/197estados em4×, suavizando cada quadro isoladamente,
+com alpha preservado e sem padding ou mudanças de geometria/estados/hitboxes.
+Conservar as fontes e os derivados exatos anteriores. Cores interpoladas são
+parte do acabamento aprovado. Plano: `CLASSIC_BUTTONS_SMOOTHING.md`.
+
+## Botões4× integrados — REQ-02/12/19/20
+
+Pedido posterior autoriza usar os atlas4× no lobby e na sala, mantendo o
+tamanho visual, alinhamento, estados e áreas de clique vigentes. Apenas os
+recortes de textura usam densidade4; layout continua em coordenadas nativas.
+Fallback original quando o recurso/catálogo4× estiver inválido ou ausente.
+Plano: `CLASSIC_BUTTONS_HD_INTEGRATION.md`. Sem mudança de regras ou versão.
+
 ## Skill HD: restauração fiel — REQ-12/19/20
 
 A solicitação atual torna a restauração conservadora o padrão da skill
@@ -7,6 +23,16 @@ A solicitação atual torna a restauração conservadora o padrão da skill
 alpha, alvo 4× por dimensão quando suportado. Não reconstruir detalhes
 ambíguos. Ensaiar com `assets/classic` sem substituir arte ativa. Plano e
 critérios em `CLASSIC_HD_RESTORATION_SKILL.md`.
+
+No ensaio posterior do CREATE, o usuário escolheu explicitamente repetição
+de pixels. O contrato exige1712×180, mesmos quatro estados, zero margens
+acrescidas e nenhum pixel RGBA alterado em relação à ampliação inteira4×.
+Entrega separada, sem integração ao jogo.
+
+Pedido seguinte estende a ampliação exata aos demais botões de `assets/classic`:
+preservar cores, estados e alinhamento, sem margens extras. Derivados4× em
+`assets/hd/classic/buttons_4x`, com originais intactos. O conjunto reúne os41
+demais atlas e o CREATE já conferido, sem alterar consumidores do jogo.
 
 ## Correções ASate/JD/Aduka/Raon — REQ-04/05/07/08/09/19/44/45
 

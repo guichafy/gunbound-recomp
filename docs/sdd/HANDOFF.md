@@ -1,5 +1,114 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Versionamento local — 25/10/2026
+
+Por solicitação do usuário, alterações pendentes da sessão anterior reunidas
+para commit local: restauração/suavização dos botões, integração, evidências,
+testes e skills, incluindo a cópia Codex de `gunbound-client-port` (9 arquivos
+idênticos à skill já versionada). Verificação repetida nesta sessão:
+`test_classic_buttons_hd test_scene test_items_scene test_roster test_shop_wide`
+com **778 checks/0 falhas**, **21 testes Python** da skill HD aprovados e
+`git diff --check` sem problemas. Sem push, mudança de versão ou nova exportação;
+os limites de inspeção visual/manual e do aplicativo abaixo permanecem.
+
+## Suavização aprovada aplicada — ADR-101
+
+O usuário aprovou o EXIT bicúbico e autorizou aplicação ao lote e adoção na
+skill. `ClassicChrome` agora usa `assets/hd/classic/buttons_smooth_4x`:
+42atlas/197estados, BICUBIC por quadro e alpha nativo preservado. EXIT
+idêntico à prévia aprovada;180arquivos de fontes/exatos anteriores intactos.
+Geometria, estados, cliques e fallback permanecem. As cores são interpoladas.
+
+Validação atual: **778checks Godot +21testes Python**, sem falhas. GPU real
+1920×1080: layout/hitboxes iguais, mudançasRGBA restritas aos botões. PCK
+isolado92/0/exit0 confirma atlas, JSONs, hash do EXIT e ausência de override/TLS
+local. Revisão independente aprovada; CA/editor_settings ambientais no registro.
+
+Skill instalada sincronizada:14arquivos idênticos, estrutura/links e21testes
+aprovados. Modo exato permanece disponível; verificador não sobrescreve
+imagens/relatórios. Registro: `CLASSIC_BUTTONS_SMOOTHING.md`; capturas em
+`docs/classic-buttons-smoothing`. Sem app novo/versão/publicação; aplicativo
+previamente exportado não foi atualizado. Inspeção visual integral pelo
+usuário e escuta/mouse manual permanecem separados das verificações automáticas.
+
+## EXIT — prévia de suavização conservadora
+
+Pedido atual: avaliar melhoria de nitidez antes de um lote. Duas restaurações
+IA do estado normal alteraram detalhes/margens e foram rejeitadas para
+produção. O usuário aceitou testar suavização algorítmica conservadora.
+
+`docs/exit-restoration-preview/exit-4x-bicubic.png`:1712×180, quatro estados
+processados separadamente com BICUBIC, alinhamento/alpha preservados e sem
+margens novas. As cores são interpoladas; não é repetição exata de pixels.
+Dimensões/grade/alpha aprovados, comparação antes/depois e quatro estados
+conferidos. Fonte e atlas ativo intactos. Registro em
+`CLASSIC_HD_RESTORATION_SKILL.md` e `docs/exit-restoration-preview/reference.json`.
+Aceite visual, eventual integração e lote aguardam decisão do usuário.
+
+## Botões4× integrados no lobby/sala — ADR-100
+
+`ClassicChrome` usa os atlas4× validados, mantendo geometria/estados no
+manifest nativo. Apenas recortes de textura mudam de densidade; mínimos,
+posições, filtro, stretch e hitboxes ficam iguais. Fallback nativo para HD
+ausente/inválido. Os dois JSONs foram incluídos no preset de exportação.
+
+Suítes dirigidas: **735checks/0falhas**, incluindo nova544/0, cliques reais
+da viewport e fallback. GPU final1920×1080: lobby/sala RGBA idênticos ao usar
+texturas nativas ou4× na mesma cena congelada. PCK isolado91/0/exit0 confirma
+42atlas e os dois JSONs, sem override/TLS local. Revisão independente aprovada.
+PNG/JSON em `docs/classic-buttons-integration`; registro e limites em
+`CLASSIC_BUTTONS_HD_INTEGRATION.md`.
+
+GPU restrita abortou em registro gráfico/fontes; captura fora do sandbox
+funcionou. CA/editor_settings ambientais explícitos no registro.95arquivos
+de origem e42PNGsHD intactos por hash. Sem nova versão/app; app já exportado
+não foi atualizado. Aceite visual/escuta/mouse manual pendentes.
+
+## Todos os botões clássicos4× — derivados exatos
+
+Pedido seguinte aplicado aos41atlas restantes de `assets/classic`. Conjunto
+em `assets/hd/classic/buttons_4x`:42PNGs incluindo o CREATE já conferido,
+197estados, catálogo com dimensões/ordem/regiões/hashes e registro original.
+Checker exato aprovado em42/42; comparação independente de8087792pixels RGBA
+sem divergências ou novas cores/margens.95arquivos de origem intactos por
+hash antes/depois. Inspeção de amostras START/canal1/Friends/Dragon.
+
+ZIP42PNGs+catálogo em `docs/classic-hd-restoration/classic-buttons-4x.zip`,
+CRC e hashes conferidos. Relatórios em `reports/buttons-4x` nessa pasta.
+Registro: `CLASSIC_HD_RESTORATION_SKILL.md`. Derivados ainda não conectados
+ao runtime; nenhum build, versão ou código alterado nesta etapa.
+
+## CREATE4× — ampliação exata na skill HD
+
+Pedido posterior e escolha explícita do usuário por repetição de pixels.
+Saída `docs/classic-hd-restoration/output/create-4x.png`:1712×180RGBA opaco,
+quatro estados de428×180, sem margens novas. Checker exato e enumeração
+independente conferem308160pixels, zero divergências e mesmas648cores.
+PNG inspecionado. É ampliação pixelada4×, sem alegar novos detalhes por IA.
+
+Skill ganhou helper de repetição e `--exact-pixels` no checker;15testes
+aprovados no repositório e na instalação sincronizada;11arquivos idênticos,
+estrutura/links válidos e revisão independente aprovada. A nova tentativa
+IA2164×726 também foi rejeitada e preservada.
+Registro: `CLASSIC_HD_RESTORATION_SKILL.md`. Fonte, runtime e build preservados.
+Aceite visual do usuário e eventual integração permanecem separados.
+
+## Skill gunbound-classic-hd — restauração fiel (ADR-099)
+
+Pedido atual atualiza a skill, sem trocar arte ativa. Prompt completo do usuário,
+fonte visual única, preservação de geometria/paleta/alpha/quadros e alvo4×
+substituem o padrão de acabamento2.5D. Rig/efeitos aprovados continuam acessíveis
+no seu escopo. Registro: `CLASSIC_HD_RESTORATION_SKILL.md`.
+
+Três gerações reais com `assets/classic` foram rejeitadas: lobby1448×1086
+(alvo3200×2400, alpha/aparência alterados), CREATE2170×725 (alvo1712×180)
+e Mage2048×768 (alvo1260×188); atlas ganharam padding/aspecto errado.
+Brutos, prompts e JSONs/hash em `docs/classic-hd-restoration`. Nenhum foi aplicado.
+Checker read-only:9testes aprovados; estrutura válida e cinco cenários de
+comportamento revisados independentemente. Sem validação Godot/GPU nova nem build.
+Cópia instalada sincronizada com backup;9testes também aprovados na instalação,
+estrutura/links válidos e arquivos idênticos. Aceite de arte futura continua pendente.
+
 ## Sala — ícone do Dragon
 
 `b_ready_mobile14` do cliente é o Aduka, o mobile que vem depois do Grub.

@@ -1,0 +1,42 @@
+{
+  "pillow_version": "11.3.0",
+  "method": "bicubic_per_frame_preserve_native_alpha",
+  "atlas_count": 42,
+  "states": 197,
+  "original_and_exact_files_preserved": 180,
+  "exit_matches_approved": true,
+  "skill_installed_files": {
+    "SKILL.md": "302ac5600244b02c0782ef880796db423c928922c2dfabafe7a0b125357d52c1",
+    "references/restoration-prompt.txt": "78301ea380f2058147731e18b54f690401e98b6e0e41a5acfed9cd091288c23a",
+    "references/animation.md": "1682dfab32b68cd16ff617d10622e26b1dd110fca22792bf2c806f2d19a450bf",
+    "references/demogame.md": "f9d266db8d2d025539292345fefc3d3ee084aa7efe644e23a7ed902aac2297df",
+    "references/generation.md": "84539c79f6f74909c222415e751825d73e4a1256bfef15c4461f6cebc65a543d",
+    "references/effects.md": "fcfccd2ad3acd2a9cc464ab6f6e3494e45219d06c6b65439dfaf391a149df0ea",
+    "references/conservative.md": "ee993465dc3d47622ac04753ac1abb3c73d05749a50f920ab1d39bc85f4f8884",
+    "tests/test_validate_restoration.py": "5c2e21b40db3290db4d726cf29ae19d28f17d977e706daa513b695a556f328ab",
+    "tests/test_upscale_conservative.py": "11a7faaa7967e7c4b990d07de8e8fdb126ea517f544cbec4f4db5f7bdcd1f8d0",
+    "tests/test_upscale_exact.py": "2b5ede7f064db480a69059d4db8a6cf0d04a988b105fe3ae4fe51dd26a0c5adb",
+    "agents/openai.yaml": "7a38193cd1c485c862a149092b9b81faa67176a82b7b05193fc260d9e309f02b",
+    "scripts/upscale_conservative.py": "3140edd60f25be34c9f6990c653ea661bd301d415d63530248c04ea8972e2953",
+    "scripts/validate_restoration.py": "17045c45e32c39a0135e159c7a092c34511f516660446e7a492c67bba0e08027",
+    "scripts/upscale_exact.py": "951f4ef83983a45ccf01d0a4e69a0b5cd34edf781fef6f8713210c8efc67f027"
+  },
+  "python_tests": 21,
+  "godot_checks": 778,
+  "pck_checks": 92,
+  "pck_isolated_path": "/private/tmp/smooth-buttons-pck-vk3u1j5p",
+  "capture_files": {
+    "room-smooth.png": "2f85adcf11ae2c6dfad67c0edfc606dc268beb550eb3dedb7ea281f9ebaaf37e",
+    "lobby-smooth.png": "ac80b3dbdf43769e8dceb89fbb22d6c8d948c3ef124eecd9103a627baa185ef6",
+    "room-exact.png": "cb1fe4aa7233309cda82ccadaf5ce5c690ddc77eed05ad678ecd660b7e011667",
+    "lobby-exact.png": "2bcd4b1fe9f60b243fddd0263865122caa99067a1678a2abfe97b31cce5a5e82"
+  },
+  "runtime_files": {
+    "scripts/classic_chrome.gd": "12019ab2fa4a38b5a4a8117284d1bdcac438195b40a6e8734a1562ddb6333e81",
+    "export_presets.cfg": "e960d879903f5bac46bf2be05335d411d4636e53c57a424b081cad61fbac2ebb",
+    "tests/test_classic_buttons_hd.gd": "03ea56efebd4ef62783e0d3653a9c9197ecc06011bbb27011309a6e1127c0fc5",
+    "tests/capture_classic_buttons_smooth.gd": "8514af28623777704170ca5ca205394f115b8212d3e01f74a0fbfcfc4132b7a8"
+  },
+  "review": "Independent review approved; report-overwrite issue fixed and reenacted",
+  "exported_app_updated": false
+}

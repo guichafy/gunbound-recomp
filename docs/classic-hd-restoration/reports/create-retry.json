@@ -1,0 +1,47 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/lobby/b_gamelist_create.png",
+    "sha256": "0296b73253e6608d88d23698fbd8b9b8e9c0081ce0169fa65dc5168c3e0bfc10",
+    "size": [
+      428,
+      45
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/docs/classic-hd-restoration/raw/create-retry.png",
+    "sha256": "d7180477a5b761037bc936de7333aaa968ccd7adc76e72cab290d1ffe9670f11",
+    "size": [
+      2164,
+      726
+    ],
+    "mode": "RGB",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    4,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    1712,
+    180
+  ],
+  "failures": [
+    "dimensions",
+    "aspect_ratio"
+  ],
+  "cells": null,
+  "exact_pixels_required": true,
+  "pixel_replication_verified": null,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "rejected"
+}

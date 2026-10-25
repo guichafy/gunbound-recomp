@@ -1,5 +1,84 @@
 # Entregas e próximos trabalhos
 
+## Versionamento local autorizado — 25/10/2026
+
+- [x] Revisar alterações da sessão anterior para commit local, sem envio ao remoto.
+- [x] Reexecutar regressões dirigidas: 778 checks Godot/0 falhas e 21 testes Python aprovados.
+- [x] Conferir whitespace e cópia Codex da skill client-port (9 arquivos idênticos).
+
+## Aplicação bicúbica e skill — REQ-02/12/19/20, ADR-101
+
+- [x] Registrar aprovação do EXIT e autorização para aplicar ao lote.
+- [x] Helper BICUBIC por quadro, alpha preservado, grade/saída validados.
+- [x] Gerar42atlas/197estados em `buttons_smooth_4x`; EXIT coincide com a prévia.
+- [x] Manter180arquivos de fontes/exatos intactos e atualizar consumidor/preset.
+- [x] Preservar layout/hitboxes/estados;778checks Godot e21testes Python aprovados.
+- [x] GPU1920×1080: alterações só nos botões; PCK isolado92/0/exit0.
+- [x] Skill com receita conservadora, modo exato e checker seguro; instalação sincronizada.
+- [x] Revisão independente aprovada; estrutura/links/14arquivos/21testes da instalação conferidos.
+- [ ] Inspeção visual integral pelo usuário e eventual reexportação do aplicativo.
+
+Registro: `CLASSIC_BUTTONS_SMOOTHING.md`; capturas/ZIP em `docs/classic-buttons-smoothing`.
+
+## EXIT — validar suavização antes de lote
+
+- [x] Testar duas prévias IA; registrar desvios e rejeitá-las para produção.
+- [x] Registrar escolha do usuário por suavização algorítmica conservadora.
+- [x] Produzir EXIT BICUBIC1712×180, quatro estados alinhados, alpha preservado e zero padding.
+- [x] Comparação antes/depois com quatro estados e slider conferidos; fontes/atlas ativo intactos.
+- [ ] Aceite visual do usuário antes de qualquer integração ou lote.
+
+Prévia: `docs/exit-restoration-preview/exit-4x-bicubic.png`. Registro:
+`CLASSIC_HD_RESTORATION_SKILL.md`. Pixels/tons interpolados, sem alegar cópia exata.
+
+## Botões4× integrados — REQ-02/12/19/20, ADR-100
+
+- [x] Usar atlas4× em `ClassicChrome`, com validação e fallback nativo.
+- [x] Manter tamanho lógico, layout, estados e hitboxes; recortes de textura×4.
+- [x] Importar42PNGs; incluir JSON nativo eHD no preset de exportação.
+- [x] Teste dirigido antes/depois; suíte nova544/0 e regressões, total735/0.
+- [x] GPU1920×1080: lobby/sala idênticos em todos os bytesRGBA na troca de atlas.
+- [x] PCK isolado91/0/exit0;42atlas/catálogos presentes, override/TLS local ausentes.
+- [x] Revisão independente aprovada e hashes das fontes/PNGsHD preservados.
+- [ ] Aceite visual do usuário, escuta/mouse manual; aplicativo não reexportado.
+
+Registro: `CLASSIC_BUTTONS_HD_INTEGRATION.md`. Capturas em `docs/classic-buttons-integration`.
+
+## Demais botões clássicos4× — REQ-12/19/20, ADR-099
+
+- [x] Inventariar42atlas e conferir contra todos os PNGs de botão `b_*`.
+- [x] Ampliar41atlas restantes e reunir o CREATE já validado em `assets/hd/classic/buttons_4x`.
+- [x] Preservar197estados/ordem/células, cores, alpha e alinhamento, sem margens novas.
+- [x] Checker42/42 e enumeração independente de8087792pixels, zero divergências.
+- [x] Conferir95arquivos de origem por hash antes/depois, todos intactos.
+- [x] Catálogo e relatórios por atlas; ZIP com42PNGs+catálogo, CRC/hashes válidos.
+
+Registro: `CLASSIC_HD_RESTORATION_SKILL.md`. Sem integração ao runtime ou build.
+
+## CREATE4× exato na skill HD — REQ-12/19/20, ADR-099
+
+- [x] Repetir tentativa IA com contrato explícito; rejeitar2164×726 por aspecto/margens/cores.
+- [x] Registrar escolha do usuário por ampliação determinística com pixels exatos.
+- [x] Entregar PNG1712×180, quatro estados, sem margens acrescentadas.
+- [x] Conferir308160pixels e648cores por enumeração independente, zero divergências.
+- [x] Helper e checker `--exact-pixels`, com15testes aprovados.
+- [x] Revisão independente aprovada; cópia instalada sincronizada e15testes aprovados também nela.
+
+Arquivo: `docs/classic-hd-restoration/output/create-4x.png`. Registro em
+`CLASSIC_HD_RESTORATION_SKILL.md`. Aceite visual/integração não presumidos.
+
+## Skill HD: restauração fiel — REQ-12/19/20, ADR-099
+
+- [x] Reproduzir reconstrução/volumes suaves na skill antiga em contexto independente.
+- [x] Adotar prompt integral do usuário, fonte visual única e contrato4×/alpha/estados.
+- [x] Separar restauração de adaptação/rig/efeitos aprovados.
+- [x] Validar três PNGs de `assets/classic`: todos rejeitados; brutos/prompts/hashes preservados.
+- [x] Avaliação comportamental posterior em cinco cenários; checker com9testes aprovados.
+- [x] Sincronizar a skill instalada com backup e conferir9testes/estrutura/links/hashes.
+- [ ] Aceite visual de arte futura e integração: nenhum candidato atual é conforme.
+
+Registro: `CLASSIC_HD_RESTORATION_SKILL.md`. Runtime/build/versão preservados.
+
 ## Lobby clássico e sala — REQ-02, ADR-096
 
 - [x] Extrair `gamelist_back`/`ready_back` e os botões EPA para `assets/classic`.

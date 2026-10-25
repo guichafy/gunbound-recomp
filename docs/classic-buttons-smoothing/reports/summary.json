@@ -1,0 +1,612 @@
+{
+  "atlas_count": 42,
+  "frame_count": 197,
+  "pixels_with_alpha_checked": 8087792,
+  "approved_exit_pixels_identical": true,
+  "new_root": "assets/hd/classic/buttons_smooth_4x",
+  "source_and_exact_files_before": {
+    "assets/classic/manifest.json": "07d90258a9409a51c81f73b08e279b16bcc81027aab884cbf35b5f691ba183c9",
+    "assets/classic/room/b_ready_mobile08.png.import": "c3d666fe08a8384c2457ad8d8a96c66e15807051d532470d65f39679d9e9d0b0",
+    "assets/classic/room/b_ready_mobile14.png.import": "a711ee30fbfe0ffd4d160a8217f942bc326db65c40b6f553e281c0a7e271bcd0",
+    "assets/classic/room/b_ready_mobile_knight.png": "ffd93dc27015d326587b28ce18013f0d801d13543c957c9dcd45bf3374007d4e",
+    "assets/classic/room/b_ready_mobile05.png.import": "62e014918f574cce9f1452dde5536b3f9e982126fd05a96c63a7369d11945e31",
+    "assets/classic/room/b_ready_mobile_aduka.png": "0d31d5a5122951b8286dc971cdb5adab7c4d7b409b7f96d3b0ace79ea1ee281d",
+    "assets/classic/room/b_ready_mobile_dragon.png": "37d2e0966240673982227b811b4514fba2b28f5ca7e550695afb454abed05781",
+    "assets/classic/room/b_ready_solo.png.import": "6672a313082dd60eef39ffb72e1e27bb6ea13c1e0a0ffc25bf5c076fe360e31e",
+    "assets/classic/room/b_ready_changeteam.png.import": "0c0f3d1452bcb5e9feb89dacfc3305f6c0a671f5107156c430785d22f0894064",
+    "assets/classic/room/b_ready_exit.png": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+    "assets/classic/room/b_ready_mobile11.png.import": "0f029490eb938b3083907fd1b7183282ef873249eb9df44f84b50440d3af3462",
+    "assets/classic/room/b_ready_mobile14.png": "830cc977e368763e326f376275453b2fa99b4c06678c8c9d67a8a89171977e93",
+    "assets/classic/room/b_ready_mobile01.png": "12a174459f942aca9787a019f1878864c316a3d4cad88759a4323ca1c8bc6a10",
+    "assets/classic/room/b_ready_mobile03.png": "8e9d7b44123354d34a20b9e9dd148837f02d8edd1fcffe8139d1f8ea5e3ec646",
+    "assets/classic/room/b_ready_mobile_knight.png.import": "58d6ce42ed7c6c435b852a47877dc719dc314c21e7cec5d77f1db1d1e9db12c6",
+    "assets/classic/room/b_ready_mobile07.png.import": "d424ac12bfec59fe31e4883aa8a8910e42b0835f8a36a54ad7362490771af338",
+    "assets/classic/room/b_ready_mobile_aduka.png.import": "5a375d7bb841085a4be7df019d53c5778c0bc6e5deb793bb38e61edee981939c",
+    "assets/classic/room/b_ready_mobile02.png": "6b0286f0b2ac104dc3be2135e6894b6cd448d91dcd56e67715d27d1f01bdb399",
+    "assets/classic/room/b_ready_mobile12.png": "05a12605b6d9f28a3000ce02d6998f0a7749427dfade3f76cf239fbe3313e0b4",
+    "assets/classic/room/b_ready_mobile06.png": "da2c9adc01fd6ca282e261525ed5c46a8c92e215897dc2b477b5d797d5a91d1e",
+    "assets/classic/room/b_ready_mobile02.png.import": "379f2992616e285087ea8b2b2330688add33193a8b7fadcf807c0fdd8be48a41",
+    "assets/classic/room/b_ready_mobile07.png": "59280cf32aee37a5e1a8ee4eca09c1a5336aa0630581d0341684f8e88202f294",
+    "assets/classic/room/b_ready_mobile13.png": "88f2148200e411b897af4921a786babec28e0ae11e2ac6e2036d7bcd35a2f08b",
+    "assets/classic/room/b_ready_mobile05.png": "c490de3a6e85ea7885df56c736dea47c6e760cbf5b0cd2e149c4b28c91da3fb6",
+    "assets/classic/room/b_ready_start.png": "21a5ab09df99d36f5de46d6cc9e73ca566a54198683ef0863dcde15110988c89",
+    "assets/classic/room/b_ready_mobile11.png": "3e535f9210078b23372582f752c9c85161feddafb95c51c358ccf96bf1d5c577",
+    "assets/classic/room/b_ready_mobile13.png.import": "b09cc23f3715753c5f368476caa4f0cf77ce720db3e6a3f4ce240059cfe156f1",
+    "assets/classic/room/b_ready_mobile_dragon.png.import": "7beb85e9f92d91135583c1f58f9254d2c5e4ff815044fcd8586fe41c7b19c74f",
+    "assets/classic/room/b_ready_mapnext.png.import": "c08df8111604971a3639b215b86e213bc489b86d1b3fa03ac4c6504f75d26a63",
+    "assets/classic/room/b_ready_mobile10.png": "eb3b1baca40d8de97690834025ee281c285fbb28aed686c80905594a6627e75e",
+    "assets/classic/room/b_ready_mobile04.png": "6c380fc8f1636b26845a5234f857b78a5eca0f53917b8e961e5fd226f92f78c3",
+    "assets/classic/room/b_ready_mobile09.png": "21907e5b6ed28f32411b467d2f2af3cac6d582c8b71adbf81535b14a6360a223",
+    "assets/classic/room/b_ready_exit.png.import": "d5b748eea96f8c9ca9dc91e890248a95787737bbd774e17811f989a4168def69",
+    "assets/classic/room/b_ready_mobile01.png.import": "61a7e771e35b3e284da9bcab4d4af71ab7337e1ce3cb7e160ccc73e794462fe4",
+    "assets/classic/room/b_ready_mobile08.png": "acb0560eaff545f363dc88a9b46a3c86087ca8aa3cba14a1de4aea69867e71b8",
+    "assets/classic/room/b_ready_mobile10.png.import": "0b3704907eb9f44ff386b8832e068ba180c0a7b8ffeb7b319a1d3a3c5d9fbc1c",
+    "assets/classic/room/b_ready_mobile09.png.import": "ee7c69e4a1cdf9c56bbd53f17e0eec5fd631824d8a316ea13fea16d6238ac9cf",
+    "assets/classic/room/back.png.import": "b1a30e36aada04faa968448df891973e10810cc3eceba7aed8a64b20ae673ddb",
+    "assets/classic/room/b_ready_solo.png": "1f321bcdbd28fd610fed96649847aad034bc089bec9a0cb91aa587dd8dd7e5a9",
+    "assets/classic/room/b_ready_mobile04.png.import": "2e61c58459c59d76b09a8ebe9534927759e9ee06f49c5420a30c0ce3f6e0d934",
+    "assets/classic/room/b_ready_start.png.import": "2ed564ac9b47c52ed7c61ad3b279aecb33fafab3f24d76c460a379eb9bd9f1cf",
+    "assets/classic/room/b_ready_mobile03.png.import": "2103b6df528347a02283f7df7edabe73f4157e87dff61be715d6a096423a8255",
+    "assets/classic/room/b_ready_mobile12.png.import": "f8e83e2d484ce8b31de05614407d3d7ea8f558add713c4757e93bafe158e9bdd",
+    "assets/classic/room/b_ready_mapprev.png": "90ae344d2b6d59d6648339443959a577a1e6e45a816047b51eb7e9b08efcff5b",
+    "assets/classic/room/b_ready_mapnext.png": "e4535e26dfa8ec99ecbf8643ae78ac54863040a0e62b2c3bcaacd90cfa863d8f",
+    "assets/classic/room/back.png": "b0eb29b20c615f7abc80b7c313d010dc80ad4240eabae179d328a756d3c7f99a",
+    "assets/classic/room/b_ready_changeteam.png": "a069ad8a914e8809d8339cf73a2ba8323e3f7ad532c444033af9759fd26480f2",
+    "assets/classic/room/b_ready_mobile06.png.import": "41696f4f64b228d153bee2b2d844a2d7c30b6dace0380cdd3479789dcd8cf0e0",
+    "assets/classic/room/b_ready_mapprev.png.import": "9c25877d0fc0c07726dab2adda4d282fd6b2a1896355a172698f94f46aa0a351",
+    "assets/classic/lobby/b_gamechat_ch1.png": "96e6378a6c0d6a453de48a7e3cf6d06626109acfe92ac72d3467fe167829703c",
+    "assets/classic/lobby/b_gamechat_ch7.png.import": "5e75b799bd835fbca143a69b4834c6791d0c64538475a1d214560a8e2d8f4b0f",
+    "assets/classic/lobby/b_gamelist_exit.png": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+    "assets/classic/lobby/b_gamelist_viewall.png.import": "b44d654ceba8fc24a73236b49ec6f8f449ad307d9487ccb347a4f4674c748981",
+    "assets/classic/lobby/b_gamechat_ch2.png": "535fc6d5b920f8d3b8513c49415e6a0cb38bceb2022d7918f8e0b7fe56b5ac48",
+    "assets/classic/lobby/b_gamelist_directgo.png": "abf178ec2c1dfe3aa6ec016b0c1a0a4fe7dec41456b2aaa14f25211710e3c854",
+    "assets/classic/lobby/b_gamechat_ch3.png": "4e0e8f2494bc530cfba0dd58e534b7a41331e960e4840ec34deafa6e0976574a",
+    "assets/classic/lobby/b_gamechat_ch7.png": "032e6d0de1cdddad38e6c982b7dd9390ff5cbc7a77684656558e6e3d172b452b",
+    "assets/classic/lobby/b_gamechat_ch6.png": "1cc7797e9330d0203deca84fd2051a617cde90ebb98e6232ee7d542fd2935e2e",
+    "assets/classic/lobby/b_gamechat_ch4.png": "20fbcc7e8b929626c837d96b646580b686034096fd9847acdded71e49e14b84c",
+    "assets/classic/lobby/b_gamechat_ch2.png.import": "0f02b5cebd9529bb38ecea68c69a72f3e65d0b467ec28e1255be5e909fd37218",
+    "assets/classic/lobby/b_gamechat_ch5.png": "e32a005d2fb8f352aec40cd36f96d97ffe659f027c7cb25d41c74748f7c83929",
+    "assets/classic/lobby/b_gamelist_prev.png": "d99d183c98131841166f7f4e81362550978fc935a491b35f4b31284fd087501b",
+    "assets/classic/lobby/b_gamelist_friend.png": "bcf4807b4ae4baf6fb715ebd621ef8f1fd5be58801801eaa0fa41043fdcdd693",
+    "assets/classic/lobby/b_gamechat_ch5.png.import": "46e3c92d58b64e333bd876c9b6a52400e1788b0975ff3b02d726439e9d062db5",
+    "assets/classic/lobby/b_gamelist_create.png": "0296b73253e6608d88d23698fbd8b9b8e9c0081ce0169fa65dc5168c3e0bfc10",
+    "assets/classic/lobby/b_gamelist_wait.png": "3319ee6d8cf314fe86219303ba9a1f27cfe4509a2b5e2a951fd43a652f782118",
+    "assets/classic/lobby/b_gamelist_viewall.png": "3a499534569f7e9faac7636cd82021c7161165f15a08303fb8713d6d6e48f449",
+    "assets/classic/lobby/b_gamechat_ch8.png.import": "9b667e998601696e7b28637dbaee383b1c26bba5cb578f863d73260b69120002",
+    "assets/classic/lobby/b_gamelist_wait.png.import": "838061951f67e13432993264b51b36d28562c68a2b736f0d321edba4a78f8936",
+    "assets/classic/lobby/b_gamelist_next.png": "6f09f3f3f1e2d50f4afb1075aedccd42023c7d18cb30693d2a0646aa724adbd2",
+    "assets/classic/lobby/b_gamelist_exit.png.import": "2a77f71e6477527d95f58a3adf91b6e9dfe794627087e18b47136802fe3b03ef",
+    "assets/classic/lobby/b_gamelist_prev.png.import": "b4388c8ad3a00879a2c6a7d48b58125d6a01eb7a816730efb1f2caa97d40739f",
+    "assets/classic/lobby/b_gamelist_ranking.png.import": "f93c3c19903d2fd5349ce97547b6e7db2efa1388007181b30b3a6f67d7d8aadb",
+    "assets/classic/lobby/b_gamechat_ch3.png.import": "a6a29c32a7353950ca117331de52cb67a53aba85729368012a077924204b8469",
+    "assets/classic/lobby/b_gamelist_ranking.png": "650c443404a6bffff7505f55ec18df7e02f6b5f16c779e8a7ade778ba638c6c4",
+    "assets/classic/lobby/channel.png": "5c49073b739daffaa890579ad0e013a78944e5d11298f5b2ef164cd2336cb3ad",
+    "assets/classic/lobby/chat.png.import": "956c011ddcce18cf3b242e842c7aa710e470fe61b3f8ea6f71c3a12f1b40676d",
+    "assets/classic/lobby/b_gamechat_ch6.png.import": "898b5cdd74c2e4e2f880b044f0b18f67817c02e6759483f68309ddd506893778",
+    "assets/classic/lobby/back.png.import": "17191dd273d011ec6952d00d1c7a4ba789d70f7bf3b9dc57b870bab853badbe3",
+    "assets/classic/lobby/b_gamelist_join.png": "c9a9b49fac38f5edf5a40d1d63447fe7cb0027c0c695aef0a94c11282a1ab11c",
+    "assets/classic/lobby/b_gamelist_avatar.png": "abb5444ae7e7d92624433623198e0dab61fff8a632742735ef0f2354a57968fb",
+    "assets/classic/lobby/channel.png.import": "3dc40963a66e4149fe27f1fa82f4b7ecb04b18c6a310a0a3de85660d4f7f2dbe",
+    "assets/classic/lobby/b_gamechat_ch8.png": "8d06047812edfa0f2d39f1898c172b2dd66d740197792089e766b517be247b40",
+    "assets/classic/lobby/b_gamechat_ch1.png.import": "319b7a6c65c9286a6976e6ae3a3753a69e9e982b794de0c11482425d1e6c074d",
+    "assets/classic/lobby/b_gamelist_directgo.png.import": "fcd804a8541224b9a5430e0b3ab797e5ee0be0b897d5c3bc05d516df9869b7a6",
+    "assets/classic/lobby/buddy_fill.png": "302b11bc60353b198c3589d7e6d3ed88bb97d79625ba676b872e8acf46ad095f",
+    "assets/classic/lobby/b_gamelist_avatar.png.import": "99740a2a889d79164308d5512ddf493251c51d608d73cd92b6a0792c33e95418",
+    "assets/classic/lobby/chat.png": "77029fba26e8399b13c820c7efd8a66a9113d35bcbba93ee311b6542c515f185",
+    "assets/classic/lobby/buddy_fill.png.import": "795bbe60a69084991c099496ba1c191bcbd237b6991f80e1460064e6003df124",
+    "assets/classic/lobby/b_gamechat_ch4.png.import": "e50a98bc5d81e16bb8ab2a8c2fc8afd819706ce5e43d3304e4e32e401f78771b",
+    "assets/classic/lobby/back.png": "16999e8c6d880e3c48591101468a80c16f8b312db914d65e14bbc7bc6e713d68",
+    "assets/classic/lobby/b_gamelist_friend.png.import": "9e8ff2f95610c368c73e984d82a1a3cf9882c732d797b8a80c4d5264b1d7b839",
+    "assets/classic/lobby/b_gamelist_create.png.import": "20938e2a0f5ec8fa9804e52d0f0adb50f0cbac26c47287b89f66b39f63bbcf72",
+    "assets/classic/lobby/b_gamelist_next.png.import": "c074fff42b5c52d241239d20ce19752ea39c65a61b7bb585f5272d59802d0229",
+    "assets/classic/lobby/b_gamelist_join.png.import": "ed572ae428e4f98b849fad6eeb40947c079e13aaeed30a2ea564c10224be84af",
+    "assets/hd/classic/buttons_4x/catalog.json": "42e89c09a59c8ec547a563aa1198ff928ec20e267b2301bd1c23f792cb903f82",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile08.png.import": "f524a4401467d69befb2f0adaa60dbd4b684d7453b906be652500b4dc12141f5",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile14.png.import": "af9f7ad54f2b22c88cb9adb6f7efa2cea25044f681eb7c905b6f0d4fec1e3333",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile_knight.png": "7e2a4c38dd6eede6b0b8a90286d57e074cd3d4c15af67a1e93ff40d1e9d4ba82",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile05.png.import": "7354c45e4aecec230b49ed58fd7299568cb058698a6473b746cd70ebd067c66e",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile_aduka.png": "d8f936f02de256513aaf44d6f72e8e6ecf711656f0138d83904d4510f9fd5862",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile_dragon.png": "aafe2f065ec500897d2bf5815150b002fc131f380ecf9530bc52feed4e078603",
+    "assets/hd/classic/buttons_4x/room/b_ready_solo.png.import": "bf49c72f9892dfe834ee371246684a86335dbbccf1d2ad6cf54251a3e0997076",
+    "assets/hd/classic/buttons_4x/room/b_ready_changeteam.png.import": "0e8ebf327fbdba6e10977346c3bbad76d050ec3eac2b992c15064596a445c88d",
+    "assets/hd/classic/buttons_4x/room/b_ready_exit.png": "3a6a98dfeeb5c691ba07c2673cc5b51f22b39799816726c4336042652e284b12",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile11.png.import": "eceb2cb27c41cd53dd51e5cdafede8d4b10df73cfd618dbe183b110ecc97483d",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile14.png": "32aa1d6a90bfea21fd7e469e243762943eca559256877f838b73553b178271e4",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile01.png": "3c1d0f156a5c4cccd369cf7b97a31a223e7c63c9170dfa86f0175296d7059b39",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile03.png": "66133778200561dcdd9a12379f3bf769713e893efa81f2bb859e4d6db216ef86",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile_knight.png.import": "fa27d2355d608a529d24e74f0129e67c7f32f3413506192ac2c88c793ebffd6e",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile07.png.import": "e2076a501031087a67510bf3ec82adcdb38d8a113a559af2c47befba1dd5f7a8",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile_aduka.png.import": "376a8d45630a3a3baf64c3184eff1e46d16e23bd2fc715f2f5b89a7696583a18",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile02.png": "6491c007f418385edaf11210652dabf912e41358fdd201c82ca5e84057f24c00",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile12.png": "c7fdbf62459d3534bf18cd19370af03003998ba644404317cffae66048020029",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile06.png": "f5d565b150809f9284c88a9e17274a7efe170d3133c96302d0a5e0f2d96369a3",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile02.png.import": "293c0aeecbbcbe7bada7c5759a78fe986268ad6e186901de04bbfd5f8072a56a",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile07.png": "d5c3821fa17a4abcdb66cb919cc98a5d36eb15f545be5eb1d715dbc19ae34a6d",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile13.png": "d9791f848b1c4fc4194d9c207830142a5de2caf1189bd67ad6d92cb3589c41bd",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile05.png": "bc71a892b74188653910fe347fc09999a276e38326623fc3cb5c27f52060f5ff",
+    "assets/hd/classic/buttons_4x/room/b_ready_start.png": "6840731a84436108132fbbbfde7060190c8c1b31d3d541024b20b77b77656d98",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile11.png": "6d474d6a317b111b43bcd0c16c900595a0c7034028d3229f1091328231fd3233",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile13.png.import": "915ac8c6e94e1a7f8d51d32dedce8f56a81f2792634c643188c30d2d7c3fcf86",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile_dragon.png.import": "b97710d83ddbb0f24a213f12f3e49e37949ef0fe438eb8d7f055e711b2d06915",
+    "assets/hd/classic/buttons_4x/room/b_ready_mapnext.png.import": "8a1f35ad7fd4b93abe40278e497c05c105cb18bea6744ad81e8f5c429c0ea676",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile10.png": "d27520c4209166b8ecd519c40d17b102e47144e9104bc805bfb9c3812968a230",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile04.png": "e9c782d937b47ec09cbab6ba8ee2f99ffb9fe9221c20908066f04a807ee33b7c",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile09.png": "fc99acd109e0885e6b96781e9039c7571c63a95904f5c44b4e3c6dd89f046a2a",
+    "assets/hd/classic/buttons_4x/room/b_ready_exit.png.import": "6f578ea6cb46688f10922889dbec1218f196246e492d944ed2ba582df9273b34",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile01.png.import": "eb1d28dd1a0d60fb4c7767e55b8ae8e8517dace7ed3df5a1c84ce4cd26911a41",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile08.png": "30e3df5196146a320f885d776687a58b63b9b552665af9ff382d389cd15b5482",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile10.png.import": "5890b1aec64b5fc1750b0320b3b7d623b4f5becf8af05eac27ed87c99b96250a",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile09.png.import": "a3e2ef835eb029654bb2ff46cc47380f294eb5269dcace27c6ddc482c05defc0",
+    "assets/hd/classic/buttons_4x/room/b_ready_solo.png": "6be86b2af1ec8175748def58b829d61a87a468a4c3b6fe595474678c624bc875",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile04.png.import": "9ff2feaef8cf4f057070b4e79de2609b76c64c3731b29039f9104ce64b67068b",
+    "assets/hd/classic/buttons_4x/room/b_ready_start.png.import": "913fe0de3c2f396f1b42cfb14f733938ab4a5f97a286b1024c9ea51cae4ecd46",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile03.png.import": "f1459b6d7434247d7276ad896befe3a63fb3418ebc38746643a82713dc967692",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile12.png.import": "59699aa8ae7a1bfceb566a08830e8e12facbe686fb1665585f2aa4c6c2263941",
+    "assets/hd/classic/buttons_4x/room/b_ready_mapprev.png": "cc399e28b900d6515406193e0c70afcb875c6a4f61229b5e094ca81839fb77f0",
+    "assets/hd/classic/buttons_4x/room/b_ready_mapnext.png": "cd871514d62d87dd0e0bb7fb56244b2b1101cd236a6e44b37b7972469e0baa76",
+    "assets/hd/classic/buttons_4x/room/b_ready_changeteam.png": "0ff179ad5cd4da741c8492b450ad4e350e82e59dd0d172235a768ad3cac5e528",
+    "assets/hd/classic/buttons_4x/room/b_ready_mobile06.png.import": "69c958783683ad02adeb25d4395aa89eb97d3a1701256e0ce436a35a4f2af698",
+    "assets/hd/classic/buttons_4x/room/b_ready_mapprev.png.import": "ee50269a04c2148674cdd747a689e59530217e7416283f53172edf3c3028ebe3",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch1.png": "63b336010f56301066df77daa6400f4db595752ef0b0a1180c29b36965a56381",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch7.png.import": "2061657874039a7c7c2b11b9a66e6a5f971627c9d1e689ba91cdeaa9a264360e",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_exit.png": "3a6a98dfeeb5c691ba07c2673cc5b51f22b39799816726c4336042652e284b12",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_viewall.png.import": "477981e5841f441e4f8e6ee6577df32d54bc7d3444b5d781e1c6389ac6fcf218",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch2.png": "487c07865a62ca99166c782ee01b8a68fdd7afff653b1c69fae20d483b454d2d",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_directgo.png": "a9a857ad3665f54134d8d3b012105b24da904f72d45f809c815a527ae789c79d",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch3.png": "fc6cd8d96dc40a242ab8c61058701bdd7c791155c1776d3e15a71770da0c4ac2",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch7.png": "b0858eabca5f1fcb2e0bf8b34230b7007162fd2e34b6476a029732734e1dc8e3",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch6.png": "93f0416601a150d4f788adbb15f37c912272a1828a83a483ea7e3d94ac70cb19",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch4.png": "8442b7b2bfc10887125541799782e86b50d11360c170f713f08c72d85b5b87c4",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch2.png.import": "6e53e6c2fd0423db682098bd61e97b1fe8e1a40a324c4ac49b5a497b7b1fe6c5",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch5.png": "cb750afc12d3c9a4bbd2db0fd9f098ff4d46cc66d3451b1f8dd1ba3a9a833656",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_prev.png": "13e0cad2e2c8362915c789da7b07869c9cf36c55c54250bc466dc652254b2270",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_friend.png": "073de04e1d6d30ce115bbd4b20e67beafce2e3cf5f7b56f4caab99f6c0bfa0a1",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch5.png.import": "67d01f884ce310e6175cf2db46374d0668d1c635f12571e40893f5bec5e2f98a",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_create.png": "8c3d5789044b57f2008b83821a677d04f05c4a9eed3983fb4b94375a97bfda17",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_wait.png": "9951460ab822bf5a4038e48fef41df9ffca57433fb2712abe404f334d0c9d6be",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_viewall.png": "4128c9fd38dc511a82aff972ad225fbf773aed4de41c20e46b61d4411fa719a3",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch8.png.import": "8c3a3ca2c61081dd54acf426c32bf4d6e21b4afda4ed4f6cdf32b79d5003e143",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_wait.png.import": "8d1218a8547b9e3b3c8a4eb5252c2f19446694d22984bbedc542ee63177064b7",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_next.png": "d93e5122bb87d79c47f5ca0fd7c24d174b5689d7021ec89fcc1ef1778a706dc8",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_exit.png.import": "b56d4bdec4ca85fffb737226c59efb276f5a3ba8b155aac9ee46fd54aaa980f1",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_prev.png.import": "cd5480a4f5c2e5a5e538e444acdb07144753f3029f5b0e3e35a6e1937376c74e",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_ranking.png.import": "1980fc8132cd85aa71edcf163eb0209522f0f8e29854356f63ab07d026be98fa",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch3.png.import": "ae7cf23a94a3275634b57cab23338f895dd2dba5c05be1bc32ae88cd60b97dc1",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_ranking.png": "f1a04168547394ba1b4a4ee01958aef3829b39311ec76c6ee6edefff5b40e6c0",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch6.png.import": "467a1ae09787627ed87b8b1bba62afac8d498a3220544e595bcb822faadd4a9c",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_join.png": "831f5bb817fc5eb50d9c0fb5aa09bd500e9dd024411e30e606cac6859887915e",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_avatar.png": "23c837d632b2590ff3ea0e451bd015d76b39f179d2c52fdf1a723bb6587f88cf",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch8.png": "17997786516265b0b5a5eccf7f03463bdaa1204d329921712611d802bf6b6554",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch1.png.import": "44e4fd65147b97ff590e30decb9615f74e95a15315ab2ba08e1869dd6c3f97d0",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_directgo.png.import": "9b4c950f185d660124d33959894e471497950239a06072b1b32033e1f17ca782",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_avatar.png.import": "91a46b3e51dd5711131b0c5ef01333a45aa910a789ed4317bd7ff6c239c31d4d",
+    "assets/hd/classic/buttons_4x/lobby/b_gamechat_ch4.png.import": "24a8ca43cb50ba5cffc7d21e505dc75701960a185f7939bac2122272b3096b9e",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_friend.png.import": "dc86721f0426c4f727d4f500d07a4620d4c0a53991923351ea9dc8186c11b4f7",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_create.png.import": "2f188be98b948088a9fdcfe0ad185a72f849ede34a69f3167de23c5dbaa660a5",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_next.png.import": "6ee41e74325a43aa7226227879dc49fa29fb60e5ec78206855e15237eef78583",
+    "assets/hd/classic/buttons_4x/lobby/b_gamelist_join.png.import": "b7c2166c3f97ab111e01ccce7934e999804f655dd2f4f3bbce57330e3ab54a2b"
+  },
+  "items": [
+    {
+      "key": "b_gamelist_exit",
+      "size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_exit.json"
+    },
+    {
+      "key": "b_gamelist_ranking",
+      "size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_ranking.json"
+    },
+    {
+      "key": "b_gamelist_avatar",
+      "size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_avatar.json"
+    },
+    {
+      "key": "b_gamelist_create",
+      "size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_create.json"
+    },
+    {
+      "key": "b_gamelist_join",
+      "size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_join.json"
+    },
+    {
+      "key": "b_gamelist_viewall",
+      "size": [
+        1620,
+        132
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_viewall.json"
+    },
+    {
+      "key": "b_gamelist_wait",
+      "size": [
+        1620,
+        132
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_wait.json"
+    },
+    {
+      "key": "b_gamelist_friend",
+      "size": [
+        1640,
+        132
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_friend.json"
+    },
+    {
+      "key": "b_gamelist_directgo",
+      "size": [
+        1640,
+        132
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_directgo.json"
+    },
+    {
+      "key": "b_gamelist_prev",
+      "size": [
+        784,
+        132
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_prev.json"
+    },
+    {
+      "key": "b_gamelist_next",
+      "size": [
+        784,
+        132
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamelist_next.json"
+    },
+    {
+      "key": "b_ready_exit",
+      "size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_exit.json"
+    },
+    {
+      "key": "b_ready_changeteam",
+      "size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_changeteam.json"
+    },
+    {
+      "key": "b_ready_start",
+      "size": [
+        1984,
+        152
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_start.json"
+    },
+    {
+      "key": "b_ready_mapprev",
+      "size": [
+        448,
+        112
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mapprev.json"
+    },
+    {
+      "key": "b_ready_mapnext",
+      "size": [
+        448,
+        112
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mapnext.json"
+    },
+    {
+      "key": "b_ready_solo",
+      "size": [
+        1296,
+        96
+      ],
+      "frames": 4,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_solo.json"
+    },
+    {
+      "key": "b_gamechat_ch1",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch1.json"
+    },
+    {
+      "key": "b_gamechat_ch2",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch2.json"
+    },
+    {
+      "key": "b_gamechat_ch3",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch3.json"
+    },
+    {
+      "key": "b_gamechat_ch4",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch4.json"
+    },
+    {
+      "key": "b_gamechat_ch5",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch5.json"
+    },
+    {
+      "key": "b_gamechat_ch6",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch6.json"
+    },
+    {
+      "key": "b_gamechat_ch7",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch7.json"
+    },
+    {
+      "key": "b_gamechat_ch8",
+      "size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch8.json"
+    },
+    {
+      "key": "b_ready_mobile01",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile01.json"
+    },
+    {
+      "key": "b_ready_mobile02",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile02.json"
+    },
+    {
+      "key": "b_ready_mobile03",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile03.json"
+    },
+    {
+      "key": "b_ready_mobile04",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile04.json"
+    },
+    {
+      "key": "b_ready_mobile05",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile05.json"
+    },
+    {
+      "key": "b_ready_mobile06",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile06.json"
+    },
+    {
+      "key": "b_ready_mobile07",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile07.json"
+    },
+    {
+      "key": "b_ready_mobile08",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile08.json"
+    },
+    {
+      "key": "b_ready_mobile09",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile09.json"
+    },
+    {
+      "key": "b_ready_mobile10",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile10.json"
+    },
+    {
+      "key": "b_ready_mobile11",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile11.json"
+    },
+    {
+      "key": "b_ready_mobile12",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile12.json"
+    },
+    {
+      "key": "b_ready_mobile13",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile13.json"
+    },
+    {
+      "key": "b_ready_mobile14",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile14.json"
+    },
+    {
+      "key": "b_ready_mobile_knight",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile_knight.json"
+    },
+    {
+      "key": "b_ready_mobile_aduka",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile_aduka.json"
+    },
+    {
+      "key": "b_ready_mobile_dragon",
+      "size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "alpha_preserved": true,
+      "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile_dragon.json"
+    }
+  ],
+  "preserved_file_count": 180
+}

@@ -1,0 +1,44 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/lobby/back.png",
+    "sha256": "16999e8c6d880e3c48591101468a80c16f8b312db914d65e14bbc7bc6e713d68",
+    "size": [
+      800,
+      600
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/docs/classic-hd-restoration/raw/lobby.png",
+    "sha256": "f72f5d6c49ed8d4f696569d6027ab7098b3ac344b18fa2830379678ec3c9e435",
+    "size": [
+      1448,
+      1086
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      254
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    1,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    3200,
+    2400
+  ],
+  "failures": [
+    "dimensions"
+  ],
+  "cells": null,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "rejected"
+}

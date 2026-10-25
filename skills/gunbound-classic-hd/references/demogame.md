@@ -10,7 +10,10 @@ essa cópia do projeto para princípios de geração/registro/animação.
   `docs/sdd/HANDOFF.md` → SPEC.md → DESIGN.md antes de alterar comportamento.
 - C# OpenBound: `/Users/guichafy/Workspaces/Gunbound`, fonte de mecânicas,
   metadados e arte; não modificar a referência para ajustar um derivado.
-- Originais integrados: `assets/openbound/`; derivados: `assets/hd/`.
+- Originais integrados: `assets/openbound/`, `assets/xfs/` e `assets/classic/`;
+  derivados: `assets/hd/`. `assets/classic/manifest.json` descreve as janelas
+  e a ordem dos estados dos botões de lobby/sala. Use-o como metadado,
+  mantendo cada PNG como sua única referência visual na restauração.
   Preserve originais, `.gd.uid` e `.png.import`. Brutos de geração ficam
   separados do runtime, usualmente em `source/` com `.gdignore`.
 - Estado aprovado: composição e animação0.14.4 confirmadas pelo usuário.
@@ -18,6 +21,13 @@ essa cópia do projeto para princípios de geração/registro/animação.
   offsets de bbox por quadro da ADR-061. Não recuperar o tremor antigo.
 
 ## Código e metadados reutilizáveis
+
+Botões do lobby/sala: acabamento bicúbico aprovado, ativo em
+`assets/hd/classic/buttons_smooth_4x`. `scripts/classic_chrome.gd` converte só
+recortes de textura; hitboxes/layout continuam nativos. Fontes em
+`assets/classic`, derivados exatos anteriores em `buttons_4x`. Regenerar
+a partir da fonte por quadro, nunca reamostrar o HD. Consultar
+`docs/sdd/CLASSIC_BUTTONS_SMOOTHING.md` e ADR-101 para catálogo/validação.
 
 | Tema | Implementação existente |
 |---|---|

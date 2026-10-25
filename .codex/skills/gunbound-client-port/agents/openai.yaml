@@ -1,0 +1,4 @@
+interface:
+  display_name: "GunBound Client → Godot"
+  short_description: "Porte fiel com Ghidra, evidência e animação no Godot"
+  default_prompt: "Use $gunbound-client-port para analisar com Ghidra e portar ou corrigir este comportamento do cliente GunBound no Godot, preservando os mobiles e avatares aprovados."

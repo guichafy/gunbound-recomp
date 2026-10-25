@@ -1,4 +1,4 @@
 interface:
-  display_name: "Gunbound Classic em HD"
-  short_description: "Arte clássica em HD com animação suave"
-  default_prompt: "Use $gunbound-classic-hd para regenerar este asset clássico em alta resolução e animá-lo com peças estáveis, preservando sua identidade."
+  display_name: "Gunbound Classic: ampliação conservadora"
+  short_description: "Suavização4× de imagens e sprites clássicos"
+  default_prompt: "Use $gunbound-classic-hd para ampliar esta imagem clássica em4× com suavização bicúbica por quadro, preservando desenho, alpha, estados e alinhamento."

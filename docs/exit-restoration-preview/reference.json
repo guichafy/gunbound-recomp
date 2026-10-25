@@ -1,0 +1,84 @@
+{
+  "source": "assets/classic/lobby/b_gamelist_exit.png",
+  "source_sha256": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+  "current_exact_4x": "assets/hd/classic/buttons_4x/lobby/b_gamelist_exit.png",
+  "current_exact_4x_sha256": "3a6a98dfeeb5c691ba07c2673cc5b51f22b39799816726c4336042652e284b12",
+  "scope": "Normal state of lobby EXIT only; visual cleanup preview. No runtime/batch changes.",
+  "source_rectangle": [
+    0,
+    0,
+    107,
+    45
+  ],
+  "tool": "image_gen.imagegen integrated edit",
+  "status": "User approved conservative smoothing; applied to42button atlases",
+  "attempts": [
+    {
+      "file": "exit-normal-attempt-1.png",
+      "prompt": "prompt.txt",
+      "size": [
+        1940,
+        811
+      ],
+      "sha256": "aebfe3770ca3bbe99b90f62f53b5e4fbda76ec4b4a3706e14a5d1af45fa80147",
+      "non_black_bbox_threshold_8": [
+        0,
+        0,
+        1940,
+        806
+      ],
+      "production_ready": false,
+      "observation": "Oversized yellow letter fill and modified icon details"
+    },
+    {
+      "file": "exit-normal-attempt-2.png",
+      "prompt": "prompt-attempt-2.txt",
+      "size": [
+        1934,
+        813
+      ],
+      "sha256": "3f1e6064f79602521a2e789fc7cfc61c62ce130961e30dad54c8f13bb1ac104d",
+      "non_black_bbox_threshold_8": [
+        0,
+        109,
+        1934,
+        777
+      ],
+      "production_ready": false,
+      "observation": "Normal button shifted down, added top black band109px; icon/outline details differ"
+    }
+  ],
+  "user_choice": "Sim, testar suavização conservadora (recomendado)",
+  "conservative_preview": {
+    "file": "exit-4x-bicubic.png",
+    "size": [
+      1712,
+      180
+    ],
+    "frame_size": [
+      428,
+      180
+    ],
+    "frames": 4,
+    "order": [
+      "ready",
+      "mouse",
+      "push",
+      "disable"
+    ],
+    "method": "Pillow BICUBIC, each original frame processed independently at4x then placed at its original4x coordinates",
+    "sha256": "391ff038980165650379f7bf73296515900878041817156887ba31bcf70888f2",
+    "alpha_unchanged": true,
+    "added_padding": 0,
+    "colors_interpolated": true,
+    "native_rgb_mae_by_state": [
+      5.341433,
+      4.747387,
+      4.720388,
+      4.931256
+    ],
+    "production_ready": true,
+    "reason": "User approved and applied to assets/hd/classic/buttons_smooth_4x"
+  },
+  "user_visual_approval": "Sim, aplique e melhore a skill para adotar essa abordagem para as próximas sessões"
+}

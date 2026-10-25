@@ -1,0 +1,34 @@
+{
+  "method": "independent coordinate enumeration, no resize function",
+  "output_rgba_pixels_checked": 308160,
+  "changed_pixels": 0,
+  "source_and_output_distinct_rgba_colors": 648,
+  "source_sha256": "0296b73253e6608d88d23698fbd8b9b8e9c0081ce0169fa65dc5168c3e0bfc10",
+  "output_sha256": "8c3d5789044b57f2008b83821a677d04f05c4a9eed3983fb4b94375a97bfda17",
+  "frame_regions": [
+    [
+      0,
+      0,
+      428,
+      180
+    ],
+    [
+      428,
+      0,
+      428,
+      180
+    ],
+    [
+      856,
+      0,
+      428,
+      180
+    ],
+    [
+      1284,
+      0,
+      428,
+      180
+    ]
+  ]
+}

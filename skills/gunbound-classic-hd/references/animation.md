@@ -1,5 +1,9 @@
 # Registro e movimento sem troca de anatomia
 
+Este fluxo trata correções de rig HD existente ou adaptação de animação
+explicitamente solicitada. Para restauração fiel de atlas, conserve os quadros,
+poses e janelas da fonte; não os substitua por transformações de um mestre.
+
 ## Bbox não é pivô
 
 Gerar quadros bonitos separadamente pode variar rosto, roupa e silhueta.

@@ -1,0 +1,76 @@
+You are an expert in high-fidelity restoration and upscaling of
+original 2D video game assets, specializing in Gunbound Classic.
+
+TASK:
+Using the uploaded image as the sole and absolute visual reference,
+produce a higher-resolution, cleaner version of the EXACT SAME image.
+
+PRIMARY OBJECTIVE:
+Maximum visual fidelity to the original Gunbound Classic asset.
+This is a restoration and upscaling task, NOT a redesign,
+reinterpretation, remaster, or creative reconstruction.
+
+ABSOLUTE PRESERVATION RULES:
+1. Preserve the original character, mobile, object, projectile,
+   effect, or animation exactly as depicted.
+2. Maintain identical silhouettes, proportions, shapes, geometry,
+   facial expressions, poses, outlines, colors, palette, and shading.
+3. Preserve every visible feature, including weapons, mechanical
+   parts, accessories, textures, highlights, shadows, and details.
+4. Do not introduce, remove, reposition, replace, simplify,
+   or redesign any element.
+5. Preserve the original 2D Gunbound Classic visual style,
+   rendering characteristics, and artistic identity.
+6. Preserve the exact composition, orientation, framing,
+   boundaries, and relative coordinates of all elements.
+7. Do not convert the image into 3D, anime, modern cartoon,
+   vector art, or a different illustration style.
+8. Do not invent missing details or reinterpret ambiguous pixels.
+
+UPSCALE AND RESTORATION:
+- Target 4x the original width and height when supported.
+- Improve clarity and edge definition while retaining
+  the original appearance.
+- Reduce compression artifacts, unwanted blur, and scaling
+  noise conservatively.
+- Restore existing details rather than generating new details.
+- Preserve original gradients, antialiasing behavior,
+  line weights, color transitions, and texture characteristics.
+- If the input is pixel art, preserve its pixel-art characteristics
+  and avoid inappropriate smoothing.
+- Do not apply artificial lighting, new shadows, bloom,
+  cinematic effects, extra reflections, or added surface detail.
+- Favor preservation over sharpness whenever they conflict.
+
+GAME-ASSET REQUIREMENTS:
+- If the source is a sprite sheet, preserve the exact number,
+  order, positions, spacing, and alignment of frames.
+- Never merge, split, rearrange, crop, or invent animation frames.
+- Preserve original animation poses and frame-specific effects.
+- Retain the source background and transparency behavior,
+  including alpha-channel boundaries when present.
+- Avoid halos, color bleeding, background contamination,
+  or unwanted edge pixels.
+- Do not add padding, borders, labels, or watermarks.
+
+STRICT FIDELITY PRIORITY:
+1. Original identity and silhouette
+2. Geometry, composition, and alignment
+3. Original palette and shading
+4. Fine details and outlines
+5. Increased resolution and technical clarity
+
+If any enhancement would modify the original appearance,
+DO NOT apply that enhancement.
+
+OUTPUT:
+Return only the restored, upscaled image, maintaining the
+exact source aspect ratio and all original visual content.
+
+FINAL VALIDATION:
+The result must appear to be the original Gunbound Classic
+asset rendered at a higher resolution, not an AI recreation
+or artistic reinterpretation.
+
+
+EXACT CREATE RETRY CONTRACT: This is a pixel-preserving 4x enlargement of the full source, NOT a redraw. Source is 428 by 45 pixels, fully opaque RGBA. Produce exactly 1712 by 180 pixels. Each source pixel becomes the same-color 4x4 square, retaining its exact RGBA values. All four adjacent frames occupy the FULL output height: x=0..427 READY, x=428..855 MOUSE, x=856..1283 PUSH, x=1284..1711 DISABLED. No canvas beyond these bounds, no gaps and no top or bottom margins. Copy the white/cyan CREATE lettering, exact outlines, small cyan hand icons and grayscale disabled frame. Do not recolor the lettering yellow or thicken any border. Preserve every source pixel color, including original opaque corner/background pixels. Return the exact 1712x180 full-width strip only, with no padding, resampling blur, vector cleanup or newly inferred detail.

@@ -1,0 +1,4158 @@
+{
+  "version": 1,
+  "scale": 4,
+  "method": "bicubic_per_frame_preserve_native_alpha",
+  "source_manifest": "assets/classic/manifest.json",
+  "source_manifest_sha256": "07d90258a9409a51c81f73b08e279b16bcc81027aab884cbf35b5f691ba183c9",
+  "tools": {
+    "skills/gunbound-classic-hd/scripts/upscale_conservative.py": "3140edd60f25be34c9f6990c653ea661bd301d415d63530248c04ea8972e2953"
+  },
+  "runtime_integration": true,
+  "buttons": {
+    "b_gamelist_exit": {
+      "file": "lobby/b_gamelist_exit.png",
+      "size": [
+        1712,
+        180
+      ],
+      "frame_size": [
+        428,
+        180
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          428,
+          180
+        ],
+        [
+          428,
+          0,
+          428,
+          180
+        ],
+        [
+          856,
+          0,
+          428,
+          180
+        ],
+        [
+          1284,
+          0,
+          428,
+          180
+        ]
+      ],
+      "sha256": "391ff038980165650379f7bf73296515900878041817156887ba31bcf70888f2",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_exit.png",
+        "sha256": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+        "size": [
+          428,
+          45
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_exit.png",
+          "entry": "b_gamelist_exit.img",
+          "entry_sha256": "c9102ad7390e65420f8a8ad8147633f4a5e1f0bb3f32e7090fd24fd78924fb8b",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            107,
+            45
+          ],
+          "frames": 4,
+          "epa": "b_gamelist_exit.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_exit.json"
+      }
+    },
+    "b_gamelist_ranking": {
+      "file": "lobby/b_gamelist_ranking.png",
+      "size": [
+        1712,
+        180
+      ],
+      "frame_size": [
+        428,
+        180
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          428,
+          180
+        ],
+        [
+          428,
+          0,
+          428,
+          180
+        ],
+        [
+          856,
+          0,
+          428,
+          180
+        ],
+        [
+          1284,
+          0,
+          428,
+          180
+        ]
+      ],
+      "sha256": "e8a5d786d096d29216724f46b697c2ec2e73b06cc7bf5800eb7e7d78e33c39b7",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_ranking.png",
+        "sha256": "650c443404a6bffff7505f55ec18df7e02f6b5f16c779e8a7ade778ba638c6c4",
+        "size": [
+          428,
+          45
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_ranking.png",
+          "entry": "b_gamelist_ranking.img",
+          "entry_sha256": "c00eede7867625976045b2a7040dd7909d2d6fa7d72e8689d2e963726143c470",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            107,
+            45
+          ],
+          "frames": 4,
+          "epa": "b_gamelist_ranking.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_ranking.json"
+      }
+    },
+    "b_gamelist_avatar": {
+      "file": "lobby/b_gamelist_avatar.png",
+      "size": [
+        1712,
+        180
+      ],
+      "frame_size": [
+        428,
+        180
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          428,
+          180
+        ],
+        [
+          428,
+          0,
+          428,
+          180
+        ],
+        [
+          856,
+          0,
+          428,
+          180
+        ],
+        [
+          1284,
+          0,
+          428,
+          180
+        ]
+      ],
+      "sha256": "7e622c5934592bdfa2d641493edd11df73703e9e1f30b1c3cf71875152aa71ba",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_avatar.png",
+        "sha256": "abb5444ae7e7d92624433623198e0dab61fff8a632742735ef0f2354a57968fb",
+        "size": [
+          428,
+          45
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_avatar.png",
+          "entry": "b_gamelist_avatar.img",
+          "entry_sha256": "4af1d866a317538f4de4d1ff947d8f9f27204831439b7afad5989f6152f4c473",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            107,
+            45
+          ],
+          "frames": 4,
+          "epa": "b_gamelist_avatar.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_avatar.json"
+      }
+    },
+    "b_gamelist_create": {
+      "file": "lobby/b_gamelist_create.png",
+      "size": [
+        1712,
+        180
+      ],
+      "frame_size": [
+        428,
+        180
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          428,
+          180
+        ],
+        [
+          428,
+          0,
+          428,
+          180
+        ],
+        [
+          856,
+          0,
+          428,
+          180
+        ],
+        [
+          1284,
+          0,
+          428,
+          180
+        ]
+      ],
+      "sha256": "95c7ea79cb5ca43c62cb70b80087880e4c4fb1b0e785882c1143996dd0b2ec8d",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_create.png",
+        "sha256": "0296b73253e6608d88d23698fbd8b9b8e9c0081ce0169fa65dc5168c3e0bfc10",
+        "size": [
+          428,
+          45
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_create.png",
+          "entry": "b_gamelist_create.img",
+          "entry_sha256": "2e911d68e0fcb0ba804b6c2feb8c41e9519f0ae34936531a0d0c2d1e4de11fd0",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            107,
+            45
+          ],
+          "frames": 4,
+          "epa": "b_gamelist_create.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_create.json"
+      }
+    },
+    "b_gamelist_join": {
+      "file": "lobby/b_gamelist_join.png",
+      "size": [
+        1712,
+        180
+      ],
+      "frame_size": [
+        428,
+        180
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          428,
+          180
+        ],
+        [
+          428,
+          0,
+          428,
+          180
+        ],
+        [
+          856,
+          0,
+          428,
+          180
+        ],
+        [
+          1284,
+          0,
+          428,
+          180
+        ]
+      ],
+      "sha256": "067f0479660d122b925196fbfb5d82d2b91b6319b6e8a33f09f8837cc012ab23",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_join.png",
+        "sha256": "c9a9b49fac38f5edf5a40d1d63447fe7cb0027c0c695aef0a94c11282a1ab11c",
+        "size": [
+          428,
+          45
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_join.png",
+          "entry": "b_gamelist_join.img",
+          "entry_sha256": "bdb7c8a85c4ad0d869e392ef9c1ffbc99e3c13d2e61f1186e67874590cf5e797",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            107,
+            45
+          ],
+          "frames": 4,
+          "epa": "b_gamelist_join.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_join.json"
+      }
+    },
+    "b_gamelist_viewall": {
+      "file": "lobby/b_gamelist_viewall.png",
+      "size": [
+        1620,
+        132
+      ],
+      "frame_size": [
+        324,
+        132
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          324,
+          132
+        ],
+        [
+          324,
+          0,
+          324,
+          132
+        ],
+        [
+          648,
+          0,
+          324,
+          132
+        ],
+        [
+          972,
+          0,
+          324,
+          132
+        ],
+        [
+          1296,
+          0,
+          324,
+          132
+        ]
+      ],
+      "sha256": "c4887f9fbd8ba06f119c25665c181619f300c8f32d77b07bb84569d0c50658a3",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_viewall.png",
+        "sha256": "3a499534569f7e9faac7636cd82021c7161165f15a08303fb8713d6d6e48f449",
+        "size": [
+          405,
+          33
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_viewall.png",
+          "entry": "b_gamelist_viewall.img",
+          "entry_sha256": "630ae35df67c0b6521f46e31b090735c83f1f7a599a72eaa80d3d66107f09223",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            81,
+            33
+          ],
+          "frames": 5,
+          "epa": "b_gamelist_viewall.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ],
+            "active": [
+              4
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_viewall.json"
+      }
+    },
+    "b_gamelist_wait": {
+      "file": "lobby/b_gamelist_wait.png",
+      "size": [
+        1620,
+        132
+      ],
+      "frame_size": [
+        324,
+        132
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          324,
+          132
+        ],
+        [
+          324,
+          0,
+          324,
+          132
+        ],
+        [
+          648,
+          0,
+          324,
+          132
+        ],
+        [
+          972,
+          0,
+          324,
+          132
+        ],
+        [
+          1296,
+          0,
+          324,
+          132
+        ]
+      ],
+      "sha256": "6535d619ee2202609476cd0b89378cebce3f5ff9a09c4cf737013b4de5a0b44e",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_wait.png",
+        "sha256": "3319ee6d8cf314fe86219303ba9a1f27cfe4509a2b5e2a951fd43a652f782118",
+        "size": [
+          405,
+          33
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_wait.png",
+          "entry": "b_gamelist_wait.img",
+          "entry_sha256": "3a3316997b2a6b2f22ce671591077042e917d0101313f92a04fa2f0291beee09",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            81,
+            33
+          ],
+          "frames": 5,
+          "epa": "b_gamelist_wait.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ],
+            "active": [
+              4
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_wait.json"
+      }
+    },
+    "b_gamelist_friend": {
+      "file": "lobby/b_gamelist_friend.png",
+      "size": [
+        1640,
+        132
+      ],
+      "frame_size": [
+        328,
+        132
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          328,
+          132
+        ],
+        [
+          328,
+          0,
+          328,
+          132
+        ],
+        [
+          656,
+          0,
+          328,
+          132
+        ],
+        [
+          984,
+          0,
+          328,
+          132
+        ],
+        [
+          1312,
+          0,
+          328,
+          132
+        ]
+      ],
+      "sha256": "f20da3fb60b55513e9728624c5d5096f2f24dee268b8e795fc8e42e812b11fc1",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_friend.png",
+        "sha256": "bcf4807b4ae4baf6fb715ebd621ef8f1fd5be58801801eaa0fa41043fdcdd693",
+        "size": [
+          410,
+          33
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_friend.png",
+          "entry": "b_gamelist_friend.img",
+          "entry_sha256": "9e6aed8ff4dfe32468d7ff3b8265b0842bc7767de66246336ed2c55c64e886f7",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            82,
+            33
+          ],
+          "frames": 5,
+          "epa": "b_gamelist_friend.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ],
+            "active": [
+              4
+            ]
+          },
+          "note": "O quadro active mede 82×33; a tira alinha todos em 82."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_friend.json"
+      }
+    },
+    "b_gamelist_directgo": {
+      "file": "lobby/b_gamelist_directgo.png",
+      "size": [
+        1640,
+        132
+      ],
+      "frame_size": [
+        328,
+        132
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          328,
+          132
+        ],
+        [
+          328,
+          0,
+          328,
+          132
+        ],
+        [
+          656,
+          0,
+          328,
+          132
+        ],
+        [
+          984,
+          0,
+          328,
+          132
+        ],
+        [
+          1312,
+          0,
+          328,
+          132
+        ]
+      ],
+      "sha256": "858c129d943fcb0c7437d3f19fe1ec56e2dd42bf2482a0a278fb28854ad12763",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_directgo.png",
+        "sha256": "abf178ec2c1dfe3aa6ec016b0c1a0a4fe7dec41456b2aaa14f25211710e3c854",
+        "size": [
+          410,
+          33
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_directgo.png",
+          "entry": "b_gamelist_directgo.img",
+          "entry_sha256": "eece8798c40efcbe49596ae8441ea3a8fda6ee46bda1f27f0dd260333c3862fa",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            82,
+            33
+          ],
+          "frames": 5,
+          "epa": "b_gamelist_directgo.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          },
+          "note": "O EPA não declara active; o quadro 4 entra assim mesmo, como no pedido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_directgo.json"
+      }
+    },
+    "b_gamelist_prev": {
+      "file": "lobby/b_gamelist_prev.png",
+      "size": [
+        784,
+        132
+      ],
+      "frame_size": [
+        196,
+        132
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          196,
+          132
+        ],
+        [
+          196,
+          0,
+          196,
+          132
+        ],
+        [
+          392,
+          0,
+          196,
+          132
+        ],
+        [
+          588,
+          0,
+          196,
+          132
+        ]
+      ],
+      "sha256": "23a9b3d9e6948cbe48f2a90d8c40f9266684b70e4307abc7ac80ab2da2350612",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_prev.png",
+        "sha256": "d99d183c98131841166f7f4e81362550978fc935a491b35f4b31284fd087501b",
+        "size": [
+          196,
+          33
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_prev.png",
+          "entry": "b_gamelist_prev.img",
+          "entry_sha256": "d7b9f6111868a281c837f38ebd50f1eb460cf69333e38826cf7e0c8d40705d6f",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            49,
+            33
+          ],
+          "frames": 4,
+          "epa": "b_gamelist_prev.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_prev.json"
+      }
+    },
+    "b_gamelist_next": {
+      "file": "lobby/b_gamelist_next.png",
+      "size": [
+        784,
+        132
+      ],
+      "frame_size": [
+        196,
+        132
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          196,
+          132
+        ],
+        [
+          196,
+          0,
+          196,
+          132
+        ],
+        [
+          392,
+          0,
+          196,
+          132
+        ],
+        [
+          588,
+          0,
+          196,
+          132
+        ]
+      ],
+      "sha256": "e93dffe8f68dc40bb666d8bb5d4e66e502bd0ab99273e4abb6e3d94c5694c12d",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamelist_next.png",
+        "sha256": "6f09f3f3f1e2d50f4afb1075aedccd42023c7d18cb30693d2a0646aa724adbd2",
+        "size": [
+          196,
+          33
+        ],
+        "record": {
+          "file": "lobby/b_gamelist_next.png",
+          "entry": "b_gamelist_next.img",
+          "entry_sha256": "c24193b43b90732e506959e534359521bee6b5b2fb75e5a0c68a89a83648b8df",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            49,
+            33
+          ],
+          "frames": 4,
+          "epa": "b_gamelist_next.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamelist_next.json"
+      }
+    },
+    "b_ready_exit": {
+      "file": "room/b_ready_exit.png",
+      "size": [
+        1712,
+        180
+      ],
+      "frame_size": [
+        428,
+        180
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          428,
+          180
+        ],
+        [
+          428,
+          0,
+          428,
+          180
+        ],
+        [
+          856,
+          0,
+          428,
+          180
+        ],
+        [
+          1284,
+          0,
+          428,
+          180
+        ]
+      ],
+      "sha256": "391ff038980165650379f7bf73296515900878041817156887ba31bcf70888f2",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_exit.png",
+        "sha256": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+        "size": [
+          428,
+          45
+        ],
+        "record": {
+          "file": "room/b_ready_exit.png",
+          "entry": "b_ready_exit.img",
+          "entry_sha256": "256217065a98e848822eafff1577ecd6af5e90369b9a2f04f8f619d758b12b63",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            107,
+            45
+          ],
+          "frames": 4,
+          "epa": "b_ready_exit.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_exit.json"
+      }
+    },
+    "b_ready_changeteam": {
+      "file": "room/b_ready_changeteam.png",
+      "size": [
+        1712,
+        180
+      ],
+      "frame_size": [
+        428,
+        180
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          428,
+          180
+        ],
+        [
+          428,
+          0,
+          428,
+          180
+        ],
+        [
+          856,
+          0,
+          428,
+          180
+        ],
+        [
+          1284,
+          0,
+          428,
+          180
+        ]
+      ],
+      "sha256": "15ede667ae4e81778199fb4ac97e7bed136ac2ba800b364756b69f551730c295",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_changeteam.png",
+        "sha256": "a069ad8a914e8809d8339cf73a2ba8323e3f7ad532c444033af9759fd26480f2",
+        "size": [
+          428,
+          45
+        ],
+        "record": {
+          "file": "room/b_ready_changeteam.png",
+          "entry": "b_ready_changeteam.img",
+          "entry_sha256": "8951c0afbb3261c2cbbb546093077e4eafaedfcdaaee771d7ceea8947b539484",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            107,
+            45
+          ],
+          "frames": 4,
+          "epa": "b_ready_changeteam.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              2
+            ],
+            "mouse": [
+              1
+            ],
+            "disable": [
+              3
+            ],
+            "select": [
+              0
+            ]
+          }
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_changeteam.json"
+      }
+    },
+    "b_ready_start": {
+      "file": "room/b_ready_start.png",
+      "size": [
+        1984,
+        152
+      ],
+      "frame_size": [
+        496,
+        152
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          496,
+          152
+        ],
+        [
+          496,
+          0,
+          496,
+          152
+        ],
+        [
+          992,
+          0,
+          496,
+          152
+        ],
+        [
+          1488,
+          0,
+          496,
+          152
+        ]
+      ],
+      "sha256": "d5a605cc8b8e4a989f3a52f41f20fda08b5c8c6b153bfbcdd2290d29b1c19db9",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_start.png",
+        "sha256": "21a5ab09df99d36f5de46d6cc9e73ca566a54198683ef0863dcde15110988c89",
+        "size": [
+          496,
+          38
+        ],
+        "record": {
+          "file": "room/b_ready_start.png",
+          "entry": "b_ready_start.img",
+          "entry_sha256": "d9348fa9822167db948d71fe2e763299257f46f72e061bebda2efa3be30d0a96",
+          "img_indices": [
+            0,
+            1,
+            6,
+            9
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            124,
+            38
+          ],
+          "frames": 4,
+          "epa": "b_ready_start.epa",
+          "epa_states": {
+            "ready": [
+              0
+            ],
+            "push": [
+              6,
+              7,
+              8
+            ],
+            "mouse": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "disable": [
+              9
+            ],
+            "select": [
+              0
+            ]
+          },
+          "note": "EPA: normal 0, hover 1, push 6, disable 9. A tira guarda o primeiro quadro de cada estado."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_start.json"
+      }
+    },
+    "b_ready_mapprev": {
+      "file": "room/b_ready_mapprev.png",
+      "size": [
+        448,
+        112
+      ],
+      "frame_size": [
+        112,
+        112
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          112,
+          112
+        ],
+        [
+          112,
+          0,
+          112,
+          112
+        ],
+        [
+          224,
+          0,
+          112,
+          112
+        ],
+        [
+          336,
+          0,
+          112,
+          112
+        ]
+      ],
+      "sha256": "a693a0ccbfb957e14b5507684a2252ea8ce268ad2bdbc7fb6bd72d2be5673cdc",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mapprev.png",
+        "sha256": "90ae344d2b6d59d6648339443959a577a1e6e45a816047b51eb7e9b08efcff5b",
+        "size": [
+          112,
+          28
+        ],
+        "record": {
+          "file": "room/b_ready_mapprev.png",
+          "entry": "b_ready_mapprev.img",
+          "entry_sha256": "eb093388475042d93fc20ef60e4333295bef988a540b453e2f64764a1076b094",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            28,
+            28
+          ],
+          "frames": 4,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mapprev.json"
+      }
+    },
+    "b_ready_mapnext": {
+      "file": "room/b_ready_mapnext.png",
+      "size": [
+        448,
+        112
+      ],
+      "frame_size": [
+        112,
+        112
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          112,
+          112
+        ],
+        [
+          112,
+          0,
+          112,
+          112
+        ],
+        [
+          224,
+          0,
+          112,
+          112
+        ],
+        [
+          336,
+          0,
+          112,
+          112
+        ]
+      ],
+      "sha256": "93ea7ad67992c5ff4e121f18f0df8260fc0649ade42c89523f6123b287daab82",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mapnext.png",
+        "sha256": "e4535e26dfa8ec99ecbf8643ae78ac54863040a0e62b2c3bcaacd90cfa863d8f",
+        "size": [
+          112,
+          28
+        ],
+        "record": {
+          "file": "room/b_ready_mapnext.png",
+          "entry": "b_ready_mapnext.img",
+          "entry_sha256": "b638933b5d88d4eaef43e49e979a3ff8048172588e125147a6501f110343f44b",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            28,
+            28
+          ],
+          "frames": 4,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mapnext.json"
+      }
+    },
+    "b_ready_solo": {
+      "file": "room/b_ready_solo.png",
+      "size": [
+        1296,
+        96
+      ],
+      "frame_size": [
+        324,
+        96
+      ],
+      "frames": 4,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          324,
+          96
+        ],
+        [
+          324,
+          0,
+          324,
+          96
+        ],
+        [
+          648,
+          0,
+          324,
+          96
+        ],
+        [
+          972,
+          0,
+          324,
+          96
+        ]
+      ],
+      "sha256": "df4b76de166829c6cc1c581cf2b23fc57796a2021b7dd998cfc655940b47e076",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_solo.png",
+        "sha256": "1f321bcdbd28fd610fed96649847aad034bc089bec9a0cb91aa587dd8dd7e5a9",
+        "size": [
+          324,
+          24
+        ],
+        "record": {
+          "file": "room/b_ready_solo.png",
+          "entry": "b_ready_solo.img",
+          "entry_sha256": "e49ad854629ebd6158490a2ce168d968ef21278576c7e87b75f189c1aba708ea",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable"
+          ],
+          "frame_size": [
+            81,
+            24
+          ],
+          "frames": 4,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Mostrado como modo vigente, sem regra extra."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_solo.json"
+      }
+    },
+    "b_gamechat_ch1": {
+      "file": "lobby/b_gamechat_ch1.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "04b228a4d1c9fce0fdfa07b07f6471f30bcc93035e5ebbecea5c54362676f216",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch1.png",
+        "sha256": "96e6378a6c0d6a453de48a7e3cf6d06626109acfe92ac72d3467fe167829703c",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch1.png",
+          "entry": "b_gamechat_ch1.img",
+          "entry_sha256": "70cbda41070c9f145fe1506a791752123ec7adbb0c351d5d7cbc5de9c36a3dee",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch1.json"
+      }
+    },
+    "b_gamechat_ch2": {
+      "file": "lobby/b_gamechat_ch2.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "284afe38c0d2335105b7be041c96bcd0fec068c2b5643a037de5580a506976eb",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch2.png",
+        "sha256": "535fc6d5b920f8d3b8513c49415e6a0cb38bceb2022d7918f8e0b7fe56b5ac48",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch2.png",
+          "entry": "b_gamechat_ch2.img",
+          "entry_sha256": "ebf2517ed507304895df8d5e8c9817fb6c9bfe19d0cc8de73e13e4e6682416bf",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch2.json"
+      }
+    },
+    "b_gamechat_ch3": {
+      "file": "lobby/b_gamechat_ch3.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "11d540c8225ed526f5a62b1d652c53dbcfa102eac01615d1f11e27c09cb8c526",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch3.png",
+        "sha256": "4e0e8f2494bc530cfba0dd58e534b7a41331e960e4840ec34deafa6e0976574a",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch3.png",
+          "entry": "b_gamechat_ch3.img",
+          "entry_sha256": "1fc43d108acf6bf9a7adf700482bafa3e915e6a2a8aa0c271708151a48509780",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch3.json"
+      }
+    },
+    "b_gamechat_ch4": {
+      "file": "lobby/b_gamechat_ch4.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "b0ab99a079aba1f9e3351f38cac6cdd944f0cd4bdde99810e88652a568c510b4",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch4.png",
+        "sha256": "20fbcc7e8b929626c837d96b646580b686034096fd9847acdded71e49e14b84c",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch4.png",
+          "entry": "b_gamechat_ch4.img",
+          "entry_sha256": "3e66e1619727ea31ae669b0be2d3e01b721948cbdffdbf39b86450c3635de7a0",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch4.json"
+      }
+    },
+    "b_gamechat_ch5": {
+      "file": "lobby/b_gamechat_ch5.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "986a6161649ad5968dd103d8464417b4b532185bd4fceda10a2b2548888dc252",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch5.png",
+        "sha256": "e32a005d2fb8f352aec40cd36f96d97ffe659f027c7cb25d41c74748f7c83929",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch5.png",
+          "entry": "b_gamechat_ch5.img",
+          "entry_sha256": "3a4883819f8bbaae2a64a51d3637087ea0ebe0afaf05cd8ef39ab87c6bc5733b",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch5.json"
+      }
+    },
+    "b_gamechat_ch6": {
+      "file": "lobby/b_gamechat_ch6.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "0376041b6572c0c91e6e04d4de0007debd0e31984ca44dff1539b73a140ee65b",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch6.png",
+        "sha256": "1cc7797e9330d0203deca84fd2051a617cde90ebb98e6232ee7d542fd2935e2e",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch6.png",
+          "entry": "b_gamechat_ch6.img",
+          "entry_sha256": "e04044e029a7edf417a9849cfc1702156b9fa64cea291dc065666d0c491976f7",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch6.json"
+      }
+    },
+    "b_gamechat_ch7": {
+      "file": "lobby/b_gamechat_ch7.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "d93afb7c01e121a8d3f3b1d4a6eb3f31f5c22dc4588c66c06f962dea65483bfe",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch7.png",
+        "sha256": "032e6d0de1cdddad38e6c982b7dd9390ff5cbc7a77684656558e6e3d172b452b",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch7.png",
+          "entry": "b_gamechat_ch7.img",
+          "entry_sha256": "c0f295bab2fa9adae55be3757f52b90dd37313a65e5a091b6fa88212a83f4974",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch7.json"
+      }
+    },
+    "b_gamechat_ch8": {
+      "file": "lobby/b_gamechat_ch8.png",
+      "size": [
+        440,
+        88
+      ],
+      "frame_size": [
+        88,
+        88
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          88,
+          88
+        ],
+        [
+          88,
+          0,
+          88,
+          88
+        ],
+        [
+          176,
+          0,
+          88,
+          88
+        ],
+        [
+          264,
+          0,
+          88,
+          88
+        ],
+        [
+          352,
+          0,
+          88,
+          88
+        ]
+      ],
+      "sha256": "2a783fc2e08db7d6e664a9e5f8b9f6969a95a23ce156cd6afd994ea956e330ed",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/lobby/b_gamechat_ch8.png",
+        "sha256": "8d06047812edfa0f2d39f1898c172b2dd66d740197792089e766b517be247b40",
+        "size": [
+          110,
+          22
+        ],
+        "record": {
+          "file": "lobby/b_gamechat_ch8.png",
+          "entry": "b_gamechat_ch8.img",
+          "entry_sha256": "2c516daa4ae18a34cdae74554ea64f3866effed7efaa85d49922563cd21c9a35",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            22,
+            22
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o canal ativo."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_gamechat_ch8.json"
+      }
+    },
+    "b_ready_mobile01": {
+      "file": "room/b_ready_mobile01.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "c4926231f561438469a08c2b19aa44cb5fefa6fa3a4b782f6574222d006ca3a3",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile01.png",
+        "sha256": "12a174459f942aca9787a019f1878864c316a3d4cad88759a4323ca1c8bc6a10",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile01.png",
+          "entry": "b_ready_mobile01.img",
+          "entry_sha256": "9f4230ea4ca41e23e90d4fddd77663fb206d15ed39cbe7412a9309017cdd06f0",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile01.json"
+      }
+    },
+    "b_ready_mobile02": {
+      "file": "room/b_ready_mobile02.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "7ec2aff331cf0c95d44e3bae6481bf23c7a70aa13119ce0b2ae5744c1c06f8e1",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile02.png",
+        "sha256": "6b0286f0b2ac104dc3be2135e6894b6cd448d91dcd56e67715d27d1f01bdb399",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile02.png",
+          "entry": "b_ready_mobile02.img",
+          "entry_sha256": "ebf0aaa7b2e38056ce83cc63387779fe9a0e04cc93182dc8b3801911292b1990",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile02.json"
+      }
+    },
+    "b_ready_mobile03": {
+      "file": "room/b_ready_mobile03.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "7071b391906dd40e7a02a9d23b9617398b32eeede8f7af2116085c49b7fbd821",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile03.png",
+        "sha256": "8e9d7b44123354d34a20b9e9dd148837f02d8edd1fcffe8139d1f8ea5e3ec646",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile03.png",
+          "entry": "b_ready_mobile03.img",
+          "entry_sha256": "2629a646ff60521df23ee09fed520d18c85499f068d5d74774a3477b5d7b2613",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile03.json"
+      }
+    },
+    "b_ready_mobile04": {
+      "file": "room/b_ready_mobile04.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "02cc19ab5ccd89aebbbe5989d76b78dc2bbe2e7d59aa512e78b7cac2086a5aa0",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile04.png",
+        "sha256": "6c380fc8f1636b26845a5234f857b78a5eca0f53917b8e961e5fd226f92f78c3",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile04.png",
+          "entry": "b_ready_mobile04.img",
+          "entry_sha256": "caa95bced6fe4d658ba1641a72a3e111b67fb59f84dc94a2ad4700591346c6fb",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile04.json"
+      }
+    },
+    "b_ready_mobile05": {
+      "file": "room/b_ready_mobile05.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "9ff02813b315ce9a6417deb41b97f4bb28666f7141eb2f4175cd59f0c0c5fe6c",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile05.png",
+        "sha256": "c490de3a6e85ea7885df56c736dea47c6e760cbf5b0cd2e149c4b28c91da3fb6",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile05.png",
+          "entry": "b_ready_mobile05.img",
+          "entry_sha256": "7dd8d5788bc5ea4998f9ab5deb9bc54c3c6562bd993bc0a133d7903d2906811a",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile05.json"
+      }
+    },
+    "b_ready_mobile06": {
+      "file": "room/b_ready_mobile06.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "3a82df88e2dacbf6eba24c25ed202d651cbef836abc6a93172f6b013914b71e3",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile06.png",
+        "sha256": "da2c9adc01fd6ca282e261525ed5c46a8c92e215897dc2b477b5d797d5a91d1e",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile06.png",
+          "entry": "b_ready_mobile06.img",
+          "entry_sha256": "adfb770e003f128a6bf1b8d600ebbe6113ec0253f2079bfc9be9a6efc94b2711",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile06.json"
+      }
+    },
+    "b_ready_mobile07": {
+      "file": "room/b_ready_mobile07.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "3b40208081e61a8d2cecf22cafe1ad8c157a1fc52e1da2a842811c314d1bd6d1",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile07.png",
+        "sha256": "59280cf32aee37a5e1a8ee4eca09c1a5336aa0630581d0341684f8e88202f294",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile07.png",
+          "entry": "b_ready_mobile07.img",
+          "entry_sha256": "dc690c7f470ee07a2a380a5448f1dd8d66103b4813797aed9dbd053461c940ad",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile07.json"
+      }
+    },
+    "b_ready_mobile08": {
+      "file": "room/b_ready_mobile08.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "7224ef48d14ad0997626f99f1a10ea545200270c9247b5036cde61ad92ddef3e",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile08.png",
+        "sha256": "acb0560eaff545f363dc88a9b46a3c86087ca8aa3cba14a1de4aea69867e71b8",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile08.png",
+          "entry": "b_ready_mobile08.img",
+          "entry_sha256": "120b7755087177d2b4d4e687e37a3446162e585cfd38de9beb869ef64f6bde26",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile08.json"
+      }
+    },
+    "b_ready_mobile09": {
+      "file": "room/b_ready_mobile09.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "e9002074c0777f9c765eb48d9e8ff026d89c683ce56ce145ff55126520bb347b",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile09.png",
+        "sha256": "21907e5b6ed28f32411b467d2f2af3cac6d582c8b71adbf81535b14a6360a223",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile09.png",
+          "entry": "b_ready_mobile09.img",
+          "entry_sha256": "33fc65e84550be5f196078d5e43c1312dfc3f8cc5443931d09be87276466e24d",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile09.json"
+      }
+    },
+    "b_ready_mobile10": {
+      "file": "room/b_ready_mobile10.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "32df91aac22aa4ef7c1946cc84972aea54ee3fb2e45ba995811e4703a9635d31",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile10.png",
+        "sha256": "eb3b1baca40d8de97690834025ee281c285fbb28aed686c80905594a6627e75e",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile10.png",
+          "entry": "b_ready_mobile10.img",
+          "entry_sha256": "ddf3f4864c8ba40583c763f1dff7897666c73fed74d849624591735d0fcc6606",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile10.json"
+      }
+    },
+    "b_ready_mobile11": {
+      "file": "room/b_ready_mobile11.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "af8fc92ec23e2a5ba4e2c09a62b4f72704c003af95d52fc48897110c7627a8d3",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile11.png",
+        "sha256": "3e535f9210078b23372582f752c9c85161feddafb95c51c358ccf96bf1d5c577",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile11.png",
+          "entry": "b_ready_mobile11.img",
+          "entry_sha256": "9286fc546a586a549e1aa7b6603e7b412eabf8b1dc0cd660db9a2a09be3d6cb0",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile11.json"
+      }
+    },
+    "b_ready_mobile12": {
+      "file": "room/b_ready_mobile12.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "10f2e70019155902a97e2f41526497c77ab831de09831f1577f832a6c73932c5",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile12.png",
+        "sha256": "05a12605b6d9f28a3000ce02d6998f0a7749427dfade3f76cf239fbe3313e0b4",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile12.png",
+          "entry": "b_ready_mobile12.img",
+          "entry_sha256": "fa63ae46ffce788776e39b79bdc3a53363034b0c481046cf060de6d7574ff263",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile12.json"
+      }
+    },
+    "b_ready_mobile13": {
+      "file": "room/b_ready_mobile13.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "d975e62800c8cfa5f9871f547eeeb695d9bc642e5f7e350ef48ab20639df1526",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile13.png",
+        "sha256": "88f2148200e411b897af4921a786babec28e0ae11e2ac6e2036d7bcd35a2f08b",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile13.png",
+          "entry": "b_ready_mobile13.img",
+          "entry_sha256": "75ff53c39a0250f67ae3cc9e639336f286a721549806f163e132da16fc8eaf9a",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile13.json"
+      }
+    },
+    "b_ready_mobile14": {
+      "file": "room/b_ready_mobile14.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "421d649b598ee6b652f4cf5935660f491e23c896cbaaea85d38ca9109517c12d",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile14.png",
+        "sha256": "830cc977e368763e326f376275453b2fa99b4c06678c8c9d67a8a89171977e93",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile14.png",
+          "entry": "b_ready_mobile14.img",
+          "entry_sha256": "b817befdf524c027c7e03f712d02b98a4ce2113b4fa97123d4af9e8a78c01fd1",
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Sem .epa no XFS. Quadros na ordem ready/mouse/push/disable vista nos botões EPA. Quadro 4 é o mobile escolhido."
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile14.json"
+      }
+    },
+    "b_ready_mobile_knight": {
+      "file": "room/b_ready_mobile_knight.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "48fdc77d77cea5a238b1c7501d9ad7b9957dd76c4322a6768aa879dca1d4cc25",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile_knight.png",
+        "sha256": "ffd93dc27015d326587b28ce18013f0d801d13543c957c9dcd45bf3374007d4e",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile_knight.png",
+          "entry": null,
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Quadro 0 de CharacterSpritesheet.png (célula 81x72) sobre o fundo dos cinco quadros de b_ready_mobile01.img, sem o Armor desse botão. O XFS não tem botão de Knight nem de Aduka; mobile15 é RANDOM e não entra.",
+          "source_sheet": "assets/openbound/knight/CharacterSpritesheet.png",
+          "source_cell": [
+            81,
+            72
+          ],
+          "background_entry": "b_ready_mobile01.img"
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile_knight.json"
+      }
+    },
+    "b_ready_mobile_aduka": {
+      "file": "room/b_ready_mobile_aduka.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "c90dd30549e1ece754cf5cf052651747eb83e14c6645127a514a9bccf62147ae",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile_aduka.png",
+        "sha256": "0d31d5a5122951b8286dc971cdb5adab7c4d7b409b7f96d3b0ace79ea1ee281d",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile_aduka.png",
+          "entry": null,
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Quadro 0 de CharacterSpritesheet.png (célula 73x62) sobre o fundo dos cinco quadros de b_ready_mobile01.img, sem o Armor desse botão. O XFS não tem botão de Knight nem de Aduka; mobile15 é RANDOM e não entra.",
+          "source_sheet": "assets/openbound/aduka/CharacterSpritesheet.png",
+          "source_cell": [
+            73,
+            62
+          ],
+          "background_entry": "b_ready_mobile01.img"
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile_aduka.json"
+      }
+    },
+    "b_ready_mobile_dragon": {
+      "file": "room/b_ready_mobile_dragon.png",
+      "size": [
+        1260,
+        188
+      ],
+      "frame_size": [
+        252,
+        188
+      ],
+      "frames": 5,
+      "order": [
+        "ready",
+        "mouse",
+        "push",
+        "disable",
+        "active"
+      ],
+      "frame_regions": [
+        [
+          0,
+          0,
+          252,
+          188
+        ],
+        [
+          252,
+          0,
+          252,
+          188
+        ],
+        [
+          504,
+          0,
+          252,
+          188
+        ],
+        [
+          756,
+          0,
+          252,
+          188
+        ],
+        [
+          1008,
+          0,
+          252,
+          188
+        ]
+      ],
+      "sha256": "065e24393e27dece35ec391dbc21dd2b3e1a5d9eba9577b05b709945138573b2",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source": {
+        "file": "assets/classic/room/b_ready_mobile_dragon.png",
+        "sha256": "37d2e0966240673982227b811b4514fba2b28f5ca7e550695afb454abed05781",
+        "size": [
+          315,
+          47
+        ],
+        "record": {
+          "file": "room/b_ready_mobile_dragon.png",
+          "entry": null,
+          "order": [
+            "ready",
+            "mouse",
+            "push",
+            "disable",
+            "active"
+          ],
+          "img_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "frame_size": [
+            63,
+            47
+          ],
+          "frames": 5,
+          "note": "Quadro 0 de CharacterSpritesheet.png (célula 82x76) sobre o fundo dos cinco quadros de b_ready_mobile01.img, sem o Armor desse botão. O XFS não tem botão de Knight nem de Aduka; mobile15 é RANDOM e não entra.",
+          "source_sheet": "assets/openbound/dragon/CharacterSpritesheet.png",
+          "source_cell": [
+            82,
+            76
+          ],
+          "background_entry": "b_ready_mobile01.img"
+        }
+      },
+      "verification": {
+        "method": "bicubic_per_frame_preserve_native_alpha",
+        "interpolated_colors": true,
+        "alpha_values_changed_pixels": 0,
+        "report": "docs/classic-buttons-smoothing/reports/b_ready_mobile_dragon.json"
+      }
+    }
+  },
+  "approval_reference": "docs/exit-restoration-preview/exit-4x-bicubic.png"
+}

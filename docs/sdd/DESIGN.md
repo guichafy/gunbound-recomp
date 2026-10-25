@@ -1,5 +1,41 @@
 # Design implementado
 
+## Acabamento conservador ativo — ADR-101
+
+DiretórioHD ativo: `assets/hd/classic/buttons_smooth_4x`, catálogo gerado a
+partir das fontes com BICUBIC por quadro e alpha em nearest. Atlas exatos
+anteriores permanecem em `buttons_4x`. O consumidor mantém a mesma conversão
+de recortes e a mesma geometria lógica da ADR-100. Importação pode reparar
+RGB sob alpha0; testes comparam a contribuição visível e o alpha, sem tratar
+RGB invisível como alteração do desenho. Ver `CLASSIC_BUTTONS_SMOOTHING.md`.
+
+## Consumo dos botões4× — ADR-100
+
+`ClassicChrome` lê o catálogo4× ao lado do manifest nativo. Valida registro,
+escala/dimensões e textura importada; fornece um atlasHD válido ou fallback
+nativo. `frame_size` e os controles continuam em pixels nativos; somente a
+região do `AtlasTexture` usa densidade4. Cache separa caminhos HD/nativos.
+Lobby/menu não duplicam conversão nem alteram o layout. Os dois JSONs entram
+no preset de exportação. Validação: `CLASSIC_BUTTONS_HD_INTEGRATION.md`.
+
+## Skill HD — restauração fiel (ADR-099)
+
+`skills/gunbound-classic-hd` usa fonte visual única e prompt integral de
+restauração. `scripts/validate_restoration.py` dessa skill lê imagens, mede
+dimensões/grade/alpha e diferenças por célula; não edita PNGs e não aprova
+aparência. Ensaios separados em `docs/classic-hd-restoration` não são recursos
+do runtime. Evidência em `CLASSIC_HD_RESTORATION_SKILL.md`.
+
+Para repetição exata pedida/aceita, `scripts/upscale_exact.py` na skill
+salva um PNG novo com nearest inteiro e preservação de RGBA. O verificador
+usa `--exact-pixels` para conferir todos os pixels na resolução final,
+além da geometria/alpha. Média RGB sozinha não comprova esse contrato.
+
+O lote `assets/hd/classic/buttons_4x` reúne42atlas/197estados. Seu catálogo
+guarda escala4, dimensão/célula/regiões ampliadas, ordem/registro nativo e
+hashes de origem/saída. Os consumidores atuais continuam usando o catálogo
+nativo: a entrega de PNGs ampliados não muda coordenadas lógicas da interface.
+
 ## ASate/JD/Aduka/Raon 0.20.5
 
 `AsateEffect`, `JDEffect`, `AdukaEffect` e `RaonEffect` isolam o estado de

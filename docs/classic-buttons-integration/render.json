@@ -1,0 +1,20 @@
+[
+	{
+		"identical_rgba": true,
+		"replaced_state_textures": 76,
+		"screen": "lobby",
+		"size": [
+			1920,
+			1080
+		]
+	},
+	{
+		"identical_rgba": true,
+		"replaced_state_textures": 88,
+		"screen": "room",
+		"size": [
+			1920,
+			1080
+		]
+	}
+]

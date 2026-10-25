@@ -1,0 +1,744 @@
+{
+  "atlas_count": 42,
+  "newly_upscaled_atlas_count": 41,
+  "reused_create_atlas_count": 1,
+  "frame_count": 197,
+  "output_pixels_checked": 8087792,
+  "rgba_changed_pixels": 0,
+  "by_folder": {
+    "lobby": 19,
+    "room": 23
+  },
+  "items": [
+    {
+      "name": "b_gamelist_exit",
+      "source_size": [
+        428,
+        45
+      ],
+      "output_size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 535,
+      "pixels_checked": 308160,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_ranking",
+      "source_size": [
+        428,
+        45
+      ],
+      "output_size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 660,
+      "pixels_checked": 308160,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_avatar",
+      "source_size": [
+        428,
+        45
+      ],
+      "output_size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 649,
+      "pixels_checked": 308160,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_create",
+      "source_size": [
+        428,
+        45
+      ],
+      "output_size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 648,
+      "pixels_checked": 308160,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_join",
+      "source_size": [
+        428,
+        45
+      ],
+      "output_size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 659,
+      "pixels_checked": 308160,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_viewall",
+      "source_size": [
+        405,
+        33
+      ],
+      "output_size": [
+        1620,
+        132
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 677,
+      "pixels_checked": 213840,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_wait",
+      "source_size": [
+        405,
+        33
+      ],
+      "output_size": [
+        1620,
+        132
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 697,
+      "pixels_checked": 213840,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_friend",
+      "source_size": [
+        410,
+        33
+      ],
+      "output_size": [
+        1640,
+        132
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 677,
+      "pixels_checked": 216480,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_directgo",
+      "source_size": [
+        410,
+        33
+      ],
+      "output_size": [
+        1640,
+        132
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 659,
+      "pixels_checked": 216480,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_prev",
+      "source_size": [
+        196,
+        33
+      ],
+      "output_size": [
+        784,
+        132
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 541,
+      "pixels_checked": 103488,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamelist_next",
+      "source_size": [
+        196,
+        33
+      ],
+      "output_size": [
+        784,
+        132
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 519,
+      "pixels_checked": 103488,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_exit",
+      "source_size": [
+        428,
+        45
+      ],
+      "output_size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 535,
+      "pixels_checked": 308160,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_changeteam",
+      "source_size": [
+        428,
+        45
+      ],
+      "output_size": [
+        1712,
+        180
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 549,
+      "pixels_checked": 308160,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_start",
+      "source_size": [
+        496,
+        38
+      ],
+      "output_size": [
+        1984,
+        152
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 339,
+      "pixels_checked": 301568,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mapprev",
+      "source_size": [
+        112,
+        28
+      ],
+      "output_size": [
+        448,
+        112
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 364,
+      "pixels_checked": 50176,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mapnext",
+      "source_size": [
+        112,
+        28
+      ],
+      "output_size": [
+        448,
+        112
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 360,
+      "pixels_checked": 50176,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_solo",
+      "source_size": [
+        324,
+        24
+      ],
+      "output_size": [
+        1296,
+        96
+      ],
+      "frames": 4,
+      "distinct_rgba_colors": 398,
+      "pixels_checked": 124416,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch1",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 366,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch2",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 367,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch3",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 367,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch4",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 367,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch5",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 367,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch6",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 367,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch7",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 367,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_gamechat_ch8",
+      "source_size": [
+        110,
+        22
+      ],
+      "output_size": [
+        440,
+        88
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 367,
+      "pixels_checked": 38720,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile01",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 576,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile02",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 916,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile03",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 739,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile04",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 888,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile05",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 617,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile06",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 817,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile07",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 633,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile08",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 681,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile09",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 835,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile10",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 648,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile11",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 951,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile12",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 966,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile13",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 2484,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile14",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 747,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile_knight",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 488,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile_aduka",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 446,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    },
+    {
+      "name": "b_ready_mobile_dragon",
+      "source_size": [
+        315,
+        47
+      ],
+      "output_size": [
+        1260,
+        188
+      ],
+      "frames": 5,
+      "distinct_rgba_colors": 480,
+      "pixels_checked": 236880,
+      "changed_pixels": 0
+    }
+  ],
+  "original_files_preserved": 95,
+  "source_tree_sha256_before_and_after": {
+    "manifest.json": "07d90258a9409a51c81f73b08e279b16bcc81027aab884cbf35b5f691ba183c9",
+    "room/b_ready_mobile08.png.import": "c3d666fe08a8384c2457ad8d8a96c66e15807051d532470d65f39679d9e9d0b0",
+    "room/b_ready_mobile14.png.import": "a711ee30fbfe0ffd4d160a8217f942bc326db65c40b6f553e281c0a7e271bcd0",
+    "room/b_ready_mobile_knight.png": "ffd93dc27015d326587b28ce18013f0d801d13543c957c9dcd45bf3374007d4e",
+    "room/b_ready_mobile05.png.import": "62e014918f574cce9f1452dde5536b3f9e982126fd05a96c63a7369d11945e31",
+    "room/b_ready_mobile_aduka.png": "0d31d5a5122951b8286dc971cdb5adab7c4d7b409b7f96d3b0ace79ea1ee281d",
+    "room/b_ready_mobile_dragon.png": "37d2e0966240673982227b811b4514fba2b28f5ca7e550695afb454abed05781",
+    "room/b_ready_solo.png.import": "6672a313082dd60eef39ffb72e1e27bb6ea13c1e0a0ffc25bf5c076fe360e31e",
+    "room/b_ready_changeteam.png.import": "0c0f3d1452bcb5e9feb89dacfc3305f6c0a671f5107156c430785d22f0894064",
+    "room/b_ready_exit.png": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+    "room/b_ready_mobile11.png.import": "0f029490eb938b3083907fd1b7183282ef873249eb9df44f84b50440d3af3462",
+    "room/b_ready_mobile14.png": "830cc977e368763e326f376275453b2fa99b4c06678c8c9d67a8a89171977e93",
+    "room/b_ready_mobile01.png": "12a174459f942aca9787a019f1878864c316a3d4cad88759a4323ca1c8bc6a10",
+    "room/b_ready_mobile03.png": "8e9d7b44123354d34a20b9e9dd148837f02d8edd1fcffe8139d1f8ea5e3ec646",
+    "room/b_ready_mobile_knight.png.import": "58d6ce42ed7c6c435b852a47877dc719dc314c21e7cec5d77f1db1d1e9db12c6",
+    "room/b_ready_mobile07.png.import": "d424ac12bfec59fe31e4883aa8a8910e42b0835f8a36a54ad7362490771af338",
+    "room/b_ready_mobile_aduka.png.import": "5a375d7bb841085a4be7df019d53c5778c0bc6e5deb793bb38e61edee981939c",
+    "room/b_ready_mobile02.png": "6b0286f0b2ac104dc3be2135e6894b6cd448d91dcd56e67715d27d1f01bdb399",
+    "room/b_ready_mobile12.png": "05a12605b6d9f28a3000ce02d6998f0a7749427dfade3f76cf239fbe3313e0b4",
+    "room/b_ready_mobile06.png": "da2c9adc01fd6ca282e261525ed5c46a8c92e215897dc2b477b5d797d5a91d1e",
+    "room/b_ready_mobile02.png.import": "379f2992616e285087ea8b2b2330688add33193a8b7fadcf807c0fdd8be48a41",
+    "room/b_ready_mobile07.png": "59280cf32aee37a5e1a8ee4eca09c1a5336aa0630581d0341684f8e88202f294",
+    "room/b_ready_mobile13.png": "88f2148200e411b897af4921a786babec28e0ae11e2ac6e2036d7bcd35a2f08b",
+    "room/b_ready_mobile05.png": "c490de3a6e85ea7885df56c736dea47c6e760cbf5b0cd2e149c4b28c91da3fb6",
+    "room/b_ready_start.png": "21a5ab09df99d36f5de46d6cc9e73ca566a54198683ef0863dcde15110988c89",
+    "room/b_ready_mobile11.png": "3e535f9210078b23372582f752c9c85161feddafb95c51c358ccf96bf1d5c577",
+    "room/b_ready_mobile13.png.import": "b09cc23f3715753c5f368476caa4f0cf77ce720db3e6a3f4ce240059cfe156f1",
+    "room/b_ready_mobile_dragon.png.import": "7beb85e9f92d91135583c1f58f9254d2c5e4ff815044fcd8586fe41c7b19c74f",
+    "room/b_ready_mapnext.png.import": "c08df8111604971a3639b215b86e213bc489b86d1b3fa03ac4c6504f75d26a63",
+    "room/b_ready_mobile10.png": "eb3b1baca40d8de97690834025ee281c285fbb28aed686c80905594a6627e75e",
+    "room/b_ready_mobile04.png": "6c380fc8f1636b26845a5234f857b78a5eca0f53917b8e961e5fd226f92f78c3",
+    "room/b_ready_mobile09.png": "21907e5b6ed28f32411b467d2f2af3cac6d582c8b71adbf81535b14a6360a223",
+    "room/b_ready_exit.png.import": "d5b748eea96f8c9ca9dc91e890248a95787737bbd774e17811f989a4168def69",
+    "room/b_ready_mobile01.png.import": "61a7e771e35b3e284da9bcab4d4af71ab7337e1ce3cb7e160ccc73e794462fe4",
+    "room/b_ready_mobile08.png": "acb0560eaff545f363dc88a9b46a3c86087ca8aa3cba14a1de4aea69867e71b8",
+    "room/b_ready_mobile10.png.import": "0b3704907eb9f44ff386b8832e068ba180c0a7b8ffeb7b319a1d3a3c5d9fbc1c",
+    "room/b_ready_mobile09.png.import": "ee7c69e4a1cdf9c56bbd53f17e0eec5fd631824d8a316ea13fea16d6238ac9cf",
+    "room/back.png.import": "b1a30e36aada04faa968448df891973e10810cc3eceba7aed8a64b20ae673ddb",
+    "room/b_ready_solo.png": "1f321bcdbd28fd610fed96649847aad034bc089bec9a0cb91aa587dd8dd7e5a9",
+    "room/b_ready_mobile04.png.import": "2e61c58459c59d76b09a8ebe9534927759e9ee06f49c5420a30c0ce3f6e0d934",
+    "room/b_ready_start.png.import": "2ed564ac9b47c52ed7c61ad3b279aecb33fafab3f24d76c460a379eb9bd9f1cf",
+    "room/b_ready_mobile03.png.import": "2103b6df528347a02283f7df7edabe73f4157e87dff61be715d6a096423a8255",
+    "room/b_ready_mobile12.png.import": "f8e83e2d484ce8b31de05614407d3d7ea8f558add713c4757e93bafe158e9bdd",
+    "room/b_ready_mapprev.png": "90ae344d2b6d59d6648339443959a577a1e6e45a816047b51eb7e9b08efcff5b",
+    "room/b_ready_mapnext.png": "e4535e26dfa8ec99ecbf8643ae78ac54863040a0e62b2c3bcaacd90cfa863d8f",
+    "room/back.png": "b0eb29b20c615f7abc80b7c313d010dc80ad4240eabae179d328a756d3c7f99a",
+    "room/b_ready_changeteam.png": "a069ad8a914e8809d8339cf73a2ba8323e3f7ad532c444033af9759fd26480f2",
+    "room/b_ready_mobile06.png.import": "41696f4f64b228d153bee2b2d844a2d7c30b6dace0380cdd3479789dcd8cf0e0",
+    "room/b_ready_mapprev.png.import": "9c25877d0fc0c07726dab2adda4d282fd6b2a1896355a172698f94f46aa0a351",
+    "lobby/b_gamechat_ch1.png": "96e6378a6c0d6a453de48a7e3cf6d06626109acfe92ac72d3467fe167829703c",
+    "lobby/b_gamechat_ch7.png.import": "5e75b799bd835fbca143a69b4834c6791d0c64538475a1d214560a8e2d8f4b0f",
+    "lobby/b_gamelist_exit.png": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+    "lobby/b_gamelist_viewall.png.import": "b44d654ceba8fc24a73236b49ec6f8f449ad307d9487ccb347a4f4674c748981",
+    "lobby/b_gamechat_ch2.png": "535fc6d5b920f8d3b8513c49415e6a0cb38bceb2022d7918f8e0b7fe56b5ac48",
+    "lobby/b_gamelist_directgo.png": "abf178ec2c1dfe3aa6ec016b0c1a0a4fe7dec41456b2aaa14f25211710e3c854",
+    "lobby/b_gamechat_ch3.png": "4e0e8f2494bc530cfba0dd58e534b7a41331e960e4840ec34deafa6e0976574a",
+    "lobby/b_gamechat_ch7.png": "032e6d0de1cdddad38e6c982b7dd9390ff5cbc7a77684656558e6e3d172b452b",
+    "lobby/b_gamechat_ch6.png": "1cc7797e9330d0203deca84fd2051a617cde90ebb98e6232ee7d542fd2935e2e",
+    "lobby/b_gamechat_ch4.png": "20fbcc7e8b929626c837d96b646580b686034096fd9847acdded71e49e14b84c",
+    "lobby/b_gamechat_ch2.png.import": "0f02b5cebd9529bb38ecea68c69a72f3e65d0b467ec28e1255be5e909fd37218",
+    "lobby/b_gamechat_ch5.png": "e32a005d2fb8f352aec40cd36f96d97ffe659f027c7cb25d41c74748f7c83929",
+    "lobby/b_gamelist_prev.png": "d99d183c98131841166f7f4e81362550978fc935a491b35f4b31284fd087501b",
+    "lobby/b_gamelist_friend.png": "bcf4807b4ae4baf6fb715ebd621ef8f1fd5be58801801eaa0fa41043fdcdd693",
+    "lobby/b_gamechat_ch5.png.import": "46e3c92d58b64e333bd876c9b6a52400e1788b0975ff3b02d726439e9d062db5",
+    "lobby/b_gamelist_create.png": "0296b73253e6608d88d23698fbd8b9b8e9c0081ce0169fa65dc5168c3e0bfc10",
+    "lobby/b_gamelist_wait.png": "3319ee6d8cf314fe86219303ba9a1f27cfe4509a2b5e2a951fd43a652f782118",
+    "lobby/b_gamelist_viewall.png": "3a499534569f7e9faac7636cd82021c7161165f15a08303fb8713d6d6e48f449",
+    "lobby/b_gamechat_ch8.png.import": "9b667e998601696e7b28637dbaee383b1c26bba5cb578f863d73260b69120002",
+    "lobby/b_gamelist_wait.png.import": "838061951f67e13432993264b51b36d28562c68a2b736f0d321edba4a78f8936",
+    "lobby/b_gamelist_next.png": "6f09f3f3f1e2d50f4afb1075aedccd42023c7d18cb30693d2a0646aa724adbd2",
+    "lobby/b_gamelist_exit.png.import": "2a77f71e6477527d95f58a3adf91b6e9dfe794627087e18b47136802fe3b03ef",
+    "lobby/b_gamelist_prev.png.import": "b4388c8ad3a00879a2c6a7d48b58125d6a01eb7a816730efb1f2caa97d40739f",
+    "lobby/b_gamelist_ranking.png.import": "f93c3c19903d2fd5349ce97547b6e7db2efa1388007181b30b3a6f67d7d8aadb",
+    "lobby/b_gamechat_ch3.png.import": "a6a29c32a7353950ca117331de52cb67a53aba85729368012a077924204b8469",
+    "lobby/b_gamelist_ranking.png": "650c443404a6bffff7505f55ec18df7e02f6b5f16c779e8a7ade778ba638c6c4",
+    "lobby/channel.png": "5c49073b739daffaa890579ad0e013a78944e5d11298f5b2ef164cd2336cb3ad",
+    "lobby/chat.png.import": "956c011ddcce18cf3b242e842c7aa710e470fe61b3f8ea6f71c3a12f1b40676d",
+    "lobby/b_gamechat_ch6.png.import": "898b5cdd74c2e4e2f880b044f0b18f67817c02e6759483f68309ddd506893778",
+    "lobby/back.png.import": "17191dd273d011ec6952d00d1c7a4ba789d70f7bf3b9dc57b870bab853badbe3",
+    "lobby/b_gamelist_join.png": "c9a9b49fac38f5edf5a40d1d63447fe7cb0027c0c695aef0a94c11282a1ab11c",
+    "lobby/b_gamelist_avatar.png": "abb5444ae7e7d92624433623198e0dab61fff8a632742735ef0f2354a57968fb",
+    "lobby/channel.png.import": "3dc40963a66e4149fe27f1fa82f4b7ecb04b18c6a310a0a3de85660d4f7f2dbe",
+    "lobby/b_gamechat_ch8.png": "8d06047812edfa0f2d39f1898c172b2dd66d740197792089e766b517be247b40",
+    "lobby/b_gamechat_ch1.png.import": "319b7a6c65c9286a6976e6ae3a3753a69e9e982b794de0c11482425d1e6c074d",
+    "lobby/b_gamelist_directgo.png.import": "fcd804a8541224b9a5430e0b3ab797e5ee0be0b897d5c3bc05d516df9869b7a6",
+    "lobby/buddy_fill.png": "302b11bc60353b198c3589d7e6d3ed88bb97d79625ba676b872e8acf46ad095f",
+    "lobby/b_gamelist_avatar.png.import": "99740a2a889d79164308d5512ddf493251c51d608d73cd92b6a0792c33e95418",
+    "lobby/chat.png": "77029fba26e8399b13c820c7efd8a66a9113d35bcbba93ee311b6542c515f185",
+    "lobby/buddy_fill.png.import": "795bbe60a69084991c099496ba1c191bcbd237b6991f80e1460064e6003df124",
+    "lobby/b_gamechat_ch4.png.import": "e50a98bc5d81e16bb8ab2a8c2fc8afd819706ce5e43d3304e4e32e401f78771b",
+    "lobby/back.png": "16999e8c6d880e3c48591101468a80c16f8b312db914d65e14bbc7bc6e713d68",
+    "lobby/b_gamelist_friend.png.import": "9e8ff2f95610c368c73e984d82a1a3cf9882c732d797b8a80c4d5264b1d7b839",
+    "lobby/b_gamelist_create.png.import": "20938e2a0f5ec8fa9804e52d0f0adb50f0cbac26c47287b89f66b39f63bbcf72",
+    "lobby/b_gamelist_next.png.import": "c074fff42b5c52d241239d20ce19752ea39c65a61b7bb585f5272d59802d0229",
+    "lobby/b_gamelist_join.png.import": "ed572ae428e4f98b849fad6eeb40947c079e13aaeed30a2ea564c10224be84af"
+  },
+  "source_manifest_matches_all_button_pngs": true,
+  "independent_method": "Every output RGBA pixel compared against source[x//4,y//4]; no resizing used in independent verification"
+}

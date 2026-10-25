@@ -965,3 +965,67 @@ colagem. Não se usa o RANDOM nem o placeholder. Item de 2 slots deixa de
 repetir o ícone em cada lugar: um controle cobre os dois retângulos e o vão,
 e o clique tira o item inteiro. Item de 1 slot permanece em um lugar.
 Catálogo, `options.items` e o teto de 6 slots não mudam. CPU continua sem itens.
+
+## ADR-099 — restauração fiel como padrão da skill HD
+
+25/10/2026, REQ-12/19/20. O prompt atual do usuário substitui as orientações
+de reconstrução/2.5D e segunda referência de acabamento na restauração de
+Gunbound Classic. Fonte visual única, mesma geometria/paleta/alpha/estados,
+alvo4× por dimensão quando suportado. Preservação prevalece sobre nitidez.
+Rig/efeitos de HD já aprovado continuam disponíveis para correções próprias;
+esta decisão não troca arte ativa nem revoga aceites anteriores.
+
+Skill conserva o prompt integral, contrato medido e checker somente de leitura.
+Dimensões/métricas não autorizam aceite visual; candidatos incompatíveis são
+rejeitados sem corrigir por esticamento/crop. Três ensaios reais em
+`assets/classic` falharam no contrato. Evidência/limites em
+`CLASSIC_HD_RESTORATION_SKILL.md`. Sem integração, versão nova ou build.
+
+No ensaio posterior do CREATE, o usuário aceitou explicitamente repetição
+exata dos pixels. A skill passa a oferecer `upscale_exact.py` para esse
+contrato: nearest inteiro, PNG separado e validação RGBA integral com
+`--exact-pixels`. Não se apresenta esse resultado como restauração neural.
+CREATE1712×180 foi conferido nos308160pixels, sem divergências/padding e
+com as648cores originais. O aceite dessa técnica não autoriza substituir
+outros assets nem aplicar os candidatos rejeitados ao runtime.
+
+Solicitação seguinte estende explicitamente a mesma técnica aos41demais
+atlas de botões em `assets/classic`. Derivados separados em
+`assets/hd/classic/buttons_4x`, conjunto completo42PNGs/197estados incluindo
+CREATE, com catálogo de origem/escala/hashes e verificação RGBA integral.
+Os originais e seus `.png.import` são preservados. Esta ampliação não conecta
+os derivados aos consumidores da interface nem altera dimensões lógicas.
+
+## ADR-100 — atlas4× no lobby/sala com geometria nativa
+
+25/10/2026, REQ-02/12/19/20. Pedido posterior autoriza integrar os derivados
+da ADR-099. `ClassicChrome` troca o atlas e multiplica somente a região de
+textura por4. Manifest nativo continua definindo células lógicas, estados,
+layout e hitboxes; filtro nearest, stretch e mínimos dos controles permanecem.
+Catálogo/recursoHD inválido ou ausente retorna ao original. Nenhum ajuste de
+posição, tamanho, novo botão ou regra de treino é introduzido.
+
+Importações dos42PNGs e inclusão explícita dos dois JSONs no preset permitem
+uso no projeto e no PCK. Suítes735/0; GPU1920×1080 com RGBA idêntico para
+lobby/sala; smoke isolado91/0/exit0, revisão independente aprovada.
+Limites ambientais e evidências em `CLASSIC_BUTTONS_HD_INTEGRATION.md`.
+Aplicativo previamente exportado não foi substituído por esta integração.
+
+## ADR-101 — suavização conservadora aprovada
+
+25/10/2026, REQ-02/12/19/20. O usuário aprovou o EXIT BICUBIC e pediu aplicar
+o acabamento e adotá-lo na skill para próximas sessões. Substitui o acabamento
+exato da ADR-099/100 no consumo dos botões, preservando fontes e derivados
+anteriores. Ativo em `assets/hd/classic/buttons_smooth_4x`,42atlas/197estados.
+
+Cada quadro é filtrado isoladamente em4×; alpha conserva cobertura/valores
+nativos por nearest e o RGB usa interpolação bicúbica. Sem novas margens,
+mistura de estados, redesenho ou mudança de layout/hitbox. Cores/pixels não
+são idênticos à fonte; o modo exato permanece para pedidos que o exijam.
+O EXIT integrado coincide com a prévia explicitamente aprovada.
+
+Skill inclui helper reproduzível, inspeção por estado e fluxo sem IA para
+melhorias desse tipo; relatórios usam destino novo para não sobrescrever
+fontes/candidatos. Suítes778/0,21testes Python, GPU1920×1080 e PCK92/0/exit0,
+com limites ambientais documentados em `CLASSIC_BUTTONS_SMOOTHING.md`.
+Sem nova versão, aplicativo exportado ou envio ao remoto.

@@ -1,75 +1,77 @@
 ---
 name: gunbound-classic-hd
-description: "Use quando a tarefa envolver regenerar imagens ou sprites de Gunbound Classic/OpenBound em alta resolução ou Full HD, animar mobiles/personagens/avatares, refazer brilho/aura/contorno de uma peça, ou corrigir tremor, troca de anatomia, proporção e encaixe dessas peças."
+description: "Use quando a tarefa envolver ampliar ou suavizar imagens, botões, sprites e atlas Gunbound Classic/OpenBound em HD/4×, validar fidelidade/alpha/quadros, animar mobiles/avatares ou corrigir tremor, anatomia, proporção e encaixe."
 ---
 
-# Gunbound Classic: arte HD e animação contínua
+# Gunbound Classic: ampliação conservadora e animação
 
-Preserve a identidade clássica ao reconstruir detalhes. Anime uma anatomia
-constante por pivôs e transformações contínuas. Nitidez de um quadro isolado
-não comprova estabilidade de uma animação.
+Preserve o desenho clássico, geometria, enquadramento, estados e registro.
+Para melhorar nitidez de uma imagem existente com contornos mais suaves, o
+padrão é **suavização bicúbica conservadora4× por quadro**, sem redesenhar.
+Ela interpola tons vizinhos; não recupera detalhes ausentes nem preserva os
+pixels/cores exatamente. Originais e derivados aprovados ficam preservados.
 
-## Escolha o resultado
+## Escolher o método e escopo
 
-- **Imagem somente:** regenere a imagem solicitada; não altere a engine.
-- **Asset para o jogo:** entregue a arte, metadados de registro e integração.
-- **Animação com arte já boa:** corrija registro/rig/relógios antes de gerar
-  novamente. Uma geração nova não resolve um pivô incorreto.
+| Pedido | Procedimento |
+|---|---|
+| Melhorar definição/suavizar arte existente | [Ampliação conservadora](references/conservative.md) |
+| Preservar cada pixel e cor exatamente | `upscale_exact.py`, nearest inteiro |
+| Gerar arte ou redesign explicitamente pedido | [Geração e prompt](references/generation.md) |
+| Corrigir animação/encaixe de arte já boa | [Registro e movimento](references/animation.md) |
 
-Full HD significa **1920×1080** para a imagem/composição final. Sprites e atlas
-transparentes podem ter outros tamanhos: confirme os pixels úteis da figura
-e a nitidez na maior escala de uso. Um PNG1254×1254 não é Full HD; aumentar
-a tela transparente ou interpolar pixels não reconstrói detalhes.
+Imagem/prévia não autoriza integração ou lote. Integração solicitada inclui
+catálogo, fallback e testes; não muda combate, perfil ou geometria lógica.
+Aprovação de um acabamento vale para o escopo autorizado: não peça novamente
+permissão para aplicar o método que o usuário já escolheu.
 
-## Regenerar
+## Suavizar conservadoramente
 
-Leia [geração e prompts](references/generation.md) quando criar/substituir arte.
-Inspecione a fonte e um asset HD aprovado como referências distintas: a fonte
-define identidade/geometria, o aprovado define acabamento. Preserve direção,
-silhueta, cores, pose e proporções. Gere peças estáveis e efeitos em camadas
-separadas.
-Use GPT Images no fluxo aprendido neste projeto, respeitando outra escolha
-explícita do usuário e a ferramenta de imagens disponível. Preserve originais,
-brutos, alpha real, prompts e dimensões observadas; copie o resultado escolhido
-para o projeto e regenere o catálogo antes de integrar.
+Leia [conservative.md](references/conservative.md). Use a fonte nativa, não
+um PNG já ampliado. Meça grade/células/ordem/pivôs. Na pasta da skill:
 
-Para personagem sem equipamento modular, prefira anatomia inteira. Para
-avatares vestíveis, cabeça/corpo/óculos/bandeira continuam separados, ligados
-por âncoras constantes. Não gere uma cabeça diferente em cada pose nem
-redimensione partes conforme os efeitos crescem.
+```sh
+python3 scripts/upscale_conservative.py FONTE.png SAIDA.png --scale 4 --columns N --rows M
+python3 scripts/validate_restoration.py FONTE.png SAIDA.png --scale 4 --columns N --rows M --report medidas.json
+```
 
-## Efeitos colados à anatomia
+Cada quadro é filtrado isoladamente com BICUBIC e recolocado nas coordenadas
+originais×4. Alpha mantém cobertura/valores via nearest; RGB transparente é
+tratado em espaço pré-multiplicado para evitar vazamento. Sem padding, crop,
+reposicionamento, sharpening, luz nova ou mistura entre estados.
 
-Leia [efeitos presos à anatomia](references/effects.md) antes de refazer brilho,
-aura ou contorno de uma peça. Se o efeito clássico for a silhueta da própria
-peça, derive-o da máscara do mestre HD com o perfil medido no clássico, em vez
-de gerar uma luz solta: gerada à parte, ela não coincide com o HD, e entortá-la
-só desloca o erro. Registre-o na janela da peça base e aceite por cobertura,
-vazamento e visibilidade na prévia real, lado a lado com o clássico.
+Conserve anatomia, letras, contornos e intensidade dos efeitos. Compare todos
+os estados no tamanho de uso: suavidade não basta se o texto perde legibilidade.
+Para efeitos/transparência e grades não uniformes, confira janelas e camadas
+nativas; o helper só aceita grade uniforme. Não invente FPS, poses ou recortes.
 
-## Registrar e animar
+## Pixels exatos e geração
 
-Leia [registro, composição e movimento](references/animation.md) para código.
-Recorte alpha uma vez e registre o pivô na janela nativa. O centro da silhueta
-por quadro não é uma junta: olhos/cabelo/luz mudam o bbox sem mover o assento.
-Conserve aspecto e escala compartilhada. Distinga Body/RiderPivot de quadris
-de um piloto inteiro; derive a montagem do contato real do mobile.
+Quando o pedido exigir pixels/cores idênticos, use:
 
-Respiração usa relógio contínuo pausável; ações conservam seus tempos originais.
-Misture mudanças de pose a partir da geometria atualmente exibida, por ator,
-incluindo interrupções/recuo repetido. Rodas seguem distância acumulada.
-Animação não determina colisão, dano ou trajetória.
+```sh
+python3 scripts/upscale_exact.py FONTE.png SAIDA.png --scale 4
+python3 scripts/validate_restoration.py FONTE.png SAIDA.png --exact-pixels
+```
 
-## Conferir e entregar
+Esse modo conserva os degraus do pixel art. Não use `--exact-pixels` para
+julgar BICUBIC, que altera RGB intencionalmente. Evite geração para limpeza
+de raster: ela pode mudar símbolos, letras, cores e margens. Para geração
+solicitada, use a ferramenta de imagens disponível e suas instruções atuais;
+[restoration-prompt.txt](references/restoration-prompt.txt) é referência desse
+modo, não substitui o procedimento determinístico aprovado.
 
-Verifique registro/proporções constantes, ciclos/transições, pausa, ambos os
-sentidos e inclinação. Inspecione sequência GPU a60fps, além de uma imagem
-1920×1080 sem distorção de aspecto. Confira alpha/halos e nitidez no tamanho
-real. Rode regressões pertinentes; preserve fallback nativo quando faltar
-arte/metadado válido. Se entregar aplicativo, reexporte e confira seu pacote.
+## Integrar e validar
 
-Em Gunbound Recomp/DemoGame, consulte [mapa do projeto](references/demogame.md)
-para arquivos, fórmulas e testes existentes. Não copie suas coordenadas para
-outro mobile sem medir a fonte. Entregue caminhos, dimensões reais, prompt,
-evidência de movimento e limitações: rig HD é adaptação artística, não
-restauração de todos os gestos/olhos do original.
+Dimensões reais devem ser4× por eixo, com a mesma grade e aspecto. Full HD é
+uma composição1920×1080; atlas mantém seu aspecto. Registre fonte/hash, método,
+parâmetros, dimensões, catálogo e limites. Métricas não substituem inspeção.
+
+No jogo, multiplique apenas recortes da textura pela densidade; tamanho lógico,
+pivôs, alinhamento e hitboxes ficam iguais. Confira estados, cliques, fallback
+e render real; se entregar app, reexporte e confira o pacote.
+
+Rig existente usa peças/pivôs/relógios contínuos. Atlas fiel conserva poses e
+quadros; um mestre único não substitui a animação original. Para brilho preso
+à anatomia em HD aprovado, leia [effects.md](references/effects.md). No Gunbound
+Recomp, consulte o [mapa do projeto](references/demogame.md).

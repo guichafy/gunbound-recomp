@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-25",
+  "capture": "GPU OpenGL4.1 Metal Compatibility, Apple M4 Pro",
+  "size": [
+    1920,
+    1080
+  ],
+  "runtime_files": {
+    "scripts/classic_chrome.gd": "f1445aa68c3d7ae2579ab9940e7dc3c93af6eb814a59ae820a3c9bff75e2f790",
+    "scripts/lobby_screen.gd": "0d026af7a96863482f44d7eea02ad25b537550766515af871fb386f7a6121518",
+    "scripts/menu_screen.gd": "e93c2b7393e2da569171a8036e550cfc467dd20e40a2594de77300214191e6dc",
+    "export_presets.cfg": "200eb36a43b2772baf0c771dc53168af9a2f67cad64aa51a453f52eda82ab029"
+  },
+  "captures": {
+    "room-4x.png": "cb1fe4aa7233309cda82ccadaf5ce5c690ddc77eed05ad678ecd660b7e011667",
+    "lobby-4x.png": "2bcd4b1fe9f60b243fddd0263865122caa99067a1678a2abfe97b31cce5a5e82",
+    "room-native.png": "cb1fe4aa7233309cda82ccadaf5ce5c690ddc77eed05ad678ecd660b7e011667",
+    "lobby-native.png": "2bcd4b1fe9f60b243fddd0263865122caa99067a1678a2abfe97b31cce5a5e82"
+  },
+  "original_files_preserved": 95,
+  "hd_pngs_preserved": 42,
+  "headless_checks": 735,
+  "pck_checks": 91,
+  "pck_isolation": "/private/tmp/classic-buttons-pck-0pcicjn6",
+  "environment_notes": [
+    "Restricted GUI launch SIGABRT during macOS application/font registration; unrestricted capture succeeded.",
+    "Import/export cannot save user editor_settings and system CA lookup reports ret!=noErr.",
+    "PCK smoke system CA warning; no assertion/script errors."
+  ],
+  "exported_app_updated": false
+}

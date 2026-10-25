@@ -1,0 +1,46 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/room/b_ready_mobile02.png",
+    "sha256": "6b0286f0b2ac104dc3be2135e6894b6cd448d91dcd56e67715d27d1f01bdb399",
+    "size": [
+      315,
+      47
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/docs/classic-hd-restoration/raw/mage.png",
+    "sha256": "32f70022b2175f8c5692fc3441b6663f79d451e4ac693b5151eae74181a4426a",
+    "size": [
+      2048,
+      768
+    ],
+    "mode": "RGB",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    5,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    1260,
+    188
+  ],
+  "failures": [
+    "dimensions",
+    "aspect_ratio",
+    "candidate_grid"
+  ],
+  "cells": null,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "rejected"
+}

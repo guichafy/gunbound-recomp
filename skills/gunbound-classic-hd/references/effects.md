@@ -1,5 +1,9 @@
 # Efeitos presos à anatomia: brilho, aura e contorno
 
+Use este fluxo para corrigir efeito sobre uma peça HD já aprovada ou numa
+adaptação solicitada. Na restauração fiel de imagem/atlas inteiro, preserve
+o efeito e o alpha da própria fonte, sem derivar uma composição nova.
+
 Aprendido no brilho do chifre do Great Devil Head (três tentativas rejeitadas
 antes do aceite: luz gerada à parte deslocada, halo atrás imperceptível e
 meia-lua entortada por malha UV). A forma correta veio do próprio chifre HD.
