@@ -1,5 +1,13 @@
 # Design implementado
 
+## Texturas do lobby4×
+
+Imagens estáticas e insígnias usam derivados conservadores registrados em
+assets/hd/classic/lobby_smooth_4x. A seleção valida fonte/grade/dimensões,
+com fallback nativo. Só textura/recortes ganham densidade; controles mantêm
+tamanhos originais. Ver LOBBY_ART_HD.md.
+
+
 ## Lobby: patente atribuída e contenção — ADR-102
 
 `classic_ranks.gd` define os códigos Thor −4…20 e recortes dos atlas originais;

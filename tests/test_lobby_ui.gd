@@ -48,9 +48,9 @@ func run() -> void:
 	if FileAccess.file_exists(rank_path):
 		var ranks = load(rank_path)
 		for code in range(-4, 21):
-			var icon: AtlasTexture = ranks.icon(code)
+			var icon: AtlasTexture = ranks.icon(code, false, false)
 			check(icon != null and icon.region == Rect2((code + 4) * 15, 0, 15, 25), "Native rank1 frame follows WORD+4")
-			icon = ranks.icon(code, true)
+			icon = ranks.icon(code, true, false)
 			check(icon != null and icon.region == Rect2((code + 4) * 25, 0, 25, 15), "Native rank2 frame follows same code")
 		check(ranks.title(20) == "GM" and ranks.description(20).contains("Administrador"), "GM identifies Administrator of the System")
 		check(ranks.title(19) == "Chick" and ranks.title(-4) == "Silver Dragon", "Catalog follows Thor order")

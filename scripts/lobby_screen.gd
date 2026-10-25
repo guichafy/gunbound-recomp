@@ -78,12 +78,15 @@ static func grouped(value: int) -> String:
 func rank_icon(stage: Control, key: String, at: Vector2, horizontal: bool) -> TextureRect:
 	var icon := TextureRect.new()
 	icon.name = key
+	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.texture = Ranks.icon(rank_code, horizontal)
 	icon.position = at
-	icon.size = icon.texture.get_size()
+	icon.stretch_mode = TextureRect.STRETCH_SCALE
+	icon.size = Vector2(25,15) if horizontal else Vector2(15,25)
 	icon.tooltip_text = Ranks.description(rank_code)
 	icon.mouse_filter = Control.MOUSE_FILTER_PASS
 	stage.add_child(icon)
+	icon.size = Vector2(25,15) if horizontal else Vector2(15,25)
 	return icon
 
 func build_filters(stage: Control, _ui) -> void:

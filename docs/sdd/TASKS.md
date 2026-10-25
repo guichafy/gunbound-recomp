@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Lobby com acabamento4× — 25/10/2026
+
+- [x] Versionar correção chat/GM:5732568,735checks/0 repetidos antes do commit.
+- [x] Ampliar/integrar seis imagens restantes,54células, fallback e geometria.
+- [x] Conferir1045checks Godot,21Python, revisão776/0 eGPU1920×1080.
+- [x] Conferir PCKisolado223/0/exit0, semoverride/TLSlocal; originais intactos.
+- [x] Documentar e versionar localmente o acabamento (ADR-103).
+- [ ] Aceite visual do usuário; app novo somente em entrega solicitada.
+
+
 ## Lobby/chat e patente GM — REQ-02/10/12/19, ADR-102
 
 - [x] REA no cliente original: convençãoThorWORD+4, GM20/quadros24.

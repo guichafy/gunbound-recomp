@@ -1,5 +1,12 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Acabamento restante do lobby — REQ-02/12/19/20
+
+Pedido25/10/2026 autoriza BICUBIC4× no fundo/molduras e insígnias nativas,
+com alpha, quadros, layout e hitboxes preservados; fallback original.
+Ver LOBBY_ART_HD.md. Não muda perfil, combate ou versão.
+
+
 ## Lobby e patente clássica — REQ-02/10/12/19
 
 Pedido atual substitui a apresentação Rank=level da ADR-096. Patente própria

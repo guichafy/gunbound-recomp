@@ -1,0 +1,32 @@
+[
+	{
+		"changed_textures": 6,
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "lobby",
+		"size": [
+			1920,
+			1080
+		]
+	},
+	{
+		"changed_textures": 6,
+		"images_differ": true,
+		"same_layout_hitboxes": true,
+		"screen": "stress",
+		"size": [
+			1920,
+			1080
+		]
+	},
+	{
+		"changed_textures": 0,
+		"images_differ": false,
+		"same_layout_hitboxes": true,
+		"screen": "room",
+		"size": [
+			1920,
+			1080
+		]
+	}
+]

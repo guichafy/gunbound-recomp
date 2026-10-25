@@ -1,5 +1,20 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Lobby com acabamento4× completo — ADR-103
+
+Correção chat/GM versionada em5732568. Fundo, molduras chat/canal,
+preenchimento e50insígnias agora usam BICUBIC4× conservador/alpha nearest.
+SeisPNGs em assets/hd/classic/lobby_smooth_4x; fontes/botões prévios intactos.
+Tamanho visual/posições/áreas de clique nativos; fallback validado.
+Sala permaneceRGBAidêntica. Sem alteração de perfil/combate/versão.
+
+1045checks Godot/0 e21testes Python, revisão independente776/0,54células
+conferidas. GPU1920×1080 padrão/stress, PCK223/0/exit0 semoverride/TLSlocal.
+CA/editor_settings ambientais detalhados em LOBBY_ART_HD.md. Commit local
+autorizado, sem push/app novo. Aceite visual do usuário e mouse físico/escuta
+permanecem separados. Capturas/hashes: docs/lobby-art-hd.
+
+
 ## Lobby corrigido e patente GM — ADR-102
 
 Rank deixou de ser level(): perfil novo e legado sem patente recebem GM20,

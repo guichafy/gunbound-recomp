@@ -1,0 +1,67 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/lobby/chat.png",
+    "sha256": "77029fba26e8399b13c820c7efd8a66a9113d35bcbba93ee311b6542c515f185",
+    "size": [
+      549,
+      259
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/lobby_smooth_4x/lobby/chat.png",
+    "sha256": "7a890ddc84df668478532639c37e4990dd5e337b2e996dc7a572dd2ee29cff12",
+    "size": [
+      2196,
+      1036
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    1,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    2196,
+    1036
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 367254,
+      "max_rgba_delta": 128,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 1.248654,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        549,
+        259
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        549,
+        259
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

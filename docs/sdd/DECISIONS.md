@@ -1050,3 +1050,21 @@ os mínimos de fonte do Godot, reaplicando tamanho após tema/clipping.
 
 1086checks Godot/0, revisor96/0 e50quadrosXFS, GPU1920×1080, PCK109/0/exit0.
 Evidência/limites em `LOBBY_UI_RANK.md`; sem versão/app/commit/publicação.
+
+
+## ADR-103 — acabamento restante do lobby em4×
+
+25/10/2026, REQ-02/12/19/20. Após versionar o lobby/GM em5732568, aplicar
+BICUBIC4× às quatro imagens estáticas e dois atlas de patente, por quadro,
+alpha nearest. Mantém aparência/registro, sem redesenho/padding; RGB é
+interpolado. Botões aprovados e originais permanecem. Sala não muda.
+
+Novo catálogo independente valida origem/grade/dimensões com fallback nativo.
+Tamanho mínimo/visual dos TextureRect explicitamente nativo, inclusive após
+add_child. GM20/quadro24 continua independente do XP. Nenhuma mudança de perfil,
+combate ou versão. PCKincluiJSON/PNGs; não há novo aplicativo exportado.
+
+1045checks Godot/0,21testes Python; revisão independente776/0 e54células.
+GPU1920×1080 confirma mesmas áreas de clique e salaRGBAidêntica. PCK223/0/exit0,
+sem override/TLSlocal. Evidência/limites: LOBBY_ART_HD.md e docs/lobby-art-hd.
+Commit local solicitado, sem envio ao remoto.

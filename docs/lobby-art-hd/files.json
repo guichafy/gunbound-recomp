@@ -1,0 +1,79 @@
+{
+  "baseline_commit": "5732568",
+  "method": "BICUBIC4x per frame; native alpha NEAREST",
+  "native_and_approved_files_preserved": 185,
+  "cells": 54,
+  "images": 6,
+  "godot_checks": 1045,
+  "godot_failures": 0,
+  "skill_python_tests": 21,
+  "independent_review_checks": 776,
+  "pck_checks": 223,
+  "pck_failures": 0,
+  "pck_exit": 0,
+  "app_reexported": false,
+  "version_changed": false,
+  "source": {
+    "assets/hd/classic/lobby_smooth_4x/catalog.json": "4337383a8f35dfe8decf39c73a9e1b63eb95827a4925028b0d4576f2685a4b87",
+    "assets/hd/classic/lobby_smooth_4x/lobby/back.png": "092ccc09a86d215e531626c6db23c32f537d2e82edbed79a217ab9d0e22e0830",
+    "assets/hd/classic/lobby_smooth_4x/lobby/back.png.import": "fb42a6366bcef8e72c66069dcce4474dad55bf5b4aca20996a3ffa008f698134",
+    "assets/hd/classic/lobby_smooth_4x/lobby/buddy_fill.png": "86a43c33b888b4a1b5db86b4566a3e9011a8effb93cb2a462121fab85056f6f7",
+    "assets/hd/classic/lobby_smooth_4x/lobby/buddy_fill.png.import": "4d03150376c768b214a42663a32a2c2cd3a854eb57ccf6cf9b9509874c92ccff",
+    "assets/hd/classic/lobby_smooth_4x/lobby/channel.png": "c1f8f75d5d37848cba6902c0cf9e75190de77ed8a504034f365a3479b15009ba",
+    "assets/hd/classic/lobby_smooth_4x/lobby/channel.png.import": "cfac0b825b7b75768c39632c83f65f56b90b6e19e2c54b7f50e591b3575e9660",
+    "assets/hd/classic/lobby_smooth_4x/lobby/chat.png": "7a890ddc84df668478532639c37e4990dd5e337b2e996dc7a572dd2ee29cff12",
+    "assets/hd/classic/lobby_smooth_4x/lobby/chat.png.import": "b3eaa8b1799b5cf000e6af2f770378d21dbc19679dbaf79441b31f6bff23cf5d",
+    "assets/hd/classic/lobby_smooth_4x/ranks/rank1.png": "441cb8b196f9b1928fcef4b4e2144a0e290fa7944b2e593be679921bf3061cad",
+    "assets/hd/classic/lobby_smooth_4x/ranks/rank1.png.import": "eef146bef9d46017a409c457842014f030eeecfc64574a7fdbcf8aa38f357975",
+    "assets/hd/classic/lobby_smooth_4x/ranks/rank2.png": "a0ed44ab337b2a61bbb42cdea540c4870feeda8b5670d7fdd179d9568cb89aa2",
+    "assets/hd/classic/lobby_smooth_4x/ranks/rank2.png.import": "de739f47dcb3b77cb1d441c3fe127ed16c4636d26d8f5b0a3718bc32c1e05ab3"
+  },
+  "artifacts": {
+    "docs/lobby-art-hd/lobby-hd.png": "233781d05861dc889e81285c84357faa31fba049f6967ed145e6509cca9065bf",
+    "docs/lobby-art-hd/lobby-native.png": "6708b59eb0bbaa63e63f942182754940ab3f6ad2ccad207debfbf5188a089460",
+    "docs/lobby-art-hd/ranks-comparison.png": "655a58a8edd8c24d8733f0547ac3311a5b2d116f54cf3900f1bdefac6cb69f34",
+    "docs/lobby-art-hd/render.json": "37f9dd3989cb46fa1badeb49ba635ca1d6c9aab36e6d8264033c51df459a9466",
+    "docs/lobby-art-hd/reports/lobby_back.json": "9feff4b16bf6d0ac8d89d788dea0ed2bf1ee6b0311a4b9c30ac2d7ea6fc6f241",
+    "docs/lobby-art-hd/reports/lobby_buddy_fill.json": "2f521b142e724d2ac6634d9056e6672ae67add8b2fbffba88ab384e4175cfeb0",
+    "docs/lobby-art-hd/reports/lobby_channel.json": "3b28e026fea6e05edfe1e8054cb32eb83d0ee712ee27ca303d3d39f224d1b2a3",
+    "docs/lobby-art-hd/reports/lobby_chat.json": "0d6fdb468ebb6a0090eddf593545b9c6c6eec598e64f8431e3665e59ee40d6e1",
+    "docs/lobby-art-hd/reports/rank1.json": "9facb02b150648e05f55b6086c86f9265b5fce4bee14aeb8685da68ff1837ebc",
+    "docs/lobby-art-hd/reports/rank2.json": "9b5822f73252ddb69571147ae3f0e7ef33c8aa79573dbda7089555ba9b0c5a89",
+    "docs/lobby-art-hd/room-hd.png": "228662df92848cec9470770ff2be8dfb6699ffaa698489c4732afadc6393859e",
+    "docs/lobby-art-hd/room-native.png": "228662df92848cec9470770ff2be8dfb6699ffaa698489c4732afadc6393859e",
+    "docs/lobby-art-hd/stress-hd.png": "c7c83aced8392ed044cc22c06fc00f0cfb4a0dcdb2a853f06a92591fd3c1fb52",
+    "docs/lobby-art-hd/stress-native.png": "927cd70ccb887e4feffe5cd8958e4de16deae194bdd93a75deca7377f285aa42"
+  },
+  "gpu": [
+    {
+      "changed_textures": 6,
+      "images_differ": true,
+      "same_layout_hitboxes": true,
+      "screen": "lobby",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "changed_textures": 6,
+      "images_differ": true,
+      "same_layout_hitboxes": true,
+      "screen": "stress",
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "changed_textures": 0,
+      "images_differ": false,
+      "same_layout_hitboxes": true,
+      "screen": "room",
+      "size": [
+        1920,
+        1080
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/lobby/buddy_fill.png",
+    "sha256": "302b11bc60353b198c3589d7e6d3ed88bb97d79625ba676b872e8acf46ad095f",
+    "size": [
+      107,
+      45
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/lobby_smooth_4x/lobby/buddy_fill.png",
+    "sha256": "86a43c33b888b4a1b5db86b4566a3e9011a8effb93cb2a462121fab85056f6f7",
+    "size": [
+      428,
+      180
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    1,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    428,
+    180
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 52538,
+      "max_rgba_delta": 20,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 0.31215,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        107,
+        45
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        107,
+        45
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

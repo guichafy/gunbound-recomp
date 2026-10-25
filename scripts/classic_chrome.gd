@@ -2,6 +2,9 @@ extends RefCounted
 ## Tiras EPA do lobby/sala. Densidade4× somente nos recortes de textura;
 ## layout e hitboxes continuam no palco nativo800×600 com escala4/3.
 
+const LobbyArt = preload("res://scripts/classic_lobby_art.gd")
+var lobby_art = LobbyArt.new()
+
 const ROOT := "res://assets/classic/"
 const HD_ROOT := "res://assets/hd/classic/buttons_smooth_4x/"
 const HD_DENSITY := 4.0
@@ -39,7 +42,8 @@ static func mount(parent: Node) -> Control:
 
 func image(key: String) -> Texture2D:
 	var info: Dictionary = manifest.get("images", {}).get(key, {})
-	return _load_sheet(str(info.get("file", "")))
+	var hd: Texture2D = lobby_art.texture(key, info) if key.begins_with("lobby_") else null
+	return hd if hd != null else _load_sheet(str(info.get("file", "")))
 
 func frame_count(key: String) -> int:
 	return int(manifest.get("strips", {}).get(key, {}).get("frames", 1))
@@ -88,13 +92,15 @@ func _hd_button(key: String, native: Dictionary) -> Texture2D:
 
 func place(parent: Node, key: String, at: Vector2) -> TextureRect:
 	var rect := TextureRect.new()
+	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	rect.texture = image(key)
 	rect.position = at
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	rect.stretch_mode = TextureRect.STRETCH_SCALE
-	rect.size = rect.texture.get_size() if rect.texture != null else Vector2.ZERO
+	var native_size: Array = manifest.get("images", {}).get(key, {}).get("size", [0,0])
+	rect.size = Vector2(native_size[0], native_size[1])
 	parent.add_child(rect)
+	rect.size = Vector2(native_size[0], native_size[1])
 	return rect
 
 ## Quadro 0 normal, 1 hover, 2 push, 3 disable. `shown` troca o quadro parado
