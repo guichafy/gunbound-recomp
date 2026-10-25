@@ -28,7 +28,7 @@ func _initialize() -> void:
 		check(false, "Bomb schedule is available to the live flight")
 		finish("BIGFOOT ATTACK CHECKS")
 		return
-	var times := [[0.0, 0.2, 0.4, 0.6], [0.2, 0.2, 0.2, 0.4, 0.4, 0.4], [0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875]]
+	var times := [[0.15, 0.35, 0.6, 0.85], [0.3, 0.3, 0.3, 0.5, 0.5, 0.5], [0.15, 0.25, 0.35, 0.45, 0.6, 0.75, 0.85, 0.95]]
 	for weapon in [0, 1, 2]:
 		model = fixture()
 		model.fire(30, 70, weapon)
@@ -55,11 +55,11 @@ func _initialize() -> void:
 		for index in range(4):
 			var speed: Vector2 = model.projectiles[index].velocity
 			var degrees := rad_to_deg(atan2(-speed.y, speed.x * facing))
-			check(absf(degrees - [43.0, 37.0, 40.0, 40.0][index]) < 0.01, "T1 spread is preserved at upper aim bound and facing " + str(facing))
+			check(absf(degrees - [43.0, 37.0, 40.0, 40.0][index]) < 0.15, "T1 spread keeps angle within native Sine 1/512 quantization at facing " + str(facing))
 	model = fixture()
-	model.fire(30, 100, 1)
-	check(model.projectiles[0].velocity.length() < model.projectiles[1].velocity.length() and model.projectiles[2].velocity.length() > model.projectiles[1].velocity.length(), "T2 force variants remain distinct at full power")
-	check(Vector2(model.projectiles[0].velocity).normalized().is_equal_approx(Vector2(model.projectiles[2].velocity).normalized()), "T2 force variants share aim direction")
+	model.fire(30, 50, 1)
+	check(model.projectiles[0].velocity.length() < model.projectiles[1].velocity.length() and model.projectiles[2].velocity.length() > model.projectiles[1].velocity.length(), "T2 force variants remain distinct below native power cap")
+	check(Vector2(model.projectiles[0].velocity).normalized().dot(Vector2(model.projectiles[2].velocity).normalized()) > 0.99999, "T2 force variants share aim direction within native component truncation")
 	model.advance_projectiles(0.1)
 	var pending: Dictionary = model.projectiles[0]
 	check(pending.age == 0 and pending.pos == pending.hit_pos and not pending.launched, "Pending T2 bombs cannot age, move or collide")

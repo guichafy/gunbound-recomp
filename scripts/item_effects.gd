@@ -38,7 +38,8 @@ static func modify_shells(model, index: int, angle: float, power: float, weapon:
 			var second := weapon if not bool(rules.get("mixed", false)) else (1 if weapon == 0 else 0)
 			var first_end := ShellState.last_spawn(shells)
 			for shell in model.projectile_parameters(index, angle, power, second):
-				shell.spawn_at = float(shell.spawn_at) + Items.DUAL_WAIT + first_end
+				shell.pose_start_at = Items.DUAL_WAIT + first_end
+				shell.spawn_at = float(shell.spawn_at) + float(shell.pose_start_at)
 				shell.volley = 1
 				shells.append(shell)
 		"beacon":
@@ -46,8 +47,12 @@ static func modify_shells(model, index: int, angle: float, power: float, weapon:
 			var beacon: Dictionary = shells[0]
 			var velocity: Vector2 = model.shot_velocity(index, angle, power, weapon) * Items.BEACON_SPEED
 			var initial: Vector2 = model.muzzle(index, angle, weapon)
+			beacon.erase("launch_velocity_fp")
+			beacon.fp_ready = false
+			beacon.boomer = false
+			beacon.boomer_ss = false
 			beacon.merge({"pos": initial, "hit_pos": initial, "velocity": velocity, "trail": [initial], "helix": 0.0, "phase": 0.0,
-				"spawn_at": float(Mobiles.definition(int(model.actors[index].vehicle)).beacon_delay), "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND, "burrow": false, "ghost": false}, true)
+				"spawn_at": float(Mobiles.definition(int(model.actors[index].vehicle)).beacon_delay), "damage": 0, "launch_speed": velocity.length(), "beacon": true, "wind_scale": Items.BEACON_WIND, "burrow": false, "ghost": false, "flight": ""}, true)
 			shells = [beacon]
 		"electric":
 			# An invisible Electricity column of scale 1000 around the mobile:

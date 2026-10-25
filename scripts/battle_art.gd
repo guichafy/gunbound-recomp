@@ -24,7 +24,8 @@ func start_pose(index: int, pose: String, timer: String, duration: float) -> voi
 func react(event: Dictionary) -> void:
 	# A Dual second volley replays the shooting animation (OnStartInteracting).
 	if event.type in ["fire", "volley"]:
-		start_pose(event.actor, "recoil", "recoil", MobileLooks.RECOIL_TIME)
+		motion[event.actor]["recoil_weapon"] = int(event.get("weapon", 0))
+		start_pose(event.actor, "recoil", "recoil", Mobiles.ShotTiming.pose_duration(int(event.get("vehicle", Mobiles.DEFAULT_ID)), int(event.get("weapon", 0))))
 	elif event.type == "item":
 		# Mobile.UseItem: ActorFlipbookState.UsingItem, 20 frames at 19 fps.
 		start_pose(event.actor, "using_item", "using", USING_ITEM_TIME)
@@ -100,7 +101,7 @@ func selected_weapon(model, index: int, ctx: Dictionary) -> int:
 ## (last_shots), so a short turn cannot swap the SS recoil for S1.
 func weapon_for_pose(model, index: int, ctx: Dictionary, pose: String) -> int:
 	if pose == "recoil":
-		return int(model.last_shots[index].get("weapon", 0))
+		return int(motion[index].get("recoil_weapon", model.last_shots[index].get("weapon", 0)))
 	return int(ctx.player_weapon) if index == Match.PLAYER else int(ctx.cpu_weapon)
 
 func atlas_frame(model, index: int, ctx: Dictionary) -> int:

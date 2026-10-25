@@ -76,7 +76,7 @@ func run() -> void:
 		assert(root.get_texture().get_image().save_png("res://docs/avatar-hd-migration/qa/%s-%03d.png" % [batch,frame])==OK)
 	var components:=[]
 	for entry in gallery.entries:
-		components.append({"id":entry.id,"sheet_hash":meta.sheets[entry.sheet].sha256,"registration":{"sheet":entry.sheet,"region":entry.region,"native_rect":entry.get("native_rect",[]),"effect":entry.get("effect",false),"pulsate":entry.get("pulsate",false),"reference_state":entry.get("reference_state",""),"attachment":entry.get("attachment",{}),"draw_behind":entry.get("draw_behind",false),"contour_glow":entry.get("contour_glow",{}),"light_curve":entry.get("light_curve",[])}})
+		components.append({"id":entry.id,"sheet_hash":meta.sheets[entry.sheet].sha256,"registration":{"sheet":entry.sheet,"region":entry.region,"native_rect":entry.get("native_rect",[]),"effect":entry.get("effect",false),"pulsate":entry.get("pulsate",false),"reference_state":entry.get("reference_state",""),"attachment":entry.get("attachment",{}),"draw_behind":entry.get("draw_behind",false),"contour_glow":entry.get("contour_glow",{}),"light_curve":entry.get("light_curve",[]),"overlay_base":entry.get("overlay_base",{})}})
 	var report:=FileAccess.open("res://docs/avatar-hd-migration/qa/"+batch+".json",FileAccess.WRITE)
 	var hashes: Dictionary={}
 	for path in ["scripts/avatar_art.gd","scripts/avatar_xfs_hd.gd","scripts/avatar_contour_glow.gd","scripts/mobile_rig.gd","scripts/mage_sprite.gd","scripts/bigfoot_sprite.gd"]:

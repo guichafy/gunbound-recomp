@@ -1,5 +1,37 @@
 extends "res://tests/support/suite.gd"
+
+func test_mine_credit() -> void:
+	var Match = load("res://scripts/match.gd")
+	var Combat = load("res://scripts/combat.gd")
+	var Classic = load("res://scripts/classic_flight.gd")
+	for scenario in [[0, 1], [1, 0], [1, 1]]:
+		var owner: int = scenario[0]
+		var target: int = scenario[1]
+		var model = Match.new()
+		model.start(7, 1, 7, "")
+		model.weather.columns.clear()
+		model.weather.thor.active = false
+		model.fire(30, 40, 1)
+		model.actors[target].hp = 1
+		model.actors[target].shield = 0
+		model.mines = [{"owner": owner, "pos": Combat.full_hit(model.actors[target], 21.0), "radius": 21.0,
+			"damage": 400, "weapon": 2, "vehicle": 7}]
+		Classic._detonate_mine(model, 0)
+		model.finish_gold_shot()
+		check(model.shot_actor == 0, "Mine Gold never replaces the firing actor")
+		var expected_gold := -60 if target == owner else 40
+		var enemy_damage := 0 if target == owner else 400
+		check(int(model.actors[owner].gold_state.gold) == expected_gold and int(model.actors[owner].gold_state.enemy_damage) == enemy_damage,
+			"Mine owner %d receives the damage and kill credit against actor %d" % [owner, target])
+		check(int(model.actors[1 - owner].gold_state.gold) == 0, "A foreign mine cannot award the current shooter an unrelated suicide or kill")
+		var credit: Dictionary = model.actors[owner].gold_state.duplicate(true)
+		model.finish_gold_shot()
+		model.check_end()
+		model.tick(1.0 / 30.0)
+		check(model.actors[owner].gold_state == credit, "Mine damage and kill are credited once")
+
 func run() -> void:
+	test_mine_credit()
 	check(FileAccess.file_exists("res://scripts/gold_rewards.gd"), "Gold scoring exists")
 	if failures == 0:
 		var G = load("res://scripts/gold_rewards.gd")
@@ -46,7 +78,12 @@ func run() -> void:
 				m.actors[0].pos = Vector2(240,100)
 				m.actors[0].facing = facing
 				m.fire(30,65,0)
-				check(is_equal_approx(float(m.shot_gold.angle),150.0 if facing==1 else 30.0), "Source HUD angle central trajectory")
+				# Native LUT/truncation at P292 (Mage) and P273 (Bigfoot),
+				# rather than an exact continuous 30-degree vector.
+				var native_velocity: Vector2 = Vector2(6451,-3737) if mobile == 1 else Vector2(6041,-3481)
+				native_velocity.x *= facing
+				var expected_angle := fposmod(rad_to_deg(native_velocity.angle()) + 180.0, 360.0)
+				check(is_equal_approx(float(m.shot_gold.angle),expected_angle), "Source HUD angle uses quantized central trajectory")
 				m.events = [{"type":"damage","actor":1,"amount":200}]
 				m.collect_gold_damage(0,Vector2(240+100*facing,100),{"age":1,"influenced":[]})
 				check(not m.shot_gold.boomer and not m.shot_gold.backward, "Normal forward shot no Boomer")

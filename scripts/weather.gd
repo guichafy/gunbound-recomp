@@ -12,7 +12,8 @@ const HALF_WIDTH := {"force": 20.0, "tornado": 35.0, "electricity": 20.0, "weakn
 const OUTER_MARGIN := 10.0
 # NetworkObjectParameters: wind 0–34, disturbance force −2..+1 / angle −3..+2 degrees
 # (MatchMetadata.cs: Next(0, 4) − 2 and Next(0, 6) − 3), 50% skip.
-const MAX_WIND := 35
+const MAX_WIND := 27
+const WIND_OSCILLATION := [-1, 0, 1, 0, 1, 0, -1, 0]
 const WIND_FORCE_DISTURBANCE := 4
 const WIND_ANGLE_DISTURBANCE := 6
 # Thor: x 10–90%, y 10–70% of the map; damage 40 + 20/level, XP table.
@@ -35,6 +36,7 @@ var queue: Array = []
 var columns: Array = []
 var next_id := 0
 var wind_force := 0
+var wind_turn := 0
 var wind_angle := 0
 var thor := {"active": false, "pos": Vector2.ZERO, "level": 1, "xp": 0}
 
@@ -45,7 +47,9 @@ func setup(preset: Array, world_size: Vector2, rng: RandomNumberGenerator) -> Di
 	columns.clear()
 	thor = {"active": false, "pos": Vector2.ZERO, "level": 1, "xp": 0}
 	# Adaptation: the original starts windless; training starts with a Wind draw.
-	change_wind(rng)
+	wind_turn = 0
+	wind_force = rng.randi_range(0, 25)
+	wind_angle = rng.randi_range(0, 359)
 	for i in range(DISPLAYED):
 		queue.append(draw_entry(rng))
 	return process_active(rng, "")
@@ -82,8 +86,7 @@ func draw_entry(rng: RandomNumberGenerator) -> Dictionary:
 
 func process_active(rng: RandomNumberGenerator, previous: String) -> Dictionary:
 	var entry: Dictionary = queue[0]
-	disturb_wind(rng)
-	if entry.type == "wind":
+	if entry.type == "wind" and not previous.is_empty():
 		change_wind(rng)
 	# ApplyCurrentWeatherEffect: a new type wipes the others (Thor deactivates).
 	if previous != entry.type:
@@ -100,10 +103,9 @@ func process_active(rng: RandomNumberGenerator, previous: String) -> Dictionary:
 	return entry
 
 func disturb_wind(rng: RandomNumberGenerator) -> void:
-	if rng.randf() <= 0.5:
-		return
-	wind_force = maxi(0, wind_force + rng.randi_range(0, WIND_FORCE_DISTURBANCE - 1) - WIND_FORCE_DISTURBANCE / 2)
-	wind_angle = posmod(wind_angle + rng.randi_range(0, WIND_ANGLE_DISTURBANCE - 1) - WIND_ANGLE_DISTURBANCE / 2, 360)
+	# Original force oscillation; column forecast/calendar remains the C# adapter.
+	wind_force = clampi(wind_force + int(WIND_OSCILLATION[wind_turn % WIND_OSCILLATION.size()]), 0, 26)
+	wind_turn += 1
 
 func change_wind(rng: RandomNumberGenerator) -> void:
 	wind_force = rng.randi_range(0, MAX_WIND - 1)
@@ -111,7 +113,7 @@ func change_wind(rng: RandomNumberGenerator) -> void:
 
 func wind_vector() -> Vector2:
 	# Screen angle (y down) times force; Combat scales it by its WIND_ACCELERATION.
-	return Vector2(cos(deg_to_rad(wind_angle)), sin(deg_to_rad(wind_angle))) * float(wind_force)
+	return Vector2(cos(deg_to_rad(wind_angle)), -sin(deg_to_rad(wind_angle))) * float(wind_force)
 
 func add_column(type: String, x: float, scale: float, extra: String = "") -> Dictionary:
 	# WeatherHandler.CheckAndMergeWeatherEffects: overlapping same-type columns
@@ -174,6 +176,7 @@ func copy():
 	result.queue = queue.duplicate(true)
 	result.columns = columns.duplicate(true)
 	result.next_id = next_id
+	result.wind_turn = wind_turn
 	result.wind_force = wind_force
 	result.wind_angle = wind_angle
 	result.thor = thor.duplicate(true)

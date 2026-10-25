@@ -567,6 +567,7 @@
 				26.0,
 				24.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -584,6 +585,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -606,6 +608,7 @@
 				33.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -623,6 +626,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -645,6 +649,7 @@
 				32.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -662,6 +667,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -684,6 +690,7 @@
 				28.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -701,6 +708,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -723,6 +731,7 @@
 				36.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -740,6 +749,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -762,6 +772,7 @@
 				35.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -795,6 +806,7 @@
 				74.0,
 				86.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -812,6 +824,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -834,6 +847,7 @@
 				30.0,
 				24.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -851,6 +865,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -873,6 +888,7 @@
 				39.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -890,6 +906,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -912,6 +929,7 @@
 				33.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -929,6 +947,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -951,6 +970,7 @@
 				43.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -968,6 +988,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -990,6 +1011,7 @@
 				31.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1007,6 +1029,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1029,6 +1052,7 @@
 				28.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1051,6 +1075,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1068,6 +1093,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1090,6 +1116,7 @@
 				40.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1107,6 +1134,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1129,6 +1157,7 @@
 				28.0,
 				37.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1146,6 +1175,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1168,6 +1198,7 @@
 				30.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1185,6 +1216,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1207,6 +1239,7 @@
 				34.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1224,6 +1257,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1246,6 +1280,7 @@
 				33.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1263,6 +1298,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1285,6 +1321,7 @@
 				42.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1302,6 +1339,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1324,6 +1362,7 @@
 				27.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1341,6 +1380,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1363,6 +1403,7 @@
 				41.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1380,6 +1421,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1402,6 +1444,7 @@
 				37.0,
 				59.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1419,6 +1462,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1441,6 +1485,7 @@
 				33.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1474,6 +1519,7 @@
 				83.0,
 				63.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -1496,6 +1542,7 @@
 				39.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1513,6 +1560,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1535,6 +1583,7 @@
 				25.0,
 				23.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1552,6 +1601,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1574,6 +1624,7 @@
 				30.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1591,6 +1642,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1613,6 +1665,7 @@
 				31.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1630,6 +1683,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1652,6 +1706,7 @@
 				45.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1669,6 +1724,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1691,6 +1747,7 @@
 				30.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1708,6 +1765,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1730,6 +1788,7 @@
 				32.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1747,6 +1806,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1769,6 +1829,7 @@
 				25.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1786,6 +1847,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1808,6 +1870,7 @@
 				30.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1825,6 +1888,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1847,6 +1911,7 @@
 				39.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1864,6 +1929,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1886,6 +1952,7 @@
 				32.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1908,6 +1975,7 @@
 				33.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1925,6 +1993,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1947,6 +2016,7 @@
 				31.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1964,6 +2034,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -1986,6 +2057,7 @@
 				33.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2003,6 +2075,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2025,6 +2098,7 @@
 				39.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2042,6 +2116,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2064,6 +2139,7 @@
 				26.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2081,6 +2157,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2103,6 +2180,7 @@
 				35.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2136,6 +2214,7 @@
 				9.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -2153,6 +2232,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2175,6 +2255,7 @@
 				31.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2192,6 +2273,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2214,6 +2296,7 @@
 				37.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2231,6 +2314,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2253,6 +2337,7 @@
 				35.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2270,6 +2355,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2292,6 +2378,7 @@
 				32.0,
 				24.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2309,6 +2396,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2331,6 +2419,7 @@
 				32.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2364,6 +2453,7 @@
 				64.0,
 				74.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -2386,6 +2476,7 @@
 				39.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2403,6 +2494,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2425,6 +2517,7 @@
 				33.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2442,6 +2535,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2464,6 +2558,7 @@
 				43.0,
 				37.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2481,6 +2576,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2503,6 +2599,7 @@
 				30.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2520,6 +2617,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2542,6 +2640,7 @@
 				29.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2559,6 +2658,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2581,6 +2681,7 @@
 				33.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2598,6 +2699,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2620,6 +2722,7 @@
 				28.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2637,6 +2740,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2659,6 +2763,7 @@
 				28.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2676,6 +2781,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2698,6 +2804,7 @@
 				32.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2715,6 +2822,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2737,6 +2845,7 @@
 				33.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2754,6 +2863,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2776,6 +2886,7 @@
 				36.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2798,6 +2909,7 @@
 				27.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2815,6 +2927,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2837,6 +2950,7 @@
 				24.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2854,6 +2968,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2876,6 +2991,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2893,6 +3009,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2915,6 +3032,7 @@
 				23.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2932,6 +3050,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2954,6 +3073,7 @@
 				36.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2971,6 +3091,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -2993,6 +3114,7 @@
 				25.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3010,6 +3132,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3032,6 +3155,7 @@
 				29.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3049,6 +3173,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3071,6 +3196,7 @@
 				35.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3088,6 +3214,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3110,6 +3237,7 @@
 				25.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3127,6 +3255,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3149,6 +3278,7 @@
 				37.0,
 				37.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3166,6 +3296,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3188,6 +3319,7 @@
 				34.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3210,6 +3342,7 @@
 				31.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3227,6 +3360,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3249,6 +3383,7 @@
 				48.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3260,101 +3395,45 @@
 			"sheet": "batch_005"
 		},
 		"xfs:0:0:71|layer:1": {
-			"attachment": {
-				"base_uv": [
-					0.17,
-					0.32
-				],
-				"effect_uv": [
-					0.5,
-					0.5
-				],
-				"feature": "single profile horn",
-				"scale": 1.0
-			},
+			"attachment": {},
 			"contour_glow": {},
 			"draw_behind": false,
 			"effect": true,
-			"light_curve": [
-				[
-					0.0,
-					0.49,
-					0.2,
-					-0.035,
-					0.75
-				],
-				[
-					0.05,
-					0.445,
-					0.17,
-					0.02,
-					0.75
-				],
-				[
-					0.15,
-					0.295,
-					0.11,
-					0.1,
-					0.65
-				],
-				[
-					0.3,
-					0.204,
-					0.087,
-					0.23,
-					0.65
-				],
-				[
-					0.45,
-					0.22,
-					0.14,
-					0.34,
-					0.72
-				],
-				[
-					0.6,
-					0.39,
-					0.22,
-					0.46,
-					0.5
-				],
-				[
-					0.73,
-					0.57,
-					0.26,
-					0.53,
-					0.35
-				],
-				[
-					0.87,
-					0.65,
-					0.27,
-					0.58,
-					0.26
-				],
-				[
-					1.0,
-					0.7,
-					0.28,
-					0.64,
-					0.26
-				]
-			],
+			"light_curve": [],
 			"native_rect": [
 				-18.0,
 				-42.0,
 				25.0,
 				28.0
 			],
+			"overlay_base": {
+				"base_region": [
+					546.0,
+					235.0,
+					198.0,
+					153.0
+				],
+				"base_sheet": "batch_005",
+				"core_alpha": 187.0,
+				"derivation": "HD horn silhouette + classic mh00071l profile",
+				"feature": "single profile horn",
+				"offset": [
+					-20.0,
+					-20.0
+				],
+				"outline": 3.0,
+				"rim_blur": 5.0,
+				"rim_grow": 4.0
+			},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
-				90.0,
-				17.0,
-				1094.0,
-				1173.0
+				0.0,
+				0.0,
+				238.0,
+				193.0
 			],
-			"sheet": "batch_005_repair_008"
+			"sheet": "great_devil_horn_light"
 		},
 		"xfs:0:0:71|portrait": {
 			"attachment": {},
@@ -3363,6 +3442,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3385,6 +3465,7 @@
 				28.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3402,6 +3483,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3424,6 +3506,7 @@
 				24.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3441,6 +3524,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3463,6 +3547,7 @@
 				31.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3480,6 +3565,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3502,6 +3588,7 @@
 				37.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3519,6 +3606,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3541,6 +3629,7 @@
 				49.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3558,6 +3647,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3580,6 +3670,7 @@
 				33.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3602,6 +3693,7 @@
 				30.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3635,6 +3727,7 @@
 				32.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -3657,6 +3750,7 @@
 				28.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3679,6 +3773,7 @@
 				25.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3696,6 +3791,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3718,6 +3814,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3735,6 +3832,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3757,6 +3855,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3774,6 +3873,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3796,6 +3896,7 @@
 				27.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3813,6 +3914,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3835,6 +3937,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3857,6 +3960,7 @@
 				26.0,
 				23.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -3874,6 +3978,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3896,6 +4001,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3913,6 +4019,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3935,6 +4042,7 @@
 				33.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3952,6 +4060,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3974,6 +4083,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -3991,6 +4101,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4013,6 +4124,7 @@
 				27.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4030,6 +4142,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4052,6 +4165,7 @@
 				43.0,
 				37.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4069,6 +4183,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4091,6 +4206,7 @@
 				28.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4108,6 +4224,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4130,6 +4247,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4147,6 +4265,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4169,6 +4288,7 @@
 				28.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4186,6 +4306,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4208,6 +4329,7 @@
 				31.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4225,6 +4347,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4247,6 +4370,7 @@
 				28.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4264,6 +4388,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4286,6 +4411,7 @@
 				27.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4303,6 +4429,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4325,6 +4452,7 @@
 				28.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4342,6 +4470,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4364,6 +4493,7 @@
 				26.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4381,6 +4511,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4403,6 +4534,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4420,6 +4552,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4442,6 +4575,7 @@
 				28.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4459,6 +4593,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4481,6 +4616,7 @@
 				31.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4498,6 +4634,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4520,6 +4657,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4537,6 +4675,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4559,6 +4698,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4576,6 +4716,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4598,6 +4739,7 @@
 				44.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4615,6 +4757,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4637,6 +4780,7 @@
 				39.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4659,6 +4803,7 @@
 				8.0,
 				24.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -4676,6 +4821,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4698,6 +4844,7 @@
 				31.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4715,6 +4862,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4737,6 +4885,7 @@
 				27.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4754,6 +4903,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4776,6 +4926,7 @@
 				35.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4793,6 +4944,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4815,6 +4967,7 @@
 				26.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4832,6 +4985,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4854,6 +5008,7 @@
 				29.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4871,6 +5026,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4893,6 +5049,7 @@
 				29.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4910,6 +5067,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4932,6 +5090,7 @@
 				29.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4949,6 +5108,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4971,6 +5131,7 @@
 				28.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -4988,6 +5149,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5010,6 +5172,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5027,6 +5190,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5049,6 +5213,7 @@
 				35.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5066,6 +5231,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5088,6 +5254,7 @@
 				32.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5105,6 +5272,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5127,6 +5295,7 @@
 				27.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5144,6 +5313,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5166,6 +5336,7 @@
 				29.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5188,6 +5359,7 @@
 				24.0,
 				19.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -5205,6 +5377,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5227,6 +5400,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5244,6 +5418,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5266,6 +5441,7 @@
 				27.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5283,6 +5459,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5305,6 +5482,7 @@
 				29.0,
 				21.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5322,6 +5500,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5344,6 +5523,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5361,6 +5541,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5383,6 +5564,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5400,6 +5582,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5422,6 +5605,7 @@
 				28.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5439,6 +5623,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5461,6 +5646,7 @@
 				28.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5478,6 +5664,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5500,6 +5687,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5517,6 +5705,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5539,6 +5728,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5556,6 +5746,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5578,6 +5769,7 @@
 				31.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5595,6 +5787,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5617,6 +5810,7 @@
 				27.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5634,6 +5828,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5656,6 +5851,7 @@
 				33.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5673,6 +5869,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5695,6 +5892,7 @@
 				27.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5712,6 +5910,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5734,6 +5933,7 @@
 				28.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5756,6 +5956,7 @@
 				8.0,
 				5.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -5773,6 +5974,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5795,6 +5997,7 @@
 				28.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5812,6 +6015,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5834,6 +6038,7 @@
 				30.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5851,6 +6056,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5873,6 +6079,7 @@
 				32.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5890,6 +6097,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5912,6 +6120,7 @@
 				26.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5929,6 +6138,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5951,6 +6161,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5968,6 +6179,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -5990,6 +6202,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6007,6 +6220,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6029,6 +6243,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6046,6 +6261,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6068,6 +6284,7 @@
 				27.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6090,6 +6307,7 @@
 				31.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -6107,6 +6325,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6129,6 +6348,7 @@
 				35.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6146,6 +6366,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6168,6 +6389,7 @@
 				30.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6185,6 +6407,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6207,6 +6430,7 @@
 				29.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6224,6 +6448,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6246,6 +6471,7 @@
 				30.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6263,6 +6489,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6285,6 +6512,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6302,6 +6530,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6324,6 +6553,7 @@
 				26.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6341,6 +6571,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6363,6 +6594,7 @@
 				47.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6380,6 +6612,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6402,6 +6635,7 @@
 				26.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6419,6 +6653,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6441,6 +6676,7 @@
 				40.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6458,6 +6694,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6480,6 +6717,7 @@
 				44.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6497,6 +6735,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6519,6 +6758,7 @@
 				38.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6536,6 +6776,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6558,6 +6799,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6575,6 +6817,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6597,6 +6840,7 @@
 				28.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6614,6 +6858,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6636,6 +6881,7 @@
 				30.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6658,6 +6904,7 @@
 				19.0,
 				14.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -6675,6 +6922,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6697,6 +6945,7 @@
 				25.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6714,6 +6963,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6736,6 +6986,7 @@
 				13.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6753,6 +7004,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6775,6 +7027,7 @@
 				13.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6792,6 +7045,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6814,6 +7068,7 @@
 				13.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6831,6 +7086,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6853,6 +7109,7 @@
 				15.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6870,6 +7127,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6892,6 +7150,7 @@
 				14.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6909,6 +7168,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6931,6 +7191,7 @@
 				15.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6953,6 +7214,7 @@
 				21.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -6970,6 +7232,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -6992,6 +7255,7 @@
 				13.0,
 				13.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7009,6 +7273,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7031,6 +7296,7 @@
 				16.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7048,6 +7314,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7070,6 +7337,7 @@
 				15.0,
 				13.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7087,6 +7355,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7109,6 +7378,7 @@
 				14.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7126,6 +7396,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7148,6 +7419,7 @@
 				13.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7165,6 +7437,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7187,6 +7460,7 @@
 				14.0,
 				11.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7204,6 +7478,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7226,6 +7501,7 @@
 				17.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7243,6 +7519,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7265,6 +7542,7 @@
 				18.0,
 				14.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7282,6 +7560,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7304,6 +7583,7 @@
 				7.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7321,6 +7601,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7343,6 +7624,7 @@
 				14.0,
 				11.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7360,6 +7642,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7382,6 +7665,7 @@
 				6.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7399,6 +7683,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7421,6 +7706,7 @@
 				12.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7438,6 +7724,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7460,6 +7747,7 @@
 				12.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7477,6 +7765,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7499,6 +7788,7 @@
 				17.0,
 				13.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7516,6 +7806,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7538,6 +7829,7 @@
 				11.0,
 				19.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7555,6 +7847,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7577,6 +7870,7 @@
 				19.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7594,6 +7888,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7616,6 +7911,7 @@
 				16.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7633,6 +7929,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7655,6 +7952,7 @@
 				18.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7672,6 +7970,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7694,6 +7993,7 @@
 				11.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7711,6 +8011,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7733,6 +8034,7 @@
 				11.0,
 				15.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7750,6 +8052,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7772,6 +8075,7 @@
 				15.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7789,6 +8093,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7811,6 +8116,7 @@
 				9.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7828,6 +8134,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7850,6 +8157,7 @@
 				20.0,
 				13.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7867,6 +8175,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7889,6 +8198,7 @@
 				6.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7906,6 +8216,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7928,6 +8239,7 @@
 				7.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7945,6 +8257,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7967,6 +8280,7 @@
 				7.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -7984,6 +8298,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8006,6 +8321,7 @@
 				13.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8023,6 +8339,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8045,6 +8362,7 @@
 				10.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8062,6 +8380,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8084,6 +8403,7 @@
 				13.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8101,6 +8421,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8123,6 +8444,7 @@
 				13.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8145,6 +8467,7 @@
 				17.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -8162,6 +8485,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8184,6 +8508,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8201,6 +8526,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8223,6 +8549,7 @@
 				27.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8240,6 +8567,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8262,6 +8590,7 @@
 				36.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8279,6 +8608,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8301,6 +8631,7 @@
 				36.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8318,6 +8649,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8340,6 +8672,7 @@
 				25.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8357,6 +8690,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8379,6 +8713,7 @@
 				39.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8396,6 +8731,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8418,6 +8754,7 @@
 				33.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8451,6 +8788,7 @@
 				21.0,
 				19.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -8468,6 +8806,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8490,6 +8829,7 @@
 				28.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8507,6 +8847,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8529,6 +8870,7 @@
 				43.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8546,6 +8888,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8568,6 +8911,7 @@
 				31.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8585,6 +8929,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8607,6 +8952,7 @@
 				31.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8624,6 +8970,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8646,6 +8993,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8668,6 +9016,7 @@
 				39.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8701,6 +9050,7 @@
 				15.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "normal",
 			"region": [
@@ -8718,6 +9068,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8740,6 +9091,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8757,6 +9109,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8779,6 +9132,7 @@
 				28.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8812,6 +9166,7 @@
 				29.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -8829,6 +9184,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8851,6 +9207,7 @@
 				24.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8868,6 +9225,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8890,6 +9248,7 @@
 				33.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8907,6 +9266,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8929,6 +9289,7 @@
 				38.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -8962,6 +9323,7 @@
 				74.0,
 				86.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -8979,6 +9341,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9001,6 +9364,7 @@
 				25.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9018,6 +9382,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9040,6 +9405,7 @@
 				35.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9057,6 +9423,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9079,6 +9446,7 @@
 				39.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9096,6 +9464,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9118,6 +9487,7 @@
 				41.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9135,6 +9505,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9157,6 +9528,7 @@
 				32.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9190,6 +9562,7 @@
 				83.0,
 				63.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -9212,6 +9585,7 @@
 				27.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9229,6 +9603,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9251,6 +9626,7 @@
 				27.0,
 				43.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9268,6 +9644,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9290,6 +9667,7 @@
 				44.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9307,6 +9685,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9329,6 +9708,7 @@
 				28.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9346,6 +9726,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9368,6 +9749,7 @@
 				28.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9385,6 +9767,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9407,6 +9790,7 @@
 				31.0,
 				45.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9440,6 +9824,7 @@
 				5.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -9457,6 +9842,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9479,6 +9865,7 @@
 				31.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9496,6 +9883,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9518,6 +9906,7 @@
 				40.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9535,6 +9924,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9557,6 +9947,7 @@
 				33.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9590,6 +9981,7 @@
 				8.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -9607,6 +9999,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9629,6 +10022,7 @@
 				26.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9646,6 +10040,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9668,6 +10063,7 @@
 				28.0,
 				23.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9690,6 +10086,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9707,6 +10104,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9729,6 +10127,7 @@
 				30.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9762,6 +10161,7 @@
 				25.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -9779,6 +10179,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9801,6 +10202,7 @@
 				36.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9818,6 +10220,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9840,6 +10243,7 @@
 				37.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9857,6 +10261,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9879,6 +10284,7 @@
 				28.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9912,6 +10318,7 @@
 				9.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -9929,6 +10336,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9951,6 +10359,7 @@
 				34.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -9984,6 +10393,7 @@
 				25.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -10001,6 +10411,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10023,6 +10434,7 @@
 				46.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10056,6 +10468,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -10073,6 +10486,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10095,6 +10509,7 @@
 				32.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10128,6 +10543,7 @@
 				50.0,
 				64.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -10145,6 +10561,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10167,6 +10584,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10184,6 +10602,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10206,6 +10625,7 @@
 				42.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10223,6 +10643,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10245,6 +10666,7 @@
 				33.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10267,6 +10689,7 @@
 				31.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10284,6 +10707,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10306,6 +10730,7 @@
 				32.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10323,6 +10748,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10345,6 +10771,7 @@
 				38.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10362,6 +10789,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10384,6 +10812,7 @@
 				28.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10401,6 +10830,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10423,6 +10853,7 @@
 				25.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10440,6 +10871,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10462,6 +10894,7 @@
 				31.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10479,6 +10912,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10501,6 +10935,7 @@
 				33.0,
 				32.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10518,6 +10953,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10540,6 +10976,7 @@
 				27.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10557,6 +10994,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10579,6 +11017,7 @@
 				23.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10596,6 +11035,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10618,6 +11058,7 @@
 				25.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10635,6 +11076,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10657,6 +11099,7 @@
 				33.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10679,6 +11122,7 @@
 				39.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10696,6 +11140,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10718,6 +11163,7 @@
 				32.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10735,6 +11181,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10757,6 +11204,7 @@
 				33.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10774,6 +11222,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10796,6 +11245,7 @@
 				32.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10813,6 +11263,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10835,6 +11286,7 @@
 				39.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10852,6 +11304,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10874,6 +11327,7 @@
 				24.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10891,6 +11345,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10913,6 +11368,7 @@
 				37.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10930,6 +11386,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10952,6 +11409,7 @@
 				40.0,
 				37.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10969,6 +11427,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -10991,6 +11450,7 @@
 				26.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11008,6 +11468,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11030,6 +11491,7 @@
 				29.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11047,6 +11509,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11069,6 +11532,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11091,6 +11555,7 @@
 				32.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11108,6 +11573,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11130,6 +11596,7 @@
 				26.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11147,6 +11614,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11169,6 +11637,7 @@
 				37.0,
 				61.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11186,6 +11655,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11208,6 +11678,7 @@
 				37.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11225,6 +11696,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11247,6 +11719,7 @@
 				37.0,
 				49.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11264,6 +11737,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11286,6 +11760,7 @@
 				39.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11303,6 +11778,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11325,6 +11801,7 @@
 				48.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11342,6 +11819,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11364,6 +11842,7 @@
 				20.0,
 				20.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11381,6 +11860,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11403,6 +11883,7 @@
 				31.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11420,6 +11901,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11442,6 +11924,7 @@
 				38.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11459,6 +11942,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11481,6 +11965,7 @@
 				30.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11514,6 +11999,7 @@
 				31.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -11536,6 +12022,7 @@
 				48.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11553,6 +12040,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11575,6 +12063,7 @@
 				31.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11608,6 +12097,7 @@
 				28.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "normal",
 			"region": [
@@ -11630,6 +12120,7 @@
 				31.0,
 				43.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11652,6 +12143,7 @@
 				25.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11669,6 +12161,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11691,6 +12184,7 @@
 				24.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11708,6 +12202,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11730,6 +12225,7 @@
 				23.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11752,6 +12248,7 @@
 				15.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11769,6 +12266,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11791,6 +12289,7 @@
 				29.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11808,6 +12307,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11830,6 +12330,7 @@
 				24.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11847,6 +12348,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11869,6 +12371,7 @@
 				28.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11886,6 +12389,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11908,6 +12412,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11930,6 +12435,7 @@
 				6.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -11947,6 +12453,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11969,6 +12476,7 @@
 				24.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -11986,6 +12494,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12008,6 +12517,7 @@
 				30.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12030,6 +12540,7 @@
 				30.0,
 				19.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12047,6 +12558,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12069,6 +12581,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12086,6 +12599,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12108,6 +12622,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12125,6 +12640,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12147,6 +12663,7 @@
 				25.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12164,6 +12681,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12186,6 +12704,7 @@
 				28.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12203,6 +12722,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12225,6 +12745,7 @@
 				40.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12242,6 +12763,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12264,6 +12786,7 @@
 				24.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12281,6 +12804,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12303,6 +12827,7 @@
 				24.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12325,6 +12850,7 @@
 				18.0,
 				20.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -12342,6 +12868,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12364,6 +12891,7 @@
 				25.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12381,6 +12909,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12403,6 +12932,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12420,6 +12950,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12442,6 +12973,7 @@
 				31.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12459,6 +12991,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12481,6 +13014,7 @@
 				27.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12498,6 +13032,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12520,6 +13055,7 @@
 				28.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12537,6 +13073,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12559,6 +13096,7 @@
 				25.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12576,6 +13114,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12598,6 +13137,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12615,6 +13155,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12637,6 +13178,7 @@
 				29.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12654,6 +13196,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12676,6 +13219,7 @@
 				23.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12693,6 +13237,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12715,6 +13260,7 @@
 				26.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12732,6 +13278,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12754,6 +13301,7 @@
 				36.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12776,6 +13324,7 @@
 				14.0,
 				19.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -12793,6 +13342,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12815,6 +13365,7 @@
 				44.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12832,6 +13383,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12854,6 +13406,7 @@
 				32.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12871,6 +13424,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12893,6 +13447,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12915,6 +13470,7 @@
 				14.0,
 				13.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -12932,6 +13488,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12954,6 +13511,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12971,6 +13529,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -12993,6 +13552,7 @@
 				28.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13010,6 +13570,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13032,6 +13593,7 @@
 				27.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13054,6 +13616,7 @@
 				11.0,
 				15.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -13071,6 +13634,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13093,6 +13657,7 @@
 				25.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13110,6 +13675,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13132,6 +13698,7 @@
 				28.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13149,6 +13716,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13171,6 +13739,7 @@
 				29.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13188,6 +13757,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13210,6 +13780,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13232,6 +13803,7 @@
 				14.0,
 				13.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -13249,6 +13821,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13271,6 +13844,7 @@
 				26.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13293,6 +13867,7 @@
 				11.0,
 				15.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -13310,6 +13885,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13332,6 +13908,7 @@
 				24.0,
 				23.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13354,6 +13931,7 @@
 				34.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -13371,6 +13949,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13393,6 +13972,7 @@
 				23.0,
 				23.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13415,6 +13995,7 @@
 				36.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -13432,6 +14013,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13454,6 +14036,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13471,6 +14054,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13493,6 +14077,7 @@
 				28.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13510,6 +14095,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13532,6 +14118,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13549,6 +14136,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13571,6 +14159,7 @@
 				29.0,
 				21.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13588,6 +14177,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13610,6 +14200,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13627,6 +14218,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13649,6 +14241,7 @@
 				30.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13666,6 +14259,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13688,6 +14282,7 @@
 				26.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13705,6 +14300,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13727,6 +14323,7 @@
 				27.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13744,6 +14341,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13766,6 +14364,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13783,6 +14382,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13805,6 +14405,7 @@
 				39.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13827,6 +14428,7 @@
 				8.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -13844,6 +14446,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13866,6 +14469,7 @@
 				34.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13883,6 +14487,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13905,6 +14510,7 @@
 				32.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13922,6 +14528,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13944,6 +14551,7 @@
 				29.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13961,6 +14569,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -13983,6 +14592,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14000,6 +14610,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14022,6 +14633,7 @@
 				36.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14039,6 +14651,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14061,6 +14674,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14078,6 +14692,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14100,6 +14715,7 @@
 				33.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14117,6 +14733,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14139,6 +14756,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14156,6 +14774,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14178,6 +14797,7 @@
 				32.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14195,6 +14815,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14217,6 +14838,7 @@
 				26.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14234,6 +14856,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14256,6 +14879,7 @@
 				23.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14273,6 +14897,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14295,6 +14920,7 @@
 				25.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14312,6 +14938,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14334,6 +14961,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14356,6 +14984,7 @@
 				31.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -14373,6 +15002,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14395,6 +15025,7 @@
 				35.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14412,6 +15043,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14434,6 +15066,7 @@
 				30.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14451,6 +15084,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14473,6 +15107,7 @@
 				29.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14490,6 +15125,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14512,6 +15148,7 @@
 				32.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14529,6 +15166,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14551,6 +15189,7 @@
 				27.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14568,6 +15207,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14590,6 +15230,7 @@
 				25.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14607,6 +15248,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14629,6 +15271,7 @@
 				37.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14646,6 +15289,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14668,6 +15312,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14685,6 +15330,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14707,6 +15353,7 @@
 				39.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14724,6 +15371,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14746,6 +15394,7 @@
 				36.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14763,6 +15412,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14785,6 +15435,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14802,6 +15453,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14824,6 +15476,7 @@
 				23.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14841,6 +15494,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14863,6 +15517,7 @@
 				23.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14885,6 +15540,7 @@
 				12.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -14902,6 +15558,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14924,6 +15581,7 @@
 				29.0,
 				28.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14946,6 +15604,7 @@
 				20.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -14963,6 +15622,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -14985,6 +15645,7 @@
 				27.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15002,6 +15663,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15024,6 +15686,7 @@
 				13.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15041,6 +15704,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15063,6 +15727,7 @@
 				11.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15080,6 +15745,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15102,6 +15768,7 @@
 				7.0,
 				5.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15119,6 +15786,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15141,6 +15809,7 @@
 				14.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15158,6 +15827,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15180,6 +15850,7 @@
 				13.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15197,6 +15868,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15219,6 +15891,7 @@
 				14.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15236,6 +15909,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15258,6 +15932,7 @@
 				15.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15275,6 +15950,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15297,6 +15973,7 @@
 				11.0,
 				11.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15314,6 +15991,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15336,6 +16014,7 @@
 				14.0,
 				14.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15353,6 +16032,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15375,6 +16055,7 @@
 				14.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15392,6 +16073,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15414,6 +16096,7 @@
 				13.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15431,6 +16114,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15453,6 +16137,7 @@
 				14.0,
 				11.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15470,6 +16155,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15492,6 +16178,7 @@
 				16.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15509,6 +16196,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15531,6 +16219,7 @@
 				18.0,
 				14.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15548,6 +16237,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15570,6 +16260,7 @@
 				6.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15587,6 +16278,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15609,6 +16301,7 @@
 				14.0,
 				11.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15626,6 +16319,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15648,6 +16342,7 @@
 				5.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15665,6 +16360,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15687,6 +16383,7 @@
 				12.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15704,6 +16401,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15726,6 +16424,7 @@
 				12.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15743,6 +16442,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15765,6 +16465,7 @@
 				15.0,
 				14.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15782,6 +16483,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15804,6 +16506,7 @@
 				11.0,
 				18.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15821,6 +16524,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15843,6 +16547,7 @@
 				13.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15860,6 +16565,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15882,6 +16588,7 @@
 				12.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15899,6 +16606,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15921,6 +16629,7 @@
 				19.0,
 				29.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15938,6 +16647,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15960,6 +16670,7 @@
 				11.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15977,6 +16688,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -15999,6 +16711,7 @@
 				11.0,
 				15.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16016,6 +16729,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16038,6 +16752,7 @@
 				15.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16055,6 +16770,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16077,6 +16793,7 @@
 				10.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16094,6 +16811,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16116,6 +16834,7 @@
 				19.0,
 				12.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16133,6 +16852,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16155,6 +16875,7 @@
 				7.0,
 				5.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16172,6 +16893,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16194,6 +16916,7 @@
 				6.0,
 				6.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16211,6 +16934,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16233,6 +16957,7 @@
 				9.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16250,6 +16975,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16272,6 +16998,7 @@
 				11.0,
 				8.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16289,6 +17016,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16311,6 +17039,7 @@
 				12.0,
 				7.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16333,6 +17062,7 @@
 				18.0,
 				10.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -16350,6 +17080,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16372,6 +17103,7 @@
 				13.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16389,6 +17121,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16411,6 +17144,7 @@
 				13.0,
 				9.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16428,6 +17162,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16450,6 +17185,7 @@
 				34.0,
 				45.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16472,6 +17208,7 @@
 				12.0,
 				12.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -16489,6 +17226,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16511,6 +17249,7 @@
 				31.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16533,6 +17272,7 @@
 				16.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -16550,6 +17290,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16572,6 +17313,7 @@
 				49.0,
 				48.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16589,6 +17331,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16611,6 +17354,7 @@
 				35.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16633,6 +17377,7 @@
 				35.0,
 				31.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -16650,6 +17395,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16672,6 +17418,7 @@
 				26.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16694,6 +17441,7 @@
 				37.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -16711,6 +17459,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16733,6 +17482,7 @@
 				35.0,
 				48.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16755,6 +17505,7 @@
 				18.0,
 				20.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -16772,6 +17523,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16794,6 +17546,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16811,6 +17564,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16833,6 +17587,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16850,6 +17605,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16872,6 +17628,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16889,6 +17646,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16911,6 +17669,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16928,6 +17687,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16950,6 +17710,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16967,6 +17728,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -16989,6 +17751,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17006,6 +17769,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17028,6 +17792,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17045,6 +17810,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17067,6 +17833,7 @@
 				38.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17089,6 +17856,7 @@
 				34.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -17106,6 +17874,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17128,6 +17897,7 @@
 				36.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17150,6 +17920,7 @@
 				18.0,
 				13.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -17167,6 +17938,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17189,6 +17961,7 @@
 				37.0,
 				43.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17206,6 +17979,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17228,6 +18002,7 @@
 				31.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17245,6 +18020,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17267,6 +18043,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17284,6 +18061,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17306,6 +18084,7 @@
 				34.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17323,6 +18102,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17345,6 +18125,7 @@
 				40.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17362,6 +18143,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17384,6 +18166,7 @@
 				31.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17406,6 +18189,7 @@
 				39.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -17423,6 +18207,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17445,6 +18230,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17462,6 +18248,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17484,6 +18271,7 @@
 				29.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17501,6 +18289,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17523,6 +18312,7 @@
 				39.0,
 				53.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17540,6 +18330,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17562,6 +18353,7 @@
 				31.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17584,6 +18376,7 @@
 				31.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -17601,6 +18394,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17623,6 +18417,7 @@
 				34.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17640,6 +18435,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17662,6 +18458,7 @@
 				47.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17679,6 +18476,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17701,6 +18499,7 @@
 				33.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17718,6 +18517,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17740,6 +18540,7 @@
 				45.0,
 				50.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17762,6 +18563,7 @@
 				40.0,
 				43.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -17779,6 +18581,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17801,6 +18604,7 @@
 				42.0,
 				50.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17823,6 +18627,7 @@
 				32.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -17840,6 +18645,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17862,6 +18668,7 @@
 				32.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17879,6 +18686,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17901,6 +18709,7 @@
 				36.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17923,6 +18732,7 @@
 				32.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -17940,6 +18750,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17962,6 +18773,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -17979,6 +18791,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18001,6 +18814,7 @@
 				46.0,
 				52.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18018,6 +18832,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18040,6 +18855,7 @@
 				38.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18057,6 +18873,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18079,6 +18896,7 @@
 				34.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -18096,6 +18914,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18118,6 +18937,7 @@
 				48.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18135,6 +18955,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18157,6 +18978,7 @@
 				38.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18174,6 +18996,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18196,6 +19019,7 @@
 				39.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18213,6 +19037,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18235,6 +19060,7 @@
 				28.0,
 				30.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18257,6 +19083,7 @@
 				14.0,
 				18.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -18274,6 +19101,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18296,6 +19124,7 @@
 				35.0,
 				44.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18313,6 +19142,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18335,6 +19165,7 @@
 				42.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18352,6 +19183,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18374,6 +19206,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18391,6 +19224,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18413,6 +19247,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18430,6 +19265,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18452,6 +19288,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18469,6 +19306,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18491,6 +19329,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18508,6 +19347,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18530,6 +19370,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18547,6 +19388,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18569,6 +19411,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18586,6 +19429,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18608,6 +19452,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18625,6 +19470,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18647,6 +19493,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18664,6 +19511,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18686,6 +19534,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18703,6 +19552,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18725,6 +19575,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18742,6 +19593,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18764,6 +19616,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18781,6 +19634,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18803,6 +19657,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18820,6 +19675,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18842,6 +19698,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18859,6 +19716,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18881,6 +19739,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18898,6 +19757,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18920,6 +19780,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18937,6 +19798,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18959,6 +19821,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18976,6 +19839,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -18998,6 +19862,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19015,6 +19880,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19037,6 +19903,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19054,6 +19921,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19076,6 +19944,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19093,6 +19962,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19115,6 +19985,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19132,6 +20003,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19154,6 +20026,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19171,6 +20044,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19193,6 +20067,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19210,6 +20085,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19232,6 +20108,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19249,6 +20126,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19271,6 +20149,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19288,6 +20167,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19310,6 +20190,7 @@
 				26.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19332,6 +20213,7 @@
 				14.0,
 				11.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -19349,6 +20231,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19371,6 +20254,7 @@
 				37.0,
 				48.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19393,6 +20277,7 @@
 				40.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -19410,6 +20295,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19432,6 +20318,7 @@
 				44.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19449,6 +20336,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19471,6 +20359,7 @@
 				55.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19488,6 +20377,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19510,6 +20400,7 @@
 				28.0,
 				35.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19527,6 +20418,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19549,6 +20441,7 @@
 				42.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19571,6 +20464,7 @@
 				38.0,
 				39.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -19588,6 +20482,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19610,6 +20505,7 @@
 				37.0,
 				45.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19632,6 +20528,7 @@
 				42.0,
 				48.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -19649,6 +20546,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19671,6 +20569,7 @@
 				42.0,
 				49.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19688,6 +20587,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19710,6 +20610,7 @@
 				25.0,
 				45.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19727,6 +20628,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19749,6 +20651,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19766,6 +20669,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19788,6 +20692,7 @@
 				37.0,
 				48.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19805,6 +20710,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19827,6 +20733,7 @@
 				31.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19844,6 +20751,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19866,6 +20774,7 @@
 				44.0,
 				44.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19888,6 +20797,7 @@
 				24.0,
 				24.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -19905,6 +20815,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19927,6 +20838,7 @@
 				25.0,
 				52.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19944,6 +20856,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19966,6 +20879,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -19983,6 +20897,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20005,6 +20920,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20022,6 +20938,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20044,6 +20961,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20061,6 +20979,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20083,6 +21002,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20100,6 +21020,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20122,6 +21043,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20139,6 +21061,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20161,6 +21084,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20178,6 +21102,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20200,6 +21125,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20217,6 +21143,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20239,6 +21166,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20256,6 +21184,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20278,6 +21207,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20295,6 +21225,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20317,6 +21248,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20334,6 +21266,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20356,6 +21289,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20373,6 +21307,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20395,6 +21330,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20412,6 +21348,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20434,6 +21371,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20451,6 +21389,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20473,6 +21412,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20490,6 +21430,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20512,6 +21453,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20529,6 +21471,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20551,6 +21494,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20568,6 +21512,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20590,6 +21535,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20607,6 +21553,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20629,6 +21576,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20646,6 +21594,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20668,6 +21617,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20685,6 +21635,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20707,6 +21658,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20724,6 +21676,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20746,6 +21699,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20763,6 +21717,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20785,6 +21740,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20802,6 +21758,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20824,6 +21781,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20841,6 +21799,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20863,6 +21822,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20880,6 +21840,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20902,6 +21863,7 @@
 				34.0,
 				44.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20924,6 +21886,7 @@
 				59.0,
 				23.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -20941,6 +21904,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20963,6 +21927,7 @@
 				26.0,
 				25.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -20980,6 +21945,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21002,6 +21968,7 @@
 				28.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21024,6 +21991,7 @@
 				22.0,
 				22.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21041,6 +22009,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21063,6 +22032,7 @@
 				33.0,
 				44.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21085,6 +22055,7 @@
 				26.0,
 				23.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21102,6 +22073,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21124,6 +22096,7 @@
 				48.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21141,6 +22114,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21163,6 +22137,7 @@
 				29.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21180,6 +22155,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21202,6 +22178,7 @@
 				19.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21219,6 +22196,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21241,6 +22219,7 @@
 				30.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21263,6 +22242,7 @@
 				18.0,
 				20.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21280,6 +22260,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21302,6 +22283,7 @@
 				35.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21324,6 +22306,7 @@
 				19.0,
 				22.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21341,6 +22324,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21363,6 +22347,7 @@
 				39.0,
 				44.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21380,6 +22365,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21402,6 +22388,7 @@
 				30.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21424,6 +22411,7 @@
 				16.0,
 				15.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21441,6 +22429,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21463,6 +22452,7 @@
 				44.0,
 				54.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21480,6 +22470,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21502,6 +22493,7 @@
 				26.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21519,6 +22511,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21541,6 +22534,7 @@
 				32.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21558,6 +22552,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21580,6 +22575,7 @@
 				36.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21597,6 +22593,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21619,6 +22616,7 @@
 				35.0,
 				36.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21636,6 +22634,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21658,6 +22657,7 @@
 				37.0,
 				49.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21680,6 +22680,7 @@
 				16.0,
 				14.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21697,6 +22698,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21719,6 +22721,7 @@
 				41.0,
 				51.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21741,6 +22744,7 @@
 				17.0,
 				18.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21758,6 +22762,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21780,6 +22785,7 @@
 				36.0,
 				48.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21797,6 +22803,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21819,6 +22826,7 @@
 				32.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21836,6 +22844,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21858,6 +22867,7 @@
 				24.0,
 				43.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21880,6 +22890,7 @@
 				13.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -21897,6 +22908,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21919,6 +22931,7 @@
 				33.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21936,6 +22949,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21958,6 +22972,7 @@
 				23.0,
 				33.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21975,6 +22990,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -21997,6 +23013,7 @@
 				26.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22014,6 +23031,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22036,6 +23054,7 @@
 				23.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22053,6 +23072,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22075,6 +23095,7 @@
 				36.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22092,6 +23113,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22114,6 +23136,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22131,6 +23154,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22153,6 +23177,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22170,6 +23195,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22192,6 +23218,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22209,6 +23236,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22231,6 +23259,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22248,6 +23277,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22270,6 +23300,7 @@
 				36.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22287,6 +23318,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22309,6 +23341,7 @@
 				36.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22326,6 +23359,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22348,6 +23382,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22365,6 +23400,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22387,6 +23423,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22404,6 +23441,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22426,6 +23464,7 @@
 				26.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22443,6 +23482,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22465,6 +23505,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22482,6 +23523,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22504,6 +23546,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22521,6 +23564,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22543,6 +23587,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22560,6 +23605,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22582,6 +23628,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22599,6 +23646,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22621,6 +23669,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22638,6 +23687,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22660,6 +23710,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22677,6 +23728,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22699,6 +23751,7 @@
 				37.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22716,6 +23769,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22738,6 +23792,7 @@
 				39.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22755,6 +23810,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22777,6 +23833,7 @@
 				42.0,
 				50.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22794,6 +23851,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22816,6 +23874,7 @@
 				37.0,
 				40.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22833,6 +23892,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22855,6 +23915,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22872,6 +23933,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22894,6 +23956,7 @@
 				31.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22911,6 +23974,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22933,6 +23997,7 @@
 				32.0,
 				42.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22955,6 +24020,7 @@
 				17.0,
 				16.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -22972,6 +24038,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -22994,6 +24061,7 @@
 				32.0,
 				47.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23016,6 +24084,7 @@
 				18.0,
 				18.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -23033,6 +24102,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23055,6 +24125,7 @@
 				34.0,
 				43.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23077,6 +24148,7 @@
 				23.0,
 				22.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -23094,6 +24166,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23116,6 +24189,7 @@
 				42.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23133,6 +24207,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23155,6 +24230,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23172,6 +24248,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23194,6 +24271,7 @@
 				31.0,
 				50.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23211,6 +24289,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23233,6 +24312,7 @@
 				37.0,
 				50.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23255,6 +24335,7 @@
 				24.0,
 				41.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -23272,6 +24353,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23294,6 +24376,7 @@
 				37.0,
 				48.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23316,6 +24399,7 @@
 				40.0,
 				38.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -23333,6 +24417,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23355,6 +24440,7 @@
 				39.0,
 				46.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23377,6 +24463,7 @@
 				20.0,
 				20.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -23394,6 +24481,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23416,6 +24504,7 @@
 				35.0,
 				49.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23433,6 +24522,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23455,6 +24545,7 @@
 				44.0,
 				45.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23472,6 +24563,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23494,6 +24586,7 @@
 				37.0,
 				34.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23511,6 +24604,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23533,6 +24627,7 @@
 				38.0,
 				51.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23555,6 +24650,7 @@
 				24.0,
 				26.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -23572,6 +24668,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23594,6 +24691,7 @@
 				33.0,
 				50.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23616,6 +24714,7 @@
 				17.0,
 				17.0
 			],
+			"overlay_base": {},
 			"pulsate": true,
 			"reference_state": "",
 			"region": [
@@ -23633,6 +24732,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23655,6 +24755,7 @@
 				38.0,
 				44.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23672,6 +24773,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23694,6 +24796,7 @@
 				29.0,
 				27.0
 			],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23711,6 +24814,7 @@
 			"effect": false,
 			"light_curve": [],
 			"native_rect": [],
+			"overlay_base": {},
 			"pulsate": false,
 			"reference_state": "",
 			"region": [
@@ -23725,10 +24829,10 @@
 	"renderer_hashes": {
 		"scripts/avatar_art.gd": "b7ad7e03b75854bbb4401ab816a9a680a0c344b605e311027b7dfd77e268b7d7",
 		"scripts/avatar_contour_glow.gd": "3b3fb2582f488787fb2615bed8bfdbb70f6920d49cc080a2216c048b4b3077d2",
-		"scripts/avatar_xfs_hd.gd": "33cdaa12e563c12134b5ad02b0937f3cc3ce9044a640e72550ae1e9431e10a9b",
-		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
-		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
-		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"
+		"scripts/avatar_xfs_hd.gd": "3beb9adae9b68a87d977c3ce2e0e9e3a83e34f0503628c77bf13ac1d27d975aa",
+		"scripts/bigfoot_sprite.gd": "5da73fe21956be9776ed87b613371f14af4bc6e448f3c8ff76277e2ca6488fdc",
+		"scripts/mage_sprite.gd": "b6e75b544418fe9bcee7e07c8167037171040e60c039678ec7706e5c679a430b",
+		"scripts/mobile_rig.gd": "4c12532295a17a7475b5176e0154272558cd034e66f8d8a775d8dbe37ab286eb"
 	},
 	"sheet_hashes": {
 		"batch_001": "302bc8d5813e7383cd37ffb5d2f742f2599e8cbebe3592c2ef55ab7302ad96e4",
@@ -23736,7 +24840,6 @@
 		"batch_003": "42f387716e9071037071b78ea2df658e4ab0ead6ea45068f45550b1c4147c9f1",
 		"batch_004": "d9d9c7befc6408368c50747e174b7778564f60b745502dcf0a014c176089490c",
 		"batch_005": "638a0aa51e963c9c6f3ed270542fae82ae13d52c1bc8ab8a6920bdc105284abf",
-		"batch_005_repair_008": "1322d9be2f84e576937fb6b9196d56ab96de88bd67d072d6337e17d08048b27c",
 		"batch_006": "257ea6a35f7ca59e283b54dc5c8503074fa02b0249f962b10b89b5e66da50b59",
 		"batch_007": "111da2471c977cc3a32735ab43d05e94cef39631f0e84398a912a080592919b9",
 		"batch_008": "35387a4cacf3da23b4a2e1f71c59ac4680efbda1ca73bef8f2dd6f047650b910",
@@ -23769,6 +24872,7 @@
 		"batch_034": "911b9f88dc89776be4ea48b6ce95799dfa86da9f80397e65ef1caf47879cf054",
 		"batch_035": "f14445484739118c0d2604ffb69190e133b18374e5910c49822599b6efa755c4",
 		"batch_036": "7b9070beaf7f4a82231e07a9d29505e783dcb0b325b128f1af4d9a7e5ff87c13",
-		"batch_037": "da6c9ba2bf5fb824ff6fb2da77dd24f54d2c7bb12f1abdf5550ac53e4f3f464e"
+		"batch_037": "da6c9ba2bf5fb824ff6fb2da77dd24f54d2c7bb12f1abdf5550ac53e4f3f464e",
+		"great_devil_horn_light": "10ead664c8879cc6bb336eb1d761eecc87e8b6c8d17b65b93e830fff6344faaf"
 	}
 }

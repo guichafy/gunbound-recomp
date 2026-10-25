@@ -124,6 +124,23 @@ func piece(key: String, index: int) -> Dictionary:
 		var light:=light_layer(data.texture,data.source,"hd:"+key+":"+str(index)+":"+str(entry.sheet))
 		data.paint=light.paint
 		data.source=light.source
+	if entry.has("overlay_base"):
+		# A light derived from the head's own horn pixels shares its window:
+		# same origin and scale as the anatomy, padded only for the soft rim.
+		var overlay=entry.overlay_base
+		if index<=0 or not data.effect or data.draw_behind or not overlay is Dictionary or not overlay.get("offset") is Array or overlay.offset.size()!=2:return {}
+		for value in overlay.offset:
+			if typeof(value) not in [TYPE_INT,TYPE_FLOAT] or not is_finite(float(value)) or float(value)>0:return {}
+		var base:=piece(key,0)
+		if base.is_empty():return {}
+		var offset:=Vector2(overlay.offset[0],overlay.offset[1])
+		if data.source.size!=base.source.size-2*offset:return {}
+		var scale: Vector2=base.target.size/base.source.size
+		data.target=Rect2(base.target.position+offset*scale,data.source.size*scale)
+		# The baked PNG already carries the classic core alpha.
+		var opacity=overlay.get("opacity",1.0)
+		if typeof(opacity) not in [TYPE_INT,TYPE_FLOAT] or not is_finite(float(opacity)) or float(opacity)<0 or float(opacity)>1:return {}
+		data.opacity=float(opacity)
 	if entry.has("light_curve"):
 		if index<=0 or data.draw_behind or not data.effect:return {}
 		var base:=piece(key,0)

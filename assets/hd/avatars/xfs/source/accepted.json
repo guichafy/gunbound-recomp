@@ -10170,104 +10170,46 @@
     "native_mean_opacity": 0.5539503386004515,
     "reference_state": "normal",
     "region": [
-      90,
-      17,
-      1094,
-      1173
+      0,
+      0,
+      238,
+      193
     ],
-    "sheet": "batch_005_repair_008",
+    "sheet": "great_devil_horn_light",
     "sheet_meta": {
-      "file": "res://assets/hd/avatars/xfs/batch_005_repair_008.png",
+      "file": "res://assets/hd/avatars/xfs/great_devil_horn_light.png",
       "size": [
-        1295,
-        1214
+        238,
+        193
       ],
-      "sha256": "1322d9be2f84e576937fb6b9196d56ab96de88bd67d072d6337e17d08048b27c"
+      "sha256": "10ead664c8879cc6bb336eb1d761eecc87e8b6c8d17b65b93e830fff6344faaf"
     },
     "state": "qa_passed",
-    "generated_mean_opacity": 0.7067312712627392,
-    "registered_at": "2026-10-20T23:42:26.013232+00:00",
-    "visual_review": "identity/layout checked against batch reference before registration",
-    "attachment": {
-      "feature": "single profile horn",
-      "base_uv": [
-        0.17,
-        0.32
-      ],
-      "effect_uv": [
-        0.5,
-        0.5
-      ],
-      "scale": 1
-    },
+    "generated_mean_opacity": 0.4964457306101248,
+    "registered_at": "2026-10-24T14:37:52.803369+00:00",
+    "visual_review": "derived from the HD horn silhouette; classic L profile measured",
     "normal_reference": "assets/hd/avatars/xfs/source/effect_alignment/reference_effects_normal.png",
-    "evidence": "docs/avatar-hd-migration/qa/batch_005.json",
     "draw_behind": false,
-    "light_curve": [
-      [
-        0,
-        0.49,
-        0.2,
-        -0.035,
-        0.75
+    "overlay_base": {
+      "feature": "single profile horn",
+      "base_sheet": "batch_005",
+      "base_region": [
+        546,
+        235,
+        198,
+        153
       ],
-      [
-        0.05,
-        0.445,
-        0.17,
-        0.02,
-        0.75
+      "offset": [
+        -20,
+        -20
       ],
-      [
-        0.15,
-        0.295,
-        0.11,
-        0.1,
-        0.65
-      ],
-      [
-        0.3,
-        0.204,
-        0.087,
-        0.23,
-        0.65
-      ],
-      [
-        0.45,
-        0.22,
-        0.14,
-        0.34,
-        0.72
-      ],
-      [
-        0.6,
-        0.39,
-        0.22,
-        0.46,
-        0.5
-      ],
-      [
-        0.73,
-        0.57,
-        0.26,
-        0.53,
-        0.35
-      ],
-      [
-        0.87,
-        0.65,
-        0.27,
-        0.58,
-        0.26
-      ],
-      [
-        1,
-        0.7,
-        0.28,
-        0.64,
-        0.26
-      ]
-    ]
+      "derivation": "HD horn silhouette + classic mh00071l profile",
+      "core_alpha": 187,
+      "rim_grow": 4,
+      "rim_blur": 5,
+      "outline": 3
+    },
+    "evidence": "docs/avatar-hd-migration/qa/batch_005.json"
   },
   "xfs:0:0:71|portrait": {
     "id": "xfs:0:0:71|portrait",

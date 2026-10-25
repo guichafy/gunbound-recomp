@@ -1,4 +1,7 @@
-# Catálogo clássico de avatares — REQ-45
+# Catálogo clássico de avatares — REQ-46
+
+Na `main`, REQ-45 já é o roster dos 16 mobiles e ADR-082 já é o brilho do
+chifre. Este catálogo usa REQ-46 e ADR-089.
 
 ## Pedido
 

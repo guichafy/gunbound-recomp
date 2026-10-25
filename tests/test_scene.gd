@@ -37,7 +37,7 @@ func run() -> void:
 	space.pressed = true
 	scene._unhandled_key_input(space)
 	scene._process(0.1)
-	check(scene.aim.charging and is_equal_approx(scene.aim.power, 4.0), "Holding Space charges from 0 in steps of 2 every 0.04 s (original)")
+	check(scene.aim.charging and is_equal_approx(scene.aim.power, 100.0 / 30.0), "Holding Space charges continuously:0.1s of3s is3.333percent (ADR-084)")
 	space.pressed = false
 	scene._unhandled_key_input(space)
 	check(scene.model.phase == "flight", "HUD fire command launches a real projectile")

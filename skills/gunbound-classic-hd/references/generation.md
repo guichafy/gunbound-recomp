@@ -31,7 +31,9 @@ Diferencie arte regenerada com novos detalhes de simples ampliação interpolada
    evitam duplicar anatomia ao vestir. Um piloto não modular pode ser inteiro.
 4. Use um mestre constante por peça. Novas poses não devem redefinir olhos,
    rosto, comprimento dos braços, rodas ou chassis. Estados são transformações
-   do mestre; chamas, aura e clarão são assets/camadas próprios.
+   do mestre; chamas, aura e clarão são assets/camadas próprios. Se a forma
+   do efeito clássico for a silhueta da peça (brilho de chifre, joia acesa),
+   derive a camada da máscara do mestre HD em vez de gerá-la; ver effects.md.
 
 ## Prompt que funcionou para avatares
 

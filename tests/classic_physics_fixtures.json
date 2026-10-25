@@ -1,0 +1,2567 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "sine": {
+    "va": "0x54c240",
+    "size": 1440,
+    "sha256": "6e40fa45f367eda31c6b03f9cf76af99ab1cf97bace9c856eca44357416dfa7a"
+  },
+  "angle": {
+    "center_va": "0x598e7e",
+    "first_va": "0x588f80",
+    "size": 131072,
+    "sha256": "41734b41c43ff4e760a3a11a830c208493446dd1aef3a72f2a760e9b0bce3ffb"
+  },
+  "sine_sample": {
+    "0": 0.0,
+    "1": 0.01744999922811985,
+    "30": 0.5,
+    "45": 0.7071099877357483,
+    "60": 0.8660299777984619,
+    "90": 1.0,
+    "135": 0.7071099877357483,
+    "180": 0.0,
+    "225": -0.7071099877357483,
+    "270": -1.0,
+    "315": -0.7071099877357483
+  },
+  "wind_cases": [
+    {
+      "W": 0,
+      "phi": 0,
+      "G": 98,
+      "a": [
+        0,
+        250
+      ]
+    },
+    {
+      "W": 26,
+      "phi": 0,
+      "G": 98,
+      "a": [
+        66,
+        250
+      ]
+    },
+    {
+      "W": 26,
+      "phi": 90,
+      "G": 98,
+      "a": [
+        0,
+        184
+      ]
+    },
+    {
+      "W": 26,
+      "phi": 180,
+      "G": 98,
+      "a": [
+        -66,
+        250
+      ]
+    },
+    {
+      "W": 26,
+      "phi": 270,
+      "G": 98,
+      "a": [
+        0,
+        317
+      ]
+    },
+    {
+      "W": 26,
+      "phi": 45,
+      "G": 98,
+      "a": [
+        46,
+        204
+      ]
+    },
+    {
+      "W": 26,
+      "phi": 225,
+      "G": 98,
+      "a": [
+        -46,
+        296
+      ]
+    },
+    {
+      "W": 1,
+      "phi": 45,
+      "G": 98,
+      "a": [
+        0,
+        250
+      ]
+    }
+  ],
+  "angle_cases": [
+    {
+      "v": [
+        100,
+        0
+      ],
+      "angle": 0
+    },
+    {
+      "v": [
+        0,
+        -100
+      ],
+      "angle": 90
+    },
+    {
+      "v": [
+        -100,
+        0
+      ],
+      "angle": 180
+    },
+    {
+      "v": [
+        0,
+        100
+      ],
+      "angle": 270
+    },
+    {
+      "v": [
+        100,
+        -100
+      ],
+      "angle": 45
+    },
+    {
+      "v": [
+        -100,
+        -100
+      ],
+      "angle": 135
+    },
+    {
+      "v": [
+        0,
+        0
+      ],
+      "angle": 0
+    },
+    {
+      "v": [
+        99,
+        -99
+      ],
+      "angle": 0
+    },
+    {
+      "v": [
+        7600,
+        -7500
+      ],
+      "angle": 45
+    },
+    {
+      "v": [
+        -7600,
+        -7500
+      ],
+      "angle": 135
+    },
+    {
+      "v": [
+        50000,
+        -50000
+      ],
+      "angle": 45
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "bigfoot-full-zero",
+      "input": {
+        "P": 420,
+        "theta": 45,
+        "W": 0,
+        "phi": 0,
+        "G": 98,
+        "boomer": false,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          7577,
+          -7577
+        ],
+        "a": [
+          0,
+          250
+        ]
+      },
+      "curved": false,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            7577,
+            -7577
+          ],
+          "v": [
+            7577,
+            -7327
+          ],
+          "pixel": [
+            29,
+            -30
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            15154,
+            -14904
+          ],
+          "v": [
+            7577,
+            -7077
+          ],
+          "pixel": [
+            59,
+            -59
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            22731,
+            -21981
+          ],
+          "v": [
+            7577,
+            -6827
+          ],
+          "pixel": [
+            88,
+            -86
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            75770,
+            -64520
+          ],
+          "v": [
+            7577,
+            -5077
+          ],
+          "pixel": [
+            295,
+            -253
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            151540,
+            -104040
+          ],
+          "v": [
+            7577,
+            -2577
+          ],
+          "pixel": [
+            591,
+            -407
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            265195,
+            -116445
+          ],
+          "v": [
+            7577,
+            1173
+          ],
+          "pixel": [
+            1035,
+            -455
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            272772,
+            -115272
+          ],
+          "v": [
+            7577,
+            1423
+          ],
+          "pixel": [
+            1065,
+            -451
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            303080,
+            -108080
+          ],
+          "v": [
+            7577,
+            2423
+          ],
+          "pixel": [
+            1183,
+            -423
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            340965,
+            -93465
+          ],
+          "v": [
+            7577,
+            3673
+          ],
+          "pixel": [
+            1331,
+            -366
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            348542,
+            -89792
+          ],
+          "v": [
+            7577,
+            3923
+          ],
+          "pixel": [
+            1361,
+            -351
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            454620,
+            -12120
+          ],
+          "v": [
+            7577,
+            7423
+          ],
+          "pixel": [
+            1775,
+            -48
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            606160,
+            183840
+          ],
+          "v": [
+            7577,
+            12423
+          ],
+          "pixel": [
+            2367,
+            718
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "mage-half-diagonal",
+      "input": {
+        "P": 225,
+        "theta": 30,
+        "W": 26,
+        "phi": 45,
+        "G": 90,
+        "boomer": false,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          4966,
+          -2867
+        ],
+        "a": [
+          46,
+          184
+        ]
+      },
+      "curved": false,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            4966,
+            -2867
+          ],
+          "v": [
+            5012,
+            -2683
+          ],
+          "pixel": [
+            19,
+            -12
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            9978,
+            -5550
+          ],
+          "v": [
+            5058,
+            -2499
+          ],
+          "pixel": [
+            38,
+            -22
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            15036,
+            -8049
+          ],
+          "v": [
+            5104,
+            -2315
+          ],
+          "pixel": [
+            58,
+            -32
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            51730,
+            -20390
+          ],
+          "v": [
+            5426,
+            -1027
+          ],
+          "pixel": [
+            202,
+            -80
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            108060,
+            -22380
+          ],
+          "v": [
+            5886,
+            813
+          ],
+          "pixel": [
+            422,
+            -88
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            201180,
+            9135
+          ],
+          "v": [
+            6576,
+            3573
+          ],
+          "pixel": [
+            785,
+            35
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            207756,
+            12708
+          ],
+          "v": [
+            6622,
+            3757
+          ],
+          "pixel": [
+            811,
+            49
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            234520,
+            28840
+          ],
+          "v": [
+            6806,
+            4493
+          ],
+          "pixel": [
+            916,
+            112
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            269010,
+            53145
+          ],
+          "v": [
+            7036,
+            5413
+          ],
+          "pixel": [
+            1050,
+            207
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            276046,
+            58558
+          ],
+          "v": [
+            7082,
+            5597
+          ],
+          "pixel": [
+            1078,
+            228
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            379380,
+            153660
+          ],
+          "v": [
+            7726,
+            8173
+          ],
+          "pixel": [
+            1481,
+            600
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            542640,
+            352080
+          ],
+          "v": [
+            8646,
+            11853
+          ],
+          "pixel": [
+            2119,
+            1375
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "native-min-diagonal",
+      "input": {
+        "P": 1,
+        "theta": 45,
+        "W": 0,
+        "phi": 0,
+        "G": 98,
+        "boomer": false,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          0,
+          0
+        ],
+        "a": [
+          0,
+          250
+        ]
+      },
+      "curved": false,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            0,
+            0
+          ],
+          "v": [
+            0,
+            250
+          ],
+          "pixel": [
+            0,
+            0
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            0,
+            250
+          ],
+          "v": [
+            0,
+            500
+          ],
+          "pixel": [
+            0,
+            0
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            0,
+            750
+          ],
+          "v": [
+            0,
+            750
+          ],
+          "pixel": [
+            0,
+            2
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            0,
+            11250
+          ],
+          "v": [
+            0,
+            2500
+          ],
+          "pixel": [
+            0,
+            43
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            0,
+            47500
+          ],
+          "v": [
+            0,
+            5000
+          ],
+          "pixel": [
+            0,
+            185
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            0,
+            148750
+          ],
+          "v": [
+            0,
+            8750
+          ],
+          "pixel": [
+            0,
+            581
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            0,
+            157500
+          ],
+          "v": [
+            0,
+            9000
+          ],
+          "pixel": [
+            0,
+            615
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            0,
+            195000
+          ],
+          "v": [
+            0,
+            10000
+          ],
+          "pixel": [
+            0,
+            761
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            0,
+            247500
+          ],
+          "v": [
+            0,
+            11250
+          ],
+          "pixel": [
+            0,
+            966
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            0,
+            258750
+          ],
+          "v": [
+            0,
+            11500
+          ],
+          "pixel": [
+            0,
+            1010
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            0,
+            442500
+          ],
+          "v": [
+            0,
+            15000
+          ],
+          "pixel": [
+            0,
+            1728
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            0,
+            790000
+          ],
+          "v": [
+            0,
+            20000
+          ],
+          "pixel": [
+            0,
+            3085
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "native-min-horizontal",
+      "input": {
+        "P": 1,
+        "theta": 0,
+        "W": 0,
+        "phi": 0,
+        "G": 98,
+        "boomer": false,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          25,
+          0
+        ],
+        "a": [
+          0,
+          250
+        ]
+      },
+      "curved": false,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            25,
+            0
+          ],
+          "v": [
+            25,
+            250
+          ],
+          "pixel": [
+            0,
+            0
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            50,
+            250
+          ],
+          "v": [
+            25,
+            500
+          ],
+          "pixel": [
+            0,
+            0
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            75,
+            750
+          ],
+          "v": [
+            25,
+            750
+          ],
+          "pixel": [
+            0,
+            2
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            250,
+            11250
+          ],
+          "v": [
+            25,
+            2500
+          ],
+          "pixel": [
+            0,
+            43
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            500,
+            47500
+          ],
+          "v": [
+            25,
+            5000
+          ],
+          "pixel": [
+            1,
+            185
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            875,
+            148750
+          ],
+          "v": [
+            25,
+            8750
+          ],
+          "pixel": [
+            3,
+            581
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            900,
+            157500
+          ],
+          "v": [
+            25,
+            9000
+          ],
+          "pixel": [
+            3,
+            615
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            1000,
+            195000
+          ],
+          "v": [
+            25,
+            10000
+          ],
+          "pixel": [
+            3,
+            761
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            1125,
+            247500
+          ],
+          "v": [
+            25,
+            11250
+          ],
+          "pixel": [
+            4,
+            966
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            1150,
+            258750
+          ],
+          "v": [
+            25,
+            11500
+          ],
+          "pixel": [
+            4,
+            1010
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            1500,
+            442500
+          ],
+          "v": [
+            25,
+            15000
+          ],
+          "pixel": [
+            5,
+            1728
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            2000,
+            790000
+          ],
+          "v": [
+            25,
+            20000
+          ],
+          "pixel": [
+            7,
+            3085
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "boomer-zero",
+      "input": {
+        "P": 350,
+        "theta": 45,
+        "W": 0,
+        "phi": 0,
+        "G": 98,
+        "boomer": true,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          6323,
+          -6323
+        ],
+        "a": [
+          0,
+          250
+        ]
+      },
+      "curved": false,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            6323,
+            -6451
+          ],
+          "v": [
+            6323,
+            -6201
+          ],
+          "pixel": [
+            24,
+            -26
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            12646,
+            -12780
+          ],
+          "v": [
+            6323,
+            -6079
+          ],
+          "pixel": [
+            49,
+            -50
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            18969,
+            -18987
+          ],
+          "v": [
+            6323,
+            -5957
+          ],
+          "pixel": [
+            74,
+            -75
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            63230,
+            -59020
+          ],
+          "v": [
+            6323,
+            -5103
+          ],
+          "pixel": [
+            246,
+            -231
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            126460,
+            -105840
+          ],
+          "v": [
+            6323,
+            -3883
+          ],
+          "pixel": [
+            493,
+            -414
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            221305,
+            -153195
+          ],
+          "v": [
+            6323,
+            -2053
+          ],
+          "pixel": [
+            864,
+            -599
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            227628,
+            -155376
+          ],
+          "v": [
+            6323,
+            -1931
+          ],
+          "pixel": [
+            889,
+            -607
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            252920,
+            -162880
+          ],
+          "v": [
+            6323,
+            -1443
+          ],
+          "pixel": [
+            987,
+            -637
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            284535,
+            -169515
+          ],
+          "v": [
+            6323,
+            -833
+          ],
+          "pixel": [
+            1111,
+            -663
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            290858,
+            -170476
+          ],
+          "v": [
+            6323,
+            -711
+          ],
+          "pixel": [
+            1136,
+            -666
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            379380,
+            -171120
+          ],
+          "v": [
+            6323,
+            997
+          ],
+          "pixel": [
+            1481,
+            -669
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            505840,
+            -130560
+          ],
+          "v": [
+            6323,
+            3437
+          ],
+          "pixel": [
+            1975,
+            -510
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "boomer-tailwind",
+      "input": {
+        "P": 350,
+        "theta": 45,
+        "W": 26,
+        "phi": 0,
+        "G": 98,
+        "boomer": true,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          6323,
+          -6323
+        ],
+        "a": [
+          66,
+          250
+        ]
+      },
+      "curved": false,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            6323,
+            -6451
+          ],
+          "v": [
+            6389,
+            -6201
+          ],
+          "pixel": [
+            24,
+            -26
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            12712,
+            -12780
+          ],
+          "v": [
+            6455,
+            -6079
+          ],
+          "pixel": [
+            49,
+            -50
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            19167,
+            -18987
+          ],
+          "v": [
+            6521,
+            -5957
+          ],
+          "pixel": [
+            74,
+            -75
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            66200,
+            -59020
+          ],
+          "v": [
+            6983,
+            -5103
+          ],
+          "pixel": [
+            258,
+            -231
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            139000,
+            -105840
+          ],
+          "v": [
+            7643,
+            -3883
+          ],
+          "pixel": [
+            542,
+            -414
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            260575,
+            -153195
+          ],
+          "v": [
+            8633,
+            -2053
+          ],
+          "pixel": [
+            1017,
+            -599
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            269208,
+            -155376
+          ],
+          "v": [
+            8699,
+            -1931
+          ],
+          "pixel": [
+            1051,
+            -607
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            304400,
+            -162880
+          ],
+          "v": [
+            8963,
+            -1443
+          ],
+          "pixel": [
+            1189,
+            -637
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            349875,
+            -169515
+          ],
+          "v": [
+            9293,
+            -833
+          ],
+          "pixel": [
+            1366,
+            -663
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            359168,
+            -170476
+          ],
+          "v": [
+            9359,
+            -711
+          ],
+          "pixel": [
+            1403,
+            -666
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            496200,
+            -171120
+          ],
+          "v": [
+            10283,
+            997
+          ],
+          "pixel": [
+            1938,
+            -669
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            714400,
+            -130560
+          ],
+          "v": [
+            11603,
+            3437
+          ],
+          "pixel": [
+            2790,
+            -510
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "boomer-headwind",
+      "input": {
+        "P": 350,
+        "theta": 45,
+        "W": 26,
+        "phi": 180,
+        "G": 98,
+        "boomer": true,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          6323,
+          -6323
+        ],
+        "a": [
+          -66,
+          250
+        ]
+      },
+      "curved": true,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            6233,
+            -6413
+          ],
+          "v": [
+            6167,
+            -6163
+          ],
+          "pixel": [
+            24,
+            -26
+          ],
+          "curve_angle": 46,
+          "direction": 1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            12308,
+            -12664
+          ],
+          "v": [
+            6009,
+            -6001
+          ],
+          "pixel": [
+            48,
+            -50
+          ],
+          "curve_angle": 47,
+          "direction": 1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            18224,
+            -18752
+          ],
+          "v": [
+            5850,
+            -5838
+          ],
+          "pixel": [
+            71,
+            -74
+          ],
+          "curve_angle": 48,
+          "direction": 1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            55054,
+            -56654
+          ],
+          "v": [
+            4695,
+            -4648
+          ],
+          "pixel": [
+            215,
+            -222
+          ],
+          "curve_angle": 55,
+          "direction": 1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            93098,
+            -95584
+          ],
+          "v": [
+            2938,
+            -2793
+          ],
+          "pixel": [
+            363,
+            -374
+          ],
+          "curve_angle": 65,
+          "direction": 1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            116085,
+            -116598
+          ],
+          "v": [
+            298,
+            276
+          ],
+          "pixel": [
+            453,
+            -456
+          ],
+          "curve_angle": 342,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            116473,
+            -116412
+          ],
+          "v": [
+            322,
+            436
+          ],
+          "pixel": [
+            454,
+            -455
+          ],
+          "curve_angle": 315,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            118463,
+            -113810
+          ],
+          "v": [
+            505,
+            1193
+          ],
+          "pixel": [
+            462,
+            -445
+          ],
+          "curve_angle": 294,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            122104,
+            -106037
+          ],
+          "v": [
+            771,
+            2223
+          ],
+          "pixel": [
+            476,
+            -415
+          ],
+          "curve_angle": 288,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            122996,
+            -103853
+          ],
+          "v": [
+            826,
+            2434
+          ],
+          "pixel": [
+            480,
+            -406
+          ],
+          "curve_angle": 288,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            141339,
+            -50882
+          ],
+          "v": [
+            1612,
+            5436
+          ],
+          "pixel": [
+            552,
+            -199
+          ],
+          "curve_angle": 285,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            186869,
+            98408
+          ],
+          "v": [
+            2752,
+            9776
+          ],
+          "pixel": [
+            729,
+            384
+          ],
+          "curve_angle": 285,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "boomer-headwind-left",
+      "input": {
+        "P": 350,
+        "theta": 135,
+        "W": 26,
+        "phi": 0,
+        "G": 98,
+        "boomer": true,
+        "ss": false
+      },
+      "initial": {
+        "v": [
+          -6323,
+          -6323
+        ],
+        "a": [
+          66,
+          250
+        ]
+      },
+      "curved": true,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            -6233,
+            -6413
+          ],
+          "v": [
+            -6167,
+            -6163
+          ],
+          "pixel": [
+            -25,
+            -26
+          ],
+          "curve_angle": 134,
+          "direction": -1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            -12308,
+            -12664
+          ],
+          "v": [
+            -6009,
+            -6001
+          ],
+          "pixel": [
+            -49,
+            -50
+          ],
+          "curve_angle": 133,
+          "direction": -1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            -18224,
+            -18752
+          ],
+          "v": [
+            -5850,
+            -5838
+          ],
+          "pixel": [
+            -72,
+            -74
+          ],
+          "curve_angle": 132,
+          "direction": -1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            -55054,
+            -56654
+          ],
+          "v": [
+            -4695,
+            -4648
+          ],
+          "pixel": [
+            -216,
+            -222
+          ],
+          "curve_angle": 125,
+          "direction": -1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            -93098,
+            -95584
+          ],
+          "v": [
+            -2938,
+            -2793
+          ],
+          "pixel": [
+            -364,
+            -374
+          ],
+          "curve_angle": 115,
+          "direction": -1,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            -116085,
+            -116598
+          ],
+          "v": [
+            -298,
+            276
+          ],
+          "pixel": [
+            -454,
+            -456
+          ],
+          "curve_angle": 198,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            -116473,
+            -116412
+          ],
+          "v": [
+            -322,
+            436
+          ],
+          "pixel": [
+            -455,
+            -455
+          ],
+          "curve_angle": 225,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            -118463,
+            -113810
+          ],
+          "v": [
+            -505,
+            1193
+          ],
+          "pixel": [
+            -463,
+            -445
+          ],
+          "curve_angle": 246,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            -122102,
+            -106043
+          ],
+          "v": [
+            -769,
+            2217
+          ],
+          "pixel": [
+            -477,
+            -415
+          ],
+          "curve_angle": 249,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            -122992,
+            -103865
+          ],
+          "v": [
+            -824,
+            2428
+          ],
+          "pixel": [
+            -481,
+            -406
+          ],
+          "curve_angle": 252,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 60,
+          "p": [
+            -141231,
+            -51206
+          ],
+          "v": [
+            -1596,
+            5388
+          ],
+          "pixel": [
+            -552,
+            -201
+          ],
+          "curve_angle": 252,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 80,
+          "p": [
+            -186323,
+            96770
+          ],
+          "v": [
+            -2728,
+            9704
+          ],
+          "pixel": [
+            -728,
+            378
+          ],
+          "curve_angle": 255,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        }
+      ]
+    },
+    {
+      "name": "boomer-ss-zero",
+      "input": {
+        "P": 350,
+        "theta": 45,
+        "W": 0,
+        "phi": 0,
+        "G": 98,
+        "boomer": true,
+        "ss": true
+      },
+      "initial": {
+        "v": [
+          6323,
+          -6323
+        ],
+        "a": [
+          0,
+          250
+        ]
+      },
+      "curved": false,
+      "ticks": [
+        {
+          "tick": 1,
+          "p": [
+            6323,
+            -6451
+          ],
+          "v": [
+            6323,
+            -6201
+          ],
+          "pixel": [
+            24,
+            -26
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 2,
+          "p": [
+            12646,
+            -12780
+          ],
+          "v": [
+            6323,
+            -6079
+          ],
+          "pixel": [
+            49,
+            -50
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 3,
+          "p": [
+            18969,
+            -18987
+          ],
+          "v": [
+            6323,
+            -5957
+          ],
+          "pixel": [
+            74,
+            -75
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 10,
+          "p": [
+            63230,
+            -59020
+          ],
+          "v": [
+            6323,
+            -5103
+          ],
+          "pixel": [
+            246,
+            -231
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 20,
+          "p": [
+            126460,
+            -105840
+          ],
+          "v": [
+            6323,
+            -3883
+          ],
+          "pixel": [
+            493,
+            -414
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 35,
+          "p": [
+            221305,
+            -153195
+          ],
+          "v": [
+            6323,
+            -2053
+          ],
+          "pixel": [
+            864,
+            -599
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "normal",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 36,
+          "p": [
+            221305,
+            -153195
+          ],
+          "v": [
+            6323,
+            -2053
+          ],
+          "pixel": [
+            864,
+            -599
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "change",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 40,
+          "p": [
+            221305,
+            -153195
+          ],
+          "v": [
+            6323,
+            -2053
+          ],
+          "pixel": [
+            864,
+            -599
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "change",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 45,
+          "p": [
+            221305,
+            -153195
+          ],
+          "v": [
+            6323,
+            -2053
+          ],
+          "pixel": [
+            864,
+            -599
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "change",
+          "damage": 350,
+          "diameter": 46
+        },
+        {
+          "tick": 46,
+          "p": [
+            227628,
+            -155376
+          ],
+          "v": [
+            6323,
+            -1931
+          ],
+          "pixel": [
+            889,
+            -607
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "cnormal",
+          "damage": 700,
+          "diameter": 55
+        },
+        {
+          "tick": 60,
+          "p": [
+            316150,
+            -173100
+          ],
+          "v": [
+            6323,
+            -223
+          ],
+          "pixel": [
+            1234,
+            -677
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "cnormal",
+          "damage": 700,
+          "diameter": 55
+        },
+        {
+          "tick": 80,
+          "p": [
+            442610,
+            -156940
+          ],
+          "v": [
+            6323,
+            2217
+          ],
+          "pixel": [
+            1728,
+            -614
+          ],
+          "curve_angle": 0,
+          "direction": 0,
+          "state": "cnormal",
+          "damage": 700,
+          "diameter": 55
+        }
+      ]
+    }
+  ]
+}

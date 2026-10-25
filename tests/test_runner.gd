@@ -1,5 +1,16 @@
 extends "res://tests/support/suite.gd"
 
+const Physics = preload("res://scripts/classic_ballistics.gd")
+
+func sample_motion(wind_force: int) -> Dictionary:
+	Physics.warmup()
+	var shell := {}
+	Physics.seed(shell, Vector2i.ZERO, Vector2i(1280, -1280), Physics.acceleration_fp(98, wind_force, 0))
+	for tick in 2:
+		Physics.move(shell)
+		Physics.finish_tick(shell)
+	return shell
+
 func _initialize() -> void:
 	var paths := ["res://scripts/terrain.gd", "res://scripts/combat.gd", "res://scripts/match.gd"]
 	for path in paths:
@@ -17,10 +28,10 @@ func _initialize() -> void:
 	terrain.carve(Vector2(640, 580), 32.0)
 	check(not terrain.is_solid(Vector2(640, 580)), "Explosion removes crater center")
 	check(terrain.is_solid(Vector2(680, 580)), "Explosion preserves ground beyond its radius")
-	var step: Dictionary = combat.advance(Vector2.ZERO, Vector2(100, -100), Vector2.ZERO, 0.1)
+	var step: Dictionary = sample_motion(0)
 	check(is_equal_approx(step.velocity.x, 100.0), "No wind preserves horizontal velocity")
 	check(step.velocity.y > -100.0, "Gravity accelerates projectile downward")
-	var windy: Dictionary = combat.advance(Vector2.ZERO, Vector2(100, -100), Vector2(20, 0), 0.1)
+	var windy: Dictionary = sample_motion(20)
 	check(windy.velocity.x > step.velocity.x, "Positive wind accelerates rightwards")
 	var hit: Dictionary = combat.trace_segment(Vector2(640, 100), Vector2(640, 650), terrain, [], -1)
 	check(not hit.is_empty(), "Swept collision catches ground across a long segment")
@@ -68,9 +79,9 @@ func _initialize() -> void:
 	match_model.start(1, 1, 46)
 	var cpu_shot: Dictionary = match_model.choose_cpu_shot()
 	check(cpu_shot.angle >= 10.0 and cpu_shot.angle <= 85.0, "CPU returns a legal angle")
-	check(cpu_shot.power >= 15.0 and cpu_shot.power <= 100.0, "CPU returns legal power")
+	check(cpu_shot.power >= match_model.minimum_power(0) and cpu_shot.power <= 100.0, "CPU returns legal native power")
 	match_model.start(1, 2, 123, "")
-	# A real -30-degree support makes Mage's legal 50-degree aim steep enough
+	# A real -30-degree support makes Mage's legal 45-degree aim steep enough
 	# for wind to return the laser to its shooter after muzzle clearance.
 	for y in range(400):
 		for x in range(640):
@@ -78,10 +89,10 @@ func _initialize() -> void:
 	match_model.actors[0].pos.y = match_model.terrain.surface_at(235) - match_model.stance_of(0)
 	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - match_model.stance_of(1)
 	match_model.stamp_tilt()
-	match_model.wind = Vector2(-35, 0)
-	var returning: Dictionary = match_model.predict_shot(0, 50.0, 15.0, 0)
+	match_model.wind = Vector2(-26, 0)
+	var returning: Dictionary = match_model.predict_shot(0, 45.0, 15.0, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")
-	match_model.fire(50.0, 15.0, 0)
+	match_model.fire(45.0, 15.0, 0)
 	for i in range(1600):
 		match_model.tick(1.0 / 120.0)
 		if match_model.phase != "flight":

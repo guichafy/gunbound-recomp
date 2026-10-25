@@ -42,10 +42,42 @@ func run() -> void:
 		bounded = bounded and absi(weather.wind_force - force) <= 2 and mini(posmod(weather.wind_angle - angle, 360), posmod(angle - weather.wind_angle, 360)) <= 3 and weather.wind_angle >= 0 and weather.wind_angle < 360 and weather.wind_force >= 0
 	check(bounded, "Wind disturbance stays within force −2..+1 / angle −3..+2 degrees")
 	weather.change_wind(rng)
-	check(weather.wind_force >= 0 and weather.wind_force < 35 and weather.wind_angle >= 0 and weather.wind_angle < 360, "Wind weather re-rolls force and angle")
+	check(weather.wind_force >= 0 and weather.wind_force <= 26 and weather.wind_angle >= 0 and weather.wind_angle < 360, "Wind weather re-rolls force and angle")
 	weather.wind_force = 20
 	weather.wind_angle = 90
-	check(weather.wind_vector().distance_to(Vector2(0, 20)) < 0.001, "Wind angle follows screen space (90° pushes down)")
+	check(weather.wind_vector().distance_to(Vector2(0, -20)) < 0.001, "Native wind90 pushes upward in screen space")
+
+	# ADR-084: initial force0..25; events0..26; force oscillates every turn.
+	var wind_reference = Weather.new()
+	wind_reference.wind_force = 10
+	var forces := []
+	for _i in 8:
+		wind_reference.disturb_wind(rng)
+		forces.append(wind_reference.wind_force)
+	check(forces == [9,9,10,10,11,11,10,10], "Native per-turn force oscillation")
+	var initial_range := true
+	var event_range := true
+	for seed_value in 100:
+		var sample = Weather.new()
+		rng.seed = seed_value
+		sample.setup([1,0,0,0,0,0,0,0,0,0],Vector2(1800,1800),rng)
+		initial_range = initial_range and sample.wind_force >= 0 and sample.wind_force <= 25
+		sample.change_wind(rng)
+		event_range = event_range and sample.wind_force >= 0 and sample.wind_force <= 26
+	check(initial_range, "Initial native wind0..25")
+	check(event_range, "Native Wind events0..26")
+
+	var particle_model = Match.new()
+	particle_model.start(2,1,7)
+	var particles = load("res://scripts/weather_art.gd").new()
+	particles.reset(Maps.get_map(Maps.DEFAULT))
+	for cardinal in [0,90,180,270]:
+		particle_model.weather.wind_force = 26
+		particle_model.weather.wind_angle = cardinal
+		particles.particles.clear()
+		particles.emit_ground(Vector2(600,300),32,0,particle_model)
+		var expected: Vector2 = Vector2(0,500)+particle_model.weather.wind_vector()*5.0
+		check(not particles.particles.is_empty() and Vector2(particles.particles[0].acceleration).is_equal_approx(expected),"Particles use the physical wind vector cardinal" + str(cardinal))
 
 	# Columns: same-type overlaps merge at the mean with summed scale.
 	weather.columns.clear()

@@ -1,4 +1,5 @@
 extends SceneTree
+## Historical 0.18.4 fixture, superseded by ADR-082. Current acceptance is capture_horn_classic.gd.
 class Gallery extends Node2D:
 	var art=load("res://scripts/avatar_art.gd").new()
 	var original=load("res://scripts/avatar_art.gd").new()

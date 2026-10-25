@@ -15,9 +15,13 @@ func run() -> void:
 	scene.opening = 0
 	scene.start_match()
 	key(scene, true)
+	# 3s charge (ADR-084); verify the old2.2s point still has not fired.
 	for i in range(22):
 		scene._process(0.1)
-	check(scene.model.phase == "flight", "Full charge fires automatically")
+	check(scene.model.phase == "aim" and scene.aim.charging,"2.2s remains below the3s auto-charge boundary")
+	for _i in range(8):
+		scene._process(0.1)
+	check(scene.model.phase == "flight", "Full charge fires automatically at3s")
 	check(not scene.aim.charging and scene.aim.power == 100.0, "Automatic shot clears charge at maximum")
 	check(not scene.model.last_shots[0].is_empty(), "Full charge records a real shot")
 	var count: int = scene.model.projectiles.size()

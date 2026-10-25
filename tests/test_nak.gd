@@ -37,7 +37,7 @@ func first(events: Array, type: String) -> Dictionary:
 
 func _initialize() -> void:
 	var nak: Dictionary = Mobiles.definition(3)
-	check(Mobiles.PLAYABLE == [1, 2, 3] and nak.name == "Nak", "Nak joins the roster with stable ID 3")
+	check(Mobiles.PLAYABLE.slice(0, 3) == [1, 2, 3] and Mobiles.PLAYABLE.size() == 16 and nak.name == "Nak", "Nak keeps stable ID 3 beside the classic roster")
 	check(int(nak.hp) == 1100 and int(nak.shield) == 0 and int(nak.protection) == 35 and not bool(nak.bionic), "MobileMetadata: 1100 HP, no shield, Steel")
 	check(is_equal_approx(float(nak.beacon_delay), 0.0), "Base Mobile beacon interaction time")
 	for weapon in range(3):

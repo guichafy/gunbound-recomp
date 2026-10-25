@@ -19,7 +19,7 @@ const HEALTH_RED := Color8(198, 20, 0)
 const CROSSHAIR_FADE := Color(0.6, 0.6, 0.6, 0.6)
 const CROSSHAIR_INTRO := 0.25
 const POINTER_OFFSET := 29.0
-const MAX_WIND := 35.0
+const MAX_WIND := 26.0
 const TURN_TIME := 30
 # Button.cs presets: frame index of normal, hover, clicked, disabled, activated.
 const SHOT_FRAMES := [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14]]
@@ -238,7 +238,7 @@ func tick(delta: float, model, sound) -> void:
 		var half := MAX_WIND * 0.5
 		yellow_target = 1.0 - absf(force - half) / half
 		red_target = 1.0 - yellow_target if force > half else 0.0
-	var goal: float = deg_to_rad(float(model.weather.wind_angle)) if model.weather != null and force > 0.0 else compass_rotation
+	var goal: float = model.weather.wind_vector().angle() if model.weather != null and force > 0.0 else compass_rotation
 	var difference := wrapf(goal - compass_rotation, -PI, PI)
 	var turn := delta * (1.0 + force * 5.0 / MAX_WIND)
 	compass_rotation = goal if absf(difference) <= turn else compass_rotation + signf(difference) * turn

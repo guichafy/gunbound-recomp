@@ -1,0 +1,4 @@
+interface:
+  display_name: "GunBound Client → Godot"
+  short_description: "Porte fiel do cliente, REA e animação no Godot"
+  default_prompt: "Use $gunbound-client-port para portar ou corrigir este comportamento do cliente GunBound no Godot, preservando os mobiles e avatares aprovados."

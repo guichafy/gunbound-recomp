@@ -1,10 +1,73 @@
 # Design implementado
 
-Estado vigente: 0.18.6. O contrato atual são as seções «Arquitetura SOLID» e
-«Revisão de qualidade 0.18.6» (logo abaixo), as regras de batalha de
-`BATTLE_RULES_AUDIT.md` e `HANDOFF.md`. As demais seções guardam o histórico de
-cada entrega: terreno 640×400, força a 65 pontos/s, gravidade 260, CPU com
-Carapaça, som só PCM e `Combat.predict` não descrevem o jogo atual.
+Estado vigente: **0.20.2**, ADR-084/085/086/087. A seção abaixo complementa a
+arquitetura SOLID e substitui as descrições históricas de balística C#,
+integração120 Hz, carga 2 s e piso15%. Resumo e limites em
+[BATTLE_FIDELITY_0_20.md](BATTLE_FIDELITY_0_20.md); contrato aritmético em
+[CLASSIC_BALLISTICS_0_20.md](CLASSIC_BALLISTICS_0_20.md).
+
+## Física e apresentação0.20
+
+`ClassicBallistics` integra pares inteiros24.8 a 20 Hz; `move` antecede colisão
+e `finish_tick` aplica aceleração. ShellState guarda estadoFP, velocidade
+inicial exata, relógios, endpoints anteriores e todos os parâmetros de
+regras. `shot_velocity_fp` concentra clamp/geometria/quantização; `pos` e
+`velocity` são projeções para os consumidores existentes. Acumuladores
+preservam resíduos e evitam perda de tick em 30/60/120FPS.
+
+`Match.advance_projectile_tick` avança minas e projéteis para execução e
+previsão. `GoldTracker.collect_mine` credita o dono e marca mortes já
+contabilizadas, sem alterar shot_actor. Filhos e cristais usam ShellState.
+FlightSnapshot duplica terreno/atores/clima/minas/estado, arma os projéteis e
+reconstrói volleys. Física e ShotTiming são pré-aquecidos na thread principal;
+CpuPlanner não lê arquivos, recursos ou estado vivo durante a busca.
+
+`BoomerFlight` decide curva, freeze36–45 antes do clima e transformação46.
+`ClassicFlight.open_shell/hold` publica os estados do Armor e a transição
+Turtle descrita abaixo. Cena recebe eventos; `ClassicShotTiming` fornece
+EPA, emissão e som por grupo. `pose_start_at` separa a pose Dual do spawn;
+`projectile_launch` toca um som por grupo. O modelo nunca usa posição
+interpolada: `Game.draw_projectiles` altera só uma cópia visual, e
+`ClassicProjectileArt` lê o histórico para WaterEffect. Contato opaco vem
+do importador, não de Image.load; assets originais/HD são preservados.
+
+Colisão varrida, dano/cratera, tornado, demais órbitas/hélices e beacon continuam
+adaptações identificadas. As famílias pesquisadas mas não portadas estão em
+`BATTLE_MOBILE_FAMILY_PLANS.md`; nenhuma tabela de renderização decide dano.
+
+## Turtle T2 0.20.2
+
+`TurtleFlight` implementa `flight=turtle_wave`, com contador, fase, amplitude
+e avanço próprios. `ClassicFlight.prepare/hit_point/finish_tick` conecta
+esse estado ao laço compartilhado. `fp_pos` continua a trajetória central;
+`hit_pos` recebe o deslocamento perpendicular calculado com velocidade FP
+pré-aceleração. Após `Physics.finish_tick`, registra seção de meia largura 10
+com heading pós-aceleração e avança a agenda inteira. Não há IO no worker.
+
+`water_sides` acompanha o histórico de pontos. O renderer ancora as seções
+no pixel inteiro, interpola cópias e reutiliza suas bordas. Para T2,
+`triangle_data` emite índices 0/1/2, 0/2/3 e `draw_water` os envia diretamente
+ao RenderingServer; isso preserva quads cruzados que ear-clipping rejeitava.
+T1 mantém `draw_polygon`. Dual/Dual+ têm estados separados, e Teleport limpa
+flight para continuar como beacon sem onda. Dados T1/SS/avatares preservados.
+Contrato, fontes e resultados: [TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md).
+
+## Turtle 0.20.1
+
+`ClassicProjectileArt` usa uma seção transversal compartilhada por amostra,
+UV horizontal 1/8 e alpha(255−16i)/255. A interpolação de todo o histórico
+ocorre na cópia visual; `draw_fraction` nunca alimenta colisão.
+
+`ShellState` preserva `transform_ticks/transform_hold`. Turtle SS abre no 44º
+tick físico, mantém change por dez ticks e publica `split`; o laço comum
+real/previsão cria seis filhos via ShellState e remove o pai. Divisão não chama
+explosão. `burst` exige a sentinela para flight=open, evitando filhos no impacto
+do tick 44. Hold estabiliza os endpoints anteriores usados pelo renderer.
+
+`ClassicSprite` seleciona `SSChild.png`/bullet12c para o filho; evento e efeito
+carregam `child/ss_state`. Pai normal compõe Flame3+SSFlame; pai em change e
+filho usam Flame3. Dano/velocidade/dispersão dos filhos continuam adaptações.
+Detalhes, revisão e evidência temporal em [TURTLE_ANIMATION_FIX.md](TURTLE_ANIMATION_FIX.md).
 
 ## Arquitetura SOLID
 
@@ -14,7 +77,7 @@ orquestra e não decide dano. Papéis do treino 1×1: `Match.PLAYER` (0) e
 
 | Arquivo | Responsabilidade |
 |---|---|
-| `scripts/mobiles.gd` | Catálogo de regras Mage/Bigfoot/Nak: armas (custo original), mira, escudo, som e texto. Sem ramo por ID |
+| `scripts/mobiles.gd` | Catálogo dos16mobiles (com classic_mobiles): armas/custo original, força/gravidade, mira e atributos; emissão pelo catálogo ShotTiming |
 | `scripts/flight_snapshot.gd` | Lista fechada copiada por `predict_shot` e pela busca da CPU |
 | `scripts/damage.gd` | `blast` e `deal_damage`; o Match chama e guarda os eventos |
 | `scripts/turn_table.gd` | Agenda, passe, previsão de iniciativa e fim de partida |
@@ -553,7 +616,7 @@ passo164×160; retratos84×76 e stats em coluna separada. Inventário à direita
 
 Catálogo XFS562/479compráveis e camadas/retratos extraídos offline; runtime
 consome JSON/PNGs, sem protocolo de rede. IDs xfs:gênero:categoria:id são
-separados do C#. REQ-45 acrescenta `classic.json`: os mesmos 562 registros com
+separados do C#. REQ-46/ADR-089 acrescenta `classic.json`: os mesmos 562 registros com
 o WORD/DWORD do servidor (slot corpo, cabeça, olho, bandeira; bit 15 masculino)
 e texto CP949. A categoria da loja não muda. Profile3 converte identidades verificadas (Pilot Goggle1→2),
 conserva Kappa como legado, não concede saldo novamente e mantém rollback.
@@ -581,7 +644,7 @@ preto para ausência de emissão em textura de memória, sem editar PNGs. Pulsa�
 segue material da fonte, não o sufixoL sozinho. Registro permanece fixo ao longo
 da animação do rig. Controle/aceite separado do runtime exige capturas atuais
 por lote, assinatura de recorte/registro/renderer e auditoria do consumidor real.
-12N/A são acessórios vazios/placeholders sem arte, com razão explícita.
+12N/A são acessórios vazios/place holders sem arte, com razão explícita.
 
 ## Revisão0.18 — estado de efeito e Nak HD
 
@@ -601,6 +664,14 @@ textura L anterior sobre a cabeça, com opacidade/pulsação anteriores. Nove
 marcos medidos na cabeça e na luz produzem64faixas UV constantes em ArrayMesh,
 com pivô/flip/inclinação comuns. Só geometria muda; cache sem relógio. A máscara
 0.18.3 fica preservada para comparação histórica, sem entrada no catálogo ativo.
+
+Brilho clássico 0.18.7/ADR-082 substitui a malha curvada no catálogo: a camada
+L do Great Devil usa `overlay_base` e um PNG derivado da silhueta do chifre HD
+(`build_devil_horn_light.py`). `AvatarXfsHD.piece` registra a luz na janela da
+cabeça (deslocamento −20 px na fonte, mesma escala), exige tamanho igual ao da
+cabeça mais a margem e opacidade em 0–1; qualquer desvio cai no fallback
+original completo. `curve_light`/`light_curve` e a máscara 0.18.3 ficam como
+histórico sem entrada ativa.
 
 Saldo de teste0.18.5/ADR-080: Profile usa 999.999.999 em cada moeda como padrão.
 `game._ready` chama a concessão única após `load_profile`; carteira legível

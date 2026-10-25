@@ -1,26 +1,20 @@
 extends "res://tests/support/suite.gd"
 func light_at(data: Dictionary, point: Vector2) -> Color:
-	if not data.get("mesh") is ArrayMesh:return Color.TRANSPARENT
-	var arrays: Array=data.mesh.surface_get_arrays(0)
-	var positions: PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
-	var uv: PackedVector2Array=arrays[Mesh.ARRAY_TEX_UV]
-	var indices: PackedInt32Array=arrays[Mesh.ARRAY_INDEX]
-	for i in range(0,indices.size(),3):
-		var ia:=indices[i]
-		var ib:=indices[i+1]
-		var ic:=indices[i+2]
-		var a:=Vector2(positions[ia].x,positions[ia].y)
-		var ab:=Vector2(positions[ib].x,positions[ib].y)-a
-		var ac:=Vector2(positions[ic].x,positions[ic].y)-a
-		var determinant:=ab.cross(ac)
-		if absf(determinant)<.000001:continue
-		var u: float=(point-a).cross(ac)/determinant
-		var v: float=ab.cross(point-a)/determinant
-		if u<0 or v<0 or u+v>1:continue
-		var sample: Vector2=uv[ia]+(uv[ib]-uv[ia])*u+(uv[ic]-uv[ia])*v
-		var image: Image=data.paint.diffuse_texture.get_image()
-		return image.get_pixelv(Vector2i(sample*Vector2(image.get_size())).clamp(Vector2i.ZERO,image.get_size()-Vector2i.ONE))
-	return Color.TRANSPARENT
+	# Light piece drawn as a rectangle: map the canvas point back to its pixels.
+	if not data.target.has_point(point):return Color.TRANSPARENT
+	var image: Image=data.paint.diffuse_texture.get_image()
+	var uv: Vector2=(point-data.target.position)/data.target.size
+	return image.get_pixelv(Vector2i(data.source.position+uv*data.source.size).clamp(Vector2i.ZERO,image.get_size()-Vector2i.ONE))
+func horn_gold(head: Dictionary) -> Array:
+	# Saturated gold of the HD horn, the same anatomy the light is derived from.
+	var image: Image=head.texture.get_image()
+	if image.is_compressed():image.decompress()
+	var points: Array=[]
+	for y in range(int(head.source.size.y*.7)):
+		for x in range(int(head.source.size.x*.5)):
+			var c: Color=image.get_pixelv(Vector2i(head.source.position)+Vector2i(x,y))
+			if c.a>.5 and c.r>.43 and c.g>c.r*.55 and c.b<c.g*.6:points.append(Vector2(x,y)+Vector2(.5,.5))
+	return points
 func run() -> void:
 	var art=load("res://scripts/avatar_art.gd").new()
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
@@ -63,32 +57,44 @@ func run() -> void:
 	var devil: Dictionary=art.xfs_hd.layers["xfs:0:0:71|layer:1"]
 	var devil_light: Dictionary=art.xfs_hd.piece("xfs:0:0:71",1)
 	var devil_head: Dictionary=art.xfs_hd.piece("xfs:0:0:71",0)
-	check(devil_light.get("mesh") is ArrayMesh,"Existing luminous texture bends onto the horn instead of being replaced by a faint contour")
+	check(not devil_light.has("mesh") and devil.has("overlay_base") and not devil.has("light_curve") and not devil.has("attachment"),"Great Devil light is derived from the HD horn, not a bent generic crescent")
 	check(devil.source_frame>=11 and devil.reference_state=="normal","Great Devil light is sourced from the one-horn profile state")
-	check(devil_light.source.size.x/devil_light.source.size.y<1.1,"Great Devil master has one profile crescent, not the two-horn frontal pair")
-	check(devil_light.source.size==Vector2(1094,1173) and is_equal_approx(devil_light.opacity,.78382),"Curvature repair preserves the selected HD light master and previous material opacity")
+	check(devil_light.source.size==devil_head.source.size+Vector2(40,40) and is_equal_approx(devil_light.opacity,1.0),"Horn light shares the head window plus rim padding and carries its own classic core alpha")
+	check((devil_light.target.size/devil_light.source.size).is_equal_approx(devil_head.target.size/devil_head.source.size),"Horn light uses the anatomy's own scale")
+	check(devil_light.target.position.is_equal_approx(devil_head.target.position-Vector2(20,20)*devil_head.target.size/devil_head.source.size),"Horn light uses the anatomy's own origin")
 	var devil_gear: Dictionary=catalog.defaults(0)
 	devil_gear["0"]="xfs:0:0:71"
 	var devil_pieces: Array=art.sample(devil_gear,0.3).filter(func(p): return p.category==0)
-	check(devil_pieces.size()==2 and devil_pieces[0].xfs_layer==0 and devil_pieces[1].xfs_layer==1 and devil_pieces[1].effect,"Previous luminous overlay and pulsation are preserved after the curve correction")
+	check(devil_pieces.size()==2 and devil_pieces[0].xfs_layer==0 and devil_pieces[1].xfs_layer==1 and devil_pieces[1].effect,"Luminous overlay is drawn over the head and keeps its pulsation")
+	var to_canvas:=func(point: Vector2) -> Vector2: return devil_head.target.position+point/devil_head.source.size*devil_head.target.size
 	for point in [Vector2(28,11),Vector2(13,29),Vector2(18,49),Vector2(35,68),Vector2(62,83)]:
-		var local: Vector2=devil_head.target.position+point/devil_head.source.size*devil_head.target.size
-		check(light_at(devil_light,local).a>.5,"Restored luminous band touches the actual horn along its curve: "+str(point))
+		check(light_at(devil_light,to_canvas.call(point)).a>.7,"Classic white core covers the horn along its curve: "+str(point))
+	var gold: Array=horn_gold(devil_head)
+	var covered:=gold.filter(func(point): return light_at(devil_light,to_canvas.call(point)).a>.7).size()
+	check(gold.size()>2500 and covered>=gold.size()*.98,"Core covers the whole HD horn, tip included: %d/%d" % [covered,gold.size()])
+	for point in [Vector2(100,120),Vector2(150,60),Vector2(80,140),Vector2(190,20)]:
+		check(light_at(devil_light,to_canvas.call(point)).a==0,"No light leaks onto the face or hair: "+str(point))
 	var later_light: Dictionary=art.sample(devil_gear,1.7).filter(func(p): return p.category==0)[1]
-	check(later_light.get("mesh")==devil_light.get("mesh"),"Curve stays fixed and cached while the animation clock advances")
+	check(later_light.target==devil_pieces[1].target and later_light.source==devil_pieces[1].source,"Horn light registration stays fixed while the animation clock advances")
 	var attachments:=0
 	for candidate in catalog.entries.values():
 		if candidate.get("source")!="xfs" or int(candidate.category)!=0 or candidate.get("layers",[]).size()!=2:
 			continue
 		var entry: Dictionary=art.xfs_hd.layers[candidate.key+"|layer:1"]
 		check(entry.get("reference_state")=="normal" and int(entry.source_frame)>=11,"All head effects share the Normal anatomy reference: "+candidate.key)
-		check(entry.has("attachment") and not art.xfs_hd.piece(candidate.key,1).is_empty(),"All twenty effects have a measured HD feature attachment: "+candidate.key)
+		check((entry.has("attachment") or entry.has("overlay_base")) and not art.xfs_hd.piece(candidate.key,1).is_empty(),"All twenty effects have a measured HD feature registration: "+candidate.key)
 		attachments+=1
 	check(attachments==20,"Alignment review covers all twenty animated heads")
-	var saved_attachment: Dictionary=devil.attachment.duplicate(true)
-	devil.attachment.base_uv=[NAN,.3]
-	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Invalid anatomical attachment triggers complete native fallback")
-	devil.attachment=saved_attachment
+	var saved_overlay: Dictionary=devil.overlay_base.duplicate(true)
+	devil.overlay_base.offset=[NAN,-20]
+	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Invalid horn light registration triggers complete native fallback")
+	devil.overlay_base=saved_overlay.duplicate(true)
+	devil.overlay_base.opacity=2.0
+	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Out-of-range horn light opacity triggers complete native fallback")
+	devil.overlay_base=saved_overlay.duplicate(true)
+	devil.overlay_base.offset=[-21,-20]
+	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Horn light that no longer matches the head window falls back instead of drifting")
+	devil.overlay_base=saved_overlay
 	var base_entry: Dictionary=art.xfs_hd.layers["xfs:0:0:71|layer:0"]
 	base_entry.draw_behind=true
 	base_entry.contour_glow={"uv_region":[0,0,.42,.66],"radius":18,"sigma":5.0,"strength":.8}
@@ -96,13 +102,10 @@ func run() -> void:
 	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Invalid base contour triggers complete native fallback")
 	base_entry.erase("draw_behind")
 	base_entry.erase("contour_glow")
-	var curve: Array=devil.light_curve.duplicate(true)
-	devil.light_curve[2][2]=NAN
-	check(not art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Non-finite curve coordinates trigger complete native fallback")
-	devil.light_curve=curve
-	base_entry.light_curve=curve
-	check(art.xfs_hd.piece("xfs:0:0:71",0).is_empty(),"Curve on base layer is rejected before recursion")
-	base_entry.erase("light_curve")
+	base_entry.overlay_base=saved_overlay
+	check(art.xfs_hd.piece("xfs:0:0:71",0).is_empty(),"Overlay on base layer is rejected before recursion")
+	base_entry.erase("overlay_base")
+	check(art.xfs_hd.complete(catalog.find("xfs:0:0:71")),"Restored registration renders the HD horn light again")
 	var item: Dictionary=catalog.find("xfs:0:0:4")
 	check(art.xfs_hd.complete(item),"Wing Helmet's base and effect both have HD masters")
 	var equipment: Dictionary=catalog.defaults(0)

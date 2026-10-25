@@ -1,11 +1,15 @@
-# Hand-off — Gunbound Recomp 0.18.6 / catálogo clássico de avatares
+# Hand-off — Gunbound Recomp 0.20.2 / catálogo clássico de avatares
 
-## Catálogo clássico — REQ-45, ADR-082
+## Catálogo clássico — REQ-46, ADR-089
 
 Pedido: manter todos os avatares originais do Gunbound clássico e refazer o
 catálogo com equivalência ao launcher e ao servidor jglim. Ler
-`AVATAR_CLASSIC_CATALOG.md`. Versão do aplicativo permanece 0.18.6; não houve
-reexportação.
+`AVATAR_CLASSIC_CATALOG.md`. A versão do aplicativo continua a da `main`
+(0.20.2); este índice não reexporta o app.
+
+Na `main`, REQ-45 e ADR-082 já nomeiam o roster dos 16 mobiles e o brilho do
+chifre. O catálogo de avatares fica em REQ-46 e ADR-089 para não reutilizar
+esses números.
 
 - `avatar.xfs` local é o TestClient do launcher (22968 bytes, mesmo SHA-256).
   562 registros, 479 compráveis. Nenhum foi removido. `ff.dat` continua vazio;
@@ -22,11 +26,225 @@ reexportação.
   zeros. Bandeira vazia é WORD 0 nos dois gêneros.
 - 28 descrições saem de CP1252 para CP949. A reticência volta a ser `…` e o
   UserID do concurso volta a `까꿍사냥꾼`. Preços e bônus intactos.
-- Validação: `test_xfs_import.py` 12 testes; `test_xfs_catalog.gd` 3816 checks,
-  zero falhas; regressão de catálogo, perfil, equipamento, saldo, atributos,
-  migração HD, arte e loja XFS, 2178 checks, zero falhas. Sem partida completa:
-  dano, atraso e o snapshot de bônus não mudaram de fórmula. App não
-  reexportado.
+- Validação na branch, antes do merge: `test_xfs_import.py` 12 testes;
+  `test_xfs_catalog.gd` 3816 checks, zero falhas; regressão de catálogo,
+  perfil, equipamento, saldo, atributos, migração HD, arte e loja XFS, 2178
+  checks, zero falhas. Sem partida completa: dano, atraso e o snapshot de
+  bônus não mudaram de fórmula.
+
+
+## Continuidade do porte após aceite do T2
+
+Skill `skills/gunbound-client-port/SKILL.md` (`$gunbound-client-port`): REA,
+proveniência, aritmética, estados, animação/raster e validação independente.
+Ler ADR-088. O usuário autorizou análise do binário client-side para informar
+os portes. Preservar todos os mobiles e avatares atuais, inclusive HD aprovado;
+modernização visual fica para etapa posterior. Esta tarefa é documental:
+não altera runtime nem exige reexportar o app 0.20.2 já entregue.
+
+Skill validada estruturalmente (frontmatter/UI/links, seis arquivos) e aplicada
+por dois subagentes sem contexto herdado: retomada Turtle/avatar e transferência
+para especial hipotético com aritmética negativa, recurso de cobertura parcial,
+quad cruzado e filhos. Ambos distinguiram evidência estática, observação e
+lacunas. Dez hashes anteriores de runtime/testes/captura permanecem iguais;
+não houve nova execução das suítes do jogo. Alias Claude aponta à skill canônica.
+Commit da skill pendente: `git add -- skills/gunbound-client-port` falhou com
+`Unable to create .../.git/index.lock: Operation not permitted` na sandbox.
+Arquivos locais preservados; nenhum commit/push foi realizado nesta tarefa.
+
+## Estado atual — Turtle T2 0.20.2
+
+24/10/2026 (America/Sao_Paulo). [TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md), ADR-087.
+A onda substitui a órbita aproximada: fases 0/180, amplitude 1000/100,
+avanço 5; crescimento por dez ticks e redução posterior até estabilizar.
+Heading pré-aceleração decide a colisão; heading pós-aceleração orienta a
+seção de meia largura 10. Trajetória central separada, passo real/previsão
+comum e interpolação só visual. O raster T2 usa dois triângulos explícitos
+para aceitar seções cruzadas; T1/SS e avatares preservados.
+
+Gates independentes aprovados após o P2 de raster; suíte T2 final 588/0,
+probes 28667+46+32 sem falhas. **Harness final: 8020 checks Godot + 16 Python
++ 29 partidas (13+16), zero falhas e parse aprovado.** Log
+`.tools/turtle-t2/full-check.log`. Captura temporal real 1920×1080/60 FPS,
+270 quadros, normal/P1/Tornado nos dois sentidos; inspeção da oscilação e
+aproximação, pausa 30 quadros byte-idêntica. Evidência em `docs/turtle-t2/`.
+A alteração posterior apenas no recorte dos painéis da captura teve parse
+isolado limpo. Não houve execução do cliente original, escuta ou mouse manual.
+
+**App/ZIP 0.20.2 exportados**, assinatura estrita/CRC/Info.plist válidos;
+ZIP ~201 MiB. Fonte 163/0; PCK isolado 179/0/exit0, modo packed, sem override
+ou TLS local. Único ERROR do smoke: CA ambiental macOS; build também
+registra editor_settings fora da sandbox. Hashes runtime/testes/QA iguais
+aos verificados, PNGs preexistentes preservados. Detalhes no registro T2;
+não reutilizar resultados 0.20.1 como prova desta entrega.
+Tornado, colisão/dano e física dos filhos SS continuam adaptações. O usuário
+confirmou o aceite visual do T2: “Agora funcionou”. Escuta e mouse manual
+continuam sem validação registrada. Registros anteriores abaixo preservam o estado
+de cada entrega; a antiga órbita T2 foi substituída pela ADR-087.
+
+## Entrega 0.20.1 — histórico
+
+[TURTLE_ANIMATION_FIX.md](TURTLE_ANIMATION_FIX.md), ADR-086. T1/T2 usam as oito
+colunas completas de WaterEffect, seções compartilhadas e histórico visual
+interpolado sem mutar colisão. SS abre no tick 44, conclui dez ticks change e
+divide em seis filhos bullet12c, removendo o pai sem explosão no ar.
+Impactos preservam estágio: pai normal Flame3+SSFlame; change/filho Flame3.
+
+Revisão independente fechou três P2: divisão antecipada em impacto no 44,
+oscilação visual do hold e camada SSFlame indevida. Gates de especificação e
+qualidade focal aprovados; suíte Turtle 158/0, probe independente 18 cenários e
+4628 verificações/0 falhas. **GPU temporal 1920×1080/60 FPS**, 270 quadros,
+T1/T2/SS nos dois sentidos, 30 quadros de pausa; quadros inspecionados e pausa
+byte-idêntica. Evidência em `docs/turtle-projectiles/`; não houve execução do
+cliente original, escuta ou teste manual de mouse.
+
+**Harness integral: 7432 checks Godot + 16 testes Python + 29 partidas,
+zero falhas; parse aprovado.** Log `.tools/turtle-fix/full-check-final.log`.
+Probe de recursos na fonte 154/0, limpo. **App/ZIP 0.20.1 exportados**,
+assinatura estrita, CRC e Info.plist conferidos; ZIP ~201 MiB. PCK isolado
+em `/tmp`: 170 checks/0 falhas/exit0, sem SCRIPT ERROR/leaks. Único ERROR
+do smoke: CA ambiental macOS; build também registra CA/editor_settings.
+Override ausente do ROOT/PCK. Logs e hashes no registro Turtle.
+Não reutilizar totais nem
+artefatos 0.20.0 como validação desta correção. HUD, mira, carga e trava SS
+preservados; dano, velocidade/dispersão dos filhos e física especial integral
+continuam adaptações. Histórico 0.20 abaixo preservado; sua descrição antiga
+do Turtle aberto foi substituída pela ADR-086.
+
+## Entrega0.20.0 — histórico, 24/10/2026
+
+Código 0.20.0 integrado ao workspace; sem commit/push. Tarefas 1–7 do plano
+implementadas e tarefa 8 concluída como pesquisa 48 tiros + planos futuros.
+Resumo, limites e registro final em
+[BATTLE_FIDELITY_0_20.md](BATTLE_FIDELITY_0_20.md).
+
+- Minas/fábrica: autoria, Gold, raio/Lightning e filhos completos no passo
+  comum; resultado/recompensa não duplicam.
+- Física 20 Hz/24.8, LUTs/truncamentos originais, força mínima P1/quantização
+  única, carga 3 s, vento e limites de mira compartilhados com HUD/CPU.
+- Boomer com curva e S2 quatro spawns; SS congela36–45/retoma46. WaterEffect
+  Turtle, matriz 48 de som/EPA, grupos de áudio e pose Dual independente.
+  Armor/Turtle publicam change/aberto a partir do hold existente.
+- Revisões independentes aprovam especificação e qualidade após os fixes.
+  Probe 48 voos/0 divergências; assets 49, timeline 158, cena 18, física 1077,
+  Boomer 88, paridade 86. **Harness final aprovado: 7287 checks Godot, 16 testes
+  Python e29 partidas (13+16), zero falhas, parse aprovado.** Log local
+  `.tools/battle-execution/final-full-check-3.log`. Teardown AudioServer
+  corrigido somente no teste, com duas revalidações dirigidas limpas.
+- **GPU:** editor nativo gerou composition/timeline em `docs/classic-shots/`;
+  composição inspecionada. Framebuffer 3004×1805 com quadro 1920×1080 no canto;
+  não alegar Full HD. Script com SubViewport 1920×1080 compila; recaptura
+  bloqueada por timeout do controle UI/CLI abort134. Escuta e mouse manual
+  pendentes. **App/ZIP 0.20.0 exportados**, Info.plist e assinatura estrita
+  válidos. PCK isolado em `/tmp`: 160 checks/0 falhas/exit0, sem SCRIPT ERROR
+  ou leaks; um ERROR ambiental de CA permanece no log. Build também registra
+  CA/editor_settings; não alegar logs limpos. Override ausente do ROOT/PCK.
+  Detalhes e logs no registro 0.20.
+
+Fidelidade original é comprovada por análise estática e fixtures, sem executar
+o cliente. Dano, colisão refinada, tornado e diversos estágios por família
+continuam adaptações/pendências explícitas. Não atribuir dano arbitrário a
+JD/Aduka por poder 0, nem anunciar todos os especiais nativos. Preservar HD,
+assets originais, perfil e fonte C#. Inspecionar contato ASate0 → −3 no QA visual.
+
+## Planejamento anterior à implementação (histórico)
+
+As seções seguintes conservam o estado observado antes do porte; seus
+"pendente" e "código atual" não substituem o estado0.20 acima.
+
+## Decisões de fidelidade aprovadas — 24/10/2026
+
+Usuário respondeu às três escolhas: física original, carga original de
+3 segundos e força mínima igual à original. ADR-084 substitui parcialmente
+ADR-076 e a carga de 2 s. SPEC e BATTLE_FIDELITY_PLAN atualizados; execução
+pendente. Não solicitar novamente essas decisões nem interpretar os registros
+históricos abaixo como bloqueio de aprovação. O código/app ainda não recebeu
+o porte. Próximo pacote continua autoria/paridade de minas, fábrica e mira;
+física/força/carga seguem depois conforme o plano, agora com escopo definido.
+
+## Revisão e planejamento de fidelidade — 24/10/2026
+
+HEAD `c796154` (brilho Great Devil), sobre `6038d0a` (roster). Revisão em
+[BATTLE_FIDELITY_PLAN.md](BATTLE_FIDELITY_PLAN.md), que atualiza a leitura de
+[BATTLE_FIDELITY_HANDOFF.md](BATTLE_FIDELITY_HANDOFF.md). Nenhuma regra alterada.
+Confirmados raio zero das minas Raon, parâmetros Lightning descartados e
+mina trocando autoria durante tiro alheio, fora da previsão. Boomer ainda
+usa voo comum; relatório recuperado descreve curva e quatro spawns do S2.
+Dragon/Knight/Aduka são as identidades vigentes; não usar os nomes antigos
+dos relatórios para escolher dados dos três últimos registros.
+
+Próximo pacote: autoria/paridade de minas, fábrica de projéteis e limites de
+mira. Física original já aprovada na ADR-084, ainda sem implementação;
+JD/Aduka com poder zero exigem RE, não dano arbitrário.
+Recuperados 511 arquivos em `.tools/battle-re/recovered-2026-10-24/`, com
+manifesto de hashes; scripts ainda contêm caminhos temporários a adaptar.
+
+Validação dirigida: 2268 checks, zero falhas de assertiva; harness retorna
+4 por erro `get_system_ca_certificates` do Godot neste ambiente. Dois testes
+Python passaram. Sem suite completa, partidas, captura GPU ou novo build;
+não confundir este resultado com as validações históricas abaixo.
+
+Achado adicional: usuário relata Turtle T1 igual ao Armor T1. Confirmado por
+hash que a bala base é idêntica já no XFS original. O C# acrescenta rastro
+próprio; investigar a composição Bullet12 na tarefa 4 do plano antes de
+escolher o renderer. Nenhum asset ou comportamento alterado nesta análise.
+
+## Roster clássico 0.19.0 (REQ-45, ADR-083)
+
+Os 16 mobiles do `characterdata.dat` entram no treino. IDs 1–3 preservados.
+Arte original em `assets/openbound/` (pastas armor, trico, boomer, raon,
+lightning, jd, asate, ice, turtle, grub, dragon, knight, aduka), extraída
+por `scripts/import_classic_mobiles.py`. Menu em grade 4×4. Crosshair novo
+fica no sprite original; Mage e Bigfoot continuam no HD.
+
+Voo especial no laço comum: Armor SS, Trico S2/SS, Raon S1 e minas, Lightning,
+Ice S2 e Turtle S2/SS. O raio do Lightning sobe 3 px por passo a partir do
+impacto (ângulo π/2 no S1, quatro diagonais no S2) e o choque extra fica nos
+mobiles depois do último sólido. A mina do S2 do Raon anda até 90 px na superfície em direção ao mobile
+mais perto e só estoura ao encostar na caixa. A do SS segue em frente (até
+360 px), vira num vão e estoura no mobile ou quando o passo acaba. As duas
+e o cristal do JD são desenhados com `rayonmine.img`, `srayonmine.img` e
+`crystal.img`. A mina do S2 fica em `normal` além de 90 px e em `active`
+dentro dessa distância; a do SS usa `move` enquanto anda. O brilho
+`rayonminel.img` acompanha a mina do S2. Boomer, JD,
+A.Sate, Grub, Knight e o Aduka ainda usam o projétil comum com os
+números da tabela. O SS do Dragon, ao detonar, solta cinco tiros filhos
+(`ExplodeSuperShot_Bullet14`). O S2 e o SS do JD soltam um cristal no
+impacto (`SpawnCrystalShot` / `SpawnSuperCrystalShot`). A tabela de métodos
+desse cristal é o simulador comum e a detonação comum, com velocidade 0, então
+ele cai do ponto do impacto e não aplica um segundo dano. Os S2/SS do
+Aduka continuam com poder 0 na tabela; ele atira pelas costas. O SS do Boomer troca de quadro
+como o `bullet6p.epa`: normal, change e depois cnormal. A.Sate, Knight
+e o S2 do Aduka usam o simulador comum de projétil no cliente. O S1 e o
+S2 do Dragon seguem esse passo e espalham faíscas de -4 a +4 px ao longo do
+trajeto (`FUN_00436fd0`). `tank14/15/16` são Dragon, Knight e Aduka.
+O menu usa a mesma escala de pixel do Trico (casco 60). O SS do Grub (`SimulateSuperShot_Bullet13`) não
+consulta mobiles: atravessa quem estiver no caminho e só estoura no terreno.
+
+Validação: `check.sh` completo antes da correção dos nomes, **5564 checks** e **13 partidas**.
+Depois dela, `test_classic_mobiles` 136, `test_hud` 228 e `test_roster` 63, zero falhas.
+App/ZIP **0.19.0** reexportado em `builds/`; `codesign --verify --deep --strict` válido.
+
+## Hand-off anterior — 0.18.7 / brilho clássico do chifre
+
+## Brilho do Great Devil Head 0.18.7 (ADR-082)
+
+Pedido: refazer o brilho dos chifres a partir do clássico, na posição e no
+formato do chifre como na baixa resolução. O L original é a silhueta do chifre
+embranquecida por cima; a meia-lua HD curvada (0.18.4) não seguia o chifre.
+Agora `scripts/build_devil_horn_light.py` deriva `great_devil_horn_light.png`
+da máscara do chifre HD com o perfil medido no clássico, registrada sobre a
+cabeça (`overlay_base`). Detalhes, números e limites em `HORN_AURA_FIX.md`;
+evidência GPU em `docs/horn-classic/`.
+
+Validação: suítes de avatar/loja/migração (2405 checks), testes Python de
+efeito, QA dos 37 lotes e auditoria runtime 550/0/0. Limites: app não
+reexportado e `check.sh` completo não rodado, porque outra sessão alterava ao
+mesmo tempo regras de combate e assets de novos mobiles nesta pasta; isso não
+faz parte desta entrega. Validação visual: usuário validou na main em
+24/10/2026 ("funcionou muito melhor"); lições na skill `gunbound-classic-hd`
+(`references/effects.md`: derivar da máscara da peça, medir o clássico).
+
 
 ## Revisão de qualidade 0.18.6 (ADR-081)
 
@@ -271,7 +489,7 @@ Esta pendência impede declarar todo o pedido de HD do PR finalizado.
 REQ-10/20/39, ADR-073; ler AVATAR_HD_MIGRATION.md. Controle em
 [docs/avatar-hd-migration/index.html](../avatar-hd-migration/index.html), CSV e
 JSON. **550/550avatares reais,629/629camadas e550/550miniaturas validados**;
-três padrões vazios/nove placeholders N/A, todos com motivo. Não confundir
+três padrões vazios/nove place holders N/A, todos com motivo. Não confundir
 miniatura com peça vestível: a auditoria confirmou os550registros consumindo
 masters HD no AvatarArt, sem fallback nativo/legado oculto.
 
@@ -328,7 +546,7 @@ RGB0/131/179, confirmado por amostra GPU. Controles sem regra local ficam
 indisponíveis com explicação. Sem rede/contas/amigos/presentes/venda nova.
 
 3163checks+10partidas passaram; após último atlas de retratos,106checks
-dirigidos e oito testes Python passaram. GPU1920×1080,120frames60Hz/MP4,
+dirigidos e oito testes Python passaram. GPU 1920×1080,120frames60Hz/MP4,
 compra/atributos/fallback/gêneros/mobiles/Ghost e três contatos de montagem
 em docs/avatar-shop-xfs. Smoke PCK fora do projeto PASS:562registros,
 assets/compra/vestir/recarga/batalha,1920×1080 e1280×800. App/ZIP0.16.0
@@ -357,11 +575,11 @@ Capturas anteriores que desligavam stretch artificialmente foram substituídas.
 GPT Images/gunbound-classic-hd: fundo1672×941 e retrato No Goggles/No Flag
 1254×1254RGBA (recorte870×1076, mipmaps). Originais/brutos/prompts preservados;
 metadados validados com fallback. Retrato é só UI:15registros/13peças vestíveis
-mantidos. FullHD é a composiçãoGPU1920×1080; não confundir com tamanho do PNG.
+mantidos. FullHD é a composiçãoGPU 1920×1080; não confundir com tamanho do PNG.
 
 **1949checks rápidos sem falhas, incluindo36de test_shop_wide**. Dez partidas
 completas passaram nesta entrega antes do último ajuste só de retrato/loader.
-GPU1920×1080 e120frames/60Hz, MP4 de2s, estados de compra/inventário/atributos,
+GPU 1920×1080 e120frames/60Hz, MP4 de2s, estados de compra/inventário/atributos,
 categorias/gêneros/mobiles/fallback em docs/avatar-shop-video. Force_draw no
 harness evita espera da GPU quando a janela fica encoberta no macOS.
 Faixa de preço verificada:1corRGB121/159/211, tanto GPU quanto PCK.
@@ -386,7 +604,7 @@ rig/mobile/anatomia não alterados. Preço vetorial0.14.8 continua nítido: GPU 
 PCK com uma única cor RGB121/159/211 nas amostras sem texto.
 
 **1913checks+10partidas completas, zero falhas**, incluindo42da nova auditoria
-e40de paridade. Revisão independente sem achados. GPU1920×1080 HD/fallback,
+e40de paridade. Revisão independente sem achados. GPU 1920×1080 HD/fallback,
 compra/moeda única, atributos, busca vazia, gêneros/mobiles e120frames60Hz em
 docs/avatar-shop-audit. App/ZIP0.14.9 reexportados, assinatura estrita válida;
 smoke do PCK isolado em/tmp passou com compra/vestir/recarga/batalha e assets.
@@ -435,7 +653,7 @@ em manchas. Centro da faixa agora é retângulo vetorial azul uniforme no
 StyleBox; recortes de laterais/borda branca/rebites preservados. Sem novo
 PNG, alteração de regras, retratos, layout, perfil ou atributos.
 
-GPU1920×1080 HD/fallback/compra/roster em docs/avatar-price-crisp. Amostra
+GPU 1920×1080 HD/fallback/compra/roster em docs/avatar-price-crisp. Amostra
 sem texto passou de527cores diferentes para1(RGB121/159/211); região do
 PCK1280×800 também tem essa única cor. Evidência em pixel-check.json.
 1848checks em check.sh --quick, zero falhas. Partidas longas não repetidas:
@@ -460,7 +678,7 @@ outra imagem. Nenhuma mudança de combate/perfil/preços/PNG/anatomia.
 1848checks em check.sh --quick, zero falhas; inclui280de loja/cena/continuidade.
 Partidas longas não repetidas porque só apresentação mudou (10passaram na0.14.6).
 Revisão independente sem achados. GPU HD/fallback/compra/roster em
-docs/avatar-card-fix,1920×1080 e120frames60FPS; imagem enviada pelo usuário
+docs/avatar-card-fix,1920×1080 e120frames60 FPS; imagem enviada pelo usuário
 preservada em before-cards.png. App/ZIP0.14.7 reexportados, assinatura estrita
 válida; smoke GPU do PCK isolado em/tmp passou (card/efeito/retrato/compra,
 20texturasHD, exclusão de brutos, vestir/recarga/batalha).
@@ -489,7 +707,7 @@ GPU inicial encontrou popup mínimo da textura e bordas4× maiores: corrigidos
 com expansão antes do tamanho e ShopCardStyle em nove recortes independentes.
 Revisão independente final sem achados. **1848checks+10partidas sem falhas**,
 42,1s partidas;40paridade/46UIHD/25Shop/25classic. Perfis isolados somente.
-Capturas1920×1080 e120frames60FPS em docs/avatar-shop-parity cobrem compra,
+Capturas1920×1080 e120frames60 FPS em docs/avatar-shop-parity cobrem compra,
 moeda única, atributos, gêneros, Mage/Bigfoot e controles animados.
 
 App/ZIP0.14.6 reexportados em builds, assinatura estrita válida; ZIP127,4MB.
@@ -788,7 +1006,7 @@ shop inválido renovando saldo, ângulo Gold espelhado e pellets sem dano altera
 bônus. Um quarto candidato sobre remap do .gd não se reproduziu neste Godot:
 PCK original já tinha preview1786pixels; gate redundante removido por robustez.
 
-Sete capturas GPU1920×1200 em docs/avatar-shop: loja, compra, inventário,
+Sete capturas GPU 1920×1200 em docs/avatar-shop: loja, compra, inventário,
 atributos, Mage/Bigfoot e poses/sentidos/encosta. PCK do app exportado carregou
 catálogo15 e renderizou preview (1786pixels da figura, PASS), com perfil isolado.
 `capture_avatar_pck_smoke.gd` preserva reprodução: copiar o script para fora do

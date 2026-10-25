@@ -35,6 +35,11 @@ func _initialize() -> void:
 	model.fire(80, 65, 1)
 	check(model.last_shots[0].angle == 50.0, "Mage clamps aim to original 50 degree maximum")
 	check(model.projectiles.size() == 2, "Second shot creates two helix components")
+	# Mage MainAction emits at tick1; neither component moves before0.05s.
+	model.advance_projectiles(0.04)
+	check(not model.projectiles[0].launched,"Helix colliders stay parked before emission")
+	model.advance_projectiles(0.01)
+	check(model.projectiles[0].launched,"Helix emits at0.05s")
 	model.advance_projectiles(0.05)
 	check(Vector2(model.projectiles[0].hit_pos).distance_to(model.projectiles[1].hit_pos) > 1.0, "Opposite phases produce separate colliders")
 	model.start(1, 1, 44)
@@ -79,10 +84,13 @@ func _initialize() -> void:
 	model.start(1, 1, 49, "")
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(200, 350)
-	model.actors[1].pos = Vector2(480, 153.4247)
+	# Native Mage P315/theta40 crosses x470 near flight tick10, where
+	# the two helix phases rejoin. The first25px crater opens that crossing;
+	# the remaining phase reaches the Bigfoot box centred near(600,90).
+	model.actors[1].pos = Vector2(600, 80)
 	model.wind = Vector2.ZERO
 	for row in range(400):
-		model.terrain.cells[row * 640 + 190] = 1
+		model.terrain.cells[row * 640 + 235] = 1
 	var before: PackedByteArray = model.terrain.cells.duplicate()
 	var state: Array = model.actors.duplicate(true)
 	var predicted_wall: Dictionary = model.predict_shot(0, 40, 70, 1)
@@ -90,15 +98,19 @@ func _initialize() -> void:
 	check(model.terrain.cells == before and model.actors == state, "Salvo prediction cannot change real mask, health or shield")
 	model.fire(40, 70, 1)
 	var wall_hits: Array[Vector2] = []
+	var collided: Array[int] = []
 	for frame in range(1440):
 		model.advance_projectiles(Combat.STEP)
 		for event in model.events:
 			if event.type == "explosion":
 				wall_hits.append(event.position)
+				collided.append(int(event.collided_actor))
 		model.events.clear()
 		if model.phase != "flight":
 			break
 	check(wall_hits.size() == 2 and model.actors[1].hp < 1100, "Both components resolve, with second damaging target behind wall")
+	check(collided == [-1,1],"First component hits terrain; second crosses the opened crater and hits the actor")
+	check(wall_hits.size() == 2 and is_equal_approx(wall_hits[0].x,470.0) and wall_hits[1].x > 550.0,"Second collision lies beyond the otherwise continuous wall")
 	var minimum := INF
 	for point in wall_hits:
 		minimum = minf(minimum, point.distance_to(predicted_wall.position))

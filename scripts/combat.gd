@@ -1,42 +1,27 @@
 extends RefCounted
 ## Same integrator and swept collision are used by live shots and CPU aiming.
 
+const Physics = preload("res://scripts/classic_ballistics.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
-# OpenBound Parameter.cs (ADR-076): ProjectileMovementGravity 9.8 × 20 and
-# speed = force × ProjectileMovementForceFactor 100 / mass. Every Mage, Bigfoot
-# and Nak shell weighs 14 (the teleport beacon 10, Items.BEACON_SPEED).
-const GRAVITY := 196.0
-const FORCE_FACTOR := 100.0
-const SHELL_MASS := 14.0
-const STEP := 1.0 / 120.0
+const STEP := 0.05
 # Legal shot strength, in percent of the bar.
-const MIN_POWER := 15.0
+const MIN_POWER := 0.0
 const MAX_POWER := 100.0
 # A shell still flying after this many seconds is a miss (live shot and prediction).
 const MAX_FLIGHT_AGE := 12.0
 
-# Wind is the OpenBound vector (force units, screen angle) times the shells'
-# wind influence 1.2 (Projectile*WindInfluence); 35 = 42 px/s².
-const WIND_ACCELERATION := 1.2
 # Nak S2 underground (original DetonateShot2_Bullet3): vy -= 0xC400 / 100 each
 # step, twice the 98 gravity of the mobile, and no wind. Entering halves vy.
 const BURROW_GRAVITY := 2.0
 const BURROW_ENTRY_DAMPING := 0.5
 
-static func advance(position: Vector2, velocity: Vector2, wind: Vector2, delta: float) -> Dictionary:
-	var acceleration := Vector2(0.0, GRAVITY) + wind * WIND_ACCELERATION
-	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
+static func launch_velocity_fp(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0, force_max: int = 42) -> Vector2i:
+	# The catalog is the only aim clamp. Convert screen support to native theta.
+	var theta := int((angle if facing > 0 else 180.0 - angle) - rad_to_deg(rotation))
+	return Physics.launch_velocity_fp(theta, Physics.native_power(power + power_offset, force_max))
 
-## Underground flight of a burrowing shell: reversed, stronger gravity, no wind.
-static func advance_buried(position: Vector2, velocity: Vector2, delta: float) -> Dictionary:
-	var acceleration := Vector2(0.0, -GRAVITY * BURROW_GRAVITY)
-	return {"position": position + velocity * delta + acceleration * delta * delta * 0.5, "velocity": velocity + acceleration * delta}
-
-static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0) -> Vector2:
-	# Projectile.InitializeMovement: the emitter's force modifier joins before the mass.
-	var speed := (clampf(power, MIN_POWER, MAX_POWER) + power_offset) * FORCE_FACTOR / SHELL_MASS
-	var radians := deg_to_rad(clampf(angle, 10.0, 85.0))
-	return Vector2(cos(radians) * facing, -sin(radians)).rotated(rotation) * speed
+static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0, force_max: int = 42) -> Vector2:
+	return Vector2(launch_velocity_fp(angle, power, facing, rotation, power_offset, force_max)) / (256.0 * STEP)
 
 static func trace_segment(from: Vector2, to: Vector2, terrain, actors: Array, ignored: int) -> Dictionary:
 	var terrain_hit: Dictionary = terrain.raycast(from, to)
@@ -126,9 +111,7 @@ static func segment_box(from: Vector2, to: Vector2, actor: Dictionary) -> float:
 	return clampf(tmin, 0.0, 1.0)
 
 static func out_of_bounds(position: Vector2, terrain) -> bool:
-	# Shells may fly above the world; they leave by the sides or below it.
-	var size: Vector2 = terrain.world_size()
-	return position.x < -150.0 or position.x > size.x + 150.0 or position.y > size.y + 20.0
+	return Physics.outside(Physics.position_fp(position), Vector2i(terrain.world_size()))
 
 static func ignored_shooter(age: float, shooter: int) -> int:
 	return shooter if age < 0.15 else -1

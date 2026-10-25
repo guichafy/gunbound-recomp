@@ -5,6 +5,8 @@ const Attributes = preload("res://scripts/player_attributes.gd")
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
 const Weather = preload("res://scripts/weather.gd")
+const Physics = preload("res://scripts/classic_ballistics.gd")
+const BoomerFlight = preload("res://scripts/boomer_flight.gd")
 const Combat = preload("res://scripts/combat.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 const FlightSnapshot = preload("res://scripts/flight_snapshot.gd")
@@ -17,6 +19,7 @@ const GoldTracker = preload("res://scripts/gold_tracker.gd")
 const CpuPlanner = preload("res://scripts/cpu_planner.gd")
 const ActorState = preload("res://scripts/actor_state.gd")
 const ShellState = preload("res://scripts/shell_state.gd")
+const ClassicFlight = preload("res://scripts/classic_flight.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 # Training option "all": equal weight for every weather type, Thor included.
@@ -43,7 +46,13 @@ const TIME_EPSILON := 0.0000001
 const SPECIAL_WEAPON := Mobiles.SPECIAL
 # Stable mobile IDs are independent of menu slots. Removed ID 0 is not playable.
 const PLAYABLE_VEHICLES := Mobiles.PLAYABLE
-const VEHICLES := Mobiles.DEFINITIONS
+static var VEHICLES := {}
+var mines: Array = []
+var projectile_accumulator := 0.0
+
+static func _static_init() -> void:
+	Physics.warmup()
+	VEHICLES = Mobiles.ALL
 var terrain
 var actors: Array = []
 var projectiles: Array = []
@@ -71,7 +80,7 @@ var resolve_wait := 0.0
 var flight_elapsed := 0.0
 var last_shots: Array = [{}, {}]
 var map_id := ""
-# Dual second volley start times (presentation event only; not in the snapshot).
+# Dual second volley start times; snapshots reconstruct them from their shells.
 var volleys: Array = []
 # Gold metadata of the shot in flight (GoldTracker); a FlightSnapshot field.
 var shot_gold: Dictionary = {}
@@ -122,7 +131,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	accumulator = 0.0
 	resolve_wait = 0.0
 	flight_elapsed = 0.0
+	projectile_accumulator = 0.0
 	projectiles.clear()
+	mines.clear()
 	volleys.clear()
 	events.clear()
 	shot_gold = {}
@@ -146,6 +157,8 @@ func begin_turn() -> void:
 	turn_time = TURN_TIME
 	actors[active].turns += 1
 	total_turns += 1
+	if total_turns > 1:
+		weather.disturb_wind(rng)
 	# A round is two turns (RoomSize 2 in MatchMetadata.PassTurn).
 	# Weather, including Protection, is applied before Regenerate().
 	if total_turns > 1 and (total_turns - 1) % 2 == 0:
@@ -154,6 +167,10 @@ func begin_turn() -> void:
 		Mobiles.regenerate(actor)
 	actors[active].ss_lock = maxi(int(actors[active].ss_lock) - 1, 0)
 	movement_left = movement_budget()
+	ClassicFlight.walk_mines(self)
+	ClassicFlight.detonate_mines(self)
+	if check_end():
+		return
 	wind = weather.wind_vector()
 	stamp_tilt()
 	events.append({"type": "turn", "actor": active})
@@ -249,11 +266,19 @@ func weapon_rules(index: int, weapon: int) -> Dictionary:
 func aim_limits(index: int, weapon: int = 0) -> Vector2:
 	return Mobiles.aim_limits(actors[index].vehicle, weapon)
 
-func shot_velocity(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0) -> Vector2:
+func shot_velocity_fp(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0) -> Vector2i:
 	var limits := aim_limits(index, weapon)
-	var velocity := Combat.launch_velocity(clampf(angle, limits.x, limits.y), power, actors[index].facing, body_rotation(index), power_offset)
-	# Emitter spread comes after base aim limiting and mirrors with facing.
-	return velocity.rotated(-float(actors[index].facing) * deg_to_rad(angle_offset))
+	return Combat.launch_velocity_fp(clampf(angle, limits.x, limits.y) + angle_offset, power, int(actors[index].facing), body_rotation(index), power_offset, Mobiles.force_max(int(actors[index].vehicle)))
+
+func shot_velocity(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0) -> Vector2:
+	return Vector2(shot_velocity_fp(index, angle, power, weapon, angle_offset, power_offset)) / (256.0 * Combat.STEP)
+
+func minimum_power(index: int) -> float:
+	return Mobiles.minimum_power(int(actors[index].vehicle))
+
+func normalized_power(index: int, percent: float) -> float:
+	var maximum := Mobiles.force_max(int(actors[index].vehicle))
+	return Physics.power_percent(Physics.native_power(percent, maximum), maximum)
 
 func projectile_parameters(index: int, angle: float, power: float, weapon: int) -> Array:
 	var rules := weapon_rules(index, weapon)
@@ -265,7 +290,14 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		var entry: Dictionary = emission[component]
 		var initial := muzzle(index, angle if spread_after else angle + float(entry.angle), weapon)
 		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power) if spread_after else shot_velocity(index, angle + float(entry.angle), power, weapon)
-		result.append(ShellState.create(initial, velocity, entry.spawn, rules, weapon, component))
+		var shell := ShellState.create(initial, velocity, entry.spawn, rules, weapon, component)
+		shell.sound_group = int(entry.get("sound_group", component))
+		shell.sound = bool(entry.get("sound", true))
+		shell.pose_start_at = float(entry.get("pose_start_at", 0.0))
+		# Preserve exact launch integers instead of re-quantizing their float projection.
+		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, entry.angle, entry.power) if spread_after else shot_velocity_fp(index, angle + float(entry.angle), power, weapon)
+		ClassicFlight.prepare(shell, entry)
+		result.append(shell)
 	return result
 
 ## Mobile.ShootWithModifiers: the shells of a shot under this turn's item.
@@ -279,9 +311,26 @@ func shot_shells(index: int, angle: float, power: float, weapon: int) -> Array:
 
 func launch_projectile(projectile: Dictionary) -> void:
 	projectile.launched = true
+	seed_projectile(projectile)
 	# Thor intersects everything: every shell fired while active attaches to it.
 	projectile.thor = bool(weather.thor.active)
-	events.append({"type": "projectile_launch", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": int(projectile.get("weapon", shot_weapon)), "time": projectile.spawn_at, "beacon": bool(projectile.get("beacon", false))})
+	events.append({"type": "projectile_launch", "actor": shot_actor, "vehicle": actors[shot_actor].vehicle, "weapon": int(projectile.get("weapon", shot_weapon)), "time": projectile.spawn_at, "beacon": bool(projectile.get("beacon", false)), "sound": bool(projectile.get("sound", true)), "sound_group": int(projectile.get("sound_group", 0)), "volley": int(projectile.get("volley", 0))})
+
+func seed_projectile(projectile: Dictionary) -> void:
+	if bool(projectile.get("fp_ready", false)):
+		return
+	var force := roundi(wind.length() * float(projectile.get("wind_scale", 1.0)))
+	var phi := roundi(-rad_to_deg(wind.angle())) if force > 0 else 0
+	var gravity := Mobiles.gravity_native(int(actors[shot_actor].vehicle))
+	var velocity: Vector2i = Physics.velocity_fp(projectile.velocity)
+	if projectile.has("launch_velocity_fp"):
+		var pending: Vector2i = projectile.launch_velocity_fp
+		if Vector2(pending) / (256.0 * Combat.STEP) == Vector2(projectile.velocity):
+			velocity = pending
+	Physics.seed(projectile, Physics.position_fp(projectile.pos), velocity, Physics.acceleration_fp(gravity, force, phi))
+	projectile.launch_speed = Vector2(projectile.velocity).length()
+	if bool(projectile.get("boomer", false)):
+		BoomerFlight.seed(projectile)
 
 func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictionary:
 	var shells := shot_shells(index, angle, power, weapon)
@@ -329,7 +378,7 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 		actors[active].ss_lock = int(actors[active].ss_lock) + Mobiles.SS_LOCK
 	var limits := aim_limits(active, weapon)
 	angle = clampf(angle, limits.x, limits.y)
-	power = clampf(power, Combat.MIN_POWER, Combat.MAX_POWER)
+	power = clampf(power, minimum_power(active), Combat.MAX_POWER)
 	last_shots[active] = {"angle": angle, "power": power, "weapon": weapon}
 	projectiles.clear()
 	projectiles = shot_shells(active, angle, power, weapon)
@@ -338,20 +387,22 @@ func fire(angle: float, power: float, weapon: int) -> bool:
 	phase = PHASE_FLIGHT
 	accumulator = 0.0
 	flight_elapsed = 0.0
-	events.append({"type": "fire", "actor": active, "weapon": weapon, "item": str(actors[active].get("turn_item", ""))})
+	projectile_accumulator = 0.0
+	events.append({"type": "fire", "actor": active, "vehicle": actors[active].vehicle, "weapon": weapon, "item": str(actors[active].get("turn_item", ""))})
 	for projectile in projectiles:
 		if float(projectile.spawn_at) <= 0.0:
 			launch_projectile(projectile)
 	return true
 
-## Dual: the second volley replays the shooting animation at its first spawn.
+## Dual: the second pose starts at its salvo offset; source spawn ticks
+## follow it. Pose start must not be delayed to the first emitted component.
 static func second_volley(shells: Array) -> Array:
 	for shell in shells:
 		if int(shell.volley) == 1:
-			var start := float(shell.spawn_at)
+			var start := float(shell.get("pose_start_at", shell.spawn_at))
 			for other_shell in shells:
 				if int(other_shell.volley) == 1:
-					start = minf(start, float(other_shell.spawn_at))
+					start = minf(start, float(other_shell.get("pose_start_at", other_shell.spawn_at)))
 			return [{"time": start, "weapon": int(shell.weapon)}]
 	return []
 
@@ -362,6 +413,16 @@ func pass_turn() -> void:
 	TurnTable.pass_turn(self)
 
 func tick(delta: float) -> void:
+	if phase in [PHASE_AIM, PHASE_SETTLE]:
+		# Placed mines use the same fixed clock even while no shell is flying.
+		accumulator += delta
+		while accumulator + TIME_EPSILON >= Combat.STEP:
+			accumulator = maxf(0.0, accumulator - Combat.STEP)
+			ClassicFlight.crawl_mines(self, Combat.STEP)
+			if int(actors[PLAYER].hp) <= 0 or int(actors[CPU].hp) <= 0:
+				finish_gold_shot()
+				check_end()
+				return
 	if phase == PHASE_AIM:
 		if cpu_thinking and active == CPU:
 			return
@@ -369,9 +430,9 @@ func tick(delta: float) -> void:
 		if turn_time <= 0.0:
 			pass_turn()
 	elif phase == PHASE_FLIGHT:
-		accumulator += minf(delta, 0.1)
-		while accumulator >= Combat.STEP and phase == PHASE_FLIGHT:
-			accumulator -= Combat.STEP
+		accumulator += delta
+		while accumulator + TIME_EPSILON >= Combat.STEP and phase == PHASE_FLIGHT:
+			accumulator = maxf(0.0, accumulator - Combat.STEP)
 			advance_projectiles(Combat.STEP)
 	elif phase == PHASE_SETTLE:
 		resolve_wait -= delta
@@ -382,6 +443,15 @@ func tick(delta: float) -> void:
 				schedule(shot_actor, TurnTable.shot_cost(self, shot_actor, shot_weapon, shot_elapsed))
 
 func advance_projectiles(delta: float) -> void:
+	# Public callers (tests and scene bridges) may pass arbitrary deltas. The
+	# model integrates only complete native ticks; never drop a fractional tick.
+	projectile_accumulator += delta
+	while projectile_accumulator + TIME_EPSILON >= Combat.STEP and phase == PHASE_FLIGHT:
+		projectile_accumulator = maxf(0.0, projectile_accumulator - Combat.STEP)
+		advance_projectile_tick(Combat.STEP)
+
+func advance_projectile_tick(delta: float) -> void:
+	ClassicFlight.crawl_mines(self, delta)
 	stamp_tilt()
 	flight_elapsed += delta
 	# Dual: OnStartInteracting of the second shot plays the shooting animation.
@@ -398,16 +468,48 @@ func advance_projectiles(delta: float) -> void:
 			travel_delta = clampf(flight_elapsed - float(projectile.spawn_at), 0.0, delta)
 			if travel_delta <= TIME_EPSILON:
 				continue
+		if ClassicFlight.hold(projectile, travel_delta):
+			if ClassicFlight.split_open_shell(self,projectile):
+				projectiles.remove_at(i)
+			continue
+		if bool(projectile.get("chaining", false)):
+			if ClassicFlight.tick_chain(projectile, travel_delta):
+				if float(projectile.chain_wait) <= 0.0:
+					var link: Vector2 = ClassicFlight.advance_chain(projectile)
+					explode(link, -1, projectile)
+					if int(projectile.chain_left) <= 0:
+						projectiles.remove_at(i)
+			continue
+		seed_projectile(projectile)
+		projectile.previous_draw_pos = projectile.pos
+		projectile.previous_hit_pos = projectile.hit_pos
 		var underground := bool(projectile.get("underground", false))
+		var entered_burrow := false
 		var next: Dictionary
-		if underground:
-			next = Combat.advance_buried(projectile.pos, projectile.velocity, travel_delta)
-		else:
+		# SS change freezes all motion/contact, including a newly entered column.
+		if bool(projectile.get("boomer", false)) and not BoomerFlight.advance_state(projectile):
+			projectile.age += travel_delta
+			continue
+		if not underground:
 			apply_weather_contact(projectile)
-			next = tornado_step(projectile, travel_delta) if not projectile.tornado.is_empty() else Combat.advance(projectile.pos, projectile.velocity, wind * float(projectile.get("wind_scale", 1.0)), travel_delta)
+		var external: bool = not projectile.tornado.is_empty()
+		if bool(projectile.get("boomer", false)):
+			if not BoomerFlight.begin_tick(projectile, not external, false):
+				projectile.age += travel_delta
+				continue
+		else:
+			projectile.flight_ticks = int(projectile.get("flight_ticks", 0)) + 1
+		if external:
+			next = tornado_step(projectile, Combat.STEP)
+			Physics.import_external_motion(projectile, next.position, next.velocity)
+		else:
+			Physics.move(projectile)
+			next = {"position": projectile.pos, "velocity": projectile.velocity}
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
-		var actual: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
+		ClassicFlight.open_shell(projectile)
+		var carrier: Vector2 = Combat.sample_position(next.position, next.velocity, float(projectile.age) + travel_delta, projectile.helix, projectile.phase)
+		var actual: Vector2 = ClassicFlight.hit_point(projectile, carrier)
 		# The teleportation beacon only collides with the ground.
 		var beacon := bool(projectile.get("beacon", false))
 		var hit: Dictionary
@@ -419,13 +521,19 @@ func advance_projectiles(delta: float) -> void:
 				if not exit.is_empty() and (hit.is_empty() or float(exit.fraction) < float(hit.fraction)):
 					hit = {"position": exit.position, "actor": -1}
 		else:
-			hit = Combat.trace_segment(projectile.hit_pos, actual, terrain, [] if beacon else actors, ignored)
+			var bodies: Array = [] if beacon or bool(projectile.get("skip_actors", false)) else actors
+			hit = Combat.trace_segment(projectile.hit_pos, actual, terrain, bodies, ignored)
 			# SimulateShot2_Bullet3: the first solid pixel switches the shell to its
 			# "special" underground state there and halves the vertical speed.
 			if bool(projectile.get("burrow", false)) and not hit.is_empty() and int(hit.actor) < 0:
 				projectile.underground = true
+				entered_burrow = true
 				next.position = hit.position
 				next.velocity = Vector2(next.velocity.x, next.velocity.y * Combat.BURROW_ENTRY_DAMPING)
+				Physics.import_external_motion(projectile, next.position, next.velocity)
+				projectile.fp_acceleration = Vector2i(0, -Physics.quot(Mobiles.gravity_native(int(actors[shot_actor].vehicle)) * 2 * 256, 100))
+				projectile.previous_draw_pos = next.position
+				projectile.previous_hit_pos = next.position
 				actual = hit.position
 				hit = {}
 				events.append({"type": "burrow", "position": actual})
@@ -434,17 +542,24 @@ func advance_projectiles(delta: float) -> void:
 		projectile.age += travel_delta
 		projectile.pos = next.position
 		projectile.velocity = next.velocity
-		if int(float(projectile.age) * 120.0) % 4 == 0:
-			projectile.trail.append(projectile.hit_pos)
-			if projectile.trail.size() > 28:
-				projectile.trail.pop_front()
+		projectile.trail.append(projectile.hit_pos)
+		if projectile.trail.size() > 28:
+			projectile.trail.pop_front()
 		if not hit.is_empty():
 			if beacon:
 				land_beacon(hit.position, previous, projectile)
+				projectiles.remove_at(i)
+			elif ClassicFlight.begin_chain(projectile, hit.position, float(actors[shot_actor].facing)):
+				explode(hit.position, int(hit.actor), projectile)
 			else:
 				explode(hit.position, int(hit.actor), projectile)
-			projectiles.remove_at(i)
-		elif Combat.out_of_bounds(projectile.pos, terrain) or projectile.age > Combat.MAX_FLIGHT_AGE:
+				projectiles.remove_at(i)
+		else:
+			Physics.finish_tick(projectile, not external and not entered_burrow)
+			ClassicFlight.finish_tick(projectile)
+			if bool(projectile.get("boomer", false)):
+				BoomerFlight.finish_tick(projectile, not external)
+		if hit.is_empty() and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
 	if projectiles.is_empty():
@@ -460,10 +575,22 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var weapon: Dictionary = weapon_rules(shot_actor, weapon_index)
 	var item: String = str(actors[shot_actor].get("turn_item", ""))
 	# Projectile.Explode: erosion radius × (1 + Owner.Dig / 100) (Bunge Shot).
-	var removed: int = terrain.carve(position, Attributes.crater(float(weapon.radius),Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
-	var heading: float = Vector2(projectile.velocity).angle() if projectile.has("velocity") else PI * 0.5
-	events.append({"type": "explosion", "position": position, "radius": weapon.radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	blast(position, float(weapon.radius), float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
+	var radius := float(weapon.radius)
+	if projectile.has("blast_radius"):
+		radius = float(projectile.blast_radius)
+	var removed: int = terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
+	var heading := PI * 0.5
+	var velocity := Vector2.ZERO
+	if projectile.has("velocity"):
+		velocity = projectile.velocity
+		heading = velocity.angle()
+	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "child":bool(projectile.get("child",false)), "ss_state":str(projectile.get("ss_state","normal")), "collided_actor": collided_actor, "removed": removed, "angle": heading})
+	blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
+	if not projectile.is_empty():
+		ClassicFlight.bolts(self, projectile, position)
+		ClassicFlight.chill(self, projectile, event_start)
+		ClassicFlight.plant_mine(self, projectile, position)
+		ClassicFlight.burst(self, projectile, position, velocity)
 	explode_actions(position, projectile, event_start)
 
 ## OnExplodeAction order: Thor attached at launch, then Electricity; then the

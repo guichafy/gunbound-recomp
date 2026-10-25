@@ -42,6 +42,28 @@ static func collect(model, event_start: int, impact: Vector2, projectile: Dictio
 	gold.boomer = bool(gold.boomer) or (facing == -1 and dx < 0 and angle > 90) or (facing == 1 and dx > 0 and angle < 90)
 	gold.backward = bool(gold.backward) or (facing == -1 and dx > 0) or (facing == 1 and dx < 0)
 
+## A placed mine keeps its mobile owner (RaonLauncherMine.BuildMineProjectile).
+## It may detonate during somebody else's shot; credit neither its damage nor
+## its deaths to that shot. Mine explosions have no flight/angle bonuses.
+static func collect_mine(model, event_start: int, owner: int, dead_before: Array) -> void:
+	var credit := {"enemy_damage": 0, "ally_damage": 0, "enemy_kills": 0, "ally_kills": 0}
+	for event in model.events.slice(event_start):
+		if event.type in ["damage", "shield_damage"] and int(event.amount) > 0:
+			event["shooter"] = owner
+			credit["ally_damage" if int(event.actor) == owner else "enemy_damage"] += int(event.amount)
+	for index in range(model.actors.size()):
+		if not bool(dead_before[index]) and int(model.actors[index].hp) <= 0:
+			credit["ally_kills" if index == owner else "enemy_kills"] += 1
+			# finish() must not discover this death again for the shot in flight.
+			if not model.shot_gold.is_empty():
+				model.shot_gold.dead[index] = true
+	if owner == int(model.shot_actor) and not model.shot_gold.is_empty():
+		for key in credit:
+			model.shot_gold[key] += int(credit[key])
+	else:
+		var actor: Dictionary = model.actors[owner]
+		actor.gold_state = GoldRewards.apply_shot(actor.gold_state, credit, Attributes.points(actor, Attributes.POPULARITY))
+
 ## FinishGoldShot: counts kills once after settling and pays the shooter.
 static func finish(model) -> void:
 	var gold: Dictionary = model.shot_gold

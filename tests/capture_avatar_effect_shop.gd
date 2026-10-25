@@ -21,8 +21,8 @@ func run() -> void:
 	await process_frame
 	var shop=scene.shop
 	var horn: Dictionary=shop.avatar_art.xfs_hd.piece("xfs:0:0:71",1)
-	assert(not horn.is_empty() and horn.source.size.x/horn.source.size.y<1.1)
-	assert(horn.get("mesh") is ArrayMesh and horn.effect and not horn.draw_behind)
+	assert(not horn.is_empty() and horn.source.size==shop.avatar_art.xfs_hd.piece("xfs:0:0:71",0).source.size+Vector2(40,40))
+	assert(not horn.has("mesh") and horn.effect and not horn.draw_behind)
 	shop.set_process(false)
 	shop.search.text="Great Devil"
 	shop.model.query=shop.search.text
@@ -49,8 +49,8 @@ func run() -> void:
 			var opacity:=[]
 			for renderer in renderers:
 				var entry: Dictionary=renderer.xfs_hd.layers["xfs:0:0:71|layer:1"]
-				opacity.append(entry.native_mean_opacity)
-				entry.native_mean_opacity=0.0
+				opacity.append(entry.overlay_base.get("opacity",1.0))
+				entry.overlay_base.opacity=0.0
 			shop.painter.queue_redraw()
 			await process_frame
 			RenderingServer.force_draw()
@@ -61,7 +61,7 @@ func run() -> void:
 					var delta:=image.get_pixel(x,y)-reference.get_pixel(x,y)
 					amount+=absf(delta.r)+absf(delta.g)+absf(delta.b)
 			energy.append(amount)
-			for i in range(renderers.size()):renderers[i].xfs_hd.layers["xfs:0:0:71|layer:1"].native_mean_opacity=opacity[i]
+			for i in range(renderers.size()):renderers[i].xfs_hd.layers["xfs:0:0:71|layer:1"].overlay_base.opacity=opacity[i]
 		assert(energy[0]>150 and energy[0]>energy[1]*1.3,"Shine remains visible and animated in the actual "+mode+" shop preview")
 		energies[mode]=energy
 	var report:=FileAccess.open(destination+"/shop-pulse.json",FileAccess.WRITE)

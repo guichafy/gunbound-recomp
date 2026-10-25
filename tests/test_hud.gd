@@ -45,11 +45,11 @@ func run() -> void:
 	check(scene.VIEW_SIZE == Vector2(1280, 664) and is_equal_approx(732.0 - 85.0 * 1.6 * 0.5, 664.0), "World view ends where the 1280×136 action bar starts")
 	for name in hud.textures:
 		var factor: float = hud.density(name)
-		# Nak crosshairs stay original until its HD pass (image generation deferred, NAK_0_15.md).
-		if name.begins_with("CrosshairNak"):
-			check(is_equal_approx(factor, 1.0) and hud.textures[name] == hud.originals[name], "%s falls back to the original sprite" % name)
-		else:
+		# Mobiles without an approved HD sheet keep the original crosshair (Nak, and the classic roster).
+		if ResourceLoader.exists("res://assets/hd/hud/" + name):
 			check(is_equal_approx(factor, 3.0), "%s uses the 3× HD sprite" % name)
+		else:
+			check(is_equal_approx(factor, 1.0) and hud.textures[name] == hud.originals[name], "%s falls back to the original sprite" % name)
 	scene.select_vehicle(2)
 	scene.opening = 0
 	scene.start_match()
@@ -74,20 +74,20 @@ func run() -> void:
 	check(scene.aim.weapon == 0 and scene.weapon_buttons[2].disabled, "Tab skips SS while its lock is active")
 	scene.select_weapon(0)
 
-	# REQ-28 strength bar: starts empty, +2 every 0.04 s, release fires once.
+	# REQ-28/ADR-084: continuous 3 s charge, native quantization only at launch.
 	check(scene.aim.power == 0.0, "Strength bar starts the player turn empty")
 	key(scene, KEY_SPACE, true)
 	scene._process(0.1)
 	scene._process(0.1)
-	check(scene.aim.charging and is_equal_approx(scene.aim.power, 10.0), "0.2 s of charge = 5 steps of 2")
+	check(scene.aim.charging and is_equal_approx(scene.aim.power, 100.0 / 15.0), "0.2 s of the 3 s charge = 6.6667 percent")
 	hud.set_selector_from_screen(HudArt.bar_point(Vector2(100, 17)).x)
-	check(is_equal_approx(hud.selector_x, 100.0) and is_equal_approx(scene.aim.power, 10.0), "Dragging the selector marks the bar without changing power")
+	check(is_equal_approx(hud.selector_x, 100.0) and is_equal_approx(scene.aim.power, 100.0 / 15.0), "Dragging the selector marks the bar without changing power")
 	hud.set_selector_from_screen(5000.0)
 	check(hud.selector_x == 240.0, "Selector is clamped to the bar like the original")
 	var expected_angle: int = hud.hud_angle(scene.model, scene.aim.angle, scene.aim.weapon)
 	key(scene, KEY_SPACE, false)
 	check(scene.model.phase == "flight", "Releasing Space fires")
-	check(is_equal_approx(hud.previous_power, 10.0) and hud.previous_angle == expected_angle, "Previous shot marker and LAST angle record the shot")
+	check(is_equal_approx(hud.previous_power, 100.0 / 15.0) and hud.previous_angle == expected_angle, "Previous shot marker and LAST angle record the shot")
 	var shot_before: Dictionary = scene.model.last_shots[0].duplicate()
 	var shells_before: int = scene.model.projectiles.size()
 	key(scene, KEY_SPACE, false)
@@ -282,12 +282,17 @@ func run() -> void:
 	check(hud.floats.is_empty(), "Floating damage expires after 3 s")
 	var actor: Dictionary = {"hp": 300, "max_hp": 1000, "shield": 0, "max_shield": 0}
 	check(HudArt.health_segments(actor) == Vector2(22, 0), "Life bar fills floor(76 × hp / total)")
-	scene.model.weather.wind_force = 30
+	scene.model.weather.wind_force = 26
 	scene.model.weather.wind_angle = 90
 	for frame in range(80):
 		hud.tick(0.05, scene.model, null)
-	check(is_equal_approx(wrapf(hud.compass_rotation - PI * 0.5, -PI, PI), 0.0), "Compass turns to the wind angle")
-	check(is_equal_approx(hud.yellow_alpha, 1.0 - 12.5 / 17.5) and is_equal_approx(hud.red_alpha, 12.5 / 17.5), "Strong wind fades the yellow arrow into the red one")
+	check(is_equal_approx(wrapf(hud.compass_rotation + PI * 0.5, -PI, PI), 0.0), "Compass turns to the wind angle")
+	check(is_equal_approx(hud.yellow_alpha, 0.0) and is_equal_approx(hud.red_alpha, 1.0), "Strong wind fades the yellow arrow into the red one")
+	for cardinal in [0,90,180,270]:
+		scene.model.weather.wind_angle = cardinal
+		for _frame in 80:
+			hud.tick(0.05,scene.model,null)
+		check(Vector2.from_angle(hud.compass_rotation).dot(scene.model.weather.wind_vector().normalized()) > 0.99999,"Compass agrees with physical wind cardinal" + str(cardinal))
 	hud.weather_shown = ["force", "tornado", "wind", "random"]
 	scene.model.weather.queue = [{"type": "tornado"}, {"type": "wind"}, {"type": "random"}, {"type": "mirror"}]
 	hud.sync_weather(scene.model)
@@ -319,9 +324,39 @@ func run() -> void:
 				var hit := false
 				for radius in range(28, 41):
 					var point := Vector2(41.5, 41.5) + local * radius
-					hit = hit or image.get_pixelv(point).a > 0.1
+					# Native theta and velocity components are truncated, while the
+					# original wedge is rasterized: cover the containing pixel's 1px
+					# neighbourhood, not a mathematically infinitesimal alpha edge.
+					for dx in range(-1,2):
+						for dy in range(-1,2):
+							hit = hit or image.get_pixelv(point + Vector2(dx,dy)).a > 0.1
 				inside = inside and hit
 			check(inside, "%s covers the legal aim %s at both ends" % [wedge, legal])
+
+	# Quantization error is bounded independently of the raster coverage test.
+	# A linear support fixture checks both facing directions without changing
+	# the shared conversion used by muzzle, CPU and HUD.
+	var maximum_error := 0.0
+	for vehicle in [1,2,3,6]:
+		var supported = Match.new()
+		supported.start(vehicle,1,4,"")
+		for support in [-10.0,0.0,10.0]:
+			supported.terrain = AimSlope.new(deg_to_rad(support))
+			supported.actors[0].pos = Vector2(640,400-supported.stance_of(0))
+			for facing in [-1,1]:
+				supported.actors[0].facing = facing
+				for shot in range(3):
+					var legal: Vector2 = supported.aim_limits(0,shot)
+					for aim in [legal.x,(legal.x+legal.y)*0.5,legal.y]:
+						var native: Vector2 = supported.shot_velocity(0,aim,100,shot).normalized()
+						var ideal := Vector2(cos(deg_to_rad(aim))*facing,-sin(deg_to_rad(aim))).rotated(supported.body_rotation(0))
+						var error := absf(rad_to_deg(native.angle_to(ideal)))
+						maximum_error = maxf(maximum_error,error)
+						check(error <= 1.25,"HUD shared physical aim quantization within1.25deg vehicle" + str(vehicle) + " facing" + str(facing) + " support" + str(support))
+	# theta truncation <1deg plus two component truncations <0.24deg
+	# at the smallest full-power P350; the 40px raster error remains <1px.
+	check(40.0*sin(deg_to_rad(maximum_error)) < 1.0,"Native wedge endpoints differ by less than one raster pixel")
+	print("Maximum native aim vs continuous wedge error degrees: ",maximum_error)
 
 	# Delayboard data never invents a CPU weapon before the CPU chooses.
 	scene.opening = 0
@@ -333,3 +368,12 @@ func run() -> void:
 	report("HUD CHECKS")
 	scene.queue_free()
 	quit(exit_code())
+
+class AimSlope extends RefCounted:
+	var rotation: float
+	func _init(value: float) -> void:
+		rotation = value
+	func surface_at(x: float, _from_y: float = 0.0) -> float:
+		return 400.0+tan(rotation)*(x-640.0)
+	func is_void(_height: float) -> bool:
+		return false

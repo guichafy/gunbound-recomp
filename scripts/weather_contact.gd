@@ -3,6 +3,7 @@ extends RefCounted
 ## moved out of Match (ADR-081). Match keeps the facade and the event queue;
 ## runs on the CPU snapshot as well, so it reads only the given model.
 
+const Physics = preload("res://scripts/classic_ballistics.gd")
 const Weather = preload("res://scripts/weather.gd")
 
 ## Entering a column's inner rectangle interacts once; leaving through the
@@ -36,7 +37,7 @@ static func interact(model, projectile: Dictionary, column: Dictionary) -> void:
 		"mirror":
 			if first and damage != 0:
 				projectile.damage = int(damage * 1.1 + 5.0)
-			projectile.velocity = Vector2(-projectile.velocity.x, projectile.velocity.y)
+			Physics.mirror_x(projectile)
 		"electricity":
 			if first:
 				projectile.electric = true

@@ -15,6 +15,7 @@
 					25.0,
 					28.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -36,6 +37,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -62,6 +64,7 @@
 					37.0,
 					37.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -83,6 +86,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -109,6 +113,7 @@
 					31.0,
 					32.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -130,6 +135,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -156,6 +162,7 @@
 					48.0,
 					36.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -171,103 +178,47 @@
 		{
 			"id": "xfs:0:0:71|layer:1",
 			"registration": {
-				"attachment": {
-					"base_uv": [
-						0.17,
-						0.32
-					],
-					"effect_uv": [
-						0.5,
-						0.5
-					],
-					"feature": "single profile horn",
-					"scale": 1.0
-				},
+				"attachment": {},
 				"contour_glow": {},
 				"draw_behind": false,
 				"effect": true,
-				"light_curve": [
-					[
-						0.0,
-						0.49,
-						0.2,
-						-0.035,
-						0.75
-					],
-					[
-						0.05,
-						0.445,
-						0.17,
-						0.02,
-						0.75
-					],
-					[
-						0.15,
-						0.295,
-						0.11,
-						0.1,
-						0.65
-					],
-					[
-						0.3,
-						0.204,
-						0.087,
-						0.23,
-						0.65
-					],
-					[
-						0.45,
-						0.22,
-						0.14,
-						0.34,
-						0.72
-					],
-					[
-						0.6,
-						0.39,
-						0.22,
-						0.46,
-						0.5
-					],
-					[
-						0.73,
-						0.57,
-						0.26,
-						0.53,
-						0.35
-					],
-					[
-						0.87,
-						0.65,
-						0.27,
-						0.58,
-						0.26
-					],
-					[
-						1.0,
-						0.7,
-						0.28,
-						0.64,
-						0.26
-					]
-				],
+				"light_curve": [],
 				"native_rect": [
 					-18.0,
 					-42.0,
 					25.0,
 					28.0
 				],
+				"overlay_base": {
+					"base_region": [
+						546.0,
+						235.0,
+						198.0,
+						153.0
+					],
+					"base_sheet": "batch_005",
+					"core_alpha": 187.0,
+					"derivation": "HD horn silhouette + classic mh00071l profile",
+					"feature": "single profile horn",
+					"offset": [
+						-20.0,
+						-20.0
+					],
+					"outline": 3.0,
+					"rim_blur": 5.0,
+					"rim_grow": 4.0
+				},
 				"pulsate": true,
 				"reference_state": "normal",
 				"region": [
-					90.0,
-					17.0,
-					1094.0,
-					1173.0
+					0.0,
+					0.0,
+					238.0,
+					193.0
 				],
-				"sheet": "batch_005_repair_008"
+				"sheet": "great_devil_horn_light"
 			},
-			"sheet_hash": "1322d9be2f84e576937fb6b9196d56ab96de88bd67d072d6337e17d08048b27c"
+			"sheet_hash": "10ead664c8879cc6bb336eb1d761eecc87e8b6c8d17b65b93e830fff6344faaf"
 		},
 		{
 			"id": "xfs:0:0:71|portrait",
@@ -278,6 +229,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -304,6 +256,7 @@
 					28.0,
 					32.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -325,6 +278,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -351,6 +305,7 @@
 					24.0,
 					26.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -372,6 +327,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -398,6 +354,7 @@
 					31.0,
 					28.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -419,6 +376,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -445,6 +403,7 @@
 					37.0,
 					36.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -466,6 +425,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -492,6 +452,7 @@
 					49.0,
 					41.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -513,6 +474,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -534,6 +496,7 @@
 				"effect": false,
 				"light_curve": [],
 				"native_rect": [],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -560,6 +523,7 @@
 					26.0,
 					25.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -586,6 +550,7 @@
 					32.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -623,6 +588,7 @@
 					83.0,
 					63.0
 				],
+				"overlay_base": {},
 				"pulsate": true,
 				"reference_state": "normal",
 				"region": [
@@ -649,6 +615,7 @@
 					28.0,
 					23.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -675,6 +642,7 @@
 					33.0,
 					41.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -701,6 +669,7 @@
 					33.0,
 					39.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -727,6 +696,7 @@
 					25.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -753,6 +723,7 @@
 					30.0,
 					31.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -790,6 +761,7 @@
 					31.0,
 					29.0
 				],
+				"overlay_base": {},
 				"pulsate": true,
 				"reference_state": "normal",
 				"region": [
@@ -816,6 +788,7 @@
 					31.0,
 					27.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -853,6 +826,7 @@
 					28.0,
 					31.0
 				],
+				"overlay_base": {},
 				"pulsate": true,
 				"reference_state": "normal",
 				"region": [
@@ -879,6 +853,7 @@
 					31.0,
 					43.0
 				],
+				"overlay_base": {},
 				"pulsate": false,
 				"reference_state": "",
 				"region": [
@@ -907,10 +882,10 @@
 	"renderer_hashes": {
 		"scripts/avatar_art.gd": "b7ad7e03b75854bbb4401ab816a9a680a0c344b605e311027b7dfd77e268b7d7",
 		"scripts/avatar_contour_glow.gd": "3b3fb2582f488787fb2615bed8bfdbb70f6920d49cc080a2216c048b4b3077d2",
-		"scripts/avatar_xfs_hd.gd": "33cdaa12e563c12134b5ad02b0937f3cc3ce9044a640e72550ae1e9431e10a9b",
-		"scripts/bigfoot_sprite.gd": "db02a2fdbd73e5be5bbfa781bbf991264474687a49c1bf77ecb7016f8259be54",
-		"scripts/mage_sprite.gd": "46dd5532496a0f259b5df2995087b96ed9e7691e3c139d343323c0f7ce903769",
-		"scripts/mobile_rig.gd": "ede229ca733c420572bbbba1dceaff4f34e1a5f9c8fd266eca49aca20d068010"
+		"scripts/avatar_xfs_hd.gd": "3beb9adae9b68a87d977c3ce2e0e9e3a83e34f0503628c77bf13ac1d27d975aa",
+		"scripts/bigfoot_sprite.gd": "5da73fe21956be9776ed87b613371f14af4bc6e448f3c8ff76277e2ca6488fdc",
+		"scripts/mage_sprite.gd": "b6e75b544418fe9bcee7e07c8167037171040e60c039678ec7706e5c679a430b",
+		"scripts/mobile_rig.gd": "4c12532295a17a7475b5176e0154272558cd034e66f8d8a775d8dbe37ab286eb"
 	},
 	"size": [
 		1920,

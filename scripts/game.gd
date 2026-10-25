@@ -86,7 +86,12 @@ var sprites := build_sprites()
 static func build_sprites() -> Dictionary:
 	var result := {}
 	for vehicle_id in MobileLooks.ids():
-		result[vehicle_id] = load(MobileLooks.look(vehicle_id).sprite).new()
+		var look: Dictionary = MobileLooks.look(vehicle_id)
+		var sprite = load(look.sprite).new()
+		if sprite.has_method("setup"):
+			sprite.setup(str(look.kind))
+			sprite.rear = bool(Mobiles.definition(vehicle_id).get("rear", false))
+		result[vehicle_id] = sprite
 	return result
 
 func _ready() -> void:
@@ -406,12 +411,12 @@ func play_mobile_shot(event: Dictionary) -> void:
 	var id := int(event.vehicle) if event.has("vehicle") else int(model.actors[event.actor].vehicle)
 	# A Dual second volley sounds like a new shot; the teleport beacon has its own.
 	var moment: String = "fire" if event.type == "volley" else event.type
-	if not Mobiles.has_id(id) or Mobiles.shot_sound_on(id) != moment or bool(event.get("beacon", false)) or event.get("item", "") == "teleport":
+	if not Mobiles.has_id(id) or Mobiles.shot_sound_on(id) != moment or not bool(event.get("sound", true)) or bool(event.get("beacon", false)) or event.get("item", "") == "teleport":
 		return
 	var body = sprite_for(id)
 	if body == null:
 		return
-	sound.play("fire", body.shoot_sounds[event.weapon])
+	sound.play("fire", Mobiles.ShotTiming.stream(id, int(event.weapon), "fire"))
 
 func consume_events() -> void:
 	var granted := -1
@@ -443,12 +448,12 @@ func consume_events() -> void:
 			"explosion":
 				rig.last_impact = event.position
 				var vehicle_id := int(event.get("vehicle", Mobiles.DEFAULT_ID))
-				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "age": 0.0})
+				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "child":bool(event.get("child",false)), "ss_state":str(event.get("ss_state","normal")), "age": 0.0, "angle":float(event.get("angle",0.0))})
 				shake = 7.0
 				var original: AudioStream = null
 				var body = sprite_for(vehicle_id)
 				if body != null:
-					original = body.blast_sounds[event.weapon]
+					original = Mobiles.ShotTiming.stream(vehicle_id, int(event.weapon), "blast")
 				sound.play("explosion", original)
 			"fall":
 				floating.append({"pos": Vector2(model.actors[event.actor].pos.x, minf(float(model.actors[event.actor].pos.y), model.terrain.world_size().y) - 80.0), "text": "QUEDA!", "age": 0.0, "color": Color("ffbc79")})
@@ -623,6 +628,7 @@ func _draw() -> void:
 				item_art.draw_using(self, body, art.motion[index], int(model.actors[index].facing), offset)
 	hud.draw_world(self, model, offset, hud_state())
 	draw_projectiles(offset)
+	draw_mines(offset)
 	draw_set_transform(Vector2.ZERO)
 	weather_art.draw_shell_marks(self, model, offset)
 	weather_art.draw_beams(self, offset)
@@ -642,7 +648,12 @@ func _draw() -> void:
 ## S1 and S2 in one turn); the beacon has its own art.
 func draw_projectiles(offset: Vector2) -> void:
 	draw_set_transform(offset)
-	for projectile in model.projectiles:
+	for source_projectile in model.projectiles:
+		var projectile: Dictionary = source_projectile.duplicate()
+		var blend := clampf(float(model.accumulator)/0.05,0.0,1.0)
+		projectile.draw_fraction = blend
+		projectile.hit_pos = Vector2(projectile.get("previous_hit_pos",projectile.hit_pos)).lerp(projectile.hit_pos,blend)
+		projectile.pos = Vector2(projectile.get("previous_draw_pos",projectile.pos)).lerp(projectile.pos,blend)
 		if not projectile.launched:
 			continue
 		if bool(projectile.get("beacon", false)):
@@ -661,6 +672,15 @@ func draw_projectiles(offset: Vector2) -> void:
 				draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)
 		body.draw_projectile(self, projectile, shell_weapon, offset)
 		draw_set_transform(offset)
+
+func draw_mines(offset: Vector2) -> void:
+	var body = sprite_for(7)
+	if body != null and body.has_method("draw_placed"):
+		var marks: Array = model.mines.duplicate()
+		for projectile in model.projectiles:
+			if bool(projectile.get("crystal_body", false)):
+				marks.append({"pos": projectile.get("hit_pos", projectile.pos), "crystal": true})
+		body.draw_placed(self, marks, model.actors, offset)
 
 ## Rising texts ("QUEDA!") that fade over 1.5 s.
 func draw_floating(offset: Vector2) -> void:

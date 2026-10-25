@@ -1,10 +1,47 @@
-# Especificação — Gunbound Recomp 0.18.6
+# Especificação — Gunbound Recomp 0.20.2
 
 As seções abaixo são cronológicas: o texto de cada versão fica como histórico
 quando uma seção posterior o substitui. A partir de 0.7.0 vale a seção mais nova
-de cada requisito (batalha: REQ-44/ADR-076).
+de cada requisito (batalha atual: REQ-44/ADR-084/085; Turtle: ADR-086/087).
 
-## Índice vivo de requisitos (0.18.6)
+## Continuidade do porte — REQ-12/19/20/38–41/44/45
+
+Após confirmar o T2 (“Agora funcionou”), o usuário autorizou engenharia
+reversa do binário client-side como fonte para ajustar o porte no Godot.
+Preservar os 16 mobiles e os avatares/equipamentos atuais, incluindo HD
+aprovado; modernização visual será uma etapa posterior solicitada.
+Procedimento reutilizável: `skills/gunbound-client-port/SKILL.md` e ADR-088.
+Esta consolidação documental não implementa novas famílias nem altera rede,
+combate, catálogo ou a versão do aplicativo.
+
+## Turtle T2 0.20.2 — REQ-04/08/19/44/45
+
+A órbita aproximada do T2 foi substituída pelo movimento comprovado no
+cliente: duas fases opostas 0/180°, amplitude inicial 1000/100=10 px, avanço 5°
+por tick. Nos dez primeiros ticks a amplitude cresce 200 e o avanço 4;
+depois diminuem 20 e 1, com piso 0. A onda perpendicular usa heading/LUT
+nativos antes da aceleração; seções do rastro usam heading após aceleração,
+com meia largura 10 px. Ordem: mover trajetória central→onda/colisão→acelerar→
+registrar seção→avançar fase→atualizar amplitude/avanço. O offset não se
+acumula na trajetória central. Real e previsão usam o mesmo ponto; renderer
+interpola somente cópias e emite dois triângulos explícitos por quad T2,
+inclusive nas seções cruzadas. T1 mantém seu raster anterior; T1/SS, avatares,
+dano, itens, HUD e carga conservam os contratos existentes. Evidência e
+limites em `TURTLE_T2_FIDELITY.md`; não implica combate integral nativo.
+
+## Correção Turtle 0.20.1 — REQ-04/07/19/45
+
+Pedido atual: corrigir as animações de T1, T2 e SS. WaterEffect deve percorrer
+as oito colunas completas e compor uma faixa contínua nas curvas, sem alterar
+histórico usado por colisão. SS usa `bullet12p` normal/abertura; no tick 44
+inicia os 10 ticks de change, emite seis filhos `bullet12c` e remove o pai.
+A divisão no ar não aplica dano/cratera. Impactos identificam pai/filho;
+o pai normal usa flame123 + ssflame12; pai em change e filhos usam flame123.
+Impacto no tick 44 não antecipa a divisão; hold mantém endpoints visuais fixos.
+Dano, raio, velocidade e dispersão dos filhos conservam a adaptação atual; não é porte integral
+da física especial do Turtle. Plano e evidências: `TURTLE_ANIMATION_FIX.md`.
+
+## Índice vivo de requisitos (0.20.2)
 
 Versão em fonte única: `application/config/version` em `project.godot` (ADR-081).
 Este índice resume o requisito vigente e onde ele está; as seções seguintes
@@ -13,30 +50,56 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | ID | Requisito vigente | Documento | Estado |
 |---|---|---|---|
 | REQ-01 | Engine multiplataforma; entrega executável no Mac | este arquivo, `build_macos.py` | macOS entregue; Windows/Linux/Android/iOS não testados |
-| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente (Mage, Bigfoot, Nak) |
+| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente; 16 mobiles (REQ-45) |
 | REQ-03 | Mira, força e movimento; teclado e extras na tela | HUD_0_10, AIMING_0_12 | Vigente; console original substituído por REQ-27..30 |
-| REQ-04 | Balística, colisão e crateras | BATTLE_RULES_AUDIT, MOBILE_PARITY | Vigente; gravidade/força do C# (REQ-44) |
-| REQ-05 | Vida, dano, queda e resultado | MOBILE_PARITY, BATTLE_RULES_AUDIT | Vigente; deriva na queda ADR-077 |
-| REQ-06 | Iniciativa por atraso, turno de 30 s, passe | BATTLE_RULES_AUDIT | Vigente; custo por tempo gasto e passe 200 ÷ 7,5 (REQ-44) |
-| REQ-07 | Três tiros; SS aberto no 1º turno, trava de 4 turnos | MOBILE_PARITY | Vigente |
+| REQ-04 | Balística, colisão e crateras | CLASSIC_BALLISTICS_0_20, BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY | Física comum 20 Hz/24.8 e onda Turtle T2 implementadas; colisão/dano continuam adaptações declaradas |
+| REQ-05 | Vida, dano, queda e resultado | MOBILE_PARITY, BATTLE_RULES_AUDIT, BATTLE_FIDELITY_0_20 | Vigente; autoria/Gold de minas corrigidos; deriva na queda ADR-077 |
+| REQ-06 | Iniciativa por atraso, turno de 30 s, passe | BATTLE_RULES_AUDIT | Vigente; custo por tempo gasto e passe 200 ÷ 7, 5 (REQ-44) |
+| REQ-07 | Três tiros; SS aberto no 1º turno, trava de 4 turnos | MOBILE_PARITY, TURTLE_ANIMATION_FIX | Vigente; Turtle divide após abertura, sem impacto aéreo |
 | REQ-08 | CPU com as mesmas regras e três dificuldades | PERF_LIMITS_0_11, BATTLE_RULES_AUDIT | Vigente; CPU não se move nem usa itens |
 | REQ-09 | Pausa, ajuda, resultado, revanche e menu | HUD_0_10 | Vigente |
 | REQ-10 | Perfil local sem duplicar recompensa | AVATAR_SHOP, AVATAR_HD_MIGRATION | Vigente; saldo de teste ADR-080 |
 | REQ-11 | Arte original própria | — | Substituído por REQ-19/20 |
 | REQ-12 | Código, documentação e app para validar e aprender | QUALITY_REVIEW | Vigente; revisão de qualidade 0.18.6 |
 | REQ-13..18 | Refinamento 0.2 (HUD, fila, inclinação, carga, animações, impacto) | REFINEMENT_0_2 | HUD/console substituídos por REQ-27..30; demais vigentes |
-| REQ-19 | Mobiles e assets reais | BIGFOOT_0_3, MAGE_0_4, NAK_0_15 | Parcial: Mage, Bigfoot, Nak; demais mobiles pendentes |
-| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD | Vigente; HD do Nak gerado e pendente de integração |
-| REQ-21..26 | Mapa Miramo A, câmera 1:1, vento 2D, clima, Thor, partícula | MAP_0_8, WEATHER_CAMERA_0_9 | Vigente |
-| REQ-27..31 | HUD original e popup de opções | HUD_0_10 | Vigente; Mouse Speed desabilitado |
+| REQ-19 | Mobiles e assets reais | BIGFOOT_0_3, MAGE_0_4, NAK_0_15, REQ-45 | Vigente nos 16 do cliente Thor's Hammer |
+| REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD, HORN_AURA_FIX | Vigente; HD do Nak gerado e pendente de integração; brilho do Great Devil derivado do chifre (ADR-082) |
+| REQ-21..26 | Mapa Miramo A, câmera 1: 1, vento 2D, clima, Thor, partícula | MAP_0_8, WEATHER_CAMERA_0_9 | Vigente |
+| REQ-27..31 | HUD original e popup de opções | HUD_0_10, BATTLE_FIDELITY_0_20 | Carga 3 s/mínimo nativo (REQ-28); bússola/vento coerentes; Mouse Speed desabilitado |
 | REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |
 | REQ-34 | Aiming Mode Drag/Slice | AIMING_0_12 | Vigente; TODO Mouse Speed |
 | REQ-35..37 | Itens de batalha, Select Item, arte HD | ITEMS_0_13 | Vigente; custos do `itemdata.dat`; CPU sem itens; Team Teleport sem aliado no 1×1 |
 | REQ-38..41 | Loja, composição, atributos e modificadores | AVATAR_SHOP_XFS_0_16, AVATAR_HD_MIGRATION | Vigente; catálogo XFS com bônus por equipamento |
 | REQ-42 | Paridade Mage/Bigfoot com o C# | MOBILE_PARITY | Vigente, com os ajustes de REQ-44 |
 | REQ-43 | Nak (ID 3) com dados do cliente original | NAK_0_15 | Vigente; aura UsingItem ausente (sem arte original) |
-| REQ-44 | Regras de batalha: cliente original comprovado, depois C# | BATTLE_RULES_AUDIT | Vigente |
-| REQ-45 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
+| REQ-44 | Regras de batalha: cliente original comprovado, depois C# | BATTLE_RULES_AUDIT, BATTLE_FIDELITY_0_20 | ADR-084 substitui balística/carga/mínimo; demais limites declarados |
+| REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS | Boomer, onda Turtle T2 e cronologia48 implementados; demais limites/portes explícitos |
+| REQ-46 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
+
+## Base da batalha 0.20 e validação histórica
+
+[BATTLE_FIDELITY_0_20.md](BATTLE_FIDELITY_0_20.md) consolida implementação,
+evidência e limites. REQ-03/04/08/23/28/34/44: passo comum20 Hz/24.8 e LUTs
+originais; forçaP1..10*f25 convertida uma vez; Slice3 s, Drag por soltura,
+disparo único/cancelável; aceleração capturada no lançamento; CPU/HUD usam
+limites e geometria comuns, incluindo extremos de mira. Boomer guarda curva
+por shell e SS normal→change36–45→cnormal46, sem contato durante freeze.
+
+REQ-05/06/10/45: mina conserva dono/crédito sem substituir autoria/arma/item
+ou delay do tiro vigente; real e previsão avançam minas/filhos no mesmo laço,
+com snapshots profundos e recompensa idempotente. Fábrica preserva parâmetros
+Lightning e raio. REQ-09/19: EPA/MainAction controlam48timelines, grupos de
+som e duração de pose; Dual distingue pose/spawn e pausa congela relógios.
+Turtle usa WaterEffect; Dragon reserva o sprite filho ao SS; recursos ausentes
+confirmados permanecem silêncio explícito, sem fallback de outro mobile.
+
+Aceite de implementação: fixtures independentes, paridade real/previsão,
+modelos/cenas e revisão. Fechamento: harness completo sem ERROR, partidas,
+QA GPU/áudio e PCK conforme registro 0.20. Gates de revisão aprovados; rodada
+completa final passou (7287 checks Godot, 16 Python, 29 partidas). App assinado e
+PCK 160 checks aprovados nas assertivas, com ressalva ambiental de CA.
+Recaptura Full HD/escuta pendentes. Pesquisa 48 tiros da tarefa 8
+não equivale a porte integral de dano, colisão, tornado ou famílias restantes.
 
 ## Histórico da especificação
 
@@ -134,6 +197,10 @@ continuam fora. Arte HD do Nak adiada pelo usuário.
 
 ## Paridade das regras de batalha — REQ-44
 
+Atualização de24/10/2026: ADR-084 implementada na0.20, com física comum
+original, carga3s e força mínima nativa. Os valores C# de balística abaixo
+são histórico substituído; agenda/itens/demais regras não alteradas continuam.
+
 Pedido de 20/10/2026: comparar a batalha com o OpenBound C# e com o cliente
 original Thor's Hammer (engenharia reversa do GunBound-Decomp e dos `.dat`).
 Auditoria e evidências em [BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md),
@@ -165,6 +232,39 @@ Todos os delays seguem na escala ÷ 7,5. Ficam como estavam no Godot: empate
 por morte dupla e passe sem travar o SS (o C# trava). As seeds de
 `test_matches` mudam de propósito; os novos valores de referência estão no
 hand-off.
+
+## Roster clássico 0.19.0 — REQ-45
+
+**Alvo aprovado de fidelidade (ADR-084, REQ-03/04/08/23/28/44/45):**
+balística e vento do cliente original comprovados, velocidade/gravidade
+por mobile, carga completa em 3 segundos e força mínima nativa, sem piso
+arbitrário de 15%. HUD, controles Drag/Slice, CPU e voo real compartilham
+os limites e conversões. Disparo único e cancelamento pela pausa continuam.
+Critérios: fixtures do cliente, paridade previsão/voo, cenas, modelos e
+partidas completas; registrar mudanças intencionais de referência.
+
+Revisão de24/10/2026 implementada na0.20 conforme
+[BATTLE_FIDELITY_0_20.md](BATTLE_FIDELITY_0_20.md). O plano original fica
+preservado; ADR-084 já substitui balística, carga e mínimo da ADR-076.
+As descrições abaixo registram a entrega 0.19.0 e não comprovam paridade
+integral com o cliente original.
+
+O `GunBound.gme` carrega 16 registros de `characterdata.dat` (`tank1`…`tank16`).
+Mage permanece no ID 1, Bigfoot no 2 e Nak no 3. Os outros entram nos IDs 4–16:
+Armor, Trico, Boomer, Raon, Lightning, JD, ASate, Ice, Turtle, Grub, Dragon,
+Knight e Aduka. Vida, escudo, regeneração de escudo, mira, delay e o fator
+de tempo vêm dessa tabela. O dano e o raio usam a mesma leitura do Nak
+(`[44]/[57]/[70]` e metade de `[47]/[60]/[73]`). A arte é o atlas original, sem
+HD novo. A CPU dos IDs novos enfrenta o Mage; 1↔2 e Nak→Mage ficam.
+
+Tiros com classe no C#: Armor SS abre aos 2 s; Trico S2 orbita em três e o SS
+explode oito vezes; Raon S1 orbita em quatro, S2/SS plantam mina que anda até
+90 px e estoura a 90 px; Lightning soma o raio elétrico; Ice S2 tira 5 de
+defesa; Turtle S2 são dois projéteis e o SS, depois de 1,5 s, parte em seis.
+Boomer, JD, A.Sate, Grub, Knight e o Aduka ainda disparam o projétil
+comum com os números da tabela. O SS do Dragon solta cinco filhos. O SS do JD
+e os S2/SS do Aduka têm poder 0 nessa tabela. O Aduka atira pelas costas.
+Kalsiddon e J.Frog não estão nestes 16 registros.
 
 ## Mage 0.4
 
@@ -370,7 +470,7 @@ A restrição anterior a quinze cosméticos fica substituída para o catálogo X
 REQ-10/20/39: pedido posterior exige migração HD completa das peças vestidas e
 animadas, além das miniaturas. Controle por registro/camada e critérios em
 AVATAR_HD_MIGRATION.md. Cobertura real:550avatares vestíveis/629camadas; padrões
-vazios/placeholders recebem motivo N/A. Regenerar e integrar todos os componentes
+vazios/place holders recebem motivo N/A. Regenerar e integrar todos os componentes
 reais, preservando registro, identidade, animação contínua e fallback validado.
 
 REQ-10/20/39 aceitos tecnicamente na0.17:550avatares/629camadas vestíveis e
@@ -401,7 +501,7 @@ progresso/posses/equipamento. Gravar marcador junto à carteira; gastos e
 recargas posteriores preservam o saldo salvo. Falha de gravação reverte a
 concessão. Não liberar itens indisponíveis nem alterar preços/bônus.
 
-## Catálogo clássico de avatares — REQ-45
+## Catálogo clássico de avatares — REQ-46
 
 Pedido: manter todos os avatares originais do Gunbound clássico e refazer o
 catálogo com equivalência máxima a `jglim/gunbound-launcher` e

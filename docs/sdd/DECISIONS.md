@@ -488,7 +488,7 @@ ADR-067/069/070 para o catálogo XFS. Sem rede/contas neste corte.
 
 Usuário apontou a diferença entre miniatura regenerada e peça vestida nativa.
 Registrar miniatura, base, efeito e QA separadamente para todos os562registros.
-550têm peças/629camadas; padrões vazios e placeholders recebem N/A com motivo.
+550têm peças/629camadas; padrões vazios e place holders recebem N/A com motivo.
 Masters anatômicos constantes e efeitos separados conservam rig/animação
 aprovada; arte só gerada não conta como componente validado. Arte original,
 brutos e prompts preservados. AVATAR_HD_MIGRATION.md define o critério550/550.
@@ -532,6 +532,10 @@ O pedido de finalizar o PR1 com arte HD substitui o adiamento de HD do Nak na
 ADR-074; anatomia estável e efeitos próprios, sem mudanças de regras. NAK_HD.md.
 
 ## ADR-076 — regras de batalha: original comprovado, depois C#
+
+Substituída parcialmente pela ADR-084 em 24/10/2026: balística C#, carga
+adaptada e piso de força 15 deixam de ser o alvo aprovado. A implementação
+da física original ainda está pendente; demais decisões deste ADR permanecem.
 
 Pedido de 20/10/2026: auditar a batalha contra o OpenBound C# e o cliente
 original Thor's Hammer ([BATTLE_RULES_AUDIT.md](BATTLE_RULES_AUDIT.md)).
@@ -607,6 +611,8 @@ sentidos e pausa. HORN_AURA_FIX.md.
 
 ## ADR-079 — preservar o brilho e corrigir somente sua curva
 
+Substituída pela ADR-082: a faixa curvada continuou fora do formato do chifre.
+
 Substitui ADR-078 após rejeição explícita do usuário: o halo da0.18.3 ficou
 imperceptível no tamanho real da loja. Restaurar textura L, composição sobre
 o chifre, opacidade e pulsação anteriores. Corrigir curva por uma malha UV
@@ -638,7 +644,164 @@ scripts de desenho; delays guardados na unidade original do C# e convertidos uma
 vez (`delay_units.gd`). Tipagem completa de ator/projétil adiada (motivos no
 plano): fábricas de estado no lugar. Nak sem aura UsingItem até haver arte.
 
-## ADR-082 — catálogo clássico identificado pelo código do servidor
+## ADR-082 — brilho do chifre a partir do L clássico
+
+Substitui ADR-079. Usuário pediu refazer o brilho do Great Devil Head a partir
+do clássico: posição e formato iguais aos da baixa resolução. O L original
+(`mh00071l`) é a silhueta do próprio chifre, embranquecida e desenhada por
+cima: núcleo 187/255 sobre o chifre inteiro (contorno incluso) e borda de ~4 px
+nativos. Uma luz gerada à parte (meia-lua 0.18.0/0.18.4) nunca coincide com o
+chifre HD, mesmo curvada. Decisão: derivar a luz da máscara de ouro do mestre HD
+(componente principal, sulcos fechados, contorno incluso) com o perfil medido
+no clássico, assada em `great_devil_horn_light.png` por
+`scripts/build_devil_horn_light.py`, sem nova geração GPT Images. Registro
+`overlay_base`: mesma origem e escala da cabeça, margem de 20 px para a borda,
+opacidade do material 1 (o PNG carrega o alfa clássico). Pulsação e relógio
+anteriores mantidos. Masters, originais e os outros 19 efeitos preservados.
+
+## ADR-083 — roster dos 16 mobiles do cliente
+
+Pedido: implementar todos os mobiles do cliente clássico, no padrão atual,
+com as características originais, e entregar com testes e build. IDs 1 Mage,
+2 Bigfoot e 3 Nak não mudam (o 0 continua fora). Os IDs 4–16 seguem a ordem
+do cliente a partir do Armor. Números de vida, escudo, mira, delay e tempo
+saem do `characterdata.dat` decodificado. Dano e raio seguem a leitura já
+usada no Nak. Arte de `graphics.xfs`, sem HD novo. Onde o OpenBound tem a
+classe do tiro, o voo especial entra no laço comum (`classic_flight.gd`).
+Onde não tem (Boomer, JD, A.Sate, Grub, Knight e o Aduka), o tiro é
+o projétil comum com os números da tabela, até a simulação do cliente desses
+tiros ser portada. A loja de avatares não entra nesta decisão.
+
+Correção posterior: `tank14.img`, `tank15.img` e `tank16.img` são Dragon,
+Knight e Aduka. Os nomes Kalsiddon e J.Frog não correspondem a esses arquivos
+nem a estes 16 registros. O menu desenha o atlas numa escala única (casco 60,
+a mesma largura do combate), com o pé opaco do quadro parado no chão.
+
+## ADR-084 — física, carga e força mínima do cliente original
+
+24/10/2026. **Decisão aprovada pelo usuário e implementada na0.20.0.**
+Contrato e resultados em `BATTLE_FIDELITY_0_20.md` e
+`CLASSIC_BALLISTICS_0_20.md`. As formulações futuras abaixo preservam o
+registro da decisão anterior ao código; não indicam porte ainda pendente.
+Respostas às três escolhas do plano de fidelidade: (1) seguir a física
+original; (2) adotar carga original de 3 segundos; (3) reproduzir a força
+mínima original. Substitui a escolha de balística C# e preservação do piso
+15 da ADR-076, além da carga de 2 segundos de REQ-28.
+
+O porte seguirá as regras comprovadas do cliente Thor's Hammer: velocidade
+e gravidade por mobile, vento quantizado, aceleração fixada no lançamento,
+ordem de integração original e estados próprios dos tiros, incluindo Boomer.
+O plano propõe ponto fixo com 8 bits fracionários e passo de 20 Hz, com
+apresentação suave independente da colisão. A implementação deve validar
+truncamentos e limites nativos da força, sem trocar o piso 15 por outro
+percentual arbitrário. Barra, Drag/Slice, CPU e disparo real devem usar os
+mesmos limites e conversões; carga completa leva 3 segundos.
+
+A alteração muda mira, alcance, tempo de voo, busca da CPU e referências
+das partidas. Preservar o baseline anterior e justificar novas referências
+com fixtures independentes do cliente. Colisão refinada e tiros ainda não
+comprovados continuam investigação, sem promessa de paridade integral.
+Demais decisões de agenda, cobrança fixa de 2 s da CPU, perfil, roster e
+arte HD aprovada permanecem. Plano: [BATTLE_FIDELITY_PLAN.md](BATTLE_FIDELITY_PLAN.md).
+
+
+## ADR-085 — escopo comprovado e fronteiras da fidelidade0.20
+
+24/10/2026. Registra as escolhas da implementação do plano aprovado, sem
+ampliar o escopo da ADR-084. Tarefas1–7 entregam minas/fábrica, física comum,
+mira, Boomer e apresentação; tarefa8 entrega pesquisa48tiros e próximos
+planos. Original comprovado continua prevalecendo sobre C#, mas pesquisa
+parcial não autoriza dano ou mecanismos inventados.
+
+Decisões: manter a colisão varrida/caixas, dano/cratera, tornado e adaptações
+existentes enquanto seus portes nativos não estiverem fechados; registrar
+essa fronteira em vez de chamar a partida de emulação integral. Aceleração
+FP nasce no lançamento e todos os consumidores de combate usam a mesma
+simulação/snapshot. Interpolação e animação não alimentam colisão.
+
+MainAction/EPA comprovados definem48timelines, componentes e grupos de som.
+Turtle usa WaterEffect e suprime a cabeça Armor; Dragon S1/S2 permanece sem
+corpo, com partículas, e bullet14c/cl pertence aos filhos SS. Arquivos de som
+Knight151blast e Aduka23blast ausentes permanecem silêncio explícito, sem
+substituto inventado. Recursos flame/ssflame são estágios separados; somente
+caminhos já comprovados são ativados. Dados/fontes preservados.
+
+A ponte visual de Armor/Turtle espelha open/hold existente sem mudar combate;
+Boomer mantém sua máquinaFP própria. Contato opaco pré-calculado elimina a
+dependência de PNG cru no PCK; ASate muda de0 para−3 por medir o alpha real,
+com deslocamento visual3px declarado para QA. Não altera hitbox nem pose física.
+
+Consequência: há melhoria funcional e audiovisual verificável, com gates de
+revisão e harness final aprovados. QA GPU tem limite de resolução; escuta
+pendente. App assinado e PCK passaram nas assertivas, com ressalvas ambientais
+do export/smoke registradas separadamente. Próximos portes seguem `BATTLE_MOBILE_FAMILY_PLANS.md`.
+
+
+## ADR-086 — reparo Turtle por estágio comprovado, sem porte numérico integral
+
+24/10/2026, implementado na 0.20.1 por solicitação de correção dos tiros.
+Substitui parcialmente a ponte visual Turtle da ADR-085: manter o pai voando no
+último quadro change não reproduz o encerramento da EPA. A leitura estática
+comprova tick 44→dez ticks change→seis filhos/remoção do pai. Essa topologia entra
+no laço comum real/previsão; divisão não é explosão e impacto no tick 44 não
+pode antecipá-la. Valores atuais de dano, raio, velocidade e dispersão dos
+filhos continuam adaptações. Armor e Boomer conservam contratos próprios.
+
+WaterEffect usa oito colunas completas, alpha nativo e uma seção transversal
+por amostra, compartilhada pelos segmentos vizinhos. Interpolação altera
+somente cópias visuais; hold estabiliza os endpoints de apresentação. Filhos
+usam bullet12c. Impacto do pai normal compõe flame123+ssflame12; pai em change
+e filhos usam flame123, com child/ss_state preservados no evento/efeito.
+
+Revisão independente fechou três P2 com regressões RED→GREEN; captura temporal
+GPU 1920×1080/60 FPS observou faixa contínua e estágios corretos. Não implica
+paridade completa da física especial, nem execução do cliente original,
+QA de áudio ou input manual. Resultado detalhado em `TURTLE_ANIMATION_FIX.md`;
+HUD, mira, carga, trava SS, perfil, originais e fonte C# preservados.
+
+
+## ADR-087 — onda Turtle T2 e raster conforme o cliente
+
+24/10/2026 (America/Sao_Paulo). Implementado na 0.20.2 após o usuário apontar que o T2 ainda não
+se movia como o original. Substitui a órbita T2 mantida na ADR-086, preservando
+T1/SS e o restante da entrega anterior. Seguir instruções/LUTs comprovadas do
+PE em vez da aproximação contínua do C#: fase 0/180, amplitude 1000, avanço 5,
+crescimento por dez ticks e decaimento até avanço/amplitude zero.
+
+Separar a trajetória central da onda. Heading pré-aceleração calcula o ponto
+de colisão; heading pós-aceleração orienta as seções de meia largura 10.
+Mesmo laço real/previsão e estado privado por projétil; interpolação só visual.
+Quads T2 podem se cruzar em tiros legais de força mínima ou sob Tornado.
+Usar os dois triângulos explícitos do raster original, sem ear-clipping;
+preservar draw_polygon no T1. O reparo foi reproduzido em RED e revalidado.
+
+Gates de revisão e harness final aprovados, com captura temporal Full HD
+inspecionada. Isso fecha a onda ordinária do T2, sem alegar paridade nativa
+de tornado, colisão refinada, dano/cratera ou combate integral. Cliente
+original não executado; aceite visual do T2 posteriormente confirmado pelo usuário
+(“Agora funcionou”); escuta e mouse sem validação registrada.
+Contrato e evidências em `TURTLE_T2_FIDELITY.md`.
+
+## ADR-088 — aprendizado reutilizável do porte e preservação visual
+
+Após o aceite visual do T2 (“Agora funcionou”), o usuário solicitou uma skill
+para reescrever o cliente GunBound no Godot e autorizou REA do binário
+client-side para obter informações e ajustar a implementação. Consolidar
+o método em `skills/gunbound-client-port/SKILL.md`, complementando as skills
+de mobile C# e arte clássica HD existentes. Fontes jglim/gunbound-launcher
+e jglim/gunbound-server são referências distintas: cliente/recursos e
+emulação de servidor, respectivamente. Conferir build e proveniência;
+análise estática não equivale a executar o cliente original.
+
+Preservar os 16 mobiles e avatares/equipamentos atuais, incluindo o HD
+aprovado. Modernização visual fica para etapa posterior solicitada pelo
+usuário. A skill ensina separar estado, colisão e apresentação; comprovar
+aritmética/ordem/LUTs; reconstruir raster/UV/registro; e aceitar por fixtures
+independentes, regressões e sequência GPU, com limites explícitos.
+Isso não expande o protótipo para rede nem declara os especiais restantes
+portados. Nenhuma regra de combate, arte ou versão muda nesta consolidação.
+
+## ADR-089 — catálogo clássico identificado pelo código do servidor
 
 O `avatar.xfs` da versão 280 já estava byte a byte igual ao TestClient do
 launcher, com 562 registros. Faltava a identidade que o `gunbound-server` usa
@@ -656,3 +819,6 @@ Love Cupid (id 143) não existe nesta versão e não é criado.
 A categoria interna da loja continua cabeça/corpo/óculos/bandeira. Mudá-la
 reapontaria equipamento já salvo. `ff.dat` vazio e os dois frames `ff00001`
 não viram item. Legado OpenBound permanece no namespace antigo.
+
+Na `main`, ADR-082 já é o brilho do chifre e REQ-45 já é o roster dos 16
+mobiles. Este catálogo usa ADR-089 e REQ-46.

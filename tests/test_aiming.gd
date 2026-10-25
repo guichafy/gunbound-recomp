@@ -71,7 +71,7 @@ func run() -> void:
 
 	# Drag: press in the world, drag 320 px right = 50, release fires once.
 	button(start, true)
-	check(scene.aim.charging and scene.aim.drag_aiming and scene.aim.power == 0.0, "Drag: a left press in the world starts the shot with an empty bar")
+	check(scene.aim.charging and scene.aim.drag_aiming and is_equal_approx(scene.aim.power, scene.model.minimum_power(0)), "Drag starts at the mobile native P1")
 	motion(start + Vector2(320, 0), Vector2(320, 0))
 	check(is_equal_approx(scene.aim.power, 50.0), "Dragging the bar width (640 px) / 2 sets power 50")
 	motion(start + Vector2(160, 0), Vector2(-160, 0))
@@ -83,11 +83,12 @@ func run() -> void:
 	button(start + Vector2(320, 0), false)
 	check(scene.model.projectiles.size() == shells and not scene.aim.charging, "A second release cannot fire again")
 
-	# A click without a drag cancels.
+	# ADR-084: a click releases the native P1, including zero diagonal velocity.
 	fresh_turn()
 	button(start, true)
 	button(start, false)
-	check(scene.model.phase == "aim" and not scene.aim.charging, "A click without dragging does not shoot")
+	check(scene.model.phase == "flight" and not scene.aim.charging, "A click without dragging releases native P1")
+	fresh_turn()
 
 	# Letting go over the action bar still ends (and fires) the drag.
 	button(start, true)

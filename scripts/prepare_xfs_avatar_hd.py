@@ -25,7 +25,7 @@ def renderer_hashes():
 
 
 def registration(entry):
-    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False),('reference_state',''),('attachment',{}),('draw_behind',False),('contour_glow',{}),('light_curve',[])]}
+    return {name:entry.get(name,default) for name,default in [('sheet',''),('region',[]),('native_rect',[]),('effect',False),('pulsate',False),('reference_state',''),('attachment',{}),('draw_behind',False),('contour_glow',{}),('light_curve',[]),('overlay_base',{})]}
 
 
 def read(path):

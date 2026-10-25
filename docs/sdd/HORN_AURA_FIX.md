@@ -65,3 +65,40 @@ assinatura estrita/versão conferidas. Smoke PCK550/629/loja/vestir/reload/batal
 PASS fora do projeto. Pico/vale Avatar/Mobile acima reproduzidos no PCK; capturas
 e relatório em `docs/horn-curve/`. Em 23/10/2026 o usuário relatou que a
 implementação ficou melhor e solicitou revisão, commit e envio à main remota.
+
+## Brilho refeito a partir do clássico — 24/10/2026
+
+Usuário: os chifres do Great Devil Head ainda não estavam bons; refazer a partir
+do clássico com o brilho na posição e no formato do chifre, como na baixa
+resolução. ADR-082 substitui ADR-079. REQ-10/20/39.
+
+Medição do clássico: `mh00071l` é a silhueta do próprio chifre, desenhada por
+cima. Após a conversão L (alfa × canal mais claro), núcleo branco 187/255 sobre
+todo o chifre e o contorno, rampa 187→162→125→73→23 nos 4 px nativos externos.
+A luz acima de 20/90/160 cobre 1,81/1,43/0,98× a área do chifre e 71% da energia
+fica sobre ele. A meia-lua HD (1094×1173) tinha outra geometria; curvada na
+0.18.4, cobria só 2301/2563 pixels do ouro e deixava a base dourada.
+
+Implementação 0.18.7: `scripts/build_devil_horn_light.py` lê a cabeça HD
+selecionada (`batch_005`, 198×153), separa o ouro saturado, fecha os sulcos,
+pega o componente principal, preenche furos e soma 3 px de contorno. Borda:
+crescimento 4 px + desfoque 5 (1,86/1,36/1,01× e 71%, próximo do clássico).
+Núcleo branco, franja creme (255,238,176), alfa assado. Saída
+`great_devil_horn_light.png` 238×193 (cabeça + 20 px por lado). Registro
+`overlay_base` em `AvatarXfsHD.piece`: origem/escala da cabeça, opacidade 1,
+fallback original se tamanho/deslocamento/opacidade forem inválidos. Pulsação
+0,8+0,2·sin(age·TAU/1,1) e relógio mantidos. `repair_avatar_effect_alignment.py`
+não recoloca mais a curva. Reexecutar `register_xfs_avatar_hd.py batch_005`
+devolve a célula gerada à camada: rodar o script de novo em seguida. Sem nova geração GPT Images: a forma vem do chifre HD.
+
+Validação: RED no catálogo 0.18.4 (5 falhas, cobertura 2301/2563); GREEN
+`test_xfs_hd_migration` 2009 checks (cobertura ≥98% do ouro com alfa >0,7,
+zero vazamento em rosto/cabelo, escala/origem da cabeça, fallback com NaN,
+deslocamento ou opacidade inválidos). GPU 1920×1080/60fps, 162 quadros, dois
+sentidos e −9°, 30 quadros de pausa idênticos: `docs/horn-classic/`
+(clássico × 0.18.4 × 0.18.7, `motion.mp4`). Pulso na escala da loja 635,9 contra
+353,2 da 0.18.4 (1503 pixels visíveis). Prévia real da loja: Avatar 1163/701 e
+Mobile 900/543 (pico/vale; 0.18.4: 642/387 e 544/329). 37 lotes recapturados,
+QA 550 e auditoria runtime 550 confirmados/0 pendentes/0 falhas.
+Usuário validou na main em 24/10/2026: "funcionou muito melhor".
+
