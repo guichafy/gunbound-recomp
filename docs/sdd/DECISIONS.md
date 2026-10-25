@@ -637,3 +637,22 @@ partidas (eventos + campos do ator) além das seeds 81–93; versão em fonte ú
 scripts de desenho; delays guardados na unidade original do C# e convertidos uma
 vez (`delay_units.gd`). Tipagem completa de ator/projétil adiada (motivos no
 plano): fábricas de estado no lugar. Nak sem aura UsingItem até haver arte.
+
+## ADR-082 — catálogo clássico identificado pelo código do servidor
+
+O `avatar.xfs` da versão 280 já estava byte a byte igual ao TestClient do
+launcher, com 562 registros. Faltava a identidade que o `gunbound-server` usa
+na loja e no avatar equipado. O índice `classic.json` guarda arquivo, slot,
+preço, status e texto CP949 de cada registro, sem apagar peça nem inventar
+avatar de cliente mais novo.
+
+O WORD usa o id nos 15 bits baixos e o bit 15 para masculino. O terceiro byte
+do DWORD é o slot corpo/cabeça/olho/bandeira. Os quatro WORDs equipados seguem
+essa ordem: o conjunto do usuário `amigos` fecha com Rocker Suit, Rocker Hair,
+Dizzy Glasses e Bazooka, e o comentário “head, body, eye, flag” fica
+substituído por essa evidência. Bandeira vazia é o WORD 0 nos dois gêneros.
+Love Cupid (id 143) não existe nesta versão e não é criado.
+
+A categoria interna da loja continua cabeça/corpo/óculos/bandeira. Mudá-la
+reapontaria equipamento já salvo. `ff.dat` vazio e os dois frames `ff00001`
+não viram item. Legado OpenBound permanece no namespace antigo.

@@ -111,6 +111,11 @@ def extract(data,row):
 
 
 STAT_NAMES=['shot_delay','bunge','attack','defense','health','item_delay','shield','popularity']
+# Thor's Hammer writes avatar names and descriptions in the Korean code page.
+# CP949 keeps ASCII intact and restores the ellipsis (A1 A6) and Hangul that
+# CP1252 was showing as mojibake. Every DAT string in version 280 decodes.
+def text(blob):
+    return blob.split(b'\0')[0].decode('cp949')
 def avatar_rows(data):
     info=archive(data);rows=[]
     for name,entry in info['entries'].items():
@@ -121,7 +126,7 @@ def avatar_rows(data):
         if len(payload)!=4+count*132:raise ValueError("Invalid avatar DAT size")
         for i in range(count):
             row=struct.unpack_from('<I23sB10i64s',payload,4+i*132)
-            rows.append(dict(file=name,id=row[0],name=row[1].split(b'\0')[0].decode('cp1252'),buyable=bool(row[2]),gold=row[3],cash=row[4],stats=dict(zip(STAT_NAMES,row[5:13])),description=row[13].split(b'\0')[0].decode('cp1252')))
+            rows.append(dict(file=name,id=row[0],name=text(row[1]),buyable=bool(row[2]),gold=row[3],cash=row[4],stats=dict(zip(STAT_NAMES,row[5:13])),description=text(row[13])))
     return rows
 
 

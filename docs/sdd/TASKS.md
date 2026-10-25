@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Catálogo clássico de avatares (REQ-45, ADR-082)
+
+- [x] Conferir `avatar.xfs` com o TestClient do gunbound-launcher (mesmo SHA-256, versão 280, 562 registros).
+- [x] Índice `classic.json` com slot, preços, status e texto CP949; nenhuma peça removida.
+- [x] WORD/DWORD do gunbound-server: bit 15 masculino, slot corpo/cabeça/olho/bandeira, conjunto do `amigos` e padrões `/gender`.
+- [x] Love Cupid (id 143) e `ff.dat` vazio permanecem fora do catálogo comprável.
+- [x] Chaves e categoria da loja preservadas para equipamento já salvo.
+- [x] `test_xfs_import.py` (12) e `test_xfs_catalog.gd` (3816 checks, zero falhas).
+- [x] Regressão de loja/perfil/atributos/HD: 2178 checks, zero falhas.
+- [ ] Usuário validar na loja as descrições com reticência e o nome coreano do concurso.
+- [ ] App não reexportado nesta entrega.
+
 ## Revisão de qualidade 0.18.6 (ADR-081)
 
 - [x] Análise SPEC × código e plano P1–P4 com portões (QUALITY_REVIEW.md).

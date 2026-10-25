@@ -49,6 +49,41 @@ class XfsImport(unittest.TestCase):
             with Image.open(path) as image:
                 self.assertEqual(list(image.size),entry['size'])
             self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),entry['sha256'])
+    def test_classic_index_matches_launcher_and_server_codes(self):
+        import hashlib
+        from build_classic_avatar_catalog import MALE_BIT, identity
+        classic=json.loads((ROOT/'assets/xfs/avatars/classic.json').read_text())
+        self.assertEqual(classic['avatar_xfs_sha256'], hashlib.sha256(self.data).hexdigest())
+        self.assertEqual(classic['string_encoding'], 'cp949')
+        self.assertEqual(classic['empty_dats'], ['ff.dat'])
+        self.assertEqual(classic['unlisted_graphics'], ['ff00001.img', 'sff00001.img'])
+        original=[identity(row) for row in avatar_rows(self.data)]
+        self.assertEqual(classic['records'], original)
+        self.assertEqual(len(original), 562)
+        self.assertEqual(sum(row['buyable'] for row in original), 479)
+        stored=json.loads((ROOT/'assets/xfs/avatars/catalog.json').read_text())['records']
+        self.assertEqual([row['key'] for row in original], [row['key'] for row in stored])
+        panda=next(row for row in original if row['key']=='xfs:1:1:71')
+        self.assertTrue(panda['description'].endswith('까꿍사냥꾼'))
+        def dword(text):
+            raw=bytes.fromhex(text)
+            return int.from_bytes(raw, 'little')
+        def resolve(text):
+            code=dword(text)
+            self.assertEqual(code >> 24, 0)
+            slot=(code >> 16) & 0xFF
+            word=code & 0xFFFF
+            item_id=word & 0x7FFF
+            gender=0 if word & MALE_BIT else 1
+            return next(row for row in original if row['slot']==slot and row['id']==item_id and row['gender'] in (gender, 2))
+        self.assertEqual(resolve('01000100')['key'], 'xfs:1:0:1')
+        self.assertEqual(resolve('01800300')['name'], 'Blue Flag')
+        self.assertEqual(resolve('44800000')['name'], 'Rocker Suit')
+        self.assertEqual(resolve('43800100')['name'], 'Rocker Hair')
+        self.assertEqual(resolve('24800200')['name'], 'Dizzy Glasses')
+        self.assertEqual(resolve('A4800300')['name'], 'Bazooka')
+        with self.assertRaises(StopIteration):
+            resolve('8F800100')
     def test_hd_landscape_is_real_measured_asset(self):
         from PIL import Image
         meta=json.loads((ROOT/'assets/hd/shop/xfs_landscape.json').read_text())
