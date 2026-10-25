@@ -3,5 +3,33 @@
     "additionalDirectories": [
       "/Users/guichafy/Workspaces/Gunbound"
     ]
+  },
+  "enabledPlugins": {
+    "claude-code-setup@anthropic-plugin-directory": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard_preserved.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$CLAUDE_PROJECT_DIR/.claude/hooks/gd_parse_check.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
   }
 }
