@@ -36,7 +36,7 @@ func run() -> void:
 		for index in 4:
 			var node = scene.root.find_child("Team%s%d"%[team,index],true,false)
 			check(node!=null and node.texture.resource_path == ROOT+"room/reference/room_team_%s.png"%team.to_lower(),"All eight slots carry original team identification")
-	check(panel.player_name.position.y==172 and panel.player_anchor.y+panel.NATIVE_GROUND==144,"Nameplate is below the mobile, inside team strip")
+	check(panel.player_name.position.y==172 and panel.player_anchor.y+panel.NATIVE_GROUND==155,"Nameplate remains below the native room composition point")
 	await process_frame
 	check(panel.item_catalog.get_v_scroll_bar().max_value>panel.item_catalog.get_v_scroll_bar().page,"Unified catalog contains scrollable overflow")
 	check(panel.item_up.disabled and not panel.item_down.disabled,"Native scroll arrows reflect first row")

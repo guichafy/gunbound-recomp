@@ -269,6 +269,7 @@ def main():
         ("b_ready_exit", "room", EPA4, EPA4_NAMES, ""),
         ("b_ready_changeteam", "room", EPA4, EPA4_NAMES, ""),
         ("b_ready_start", "room", START, EPA4_NAMES, "EPA: normal 0, hover 1, push 6, disable 9. A tira guarda o primeiro quadro de cada estado."),
+        ("b_ready_startgame", "room", EPA4, EPA4_NAMES, "START azul no padrão EXIT/CHANGE (ADR-108)."),
         ("b_ready_mapprev", "room", EPA4, EPA4_NAMES, inferred),
         ("b_ready_mapnext", "room", EPA4, EPA4_NAMES, inferred),
         ("b_ready_solo", "room", EPA4, EPA4_NAMES, inferred + " Mostrado como modo vigente, sem regra extra."),

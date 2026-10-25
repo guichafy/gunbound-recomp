@@ -5,6 +5,12 @@ const Items = preload("res://scripts/items.gd")
 const ROOT := "res://assets/hd/classic/room_smooth_4x/"
 const REFERENCE_ROOT := "res://assets/hd/classic/room_reference_4x/"
 const POLISH_ROOT := "res://assets/hd/classic/room_polish_4x/"
+const STATUS_ROOT := "res://assets/hd/classic/room_status_4x/"
+const SETTINGS_ROOT := "res://assets/hd/classic/room_settings_4x/"
+var settings_art = Conservative.new(SETTINGS_ROOT)
+var settings_keys: Array = []
+var status_art = Conservative.new(STATUS_ROOT)
+var status_keys: Array = []
 var polish_art = Conservative.new(POLISH_ROOT)
 var polish_keys: Array = []
 var reference_art = Conservative.new(REFERENCE_ROOT)
@@ -26,6 +32,14 @@ func _init() -> void:
 	if polish is Dictionary and polish.get("assets") is Dictionary:
 		polish_keys = polish.assets.keys()
 		records.merge(polish.assets)
+	var status = JSON.parse_string(FileAccess.get_file_as_string("res://assets/classic/room/status/catalog.json"))
+	if status is Dictionary and status.get("assets") is Dictionary:
+		status_keys = status.assets.keys()
+		records.merge(status.assets)
+	var settings = JSON.parse_string(FileAccess.get_file_as_string("res://assets/classic/room/settings/catalog.json"))
+	if settings is Dictionary and settings.get("assets") is Dictionary:
+		settings_keys = settings.assets.keys()
+		records.merge(settings.assets)
 	var manifest = JSON.parse_string(FileAccess.get_file_as_string("res://assets/classic/manifest.json"))
 	records["room_back"] = manifest.images.room_back
 
@@ -34,6 +48,10 @@ func image(key: String) -> Texture2D:
 	if record.is_empty():
 		return null
 	var provider = polish_art if key in polish_keys else (reference_art if key in reference_keys else art)
+	if key in status_keys:
+		provider = status_art
+	if key in settings_keys:
+		provider = settings_art
 	var hd: Texture2D = provider.texture(key,record)
 	return hd if hd != null else load("res://assets/classic/" + str(record.file))
 
@@ -44,7 +62,7 @@ func frame(key: String, index: int) -> AtlasTexture:
 	var sheet := image(key)
 	if sheet == null:
 		return null
-	var density := 4.0 if (sheet.resource_path.begins_with(ROOT) or sheet.resource_path.begins_with(REFERENCE_ROOT) or sheet.resource_path.begins_with(POLISH_ROOT)) else 1.0
+	var density := 4.0 if (sheet.resource_path.begins_with(ROOT) or sheet.resource_path.begins_with(REFERENCE_ROOT) or sheet.resource_path.begins_with(POLISH_ROOT) or sheet.resource_path.begins_with(STATUS_ROOT) or sheet.resource_path.begins_with(SETTINGS_ROOT)) else 1.0
 	var cell := Vector2(record.frame_size[0],record.frame_size[1])
 	var safe := clampi(index,0,int(record.frames)-1)
 	var result := AtlasTexture.new()

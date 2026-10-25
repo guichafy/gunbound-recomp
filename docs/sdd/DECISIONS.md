@@ -1125,3 +1125,142 @@ Sem novos mapas, regras ou mudanças de perfil.
 com idle/avatares ativos e âncoras fixas;PCK109/0/exit0. Fontes/alpha/arte anterior
 preservados. VerROOM_POLISH.md para evidência, limites e ressalvas ambientais.
 Sem novoapp,versão,commit ou publicação solicitados nesta etapa.
+
+## ADR-107 — cards encaixados, Ready e placas nativas da sala
+
+25/10/2026,REQ-02/12/19/20. O novo pedido substitui contato144 daADR-106 por
+composição105/563,155, derivada da posição guardada pelo cliente004dba80.
+Retirar visualmente nome do mobile dos cards, inclusiveRandom; manter
+apelido/CPU,avatar eidle. Nenhuma mudança de combate/perfil/IDs/sorteio.
+
+Ready/chave usam ready_back índices6/7; hastes extras3–5 preservadas noatlas.
+No treino, piloto é dono da sala e CPU está pronta. DecoraçãoIGNORE preserva
+clique de seleção no card; não cria estado/protocolo de rede. Nome contido
+antes da chave. PlacasSOLO/1:1/A SIDE/NODEATH/BASIC usam os botõesXFS como
+indicadores; layout emduascolunas da foto, dados refletem regras existentes.
+Não anunciarJewel/Double/Death40 como modos implementados.
+
+7PNGs/25janelas, BICUBIC4× porjanela/alpha nearest, originais e456assets
+prévios intactos; catálogo/fallback e exportação conferidos.1093checksGodot/0,
+21Python/0,GPU17escolhas/24quadros,PCK40/0. Revisão aprovada apósP2deinput
+reproduzido e corrigido. Evidência,derivações e ressalvas ambientais em
+ROOM_CARD_FIDELITY.md. Semnovoapp/versão/commit/push. Aceite visual pendente.
+
+## ADR-108 — dificuldade no card, clima sem poços e START azul
+
+25/10/2026,REQ-02/12/19/20. Pedido posterior àADR-107 move a dificuldade
+confirmada para o card da máquina (`CPU · Normal/Leve/Precisa`). Rascunho e
+Cancelar não mudam o card. Retirar a linha duplicada do painel central.
+
+Números do clima mantêm texto branco eLabel transparente. O fundo nativo
+contém os poços escuros; restaurar somente essas oito bases usando amostra
+laranja limpa da própria textura ativa, com densidade/fallback correspondentes.
+Não editarPNG original nem símbolos/valores de clima.
+
+UsarSTARTGAME azul nativo107×45/quatro estados0/1/2/3, em660,552, coerente
+comEXIT/CHANGE. Fonte/HD novos acrescentados aos catálogos; antigoSTART verde
+e42registros anteriores preservados. Extração reproduzível ealpha nearest.
+Sem alteração da açãoStart, regras, perfil, versão, aplicativo ou publicação.
+
+1286checksGodot/0,752/0 finais,21Python/0; GPUFullHD confirma8baseslaranja,
+Normal/Precisa e estadosSTART. Revisão independente aprovada. Evidência e
+limites:ROOM_FINAL_POLISH.md e docs/room-final-polish.
+
+## ADR-109 — SETTINGS, modal clássico e lettering original preservado
+
+25/10/2026,REQ-02/12/19/20. Pedido posterior remove seta deSTART, substitui
+CHANGE porSETTINGS semsetacircular e adapta o modal à linguagem Classic.
+Correção explícita do usuário rejeita a substituição da fonte: START usa a
+palavra raster original; SETTINGS compõe letras recortadas dos sprites
+START/EXIT/CHANGE, conservando contorno/cores/estados. Não aplicarSystemFont
+nesses dois rótulos. Bordas limpas doSTARTGAME mantêm o acabamento azul.
+
+Modal560×470 centrado usa moldura derivada de9recortes limpos de ready_back8,
+rádios eOK/Cancel nativos. FonteASCII95glifos8×12 defont.fnt doXFS, mantendo
+9120bits originais; caracteres fora deASCII nos apelidos usam fallback já
+existente. Tint noCanvasItem preserva o raster. Layout é adaptação pedida,
+sem alegar formulário nativo idêntico nem alterar regras/perfil/modos.
+
+CapturarESC antes doGUI no painel visível evita queLineEdit consuma o
+cancelamento; evento tratado evita navegação dupla. Rascunho/aceite/cancel,
+foco, cliques eSTART conferidos.1317checksGodot/0,21Python/0,GPUFullHD ePCK70/0;
+revisão independente aprovada. Evidência/limites:ROOM_SETTINGS_CLASSIC.md.
+Semnovoapp/ZIP,versão,commit oupublicação. Aceite visual do usuário separado.
+
+## ADR-110 — SETTINGS composto sobre alpha, sem emendas de retângulos
+
+25/10/2026,REQ-02/12/19/20. START daADR-109 foi aprovado pelo usuário; deve
+permanecerRGBA idêntico. Usuário rejeitouSETTINGS por recortes sem acabamento.
+Substituir janelas opacas desenhadas separadamente por um rótuloRGBA completo,
+81×17/quatro estados, derivado dos mesmos glifos originais.
+
+Separar cobertura pela paleta nativa, alinhar altura de maiúsculas, espaçar1px,
+contorno redondo1,25px e filtrar a palavra inteira em4×. Cores por estado vêm
+dos sprites; nativefallback deriva do mesmo composto. SemSystemFont ou troca
+da aparência doSTART/modal. O acabamento altera alpha/antialiasing/contorno;
+não afirmar identidade pixel-exata dos glifos após composição.
+
+965checksGodot/0,GPU4estados/fallback/clique eSTART aprovado idêntico. Revisor
+reproduziu os dois atlas em memória comRGBA idêntico. Evidência/limites:
+SETTINGS_LETTERING_FIX.md. Semapp/versão/commit/push solicitados.
+
+## ADR-111 — restaurarRGBA completo das letras deSETTINGS
+
+25/10/2026,REQ-02/12/19/20. Usuário rejeitou o aspecto de fonte daADR-110.
+Substituir reconstrução de preenchimento/contorno por cópia direta dos pixels
+originais. Paleta serve para localizar área e limpar fundo/vizinhos; sem
+redesenhar traços. Ajustar alinhamento/junções com contornos antes das faces.
+START aprovado deve continuarRGBA idêntico; modal/fonteASCII preservados.
+
+WordComplete74×20/quatro estados, ampliação conservadora4× ealpha nearest,
+PNG anteriores preservados. Catálogo altera somente o registro ativo do
+rótulo.629núcleos/3156contornos exclusivos exatos e paletas por estado
+conferidas;969checksGodot/0,GPU4estados/fallback/clique/START idêntico.
+Evidência/limites:SETTINGS_ORIGINAL_LETTERS.md. Semapp/versão/commit/push.
+
+## ADR-112 — alpha da casca e glifos isolados da sala
+
+25/10/2026,REQ-02/12/19/20. Pedido posterior corrige exterior retangular
+opaco e composição deSETTINGS. STARTGAME fonte tem cenárioRGB comalpha255
+nos cantos; desenhar só por cima não elimina a textura base doTextureButton.
+Usar casca derivada transparente107×45 nas quatro texturas do controle,
+preservando o contorno preto, tamanho/estados/hitboxes. LetteringSTART
+original fica separado e idêntico ao aprovado.
+
+SETTINGS83×20 usaTdoSTART eIisolado doEXIT, com3px entre faces e topo18.
+Maior componente8conexa por glifo elimina3pixels doA vizinho em cadaT;
+cores/traços permanecem nativos.1436pixels de faceRGBA conferidos, montagem
+anterior daADR-111 preservada em disco. BICUBIC4×/alpha nearest, fallback.
+
+1344checksGodot/0 eGPUFullHD: fundo nos cantos,START lettering idêntico,
+quatro estados/fallback da palavra,clique/modal. Evidência/limites:
+ROOM_BUTTON_ALPHA.md. Semapp/versão/commit/push. Aceite visual separado.
+
+## ADR-113 — contorno único deSETTINGS, faces originais preservadas
+
+25/10/2026,REQ-02/12/19/20. Usuário aprovou a transparência daADR-112 e
+pediu acabamento/espaçamento mais próximo deSTART. Máscaras individuais
+de contorno ainda preservavam emendas de recortes. Compor a base azul como
+uma palavra única, derivando o contorno2px e seu alpha suave0,15px da união
+das faces; reduzir espaçamento3→2px. Não reconstruir preenchimento nem
+substituir a fonte:1436pixels de faceRGBA copiados integralmente da fonte.
+
+WordPolished78×22/quatro estados. Margem adicional/destinoy13 preservam
+topo18. RGBBICUBIC4×, alpha derivado; fallbackRGB nativo e coberturaBOX sem
+ringing. Casca transparente/START inteiros aprovadosRGBA idênticos. Ativos
+anteriores preservados, catálogo aponta novo derivado.986checksGodot/0,
+GPU4estados/fallback/clique. Evidência/limites:SETTINGS_WORD_FINISH.md.
+Semapp/versão/commit/push; aceite visual do usuário separado.
+
+## ADR-114 — alinhamento óptico dos T de SETTINGS
+
+25/10/2026,REQ-02/12/19/20. Usuário identificou TT acima deSE/INGS. A caixa
+de pixels fortes não inclui toda a barra suavizada do T. Compensar+1pixel
+vertical nos dois T antes do contorno/ampliação, nos quatro estados.
+Demais letras, espaços, faces nativas, acabamento, casca eSTART preservados.
+
+Ativo WordBaseline78×22;1436facesRGBA exatas. Dois checks reproduzem a falha
+antiga e conferem barrasT/T na linha visível deE.988checksGodot/0,GPUFullHD
+e revisão independente aprovados; retirar o offset reproduz o atlas anterior.
+Evidência/limites:SETTINGS_BASELINE.md. Sem nova exportação/PCK/app, versão,
+commit ou publicação. Aceite visual do usuário separado.

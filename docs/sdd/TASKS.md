@@ -1,5 +1,85 @@
 # Entregas e próximos trabalhos
 
+## Aceite e versionamento dos ajustes da sala — 25/10/2026
+
+- [x] Aceite visual final do usuário e autorização de commit local.
+- [x] Reunir ADR-107 a114: código, assets, fonte original, testes e evidências.
+- [x] Verificação atual:1350checksGodot/0,21Python/0,24hashes e diff limpo.
+- [x] Manter versão/aplicativo atuais; publicação não solicitada.
+
+## Alinhamento de SETTINGS — ADR-114
+
+- [x] Abaixar os dois T em1px, preservando demais letras/fonte/acabamento.
+- [x] Dois checks de topo visível reproduzem o erro;988checksGodot/0 finais.
+- [x] GPU4estados/fallback/clique;START inteiro e transparência idênticos.
+- [x] Revisão confirma delta exclusivo dos T e1436facesRGBA preservadas.
+- [x] Aceite visual do usuário. Sem app novo; ver `SETTINGS_BASELINE.md`.
+
+## Acabamento de SETTINGS — ADR-113
+
+- [x] Preservar fonte nativa e transparência aprovada daADR112.
+- [x] Compor contorno único/alpha suave e espaçamento2px sem emendas.
+- [x]1436facesRGBA exatas;986checksGodot/0 eGPU4estados/fallback/clique.
+- [x] START inteiroRGBA idêntico; quatro bordas transparentes nos dois atlas.
+- [x] Revisão final aprovada;PCK96/0/exit0, semoverride local.
+- [ ] Aceite visual do usuário. Semapp novo; verSETTINGS_WORD_FINISH.md.
+
+## Alpha e composição da sala — ADR-112
+
+- [x] Remover cenário opaco dos cantos nas texturas reais de START/SETTINGS.
+- [x] Isolar glifos nativos, T de START, I limpo, espaçamento e topo comuns.
+- [x]1436pixels de faceRGBA originais;1344checksGodot/0 em8suítes.
+- [x] GPU confirma fundo nos cantos, lettering START idêntico e clique/modal.
+- [x] Revisão final aprovada ePCK isolado96/0/exit0, semoverride local.
+- [ ] Aceite visual do usuário. Semapp novo; verROOM_BUTTON_ALPHA.md.
+
+## SETTINGS com fonte completa — ADR-111
+
+- [x] Descartar reconstrução de preenchimento/contorno do catálogo ativo.
+- [x] CopiarRGBA nativo completo, lapidando só fundo/junções e alinhamento.
+- [x]629núcleos/3156contornos exatos;969checks/0,GPU4estados,PCK79/0.
+- [x] Revisão aprovada; margem completa do push e4364pixels no canvas.
+- [x] START aprovadoRGBA idêntico; modal e cliques preservados.
+- [ ] Aceite visual do usuário. Semapp novo; verSETTINGS_ORIGINAL_LETTERS.md.
+
+## Acabamento de SETTINGS — ADR-110
+
+- [x] Remover mattes/contornos quebrados dos recortes; manter formas nativas.
+- [x] Palavra única transparente, quatro estados, baseline/espaço/contorno comuns.
+- [x]965checksGodot/0,GPUFullHD e revisão independente com atlas reproduzidos.
+- [x] START aprovadoRGBA idêntico; fonte/modal/regras e cliques preservados.
+- [ ] Aceite visual do usuário. Semnovoapp; verSETTINGS_LETTERING_FIX.md.
+
+## SETTINGS, modal e fonte original — ADR-109
+
+- [x] START semseta; SETTINGS substituiCHANGE esetacircular.
+- [x] Lettering raster dos botões originais, semfonteTTF substituta.
+- [x] Janela azul clássica, rádios eOK/Cancel nativos;95glifosASCII dofont.fnt.
+- [x] Preservar rascunho/aceite/cancelamento; ESC funciona com foco de texto.
+- [x]1317checksGodot/0,21Python/0,GPUFullHD,PCK70/0 e revisão aprovada.
+- [ ] Aceite visual do usuário. Semnovoapp; verROOM_SETTINGS_CLASSIC.md.
+
+## Dificuldade, contadores e START — ADR-108
+
+- [x] Dificuldade confirmada ao lado deCPU, fora do painel central.
+- [x] Números brancos transparentes sobre base laranja restaurada.
+- [x] STARTGAME azul original107×45/quatro estados, alinhado ao rodapé.
+- [x] Fonte/HD,catálogo43,extração e42registros/222PNGs prévios preservados.
+- [x]1286checksGodot/0,752/0 finais,21Python/0,GPUFullHD,PCK55/0 e revisão aprovada.
+- [ ] Aceite visual do usuário; semapp novo. Evidência:ROOM_FINAL_POLISH.md.
+
+## Cards, Ready e placas da sala — ADR-107
+
+- [x] Encaixar mobile na faixa em155 com posições105/563 derivadas do cliente.
+- [x] Retirar nome do mobile dos dois cards, incluindoRandom; preservaridle/avatar.
+- [x] Ready/chave e placas nativas, refletindo regras offline existentes.
+- [x]7PNGs/25janelas4×conservador/fallback,64checks dearte e456assets intactos.
+- [x]1093checksGodot/0,21Python/0,GPU17escolhas/24quadros,PCK40/0.
+- [x]P2deinput corrigido, cliques automatizados e revisão final aprovada.
+- [ ] Aceite visual do usuário; mouse físico/escuta separados. Semapp novo.
+
+Evidência/limites:ROOM_CARD_FIDELITY.md e docs/room-card-fidelity.
+
 ## Sala: itens, apoio, mapa e Random — ADR-106
 
 - [x] Catálogo nativo uniforme64×43 com indicação1/2slots e custo.

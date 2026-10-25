@@ -20,7 +20,7 @@ func check_frame(texture: AtlasTexture, region: Rect2, label: String) -> void:
 func test_atlases() -> void:
 	var chrome = Chrome.new()
 	var records: Dictionary = chrome.manifest.strips
-	check(records.size() == 42, "All 42 classic button atlases remain available")
+	check(records.size() == 43, "All prior42 buttons and blue STARTGAME remain available")
 	for key in records:
 		var info: Dictionary = records[key]
 		var size := Vector2(float(info.frame_size[0]), float(info.frame_size[1]))

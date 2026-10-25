@@ -1,0 +1,356 @@
+{
+  "version": 1,
+  "scale": 4,
+  "method": "BICUBIC per native frame; alpha NEAREST",
+  "assets": {
+    "room_status": {
+      "file": "room/status/room_status.png",
+      "source": {
+        "file": "assets/classic/room/status/room_status.png",
+        "sha256": "a91dff7c5e360eb10a134d195db136bc7df55a32e9dc53c215b9d51924540782",
+        "record": {
+          "file": "room/status/room_status.png",
+          "size": [
+            76,
+            40
+          ],
+          "frame_size": [
+            19,
+            40
+          ],
+          "frames": 4
+        },
+        "entry": "ready_back.img",
+        "img_indices": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "entry_sha256": "d1042b8a8913a0c5ccbf5dfa7b6b7193116b38abad941c6329e8f230f9c021b9",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        304,
+        160
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "6d55ce7b652eee15317c779168b15863ad8a97840c1b9b9ec196ac7b9df8232c"
+    },
+    "room_master_key": {
+      "file": "room/status/room_master_key.png",
+      "source": {
+        "file": "assets/classic/room/status/room_master_key.png",
+        "sha256": "6dc73bb3acd4aec7b23136d8967222339ea17796deca7449f5180eed8e523857",
+        "record": {
+          "file": "room/status/room_master_key.png",
+          "size": [
+            22,
+            13
+          ],
+          "frame_size": [
+            22,
+            13
+          ],
+          "frames": 1
+        },
+        "entry": "ready_back.img",
+        "img_indices": [
+          7
+        ],
+        "entry_sha256": "d1042b8a8913a0c5ccbf5dfa7b6b7193116b38abad941c6329e8f230f9c021b9",
+        "hotspots": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        88,
+        52
+      ],
+      "columns": 1,
+      "rows": 1,
+      "sha256": "aa38a62564f59d1787700a54fd4c5568f6e175b3986f5d527197e9ca45ca20f4"
+    },
+    "room_mode": {
+      "file": "room/status/room_mode.png",
+      "source": {
+        "file": "assets/classic/room/status/room_mode.png",
+        "sha256": "1f321bcdbd28fd610fed96649847aad034bc089bec9a0cb91aa587dd8dd7e5a9",
+        "record": {
+          "file": "room/status/room_mode.png",
+          "size": [
+            324,
+            24
+          ],
+          "frame_size": [
+            81,
+            24
+          ],
+          "frames": 4
+        },
+        "entry": "b_ready_solo.img",
+        "img_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "entry_sha256": "e49ad854629ebd6158490a2ce168d968ef21278576c7e87b75f189c1aba708ea",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        1296,
+        96
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "df4b76de166829c6cc1c581cf2b23fc57796a2021b7dd998cfc655940b47e076"
+    },
+    "room_size": {
+      "file": "room/status/room_size.png",
+      "source": {
+        "file": "assets/classic/room/status/room_size.png",
+        "sha256": "1ef6fb5413aaccb645a0ca5d19de2dcb4c499489ded4eb5fbb20b985c0aea2e8",
+        "record": {
+          "file": "room/status/room_size.png",
+          "size": [
+            324,
+            24
+          ],
+          "frame_size": [
+            81,
+            24
+          ],
+          "frames": 4
+        },
+        "entry": "b_ready_1vs1.img",
+        "img_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "entry_sha256": "4287b80593491578402ec5f3c434a6ddd7a6a37f03f72afb1bda81e14f1aada5",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        1296,
+        96
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "a905da8d955460ddc3c2e51544abf0bfd5ac89f53d8a427f5a425c1b4596f42c"
+    },
+    "room_map_side": {
+      "file": "room/status/room_map_side.png",
+      "source": {
+        "file": "assets/classic/room/status/room_map_side.png",
+        "sha256": "978fb8e01e4ef526f54e240622bb8a5dbb1c704b23ba5e6e20037c8e360a7571",
+        "record": {
+          "file": "room/status/room_map_side.png",
+          "size": [
+            324,
+            24
+          ],
+          "frame_size": [
+            81,
+            24
+          ],
+          "frames": 4
+        },
+        "entry": "b_ready_aside.img",
+        "img_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "entry_sha256": "130431052c8192849010d86689c65dae0a49c4c185cdc591636c4e81977078c7",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        1296,
+        96
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "74d1197091dd455c18729c26f905e31ef300142efe169c02711ae3ac5535b36c"
+    },
+    "room_death": {
+      "file": "room/status/room_death.png",
+      "source": {
+        "file": "assets/classic/room/status/room_death.png",
+        "sha256": "4025bfcdf156e2357bd241666b6c9900623a78f51ce9d83e2d729e99950678fc",
+        "record": {
+          "file": "room/status/room_death.png",
+          "size": [
+            324,
+            24
+          ],
+          "frame_size": [
+            81,
+            24
+          ],
+          "frames": 4
+        },
+        "entry": "b_ready_nodeath.img",
+        "img_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "entry_sha256": "247a0c3a3723c9e022bb2f469f73f63e212acb162d59a4b35e114baa75a7aeba",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        1296,
+        96
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "0cd68a978a20e087bd621a3232ccaebe30234b92d53916eaf319ca8033fcf980"
+    },
+    "room_items": {
+      "file": "room/status/room_items.png",
+      "source": {
+        "file": "assets/classic/room/status/room_items.png",
+        "sha256": "f9b64a1ad0f79ce257059f5214bd3ed8162235f75ee2919fd2958133bcb4cc2e",
+        "record": {
+          "file": "room/status/room_items.png",
+          "size": [
+            324,
+            24
+          ],
+          "frame_size": [
+            81,
+            24
+          ],
+          "frames": 4
+        },
+        "entry": "b_ready_basicbomb.img",
+        "img_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "entry_sha256": "b335ffef30d4585a26ce3687131f34a0e69ca05d5517e99f34d20871fe0b03ef",
+        "hotspots": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "size": [
+        1296,
+        96
+      ],
+      "columns": 4,
+      "rows": 1,
+      "sha256": "4fd826529dcec6d2dd5df333443ff78320c2dbe5a3851cacd96770e6f1f56f5f"
+    }
+  }
+}

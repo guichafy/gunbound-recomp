@@ -1,5 +1,52 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Alinhamento visual de SETTINGS — REQ-02/12/19/20
+
+Corrigir os dois T que aparecem acima de SE/INGS, preservando fonte e
+acabamento aprovados. Contrato: `SETTINGS_BASELINE.md`.
+
+## Acabamento da palavra SETTINGS — REQ-02/12/19/20
+
+Preservar transparência aprovada e fonte original; eliminar emendas do
+contorno e ajustar espaços conforme START. Ver `SETTINGS_WORD_FINISH.md`.
+
+## Alpha e composição dos botões — REQ-02/12/19/20
+
+Remover cenário opaco fora dos cantos arredondados de START/SETTINGS e
+refinar as letras de SETTINGS comparando com START, preservando a fonte.
+Contrato: `ROOM_BUTTON_ALPHA.md`, posterior à ADR-111.
+
+## Letras completas de SETTINGS — REQ-02/12/19/20
+
+Pedido posterior rejeita a reconstrução daADR-110. Restaurar pixels completos
+dos glifos/contornos nativos e lapidar somente fundo/junções. START aprovado
+preservado. Contrato: `SETTINGS_ORIGINAL_LETTERS.md`.
+
+## Acabamento de SETTINGS — REQ-02/12/19/20
+
+START aprovado deve permanecer idêntico. SETTINGS conserva as formas nativas,
+com fundo transparente, baseline/espaçamento e contorno uniformes, sem emendas
+dos recortes. Plano: `SETTINGS_LETTERING_FIX.md`, substitui composição daADR-109.
+
+## SETTINGS e modal clássico — REQ-02/12/19/20
+
+START sem seta; CHANGE substituído porSETTINGS sem seta circular. Modal de
+apelido/dificuldade/clima com moldura, cores e controles clássicos, mantendo
+rascunho/aceite/cancelamento. Adaptação solicitada: `ROOM_SETTINGS_CLASSIC.md`.
+
+## Acabamento final da sala — REQ-02/12/19/20
+
+Dificuldade aparece ao lado deCPU no card da máquina; números do clima
+brancos, sem poços escuros; START usa o botão azul clássico no padrão de
+EXIT/CHANGE. Plano: `ROOM_FINAL_POLISH.md`. Demais elementos daADR-107 mantidos.
+
+## Cards e indicadores da sala — REQ-02/12/19/20
+
+Pedido posterior corrige encaixe do mobile na faixa, retira o nome do mobile
+dos cards e restaura Ready/placas do mapa com arte nativa. Configurações
+exibidas refletem o treino offline existente. Plano: `ROOM_CARD_FIDELITY.md`.
+Substitui o contato144 daADR-106; preserva idle, avatar e Random.
+
 ## Correções de catálogo, apoio e mapa da sala — REQ-02/12/19/20/36
 
 Ver `ROOM_POLISH.md`: catálogo nativo uniforme, equipamento de1/2slots,

@@ -1,0 +1,64 @@
+{
+  "file": "room/settings/room_settings_word.png",
+  "size": [
+    1296,
+    68
+  ],
+  "columns": 4,
+  "rows": 1,
+  "sha256": "d0cc95dfedc3136fdb03e79081fdd423030341da3b0f68fa3ec164d54095d225",
+  "source": {
+    "file": "assets/classic/room/settings/room_settings_word.png",
+    "sha256": "0914b80de889bd544cfe2596b0decf0d30f5d376f47db53091342dca4d6098e5",
+    "record": {
+      "file": "room/settings/room_settings_word.png",
+      "size": [
+        324,
+        17
+      ],
+      "frame_size": [
+        81,
+        17
+      ],
+      "frames": 4
+    },
+    "native_button_sha256": {
+      "startgame": "164e41f29372075eb22b925a6b0a0ec51e75f56974d270a79ecbabbeebc6a579",
+      "exit": "f470996fdbba886620a523ae2d633280d511e0798f3cc0e6b0793a0256acec0c",
+      "changeteam": "a069ad8a914e8809d8339cf73a2ba8323e3f7ad532c444033af9759fd26480f2"
+    },
+    "glyph_windows": {
+      "S": [
+        "startgame",
+        40,
+        51
+      ],
+      "E": [
+        "changeteam",
+        82,
+        94
+      ],
+      "T": [
+        "exit",
+        69,
+        79
+      ],
+      "I": [
+        "exit",
+        65,
+        70
+      ],
+      "N": [
+        "changeteam",
+        63,
+        73
+      ],
+      "G": [
+        "changeteam",
+        72,
+        84
+      ]
+    }
+  },
+  "method": "native fill coverage recovered from ink/gold/white palette; common cap-height; 1px spacing; 1.25px round outline; whole-word BICUBIC4x; alpha is derived, not native coverage"
+}

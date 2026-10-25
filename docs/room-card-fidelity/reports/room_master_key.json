@@ -1,0 +1,67 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/classic/room/status/room_master_key.png",
+    "sha256": "6dc73bb3acd4aec7b23136d8967222339ea17796deca7449f5180eed8e523857",
+    "size": [
+      22,
+      13
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/room_status_4x/room/status/room_master_key.png",
+    "sha256": "aa38a62564f59d1787700a54fd4c5568f6e175b3986f5d527197e9ca45ca20f4",
+    "size": [
+      88,
+      52
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    1,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    88,
+    52
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 2726,
+      "max_rgba_delta": 139,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 6.902564,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        22,
+        13
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        22,
+        13
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}
