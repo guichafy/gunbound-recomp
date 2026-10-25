@@ -865,3 +865,13 @@ integral. Aritmética/ABI/FPU, despacho, unidades, relógios e consumidores
 precisam de prova, seguida de fixtures independentes, execução/previsão e
 QA apropriado. Preservar elenco, avatares, perfil e limites offline.
 Plano/validação: GHIDRA_SKILL_VALIDATION.md. Sem nova regra/arte/build.
+
+## ADR-092 — sala inicial no lugar do cartão de treino
+
+24/10/2026. A tela de entrada passa a ser a sala 1×1. Iniciar dispara o treino
+com o ajuste gravado. O menu Configurações da partida agrupa apelido,
+dificuldade e clima, e só os aplica ao aceitar. Mobile e itens permanecem em
+botões da sala: a grade dos 16 aplica no clique; itens seguem o
+PopupSelectItem. Opções de som, rolagem e fundo continuam no popup já
+existente. O mapa segue Miramo Town A, sem setas. Não muda regra de combate,
+elenco, perfil nem o fluxo da loja.

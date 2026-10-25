@@ -153,9 +153,10 @@ func show_menu() -> void:
 	replace_root()
 	menu = MenuScreen.new()
 	menu.build(root, ui, {"version": version(), "nickname": profile.nickname, "difficulty": cpu_difficulty,
-		"weather_label": weather_label(), "items_label": items_label(), "level": profile.level(), "xp": profile.xp, "wins": profile.wins},
+		"weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
+		"level": profile.level(), "xp": profile.xp, "wins": profile.wins},
 		{"select_vehicle": select_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
-		"toggle_weather": toggle_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop, "show_help": show_help})
+		"set_weather": set_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop, "show_help": show_help})
 	select_vehicle(vehicle)
 	queue_redraw()
 
@@ -178,9 +179,13 @@ func show_shop() -> void:
 	queue_redraw()
 
 ## Training option: the map's original weather weights or every effect.
-func toggle_weather() -> String:
-	weather_mode = "all" if weather_mode == "original" else "original"
+## The room popup sets the mode on Accept; it does not flip a live button.
+func set_weather(mode: String) -> String:
+	weather_mode = "all" if mode == "all" else "original"
 	return weather_label()
+
+func toggle_weather() -> String:
+	return set_weather("all" if weather_mode == "original" else "original")
 
 func weather_label() -> String:
 	return "Clima: " + ("original do mapa" if weather_mode == "original" else "todos (Thor)")
@@ -519,8 +524,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		elif overlays.is_open():
 			if overlays.kind != "result":
 				close_overlay()
+		elif screen == "menu" and menu != null and menu.popup_open():
+			menu.cancel_popup()
 		elif screen == "match":
 			show_options()
+		return
+	if screen == "menu" and menu != null and menu.popup_open():
 		return
 	if event.pressed and event.physical_keycode == KEY_P and screen == "match" and overlays.kind in ["", "options"]:
 		show_pause()
@@ -601,10 +610,11 @@ func _draw() -> void:
 	else:
 		draw_texture_rect_region(backdrop.texture, Rect2(0, 0, 1280, 800), background_region(backdrop))
 	if screen == "menu":
-		draw_rect(Rect2(0, 0, 750, 800), Color(0.035, 0.13, 0.17, 0.30))
-		draw_circle(Vector2(342, 617), 157.0, Color(0.93, 0.96, 0.87, 0.14))
-		draw_arc(Vector2(342, 617), 169.0, 0.1, TAU - 0.4, 90, Color(0.78, 0.95, 0.88, 0.45), 1.5, true)
-		draw_sprite(vehicle, Vector2(335, 662 + sin(elapsed * 1.6) * 5), 180.0, 1)
+		var bob := sin(elapsed * 1.6) * 4.0
+		var player_at: Vector2 = menu.player_anchor if menu != null else Vector2(226, 406)
+		draw_sprite(vehicle, player_at + Vector2(0, bob), 180.0, 1)
+		if menu != null:
+			draw_sprite(Mobiles.opponent(vehicle), menu.cpu_anchor + Vector2(0, sin(elapsed * 1.6 + 1.4) * 3.0), 180.0, -1)
 		return
 	if model.terrain == null:
 		return

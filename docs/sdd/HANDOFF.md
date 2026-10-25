@@ -1,5 +1,18 @@
 # Hand-off — Gunbound Recomp 0.20.3 / Bigfoot e Mage originais
 
+## Sala inicial 1×1 — ADR-092
+
+A entrada deixou de ser o cartão “Preparar treino”. `menu_screen.gd` monta a
+sala: lugar do piloto, lugar da máquina, Miramo Town A no centro, retrato e
+Iniciar. Configurações da partida guarda apelido, dificuldade e clima até
+Aceitar; Cancelar restaura. Mobile aplica no clique. Itens segue o
+PopupSelectItem. Opções do cliente não entraram nesse menu. Sem regra nova,
+sem troca de mapa e sem build.
+
+Validação: `test_scene` (cancelar/aceitar/mobile) e `test_items_scene`
+(apelido e contagem de itens). Captura visual da sala ainda não registrada.
+Aceite do usuário pendente.
+
 ## Ghidra adotado na skill — ADR-091
 
 gunbound-client-port agora prefere Ghidra headless direto, com

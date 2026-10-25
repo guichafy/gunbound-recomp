@@ -1,5 +1,12 @@
 # Entregas e próximos trabalhos
 
+## Sala inicial 1×1 — REQ-02/09/36, ADR-092
+
+- [x] Trocar o cartão “Preparar treino” pela sala com piloto, máquina e Miramo.
+- [x] Menu da partida com apelido, dificuldade e clima; Aceitar grava, Cancelar restaura.
+- [x] Mobile em popup próprio; itens no PopupSelectItem; Iniciar num clique.
+- [ ] Aceite visual do usuário na sala, no menu da partida e no popup de mobile.
+
 ## Ghidra na skill de porte — REQ-12/19/44/45, ADR-091
 
 - [x] Adotar Ghidra headless direto e incluir runner/exportador reproduzíveis.

@@ -12,6 +12,24 @@ func run() -> void:
 		quit(1)
 		return
 	check(scene.screen == "menu" and scene.menu.nickname_input != null, "Menu shows nickname and vehicle controls")
+	var saved_name: String = scene.menu.nickname_input.text
+	scene.menu.open_settings()
+	scene.menu.nickname_input.text = "Sala Temp"
+	scene.menu.choose_difficulty(0)
+	scene.menu.choose_weather("all")
+	scene.menu.cancel_popup()
+	check(not scene.menu.popup_open() and scene.menu.nickname_input.text == saved_name and scene.cpu_difficulty == 1 and scene.weather_mode == "original", "Cancelar devolve apelido, dificuldade e clima sem iniciar")
+	scene.menu.open_settings()
+	scene.menu.choose_difficulty(2)
+	scene.menu.choose_weather("all")
+	scene.menu.accept_settings()
+	check(scene.screen == "menu" and scene.cpu_difficulty == 2 and scene.weather_mode == "all" and scene.menu.weather_caption.text.begins_with("Clima:"), "Aceitar grava dificuldade e clima e permanece na sala")
+	scene.cpu_difficulty = 1
+	scene.weather_mode = "original"
+	scene.menu.open_mobile()
+	scene.menu.pick_vehicle(1)
+	check(scene.vehicle == 1 and not scene.menu.popup_open() and scene.menu.portrait_name.text == "Mage", "Mobile aplica na hora e fecha o popup")
+	scene.select_vehicle(2)
 	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
 	scene.opening = 0
 	var version: String = ProjectSettings.get_setting("application/config/version", "")
