@@ -29,6 +29,7 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [BIGFOOT_ATTACKS_0_5.md](BIGFOOT_ATTACKS_0_5.md) | T1/T2/SS Bigfoot: emitter, regras, áudio/Fx e validação 0.5 |
 | [ITEMS_0_13.md](ITEMS_0_13.md) | Itens de batalha: regras do OpenBound, Select Item, arte HD e validação 0.13 |
 | [QUALITY_REVIEW.md](QUALITY_REVIEW.md) | Revisão de qualidade 0.18.6: achados P1–P4, plano, portões e escopo reduzido |
+| [AVATAR_CLASSIC_CATALOG.md](AVATAR_CLASSIC_CATALOG.md) | Catálogo clássico versão 280 e códigos do servidor (REQ-46) |
 
 Skill de continuidade: `skills/gunbound-client-port/SKILL.md`
 (`$gunbound-client-port`), REA e porte com mobiles/avatares aprovados

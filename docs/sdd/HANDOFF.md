@@ -1,4 +1,37 @@
-# Hand-off — Gunbound Recomp 0.20.2 / onda Turtle T2
+# Hand-off — Gunbound Recomp 0.20.2 / catálogo clássico de avatares
+
+## Catálogo clássico — REQ-46, ADR-089
+
+Pedido: manter todos os avatares originais do Gunbound clássico e refazer o
+catálogo com equivalência ao launcher e ao servidor jglim. Ler
+`AVATAR_CLASSIC_CATALOG.md`. A versão do aplicativo continua a da `main`
+(0.20.2); este índice não reexporta o app.
+
+Na `main`, REQ-45 e ADR-082 já nomeiam o roster dos 16 mobiles e o brilho do
+chifre. O catálogo de avatares fica em REQ-46 e ADR-089 para não reutilizar
+esses números.
+
+- `avatar.xfs` local é o TestClient do launcher (22968 bytes, mesmo SHA-256).
+  562 registros, 479 compráveis. Nenhum foi removido. `ff.dat` continua vazio;
+  `ff00001.img` e `sff00001.img` ficam fora da loja. Love Cupid (id 143) não
+  existe nesta versão e o decodificador não o inventa.
+- `assets/xfs/avatars/classic.json` é o índice: DAT, slot do servidor, preços,
+  oito status na ordem do AvatarInfoProcessor e texto CP949. A arte e a chave
+  `xfs:gênero:categoria:id` permanecem. Categoria da loja não muda, então
+  equipamento salvo continua na mesma peça.
+- WORD: id nos 15 bits baixos, bit 15 masculino. DWORD: slot no terceiro byte
+  (corpo, cabeça, olho, bandeira). Equipado: quatro WORDs nessa ordem. O
+  conjunto `amigos` (`448043802480A480`) resolve Rocker Suit, Rocker Hair,
+  Dizzy Glasses e Bazooka. Padrão masculino `0080008000800000`; feminino oito
+  zeros. Bandeira vazia é WORD 0 nos dois gêneros.
+- 28 descrições saem de CP1252 para CP949. A reticência volta a ser `…` e o
+  UserID do concurso volta a `까꿍사냥꾼`. Preços e bônus intactos.
+- Validação na branch, antes do merge: `test_xfs_import.py` 12 testes;
+  `test_xfs_catalog.gd` 3816 checks, zero falhas; regressão de catálogo,
+  perfil, equipamento, saldo, atributos, migração HD, arte e loja XFS, 2178
+  checks, zero falhas. Sem partida completa: dano, atraso e o snapshot de
+  bônus não mudaram de fórmula.
+
 
 ## Continuidade do porte após aceite do T2
 

@@ -616,7 +616,9 @@ passo164×160; retratos84×76 e stats em coluna separada. Inventário à direita
 
 Catálogo XFS562/479compráveis e camadas/retratos extraídos offline; runtime
 consome JSON/PNGs, sem protocolo de rede. IDs xfs:gênero:categoria:id são
-separados do C#. Profile3 converte identidades verificadas (Pilot Goggle1→2),
+separados do C#. REQ-46/ADR-089 acrescenta `classic.json`: os mesmos 562 registros com
+o WORD/DWORD do servidor (slot corpo, cabeça, olho, bandeira; bit 15 masculino)
+e texto CP949. A categoria da loja não muda. Profile3 converte identidades verificadas (Pilot Goggle1→2),
 conserva Kappa como legado, não concede saldo novamente e mantém rollback.
 Bandeiras mf compartilhadas; ff vazio. Ghost aceita camada L sem base.
 

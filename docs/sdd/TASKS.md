@@ -1,5 +1,18 @@
 # Entregas e próximos trabalhos
 
+## Catálogo clássico de avatares (REQ-46, ADR-089)
+
+- [x] Conferir `avatar.xfs` com o TestClient do gunbound-launcher (mesmo SHA-256, versão 280, 562 registros).
+- [x] Índice `classic.json` com slot, preços, status e texto CP949; nenhuma peça removida.
+- [x] WORD/DWORD do gunbound-server: bit 15 masculino, slot corpo/cabeça/olho/bandeira, conjunto do `amigos` e padrões `/gender`.
+- [x] Love Cupid (id 143) e `ff.dat` vazio permanecem fora do catálogo comprável.
+- [x] Chaves e categoria da loja preservadas para equipamento já salvo.
+- [x] `test_xfs_import.py` (12) e `test_xfs_catalog.gd` (3816 checks, zero falhas).
+- [x] Regressão de loja/perfil/atributos/HD: 2178 checks, zero falhas.
+- [x] No merge com a `main`, REQ-45/ADR-082 permanecem do roster e do chifre; este catálogo usa REQ-46/ADR-089.
+- [ ] Usuário validar na loja as descrições com reticência e o nome coreano do concurso.
+- [ ] App não reexportado nesta entrega.
+
 ## Aprendizado do porte — REQ-12/19/20/38–41/44/45
 
 - [x] Registrar aceite visual do T2 e autorização de REA client-side (ADR-088).
