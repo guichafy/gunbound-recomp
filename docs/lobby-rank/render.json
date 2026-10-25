@@ -1,0 +1,52 @@
+{
+	"controls": {
+		"ChannelRankIcon": {
+			"global_rect": "[P: (1300.2, 599.4), S: (45.0, 27.0)]",
+			"position": "(589.0, 333.0)",
+			"size": "(25.0, 15.0)"
+		},
+		"LocalChatHistory": {
+			"global_rect": "[P: (315.6, 583.2), S: (858.6, 338.4)]",
+			"position": "(42.0, 324.0)",
+			"size": "(477.0, 188.0)"
+		},
+		"LocalChatInput": {
+			"global_rect": "[P: (315.6, 932.4), S: (887.4, 28.8)]",
+			"position": "(42.0, 518.0)",
+			"size": "(493.0, 16.0)"
+		},
+		"PilotCash": {
+			"global_rect": "[P: (763.8, 68.4), S: (219.6, 23.4)]",
+			"position": "(291.0, 38.0)",
+			"size": "(122.0, 13.0)"
+		},
+		"PilotGP": {
+			"global_rect": "[P: (583.8, 41.4), S: (399.6, 23.4)]",
+			"position": "(191.0, 23.0)",
+			"size": "(222.0, 13.0)"
+		},
+		"PilotGold": {
+			"global_rect": "[P: (544.2, 68.4), S: (214.2, 23.4)]",
+			"position": "(169.0, 38.0)",
+			"size": "(119.0, 13.0)"
+		},
+		"PilotName": {
+			"global_rect": "[P: (583.8, 10.8), S: (250.2, 28.8)]",
+			"position": "(191.0, 6.0)",
+			"size": "(139.0, 16.0)"
+		},
+		"PilotRank": {
+			"global_rect": "[P: (839.4, 12.6), S: (144.0, 25.2)]",
+			"position": "(333.0, 7.0)",
+			"size": "(80.0, 14.0)"
+		},
+		"PilotRankIcon": {
+			"global_rect": "[P: (549.6, 16.2), S: (27.0, 45.0)]",
+			"position": "(172.0, 9.0)",
+			"size": "(15.0, 25.0)"
+		}
+	},
+	"history": 64,
+	"rank": 20,
+	"size": "(1920, 1080)"
+}

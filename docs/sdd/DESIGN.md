@@ -1,5 +1,12 @@
 # Design implementado
 
+## Lobby: patente atribuída e contenção — ADR-102
+
+`classic_ranks.gd` define os códigos Thor −4…20 e recortes dos atlas originais;
+patente é persistida separadamente da progressãoXP/level. Lobby recebe esse
+dado no retrato, insígnia e canal. Carteiras separadas e chat contido/rolável
+seguem as áreas nativas. Evidência REA e plano: `LOBBY_UI_RANK.md`.
+
 ## Acabamento conservador ativo — ADR-101
 
 DiretórioHD ativo: `assets/hd/classic/buttons_smooth_4x`, catálogo gerado a

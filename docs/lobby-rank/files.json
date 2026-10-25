@@ -1,0 +1,32 @@
+{
+  "native_frames_verified": 50,
+  "files": {
+    "assets/classic/ranks/rank1.png": {
+      "sha256": "11ffeab57d8f432ff623a5e99faf165073da2d8463a48180126e5c8498498454",
+      "bytes": 10532
+    },
+    "assets/classic/ranks/rank2.png": {
+      "sha256": "69c41eca12c016a189678982f396c6487eabe02cf9d3d9923e19de41ed023a9b",
+      "bytes": 11094
+    },
+    "docs/lobby-rank/lobby-gm.png": {
+      "sha256": "6708b59eb0bbaa63e63f942182754940ab3f6ad2ccad207debfbf5188a089460",
+      "bytes": 374897
+    },
+    "docs/lobby-rank/lobby-stress.png": {
+      "sha256": "8f71372809c830ff81ed596e1f1b124d855283e7be566da11e111cc559f52702",
+      "bytes": 470510
+    },
+    "docs/lobby-rank/rea-evidence.json": {
+      "sha256": "c9b8d6077d3d206c9f96d1ff3ff7930dde5224f6b1b79aea41b70df47b1d61c3",
+      "bytes": 1075573
+    }
+  },
+  "godot_checks": 1086,
+  "godot_failures": 0,
+  "pck_checks": 109,
+  "pck_failures": 0,
+  "review_checks": 96,
+  "app_reexported": false,
+  "original_client_executed": false
+}

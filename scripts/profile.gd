@@ -4,6 +4,7 @@ extends RefCounted
 const Catalog = preload("res://scripts/avatar_catalog.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const JsonStore = preload("res://scripts/json_store.gd")
+const Ranks = preload("res://scripts/classic_ranks.gd")
 const INITIAL_TEST_BALANCE := 999999999
 var catalog = Catalog.new()
 var gold := INITIAL_TEST_BALANCE
@@ -16,6 +17,8 @@ var attributes: Array = [0,0,0,0,0,0,0,0]
 var path: String
 var nickname := "Piloto"
 var xp := 0
+## Patente atribuída, independente de XP/atributos. O dono local é GM.
+var rank := Ranks.GM
 var wins := 0
 var matches := 0
 var awarded: Array = []
@@ -39,6 +42,7 @@ func load_profile() -> void:
 	if data.get("nickname") is String:
 		nickname = clean_nickname(data.nickname)
 	xp = JsonStore.read_int(data, "xp", 0, 1000000000, xp)
+	rank = Ranks.normalize(data.get("rank", Ranks.GM))
 	matches = JsonStore.read_int(data, "matches", 0, 1000000000, matches)
 	wins = JsonStore.read_int(data, "wins", 0, matches, wins)
 	if data.get("awarded") is Array:
@@ -84,10 +88,11 @@ func save_profile() -> bool:
 func shop_data() -> Dictionary:
 	return {"version":1,"gold":gold,"cash":cash,"test_funds_granted":test_funds_granted,"gender":gender,"owned":owned.duplicate(),"equipped":equipped.duplicate(true),"attributes":attributes.duplicate()}
 func snapshot() -> Dictionary:
-	return {"version":3,"nickname":nickname,"xp":xp,"wins":wins,"matches":matches,"awarded":awarded.duplicate(),"shop":shop_data()}
+	return {"version":4,"nickname":nickname,"xp":xp,"rank":Ranks.normalize(rank),"wins":wins,"matches":matches,"awarded":awarded.duplicate(),"shop":shop_data()}
 func restore(data: Dictionary) -> void:
 	nickname = data.nickname
 	xp = data.xp
+	rank = Ranks.normalize(data.get("rank", Ranks.GM))
 	wins = data.wins
 	matches = data.matches
 	awarded = data.awarded.duplicate()

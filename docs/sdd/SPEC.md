@@ -1,5 +1,12 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Lobby e patente clássica — REQ-02/10/12/19
+
+Pedido atual substitui a apresentação Rank=level da ADR-096. Patente própria
+do cliente Thor, insígnia original e GM20 por padrão no perfil local. Corrigir
+contenção do cartão/carteira/chat e rolagem local. Preservar progressão,
+avatares, saldos e escopo offline. Contrato/plano: `LOBBY_UI_RANK.md`.
+
 ## Suavização dos botões aprovada — REQ-02/12/19/20
 
 O usuário aprovou o EXIT BICUBIC e pediu aplicar a abordagem e adotá-la na
@@ -151,8 +158,8 @@ encerra o jogo; EXIT da sala volta ao lobby. AVATAR abre a loja já existente
 e a saída da loja volta à tela que a abriu. Buddy não é colocado. Ranking e
 Join ficam desabilitados. Não há rede, contas nem multiplayer.
 
-O cartão mostra o apelido do perfil. Rank é `profile.level()` e GP é o XP
-local, não um rank de servidor. O chat é local: uma linha de sistema e o eco
+O cartão mostra o apelido do perfil. Na ADR-096, Rank era `profile.level()`; essa apresentação foi substituída
+pela ADR-102: patente atribuída própria, GM20 por padrão. GP continua XP local. O chat é local: uma linha de sistema e o eco
 do que o jogador digita, sem nome de servidor. A lista do canal tem só o
 jogador. O mapa continua Miramo Town A, com as setas visíveis e desabilitadas.
 O botão SOLO aparece como modo vigente. Jewel, Death e Big Bomb não entram

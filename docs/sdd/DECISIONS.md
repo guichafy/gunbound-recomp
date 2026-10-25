@@ -1029,3 +1029,24 @@ melhorias desse tipo; relatórios usam destino novo para não sobrescrever
 fontes/candidatos. Suítes778/0,21testes Python, GPU1920×1080 e PCK92/0/exit0,
 com limites ambientais documentados em `CLASSIC_BUTTONS_SMOOTHING.md`.
 Sem nova versão, aplicativo exportado ou envio ao remoto.
+
+## ADR-102 — patente clássica atribuída e lobby contido
+
+25/10/2026, REQ-02/10/12/19. Pedido atual substitui Rank=level daADR-096:
+patente é campo próprio do perfilversion4. Novo dono local e legado sem campo
+recebem GM20, Administrador do Sistema; explícito inválido recebeChick19.
+Recompensas/nível de atributos continuam as existentes, sem alterar patente.
+Não se retoma ranking competitivo nem rede. GP apresentado usa XP local.
+
+REA/Hopper no PEfixado confirma decoderWORD+4, rank1/2 e render do cartão.
+ConvençãoThor−4…20, GMquadro24; não usar GM27doOpenBound. Catálogo25patentes
+com PNGs nativos separados. O cliente recebe patentes externamente; não se
+inventa uma tabelaGP→patente do servidor com a progressão local.
+
+Cartão conserva moldura e contém nome/GP/carteiras; mesmos ícones no canal.
+Histórico local64mensagens com scroll, entrada transparente dentro da faixa,
+BBCode do usuário literal. Filtros nas posições nativas. Layout final considera
+os mínimos de fonte do Godot, reaplicando tamanho após tema/clipping.
+
+1086checks Godot/0, revisor96/0 e50quadrosXFS, GPU1920×1080, PCK109/0/exit0.
+Evidência/limites em `LOBBY_UI_RANK.md`; sem versão/app/commit/publicação.

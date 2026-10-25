@@ -1,5 +1,27 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Lobby corrigido e patente GM — ADR-102
+
+Rank deixou de ser level(): perfil novo e legado sem patente recebem GM20,
+Administrador do Sistema. Campo rank version4 persiste separado do XP/level;
+saldos, avatares e atributos preservados. REA/Hopper confirmou o WORD+4 do
+cliente e atlas rank1/rank2, GMquadro24; GM27OpenBound não é a convençãoThor.
+GP continua sendo XP local; nenhuma ladder ou tabela competitiva foi criada.
+
+Cartão tem campos separados/contidos, insígnias originais no cartão/canal;
+chat recebe Enter, texto literal,64mensagens e roda do mouse. Entrada usa
+estilo transparente dentro da faixa. Filtros usam posições nativas; tag de
+versão cabe na lateral. Catálogo/extrator de patentes separados, sem substituir
+botõesHD/fundos aprovados. Registro/evidência: `LOBBY_UI_RANK.md`.
+
+Validação **1086checks Godot/0**,96/0 repetidos pelo revisor,50quadrosXFS
+conferidos. GPU real1920×1080, padrãoGM e stress em `docs/lobby-rank`.
+PCK isolado109/0/exit0 com CAambiental e semoverride/TLSlocal. Import/export
+registram CA/editor_settings ambientais. Sem execução do cliente original,
+sem perfil real nos testes, sem versão/app/publicação. Commit local solicitado em25/10/2026; nova
+verificação dirigida735checks/0 antes do versionamento. Aceite visual
+manual e eventual aplicativo atualizado ainda separados.
+
 ## Versionamento local — 25/10/2026
 
 Por solicitação do usuário, alterações pendentes da sessão anterior reunidas

@@ -1,0 +1,27 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "rank_to_frame": "signed_WORD + 4",
+  "gm_code": 20,
+  "sheets": {
+    "rank1": {
+      "entry": "rank1.img",
+      "entry_sha256": "25b1f59b6deb8eefea6a9cbb17c45ca60505aed709fe8c778f89cbee487068d2",
+      "sha256": "11ffeab57d8f432ff623a5e99faf165073da2d8463a48180126e5c8498498454",
+      "frame_size": [
+        15,
+        25
+      ],
+      "frames": 25
+    },
+    "rank2": {
+      "entry": "rank2.img",
+      "entry_sha256": "a1cc8e7e5642b4f8ce0e711eeec42aa2a2dd56c9cd550fccd1b95f9820082919",
+      "sha256": "69c41eca12c016a189678982f396c6487eabe02cf9d3d9923e19de41ed023a9b",
+      "frame_size": [
+        25,
+        15
+      ],
+      "frames": 25
+    }
+  }
+}

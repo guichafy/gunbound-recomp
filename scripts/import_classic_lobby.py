@@ -4,8 +4,8 @@
 
 Writes horizontal EPA strips under assets/classic/lobby and assets/classic/room,
 plus assets/classic/manifest.json. Does not copy the archive and does not
-export Buddy. Rank/GP on the lobby are the local level and XP; that note lives
-in the manifest and in ADR-096.
+export Buddy. Ranks are extracted separately by import_classic_ranks.py
+(ADR-102); GP displays the existing local XP.
 """
 import argparse
 import hashlib
@@ -232,7 +232,7 @@ def main():
         "source": "jglim/gunbound-launcher TestClient graphics.xfs",
         "archive": "graphics.xfs",
         "archive_sha256": ARCHIVE_SHA,
-        "note": "Lobby clássico (gamelist_back, não gamelistmode) e sala (ready_back, não readymode). Buddy não é exportado: o buraco do botão é preenchido com a cor da moldura. Rank e GP do cartão são o nível e o XP locais do perfil, não um rank de servidor. mobile15 (RANDOM) fica de fora.",
+        "note": "Lobby clássico (gamelist_back, não gamelistmode) e sala (ready_back, não readymode). Buddy não é exportado: o buraco do botão é preenchido com a cor da moldura. Patente do cartão é atribuída separadamente (ADR-102, import_classic_ranks.py); GP apresenta o XP local, sem classificação competitiva. mobile15 (RANDOM) fica de fora.",
         "images": {},
         "strips": {},
     }

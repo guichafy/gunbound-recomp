@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Lobby/chat e patente GM — REQ-02/10/12/19, ADR-102
+
+- [x] REA no cliente original: convençãoThorWORD+4, GM20/quadros24.
+- [x] Extrair50quadros de insígnias; catálogo/extrator reproduzível.
+- [x] Patente separada deXP/level, defaultGM, migração e persistênciav4.
+- [x] Corrigir cartão/carteiras, chat/rolagem/entrada e alinhamento dos filtros.
+- [x] 1086checks/0; teste novo96/0 e comparaçãoXFS repetidos pelo revisor.
+- [x] GPU1920×1080 normal/stress e PCK isolado109/0, semoverride/TLSlocal.
+- [x] Revisão independente, parse/Python/whitespace e registros finais.
+- [ ] Aceite visual pelo usuário; app exportado permanece anterior.
+
 ## Versionamento local autorizado — 25/10/2026
 
 - [x] Revisar alterações da sessão anterior para commit local, sem envio ao remoto.

@@ -169,7 +169,7 @@ func show_lobby() -> void:
 	model.phase = Match.PHASE_MENU
 	lobby = LobbyScreen.new()
 	lobby.build(root, ui, {"version": version(), "nickname": profile.nickname, "level": profile.level(),
-		"xp": profile.xp, "gold": profile.gold, "cash": profile.cash},
+		"rank": profile.rank, "xp": profile.xp, "gold": profile.gold, "cash": profile.cash},
 		{"create": show_menu, "show_shop": show_shop, "quit": quit_game})
 	queue_redraw()
 

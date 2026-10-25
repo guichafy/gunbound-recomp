@@ -2,7 +2,7 @@
   "source": "jglim/gunbound-launcher TestClient graphics.xfs",
   "archive": "graphics.xfs",
   "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
-  "note": "Lobby clássico (gamelist_back, não gamelistmode) e sala (ready_back, não readymode). Buddy não é exportado: o buraco do botão é preenchido com a cor da moldura. Rank e GP do cartão são o nível e o XP locais do perfil, não um rank de servidor. mobile15 (RANDOM) fica de fora.",
+  "note": "Lobby clássico (gamelist_back, não gamelistmode) e sala (ready_back, não readymode). Buddy não é exportado: o buraco do botão é preenchido com a cor da moldura. Patente do cartão é atribuída separadamente (ADR-102, import_classic_ranks.py); GP apresenta o XP local, sem classificação competitiva. mobile15 (RANDOM) fica de fora.",
   "images": {
     "lobby_back": {
       "file": "lobby/back.png",
