@@ -823,3 +823,29 @@ Mage usa a faixa LaserEffect.xtf com16colunas, seções±8 e ondaT2 nativa
 tempos das poses dos dois mobiles; sem rotação/fade/rastro genérico extra.
 Não altera dano, avatares, perfil ou os16IDs. Limites e fonte em
 MAGE_BIGFOOT_ANIMATION_PORT.md; não declara dano/colisão/tornado integrais.
+
+## ADR-089 — catálogo clássico identificado pelo código do servidor
+
+O `avatar.xfs` da versão 280 já estava byte a byte igual ao TestClient do
+launcher, com 562 registros. Faltava a identidade que o `gunbound-server` usa
+na loja e no avatar equipado. O índice `classic.json` guarda arquivo, slot,
+preço, status e texto CP949 de cada registro, sem apagar peça nem inventar
+avatar de cliente mais novo.
+
+O WORD usa o id nos 15 bits baixos e o bit 15 para masculino. O terceiro byte
+do DWORD é o slot corpo/cabeça/olho/bandeira. Os quatro WORDs equipados seguem
+essa ordem: o conjunto do usuário `amigos` fecha com Rocker Suit, Rocker Hair,
+Dizzy Glasses e Bazooka, e o comentário “head, body, eye, flag” fica
+substituído por essa evidência. Bandeira vazia é o WORD 0 nos dois gêneros.
+Love Cupid (id 143) não existe nesta versão e não é criado.
+
+A categoria interna da loja continua cabeça/corpo/óculos/bandeira. Mudá-la
+reapontaria equipamento já salvo. `ff.dat` vazio e os dois frames `ff00001`
+não viram item. Legado OpenBound permanece no namespace antigo.
+
+Na `main`, ADR-082 já é o brilho do chifre e REQ-45 já é o roster dos 16
+mobiles. Este catálogo usa ADR-089 e REQ-46.
+
+Nota de integração: ADR-089 foi usado independentemente pela restauração de
+Bigfoot/Mage e pelo catálogo clássico de avatares. Ambos os registros e suas
+referências foram preservados neste merge; distinguir pelo título.

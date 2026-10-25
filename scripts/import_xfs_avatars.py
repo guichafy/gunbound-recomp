@@ -86,6 +86,8 @@ def build(graphics_path, avatar_path):
                 bonus_order=STAT_ORDER)
     (output/'catalog.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
     print(f"Imported {len(rows)} records; {sum(r['buyable'] for r in rows)} buyable; {len(missing)} missing artwork")
+    from build_classic_avatar_catalog import build as build_classic
+    build_classic(avatar_path, output/'catalog.json', output/'classic.json')
 
 
 if __name__ == '__main__':

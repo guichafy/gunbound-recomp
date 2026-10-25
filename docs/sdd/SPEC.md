@@ -97,6 +97,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-43 | Nak (ID 3) com dados do cliente original | NAK_0_15 | Vigente; aura UsingItem ausente (sem arte original) |
 | REQ-44 | Regras de batalha: cliente original comprovado, depois C# | BATTLE_RULES_AUDIT, BATTLE_FIDELITY_0_20 | ADR-084 substitui balística/carga/mínimo; demais limites declarados |
 | REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS | Boomer, onda Turtle T2 e cronologia48 implementados; demais limites/portes explícitos |
+| REQ-46 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
 
 ## Base da batalha 0.20 e validação histórica
 
@@ -522,3 +523,21 @@ recebem esse saldo uma vez ao iniciar o aplicativo atualizado, preservando
 progresso/posses/equipamento. Gravar marcador junto à carteira; gastos e
 recargas posteriores preservam o saldo salvo. Falha de gravação reverte a
 concessão. Não liberar itens indisponíveis nem alterar preços/bônus.
+
+## Catálogo clássico de avatares — REQ-46
+
+Pedido: manter todos os avatares originais do Gunbound clássico e refazer o
+catálogo com equivalência máxima a `jglim/gunbound-launcher` e
+`jglim/gunbound-server`. Plano e evidência em `AVATAR_CLASSIC_CATALOG.md`.
+
+O `avatar.xfs` versionado é o TestClient do launcher, versão 280, byte a byte.
+São 562 registros nos oito DATs (479 compráveis). `ff.dat` tem contagem zero;
+`ff00001.img` e `sff00001.img` existem no `graphics.xfs` e não entram na loja.
+Nenhum registro é removido e nenhum avatar posterior à versão 280 é inventado.
+
+A identidade de protocolo segue `gameserver.py`: WORD com o id nos 15 bits
+baixos e masculino no bit 15; DWORD com o slot no terceiro byte (corpo 0,
+cabeça 1, olho 2, bandeira 3). O conjunto equipado são quatro WORDs nessa
+ordem. A categoria interna da loja continua cabeça, corpo, óculos, bandeira,
+para não mover chaves já salvas. Textos do DAT usam CP949. Preços, bônus e
+arte permanecem os do registro original.
