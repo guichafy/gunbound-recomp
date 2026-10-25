@@ -1,0 +1,16 @@
+{
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 60,
+  "frames": 210,
+  "pause_frames": [
+    120,
+    149
+  ],
+  "pause_unique_hashes": 1,
+  "composition_sha256": "d08a900c5569b49a7950b81dd78413179cae237185645209e87b1810e61ac252",
+  "mp4_sha256": "ed383cbb6ef5f1b393363698c0f7f3bfae717e2621b1b520d86ec6b901fe7651",
+  "type": "GPU presentation fixtures through Game.build_sprites; not native client execution or live shot simulation"
+}

@@ -18,11 +18,14 @@ const Combat = preload("res://scripts/combat.gd")
 const Damage = preload("res://scripts/damage.gd")
 const ShellState = preload("res://scripts/shell_state.gd")
 const GoldTracker = preload("res://scripts/gold_tracker.gd")
+const MageFlight = preload("res://scripts/mage_flight.gd")
 const TurtleFlight = preload("res://scripts/turtle_flight.gd")
 const MINE_RANGE := 90.0
 const MINE_STEPS := 90
 
 static func prepare(projectile: Dictionary, entry: Dictionary) -> void:
+	if MageFlight.active(projectile):
+		MageFlight.prepare(projectile,int(round(float(projectile.phase)*180.0/PI)))
 	projectile.orbit = entry.get("orbit", Vector2.ZERO)
 	projectile.spin = float(entry.get("spin", 0.0))
 	projectile.phase_orbit = float(entry.get("phase", 0.0))
@@ -30,6 +33,8 @@ static func prepare(projectile: Dictionary, entry: Dictionary) -> void:
 		TurtleFlight.prepare(projectile,int(entry.get("wave_phase",0)))
 
 static func hit_point(projectile: Dictionary, carrier: Vector2) -> Vector2:
+	if MageFlight.active(projectile):
+		return MageFlight.hit_point(projectile,carrier)
 	if str(projectile.get("flight","")) == TurtleFlight.MODE:
 		return TurtleFlight.hit_point(projectile,carrier)
 	var orbit: Vector2 = projectile.get("orbit", Vector2.ZERO)
@@ -38,6 +43,8 @@ static func hit_point(projectile: Dictionary, carrier: Vector2) -> Vector2:
 	return carrier + orbit.rotated(float(projectile.phase_orbit) + float(projectile.age) * float(projectile.spin))
 
 static func finish_tick(projectile: Dictionary) -> void:
+	if MageFlight.active(projectile):
+		MageFlight.finish_tick(projectile)
 	if str(projectile.get("flight","")) == TurtleFlight.MODE:
 		TurtleFlight.finish_tick(projectile)
 

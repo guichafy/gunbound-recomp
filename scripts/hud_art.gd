@@ -87,7 +87,9 @@ func _init() -> void:
 		var original: Texture2D = load(original_path)
 		originals[name] = original
 		var hd_path: String = "res://assets/hd/hud/" + name
-		textures[name] = load(hd_path) if ResourceLoader.exists(hd_path) else original
+		# Mobile-specific wedges follow the original mobile artwork (ADR-089).
+		var original_wedge: bool = name.begins_with("CrosshairMage") or name.begins_with("CrosshairBigfoot")
+		textures[name] = load(hd_path) if not original_wedge and ResourceLoader.exists(hd_path) else original
 	clock_sound = load("res://assets/openbound/hud/ClockSecond.mp3")
 
 ## Screen position of a HUD.cs offset (relative to the action bar centre).

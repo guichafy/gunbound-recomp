@@ -8,12 +8,30 @@ const SpritePose = preload("res://scripts/sprite_pose.gd")
 const MobileLooks = preload("res://scripts/mobile_looks.gd")
 const USING_ITEM_TIME := MobileLooks.USING_ITEM_TIME
 var motion: Array = []
+var sprites: Dictionary = {}
+
+func bind_sprites(active_sprites: Dictionary) -> void:
+	sprites = active_sprites
+
+func source_duration(index: int, pose: String, fallback: float, weapon: int = 0) -> float:
+	var state: Dictionary = motion[index]
+	var sprite = sprites.get(int(state.vehicle))
+	if bool(state.get("native_animation",false)) and sprite != null:
+		var duration: float = sprite.pose_duration(pose,weapon,false)
+		if duration > 0.0:
+			return duration
+	return fallback
+
 
 func reset(actors: Array) -> void:
 	motion.clear()
 	for actor in actors:
 		var spec: Dictionary = Mobiles.definition(actor.vehicle)
-		motion.append({"pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "hurt_pose": "hurt", "hurt_flip": false, "shock": 0.0, "falling": 0.0, "unable": 0.0, "using": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
+		var sprite = sprites.get(int(actor.vehicle))
+		var native: bool = sprite != null and sprite.native_animation
+		motion.append({"vehicle":int(actor.vehicle), "native_animation":native, "pos": Vector2(actor.pos), "previous": Vector2(actor.pos), "moving": 0.0, "recoil": 0.0, "hurt": 0.0, "hurt_pose": "hurt", "hurt_flip": false, "shock": 0.0, "falling": 0.0, "unable": 0.0, "using": 0.0, "dead": 0.0, "rotation": 0.0, "pose": "idle", "pose_age": 0.0, "wheel_phase": 0.0, "hurt_time": float(spec.hurt), "death_time": float(spec.death)})
+		var index := motion.size()-1
+		motion[index].death_time = source_duration(index,"destroyed",float(spec.death))
 
 ## Starts `pose` now and arms its timer (`timer` field of the motion state).
 func start_pose(index: int, pose: String, timer: String, duration: float) -> void:
@@ -28,24 +46,24 @@ func react(event: Dictionary) -> void:
 		start_pose(event.actor, "recoil", "recoil", Mobiles.ShotTiming.pose_duration(int(event.get("vehicle", Mobiles.DEFAULT_ID)), int(event.get("weapon", 0))))
 	elif event.type == "item":
 		# Mobile.UseItem: ActorFlipbookState.UsingItem, 20 frames at 19 fps.
-		start_pose(event.actor, "using_item", "using", USING_ITEM_TIME)
+		start_pose(event.actor, "using_item", "using", source_duration(event.actor,"using_item",USING_ITEM_TIME))
 	elif event.type == "teleport":
 		# ForceChangePosition: the mobile appears at the beacon, no slide.
 		motion[event.actor].pos = Vector2(event.to)
 		motion[event.actor].previous = Vector2(event.to)
 	elif event.type in ["damage", "shield_damage"]:
 		if str(event.get("kind", "")) == "shock":
-			start_pose(event.actor, "shock", "shock", 1.0)
+			start_pose(event.actor, "shock", "shock", source_duration(event.actor,"shock",1.0))
 		else:
 			# Two hurt animations alternate (MobileFlipbook second damage).
 			var alternate: bool = bool(motion[event.actor].hurt_flip)
 			motion[event.actor].hurt_flip = not alternate
 			motion[event.actor].hurt_pose = "hurt_2" if alternate else "hurt"
-			start_pose(event.actor, str(motion[event.actor].hurt_pose), "hurt", float(motion[event.actor].hurt_time))
+			start_pose(event.actor, str(motion[event.actor].hurt_pose), "hurt", source_duration(event.actor,str(motion[event.actor].hurt_pose),float(motion[event.actor].hurt_time)))
 	elif event.type == "fall":
-		start_pose(event.actor, "falling", "falling", 1.0)
+		start_pose(event.actor, "falling", "falling", source_duration(event.actor,"falling",1.0))
 	elif event.type == "blocked":
-		start_pose(event.actor, "unable", "unable", 1.0)
+		start_pose(event.actor, "unable", "unable", source_duration(event.actor,"unable",1.0))
 
 func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0, cpu_charging: bool = false, cpu_weapon: int = 0) -> void:
 	for index in range(motion.size()):
@@ -108,7 +126,9 @@ func atlas_frame(model, index: int, ctx: Dictionary) -> int:
 	var actor: Dictionary = model.actors[index]
 	var state: Dictionary = motion[index]
 	var weapon := selected_weapon(model, index, ctx)
-	return ctx.atlas.frame_index(state_name(model, index, bool(ctx.charging), bool(ctx.cpu_charging)), float(state.pose_age), weapon, Mobiles.low_health(actor))
+	var pose := state_name(model,index,bool(ctx.charging),bool(ctx.cpu_charging))
+	var age: float = state.dead if pose == "destroyed" and bool(state.get("native_animation",false)) else state.pose_age
+	return ctx.atlas.frame_index(pose,age,weapon,Mobiles.low_health(actor))
 
 func presentation(index: int, rig, clock: float, weapon: int) -> Dictionary:
 	# A separate history per actor; interrupted transitions start at the last
@@ -137,23 +157,33 @@ func presentation(index: int, rig, clock: float, weapon: int) -> Dictionary:
 	visual.current = result
 	return result
 
+## Native atlas poses supply their own destruction/damage frames. The old
+## rolling/fading treatment remains confined to the other presentation paths.
+func visual_style(index: int, actor: Dictionary, time: float) -> Dictionary:
+	var state: Dictionary = motion[index]
+	var dead: float = state.dead
+	var duration: float = state.death_time
+	var native := bool(state.get("native_animation",false))
+	var rotation: float = state.rotation
+	if actor.hp <= 0 and not native:
+		rotation += dead*float(actor.facing)*0.8
+	var alpha := clampf(1.0-dead/duration,0.0,1.0) if actor.hp <= 0 and not native else 1.0
+	var color := Color(1,0.65,0.6,alpha) if state.hurt > 0.0 and not native and int(time*24.0)%2 == 0 else Color(1,1,1,alpha)
+	return {"visible":actor.hp > 0 or dead < duration,"rotation":rotation,"color":color}
+
 func draw_actor(view: Node2D, model, index: int, offset: Vector2, ctx: Dictionary) -> void:
 	var actor: Dictionary = model.actors[index]
 	var state: Dictionary = motion[index]
 	var pos: Vector2 = state.pos
-	var dead: float = state.dead
-	var death_duration := float(state.death_time)
-	if actor.hp <= 0 and dead > death_duration:
-		return
 	var time: float = float(ctx.elapsed)
-	var rotation: float = state.rotation
-	if actor.hp <= 0:
-		rotation += dead * float(actor.facing) * 0.8
+	var style := visual_style(index,actor,time)
+	if not style.visible:
+		return
+	var rotation: float = style.rotation
+	var color: Color = style.color
 	view.draw_set_transform(pos + offset)
 	view.draw_style_box(ctx.shadow, Rect2(-40, 21, 80, 9))
 	view.draw_set_transform(Vector2.ZERO)
-	var alpha := clampf(1.0 - dead / death_duration, 0.0, 1.0) if actor.hp <= 0 else 1.0
-	var color := Color(1, 0.65, 0.6, alpha) if state.hurt > 0.0 and int(time * 24.0) % 2 == 0 else Color(1, 1, 1, alpha)
 	var atlas = ctx.atlas
 	var weapon := weapon_for_pose(model, index, ctx, state.pose)
 	var avatar_context: Dictionary = ctx.get("avatar_context",{}).duplicate()

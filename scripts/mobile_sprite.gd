@@ -8,6 +8,8 @@ const SHOT_KEYS := ["S1", "S2", "SS"]
 # The original default rider (body + head) ships once, in the Bigfoot folder.
 const LEGACY_RIDER := "res://assets/openbound/bigfoot/"
 const EFFECT_FPS := 30.0
+var original_art := false
+var native_animation := false
 var cell: Vector2
 var pivot: Vector2
 var hull_width: float
@@ -32,7 +34,7 @@ var hd_shots
 var hd_effects
 var effect_sizes: Array[Vector2] = []
 
-func configure(folder: String, frame_size: Vector2, anchor: Vector2, animations: Dictionary, hull: float, ground_contact: float) -> void:
+func configure(folder: String, frame_size: Vector2, anchor: Vector2, animations: Dictionary, hull: float, ground_contact: float, presentation_kind: String = "") -> void:
 	cell = frame_size
 	pivot = anchor
 	sequences = animations
@@ -45,7 +47,7 @@ func configure(folder: String, frame_size: Vector2, anchor: Vector2, animations:
 	var text := FileAccess.get_file_as_string(folder + "/RiderPivot.json").strip_edges()
 	text = text.trim_suffix("]").strip_edges().trim_suffix(",") + "]"
 	rider_offsets = JSON.parse_string(text)
-	hd_rig = MobileRig.new(folder.get_file())
+	hd_rig = MobileRig.new(presentation_kind if not presentation_kind.is_empty() else folder.get_file())
 	hd_rig.register_avatar(rider_offset(0),contact_y-pivot.y,hull_width)
 
 ## Shared loading step of every mobile: Shoot/Blast S1/S2/SS sounds and the
@@ -107,7 +109,7 @@ func frame_rect(index: int) -> Rect2:
 
 ## `request` is a SpritePose: position, width, facing and the animation state.
 func draw(view: Node2D, request) -> void:
-	if hd_rig.draw(view, request):
+	if not original_art and hd_rig.draw(view, request):
 		return
 	var pos: Vector2 = request.pos
 	var width: float = request.width

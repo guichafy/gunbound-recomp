@@ -202,6 +202,7 @@ func start_match() -> void:
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
 	sound.play_music()
+	art.bind_sprites(sprites)
 	art.reset(model.actors)
 	rig.manual = false
 	dragging = false
@@ -666,7 +667,7 @@ func draw_projectiles(offset: Vector2) -> void:
 			continue
 		var shell_weapon := int(projectile.get("weapon", model.shot_weapon))
 		var color: Color = model.weapon_rules(model.shot_actor, shell_weapon).color
-		if Mobiles.generic_trail(shooter):
+		if Mobiles.generic_trail(shooter) and not body.native_animation:
 			var trail: Array = projectile.trail
 			for index in range(1, trail.size()):
 				draw_line(trail[index - 1], trail[index], Color(color, float(index) / trail.size() * 0.6), 2.0, true)

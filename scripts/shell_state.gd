@@ -10,6 +10,7 @@ static func create(position: Vector2, velocity: Vector2, spawn_at: float, rules:
 		"previous_draw_pos": position, "previous_hit_pos": position,
 		"boomer": bool(rules.get("boomer", false)), "boomer_ss": bool(rules.get("boomer_ss", false)), "boomer_diameter": int(rules.get("boomer_diameter", 46)),
 		"ss_state": "normal", "ss_state_tick": 0,
+		"mage_phase": 0, "mage_component": component % 2, "laser_sides": [],
 		"pos": position, "hit_pos": position, "velocity": velocity, "age": 0.0, "trail": [position],
 		"helix": float(rules.get("helix", 0)), "phase": float(component) * PI, "spawn_at": spawn_at, "launched": false,
 		# Weather state per shell (Projectile.cs): base damage, columns touched, influences.

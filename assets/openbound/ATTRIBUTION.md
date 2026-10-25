@@ -136,3 +136,24 @@ por `scripts/import_nak_assets.py` com leitor próprio; formato documentado por
 reposicionados em células pelo hotspot de cada quadro; `nak/frames.json` guarda
 células, origens e o `tank3.epa`. Hashes em `SOURCE_MANIFEST.json` (`nak/…`).
 Recursos visuais de Gunbound, atribuídos a seus titulares; uso local de protótipo.
+
+
+## Restauração Bigfoot/Mage (0.20.3)
+
+`mage/original/` e `bigfoot/original/`: tank2/tank5 e seus projéteis, luzes,
+impactos, EPA e RiderPivot extraídos sem modificar pixels de
+jglim/gunbound-launcher TestClient/graphics.xfs. SHA-256 do arquivo:
+`a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08`.
+Importador: scripts/import_classic_mobiles.py --only mage / --only bigfoot.
+Metadados por folha incluem entrada e hash do payload. S1T/S2T de Mage são
+as texturas originais OpenBound já atribuídas acima; composição atual mantida.
+Fontes anteriores e derivados HD preservados. Ver ADR-089 e
+docs/sdd/ORIGINAL_MAGE_BIGFOOT.md.
+
+
+### Mage LaserEffect0.20.4
+
+`mage/original/LaserEffect.png` é a conversão ARGB4444 sem perda do payload
+`LaserEffect.xtf` do mesmo graphics.xfs acima. Manifesto em frames.json/ribbons.
+Composição/faixas/onda e poses: docs/sdd/MAGE_BIGFOOT_ANIMATION_PORT.md.
+S1T/S2T e todos os derivados HD anteriores continuam preservados.

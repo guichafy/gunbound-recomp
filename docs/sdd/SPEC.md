@@ -1,4 +1,27 @@
-# Especificação — Gunbound Recomp 0.20.2
+# Especificação — Gunbound Recomp 0.20.3
+
+## Ferramenta do porte — REQ-12/19/44/45
+
+Adotar Ghidra na skill gunbound-client-port, com execução headless direta,
+evidência reproduzível e validação da ligação entre ASM/dados e GDScript.
+Separar funcionamento do Ghidra12.2 da compatibilidade do conector REA.
+Plano: GHIDRA_SKILL_VALIDATION.md. Sem alteração de regra ou arte nesta tarefa.
+
+## Tiros e animações Bigfoot/Mage0.20.4 — REQ-04/07/08/09/19/44/45
+
+Feedback da0.20.3 amplia a restauração para a composição e os estados dos
+tiros e poses. Mage T1/T2 devem usar LaserEffect nativo, seções e UV do
+cliente; T2 usa onda13px/40°/fases0/180 no passo comum. Timers de ações vêm
+da EPA; retirar os overrides genéricos sobre a morte e o rastro Bigfoot.
+Preservar avatares e dano. Plano/evidência: MAGE_BIGFOOT_ANIMATION_PORT.md.
+
+## Bigfoot/Mage originais 0.20.3 — REQ-12/19/20/45
+
+Por solicitação atual, Bigfoot e Mage voltam aos sprites originais do cliente,
+com o mesmo pipeline do elenco clássico. Conservar derivados HD em disco,
+avatares/equipamentos e regras. Esta escolha substitui somente a obrigação
+de manter o HD desses dois mobiles na ADR-088. Plano: ORIGINAL_MAGE_BIGFOOT.md.
+
 
 As seções abaixo são cronológicas: o texto de cada versão fica como histórico
 quando uma seção posterior o substitui. A partir de 0.7.0 vale a seção mais nova

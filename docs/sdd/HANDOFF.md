@@ -1,4 +1,46 @@
-# Hand-off — Gunbound Recomp 0.20.2 / onda Turtle T2
+# Hand-off — Gunbound Recomp 0.20.3 / Bigfoot e Mage originais
+
+## Avaliação de ferramenta — Ghidra 12.2
+
+Pedido atual: avaliar Ghidra após problemas no Hopper. Resultado em
+[GHIDRA_EVALUATION.md](GHIDRA_EVALUATION.md): headless direto funciona no Mac
+arm64/Java25, autoanálise26s/2408funções. Quatro de oito rotinas Mage exigiram
+indicar entradas conhecidas em vtables; depois8/8 decompiladas e reabertura
+readOnly com24extratos idênticos. Cache redirecionado e projeto fora de
+`.tools` (Ghidra rejeita componente de projeto iniciado por ponto).
+REA6.7.0 atual sem GHIDRA_INSTALL_DIR e sua política aceita12.1.x, rejeita12.2;
+usar CLI direta neste ambiente. GUI/cliente original não executados; sem
+benchmark novo do Hopper. Nenhuma regra/asset/build alterado nesta avaliação;
+trabalho parcial0.20.4 preexistente não foi validado por ela.
+
+## Estado atual — restauração Bigfoot/Mage 0.20.3
+
+Pedido atual substitui parcialmente a preservação HD da ADR-088. Ler
+ORIGINAL_MAGE_BIGFOOT.md e ADR-089. Atlas tank2/tank5, EPA, RiderPivot,
+tiros/luzes/impactos extraídos em subpastas original/, sem sobrescrever os
+arquivos anteriores. Catálogo ativo usa ClassicSprite/ClassicMageSprite,
+escala nativa, miras e auras originais. Imagens/descritores HD anteriores
+conservados como histórico; avatares/equipamentos, regras, IDs e perfil
+mantidos. Mage T1/T2 conservam composição OpenBound adaptada; SS nativo usa
+ssflame2. Bigfoot T2 usa seu flame52 em vez do Armor do fork.
+
+Validação atual: **8059 checks Godot + 17 testes Python + 29 partidas**,
+zero falhas e parse aprovado. Oráculo de pixels/hotspots/RiderPivot/EPA do
+XFS; regressão ativa 39/0. Galeria GPU real 1920×1080/210 quadros/60 Hz:
+poses, sentidos, inclinações, tiros/impactos; pausa de 30 quadros idênticos.
+São fixtures de apresentação, não execução do cliente ou tiros reais.
+PNG/MP4/hashes em docs/original-mobiles/. Captura específica menu/loja/arena
+preparada e parse aprovado; execução posterior bloqueada por timeout UI.
+Suites de cena/modelos cobrem esses fluxos.
+
+App/ZIP **0.20.3** exportados, assinatura profunda/estrita, versão e CRC
+conferidos. PCK isolado 44/0/exit0: 16 sprites/JSON/recursos carregam, sem
+override/TLS local nem SCRIPT ERROR/leaks. Ressalvas ambientais de CA no
+smoke e CA/editor_settings no export detalhadas no registro. Override de CA
+usado apenas no harness e removido antes do build. Aceite visual do usuário,
+mouse manual e escuta pendentes. Nenhum commit/push.
+
+As seções abaixo são históricas; resultados anteriores não validam 0.20.3.
 
 ## Continuidade do porte após aceite do T2
 

@@ -1,6 +1,7 @@
 """Extract original Thor's Hammer sheets for the mobiles still missing in Godot.
 
-Mage (tank2), Nak (tank3) and Bigfoot (tank5) already have their own atlases.
+Mage (tank2) and Bigfoot (tank5) keep their previous assets untouched in
+parallel with native sheets under original/. Nak has a dedicated importer.
 This importer follows scripts/import_nak_assets.py: unchanged pixels, hotspot
 origin, 20 columns, frames.json with the .epa pose lists.
 
@@ -27,6 +28,8 @@ HUD = ROOT / "assets" / "openbound" / "hud"
 
 # folder, graphics tank index (client id + 1), crosshair/sound prefix
 MOBILES = [
+    ("mage", 2, "Mage"),
+    ("bigfoot", 5, "Bigfoot"),
     ("armor", 1, "Armor"),
     ("trico", 4, "Trico"),
     ("boomer", 6, "Boomer"),
@@ -202,6 +205,8 @@ def main():
         if args.only and folder != args.only:
             continue
         out = ROOT / "assets" / "openbound" / folder
+        if number in (2, 5):
+            out = out / "original"
         out.mkdir(parents=True, exist_ok=True)
         raw = xfs.read_entry(ARCHIVE, toc[f"tank{number}.img"])
         frames = xfs.frames(raw)
@@ -249,10 +254,21 @@ def main():
             "contact": frames[poses["idle"][0]]["h"] if "idle" in poses else cell[1],
             "sheets": meta["sheets"],
         }
+        if number == 2:
+            raw_laser = xfs.read_entry(ARCHIVE, toc["LaserEffect.xtf"])
+            width, height, fmt = struct.unpack_from("<IIB", raw_laser)
+            if fmt != 1 or len(raw_laser) != 9 + width * height * 2:
+                raise ValueError("unexpected LaserEffect XTF format")
+            laser = Image.new("RGBA", (width, height))
+            laser.putdata([xfs._argb4444(v) for (v,) in struct.iter_unpack("<H", raw_laser[9:])])
+            laser.save(out / "LaserEffect.png")
+            info["ribbons"] = {"laser": {"entry": "LaserEffect.xtf", "entry_sha256": hashlib.sha256(raw_laser).hexdigest(), "columns": 16, "rows": 16, "file": "LaserEffect.png"}}
         (out / "frames.json").write_text(json.dumps(info))
         (out / "RiderPivot.json").write_text(json.dumps(rider))
-        copy_audio(folder, prefix)
-        copy_crosshairs(prefix)
+        # Existing Mage/Bigfoot sounds and crosshairs are already present.
+        if number not in (2, 5):
+            copy_audio(folder, prefix)
+            copy_crosshairs(prefix)
         print(folder, "frames", len(frames), "sheets", len(meta["sheets"]))
 
 

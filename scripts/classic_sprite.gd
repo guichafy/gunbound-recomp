@@ -9,6 +9,7 @@ const ClassicProjectileArt = preload("res://scripts/classic_projectile_art.gd")
 var classic_art = ClassicProjectileArt.new()
 var meta: Dictionary = {}
 var mobile_kind := ""
+var asset_folder := ""
 var placed: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []
@@ -16,7 +17,10 @@ var rear := false
 
 func setup(kind: String) -> void:
 	mobile_kind = kind
-	var folder := "res://assets/openbound/" + kind
+	original_art = true
+	native_animation = bool(preload("res://scripts/mobile_looks.gd").by_kind(kind).get("native_animation",false))
+	var folder := str(preload("res://scripts/mobile_looks.gd").by_kind(kind).get("assets", "res://assets/openbound/" + kind))
+	asset_folder = folder
 	meta = JSON.parse_string(FileAccess.get_file_as_string(folder + "/frames.json"))
 	var cell := Vector2(meta.cell[0], meta.cell[1])
 	var pivot := Vector2(meta.origin[0], meta.origin[1])
@@ -26,8 +30,8 @@ func setup(kind: String) -> void:
 	var feet := float(meta.get("contact_feet", 0.0))
 	configure(folder, cell, pivot, {
 		"idle": [0, 0, 19.0, true]
-	}, 60.0, pivot.y + feet)
-	load_sounds(folder)
+	}, 60.0, pivot.y + feet, kind)
+	load_sounds("res://assets/openbound/" + kind)
 	for name in ["Bullet1", "Bullet2", "Bullet3"]:
 		bullets.append(_optional(folder, name))
 		lights.append(_optional(folder, name + "Light"))
@@ -60,6 +64,18 @@ func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int
 	var looping := key in ["idle", "idle_low", "moving", "moving_low", "charging_0", "charging_1", "charging_2", "unable"]
 	var durations: Array = meta.get("pose_durations", {}).get(key, [])
 	return Timing.frame(frames, durations, age, looping)
+
+## EPA ticks control action lifetimes as well as source frames.
+func pose_duration(pose: String, weapon: int = 0, low_health: bool = false) -> float:
+	var key := pose
+	if pose in ["charging","recoil"]:
+		key += "_"+str(clampi(weapon,0,2))
+	elif low_health and pose in ["idle","moving"]:
+		key += "_low"
+	var ticks := 0
+	for duration in meta.get("pose_durations",{}).get(key,[]):
+		ticks += maxi(1,int(duration))
+	return float(ticks if ticks > 0 else meta.poses.get(key,[]).size())*Timing.STEP
 
 func draw(view: Node2D, request) -> void:
 	super.draw(view, request.mirrored() if rear else request)
@@ -130,7 +146,7 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 
 func _optional_cached(name: String) -> CanvasTexture:
 	if not placed.has(name):
-		placed[name] = _optional("res://assets/openbound/"+mobile_kind,name.trim_suffix(".png"))
+		placed[name] = _optional(asset_folder,name.trim_suffix(".png"))
 	return placed[name]
 
 ## Stable stand-in for `_rand() % 9` in FUN_00436fd0: the span is -4..+4.
@@ -202,7 +218,7 @@ func effect_sheets(effect: Dictionary) -> Array:
 		return [name,"SSFlame.png"]
 	# Existing special detonation paths with no primary flame have their own
 	# secondary resource. Never overlay both stages automatically.
-	if sheet(name).is_empty() and weapon == 2 and mobile_kind in ["lightning", "ice"]:
+	if sheet(name).is_empty() and weapon == 2 and mobile_kind in ["lightning", "ice", "mage"]:
 		name = "SSFlame.png"
 	return [name]
 

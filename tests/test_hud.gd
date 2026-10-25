@@ -47,7 +47,8 @@ func run() -> void:
 		var factor: float = hud.density(name)
 		# Mobiles without an approved HD sheet keep the original crosshair (Nak, and the classic roster).
 		if ResourceLoader.exists("res://assets/hd/hud/" + name):
-			check(is_equal_approx(factor, 3.0), "%s uses the 3× HD sprite" % name)
+			var native_wedge: bool = name.begins_with("CrosshairMage") or name.begins_with("CrosshairBigfoot")
+			check(is_equal_approx(factor, 1.0 if native_wedge else 3.0), "%s uses the intended original/HD source" % name)
 		else:
 			check(is_equal_approx(factor, 1.0) and hud.textures[name] == hud.originals[name], "%s falls back to the original sprite" % name)
 	scene.select_vehicle(2)

@@ -164,7 +164,7 @@ func run() -> void:
 	check(art.textures["ItemDual.png"].get_width() == 292 * 3 and is_equal_approx(art.density("ItemDual.png"), 3.0) and is_equal_approx(art.density("MatchStatus.png"), 3.0), "HD item sprites are 3× the originals")
 	check(art.textures["TeleportBullet.png"].get_width() == 516 * 2 and art.textures.has("TeleportFlame.png"), "Teleport beacon and flame keyframes are 2× HD")
 	check(art.using_frame(0.0) == 0 and art.using_frame(10.0 / 19.0) == 10 and art.using_frame(5.0) == 19, "UsingItem samples 20 frames at 19 fps and holds the last")
-	check(art.using_textures["bigfoot"].get_width() == 129 * 4 * 5 and art.using_textures["mage"].get_height() == 150 * 4 * 4 and is_equal_approx(art.using_density("bigfoot"), 4.0), "UsingItem aura sheets are 4× HD")
+	check(art.using_textures["bigfoot"].get_width() == 129 * 5 and art.using_textures["mage"].get_height() == 150 * 4 and is_equal_approx(art.using_density("bigfoot"), 1.0), "Original mobiles use native UsingItem aura sheets")
 	check(art.textures["ItemDual.png"].get_image().has_mipmaps(), "HD UI item sprites are imported with mipmaps")
 	art.textures = art.originals.duplicate()
 	check(is_equal_approx(art.density("MatchStatus.png"), 1.0) and art.button_frame("dual", 3).region == Rect2(219, 0, 73, 36), "Originals keep the Button.cs rectangles")

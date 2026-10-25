@@ -61,8 +61,11 @@ func _init() -> void:
 
 func _load_using(kind: String, file_name: String) -> void:
 	var hd_path := HD + file_name
+	# Original mobile atlases use the original aura at the native atlas scale.
+	if MobileLooks.by_kind(kind).has("assets"):
+		hd_path = ""
 	var original_path := ORIGINALS + file_name
-	if ResourceLoader.exists(hd_path):
+	if not hd_path.is_empty() and ResourceLoader.exists(hd_path):
 		using_textures[kind] = load(hd_path)
 	elif ResourceLoader.exists(original_path):
 		var canvas := CanvasTexture.new()
@@ -198,15 +201,18 @@ func draw_using(view: CanvasItem, body, state: Dictionary, facing: int, offset: 
 	var texture: Texture2D = using_textures.get(kind)
 	if texture == null:
 		return
-	var cell: Vector2 = body.cell
+	var cell: Vector2 = MobileLooks.using_aura(kind).cell
 	var amount: float = 60.0 / float(body.hull_width)
 	var ground := 24.0
 	var frame := using_frame(float(state.pose_age))
 	var density := using_density(kind)
 	var source_cell := cell * density
 	view.draw_set_transform(Vector2(state.pos) + offset, float(state.rotation), Vector2(-facing, 1))
-	var pivot_x: float = body.pivot.x
-	var contact_y: float = body.contact_y
+	# Aura source retains its OpenBound window; its registration is independent
+	# from the tightly packed native tank atlas.
+	var aura: Dictionary = MobileLooks.using_aura(kind)
+	var pivot_x: float = aura.get("pivot", body.pivot).x
+	var contact_y: float = aura.get("contact", body.contact_y)
 	var target := Rect2(Vector2(-pivot_x * amount, ground - contact_y * amount), cell * amount)
 	var column := frame % USING_COLUMNS
 	var row := int(frame / USING_COLUMNS)

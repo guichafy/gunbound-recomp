@@ -800,3 +800,26 @@ aritmética/ordem/LUTs; reconstruir raster/UV/registro; e aceitar por fixtures
 independentes, regressões e sequência GPU, com limites explícitos.
 Isso não expande o protótipo para rede nem declara os especiais restantes
 portados. Nenhuma regra de combate, arte ou versão muda nesta consolidação.
+
+
+## ADR-089 — restauração original de Bigfoot e Mage
+
+24/10/2026. Solicitação explícita substitui parcialmente ADR-088/REQ-20:
+usar arte original dos dois mobiles como no restante do elenco. Extrair
+tank2/tank5 e EPA pelo pipeline clássico em subpastas novas; conservar os
+derivados HD e fontes anteriores. Avatares e equipamentos continuam com a
+aparência atual, montados no RiderPivot nativo. Não alterar combate/perfil.
+Mage T1/T2 continuam com S1T/S2T originais do OpenBound e composição existente
+(adaptação); SS usa bullet2p/ssflame2. Bigfoot passa a usar flame52 do cliente
+no T2, substituindo visualmente o Flame2 Armor do fork. Escala e contato
+seguem os demais mobiles clássicos. Registro: ORIGINAL_MAGE_BIGFOOT.md.
+
+
+## ADR-090 — tiros e poses acompanham a restauração original
+
+Feedback após0.20.3 substitui a composição S1T/S2T conservada naADR-089:
+Mage usa a faixa LaserEffect.xtf com16colunas, seções±8 e ondaT2 nativa
+13px/40°/fases0/180; estado privado no laço real/previsão. EPA rege os
+tempos das poses dos dois mobiles; sem rotação/fade/rastro genérico extra.
+Não altera dano, avatares, perfil ou os16IDs. Limites e fonte em
+MAGE_BIGFOOT_ANIMATION_PORT.md; não declara dano/colisão/tornado integrais.

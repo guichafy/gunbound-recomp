@@ -19,8 +19,8 @@ const LOW_HEALTH := 0.3
 
 # "cost" is the OpenBound DelayPresets value; weapon() adds "delay" in turn units.
 const MAGE_WEAPONS := [
-	{"name": "Laser", "damage": 150.0, "radius": 25.0, "cost": 750, "count": 1, "helix": 0.0, "emp": 0.0, "color": Color("b3ceff")},
-	{"name": "Duplo laser", "damage": 200.0, "radius": 25.0, "cost": 900, "count": 2, "helix": 15.0, "emp": 0.0, "color": Color("d43e70")},
+	{"name": "Laser", "damage": 150.0, "radius": 25.0, "cost": 750, "count": 1, "helix": 0.0, "flight": "mage_laser", "emp": 0.0, "color": Color("b3ceff")},
+	{"name": "Duplo laser", "damage": 200.0, "radius": 25.0, "cost": 900, "count": 2, "helix": 0.0, "flight": "mage_wave", "emp": 0.0, "color": Color("d43e70")},
 	{"name": "EMP", "damage": 200.0, "radius": 25.0, "cost": 1300, "count": 1, "helix": 0.0, "emp": 100.0, "color": Color("b6adff")}
 ]
 const MAGE_AIM := [Vector2(15, 50), Vector2(15, 50), Vector2(15, 50)]

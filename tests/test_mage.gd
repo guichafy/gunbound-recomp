@@ -41,7 +41,9 @@ func _initialize() -> void:
 	model.advance_projectiles(0.01)
 	check(model.projectiles[0].launched,"Helix emits at0.05s")
 	model.advance_projectiles(0.05)
-	check(Vector2(model.projectiles[0].hit_pos).distance_to(model.projectiles[1].hit_pos) > 1.0, "Opposite phases produce separate colliders")
+	check(Vector2(model.projectiles[0].hit_pos).distance_to(model.projectiles[1].hit_pos) < 0.01, "Native phases0/180 overlap at the initial sine zero")
+	model.advance_projectiles(0.05)
+	check(Vector2(model.projectiles[0].hit_pos).distance_to(model.projectiles[1].hit_pos) > 1.0, "Native phases40/220 separate on the second flight tick")
 	model.start(1, 1, 44)
 	check(is_equal_approx(model.weapon_rules(0, 1).delay, 120.0), "Mage delay preserves normalized original ratio")
 	model.actors[0].ready = 100

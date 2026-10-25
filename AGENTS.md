@@ -4,17 +4,30 @@ Leia primeiro `docs/sdd/HANDOFF.md`, depois `docs/sdd/SPEC.md` e
 `docs/sdd/DESIGN.md`. `docs/sdd/README.md` explica a organização SDD.
 Converse com o usuário em português.
 
+## Restauração Bigfoot/Mage 0.20.3 — caminho atual
+
+Pedido posterior substitui a preservação HD desses dois mobiles na ADR-088.
+Ler docs/sdd/ORIGINAL_MAGE_BIGFOOT.md e ADR-089. Catálogo ativo usa
+ClassicSprite/ClassicMageSprite e subpastas assets/openbound/{mage,bigfoot}/original
+(tank2/tank5, EPA, contato e RiderPivot nativos). Escala igual aos demais
+clássicos; tiros/impactos/miras/auras originais. HD anterior preservado em disco;
+avatares/equipamentos e regras mantidos. Mage T1/T2 conservam composição
+OpenBound adaptada, sem alegação de paridade integral do laser.
+Harness 8059 checks +17 Python +29 partidas aprovado; galeria GPU210 frames,
+pausa30 idênticos; app/ZIP0.20.3 assinados, PCK44/0. Aceite visual do usuário,
+escuta/mouse e captura específica menu/loja/arena pendentes (timeout UI).
+
 ## Estado e escopo
 
-Protótipo 0.20.2 em Godot 4.7.2 + GDScript (versão única em
+Protótipo 0.20.3 em Godot 4.7.2 + GDScript (versão única em
 `application/config/version` do `project.godot`), identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
 desktop macOS, treino offline 1×1 contra CPU. O elenco jogável é o dos 16
 mobiles do cliente (REQ-45, ADR-083): IDs 1 Mage, 2 Bigfoot e 3 Nak preservados;
 4–16 são Armor, Trico, Boomer, Raon, Lightning, JD, ASate, Ice, Turtle, Grub,
-Dragon, Knight e Aduka, com arte original. Bigfoot e Mage mantêm o HD já
-aprovado. Escaravelho foi removido por solicitação do usuário.
+Dragon, Knight e Aduka, com arte original. Bigfoot e Mage usam a arte original conforme a restauração 0.20.3;
+derivados HD anteriores preservados em disco. Escaravelho foi removido por solicitação do usuário.
 O perfil recomeçou na pasta `app_userdata/Gunbound Recomp`, sem migração.
 Ranking foi explicitamente retirado. Rede, contas, multiplayer e mobile estão
 no roadmap; não os implemente sem uma nova solicitação. A engine deve preservar

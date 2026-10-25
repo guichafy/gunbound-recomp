@@ -1,5 +1,13 @@
 # Design implementado
 
+## Apresentação original Bigfoot/Mage 0.20.3
+
+Catálogo ativo encaminha Bigfoot/Mage ao atlas original/EPA/contato nativo.
+Importação em subpastas original/, sem sobrescrever fontes anteriores;
+render de atlas ignora rig e tiros HD. Mage conserva composição S1T/S2T
+original do OpenBound. Ver ORIGINAL_MAGE_BIGFOOT.md e ADR-089.
+
+
 Estado vigente: **0.20.2**, ADR-084/085/086/087. A seção abaixo complementa a
 arquitetura SOLID e substitui as descrições históricas de balística C#,
 integração120 Hz, carga 2 s e piso15%. Resumo e limites em
