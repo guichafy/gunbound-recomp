@@ -37,6 +37,17 @@ func run() -> void:
 	for node in scene.root.get_children():
 		shows_version = shows_version or (node is Label and node.text.ends_with("/   " + version))
 	check(not version.is_empty() and shows_version, "Menu shows the single-source project version")
+	check(scene.cpu_vehicle < 0 and scene.resolved_cpu_id() == 1, "Until a pick, Bigfoot still trains against Mage")
+	scene.menu.open_cpu_mobile()
+	scene.menu.pick_vehicle(4)
+	check(scene.cpu_vehicle == 4 and not scene.menu.popup_open() and scene.menu.cpu_mobile.text == "Armor", "CPU mobile applies on click and closes the popup")
+	scene.opening = 0
+	scene.start_match()
+	check(int(scene.model.actors[1].vehicle) == 4 and int(scene.model.actors[0].vehicle) == 2, "The match drives the mobile chosen for the machine")
+	scene.show_menu()
+	scene.cpu_vehicle = -1
+	scene.select_vehicle(2)
+	scene.opening = 0
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
 	check(scene.weapon_buttons.size() == 3 and scene.pass_button is TextureButton and scene.options_button is TextureButton, "Original S1/S2/SS, Options and SkipTurn sprite buttons")

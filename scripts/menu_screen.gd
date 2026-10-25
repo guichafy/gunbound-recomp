@@ -2,15 +2,25 @@ extends RefCounted
 ## Start room (REQ-02, REQ-36, ADR-092). The entry is the 1×1 room: the player
 ## and the machine, Miramo Town in the centre, and Iniciar on the saved setup.
 ## Match settings (nickname, difficulty, weather) live in one popup and apply
-## on Accept. Mobile and items keep their own room buttons.
+## on Accept. The player's mobile and the machine's mobile each have a room
+## button and apply on click. Items keep their popup.
 
 const Mobiles = preload("res://scripts/mobiles.gd")
 const DIFFICULTIES := ["Leve", "Normal", "Precisa"]
 const WEATHER_MODES := ["original", "all"]
 const WEATHER_LABELS := ["Original do mapa", "Todos os efeitos"]
-const PLAYER_SLOT := Rect2(36, 64, 380, 476)
-const CPU_SLOT := Rect2(864, 64, 380, 476)
-const CENTER_SLOT := Rect2(432, 64, 416, 476)
+# A short stage under the open sky. The native sprite is about 100 px tall,
+# so the card only adds the nameplate and a little air — not a tall empty frame.
+const STAGE_Y := 312.0
+const STAGE_H := 228.0
+const PLAYER_SLOT := Rect2(36, STAGE_Y, 380, STAGE_H)
+const CPU_SLOT := Rect2(864, STAGE_Y, 380, STAGE_H)
+const CENTER_SLOT := Rect2(432, STAGE_Y, 416, STAGE_H)
+# Same hull as the arena. The menu art has no HD sheet yet, so a larger width
+# only enlarges the classic pixels.
+const MOBILE_WIDTH := 60.0
+# mobile_sprite.gd puts the contact this far under the anchor when width < 150.
+const NATIVE_GROUND := 24.0
 
 var ui
 var nickname_input: LineEdit
@@ -26,6 +36,7 @@ var cpu_detail: Label
 var cpu_mobile: Label
 var weather_caption: Label
 var portrait_name: Label
+var mobile_title: Label
 var settings_popup: Panel
 var mobile_popup: Panel
 var dimmer: ColorRect
@@ -38,11 +49,14 @@ var draft_difficulty := 1
 var draft_weather := "original"
 var nickname_snapshot := ""
 var popup_kind := ""
+var mobile_for := "player"
+var player_vehicle_id := 2
+var cpu_vehicle_id := 1
 
 ## `info`: version, nickname, difficulty, weather_mode, weather_label,
 ## items_label, level, xp, wins.
-## `actions`: select_vehicle(id), select_difficulty(index), set_weather(mode),
-## show_items, start, show_shop, show_help.
+## `actions`: select_vehicle(id), select_cpu_vehicle(id), select_difficulty(index),
+## set_weather(mode), show_items, start, show_shop, show_help.
 func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> void:
 	ui = factory
 	actions = callbacks
@@ -50,8 +64,8 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	saved_weather = "all" if str(info.weather_mode) == "all" else "original"
 	draft_difficulty = saved_difficulty
 	draft_weather = saved_weather
-	player_anchor = Vector2(PLAYER_SLOT.position.x + PLAYER_SLOT.size.x * 0.5, PLAYER_SLOT.end.y - 78)
-	cpu_anchor = Vector2(CPU_SLOT.position.x + CPU_SLOT.size.x * 0.5, CPU_SLOT.end.y - 78)
+	player_anchor = slot_anchor(PLAYER_SLOT)
+	cpu_anchor = slot_anchor(CPU_SLOT)
 	# Direct child: test_scene reads the version from root labels only.
 	var tag: Label = ui.label(root, "TREINO OFFLINE   /   " + str(info.version), Vector2(36, 18), Vector2(460, 24), 13, ui.TEAL, true)
 	tag.add_theme_constant_override("outline_size", 2)
@@ -73,6 +87,12 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	build_settings_popup(root, str(info.nickname))
 	build_mobile_popup(root)
 	player_name.text = str(info.nickname)
+	cpu_vehicle_id = int(info.cpu_vehicle)
+	cpu_mobile.text = str(Mobiles.definition(cpu_vehicle_id).name)
+
+func slot_anchor(rect: Rect2) -> Vector2:
+	var plate_top := rect.position.y + rect.size.y - 72.0
+	return Vector2(rect.position.x + rect.size.x * 0.5, plate_top - NATIVE_GROUND)
 
 func build_slot(root: Control, rect: Rect2, who: String) -> void:
 	var slot: Panel = ui.panel(root, rect.position, rect.size, Color(0.05, 0.14, 0.24, 0.22), 12)
@@ -89,11 +109,11 @@ func build_slot(root: Control, rect: Rect2, who: String) -> void:
 
 func build_centre(root: Control, weather_label: String) -> void:
 	var panel: Panel = ui.panel(root, CENTER_SLOT.position, CENTER_SLOT.size, Color(0.06, 0.16, 0.28, 0.72), 12)
-	weather_caption = ui.label(panel, weather_label, Vector2(20, 18), Vector2(376, 28), 15, ui.TEAL, true)
+	weather_caption = ui.label(panel, weather_label, Vector2(20, 52), Vector2(376, 28), 15, ui.TEAL, true)
 	weather_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var map_name: Label = ui.label(panel, "Miramo Town A", Vector2(20, 196), Vector2(376, 40), 26, ui.CREAM, true)
+	var map_name: Label = ui.label(panel, "Miramo Town A", Vector2(20, 92), Vector2(376, 40), 26, ui.CREAM, true)
 	map_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var fixed: Label = ui.label(panel, "Solo · 1×1", Vector2(20, 242), Vector2(376, 24), 14, ui.MUTED)
+	var fixed: Label = ui.label(panel, "Solo · 1×1", Vector2(20, 140), Vector2(376, 24), 14, ui.MUTED)
 	fixed.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 func build_status(root: Control, info: Dictionary) -> void:
@@ -108,15 +128,20 @@ func build_portrait(root: Control) -> void:
 
 func build_bar(root: Control, info: Dictionary) -> void:
 	room_buttons.clear()
-	room_buttons.append(bar_button(root, "Mobile", Vector2(36, 704), Vector2(140, 48), open_mobile))
-	items_button = bar_button(root, str(info.items_label), Vector2(188, 704), Vector2(180, 48), actions.show_items)
+	var own_mobile: Button = bar_button(root, "Mobile", Vector2(36, 704), Vector2(128, 48), open_mobile)
+	own_mobile.tooltip_text = "Escolher o seu mobile"
+	room_buttons.append(own_mobile)
+	var cpu_choice: Button = bar_button(root, "CPU", Vector2(172, 704), Vector2(128, 48), open_cpu_mobile)
+	cpu_choice.tooltip_text = "Escolher o mobile da máquina"
+	room_buttons.append(cpu_choice)
+	items_button = bar_button(root, str(info.items_label), Vector2(308, 704), Vector2(176, 48), actions.show_items)
 	items_button.tooltip_text = "Escolher os itens da barra F1–F6 (Select Item)"
 	room_buttons.append(items_button)
-	var settings: Button = bar_button(root, "Configurações", Vector2(380, 704), Vector2(200, 48), open_settings)
+	var settings: Button = bar_button(root, "Configurações", Vector2(492, 704), Vector2(188, 48), open_settings)
 	settings.tooltip_text = "Apelido, dificuldade da máquina e clima"
 	room_buttons.append(settings)
-	room_buttons.append(bar_button(root, "Shop", Vector2(592, 704), Vector2(130, 48), actions.show_shop))
-	room_buttons.append(bar_button(root, "Como jogar", Vector2(734, 704), Vector2(170, 48), actions.show_help))
+	room_buttons.append(bar_button(root, "Shop", Vector2(688, 704), Vector2(112, 48), actions.show_shop))
+	room_buttons.append(bar_button(root, "Como jogar", Vector2(808, 704), Vector2(156, 48), actions.show_help))
 	var start: Button = ui.button(root, "INICIAR", Vector2(1004, 704), Vector2(240, 48), actions.start, true)
 	start.tooltip_text = "Começa o treino com o ajuste gravado"
 	room_buttons.append(start)
@@ -167,7 +192,7 @@ func build_settings_popup(root: Control, nickname: String) -> void:
 func build_mobile_popup(root: Control) -> void:
 	mobile_popup = ui.panel(root, Vector2(250, 168), Vector2(780, 420), Color("0d2740"), 14)
 	mobile_popup.visible = false
-	ui.label(mobile_popup, "Escolha o mobile", Vector2(28, 20), Vector2(560, 34), 22, ui.CREAM, true)
+	mobile_title = ui.label(mobile_popup, "Escolha o seu mobile", Vector2(28, 20), Vector2(560, 34), 22, ui.CREAM, true)
 	vehicle_buttons.clear()
 	for slot in range(Mobiles.PLAYABLE.size()):
 		var id: int = Mobiles.PLAYABLE[slot]
@@ -195,7 +220,18 @@ func open_settings() -> void:
 func open_mobile() -> void:
 	if popup_kind != "":
 		return
+	mobile_for = "player"
+	mobile_title.text = "Escolha o seu mobile"
+	highlight(vehicle_buttons, Mobiles.PLAYABLE.find(player_vehicle_id))
 	show_popup("mobile", mobile_popup)
+
+func open_cpu_mobile() -> void:
+	if popup_kind != "":
+		return
+	mobile_for = "cpu"
+	mobile_title.text = "Mobile da máquina"
+	highlight(vehicle_buttons, Mobiles.PLAYABLE.find(cpu_vehicle_id))
+	show_popup("cpu", mobile_popup)
 
 func choose_difficulty(index: int) -> void:
 	draft_difficulty = clampi(index, 0, DIFFICULTIES.size() - 1)
@@ -219,7 +255,10 @@ func accept_settings() -> void:
 	close_popup()
 
 func pick_vehicle(id: int) -> void:
-	actions.select_vehicle.call(id)
+	if mobile_for == "cpu":
+		actions.select_cpu_vehicle.call(id)
+	else:
+		actions.select_vehicle.call(id)
 	close_popup()
 
 func cancel_popup() -> void:
@@ -246,15 +285,21 @@ func close_popup() -> void:
 	for button in room_buttons:
 		button.disabled = false
 
-## Marks the chosen mobile and describes it. The machine shows its opponent.
+## Marks the chosen mobile and describes it.
 func show_vehicle(id: int) -> void:
+	player_vehicle_id = id
 	highlight(vehicle_buttons, Mobiles.PLAYABLE.find(id))
 	var data: Dictionary = Mobiles.definition(id)
-	var foe: Dictionary = Mobiles.definition(Mobiles.opponent(id))
 	portrait_name.text = str(data.name)
 	player_mobile.text = str(data.name)
-	cpu_mobile.text = str(foe.name)
 	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), str(data.summary)]
+
+## The machine's mobile. Independent from the player's once the room picks one.
+func show_cpu(id: int) -> void:
+	cpu_vehicle_id = id
+	cpu_mobile.text = str(Mobiles.definition(id).name)
+	if popup_kind == "cpu":
+		highlight(vehicle_buttons, Mobiles.PLAYABLE.find(id))
 
 func highlight(buttons: Array[Button], chosen: int) -> void:
 	for j in range(buttons.size()):

@@ -6,6 +6,10 @@
 - [x] Menu da partida com apelido, dificuldade e clima; Aceitar grava, Cancelar restaura.
 - [x] Mobile em popup próprio; itens no PopupSelectItem; Iniciar num clique.
 - [ ] Aceite visual do usuário na sala, no menu da partida e no popup de mobile.
+- [x] Botão CPU escolhe o mobile da máquina; o pareamento antigo segue como padrão (ADR-093).
+- [ ] Aceite visual da escolha do mobile da CPU.
+- [x] Sala desenha o mobile no casco nativo de 60 px (ADR-095).
+- [ ] Aceite visual do tamanho do mobile na sala.
 
 ## Ghidra na skill de porte — REQ-12/19/44/45, ADR-091
 

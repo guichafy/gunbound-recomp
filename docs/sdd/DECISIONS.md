@@ -875,3 +875,22 @@ botões da sala: a grade dos 16 aplica no clique; itens seguem o
 PopupSelectItem. Opções de som, rolagem e fundo continuam no popup já
 existente. O mapa segue Miramo Town A, sem setas. Não muda regra de combate,
 elenco, perfil nem o fluxo da loja.
+
+## ADR-093 — mobile da máquina escolhido na sala
+
+24/10/2026. O treino pode fixar o mobile da CPU. O botão CPU da sala abre a
+mesma grade dos 16 e aplica no clique. Sem escolha, `Match.start` continua
+com `Mobiles.opponent` (1↔2, Nak contra Mage, os demais contra Mage). A
+escolha vale para as partidas seguintes até outra troca. Os dois lados podem
+usar o mesmo mobile. Não altera dificuldade, itens da CPU nem o pareamento
+usado pelos testes que não passam esse id.
+
+## ADR-095 — mobile da sala no tamanho nativo
+
+25/10/2026. A sala desenhava o casco a 180 px, três vezes a arte clássica, e o
+resultado ficava pixelado. O menu passa a usar largura 60, a mesma da arena,
+com o ponto de contato sobre a placa do lugar. O palco tem a altura do
+sprite mais a placa, e a placa do mapa acompanha essa faixa; o céu acima
+permanece livre. A animação de espera anda em pixels inteiros. A arena, o
+HUD e o filtro da cena não mudam. Quando houver folha HD dessa vista, o
+tamanho pode subir sem reaproveitar este aumento.

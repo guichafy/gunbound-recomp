@@ -106,9 +106,13 @@ ajustes. Dois lugares (piloto e máquina), Miramo Town A no centro, retrato do
 mobile escolhido e Iniciar. Iniciar usa o ajuste já gravado.
 
 Configurações da partida reúne apelido, dificuldade e clima. Aceitar grava e
-volta à sala; Cancelar restaura o que estava aberto. Mobile abre a grade dos
-16 e aplica no clique. Itens continua no PopupSelectItem. Som, rolagem e fundo
-permanecem no popup de opções do cliente. Não há troca de mapa.
+volta à sala; Cancelar restaura o que estava aberto. O mobile da sala usa o
+casco nativo de 60 px, o mesmo da arena (ADR-095), porque essa arte ainda não
+tem folha HD. Mobile abre a grade dos 16 e aplica no clique. CPU abre a mesma
+grade para a máquina e também aplica no clique; sem essa escolha, o pareamento
+segue o de sempre (1↔2, Nak contra Mage, os demais contra Mage). Itens continua
+no PopupSelectItem. Som, rolagem e fundo permanecem no popup de opções do
+cliente. Não há troca de mapa.
 
 ## Base da batalha 0.20 e validação histórica
 

@@ -152,7 +152,8 @@ func run() -> void:
 		for button in view.menu.vehicle_buttons:
 			if button.text == names[id]:
 				button_found = true
-				check(button.position.x + button.size.x <= 392.0, "%s fits the menu card" % names[id])
+				var popup_size: Vector2 = view.menu.mobile_popup.size
+				check(button.position.x + button.size.x <= popup_size.x and button.position.y + button.size.y <= popup_size.y, "%s fits the mobile popup" % names[id])
 		check(button_found, "Menu lists %s" % names[id])
 	view.queue_free()
 	await process_frame

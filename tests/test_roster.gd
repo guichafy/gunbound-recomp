@@ -25,7 +25,7 @@ func run() -> void:
 	view.sound.muted = true
 	check(view.menu.vehicle_buttons.size() == 16, "Menu displays the full classic roster")
 	for button in view.menu.vehicle_buttons:
-		check(button.position.x + button.size.x <= 392.0, "Vehicle button %s fits the menu card" % button.text)
+		check(button.position.x + button.size.x <= view.menu.mobile_popup.size.x and button.position.y + button.size.y <= view.menu.mobile_popup.size.y, "Vehicle button %s fits the mobile popup" % button.text)
 	for id in [1, 2, 3]:
 		view.show_menu()
 		for button in view.menu.vehicle_buttons:
@@ -36,13 +36,12 @@ func run() -> void:
 		view.start_match()
 		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == opponents[id], "Menu selection starts the correct duel")
 	view.show_menu()
-	# Difficulty and weapons have three slots even though the roster has two.
-	var card = view.menu.vehicle_buttons[0].get_parent()
-	for label in ["Leve", "Normal", "Precisa"]:
-		for child in card.get_children():
-			if child is Button and child.text == label:
-				child.pressed.emit()
-		check(view.cpu_difficulty == ["Leve", "Normal", "Precisa"].find(label), "Difficulty slots stay independent of roster")
+	# Room settings apply the selected difficulty on Accept (ADR-092).
+	for slot in 3:
+		view.menu.open_settings()
+		view.menu.difficulty_buttons[slot].pressed.emit()
+		view.menu.accept_settings()
+		check(view.cpu_difficulty == slot, "Difficulty slots stay independent of roster")
 	view.select_vehicle(0)
 	check(view.vehicle == 2, "Stale selection cannot restore Escaravelho")
 	var Rig = load("res://scripts/mobile_rig.gd")

@@ -55,6 +55,8 @@ var pan_mask := MOUSE_BUTTON_MASK_LEFT
 # Start menu (MenuScreen): its controls live there, built from data and callbacks.
 var menu = null
 var vehicle := 2
+# -1 follows Mobiles.opponent. A room pick stores that mobile until changed.
+var cpu_vehicle := -1
 var cpu_difficulty := 1
 # Training option: the map's original weather preset or every effect (Thor included).
 var weather_mode := "original"
@@ -154,8 +156,8 @@ func show_menu() -> void:
 	menu = MenuScreen.new()
 	menu.build(root, ui, {"version": version(), "nickname": profile.nickname, "difficulty": cpu_difficulty,
 		"weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
-		"level": profile.level(), "xp": profile.xp, "wins": profile.wins},
-		{"select_vehicle": select_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
+		"level": profile.level(), "xp": profile.xp, "wins": profile.wins, "cpu_vehicle": resolved_cpu_id()},
+		{"select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
 		"set_weather": set_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop, "show_help": show_help})
 	select_vehicle(vehicle)
 	queue_redraw()
@@ -190,11 +192,23 @@ func toggle_weather() -> String:
 func weather_label() -> String:
 	return "Clima: " + ("original do mapa" if weather_mode == "original" else "todos (Thor)")
 
+## The mobile the machine will drive. An explicit pick wins over the pairing.
+func resolved_cpu_id() -> int:
+	return cpu_vehicle if cpu_vehicle >= 0 else Mobiles.opponent(vehicle)
+
 func select_vehicle(index: int) -> void:
 	index = Match.normalize_vehicle(index)
 	vehicle = index
 	if menu != null and is_instance_valid(menu.vehicle_info):
 		menu.show_vehicle(index)
+		if cpu_vehicle < 0:
+			menu.show_cpu(Mobiles.opponent(vehicle))
+	queue_redraw()
+
+func select_cpu_vehicle(index: int) -> void:
+	cpu_vehicle = Match.normalize_vehicle(index)
+	if menu != null and is_instance_valid(menu.cpu_mobile):
+		menu.show_cpu(cpu_vehicle)
 	queue_redraw()
 
 func start_match() -> void:
@@ -202,7 +216,7 @@ func start_match() -> void:
 		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
 		profile.save_profile()
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening)
+	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle)
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
@@ -610,11 +624,12 @@ func _draw() -> void:
 	else:
 		draw_texture_rect_region(backdrop.texture, Rect2(0, 0, 1280, 800), background_region(backdrop))
 	if screen == "menu":
-		var bob := sin(elapsed * 1.6) * 4.0
-		var player_at: Vector2 = menu.player_anchor if menu != null else Vector2(226, 406)
-		draw_sprite(vehicle, player_at + Vector2(0, bob), 180.0, 1)
+		var bob := roundf(sin(elapsed * 1.6) * 2.0)
+		var player_at: Vector2 = menu.player_anchor if menu != null else Vector2(226, 420)
+		draw_sprite(vehicle, (player_at + Vector2(0, bob)).round(), MenuScreen.MOBILE_WIDTH, 1)
 		if menu != null:
-			draw_sprite(Mobiles.opponent(vehicle), menu.cpu_anchor + Vector2(0, sin(elapsed * 1.6 + 1.4) * 3.0), 180.0, -1)
+			var cpu_bob := roundf(sin(elapsed * 1.6 + 1.4) * 2.0)
+			draw_sprite(resolved_cpu_id(), (menu.cpu_anchor + Vector2(0, cpu_bob)).round(), MenuScreen.MOBILE_WIDTH, -1)
 		return
 	if model.terrain == null:
 		return

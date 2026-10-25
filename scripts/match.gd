@@ -91,7 +91,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = [], opening: int = PLAYER) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = [], opening: int = PLAYER, cpu_vehicle: int = -1) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -110,7 +110,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 			spawns[index] = options[rng.randi_range(0, options.size() - 1)]
 	actors.clear()
 	for index in [PLAYER, CPU]:
-		var kind := vehicle if index == PLAYER else Mobiles.opponent(vehicle)
+		# cpu_vehicle < 0 keeps the pairing (1↔2, Nak→Mage, anyone else→Mage).
+		var cpu_kind := Mobiles.opponent(vehicle) if cpu_vehicle < 0 else normalize_vehicle(cpu_vehicle)
+		var kind := vehicle if index == PLAYER else cpu_kind
 		var x: float = spawns[index].x
 		# Search from just above the listed spawn so layered maps keep its platform.
 		var ground: float = terrain.surface_at(x, maxf(0.0, spawns[index].y - 80.0))
