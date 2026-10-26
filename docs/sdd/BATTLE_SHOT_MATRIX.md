@@ -59,9 +59,9 @@ Cada chave da coluna Classe resolve os endereços `Animate/Simulate/tick/Explode
 | 5 Boomer | S1 | 1 @8 | Boomer | 254/48/124; 50/0; 98 | Curva conforme sinal de ax versus vx; k=[53]=50. | A |
 | 5 Boomer | S2 | 4 @8,10,12,14 | Boomer | 118/42/114; 0/0; 98 | Mesma curva; quatro emissões temporizadas. | A |
 | 5 Boomer | SS | 1 @8 | SuperShot_Bullet6 | 350/46/120; 200/120; 98 | Curva; contador 36 ticks → change → cnormal; poder×2 e raio×1,2. | A |
-| 6 Raon | S1 | 3 @11 | Shot2_Bullet7 | 90/54/130; 0/0; 98 | idx0 comum; idx1/2 oscilam com fase 0/180. | A |
-| 6 Raon | S2 | 2 @11 | Shot1_Bullet7 | 200/42/122; 90/26; 98 | 2 minas no impacto: SpawnMine 0x4375f0. Não são 2 explosões instantâneas. | B |
-| 6 Raon | SS | 1 @11 | SuperShot_Bullet7 | 400/42/130; 90/26; 98 | 1 supermina: SpawnSuperMine 0x437870; autoria e agenda separadas. | B |
+| 6 Raon | S1 | 3 @11 | Shot2_Bullet7 | 90/54/130; 0/0; 98 | idx0 comum; idx2/3 oscilam com fase 0/180 (ADR-116). | A |
+| 6 Raon | S2 | 2 @11 | Shot1_Bullet7 | 200/42/122; 90/26; 98 | 2 minas no impacto: SpawnMine 0x4375f0. Força P+15/P−15 no mesmo ângulo; bala só colide com terreno (ADR-116). | B |
+| 6 Raon | SS | 1 @11 | SuperShot_Bullet7 | 400/42/130; 90/26; 98 | 1 supermina: SpawnSuperMine 0x437870; força P+15, só terreno, direção vx>0 (ADR-116). | B |
 | 7 Lightning | S1 | 1 @1 | Shot1_Bullet8 | 230/54/134; 56/20; 90 | Feixe de colisão próprio após impacto; não reduzir ao sprite. | B |
 | 7 Lightning | S2 | 1 @1 | Shot2_Bullet8 | 240/40/143; 56/20; 90 | Feixes diagonais: consultar simulador e tick, não count de spawn. | B |
 | 7 Lightning | SS | 1 @1 | SuperShot_Bullet8 | 230/40/143; 26/20; 90 | ExplodeSuperShot_Bullet8; composição/varredura a fechar. | B |

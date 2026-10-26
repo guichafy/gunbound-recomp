@@ -74,6 +74,21 @@ Preservar todos os 16 mobiles, avatares/equipamentos e HD já aprovados.
 Modernização do design de mobile/avatar fica para uma etapa posterior
 solicitada pelo usuário. Não substituir a aparência atual durante o porte.
 
+## Tiros Raon — ADR-116
+
+Ler RAON_CLASSIC_FIX.md (seção ADR-116). Mobile06_MainAction: T1 idx0/2/3
+(comum, fase0, fase180); T2 dois tiros no mesmo ângulo com força nativa
+P+15/P−15; SS P+15 (`native_power` na emissão, somado após quantizar, sem
+clamp). Balas T2/SS só colidem com terreno; supermina anda para a direita
+só com vx>0. Teste test_raon_shots; captura GPU tests/capture_raon_shots.gd.
+Minas (ADR-117): pos = pixel do chão; AnimateMine nativo (inclinação, queda,
+gatilho 8 px pelos pés, explosão y−10); desenho por `RaonEffect.draw_transform`.
+Teste test_raon_mines; captura tests/capture_raon_mines.gd com
+`--disable-vsync --always-on-top` (janela oculta fica lenta).
+Rastro (ADR-118): T1 do Raon desenha 7 cópias anteriores, alfa 255−32k
+(`ClassicSprite.trail_levels`), **apenas no T1 do Raon** (`has_trail`, ADR-120,
+pedido do usuário). Não estender a outros tiros sem novo pedido.
+
 ## Turtle T2 0.20.2 — caminho atual
 
 Ler `docs/sdd/TURTLE_T2_FIDELITY.md` e ADR-087. `turtle_flight.gd` usa

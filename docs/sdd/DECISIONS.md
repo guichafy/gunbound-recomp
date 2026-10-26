@@ -1277,3 +1277,67 @@ ClassicSprite valida catálogo por folha e multiplica apenas recortes de origem;
 destino, pivô, contato, RiderPivot, avatar, tiros e regras ficam nativos.
 Folha inválida volta ao original. Piloto padrão compartilhado, aura e avatares
 fora do escopo. Plano/evidência em `BIGFOOT_SMOOTH_4X.md`.
+
+## ADR-116 — tiros Raon T1/T2/SS pelo MainAction nativo
+
+26/10/2026, REQ-19/44/45. Pedido do usuário: corrigir os tiros do Raon.
+Substitui, na ADR-094, a fase das órbitas T1 e o leque angular ±3° do T2 do
+catálogo 0.19. `Mobile06_MainAction` 0x49c120 prevalece sobre o C#:
+T1 emite idx0/2/3 (comum, fase0, fase180); T2 emite dois tiros no mesmo
+ângulo com força nativa P+15 e P−15; SS emite um tiro com P+15. O15 é o
+inteiro protegido 0x794bf0 escrito no WinMain. O deslocamento é somado ao P
+já quantizado, sem clamp (`native_power` em `projectile_parameters`), e vale
+igualmente para execução, previsão, CPU e itens.
+
+Balas de mina T2/SS usam `SimulateShot_Bullet7n_9s_7p_9p`, que não chama
+`HitTestMobilesAndJewels`: atravessam mobiles (`skip_actors`), como o Grub SS.
+A supermina anda para a direita só com vx>0 no impacto. Ponto de plantio,
+contato/encosta das minas, dano e rotação do sprite seguem como na ADR-094.
+Evidência e limites em `RAON_CLASSIC_FIX.md`.
+
+## ADR-117 — minas Raon no terreno pelo AnimateMine nativo
+
+26/10/2026, REQ-19/44/45. Relato do usuário após a ADR-116. Substitui, na
+ADR-094/116, o contato por caixa (`mine.pos+(0,5)`), a posição “chão−5”, a
+falta de queda e o espelho da mina. Mina S2/SS fica no pixel do chão; a cada
+tick do modelo segue a ordem nativa: inclinação, chão/encaixe 15 px, queda
+acelerada com quique, remoção fora do mundo, gatilho. Explode quando os pés de
+qualquer mobile vivo (dono incluído) ficam a menos de 8 px; a supermina também
+explode junto de outra mina. Explosão em y−10. O desenho gira em torno do ponto
+do chão pela inclinação nativa e espelha quando a mina olha para a direita.
+Balas T2/SS continuam atravessando mobiles (ADR-116). Agenda/alvo/orçamento S2
+e passo da supermina seguem como antes. Evidência em `RAON_CLASSIC_FIX.md`.
+
+## ADR-118 — rastro nativo de 8 níveis nas balas do Raon
+
+26/10/2026, REQ-19/20/45. Referência em vídeo do usuário mostrou o T1 com
+cauda de cópias. O cliente publica cada bala por quadro (`0x458690`), desenha
+os níveis 7..0 com alfa 255−32k e desloca o histórico a cada quadro; o quadro
+é limitado a um por tick de 20 Hz. O Godot passa a desenhar as sete cópias
+anteriores com o quadro atual da bala, a partir do histórico por tick, para
+T1/T2/SS do Raon; ao sair do modelo, a cena esvazia a cauda um nível por tick
+(pausável), como o deslocamento nativo. Sem espelho vertical (flag nativo 0).
+A mesma rotina vale para as balas comuns dos outros mobiles
+no cliente, mas fica desligada para eles até decisão do usuário, porque muda
+o visual já aprovado. Modelo, colisão e previsão não mudam.
+
+## ADR-119 — rastro nativo em todas as balas comuns
+
+26/10/2026, REQ-19/20/45. Pedido do usuário após conferir o Raon. Estende a
+ADR-118: todas as classes de bala que no cliente publicam pelo `0x458690`,
+`0x4ae1a0` ou `0x488880` desenham sete cópias anteriores com alfa 255−32k e
+escoam a cauda após o impacto. As classes `0x488880` (Nak SS, Grub SS,
+Aduka S2/SS) espelham verticalmente quando seguem para a esquerda. Desenhos
+próprios sem histórico (lasers do Mage, água do Turtle, Dragon S1/S2,
+satélites/íons) não mudam. Nak mantém sua orientação aprovada e recebe só as
+cópias. Modelo, colisão e previsão não mudam.
+
+## ADR-120 — rastro apenas no T1 do Raon
+
+26/10/2026, REQ-19/20/45. Decisão do usuário: “o rastro precisa estar apenas
+no T1 do Raon”. Substitui a ADR-119 por inteiro e restringe a ADR-118: somente
+o T1 do Raon desenha as sete cópias e esvazia a cauda após o impacto
+(`ClassicSprite.has_trail`). T2/SS do Raon e todos os outros mobiles voltam ao
+sprite único aprovado; o espelho “Facing” de Nak/Grub/Aduka e as cópias do Nak
+foram retirados. O censo do slot3 continua registrado como evidência do cliente,
+sem efeito no Godot.

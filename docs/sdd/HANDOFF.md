@@ -1,5 +1,104 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Rastro só no T1 do Raon — ADR-120
+
+O usuário não quer rastro fora do T1 do Raon. `ClassicSprite.has_trail` liga
+as sete cópias e o esvaziamento após o impacto só para `raon`/T1; T2/SS do Raon,
+os outros mobiles, o espelho Facing e o Nak voltaram ao desenho aprovado.
+`test_raon_trail` 93/0, `check.sh --quick` 13202 checks/0 (sem captura GPU nova:
+só a seleção do desenho mudou). A seção ADR-119 abaixo é histórica.
+Sem app, versão 0.20.5, sem commit.
+
+## Rastro em todas as balas comuns — ADR-119 (histórico, substituída)
+
+Pedido “Adicione rastro”. Censo do slot3 no PE: quase todas as classes usam
+`0x458690` (rastro); Trico SS `0x4ae1a0` (rastro); Nak SS, Grub SS e Aduka
+T2/SS `0x488880` (rastro + espelho vertical indo para a esquerda); Mage T1/T2,
+Turtle T1/T2, Dragon T1/T2, satélites/íons têm desenho próprio sem histórico.
+`ClassicSprite` decide por `trail_style(kind, weapon)` e desenha brilho+corpo
+nas sete cópias; a cena esvazia a cauda de qualquer bala com rastro
+(`leaves_trail`). Nak recebe só as cópias, mantendo a orientação aprovada.
+`test_raon_trail` 95/0, Python 13/13, `check.sh --quick` 13204 checks/0
+(partidas não repetidas: só desenho). GPU: amostra Armor/JD/Grub/Aduka/Nak/Mage
+em `.tools/raon-shots/gallery`; galeria completa ficou lenta com o jogo aberto.
+Sem app, versão 0.20.5, sem commit.
+
+## Rastro das balas Raon — ADR-118
+
+Vídeo do usuário (YouTube `fd9VsdZQbsI`, 1:15–1:20) mostrou o T1 com cauda
+densa de cópias. No cliente, toda bala comum publica posição/ângulo por quadro
+(`0x458690`), o render desenha os níveis 7..0 com alfa 255−32k e o histórico
+desloca a cada quadro, no máximo um por tick de 20 Hz. `ClassicSprite`
+desenha agora as sete cópias anteriores (histórico `trail` por tick, quadro
+atual da bala) só para o Raon e, depois do impacto, a cena esvazia a cauda
+nível a nível (`lingering`), como no vídeo em 1:17,7. Sem espelho vertical:
+o nativo grava 0 no flag, então robôs indo para a esquerda giram 180° como no
+original. `test_raon_trail` 45/0, Python 12/12, `check.sh --quick` 13154
+checks/0 (partidas não repetidas: modelo/colisão inalterados). GPU T1 nos dois
+sentidos e T2/SS com pausa idêntica (`docs/raon-shots/t1-trail-godot.png`,
+`trail-left.png`). Ângulo por nível usa o deslocamento do tick (nativo:
+campo de 3°). Mesmo rastro existe para as balas comuns dos outros mobiles,
+mas não foi ativado.
+Sem app, versão 0.20.5, sem commit.
+
+## Minas Raon no terreno — ADR-117
+
+Relato após a ADR-116: robôs do T2 virados, mina deve estourar ao encostar e
+falhas de estouro ligadas ao terreno. AnimateMine/AnimateSuperMine (`0x498b60`/
+`0x4921e0`) mostram: mina no pixel do chão, sonda y−15, encaixe 15 px, queda
++1 px/tick com quique a v≥5, remoção fora do mundo sem explosão e gatilho por
+distância < 8 px até os pés de qualquer mobile vivo (dono incluído; S2[66]/
+SS[79]=8). Supermina também explode junto de outra mina; explosão em y−10.
+O Godot usava caixa a partir de `pos+(0,5)` (o Raon com apoio 20 ficava 1 px
+fora), não fazia a mina cair e espelhava ao contrário. Desenho agora gira em
+torno do chão pela inclinação nativa (`0x4986a0`, LUT `0x598e7e`) e recorta a
+célula 32×32 (`0x497980`). Balas T2/SS continuam atravessando mobiles: nem a
+simulação nem a detonação testam mobiles; o “encostar” vem do gatilho da mina.
+
+Código: `raon_effect.gd` (`slope_angle`, `settle`, `touching`, `draw_transform`,
+`blast_point`), `classic_flight.gd` (remoção/centro), `classic_sprite.gd`
+(desenho). `test_raon_mines` RED→33/0, `test_raon_effect` 168/0 (testes
+antigos migrados para a âncora no chão), Python 11/11, e aceitação real em
+`test_raon_shots` 102/0: bala T2/SS atravessa o mobile, planta sob os pés,
+detona no tick seguinte, causa dano e o turno SS sai do voo. `./scripts/check.sh`:
+**13102 checks Godot, 80 suítes, 29 partidas, exit0** (`.tools/raon-shots/
+final-harness-117.log`). GPU real `tests/capture_raon_mines.gd` em relevo:
+330 quadros/60Hz, pausa30 idêntica, retomada, detonação supermina×mina e
+mobile×mina na cratera; evidência `docs/raon-shots/mines-terrain.png`. A janela
+oculta do macOS deixa a captura lenta; usar `--disable-vsync --always-on-top`.
+T1 sem divergência estática: tira em `docs/raon-shots/t1-strip.png`, aguardando
+referência do usuário; tira do T2 nos dois sentidos em
+`docs/raon-shots/t2-flight-directions.png` (giro das balas em voo sem prova
+nativa, renderer comum inalterado). Sem app reexportado, versão0.20.5, sem commit.
+
+## Tiros Raon T1/T2/SS — ADR-116
+
+Pedido: corrigir os tiros do Raon. Ghidra direto sobre o mesmo PE
+(`.tools/raon-shots/q1..q9`) mostrou quatro divergências da 0.20.5: T1 com
+fases dos componentes 1/2 invertidas (nativo idx2→0, idx3→180); T2 com leque
+de ±3° em vez de força nativa P+15/P−15 no mesmo ângulo (constante 15 em
+0x794bf0, WinMain); SS sem o P+15; balas de mina colidindo com mobiles,
+embora `SimulateShot_Bullet7n_9s_7p_9p` não chame `HitTestMobilesAndJewels`.
+Também a supermina passou a usar `vx>0` estrito para a direção.
+
+Código: `raon_effect.gd`, `combat.gd`/`match.gd` (`native_power` da emissão,
+somado após quantizar, sem clamp, compartilhado por execução/previsão/CPU/itens)
+e catálogo Raon com `skip_actors`. Teste novo `test_raon_shots` (RED 39 → 95/0),
+`test_raon_effect` 168/0 (expectativa de fase corrigida), integração 263/0,
+prova Python do PE 9/9.
+
+`./scripts/check.sh`: **13062 checks Godot, 33 testes Python, 29 partidas**,
+zero falhas, parse aprovado, exit0 (`.tools/raon-shots/final-harness.log`).
+Ajuste posterior em `create_mine` (`fp_ready`) revalidado nas suítes Raon
+(95/0, 168/0, 263/0, Python 9/9) e no parse; harness inteiro não repetido.
+As partidas com Raon mudam de trajetória de propósito; continuaram aprovadas.
+GPU real `tests/capture_raon_shots.gd` (gl_compatibility, M4 Pro, fora do sandbox): 3 tiros × 2 sentidos,
+300 quadros/60Hz, pausa de 30 quadros idêntica e retomada nos seis;
+comparativo em `docs/raon-shots/before-after.png`. É captura do Godot, não
+execução do cliente original. Pendentes: ponto exato do plantio, contato/encosta
+e dano das minas, rotação do sprite pelo heading, escuta/mouse, aceite visual.
+Sem app reexportado, versão inalterada (0.20.5), sem commit.
+
 ## Bigfoot com acabamento4× — ADR-115
 
 Pedido: aplicar ao Bigfoot a suavização BICUBIC4× aprovada nos botões/lobby.

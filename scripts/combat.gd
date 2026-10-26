@@ -15,13 +15,15 @@ const MAX_FLIGHT_AGE := 12.0
 const BURROW_GRAVITY := 2.0
 const BURROW_ENTRY_DAMPING := 0.5
 
-static func launch_velocity_fp(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0, force_max: int = 42) -> Vector2i:
+## native_offset is added to the quantized native power, unclamped, as the
+## Raon S2/SS MainAction does before the spawner (0x40a5f0/0x40a6e0).
+static func launch_velocity_fp(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0, force_max: int = 42, native_offset: int = 0) -> Vector2i:
 	# The catalog is the only aim clamp. Convert screen support to native theta.
 	var theta := int((angle if facing > 0 else 180.0 - angle) - rad_to_deg(rotation))
-	return Physics.launch_velocity_fp(theta, Physics.native_power(power + power_offset, force_max))
+	return Physics.launch_velocity_fp(theta, Physics.native_power(power + power_offset, force_max) + native_offset)
 
-static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0, force_max: int = 42) -> Vector2:
-	return Vector2(launch_velocity_fp(angle, power, facing, rotation, power_offset, force_max)) / (256.0 * STEP)
+static func launch_velocity(angle: float, power: float, facing: int, rotation: float = 0.0, power_offset: float = 0.0, force_max: int = 42, native_offset: int = 0) -> Vector2:
+	return Vector2(launch_velocity_fp(angle, power, facing, rotation, power_offset, force_max, native_offset)) / (256.0 * STEP)
 
 static func trace_segment(from: Vector2, to: Vector2, terrain, actors: Array, ignored: int) -> Dictionary:
 	var terrain_hit: Dictionary = terrain.raycast(from, to)

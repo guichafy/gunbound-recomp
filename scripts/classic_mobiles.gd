@@ -38,8 +38,10 @@ static func definitions() -> Dictionary:
 			"1000 de vida · mira larga 10–90°."),
 		7: _body("Raon", "raon", 1050, 0, 0, 10, false, Vector2(30, 38), 20.0, 0.7, true,
 			[shot("Tiro 1", 90, 27, 750, {"flight":"raon_orbit","shells": [{"spawn":0.0,"angle":0.0,"power":0.0,"raon_component":0},{"spawn":0.0,"angle":0.0,"power":0.0,"raon_component":1},{"spawn":0.0,"angle":0.0,"power":0.0,"raon_component":2}]}),
-			shot("Tiro 2", 0, 0, 900, {"flight": "mine", "mine_damage":200,"mine_radius":21.0,"shells": [{"spawn": 0.0, "angle": 3.0, "power": 0.0}, {"spawn": 0.0, "angle": -3.0, "power": 0.0}]}),
-			shot("SS", 0, 0, 1300, {"flight": "mine", "mine_damage":400,"mine_radius":21.0,"mine_crawl":true})],
+			# Mobile06_MainAction: S2 is P+15/P−15 at one angle, SS is P+15 (ADR-116).
+			# SimulateShot_Bullet7n_9s_7p_9p never calls HitTestMobilesAndJewels.
+			shot("Tiro 2", 0, 0, 900, {"flight": "mine", "mine_damage":200,"mine_radius":21.0,"skip_actors":true,"shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_power": 15}, {"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_power": -15}]}),
+			shot("SS", 0, 0, 1300, {"flight": "mine", "mine_damage":400,"mine_radius":21.0,"mine_crawl":true,"skip_actors":true,"shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_power": 15}]})],
 			[Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)],
 			"1050 de vida · S2 e SS plantam mina."),
 		8: _body("Lightning", "lightning", 750, 300, 20, 10, false, Vector2(41, 30), 23.0, 0.0, true,

@@ -239,6 +239,49 @@ Registro: `CLASSIC_HD_RESTORATION_SKILL.md`. Runtime/build/versão preservados.
 - [x] Ícone de Knight e Aduka sem o Armor por baixo; item de 2 slots é uma peça só nos dois lugares.
 - [ ] Aceite visual do lobby e da sala, e escuta. App não reexportado. Cliente original não executado.
 
+## Rastro só no T1 do Raon — ADR-120
+
+- [x] Usuário recusou o rastro nos outros tiros; `has_trail` limita ao T1 do Raon.
+- [x] Revertidos Nak, espelho Facing e T2/SS do Raon; `test_raon_trail` 93/0; harness rápido 13202/0.
+- [ ] Aceite visual do T1 no jogo.
+
+## Rastro em todas as balas comuns — ADR-119 (substituída pela ADR-120)
+
+- [x] Censo do slot3 de todas as classes: rastro, rastro+espelho (`0x488880`) ou desenho próprio.
+- [x] `ClassicSprite.trail_style/facing_flip/_draw_bullet`, cauda após impacto para qualquer mobile com rastro; Nak com cópias na orientação aprovada.
+- [x] `test_raon_trail` 95/0; Python 13/13; `check.sh --quick` 13204/0.
+- [x] Substituída pela ADR-120 a pedido do usuário.
+
+## Rastro das balas Raon — ADR-118
+
+- [x] Vídeo de referência (YouTube fd9VsdZQbsI, 1:15–1:20): T1 com cauda de cópias translúcidas.
+- [x] Binário: publicação 0x458690, render 7..0 com alfa 255−32k, deslocamento por quadro, 1 quadro/tick.
+- [x] `trail_levels`/`lingering_levels` (cauda escoa após o impacto) para o Raon; `test_raon_trail` 45/0; Python 12/12; harness rápido 13154/0.
+- [x] Usuário pediu “Adicione rastro”: estendido a todas as balas comuns (ADR-119).
+- [ ] Aceite visual do usuário.
+
+## Minas Raon no terreno — ADR-117
+
+- [x] Relato do usuário: robôs do T2 virados, mina deve estourar ao encostar, falhas ligadas ao terreno.
+- [x] Ghidra (r1..r5): AnimateMine/SuperMine, inclinação 0x4986a0, desenho 0x499d50/RayonTexture, raio 8 do bloco S2/SS.
+- [x] Mina no pixel do chão, inclinação nativa, queda/quique, remoção fora do mundo, gatilho 8 px pelos pés, explosão y−10.
+- [x] Desenho girado pela inclinação e espelho correto; supermina detona junto de outra mina.
+- [x] `test_raon_mines` RED→33/0; Python 11/11; harness 13102 Godot/80 suítes/partidas, exit0.
+- [x] GPU em relevo inclinado `tests/capture_raon_mines.gd`: 330 quadros, pausa30 idêntica, duas detonações.
+- [x] T1 "maior/mais extenso": rastro nativo de 8 níveis (ADR-118) a partir do vídeo de referência.
+- [ ] Aceite visual, escuta/mouse; app não reexportado; busca nativa de 30 px da mina enterrada e brilho por cima pendentes.
+
+## Tiros Raon T1/T2/SS — ADR-116
+
+- [x] Reproduzir com GPU real e testes RED (39 falhas em `test_raon_shots`).
+- [x] Fixar ASM/dados: idx0/2/3, força ±15 (0x794bf0), SS +15, Simulate sem HitTestMobilesAndJewels, direção vx>0.
+- [x] T1 fases comum/0/180; T2 P+15/P−15 sem leque; SS P+15; balas de mina atravessam mobiles.
+- [x] Prova Python do PE 9/9; `test_raon_shots`, `test_raon_effect`, integração especial.
+- [x] Captura GPU temporal 3 tiros × 2 sentidos, pausa30 idêntica e retomada.
+- [x] Harness completo: 13062 checks Godot, 33 Python, 29 partidas, parse e exit0.
+- [ ] Aceite visual do usuário, escuta/mouse; app não reexportado; cliente original não executado.
+- [ ] Pendentes: ponto exato do plantio, rotação do sprite pelo heading, contato/encosta das minas.
+
 ## ASate/JD/Aduka/Raon 0.20.5 — ADR-094
 
 - [x] Investigar os quatro mobiles com Ghidra/ASM/dados e fixtures independentes.

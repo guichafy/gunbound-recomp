@@ -175,10 +175,11 @@ static func _detonate_mine(model, index: int) -> void:
 	model.mines.remove_at(index)
 	var dead: Array = model.actors.map(func(actor): return int(actor.hp) <= 0)
 	var event_start: int = model.events.size()
-	model.blast(Vector2(mine.pos), float(mine.radius), float(mine.damage), 0.0, 0.0, int(mine.owner))
+	var center: Vector2 = RaonEffect.blast_point(mine) if bool(mine.get("raon_mine",false)) else Vector2(mine.pos)
+	model.blast(center, float(mine.radius), float(mine.damage), 0.0, 0.0, int(mine.owner))
 	GoldTracker.collect_mine(model, event_start, int(mine.owner), dead)
-	var removed: int = model.terrain.carve(Vector2(mine.pos),float(mine.radius))
-	model.events.append({"type": "explosion", "actor": int(mine.owner), "position": mine.pos, "radius": mine.radius, "weapon": mine.weapon, "vehicle": mine.vehicle, "raon_mine":true, "collided_actor": -1, "removed": removed, "angle": 0.0})
+	var removed: int = model.terrain.carve(center,float(mine.radius))
+	model.events.append({"type": "explosion", "actor": int(mine.owner), "position": center, "radius": mine.radius, "weapon": mine.weapon, "vehicle": mine.vehicle, "raon_mine":true, "collided_actor": -1, "removed": removed, "angle": 0.0})
 
 static func walk_mines(model) -> void:
 	var owner: int = int(model.active)
@@ -209,6 +210,10 @@ static func walk_mines(model) -> void:
 static func crawl_mines(model, delta: float) -> void:
 	for index in RaonEffect.step_mines(model.mines,model.actors,model.terrain,delta):
 		_detonate_mine(model,index)
+	# AnimateMine bounds: a mine that left the world disappears without a blast.
+	for index in range(model.mines.size()-1,-1,-1):
+		if bool(model.mines[index].get("lost",false)):
+			model.mines.remove_at(index)
 	var spent: Array[int] = []
 	for index in range(model.mines.size()):
 		var mine: Dictionary = model.mines[index]

@@ -281,12 +281,12 @@ func weapon_rules(index: int, weapon: int) -> Dictionary:
 func aim_limits(index: int, weapon: int = 0) -> Vector2:
 	return Mobiles.aim_limits(actors[index].vehicle, weapon)
 
-func shot_velocity_fp(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0) -> Vector2i:
+func shot_velocity_fp(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0, native_offset: int = 0) -> Vector2i:
 	var limits := aim_limits(index, weapon)
-	return Combat.launch_velocity_fp(clampf(angle, limits.x, limits.y) + angle_offset, power, int(actors[index].facing), body_rotation(index), power_offset, Mobiles.force_max(int(actors[index].vehicle)))
+	return Combat.launch_velocity_fp(clampf(angle, limits.x, limits.y) + angle_offset, power, int(actors[index].facing), body_rotation(index), power_offset, Mobiles.force_max(int(actors[index].vehicle)), native_offset)
 
-func shot_velocity(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0) -> Vector2:
-	return Vector2(shot_velocity_fp(index, angle, power, weapon, angle_offset, power_offset)) / (256.0 * Combat.STEP)
+func shot_velocity(index: int, angle: float, power: float, weapon: int, angle_offset: float = 0.0, power_offset: float = 0.0, native_offset: int = 0) -> Vector2:
+	return Vector2(shot_velocity_fp(index, angle, power, weapon, angle_offset, power_offset, native_offset)) / (256.0 * Combat.STEP)
 
 func minimum_power(index: int) -> float:
 	return Mobiles.minimum_power(int(actors[index].vehicle))
@@ -304,7 +304,8 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 	for component in range(emission.size()):
 		var entry: Dictionary = emission[component]
 		var initial := muzzle(index, angle if spread_after else angle + float(entry.angle), weapon)
-		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power) if spread_after else shot_velocity(index, angle + float(entry.angle), power, weapon)
+		var native := int(entry.get("native_power", 0))
+		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power, native) if spread_after else shot_velocity(index, angle + float(entry.angle), power, weapon, 0.0, 0.0, native)
 		var shell := ShellState.create(initial, velocity, entry.spawn, rules, weapon, component)
 		shell.owner = index
 		shell.vehicle = vehicle_id
@@ -312,7 +313,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		shell.sound = bool(entry.get("sound", true))
 		shell.pose_start_at = float(entry.get("pose_start_at", 0.0))
 		# Preserve exact launch integers instead of re-quantizing their float projection.
-		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, entry.angle, entry.power) if spread_after else shot_velocity_fp(index, angle + float(entry.angle), power, weapon)
+		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, entry.angle, entry.power, native) if spread_after else shot_velocity_fp(index, angle + float(entry.angle), power, weapon, 0.0, 0.0, native)
 		ClassicFlight.prepare(shell, entry)
 		result.append(shell)
 	return result

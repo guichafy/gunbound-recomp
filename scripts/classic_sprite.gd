@@ -7,6 +7,10 @@ const SHOT_FPS := 20.0
 const Timing = preload("res://scripts/classic_shot_timing.gd")
 const ClassicProjectileArt = preload("res://scripts/classic_projectile_art.gd")
 const SmoothArt = preload("res://scripts/mobile_smooth_art.gd")
+const RaonEffect = preload("res://scripts/raon_effect.gd")
+const RAYON_CELL := Rect2(-16, -24, 32, 32)
+## Client afterimage history depth (ADR-118); shown only where has_trail().
+const NATIVE_TRAIL_LEVELS := 8
 var classic_art = ClassicProjectileArt.new()
 var meta: Dictionary = {}
 var mobile_kind := ""
@@ -167,16 +171,81 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 	if info.is_empty():
 		return
 	var index := projectile_frame(info,projectile)
-	var position: Vector2 = projectile.get("hit_pos", projectile.pos) + offset
-	view.draw_set_transform(position, Vector2(projectile.velocity).angle())
 	var light_name := name.replace(".png","Light.png")
 	var light_info := sheet(light_name)
-	if not light_info.is_empty():
-		var light := cell_frame(light_name, projectile_frame(light_info,projectile))
-		view.draw_texture_rect_region(_optional_cached(light_name), light[1], light[0])
-	var body := cell_frame(name, index)
-	view.draw_texture_rect_region(_optional_cached(name), body[1], body[0])
+	var light_index := projectile_frame(light_info,projectile) if not light_info.is_empty() else -1
+	if has_trail(mobile_kind, weapon):
+		# BulletTexture1/2 levels 7..1 reuse this frame's cells at older positions.
+		for level in trail_levels(projectile):
+			_draw_bullet(view, name, index, light_name, light_index, Vector2(level.pos) + offset, float(level.angle), float(level.alpha))
+	var position: Vector2 = projectile.get("hit_pos", projectile.pos) + offset
+	_draw_bullet(view, name, index, light_name, light_index, position, Vector2(projectile.velocity).angle(), 1.0)
 	view.draw_set_transform(Vector2.ZERO)
+
+## One published bullet level: light cell then body cell, rotated by the heading.
+func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float) -> void:
+	view.draw_set_transform(at, angle)
+	if light_index >= 0:
+		var light := cell_frame(light_name, light_index)
+		view.draw_texture_rect_region(_optional_cached(light_name), light[1], light[0], Color(1, 1, 1, alpha))
+	var body := cell_frame(name, index)
+	view.draw_texture_rect_region(_optional_cached(name), body[1], body[0], Color(1, 1, 1, alpha))
+
+## User decision (ADR-120): the client's afterimage history is shown only on
+## the Raon T1 (ADR-118); every other shot keeps the approved single sprite.
+static func has_trail(kind: String, weapon: int) -> bool:
+	return kind == "raon" and weapon == 0
+
+## Native afterimages (0x458690 publish, render 0x4c4e93, shift at frame end):
+## level k is the bullet k model ticks ago, alpha 255-32k, oldest first. The
+## 60Hz presentation slides every level by the same blend as the head.
+static func trail_levels(projectile: Dictionary) -> Array:
+	var history: Array = projectile.get("trail", [])
+	var blend := clampf(float(projectile.get("draw_fraction", 1.0)), 0.0, 1.0)
+	var levels: Array = []
+	for level in range(NATIVE_TRAIL_LEVELS - 1, 0, -1):
+		var newer := history.size() - 1 - level
+		if newer < 0:
+			continue
+		var older := maxi(newer - 1, 0)
+		var at := Vector2(history[older]).lerp(Vector2(history[newer]), blend)
+		var step := Vector2(history[newer]) - Vector2(history[older])
+		var angle := step.angle() if step != Vector2.ZERO else Vector2(projectile.get("velocity", Vector2.RIGHT)).angle()
+		levels.append({"level": level, "pos": at, "angle": angle, "alpha": float(255 - 32 * level) / 255.0})
+	return levels
+
+## Afterimages left when a shell stops publishing (impact, mine, miss): the
+## render keeps shifting level k <- k-1, so `ticks_since` model ticks later
+## level k shows the point published (k - ticks_since) ticks before removal.
+static func lingering_levels(history: Array, ticks_since: int) -> Array:
+	var levels: Array = []
+	for level in range(NATIVE_TRAIL_LEVELS - 1, maxi(ticks_since, 1) - 1, -1):
+		var index := history.size() - 1 - (level - ticks_since)
+		if index < 0 or index >= history.size():
+			continue
+		var step := Vector2(history[index]) - Vector2(history[maxi(index - 1, 0)])
+		levels.append({"level": level, "pos": Vector2(history[index]), "angle": step.angle(), "alpha": float(255 - 32 * level) / 255.0})
+	return levels
+
+## Scene-only ghost of a removed Raon T1 shell; `age` follows the paused clock.
+func draw_lingering(view: Node2D, ghost: Dictionary, offset: Vector2 = Vector2.ZERO) -> void:
+	var shell: Dictionary = ghost.shell
+	var weapon := int(shell.get("weapon", 0))
+	var name := projectile_sheet(shell, weapon)
+	var info := sheet(name)
+	if info.is_empty() or not has_trail(mobile_kind, weapon):
+		return
+	var light_name := name.replace(".png","Light.png")
+	var light_info := sheet(light_name)
+	var light_index := projectile_frame(light_info, shell) if not light_info.is_empty() else -1
+	var index := projectile_frame(info, shell)
+	for level in lingering_levels(shell.get("trail", []), int(floor(float(ghost.age) / Timing.STEP + 0.000001)) + 1):
+		_draw_bullet(view, name, index, light_name, light_index, Vector2(level.pos) + offset, float(level.angle), float(level.alpha))
+	view.draw_set_transform(Vector2.ZERO)
+
+## Whether a removed shell keeps draining afterimages in the scene.
+func leaves_trail(shell: Dictionary) -> bool:
+	return has_trail(mobile_kind, int(shell.get("weapon", 0)))
 
 func _optional_cached(name: String) -> CanvasTexture:
 	if not placed.has(name):
@@ -228,15 +297,35 @@ func draw_placed(view: Node2D, mines: Array, actors: Array, offset: Vector2) -> 
 		var age := float(mine.get("state_age",mine.get("age",0.0)))
 		var index := Timing.frame(frames,info.get("durations",{}).get(state,[]),age,true)
 		var parts := cell_frame(file, index)
+		if bool(mine.get("raon_mine", false)):
+			# RayonTexture: EPA origin at cell (16,24), 32px cell, slope and
+			# facing from the model (0x499d50/0x4ebbc0).
+			view.draw_set_transform_matrix(Transform2D(0.0, offset) * RaonEffect.draw_transform(mine))
+			if file == "Mine.png":
+				var glow: CanvasTexture = _placed_texture("MineLight.png")
+				if glow != null and sheet("MineLight.png").has("cell"):
+					var light := _rayon_clip(cell_frame("MineLight.png", mini(index, int(sheet("MineLight.png").frames) - 1)))
+					if not light.is_empty():
+						view.draw_texture_rect_region(glow, light[1], light[0], Color(1, 1, 1, 0.75))
+			var body := _rayon_clip(parts)
+			if not body.is_empty():
+				view.draw_texture_rect_region(texture, body[1], body[0])
+			continue
 		var facing := -1.0 if float(mine.get("dir",1.0)) < 0.0 else 1.0
 		view.draw_set_transform(Vector2(mine.pos) + offset,0.0,Vector2(facing,1))
-		if file == "Mine.png":
-			var glow: CanvasTexture = _placed_texture("MineLight.png")
-			if glow != null and sheet("MineLight.png").has("cell"):
-				var light := cell_frame("MineLight.png", mini(index, int(sheet("MineLight.png").frames) - 1))
-				view.draw_texture_rect_region(glow, light[1], light[0], Color(1, 1, 1, 0.75))
 		view.draw_texture_rect_region(texture, parts[1], parts[0])
 	view.draw_set_transform(Vector2.ZERO)
+
+## BlitSpriteFrameToRayonTextureCell 0x497980 clips each frame to the 32px
+## cell whose origin is (16,24): local x -16..15, y -24..7.
+static func _rayon_clip(parts: Array) -> Array:
+	var source: Rect2 = parts[0]
+	var dest: Rect2 = parts[1]
+	var kept := dest.intersection(RAYON_CELL)
+	if kept.size.x <= 0.0 or kept.size.y <= 0.0:
+		return []
+	var texels := source.size / dest.size
+	return [Rect2(source.position + (kept.position - dest.position) * texels, kept.size * texels), kept]
 
 func effect_capacity(weapon: int) -> int:
 	var info := sheet("Flame%d.png" % (weapon + 1))

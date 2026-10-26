@@ -221,7 +221,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-42 | Paridade Mage/Bigfoot com o C# | MOBILE_PARITY | Vigente, com os ajustes de REQ-44 |
 | REQ-43 | Nak (ID 3) com dados do cliente original | NAK_0_15 | Vigente; aura UsingItem ausente (sem arte original) |
 | REQ-44 | Regras de batalha: cliente original comprovado, depois C# | BATTLE_RULES_AUDIT, BATTLE_FIDELITY_0_20 | ADR-084 substitui balística/carga/mínimo; demais limites declarados |
-| REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS | Boomer, onda Turtle T2 e cronologia48 implementados; demais limites/portes explícitos |
+| REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS, RAON_CLASSIC_FIX | Boomer, onda Turtle T2, cronologia48 e tiros/minas Raon (ADR-116/117) implementados; demais limites/portes explícitos |
 | REQ-46 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
 
 ## Lobby clássico e sala — ADR-096

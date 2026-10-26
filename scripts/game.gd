@@ -6,6 +6,7 @@ const CpuTurn = preload("res://scripts/cpu_turn.gd")
 const MenuScreen = preload("res://scripts/menu_screen.gd")
 const LobbyScreen = preload("res://scripts/lobby_screen.gd")
 const Combat = preload("res://scripts/combat.gd")
+const ClassicSprite = preload("res://scripts/classic_sprite.gd")
 const AvatarShop = preload("res://scripts/avatar_shop.gd")
 const ShopModel = preload("res://scripts/avatar_shop_model.gd")
 var shop
@@ -81,6 +82,8 @@ var match_id := ""
 var reward := 0
 var result_wait := -1.0
 var effects: Array = []
+# Raon T1 afterimages still draining after their shell left the model (ADR-118/120).
+var lingering: Array = []
 var floating: Array = []
 var shake := 0.0
 var fire_button: Button
@@ -164,6 +167,7 @@ func _clear_front() -> void:
 	sound.stop_music()
 	result_wait = -1.0
 	effects.clear()
+	lingering.clear()
 	floating.clear()
 	replace_root()
 	menu = null
@@ -310,6 +314,7 @@ func start_match() -> void:
 	aim.charging = false
 	cpu.reset()
 	effects.clear()
+	lingering.clear()
 	floating.clear()
 	replace_root()
 	build_hud()
@@ -451,7 +456,9 @@ func _process(delta: float) -> void:
 		aim.tick(self, frame_delta)
 	hud.tick(frame_delta, model, sound)
 	item_art.tick(frame_delta)
+	var shells_before: Array = model.projectiles.duplicate()
 	model.tick(frame_delta)
+	collect_lingering(shells_before)
 	weather_art.tick(frame_delta, model)
 	art.tick(model, frame_delta, aim.charging, aim.weapon, cpu.charging(model), cpu.weapon())
 	consume_events()
@@ -460,6 +467,10 @@ func _process(delta: float) -> void:
 		effects[i].age += frame_delta
 		if effects[i].age > 1.5:
 			effects.remove_at(i)
+	for i in range(lingering.size() - 1, -1, -1):
+		lingering[i].age += frame_delta
+		if lingering[i].age > ClassicSprite.NATIVE_TRAIL_LEVELS * Combat.STEP:
+			lingering.remove_at(i)
 	for i in range(floating.size() - 1, -1, -1):
 		floating[i].age += frame_delta
 		if floating[i].age > 1.5:
@@ -769,9 +780,23 @@ func _draw() -> void:
 	draw_offscreen_markers()
 	hud.draw_screen(self, model, hud_state())
 
+## A shell with the native afterimage history keeps draining after it leaves
+## the model; the copy is presentation only and never reaches collision.
+func collect_lingering(shells_before: Array) -> void:
+	for shell in shells_before:
+		if not bool(shell.get("launched", false)) or model.projectiles.any(func(live): return is_same(live, shell)):
+			continue
+		var body = sprite_for(int(shell.get("vehicle", -1)))
+		if body != null and body.has_method("leaves_trail") and body.leaves_trail(shell):
+			lingering.append({"shell": shell.duplicate(true), "vehicle": int(shell.vehicle), "age": 0.0})
+
 ## Shells in flight, in world space. Each shell keeps its weapon (Dual+ mixes
 ## S1 and S2 in one turn); the beacon has its own art.
 func draw_projectiles(offset: Vector2) -> void:
+	for ghost in lingering:
+		var ghost_body = sprite_for(int(ghost.vehicle))
+		if ghost_body != null:
+			ghost_body.draw_lingering(self, ghost, offset)
 	draw_set_transform(offset)
 	for source_projectile in model.projectiles:
 		var projectile: Dictionary = source_projectile.duplicate()
