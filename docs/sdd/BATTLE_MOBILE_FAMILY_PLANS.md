@@ -62,6 +62,11 @@ Pacote2: SS com filtragem correta de colisão e sua própria agenda de ricochete
 
 ## 6. Feixes, campos e transformação — Lightning/Ice/Turtle
 
+Lightning revisado e portado no escopo delimitado da ADR-127 em
+`LIGHTNING_CLIENT_REVIEW.md` (27/10/2026). As pesquisas abaixo descrevem
+o plano anterior; não usar quatro braços C# como contrato vigente.
+
+
 Lightning: confirmar varredura original de cada braço e separar dano de passagem e choque final. C# S2 cria4 eletricidades mas isso não substitui a leitura dos quatro caminhos originais. Fixtures com cobertura parcial, dois sólidos separados e mobile fora/atrás da última célula sólida; testar que parâmetros adicionais não se perdem na fábrica.
 
 Ice: identificar as células alteradas pelo simulador/Explode, teto e repetição da redução antes de mudar o modelo. C# `OnDealDamage` é fonte auxiliar e contém sua própria condição de limite. Fixtures repetindo S2 contra o mesmo ator, defesa máxima/mínima, SS e ausência de dano inicial.

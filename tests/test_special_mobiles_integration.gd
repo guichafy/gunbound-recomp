@@ -23,6 +23,11 @@ func fresh(vehicle: int, weapon: int):
 		# This fixture replaces the generated terrain after Match.start.
 		model.terrain.native_cells.clear()
 		model.terrain.enable_native()
+		# Native Thor starts atY500; this artificial floor isY440. Place the
+		# test satellite above its target to exercise a damaging contact.
+		model.weather.thor.pos=Vector2(600,100)
+		model.weather.thor.display_pos=model.weather.thor.pos
+		model.weather.thor.previous_display_pos=model.weather.thor.pos
 	model.fire(40,50,weapon)
 	model.events.clear()
 	return model

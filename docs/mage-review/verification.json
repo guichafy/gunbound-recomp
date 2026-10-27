@@ -1,0 +1,362 @@
+{
+  "passed": true,
+  "scope": "Mage-only stable snapshot plus full rerun of environment-only failed button suite",
+  "suites": 87,
+  "godot_checks": 20598,
+  "python_tests": 48,
+  "matches": 29,
+  "parse": true,
+  "records": {
+    "parse": {
+      "status": "OK",
+      "summary": "todos os scripts e capturas compilam"
+    },
+    "test_runner": {
+      "status": "OK",
+      "summary": "CHECKS: 39 | FAILURES: 0"
+    },
+    "test_scene": {
+      "status": "OK",
+      "summary": "SCENE CHECKS: 27 | FAILURES: 0"
+    },
+    "test_lobby_ui": {
+      "status": "OK",
+      "summary": "LOBBY UI CHECKS: 96 | FAILURES: 0"
+    },
+    "test_lobby_art_hd": {
+      "status": "OK",
+      "summary": "LOBBY ART HD CHECKS: 93 | FAILURES: 0"
+    },
+    "test_room_ui": {
+      "status": "OK",
+      "summary": "ROOM UI CHECKS: 172 | FAILURES: 0"
+    },
+    "test_room_reference": {
+      "status": "OK",
+      "summary": "ROOM REFERENCE CHECKS: 209 | FAILURES: 0"
+    },
+    "test_room_polish": {
+      "status": "OK",
+      "summary": "ROOM POLISH CHECKS: 162 | FAILURES: 0"
+    },
+    "test_room_settings": {
+      "status": "OK",
+      "summary": "ROOM SETTINGS CHECKS: 58 | FAILURES: 0"
+    },
+    "test_classic_buttons_hd": {
+      "status": "OK",
+      "summary": "CLASSIC BUTTONS HD CHECKS: 596 | FAILURES: 0",
+      "revalidated_after": "Missing docs PNG in temporary copy; docs reattached, entire suite repeated"
+    },
+    "test_refinement": {
+      "status": "OK",
+      "summary": "REFINEMENT MODEL CHECKS: 28 | FAILURES: 0"
+    },
+    "test_refinement_scene": {
+      "status": "OK",
+      "summary": "REFINEMENT SCENE CHECKS: 22 | FAILURES: 0"
+    },
+    "test_bigfoot": {
+      "status": "OK",
+      "summary": "BIGFOOT CHECKS: 28 | FAILURES: 0"
+    },
+    "test_bigfoot_smooth": {
+      "status": "OK",
+      "summary": "BIGFOOT SMOOTH CHECKS: 70 | FAILURES: 0"
+    },
+    "test_mage": {
+      "status": "OK",
+      "summary": "MAGE CHECKS: 41 | FAILURES: 0"
+    },
+    "test_mage_scene": {
+      "status": "OK",
+      "summary": "MAGE SCENE CHECKS: 15 | FAILURES: 0"
+    },
+    "test_bigfoot_attacks": {
+      "status": "OK",
+      "summary": "BIGFOOT ATTACK CHECKS: 56 | FAILURES: 0"
+    },
+    "test_bigfoot_attacks_scene": {
+      "status": "OK",
+      "summary": "BIGFOOT ATTACK SCENE CHECKS: 14 | FAILURES: 0"
+    },
+    "test_hd_assets": {
+      "status": "OK",
+      "summary": "HD CHECKS: 193 | FAILURES: 0"
+    },
+    "test_mobile_animation": {
+      "status": "OK",
+      "summary": "ANIMATION CHECKS: 240 | FAILURES: 0"
+    },
+    "test_pilot_projectiles": {
+      "status": "OK",
+      "summary": "PILOT/SHOTS CHECKS: 108 | FAILURES: 0"
+    },
+    "test_roster": {
+      "status": "OK",
+      "summary": "ROSTER/SIDE PILOT CHECKS: 79 | FAILURES: 0"
+    },
+    "test_map": {
+      "status": "OK",
+      "summary": "MAP CHECKS: 41 | FAILURES: 0"
+    },
+    "test_weather": {
+      "status": "OK",
+      "summary": "WEATHER CHECKS: 69 | FAILURES: 0"
+    },
+    "test_hud": {
+      "status": "OK",
+      "summary": "HUD CHECKS: 449 | FAILURES: 0"
+    },
+    "test_aiming": {
+      "status": "OK",
+      "summary": "AIMING CHECKS: 25 | FAILURES: 0"
+    },
+    "test_performance": {
+      "status": "OK",
+      "summary": "PERFORMANCE CHECKS: 19 | FAILURES: 0"
+    },
+    "test_items": {
+      "status": "OK",
+      "summary": "ITEMS CHECKS: 49 | FAILURES: 0"
+    },
+    "test_items_scene": {
+      "status": "OK",
+      "summary": "ITEMS SCENE CHECKS: 47 | FAILURES: 0"
+    },
+    "test_shop_items_integration": {
+      "status": "OK",
+      "summary": "SHOP ITEMS INTEGRATION CHECKS: 39 | FAILURES: 0"
+    },
+    "test_avatar_catalog": {
+      "status": "OK",
+      "summary": "AVATAR CATALOG CHECKS: 34 | FAILURES: 0"
+    },
+    "test_avatar_profile": {
+      "status": "OK",
+      "summary": "AVATAR PROFILE CHECKS: 25 | FAILURES: 0"
+    },
+    "test_avatar_shop": {
+      "status": "OK",
+      "summary": "AVATAR SHOP CHECKS: 25 | FAILURES: 0"
+    },
+    "test_avatar_shop_classic": {
+      "status": "OK",
+      "summary": "CLASSIC SHOP CHECKS: 25 | FAILURES: 0"
+    },
+    "test_avatar_shop_parity": {
+      "status": "OK",
+      "summary": "SHOP PARITY CHECKS: 34 | FAILURES: 0"
+    },
+    "test_shop_audit": {
+      "status": "OK",
+      "summary": "SHOP AUDIT CHECKS: 27 | FAILURES: 0"
+    },
+    "test_shop_wide": {
+      "status": "OK",
+      "summary": "WIDE SHOP CHECKS: 36 | FAILURES: 0"
+    },
+    "test_shop_xfs": {
+      "status": "OK",
+      "summary": "XFS SHOP CHECKS: 17 | FAILURES: 0"
+    },
+    "test_xfs_catalog": {
+      "status": "OK",
+      "summary": "XFS CATALOG CHECKS: 3816 | FAILURES: 0"
+    },
+    "test_shop_test_funds": {
+      "status": "OK",
+      "summary": "SHOP TEST FUNDS CHECKS: 14 | FAILURES: 0"
+    },
+    "test_xfs_equipment": {
+      "status": "OK",
+      "summary": "XFS EQUIPMENT CHECKS: 19 | FAILURES: 0"
+    },
+    "test_xfs_hd_migration": {
+      "status": "OK",
+      "summary": "XFS HD MIGRATION CHECKS: 2009 | FAILURES: 0"
+    },
+    "test_shop_hd": {
+      "status": "OK",
+      "summary": "SHOP HD CHECKS: 46 | FAILURES: 0"
+    },
+    "test_avatar_art": {
+      "status": "OK",
+      "summary": "AVATAR ART CHECKS: 9 | FAILURES: 0"
+    },
+    "test_avatar_mount": {
+      "status": "OK",
+      "summary": "AVATAR MOUNT CHECKS: 24 | FAILURES: 0"
+    },
+    "test_avatar_hd": {
+      "status": "OK",
+      "summary": "AVATAR HD CHECKS: 152 | FAILURES: 0"
+    },
+    "test_avatar_continuity": {
+      "status": "OK",
+      "summary": "AVATAR CONTINUITY CHECKS: 130 | FAILURES: 0"
+    },
+    "test_attributes": {
+      "status": "OK",
+      "summary": "ATTRIBUTES CHECKS: 59 | FAILURES: 0"
+    },
+    "test_gold_rewards": {
+      "status": "OK",
+      "summary": "GOLD REWARDS CHECKS: 43 | FAILURES: 0"
+    },
+    "test_mobile_parity": {
+      "status": "OK",
+      "summary": "MOBILE PARITY CHECKS: 27 | FAILURES: 0"
+    },
+    "test_nak": {
+      "status": "OK",
+      "summary": "NAK CHECKS: 55 | FAILURES: 0"
+    },
+    "test_battle_rules": {
+      "status": "OK",
+      "summary": "BATTLE RULES CHECKS: 60 | FAILURES: 0"
+    },
+    "test_classic_mobiles": {
+      "status": "OK",
+      "summary": "CLASSIC MOBILE CHECKS: 141 | FAILURES: 0"
+    },
+    "test_original_mobiles": {
+      "status": "OK",
+      "summary": "ORIGINAL MOBILES CHECKS: 39 | FAILURES: 0"
+    },
+    "test_mage_client_animation": {
+      "status": "OK",
+      "summary": "MAGE CLIENT ANIMATION CHECKS: 115 | FAILURES: 0"
+    },
+    "test_classic_flight_parity": {
+      "status": "OK",
+      "summary": "CLASSIC FLIGHT PARITY CHECKS: 86 | FAILURES: 0"
+    },
+    "test_classic_ballistics": {
+      "status": "OK",
+      "summary": "CLASSIC BALLISTICS CHECKS: 1077 | FAILURES: 0"
+    },
+    "test_boomer": {
+      "status": "OK",
+      "summary": "BOOMER CHECKS: 88 | FAILURES: 0"
+    },
+    "test_classic_assets": {
+      "status": "OK",
+      "summary": "CLASSIC ASSETS CHECKS: 36 | FAILURES: 0"
+    },
+    "test_turtle_projectiles": {
+      "status": "OK",
+      "summary": "TURTLE PROJECTILE CHECKS: 158 | FAILURES: 0"
+    },
+    "test_turtle_t2": {
+      "status": "OK",
+      "summary": "TURTLE T2 CHECKS: 588 | FAILURES: 0"
+    },
+    "test_classic_shot_timing": {
+      "status": "OK",
+      "summary": "CLASSIC SHOT TIMING CHECKS: 158 | FAILURES: 0"
+    },
+    "test_classic_shot_timing_scene": {
+      "status": "OK",
+      "summary": "CLASSIC TIMING SCENE CHECKS: 18 | FAILURES: 0"
+    },
+    "test_xfs_import": {
+      "status": "OK",
+      "summary": "Ran 12 tests in 1.397s"
+    },
+    "test_avatar_effect_source": {
+      "status": "OK",
+      "summary": "Ran 2 tests in 0.066s"
+    },
+    "test_classic_asset_manifest": {
+      "status": "OK",
+      "summary": "Ran 3 tests in 0.021s"
+    },
+    "test_original_mobile_assets": {
+      "status": "OK",
+      "summary": "Ran 2 tests in 19.582s"
+    },
+    "test_asate_effect": {
+      "status": "OK",
+      "summary": "ASATE EFFECT CHECKS: 80 | FAILURES: 0"
+    },
+    "test_jd_effect": {
+      "status": "OK",
+      "summary": "JD_EFFECT CHECKS: 80 | FAILURES: 0"
+    },
+    "test_aduka_effect": {
+      "status": "OK",
+      "summary": "ADUKA EFFECT CHECKS: 93 | FAILURES: 0"
+    },
+    "test_aduka_beam_art": {
+      "status": "OK",
+      "summary": "ADUKA BEAM ART CHECKS: 16 | FAILURES: 0"
+    },
+    "test_aduka_thor_assets": {
+      "status": "OK",
+      "summary": "Ran 2 tests in 0.370s"
+    },
+    "test_raon_effect": {
+      "status": "OK",
+      "summary": "RAON EFFECT CHECKS: 168 | FAILURES: 0"
+    },
+    "test_raon_shots": {
+      "status": "OK",
+      "summary": "RAON SHOTS CHECKS: 102 | FAILURES: 0"
+    },
+    "test_raon_mines": {
+      "status": "OK",
+      "summary": "RAON MINES CHECKS: 33 | FAILURES: 0"
+    },
+    "test_raon_trail": {
+      "status": "OK",
+      "summary": "RAON TRAIL CHECKS: 93 | FAILURES: 0"
+    },
+    "test_special_mobiles_integration": {
+      "status": "OK",
+      "summary": "SPECIAL MOBILE INTEGRATION CHECKS: 275 | FAILURES: 0"
+    },
+    "test_raon_native_source": {
+      "status": "OK",
+      "summary": "Ran 13 tests in 0.253s"
+    },
+    "test_asate_satellite_audio": {
+      "status": "OK",
+      "summary": "Ran 3 tests in 0.090s"
+    },
+    "test_matches": {
+      "status": "OK",
+      "summary": "COMPLETE MATCHES: 13 | FAILURES: 0 | TIME MS: 100748"
+    },
+    "test_classic_matches": {
+      "status": "OK",
+      "summary": "CLASSIC MATCHES: 16 | FAILURES: 0 | TIME MS: 100704"
+    },
+    "test_aduka_native": {
+      "status": "OK",
+      "summary": "ADUKA NATIVE CHECKS: 40 | FAILURES: 0"
+    },
+    "test_aduka_assets": {
+      "status": "OK",
+      "summary": "Ran 7 tests in 10.542s"
+    },
+    "test_aduka_combat": {
+      "status": "OK",
+      "summary": "ADUKA COMBAT CHECKS: 661 | FAILURES: 0"
+    },
+    "test_aduka_weather": {
+      "status": "OK",
+      "summary": "ADUKA WEATHER CHECKS: 2629 | FAILURES: 0"
+    },
+    "test_mage_native": {
+      "status": "OK",
+      "summary": "MAGE NATIVE CHECKS: 4054 | FAILURES: 0"
+    },
+    "test_mage_assets": {
+      "status": "OK",
+      "summary": "Ran 4 tests in 14.103s"
+    }
+  },
+  "full_log_sha256": "8382c5ce499b963640452f55f38cb53dfaa4e9f5c42eab99c84854f4a084afb1",
+  "button_recheck_sha256": "43ca72dbf490a33ee2b0d3d8afdc5ad0ee147181d15fc894d92690f4e4b81930"
+}

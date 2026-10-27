@@ -1,0 +1,1524 @@
+{
+  "authority": "Static PE ASM, original DAT/XFS and independent arithmetic fixtures. No Windows runtime execution.",
+  "date": "2026-10-27",
+  "toolchain": "Ghidra12.2/JDK26; x86 LE32 Windows ABI",
+  "inputs": {
+    ".tools/mobile-animation-port/GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    ".tools/gunbound-client/graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+    ".tools/gunbound-client/stage.dat": "103c2b488977e1721becf8cb90496f95477302ec24141f94116d5214a3e6cfca",
+    ".tools/gunbound-client/characterdata.dat": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf"
+  },
+  "extracts": [
+    {
+      "extract": ".tools/mage-weather/01-calendar",
+      "accepted_for_proof": true,
+      "manifest_sha256": "512002a30f7413aa62181c22228c42607c1858c908f48ab1af96427bcfc9154d",
+      "functions": [
+        {
+          "requested_va": "0x41ebf0",
+          "entry_va": "0041ebf0",
+          "status": "decompiled",
+          "asm_sha256": "9315d7f9ac564d26493bcd604223c9944ad70dd1bb35809a5812c3c6d96b207c",
+          "c_sha256": "3808a0a1bb84d35bdc5d815159ac18be4fd87a5884f976377e1927f7c41402f7"
+        },
+        {
+          "requested_va": "0x41f200",
+          "entry_va": "0041f200",
+          "status": "decompiled",
+          "asm_sha256": "9aa3a0e2c422f795ed77af23bf41ca0a4f78379fe942e9c7d6347203aa85a840",
+          "c_sha256": "194c7835de61f653f9f7e145692cda9e5f4a2d9192780080939f3b95ef3eba55"
+        },
+        {
+          "requested_va": "0x41fd50",
+          "entry_va": "0041fd50",
+          "status": "decompiled",
+          "asm_sha256": "4ee0a6000ea97a572611c4b50b29133c4dd3035a5b4a5193af5b39f623b75b05",
+          "c_sha256": "45b9331d2e6cbbe7d44edaca9dd9e8630e57a49ac84e6a179341948bdd9e6e40"
+        },
+        {
+          "requested_va": "0x4d0a10",
+          "entry_va": "004d0a10",
+          "status": "decompiled",
+          "asm_sha256": "5ee6477e407b9e4f8a0590e90f6d21d5ff3a335b8c653b5e83e624ac3851da89",
+          "c_sha256": "5754bcf46d9f19eb12a7c42167c7b55972d22170dfec4cbd1d2e490bbbd029ba"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/02-effects",
+      "accepted_for_proof": true,
+      "manifest_sha256": "fdc94b238533d7150e12269d083315fb883f180586620a4c9eabe14fb7ceb0f4",
+      "functions": [
+        {
+          "requested_va": "0x435ad0",
+          "entry_va": "00435ad0",
+          "status": "decompiled",
+          "asm_sha256": "76b5c0d055fc2ed6d1d400dc8f7fdd26567e5930d9e57f4126d9521a07058bcc",
+          "c_sha256": "cdc9bf82c05fe56cf726a611dc9fd1676d308e0b6136147ce4e53c64313f2655"
+        },
+        {
+          "requested_va": "0x435800",
+          "entry_va": "00435800",
+          "status": "decompiled",
+          "asm_sha256": "c14d5abfdec6f062a9a9f79342477709c530c89db7dbc04d1849ef8c48c332f0",
+          "c_sha256": "7903c195384e6dc865a39b7d3110ebf3c53ac808bc67ee8a601a04b44ac93e43"
+        },
+        {
+          "requested_va": "0x435da0",
+          "entry_va": "00435da0",
+          "status": "decompiled",
+          "asm_sha256": "6320bde2b559eb0756d44b8b09887b7cafbc469f32f55dfe3295a83e09a60fd7",
+          "c_sha256": "612dc50250f44edcd8fc7aa123ca8f84801ef9aaee80cda24135407d912a259f"
+        },
+        {
+          "requested_va": "0x4217b0",
+          "entry_va": "004217b0",
+          "status": "decompiled",
+          "asm_sha256": "4d70c75187090c4e002f41d938e8dc1d0949bd03b58379abbd843fa92fe81d43",
+          "c_sha256": "d944f48598a17a66c8ff89844618aa377034dfe805852a51fcecbeb7960320e4"
+        },
+        {
+          "requested_va": "0x45ea40",
+          "entry_va": "0045ea40",
+          "status": "decompiled",
+          "asm_sha256": "b82bdf78cb34993564a1ea83f0621b8300da9aff16d009cbf9e663849ca4f53e",
+          "c_sha256": "54952aae92447f94c6dadd229acfba806a4b553fd59172bbb5c0c73e8dd0ad6f"
+        },
+        {
+          "requested_va": "0x43af40",
+          "entry_va": "0043af40",
+          "status": "decompiled",
+          "asm_sha256": "8120bc6c0c52170e9ecddd7bb6c8832d3b4b600169cc0e68c807f9b87dcf6ada",
+          "c_sha256": "de31af8ce6fb41c7fde545bb54afe4fd65278219f333eda30e2055f13d3d3bd8"
+        },
+        {
+          "requested_va": "0x431d90",
+          "entry_va": "00431d90",
+          "status": "decompiled",
+          "asm_sha256": "63493e6733d3f10913f1910bdfba59d8ed0e18483767eec81bf37f9477b0f7d3",
+          "c_sha256": "af6ff7a496dfe3ac2850a2434bc7f7f6c50b2d71c1b289ea67cd0ac8f8bf2a74"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/03-turn",
+      "accepted_for_proof": true,
+      "manifest_sha256": "80e74875cd60f50627348a302347b4cd6970315f99faf1941968d686eb02c720",
+      "functions": [
+        {
+          "requested_va": "0x4cf310",
+          "entry_va": "004cf310",
+          "status": "decompiled",
+          "asm_sha256": "d691a41ecc45234e3746b5d6499f2415e8cb43306fa593b68dac003f3a2d01fc",
+          "c_sha256": "c1668a9150b3716aa7d125b6f1976a9726df658948b3fc12f132f021815901ee"
+        },
+        {
+          "requested_va": "0x438360",
+          "entry_va": "00438360",
+          "status": "decompiled",
+          "asm_sha256": "dd2a7d5f73c476ac17f6c7977156807ce670d90393c342c078e317bd382a6d7b",
+          "c_sha256": "b549aa82f6145e7f70cace1f502167482b16624e66f4c6d6026e2f88e2dd794a"
+        },
+        {
+          "requested_va": "0x43a530",
+          "entry_va": "0043a530",
+          "status": "decompiled",
+          "asm_sha256": "f29442ca326294e677f94ca773fd0aaaa175a9f57ac7527ad6da4ddacc325dc5",
+          "c_sha256": "49ab4c56707b159951136e42449407f2fc800bf329aec32fb8a5f04548fdd2b9"
+        },
+        {
+          "requested_va": "0x41ee00",
+          "entry_va": "0041ebf0",
+          "status": "decompiled",
+          "asm_sha256": "9315d7f9ac564d26493bcd604223c9944ad70dd1bb35809a5812c3c6d96b207c",
+          "c_sha256": "3808a0a1bb84d35bdc5d815159ac18be4fd87a5884f976377e1927f7c41402f7"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/04-columns",
+      "accepted_for_proof": false,
+      "manifest_sha256": "96b481633fd4fcf90161824697045f495fbe1aa484169adb559924ab11971ef0",
+      "functions": [
+        {
+          "requested_va": "0x471320",
+          "entry_va": "00471320",
+          "status": "decompiled",
+          "asm_sha256": "73cfbc81d15fe3b28516850f1a410fb76588268fcd8323ab0938c2b8189f0cc5",
+          "c_sha256": "7ae991dcef1878287de24b097702a71f5695b600bd60397c63113aff30c3dbac"
+        },
+        {
+          "requested_va": "0x46dde0",
+          "entry_va": "0046dde0",
+          "status": "decompiled",
+          "asm_sha256": "57c5bd86622e400a7367f4ef0ff57754e81579d01a062410d331a7452c6a20a7",
+          "c_sha256": "a376941e0001c8584420ee2548d66719612a2e36eef787f8957f190ebd37cc21"
+        },
+        {
+          "requested_va": "0x4ac750",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x4ac760",
+          "entry_va": "004ac760",
+          "status": "decompiled",
+          "asm_sha256": "d27907b857c25b7c3320e8214aa4c0fcf5ca5c7b362b31a792ac3acee9d48483",
+          "c_sha256": "5c66b0abe630dc3f1713207362658228219cbfd9c5bc64d32b27c27e569a5966"
+        },
+        {
+          "requested_va": "0x417180",
+          "entry_va": "00416c20",
+          "status": "decompiled",
+          "asm_sha256": "6d2f01091da352d9503ac2d4ada2a3a413f990ff168784da556c3e087f574905",
+          "c_sha256": "50148af7ce0e5eaa6158893601a95bca9a276216e3f05348ab7c34dcc7888db6"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/05-column-ticks",
+      "accepted_for_proof": true,
+      "manifest_sha256": "a77753e9793b2368e1cd14d7ddc8e60d9945baab332b77d3ff3c58b79309fba4",
+      "functions": [
+        {
+          "requested_va": "0x4ac750",
+          "entry_va": "004ac750",
+          "status": "decompiled",
+          "asm_sha256": "7b1c76e7833839c308b4c9cef4bb61e7eb4d518239743c9cc9b1d6cd66132e4b",
+          "c_sha256": "adb9d1d6c9fd75311546ebba30fd5c6befc5f3245b3f7efa58a7829df42842d9"
+        },
+        {
+          "requested_va": "0x46e010",
+          "entry_va": "0046e010",
+          "status": "decompiled",
+          "asm_sha256": "0e1fc4e2a9b59c2ef17b458c7be17d3062b554047df2aad22be0ed3da1caa835",
+          "c_sha256": "296522c1dd4872daea3009f9262b788eab2b72263585440125824163798668e2"
+        },
+        {
+          "requested_va": "0x44d990",
+          "entry_va": "0044d990",
+          "status": "decompiled",
+          "asm_sha256": "33b35399381c526dcf1dc194649d6443b1ec9a1525032cc9a0b1a592564df726",
+          "c_sha256": "3c4e78ede01db507901d0d74ad8998f80b444dbfa1470f903f9f52d79f065e2e"
+        },
+        {
+          "requested_va": "0x471a90",
+          "entry_va": "00471a90",
+          "status": "decompiled",
+          "asm_sha256": "f3c9bc594374fa5461dfc86575411ba4f549fd7a2182328dc9201e6b50731440",
+          "c_sha256": "012c5cb4e92352c775c154933a6486e5296831b5136daeb5937001e20f6368a3"
+        },
+        {
+          "requested_va": "0x4acc90",
+          "entry_va": "004acc90",
+          "status": "decompiled",
+          "asm_sha256": "ad4ca9d648d33a4ddaa6ea7c64cbe9e81717596a80c9efc1dd54efb7a17f1c7f",
+          "c_sha256": "7161e1a4c582e29b8ae9d3523a900a43ce63a897ee3d77a582f2349c02b5336b"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/06-stage-refs",
+      "accepted_for_proof": true,
+      "manifest_sha256": "c378902d527b0e6ef2ebd67d53370c7a3e3671cc3ff7c3eeff5cfca206ae4da0",
+      "functions": []
+    },
+    {
+      "extract": ".tools/mage-weather/07-stage-loader",
+      "accepted_for_proof": true,
+      "manifest_sha256": "a84868ecde0df2a846a9e617e9b358720cad986b77890525542d9c4cd609272c",
+      "functions": [
+        {
+          "requested_va": "0x41ab9f",
+          "entry_va": "00419d90",
+          "status": "decompiled",
+          "asm_sha256": "16372fba35f85f0e995fb9f5b9cd89d452a0372403f14838597e45f88f51b7ff",
+          "c_sha256": "d74e035d0b742ad4462f9c606e17804d21b4267a4fca745930657f7c1be1f363"
+        },
+        {
+          "requested_va": "0x40a2e0",
+          "entry_va": "0040a2e0",
+          "status": "decompiled",
+          "asm_sha256": "b79ee15527b5cc1d0688803babc8f221231ce0c1f532ecbee9139fdd611d49f5",
+          "c_sha256": "eff1f8f5e5eb5ad844046afcab20a98ba12570356ae7cac787915ca18410fa3d"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/01-consumers",
+      "accepted_for_proof": true,
+      "manifest_sha256": "4b948f067f0a6a5729be7ece017e959d540b61c1fe5267d57a4acb6411f4b148",
+      "functions": [
+        {
+          "requested_va": "0x0048d8e0",
+          "entry_va": "0048d8e0",
+          "status": "decompiled",
+          "asm_sha256": "193e6a1ac4dea013c58ef9a845aac41cf50142e35d656f280f7373f33ace5a34",
+          "c_sha256": "997f6efd2fdb5b5599e9d51b190d2c0a60bab0db8cb27905964fc0c6d11276eb"
+        },
+        {
+          "requested_va": "0x0048de60",
+          "entry_va": "0048de60",
+          "status": "decompiled",
+          "asm_sha256": "4cb049ffa88d5fda61c64be8e6ef5f1b95bfd42bed724c49b2a561d5d9359c92",
+          "c_sha256": "610c9d152e133c90c8a1a776afbe4c0681e06427b3ed60bb6c15cb65626eebf1"
+        },
+        {
+          "requested_va": "0x004511b0",
+          "entry_va": "004511b0",
+          "status": "decompiled",
+          "asm_sha256": "4d4cfb5cd0b37dab1d4125af8f53829de5e78758a69620caffa88c058a4dc371",
+          "c_sha256": "1522c40a933b831bcb40fad6fb9deeddf2330cfb784ddebcdf84d3b7a8b2f33c"
+        },
+        {
+          "requested_va": "0x004aa830",
+          "entry_va": "004aa830",
+          "status": "decompiled",
+          "asm_sha256": "1852aeac719f32b1aae9e3234ba6a9faf2657b424fea1367002cf2f007214365",
+          "c_sha256": "68c0cd5d05603cb7598c96ee27644f8214bd6fb57f7216f68e9a9aa0b2cecf68"
+        },
+        {
+          "requested_va": "0x004ac400",
+          "entry_va": "004ac400",
+          "status": "decompiled",
+          "asm_sha256": "6d733b46563a5fdaf78d63a1b033e8f8e4bc947c23be40544ab38e36cf1eb63e",
+          "c_sha256": "97e94b731c4c6315ef7183f271bf7b22c586a0ddb4c1d1b0a9cc18cc52b05cea"
+        },
+        {
+          "requested_va": "0x004ac4d0",
+          "entry_va": "004ac4d0",
+          "status": "decompiled",
+          "asm_sha256": "2203dc98461042a1d2a02f139e704adf5485b14324ed1a0efe8aa30cbe3adf77",
+          "c_sha256": "230ff9231188885231a4f86417cf17bad1d9013a885a29c797fe947aaf6af81c"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/02-helpers",
+      "accepted_for_proof": true,
+      "manifest_sha256": "8c69f4359c51389f1fa1690fe399b0881201fe42847239eedc74c2605d32249f",
+      "functions": [
+        {
+          "requested_va": "0x0040ab20",
+          "entry_va": "0040ab20",
+          "status": "decompiled",
+          "asm_sha256": "f2c8f490302910c18190d13a3e62d7cc356bfd01d7ac0449c0c8d3514253f505",
+          "c_sha256": "10c7e7090f8389f46fc9afcd9fe959c2e01422bc6a1d68aedabec262df9a4756"
+        },
+        {
+          "requested_va": "0x00436070",
+          "entry_va": "00436070",
+          "status": "decompiled",
+          "asm_sha256": "d9ceff08bc8c7f3207d6817a93e4b3322b8fbeb012d3ced8fa0ec1f6f88d9703",
+          "c_sha256": "49cfd59fe30ec79c68e087d870c7660b68ec6eedf96c7bee6e3151ceebf50089"
+        },
+        {
+          "requested_va": "0x004262d0",
+          "entry_va": "004262d0",
+          "status": "decompiled",
+          "asm_sha256": "5c96b17ba8a4ee19c68d6ea15ea069e5274e377f75ab1726cab5d76039c8a81c",
+          "c_sha256": "4f8d2dd64cf751ac383bacac27ea09d86f7059d573def9efd421167363c56044"
+        },
+        {
+          "requested_va": "0x00432320",
+          "entry_va": "00432320",
+          "status": "decompiled",
+          "asm_sha256": "bf83d174c3b61da9c6161a4c1f48a726587215d7dbbe7d0ff3f13b34f90587f4",
+          "c_sha256": "b23cd61f17fcd0d253718e69b994407a115398d465bdeb8c011afbf4da30b317"
+        },
+        {
+          "requested_va": "0x00450eb0",
+          "entry_va": "00450eb0",
+          "status": "decompiled",
+          "asm_sha256": "0202fafc751ba6e4f808e437437a4fcafdb37ad859956b81eb49ad2adecbe0e3",
+          "c_sha256": "3bb74dd42a63d9f310c8952c910017d1bc0b02bd40c3183518afd13fcd54cd25"
+        },
+        {
+          "requested_va": "0x0043bda0",
+          "entry_va": "0043bda0",
+          "status": "decompiled",
+          "asm_sha256": "3c87339848c30b3bc30ef5001974db02b11774378f0112ec355ba97781a0fda7",
+          "c_sha256": "6d59361c0239a643327f24d7b25f014fcf690a83bb2d8052bdea99aef633374c"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/03-flight-render",
+      "accepted_for_proof": true,
+      "manifest_sha256": "1b147ac7db6ae2e3e5952b6b5aa60897408206ed576c4b00fa8ab706728f04f6",
+      "functions": [
+        {
+          "requested_va": "0x00436ec0",
+          "entry_va": "00436ec0",
+          "status": "decompiled",
+          "asm_sha256": "e9102ce1d4b74ba1b4c698e2e6a43f2e12c21c49527d1a70da4ff24766ccbdfa",
+          "c_sha256": "2f9215ac2e5e2fade33c3b23d9c575e18729c604b4d2a809093c70b1f2de14dd"
+        },
+        {
+          "requested_va": "0x00482320",
+          "entry_va": "00482130",
+          "status": "decompiled",
+          "asm_sha256": "256d693b91d6df22231f935a2031bf001b33ed6741dc5de3c10217452056dc77",
+          "c_sha256": "c505c1dcbcc7f69537c57c2779b70289479c97f308fa18117e68773386067f5c"
+        },
+        {
+          "requested_va": "0x00482130",
+          "entry_va": "00482130",
+          "status": "decompiled",
+          "asm_sha256": "256d693b91d6df22231f935a2031bf001b33ed6741dc5de3c10217452056dc77",
+          "c_sha256": "c505c1dcbcc7f69537c57c2779b70289479c97f308fa18117e68773386067f5c"
+        },
+        {
+          "requested_va": "0x00425ac0",
+          "entry_va": "00425ac0",
+          "status": "decompiled",
+          "asm_sha256": "f1870d3d17634230d7661049a5d7896e9ae7daa5e59a80a2801dd2abdd0bb5b4",
+          "c_sha256": "4eeccadbd5f1340f05cc524b2347d829ad1c628c385734f59cbddbc328e2ceb9"
+        },
+        {
+          "requested_va": "0x0043a530",
+          "entry_va": "0043a530",
+          "status": "decompiled",
+          "asm_sha256": "f29442ca326294e677f94ca773fd0aaaa175a9f57ac7527ad6da4ddacc325dc5",
+          "c_sha256": "49ab4c56707b159951136e42449407f2fc800bf329aec32fb8a5f04548fdd2b9"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/04-spark",
+      "accepted_for_proof": true,
+      "manifest_sha256": "5145df73019266bd98cee41b31dc3e59f8141448d8eaf1d6d80573addc1f9d9a",
+      "functions": [
+        {
+          "requested_va": "0x00481e30",
+          "entry_va": "00481e30",
+          "status": "decompiled",
+          "asm_sha256": "3481e3b9d43294610d4964e1d342649aefea91dc96bf67a29d1f98801387f62b",
+          "c_sha256": "da2d29efac08bf91ad1023257ac069809c8c4423f6be5a092bbb0408d8ff768d"
+        },
+        {
+          "requested_va": "0x00481fb0",
+          "entry_va": "00481fb0",
+          "status": "decompiled",
+          "asm_sha256": "0ce931903ac48cc7019ab5290ceabce577b348b2d8a9d789bbd2bdb2e9ea5274",
+          "c_sha256": "f4e66222a37546739730da1763a664960b99fa7b40bee1d09a9e5e9f0d5dcd89"
+        },
+        {
+          "requested_va": "0x004820b0",
+          "entry_va": "00482080",
+          "status": "decompiled",
+          "asm_sha256": "e925899d6ccfcd16b55c90c7467e897fc90c103b6b3c6da117ce86a290974035",
+          "c_sha256": "0ecbfc633bcfa59684eb7bf5d2390e37c23e36677dda7005b2db2f1cc0a35bb5"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/05-spark-raster",
+      "accepted_for_proof": false,
+      "manifest_sha256": "05bae7a2e61a96430f1e01b447e04fe48a96bc883f6884a001d16596fdaf0df8",
+      "functions": [
+        {
+          "requested_va": "0x00481e80",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x00481ef0",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/06-thor-position",
+      "accepted_for_proof": false,
+      "manifest_sha256": "079a2327285f7a3d6f7da9f4172b471e03ef636e0bc3afcbbd2595a2345858a7",
+      "functions": [
+        {
+          "requested_va": "0x004bc117",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x00439d90",
+          "entry_va": "00439d90",
+          "status": "decompiled",
+          "asm_sha256": "b326d92778dee84514d367ef3d64cda19988d590861a5943dde4c0cd53e4706d",
+          "c_sha256": "8b31960bc6d5f903f5542a8cac1f4dfd8e976ddfaeddf9719f0d764b74c42166"
+        },
+        {
+          "requested_va": "0x004abb70",
+          "entry_va": "004abb70",
+          "status": "decompiled",
+          "asm_sha256": "723a3f411b5a87d3364a63ce3b4b14a364bd920ebc0c80d06b189cf993c815f7",
+          "c_sha256": "0b0d000cfa4aeecc525a130795b70c6ef61ca5780feed4773f68faaef1dea105"
+        },
+        {
+          "requested_va": "0x004abda0",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/07-thor-seeded",
+      "accepted_for_proof": true,
+      "manifest_sha256": "193f8b0b02d2434828e338747a178a108ecffa4e0760cade1fbbf96e3f2cc2af",
+      "functions": [
+        {
+          "requested_va": "0x004bb730",
+          "entry_va": "004bb730",
+          "status": "decompiled",
+          "asm_sha256": "721a6230deed5e970bb3f1a42f9e89d0672f1d2793ecf137f807c2e490c1318e",
+          "c_sha256": "db4c5d594b8a934a8275cfed1eb6d7ac2eebceb9b9eaaae30ec0cae7df5fc88f"
+        },
+        {
+          "requested_va": "0x004abda0",
+          "entry_va": "004abda0",
+          "status": "decompiled",
+          "asm_sha256": "c378a20a793cc4b3ddea1667648c456e9b08687049a6702bbe79dd6ffce0f612",
+          "c_sha256": "ba145f950e50460d2a0a0c57f870ede40eccae8e4092d8037f306280fd9f66fb"
+        },
+        {
+          "requested_va": "0x00481e80",
+          "entry_va": "00481e80",
+          "status": "decompiled",
+          "asm_sha256": "17ef5aa16f80577c84f9ab4f5ad2f38b6d7b527df34ab53ded8850ff3ee2aed8",
+          "c_sha256": "b6167bc66c8d2a2f9d3b395f28b95561c7ddc0426f0f1c3d77972af3785aded2"
+        },
+        {
+          "requested_va": "0x00481ef0",
+          "entry_va": "00481ef0",
+          "status": "decompiled",
+          "asm_sha256": "1bc30fcdd2e28ac8d1df2425e6d2b5fa06376698d54bbf3a7876d10196f761d2",
+          "c_sha256": "55372f959e2a58176e0ed6aaef2fef2d0dda6c15c47c5d34aec4ba262112ae9a"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/08-thor-weather",
+      "accepted_for_proof": true,
+      "manifest_sha256": "a7108770a556a6ca71eb8a5ae0e5f6f19197392fe583a81f15fcf570b28ea0ad",
+      "functions": [
+        {
+          "requested_va": "0x004cee30",
+          "entry_va": "004cee30",
+          "status": "decompiled",
+          "asm_sha256": "85b9101a3c3b7a5a376ee4e17fb427c405973268f5e689fce11c20bf51a39a7e",
+          "c_sha256": "57e7ea3d116860c6e1d6195d7def7b527227aed5461bb6bf5fb57b97a18beb58"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/09-setup-level",
+      "accepted_for_proof": true,
+      "manifest_sha256": "a9ce9357804f136dacfc2ec7dc66710d76414b64f98aa1d36835ef75e87a0c4c",
+      "functions": [
+        {
+          "requested_va": "0x004ccd10",
+          "entry_va": "004ccd10",
+          "status": "decompiled",
+          "asm_sha256": "316bce284af65ecac6cede8ad7e2d64bec9a797202e8ae7c12352787a22fb48c",
+          "c_sha256": "fd9fbe164f16a6dc01e45d77304287d97160dd6198871bb3dc5b156cdb26e5e4"
+        },
+        {
+          "requested_va": "0x004206f0",
+          "entry_va": "004206f0",
+          "status": "decompiled",
+          "asm_sha256": "e6765483356d76e3b68b2926c2751547a35ef60ef0b5465a44e7ab4c9d87fee2",
+          "c_sha256": "8d434c29ae9831b63f3baae828d847999ca6a22d9c8d7cc6e4029364cac5d4f1"
+        },
+        {
+          "requested_va": "0x0042b0b0",
+          "entry_va": "0042b0b0",
+          "status": "decompiled",
+          "asm_sha256": "7641eabf71e3b0e6f0ded358fd6171db1c88a5ff58074051366caac006e1c54b",
+          "c_sha256": "03967d5948017d82c94092f7088127e968f39b91c5c80804cb8fe61e8651debf"
+        },
+        {
+          "requested_va": "0x00419d90",
+          "entry_va": "00419d90",
+          "status": "decompiled",
+          "asm_sha256": "16372fba35f85f0e995fb9f5b9cd89d452a0372403f14838597e45f88f51b7ff",
+          "c_sha256": "d74e035d0b742ad4462f9c606e17804d21b4267a4fca745930657f7c1be1f363"
+        },
+        {
+          "requested_va": "0x004217b0",
+          "entry_va": "004217b0",
+          "status": "decompiled",
+          "asm_sha256": "4d70c75187090c4e002f41d938e8dc1d0949bd03b58379abbd843fa92fe81d43",
+          "c_sha256": "d944f48598a17a66c8ff89844618aa377034dfe805852a51fcecbeb7960320e4"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/10-transition-lcg",
+      "accepted_for_proof": true,
+      "manifest_sha256": "2204e9f75613a337adf75b5d1958d0d919598216dadd03fa176ff554f501611a",
+      "functions": [
+        {
+          "requested_va": "0x00415c60",
+          "entry_va": "00415c60",
+          "status": "decompiled",
+          "asm_sha256": "af6a68be595ffdca2f1dd8244c05d41187d95e137f607a20489a34456e7f2a9b",
+          "c_sha256": "b385946b3091c452d0deaf2e7e8ff5e2cc2d7b62ba083c3e7244826bcef55a46"
+        },
+        {
+          "requested_va": "0x004cf310",
+          "entry_va": "004cf310",
+          "status": "decompiled",
+          "asm_sha256": "d691a41ecc45234e3746b5d6499f2415e8cb43306fa593b68dac003f3a2d01fc",
+          "c_sha256": "c1668a9150b3716aa7d125b6f1976a9726df658948b3fc12f132f021815901ee"
+        },
+        {
+          "requested_va": "0x0042b0b0",
+          "entry_va": "0042b0b0",
+          "status": "decompiled",
+          "asm_sha256": "7641eabf71e3b0e6f0ded358fd6171db1c88a5ff58074051366caac006e1c54b",
+          "c_sha256": "03967d5948017d82c94092f7088127e968f39b91c5c80804cb8fe61e8651debf"
+        },
+        {
+          "requested_va": "0x00437f70",
+          "entry_va": "00437f70",
+          "status": "decompiled",
+          "asm_sha256": "4b7faf3ac34c3428b2004245bc1a15ad670d9f2414f9d6cb73ead3ba2525c020",
+          "c_sha256": "0ea9971ffb2a5a0539dc552af4b283ac5eb7196909ec8bf7ee42517e1039c012"
+        },
+        {
+          "requested_va": "0x00438100",
+          "entry_va": "00438100",
+          "status": "decompiled",
+          "asm_sha256": "fd4473fe2772c280e649808f25450579406b2a98917b824fdb22653066d7420d",
+          "c_sha256": "e3bc099e39bb685e4a40df81a4d838932b3515712a15cebf7b10609a162d17a2"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/11-column-ttl",
+      "accepted_for_proof": true,
+      "manifest_sha256": "69837638f0b94868033f73046e71bb87fb1f6e99908d6664382b8242323c32dd",
+      "functions": [
+        {
+          "requested_va": "0x00471320",
+          "entry_va": "00471320",
+          "status": "decompiled",
+          "asm_sha256": "73cfbc81d15fe3b28516850f1a410fb76588268fcd8323ab0938c2b8189f0cc5",
+          "c_sha256": "7ae991dcef1878287de24b097702a71f5695b600bd60397c63113aff30c3dbac"
+        },
+        {
+          "requested_va": "0x004cecc7",
+          "entry_va": "004cea70",
+          "status": "decompiled",
+          "asm_sha256": "7b62517df34dff079b000c3e99fd6addfbad6f683476efe5c2b22e4fd12b05a9",
+          "c_sha256": "0e664d74d61bf33a221df3e554da5e19c3214f4f5a02564243a05c6d11e0118c"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/12-column-dispatch",
+      "accepted_for_proof": true,
+      "manifest_sha256": "b3a4e92e07e14ac8d309382ac85775223f25d11878833eb9077096ade6c8d687",
+      "functions": [
+        {
+          "requested_va": "0x00471a90",
+          "entry_va": "00471a90",
+          "status": "decompiled",
+          "asm_sha256": "f3c9bc594374fa5461dfc86575411ba4f549fd7a2182328dc9201e6b50731440",
+          "c_sha256": "012c5cb4e92352c775c154933a6486e5296831b5136daeb5937001e20f6368a3"
+        },
+        {
+          "requested_va": "0x00471320",
+          "entry_va": "00471320",
+          "status": "decompiled",
+          "asm_sha256": "73cfbc81d15fe3b28516850f1a410fb76588268fcd8323ab0938c2b8189f0cc5",
+          "c_sha256": "7ae991dcef1878287de24b097702a71f5695b600bd60397c63113aff30c3dbac"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/13-column-scheduler",
+      "accepted_for_proof": true,
+      "manifest_sha256": "a6bd99d9601c2cc4e01c7c206dbe625add66423bdc0571b07abef34ade957093",
+      "functions": [
+        {
+          "requested_va": "0x0043c620",
+          "entry_va": "0043c620",
+          "status": "decompiled",
+          "asm_sha256": "930b14a569853f888cfb0f9824c339c8ce0d520cb419ee9ac3e46c627ce4519c",
+          "c_sha256": "04b731004e99c4f9cfafe028b19dacdb60c3dde2c71a09c2be3649919c435b3d"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/14-ttl-clock",
+      "accepted_for_proof": true,
+      "manifest_sha256": "caec22b095b0fd23cc56baa12981a0a89c347b7d6cf63bf9ff8fa1fd29e59cad",
+      "functions": [
+        {
+          "requested_va": "0x004508a0",
+          "entry_va": "004508a0",
+          "status": "decompiled",
+          "asm_sha256": "c945e9c12440da33ba4208dcc0d76b90eb7770351aa3589178d7c3cdef08e4dc",
+          "c_sha256": "ecf610513c53e758778f9d7713964ab538faf17b6122dc583ee1d2c9483ca9b9"
+        },
+        {
+          "requested_va": "0x004f3110",
+          "entry_va": "004f3100",
+          "status": "decompiled",
+          "asm_sha256": "e96f3199778a035c4a141221ba2ec0b7d0ab36469b08ea1c9346fe5175416c0e",
+          "c_sha256": "50a617c2ab02ac9b022669f67b2552bccc38aae9d7b7702b689625020fe73d20"
+        },
+        {
+          "requested_va": "0x004f38a0",
+          "entry_va": "004f38a0",
+          "status": "decompiled",
+          "asm_sha256": "866b7df6eca391b436e16793183bf536cc272bc0308710697325f9c789827516",
+          "c_sha256": "6c0d11a9428552447de70b439317becb64b33f7d4f6f9b6ceb430c581e1a921d"
+        },
+        {
+          "requested_va": "0x00471010",
+          "entry_va": "0046fb20",
+          "status": "decompiled",
+          "asm_sha256": "527c415a4ae53bea2be6d3834b946912d5aecd25d8b64353fc432cbf02cf5269",
+          "c_sha256": "e133cbdd36be5116b6535fa1bb3e1d472239f7b926970ae75abd329bcb3ff845"
+        },
+        {
+          "requested_va": "0x004deca2",
+          "entry_va": "004dcbe0",
+          "status": "decompiled",
+          "asm_sha256": "3db22a8d51d7594d7a8310ddb523097c14c032ad5111fb6122a63f439a1b72a4",
+          "c_sha256": "0aebbc233fcff8aded93666362d81e05529b36ea2deeac01fa9fe7c59fb34a8c"
+        },
+        {
+          "requested_va": "0x004719a0",
+          "entry_va": "00471550",
+          "status": "decompiled",
+          "asm_sha256": "7bbd62315c84bc52c0609b14ec63a8d8acd4ce7451a28c29dada28de5ea97af8",
+          "c_sha256": "8919ad5532f15eacfb01ccff3555d60cc4782eed8abb86898f8a864d98869120"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/15-object-step",
+      "accepted_for_proof": true,
+      "manifest_sha256": "955446b792366d578095e847a9d98227cfa2ebe43f1c8bc267289c02504d8e35",
+      "functions": [
+        {
+          "requested_va": "0x004507d0",
+          "entry_va": "004507d0",
+          "status": "decompiled",
+          "asm_sha256": "96a84766a0cfad151990a558db756975814df819829994fa71dbd0c3a8661be6",
+          "c_sha256": "acac8f5f06cc01a018c6c30140356da6137d92151bfb742770ffb3a074d30e4f"
+        },
+        {
+          "requested_va": "0x00450820",
+          "entry_va": "00450810",
+          "status": "decompiled",
+          "asm_sha256": "49c1c827570a790bb8eb0068dba8c02c586d844c1a53fbc9f5632a4c0c7639ad",
+          "c_sha256": "04f761a3a07b8ab6a2b94b4bbb1e8298b26feac080c124f5db1cc299ff074104"
+        },
+        {
+          "requested_va": "0x004507f4",
+          "entry_va": "004507d0",
+          "status": "decompiled",
+          "asm_sha256": "96a84766a0cfad151990a558db756975814df819829994fa71dbd0c3a8661be6",
+          "c_sha256": "acac8f5f06cc01a018c6c30140356da6137d92151bfb742770ffb3a074d30e4f"
+        },
+        {
+          "requested_va": "0x0046e010",
+          "entry_va": "0046e010",
+          "status": "decompiled",
+          "asm_sha256": "0e1fc4e2a9b59c2ef17b458c7be17d3062b554047df2aad22be0ed3da1caa835",
+          "c_sha256": "296522c1dd4872daea3009f9262b788eab2b72263585440125824163798668e2"
+        },
+        {
+          "requested_va": "0x004edca2",
+          "entry_va": "004edc50",
+          "status": "decompiled",
+          "asm_sha256": "31a31d97738f55e25f7623835fcbdbdbce78bbf98e5806fc327b8fe8dda16187",
+          "c_sha256": "64f5fa0d5a55ead43e598c77affd21a4e9c3b3dd18ad6787aafb6bc222ee4357"
+        },
+        {
+          "requested_va": "0x004f38a0",
+          "entry_va": "004f38a0",
+          "status": "decompiled",
+          "asm_sha256": "866b7df6eca391b436e16793183bf536cc272bc0308710697325f9c789827516",
+          "c_sha256": "6c0d11a9428552447de70b439317becb64b33f7d4f6f9b6ceb430c581e1a921d"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/16-ttl-candidate-abi",
+      "accepted_for_proof": true,
+      "manifest_sha256": "994d9a8d754cf12a280e761acd4ecf6bda667d26a6d403e890db437b089d0730",
+      "functions": [
+        {
+          "requested_va": "0x00405827",
+          "entry_va": "00405810",
+          "status": "decompiled",
+          "asm_sha256": "c7ffc7661aa08bf30b2fba6b1757e946d964d9b35a7d8e00337c8dca42b415e7",
+          "c_sha256": "63993afd920bb9c7f93ae9bdba694cce5cd3aba3a0cc9ef13dd6b034bc9f8a0e"
+        },
+        {
+          "requested_va": "0x0043de10",
+          "entry_va": "0043de10",
+          "status": "decompiled",
+          "asm_sha256": "af7df9a15f21d210c84d2ce19179a701f767d38dd9aaf427e7e8cf3ba6543ff9",
+          "c_sha256": "9a9414ee2038f144222acf341bd0710dc48b52f223c6e3d8804e91cf19044e50"
+        },
+        {
+          "requested_va": "0x004be239",
+          "entry_va": "004bd8b0",
+          "status": "decompiled",
+          "asm_sha256": "1744e1b65bd38a544684fb6c0bc35e4912b100d60701c65fd97dc3525c026a7f",
+          "c_sha256": "2d1c9752102baf15c4dc4d8d89788c73c4274ee4d4e5874edd5223fbc99be8cb"
+        },
+        {
+          "requested_va": "0x004f3100",
+          "entry_va": "004f3100",
+          "status": "decompiled",
+          "asm_sha256": "e96f3199778a035c4a141221ba2ec0b7d0ab36469b08ea1c9346fe5175416c0e",
+          "c_sha256": "50a617c2ab02ac9b022669f67b2552bccc38aae9d7b7702b689625020fe73d20"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/01",
+      "accepted_for_proof": true,
+      "manifest_sha256": "74db9c603ef32c3aaa673e8f9f14034a904bb5babd310e6c2f5787cd803641b7",
+      "functions": [
+        {
+          "requested_va": "0x41ebf0",
+          "entry_va": "0041ebf0",
+          "status": "decompiled",
+          "asm_sha256": "9315d7f9ac564d26493bcd604223c9944ad70dd1bb35809a5812c3c6d96b207c",
+          "c_sha256": "3808a0a1bb84d35bdc5d815159ac18be4fd87a5884f976377e1927f7c41402f7"
+        },
+        {
+          "requested_va": "0x4d0a10",
+          "entry_va": "004d0a10",
+          "status": "decompiled",
+          "asm_sha256": "5ee6477e407b9e4f8a0590e90f6d21d5ff3a335b8c653b5e83e624ac3851da89",
+          "c_sha256": "5754bcf46d9f19eb12a7c42167c7b55972d22170dfec4cbd1d2e490bbbd029ba"
+        },
+        {
+          "requested_va": "0x43c440",
+          "entry_va": "0043c440",
+          "status": "decompiled",
+          "asm_sha256": "793fe2b89c74d10367c2b2ffecdc3f19c7f0d5d9433d367319b7f4c5ffe8abdf",
+          "c_sha256": "8d5c7655d4b12d4ba39459d8be78cb258cc19316ec8fcc8e2dc6bd8329902820"
+        },
+        {
+          "requested_va": "0x43c4a0",
+          "entry_va": "0043c4a0",
+          "status": "decompiled",
+          "asm_sha256": "b8d2424f9237dc6e88424e8ff3cd680c7c78303ba6f88c1eb0aa904d1ca8f8bd",
+          "c_sha256": "0f314a2ee59da003b017ad7aee285d3b3115d9d2d83abc18b2278472482be029"
+        },
+        {
+          "requested_va": "0x43c4f0",
+          "entry_va": "0043c4f0",
+          "status": "decompiled",
+          "asm_sha256": "3ce73fba98a8f2345c9b5de7739e19f80d52697677e53f401bf3e168686e4e7a",
+          "c_sha256": "42e21c451c6d55ebf864e86b0f9d99c71a011467e430a9209e3fff88995234d4"
+        },
+        {
+          "requested_va": "0x425e60",
+          "entry_va": "00425e60",
+          "status": "decompiled",
+          "asm_sha256": "4f3b8f14d231a8990bdc9fc9dfa41d30d28a4506e032c7ebc2a983b81c8eafc4",
+          "c_sha256": "74385ac7c3a9b2062e97e7be2a30b78ff5c4a5b09ab19d07d27df024dbb53361"
+        },
+        {
+          "requested_va": "0x436dc0",
+          "entry_va": "00436dc0",
+          "status": "decompiled",
+          "asm_sha256": "dd95dfbfef17a8e649b971d6ea4de2c5517189378d823adc2b032a9ce9ca2a93",
+          "c_sha256": "aff188ddecde1030cbeaba75b8ca30f9c99a6bc39d7c1d743b04f83b46783b7c"
+        },
+        {
+          "requested_va": "0x436ec0",
+          "entry_va": "00436ec0",
+          "status": "decompiled",
+          "asm_sha256": "e9102ce1d4b74ba1b4c698e2e6a43f2e12c21c49527d1a70da4ff24766ccbdfa",
+          "c_sha256": "2f9215ac2e5e2fade33c3b23d9c575e18729c604b4d2a809093c70b1f2de14dd"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/02",
+      "accepted_for_proof": false,
+      "manifest_sha256": "bf6704ab7b84bce07b5239ea7137dccb4c7df74608ac757ec0648eed2215903d",
+      "functions": [
+        {
+          "requested_va": "0x407ff4",
+          "entry_va": "00406990",
+          "status": "decompiled",
+          "asm_sha256": "42fc633585f2463ddbe0d5a10355a2bb57307eccc81bfbc8496a650377edc34f",
+          "c_sha256": "382e97ebcf354b7c0cc81963006285a75fc0ed1859719c018fbcdf6ee11eb9fc"
+        },
+        {
+          "requested_va": "0x408034",
+          "entry_va": "00406990",
+          "status": "decompiled",
+          "asm_sha256": "42fc633585f2463ddbe0d5a10355a2bb57307eccc81bfbc8496a650377edc34f",
+          "c_sha256": "382e97ebcf354b7c0cc81963006285a75fc0ed1859719c018fbcdf6ee11eb9fc"
+        },
+        {
+          "requested_va": "0x4162d2",
+          "entry_va": "00415d40",
+          "status": "decompiled",
+          "asm_sha256": "0e43362a9d10bb6876d64f6ce08b37d03149248ab2248ade4653b7a956525c49",
+          "c_sha256": "e7b33e77168d541bbeefcbbfecd76714eb61e26218e5116aaa2aea8799fe6f44"
+        },
+        {
+          "requested_va": "0x4195d9",
+          "entry_va": "00418dc0",
+          "status": "decompiled",
+          "asm_sha256": "16699f97b109718a995afc4e31b47719f250c2d8dc6acfeac3870458bc993d78",
+          "c_sha256": "386c0d7a0b0a8242ba5d3741f0c84a7cf4f1bf89a9cda38a8f52357196ac2fe5"
+        },
+        {
+          "requested_va": "0x4bc2cf",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x4c8f7e",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x53b34b",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x53ba5b",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/03",
+      "accepted_for_proof": false,
+      "manifest_sha256": "44eeb69d9fca3ff57bb22df3d192f7b4f417b981e2e79446f81e6d3136dfe842",
+      "functions": [
+        {
+          "requested_va": "0x43990a",
+          "entry_va": "004398e0",
+          "status": "decompiled",
+          "asm_sha256": "ccc37ed5493441089f7364936a3bce7db146711ea756261636dec6459a5e9167",
+          "c_sha256": "9268a7a3ce1902b6b5ed1d2f190d544a4c6e5e1ede316b54e0ea3f5991412e85"
+        },
+        {
+          "requested_va": "0x43ab1d",
+          "entry_va": "0043a670",
+          "status": "decompiled",
+          "asm_sha256": "42ede9dae684db0dbe09b4733224ed6813cf8d16477a8edcfd67156dd6047abe",
+          "c_sha256": "d33ab7a373b390e89b81dc9941c070c9b397381d9f6ea0e1d57661be0e331611"
+        },
+        {
+          "requested_va": "0x44cc4b",
+          "entry_va": "0044c950",
+          "status": "decompiled",
+          "asm_sha256": "cdd347b0894da7e52e2eec74f51c8b5ff58547cd42a9f9cc5ae9de96fda05f6a",
+          "c_sha256": "88c5556f3b9489933ab174f126e24f804bfa6d4dd96bb961abbebf8a448330a1"
+        },
+        {
+          "requested_va": "0x4cee30",
+          "entry_va": "004cee30",
+          "status": "decompiled",
+          "asm_sha256": "85b9101a3c3b7a5a376ee4e17fb427c405973268f5e689fce11c20bf51a39a7e",
+          "c_sha256": "57e7ea3d116860c6e1d6195d7def7b527227aed5461bb6bf5fb57b97a18beb58"
+        },
+        {
+          "requested_va": "0x4ba691",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x4b8586",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/04",
+      "accepted_for_proof": false,
+      "manifest_sha256": "b23eba29758a290b6112a9c5afba126abc68c504340663d538c8a101d2b500ec",
+      "functions": [
+        {
+          "requested_va": "0x43c620",
+          "entry_va": "0043c620",
+          "status": "decompiled",
+          "asm_sha256": "930b14a569853f888cfb0f9824c339c8ce0d520cb419ee9ac3e46c627ce4519c",
+          "c_sha256": "04b731004e99c4f9cfafe028b19dacdb60c3dde2c71a09c2be3649919c435b3d"
+        },
+        {
+          "requested_va": "0x43c6a0",
+          "entry_va": "0043c6a0",
+          "status": "decompiled",
+          "asm_sha256": "dd0f0c9e2f4e992d1fc9806969ef63473cc2484c74318dc79e591aabb0ec003e",
+          "c_sha256": "c30162e8243b7e6468b0cb90076ead8c9d10581e4bbc83b7c4c4c43815e46cc8"
+        },
+        {
+          "requested_va": "0x43a8c0",
+          "entry_va": "0043a670",
+          "status": "decompiled",
+          "asm_sha256": "42ede9dae684db0dbe09b4733224ed6813cf8d16477a8edcfd67156dd6047abe",
+          "c_sha256": "d33ab7a373b390e89b81dc9941c070c9b397381d9f6ea0e1d57661be0e331611"
+        },
+        {
+          "requested_va": "0x4b8520",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x4ba620",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/05",
+      "accepted_for_proof": true,
+      "manifest_sha256": "243e714c59a25110254eadf346853a57b6935dbb3624538becf89459338fc5db",
+      "functions": [
+        {
+          "requested_va": "0x4206f0",
+          "entry_va": "004206f0",
+          "status": "decompiled",
+          "asm_sha256": "e6765483356d76e3b68b2926c2751547a35ef60ef0b5465a44e7ab4c9d87fee2",
+          "c_sha256": "8d434c29ae9831b63f3baae828d847999ca6a22d9c8d7cc6e4029364cac5d4f1"
+        },
+        {
+          "requested_va": "0x40a7d0",
+          "entry_va": "0040a7d0",
+          "status": "decompiled",
+          "asm_sha256": "479c08d2fa858a66500ce0f6568bb18aa3bdcc1fc005880bc206eb6da8da2f4d",
+          "c_sha256": "a8f1ebd343fbe424dd095b1581b09bdb3a1e83f3d451ea613aaa0fc8a5f0dbf1"
+        },
+        {
+          "requested_va": "0x40a8c0",
+          "entry_va": "0040a8c0",
+          "status": "decompiled",
+          "asm_sha256": "de6915e2368f4fb6c66128818bf97d6a3cdc1c15bbb474d31f51af3d9c3a31bc",
+          "c_sha256": "00708123b4a50863f6442f7dbee6ddd9fcd9592731b65da7710d6305f9e4db25"
+        },
+        {
+          "requested_va": "0x40afb0",
+          "entry_va": "0040afb0",
+          "status": "decompiled",
+          "asm_sha256": "a4c599e39bc1081547ed3519a4ef3c863a99d730ebfedfdcb7279a1195e429dd",
+          "c_sha256": "3fbeac7edc104f79ce1df1d340b0e57d1eecdf7a606b94119a7d17a13c09f597"
+        },
+        {
+          "requested_va": "0x40b410",
+          "entry_va": "0040b410",
+          "status": "decompiled",
+          "asm_sha256": "b03d9e783f6bc31aaa0b95859dbb0914765ecc8f57033490463510ee0ecf80f7",
+          "c_sha256": "adac8537eaf6c059abd6191a8a5f280df7fb2c022a5b2ae9a097e7e233b4b66a"
+        },
+        {
+          "requested_va": "0x40a4a0",
+          "entry_va": "0040a4a0",
+          "status": "decompiled",
+          "asm_sha256": "5e8f789cf59c59b0b9de30920f6fb056ab3c195dd2ca07df95a43de771c467a3",
+          "c_sha256": "6bc932818c27c7305f9d1c5c3e9bf8adf214bca5c38eaccd7b05e81933f74284"
+        },
+        {
+          "requested_va": "0x40b2a0",
+          "entry_va": "0040b2a0",
+          "status": "decompiled",
+          "asm_sha256": "b98f6fc9ec31883f097e35ae77ab8a349789f60ad0632aed172aad7f16a037fd",
+          "c_sha256": "f35e0541323fc51e59e12708f442ac584b0bd07b67aa27e97e4c2212838b44eb"
+        },
+        {
+          "requested_va": "0x4065a0",
+          "entry_va": "004065a0",
+          "status": "decompiled",
+          "asm_sha256": "e0042236b7c8511628b1b6f535a8876af0b3cfdb15d3aeec2295c8ab184f843d",
+          "c_sha256": "438f67a5482ddc8e9cecca4a16cce687572ef93acf1b64c0a6e2571fe04b9063"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/06",
+      "accepted_for_proof": false,
+      "manifest_sha256": "67cd915bb29857d45be530decc289d195242fd693e411d7a3fceecdcdce9fe0e",
+      "functions": [
+        {
+          "requested_va": "0x43a0ea",
+          "entry_va": "00439e40",
+          "status": "decompiled",
+          "asm_sha256": "114a13176ddc185c73a36217c7672ab6769befd4d88624f4c50af4c77f821e7e",
+          "c_sha256": "46e89a614b7168ac66d3e8ed1c5838665a5cd216a7837112e7ba4513029ae38f"
+        },
+        {
+          "requested_va": "0x4ccbd0",
+          "entry_va": "004ccbb0",
+          "status": "decompiled",
+          "asm_sha256": "f18a04cdeda9daa7296f467457b95fa65b089c4bbdd2d685a822eb94507988f9",
+          "c_sha256": "79a4b10b9ed6a119314554e6e405905034cc3255b238f883e50d257ac4f5b979"
+        },
+        {
+          "requested_va": "0x41c360",
+          "entry_va": "0041c360",
+          "status": "decompiled",
+          "asm_sha256": "f61f87b4f184d7f46d3fea0519b8faeb8a08938fd41e76b54b67a6412c5b194d",
+          "c_sha256": "9ff520c3717aa74cfa61d81e405d5ea70d7fa7cc3fa9ae53e170165030b40963"
+        },
+        {
+          "requested_va": "0x40daa2",
+          "entry_va": "0040d8e0",
+          "status": "decompiled",
+          "asm_sha256": "27b1807a1cb43246b774e73f5d1c7e29884ef7f16fb8164c57312d2831430716",
+          "c_sha256": "85391f17d4ae5f46dd68ec8d8b1436a62360171511c377eb3d9ce6af24dc7210"
+        },
+        {
+          "requested_va": "0x4b82b0",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x4b97d0",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/07",
+      "accepted_for_proof": true,
+      "manifest_sha256": "9622e278ff361c1ebe364d65fd3662ec6f69c5043bc16773181f125f6a0bde9f",
+      "functions": [
+        {
+          "requested_va": "0x4ccd10",
+          "entry_va": "004ccd10",
+          "status": "decompiled",
+          "asm_sha256": "316bce284af65ecac6cede8ad7e2d64bec9a797202e8ae7c12352787a22fb48c",
+          "c_sha256": "fd9fbe164f16a6dc01e45d77304287d97160dd6198871bb3dc5b156cdb26e5e4"
+        },
+        {
+          "requested_va": "0x43a670",
+          "entry_va": "0043a670",
+          "status": "decompiled",
+          "asm_sha256": "42ede9dae684db0dbe09b4733224ed6813cf8d16477a8edcfd67156dd6047abe",
+          "c_sha256": "d33ab7a373b390e89b81dc9941c070c9b397381d9f6ea0e1d57661be0e331611"
+        },
+        {
+          "requested_va": "0x4cee30",
+          "entry_va": "004cee30",
+          "status": "decompiled",
+          "asm_sha256": "85b9101a3c3b7a5a376ee4e17fb427c405973268f5e689fce11c20bf51a39a7e",
+          "c_sha256": "57e7ea3d116860c6e1d6195d7def7b527227aed5461bb6bf5fb57b97a18beb58"
+        },
+        {
+          "requested_va": "0x4b82b0",
+          "entry_va": "004b82b0",
+          "status": "decompiled",
+          "asm_sha256": "d4cf93738d0746f19a40a8db8e10ab87bea75cb02b72b85cd8aaeba7e1a8ff39",
+          "c_sha256": "c767166acdd99cfa8e90dd6a287eab87eac05bc1625f67843ef3e2d87eefdd1d"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/08",
+      "accepted_for_proof": true,
+      "manifest_sha256": "fef0ea630577b7fa812b1093b19ebf7888117b10e9f822ef0dfc0de2d15cb79d",
+      "functions": [
+        {
+          "requested_va": "0x43de10",
+          "entry_va": "0043de10",
+          "status": "decompiled",
+          "asm_sha256": "af7df9a15f21d210c84d2ce19179a701f767d38dd9aaf427e7e8cf3ba6543ff9",
+          "c_sha256": "9a9414ee2038f144222acf341bd0710dc48b52f223c6e3d8804e91cf19044e50"
+        },
+        {
+          "requested_va": "0x4cd7aa",
+          "entry_va": "004ccd10",
+          "status": "decompiled",
+          "asm_sha256": "316bce284af65ecac6cede8ad7e2d64bec9a797202e8ae7c12352787a22fb48c",
+          "c_sha256": "fd9fbe164f16a6dc01e45d77304287d97160dd6198871bb3dc5b156cdb26e5e4"
+        },
+        {
+          "requested_va": "0x4cecc7",
+          "entry_va": "004cea70",
+          "status": "decompiled",
+          "asm_sha256": "7b62517df34dff079b000c3e99fd6addfbad6f683476efe5c2b22e4fd12b05a9",
+          "c_sha256": "0e664d74d61bf33a221df3e554da5e19c3214f4f5a02564243a05c6d11e0118c"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/09",
+      "accepted_for_proof": true,
+      "manifest_sha256": "f2ff8a94d579b14dee82cd14ab4a777b39f00224bf394cc77b197832f5e869fc",
+      "functions": [
+        {
+          "requested_va": "0x4b97d0",
+          "entry_va": "004b97d0",
+          "status": "decompiled",
+          "asm_sha256": "e8fa6f4d7d52548c96e5543877fddd67718f60171cff12e39547292b61ddb975",
+          "c_sha256": "5039183a8b5c5c4a1313e9161913ee9e348cfaaa37b7b673a2d5e2a164e27c74"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/10-render",
+      "accepted_for_proof": true,
+      "manifest_sha256": "0b1b4140d941bf16991a9bb785d86bc0d366bbd6d65d383a174c1550bca5ceeb",
+      "functions": [
+        {
+          "requested_va": "0x471550",
+          "entry_va": "00471550",
+          "status": "decompiled",
+          "asm_sha256": "7bbd62315c84bc52c0609b14ec63a8d8acd4ce7451a28c29dada28de5ea97af8",
+          "c_sha256": "8919ad5532f15eacfb01ccff3555d60cc4782eed8abb86898f8a864d98869120"
+        },
+        {
+          "requested_va": "0x46e070",
+          "entry_va": "0046e020",
+          "status": "decompiled",
+          "asm_sha256": "983fbbf4b5b48fad8bec07ee9a7706bc86df48d3fc09d2d8382a85cb1a9d884d",
+          "c_sha256": "899ed984a0435302ea204040f8d8fd2cc7ee8d4cda996affd4905d36fa03c8c4"
+        },
+        {
+          "requested_va": "0x4ac760",
+          "entry_va": "004ac760",
+          "status": "decompiled",
+          "asm_sha256": "d27907b857c25b7c3320e8214aa4c0fcf5ca5c7b362b31a792ac3acee9d48483",
+          "c_sha256": "5c66b0abe630dc3f1713207362658228219cbfd9c5bc64d32b27c27e569a5966"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/11-render-data",
+      "accepted_for_proof": false,
+      "manifest_sha256": "2367777812d1ab787eaa1598dfe195b63031c21b77e7590180a1fd31ae202735",
+      "functions": [
+        {
+          "requested_va": "0x4f4650",
+          "entry_va": "004f4650",
+          "status": "decompiled",
+          "asm_sha256": "fce1eb6268c4ae8d1d1836d36da3019dc0aa24bbb4258729baf82c48fab3851f",
+          "c_sha256": "9265fbebb69b516b110cf2bb42e5733173fc6cedf6c3b3d907464a34036eb855"
+        },
+        {
+          "requested_va": "0x471e00",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x471a90",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x4acc90",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/12-render-blend",
+      "accepted_for_proof": true,
+      "manifest_sha256": "ab25339a2955c52ee814a97099208c5640ef1d51f9286ac7f0d3d62f9bb2d44d",
+      "functions": [
+        {
+          "requested_va": "0x4f01d0",
+          "entry_va": "004f01d0",
+          "status": "decompiled",
+          "asm_sha256": "aa4b13c46c7d320fd7961c29d2fae6b38e790c3535633af95a4a57bbce933932",
+          "c_sha256": "f51fd67e33871116da81852cc8c3673086c3020a2014fa5abde22ec26e4e271d"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/13-render-dispatch",
+      "accepted_for_proof": true,
+      "manifest_sha256": "51706e56c9098c21730d0cca7a27913f7408968b2acda94d2de4a13bd63b3d4b",
+      "functions": [
+        {
+          "requested_va": "0x4509a0",
+          "entry_va": "004508a0",
+          "status": "decompiled",
+          "asm_sha256": "c945e9c12440da33ba4208dcc0d76b90eb7770351aa3589178d7c3cdef08e4dc",
+          "c_sha256": "ecf610513c53e758778f9d7713964ab538faf17b6122dc583ee1d2c9483ca9b9"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/14-crash",
+      "accepted_for_proof": true,
+      "manifest_sha256": "5c07dbb11cc21827f7167977b92186558b4d0ab41fc2a82d769e68000bc520ee",
+      "functions": [
+        {
+          "requested_va": "0x481e30",
+          "entry_va": "00481e30",
+          "status": "decompiled",
+          "asm_sha256": "3481e3b9d43294610d4964e1d342649aefea91dc96bf67a29d1f98801387f62b",
+          "c_sha256": "da2d29efac08bf91ad1023257ac069809c8c4423f6be5a092bbb0408d8ff768d"
+        },
+        {
+          "requested_va": "0x436ec0",
+          "entry_va": "00436ec0",
+          "status": "decompiled",
+          "asm_sha256": "e9102ce1d4b74ba1b4c698e2e6a43f2e12c21c49527d1a70da4ff24766ccbdfa",
+          "c_sha256": "2f9215ac2e5e2fade33c3b23d9c575e18729c604b4d2a809093c70b1f2de14dd"
+        },
+        {
+          "requested_va": "0x48dcc0",
+          "entry_va": "0048dcc0",
+          "status": "decompiled",
+          "asm_sha256": "157bc408f86213c2097e798c2f1d0e3aa8575158406f3b240507e0c472c9b5db",
+          "c_sha256": "2b3ae2fc099ac3f0b4dba875feef34687979f22888d9bdfbc1aaebb05f3f5987"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/15-crash-render",
+      "accepted_for_proof": false,
+      "manifest_sha256": "5a2bb0fdb2413a4f9518c8ea363443217b8deb3d034e6f2c9ea64207becfa18e",
+      "functions": [
+        {
+          "requested_va": "0x481e80",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x481f00",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        },
+        {
+          "requested_va": "0x48dd10",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/16-crash-seeded",
+      "accepted_for_proof": true,
+      "manifest_sha256": "5c3821f6733b9fdd883244a62af65a92504f326c3da59f7dd2855a661466c7c4",
+      "functions": [
+        {
+          "requested_va": "0x481e80",
+          "entry_va": "00481e80",
+          "status": "decompiled",
+          "asm_sha256": "17ef5aa16f80577c84f9ab4f5ad2f38b6d7b527df34ab53ded8850ff3ee2aed8",
+          "c_sha256": "b6167bc66c8d2a2f9d3b395f28b95561c7ddc0426f0f1c3d77972af3785aded2"
+        },
+        {
+          "requested_va": "0x481ef0",
+          "entry_va": "00481ef0",
+          "status": "decompiled",
+          "asm_sha256": "1bc30fcdd2e28ac8d1df2425e6d2b5fa06376698d54bbf3a7876d10196f761d2",
+          "c_sha256": "55372f959e2a58176e0ed6aaef2fef2d0dda6c15c47c5d34aec4ba262112ae9a"
+        },
+        {
+          "requested_va": "0x48dd10",
+          "entry_va": "0048dd10",
+          "status": "decompiled",
+          "asm_sha256": "55e4d5e1ae06fa52b3316f36a7e41c0f598a9aade881510bea0a5dda98ad04e3",
+          "c_sha256": "569101e1c74c8c8c580ad12e100fb93deaaa182c0e9471b46edbb0684c753f0a"
+        },
+        {
+          "requested_va": "0x48dd80",
+          "entry_va": "0048dd80",
+          "status": "decompiled",
+          "asm_sha256": "b2d2ecfa562e9666ec3d0500f40eb52b522788f0d6f693630b4e04dca72f3759",
+          "c_sha256": "b5eb5b0812096661e1fba5c6ff7f2cc5efde091c5d32cc0f6be517b6fd6f03b8"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/17-crash-quad",
+      "accepted_for_proof": true,
+      "manifest_sha256": "b48a481776c51ea2810d834920f2ce7967014ea41bcb4ef4c5be6217c5e9c373",
+      "functions": [
+        {
+          "requested_va": "0x4ec840",
+          "entry_va": "004ec840",
+          "status": "decompiled",
+          "asm_sha256": "d194cf17926b499c4c56881a75401a0ecd79918761a53c95b70cb2c6bde569bb",
+          "c_sha256": "907e717761d9f3fcf336f8e95f456ee1d51696dc00b971f05fcaa6e6934b45cc"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/18-crash-probability",
+      "accepted_for_proof": false,
+      "manifest_sha256": "bce068541fa944bd153ecfd1d70cdec0551f5fb4a149087de1b91b0e2c6d9669",
+      "functions": [
+        {
+          "requested_va": "0x45649a",
+          "entry_va": "00455cc0",
+          "status": "decompiled",
+          "asm_sha256": "49002ffc38133b3ae8e4bf1542c1e17766aecfb6cfaeb8a73cf22f1405e1c063",
+          "c_sha256": "452d60d43f85bc2857df680cdd4f23fa51133613ecd7aacfa1a8d590a158bb6f"
+        },
+        {
+          "requested_va": "0x4ca59a",
+          "entry_va": null,
+          "status": "function_not_found",
+          "asm_sha256": null,
+          "c_sha256": null
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/moon/19-crash-settings",
+      "accepted_for_proof": true,
+      "manifest_sha256": "e455c27aeb6f715ce8564bccc75f90cada7dc19620a9362d42a040af417c0326",
+      "functions": []
+    },
+    {
+      "extract": ".tools/mage-weather/electric/17-column-vtables",
+      "accepted_for_proof": true,
+      "manifest_sha256": "d2e24f9f63534c684fe3fca97a183961994c2c86451562cc731c91772474b013",
+      "functions": [
+        {
+          "requested_va": "0x004ac5a0",
+          "seeded": false,
+          "entry_va": "004ac5a0",
+          "name": "FUN_004ac5a0",
+          "body": "[[004ac5a0, 004ac64e]]",
+          "instructions": 50,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0046dde0",
+          "seeded": false,
+          "entry_va": "0046dde0",
+          "name": "FUN_0046dde0",
+          "body": "[[0046dde0, 0046df01]]",
+          "instructions": 89,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/18-tornado-clock",
+      "accepted_for_proof": false,
+      "manifest_sha256": "19c29df3943871b47fdec98a628cef558886ce0cf249ddd700184894bf51778c",
+      "functions": [
+        {
+          "requested_va": "0x004ac750",
+          "seeded": false,
+          "status": "function_not_found"
+        },
+        {
+          "requested_va": "0x004acc90",
+          "seeded": false,
+          "status": "function_not_found"
+        }
+      ]
+    },
+    {
+      "extract": ".tools/mage-weather/electric/19-tornado-clock-seeded",
+      "accepted_for_proof": true,
+      "manifest_sha256": "41f4a9dbdc173561f18fd3bdd6803196d8aa246186e719cfd046eefdbdbbaf6a",
+      "functions": [
+        {
+          "requested_va": "0x004ac750",
+          "seeded": true,
+          "entry_va": "004ac750",
+          "name": "FUN_004ac750",
+          "body": "[[004ac750, 004ac756]]",
+          "instructions": 2,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004acc90",
+          "seeded": true,
+          "entry_va": "004acc90",
+          "name": "FUN_004acc90",
+          "body": "[[004acc90, 004accea]]",
+          "instructions": 33,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ]
+    }
+  ],
+  "contracts": {
+    "calendar": "41fd50/41f200/41ebf0/4d0a10",
+    "stage": "419d90; 484-byte rows;7weights@260;X arrays292..483",
+    "moon": "43c6a0; active actor3/8 percent maxHP; no shield",
+    "eclipse": "43a670,4b8584,4ba690; item block/global Dual reset",
+    "cleanup": "4cee69 ->43c620 before boundary on every turn",
+    "electricity": "shock pending then aux blast -> Thor -> Mage own blast/EMP",
+    "field_correction": "15c0=Force;17e4=percentage.431d90 copies percentage, does not copy Force;454dc0 zeros15c0",
+    "thor": "4bb730/439d90 placement;4cee30 Y;4ccd10->4ac180 level",
+    "column_render": "471550/46e020/4ac760;4508a0 blend",
+    "column_lifetime": "4507d0 Animate+8 only;4508a0 Draw+0xc;4f3100 removes+14. TTL+0x10 hook is not selected in audited normal2D cycle; no invented decrement."
+  },
+  "offline_inputs": [
+    "local seed for separate native LCGs and CRT",
+    "room period2 and enabled category flags",
+    "procedural arena fallback ranges",
+    "existing item activation/attribute origin bridges"
+  ],
+  "limits": [
+    "flight decorative sparks remain presentation bridge",
+    "no Windows runtime; no listening or human mouse acceptance; no new app export",
+    "normal2D callgraph audited; no global claim about all indirect/3D routes"
+  ],
+  "extra_evidence": {
+    ".tools/mage-weather/electric/TTL_CALLGRAPH.md": "a67528ca9d3c5573dcb63bc32769f281e1ae392f2233f9cf7846d70b7bd721b4",
+    ".tools/mage-weather/electric/contract.json": "f16a44fc7d1f4cbf70fdd1328279af3238efc07dcabfc7e202c981d303a50044",
+    ".tools/mage-weather/electric/ttl_raw_calls.json": "d803ab5ed3c883a3c1d16621588d1f5e2be853bf4421457506be57f1c6f61864"
+  }
+}

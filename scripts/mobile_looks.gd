@@ -49,7 +49,7 @@ const LOOKS := {
 	5: {"kind": "trico", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	6: {"kind": "boomer", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	7: {"kind": "raon", "sprite": "res://scripts/classic_sprite.gd", "native_animation": true, "rig": {}, "projectile": {}, "using": {}},
-	8: {"kind": "lightning", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	8: {"kind": "lightning", "sprite": "res://scripts/lightning_sprite.gd", "native_animation": true, "rig": {}, "projectile": {}, "using": {}},
 	9: {"kind": "jd", "sprite": "res://scripts/classic_sprite.gd", "native_animation": true, "rig": {}, "projectile": {}, "using": {}},
 	10: {"kind": "asate", "sprite": "res://scripts/classic_sprite.gd", "native_animation": true, "rig": {}, "projectile": {}, "using": {}},
 	11: {"kind": "ice", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},

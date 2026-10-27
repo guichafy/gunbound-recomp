@@ -1,5 +1,64 @@
 # Entregas e próximos trabalhos
 
+## Partículas decorativas Mage — ADR-129
+
+- [x] REA emissão/coarse/refino, fábricas, densidade passiva, clock e renderer.
+- [x] CrashTexture original65536pixels, UV/quadfloat32 e blendADD nativos.
+- [x] Registros determinísticos/copied20Hz; RNGvisual só no apresentador.
+- [x] TDD63+206Godot/2Python; FPS10/30/40/60, born1/last15/delete16.
+- [x] Revisão independente; corrigir segunda rolagem comum quandoForce0.
+- [x] GPU360quadrosFullHD/12casos,pausa30; arena real/retomada/menuclear.
+- [x] Harness98suítes/parse/exit0,27046Godot+60Python+29partidas/0,
+  hashes estáveis, evidênciaGPU e limitações registradas.
+- [ ] Aceite visual humano e execução dinâmica do clienteWindows separados.
+
+## Climas secundários Mage — ADR-128
+
+- [x] REA calendário/vento/stage, Moon/Eclipse e anexos elétrico/Thor.
+- [x] Fixtures independentes, estado copiável e mesmo passo real/previsão.
+- [x] Substituir bridges no modoMage e conservar outras duplas.
+- [x] Extrair três texturasXTF e portar quads/UV/blend/clock das colunas.
+- [x] Revisão independente; corrigir confusão17e4 percentual ×15c0 Force.
+- [x] GPU1920×1080/540quadros, seis casos, pausa30 idêntica por caso.
+- [x] Harness95suítes/parse/exit0,26775Godot+58Python+29partidas/0;
+  UI final49/0 e consolidação26777; hashes/evidências/limites registrados.
+- [ ] Aceite visual humano, escuta e mouse; execução Windows não realizada.
+
+## Lightning: revisão de batalha pelo cliente — ADR-127
+
+- [x] Fixar PE/XFS/DAT e realizar11consultasGhidra12.2/JDK26, extratos/ASM/strings.
+- [x] Especificação/plano antes do código, matriz e limites emLIGHTNING_CLIENT_REVIEW.
+- [x] T1stride3/T2stride8, sóterreno; primeira superfícievertical/duasdiagonais.
+- [x] SSraio120estrito/strikeT1, choque76/76/46, chain20 e ordem letal.
+- [x] Dano/Defense/caixas/crateras; Force+3/+8/+8 e tornado24.8 compartilhados comCPU.
+- [x] 524quadros/EPAs/PCM auditados; raioXTF/UV/alpha nativos;SSglowADD.
+- [x] Dead oculta avatar/efeitos; montagem/HD em vida e originais preservados.
+- [x] GPU300T1/T2/SS+300vento/tornado+150poses, dois sentidos e pausas30idênticas;
+  sala/Miramo reais, HUD, retomada e limpeza de dados/RIDs ao sair.
+- [x] Harness final25416Godot+55Python+29partidas/0,90suítes/parse/exit0;
+  revisão independente semP1/P2; docs/hash/limites registrados.
+- [ ] Aceite visual/escuta/input do usuário e execução dinâmicaWindows separados.
+
+Semapp/export/PCK/ZIP/versão/commit/push. Bridges restantes de clima/itens,
+origem/apoio e scheduler explícitos; trabalhoMage simultâneo preservado.
+
+## Mage: assets, força e Tempo — ADR-126
+
+- [x] REA do MainAction, laser, T1/T2/SS, atributos, dano/contato e EMP.
+- [x] Dados nativos e divisão1/2/1, dano linear/scanlines/terreno1px.
+- [x] EMP esgota escudo antes do blast; raio estrito150 no hotspotY−10.
+- [x] Tornado preserva velocidade/vento; borda do T2 usa ponto da hélice.
+- [x] Revisão independente corrigiu umP2 de borda; revisão final semP1/P2.
+- [x]4054checks Mage,567fixtures independentes de distância e489quadros/PCM.
+- [x] GPU480quadrosFullHD/dois sentidos, ambos cenários/pausa30; sala e
+  arena Miramo/HUD/T1/T2/SS com pausa/retomada; vídeo emdocs/mage-review.
+- [x] Consolidar20598checksGodot+48Python+29partidas/87suítes aprovadas;
+  referência de botões reanexada/repetida e limite do exit1 parcial registrado.
+- [ ] Aceite visual do usuário, escuta e execução dinâmica do cliente original.
+
+Ver `MAGE_CLIENT_REVIEW.md`: demais climas/calendário, itens, muzzle/apoio e
+limite12s continuam bridges identificadas. Semapp novo, versão, commit/push.
+
 ## Aduka: dano/colisão/clima e T2 com3 criaturas — ADR-125
 
 - [x] REA dos consumidores nativos de dano, escudo/XP, caixa e contato.

@@ -1,0 +1,20 @@
+{
+	"cases": [
+		{
+			"climate": "force",
+			"menu_clear": true,
+			"pause_frames_identical": 30,
+			"visible_particles": 26
+		},
+		{
+			"climate": "electricity",
+			"menu_clear": true,
+			"pause_frames_identical": 30,
+			"visible_particles": 7
+		}
+	],
+	"size": [
+		1920,
+		1080
+	]
+}

@@ -1,0 +1,13 @@
+{
+  "entry": "Lightning.xtf",
+  "entry_sha256": "601417d0f3dd79d9ba307937d84598e4ebdc8bc226e5586dea1ffc44116c7594",
+  "size": [
+    256,
+    256
+  ],
+  "format": "ARGB4444",
+  "columns": 4,
+  "blend": "additive",
+  "alpha": "255-24*tick",
+  "duration_ticks": 10
+}

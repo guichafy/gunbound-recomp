@@ -1,0 +1,46 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "dispatcher": "0x4508a0",
+  "sheets": {
+    "FirewallTexture": {
+      "entry": "FirewallTexture.xtf",
+      "entry_sha256": "c306beff81048225486c09eadbe7c8344cd70bd9117125a6a28e5fdbb021e173",
+      "image": "FirewallTexture.png",
+      "image_sha256": "9cb988e4a74474d86beb56515f684d3c63154a7590eee7f7d822789f19963536",
+      "consumer": "0x471550",
+      "size": [
+        256,
+        256
+      ],
+      "format": "ARGB4444 -> RGBA8888, each channel times17; unchanged pixels",
+      "blend": "SRCALPHA/INVSRCALPHA"
+    },
+    "LightningTexture": {
+      "entry": "LightningTexture.xtf",
+      "entry_sha256": "374508e9327b4f95d111d596fdd5d9bb157b25d75a1c4eea23e67e065d38fea2",
+      "image": "LightningTexture.png",
+      "image_sha256": "0b30981b8e81e995bd37ce74682c7fc4245cbfeb2ae4dded259a01ad9c6feb1d",
+      "consumer": "0x46e020",
+      "size": [
+        256,
+        256
+      ],
+      "format": "ARGB4444 -> RGBA8888, each channel times17; unchanged pixels",
+      "blend": "SRCALPHA/ONE"
+    },
+    "TornadoTexture": {
+      "entry": "TornadoTexture.xtf",
+      "entry_sha256": "d9064dc59faf3b1428948eb4d9c0a1b0a832333ca088b27d4c85c235132a723b",
+      "image": "TornadoTexture.png",
+      "image_sha256": "0d60c260133069d5d4ef0e9c1c1e59254136caefecdac64b385db4598b0fff80",
+      "consumer": "0x4ac760",
+      "size": [
+        256,
+        256
+      ],
+      "format": "ARGB4444 -> RGBA8888, each channel times17; unchanged pixels",
+      "blend": "SRCALPHA/INVSRCALPHA"
+    }
+  }
+}

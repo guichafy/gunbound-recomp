@@ -1,5 +1,6 @@
 extends "res://tests/support/suite.gd"
-## REQ-23/24/25: OpenBound wind, weather columns and Thor in the shared flight loop.
+## REQ-23/24/25: legacy OpenBound weather in matches without Mage.
+## Native Mage coverage: test_mage_weather / test_mage_secondary_weather.
 func run() -> void:
 	var Weather = load("res://scripts/weather.gd")
 	var Match = load("res://scripts/match.gd")
@@ -108,7 +109,7 @@ func run() -> void:
 
 	# Match wiring: rounds every two turns, Protection heals 35.
 	var model = Match.new()
-	model.start(2, 1, 11)
+	model.start(2, 1, 11, Maps.DEFAULT, "original", null, [], [], [], 0, 4)
 	check(model.weather != null and model.weather.queue.size() == 4 and model.wind == model.weather.wind_vector(), "Match starts with four weathers and the 2D wind")
 	var queue_before: Array = model.weather.queue.duplicate(true)
 	model.schedule(0, 50.0)
@@ -123,7 +124,7 @@ func run() -> void:
 	check(model.actors[0].hp == 1035 and model.actors[1].hp == model.actors[1].max_hp, "Protection heals 35, capped at full life")
 
 	# Contact rules on a single Bigfoot shell (base damage 90).
-	model.start(2, 1, 12, "")
+	model.start(2, 1, 12, "", "original", null, [], [], [], 0, 4)
 	var shell: Dictionary = model.projectile_parameters(0, 45, 60, 0)[0]
 	model.weather.columns.clear()
 	var force_column: Dictionary = model.weather.add_column("force", 600, 1)
@@ -187,7 +188,7 @@ func run() -> void:
 	check(shell.pos.x > 600 + model.weather.outer_half(tornado) and shell.velocity.distance_to(Vector2(300, -100).normalized() * float(shell.launch_speed)) < 0.01, "Release continues along the entry heading at the launch speed")
 
 	# Thor strike: beam from the satellite, damage 40 + 20/level, XP from damage.
-	model.start(2, 1, 13, "")
+	model.start(2, 1, 13, "", "original", null, [], [], [], 0, 4)
 	model.weather.columns.clear()
 	model.weather.thor.active = true
 	model.weather.thor.pos = Vector2(model.actors[1].pos.x, 100)
@@ -205,7 +206,7 @@ func run() -> void:
 	check(thor_loss > 0 and model.weather.thor.xp == thor_loss, "Thor damage (shield first) becomes its experience")
 
 	# Lightning: topmost solid point above the impact, shock 30 to nearby actors.
-	model.start(2, 1, 14, "")
+	model.start(2, 1, 14, "", "original", null, [], [], [], 0, 4)
 	var target: Vector2 = model.actors[1].pos
 	hp_before = int(model.actors[1].hp) + int(model.actors[1].shield)
 	model.events.clear()
@@ -219,7 +220,7 @@ func run() -> void:
 
 	# Live shots and CPU prediction agree with every weather in the path.
 	for setup in [["force"], ["weakness"], ["mirror"], ["electricity"], ["tornado"], ["random"], ["thor"]]:
-		model.start(2, 1, 21, "")
+		model.start(2, 1, 21, "", "original", null, [], [], [], 0, 4)
 		model.wind = Vector2.ZERO
 		model.weather.columns.clear()
 		model.weather.thor.active = false
@@ -256,7 +257,7 @@ func run() -> void:
 		check(matched, "Prediction and live flight agree with %s (%d impacts)" % [setup[0], impacts.size()])
 		check(weather_events.has("thor") if setup[0] == "thor" else (weather_events.has("weather_hit")), "Shots in the path interact with %s" % setup[0])
 	# Menu option "all": every type can be drawn and Thor really activates.
-	model.start(2, 1, 41, Maps.DEFAULT, "all")
+	model.start(2, 1, 41, Maps.DEFAULT, "all", null, [], [], [], 0, 4)
 	check(model.weather.weights == [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "Weather option 'all' weighs every type equally")
 	var thor_round := -1
 	for round in range(80):
@@ -280,7 +281,7 @@ func run() -> void:
 			if model.phase != "flight":
 				break
 	check(thor_fired, "A real shot under natural Thor triggers the satellite strike")
-	model.start(2, 1, 41, Maps.DEFAULT)
+	model.start(2, 1, 41, Maps.DEFAULT, "original", null, [], [], [], 0, 4)
 	check(model.weather.weights == Maps.get_map(Maps.DEFAULT).weather, "Default mode keeps the original Miramo preset")
 	model.start(1, 2, 31)
 	var cpu: Dictionary = model.choose_cpu_shot()

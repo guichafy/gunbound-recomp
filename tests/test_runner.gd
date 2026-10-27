@@ -81,18 +81,22 @@ func _initialize() -> void:
 	check(cpu_shot.angle >= 10.0 and cpu_shot.angle <= 85.0, "CPU returns a legal angle")
 	check(cpu_shot.power >= match_model.minimum_power(0) and cpu_shot.power <= 100.0, "CPU returns legal native power")
 	match_model.start(1, 2, 123, "")
-	# A real -30-degree support makes Mage's legal 45-degree aim steep enough
+	# A real -30-degree support makes Mage's legal40-degree aim steep enough
 	# for wind to return the laser to its shooter after muzzle clearance.
 	for y in range(400):
 		for x in range(640):
 			match_model.terrain.cells[y * 640 + x] = 1 if y * 2 >= 480.0 - (x * 2 - 235.0) * tan(PI / 6.0) else 0
+	match_model.terrain.native_cells = PackedByteArray()
+	match_model.terrain.enable_native()
 	match_model.actors[0].pos.y = match_model.terrain.surface_at(235) - match_model.stance_of(0)
 	match_model.actors[1].pos.y = match_model.terrain.surface_at(1045) - match_model.stance_of(1)
 	match_model.stamp_tilt()
+	match_model.weather.columns.clear()
+	match_model.weather.thor.active = false
 	match_model.wind = Vector2(-26, 0)
-	var returning: Dictionary = match_model.predict_shot(0, 45.0, 15.0, 0)
+	var returning: Dictionary = match_model.predict_shot(0, 40.0, 20.0, 0)
 	check(int(returning.actor) == 0, "Prediction includes firing actor after muzzle clearance")
-	match_model.fire(45.0, 15.0, 0)
+	match_model.fire(40.0, 20.0, 0)
 	for i in range(1600):
 		match_model.tick(1.0 / 120.0)
 		if match_model.phase != "flight":

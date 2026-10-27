@@ -5,8 +5,11 @@ extends RefCounted
 
 const Weather = preload("res://scripts/weather.gd")
 const ShotTiming = preload("res://scripts/classic_shot_timing.gd")
+var lightning_beam_art = preload("res://scripts/lightning_beam_art.gd").new()
 var native_beam_art = preload("res://scripts/aduka_beam_art.gd").new()
 var native_thor_art = preload("res://scripts/thor_native_art.gd").new()
+var native_columns = preload("res://scripts/mage_weather_art.gd").new()
+var mage_sparks = preload("res://scripts/mage_sparks.gd").new()
 # Weather.cs: frames 128×64 (pivot 64,32), 8 frames at 15 fps, columns scroll 50 px/s.
 const FRAME := Vector2(128, 64)
 const SCROLL_SPEED := 50.0
@@ -69,7 +72,7 @@ func _init() -> void:
 	sounds.thor_native = ShotTiming.stream(1,1,"blast")
 
 func reset(map: Dictionary) -> void:
-	native_beam_art.clear()
+	clear_beams()
 	native_thor_art.clear()
 	particles.clear()
 	beams.clear()
@@ -83,8 +86,15 @@ func reset(map: Dictionary) -> void:
 
 func react(event: Dictionary, model, sound) -> void:
 	match event.type:
+		"mage_spark_samples":
+			mage_sparks.accept(event)
 		"explosion":
 			emit_ground(event.position, int(event.get("removed", 0)), float(event.get("angle", PI * 0.5)), model)
+		"mobile_lightning":
+			var effect: Dictionary=event.duplicate(true)
+			effect.kind="mobile_lightning"
+			effect.age=0.0
+			beams.append(effect)
 		"thor":
 			beams.append({"kind": "thor", "from": event.from, "to": event.position, "age": 0.0, "level": int(event.level),"native":bool(event.get("native",false)),"ttl":float(event.get("ttl",0.6)),"period":int(event.get("period",1000)),"rgb":int(event.get("rgb",0x00ff00))})
 			if event.has("native_angle"):
@@ -124,6 +134,7 @@ func emit_ground(position: Vector2, removed_cells: int, angle: float, model) -> 
 		})
 
 func tick(delta: float, model) -> void:
+	mage_sparks.sync(int(model.spark_tick))
 	clock += delta
 	scroll = fmod(scroll + SCROLL_SPEED * delta, FRAME.y * 8.0)
 	var alive := {}
@@ -157,6 +168,10 @@ func particle_position(particle: Dictionary) -> Vector2:
 
 func draw_columns(view: Node2D, model, offset: Vector2) -> void:
 	var height: float = model.terrain.world_size().y
+	if model.weather.get("is_native")==true:
+		native_columns.draw(view,model.weather.columns,column_age,offset,height)
+		return
+	native_columns.clear()
 	for column in model.weather.columns:
 		var sheet: Texture2D = sheets.get(column.type)
 		if sheet == null:
@@ -209,7 +224,15 @@ func draw_thor(view: Node2D, model, offset: Vector2) -> void:
 	view.draw_string_outline(font, thor_position + offset + Vector2(30, 70), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, 4, view.ui.INK)
 	view.draw_string(font, thor_position + offset + Vector2(30, 70), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("9cff8a"))
 
+func clear_beams() -> void:
+	mage_sparks.reset()
+	native_columns.clear()
+	beams.clear()
+	native_beam_art.clear()
+	lightning_beam_art.clear()
+
 func draw_beams(view: Node2D, offset: Vector2) -> void:
+	lightning_beam_art.draw(view,beams.filter(func(beam):return str(beam.kind)=="mobile_lightning"),offset)
 	var native_beams: Array = []
 	for beam in beams:
 		if bool(beam.get("native",false)):
@@ -218,7 +241,7 @@ func draw_beams(view: Node2D, offset: Vector2) -> void:
 			native_beams.append(native)
 	native_beam_art.draw(view,native_beams,offset)
 	for beam in beams:
-		if bool(beam.get("native",false)):
+		if bool(beam.get("native",false)) or str(beam.kind)=="mobile_lightning":
 			continue
 		var from: Vector2 = Vector2(beam.from) + offset
 		var to: Vector2 = Vector2(beam.to) + offset
@@ -238,9 +261,12 @@ func draw_beams(view: Node2D, offset: Vector2) -> void:
 		view.draw_set_transform(Vector2.ZERO)
 
 func draw_shell_marks(view: Node2D, model, offset: Vector2) -> void:
+	mage_sparks.draw(view,offset)
 	# Force sparks, electric arcs and Weakness darkening ride on influenced shells.
 	for projectile in model.projectiles:
 		if not bool(projectile.launched):
+			continue
+		if int(projectile.get("vehicle",0))==1 and not bool(projectile.get("beacon",false)):
 			continue
 		var position: Vector2 = Vector2(projectile.hit_pos) + offset
 		var frame := int(clock * 15.0) % 8

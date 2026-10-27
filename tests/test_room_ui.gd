@@ -45,7 +45,7 @@ func run() -> void:
 	check(preview.texture.region == Rect2(544,0,544,336),"MiramoA uses original map frame1")
 	check(panel.portrait.position == Vector2(378,390) and panel.portrait.size == Vector2(113,146),"Portrait uses proven native position378,390")
 	for i in 8:
-		check(panel.climate_weights[i].text == str([2,1,2,1,0,2,0,0][i]),"Visible weather weight follows map data")
+		check(panel.climate_weights[i].text == str([2,1,2,1,0,0,0,2][i]),"Mage room shows native Miramo weights in existing icon slots")
 	panel.open_settings()
 	panel.choose_weather("all")
 	check(panel.climate_weights[0].text == "2","Draft weather leaves committed display intact")
@@ -56,7 +56,7 @@ func run() -> void:
 	check(owner.text.begins_with("WWWW") and owner.text.ends_with("GM") and owner.size == Vector2(155,17),"Header follows accepted name and stays in native window")
 	check(owner.tooltip_text.contains("Administrador"),"GM remains assigned administrator")
 	for i in 8:
-		check(panel.climate_weights[i].text == "1","All-weather display follows shared preset")
+		check(panel.climate_weights[i].text == str([1,1,1,1,0,1,1,1][i]),"Mage all-weather display includes seven native categories")
 	panel.open_settings()
 	panel.choose_weather("original")
 	panel.cancel_popup()

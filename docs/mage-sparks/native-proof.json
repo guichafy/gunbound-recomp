@@ -1,0 +1,771 @@
+{
+  "authority": "Static client PE/ASM/XFS; no Windows runtime",
+  "toolchain": "Ghidra12.2/JDK26 and llvm-objdump secondary bytes",
+  "inputs": {
+    ".tools/mobile-animation-port/GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    ".tools/gunbound-client/graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08"
+  },
+  "extracts": [
+    {
+      "extract": ".tools/mage-sparks/scheduler/01-factory-tree",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "3d22877df11c44842173ea9f40968d051c051bdc6d27a1de57aeef75c2388607",
+      "functions": [
+        {
+          "requested_va": "0x00436dc0",
+          "seeded": false,
+          "entry_va": "00436dc0",
+          "name": "FUN_00436dc0",
+          "body": "[[00436dc0, 00436ebb]]",
+          "instructions": 75,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0048dcc0",
+          "seeded": false,
+          "entry_va": "0048dcc0",
+          "name": "FUN_0048dcc0",
+          "body": "[[0048dcc0, 0048dd04]]",
+          "instructions": 19,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x00481e30",
+          "seeded": false,
+          "entry_va": "00481e30",
+          "name": "FUN_00481e30",
+          "body": "[[00481e30, 00481e74]]",
+          "instructions": 19,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004f2fb0",
+          "seeded": false,
+          "entry_va": "004f2fb0",
+          "name": "FUN_004f2fb0",
+          "body": "[[004f2fb0, 004f3015]]",
+          "instructions": 43,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004f2f00",
+          "seeded": false,
+          "entry_va": "004f2f00",
+          "name": "FUN_004f2f00",
+          "body": "[[004f2f00, 004f2f82]]",
+          "instructions": 48,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004507d0",
+          "seeded": false,
+          "entry_va": "004507d0",
+          "name": "FUN_004507d0",
+          "body": "[[004507d0, 0045080b]]",
+          "instructions": 25,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004508a0",
+          "seeded": false,
+          "entry_va": "004508a0",
+          "name": "FUN_004508a0",
+          "body": "[[004508a0, 00450b78]]",
+          "instructions": 215,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x0048dcc0.asm": "157bc408f86213c2097e798c2f1d0e3aa8575158406f3b240507e0c472c9b5db",
+        "0x00436dc0.asm": "dd95dfbfef17a8e649b971d6ea4de2c5517189378d823adc2b032a9ce9ca2a93",
+        "0x004f2f00.asm": "2e056985f5dd1bf4e375059e11d08d1f423498c8c5d610086d4c9dffa3b847ee",
+        "0x004508a0.asm": "c945e9c12440da33ba4208dcc0d76b90eb7770351aa3589178d7c3cdef08e4dc",
+        "0x004507d0.c": "acac8f5f06cc01a018c6c30140356da6137d92151bfb742770ffb3a074d30e4f",
+        "0x004507d0.asm": "96a84766a0cfad151990a558db756975814df819829994fa71dbd0c3a8661be6",
+        "0x00481e30.asm": "3481e3b9d43294610d4964e1d342649aefea91dc96bf67a29d1f98801387f62b",
+        "0x004f2f00.c": "81cb4e80e120f9fbcbfe9a80c592aa1d32ddd41d95fee0669ea76c0ccb486b0f",
+        "0x004508a0.c": "ecf610513c53e758778f9d7713964ab538faf17b6122dc583ee1d2c9483ca9b9",
+        "0x004f2fb0.asm": "ad4fe0bbe2fd60711b2ae7ef80c08d257385aa501a25bc52e124147b2ab78aa8",
+        "0x004f2fb0.c": "87d97cc789608aab32081dcd846cd1d27f35356313be5d92f8c8f2d7989089fd",
+        "0x0048dcc0.c": "2b3ae2fc099ac3f0b4dba875feef34687979f22888d9bdfbc1aaebb05f3f5987",
+        "0x00481e30.c": "da2d29efac08bf91ad1023257ac069809c8c4423f6be5a092bbb0408d8ff768d",
+        "0x00436dc0.c": "aff188ddecde1030cbeaba75b8ca30f9c99a6bc39d7c1d743b04f83b46783b7c"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/02-draw-guard",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "aadad76752581b4ff2bdd8a53f65a1ac953f8ce4522930d8d810fa2cc671bef6",
+      "functions": [
+        {
+          "requested_va": "0x00450b80",
+          "seeded": false,
+          "entry_va": "00450b80",
+          "name": "FUN_00450b80",
+          "body": "[[00450b80, 00450bac] [00450bb0, 00450bcb]]",
+          "instructions": 30,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x00450c30",
+          "seeded": false,
+          "entry_va": "00450c20",
+          "name": "FUN_00450c20",
+          "body": "[[00450c20, 00450da2]]",
+          "instructions": 120,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x00450da0",
+          "seeded": false,
+          "entry_va": "00450c20",
+          "name": "FUN_00450c20",
+          "body": "[[00450c20, 00450da2]]",
+          "instructions": 120,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004ced33",
+          "seeded": false,
+          "entry_va": "004cea70",
+          "name": "FUN_004cea70",
+          "body": "[[004cea70, 004cedb3]]",
+          "instructions": 225,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004cf3b4",
+          "seeded": false,
+          "entry_va": "004cf310",
+          "name": "FUN_004cf310",
+          "body": "[[004cf310, 004cfb05]]",
+          "instructions": 530,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004e476a",
+          "seeded": false,
+          "entry_va": "004e4450",
+          "name": "FUN_004e4450",
+          "body": "[[004e4450, 004e4963]]",
+          "instructions": 414,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004e4d0d",
+          "seeded": false,
+          "entry_va": "004e4d00",
+          "name": "FUN_004e4d00",
+          "body": "[[004e4d00, 004e4f46]]",
+          "instructions": 193,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x00450b80.c": "4bc11231c12ccbec2c8a464dde4fcac92c7f478debdc5451080f10fbda0dcebc",
+        "0x004e4d0d.asm": "77737db3cc4a4b07be35db8c3f39912b83fec87c11a7a80aba4879934a0e47cd",
+        "0x00450da0.asm": "58ea8c661652eba1377bddf9778daf3cb722db86aebaa3aec708ba38569d4d7e",
+        "0x004cf3b4.c": "c1668a9150b3716aa7d125b6f1976a9726df658948b3fc12f132f021815901ee",
+        "0x004ced33.c": "0e664d74d61bf33a221df3e554da5e19c3214f4f5a02564243a05c6d11e0118c",
+        "0x00450c30.c": "46558f1dd18a0f91077c7cdcb4df28de51ace809c97d191792fe5d1f2292955b",
+        "0x00450da0.c": "46558f1dd18a0f91077c7cdcb4df28de51ace809c97d191792fe5d1f2292955b",
+        "0x004e476a.asm": "43732179613c100e747b0059ac2825d36c86e23317493c8cbd177d2dece7de6c",
+        "0x004e476a.c": "4ad0c5c4ae06bc50cfcaefcaf185eb2c0779e110841a5ced2590b05b58ec732c",
+        "0x004e4d0d.c": "285dac1b5a2c55f49894e9596ac3062325acf3c1814b6d651a2b276fa0bb7d69",
+        "0x00450b80.asm": "a040c024d96eaf891cb14b774d3949cc8f68e11c67c540c6b5e1f5bd23756523",
+        "0x00450c30.asm": "58ea8c661652eba1377bddf9778daf3cb722db86aebaa3aec708ba38569d4d7e",
+        "0x004cf3b4.asm": "d691a41ecc45234e3746b5d6499f2415e8cb43306fa593b68dac003f3a2d01fc",
+        "0x004ced33.asm": "7b62517df34dff079b000c3e99fd6addfbad6f683476efe5c2b22e4fd12b05a9"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/03-prediction-context",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "cd3970b5fb015ef1b537344dd24f4fa1fa0b599219c866a652a457a9f901baa8",
+      "functions": [
+        {
+          "requested_va": "0x0043c860",
+          "seeded": false,
+          "entry_va": "0043c860",
+          "name": "FUN_0043c860",
+          "body": "[[0043c860, 0043ca79] [0043ca80, 0043d137] [0043d140, 0043d474] [0043d480, 0043d5ce]]",
+          "instructions": 987,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0043c800",
+          "seeded": false,
+          "entry_va": "0043c6a0",
+          "name": "FUN_0043c6a0",
+          "body": "[[0043c6a0, 0043c815]]",
+          "instructions": 98,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x00454dc0",
+          "seeded": false,
+          "entry_va": "00454dc0",
+          "name": "FUN_00454dc0",
+          "body": "[[00454dc0, 0045554e]]",
+          "instructions": 502,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x0043c860.c": "cf20a768226c963a035ca17746fb69cdafd1f7fb4ed4aad33cc7166b6878eed6",
+        "0x0043c800.asm": "dd0f0c9e2f4e992d1fc9806969ef63473cc2484c74318dc79e591aabb0ec003e",
+        "0x00454dc0.c": "769a2ecd2c04cd908a4a6a9fc9d16c2de20452b43b517ecb08327f4b2d92c326",
+        "0x0043c860.asm": "bc1f0e89923a72bee605a11fe17512f54c0db0069386cf8f3c801e10864c6890",
+        "0x00454dc0.asm": "2b25bc191faa89f7b5f3067018a527187caa06ad24b3b4d107c3ce8bab254bdb",
+        "0x0043c800.c": "c30162e8243b7e6468b0cb90076ead8c9d10581e4bbc83b7c4c4c43815e46cc8"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/04-reset-life",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "069b84023174cd7185dd1f443c43151fd0bd3af1767c7dc9ebb3301adeddf908",
+      "functions": [
+        {
+          "requested_va": "0x004f3060",
+          "seeded": false,
+          "entry_va": "004f3060",
+          "name": "FUN_004f3060",
+          "body": "[[004f3060, 004f30b0]]",
+          "instructions": 37,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004f3020",
+          "seeded": false,
+          "entry_va": "004f3020",
+          "name": "FUN_004f3020",
+          "body": "[[004f3020, 004f3056]]",
+          "instructions": 25,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004f2e50",
+          "seeded": false,
+          "entry_va": "004f2e40",
+          "name": "FUN_004f2e40",
+          "body": "[[004f2e40, 004f2e96]]",
+          "instructions": 29,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0043c860",
+          "seeded": false,
+          "entry_va": "0043c860",
+          "name": "FUN_0043c860",
+          "body": "[[0043c860, 0043ca79] [0043ca80, 0043d137] [0043d140, 0043d474] [0043d480, 0043d5ce]]",
+          "instructions": 987,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x0043c860.c": "cf20a768226c963a035ca17746fb69cdafd1f7fb4ed4aad33cc7166b6878eed6",
+        "0x004f3060.asm": "6311996826a1fa32d80135d921905d751ed74c923de076a718ccb618dac03eb8",
+        "0x0043c860.asm": "bc1f0e89923a72bee605a11fe17512f54c0db0069386cf8f3c801e10864c6890",
+        "0x004f3060.c": "c062f8deafcf795f9077bc657ec63085123d45d47dd5fd5bfeb1fed8611261ab",
+        "0x004f3020.c": "8d84d3886504d2856f776a1f92746d350a53fc3fdc3a3bf2fc9a0b8b2587eefc",
+        "0x004f2e50.c": "ce72a7ece1d6090d1fae155b8cca3a6835704399befbe2e8bc807e2242179686",
+        "0x004f3020.asm": "8a4bd413394679fc96a6defee3c3e2939f2db472b3e022d038f1498a08e8ca5a",
+        "0x004f2e50.asm": "86b0a563de046f424fce3749e29dac2309b7538446fceb9c7b5d49f0d5210bae"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/05-scene-clear",
+      "accepted_for_proof": false,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "495ded9a2b924bd09991e841a71790dd34c7e4f040df2a7aa1946cf681ae1ed4",
+      "functions": [
+        {
+          "requested_va": "0x004bd7cb",
+          "seeded": false,
+          "status": "function_not_found"
+        },
+        {
+          "requested_va": "0x004baf6a",
+          "seeded": false,
+          "status": "function_not_found"
+        }
+      ],
+      "evidence_sha256": {}
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/06-clear-seeded",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "053c569f20868437fed394ee1c41618a5dd6a4fc3e85df87c2f8e94f495f9f25",
+      "functions": [
+        {
+          "requested_va": "0x004bcd00",
+          "seeded": true,
+          "entry_va": "004bcd00",
+          "name": "FUN_004bcd00",
+          "body": "[[004bcd00, 004bd398] [004bd3a0, 004bd4f8] [004bd500, 004bd688] [004bd690, 004bd8a6]]",
+          "instructions": 1084,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x004bcd00.asm": "62512d8a0652a83b10dea07a0f6de0e262b4c8399bf82fbd4bd5a77d23a8f51c",
+        "0x004bcd00.c": "ac455cf74f334898ea075ca26665c71062cafaf94d2d790115fe258e15d4f7ca"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/07-switch-vtable",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "08532d0e1d3820f61ce4e0b31cd929d3aae17a3fb8f14e7b111b7a23e4bc469b",
+      "functions": [],
+      "evidence_sha256": {}
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/08-passive-trail",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "b5b09e2cd753c3cea3a861aa45ef2333922eae2fd069f616411f020edb813553",
+      "functions": [
+        {
+          "requested_va": "0x00436bd0",
+          "seeded": false,
+          "entry_va": "00436bd0",
+          "name": "FUN_00436bd0",
+          "body": "[[00436bd0, 00436ccb]]",
+          "instructions": 75,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x00436cc0",
+          "seeded": false,
+          "entry_va": "00436bd0",
+          "name": "FUN_00436bd0",
+          "body": "[[00436bd0, 00436ccb]]",
+          "instructions": 75,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x00436bd0.c": "efe593e8d19be43ea0da5f8d61ea4441a742e03c862a86d54e305551c178a33b",
+        "0x00436bd0.asm": "52d44ff4fd488030636c2cd4a3ba424f3b0a4085a22adc0ac0c93a4c87d8dc31",
+        "0x00436cc0.asm": "52d44ff4fd488030636c2cd4a3ba424f3b0a4085a22adc0ac0c93a4c87d8dc31",
+        "0x00436cc0.c": "efe593e8d19be43ea0da5f8d61ea4441a742e03c862a86d54e305551c178a33b"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/09-mage-passive-init",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "13b292801c638311624bede1899a83d4892a6cfda6a9bcfa36bd08ee01580b3c",
+      "functions": [
+        {
+          "requested_va": "0x0047eb60",
+          "seeded": false,
+          "entry_va": "0047eb60",
+          "name": "FUN_0047eb60",
+          "body": "[[0047eb60, 0047eb81]]",
+          "instructions": 9,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004a46f0",
+          "seeded": false,
+          "entry_va": "004a46f0",
+          "name": "FUN_004a46f0",
+          "body": "[[004a46f0, 004a4805]]",
+          "instructions": 71,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0048d8c0",
+          "seeded": false,
+          "entry_va": "0048d8c0",
+          "name": "FUN_0048d8c0",
+          "body": "[[0048d8c0, 0048d8d3]]",
+          "instructions": 6,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x004aa4d0",
+          "seeded": false,
+          "entry_va": "004aa4d0",
+          "name": "FUN_004aa4d0",
+          "body": "[[004aa4d0, 004aa514]]",
+          "instructions": 19,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x0048d8c0.asm": "dfbf5607a708ccad82af98306bc30ad15572d17d8d86c25dc50b507d73bc4a6d",
+        "0x0048d8c0.c": "28257d0565e5848366a680468323a79b80a4a53faa989c75394a54d10cbed037",
+        "0x004a46f0.asm": "36e454428ebb3b13afb505039fa3fc2b7f64309bdcaeeb2412b2f1b03e6f65f0",
+        "0x004aa4d0.asm": "4c4a1153de4e7dcf4e67330afb98fcdc20511856c7e515d65638aa9f26440130",
+        "0x0047eb60.c": "d55be37e2a6e59f346c1cf7aab310cbba836ff1b19b27ed4f522b74683bd4b97",
+        "0x0047eb60.asm": "c2206d865d7742b01ff2b72bb7464dd17472d7fe050322f046bb9ea2c2c53e94",
+        "0x004a46f0.c": "616c3ba94c49d8675fdbcacd6e4a5eb945f76baa219ee8c8f86b65ca82ff6647",
+        "0x004aa4d0.c": "dc600abc5f70be36a3d45117e02a9278cb66b1685f86dd7617bbac6d83a62316"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/10-passive-render",
+      "accepted_for_proof": false,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "411b883419e12a66384e6ffacdd014018709fba15ef40921f926c442dfac0e13",
+      "functions": [
+        {
+          "requested_va": "0x004aa6c0",
+          "seeded": false,
+          "status": "function_not_found"
+        },
+        {
+          "requested_va": "0x00525c4f",
+          "seeded": false,
+          "entry_va": "00525c4f",
+          "name": "_rand",
+          "body": "[[00525c4f, 00525c70]]",
+          "instructions": 9,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x00525c4f.c": "c5de63d8d2778108416b268f61ddc1c4ca6b2364edddf2162e7bbcb383a3c205",
+        "0x00525c4f.asm": "5f1ed97277c161e946af6b6fd75d4dfd4e7d19e04f7cde15f2ed12f1b4f4a34f"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/11-passive-render-seeded",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "250fd6c8d7e49bec99821847ddd1fd6c417eee35539571cb905e0dfab7ecd5df",
+      "functions": [
+        {
+          "requested_va": "0x004aa6c0",
+          "seeded": true,
+          "entry_va": "004aa6c0",
+          "name": "FUN_004aa6c0",
+          "body": "[[004aa6c0, 004aa758]]",
+          "instructions": 52,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x004aa6c0.asm": "3b7111f1f22eea3db8edf833dd87af1cd6903687dc4e46b7c06313d5fccca950",
+        "0x004aa6c0.c": "b95672133788c37eb220c31438a49224c71a4895fae618553caa7a355b7360fa"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/12-density-writers",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "a6bfc564724888e2e750f874c37da7f6ee0979ac03e328fdab7d8897552118b1",
+      "functions": [
+        {
+          "requested_va": "0x0041da80",
+          "seeded": false,
+          "entry_va": "0041da80",
+          "name": "FUN_0041da80",
+          "body": "[[0041da80, 0041e992]]",
+          "instructions": 961,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0040a380",
+          "seeded": false,
+          "entry_va": "0040a380",
+          "name": "FUN_0040a380",
+          "body": "[[0040a380, 0040a43c]]",
+          "instructions": 62,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0042de70",
+          "seeded": false,
+          "entry_va": "0042de70",
+          "name": "FUN_0042de70",
+          "body": "[[0042de70, 0042f46a]]",
+          "instructions": 1365,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0042bbb0",
+          "seeded": false,
+          "entry_va": "0042bbb0",
+          "name": "FUN_0042bbb0",
+          "body": "[[0042bbb0, 0042de22]]",
+          "instructions": 2126,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x0041da80.asm": "f4928beea34e4cbdcb95110618cf2cfedd4e0cd7d07f6af3be08676e26a33607",
+        "0x0040a380.c": "6502d733177cf09a63b645a774d1c24a88fe5157d00ba97110956beda4fcabeb",
+        "0x0040a380.asm": "6daaf7f819eda6a457cbd660841b749033919769cdcd3528bffa31aca8a26fa0",
+        "0x0042bbb0.c": "6bbf4e840fdb5ec1ea2d33c3ee5db1f21e99283ae5dfddc0f4618a435cca41aa",
+        "0x0042bbb0.asm": "937be4f5585f86d1f6a71fcbda8ced606009f5e51f0be6ee6eaac5e0ca8989b2",
+        "0x0042de70.asm": "2fe3c16b40ead0a6bce67295558e13b587c5c6f5c9439e5de5c6d87e01e1fda3",
+        "0x0041da80.c": "781efa4487ffdf23f070fef5afc405421ea06f351f1b53b429775ac710a16a04",
+        "0x0042de70.c": "44c1346a8a0d6ba5cdbc47a2c9daf83c9a1367338c929879b7ca141bd994b041"
+      }
+    },
+    {
+      "extract": ".tools/mage-weather/moon/16-crash-seeded",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "5c3821f6733b9fdd883244a62af65a92504f326c3da59f7dd2855a661466c7c4",
+      "functions": [
+        {
+          "requested_va": "0x481e80",
+          "seeded": true,
+          "entry_va": "00481e80",
+          "name": "FUN_00481e80",
+          "body": "[[00481e80, 00481ee6]]",
+          "instructions": 37,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x481ef0",
+          "seeded": true,
+          "entry_va": "00481ef0",
+          "name": "FUN_00481ef0",
+          "body": "[[00481ef0, 00481faa]]",
+          "instructions": 57,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x48dd10",
+          "seeded": true,
+          "entry_va": "0048dd10",
+          "name": "FUN_0048dd10",
+          "body": "[[0048dd10, 0048dd7a]]",
+          "instructions": 39,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x48dd80",
+          "seeded": true,
+          "entry_va": "0048dd80",
+          "name": "FUN_0048dd80",
+          "body": "[[0048dd80, 0048de30]]",
+          "instructions": 56,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x481e80.asm": "17ef5aa16f80577c84f9ab4f5ad2f38b6d7b527df34ab53ded8850ff3ee2aed8",
+        "0x48dd80.c": "b5eb5b0812096661e1fba5c6ff7f2cc5efde091c5d32cc0f6be517b6fd6f03b8",
+        "0x48dd10.asm": "55e4d5e1ae06fa52b3316f36a7e41c0f598a9aade881510bea0a5dda98ad04e3",
+        "0x481ef0.c": "55372f959e2a58176e0ed6aaef2fef2d0dda6c15c47c5d34aec4ba262112ae9a",
+        "0x48dd10.c": "569101e1c74c8c8c580ad12e100fb93deaaa182c0e9471b46edbb0684c753f0a",
+        "0x48dd80.asm": "b2d2ecfa562e9666ec3d0500f40eb52b522788f0d6f693630b4e04dca72f3759",
+        "0x481ef0.asm": "1bc30fcdd2e28ac8d1df2425e6d2b5fa06376698d54bbf3a7876d10196f761d2",
+        "0x481e80.c": "b6167bc66c8d2a2f9d3b395f28b95561c7ddc0426f0f1c3d77972af3785aded2"
+      }
+    },
+    {
+      "extract": ".tools/mage-weather/moon/17-crash-quad",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "b48a481776c51ea2810d834920f2ce7967014ea41bcb4ef4c5be6217c5e9c373",
+      "functions": [
+        {
+          "requested_va": "0x4ec840",
+          "seeded": false,
+          "entry_va": "004ec840",
+          "name": "FUN_004ec840",
+          "body": "[[004ec840, 004eca49]]",
+          "instructions": 141,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x4ec840.c": "907e717761d9f3fcf336f8e95f456ee1d51696dc00b971f05fcaa6e6934b45cc",
+        "0x4ec840.asm": "d194cf17926b499c4c56881a75401a0ecd79918761a53c95b70cb2c6bde569bb"
+      }
+    },
+    {
+      "extract": ".tools/mage-weather/moon/18-crash-probability",
+      "accepted_for_proof": false,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "bce068541fa944bd153ecfd1d70cdec0551f5fb4a149087de1b91b0e2c6d9669",
+      "functions": [
+        {
+          "requested_va": "0x45649a",
+          "seeded": false,
+          "entry_va": "00455cc0",
+          "name": "FUN_00455cc0",
+          "body": "[[00455cc0, 00456956] [00456960, 004572ae]]",
+          "instructions": 1534,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x4ca59a",
+          "seeded": false,
+          "status": "function_not_found"
+        }
+      ],
+      "evidence_sha256": {
+        "0x45649a.c": "452d60d43f85bc2857df680cdd4f23fa51133613ecd7aacfa1a8d590a158bb6f",
+        "0x45649a.asm": "49002ffc38133b3ae8e4bf1542c1e17766aecfb6cfaeb8a73cf22f1405e1c063"
+      }
+    },
+    {
+      "extract": ".tools/mage-weather/moon/19-crash-settings",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "e455c27aeb6f715ce8564bccc75f90cada7dc19620a9362d42a040af417c0326",
+      "functions": [],
+      "evidence_sha256": {}
+    },
+    {
+      "extract": ".tools/mage-weather/moon/20-crash-dispatch",
+      "accepted_for_proof": true,
+      "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+      "manifest_sha256": "9892106e7f91dce6f2bbd23936984da9bc7e708ee931c6b3cc7060a89426f65e",
+      "functions": [
+        {
+          "requested_va": "0x450c20",
+          "seeded": false,
+          "entry_va": "00450c20",
+          "name": "FUN_00450c20",
+          "body": "[[00450c20, 00450da2]]",
+          "instructions": 120,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x450c20.c": "46558f1dd18a0f91077c7cdcb4df28de51ace809c97d191792fe5d1f2292955b",
+        "0x450c20.asm": "58ea8c661652eba1377bddf9778daf3cb722db86aebaa3aec708ba38569d4d7e"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/13-crt-rand",
+      "accepted_for_proof": true,
+      "manifest_sha256": "2882e34fe8a8b20d8ea3f802c12bcfc2e050d23078a827f5aeaaa18bf0012059",
+      "functions": [
+        {
+          "requested_va": "0x00525c4f",
+          "seeded": false,
+          "entry_va": "00525c4f",
+          "name": "_rand",
+          "body": "[[00525c4f, 00525c70]]",
+          "instructions": 9,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x0052a4d4",
+          "seeded": false,
+          "entry_va": "0052a4d4",
+          "name": "__getptd",
+          "body": "[[0052a4d4, 0052a544]]",
+          "instructions": 37,
+          "status": "decompiled",
+          "diagnostic": ""
+        },
+        {
+          "requested_va": "0x00436dc0",
+          "seeded": false,
+          "entry_va": "00436dc0",
+          "name": "FUN_00436dc0",
+          "body": "[[00436dc0, 00436ebb]]",
+          "instructions": 75,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x00436dc0.asm": "dd95dfbfef17a8e649b971d6ea4de2c5517189378d823adc2b032a9ce9ca2a93",
+        "0x0052a4d4.asm": "dcf35caa442649d4cdcca8bf1bb64f3952e13604f60b8f249b9356677c6255b1",
+        "0x00525c4f.c": "c5de63d8d2778108416b268f61ddc1c4ca6b2364edddf2162e7bbcb383a3c205",
+        "0x0052a4d4.c": "e766ae83d4a9b9ddd89d921585a509ed2423928aef9296a7f83c89b9023b3521",
+        "0x00436dc0.c": "aff188ddecde1030cbeaba75b8ca30f9c99a6bc39d7c1d743b04f83b46783b7c",
+        "0x00525c4f.asm": "5f1ed97277c161e946af6b6fd75d4dfd4e7d19e04f7cde15f2ed12f1b4f4a34f"
+      }
+    },
+    {
+      "extract": ".tools/mage-sparks/scheduler/14-crt-tls",
+      "accepted_for_proof": true,
+      "manifest_sha256": "aa3e45d4846dbb403177638586cca8ae63b114daecbc030a4f380ace8b87b1ef",
+      "functions": [
+        {
+          "requested_va": "0x0052a700",
+          "seeded": false,
+          "entry_va": "0052a6bb",
+          "name": "__mtinit",
+          "body": "[[0052a6bb, 0052a7a9]]",
+          "instructions": 71,
+          "status": "decompiled",
+          "diagnostic": ""
+        }
+      ],
+      "evidence_sha256": {
+        "0x0052a700.c": "ea99d384141dc96a013e46495803bd1d1631a563a4d359809278eeffc70358ca",
+        "0x0052a700.asm": "c83fcc54e5f55516a89972d0abf02acc48afd9edb51ac3d71b557196951af7c1"
+      }
+    }
+  ],
+  "contracts": {
+    "samples": "455cc0 stride8 coarse before contact, no refinement samples",
+    "force": "436dc0; quality*Force15c0/400;48dcc0/48dd10/48dd80",
+    "electricity": "436ec0; quality/100;481e30/481e80/481ef0",
+    "zero_force_rng": "436bd0 consumes a trial; Mage density1e50=0, no ordinary particle;41da80 starts at1e54",
+    "clock": "100002 before190003/4; born1 last15 remove16;4507d0/4f3100",
+    "raster": "CrashTexture.xtf;4ec840 float32 LUT;450c20 SRCALPHA/ONE",
+    "cleanup": "4bcd00->4f3060",
+    "random": "525c4f: PTD+14 viaFLS/TLS,214013*x+2531011,>>16 &32767; CRTinitial1; local visual seed4242 explicit"
+  },
+  "offline_inputs": [
+    "separate presentation MSVCRT seed4242",
+    "Effect3D quality3 (native setting values1/2/3); not a claim about Windows persisted preference"
+  ],
+  "limits": [
+    "no Windows execution",
+    "input/flight origin and item bridges from preceding ADRs remain outside this cosmetic scope"
+  ]
+}

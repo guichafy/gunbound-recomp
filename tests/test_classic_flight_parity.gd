@@ -122,38 +122,24 @@ func test_planted_radius(weapon: int) -> void:
 	load("res://scripts/classic_flight.gd")._detonate_mine(model, 0)
 	check(int(model.actors[1].hp) == hp and int(model.actors[1].shield) == 30, "Planted Raon mine cannot hurt outside radius")
 
-func lightning_impact(weapon: int, target: Vector2):
-	var model = fresh(8)
-	model.terrain.cells.fill(0)
-	var impact := Vector2(640, 400)
-	model.terrain.cells[200 * model.terrain.WIDTH + 320] = 1
-	model.actors[0].pos = Vector2(200, 100)
-	model.actors[1].pos = target - Vector2(Mobiles.body(model.actors[1]).offset)
-	model.actors[1].shield = 0
-	model.actors[1].hp = 1000
-	check(model.fire(30, 40, weapon), "Lightning fires before controlled terrain impact")
-	# Keep all the rules produced by fire; only arrange a repeatable contact.
-	var shell: Dictionary = model.projectiles[0]
-	shell.pos = impact + Vector2(0, -3)
-	shell.hit_pos = shell.pos
-	shell.velocity = Vector2(0, 240)
-	shell.age = 1.0
-	shell.launched = true
-	shell.erase("launch_velocity_fp")
-	shell.fp_ready = false
-	model.advance_projectiles(Combat.STEP)
-	return model
-
 func test_lightning_diagonals() -> void:
-	for angle in [PI * 0.25, PI * 0.75, PI * 1.25, PI * 1.75]:
-		var ray := Vector2.RIGHT.rotated(-angle)
-		var target := Vector2(640, 400) + ray * 120.0 + ray.orthogonal() * 40.0
-		var model = lightning_impact(1, target)
-		check(int(model.actors[1].hp) == 965, "Lightning S2 diagonal %s applies exactly 35 extra shock" % angle)
-	# SS evaluates each mobile position against its 100 px reach.
-	var near = lightning_impact(2, Vector2(700, 350))
-	var far = lightning_impact(2, Vector2(770, 350))
-	check(int(near.actors[1].hp) < 1000 and int(far.actors[1].hp) == 1000, "Lightning SS reaches a nearby actor and excludes one beyond 100 px")
+	# Lightning native review supersedes the old four C# arms/35 shock.
+	var model=fresh(8)
+	model.terrain.cells.fill(0)
+	model.terrain.native_cells.fill(0)
+	var width:=int(model.terrain.world_size().x)
+	for x in width:
+		model.terrain.native_cells[400*width+x]=1
+	model.actors[0].pos=Vector2(100,50)
+	model.actors[1].pos=Vector2(900,50)
+	model.shot_actor=0
+	model.shot_weapon=1
+	var shell: Dictionary=model.shot_shells(0,30,40,1)[0]
+	model.explode(Vector2(640,400),-1,shell)
+	var rays: Array=model.events.filter(func(event):return event.type=="mobile_lightning")
+	check(rays.size()==2,"Native T2 creates two sky diagonals")
+	check(rays[0].direction==1 and rays[1].direction==-1,"Native T2 preserves ordered opposing diagonals")
+	check(bool(shell.skip_actors),"Native T2 never collides with mobiles during flight")
 
 func test_children(vehicle: int, count: int) -> void:
 	var model = fresh(vehicle)

@@ -1418,3 +1418,95 @@ T1/SS, glows separados, posição/orientação aprovada e demais assets mantidos
 Plano/matriz/limites: `ADUKA_COMBAT_REA.md`; evidência estática Ghidra em
 `docs/aduka-combat/native-proof.json`, fixtures independentes e GPU em
 `docs/aduka-combat`. Não é paridade integral da engine nem execução Windows.
+
+
+## ADR-126 — revisão Mage por REA: combate, EMP, força e Tempo
+
+27/10/2026. Pedido baseado no aprendizado da revisão Aduka. Consumidores
+do mesmo PE comprovam poder200/186/380, dimensões66/54/60, aspectos143/
+134/130, divisão1/2/1 dos bônus, AABB/scanlines e queda linear. Mage passa
+pelo núcleo numérico compartilhado daADR-125, isolado por vehicle1; T2
+usa os pontos físicos da hélice no contato e na borda do tornado.
+EMP esgota escudo em raio estrito150 do hotspotY−10 antes do blast normal.
+Tornado conserva velocidade24.8, duas inversões/saída3; gravidade/vento
+retomam no tick seguinte. Force é bônus separado por tick. Arte/registro/
+EPA/LaserEffect/PCM corretos foram conferidos e preservados. A adaptação
+C# de dano/colisão/EMP/tornado do Mage descrita anteriormente é substituída
+somente neste escopo. Demais bridges de clima, ativação de itens, muzzle/
+apoio e proteção de voo permanecem identificadas. VerMAGE_CLIENT_REVIEW.md.
+
+
+## ADR-127 — Lightning: raios, choque, contato, clima e animação nativos
+
+27/10/2026. Pedido de revisão geral pelo cliente original, apósAduka/Mage.
+MesmosPE/XFS/DAT, Ghidra12.2/JDK26; matriz/plano/evidência e limites em
+`LIGHTNING_CLIENT_REVIEW.md`. T1/T2 só colidem com terreno, stride3/8 e
+refino1. T1 usa primeira superfície vertical do topo; T2 duas diagonais
+com ordem e sinais nativos. SS seleciona inimigos em raio estrito120,
+cria raios/T1 remotos e não inventa blast próprio no ponto do guia.
+
+Choque76/76/46, cadeia20 e raios70/70/120 são campos separados de poder/
+Attack/Defense. Mecânicos ampliam raio20% e dano8%; cadeia usa raio original
+e exclui alvosflag1/2. Resolução ao fim do tick mantém elegibilidade do golpe
+letal para propagar antes do resultado. Real e CPU usam o mesmo estado/cópia.
+Queda linear, Defense, crateras e contato usam núcleo comum comprovado;
+coarse_step é parametrizado com padrão8 para preservar os outros portes.
+Force+3/+8/+8 separado; tornado preserva24.8, duas inversões e saída3.
+
+Arte original/EPA/pivôs/PCM conferidos. Lightning.xtf é desenhado em quads
+inteiros/UV1/4/alpha255−24×tick; SSpl emADD, sem rastro. A apresentação usa
+RNG local de variantes. Avatar e seus efeitos não aparecem emdead, conforme
+guardas das texturasAvata noPE; chassis segue. Sem editar11campos de cabeçalho
+que não são pivôs válidos nessa pose. Avatares/HD vivos e demais mobiles
+preservados. Bridges de clima/itens/origem/scheduler e demais limites seguem
+explícitos; não é execução dinâmica nem paridade integral do cliente.
+
+## ADR-128 — climas secundários do Mage pelo cliente original
+
+27/10/2026. Substitui os bridges de clima daADR-126 nas partidas contendo
+Mage. `mage_weather.gd` mantém calendário8/categorias7, LCGs/CRT, vento,
+intervalos de coluna do `stage.dat`, mescla e limpeza43c620 a cada turno.
+Miramo usa[2,1,2,1,2,0,0]: Thor ocupa o peso anteriormente atribuído à cura
+pelo C#. Fraqueza/Espelho/Aleatório não entram nesse calendário. As demais
+combinações de mobiles conservam o adaptador anterior.
+
+Moon cura somente o ator do turno em3%/8% do maxHP final, semREGEN; Eclipse
+bloqueia itens e limpaDual/Dual+, sem bloqueioSS adicional. Anexos Mage
+executam elétrico→Thor→blast próprio/EMP; choque/cadeia resolve ao fim do
+tick. Elétrico tem blastLightningT1 próprio com poder/dimensão divididos
+por2 após atributos; NÃO herdaForce15c0. O percentual17e4 é outro campo.
+Thor consulta o clima no impacto, divide só poder por1/2/1, multiplica o
+período visual, inicia emY500/X porLCG, avança40Y na fronteira e recalcula
+nível na transição seguinte. Snapshot copia todo o estado, semIO no worker.
+
+Três colunas usamXTFs originais, tiles64Y, UV/scroll/20Hz e mistura nativos;
+assets antigos preservados. Seeds/período/opções de sala são entradas
+offline; ativação de itens, regeneração comum e partículas decorativas em
+voo permanecem bridges declarados. Sem alegação de execução Windows ou
+paridade integral. Matriz, provas e resultados em `MAGE_SECONDARY_WEATHER.md`.
+
+## ADR-129 — partículas decorativas originais em voo do Mage
+
+27/10/2026. Substitui o bridge de partículas em voo declarado naADR-128,
+somente paraMage T1/T2/SS. `455cc0` publica amostras compactas dos pontos
+coarse8 já calculados, após clima e antes do contato; refino1 não emite.
+`MageSparks` consome esses registros no apresentador, com geradorMSVCRT
+próprio e timestamp20Hz copiado no snapshot. Nenhum sorteio visual ou
+objeto gráfico entra no modelo/worker; dano, contato e RNG de combate
+permanecem preservados. Outros mobiles e projéteis de item mantêm seus
+consumidores anteriores.
+
+Force usa rand%400<qualidade×Force; Electric, rand%100<qualidade. Force0
+mantém as tentativas436dc0 e436bd0. Densidade passivaMage1e50=0 impede
+uma terceira família, mas não elimina a rolagem comum. Pontos de nascimento
+fixos, offsets−10..10 e ângulos0..359; ambas famílias nascem antes do seu
+Animate no mesmo tick. Primeiro desenhoclock1, último15, remoção16;
+giro1/6°, alfa255−16clock, tamanho2×(16−clock) e frames de2ticks.
+
+CrashTexture.xtf original decodificada sem geração/reescala. Quad4ec840 usa
+LUTfloat32 e storesFPU, UV1/8 nas faixasV.25/.375; ambasSRCALPHA/ONE.
+Pausa congela partículas/RNG, saída/nova partida limpa dados eRIDs.
+Qualidade3 e seed4242 são entradas locais explícitas; não se alega replay
+do gerador globalWindows. Arte/registro/LaserEffect, combate/perfil e fontes
+anteriores preservados. Contrato, plano, evidência e validação em
+`MAGE_FLIGHT_SPARKS.md`.

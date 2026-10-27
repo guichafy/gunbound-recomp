@@ -195,7 +195,9 @@ func run() -> void:
 		all_electric = all_electric and shell.electric and "electricity" in shell.influenced
 	check(all_electric and model.projectiles.size() == 2, "Thunder makes every shell electric")
 	fly(model)
-	check(events_of(model, "lightning").size() == events_of(model, "explosion").size() and events_of(model, "explosion").size() > 0, "Each electric explosion raises a lightning strike")
+	var mage_impacts: Array = events_of(model,"explosion").filter(func(event):return int(event.vehicle)==1)
+	var attached: Array = events_of(model,"explosion").filter(func(event):return bool(event.get("native_attached",false)))
+	check(events_of(model,"mobile_lightning").size()==mage_impacts.size() and mage_impacts.size()==2 and attached.size()==2,"Each Thunder Mage component creates one native ray and one separate electrical blast")
 
 	# Teleport: one beacon, faster, no wind, ground only, no damage or crater.
 	model = fresh(2, ["teleport"])

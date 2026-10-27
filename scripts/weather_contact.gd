@@ -5,6 +5,7 @@ extends RefCounted
 
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const Weather = preload("res://scripts/weather.gd")
+const NativeWeather = preload("res://scripts/aduka_weather.gd")
 
 ## Entering a column's inner rectangle interacts once; leaving through the
 ## outer margin re-arms it.
@@ -22,9 +23,11 @@ static func apply(model, projectile: Dictionary) -> void:
 
 static func interact(model, projectile: Dictionary, column: Dictionary) -> void:
 	var type: String = column.type
-	# Aduka samples these at native coarse contact points, not the interpolated
-	# start of a tick. Its tornado keeps the fixed velocity and current wind.
-	if int(projectile.get("vehicle",0))==16 and not bool(projectile.get("beacon",false)) and type in ["force","tornado","electricity"]:
+	# These three hazards belong to a later C# ruleset, absent from this PE.
+	if int(projectile.get("vehicle",0))==1 and type in ["weakness","mirror","random"]:
+		return
+	# Mage/Aduka sample these at native physical contact points.
+	if NativeWeather.active(projectile) and type in ["force","tornado","electricity"]:
 		return
 	var first: bool = type not in projectile.influenced
 	if first and type != "tornado" and type != "random":

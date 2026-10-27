@@ -1,5 +1,138 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Mage: partículas decorativas em voo — ADR-129
+
+Pedido seguinte implementado no fonte. Ler `MAGE_FLIGHT_SPARKS.md`.
+Force/Electric agora usamCrashTexture.xtf original, quadfloat32/UV/ADD,
+posições fixas e relógio20Hz. Nasceclock1/alfa239, gira1°/6°, termina no16.
+Scanner455cc0 publica os pontoscoarse8 apósclima/antescontato, semFX extra
+no refino. Sorteios só no apresentador, separados do combate/CPU. Force0
+consome também a tentativa436bd0, cuja densidadeMage1e50 é0 e não geraFX.
+
+65.536pixels conferidos; testes focais63+206Godot/2Python e revisãofocal
+semP1/P2 após corrigir a tentativa comum. FPS10/30/40/60 com estados iguais;
+probe independente com partículas vivas e pósresultado sem mexer atores.
+GPU360quadrosFullHD,12casos/dois sentidos, pausa30 idêntica; arena realT2
+Force/Electric também com pausa/retomada/menuclear. Evidência em
+`docs/mage-sparks`, extratos locais `.tools/mage-sparks` e anterior`moon16..20`.
+Harness final98suítes/parse/exit0: **27046Godot+60Python+29partidas/0**;
+fontes/assets/fixtures iguais por hash. Seed4242/qualidade3 são inputs locais, sem
+replay do RNG globalWindows. Sem clienteWindows/escuta/aceitehumano,
+versão/exportação/app/ZIP. Pedido posterior autorizou commit e push na
+`main` do conjunto integrado com suas dependências nativas pendentes;
+o envio inclui o commit localAduka já ancestral da branch. Demais bridges
+daADR-128 preservados. Hashes e limites em `docs/mage-sparks/verified-source.json`.
+
+## Mage: climas secundários — ADR-128
+
+Pedido de27/10/2026 implementado e validado no fonte. Ler
+`MAGE_SECONDARY_WEATHER.md`. Partidas contendoMage usam calendário nativo7
+categorias/8slots, vento e rangesX do `stage.dat`; Miramo ganhaThor2 e cura0.
+Moon só cura ator do turno3%/8% maxHP; Eclipse bloqueia itens/limpaDual global.
+Colunas mesclam pelo primeiro encontro e a transição43c620 limpa outros tipos
+a cada turno, antes de novos spawns. Elétrico→Thor→Mage/EMP; elétrico tem
+blast115/dim27 base e choque40/30 por componente, semForce herdada. Thor usa
+posiçãoLCG/Y500, avanço40 até1000, poder÷1/2/1 e período×divisor; nível só
+recalcula no turno seguinte. Outras duplas preservamWeather anterior.
+
+`MageWeather.copy()` duplica estado e usa o mesmo passo real/previsão. Três
+XTFs originais extraídas, quads64Y/UV/blend/20Hz nativos. GPU540quadros em
+1920×1080/60Hz, seis casos com contatos controlados, pausa30 idêntica.
+Vídeo/PNG/JSON em `docs/mage-weather`. REA estático, sem cliente Windows;
+seeds/período e bridges de itens/regen comum/partículas em voo declarados.
+Sem nova exportação, alteração de versão, commit ou envio ao remoto.
+
+Harness final95suítes/parse/exit0: **26775Godot+58Python+29partidas/0**.
+AjusteUI posterior limpa item enfileirado emEclipse sem consumi-lo;
+regressão49/0, dois checks novos: consolidação26777Godot. Revisão focal
+semP1/P2. Fontes/recursos conferidos por hash, prova de pausaRGBA
+independente e limites em `docs/mage-weather/verified-source.json`.
+TTL sem decremento no ciclo2D auditado (Animate+8/Draw+c/deleção+14),
+sem generalização a outros fluxos indiretos/3D.
+
+## Lightning: revisão de assets, combate e Tempo — ADR-127
+
+Pedido27/10/2026, skillgunbound-client-port, mesmoPE/XFS/DAT e
+Ghidra12.2/JDK26 direto. Matriz/plano/limites em`LIGHTNING_CLIENT_REVIEW.md`;
+11consultas e35extratos em`docs/lightning-review/native-proof.json`.
+
+`LightningCombat` porta T1stride3/T2stride8 com refino1/sóterreno, vertical
+na primeira superfície e duas diagonais do topo. SS seleciona inimigo em
+raio estrito120 pelo hotspotY−10 e cria strikeT1, sem blast primário do guia.
+Dano/Defense/tipos/escudo/cratera usam núcleo comum; flags extraídos do campo
+correto separado do raio. Choque76/76/46, mecânicos+8%/raio+20%; cadeia20
+com raio original e filtros próprios. Elegibilidade anterior ao blast letal
+permite devolver choque antes do resultado. CPU/snapshots compartilham tudo.
+
+Force+3/+8/+8 por tick,20..100, separado do poder. Tornado mantém24.8,
+reflete duas vezes/libera na3ªsaída e retoma vento no próximo tick, semimpulso
+C#. Outros climas/itens/regen/apoio/origem/scheduler mantêm bridges declarados.
+Não anunciar combate integral nativo nem migrar demais ataques por efeito
+colateral; fontes/HD/avatares/perfil e revisãoMage simultânea preservados.
+
+445quadrosmobile+79tiros/impactos, pivôs/EPA/PCM conferidos contraoriginais.
+Lightning.xtf original novo para raios aditivos, quads inteiros/UV1/4,
+alpha255−24×tick/10ticks. SSpl emADD e headingquantizado, semrastro.
+EPA14dead oculta AvataTexture/AvataEffect; chassis continua, semusar11campos
+inutilizáveis comoRiderPivot. Poses vivas preservam montagem aprovada.
+
+Validação final`./scripts/check.sh`: **25416checksGodot+55Python+29partidas/0**,
+90suítes, parse aprovado, exit0. Log`.tools/lightning-review/final-harness.log`,
+SHA/contagens em`docs/lightning-review/verified-source.json`. Revisão
+independente semP1/P2; `git diff --check` limpo. Suspeita de imunidadeKnight
+foi descartada:campo+24 é estadoEPA, não IDmobile. Não foi alterado.
+
+GPU realM4Pro:300quadrosT1/T2/SS+300vento/tornado,1920×1080/relógio60Hz,
+pausa30..59 durante o raio idêntica e retomada. Poses150quadros/padrão+GreatDevilHD,
+dois sentidos, pausa30idêntica; morte igual por pixels com/sem equipamento.
+Miramo realT2:primeirofeixequadro74, pausa/retomada, HUD acima e efeitoslimpos
+ao voltar. Uma primeiraQA detectou dados retidos após saída; corrigido e
+recapturado comarray/RIDs limpos. Vídeos/PNG/JSON em`docs/lightning-review`.
+Tempos15,46s/19,86s de captura/escrita não comprovam performance60FPS.
+
+GPU restrita abortou134 antes do quadro; execução fora do sandbox concluiu.
+Importeditor registrou CA/editor_settings ambientais conhecidos; harness/GPU
+finais semSCRIPT ERROR/ERROR. SemclienteWindows/escuta/input humano nem aceite
+visual. Perfil isolado, som silenciado. Sem versão/app/export/PCK/ZIP/commit/push.
+
+## Mage: revisão de assets, força, combate e Tempo — ADR-126
+
+REA Ghidra12.2/JDK26 no mesmoPE/XFS. `MageCombat` porta dados200/186/380,
+dimensões66/54/60, aspectos143/134/130 e atributos divididos1/2/1 antes da
+soma. Núcleo45db20/455cc0 compartilhado comAduka: dano linear/passes inteiros,
+AABB, stride8/refino1, scanlines e máscara1px copiada paraCPU. T2 usa onda
+na colisão. EMP drena escudo antes do blast, raio estrito150/hotspotY−10.
+
+Tornado conserva24.8, duas inversões/saída3, vento/gravidade retomam no tick
+seguinte. Revisão independente corrigiu umP2: bordaT2 usa ponto da hélice,
+sem trocar pelo carrier. Force por tick separado. Revisão final semP1/P2.
+489quadros/pivôs/EPA, LaserEffect ePCM21fire/22blast conferidos; fontes e
+avatares/HD preservados, sem nova imagem ou compensação do piloto.
+
+Validação consolidada: **20598checksGodot+48Python+29partidas,87suítes
+aprovadas**, parse limpo. Harness estável emcópia Mage separada do trabalho
+Lightning simultâneo. UmPNG de referência de botões faltou nessa cópia:
+comando completo terminouexit1; pasta reanexada e suíte inteira repetida
+596/0/exit0. Consolidação exige todas as87suítes e preserva ambos os logs,
+sem anunciar exit0 para a rodada parcial. JSON emdocs/mage-review/verification.json.
+Nova suíteMage4054/0 (567fixtures de distância, limites deEMP/tornado,
+real×CPU até dano/cratera, itens e quatro ventos/dois sentidos).
+Workspace integrado também passou6839checks dirigidos/0 duranteLightning.
+
+GPU M4Pro:480quadros1920×1080, relógio60Hz, T1/T2/SS/dois sentidos com e
+semvento/tornado/Force; impactos1/2/1 emcada cenário, pausas30idênticas,
+retomada inspecionada. Captura/escrita49,588s, semalegar performance60FPS.
+Sala eMiramo/HUD/três tiros reais também capturados, pausa30por arma.
+Vídeo8s, imagens, manifestos e18extratos emdocs/mage-review; contrato/matriz
+emMAGE_CLIENT_REVIEW.md. GPU final semerro de script/recursos.
+
+Fraqueza/Mirror/Random/Protection, calendário/clima/choques, ativação de
+itens, muzzle/origem/apoio e limite12s continuam bridges declaradas.
+ClienteWindows, escuta/mouse humanos e aceite visual não realizados.
+Semversão nova/export/app/PCK/ZIP, commit oupush; perfil real preservado.
+A revisãoLightning simultânea não foi alterada nem validada integralmente
+aqui. HistóricoMage/arte adaptada anterior não prova esta entrega.
+
 ## Versionamento local do trabalho Aduka
 
 Pedido posterior do usuário: registrar as alterações do Aduka no Git local.

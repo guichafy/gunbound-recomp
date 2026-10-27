@@ -1,0 +1,39 @@
+{
+  "baseline_commit": "880a7645194bf38dd5df731ed3fab3f9747b933e",
+  "project": "/private/tmp/mage-validation-20261027/project",
+  "purpose": "Mage-only validation snapshot; simultaneous Lightning delta excluded from shared files without changing workspace",
+  "files": {
+    "scripts/match.gd": {
+      "snapshot_sha256": "cbcf6873b257233d56677b6691145fa76d3e1658d7b200f97770d4e6e63e2adf",
+      "workspace_sha256_at_capture": "035be0c21254388fe778065874019b9da3e8607792b53a82d2f013837fb6ae66"
+    },
+    "scripts/aduka_weather.gd": {
+      "snapshot_sha256": "80cc44a8c124bcd56d4275507c35ba3dbe4a57ed496793ba86df95f68dae6e6a",
+      "workspace_sha256_at_capture": "b1ce70aacdb36d4466ac327f6b6a52e18a9b71e783df169f985a51955a227d61"
+    },
+    "scripts/weather_contact.gd": {
+      "snapshot_sha256": "88c14dfe0b1fb93f07d55774853fe321c73ae535aba47f6040707d978678abca",
+      "workspace_sha256_at_capture": "88c14dfe0b1fb93f07d55774853fe321c73ae535aba47f6040707d978678abca"
+    },
+    "scripts/mobiles.gd": {
+      "snapshot_sha256": "be067965aa5f7b853b6ae496d0fe8aac992614027301a03bb2e7e795b3d69dd4",
+      "workspace_sha256_at_capture": "be067965aa5f7b853b6ae496d0fe8aac992614027301a03bb2e7e795b3d69dd4"
+    },
+    "scripts/mage_combat.gd": {
+      "snapshot_sha256": "5cb6872ed1dfcd37476a7bd7fdb5fbf8b454388e4e449b7570fa3865d6c8b293",
+      "workspace_sha256_at_capture": "5cb6872ed1dfcd37476a7bd7fdb5fbf8b454388e4e449b7570fa3865d6c8b293"
+    },
+    "scripts/check.sh": {
+      "snapshot_sha256": "b347791ca0a38205ce4ccfef50e2eb1abc54555fecebb92fa5725c63d2af2220",
+      "workspace_sha256_at_capture": "b347791ca0a38205ce4ccfef50e2eb1abc54555fecebb92fa5725c63d2af2220"
+    },
+    "tests/test_mage_native.gd": {
+      "snapshot_sha256": "d902514f9a3f150e59cfd31009cea2dcb30de207dac1de311d1cc6ebece8ee5d",
+      "workspace_sha256_at_capture": "d902514f9a3f150e59cfd31009cea2dcb30de207dac1de311d1cc6ebece8ee5d"
+    },
+    "tests/test_mage_assets.py": {
+      "snapshot_sha256": "60e75430c725aa688ae5e11c8025807852585d1d3692e4bcbf70c19c31e8964e",
+      "workspace_sha256_at_capture": "60e75430c725aa688ae5e11c8025807852585d1d3692e4bcbf70c19c31e8964e"
+    }
+  }
+}

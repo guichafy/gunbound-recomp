@@ -101,11 +101,16 @@ static func impact(model, projectile: Dictionary, position: Vector2) -> bool:
 
 ## A shared native Thor request; weather-triggered beams in an Aduka match
 ## use the same level/XP table and art instead of reverting to the C# table.
-static func strike(model, projectile: Dictionary, position: Vector2, source: String = "aduka") -> bool:
+static func strike(model, projectile: Dictionary, position: Vector2, source: String = "aduka", power_divisor: int = 1) -> bool:
 	ensure_thor(model)
 	var thor: Dictionary = model.weather.thor
 	var level := int(thor.level)
 	var data := parameters(level)
+	# Mage weather attachment432320: divide power only, keep dimension;
+	#45799a multiplies the beam period by the parent shell's divisor.
+	power_divisor = maxi(1,power_divisor)
+	data.power = Physics.quot(int(data.power),power_divisor)
+	data.period = int(data.period)*power_divisor
 	var owner := int(projectile.get("owner",model.shot_actor))
 	var weapon := int(projectile.get("weapon",1))
 	var origin := cannon(Vector2(thor.pos),position)
@@ -122,7 +127,10 @@ static func strike(model, projectile: Dictionary, position: Vector2, source: Str
 	var dealt: int = 0 if contact.is_empty() else NativeCombat.apply(model.actors,model.events,Vector2i(strike),
 		{"power":data.power,"dimension":data.dimension,"aspect":150,"flags":4,"percent":100},true)
 	thor.xp = int(thor.xp)+maxi(0,dealt)
-	thor.level = level_for_xp(int(thor.xp))
+	#4ccd10→4ac180 recomputes level at the next turn transition. Keep the
+	# existing non-Mage bridge until its separate integration is requested.
+	if model.weather.get("is_native")!=true:
+		thor.level = level_for_xp(int(thor.xp))
 	thor.state = "fire"
 	thor.state_tick = 0
 	thor.native_angle = target_angle(Vector2i(position)-Vector2i(thor.pos))

@@ -1,0 +1,27 @@
+{
+  "binary_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "characterdata_sha256": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+  "weapons": [
+    {
+      "power": 200,
+      "dimension": 66,
+      "aspect": 143,
+      "flags": 100,
+      "emp": 0
+    },
+    {
+      "power": 186,
+      "dimension": 54,
+      "aspect": 134,
+      "flags": 100,
+      "emp": 0
+    },
+    {
+      "power": 380,
+      "dimension": 60,
+      "aspect": 130,
+      "flags": 100,
+      "emp": 150
+    }
+  ]
+}

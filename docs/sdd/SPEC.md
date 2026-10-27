@@ -1,5 +1,33 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Partículas em voo Mage — REQ-07/08/09/24/44
+
+Substituir a apresentação adaptada deForce/eletricidade nos tirosMage pelos
+efeitos comprovados do cliente: amostras físicas, tentativas, posição fixa,
+textura, quad, mistura e relógios. Sorteio visual não altera combate/CPU.
+Plano e contratos em `MAGE_FLIGHT_SPARKS.md`.
+
+## Revisão Lightning — REQ-04/05/06/07/08/09/19/20/21–26/38–41/44/45
+
+Revisar T1/T2/SS, assets, animação, força, defesa, atributos e interação com
+Tempo/clima e seus elementos pelo cliente original. Portar diferenças
+comprovadas no passo comum real/previsão, preservando elenco, avatares/HD e
+perfil. Escopo, matriz e plano: `LIGHTNING_CLIENT_REVIEW.md`.
+
+## Climas secundários Mage — REQ-04/07/08/09/23/24/25/35/44
+
+Substituir adaptações pelo comportamento comprovado do cliente nas partidas
+contendoMage: calendário de sete categorias, vento/colunas, Moon/Eclipse,
+elétrico e Thor. Preservar estado independente da previsãoCPU. Matriz,
+sequência de implementação e limites em `MAGE_SECONDARY_WEATHER.md`.
+
+## Revisão Mage — REQ-04/05/07/08/09/19/20/44/45
+
+Revisar T1/T2/SS, assets, força, relógios e interação com Tempo/clima, vento
+e tornado pelo cliente original, conforme aprendizado da revisão Aduka.
+Corrigir divergências comprovadas; preservar montagem/avatares/HD, demais
+mobiles e perfil. Plano/matriz: `MAGE_CLIENT_REVIEW.md`.
+
 ## Dano e colisão do Aduka — REQ-04/05/07/08/09/19/20/44/45
 
 Portar os consumidores nativos de dano/colisão/Thor e revisar seus assets.

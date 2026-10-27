@@ -1,0 +1,52 @@
+{
+	"capture_write_seconds": 34.386,
+	"clear_verified": true,
+	"clock_hz": 60,
+	"directions": [
+		{
+			"facing": 1,
+			"pause_30_identical": true,
+			"peak_alive": [
+				38,
+				6,
+				92,
+				9,
+				38,
+				6
+			],
+			"unique_particles": [
+				75,
+				9,
+				173,
+				14,
+				75,
+				9
+			]
+		},
+		{
+			"facing": -1,
+			"pause_30_identical": true,
+			"peak_alive": [
+				38,
+				6,
+				90,
+				9,
+				38,
+				6
+			],
+			"unique_particles": [
+				75,
+				9,
+				172,
+				14,
+				75,
+				9
+			]
+		}
+	],
+	"frames": 360,
+	"size": [
+		1920,
+		1080
+	]
+}

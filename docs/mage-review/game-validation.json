@@ -1,0 +1,26 @@
+{
+  "engine": "Godot4.7.2",
+  "renderer": "gl_compatibility / Apple M4 Pro",
+  "size": [
+    1920,
+    1080
+  ],
+  "source": "tests/capture_mage_game.gd",
+  "scenes": [
+    "room",
+    "Miramo T1",
+    "Miramo T2",
+    "Miramo SS"
+  ],
+  "wind": [
+    27,
+    -12
+  ],
+  "weather": "tornado",
+  "pause_frames_per_weapon": 30,
+  "pause_pixel_identical": true,
+  "resumed": true,
+  "audio_muted": true,
+  "original_windows_client_executed": false,
+  "log": ".tools/mage-audit/game-gpu.log"
+}

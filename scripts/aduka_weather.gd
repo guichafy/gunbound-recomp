@@ -1,9 +1,10 @@
 extends RefCounted
-## Native projectile weather sampling,455cc0/451030/4510f0 and Aduka ticks.
+## Shared native weather sampling,455cc0/451030/4510f0. Mage4572b0/4a4950/
+##483ff0, Lightning482550/4a8360 and Aduka share the velocity-preserving tornado.
 const Physics = preload("res://scripts/classic_ballistics.gd")
 
 static func active(projectile: Dictionary) -> bool:
-	return int(projectile.get("vehicle",0))==16 and not bool(projectile.get("beacon",false))
+	return int(projectile.get("vehicle",0)) in [1,8,16] and not bool(projectile.get("beacon",false))
 
 static func geometry(column: Dictionary) -> Vector2i:
 	# Bridge the existing world's displayed128px columns to native full width.
@@ -19,7 +20,7 @@ static func sample(model, projectile: Dictionary, point: Vector2i, force_sampled
 		if point.x<=span.x-span.y or point.x>=span.x+span.y:
 			continue
 		if type=="force" and not force_sampled:
-			projectile.native_force = clampi(int(projectile.get("native_force",0))+8,20,100)
+			projectile.native_force = clampi(int(projectile.get("native_force",0))+int(projectile.get("native_contact_stride",8)),20,100)
 			force_sampled = true
 		elif type=="tornado" and projectile.tornado.is_empty():
 			projectile.tornado = {"native":true,"column":int(column.id),"turns":0,"center":span.x,"half":span.y}
@@ -41,6 +42,10 @@ static func finish(projectile: Dictionary) -> bool:
 	if absi(velocity.x)<200:
 		velocity.x = -200 if velocity.x<0 else 200
 	var x := int(projectile.fp_pos.x)>>8
+	# MageS2 publishes the wave point to+f54 before testing the bounds
+	# (4a5b8c..4a5bbc/4a5d35); its private carrier is restored next tick.
+	if int(projectile.get("vehicle",0))==1 and str(projectile.get("flight",""))=="mage_wave":
+		x = floori(float(projectile.hit_pos.x))
 	if x<int(state.center)-int(state.half) or x>int(state.center)+int(state.half):
 		state.turns = int(state.turns)+1
 		if int(state.turns)<3:

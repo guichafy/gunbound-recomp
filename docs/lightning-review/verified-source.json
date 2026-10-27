@@ -1,0 +1,71 @@
+{
+  "version": "0.20.5",
+  "harness": "./scripts/check.sh",
+  "checks": 25416,
+  "python_tests": 55,
+  "complete_matches": 29,
+  "suite_count": 90,
+  "source": [
+    {
+      "path": "scripts/lightning_combat.gd",
+      "sha256": "c872968956e86f7b8503957d5f3a20538b3f1b3b4bacbdd594105d96daf7e8bd"
+    },
+    {
+      "path": "scripts/lightning_beam_art.gd",
+      "sha256": "823b81b08e4dab682feead2926c3f346e9da4f594ff9334d0e6e94a5dc20d168"
+    },
+    {
+      "path": "scripts/lightning_sprite.gd",
+      "sha256": "e3ca171203519698dcd55ed197f0f4dff2cc7f9a4d860046c6653e26e342774a"
+    },
+    {
+      "path": "scripts/aduka_combat.gd",
+      "sha256": "d829df489f028e210b20f0f1b486334ca86c5e25beb654a139a77b81b221c546"
+    },
+    {
+      "path": "scripts/aduka_weather.gd",
+      "sha256": "178a1930ed29fa543fe915d2ca889be7f6b2f7dac61ded740d17a427dd138cae"
+    },
+    {
+      "path": "scripts/match.gd",
+      "sha256": "035be0c21254388fe778065874019b9da3e8607792b53a82d2f013837fb6ae66"
+    },
+    {
+      "path": "scripts/mobile_looks.gd",
+      "sha256": "885de8fe5d5a6c8c6031b7c233dffa9a0db8d1a35325236ece1edac19dcc3189"
+    },
+    {
+      "path": "scripts/weather_art.gd",
+      "sha256": "72f4bc9ca03f692a1cb443a76918146e1bd14d5e521aa2b9ffc2808110d63854"
+    },
+    {
+      "path": "scripts/game.gd",
+      "sha256": "49aacedbff18596b8c5c6142b6e14728fc3d012597cbc3cb17a2ccfe3f788f69"
+    },
+    {
+      "path": "assets/openbound/lightning/combat_native.json",
+      "sha256": "edfaa61397bc17ed5aab5516b8f72e971429bd248599a697980a6f10fdd7ca19"
+    },
+    {
+      "path": "assets/openbound/lightning/Lightning.png",
+      "sha256": "c0d9da4e6ffdd9e20f78681e9563bf7cc19cad28b181bb922adb8674434fee45"
+    },
+    {
+      "path": "tests/test_lightning_native.gd",
+      "sha256": "7ed1efcec1683b741aa838e8bd05bfbf45efacca27a5849f387232a5542a551c"
+    },
+    {
+      "path": "tests/test_lightning_art.gd",
+      "sha256": "d9346908733447c8a0e514fbbe5b7b5733a878e3ae365600b8ae4aca2fc6a821"
+    },
+    {
+      "path": "tests/test_lightning_weather.gd",
+      "sha256": "2716d742ca764768262232a5162555989ee036a20062393f06ab4973814fe75f"
+    },
+    {
+      "path": "tests/test_lightning_assets.py",
+      "sha256": "5b91df30e1fc91fc2576e260cfef121d60e581e0ecf42d77e92ead7f981c0c9a"
+    }
+  ],
+  "parse_passed": true
+}

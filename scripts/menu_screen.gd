@@ -736,6 +736,7 @@ func show_cpu(id: int) -> void:
 	refresh_choice()
 
 func refresh_choice() -> void:
+	refresh_climate()
 	var picking_cpu := mobile_for == "cpu"
 	if choice_label != null:
 		choice_label.text = "Escolhendo: máquina" if picking_cpu else "Escolhendo: piloto"
@@ -834,9 +835,16 @@ func build_header(stage: Control, info: Dictionary) -> void:
 
 func refresh_climate() -> void:
 	var weights: Array = MatchRules.ALL_WEATHER if saved_weather=="all" else Maps.get_map(Maps.DEFAULT).weather
+	var native := (not player_random and player_vehicle_id==1) or (not cpu_random and cpu_vehicle_id==1)
+	if native:
+		var stage: Array = MatchRules.NATIVE_STAGE.miramo_town_a.weights if saved_weather!="all" else [1,1,1,1,1,1,1]
+		weights = [stage[0],stage[1],stage[2],stage[3],0,stage[5],stage[6],stage[4],0,0]
 	for index in climate_weights.size():
-		climate_weights[index].text = str(weights[index])
-		climate_weights[index].tooltip_text = "%s: peso %d\nEspelho: %d · Aleatório: %d" % [Weather.TYPES[index],weights[index],weights[8],weights[9]]
+		climate_weights[index].text = str(int(weights[index]))
+		var label: String = Weather.TYPES[index]
+		if native:
+			label = {"protection":"Lua","ignorance":"Eclipse","weakness":"—"}.get(label,label)
+		climate_weights[index].tooltip_text = "%s: peso %d"%[label,weights[index]] if native else "%s: peso %d\nEspelho: %d · Aleatório: %d" % [label,weights[index],weights[8],weights[9]]
 
 
 func show_random(side: String) -> void:

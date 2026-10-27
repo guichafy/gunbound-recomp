@@ -10,7 +10,7 @@ const Sound = preload("res://scripts/sound.gd")
 const OUT := "res://docs/special-mobiles/"
 const FRAMES := "res://.tools/special-mobiles-fix/gpu-frames/"
 const IDS := [10,9,16,7]
-const NAMES := {10:"ASate",9:"JD",16:"Aduka",7:"Raon"}
+const NAMES := {8:"Lightning",10:"ASate",9:"JD",16:"Aduka",7:"Raon"}
 const TOTAL := 300
 var sprites: Dictionary
 var models: Array = []
@@ -114,9 +114,10 @@ func reset_models() -> void:
 					terrain.image.set_pixel(x,y,Color("685741") if y > 350 else Color("cdbd88"))
 			terrain.texture = ImageTexture.create_from_image(terrain.image)
 			terrain.visual = null
-			if mobile==16:
+			if mobile in [8,16]:
 				terrain.native_cells.clear()
 				terrain.enable_native()
+			if mobile==16:
 				# Native Thor stays inside this narrow controlled contact lane.
 				model.weather.thor.pos = Vector2(100,350)
 				model.weather.thor.display_pos = model.weather.thor.pos
@@ -192,6 +193,13 @@ func run() -> void:
 		weather_capture = true
 		output = "res://docs/aduka-combat/weather/"
 		frame_output = "res://.tools/aduka-combat/weather-frames/"
+	if "--lightning" in OS.get_cmdline_user_args() or "--lightning-weather" in OS.get_cmdline_user_args():
+		report.pause_frames=[30,59]
+		report.fixtures="six controlled Lightning launches; native contact/terrain/beam/shock; no profile"
+		targets=[8]
+		weather_capture="--lightning-weather" in OS.get_cmdline_user_args()
+		output="res://docs/lightning-review/weather/" if weather_capture else "res://docs/lightning-review/"
+		frame_output="res://.tools/lightning-review/weather-frames/" if weather_capture else "res://.tools/lightning-review/gpu-frames/"
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(frame_output))
 	sprites = Game.build_sprites()
@@ -215,7 +223,7 @@ func run() -> void:
 		var hashes: Array = []
 		var begin_time := Time.get_ticks_usec()
 		for frame in TOTAL:
-			capture_paused = frame >= 90 and frame < 120
+			capture_paused = frame >= (30 if mobile==8 else 90) and frame < (60 if mobile==8 else 120)
 			if not capture_paused:
 				advance()
 			board.queue_redraw()
@@ -229,13 +237,14 @@ func run() -> void:
 			var path := folder+"%03d.png"%frame
 			picture.save_png(path)
 			hashes.append(FileAccess.get_sha256(path))
-			if frame in [18,60,90,119,150,210,299]:
+			if frame in [18,30,59,60,90,119,150,210,299]:
 				picture.save_png(output+"%s-%03d.png"%[str(NAMES[id]).to_lower(),frame])
 		var identical := true
-		for frame in range(91,120):
-			identical = identical and hashes[frame] == hashes[90]
-		report.runs.append({"id":id,"mobile":NAMES[id],"frames":TOTAL,"elapsed_wall_seconds":float(Time.get_ticks_usec()-begin_time)/1000000,"pause30_identical":identical,"resume_changes_pixels":hashes[120] != hashes[119],"frame_sha256":hashes,"events":records.duplicate(true)})
-		print("SPECIAL GPU ",NAMES[id],":300frames1920x1080, pause30=",identical,", resume=",hashes[120] != hashes[119])
+		var pause_start:=30 if mobile==8 else 90
+		for frame in range(pause_start+1,pause_start+30):
+			identical = identical and hashes[frame] == hashes[pause_start]
+		report.runs.append({"id":id,"mobile":NAMES[id],"frames":TOTAL,"elapsed_wall_seconds":float(Time.get_ticks_usec()-begin_time)/1000000,"pause30_identical":identical,"resume_changes_pixels":hashes[pause_start+30] != hashes[pause_start+29],"frame_sha256":hashes,"events":records.duplicate(true)})
+		print("SPECIAL GPU ",NAMES[id],":300frames1920x1080, pause30=",identical,", resume=",hashes[pause_start+30] != hashes[pause_start+29])
 	var manifest := FileAccess.open(output+"manifest.json",FileAccess.WRITE)
 	manifest.store_string(JSON.stringify(report,"\t")+"\n")
 	sound.queue_free()

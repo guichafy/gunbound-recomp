@@ -1,0 +1,142 @@
+{
+  "arena-0-flight-20.png": {
+    "sha256": "4e725167078015a241f4219c145cdea92fe424fec3fd7a36143fee83de444dd1",
+    "bytes": 3273016
+  },
+  "arena-0-flight-55.png": {
+    "sha256": "4f7d5fd1ab80a0e006d115a0a17682a3bc38202d329cd3455bc7a82110d7558c",
+    "bytes": 3195062
+  },
+  "arena-0-impact.png": {
+    "sha256": "dd4d3131075fc2d65abce9948ebb1f6e3f01abe8d43c324b42ec571eb01c6a62",
+    "bytes": 3157395
+  },
+  "arena-0-paused.png": {
+    "sha256": "dd4d3131075fc2d65abce9948ebb1f6e3f01abe8d43c324b42ec571eb01c6a62",
+    "bytes": 3157395
+  },
+  "arena-0-resumed.png": {
+    "sha256": "8c4f376c1224d1bd87d0e48f4872081b0e51a92c41f291812d0c56736a916533",
+    "bytes": 3265742
+  },
+  "arena-1-flight-20.png": {
+    "sha256": "679dcc4359459c825feb9632b86c273086475a3824984b4d8b0dd09c19caf1f0",
+    "bytes": 3273814
+  },
+  "arena-1-flight-55.png": {
+    "sha256": "6d5ce22288d25ec9e4886b129491377fe7f1018e010849291177d8308f5f5db9",
+    "bytes": 3193334
+  },
+  "arena-1-impact.png": {
+    "sha256": "af5a2eac17b7b55b465e005ac988bb702939628d24bbf52b412009f11119e369",
+    "bytes": 3105783
+  },
+  "arena-1-paused.png": {
+    "sha256": "af5a2eac17b7b55b465e005ac988bb702939628d24bbf52b412009f11119e369",
+    "bytes": 3105783
+  },
+  "arena-1-resumed.png": {
+    "sha256": "a50c526d1a446390bd7b83084dc0013eac27e743d7602fd971b0202b8bd37b8a",
+    "bytes": 3175705
+  },
+  "arena-2-flight-20.png": {
+    "sha256": "3d013b022a70f8a4f1b859a209141d9453bdfa9bf8b6f98c3abed650892e6999",
+    "bytes": 3273199
+  },
+  "arena-2-flight-55.png": {
+    "sha256": "31ed5bca78dda4a2204a15edef1199faccb5e5e26d63fa1c15ba4d47398e7894",
+    "bytes": 3194932
+  },
+  "arena-2-impact.png": {
+    "sha256": "8121cb5617dafc9d25ed9370c924d51a336a08d75e84f5e6c34f57ef8b943050",
+    "bytes": 3148702
+  },
+  "arena-2-paused.png": {
+    "sha256": "8121cb5617dafc9d25ed9370c924d51a336a08d75e84f5e6c34f57ef8b943050",
+    "bytes": 3148702
+  },
+  "arena-2-resumed.png": {
+    "sha256": "defa409269eb3e514939f20d7d36de7e7fa475cbf346f03d3a744774cd666127",
+    "bytes": 3251441
+  },
+  "mage-tiros-vento-tornado.mp4": {
+    "sha256": "94c0e059609e921ca949fca314bc277b5324707078dcd0d2090e81382674f83a",
+    "bytes": 1325418
+  },
+  "room-mage.png": {
+    "sha256": "ee07ec82b676436f7ada5115befae9bde4a5275360de974572cffc5ba8d791e3",
+    "bytes": 991485
+  },
+  "time-020.png": {
+    "sha256": "f2e86fb4dc43e45d428314eff5ea7c7d25ba600e9cd1c13cf3121bed7837b242",
+    "bytes": 103829
+  },
+  "time-055.png": {
+    "sha256": "febe177b4d13a01f10e2d3b1fd621458e42560f5d105a30dd4c1ebb47f6f9baf",
+    "bytes": 113728
+  },
+  "time-090.png": {
+    "sha256": "e5cedab7dd670ffec67fad391037742b1dc01e4d10f4155379034d876db41f62",
+    "bytes": 208970
+  },
+  "time-119.png": {
+    "sha256": "563020f33fcf14967d61b5cf9539ad566f1c1254d0064125d7489ad6b5300988",
+    "bytes": 183143
+  },
+  "time-120.png": {
+    "sha256": "a38e39773cd94d7d63b194fb9e0be3e1caff4979f454a39ff70f2c33b5f5c8ce",
+    "bytes": 181904
+  },
+  "time-149.png": {
+    "sha256": "a38e39773cd94d7d63b194fb9e0be3e1caff4979f454a39ff70f2c33b5f5c8ce",
+    "bytes": 181904
+  },
+  "time-180.png": {
+    "sha256": "cae9f00c4ff03f74a6806226a2e76c0f043303ac48988fff324a3306662e7629",
+    "bytes": 180501
+  },
+  "time-210.png": {
+    "sha256": "0973d77d27e20cdb99bec943e7ad7b55fb1e272c789ff074b170290808805818",
+    "bytes": 110690
+  },
+  "time-239.png": {
+    "sha256": "bbc5e18770a154a5c26932362965b8438477b6e42e34425fb82dc70f256c1a4d",
+    "bytes": 174292
+  },
+  "time-260.png": {
+    "sha256": "8fd712a8d56a7244fd5c6b9a53dedf542000f132e0b6a0937ee59846d5569156",
+    "bytes": 106706
+  },
+  "time-295.png": {
+    "sha256": "7e6e143cfc7069d27b82e1e0a877ef808e2b342082ae90b6b8578c4514f78e79",
+    "bytes": 113228
+  },
+  "time-330.png": {
+    "sha256": "caaaba0750b67ce10206eec409af9fa563c783670915592bbcfa603fa74aaaff",
+    "bytes": 207690
+  },
+  "time-359.png": {
+    "sha256": "d6e0360cbba1784f9a7e18f0632ae9a545019311726a3968379def4d5d68ffe6",
+    "bytes": 177198
+  },
+  "time-360.png": {
+    "sha256": "74053e3aa1c4d2e3fa174ec91fe5f79c7b245b324d13c4e31653437691ec61ca",
+    "bytes": 176055
+  },
+  "time-389.png": {
+    "sha256": "74053e3aa1c4d2e3fa174ec91fe5f79c7b245b324d13c4e31653437691ec61ca",
+    "bytes": 176055
+  },
+  "time-420.png": {
+    "sha256": "f415f65359aa7a61f65a22fcd9d8e2db920f83cc81280c0526a87d6e8148a69b",
+    "bytes": 175453
+  },
+  "time-450.png": {
+    "sha256": "8d4b51732061a8747327fd59d92b05650c47e5a7fde112ffbe23cb74ceca841b",
+    "bytes": 103692
+  },
+  "time-479.png": {
+    "sha256": "b322c4798e0feaa1eb031bb60300385dcc8f0084ceda103bc2d2e0736dea9b3a",
+    "bytes": 171960
+  }
+}

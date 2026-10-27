@@ -1,5 +1,61 @@
 # Design implementado
 
+## Partículas Mage em voo — ADR-129
+
+O scanner nativo existente publica `mage_spark_samples` comoPackedInt32Array
+[x,y,Force,electric] por ponto coarse, sem reamostrar/interpolar para colisão.
+`Match.spark_tick` é timestamp decorativo20Hz, inclusive após resultado;
+esse ramo não repete dano/XP/turno. Snapshot copia o contador e as simulações
+só produzem registros; não carregam textura nem consomemRNGvisual.
+
+WeatherArt sincroniza `MageSparks` antes de consumir eventos. Timestamps
+reconstituem nascimentos mesmo com dois passos no mesmo quadro; primeiro
+desenho já inclui oAnimate nativo. O geradorMSVCRT é separado do ruído de
+terreno e do RNG da partida. `MageSparkArt.quad` calcula apenas raster;
+renderer usaRID aditivo atrás doHUD. `draw_shell_marks` preserva o caminho
+anterior dos outros mobiles; Mage usa somente os novosFX. Limpeza de tela
+zera partículas, relógio/seed local e comandos dosRIDs.
+
+## Climas Mage pelo cliente — ADR-128
+
+Partidas contendoMage instanciam `MageWeather`, derivado do adaptador existente.
+O objeto possui calendário, tabela1024, cursores/seeds e Thor; `copy()` mantém
+o tipo e duplica arrays/dicionários. Catálogo `native_stage.json` é carregado
+na inicialização principal, antes da buscaCPU. Período2 e seeds locais são
+entradas do treino. Outras duplas continuam usandoWeather.
+
+`Match.begin_turn` avança o calendário, aplica a limpeza de colunas e a
+transiçãoThor/Eclipse, executa regen comum e depois Moon no ator ativo.
+`MageWeatherEffects.impact` roda antes da cratera/EMP/blast do Mage, enfileira
+choque no consumidor comumLightning e usaAdukaEffect paraThor com divisor
+explícito. NívelThor é atualizado no próximo turno neste modo.
+`MageWeatherArt` calcula quads puros; WeatherArt controla relógio visual e
+RID aditivo, sem alterar contato. Recursos, alternativas e limites em
+`MAGE_SECONDARY_WEATHER.md`.
+
+## Lightning — ADR-127
+
+`LightningCombat` recebe tiros preparados no principal, resolve contato com
+stride3/8, raios do topo, blasts/choques/cadeia e elegibilidade até o flush
+compartilhado por execução e snapshots. `AdukaCombat.projectile_contact` aceita
+stride por shell, padrão8. `AdukaWeather` lê esse mesmo passo ao acumularForce,
+com ramo de tornado nativo. `LightningSprite` reutiliza atlas/heading/glow e
+isola o estado de morte sem avatar; `LightningBeamArt` desenha quads/UV/alpha
+emRIDs aditivos próprios. `WeatherArt.clear_beams` limpa dados e ambos os
+passes nativos na troca de tela. Contratos e limites: `LIGHTNING_CLIENT_REVIEW.md`.
+
+## Mage: núcleo nativo de combate e clima — ADR-126
+
+`MageCombat` pré-aquece dados200/186/380,66/54/60,143/134/130; atributos
+são somados após dividir1/2/1. Usa núcleo45db20/455cc0 compartilhado com
+Aduka para dano/contato/crateras, sem duplicar passes no Damage C#.
+`Match` habilita máscara1px para Mage, copia-a na previsão e varre a onda
+T2. EMP retira escudo antes do blast, em distância estrita150 do hotspotY−10.
+`AdukaWeather` conserva seu nome por compatibilidade mas atende Mage/Aduka:
+duas inversões, saída3, vento retoma após saída; T2 usa o contato da onda
+na borda. Assets corretos permanecem intactos. Bridges e evidência:
+`MAGE_CLIENT_REVIEW.md`.
+
 ## Aduka: dano, contato e clima — ADR-125
 
 `AdukaCombat` lê catálogo nativo pré-aquecido no principal e resolve AABB,

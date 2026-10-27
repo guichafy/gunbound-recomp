@@ -87,12 +87,14 @@ func _initialize() -> void:
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(200, 350)
 	# Native Mage P315/theta40 crosses x470 near flight tick10, where
-	# the two helix phases rejoin. The first25px crater opens that crossing;
-	# the remaining phase reaches the Bigfoot box centred near(600,90).
-	model.actors[1].pos = Vector2(600, 80)
+	# the two helix phases rejoin. The native27px vertical crater opens that crossing;
+	# the remaining phase reaches the native Bigfoot AABB near(600,118).
+	model.actors[1].pos = Vector2(600, 110)
 	model.wind = Vector2.ZERO
 	for row in range(400):
 		model.terrain.cells[row * 640 + 235] = 1
+	model.terrain.native_cells = PackedByteArray()
+	model.terrain.enable_native()
 	var before: PackedByteArray = model.terrain.cells.duplicate()
 	var state: Array = model.actors.duplicate(true)
 	var predicted_wall: Dictionary = model.predict_shot(0, 40, 70, 1)

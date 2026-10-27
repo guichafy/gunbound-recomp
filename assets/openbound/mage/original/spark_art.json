@@ -1,0 +1,40 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "entry": "CrashTexture.xtf",
+  "entry_sha256": "82a67f447474ea5b304e74330ffacfd62e58ab8446a2cfa4123cf2c618fb12ee",
+  "image": "CrashTexture.png",
+  "image_sha256": "57a74d0f004ced3226e6febecd21e837ce423d0db7282e6f76efff12d3373955",
+  "size": [
+    256,
+    256
+  ],
+  "format": "ARGB4444 -> RGBA8888; channels times17; unchanged pixels",
+  "dispatcher": "0x450c20",
+  "quad": "0x4ec840",
+  "sine_lut": "0x54c240",
+  "blend": "SRCALPHA/ONE",
+  "age": [
+    0,
+    15
+  ],
+  "frame_ticks": 2,
+  "families": {
+    "force": {
+      "spawn": "0x436dc0",
+      "constructor": "0x48dcc0",
+      "animate": "0x48dd10",
+      "draw": "0x48dd80",
+      "v": 0.25,
+      "rotation": 1
+    },
+    "electricity": {
+      "spawn": "0x436ec0",
+      "constructor": "0x481e30",
+      "animate": "0x481e80",
+      "draw": "0x481ef0",
+      "v": 0.375,
+      "rotation": 6
+    }
+  }
+}

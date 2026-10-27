@@ -1,0 +1,53 @@
+{
+	"cases": [
+		{
+			"electric": 1,
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"thor": 1,
+			"weapon": 0
+		},
+		{
+			"electric": 2,
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"thor": 2,
+			"weapon": 1
+		},
+		{
+			"electric": 1,
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"thor": 1,
+			"weapon": 2
+		},
+		{
+			"electric": 1,
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"thor": 1,
+			"weapon": 0
+		},
+		{
+			"electric": 2,
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"thor": 2,
+			"weapon": 1
+		},
+		{
+			"electric": 1,
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"thor": 1,
+			"weapon": 2
+		}
+	],
+	"clock_hz": 60,
+	"controlled_contacts": true,
+	"frames": 540,
+	"size": [
+		1920,
+		1080
+	]
+}

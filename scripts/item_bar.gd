@@ -119,6 +119,12 @@ func key(host, position: int) -> void:
 		press(host, shown[position])
 
 func sync(host) -> void:
+	#4cef06 resets HUD selection on Eclipse entry. Locked input cannot
+	# create a new queue, so clearing during sync also covers CPU turn chains.
+	var native_climate: bool = host.model.weather.get("is_native")==true
+	if native_climate and host.model.items_locked():queued=-1
+	if lock_rect!=null:
+		lock_rect.tooltip_text="Eclipse: itens travados" if native_climate else "Ignorância: itens travados"
 	if buttons.is_empty():
 		if lock_rect != null:
 			lock_rect.visible = host.model.items_locked()

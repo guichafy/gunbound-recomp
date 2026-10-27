@@ -1,0 +1,112 @@
+{
+  "harness_command": "SUITE_TIMEOUT=900 sh .tools/mage-check-final.sh (byte-identical frozen copy of scripts/check.sh)",
+  "harness_exit": 0,
+  "harness_suites": 95,
+  "harness_godot_checks": 26775,
+  "python_tests": 58,
+  "complete_matches": 29,
+  "final_eclipse_ui_checks": 49,
+  "final_eclipse_ui_failures": 0,
+  "consolidated_unique_godot_checks": 26777,
+  "source_unchanged_during_harness": true,
+  "final_ui_patch_verified_separately": true,
+  "source_sha256": {
+    "scripts/mage_weather_art.gd": "a0414a396cbd9511f1956e772d7b1aec8e4cd9245b783ef61d91bc1cfe3a0297",
+    "scripts/mage_projectile_art.gd": "6f62d6c9dbe82b7f993836b64a77f2d88e56569542ff6dac85ba51bcc3db9bcc",
+    "scripts/mage_sprite.gd.uid": "dd7a02080f204405255916f225cfc44a345fff39cd43b09f86251d0698a38650",
+    "scripts/mage_weather.gd": "f01ced52c4fc6b25eb870804002ddbe7d41e2d7b0a475c2e198000b7394cdc45",
+    "scripts/mage_combat.gd": "5cb6872ed1dfcd37476a7bd7fdb5fbf8b454388e4e449b7570fa3865d6c8b293",
+    "scripts/import_mage_weather.py": "48b5f8cf3814461c941371f08e7dec7b6368b2cc8a3918a12d3379bbc9e46ed3",
+    "scripts/mage_flight.gd": "e198047d6df9270bcdb8f3fe934a8c10888a7f329405aaa6518033960752d61e",
+    "scripts/mage_weather_art.gd.uid": "f2363287728b8d6bc06c7d3396419df46b755eeef1d0389815bcc146a0dc6364",
+    "scripts/damage.gd": "b81c0e88b950bebaff2341d63ee2a572f0667e6f7ca9cb82a63cb7353cdca82e",
+    "scripts/mage_weather_effects.gd": "3f043f6a986c58ca4f515dd4948b78adccfae8ab7f3787ce16dd70f577750e1c",
+    "scripts/mage_combat.gd.uid": "3353948a2869e8da27da614a957d43c8ae5a4b62165d0cb7902b571bbebc726d",
+    "scripts/classic_mage_sprite.gd.uid": "8f1137daa91d30a84b5cac532b4261c17c4275c87f1e42885c56dc0d8e72bbe8",
+    "scripts/classic_mage_sprite.gd": "1f5700a700df6b22f89940a2e0138f016eda4eca7e481e17197d7679ca33fd1a",
+    "scripts/damage.gd.uid": "7ee6c2f13741dac21b643a2559475639bdc544971cdcb16c673ebaa106135f0f",
+    "scripts/mage_weather.gd.uid": "e494020ac05b9aa7a2235387b56aac19e6dc8cb034913ec5233e526f46b97c1e",
+    "scripts/mage_projectile_art.gd.uid": "14870909845ebc3e04b41dbc37284c09ed85dd6d3599553b9b09684bc147f3bb",
+    "scripts/import_mage_weather_art.py": "bf519832c87cc3e86b877193975f3a6e7f368d79ca9f6f0d2c7efada8a2dedac",
+    "scripts/mage_sprite.gd": "b6e75b544418fe9bcee7e07c8167037171040e60c039678ec7706e5c679a430b",
+    "scripts/mage_flight.gd.uid": "0f175c9e413cd12f2f8d0883b9cbb207ccc3bab54cb6c918485e01c286c9293f",
+    "scripts/import_mage_combat.py": "8cc50c6e2a43be6150cf96e47964cb14bcee59691bbd9fa00a791136ae158101",
+    "scripts/mage_weather_effects.gd.uid": "695ae5ac21c77daf88269cf574ba61e9229172fba9581651ebfefab040fed8a7",
+    "scripts/match.gd": "21514adccbdc8296fea38d417125d1f64a9987538cdf93e765c9c4137834b0e6",
+    "scripts/aduka_effect.gd": "35afdbf1930fd2e311646f0ec611e40899088b22198c3256359e4ff16d4ad844",
+    "scripts/weather_art.gd": "db548dcb8c6e13e3bb002f206f1f9394bbf1552e80fc0156031d22c67091b5c9",
+    "scripts/weather_contact.gd": "787c586617b062b405c98bb572596b5c3a00c519cf64fe603d4f21f3c4939ef6",
+    "scripts/menu_screen.gd": "3e9d62e554ff2ee8d00936ea79e1101e2e3dac6247650bf3f54464d94794e602",
+    "scripts/check.sh": "03a41677989713323c7f5ff661005c3f0319d0fb9af6c0edcca6e520283c0cbe",
+    "assets/openbound/weather/native/column_art.json": "24fb877b92eb1f99dd15c030af8778c17c3d93f0274e2327a7efaa327d45ff23",
+    "assets/openbound/weather/native/FirewallTexture.png": "9cb988e4a74474d86beb56515f684d3c63154a7590eee7f7d822789f19963536",
+    "assets/openbound/weather/native/LightningTexture.png": "0b30981b8e81e995bd37ce74682c7fc4245cbfeb2ae4dded259a01ad9c6feb1d",
+    "assets/openbound/weather/native/TornadoTexture.png": "0d60c260133069d5d4ef0e9c1c1e59254136caefecdac64b385db4598b0fff80",
+    "assets/openbound/weather/native/FirewallTexture.png.import": "8c2c7e0a9c7bc06ec529422d0ed3008e7d8a244f91e1697b12667aae26b9adb4",
+    "assets/openbound/weather/native/TornadoTexture.png.import": "de99eeb5750123c7ee7edb37001c6f2762971d150535ea0758ab55cafd73e005",
+    "assets/openbound/weather/native/LightningTexture.png.import": "b9fbf76539c256a6cc249e50199d7abaecc15a2bd092309708e4164b22c045ae",
+    "assets/openbound/weather/native_stage.json": "8255e494e8a1ab85fc2fc8a06afbc8412dcc7a8dec96dce8b5a4355a2aa1923e",
+    "tests/test_mage_secondary_weather.gd": "4c39686f2b611314e0e1302c51f8f59ab04faf48d647ea1df32545e18059f210",
+    "tests/test_mage_assets.py": "60e75430c725aa688ae5e11c8025807852585d1d3692e4bcbf70c19c31e8964e",
+    "tests/test_mage_weather_effects.gd.uid": "8797e27c5d4850e2af2be80f447614532c81d87bdd2f38bfb2b8d5293964a6b8",
+    "tests/test_mage_secondary_weather.gd.uid": "8fab55c5b717b088e24b63835f8de8abda4783531b18b2b80dc96fe95a6110d8",
+    "tests/test_mage_weather.gd.uid": "0ba33d3faaf2b3931c76cb8fc52104fb242f407bbc91778dd1c6c4fecd21e86d",
+    "tests/test_mage_client_animation.gd.uid": "4fd27d0dbd4cc7aeb32e625890f067eb73de9d25a05cb11ed27362b312d6e955",
+    "tests/test_mage_native.gd": "d902514f9a3f150e59cfd31009cea2dcb30de207dac1de311d1cc6ebece8ee5d",
+    "tests/test_mage_client_animation.gd": "6e8a0f60677d9eb44014f99bb3f178c2c8fb59d7584b49d90298693d52dfc9e9",
+    "tests/test_mage_native.gd.uid": "e1fcbba6d479d6f7e964de54e4e703a916560eb90d0f27b80bebe4c27f9a7651",
+    "tests/test_mage_weather_source.py": "edd016386b2cfb32c29d809fc54b06742d393dc1be9d13d1a4c6b770660e205b",
+    "tests/test_mage_scene.gd.uid": "00ff0894ff0c2830f15a7cd4dfb38aea8161e5cc10acd6f6ad5eba3722173878",
+    "tests/test_mage_weather_art.gd.uid": "96c796a8e0292c6f50c2966b783da156368213c18387247ba73582ba2903991d",
+    "tests/test_mage_weather_art.gd": "67a1cc68f145fb05dd11df78b96315dba569063fe7d4b1e2d6ae140932f82f75",
+    "tests/test_mage_weather.gd": "700eef0d9d494a05b636eb5e17614fbe11bc0ec729e9abd71f8e1999e9768859",
+    "tests/test_mage.gd.uid": "ad5b6221669d4249f3bd04bee5b8f6e803af4cc5e02a100a775eff0f28df2366",
+    "tests/test_mage.gd": "26157de1242d7b374973a92a2e0f704edbf0d008ad37a8a94665541165320913",
+    "tests/test_mage_weather_effects.gd": "210673b49f0d5ee13a40b810b6a45035afa10d3a79c4cdc74cf73ad62a5c8869",
+    "tests/test_mage_scene.gd": "826e1955a4e9a7d8f62adf755841dc6cee25bf14294972d95340430cdf6328c1",
+    "tests/fixtures/mage_weather_native.json": "aeea98201d1082bf46745c94c1460f65909598cd34aa92c55210ef75074b46f4",
+    "scripts/item_bar.gd": "e4698cc5a7b39c7d37a8d63a4c91fbe18998c1514040214962c24db308fe06ae",
+    "tests/test_items_scene.gd": "98800c8e679d6bee5968f3f5533e8ba522b158727045cfd6bd4f72c2427488f1",
+    "tests/capture_mage_weather.gd": "6e858a04411cab21623a283a59fa942241c1e4d934767360c3d536faaa6ea331",
+    "tests/capture_mage_weather.gd.uid": "a5033f0e42ae5da8dab0a13891abaa52baa4555541f861008471ddee46457751"
+  },
+  "evidence_sha256": {
+    "docs/mage-weather/secondary-weather.mp4": "5d86f2cb6af41903782df8a348d69c67d3d027f42198e560ca777ed2d6f06ff5",
+    "docs/mage-weather/gpu-validation.json": "b3ba55b0ed4870cc477dc4bb79a06010ae3d41662be43e9a8c4e2fb75d3278a9",
+    "docs/mage-weather/native-proof.json": "7728a2c1bc3d35178baf31d304fbe3bdee97ff856cf2fbc10838a2cffe47731d",
+    ".tools/mage-weather/harness-final-clean.log": "33119fcaef33f483ea79fb4b8b79a20003a60865bb509a3a8f99bb65816a6204",
+    ".tools/mage-weather/eclipse-ui-green.log": "4e7796a0f13e247695ea7a3994abb5acc280c1e1b0d850d0a2543ef3d6d745e4"
+  },
+  "independent_pause_rgba": [
+    {
+      "case": 0,
+      "identical_frames": 30
+    },
+    {
+      "case": 1,
+      "identical_frames": 30
+    },
+    {
+      "case": 2,
+      "identical_frames": 30
+    },
+    {
+      "case": 3,
+      "identical_frames": 30
+    },
+    {
+      "case": 4,
+      "identical_frames": 30
+    },
+    {
+      "case": 5,
+      "identical_frames": 30
+    }
+  ],
+  "limits": [
+    "static REA; no Windows execution",
+    "controlled GPU contacts; numerical Force fix verified separately afterward",
+    "offline seeds/period/items/regen/decorative flight sparks bridges declared",
+    "no app export, version change, commit or remote publish"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+	"avatars": [
+		"default",
+		"Great Devil HD"
+	],
+	"dead_avatar_hidden_pixels": true,
+	"directions": [
+		1,
+		-1
+	],
+	"frames": 150,
+	"pause30_identical": true,
+	"pause_frames": [
+		60,
+		89
+	],
+	"poses": [
+		"idle",
+		"charging",
+		"recoil",
+		"hurt",
+		"using_item",
+		"destroyed"
+	],
+	"resolution": [
+		1920,
+		1080
+	]
+}

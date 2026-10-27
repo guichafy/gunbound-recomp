@@ -1,0 +1,2034 @@
+[
+  {
+    "seed": 0,
+    "preset": [
+      2,
+      1,
+      2,
+      1,
+      2,
+      0,
+      0
+    ],
+    "calendar": [
+      3,
+      0,
+      2,
+      4,
+      1,
+      4,
+      0,
+      2
+    ],
+    "table8": [
+      967881347,
+      3814303029,
+      620814615,
+      3603814554,
+      2943411152,
+      2542041966,
+      387592173,
+      4012430671
+    ],
+    "force": 13,
+    "angle": 145,
+    "next_force": -8,
+    "next_delta": 9,
+    "turns": [
+      {
+        "turn": 0,
+        "type": "wind",
+        "force": 0,
+        "angle": 154,
+        "next_force": -8,
+        "next_delta": 9,
+        "cursor": 3,
+        "forecast": [
+          "wind",
+          "force",
+          "electricity",
+          "thor"
+        ]
+      },
+      {
+        "turn": 1,
+        "type": "wind",
+        "force": 0,
+        "angle": 154,
+        "next_force": 11,
+        "next_delta": -97,
+        "cursor": 3,
+        "forecast": [
+          "wind",
+          "force",
+          "electricity",
+          "thor"
+        ]
+      },
+      {
+        "turn": 2,
+        "type": "force",
+        "force": 1,
+        "angle": 154,
+        "next_force": 11,
+        "next_delta": -97,
+        "cursor": 6,
+        "forecast": [
+          "force",
+          "electricity",
+          "thor",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 3,
+        "type": "force",
+        "force": 1,
+        "angle": 154,
+        "next_force": 16,
+        "next_delta": 97,
+        "cursor": 6,
+        "forecast": [
+          "force",
+          "electricity",
+          "thor",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 4,
+        "type": "electricity",
+        "force": 2,
+        "angle": 154,
+        "next_force": 16,
+        "next_delta": 97,
+        "cursor": 9,
+        "forecast": [
+          "electricity",
+          "thor",
+          "tornado",
+          "thor"
+        ]
+      },
+      {
+        "turn": 5,
+        "type": "electricity",
+        "force": 2,
+        "angle": 154,
+        "next_force": 26,
+        "next_delta": 97,
+        "cursor": 9,
+        "forecast": [
+          "electricity",
+          "thor",
+          "tornado",
+          "thor"
+        ]
+      },
+      {
+        "turn": 6,
+        "type": "thor",
+        "force": 1,
+        "angle": 154,
+        "next_force": 26,
+        "next_delta": 97,
+        "cursor": 12,
+        "forecast": [
+          "thor",
+          "tornado",
+          "thor",
+          "force"
+        ]
+      },
+      {
+        "turn": 7,
+        "type": "thor",
+        "force": 1,
+        "angle": 154,
+        "next_force": 22,
+        "next_delta": 65,
+        "cursor": 12,
+        "forecast": [
+          "thor",
+          "tornado",
+          "thor",
+          "force"
+        ]
+      },
+      {
+        "turn": 8,
+        "type": "tornado",
+        "force": 0,
+        "angle": 154,
+        "next_force": 22,
+        "next_delta": 65,
+        "cursor": 15,
+        "forecast": [
+          "tornado",
+          "thor",
+          "force",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 9,
+        "type": "tornado",
+        "force": 0,
+        "angle": 154,
+        "next_force": 1,
+        "next_delta": 12,
+        "cursor": 15,
+        "forecast": [
+          "tornado",
+          "thor",
+          "force",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 10,
+        "type": "thor",
+        "force": 1,
+        "angle": 154,
+        "next_force": 1,
+        "next_delta": 12,
+        "cursor": 18,
+        "forecast": [
+          "thor",
+          "force",
+          "electricity",
+          "wind"
+        ]
+      },
+      {
+        "turn": 11,
+        "type": "thor",
+        "force": 1,
+        "angle": 154,
+        "next_force": 21,
+        "next_delta": 20,
+        "cursor": 18,
+        "forecast": [
+          "thor",
+          "force",
+          "electricity",
+          "wind"
+        ]
+      },
+      {
+        "turn": 12,
+        "type": "force",
+        "force": 2,
+        "angle": 154,
+        "next_force": 21,
+        "next_delta": 20,
+        "cursor": 21,
+        "forecast": [
+          "force",
+          "electricity",
+          "wind",
+          "force"
+        ]
+      },
+      {
+        "turn": 13,
+        "type": "force",
+        "force": 2,
+        "angle": 154,
+        "next_force": 8,
+        "next_delta": 101,
+        "cursor": 21,
+        "forecast": [
+          "force",
+          "electricity",
+          "wind",
+          "force"
+        ]
+      },
+      {
+        "turn": 14,
+        "type": "electricity",
+        "force": 1,
+        "angle": 154,
+        "next_force": 8,
+        "next_delta": 101,
+        "cursor": 24,
+        "forecast": [
+          "electricity",
+          "wind",
+          "force",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 15,
+        "type": "electricity",
+        "force": 1,
+        "angle": 154,
+        "next_force": 17,
+        "next_delta": 81,
+        "cursor": 24,
+        "forecast": [
+          "electricity",
+          "wind",
+          "force",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 16,
+        "type": "wind",
+        "force": 16,
+        "angle": 235,
+        "next_force": 17,
+        "next_delta": 81,
+        "cursor": 27,
+        "forecast": [
+          "wind",
+          "force",
+          "electricity",
+          "thor"
+        ]
+      },
+      {
+        "turn": 17,
+        "type": "wind",
+        "force": 16,
+        "angle": 235,
+        "next_force": 8,
+        "next_delta": 5,
+        "cursor": 27,
+        "forecast": [
+          "wind",
+          "force",
+          "electricity",
+          "thor"
+        ]
+      },
+      {
+        "turn": 18,
+        "type": "force",
+        "force": 17,
+        "angle": 235,
+        "next_force": 8,
+        "next_delta": 5,
+        "cursor": 30,
+        "forecast": [
+          "force",
+          "electricity",
+          "thor",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 19,
+        "type": "force",
+        "force": 17,
+        "angle": 235,
+        "next_force": 0,
+        "next_delta": 100,
+        "cursor": 30,
+        "forecast": [
+          "force",
+          "electricity",
+          "thor",
+          "tornado"
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "preset": [
+      2,
+      1,
+      2,
+      1,
+      2,
+      0,
+      0
+    ],
+    "calendar": [
+      4,
+      3,
+      2,
+      0,
+      0,
+      1,
+      4,
+      2
+    ],
+    "table8": [
+      595146434,
+      1734259147,
+      4028172436,
+      438632704,
+      558734713,
+      3736808878,
+      729939800,
+      631594137
+    ],
+    "force": 3,
+    "angle": 12,
+    "next_force": 7,
+    "next_delta": -36,
+    "turns": [
+      {
+        "turn": 0,
+        "type": "thor",
+        "force": 2,
+        "angle": 12,
+        "next_force": 7,
+        "next_delta": -36,
+        "cursor": 3,
+        "forecast": [
+          "thor",
+          "wind",
+          "electricity",
+          "force"
+        ]
+      },
+      {
+        "turn": 1,
+        "type": "thor",
+        "force": 2,
+        "angle": 12,
+        "next_force": 14,
+        "next_delta": 107,
+        "cursor": 3,
+        "forecast": [
+          "thor",
+          "wind",
+          "electricity",
+          "force"
+        ]
+      },
+      {
+        "turn": 2,
+        "type": "wind",
+        "force": 15,
+        "angle": 119,
+        "next_force": 14,
+        "next_delta": 107,
+        "cursor": 6,
+        "forecast": [
+          "wind",
+          "electricity",
+          "force",
+          "force"
+        ]
+      },
+      {
+        "turn": 3,
+        "type": "wind",
+        "force": 15,
+        "angle": 119,
+        "next_force": 16,
+        "next_delta": 40,
+        "cursor": 6,
+        "forecast": [
+          "wind",
+          "electricity",
+          "force",
+          "force"
+        ]
+      },
+      {
+        "turn": 4,
+        "type": "electricity",
+        "force": 16,
+        "angle": 119,
+        "next_force": 16,
+        "next_delta": 40,
+        "cursor": 9,
+        "forecast": [
+          "electricity",
+          "force",
+          "force",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 5,
+        "type": "electricity",
+        "force": 16,
+        "angle": 119,
+        "next_force": 26,
+        "next_delta": 64,
+        "cursor": 9,
+        "forecast": [
+          "electricity",
+          "force",
+          "force",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 6,
+        "type": "force",
+        "force": 15,
+        "angle": 119,
+        "next_force": 26,
+        "next_delta": 64,
+        "cursor": 12,
+        "forecast": [
+          "force",
+          "force",
+          "tornado",
+          "thor"
+        ]
+      },
+      {
+        "turn": 7,
+        "type": "force",
+        "force": 15,
+        "angle": 119,
+        "next_force": 3,
+        "next_delta": 18,
+        "cursor": 12,
+        "forecast": [
+          "force",
+          "force",
+          "tornado",
+          "thor"
+        ]
+      },
+      {
+        "turn": 8,
+        "type": "force",
+        "force": 14,
+        "angle": 119,
+        "next_force": 3,
+        "next_delta": 18,
+        "cursor": 15,
+        "forecast": [
+          "force",
+          "tornado",
+          "thor",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 9,
+        "type": "force",
+        "force": 14,
+        "angle": 119,
+        "next_force": 16,
+        "next_delta": -92,
+        "cursor": 15,
+        "forecast": [
+          "force",
+          "tornado",
+          "thor",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 10,
+        "type": "tornado",
+        "force": 15,
+        "angle": 119,
+        "next_force": 16,
+        "next_delta": -92,
+        "cursor": 18,
+        "forecast": [
+          "tornado",
+          "thor",
+          "electricity",
+          "thor"
+        ]
+      },
+      {
+        "turn": 11,
+        "type": "tornado",
+        "force": 15,
+        "angle": 119,
+        "next_force": 8,
+        "next_delta": 65,
+        "cursor": 18,
+        "forecast": [
+          "tornado",
+          "thor",
+          "electricity",
+          "thor"
+        ]
+      },
+      {
+        "turn": 12,
+        "type": "thor",
+        "force": 16,
+        "angle": 119,
+        "next_force": 8,
+        "next_delta": 65,
+        "cursor": 21,
+        "forecast": [
+          "thor",
+          "electricity",
+          "thor",
+          "wind"
+        ]
+      },
+      {
+        "turn": 13,
+        "type": "thor",
+        "force": 16,
+        "angle": 119,
+        "next_force": 7,
+        "next_delta": 87,
+        "cursor": 21,
+        "forecast": [
+          "thor",
+          "electricity",
+          "thor",
+          "wind"
+        ]
+      },
+      {
+        "turn": 14,
+        "type": "electricity",
+        "force": 15,
+        "angle": 119,
+        "next_force": 7,
+        "next_delta": 87,
+        "cursor": 24,
+        "forecast": [
+          "electricity",
+          "thor",
+          "wind",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 15,
+        "type": "electricity",
+        "force": 15,
+        "angle": 119,
+        "next_force": 25,
+        "next_delta": -125,
+        "cursor": 24,
+        "forecast": [
+          "electricity",
+          "thor",
+          "wind",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 16,
+        "type": "thor",
+        "force": 14,
+        "angle": 119,
+        "next_force": 25,
+        "next_delta": -125,
+        "cursor": 27,
+        "forecast": [
+          "thor",
+          "wind",
+          "electricity",
+          "force"
+        ]
+      },
+      {
+        "turn": 17,
+        "type": "thor",
+        "force": 14,
+        "angle": 119,
+        "next_force": 25,
+        "next_delta": 62,
+        "cursor": 27,
+        "forecast": [
+          "thor",
+          "wind",
+          "electricity",
+          "force"
+        ]
+      },
+      {
+        "turn": 18,
+        "type": "wind",
+        "force": 26,
+        "angle": 181,
+        "next_force": 25,
+        "next_delta": 62,
+        "cursor": 30,
+        "forecast": [
+          "wind",
+          "electricity",
+          "force",
+          "force"
+        ]
+      },
+      {
+        "turn": 19,
+        "type": "wind",
+        "force": 26,
+        "angle": 181,
+        "next_force": 21,
+        "next_delta": 36,
+        "cursor": 30,
+        "forecast": [
+          "wind",
+          "electricity",
+          "force",
+          "force"
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "preset": [
+      2,
+      1,
+      2,
+      1,
+      2,
+      0,
+      0
+    ],
+    "calendar": [
+      2,
+      2,
+      0,
+      1,
+      3,
+      0,
+      4,
+      4
+    ],
+    "table8": [
+      2230964435,
+      2919766652,
+      4077081289,
+      2036795236,
+      2074014613,
+      1040505313,
+      1659983643,
+      1506243823
+    ],
+    "force": 24,
+    "angle": 47,
+    "next_force": -4,
+    "next_delta": 13,
+    "turns": [
+      {
+        "turn": 0,
+        "type": "electricity",
+        "force": 23,
+        "angle": 47,
+        "next_force": -4,
+        "next_delta": 13,
+        "cursor": 3,
+        "forecast": [
+          "electricity",
+          "electricity",
+          "force",
+          "tornado"
+        ],
+        "spawn": [
+          1052,
+          73
+        ]
+      },
+      {
+        "turn": 1,
+        "type": "electricity",
+        "force": 23,
+        "angle": 47,
+        "next_force": 13,
+        "next_delta": 40,
+        "cursor": 3,
+        "forecast": [
+          "electricity",
+          "electricity",
+          "force",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 2,
+        "type": "electricity",
+        "force": 24,
+        "angle": 47,
+        "next_force": 13,
+        "next_delta": 40,
+        "cursor": 6,
+        "forecast": [
+          "electricity",
+          "force",
+          "tornado",
+          "wind"
+        ]
+      },
+      {
+        "turn": 3,
+        "type": "electricity",
+        "force": 24,
+        "angle": 47,
+        "next_force": 22,
+        "next_delta": -80,
+        "cursor": 6,
+        "forecast": [
+          "electricity",
+          "force",
+          "tornado",
+          "wind"
+        ]
+      },
+      {
+        "turn": 4,
+        "type": "force",
+        "force": 25,
+        "angle": 47,
+        "next_force": 22,
+        "next_delta": -80,
+        "cursor": 9,
+        "forecast": [
+          "force",
+          "tornado",
+          "wind",
+          "force"
+        ]
+      },
+      {
+        "turn": 5,
+        "type": "force",
+        "force": 25,
+        "angle": 47,
+        "next_force": 18,
+        "next_delta": 99,
+        "cursor": 9,
+        "forecast": [
+          "force",
+          "tornado",
+          "wind",
+          "force"
+        ]
+      },
+      {
+        "turn": 6,
+        "type": "tornado",
+        "force": 24,
+        "angle": 47,
+        "next_force": 18,
+        "next_delta": 99,
+        "cursor": 12,
+        "forecast": [
+          "tornado",
+          "wind",
+          "force",
+          "thor"
+        ]
+      },
+      {
+        "turn": 7,
+        "type": "tornado",
+        "force": 24,
+        "angle": 47,
+        "next_force": 24,
+        "next_delta": 84,
+        "cursor": 12,
+        "forecast": [
+          "tornado",
+          "wind",
+          "force",
+          "thor"
+        ]
+      },
+      {
+        "turn": 8,
+        "type": "wind",
+        "force": 23,
+        "angle": 131,
+        "next_force": 24,
+        "next_delta": 84,
+        "cursor": 15,
+        "forecast": [
+          "wind",
+          "force",
+          "thor",
+          "thor"
+        ]
+      },
+      {
+        "turn": 9,
+        "type": "wind",
+        "force": 23,
+        "angle": 131,
+        "next_force": 14,
+        "next_delta": -107,
+        "cursor": 15,
+        "forecast": [
+          "wind",
+          "force",
+          "thor",
+          "thor"
+        ]
+      },
+      {
+        "turn": 10,
+        "type": "force",
+        "force": 24,
+        "angle": 131,
+        "next_force": 14,
+        "next_delta": -107,
+        "cursor": 18,
+        "forecast": [
+          "force",
+          "thor",
+          "thor",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 11,
+        "type": "force",
+        "force": 24,
+        "angle": 131,
+        "next_force": 9,
+        "next_delta": 70,
+        "cursor": 18,
+        "forecast": [
+          "force",
+          "thor",
+          "thor",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 12,
+        "type": "thor",
+        "force": 25,
+        "angle": 131,
+        "next_force": 9,
+        "next_delta": 70,
+        "cursor": 21,
+        "forecast": [
+          "thor",
+          "thor",
+          "electricity",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 13,
+        "type": "thor",
+        "force": 25,
+        "angle": 131,
+        "next_force": 25,
+        "next_delta": 79,
+        "cursor": 21,
+        "forecast": [
+          "thor",
+          "thor",
+          "electricity",
+          "electricity"
+        ]
+      },
+      {
+        "turn": 14,
+        "type": "thor",
+        "force": 24,
+        "angle": 131,
+        "next_force": 25,
+        "next_delta": 79,
+        "cursor": 24,
+        "forecast": [
+          "thor",
+          "electricity",
+          "electricity",
+          "force"
+        ]
+      },
+      {
+        "turn": 15,
+        "type": "thor",
+        "force": 24,
+        "angle": 131,
+        "next_force": 14,
+        "next_delta": 5,
+        "cursor": 24,
+        "forecast": [
+          "thor",
+          "electricity",
+          "electricity",
+          "force"
+        ]
+      },
+      {
+        "turn": 16,
+        "type": "electricity",
+        "force": 23,
+        "angle": 131,
+        "next_force": 14,
+        "next_delta": 5,
+        "cursor": 27,
+        "forecast": [
+          "electricity",
+          "electricity",
+          "force",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 17,
+        "type": "electricity",
+        "force": 23,
+        "angle": 131,
+        "next_force": 20,
+        "next_delta": 32,
+        "cursor": 27,
+        "forecast": [
+          "electricity",
+          "electricity",
+          "force",
+          "tornado"
+        ]
+      },
+      {
+        "turn": 18,
+        "type": "electricity",
+        "force": 24,
+        "angle": 131,
+        "next_force": 20,
+        "next_delta": 32,
+        "cursor": 30,
+        "forecast": [
+          "electricity",
+          "force",
+          "tornado",
+          "wind"
+        ]
+      },
+      {
+        "turn": 19,
+        "type": "electricity",
+        "force": 24,
+        "angle": 131,
+        "next_force": 14,
+        "next_delta": 56,
+        "cursor": 30,
+        "forecast": [
+          "electricity",
+          "force",
+          "tornado",
+          "wind"
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 20261027,
+    "preset": [
+      0,
+      0,
+      0,
+      8,
+      0,
+      0,
+      0
+    ],
+    "calendar": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "table8": [
+      28014493,
+      418924186,
+      3700559005,
+      2055460152,
+      1399071462,
+      1386249760,
+      1064019355,
+      1070480461
+    ],
+    "force": 0,
+    "angle": 337,
+    "next_force": -8,
+    "next_delta": 8,
+    "turns": [
+      {
+        "turn": 0,
+        "type": "wind",
+        "force": 0,
+        "angle": 345,
+        "next_force": -8,
+        "next_delta": 8,
+        "cursor": 3,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 1,
+        "type": "wind",
+        "force": 0,
+        "angle": 345,
+        "next_force": 8,
+        "next_delta": 44,
+        "cursor": 3,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 2,
+        "type": "wind",
+        "force": 9,
+        "angle": 29,
+        "next_force": 8,
+        "next_delta": 44,
+        "cursor": 6,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 3,
+        "type": "wind",
+        "force": 9,
+        "angle": 29,
+        "next_force": 25,
+        "next_delta": 114,
+        "cursor": 6,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 4,
+        "type": "wind",
+        "force": 26,
+        "angle": 143,
+        "next_force": 25,
+        "next_delta": 114,
+        "cursor": 9,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 5,
+        "type": "wind",
+        "force": 26,
+        "angle": 143,
+        "next_force": 12,
+        "next_delta": 101,
+        "cursor": 9,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 6,
+        "type": "wind",
+        "force": 11,
+        "angle": 244,
+        "next_force": 12,
+        "next_delta": 101,
+        "cursor": 12,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 7,
+        "type": "wind",
+        "force": 11,
+        "angle": 244,
+        "next_force": 10,
+        "next_delta": 42,
+        "cursor": 12,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 8,
+        "type": "wind",
+        "force": 9,
+        "angle": 286,
+        "next_force": 10,
+        "next_delta": 42,
+        "cursor": 15,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 9,
+        "type": "wind",
+        "force": 9,
+        "angle": 286,
+        "next_force": 17,
+        "next_delta": 36,
+        "cursor": 15,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 10,
+        "type": "wind",
+        "force": 18,
+        "angle": 322,
+        "next_force": 17,
+        "next_delta": 36,
+        "cursor": 18,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 11,
+        "type": "wind",
+        "force": 18,
+        "angle": 322,
+        "next_force": 1,
+        "next_delta": 127,
+        "cursor": 18,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 12,
+        "type": "wind",
+        "force": 2,
+        "angle": 89,
+        "next_force": 1,
+        "next_delta": 127,
+        "cursor": 21,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 13,
+        "type": "wind",
+        "force": 2,
+        "angle": 89,
+        "next_force": 18,
+        "next_delta": 60,
+        "cursor": 21,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 14,
+        "type": "wind",
+        "force": 17,
+        "angle": 149,
+        "next_force": 18,
+        "next_delta": 60,
+        "cursor": 24,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 15,
+        "type": "wind",
+        "force": 17,
+        "angle": 149,
+        "next_force": 11,
+        "next_delta": -87,
+        "cursor": 24,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 16,
+        "type": "wind",
+        "force": 10,
+        "angle": 62,
+        "next_force": 11,
+        "next_delta": -87,
+        "cursor": 27,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 17,
+        "type": "wind",
+        "force": 10,
+        "angle": 62,
+        "next_force": 3,
+        "next_delta": 69,
+        "cursor": 27,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 18,
+        "type": "wind",
+        "force": 4,
+        "angle": 131,
+        "next_force": 3,
+        "next_delta": 69,
+        "cursor": 30,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      },
+      {
+        "turn": 19,
+        "type": "wind",
+        "force": 4,
+        "angle": 131,
+        "next_force": 15,
+        "next_delta": 29,
+        "cursor": 30,
+        "forecast": [
+          "wind",
+          "wind",
+          "wind",
+          "wind"
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 4294967295,
+    "preset": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      8,
+      0
+    ],
+    "calendar": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "table8": [
+      403998194,
+      41389752,
+      4181869559,
+      3783558909,
+      1374184423,
+      1311806516,
+      724449214,
+      3997160401
+    ],
+    "force": 22,
+    "angle": 306,
+    "next_force": -6,
+    "next_delta": 9,
+    "turns": [
+      {
+        "turn": 0,
+        "type": "protection",
+        "force": 21,
+        "angle": 306,
+        "next_force": -6,
+        "next_delta": 9,
+        "cursor": 3,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 1,
+        "type": "protection",
+        "force": 21,
+        "angle": 306,
+        "next_force": 8,
+        "next_delta": 39,
+        "cursor": 3,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 2,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 8,
+        "next_delta": 39,
+        "cursor": 6,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 3,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 26,
+        "next_delta": -95,
+        "cursor": 6,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 4,
+        "type": "protection",
+        "force": 23,
+        "angle": 306,
+        "next_force": 26,
+        "next_delta": -95,
+        "cursor": 9,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 5,
+        "type": "protection",
+        "force": 23,
+        "angle": 306,
+        "next_force": 15,
+        "next_delta": -126,
+        "cursor": 9,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 6,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 15,
+        "next_delta": -126,
+        "cursor": 12,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 7,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 15,
+        "next_delta": 105,
+        "cursor": 12,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 8,
+        "type": "protection",
+        "force": 21,
+        "angle": 306,
+        "next_force": 15,
+        "next_delta": 105,
+        "cursor": 15,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 9,
+        "type": "protection",
+        "force": 21,
+        "angle": 306,
+        "next_force": 3,
+        "next_delta": 32,
+        "cursor": 15,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 10,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 3,
+        "next_delta": 32,
+        "cursor": 18,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 11,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 7,
+        "next_delta": -100,
+        "cursor": 18,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 12,
+        "type": "protection",
+        "force": 23,
+        "angle": 306,
+        "next_force": 7,
+        "next_delta": -100,
+        "cursor": 21,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 13,
+        "type": "protection",
+        "force": 23,
+        "angle": 306,
+        "next_force": 26,
+        "next_delta": 123,
+        "cursor": 21,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 14,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 26,
+        "next_delta": 123,
+        "cursor": 24,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 15,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 9,
+        "next_delta": 31,
+        "cursor": 24,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 16,
+        "type": "protection",
+        "force": 21,
+        "angle": 306,
+        "next_force": 9,
+        "next_delta": 31,
+        "cursor": 27,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 17,
+        "type": "protection",
+        "force": 21,
+        "angle": 306,
+        "next_force": 18,
+        "next_delta": 120,
+        "cursor": 27,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 18,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 18,
+        "next_delta": 120,
+        "cursor": 30,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      },
+      {
+        "turn": 19,
+        "type": "protection",
+        "force": 22,
+        "angle": 306,
+        "next_force": 5,
+        "next_delta": -93,
+        "cursor": 30,
+        "forecast": [
+          "protection",
+          "protection",
+          "protection",
+          "protection"
+        ]
+      }
+    ]
+  },
+  {
+    "seed": 128,
+    "preset": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      8
+    ],
+    "calendar": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "table8": [
+      3348616054,
+      499260544,
+      2488646906,
+      2174064121,
+      1977689685,
+      799063246,
+      1004093206,
+      4239392834
+    ],
+    "force": 8,
+    "angle": 16,
+    "next_force": -1,
+    "next_delta": 21,
+    "turns": [
+      {
+        "turn": 0,
+        "type": "ignorance",
+        "force": 7,
+        "angle": 16,
+        "next_force": -1,
+        "next_delta": 21,
+        "cursor": 3,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 1,
+        "type": "ignorance",
+        "force": 7,
+        "angle": 16,
+        "next_force": 24,
+        "next_delta": 59,
+        "cursor": 3,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 2,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 24,
+        "next_delta": 59,
+        "cursor": 6,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 3,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 25,
+        "next_delta": 9,
+        "cursor": 6,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 4,
+        "type": "ignorance",
+        "force": 9,
+        "angle": 16,
+        "next_force": 25,
+        "next_delta": 9,
+        "cursor": 9,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 5,
+        "type": "ignorance",
+        "force": 9,
+        "angle": 16,
+        "next_force": 13,
+        "next_delta": 38,
+        "cursor": 9,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 6,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 13,
+        "next_delta": 38,
+        "cursor": 12,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 7,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 16,
+        "next_delta": 42,
+        "cursor": 12,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 8,
+        "type": "ignorance",
+        "force": 7,
+        "angle": 16,
+        "next_force": 16,
+        "next_delta": 42,
+        "cursor": 15,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 9,
+        "type": "ignorance",
+        "force": 7,
+        "angle": 16,
+        "next_force": 25,
+        "next_delta": 31,
+        "cursor": 15,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 10,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 25,
+        "next_delta": 31,
+        "cursor": 18,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 11,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 6,
+        "next_delta": 70,
+        "cursor": 18,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 12,
+        "type": "ignorance",
+        "force": 9,
+        "angle": 16,
+        "next_force": 6,
+        "next_delta": 70,
+        "cursor": 21,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 13,
+        "type": "ignorance",
+        "force": 9,
+        "angle": 16,
+        "next_force": 22,
+        "next_delta": -77,
+        "cursor": 21,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 14,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 22,
+        "next_delta": -77,
+        "cursor": 24,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 15,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 4,
+        "next_delta": -124,
+        "cursor": 24,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 16,
+        "type": "ignorance",
+        "force": 7,
+        "angle": 16,
+        "next_force": 4,
+        "next_delta": -124,
+        "cursor": 27,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 17,
+        "type": "ignorance",
+        "force": 7,
+        "angle": 16,
+        "next_force": 9,
+        "next_delta": 38,
+        "cursor": 27,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 18,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 9,
+        "next_delta": 38,
+        "cursor": 30,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      },
+      {
+        "turn": 19,
+        "type": "ignorance",
+        "force": 8,
+        "angle": 16,
+        "next_force": 15,
+        "next_delta": 21,
+        "cursor": 30,
+        "forecast": [
+          "ignorance",
+          "ignorance",
+          "ignorance",
+          "ignorance"
+        ]
+      }
+    ]
+  }
+]

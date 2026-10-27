@@ -148,7 +148,7 @@ func _on_overlay_closed() -> void:
 
 func replace_root() -> void:
 	# Private world-effect canvases belong to Game, not to the replaced UI.
-	weather_art.native_beam_art.clear()
+	weather_art.clear_beams()
 	weather_art.native_thor_art.clear()
 	for sprite in sprites.values():
 		if sprite.has_method("clear_projectiles"):
@@ -172,7 +172,7 @@ func _clear_front() -> void:
 	if screen == "menu" and menu != null and is_instance_valid(menu.nickname_input):
 		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
 		profile.save_profile()
-	weather_art.native_beam_art.clear()
+	weather_art.clear_beams()
 	cpu.discard()
 	sound.stop_music()
 	result_wait = -1.0

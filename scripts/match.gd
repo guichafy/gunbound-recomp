@@ -5,6 +5,8 @@ const Attributes = preload("res://scripts/player_attributes.gd")
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
 const Weather = preload("res://scripts/weather.gd")
+const MageWeather = preload("res://scripts/mage_weather.gd")
+const MageWeatherEffects = preload("res://scripts/mage_weather_effects.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const BoomerFlight = preload("res://scripts/boomer_flight.gd")
 const Combat = preload("res://scripts/combat.gd")
@@ -24,6 +26,8 @@ const AsateEffect = preload("res://scripts/asate_effect.gd")
 const JDEffect = preload("res://scripts/jd_effect.gd")
 const AdukaEffect = preload("res://scripts/aduka_effect.gd")
 const AdukaCombat = preload("res://scripts/aduka_combat.gd")
+const LightningCombat = preload("res://scripts/lightning_combat.gd")
+const MageCombat = preload("res://scripts/mage_combat.gd")
 const AdukaWeather = preload("res://scripts/aduka_weather.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
@@ -53,13 +57,19 @@ const SPECIAL_WEAPON := Mobiles.SPECIAL
 # Stable mobile IDs are independent of menu slots. Removed ID 0 is not playable.
 const PLAYABLE_VEHICLES := Mobiles.PLAYABLE
 static var VEHICLES := {}
+static var NATIVE_STAGE := {}
 var mines: Array = []
 var battle_effects: Array = []
 var satellites: Dictionary = {}
 var projectile_accumulator := 0.0
+# Cosmetic native20Hz timestamp, separate from turn/delay/ballistic state.
+var spark_tick := 0
 
 static func _static_init() -> void:
 	AdukaCombat.warmup()
+	MageCombat.warmup()
+	LightningCombat.warmup()
+	NATIVE_STAGE = JSON.parse_string(FileAccess.get_file_as_string("res://assets/openbound/weather/native_stage.json"))
 	Physics.warmup()
 	VEHICLES = Mobiles.ALL
 var terrain
@@ -143,6 +153,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	resolve_wait = 0.0
 	flight_elapsed = 0.0
 	projectile_accumulator = 0.0
+	spark_tick = 0
 	projectiles.clear()
 	mines.clear()
 	battle_effects.clear()
@@ -151,12 +162,27 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	events.clear()
 	shot_gold = {}
 	last_shots = [{}, {}]
-	weather = Weather.new()
+	var mage_climate := actors.any(func(actor):return int(actor.vehicle)==1)
+	weather = MageWeather.new() if mage_climate else Weather.new()
 	var preset: Array = Maps.get_map(map_id).weather if not map_id.is_empty() else PROCEDURAL_WEATHER
 	if weather_mode == "all":
 		preset = ALL_WEATHER
-	apply_weather(weather.setup(preset, terrain.world_size(), rng))
+	if mage_climate and map_id==Maps.DEFAULT:
+		var stage: Dictionary = NATIVE_STAGE.miramo_town_a
+		if weather_mode!="all":preset=stage.weights
+		for kind in stage.column_ranges:
+			weather.spawn_ranges[kind]=[]
+			for pair in stage.column_ranges[kind]:
+				weather.spawn_ranges[kind].append(Vector2i(pair[0],pair[1]))
+	var initial: Dictionary = weather.setup(preset, terrain.world_size(), rng)
+	if mage_climate:
+		# Seed and room period are explicit offline inputs, not network replay.
+		MageWeatherEffects.setup_thor(self,rng.seed)
+	else:
+		apply_weather(initial)
 	for actor_index in actors.size():
+		if int(actors[actor_index].vehicle) in [1,8]:
+			terrain.enable_native()
 		if int(actors[actor_index].vehicle) == 10:
 			AsateEffect.ensure_satellite(self,actor_index)
 		elif int(actors[actor_index].vehicle) == 16:
@@ -176,14 +202,21 @@ func begin_turn() -> void:
 	turn_time = TURN_TIME
 	actors[active].turns += 1
 	total_turns += 1
-	if total_turns > 1:
-		weather.disturb_wind(rng)
-	# A round is two turns (RoomSize 2 in MatchMetadata.PassTurn).
-	# Weather, including Protection, is applied before Regenerate().
-	if total_turns > 1 and (total_turns - 1) % 2 == 0:
-		apply_weather(weather.next_round(rng))
+	var native_climate: bool = weather.get("is_native")==true
+	if native_climate:
+		var entry: Dictionary = weather.advance_turn(total_turns-1,rng)
+		MageWeatherEffects.transition(self,total_turns)
+		weather.eclipse_reset(actors)
+		if (total_turns-1)%int(weather.period)==0:apply_weather(entry)
+	else:
+		if total_turns > 1:
+			weather.disturb_wind(rng)
+		if total_turns > 1 and (total_turns - 1) % 2 == 0:
+			apply_weather(weather.next_round(rng))
 	for actor in actors:
 		Mobiles.regenerate(actor)
+	if native_climate:
+		weather.moon_heal(actors[active])
 	actors[active].ss_lock = maxi(int(actors[active].ss_lock) - 1, 0)
 	movement_left = movement_budget()
 	ClassicFlight.walk_mines(self)
@@ -205,7 +238,7 @@ func stamp_tilt() -> void:
 
 func apply_weather(entry: Dictionary) -> void:
 	wind = weather.wind_vector()
-	if entry.type == "protection":
+	if entry.type == "protection" and weather.get("is_native")!=true:
 		# WeatherDisplay: Protection regenerates every mobile (HealthRegenerationProtection 35).
 		for actor in actors:
 			if int(actor.hp) > 0:
@@ -322,6 +355,8 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, entry.angle, entry.power, native) if spread_after else shot_velocity_fp(index, angle + float(entry.angle), power, weapon, 0.0, 0.0, native)
 		ClassicFlight.prepare(shell, entry)
 		AdukaCombat.prepare(shell,actors[index])
+		MageCombat.prepare(shell,actors[index])
+		LightningCombat.prepare(shell,actors[index])
 		result.append(shell)
 	return result
 
@@ -441,11 +476,13 @@ func pass_turn() -> void:
 	TurnTable.pass_turn(self)
 
 func tick(delta: float) -> void:
-	if phase in [PHASE_AIM, PHASE_SETTLE, PHASE_MINES]:
+	if phase in [PHASE_AIM, PHASE_SETTLE, PHASE_MINES, PHASE_FINISHED]:
 		# Placed mines use the same fixed clock even while no shell is flying.
 		accumulator += delta
 		while accumulator + TIME_EPSILON >= Combat.STEP:
 			accumulator = maxf(0.0, accumulator - Combat.STEP)
+			spark_tick+=1
+			if phase==PHASE_FINISHED:continue
 			ClassicFlight.crawl_mines(self, Combat.STEP)
 			AsateEffect.step_satellites(self)
 			AdukaEffect.step_thor(self)
@@ -485,6 +522,7 @@ func advance_projectiles(delta: float) -> void:
 		advance_projectile_tick(Combat.STEP)
 
 func advance_projectile_tick(delta: float) -> void:
+	spark_tick+=1
 	ClassicFlight.crawl_mines(self, delta)
 	AsateEffect.step_satellites(self)
 	AdukaEffect.step_thor(self)
@@ -551,9 +589,11 @@ func advance_projectile_tick(delta: float) -> void:
 		# The teleportation beacon only collides with the ground.
 		var beacon := bool(projectile.get("beacon", false))
 		var hit: Dictionary
-		if int(projectile.get("vehicle",0))==16 and not beacon:
+		if native_weather:
 			var previous_fp := Physics.position_fp(projectile.hit_pos)
-			hit = AdukaCombat.projectile_contact(Vector2i(previous_fp.x>>8,previous_fp.y>>8),Physics.integer_position(projectile),terrain,actors,projectile,self)
+			# MageS2 samples the displaced laser, not its ballistic carrier.
+			var actual_fp := Physics.position_fp(actual)
+			hit = AdukaCombat.projectile_contact(Vector2i(previous_fp.x>>8,previous_fp.y>>8),Vector2i(actual_fp.x>>8,actual_fp.y>>8),terrain,[] if bool(projectile.get("skip_actors",false)) else actors,projectile,self)
 		elif bool(projectile.get("ghost", false)) or underground:
 			hit = Combat.trace_actors(projectile.hit_pos, actual, actors, ignored)
 			# A buried shell explodes on the first free pixel where it resurfaces.
@@ -604,6 +644,7 @@ func advance_projectile_tick(delta: float) -> void:
 		if hit.is_empty() and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
+	LightningCombat.resolve(self)
 	var pending_supermine := mines.any(func(mine):return bool(mine.get("raon_mine",false)) and bool(mine.get("crawl",false)) and int(mine.get("owner",-1)) == shot_actor)
 	if projectiles.is_empty() and battle_effects.is_empty() and not pending_supermine:
 		phase = PHASE_SETTLE
@@ -638,6 +679,9 @@ func advance_battle_effects() -> void:
 			ClassicFlight._detonate_mine(self,mine_index)
 
 func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary = {}) -> void:
+	if LightningCombat.active(projectile):
+		LightningCombat.impact(self,projectile,position)
+		return
 	if AdukaEffect.active(projectile):
 		var effect_start := events.size()
 		if AdukaEffect.impact(self,projectile,position):
@@ -661,6 +705,10 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	# Tilt stays as stamped at the start of the step. A crater must not
 	# rotate the target before this explosion's damage is measured.
 	var event_start := events.size()
+	if MageCombat.active(projectile):
+		#4572b0/4a4950/483ff0: attached electricity and Thor precede
+		# even the SS EMP; shock pending is flushed at the shared tick end.
+		MageWeatherEffects.impact(self,projectile,position)
 	# Each shell keeps its own weapon (Dual+ mixes S1 and S2 in one turn).
 	var weapon_index := int(projectile.get("weapon", shot_weapon))
 	var weapon: Dictionary = weapon_rules(shot_actor, weapon_index)
@@ -670,16 +718,22 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	if projectile.has("blast_radius"):
 		radius = float(projectile.blast_radius)
 	var native_aduka := int(projectile.get("vehicle",0))==16 and weapon_index==0 and not bool(projectile.get("beacon",false))
+	var native_mage := MageCombat.active(projectile)
 	var native_data: Dictionary = AdukaCombat.t1_parameters(projectile,actors[shot_actor]) if native_aduka else {}
-	var crater_dimension := Physics.quot(int(native_data.get("dimension",0))*int(projectile.get("aduka_crater_percent",100)),100)
-	var removed: int = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect))) if native_aduka else terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
+	if native_mage:
+		native_data = MageCombat.parameters(projectile,actors[shot_actor])
+	var crater_percent := int(projectile.get("mage_crater_percent",100)) if native_mage else int(projectile.get("aduka_crater_percent",100))
+	var crater_dimension := Physics.quot(int(native_data.get("dimension",0))*crater_percent,100)
+	var removed: int = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect))) if native_aduka or native_mage else terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
 	var heading := PI * 0.5
 	var velocity := Vector2.ZERO
 	if projectile.has("velocity"):
 		velocity = projectile.velocity
 		heading = velocity.angle()
 	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "child":bool(projectile.get("child",false)), "ss_state":str(projectile.get("ss_state","normal")), "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	if native_aduka:
+	if native_mage:
+		MageCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
+	elif native_aduka:
 		AdukaCombat.apply(actors,events,Vector2i(position),native_data)
 	else:
 		blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
@@ -699,9 +753,9 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 ## OnExplodeAction order: Thor attached at launch, then Electricity; then the
 ## Gold metadata of everything this impact dealt.
 func explode_actions(position: Vector2, projectile: Dictionary, event_start: int) -> void:
-	if bool(projectile.get("thor", false)):
+	if not MageCombat.active(projectile) and bool(projectile.get("thor", false)):
 		thor_strike(position)
-	if bool(projectile.get("electric", false)):
+	if not MageCombat.active(projectile) and bool(projectile.get("electric", false)):
 		lightning_strike(position)
 	collect_gold_damage(event_start, position, projectile)
 

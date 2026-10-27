@@ -117,8 +117,11 @@ func run() -> void:
 	# Ignorance locks the bar with ITEM LOCKED.
 	scene.model.actors[0].turn_item = ""
 	bar.disabled_until_turn = false
+	bar.queued = 1
 	scene.model.weather.queue[0].type = "ignorance"
 	scene.update_hud()
+	check(bar.queued==-1,"Native Eclipse clears a previously queued item selection")
+	check(bar.lock_rect.tooltip_text.begins_with("Eclipse"),"Native climate uses Eclipse label")
 	check(bar.lock_rect.visible and bar.buttons[1].disabled, "Ignorance shows ITEM LOCKED and disables the bar")
 	key(scene, KEY_F1)
 	check(not scene.model.actors[0].items[1].used, "Locked items ignore F-keys")

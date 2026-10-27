@@ -1,0 +1,13 @@
+{
+	"audio": "muted; no human listening",
+	"beams_after_exit": 0,
+	"client_original_executed": false,
+	"first_beam_frame": 74,
+	"hud_above_beam": true,
+	"pause30_identical": true,
+	"resolution": [
+		1920,
+		1080
+	],
+	"resume_changes_pixels": true
+}

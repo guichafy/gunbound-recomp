@@ -1,0 +1,60 @@
+{
+  "harness": "sh .tools/mage-sparks-check-final.sh; byte-identical copy of scripts/check.sh",
+  "exit_code": 0,
+  "suites": 98,
+  "godot_checks": 27046,
+  "python_tests": 60,
+  "complete_matches": 29,
+  "source_sha256": {
+    "scripts/aduka_combat.gd": "fcafa5f25f780cb8d896125985f860d8504e5f3d8688239a68d2ea3d01f5cfa9",
+    "scripts/match.gd": "98f91d447653c6418be30b36364dfaa778786adc828e051aef7e5379aefceda6",
+    "scripts/flight_snapshot.gd": "925cd8d4f576ed1a4ae415bdd87f0d2c0232bb59b8aa6b3de8775232c1ba852f",
+    "scripts/weather_art.gd": "86bbd3bcc9cc95c1a5f6ec1f4411fa08d302184036e8eed89e4d206277702e77",
+    "scripts/check.sh": "5b5cd76c48004e1f09b6a80962ab12e8b5ead3ded1109a767621462030761dae",
+    "scripts/mage_sparks.gd": "88f565074c540a09db0b5a1ea98521828debe96a862cab8a6472cd3605b94491",
+    "scripts/mage_spark_art.gd": "0fc3eb04481be9de5e33274d06ed1d972886ca677fcbc2417653719ae7aed440",
+    "scripts/import_mage_sparks.py": "84f20f8d3af96726b80a8c803311e22b436a121c90bf734f6133f2057625e875",
+    "tests/test_mage_sparks.gd": "1dc6a46b5d7cab294c4b0f3d6db94c315a4f3c10e9cf4d3590297514b8be0f70",
+    "tests/test_mage_spark_art.gd": "c71a4da5e621249a019d80cbaed4b6c2ed7902fcab3bdeb4bac414e9af3dae6f",
+    "tests/test_mage_spark_source.py": "7c0686030bf62fdb22a78c9d8a203d88a539bd0471257a28d8371eebab8a6f5e",
+    "tests/capture_mage_sparks.gd": "47efa6365b124410b3111fc8ea87a2124ca7570979b85e2041cf921c42653031",
+    "tests/fixtures/mage_spark_rng.json": "6d0515d792b484c679cef967dbcbb5bac2542f61eda71235cd5a4de57b36a27c",
+    "assets/openbound/mage/original/CrashTexture.png": "57a74d0f004ced3226e6febecd21e837ce423d0db7282e6f76efff12d3373955",
+    "assets/openbound/mage/original/spark_art.json": "b2e60e39097b1d7c6aaf9140d0cf7a6b9c31e5e8c9c30ec7d662adb8367e5d67",
+    "scripts/mage_spark_art.gd.uid": "043c77c5dd736573c7f806a7903e28f6857424e96f8c349d4eff0ec3a6d43cfd",
+    "scripts/mage_sparks.gd.uid": "902916249c62e793a21122a09e46f984d0b3712d5c8812e88ee9c03ef82a947e",
+    "tests/test_mage_sparks.gd.uid": "10c59e3e7826c938779c12f59a58e562efc7b6efd3ddd95f51ffa696a8bc9067",
+    "tests/capture_mage_sparks.gd.uid": "28f33184a7d42739be36431aca91c27b7b9c536ff8de70498f9cf10f2ccabb26",
+    "tests/test_mage_spark_art.gd.uid": "2da0228bfbdf6c069a35751ec74c9fdad2d581b10fffc96d318e6833ef877f3d",
+    "tests/capture_mage_sparks_game.gd.uid": "dc6e88b2e3c55421c7165c50cca5bd233c3abcbce5db08746d2006cbb7771c9e",
+    "tests/capture_mage_sparks_game.gd": "0614b4eed9b2e664dc731453b1d19f6eb7d3af1ed69faa43dedfdd6057bf680c",
+    "assets/openbound/mage/original/CrashTexture.png.import": "b7f8359d0adac6547ea0bda4d47f2095f5135aa54c9ee46486f75668e465e170"
+  },
+  "evidence_sha256": {
+    ".tools/mage-sparks/harness-final.log": "66ded7d1d409429a7fed27642e6f378e890861a9fc4f3c43bca2bbc78f57c1be",
+    "docs/mage-sparks/native-proof.json": "4cb88234193e6a5b8ea2331938c297dd338cb98dce4bdd94ae44b29ff0256147",
+    "docs/mage-sparks/gpu-validation.json": "20a79bb32af18ac3e1d91483e203c12d895ab88e1b5a25efa156b6cc49b290b0",
+    "docs/mage-sparks/game-validation.json": "7a97b77d354c3dc29c55d219b05a78fcdc95cf37fb31ec60dfc97615247ef437",
+    "docs/mage-sparks/flight-sparks.mp4": "530ff54045c1a25c90541964f30656e0aae1acf72c3c80e3c3ae2fcf5737637b"
+  },
+  "pixel_checks": 65536,
+  "gpu_frames": 360,
+  "gpu_size": [
+    1920,
+    1080
+  ],
+  "fps_fixture": [
+    10,
+    30,
+    40,
+    60
+  ],
+  "review": "No remaining P1/P2 after common Force0 trial fix; independent live-particle and finished-clock probes",
+  "limits": [
+    "static REA, no Windows execution",
+    "local visual seed4242/Effect3D3 are explicit inputs, no full-session CRT replay",
+    "no audio/input-human acceptance",
+    "no new app export or version change"
+  ],
+  "git_request": "User authorized commit and push on main after completion; integrated pending dependencies included"
+}

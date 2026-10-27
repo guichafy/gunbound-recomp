@@ -1,0 +1,43 @@
+{
+  "binary_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "characterdata_sha256": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+  "weapons": [
+    {
+      "power": 230,
+      "dimension": 54,
+      "aspect": 134,
+      "shock_radius": 70,
+      "flags": 1,
+      "shock": 56,
+      "chain": 20
+    },
+    {
+      "power": 240,
+      "dimension": 40,
+      "aspect": 143,
+      "shock_radius": 70,
+      "flags": 1,
+      "shock": 56,
+      "chain": 20
+    },
+    {
+      "power": 230,
+      "dimension": 40,
+      "aspect": 143,
+      "shock_radius": 120,
+      "flags": 1,
+      "shock": 26,
+      "chain": 20
+    }
+  ],
+  "body": {
+    "width": 28,
+    "height": 24,
+    "vulnerability": 86,
+    "hp": 750,
+    "shield": 300,
+    "regen": 20,
+    "force": 47,
+    "gravity": 90
+  }
+}

@@ -107,9 +107,10 @@ static func point_contact(point: Vector2i, terrain, actors: Array, ground: bool 
 				return {"position":Vector2(point),"actor":index,"fraction":0.0}
 	return {}
 
-## 455cc0 coarse8, then458920/458a00 refine only the detected contact kind.
+## 455cc0 coarse8 (Lightning T1:3), then458920/458a00 refine the contact kind.
 ## Minor coordinate advances before testing the major coordinate, including d0.
 static func projectile_contact(start: Vector2i, end: Vector2i, terrain, actors: Array, projectile: Dictionary = {}, model = null) -> Dictionary:
+	var coarse_step := int(projectile.get("native_contact_stride",8))
 	var delta := end-start
 	var horizontal := absi(delta.y)<absi(delta.x)
 	var major := absi(delta.x if horizontal else delta.y)
@@ -117,23 +118,33 @@ static func projectile_contact(start: Vector2i, end: Vector2i, terrain, actors: 
 	var direction := 1 if (delta.x if horizontal else delta.y)>=0 else -1
 	var minor := (start.y if horizontal else start.x)<<16
 	var force_sampled := false
-	for distance in range(0,major+8,8):
-		minor += stride*8
+	var spark_samples:=PackedInt32Array()
+	var mage_samples: bool=model!=null and int(projectile.get("vehicle",0))==1 and not bool(projectile.get("beacon",false))
+	for distance in range(0,major+coarse_step,coarse_step):
+		minor += stride*coarse_step
 		var position := _point(start,horizontal,direction,distance,minor>>16)
 		if model!=null:
 			force_sampled = NativeWeather.sample(model,projectile,position,force_sampled)
+		if mage_samples:
+			spark_samples.append_array(PackedInt32Array([position.x,position.y,int(projectile.get("native_force",0)),int(bool(projectile.get("electric",false)))]))
 		var coarse := point_contact(position,terrain,actors)
 		if coarse.is_empty():
 			continue
 		if distance>0:
-			var fine_minor := minor-stride*8
-			for fine in range(distance-8,distance):
+			var fine_minor := minor-stride*coarse_step
+			for fine in range(distance-coarse_step,distance):
 				fine_minor += stride
 				var contact := point_contact(_point(start,horizontal,direction,fine,fine_minor>>16),terrain,actors,int(coarse.actor)<0,int(coarse.actor)>=0)
 				if not contact.is_empty():
-					return contact
-		return coarse
-	return {}
+					return _spark_contact_result(contact,model,spark_samples)
+		return _spark_contact_result(coarse,model,spark_samples)
+	return _spark_contact_result({},model,spark_samples)
+
+static func _spark_contact_result(contact: Dictionary, model, samples: PackedInt32Array) -> Dictionary:
+	if not samples.is_empty():
+		# Records only, no visual RNG/objects in the simulation or CPU worker.
+		model.events.append({"type":"mage_spark_samples","tick":int(model.spark_tick),"samples":samples})
+	return contact
 
 static func _point(start: Vector2i, horizontal: bool, direction: int, distance: int, minor: int) -> Vector2i:
 	return Vector2i(start.x+direction*distance,minor) if horizontal else Vector2i(minor,start.y+direction*distance)

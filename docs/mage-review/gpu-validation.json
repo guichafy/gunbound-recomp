@@ -1,0 +1,35 @@
+{
+	"capture_write_seconds": 49.588,
+	"clock_hz": 60,
+	"directions": [
+		{
+			"facing": 1,
+			"impacts": [
+				1,
+				1,
+				2,
+				2,
+				1,
+				1
+			],
+			"pause_30_identical": true
+		},
+		{
+			"facing": -1,
+			"impacts": [
+				1,
+				1,
+				2,
+				2,
+				1,
+				1
+			],
+			"pause_30_identical": true
+		}
+	],
+	"frames": 480,
+	"size": [
+		1920,
+		1080
+	]
+}
