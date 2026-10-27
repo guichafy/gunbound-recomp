@@ -117,6 +117,8 @@ func run() -> void:
 	art.settings_art.catalog = saved
 	click(stage.get_node("Start").get_global_rect().get_center())
 	await process_frame
+	check(scene.screen=="loading","Arrowless START opens the loading screen before the match")
+	scene._process(5.0)
 	check(scene.screen=="match" and scene.model.difficulty==0,"Arrowless START keeps its action and committed difficulty")
 	scene.free()
 	for path in [PROFILE,PROFILE.get_basename()+"-options.json"]:DirAccess.remove_absolute(ProjectSettings.globalize_path(path))

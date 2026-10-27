@@ -1,5 +1,14 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Transição de partida — REQ-48
+
+O Start da sala abre a tela de loading do cliente por no mínimo 5 segundos
+antes da batalha. Ela mostra o mobile já resolvido (Random vira Dragon ou
+Knight na hora) e o Miramo Town com o nome de cada piloto no ponto em que
+vai nascer. A partida usa esses mesmos mobiles e essas mesmas coordenadas.
+Rede e salas maiores continuam fora desta etapa; o temporizador fixo ocupa
+o lugar da espera de carregamento multiplayer. Plano: `LOADING_SCREEN.md`.
+
 ## Objetivo e escopo de fontes — ADR-132
 
 Reescrever com fidelidade jglim/gunbound-launcher (TestClient) e jglim/gunbound-server,
@@ -289,6 +298,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS, RAON_CLASSIC_FIX | Boomer, onda Turtle T2, cronologia48 e tiros/minas Raon (ADR-116/117) implementados; demais limites/portes explícitos |
 | REQ-46 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
 | REQ-47 | Avatar Shop e avatares com os assets originais do cliente | AVATAR_SHOP_ORIGINAL | Vigente (ADR-130); HD de avatares/loja preservado em disco, fora do uso ativo |
+| REQ-48 | Start da sala mostra a transição com mapa, spawns e mobile resolvido | LOADING_SCREEN | Vigente (ADR-133); 1×1 local, espera mínima de 5 s |
 
 ## Lobby clássico e sala — ADR-096
 

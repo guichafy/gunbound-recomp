@@ -61,9 +61,18 @@ var menu = null
 # A loja volta para a tela que a abriu (lobby ou sala).
 var shop_return := "lobby"
 const RoomChoice = preload("res://scripts/room_choice.gd")
+const MatchLoading = preload("res://scripts/match_loading.gd")
+const LoadingView = preload("res://scripts/loading_view.gd")
 var room_random_sprite = preload("res://scripts/room_random_sprite.gd").new()
 var player_random := false
 var cpu_random := false
+# Resolved while the loading screen is up. -1 until Start from the room.
+var loading_player := -1
+var loading_cpu := -1
+var loading_spawns: Array = []
+var loading_width := 0
+var loading_elapsed := 0.0
+var loading_view: Control = null
 var room_rng := RandomNumberGenerator.new()
 var vehicle := 2
 # -1 follows Mobiles.opponent. A room pick stores that mobile until changed.
@@ -203,7 +212,7 @@ func show_menu() -> void:
 		"items": options.items.duplicate(), "rank": profile.rank, "level": profile.level(), "xp": profile.xp, "wins": profile.wins,
 		"cpu_vehicle": resolved_cpu_id(), "item_art": item_art},
 		{"select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
-		"set_weather": set_weather, "show_items": show_items, "start": start_match, "show_shop": show_shop,
+		"set_weather": set_weather, "show_items": show_items, "start": begin_loading, "show_shop": show_shop,
 		"show_help": show_help, "leave": show_lobby, "commit_items": commit_items})
 	menu.figures.paint = draw_room_figures
 	menu.show_vehicle(vehicle)
@@ -293,16 +302,51 @@ func select_cpu_vehicle(index: int) -> void:
 		menu.show_cpu(cpu_vehicle)
 	queue_redraw()
 
-func start_match() -> void:
-	if screen == "menu" and menu != null and is_instance_valid(menu.nickname_input):
+## Room Start. Resolves Random, shows where the two pilots spawn, then enters.
+func begin_loading() -> void:
+	if screen != "menu" or menu == null or not is_instance_valid(menu.stage):
+		start_match()
+		return
+	if is_instance_valid(menu.nickname_input):
+		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
+		profile.save_profile()
+		menu.player_name.text = profile.nickname
+	var player_id := vehicle
+	if player_random:
+		player_id = RoomChoice.roll(room_rng)
+	var cpu_id := cpu_vehicle if cpu_vehicle >= 0 else Mobiles.opponent(player_id)
+	if cpu_random:
+		cpu_id = RoomChoice.roll(room_rng)
+	var probe = Terrain.new()
+	var width := 1800
+	var spawns: Array = [Vector2(235, 0), Vector2(1045, 0)]
+	if probe.load_map(Maps.DEFAULT, false):
+		width = int(probe.world_size().x)
+		spawns = MatchLoading.roll_spawns(room_rng, Maps.get_map(Maps.DEFAULT), float(width))
+	loading_player = player_id
+	loading_cpu = cpu_id
+	loading_spawns = spawns
+	loading_width = width
+	loading_elapsed = 0.0
+	screen = "loading"
+	menu.present_loading(player_id, cpu_id)
+	loading_view = LoadingView.new()
+	menu.stage.add_child(loading_view)
+	var names := PackedStringArray([profile.nickname.left(12), "CPU"])
+	loading_view.show_marks(width, spawns, names)
+	queue_redraw()
+
+func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Array = []) -> void:
+	if (screen == "menu" or screen == "loading") and menu != null and is_instance_valid(menu.nickname_input):
 		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
 		profile.save_profile()
 	if player_random:
-		vehicle = RoomChoice.roll(room_rng)
+		vehicle = resolved_player if resolved_player >= 0 else RoomChoice.roll(room_rng)
 	if cpu_random:
-		cpu_vehicle = RoomChoice.roll(room_rng)
+		cpu_vehicle = resolved_cpu if resolved_cpu >= 0 else RoomChoice.roll(room_rng)
 	screen = "match"
-	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle)
+	loading_view = null
+	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle, spawns)
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
@@ -454,6 +498,9 @@ func _process(delta: float) -> void:
 	if not paused:
 		elapsed += minf(delta, 0.1)
 	queue_redraw()
+	if screen == "loading":
+		_tick_loading(delta)
+		return
 	if screen == "menu" and menu != null and is_instance_valid(menu.figures):
 		menu.figures.queue_redraw()
 	if screen != "match" or paused:
@@ -631,8 +678,23 @@ func hud_state() -> Dictionary:
 		"movement": model.movement_left / maxf(1.0, model.movement_budget()), "gold": maxi(0,int(model.actors[Match.PLAYER].gold_state.gold)), "queue": queue_entries,
 		"player_name": profile.nickname, "weapon": aim.weapon, "aim": aim.angle, "paused_cpu": false}
 
+func _tick_loading(delta: float) -> void:
+	loading_elapsed += delta
+	if menu != null and is_instance_valid(menu.figures):
+		menu.figures.queue_redraw()
+	if loading_view != null and is_instance_valid(loading_view):
+		loading_view.progress = clampf(loading_elapsed / MatchLoading.HOLD, 0.0, 1.0)
+		loading_view.queue_redraw()
+	if loading_elapsed < MatchLoading.HOLD:
+		return
+	var player_id := loading_player
+	var cpu_id := loading_cpu
+	var spawns := loading_spawns
+	loading_view = null
+	start_match(player_id, cpu_id, spawns)
+
 func _unhandled_key_input(event: InputEvent) -> void:
-	if screen == "shop":
+	if screen == "shop" or screen == "loading":
 		return
 	if not event is InputEventKey or event.echo:
 		return
@@ -733,8 +795,19 @@ func _draw_classic_front() -> void:
 func draw_room_figures(canvas: Node2D) -> void:
 	if menu == null:
 		return
-	draw_figure(canvas, RoomChoice.RANDOM if player_random else vehicle, menu.player_anchor, 1, profile.equipped_set())
-	draw_figure(canvas, RoomChoice.RANDOM if cpu_random else resolved_cpu_id(), menu.cpu_anchor, -1, {})
+	var player_kind := vehicle
+	var cpu_kind := resolved_cpu_id()
+	if screen == "loading":
+		player_kind = loading_player
+		cpu_kind = loading_cpu
+	elif player_random:
+		player_kind = RoomChoice.RANDOM
+	if screen != "loading" and cpu_random:
+		cpu_kind = RoomChoice.RANDOM
+	draw_figure(canvas, player_kind, menu.player_anchor, 1, profile.equipped_set())
+	draw_figure(canvas, cpu_kind, menu.cpu_anchor, -1, {})
+	if screen == "loading" and menu.loading_anchor != Vector2.INF:
+		draw_figure(canvas, player_kind, menu.loading_anchor, 1, profile.equipped_set())
 
 func _draw_screen_hud() -> void:
 	if screen == "match" and is_instance_valid(screen_hud) and model.terrain != null:

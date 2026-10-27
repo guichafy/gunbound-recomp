@@ -110,7 +110,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = [], opening: int = PLAYER, cpu_vehicle: int = -1) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = [], opening: int = PLAYER, cpu_vehicle: int = -1, spawn_override: Array = []) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -124,9 +124,14 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		terrain.generate()
 	else:
 		# RoomMetadata.cs draws each spawn from the original list; 1×1 keeps sides.
-		for index in [PLAYER, CPU]:
-			var options: Array = Maps.spawn_points(Maps.get_map(map_id), index == PLAYER, terrain.world_size().x)
-			spawns[index] = options[rng.randi_range(0, options.size() - 1)]
+		# The loading screen passes the points it already showed.
+		if spawn_override.size() >= 2:
+			spawns[PLAYER] = Vector2(spawn_override[PLAYER])
+			spawns[CPU] = Vector2(spawn_override[CPU])
+		else:
+			for index in [PLAYER, CPU]:
+				var options: Array = Maps.spawn_points(Maps.get_map(map_id), index == PLAYER, terrain.world_size().x)
+				spawns[index] = options[rng.randi_range(0, options.size() - 1)]
 	actors.clear()
 	for index in [PLAYER, CPU]:
 		# cpu_vehicle < 0 keeps the pairing (1↔2, Nak→Mage, anyone else→Mage).

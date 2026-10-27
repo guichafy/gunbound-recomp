@@ -11,7 +11,9 @@ ou reexporte (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).
 2. **Sala 1×1.** A grade 5×3 escolhe o seu mobile: 14 mobiles e Random. Dragon e Knight não
    têm botão, como no cliente, e saem só pelo Random, sorteado no START (ADR-105). Clique no
    lugar B e depois na grade para escolher o da máquina. Os seis lugares à direita trocam os itens. CHANGE
-   ajusta apelido, dificuldade e clima. START inicia a partida, EXIT ou Esc voltam ao lobby.
+   ajusta apelido, dificuldade e clima. START abre a transição por 5 segundos,
+   com o mobile já sorteado e o ponto de cada piloto no Miramo, e só então
+   começa a partida. EXIT ou Esc voltam ao lobby.
 3. **Partida** no Miramo Town A. Ao fim, o resultado dá XP e Gold, com revanche ou volta.
 
 A loja segue o cliente: Experimentar mostra uma prévia temporária, Comprar gasta Cash ou

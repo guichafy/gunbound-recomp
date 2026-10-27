@@ -1,0 +1,31 @@
+# Transição ao Start da sala — REQ-48 / ADR-133
+
+O Start da sala 1×1 abre a tela de loading do cliente e só então entra na
+partida. O tempo mínimo é 5 segundos. Random é resolvido nessa abertura:
+o card e os lugares mostram Dragon ou Knight, não o collage Random.
+
+## Evidência
+
+| Peça | Fonte | Confiança |
+|---|---|---|
+| Painel 800×244 e barra 156×14 | `load_back.img` quadros 0 e 1, `graphics.xfs` `a52f9f46…` | Extraído |
+| Prévia do Miramo 748×209 | `load_stage01.img` quadro 0; o bitmap traz o rótulo MIRAMO TOWN | Visual no arquivo |
+| Máscara do chão | quadro 1 do mesmo arquivo; primeiro pixel RGB565 não zero por coluna | VA `0x004430c0` no `GunBound.gme` `4af6283d…` |
+| Coluna do nome | `spawn_x * 748 / largura`, divisão inteira | A mesma rotina |
+| Linha do nome | linha da máscara + 18; sem máscara, y = 122 | A mesma rotina |
+| Largura do mapa | 1800 px do foreground do Miramo neste porte | Adaptação do mundo já usado pela partida |
+| Espera de 5 s | Pedido desta etapa; no cliente a tela dura o carregamento | Adaptação declarada |
+
+A montagem `map_id * 11 + lado` aparece no código que escolhe o arquivo, mas
+`load_stage11.img` é cópia byte a byte do Cave. O quadro usado é o que está
+rotulado como Miramo. Outros mapas não entram enquanto a sala só tem o Miramo.
+
+Os pontos continuam os da lista já usada por `Match.start`: o piloto na
+metade esquerda, a máquina na direita. A tela mostra esses pontos e a
+partida recebe o mesmo par, sem novo sorteio.
+
+## Limites
+
+Revanche e `start_match()` chamado direto não passam pela espera. Não há
+rede, barra ligada a download, nem prévias dos outros mapas. Não houve
+execução do cliente Windows nem aceite visual.

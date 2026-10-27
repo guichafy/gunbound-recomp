@@ -18,6 +18,7 @@ ALL="$ALL test_aduka_native test_aduka_assets test_aduka_combat test_aduka_weath
 ALL="$ALL test_lightning_native test_lightning_art test_lightning_assets test_lightning_weather"
 ALL="$ALL test_mage_weather test_mage_weather_effects test_mage_secondary_weather test_mage_weather_source test_mage_weather_art"
 ALL="$ALL test_mage_sparks test_mage_spark_art test_mage_spark_source"
+ALL="$ALL test_match_loading"
 # --quick: todas as suites Godot/Python menos as partidas completas.
 QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches)$' | tr '\n' ' ')
 
