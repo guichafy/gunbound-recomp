@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Avatar Shop original — ADR-130
+
+- [x] Fixar PE/XFS/captura; REA/Ghidra do card, preço e dígitos; matriz.
+- [x] Extrair 171 frames (116 idênticos) e gerar BICUBIC4× com verificador.
+- [x] Reescrever a loja sobre os frames originais; avatares nativos por padrão.
+- [x] Suíte `test_shop_original` e seis suítes da loja adaptadas; 20 dirigidas 0 falhas.
+- [x] GPU 1920×1080, 120 quadros60Hz, sala/batalha e comparação com `gb-avatar.png`.
+- [x] Harness completo (ver HANDOFF).
+- [ ] Aceite visual/mouse do usuário; reexportar app quando solicitado.
+
 ## Partículas decorativas Mage — ADR-129
 
 - [x] REA emissão/coarse/refino, fábricas, densidade passiva, clock e renderer.

@@ -1,0 +1,67 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/xfs/shop/b_store_puton/000.png",
+    "sha256": "ec7fb3849ccb43899f08e8a3f4ad76cf46e62d765aa8698d5a18e03162ad72eb",
+    "size": [
+      81,
+      33
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/shop_smooth_4x/b_store_puton/000.png",
+    "sha256": "00d6589b58b09445d3e87c1ad379db4ddeb4102f9adce4d0685ad737be1af2b4",
+    "size": [
+      324,
+      132
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      255,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    1,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    324,
+    132
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 38058,
+      "max_rgba_delta": 136,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 3.952987,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        81,
+        33
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        81,
+        33
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

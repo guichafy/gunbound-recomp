@@ -1,4 +1,6 @@
 extends SceneTree
+## Histórico (pré-ADR-130): usa a loja vetorial/HD substituída; não executar
+## contra a loja atual. Evidência vigente: capture_shop_original(_pck).gd.
 const SpritePose = preload("res://scripts/sprite_pose.gd")
 var scene
 class Poses extends Node2D:

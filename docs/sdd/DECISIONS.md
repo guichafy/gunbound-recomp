@@ -399,6 +399,9 @@ entra nessa pose. GPT Images não entregou alfa utilizável; as folhas vêm de
 
 ## ADR-064 — composição clássica do Avatar Shop
 
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
+
 A foto enviada pelo usuário orienta o layout3×3, substituindo a adaptação5×5
 da ADR-059. C# continua fonte de catálogo/preços/mecânicas; contém15 registros
 e não os nove avatares da imagem. Inventário lateral equipa itens possuídos;
@@ -406,6 +409,9 @@ atributos ficam em painel modal sem mudar regras. UI recomposta com sprites
 originais e controles; HD aprovado mantém aspecto/pivôs/rig da ADR-063.
 
 ## ADR-066 — fidelidade das regras OpenBound e interface Shop HD
+
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
 
 Auditoria solicitada pelo usuário compara código C# e Godot, preservando
 adaptações aprovadas ADR-063/064 (Vestir persistido e grade3×3). Catálogo,
@@ -418,6 +424,9 @@ matriz de diferenças em AVATAR_SHOP_PARITY_0_14_6.md.
 
 ## ADR-067 — preço integrado à moldura e informação de efeito real
 
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
+
 Retirar ColorRect de preço que cobre os detalhes do card. ShopCardStyle
 compõe painel branco, faixa azul e acabamento inferior a partir da própria
 textura HD/nativa, conservando bordas/cantos/rebites. Retrato126×66 deixa
@@ -426,6 +435,9 @@ AvatarMetadata C# não tem bônus por peça; imagem externa não autoriza
 inventar números/regras. Perfil/combate/PNG/anatomia permanecem preservados.
 
 ## ADR-068 — centro nítido da faixa de preços
+
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
 
 Validação do usuário: o fundo dos preços ainda parece borrado. A faixa da
 ADR-067 esticava a linha nativa75..76 (4px HD) para27px lógicos, ampliando
@@ -448,6 +460,9 @@ Não adicionar bônus por peça, novos assets/rig nem alterações de combate.
 
 ## ADR-070 — loja Full HD orientada pelo vídeo
 
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
+
 Pedido19/10/2026 substitui a composição4:3 da loja pela adaptação16:9 da
 referência em vídeo: avatar sozinho/alternância mobile, grade3×3 e inventário
 compacto. Preservar as correções transacionais0.14.9; retratos e rig mantêm
@@ -468,6 +483,9 @@ como miniatura de apresentação, sem adicioná-lo às peças vestíveis do rig.
 
 ## ADR-071 — design do cliente XFS
 
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
+
 Pedido20/10/2026 adota jglim/gunbound-server + launcher/graphics.xfs como fonte.
 Usar frames store_* comprovados pela captura do cliente, não avatarmode antigo.
 Preservar800×600 em FullHD, com catálogo à esquerda, inventário à direita,
@@ -485,6 +503,9 @@ start e compartilhados com previsão. Substitui restrição a cosméticos C# das
 ADR-067/069/070 para o catálogo XFS. Sem rede/contas neste corte.
 
 ## ADR-073 — controle e migração HD completa
+
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
 
 Usuário apontou a diferença entre miniatura regenerada e peça vestida nativa.
 Registrar miniatura, base, efeito e QA separadamente para todos os562registros.
@@ -520,6 +541,9 @@ números e uma gravidade invertida 3×. Publicado como ADR-069 no PR #1;
 renumerado para ADR-074 na integração à main, pois a loja local já usava 069–073.
 
 ## ADR-075 — estado anatômico compartilhado por cabeça e efeito
+
+**Substituída pela ADR-130** quanto à composição/arte ativa da loja e ao uso
+ativo do HD de avatares; arquivos e histórico preservados.
 
 20/10/2026. Em0.17 o gerador escolheu o maior L dentre todos os quadros, mesmo
 quando a cabeça vinha de Normal11–21. Great Devil Head combina luz frontal
@@ -1510,3 +1534,33 @@ Qualidade3 e seed4242 são entradas locais explícitas; não se alega replay
 do gerador globalWindows. Arte/registro/LaserEffect, combate/perfil e fontes
 anteriores preservados. Contrato, plano, evidência e validação em
 `MAGE_FLIGHT_SPARKS.md`.
+
+## ADR-130 — Avatar Shop e avatares com os assets originais do cliente
+
+27/10/2026, REQ-47 (e REQ-10/20/38..41/46). Pedido do usuário: corrigir os
+assets/imagens do Avatar Shop usando os originais do jogo, com REA quando
+necessário. Decisões do usuário: avatares **tudo original** (loja, sala e
+batalha), botões com as imagens originais em inglês e loja **igual ao
+original** (sem busca, contador, "Nível", "Standard"/"Treino offline" fixos).
+
+Substitui na loja a composição vetorial/GPT da 0.16 (fundo `xfs_landscape`,
+retratos `xfs_portraits`, molduras `XfsStyle`, rótulos PT e prévia de mobile
+OpenBound) e, em todo o jogo, o uso ativo dos mestres HD 0.17/0.18 de
+avatares: `AvatarArt` passa a desenhar as peças nativas do XFS por padrão
+(`new(true)` mantém o HD para auditorias). Arquivos HD preservados em disco.
+
+A tela usa `store_back`/`store_avatar`/`store_myavatar`/`store_icon`/
+`store_window_back`, botões `b_store_*`/`b_myavatar_*`/`b_storewindow_*`/
+`b_scroll_*`, `numfont` e o atlas ASCII do `font.fnt`, extraídos por
+`scripts/import_xfs_shop.py` (116 frames anteriores inalterados, 171 no total)
+e acabados com o BICUBIC4× aprovado (ADR-101/103) por
+`scripts/build_shop_smooth_hd.py`, com fallback nativo validado por hash.
+
+Regras comprovadas no cliente (REA/Hopper e Ghidra 12.2 headless, PE
+`4af6283d…`): grade de cards `0x44a000`, até três status em ordem fixa com
+regra de sinal própria do shot_delay, preço `%8d` de `0x44c460` com avanço
+10/4 e vírgulas 279/280, rótulos CASH/GOLD/ONLY. Demais posições medidas por
+casamento de template na captura `gb-avatar.png`. Gênero/atributos ficam na
+faixa lateral fora do palco; Laundry restaura a prévia; Sell/Gift/BUDDY/CASH
+CHARGE desabilitados. Catálogo, preços, bônus, compra/rollback, atributos e
+perfil inalterados. Matriz e limites em `AVATAR_SHOP_ORIGINAL.md`.

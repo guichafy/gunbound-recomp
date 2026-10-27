@@ -26,9 +26,8 @@ func run() -> void:
 	scene.show_shop()
 	await process_frame
 	var shop = scene.shop
-	check(shop.inventory_rows.get_child_count() == 14,"Fourteen compact inventory rows including empty slots")
+	check(shop.inventory_scroll.size == Vector2(176,17*14) and shop.inventory_rows.get_child_count() == shop.inventory_count(),"Fourteen 17 px client rows; only owned items become rows")
 	check(shop.inventory_rows.get_node_or_null("Owned_0_0_0") != null and shop.inventory_rows.get_node_or_null("Owned_0_1_0") != null,"Owned head/body always visible independently of shop filter")
-	check(shop.search.position.y+shop.search.size.y <= shop.cards.get_child(2).position.y,"Search stays above third avatar card")
 	check(not shop.attributes_panel.visible,"Attributes do not occupy main shop")
 	check(profile.purchase("0:0:1","gold") == "ok","Test owns head")
 	shop.refresh(1,0)
@@ -50,7 +49,7 @@ func run() -> void:
 	click(shop.attributes_button.get_global_rect().get_center())
 	await process_frame
 	check(shop.attributes_panel.visible,"Real attributes button opens separate panel")
-	check(shop.try_button.disabled and not shop.search.editable and shop.inventory_rows.get_node("Owned_0_0_0").disabled,"Attribute modal blocks all underlying shop and inventory controls")
+	check(shop.try_button.disabled and shop.gender_button.disabled and shop.inventory_rows.get_node("Owned_0_0_0").disabled,"Attribute modal blocks all underlying shop and inventory controls")
 	click(shop.add_buttons[0].get_global_rect().get_center())
 	await process_frame
 	check(shop.model.draft_attributes[0] == 1 and profile.attributes[0] == 0,"Attribute plus edits draft only")
@@ -58,7 +57,7 @@ func run() -> void:
 	await process_frame
 	check(scene.screen == "shop" and not shop.attributes_panel.visible,"ESC closes attributes before leaving Shop")
 	check(shop.model.draft_attributes[0] == 0 and profile.attributes[0] == 0,"ESC discards unconfirmed attribute draft")
-	check(shop.search.editable and not shop.inventory_rows.get_node("Owned_0_0_0").disabled,"Attribute cancel restores underlying controls")
+	check(not shop.gender_button.disabled and not shop.inventory_rows.get_node("Owned_0_0_0").disabled,"Attribute cancel restores underlying controls")
 	shop.open_attributes()
 	click(shop.add_buttons[0].get_global_rect().get_center())
 	await process_frame
@@ -77,11 +76,9 @@ func run() -> void:
 	check(profile.gender == 1 and shop.inventory_rows.get_node_or_null("Owned_1_0_0") != null and shop.inventory_rows.get_node_or_null("Owned_0_0_1") == null,"Gender refreshes compatible lateral inventory")
 	shop.toggle_gender()
 	shop.model.query = "missing"
-	shop.search.text = "missing"
 	shop.refresh(0,0)
 	await process_frame
-	check(shop.cards.get_child_count() == 0 and shop.inventory_rows.get_node_or_null("Owned_0_0_1") != null,"Empty search keeps owned inventory available")
-	shop.search.text = ""
+	check(shop.cards.get_child_count() == 0 and shop.inventory_rows.get_node_or_null("Owned_0_0_1") != null,"Empty catalog page keeps owned inventory available")
 	shop.model.query = ""
 	shop.refresh(0,0)
 	scene.show_menu()

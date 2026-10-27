@@ -1,11 +1,13 @@
 extends RefCounted
 ## Original rider pieces. Source pivots and depth order remain stable over time.
+## ADR-130: the shop, room and battle draw the native XFS pieces by default;
+## the 0.17 HD masters stay available only when requested explicitly.
 const HD = preload("res://scripts/avatar_hd.gd")
 const XfsHD = preload("res://scripts/avatar_xfs_hd.gd")
 var hd = HD.new()
 var xfs_hd = XfsHD.new()
-var use_hd := true
-func _init(prefer_hd: bool = true) -> void:
+var use_hd := false
+func _init(prefer_hd: bool = false) -> void:
 	use_hd = prefer_hd
 const Catalog = preload("res://scripts/avatar_catalog.gd")
 static var catalog = Catalog.new()

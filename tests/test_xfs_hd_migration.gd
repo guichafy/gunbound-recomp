@@ -16,7 +16,7 @@ func horn_gold(head: Dictionary) -> Array:
 			if c.a>.5 and c.r>.43 and c.g>c.r*.55 and c.b<c.g*.6:points.append(Vector2(x,y)+Vector2(.5,.5))
 	return points
 func run() -> void:
-	var art=load("res://scripts/avatar_art.gd").new()
+	var art=load("res://scripts/avatar_art.gd").new(true)
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
 	check(not art.xfs_hd.layers.is_empty(),"Equipped XFS masters have their own registered catalog")
 	var native_art=load("res://scripts/avatar_art.gd").new(false)

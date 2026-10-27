@@ -274,12 +274,13 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |
 | REQ-34 | Aiming Mode Drag/Slice | AIMING_0_12 | Vigente; TODO Mouse Speed |
 | REQ-35..37 | Itens de batalha, Select Item, arte HD | ITEMS_0_13 | Vigente; custos do `itemdata.dat`; CPU sem itens; Team Teleport sem aliado no 1×1 |
-| REQ-38..41 | Loja, composição, atributos e modificadores | AVATAR_SHOP_XFS_0_16, AVATAR_HD_MIGRATION | Vigente; catálogo XFS com bônus por equipamento |
+| REQ-38..41 | Loja, composição, atributos e modificadores | AVATAR_SHOP_XFS_0_16, AVATAR_HD_MIGRATION, AVATAR_SHOP_ORIGINAL | Vigente; catálogo XFS com bônus por equipamento; composição e arte originais pela REQ-47 |
 | REQ-42 | Paridade Mage/Bigfoot com o C# | MOBILE_PARITY | Vigente, com os ajustes de REQ-44 |
 | REQ-43 | Nak (ID 3) com dados do cliente original | NAK_0_15 | Vigente; aura UsingItem ausente (sem arte original) |
 | REQ-44 | Regras de batalha: cliente original comprovado, depois C# | BATTLE_RULES_AUDIT, BATTLE_FIDELITY_0_20 | ADR-084 substitui balística/carga/mínimo; demais limites declarados |
 | REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS, RAON_CLASSIC_FIX | Boomer, onda Turtle T2, cronologia48 e tiros/minas Raon (ADR-116/117) implementados; demais limites/portes explícitos |
 | REQ-46 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
+| REQ-47 | Avatar Shop e avatares com os assets originais do cliente | AVATAR_SHOP_ORIGINAL | Vigente (ADR-130); HD de avatares/loja preservado em disco, fora do uso ativo |
 
 ## Lobby clássico e sala — ADR-096
 
@@ -759,3 +760,14 @@ cabeça 1, olho 2, bandeira 3). O conjunto equipado são quatro WORDs nessa
 ordem. A categoria interna da loja continua cabeça, corpo, óculos, bandeira,
 para não mover chaves já salvas. Textos do DAT usam CP949. Preços, bônus e
 arte permanecem os do registro original.
+
+## Avatar Shop original — REQ-47
+
+REQ-47 (ADR-130): a loja reproduz a tela do cliente Thor's Hammer 280 com os
+frames originais do `graphics.xfs` (fundo, cards, ícones, botões, fonte e
+números), nas posições comprovadas pela rotina de desenho do cliente ou
+medidas na captura `gb-avatar.png`. Retratos são os `s*.img` do XFS; a prévia
+vestida, a sala e a batalha desenham as peças nativas do avatar. Não há busca,
+contador, rótulos em português nem prévia de mobile; gênero e atributos ficam
+fora do palco 800×600. Compra, vestir, rollback, atributos, bônus e perfil
+continuam os da REQ-38..41/46. Matriz e limites em AVATAR_SHOP_ORIGINAL.md.

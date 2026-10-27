@@ -27,7 +27,7 @@ func run() -> void:
 	root.content_scale_size = Vector2i.ZERO
 	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
 	var gallery := Gallery.new()
-	gallery.art = load("res://scripts/avatar_art.gd").new()
+	gallery.art = load("res://scripts/avatar_art.gd").new(true)
 	gallery.mobile = load("res://scripts/bigfoot_sprite.gd").new()
 	gallery.catalog = load("res://scripts/avatar_catalog.gd").new()
 	root.add_child(gallery)

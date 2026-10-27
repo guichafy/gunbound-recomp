@@ -22,6 +22,16 @@ assets/hd/classic/mobiles_smooth_4x/bigfoot; MobileLooks `smooth` e
 mobile_smooth_art.gd validam/caem no nativo; só recortes de origem ×4. Ler
 docs/sdd/BIGFOOT_SMOOTH_4X.md. Regenerar com scripts/build_bigfoot_smooth_hd.py.
 
+## Avatar Shop original — ADR-130
+
+Ler docs/sdd/AVATAR_SHOP_ORIGINAL.md. Loja desenhada com os frames do
+`graphics.xfs` (`classic_shop_art.gd`, `assets/xfs/shop`, 4× em
+`assets/hd/classic/shop_smooth_4x`); regras de card/preço/status do cliente
+0x44a000/0x44c460. `AvatarArt` usa peças nativas por padrão em loja, sala e
+batalha: isso substitui o uso ativo do HD de avatares (0.17/0.18), preservado
+em disco. Não reintroduzir busca, rótulos PT ou arte GPT na loja.
+Teste test_shop_original; captura tests/capture_shop_original.gd.
+
 ## Estado e escopo
 
 Protótipo 0.20.3 em Godot 4.7.2 + GDScript (versão única em
@@ -70,7 +80,8 @@ compatibilidade do conector com a análise direta, nem copiar C decompilado
 sem confirmar ABI, ASM, LUTs e consumidores.
 Referências: jglim/gunbound-launcher (TestClient) e jglim/gunbound-server;
 servidor não comprova sozinho o render do cliente nem amplia o escopo offline.
-Preservar todos os 16 mobiles, avatares/equipamentos e HD já aprovados.
+Preservar todos os 16 mobiles, avatares/equipamentos e HD já aprovados
+(avatares e loja: ADR-130 trocou o uso ativo do HD pelos originais).
 Modernização do design de mobile/avatar fica para uma etapa posterior
 solicitada pelo usuário. Não substituir a aparência atual durante o porte.
 
@@ -330,6 +341,8 @@ carga em `options.items`). Arte HD via `scripts/build_items_hd.py` e Codex
 test_items_scene.gd; captura tests/capture_items.gd (docs/items).
 ## Shop de avatar 0.14 — caminho atual
 
+Substituído pela ADR-130 na loja e nos avatares ativos; histórico abaixo.
+
 Ler AVATAR_SHOP.md e AVATAR_SHOP_PLAN.md. Quatro slots, catálogo original
 15registros, perfil version2 com saldo inicial1000Gold/Cash uma vez, conjuntos
 por gênero e unissex compartilhado. ShopModel mantém preview temporário;
@@ -361,6 +374,8 @@ ItemDelay acima. Test test_shop_items_integration39; suite1584+10partidas.
 
 ## Animação aprovada e skill de arte clássica HD
 
+Substituído pela ADR-130 na loja e nos avatares ativos; histórico abaixo.
+
 0.14.4/ADR-063 substitui deslocamentos do centro alpha por quadro: peças HD
 mantêm registro constante; respiração usa relógio contínuo e poses misturam
 geometria exibida por ator em0,14s. Não reintroduzir offsets de silhueta como
@@ -376,6 +391,8 @@ efeito de uma tarefa apenas de arte.
 
 
 ## Shop clássico 0.14.5 — layout atual
+
+Substituído pela ADR-130 na loja e nos avatares ativos; histórico abaixo.
 
 Ler AVATAR_SHOP_CLASSIC_0_14_5.md/ADR-064. Primeira foto do usuário define3×3,
 nove itens/página e inventário lateral vestível sempre visível. Fonte C# mantém

@@ -1,0 +1,67 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/xfs/shop/b_store_glasse/001.png",
+    "sha256": "b5b5bc2a32fd1f29a30f7cb5b2329b8e9a37d2d8e70a2b3ac85ceef6c5553362",
+    "size": [
+      49,
+      32
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  "candidate": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/shop_smooth_4x/b_store_glasse/001.png",
+    "sha256": "88000e3616aec50324497f98921aaa62a02fdff02ce9c833861075b2f09544b3",
+    "size": [
+      196,
+      128
+    ],
+    "mode": "RGBA",
+    "alpha_extrema": [
+      0,
+      255
+    ]
+  },
+  "scale": 4,
+  "grid": [
+    1,
+    1
+  ],
+  "alpha_support_threshold": 8,
+  "target_size": [
+    196,
+    128
+  ],
+  "failures": [],
+  "cells": [
+    {
+      "column": 0,
+      "row": 0,
+      "rgba_changed_pixels": 21836,
+      "max_rgba_delta": 255,
+      "alpha_support_changed_pixels": 0,
+      "alpha_values_changed_pixels": 0,
+      "alpha_mae": 0.0,
+      "visible_rgb_mae": 4.147682,
+      "source_alpha_bbox_native": [
+        0,
+        0,
+        49,
+        32
+      ],
+      "candidate_alpha_bbox_native": [
+        0,
+        0,
+        49,
+        32
+      ]
+    }
+  ],
+  "exact_pixels_required": false,
+  "pixel_replication_verified": false,
+  "visual_review": "required: identity, geometry, palette, text, frame count/order and halos",
+  "status": "pending_visual_review"
+}

@@ -2,7 +2,7 @@ extends SceneTree
 const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Gallery extends Node2D:
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
-	var hd=load("res://scripts/avatar_art.gd").new()
+	var hd=load("res://scripts/avatar_art.gd").new(true)
 	var native=load("res://scripts/avatar_art.gd").new(false)
 	var sprites=[load("res://scripts/mage_sprite.gd").new(),load("res://scripts/bigfoot_sprite.gd").new()]
 	var rows: Array=[]

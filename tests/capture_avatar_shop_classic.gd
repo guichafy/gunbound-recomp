@@ -1,4 +1,6 @@
 extends SceneTree
+## Histórico (pré-ADR-130): usa a loja vetorial/HD substituída; não executar
+## contra a loja atual. Evidência vigente: capture_shop_original(_pck).gd.
 var scene
 var output := "res://docs/avatar-shop-classic/"
 func _initialize() -> void:

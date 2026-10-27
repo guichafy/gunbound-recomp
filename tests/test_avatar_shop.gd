@@ -30,11 +30,9 @@ func run() -> void:
 	var shop = view.shop
 	var first = shop.cards.get_child(0)
 	var fourth = shop.cards.get_child(3)
-	check(first.position == Vector2(25,70) and fourth.position == Vector2(25,230), "XFS three-column grid starts below tabs with second row below")
+	check(first.position == Vector2(21,69) and fourth.position == Vector2(21,230), "Client card grid (0x44a000): 163×161 steps from 21,69")
 	check(first.size == Vector2(160,156), "XFS card proportions")
-	for child in shop.cards.get_child(1).get_children():
-		if child is TextureRect and child.name == "Portrait":
-			check(child.size == Vector2(84,76), "HD portrait reserves effect information within classic white window")
+	check(shop.cards.get_child(1).get_node("Portrait").size == Vector2(86,79), "Portrait fills the light window of store_avatar")
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	check(shop.model.selected_key == "0:0:1", "Real card click")
@@ -45,7 +43,7 @@ func run() -> void:
 	await process_frame
 	check(is_instance_valid(shop.modal), "Real Buy modal")
 	if is_instance_valid(shop.modal):
-		check(shop.try_button.disabled and not shop.search.editable, "Modal blocks underlying interface")
+		check(shop.try_button.disabled and shop.cards.get_child(0).disabled, "Modal blocks underlying interface")
 		click(shop.modal.get_node("GoldPurchase").get_global_rect().get_center())
 		await process_frame
 		check(view.profile.gold == 900 and view.profile.owns("0:0:1"), "Real Gold button")
@@ -65,10 +63,10 @@ func run() -> void:
 	shop.model.try_selected()
 	shop.model.select("0:0:1")
 	shop.refresh(0,0)
-	check(not shop.try_button.disabled and shop.try_caption.text == "Vestir", "Can restore dressed item over temporary unowned preview")
+	check(not shop.try_button.disabled and shop.try_state == "Vestir", "Can restore dressed item over temporary unowned preview")
 	click(shop.try_button.get_global_rect().get_center())
 	await process_frame
-	check(shop.model.preview["0"] == "0:0:1" and shop.try_caption.text == "Vestido", "Dress clears temporary preview and confirms saved state")
+	check(shop.model.preview["0"] == "0:0:1" and shop.try_state == "Vestido", "Dress clears temporary preview and confirms saved state")
 	shop.model.draft_attributes = [1,0,0,0,0,0,0,0]
 	view.show_menu()
 	view.opening = 0

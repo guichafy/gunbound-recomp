@@ -1,9 +1,9 @@
 extends SceneTree
 ## Historical 0.18.3 fixture, rejected by the user. Current acceptance is capture_horn_curve.gd.
 class Gallery extends Node2D:
-	var art=load("res://scripts/avatar_art.gd").new()
-	var previous=load("res://scripts/avatar_art.gd").new()
-	var reference=load("res://scripts/avatar_art.gd").new()
+	var art=load("res://scripts/avatar_art.gd").new(true)
+	var previous=load("res://scripts/avatar_art.gd").new(true)
+	var reference=load("res://scripts/avatar_art.gd").new(true)
 	var gear: Dictionary=art.catalog.defaults(0)
 	var age:=0.0
 	func _init() -> void:

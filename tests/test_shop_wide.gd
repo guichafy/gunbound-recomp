@@ -32,25 +32,12 @@ func run() -> void:
 	# Fractional virtual width produces subpixel float rounding at viewport edges.
 	check(bounds.position.distance_to(Vector2(240,0))<0.01 and bounds.size.distance_to(Vector2(1440,1080))<0.01,"Full HD XFS layout preserves native 4:3 independently of host transform")
 	check(is_equal_approx(shop.content.scale.x,shop.content.scale.y),"Uniform layout scaling")
-	check(shop.try_button.position.x<shop.buy_button.position.x and shop.gift_button.position.x>550,"Footer matches XFS Try Buy and inventory Gift")
-	check(shop.wide_background != null and shop.wide_background.get_size()==Vector2(1672,941),"Generated backdrop loads with its measured dimensions")
-	check(shop.load_registered_texture("res://.tools/no-shop-background.json")==null,"Missing backdrop metadata requests native fallback")
-	var metadata_path := "res://.tools/shop-wide-invalid-background.json"
-	for value in ["invalid",{"version":1,"size":["bad",941]},{"version":1,"size":[1,1],"file":"res://assets/hd/shop/wide_background.png"}]:
-		var file := FileAccess.open(metadata_path,FileAccess.WRITE)
-		file.store_string(JSON.stringify(value))
-		file.close()
-		check(shop.load_registered_texture(metadata_path)==null,"Invalid backdrop metadata requests native fallback")
-	DirAccess.remove_absolute(ProjectSettings.globalize_path(metadata_path))
+	check(shop.try_button.position.x<shop.buy_button.position.x and shop.gift_button.position.x>550,"Footer matches client Try Buy and inventory Gift")
+	check(shop.backdrop is ColorRect and shop.backdrop.size==Vector2(1920,1080),"Plain letterbox replaces the generated backdrop (ADR-130)")
 	for key in ["2:2:0","2:3:0"]:
 		var item: Dictionary=shop.model.catalog.find(key)
-		var portrait: Texture2D=shop.portrait_for(item)
-		check(portrait is AtlasTexture and portrait.get_height()>500,"Empty accessory portrait uses regenerated HD detail: "+key)
+		check(shop.portrait_for(item)!=null and shop.portrait_for(item).resource_path==item.portrait,"Empty accessory keeps its original portrait: "+key)
 		check(shop.avatar_art.hd.piece(key,0).is_empty(),"Portrait-only art never becomes an equipped rig piece: "+key)
-	var registered_portrait: Texture2D=shop.empty_slot_portrait
-	shop.empty_slot_portrait=null
-	check(shop.portrait_for(shop.model.catalog.find("2:3:0"))!=null,"Missing empty-slot HD portrait preserves native fallback")
-	shop.empty_slot_portrait=registered_portrait
 	# Exercise all nine positions even though the real head catalog has five.
 	var original_entries: Dictionary=shop.model.catalog.entries.duplicate(true)
 	for id in range(5,9):
@@ -64,21 +51,10 @@ func run() -> void:
 	check(bounds.encloses(last_card) and last_card.end.y<shop.category_buttons[0].get_global_rect().position.y,"Third row fits above categories and footer")
 	shop.model.catalog.entries=original_entries
 	shop.refresh(0,0)
-	check(shop.has_method("set_preview_mode"),"Avatar/mobile preview is selectable")
-	if shop.has_method("set_preview_mode"):
-		check(not shop.preview_mobile,"Video avatar-only preview is the default")
-		var equipment: Dictionary=scene.profile.equipped_set().duplicate(true)
-		click(shop.preview_buttons[1].get_global_rect().get_center())
-		await process_frame
-		check(shop.preview_mobile and scene.profile.equipped_set()==equipment,"Real mobile preview click is presentation only")
-		click(shop.preview_buttons[0].get_global_rect().get_center())
-		await process_frame
-		check(not shop.preview_mobile,"Real avatar preview click restores standalone display")
-	for node in [shop.cards.get_child(0),shop.cards.get_child(4),shop.search,shop.gift_button,shop.try_button,shop.inventory_rows.get_parent()]:
+	for node in [shop.cards.get_child(0),shop.cards.get_child(4),shop.gift_button,shop.try_button,shop.inventory_rows.get_parent()]:
 		check(bounds.encloses(node.get_global_rect()),"Control is contained in widescreen layout: "+str(node.name))
 	var row=shop.inventory_rows.get_node("Owned_0_0_0")
-	var style=row.get_theme_stylebox("normal")
-	check(style is StyleBoxFlat and style.bg_color.r>0.8 and style.bg_color.g>0.6 and style.bg_color.b<0.55,"Equipped inventory row has video's yellow highlight")
+	check(row.size==Vector2(176,17) and scene.profile.equipped_set()["0"]=="0:0:0","Equipped row keeps the 176×17 client slot (red arrow marks it)")
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	click(shop.buy_button.get_global_rect().get_center())

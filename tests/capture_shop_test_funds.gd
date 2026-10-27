@@ -1,4 +1,6 @@
 extends SceneTree
+## Histórico (pré-ADR-130): usa a loja vetorial/HD substituída; não executar
+## contra a loja atual. Evidência vigente: capture_shop_original(_pck).gd.
 func _initialize() -> void:
 	call_deferred("run")
 func run() -> void:

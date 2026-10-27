@@ -3,7 +3,7 @@ extends SceneTree
 func _initialize() -> void:
 	call_deferred("run")
 func run() -> void:
-	var art=load("res://scripts/avatar_art.gd").new()
+	var art=load("res://scripts/avatar_art.gd").new(true)
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
 	var native=JSON.parse_string(FileAccess.get_file_as_string("res://assets/xfs/avatars/catalog.json"))
 	var report: Dictionary={"covered":[],"pending":[],"errors":[],"failures":0,"sheet_hashes":{},"renderer_hashes":{},"registrations":{}}

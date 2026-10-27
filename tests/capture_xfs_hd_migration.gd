@@ -3,7 +3,7 @@ const SpritePose = preload("res://scripts/sprite_pose.gd")
 class Gallery extends Node2D:
 	var entries: Array=[]
 	var native_textures: Dictionary={}
-	var art=load("res://scripts/avatar_art.gd").new()
+	var art=load("res://scripts/avatar_art.gd").new(true)
 	var catalog=load("res://scripts/avatar_catalog.gd").new()
 	var sprites=[load("res://scripts/mage_sprite.gd").new(),load("res://scripts/bigfoot_sprite.gd").new()]
 	var age := 0.0

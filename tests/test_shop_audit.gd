@@ -49,22 +49,19 @@ func run() -> void:
 	# Hidden selection must not leave a purchase/try action for a different card.
 	check(shop.model.select("0:0:1"),"Select visible Marine without purchasing")
 	shop.refresh(0,0)
-	shop.search.grab_focus()
-	for letter in "kappa":
-		key(letter.to_upper().unicode_at(0),letter.unicode_at(0))
+	shop.model.query="kappa"
+	shop.refresh(0,0)
 	await process_frame
-	check(shop.cards.get_child_count()==1 and shop.cards.get_child(0).tooltip_text.begins_with("Kappa"),"Real text input filters to Kappa")
+	check(shop.cards.get_child_count()==1 and shop.cards.get_child(0).tooltip_text.begins_with("Kappa"),"Model filter narrows the catalog to Kappa")
 	check(shop.model.selected_key.is_empty() and shop.try_button.disabled and shop.buy_button.disabled,"Filtered-out selection clears purchase and try actions")
-	key(KEY_A,0,true)
-	for letter in "zzzz":
-		key(letter.to_upper().unicode_at(0),letter.unicode_at(0))
+	shop.model.query="zzzz"
+	shop.refresh(0,0)
 	await process_frame
-	check(shop.cards.get_child_count()==0 and shop.empty_label.visible,"Empty search shows an explanation without a phantom card")
-	key(KEY_A,0,true)
-	key(KEY_BACKSPACE)
+	check(shop.cards.get_child_count()==0 and shop.empty_label.visible,"Empty page shows an explanation without a phantom card")
+	shop.model.query=""
+	shop.refresh(0,0)
 	await process_frame
-	check(shop.model.query.is_empty(),"Real search clear restores full catalog")
-	check(not shop.empty_label.visible,"Restoring results hides empty-search explanation")
+	check(not shop.empty_label.visible,"Restoring results hides the explanation")
 	# Selection rolls back when a grid inventory click cannot persist equipment.
 	check(scene.profile.purchase("0:0:1","gold")=="ok","Own Marine in isolated profile")
 	shop.switch_tab(true)
@@ -88,27 +85,20 @@ func run() -> void:
 	for node in shop.category_buttons:
 		check(node.position.y>=shop.cards.get_child(3).get_rect().end.y,"XFS categories are below the catalog")
 		check(not node.get_rect().intersects(shop.try_button.get_rect()),"Category and Try hitboxes do not overlap")
-	check(shop.try_button.position.x<shop.buy_button.position.x and shop.gift_button.position.x>550,"XFS Try/Buy belong to catalog; Gift belongs to inventory")
+	check(shop.try_button.position.x<shop.buy_button.position.x and shop.gift_button.position.x>550,"Try/Buy belong to catalog; Gift belongs to inventory")
 	check(shop.inventory_rows.get_parent().position.x>shop.cards.get_child(2).get_rect().end.x,"XFS inventory is on the right of catalog")
-	check(shop.has_method("preview_region"),"Preview supports a uniform source crop")
-	if shop.has_method("preview_region"):
-		for path in ["InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Background","InGame/Scene/AvatarShop/InGamePreview/MiramoTown/Foreground2"]:
-			var region: Rect2 = shop.preview_region(path)
-			check(is_equal_approx(region.size.x/region.size.y,86.0/72.0),"Preview preserves aspect with uniform scaling: "+path)
-			check(Rect2(Vector2.ZERO,shop.texture(path).get_size()).encloses(region),"Preview crop stays inside source: "+path)
 	# Clicking text is the same category action as clicking the icon.
 	click(shop.category_buttons[1].get_global_rect().get_center())
 	await process_frame
 	check(shop.model.category==1,"Category caption accepts real click")
-	# ESC closes a modal even after the search held keyboard focus.
+	# ESC closes a modal before it leaves the shop.
 	shop.refresh(0,0)
 	shop.model.select("0:0:2")
 	shop.refresh(0,0)
-	shop.search.grab_focus()
 	shop.open_buy()
 	key(KEY_ESCAPE)
 	await process_frame
-	check(scene.screen=="shop" and not is_instance_valid(shop.modal) and shop.search.editable,"ESC closes purchase before leaving shop and restores focused search")
+	check(scene.screen=="shop" and not is_instance_valid(shop.modal) and not shop.try_button.disabled,"ESC closes purchase before leaving shop and restores controls")
 	scene.queue_free()
 	await process_frame
 	for path in [PROFILE_PATH,"res://.tools/shop-audit-profile-options.json"]:

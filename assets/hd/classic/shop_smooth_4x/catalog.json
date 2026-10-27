@@ -1,0 +1,2744 @@
+{
+  "version": 1,
+  "scale": 4,
+  "method": "BICUBIC per frame; native alpha NEAREST",
+  "pillow": "11.3.0",
+  "frames": {
+    "store_back:0": {
+      "file": "store_back/000.png",
+      "size": [
+        3200,
+        2400
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_back/000.png",
+        "sha256": "3ec51af34a48485f94ff417b776a8e85c5c6cda2b9557385277abc328824820c",
+        "size": [
+          800,
+          600
+        ]
+      },
+      "sha256": "ef80b55cff84536f9be8bad88d378d6013e2601a2b76a3956a2e29ece56b512a"
+    },
+    "store_avatar:0": {
+      "file": "store_avatar/000.png",
+      "size": [
+        640,
+        624
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/000.png",
+        "sha256": "24046374f517adfe528ec970ce5f717451a713f6f5864d7d286825b6fd919872",
+        "size": [
+          160,
+          156
+        ]
+      },
+      "sha256": "78ca3040315cc3176438934c9506ce666200e33691d054b1b47083684fa022c7"
+    },
+    "store_avatar:1": {
+      "file": "store_avatar/001.png",
+      "size": [
+        640,
+        624
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/001.png",
+        "sha256": "e5757b17cb09e1dfbf07bff5077263ea8f82bec172f44d352cd4cc65af90ec1e",
+        "size": [
+          160,
+          156
+        ]
+      },
+      "sha256": "29a9dc90ae420933f83acbc88116a7c3659def9e2b9ed4d0d5bf8d3500be63c3"
+    },
+    "store_avatar:2": {
+      "file": "store_avatar/002.png",
+      "size": [
+        108,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/002.png",
+        "sha256": "d72f8f39cd21887bd65d909c6d2e6dc3ca61af75ae154dcb501ad1d6b59eec5a",
+        "size": [
+          27,
+          13
+        ]
+      },
+      "sha256": "44c6a43e02b6ed88cc30958fd12da36692cfb5c297ee8c50ebd6f5817ac3155c"
+    },
+    "store_avatar:3": {
+      "file": "store_avatar/003.png",
+      "size": [
+        108,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/003.png",
+        "sha256": "9f9cd8771debd5a2347e962fb1227936fb7a2c9e411915dc6b45d0d59e6be39c",
+        "size": [
+          27,
+          13
+        ]
+      },
+      "sha256": "231f3a0db54df655b21ca3cb3325913217e7cbaae4d6a70858873d55580ebf16"
+    },
+    "store_avatar:4": {
+      "file": "store_avatar/004.png",
+      "size": [
+        148,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/004.png",
+        "sha256": "eeb6c1dc277c638bf35be3a4c256419e97c32c6b2c17b9d169c88b7003325673",
+        "size": [
+          37,
+          14
+        ]
+      },
+      "sha256": "2d48ee67e3a0c959f7c59fce6529b0cf2d061fe37a479adb9471cb385cdd6c6c"
+    },
+    "store_avatar:5": {
+      "file": "store_avatar/005.png",
+      "size": [
+        148,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/005.png",
+        "sha256": "6e94a34abe9fa808288f421fb7fb98193401fc27e4872b192dd666f809b8cc54",
+        "size": [
+          37,
+          14
+        ]
+      },
+      "sha256": "2290fd1c895f9699f7e340145ea4f65ebc6190793b198df93ecb4cc25aa41fef"
+    },
+    "store_avatar:6": {
+      "file": "store_avatar/006.png",
+      "size": [
+        324,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/006.png",
+        "sha256": "776857bd340540656fb3be6b94c019ca1b1c3ffe00551037c9c057edd6590aba",
+        "size": [
+          81,
+          14
+        ]
+      },
+      "sha256": "253d25bbf420996780186810aae54ba376dc9ca0bec92da65b3ea7cb16b62e31"
+    },
+    "store_avatar:7": {
+      "file": "store_avatar/007.png",
+      "size": [
+        324,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/007.png",
+        "sha256": "239e64db8cd687b5a7c20c5a1e49463da4e64f81a494e5d76f09d13e520139eb",
+        "size": [
+          81,
+          14
+        ]
+      },
+      "sha256": "4557cf97a2a47a595c057790be1a677f2c0f2dc6b7573dadb2639f1eb848de1c"
+    },
+    "store_avatar:8": {
+      "file": "store_avatar/008.png",
+      "size": [
+        568,
+        328
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_avatar/008.png",
+        "sha256": "ab17cbbbfd157c3704662e3b0bb0771ba4fd2855e1685aa0aced1a3a3c609bbe",
+        "size": [
+          142,
+          82
+        ]
+      },
+      "sha256": "364f0e703a5f5a1af49e151da2fd324c72dbbe5482f3278b96442d34fcf06484"
+    },
+    "store_myavatar:0": {
+      "file": "store_myavatar/000.png",
+      "size": [
+        960,
+        1748
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_myavatar/000.png",
+        "sha256": "3e4b55004ecfe0b01123b754a793e3e9f1edf0ebae84ece7716ec5a09bfaf251",
+        "size": [
+          240,
+          437
+        ]
+      },
+      "sha256": "48801c12ae0155a6e2d34dbc619c5616cfd969bab0cef24e79aed6d58d22ef1f"
+    },
+    "store_myavatar:1": {
+      "file": "store_myavatar/001.png",
+      "size": [
+        704,
+        68
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_myavatar/001.png",
+        "sha256": "5085e9f143d3e3e338cabd9e9a9a5707789a0ddd34e5e434f05ca574ccb25e24",
+        "size": [
+          176,
+          17
+        ]
+      },
+      "sha256": "32cdff87e0cdd45a06b1ff328aeed2f3118b5999fd6f777e73cdc0e71112a0d0"
+    },
+    "store_myavatar:2": {
+      "file": "store_myavatar/002.png",
+      "size": [
+        480,
+        288
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_myavatar/002.png",
+        "sha256": "f94bbdf1a86f5ab503748c4df25047e4440462779a7cc8d330bf728ef736f77e",
+        "size": [
+          120,
+          72
+        ]
+      },
+      "sha256": "4d84cd31e11757ed8ea0221df4d7e70d2226075cbc83b5ba59ec355618a0fa97"
+    },
+    "store_icon:0": {
+      "file": "store_icon/000.png",
+      "size": [
+        68,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/000.png",
+        "sha256": "e903b00124402bdc64d95c4625d20711d4b6a9edb66d3472bd18132362840c19",
+        "size": [
+          17,
+          13
+        ]
+      },
+      "sha256": "260dee808f15841480e3205906f205f3f7c072fde07f8fc561ccb56bc3f51358"
+    },
+    "store_icon:1": {
+      "file": "store_icon/001.png",
+      "size": [
+        68,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/001.png",
+        "sha256": "0d07affa73ddf42e6e996bca991f47ad3766f2deea55dfb3308d573d18589ceb",
+        "size": [
+          17,
+          13
+        ]
+      },
+      "sha256": "234e82d9646078e87afe2cb5c84c2277d76e2ff90742f089410b1a7f10fcfe72"
+    },
+    "store_icon:2": {
+      "file": "store_icon/002.png",
+      "size": [
+        52,
+        40
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/002.png",
+        "sha256": "b052071e79f56a3ee85e38d64ac1ebe1114111b9ee03e37e4570571721b934d2",
+        "size": [
+          13,
+          10
+        ]
+      },
+      "sha256": "df1dc95598879448ed467d9085cfb03067474082ee755b10710ba2cc4eae8036"
+    },
+    "store_icon:3": {
+      "file": "store_icon/003.png",
+      "size": [
+        52,
+        40
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/003.png",
+        "sha256": "6d1f00032b8e7d2ac221592fdc9dbf3418f99493e7144adc81502b00b473f572",
+        "size": [
+          13,
+          10
+        ]
+      },
+      "sha256": "75400fa0a597e38a27805b87e4bb50f215c94067e52a82ecade1f93b108d3b29"
+    },
+    "store_icon:4": {
+      "file": "store_icon/004.png",
+      "size": [
+        72,
+        28
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/004.png",
+        "sha256": "7974ca313b79794c2f2825b2c4c38df9f27ebc2398a6ce8d6466b69c2ccc6315",
+        "size": [
+          18,
+          7
+        ]
+      },
+      "sha256": "995925d01d75a8e3e8051b7c1852bcb009e49c7c50ab3b1a0a82fdbe1716957c"
+    },
+    "store_icon:5": {
+      "file": "store_icon/005.png",
+      "size": [
+        72,
+        28
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/005.png",
+        "sha256": "5a4ea55997f5ab35e4bb55eea917eaed3a43e16ea3860e51415ca10a77d9988a",
+        "size": [
+          18,
+          7
+        ]
+      },
+      "sha256": "2aaddb9a2db3e8d80d1674c35878cae38a11e8b2a62123839ffc14ee325e2814"
+    },
+    "store_icon:6": {
+      "file": "store_icon/006.png",
+      "size": [
+        40,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/006.png",
+        "sha256": "6b9d50514a1443d2faea6112bbdd0b4de6752123c0a460446d43093d43ab1ed4",
+        "size": [
+          10,
+          13
+        ]
+      },
+      "sha256": "1fc19d875a17108eb9964f52925a6a6f3eda31c316c20e9ddeeecd53c8d551b6"
+    },
+    "store_icon:7": {
+      "file": "store_icon/007.png",
+      "size": [
+        20,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/007.png",
+        "sha256": "37981fff77af0a81e5c7475ce5d004437f3363338add1a2dc2cc5e98211cbfe8",
+        "size": [
+          5,
+          9
+        ]
+      },
+      "sha256": "30033dc902c930efdb6ab724723500bf5d29c4a607b330059fc1213d63f7253f"
+    },
+    "store_icon:8": {
+      "file": "store_icon/008.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/008.png",
+        "sha256": "7d2803aed3c6aca7f14b9cba1caf55cea2c80b451c16cbe0ce93680325ef7cb8",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "53cbff84d1130286e9edec15431e0cc8ef0b34c20c5bf2570f95d93d956cfa97"
+    },
+    "store_icon:9": {
+      "file": "store_icon/009.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/009.png",
+        "sha256": "dcdcd2d31e402b2bfe182ad03cc20d57b4990e35fd68765939a59d9998772cb1",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "bf250104315d5814a713b00112655cffb2321904ce662b4c0db5c4aa69e73f1b"
+    },
+    "store_icon:10": {
+      "file": "store_icon/010.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/010.png",
+        "sha256": "8b097c8c72375b901af2a0f3a0618d4c06e1a15cd8343e2e49f83b8f77cfa9a3",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "5629e77cc480494680f1abd0ca5b0b939f28165c58b27331d3278fbb344c9d89"
+    },
+    "store_icon:11": {
+      "file": "store_icon/011.png",
+      "size": [
+        56,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/011.png",
+        "sha256": "d54e689d193c8b46c139d722d4f17d8206f69d1462b2436532db1f586ebd8b1f",
+        "size": [
+          14,
+          13
+        ]
+      },
+      "sha256": "871bf35946ae2fc5f28f5b3823084f442e8f722f1cef0243b36bad7699bfd2f6"
+    },
+    "store_icon:12": {
+      "file": "store_icon/012.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/012.png",
+        "sha256": "ea28ff8f23b9d2bdcdac4649e2b302298fa76d039486e41bf70d9d8949d5ccae",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "4ceeb413e36f05da038c7d63b772105e6d16f56c42d15a707d6e1b2f3b74102c"
+    },
+    "store_icon:13": {
+      "file": "store_icon/013.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/013.png",
+        "sha256": "50293d7155eb26c7e3b234fed76c46245d4a30d775e7c4dcbc3537551646a537",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "4ab240fe314c7ef197dc38c92e493c38eccbaeebdddad90b2ce1294ad6e4ebb9"
+    },
+    "store_icon:14": {
+      "file": "store_icon/014.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/014.png",
+        "sha256": "c0656bcc78c38765ea2b15645570e0a38a57b7c352fe4a78c75749ffe5bfc331",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "1ae99fcef13d1e1d2e29ab954e95d6a5118cd4260af799b9fca157b504c1ccfc"
+    },
+    "store_icon:15": {
+      "file": "store_icon/015.png",
+      "size": [
+        52,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/015.png",
+        "sha256": "784bb6881e6206bdfe08cbbf2dfe99c28f2a5f45e158951609b55f10069a5c38",
+        "size": [
+          13,
+          14
+        ]
+      },
+      "sha256": "0a0b011a18ef49c2fe36adf898066a436bde37c517004fcc04d2b79b1e03bd76"
+    },
+    "store_icon:16": {
+      "file": "store_icon/016.png",
+      "size": [
+        52,
+        48
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/016.png",
+        "sha256": "88c1be11c70592adb34680c9bc05261d49350a3f6b058af7825b2005459301d4",
+        "size": [
+          13,
+          12
+        ]
+      },
+      "sha256": "5394bd635ad4e2ec2587f7b55322f039a922160d51f821a02bca89f268894bb6"
+    },
+    "store_icon:17": {
+      "file": "store_icon/017.png",
+      "size": [
+        52,
+        48
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/017.png",
+        "sha256": "0cea952623e2ea7b836ed711eaa77d5f0c4a61a184d9b64e73cf0fa1eeee37fa",
+        "size": [
+          13,
+          12
+        ]
+      },
+      "sha256": "3546d362ef115198bcc2a2803eb36de2015332375d09f7f7a31e30de976d2c86"
+    },
+    "store_icon:18": {
+      "file": "store_icon/018.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/018.png",
+        "sha256": "fc397fbd2bfc8d977056e7277afada92a651e5b0368c1ab86ec19a0488e0ecd2",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "4563f3d70528c3613cc0df704f808c2c2b2eb3e31b5542d3a859cfd0e364b9ee"
+    },
+    "store_icon:19": {
+      "file": "store_icon/019.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/019.png",
+        "sha256": "a3dd8128adeb6f2a3250d2fcf262b2e8d75793030cdd450c2180371951e5ac92",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "e997fbe44ab4172dc318a97e7778c70a5dd8f8559b546dce6e4b2192826ea23a"
+    },
+    "store_icon:20": {
+      "file": "store_icon/020.png",
+      "size": [
+        56,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/020.png",
+        "sha256": "2ec1f619e255f89dba0c0a2c47c43706ebb186edc76849c2be0c75625c98372b",
+        "size": [
+          14,
+          13
+        ]
+      },
+      "sha256": "132eef524d4c56808ce5a771beeaf8a8c3904355fc4458db54186fce8c717f70"
+    },
+    "store_icon:21": {
+      "file": "store_icon/021.png",
+      "size": [
+        52,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/021.png",
+        "sha256": "4ba4c0486bd4879ab295d0fba0d6c9b165d93293c523f21ab42d007f648f0731",
+        "size": [
+          13,
+          14
+        ]
+      },
+      "sha256": "3ff266c1ff60ef3bb911df74aeb7bdf18123e688ebce0d3419e579ee7fb34a0a"
+    },
+    "store_icon:22": {
+      "file": "store_icon/022.png",
+      "size": [
+        52,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/022.png",
+        "sha256": "0815e1b71810fb792fb9ad3bf9ed226ce8ef67d707d8a08952fe226a407f9a08",
+        "size": [
+          13,
+          13
+        ]
+      },
+      "sha256": "31a0c68b5a59bfd4f85599da5ed780b03f8341e1117d004d73da50dfb04bb312"
+    },
+    "store_icon:23": {
+      "file": "store_icon/023.png",
+      "size": [
+        56,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/023.png",
+        "sha256": "862bf56ed0bc932178bf27be4b921624221ed75e327b24b9c7f7215f4f91227f",
+        "size": [
+          14,
+          13
+        ]
+      },
+      "sha256": "54e08352df189f55f40378bc7dcf2f06419afcdff04b4b63615b601c14ab86ca"
+    },
+    "store_icon:24": {
+      "file": "store_icon/024.png",
+      "size": [
+        36,
+        60
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/024.png",
+        "sha256": "a75bf9c3c235a06a6acf649a4b725bbc8a3f414d9d9a0a39dc681a43105c86d4",
+        "size": [
+          9,
+          15
+        ]
+      },
+      "sha256": "0828419c2bb51540a9744c957ab977323c9d5c04746bc2371dcbd166ec70dc4b"
+    },
+    "store_icon:25": {
+      "file": "store_icon/025.png",
+      "size": [
+        44,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/025.png",
+        "sha256": "92eb2bc506ff61a965b2cc919d13125a13a7c16d4aa6986da618b3c4694ead64",
+        "size": [
+          11,
+          13
+        ]
+      },
+      "sha256": "6d62aa7d9b8701b2fd7c644d8ac521b1c639c64e89abe8e0575bfeffcad6a566"
+    },
+    "store_icon:26": {
+      "file": "store_icon/026.png",
+      "size": [
+        56,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_icon/026.png",
+        "sha256": "edc92aefa0c9931b62eb8e9568cd0fd4bdea530b8d759589d4b99ab2c2e68386",
+        "size": [
+          14,
+          14
+        ]
+      },
+      "sha256": "f527140ce752c889667915b914b2bcc41248d43c0ab593954e2ef77bef35dbda"
+    },
+    "store_window_back:0": {
+      "file": "store_window_back/000.png",
+      "size": [
+        1252,
+        748
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/000.png",
+        "sha256": "159affadda9e17ac052e59ef445dd8969aa802f4a888fd76e538861ca79a1f17",
+        "size": [
+          313,
+          187
+        ]
+      },
+      "sha256": "43b23436126948635bd672ca1ac224dbf09294d284737ebdadf81cb9cb83dab8"
+    },
+    "store_window_back:1": {
+      "file": "store_window_back/001.png",
+      "size": [
+        1252,
+        748
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/001.png",
+        "sha256": "e2fb5747c3c2d7af41119e30182ca010c0865ac3c8b089acb18a02f001c2ddac",
+        "size": [
+          313,
+          187
+        ]
+      },
+      "sha256": "a835fc96e2fd459a2f2555d92e003e13873d4bc38e7d41d836a3fd8614d4091e"
+    },
+    "store_window_back:2": {
+      "file": "store_window_back/002.png",
+      "size": [
+        1252,
+        748
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/002.png",
+        "sha256": "fb8b6fd24f31d495c2a7f8d979f6708624a5f2c880529c10a1c1cef6448997d8",
+        "size": [
+          313,
+          187
+        ]
+      },
+      "sha256": "2bc73767bb807b4e2e2d4cf64e97353850b3b27d86afb9887aa7b673a2b49a2a"
+    },
+    "store_window_back:3": {
+      "file": "store_window_back/003.png",
+      "size": [
+        1252,
+        748
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/003.png",
+        "sha256": "080655b57d9813a3739d0f6491f3d50262c14e030744c69bd36db4071f4c8e70",
+        "size": [
+          313,
+          187
+        ]
+      },
+      "sha256": "ac36427c18c37335774fa065abceab80dbcf0e83f7010e455f77faed9c5ebe56"
+    },
+    "store_window_back:4": {
+      "file": "store_window_back/004.png",
+      "size": [
+        1252,
+        748
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/004.png",
+        "sha256": "886fac9f16b0e956bdd22635d23ff98f08f8120a0b7a371636ffc3c7b6032f70",
+        "size": [
+          313,
+          187
+        ]
+      },
+      "sha256": "b34ea575ae2e61f77583e21d8ea4fdec312df0ec64c3d39f544cdcc53eea2d8e"
+    },
+    "store_window_back:5": {
+      "file": "store_window_back/005.png",
+      "size": [
+        108,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/005.png",
+        "sha256": "b6ad57ce56c3075662fdc563f9d21d8c60404413e11387db07ee53fed6ffa79e",
+        "size": [
+          27,
+          13
+        ]
+      },
+      "sha256": "4c9bd2eec216946ce631555e949a8a753c880bca99a45c64bce491db3be896cb"
+    },
+    "store_window_back:6": {
+      "file": "store_window_back/006.png",
+      "size": [
+        108,
+        52
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/006.png",
+        "sha256": "e13159ba9e986268e48b7f44572b651fdfb919a3276b8fd31143df571a98a818",
+        "size": [
+          27,
+          13
+        ]
+      },
+      "sha256": "aca12e7ad892fa546ad84f63029ac948f6a55cd7a3d6c413e16f579997e2c08a"
+    },
+    "store_window_back:7": {
+      "file": "store_window_back/007.png",
+      "size": [
+        1100,
+        1052
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/store_window_back/007.png",
+        "sha256": "b9188952685ebb8166a50f44cf612ae124139efdfd544f4d25ebaf832677a191",
+        "size": [
+          275,
+          263
+        ]
+      },
+      "sha256": "166e6270b2a6660b99d8a49a35602fa23057c03a0de4c4887e44445f4d511d72"
+    },
+    "b_store_cap:0": {
+      "file": "b_store_cap/000.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cap/000.png",
+        "sha256": "b5ccbb804786fc0397837b383c58aed863c7068a9fe987259a538d1134972d00",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "53b2cce24491d44ef61b00d84659dd9af7fd8442427ad8117909a246cfb568b8"
+    },
+    "b_store_cap:1": {
+      "file": "b_store_cap/001.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cap/001.png",
+        "sha256": "cb9a29a175786c89b5d5890a31da5212bcd56758b50866f51cce151f24515108",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "8ec0919c151747cd2442eff6323a17bb06af16f46ba5685b4875aa2d00458898"
+    },
+    "b_store_cap:2": {
+      "file": "b_store_cap/002.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cap/002.png",
+        "sha256": "e44b7f304239378e2dc298948f902ec73bfe8d8fae64dd4d31eb7b0a372f3bb3",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "e8d67ffca197864ce619a1c0ab5e6372fd9308404b3f0cdfa65f15082ea44e18"
+    },
+    "b_store_cap:3": {
+      "file": "b_store_cap/003.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cap/003.png",
+        "sha256": "4bfb67d89a713ff5e9eb175a8ff3261b4fa437b6aa8bbad845425431076f259e",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "d91dfb8d591244dc8a9bcdc1420921065582b0c883076f26df916ac5d89ba7e6"
+    },
+    "b_store_cap:4": {
+      "file": "b_store_cap/004.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cap/004.png",
+        "sha256": "99bcc7c900ed3b3d4809b5b2c670b3c1617b2745d248a125a9f5a2e5197cae32",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "ee54f4d29707a2a4c434db24d7ecdb44ea49ee2d26fc0a55211c9e61415695cb"
+    },
+    "b_store_cloth:0": {
+      "file": "b_store_cloth/000.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cloth/000.png",
+        "sha256": "dc534484f30cffc7577afe28279473c643f17b94a5dc28e58412c3f2e74b5a91",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "8477d52c6d759dcb9f19a7a8d97650ea6d1fa8bfef9480531e22d1c43b280031"
+    },
+    "b_store_cloth:1": {
+      "file": "b_store_cloth/001.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cloth/001.png",
+        "sha256": "4b012bda1711570bc6c63bb56389437ea217bae2ebca538f6ab1f5e1ab61cb38",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "b4cef9e7079da47a9212b0dca0bf8e08335621802e1da2c6eb64227a8ddf3f2a"
+    },
+    "b_store_cloth:2": {
+      "file": "b_store_cloth/002.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cloth/002.png",
+        "sha256": "ad07c3d4083158e9c692e5f8fd6e421177f6ebd23b9380c7bbcba29329b3f5e8",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "a16c588c47d483b166c6885345bcfd863ab6717334e770311a9d3fb5d9599b5c"
+    },
+    "b_store_cloth:3": {
+      "file": "b_store_cloth/003.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cloth/003.png",
+        "sha256": "75130e0afc0d664957dc63b6ae97f550b934d3d5005e2cd5abc4d367ccee8fdd",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "3be3cc95f1e33ae9583373288dbc6a6af4543dcebd392c43144f437d140845e8"
+    },
+    "b_store_cloth:4": {
+      "file": "b_store_cloth/004.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cloth/004.png",
+        "sha256": "e6b0f198fbd51a3a1bb7287d979067fb83dca750d04975a9f8f5fac647de7d1a",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "7bb314b6b223e6af1681bc5abcf036b3d13b0fab4284ac42d2dd3b37d66d6800"
+    },
+    "b_store_glasse:0": {
+      "file": "b_store_glasse/000.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_glasse/000.png",
+        "sha256": "d7c6ef56071a6f3d5c5e66f0b9af4d19c1e02ed7d5fce7513fce843a5f63012f",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "a16060db67bc5ac68deee3c0d5be83c193cd4ccbceff9540a34f77dc7c9b504d"
+    },
+    "b_store_glasse:1": {
+      "file": "b_store_glasse/001.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_glasse/001.png",
+        "sha256": "b5b5bc2a32fd1f29a30f7cb5b2329b8e9a37d2d8e70a2b3ac85ceef6c5553362",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "88000e3616aec50324497f98921aaa62a02fdff02ce9c833861075b2f09544b3"
+    },
+    "b_store_glasse:2": {
+      "file": "b_store_glasse/002.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_glasse/002.png",
+        "sha256": "669e75bf001181b1e15e3e6a3be860df6188134ca3678fb248742ed7cd16218e",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "5221254247ba9bacb0886a5d1cc968887756f1ce72d9662a818d90657a0e52e5"
+    },
+    "b_store_glasse:3": {
+      "file": "b_store_glasse/003.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_glasse/003.png",
+        "sha256": "547de1cc9fc541ecc0adae6515a4fd7384e7a08f584efce0cc763e64c2a6d80f",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "e231a3fada7e6b24e89789d4aedfc8c37520f656a70d2c59fb5c811c88e95784"
+    },
+    "b_store_glasse:4": {
+      "file": "b_store_glasse/004.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_glasse/004.png",
+        "sha256": "03479480bed46487a6db148199188d071ed4385bbdec9c70bc579fd0de037385",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "f301513ed44567806ffbf008f5366dd973cb2a346fb51969ad04833569715919"
+    },
+    "b_store_flag:0": {
+      "file": "b_store_flag/000.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_flag/000.png",
+        "sha256": "2070ac79fa69294b1ccfb4848f1cfa198dda836218a30e7d2f46ef3a2b2fc8b7",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "f816ec40538ebcbcfbc6c736f2031192407f42a2e6bf073d4988604943820406"
+    },
+    "b_store_flag:1": {
+      "file": "b_store_flag/001.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_flag/001.png",
+        "sha256": "d9dab2d0ac52e9d891c554ecd1c1851e141c69d4c2dced57a12ca8c3f2e6d302",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "e2d873541958d32e515f7f3a26da70effb545e4a42a89dbd0b1da9ede6464ced"
+    },
+    "b_store_flag:2": {
+      "file": "b_store_flag/002.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_flag/002.png",
+        "sha256": "f687b7fc068957fbac1efb046d0f000f4bec2365a307e2432e7e8c2d628ec9cb",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "530b704122fdbac9aaeb691a6f2349457c0fe8ed9e7633a75c03c1843dd0c51e"
+    },
+    "b_store_flag:3": {
+      "file": "b_store_flag/003.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_flag/003.png",
+        "sha256": "2e8d985f70d53dccc9f36be1e29bc22b04f0b39b7fa4133f8a93b9378ed39190",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "63183a0bd7d573af15190b780fef59ad421c8326a76a9ceb3e7cd13af0266352"
+    },
+    "b_store_flag:4": {
+      "file": "b_store_flag/004.png",
+      "size": [
+        196,
+        128
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_flag/004.png",
+        "sha256": "fc67c45dabfac0cd46bea01aa0c8961004d932bcd635834c23b539075de79617",
+        "size": [
+          49,
+          32
+        ]
+      },
+      "sha256": "a07fb64d91e15bb4d5bc8ee78e595ffbe6b4af76035647e1594ddaf276dfb8b9"
+    },
+    "b_store_buy:0": {
+      "file": "b_store_buy/000.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buy/000.png",
+        "sha256": "4604f41767f19e54a41c8f93180450117b81b1953b8807d5fb37c0cdc17fc674",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "f2b87948eee2312da3eb307cff0787184d87858030cce51004b3746a8720b991"
+    },
+    "b_store_buy:1": {
+      "file": "b_store_buy/001.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buy/001.png",
+        "sha256": "81693a1d2d1e362783833532aeb8f4c1dd9ba1729f995eb1ad9081a71edd1505",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "764b3b1b48edfad1012e43c16f008960b6ef6aca6dd292c312ef53e5401f1ae9"
+    },
+    "b_store_buy:2": {
+      "file": "b_store_buy/002.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buy/002.png",
+        "sha256": "14eb872a302636d94bd4ec832dd9df9b8adf185c52a77022de99256079ed6feb",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "e285924a13dcb8567e28562aa494b94adc37423e9514039615dc98bba3395e27"
+    },
+    "b_store_buy:3": {
+      "file": "b_store_buy/003.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buy/003.png",
+        "sha256": "32b3790be3a93b4081cd1a8e5f890f75461134a240a5f0ae2258beff489a31b6",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "18583095c123c600ceabcf667a4673e11551f3517048ec2de1f1a596a3492b86"
+    },
+    "b_store_puton:0": {
+      "file": "b_store_puton/000.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_puton/000.png",
+        "sha256": "ec7fb3849ccb43899f08e8a3f4ad76cf46e62d765aa8698d5a18e03162ad72eb",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "00d6589b58b09445d3e87c1ad379db4ddeb4102f9adce4d0685ad737be1af2b4"
+    },
+    "b_store_puton:1": {
+      "file": "b_store_puton/001.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_puton/001.png",
+        "sha256": "1d0e0dfc3f93e8b8749eaadd85e03e844cf56b1dd3aa8434a8c74b5b98ce280c",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "2272041d90928c2a45ed42ac0751525594a04676d41b9c20ba30e50c5c86b731"
+    },
+    "b_store_puton:2": {
+      "file": "b_store_puton/002.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_puton/002.png",
+        "sha256": "2b5bf5c000c7c5c0dd8bef6200d0c91f045b7084cefd857fd01e6b08485635ac",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "16f184b9b4a5dfe67c26170f4956f48bfd3b086bc14fdb5ba038d060351fb280"
+    },
+    "b_store_puton:3": {
+      "file": "b_store_puton/003.png",
+      "size": [
+        324,
+        132
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_puton/003.png",
+        "sha256": "6d1e7af4d16605ae948084d2d8d48e2b2232a8c16aa30519d4b18fe5c1f71ab7",
+        "size": [
+          81,
+          33
+        ]
+      },
+      "sha256": "3ce340bffa476614daeba6e0ee3098d53f60c1d6d788f040a924749354e35136"
+    },
+    "b_store_exit:0": {
+      "file": "b_store_exit/000.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_exit/000.png",
+        "sha256": "db8dad450e3c0f9798f0ef0fb95eb679dd76ab686f52add39af51c3dd7fb97b5",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "d3a490655c5ec47b0dcce82a1a7fcce0242ff4e25116c0fec4520d71416bb086"
+    },
+    "b_store_exit:1": {
+      "file": "b_store_exit/001.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_exit/001.png",
+        "sha256": "261db962b65b398a670a46e82f8e5a6616bbb81b71b5e7d05e2e1547c6daff7a",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "f18a6aa62857808f2bff5f5a5e11829a95f7c639daa586c5cb89038133a0e92e"
+    },
+    "b_store_exit:2": {
+      "file": "b_store_exit/002.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_exit/002.png",
+        "sha256": "5033d94b130d34c73ac25188784dac9c9aa3ef7cc0648a9ce451b33a3e437190",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "d9fce5cbe78bd13be38e422e21df7693bb542b889814b0f20b30ea2c01fab823"
+    },
+    "b_store_exit:3": {
+      "file": "b_store_exit/003.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_exit/003.png",
+        "sha256": "67aa28e64dd0e5ff2506b61c9cc682f24ad09a83bd05559243d749cfdcb55ba7",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "7d124094cc0ba913b52d88ff72ee5df86b0e6785b789baf4a9fe8acc73643f1e"
+    },
+    "b_store_buddygame:0": {
+      "file": "b_store_buddygame/000.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buddygame/000.png",
+        "sha256": "039d40f6f6746243697ca85453de34801ca6b448335f1732e1603d56f5582a0e",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "1fbb5ab08c6536635eb25ce80a5777171d9bf371d6e592eeb7273a6f54c9fdfa"
+    },
+    "b_store_buddygame:1": {
+      "file": "b_store_buddygame/001.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buddygame/001.png",
+        "sha256": "bd27bb4474115afbeb350c74c7f17814b671a0ed6cef8d055f460230da8ca2e4",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "a4630cb2d340074826b900f5022a58371496a0b6792088cb75912a9606f49561"
+    },
+    "b_store_buddygame:2": {
+      "file": "b_store_buddygame/002.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buddygame/002.png",
+        "sha256": "e5231797196afc15b255cff006f49d302f09e88b26c4456e8c883d8b578b9dc3",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "ab3c1ec94c765719794c69810c89e1c8d7adc2d8880ea2df9fa351cb76b1249f"
+    },
+    "b_store_buddygame:3": {
+      "file": "b_store_buddygame/003.png",
+      "size": [
+        428,
+        180
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_buddygame/003.png",
+        "sha256": "f748714fd602d2532443c59742f3dee9d9a83253d0516a3601b98753e956d4a9",
+        "size": [
+          107,
+          45
+        ]
+      },
+      "sha256": "d409baa95d03012f6d8268c8d010e49e09c67d67ff4a30e69ac799a37333ad8a"
+    },
+    "b_store_up:0": {
+      "file": "b_store_up/000.png",
+      "size": [
+        64,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_up/000.png",
+        "sha256": "9cef959c7ad50ab0eb1deede46eac625fcd931f365fa6755493ff028be869289",
+        "size": [
+          16,
+          48
+        ]
+      },
+      "sha256": "e437a521274a9db748661d7624f7bdbf4dc9765d47a9d6f04c31491f7ffd3ba0"
+    },
+    "b_store_up:1": {
+      "file": "b_store_up/001.png",
+      "size": [
+        64,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_up/001.png",
+        "sha256": "c32d25e308d93cba74fa3bf819df99515e091915c06645abfde2a284ca9328e2",
+        "size": [
+          16,
+          48
+        ]
+      },
+      "sha256": "87a1eb668219fb7ededbadb114055e3101695aeb8b1f8f15ffc93fcee5acf454"
+    },
+    "b_store_up:2": {
+      "file": "b_store_up/002.png",
+      "size": [
+        68,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_up/002.png",
+        "sha256": "bdccc41fbd5029378c24722b505a3506c48329ff7bb88fae8e4c75d6865700e4",
+        "size": [
+          17,
+          48
+        ]
+      },
+      "sha256": "375ac358af1a90034811b54de06b53ab0d8b3690dd5cbbaf7c005efb54ef8ab2"
+    },
+    "b_store_up:3": {
+      "file": "b_store_up/003.png",
+      "size": [
+        64,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_up/003.png",
+        "sha256": "cdba8f826b6a8acc8d414ba028b7d9068d91f357455899a3ab5dd28d2a6b4aa5",
+        "size": [
+          16,
+          48
+        ]
+      },
+      "sha256": "fc03002743ca912d5993d5471db388d5de39a89dfe4e201514a4d705b5dcc60f"
+    },
+    "b_store_down:0": {
+      "file": "b_store_down/000.png",
+      "size": [
+        64,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_down/000.png",
+        "sha256": "95703ca40dce9ee22a41b0ca9361718341f9225202549626ceba992191781c18",
+        "size": [
+          16,
+          48
+        ]
+      },
+      "sha256": "14250bc79538ba10d5fbe493c3d3b528e75c2ee57705492198f9900d67473e31"
+    },
+    "b_store_down:1": {
+      "file": "b_store_down/001.png",
+      "size": [
+        64,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_down/001.png",
+        "sha256": "d1608680547f447bcb9f2d1c79cfc4f4850e5ab3d6cb26fe8d011ffbb045b0cc",
+        "size": [
+          16,
+          48
+        ]
+      },
+      "sha256": "f9359ad06edc1db5cb31327608b3ba0242922896a41dfcb23db43c0ae0ba2c72"
+    },
+    "b_store_down:2": {
+      "file": "b_store_down/002.png",
+      "size": [
+        68,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_down/002.png",
+        "sha256": "2c161c12b863e3a90d30bac906ffa3aae2d77c8f706ce25f1cc155f6694bff7d",
+        "size": [
+          17,
+          48
+        ]
+      },
+      "sha256": "9cf28ac6e94e140e8478f7e27274fbdf38cf9c75954bea7cc01e469beafec4a7"
+    },
+    "b_store_down:3": {
+      "file": "b_store_down/003.png",
+      "size": [
+        64,
+        192
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_down/003.png",
+        "sha256": "6b26d9ce505858bcf82665f5fbe71643b129f1ae7379438524fcfcbe5d2cc94f",
+        "size": [
+          16,
+          48
+        ]
+      },
+      "sha256": "dcdf468a1d0419e56971d3c2b1294111a8c1f8b8309b41b6754287e182cd7e2b"
+    },
+    "b_store_cashcharge:0": {
+      "file": "b_store_cashcharge/000.png",
+      "size": [
+        220,
+        184
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cashcharge/000.png",
+        "sha256": "6b40f97241a31668cc46bafef18aad61e2c0f57e3ce4b5a209242144636b616b",
+        "size": [
+          55,
+          46
+        ]
+      },
+      "sha256": "2989d35d223a8a2240cbf1cb6eb4979c4ee4447893e9a8370485a13583e6315b"
+    },
+    "b_store_cashcharge:1": {
+      "file": "b_store_cashcharge/001.png",
+      "size": [
+        220,
+        184
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cashcharge/001.png",
+        "sha256": "adb84ae9ee7d14f4a66421903227642a6c472b7b941ca87e6748df90cef77e7b",
+        "size": [
+          55,
+          46
+        ]
+      },
+      "sha256": "b5c2803a65e9ee66ee1fdcc95a65564002e710434131b3f450cad318c3f205a9"
+    },
+    "b_store_cashcharge:2": {
+      "file": "b_store_cashcharge/002.png",
+      "size": [
+        224,
+        188
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cashcharge/002.png",
+        "sha256": "40df311c8e6b63bc2017e7310d0f80e33029a0b2648202dc7e9c2db5e5ef65cf",
+        "size": [
+          56,
+          47
+        ]
+      },
+      "sha256": "e1e7035348283d1f402451ffa94a41a85e1968bf37054630d9e8e1f1d6b95cbb"
+    },
+    "b_store_cashcharge:3": {
+      "file": "b_store_cashcharge/003.png",
+      "size": [
+        220,
+        184
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_store_cashcharge/003.png",
+        "sha256": "5f6b373533a7cb8147b5d5d0c6ff04610ce0e2dafe963f432358588a4b08db47",
+        "size": [
+          55,
+          46
+        ]
+      },
+      "sha256": "5d74596fc5788dc6b4c75fb12cd7e93bb0cc34a5037c092a3bd2ad85ba73826f"
+    },
+    "b_myavatar_sell:0": {
+      "file": "b_myavatar_sell/000.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_sell/000.png",
+        "sha256": "ce59348119d763e9281aeff65c2f0ec5b47ea7e22fc0bec104caebee19ec5289",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "105dd6deaa0828e431727e62fe16a7703c951708eef3994847e95c2e70794099"
+    },
+    "b_myavatar_sell:1": {
+      "file": "b_myavatar_sell/001.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_sell/001.png",
+        "sha256": "a4874cb6e4ee0412393689c36ae842e242fc7edab4e5b024eb0e1b2800f992e3",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "b510cd7f4c5edb9e0f7135ef7f7577bc652f3e26284fcaea3e598e51ce815cad"
+    },
+    "b_myavatar_sell:2": {
+      "file": "b_myavatar_sell/002.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_sell/002.png",
+        "sha256": "fb9981e7e3ce762e502c172a486c4ef5a27765397b691f8d01df2564f27f7026",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "c568aab5cd64d7f8078b1a58b40adff7d0605f44e1a65345a4d35640410a2102"
+    },
+    "b_myavatar_sell:3": {
+      "file": "b_myavatar_sell/003.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_sell/003.png",
+        "sha256": "b342513b2c7756dcb42ae377a5c648e282e18e2f97bc63068fa4bd32d64e34c1",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "39d02fa6c71d6a76a52edb838187dbd16f448b724e5c1901d13628bcaa09a53f"
+    },
+    "b_myavatar_dry:0": {
+      "file": "b_myavatar_dry/000.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_dry/000.png",
+        "sha256": "b7136fd935ffc3a90bda72cdde187a165f102b1cb21e6b66b5b675c51d2fca78",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "095bef9a09f7d53c1bb152ef5db6261a367fbb32da63053d897f7f5874af6db9"
+    },
+    "b_myavatar_dry:1": {
+      "file": "b_myavatar_dry/001.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_dry/001.png",
+        "sha256": "f75a0cea94b2c058680a458a88d2d88d0d40f3fa450072e92bee0af8d931117d",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "5c9b26715f7f3bf0fde7bb312055d7a32be7aea4df95c75dacd478b9f856d805"
+    },
+    "b_myavatar_dry:2": {
+      "file": "b_myavatar_dry/002.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_dry/002.png",
+        "sha256": "873b2699640fe9d3926abba7f8d230156c0bd8f694560cc252e46be49dce7dd1",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "475deb17540dc1f7533828b3bd899e26b839c85ccb105a6e8d8d0764519eec7d"
+    },
+    "b_myavatar_dry:3": {
+      "file": "b_myavatar_dry/003.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_dry/003.png",
+        "sha256": "b520218f33988c34d63698560a9b3684cae11ca270dec77755cfbe54a5063567",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "74be65496ea0451d13c512d5d979522e740f2010c59dfd138aa4afe17bbb12d0"
+    },
+    "b_myavatar_gift:0": {
+      "file": "b_myavatar_gift/000.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_gift/000.png",
+        "sha256": "7776cee03c7ab506e05e6d2aee21ffe9e8d12077e36464ee27ffc735c76b4851",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "4a33205bd26936633dde2af244d190906dd167f0d81376be638673269ce0acdf"
+    },
+    "b_myavatar_gift:1": {
+      "file": "b_myavatar_gift/001.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_gift/001.png",
+        "sha256": "18e4a64c47a81d8d876b26784e9bfe2c65a22102ea9676b783462283c0029048",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "bf693a85e78d3d3aada566757c6db24b8693b25225bfdf2c1c7c6152569a9943"
+    },
+    "b_myavatar_gift:2": {
+      "file": "b_myavatar_gift/002.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_gift/002.png",
+        "sha256": "edb751acc8cc404f2be8e20aa7e58b6b9b1ca98401d4f872206f3b6c92e2ddcb",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "5a177c023abc30194c2dd418026d15ce2b322b6ca3ce3a5a1cd521e3dca792fd"
+    },
+    "b_myavatar_gift:3": {
+      "file": "b_myavatar_gift/003.png",
+      "size": [
+        288,
+        116
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_myavatar_gift/003.png",
+        "sha256": "812a2fff3f6db78c5fcdab32c7e9e4569454336c40252a6aaa168d3eaaeee15f",
+        "size": [
+          72,
+          29
+        ]
+      },
+      "sha256": "c2b69d730f0d9d11581f65e4946e2d084e9567dfafaae1e717c3212bb8be362a"
+    },
+    "b_storewindow_gold:0": {
+      "file": "b_storewindow_gold/000.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_gold/000.png",
+        "sha256": "f3c400c5311225e6828e63b501784d835249407c4e58e76b7956c948338d9aee",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "c86821e32358241087dc4d02176d17dd6fc3caccea00f4082dc032c2b9c85113"
+    },
+    "b_storewindow_gold:1": {
+      "file": "b_storewindow_gold/001.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_gold/001.png",
+        "sha256": "83caa64079849a8ca15257ca3e40ce693c41670adca88e9888ac1b78e6246415",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "5d9ca8363ae48edb34d2e6969d046f904eec189fd89fd81b887bf4e68e43188c"
+    },
+    "b_storewindow_gold:2": {
+      "file": "b_storewindow_gold/002.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_gold/002.png",
+        "sha256": "f00a674b68cee20bbfbfffc226f6db0f436da9d44909d60661867382d7e455c4",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "55da12ab909c6c9704752b4c6bad5ffbaa2ca64cc66d3435f27cbca9c6fc88c3"
+    },
+    "b_storewindow_gold:3": {
+      "file": "b_storewindow_gold/003.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_gold/003.png",
+        "sha256": "ccda81f344c01f3859b3efd92f370c73a8a4ecd4d506a8cc1248b9815af419d1",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "4848e6b056153b0355d9ae172f976e9a393d222b0405ce2aa7a04032bf283dd9"
+    },
+    "b_storewindow_cash:0": {
+      "file": "b_storewindow_cash/000.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cash/000.png",
+        "sha256": "0f7973b3e2437b765c28a25147d0abb1c3fa1842f22373619597807a56b8c003",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "96b1230db28ea997b029242e50da84f77edc483ba440b61c6e8e4128a7742309"
+    },
+    "b_storewindow_cash:1": {
+      "file": "b_storewindow_cash/001.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cash/001.png",
+        "sha256": "89b177c8f38e64473306c13210bd1c14fb40a3cf5704e65e00b620dbd96fe1ca",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "85ecf199679faf7c549ab25f717ec97b62fe28b7194e1949ffe97125d6ca4b18"
+    },
+    "b_storewindow_cash:2": {
+      "file": "b_storewindow_cash/002.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cash/002.png",
+        "sha256": "886add15a6ed520b18d2f91708556fee0250d78f29f4d7c2a593647175561e3d",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "e46afa2522dd95cc15a1a8ba6dc223b5e129f136094189abd175e8c673d47cb6"
+    },
+    "b_storewindow_cash:3": {
+      "file": "b_storewindow_cash/003.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cash/003.png",
+        "sha256": "1d28c0e5063453b25eb867f3cf9538ec5ea51b30a6b9b0ebfec87e9988d99ea1",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "f14982c89c9242d74394d3304018bfa574004c1ddda2f0537ee757480b6327bb"
+    },
+    "b_storewindow_cancel:0": {
+      "file": "b_storewindow_cancel/000.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cancel/000.png",
+        "sha256": "6341bc4af1a2016d05605e28c86cc54b4a373f1255bb3d4bfed0f5d4508b4826",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "388afb94f163c99043811d6b176fb24410686cfc08b1cdc0ee65c9176263fd10"
+    },
+    "b_storewindow_cancel:1": {
+      "file": "b_storewindow_cancel/001.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cancel/001.png",
+        "sha256": "314b51953ea3d60bc1277cb0a6b3146bc8d9475c70d1ea1d50a819eb6745f320",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "b22f7696a8fddbef48169dc5d8f6bed44a67795bdade02a67c396cf26ecf2d26"
+    },
+    "b_storewindow_cancel:2": {
+      "file": "b_storewindow_cancel/002.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cancel/002.png",
+        "sha256": "1554495638c9888c49857ac70d5ac22eb3673a88f224e34c64fa47fab75fd533",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "fad2e6452b461404c20f477b130e572d207102a9d9215a882fb29a3c0e67443a"
+    },
+    "b_storewindow_cancel:3": {
+      "file": "b_storewindow_cancel/003.png",
+      "size": [
+        340,
+        144
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_storewindow_cancel/003.png",
+        "sha256": "e726389d582e9874e15533a40231af2d0b89a7146f16fb6f1d40660372f2796f",
+        "size": [
+          85,
+          36
+        ]
+      },
+      "sha256": "83ef3a088435506fc74d86c073d26024c8aa33bede846e672161331c9cb81067"
+    },
+    "b_scroll_up:0": {
+      "file": "b_scroll_up/000.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_up/000.png",
+        "sha256": "59b08f1ec604be9abc97eecd91aa8338d0844226df64be1cb9e321bcdc6468d5",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "2e639345d41a7b97c45c3cd7c2651c7d226c4259a5f68cae1bffa3f906e496af"
+    },
+    "b_scroll_up:1": {
+      "file": "b_scroll_up/001.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_up/001.png",
+        "sha256": "4cd1e3d89e72444750895e318968e675b3050ef3b89c7e0e65f394d33b8dbe56",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "f09093c3b10e03d5c653bf6beef987a37041b28e3cd9c7abf8c3b7d4d64ffa78"
+    },
+    "b_scroll_up:2": {
+      "file": "b_scroll_up/002.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_up/002.png",
+        "sha256": "4cd1e3d89e72444750895e318968e675b3050ef3b89c7e0e65f394d33b8dbe56",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "f09093c3b10e03d5c653bf6beef987a37041b28e3cd9c7abf8c3b7d4d64ffa78"
+    },
+    "b_scroll_up:3": {
+      "file": "b_scroll_up/003.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_up/003.png",
+        "sha256": "895c5f5c99f86e306691161bd21727570591b3f318429b346ceab90b213aa001",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "eb99d8d6c1317e188ffd535dbf5826ace603f57d9ca3c9ddb656b22128970876"
+    },
+    "b_scroll_down:0": {
+      "file": "b_scroll_down/000.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_down/000.png",
+        "sha256": "2fd4e436011c80fa82bc18ba7ee86a4a2d4b71145fdc4171d7194c8088c45086",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "5d84af95bf2a170b79db0f4f6ba68e2e418d9246994b09097a41cf1388362091"
+    },
+    "b_scroll_down:1": {
+      "file": "b_scroll_down/001.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_down/001.png",
+        "sha256": "f68c6a3e279fc47be5e3f33683bd1383b36f89b91ef5795ae18a22a8e1d7c438",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "7c95bec29cd59d05b5de7cf973ba1653a16d0f4f1ff417c3b2c4076134cba053"
+    },
+    "b_scroll_down:2": {
+      "file": "b_scroll_down/002.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_down/002.png",
+        "sha256": "f68c6a3e279fc47be5e3f33683bd1383b36f89b91ef5795ae18a22a8e1d7c438",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "7c95bec29cd59d05b5de7cf973ba1653a16d0f4f1ff417c3b2c4076134cba053"
+    },
+    "b_scroll_down:3": {
+      "file": "b_scroll_down/003.png",
+      "size": [
+        72,
+        72
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/b_scroll_down/003.png",
+        "sha256": "9ce1d842b975d1bb4aa2c5f98e9ff516ca7d114149995ce8ef915a8e6e438e0c",
+        "size": [
+          18,
+          18
+        ]
+      },
+      "sha256": "db95fc40eb89bb4576d8daea281951249b0905e169e8be62fce159842f7e645d"
+    },
+    "numfont:0": {
+      "file": "numfont/000.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/000.png",
+        "sha256": "99ac1b06217e50c668e16e1cda7bb44210b6179ec87629897175134142962bdf",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "ab00833422b2f5cb6add74c6b0fdb5733015be250b90624364272a3b5bc75446"
+    },
+    "numfont:1": {
+      "file": "numfont/001.png",
+      "size": [
+        8,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/001.png",
+        "sha256": "52260d7bb88f20fd1377bddb96e22a586800516191cf5434cd3d8f809bbc20eb",
+        "size": [
+          2,
+          9
+        ]
+      },
+      "sha256": "66d597cedf530538a6508390c4e9c32d5018862dd6fd0f8096cd427b40d35963"
+    },
+    "numfont:2": {
+      "file": "numfont/002.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/002.png",
+        "sha256": "87bf7423875baf3f7e4909106fbe24467c218891107c6f457f75c2def53d45de",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "fb23acbb526fe7a3ec37b36ab2a15ed065ae518537e54cb71154bacf026f8874"
+    },
+    "numfont:3": {
+      "file": "numfont/003.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/003.png",
+        "sha256": "f91cbad7308021ea9c84f77703316d5d2b8d759e5102ff07487cc4fd509e3579",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "d664f65e8861f8c2dfd2129d246cd52da4eea7bc4f26c2704b7a211504313105"
+    },
+    "numfont:4": {
+      "file": "numfont/004.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/004.png",
+        "sha256": "bcf3454fd94b1e4b87065cef96832d0b4902e61092d286e20894b246431fc77b",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "78f4b3ce0616a94b1b39211a409788d594dad83b3185a2bd7503a398699f3e74"
+    },
+    "numfont:5": {
+      "file": "numfont/005.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/005.png",
+        "sha256": "5f4f41d6492a2e9a6e500cb0affdc7ab6eb37ebcca1a69509a835be0101f00e1",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "0a7f549d9530f721735c99f6ac929cd62d36700820349415563d3176f8a7950f"
+    },
+    "numfont:6": {
+      "file": "numfont/006.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/006.png",
+        "sha256": "97218c1272f2d0f82e1b573d591b2a3e242755237477d2fea153c8dfaf0eb840",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "cae28687c5886d500cebf74bbd8b72141e9525ac2871593ee97a6dc9cf315da6"
+    },
+    "numfont:7": {
+      "file": "numfont/007.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/007.png",
+        "sha256": "706c78ea3ae441d1709bb86e8519051eadb89d49ef56b3d9e4524cd82ea72a33",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "a1f3af2f9514c1080dc9fc6634e8d6397d40b328bfe849ba1c5c70e27c70beb2"
+    },
+    "numfont:8": {
+      "file": "numfont/008.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/008.png",
+        "sha256": "402e21c56f20f99bd71bbc772cd4d9ed5a231b7523160bf95458925e9dab94ac",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "7fa31229e051d9f17079022694fc3705271fa65c0fd2217c668dc9d82cd5d236"
+    },
+    "numfont:9": {
+      "file": "numfont/009.png",
+      "size": [
+        28,
+        36
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/009.png",
+        "sha256": "78549e31b4bf9aba4e268181d45022f5d93dc0ce0249a8c33fa3668f1c6c2a60",
+        "size": [
+          7,
+          9
+        ]
+      },
+      "sha256": "8f0c0fb08e5e19e956ad4c6f19199c1363b8ead676b46a715958c9132c477713"
+    },
+    "numfont:40": {
+      "file": "numfont/040.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/040.png",
+        "sha256": "a2b44584ab08670077aa304231504f13ce8277f8e31c4e19e9fed6135b6d78ec",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "c006755a9d869a418e8dcc94c80b579f78ec6ce0a384d53fb0d77e8b718ea4b7"
+    },
+    "numfont:41": {
+      "file": "numfont/041.png",
+      "size": [
+        12,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/041.png",
+        "sha256": "5a2ab6563787084c6da4ce0434589d66d4079c80bdcff019af59679beddb7aca",
+        "size": [
+          3,
+          11
+        ]
+      },
+      "sha256": "7c7b83d3b25c30a5760a003698bb3911ab3d8cb77e965562b6b7946e9a715c4d"
+    },
+    "numfont:42": {
+      "file": "numfont/042.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/042.png",
+        "sha256": "e4476b081d5511e528d1ee3f45c068166647b88e6dfc500867c12954fb69c6d4",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "7bb1b2f4131636c9b0c80036cf825ada2b23576aa52ebbeed9609d0688833f62"
+    },
+    "numfont:43": {
+      "file": "numfont/043.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/043.png",
+        "sha256": "b7d48c57fa73e9da396ab7481ef6411cfff165597193dda4c7c56eebc0c06bfb",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "c7ae7048874e411555e40cc32e872a5b3bb82a1cdfeccabf509bc93ad7c7b946"
+    },
+    "numfont:44": {
+      "file": "numfont/044.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/044.png",
+        "sha256": "fec1ae2db3851dc323f0489ccd8ca10d451ca4aaf408b209e079a08632cc8f03",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "3ef6035c83695d8783c022716264ec438c27edf2ad0c7801ca5d7051432e390e"
+    },
+    "numfont:45": {
+      "file": "numfont/045.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/045.png",
+        "sha256": "850251daf72b385ac62d44bdc6372690b21c1b8a1426ffa7695773263f058ee9",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "8290a86bb656598ec897bec1b09685c7e437bb7fba43707b119c0a325346808b"
+    },
+    "numfont:46": {
+      "file": "numfont/046.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/046.png",
+        "sha256": "cf900645b676054ef68c16eb1d411a1e2838986cd89be9cf7de7f8711ed27b2a",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "463cc19f29d72e62205ea65adf87e7bbb2315ba912ab90bc911c50f063b9124a"
+    },
+    "numfont:47": {
+      "file": "numfont/047.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/047.png",
+        "sha256": "459cdfd0cfa43943806c6c502d3ef64ec6c05f572331e9299cdc910b7c32fba6",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "0e863e7039984ba50569cd25972a1657f864e411beab4efc2e46bdfe1d786f9e"
+    },
+    "numfont:48": {
+      "file": "numfont/048.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/048.png",
+        "sha256": "970e5e567e3aa249644e500aef31d56df46dd4602bfd9a904c7a43bee8b049e6",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "6f1f1a9a655fbab8be00a57f848cef0283a320523bc61e9c5ede72b08cae2240"
+    },
+    "numfont:49": {
+      "file": "numfont/049.png",
+      "size": [
+        24,
+        44
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/049.png",
+        "sha256": "03cb8e54b5b2dcb58d316fc0a07d687d7e782ce4cd996c3cfccd15fa1c3e4979",
+        "size": [
+          6,
+          11
+        ]
+      },
+      "sha256": "b6b36c7354a8002ef6ebd52e254fecae17743ab47f1f177fe71dedfd8238ea0a"
+    },
+    "numfont:50": {
+      "file": "numfont/050.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/050.png",
+        "sha256": "bedd0acd50b024554f21a740640bcafb04637c9e9f9e800abf0cff9910e67e12",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "8280c0c41727c7b3a2b5afce0d4e4938d970525973561fb7072264ed84d7c6a0"
+    },
+    "numfont:51": {
+      "file": "numfont/051.png",
+      "size": [
+        20,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/051.png",
+        "sha256": "e9ff55c49691ac029f95f1425d033559a0f26bb43e4949a8c42fde13b666b551",
+        "size": [
+          5,
+          14
+        ]
+      },
+      "sha256": "4d02f53ed32e35f3a6591a1f24a7d70a48e2fd3838310a4efb264b376ac02c9f"
+    },
+    "numfont:52": {
+      "file": "numfont/052.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/052.png",
+        "sha256": "d7a82aa7ad14a50cc33492e2ae74a2cab4f5478458feff4c95c878d6300f2839",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "bd863ba81ff92eb67a94d95cb60771b271eed0f0baf52bd90ff0c678cecb2663"
+    },
+    "numfont:53": {
+      "file": "numfont/053.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/053.png",
+        "sha256": "64e249e23cd70861900052e4334d0fe9a2403e3edf56b38bfd547bd2dd22f82a",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "f04ae12951dfb5c6d20243e082f68452565ab3e6289922f2e65d5cc2db55bafb"
+    },
+    "numfont:54": {
+      "file": "numfont/054.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/054.png",
+        "sha256": "aa98650d64e1a1d64ecf9a57c1a47a9be49bdd935e8a3f208d6ab94ceeffa9cb",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "899ab4e52ed191ba4fca74a2f44e346285017c86de86b7d6238e1f271de046c2"
+    },
+    "numfont:55": {
+      "file": "numfont/055.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/055.png",
+        "sha256": "1caba0cd21ada3459635e131e51da941f3bda548976d526ccbf382ed91463bbc",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "cf7e6900b5d9d9bbac367e812baa8d5d5e1d7f25799b5a232e48aa103418a84e"
+    },
+    "numfont:56": {
+      "file": "numfont/056.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/056.png",
+        "sha256": "6bc42b3f6a53d3baa2183533e8222e4e151b44ec1f0480dc22534326b88c3780",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "a48b682451ad302eff106d8b08b9e250263d0b9146b1e6cc805ac5b72d42f370"
+    },
+    "numfont:57": {
+      "file": "numfont/057.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/057.png",
+        "sha256": "65fc347e64a1d834c40f0dbd14c7cff5b2ecbf53687f66014e025b5e82961bb6",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "4cd72d12e0bad817daa52f8122f919c18857249740b0b701885c9e998b22d533"
+    },
+    "numfont:58": {
+      "file": "numfont/058.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/058.png",
+        "sha256": "e17ecc8660d52a318d8cccf5370b7e24d80e59a908b3a1107655e3ce573351b2",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "d65f57719f10fa04e17c38421c109b7bbd6763d97bdf91d02b15291ec0127a2e"
+    },
+    "numfont:59": {
+      "file": "numfont/059.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/059.png",
+        "sha256": "bcf580ca6a8763a2471153bfc8e8221befd1fa96d971b6778804e5cc3d4315a9",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "be3c43f1cf1f7d8feb6f204119c04e7ea120dd6ef4ce6c36e60f3c0f3fc2c3ac"
+    },
+    "numfont:60": {
+      "file": "numfont/060.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/060.png",
+        "sha256": "99be5136b60672130364a71252c413927b44d7d63945eadd52e212e19f76d1cf",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "023ed54d9bcca9d54f6a1c2e3f92d14ddbfcd53b645680ed6ef8f042289cd222"
+    },
+    "numfont:61": {
+      "file": "numfont/061.png",
+      "size": [
+        20,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/061.png",
+        "sha256": "ddefbbac9ed724767386b3e0c6237d1f42e7b7148d955177408e2ab212f65c81",
+        "size": [
+          5,
+          14
+        ]
+      },
+      "sha256": "a0b6fe9c56aa3eb69316d179f2cd7ecbe1a7c2269201c073d383965e3b275455"
+    },
+    "numfont:62": {
+      "file": "numfont/062.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/062.png",
+        "sha256": "a61223c1b965b66bd72e4388c9b43f6f719838790629ca82412b9a4362698e0e",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "add39c0e940f899ddeadf5f96b0da40e7ff2b8267abc828b7696e52ac1732ba0"
+    },
+    "numfont:63": {
+      "file": "numfont/063.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/063.png",
+        "sha256": "a3d6e0385278d478b1015be3e18887e48972efcaf5594a98aff0773e0535a4f2",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "3a501a1469d3715d3a815dd2f7dddecdec8b15ed7ef498df464fc9ede5593a08"
+    },
+    "numfont:64": {
+      "file": "numfont/064.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/064.png",
+        "sha256": "4b0270635982f7e2c14c5cc0775484795d8bd40889d8e99ccc726e7af5392e36",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "09e12fab340d1fa58d23191f0bd98ae99e19ae9d1f6d844ad575fc81859f1a67"
+    },
+    "numfont:65": {
+      "file": "numfont/065.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/065.png",
+        "sha256": "5a504397433c7471da7bda6acea6ef17fb502203c0ec22901a0ab1ae732eb375",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "9bd8a3ae24593ee78b3881b044593693c41155027950da3106579daf6803abad"
+    },
+    "numfont:66": {
+      "file": "numfont/066.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/066.png",
+        "sha256": "8287b2a5b05f3ca3835d7dba78923f270177dcf9c0ccad734c967dda01c1f469",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "a9ac81c05406f7ae42dc44113cbf3c2d68299d57a0360baea9b2cba454aa67d9"
+    },
+    "numfont:67": {
+      "file": "numfont/067.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/067.png",
+        "sha256": "2e151116e61fe04b716c85781078f11f18b63c6a6958f8da16c0c5a10fb40b58",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "dd0442f639cd96120730a9591562ece327133eb8f7ad6c46ac525aa579725ba7"
+    },
+    "numfont:68": {
+      "file": "numfont/068.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/068.png",
+        "sha256": "fdfc4ae38513fe048d0c8e620590c105aa72ad731821eed66b93ff837225fd4b",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "baaea8e554b8c0bd318249612e0bcb963a8345fc8c17abf667ada922ad14443e"
+    },
+    "numfont:69": {
+      "file": "numfont/069.png",
+      "size": [
+        44,
+        56
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/069.png",
+        "sha256": "4195e846f33d71a86eb35a9ac662efcca6eb000d38df5ed468f10232bdd1725c",
+        "size": [
+          11,
+          14
+        ]
+      },
+      "sha256": "809757aaa77226241dabcdd75cbc23f66ae167c06078a5b7b95f4dcaa1d61368"
+    },
+    "numfont:279": {
+      "file": "numfont/279.png",
+      "size": [
+        16,
+        24
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/279.png",
+        "sha256": "9bd8fa0daecf40a424992b7a4949c9803376a4b4b6f90e8197eae08fb7cb6f6e",
+        "size": [
+          4,
+          6
+        ]
+      },
+      "sha256": "518d74904a69ad964234e8feaa7b2be8d5569bfba2e2239cec56e0e03d465553"
+    },
+    "numfont:280": {
+      "file": "numfont/280.png",
+      "size": [
+        16,
+        24
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/numfont/280.png",
+        "sha256": "64bdfa33a057c717f33a6de5ab310689180e45520ee14f8cdc48cbea986fde58",
+        "size": [
+          4,
+          6
+        ]
+      },
+      "sha256": "45a02579eafa9c7198ea5f9dfd2205805890b9b627dd5af1756f5fded6c7e86a"
+    },
+    "font:0": {
+      "file": "font/ascii.png",
+      "size": [
+        512,
+        384
+      ],
+      "source": {
+        "file": "res://assets/xfs/shop/font/ascii.png",
+        "sha256": "381ca52250e9acd49c5d900da894089803c1da1ea46bde155a52b2a03fd7b4c3",
+        "size": [
+          128,
+          96
+        ]
+      },
+      "sha256": "b5665a41fbf58e43021b3163198d5f4e1e9b209a687d2810ad790b4c1b14f36b"
+    }
+  }
+}

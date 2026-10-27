@@ -24,19 +24,14 @@ func run() -> void:
 	scene.show_shop()
 	await process_frame
 	var shop = scene.shop
-	var skin = shop.cards.get_child(0).get_theme_stylebox("normal")
-	check(not skin is StyleBoxTexture or skin.texture_margin_top<=22,"HD card border is not enlarged by source texture density")
-	var expected := [13,17,15,23,9,19,21,11] # AttributeMenu.AddAttributePoints C#.
+	# Same "+" store_icon the client draws for each status (ADR-130).
+	var expected := [13,17,15,23,9,19,21,11]
 	for i in range(8):
 		var graphic = shop.attributes_panel.get_node_or_null("AttributeBox/AttributeIcon%d" % i)
-		check(graphic != null,"Original attribute icon visible in edit panel %d" % i)
-		if graphic != null:
-			var source: Rect2 = graphic.texture.region
-			var native_scale: float = graphic.texture.atlas.get_width()/156.0
-			check(source.position/native_scale == Vector2(expected[i]%6,int(expected[i]/6))*Vector2(26,17),"Attribute icon identity matches C# %d" % i)
+		check(graphic != null and graphic.texture == shop.art.texture("store_icon:%d" % expected[i]),"Attribute icon %d is the client status glyph" % i)
 	check(shop.category_buttons.size()==4,"Four XFS category controls")
 	for node in [shop.try_button,shop.buy_button,shop.left_button,shop.right_button]:
-		check(node.get_theme_stylebox("normal")!=node.get_theme_stylebox("hover") and node.get_theme_stylebox("pressed")!=node.get_theme_stylebox("disabled"),"XFS buttons have distinct normal hover pressed and disabled states")
+		check(node.texture_normal!=node.texture_hover and node.texture_pressed!=node.texture_disabled,"Client buttons have distinct ready mouse push and disable frames")
 	# A middle-page arrow stays enabled after release, allowing the source's queued
 	# Clicked→Normal sequence to be observed through real viewport input.
 	var original_entries: Dictionary = shop.model.catalog.entries.duplicate(true)
@@ -73,7 +68,8 @@ func run() -> void:
 	shop.open_buy()
 	await process_frame
 	var gold_button = shop.modal.get_node("GoldPurchase")
-	check(is_equal_approx(gold_button.get_rect().get_center().x,shop.modal.size.x*0.5),"Single Gold payment is centered")
+	var row: Rect2 = gold_button.get_rect().merge(shop.modal.get_node("CancelPurchase").get_rect())
+	check(is_equal_approx(row.get_center().x,shop.modal.size.x*0.5),"Single Gold payment and Cancel are centered")
 	check(shop.modal.get_node_or_null("CashPurchase") == null,"Zero-price currency has no purchase button")
 	gold_button.pressed.emit()
 	await process_frame

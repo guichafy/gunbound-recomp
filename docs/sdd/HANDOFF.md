@@ -1,5 +1,34 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Avatar Shop e avatares originais — ADR-130 / REQ-47
+
+Pedido27/10/2026: corrigir assets/imagens do Avatar Shop com os originais do
+jogo, REA quando preciso. Ler `AVATAR_SHOP_ORIGINAL.md`. Decisões do usuário:
+avatares **tudo original** (loja, sala, batalha), botões originais em inglês,
+loja igual ao cliente (sem busca/contador/"Nível"/rótulos PT/prévia de mobile).
+
+`import_xfs_shop.py` extrai 171 frames (116 anteriores idênticos) incluindo
+`numfont` e o atlas ASCII do `font.fnt`; `build_shop_smooth_hd.py` gera o
+BICUBIC4× aprovado em `assets/hd/classic/shop_smooth_4x` (fallback por hash).
+`classic_shop_art.gd` desenha frames com pivô nativo, texto 8×12/avanço6 e
+números pelas regras do cliente. `avatar_shop.gd` reescrito; `AvatarArt`
+nativo por padrão (`new(true)` só para auditorias HD). GPT de loja/avatares
+preservado em disco, fora do uso ativo. Gênero/atributos na faixa lateral.
+
+Evidência: REA/Hopper (strings, xrefs, `%8d`/`%02d`) e Ghidra12.2 headless
+(`builds/ghidra-shop-ev1/ev2`: 0x44a000, 0x44c460, 0x4ed9f0) no PE `4af6283d…`;
+posições restantes por casamento de template em `gb-avatar.png`. Testes:
+`test_shop_original` 70 checks com oráculos independentes; 20 suítes
+dirigidas 6663 checks/0. GPU 1920×1080 + 120 quadros60Hz e comparação lado a
+lado em `docs/avatar-shop-original`. Harness completo `./scripts/check.sh`: **99 suítes, 27085 checks, 29 partidas, 0 falhas**
+(log `.tools/shop-original-harness.log`); depois disso o check 1280×800 levou
+`test_shop_original` a 73/0 e shop_wide/audit/classic repetidas sem falhas.
+Smoke de pacote novo: `tests/capture_shop_original_pck.gd` (não executado: sem export).
+
+Pendências: aceite visual/mouse do usuário; popup de compra sem captura
+original (adaptado); itens "Standard" listados no inventário para permitir
+voltar ao padrão; app não reexportado; nenhum commit/push.
+
 ## Mage: partículas decorativas em voo — ADR-129
 
 Pedido seguinte implementado no fonte. Ler `MAGE_FLIGHT_SPARKS.md`.

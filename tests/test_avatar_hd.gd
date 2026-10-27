@@ -19,7 +19,7 @@ func run() -> void:
 				check(region.native.size == first.native.size, "Stable size through original frame timing")
 		var c = load("res://scripts/avatar_catalog.gd").legacy()
 		var native = load("res://scripts/avatar_art.gd").new(false)
-		var art = load("res://scripts/avatar_art.gd").new()
+		var art = load("res://scripts/avatar_art.gd").new(true)
 		var set_data: Dictionary = c.defaults(0)
 		var pieces: Array = art.sample(set_data,0.0)
 		check(pieces[0].hd and pieces[1].hd, "Default rider uses HD")
