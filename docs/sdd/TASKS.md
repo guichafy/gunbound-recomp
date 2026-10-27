@@ -8,7 +8,8 @@
 - [x] `test_result_screen` (oráculo dos offsets nativos e cena) e `test_import_xfs_result` (decoder independente).
 - [x] Captura GPU 1280×800: vitória, derrota, empate, OK hover/push; sobreposição com a referência do usuário sem desvio.
 - [x] Harness completo `./scripts/check.sh`: 113 suítes, 28.338 checks Godot, 92 testes Python e 29 partidas, zero falhas/exit0.
-- [ ] Aceite visual do usuário. Destino nativo do OK (0x3f8) não localizado: OK volta à sala.
+- [x] Aceite visual do usuário nas capturas (27/10/2026).
+- [ ] Destino nativo do OK (0x3f8) não localizado: OK volta à sala.
 
 ## Integração do PR #5 — loading ao Start da sala — ADR-138 / REQ-49
 

@@ -90,7 +90,7 @@ tarefa está em [docs/sdd/TASKS.md](docs/sdd/TASKS.md).
 
 ### Em progresso
 
-- **Encerramento da partida** (ADR-139): janela WIN/LOSE de `result_back.img` com P, G e OK nas posições do cliente; P mostra o XP do porte e o OK volta à sala. Falta o aceite visual. [Contrato](docs/sdd/RESULT_SCREEN_NATIVE.md).
+- **Encerramento da partida** (ADR-139): janela WIN/LOSE de `result_back.img` com P, G e OK nas posições do cliente; P mostra o XP do porte e o OK volta à sala. Aceite visual do usuário nas capturas. [Contrato](docs/sdd/RESULT_SCREEN_NATIVE.md).
 - **Assets de batalha do cliente** (ADR-133): Miramo, HUD, clima/Thor, itens e música migrados, com fallback testado. Header/footer, cronômetro e vento corrigidos na ADR-134; lacunas declaradas, aceite/escuta e reexportação pendentes. [Inventário e validação](docs/sdd/CLIENT_ASSETS_PORT.md).
 
 - **Avatar Shop e avatares originais** (ADR-130/131): falta o aceite visual e de mouse. O

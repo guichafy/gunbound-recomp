@@ -29,8 +29,9 @@ Harness completo `./scripts/check.sh`: **113 suítes, 28.338 checks Godot, 92
 testes Python e 29 partidas, zero falhas/exit0**, parse aprovado. Log
 `.tools/result-port/full-harness.log`, SHA-256 `4a526cfd…bde2`.
 
-Pendentes: aceite visual do usuário, cliente Windows não executado, áudio
-mudo nas capturas. Versão 0.20.5, app/ZIP não reexportados, sem push.
+Aceite visual: o usuário aprovou a janela nas capturas (27/10/2026).
+Pendentes: cliente Windows não executado, áudio mudo nas capturas e destino
+nativo do OK. Versão 0.20.5, app/ZIP não reexportados, sem push.
 
 ## Integração do PR #5 — 27/10/2026
 

@@ -68,4 +68,5 @@ Todo quadro é desenhado em âncora + pivô do IMG (`FUN_004ed6a0` soma
 - [x] `match_overlay.show_result` com a janela nativa e bloqueador transparente.
 - [x] Oráculo independente `tests/test_result_screen.gd` e regressões de cena.
 - [x] Captura GPU `tests/capture_result_screen.gd` (vitória, derrota, empate).
-- [ ] Aceite visual do usuário; cliente Windows não executado.
+- [x] Aceite visual do usuário nas capturas (27/10/2026).
+- [ ] Cliente Windows não executado; destino nativo do OK pendente.
