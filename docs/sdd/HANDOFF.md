@@ -243,8 +243,8 @@ sem máscara, y = 122. A largura do Miramo neste porte é 1800. A conta
 `map_id * 11 + lado` não seleciona esse arquivo: o índice 11 repete o Cave.
 
 `begin_loading` sorteia o mobile e um ponto por lado, desenha a tela e só
-então chama `start_match` com esses valores. `start_match()` direto e a
-revanche não esperam. A escolha Random da sala permanece pendente para a
+então chama `start_match` com esses valores. `start_match()` direto não
+espera (a revanche saiu com a ADR-139). A escolha Random da sala permanece pendente para a
 próxima visita.
 
 Validação: `test_match_loading` 21 checks, 0 falhas. `test_room_settings`,

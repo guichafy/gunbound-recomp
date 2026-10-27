@@ -446,7 +446,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 | REQ-06 | Iniciativa por atraso, turno de 30 s, passagem voluntária/automática | `match.gd.schedule`, `pass_turn`, `tick` | Modelos e roteiro manual |
 | REQ-07 | Três armas; SS aberto no primeiro turno e travado por quatro turnos próprios depois do uso | `match.gd.can_use_special` | Modelos + roteiro manual para apresentação da especial |
 | REQ-08 | CPU joga com as mesmas regras; três dificuldades por erro de mira | `match.gd.choose_cpu_shot/predict_shot`, `combat.gd` | Modelos e dez partidas completas |
-| REQ-09 | Pausa congela relógio/voo; ajuda, resultado, revanche e menu navegáveis | `game.gd` | `test_scene.gd` + roteiro manual |
+| REQ-09 | Pausa congela relógio/voo; ajuda, resultado e menu navegáveis; resultado nativo de REQ-50 sem revanche | `game.gd`, `classic_result.gd` | `test_scene.gd`, `test_result_screen.gd` + roteiro manual |
 | REQ-10 | Apelido, XP, nível e vitórias locais; recompensa uma vez por resultado | `profile.gd`, `game.gd` | Persistência/corrupção/idempotência e cena |
 | REQ-11 | Arte e efeitos originais, sem copiar recursos do Gunbound | `assets/art/`, terreno procedural, `sound.gd` | `docs/ART.md`, capturas visuais |
 | REQ-12 | Fonte, documentação e aplicativo permitem validar e aprender | README, guias, fontes, testes e build | Hand-off e roteiro funcional |

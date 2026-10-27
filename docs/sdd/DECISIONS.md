@@ -1745,8 +1745,8 @@ máscara, mais 18. Sem máscara, y = 122.
 Random é resolvido ao abrir a tela, não ao entrar na batalha. O card central
 e os dois lugares mostram o mobile sorteado (Dragon ou Knight). A partida
 recebe esses ids e os mesmos pontos de spawn. `start_match()` sem argumentos
-continua imediato, para a revanche e para as suítes que montam a batalha
-direto. A fórmula `map_id * 11 + lado` vista no carregamento do arquivo não
+continua imediato, para as suítes que montam a batalha direto (a revanche
+citada no PR saiu com a ADR-139). A fórmula `map_id * 11 + lado` vista no carregamento do arquivo não
 foi usada para escolher o bitmap: o índice 11 é cópia do Cave, e o quadro
 com o rótulo MIRAMO TOWN é o `load_stage01`.
 

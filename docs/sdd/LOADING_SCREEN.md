@@ -38,6 +38,6 @@ do banco de neve; o texto desce mais 20 px para ficar sobre a neve.
 
 ## Limites
 
-Revanche e `start_match()` chamado direto não passam pela espera. Não há
+`start_match()` chamado direto não passa pela espera (a revanche saiu com a ADR-139). Não há
 rede, barra ligada a download, nem prévias dos outros mapas. Não houve
 execução do cliente Windows nem aceite visual.

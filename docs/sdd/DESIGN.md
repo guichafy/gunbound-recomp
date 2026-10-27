@@ -64,7 +64,7 @@ nativos. Lacunas ficam declaradas nos relatórios CLIENT_ASSETS_*.md.
 
 `begin_loading` no Start da sala resolve Random, sorteia um ponto por lado
 com o mesmo critério de `Match.start` e segura a tela por `MatchLoading.HOLD`
-(5 s). `start_match()` direto, usado pelos testes e pela revanche, não espera.
+(5 s). `start_match()` direto, usado pelos testes, não espera (a revanche saiu na ADR-139).
 O painel inferior é `load_back.img`; o mapa é `load_stage01.img` (Miramo).
 A coluna do nome é `spawn_x * 748 / largura` e a linha é o primeiro pixel
 sólido da máscara mais 18, como em 0x004430c0. O override de spawn entra só
@@ -486,7 +486,7 @@ Não há backend, servidor, banco externo, serviço de conta ou dependência npm
 - `settle`: espera 0,55 s, acomoda veículos, aplica quedas e decide o resultado
   antes de agendar a próxima ação.
 - `finished`: elimina projéteis, emite resultado; a apresentação concede XP uma
-  vez e abre as ações de revanche/menu. Ajuda fechada nessa fase restaura resultado.
+  vez e abre a janela nativa WIN/LOSE (ADR-139), cujo OK volta à sala. Ajuda fechada nessa fase restaura resultado.
 - Pausa pertence à apresentação, que deixa de avançar a partida e o trabalho da
   CPU. `screen`/overlay da view e `phase` do modelo são estados distintos.
 
