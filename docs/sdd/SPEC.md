@@ -1,5 +1,15 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Encerramento da partida — REQ-50 / ADR-139
+
+Ao fim do treino, mostrar a janela de resultado do cliente: painel do time A
+à esquerda e do time B à direita, cada um WIN ou LOSE conforme o vencedor,
+com a linha de cada piloto (barra, patente, apelido, P e G) e só o botão OK.
+Usar `result_back.img`, `numfont`, `font.fnt` e `b_result_confirm` nas
+posições/pivôs comprovados. Substitui o cartão com REVANCHE/Voltar ao menu
+de REQ-09. Recompensa continua única por partida. Contrato, adaptações e
+plano em `RESULT_SCREEN_NATIVE.md`.
+
 ## Menu clássico único na batalha — REQ-31/33/34/48 / ADR-137
 
 ESC/Options e o alias P abrem somente o painel play_option do cliente,
@@ -323,7 +333,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-06 | Iniciativa por atraso, turno de 30 s, passe | BATTLE_RULES_AUDIT | Vigente; custo por tempo gasto e passe 200 ÷ 7, 5 (REQ-44) |
 | REQ-07 | Três tiros; SS aberto no 1º turno, trava de 4 turnos | MOBILE_PARITY, TURTLE_ANIMATION_FIX | Vigente; Turtle divide após abertura, sem impacto aéreo |
 | REQ-08 | CPU com as mesmas regras e três dificuldades | PERF_LIMITS_0_11, BATTLE_RULES_AUDIT | Vigente; CPU não se move nem usa itens |
-| REQ-09 | Pausa, ajuda, resultado, revanche e menu | HUD_0_10 | Vigente |
+| REQ-09 | Pausa, ajuda, resultado, revanche e menu | HUD_0_10 | Vigente; resultado e revanche substituídos pela janela nativa de REQ-50 |
 | REQ-10 | Perfil local sem duplicar recompensa | AVATAR_SHOP, AVATAR_HD_MIGRATION | Vigente; saldo de teste ADR-080 |
 | REQ-11 | Arte original própria | — | Substituído por REQ-19/20 |
 | REQ-12 | Código, documentação e app para validar e aprender | QUALITY_REVIEW | Vigente; revisão de qualidade 0.18.6 |
@@ -344,6 +354,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-47 | Avatar Shop e avatares com os assets originais do cliente | AVATAR_SHOP_ORIGINAL | Vigente (ADR-130); HD de avatares/loja preservado em disco, fora do uso ativo |
 | REQ-48 | Assets de batalha do cliente: Miramo, HUD, clima/Thor, itens e áudio | CLIENT_ASSETS_PORT | ADR-133; recursos nativos com fallback validado; composição e lacunas declaradas |
 | REQ-49 | Start da sala mostra a transição com mapa, spawns e mobile resolvido | LOADING_SCREEN | Vigente (ADR-138); 1×1 local, espera mínima de 5 s |
+| REQ-50 | Encerramento com a janela WIN/LOSE do cliente e o botão OK | RESULT_SCREEN_NATIVE | Vigente (ADR-139); P = XP do porte, OK volta à sala |
 
 ## Lobby clássico e sala — ADR-096
 

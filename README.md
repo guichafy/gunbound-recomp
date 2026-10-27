@@ -54,7 +54,7 @@ Método completo em [docs/PORTE.md](docs/PORTE.md).
 | | |
 |---|---|
 | Versão do código | **0.20.5** (fonte única: `application/config/version` em `project.godot`) |
-| O que dá para jogar | Lobby → sala 1×1 → transição de 5 s com o mapa e os spawns → partida no Miramo Town A, loja, resultado, revanche e perfil local |
+| O que dá para jogar | Lobby → sala 1×1 → transição de 5 s com o mapa e os spawns → partida no Miramo Town A, janela WIN/LOSE do cliente com OK de volta à sala, loja e perfil local |
 | Última validação completa (ADR-137) | 110 suítes, 28.279 checks Godot, 88 testes Python e 29 partidas, zero falhas ([registro](docs/sdd/BATTLE_OPTIONS_NATIVE.md)) |
 | Aplicativo exportado | `builds/Gunbound Recomp.app` 0.20.5, **anterior** à loja original, aos assets e ao HUD corrigido (ADR-130/131/133/134/135/136/137). Reexporte para incluí-los |
 
@@ -76,7 +76,7 @@ tarefa está em [docs/sdd/TASKS.md](docs/sdd/TASKS.md).
 ### Entregue
 
 - Partida 1×1: terreno destrutível, vento, dano, queda, fila por atraso, três dificuldades,
-  pausa, resultado, revanche e perfil local.
+  pausa, resultado e perfil local.
 - Elenco dos 16 mobiles do cliente, com IDs fixos e arte original ([ADR-083](docs/sdd/DECISIONS.md)).
 - Balística comum do cliente: passo de 20 Hz, ponto fixo 24.8, carga de 3 s e força mínima
   nativa ([BATTLE_FIDELITY_0_20](docs/sdd/BATTLE_FIDELITY_0_20.md)).
@@ -90,6 +90,7 @@ tarefa está em [docs/sdd/TASKS.md](docs/sdd/TASKS.md).
 
 ### Em progresso
 
+- **Encerramento da partida** (ADR-139): janela WIN/LOSE de `result_back.img` com P, G e OK nas posições do cliente; P mostra o XP do porte e o OK volta à sala. Falta o aceite visual. [Contrato](docs/sdd/RESULT_SCREEN_NATIVE.md).
 - **Assets de batalha do cliente** (ADR-133): Miramo, HUD, clima/Thor, itens e música migrados, com fallback testado. Header/footer, cronômetro e vento corrigidos na ADR-134; lacunas declaradas, aceite/escuta e reexportação pendentes. [Inventário e validação](docs/sdd/CLIENT_ASSETS_PORT.md).
 
 - **Avatar Shop e avatares originais** (ADR-130/131): falta o aceite visual e de mouse. O

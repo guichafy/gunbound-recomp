@@ -20,7 +20,7 @@ ALL="$ALL test_mage_weather test_mage_weather_effects test_mage_secondary_weathe
 ALL="$ALL test_mage_sparks test_mage_spark_art test_mage_spark_source"
 ALL="$ALL test_client_item_assets test_client_item_source test_client_audio test_client_audio_source test_client_weather_assets test_client_weather_source test_client_hud_assets test_import_xfs_hud test_battle_hud_layout test_hud_clock_wind"
 ALL="$ALL test_battle_options"
-ALL="$ALL test_match_loading"
+ALL="$ALL test_match_loading test_result_screen test_import_xfs_result"
 # --quick: todas as suites Godot/Python menos as partidas completas.
 QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches)$' | tr '\n' ' ')
 

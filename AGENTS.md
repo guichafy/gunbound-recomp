@@ -45,6 +45,16 @@ assets/hd/classic/mobiles_smooth_4x/bigfoot; MobileLooks `smooth` e
 mobile_smooth_art.gd validam/caem no nativo; só recortes de origem ×4. Ler
 docs/sdd/BIGFOOT_SMOOTH_4X.md. Regenerar com scripts/build_bigfoot_smooth_hd.py.
 
+## Resultado da partida e loading — ADR-139/138
+
+Fim do treino abre a janela do cliente (`classic_result.gd`, catálogo
+`assets/xfs/result` via `scripts/import_xfs_result.py`): painéis WIN/LOSE por
+time, linhas com rank1/font.fnt/numfont e só o OK (volta à sala). Ler
+docs/sdd/RESULT_SCREEN_NATIVE.md; P = XP do porte, CPU 0P/Chick, adaptações
+declaradas. Teste test_result_screen + test_import_xfs_result; captura
+tests/capture_result_screen.gd. Start da sala passa pela tela de loading
+(PR #5, ADR-138/REQ-49, LOADING_SCREEN.md).
+
 ## Avatar Shop original — ADR-130
 
 Ler docs/sdd/AVATAR_SHOP_ORIGINAL.md. Loja desenhada com os frames do

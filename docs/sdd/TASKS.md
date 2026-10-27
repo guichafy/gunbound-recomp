@@ -1,5 +1,21 @@
 # Entregas e próximos trabalhos
 
+## Encerramento da partida — ADR-139 / REQ-50
+
+- [x] Ghidra: recurso 9001 `result_back.img`, render `FUN_004c8890`, linha `FUN_004d0260`, OK na msg 0x4413.
+- [x] Importador `import_xfs_result.py` e catálogo `assets/xfs/result` (58 quadros) no filtro de exportação.
+- [x] `classic_result.gd`: painéis por time, linhas, P/G e OK; sem escurecer, HUD bloqueado.
+- [x] `test_result_screen` (oráculo dos offsets nativos e cena) e `test_import_xfs_result` (decoder independente).
+- [x] Captura GPU 1280×800: vitória, derrota, empate, OK hover/push; sobreposição com a referência do usuário sem desvio.
+- [x] Harness completo `./scripts/check.sh`: 113 suítes, 28.338 checks Godot, 92 testes Python e 29 partidas, zero falhas/exit0.
+- [ ] Aceite visual do usuário. Destino nativo do OK (0x3f8) não localizado: OK volta à sala.
+
+## Integração do PR #5 — loading ao Start da sala — ADR-138 / REQ-49
+
+- [x] Merge da branch `cursor/match-loading-screen-ba1a` na `main` local; conflitos em SPEC/DESIGN/TASKS/HANDOFF/README/check.sh resolvidos mantendo os dois lados.
+- [x] Renumerado de REQ-48/ADR-133 (colisão) para REQ-49/ADR-138.
+- [x] `assets/classic/loading/catalog.json` incluído no filtro de exportação (faltava no PR).
+
 ## Menu clássico único durante a batalha — ADR-137
 
 - [x] REA do loader/render/input/dispatch e dos setters de áudio originais.

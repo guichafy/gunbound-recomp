@@ -14,7 +14,7 @@ ou reexporte (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).
    ajusta apelido, dificuldade e clima. START abre a transição por 5 segundos,
    com o mobile já sorteado e o ponto de cada piloto no Miramo, e só então
    começa a partida. EXIT ou Esc voltam ao lobby.
-3. **Partida** no Miramo Town A. Ao fim, o resultado dá XP e Gold, com revanche ou volta.
+3. **Partida** no Miramo Town A. Ao fim, a janela WIN/LOSE do cliente mostra os dois times com P (XP) e G (Gold); OK volta à sala.
 
 A loja segue o cliente: Experimentar mostra uma prévia temporária, Comprar gasta Cash ou
 Gold e clicar numa peça possuída a veste. Os bônus valem na próxima partida. O perfil

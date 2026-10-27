@@ -4,6 +4,7 @@ extends RefCounted
 ## charge, Options button) and the builders below only read the scene.
 
 const Match = preload("res://scripts/match.gd")
+const ResultWindow = preload("res://scripts/classic_result.gd")
 
 signal opened(kind: String)
 signal closed
@@ -99,17 +100,16 @@ func show_pause(host) -> void:
 	# Compatibility for callers/captures; there is only one battle menu.
 	show_options(host)
 
+## Original result window (REQ-50/ADR-139): drawn straight over the battle,
+## no shade; the transparent layer blocks the HUD, as the client removes its
+## buttons. OK returns to the room (adaptation: the 0x3f8 handler is unproven).
 func show_result(host) -> void:
 	if host.screen != "match" or host.model.phase != Match.PHASE_FINISHED:
 		return
-	var card := make(host, "result")
-	var result := "VITÓRIA!" if host.model.winner == Match.PLAYER else ("EMPATE" if host.model.winner == -1 else "A MÁQUINA VENCEU")
-	host.ui.label(card, "TREINO CONCLUÍDO", Vector2(32, 24), Vector2(496, 24), 12, host.ui.TEAL, true)
-	host.ui.label(card, result, Vector2(32, 72), Vector2(496, 65), 38, host.ui.CREAM, true)
-	host.ui.label(card, "Boa mira, %s." % host.profile.nickname if host.model.winner == Match.PLAYER else "Cada cratera ensina. Tente uma nova trajetória.", Vector2(32, 145), Vector2(496, 45), 17, host.ui.MUTED)
-	host.ui.panel(card, Vector2(32, 215), Vector2(496, 92), Color("23454d"), 12)
-	host.ui.label(card, "+%d XP · %d Gold" % [host.reward,host.gold_reward], Vector2(53, 230), Vector2(340, 35), 24, host.ui.TEAL, true)
-	host.ui.label(card, "NÍVEL %d   ·   %d XP TOTAL" % [host.profile.level(), host.profile.xp], Vector2(53, 270), Vector2(450, 24), 14, host.ui.CREAM)
-	host.ui.label(card, "%d turnos  ·  %s" % [host.model.total_turns, "progresso salvo neste Mac" if host.profile.last_save_ok else "não foi possível salvar o progresso"], Vector2(32, 324), Vector2(496, 35), 14, host.ui.MUTED)
-	host.ui.button(card, "REVANCHE", Vector2(32, 386), Vector2(496, 47), host.start_match, true)
-	host.ui.button(card, "Voltar ao menu", Vector2(32, 444), Vector2(496, 33), host.show_menu)
+	open("result")
+	layer.mouse_filter = Control.MOUSE_FILTER_STOP
+	var window = ResultWindow.new(ResultWindow.training_teams(host.model, host.profile, host.reward, host.gold_reward), ResultWindow.winner_team(host.model), host.show_menu)
+	window.scale = Vector2(1.6, 1.6)
+	if not host.profile.last_save_ok:
+		window.notice = "Não foi possível salvar o progresso."
+	layer.add_child(window)

@@ -1,0 +1,780 @@
+{
+  "version": 1,
+  "repository": "https://github.com/jglim/gunbound-launcher",
+  "commit": "2bc43c490ba727d6fce1a5b47ed9dc577d0f9cc1",
+  "archive": "TestClient/graphics.xfs",
+  "xfs_version": 280,
+  "graphics_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "frames": {
+    "result_back:0": {
+      "size": [
+        373,
+        381
+      ],
+      "pivot": [
+        1,
+        2
+      ],
+      "file": "res://assets/xfs/result/result_back/000.png",
+      "sha256": "a4d84a0da43a49cb2de93d5f579713ad2ba7cf5233f4b0101d31cae2e69a7b33"
+    },
+    "result_back:1": {
+      "size": [
+        373,
+        383
+      ],
+      "pivot": [
+        1,
+        0
+      ],
+      "file": "res://assets/xfs/result/result_back/001.png",
+      "sha256": "414f13cf89ae178f985969cba26647f42cdd7106c31e6fa93a96beffd5a79c58"
+    },
+    "result_back:2": {
+      "size": [
+        308,
+        47
+      ],
+      "pivot": [
+        -5,
+        0
+      ],
+      "file": "res://assets/xfs/result/result_back/002.png",
+      "sha256": "966fb76535a7f9dc08f03541998c82f82b70fab4123c06ed60ca2c5d2988b263"
+    },
+    "result_back:3": {
+      "size": [
+        303,
+        47
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/result_back/003.png",
+      "sha256": "7eff0dbea0bba6109a017149be6df3461c5bb3021ab10d4282b3d05ebcf25154"
+    },
+    "result_back:4": {
+      "size": [
+        44,
+        38
+      ],
+      "pivot": [
+        -22,
+        -19
+      ],
+      "file": "res://assets/xfs/result/result_back/004.png",
+      "sha256": "1d5205f8df791b5e69bb12be55bbc4dfff0e59c657420a79eeef97d1cfcd2efc"
+    },
+    "b_result_confirm:0": {
+      "size": [
+        103,
+        45
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/b_result_confirm/000.png",
+      "sha256": "50f9f07194bd848ea0549365b93bfc227338554ea7912c06480b1f448ffe761b"
+    },
+    "b_result_confirm:1": {
+      "size": [
+        103,
+        45
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/b_result_confirm/001.png",
+      "sha256": "fd02cc533f6676c71c85d2597f43b5bab8f13a6e54bfdf24a88f27a2118de847"
+    },
+    "b_result_confirm:2": {
+      "size": [
+        103,
+        45
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/b_result_confirm/002.png",
+      "sha256": "b17dc136bdc93e3edde28d153d2239aaf1873596c190e32ce5cb19d2f3252da9"
+    },
+    "b_result_confirm:3": {
+      "size": [
+        103,
+        45
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/b_result_confirm/003.png",
+      "sha256": "b975a5de7efc20b5b5d5968f58f8dbe7a3ccde3e518ca7932661ad9e4f1f5946"
+    },
+    "numfont:80": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/080.png",
+      "sha256": "dfe536bb4f4439eff52fcf7128444ccf057d3f09f2504119f0698db2cbe74324"
+    },
+    "numfont:81": {
+      "size": [
+        4,
+        12
+      ],
+      "pivot": [
+        2,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/081.png",
+      "sha256": "01276c32d702e7fd705b389a0a5d6d23dd7649cd7b0094377188f9f0e07eb74b"
+    },
+    "numfont:82": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/082.png",
+      "sha256": "56cf37f2a70227a59f0684c3fe8005d33892533bf0b7637e0e611fed86af4400"
+    },
+    "numfont:83": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/083.png",
+      "sha256": "5186c0ac00111ea7918d55757d5d9654c3243ff80bcaee6de646481a3970ef86"
+    },
+    "numfont:84": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/084.png",
+      "sha256": "8147f456fd6785b788e76a302e544e07f8d283d389a36316c7327ba14c18ce85"
+    },
+    "numfont:85": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/085.png",
+      "sha256": "ad8bd19c80778b8a630f56fa3f9dcfd47b27ccecb3931072095b913483d584ad"
+    },
+    "numfont:86": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/086.png",
+      "sha256": "57c7021503285d3d5be5633b2101d181306a363134cc2a9180de483a6aa55a06"
+    },
+    "numfont:87": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/087.png",
+      "sha256": "9a5751eec7a193e23efd7353e8eabe532a454ef60c8a83b753224a7342a4bce7"
+    },
+    "numfont:88": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/088.png",
+      "sha256": "3cf286addceb8d025c4af60e2fbc16e4d4c9951c5e144f8d14714b31926301c8"
+    },
+    "numfont:89": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/089.png",
+      "sha256": "6b365b629316531b67e99abcb5bb9c256e901db08231f843a487eb9d34395825"
+    },
+    "numfont:90": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/090.png",
+      "sha256": "7251ed3462ec3bddf9fc84e0e40bd497a6c91d020948dd7e4d3a7cb5bb4bb6cd"
+    },
+    "numfont:91": {
+      "size": [
+        4,
+        12
+      ],
+      "pivot": [
+        2,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/091.png",
+      "sha256": "d0bfb8090a2329152ae97de8fe05fc473ff9c3bfaadc7262b2d7afd07cd7c763"
+    },
+    "numfont:92": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/092.png",
+      "sha256": "9f17b34d889a80b49b6782e767d8ee639818bf2efa2b458f5b727faa9c675325"
+    },
+    "numfont:93": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/093.png",
+      "sha256": "6ee6e1c3e8a5d4d2ba9f20798dbff55482727f4ade8dfdb3d7291bfe45975703"
+    },
+    "numfont:94": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/094.png",
+      "sha256": "3528f0aa0e7c7424b771274136de1fb9c2f191ae718dd40fd6d7d565061956a5"
+    },
+    "numfont:95": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/095.png",
+      "sha256": "b241fde76b91fd4890714fb4a086655df83ca18abc47a735485e486b103493a1"
+    },
+    "numfont:96": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/096.png",
+      "sha256": "1fa3a860e12132e3f3060cd880546d7dd7a006d1cad67f5f270aebc6525ea856"
+    },
+    "numfont:97": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/097.png",
+      "sha256": "7e47c75f5e21b31a9482756fa54b52a2e5beff3dd221b3a8122e233f98656a9f"
+    },
+    "numfont:98": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/098.png",
+      "sha256": "038d8aeea3a8693d2034537c17c7ebfdbf4182547b8ba653e8dd7c17b1e584aa"
+    },
+    "numfont:99": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/099.png",
+      "sha256": "466f6f52531e6a5e5ba9e76f42261062c395a6ba7d257127c96f89429644404a"
+    },
+    "numfont:100": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/100.png",
+      "sha256": "9eafdd91562714e7622082acb278933abe925de6300e8ff69c8d8393d2f1bb7f"
+    },
+    "numfont:101": {
+      "size": [
+        8,
+        12
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/101.png",
+      "sha256": "07ef0bd532785b781d038cdfd4c3fa5fd1ce9c3bf0d4d13a56e718264dd83a57"
+    },
+    "numfont:102": {
+      "size": [
+        8,
+        3
+      ],
+      "pivot": [
+        0,
+        6
+      ],
+      "file": "res://assets/xfs/result/numfont/102.png",
+      "sha256": "35843b371c78468339196975f122ecaf867255f4da1e4a2279fd7ad8a22f5aaa"
+    },
+    "numfont:103": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/103.png",
+      "sha256": "a030dfb07bdf0227af4f0ba1d088fa77e60634d94e9ef6d94a70f371a84c0332"
+    },
+    "numfont:104": {
+      "size": [
+        11,
+        16
+      ],
+      "pivot": [
+        3,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/104.png",
+      "sha256": "f558e41cee795136847fbc92e1052ef3058802be254fa5c8ad0dc02bd087ad4a"
+    },
+    "numfont:105": {
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/105.png",
+      "sha256": "479d0e70880ced24560e1bb73b2156fa678296f179d987c4efe79dcf8358d8f1"
+    },
+    "numfont:106": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/106.png",
+      "sha256": "79113c5eb916bc823bdbdd45e9e614415891417412220e290b0826a859835d85"
+    },
+    "numfont:107": {
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/107.png",
+      "sha256": "69e1314d1af3a913f732530240923c99068c14d5ba89b286a2fb1c2930d50792"
+    },
+    "numfont:108": {
+      "size": [
+        16,
+        17
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/108.png",
+      "sha256": "b5f080e8fafd3cc62d8c2a38d2b275ac2eeffa4b4607c64050e35436a590827a"
+    },
+    "numfont:109": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/109.png",
+      "sha256": "0f6999dbf5bb86d0768469a86ea94a59597b796d403a6819d7c6535836e7cdaa"
+    },
+    "numfont:110": {
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/110.png",
+      "sha256": "eca6dd56721f340c0f82ee1ee3a29b1728715b1fe396f8eedb5a8b9afde4b5cd"
+    },
+    "numfont:111": {
+      "size": [
+        16,
+        17
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/111.png",
+      "sha256": "afa64ea9089230c50f5a978393e9467f7bbac535318d498dbda14349952286ba"
+    },
+    "numfont:112": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/112.png",
+      "sha256": "b8870d587db1fdccbd40368ae4d298088336460914c6ca33bdc07024db7dc59e"
+    },
+    "numfont:113": {
+      "size": [
+        16,
+        17
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/113.png",
+      "sha256": "9ade6c4f8e8d1ee798129c876e53626d0af331849bdeec53e1516d65dc453795"
+    },
+    "numfont:114": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/114.png",
+      "sha256": "1c7bc89914bd07e8aa25aad92abd57bda85cbe8d3d037e085efd999d8afa74e0"
+    },
+    "numfont:115": {
+      "size": [
+        11,
+        16
+      ],
+      "pivot": [
+        3,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/115.png",
+      "sha256": "0e4c8a1b36ed6cf92840585c70b42fc3313edfafd43ad98acc559c1f2b24040e"
+    },
+    "numfont:116": {
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/116.png",
+      "sha256": "267e31558dcec1487e3f561af8a8731405bb4e0b8dc08f12057a78e2eb185c4a"
+    },
+    "numfont:117": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/117.png",
+      "sha256": "60cbe20fe3ff2447ff99db110d2234fa47cba20e0ca93ce82c816793a812135c"
+    },
+    "numfont:118": {
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/118.png",
+      "sha256": "8537fb753aeb0f968bebc4861c0e091a8becba81fd1b49c91ab9a143c5364d8d"
+    },
+    "numfont:119": {
+      "size": [
+        16,
+        17
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/119.png",
+      "sha256": "9672e4a0f21166bca403587504920e290808254ece0c19295a816a38ab397e62"
+    },
+    "numfont:120": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/120.png",
+      "sha256": "e8c330b2ec08f8bb52a6c1512d36b2721a8ecf6449854b24df66a61262341cb6"
+    },
+    "numfont:121": {
+      "size": [
+        16,
+        16
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/121.png",
+      "sha256": "b737625204fe0fcfd101f6909e6408df69f5407aac09538ae2418853694ab5ec"
+    },
+    "numfont:122": {
+      "size": [
+        16,
+        17
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/122.png",
+      "sha256": "3d3baf1d4766e36a8f43b874d331ef143756884c68ed5059b2c83241eeb07174"
+    },
+    "numfont:123": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/123.png",
+      "sha256": "dff6ffe4bc872b589146fa719ed6ca1890128a766fa335d7f0b4a84d53ea72fe"
+    },
+    "numfont:124": {
+      "size": [
+        16,
+        17
+      ],
+      "pivot": [
+        -1,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/124.png",
+      "sha256": "e11f8b36c1e05e0791db5086f6aa415538a4bc0b49a56112bf5261a8f6b68aa6"
+    },
+    "numfont:125": {
+      "size": [
+        5,
+        8
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/125.png",
+      "sha256": "1ca14ee3dc3316fcc623de485681be5bee60fad2d49f74218b44d16cd19d3ff6"
+    },
+    "numfont:224": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/224.png",
+      "sha256": "95bdc4f4627796d04d02511b6323b5edaa39934207b27483b382a4193e374960"
+    },
+    "numfont:225": {
+      "size": [
+        15,
+        17
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/numfont/225.png",
+      "sha256": "62cfe5a9865c7d0deb4035ceb90fde1779303b779a29e349db26e1bc247473c0"
+    },
+    "font:0": {
+      "size": [
+        128,
+        96
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "file": "res://assets/xfs/result/font/ascii.png",
+      "sha256": "381ca52250e9acd49c5d900da894089803c1da1ea46bde155a52b2a03fd7b4c3"
+    }
+  },
+  "entries": {
+    "result_back": {
+      "frames": 5,
+      "entry_sha256": "cf2a16466880c2a4cce2c82608fae6c3b825c0abf1f00e2945399922e10ded98"
+    },
+    "b_result_confirm": {
+      "frames": 4,
+      "entry_sha256": "eb5bb44c8da925d28bc495af51ae8bc6c39cd91b015a6fa43ff9950f051d943f"
+    },
+    "numfont": {
+      "frames": 289,
+      "exported": [
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        224,
+        225
+      ],
+      "entry_sha256": "cdc866d4ba069522fd0e6f7ca059cf270a200ee649c802afb6fbf1936492867d"
+    },
+    "font": {
+      "cell": [
+        8,
+        12
+      ],
+      "columns": 16,
+      "glyphs": 128,
+      "advance": 6,
+      "entry_sha256": "58c73cb6009ef505e72ed3949d99a4faf5e7e481945611b998e41f749bb1ae07"
+    }
+  }
+}

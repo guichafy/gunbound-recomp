@@ -87,7 +87,7 @@ de 0.2 abaixo permanecem como histórico; o roteiro também serve para 0.3.
    - Itens (0.13): no menu, clique em **Itens**: o popup SELECT ITEM mostra as abas 2 Slots/1 Slot, nome colorido, Delay Cost e descrição ao passar o mouse; clique para equipar (até 6 slots) e clique na barra inferior para remover; Accept grava. Na batalha, os botões aparecem no painel F1–F6. Use Dual (clique ou F1): o SS fica cinza, a barra escurece, o Delayboard soma 80 e o tiro sai duas vezes (a segunda 1 s depois). No turno da máquina, clique num item para agendá-lo (aparece pressionado) e confira que ele é usado no início do seu turno e que o item usado antes sai da barra. Teleport: atire com S1/S2; um sinalizador ciano voa sem vento e, ao tocar o chão, o mobile aparece lá entre duas chamas. Em clima Ignorância a barra mostra ITEM LOCKED.
    - Performance (0.11): na troca para o turno da máquina não deve haver travada; a máquina dispara cerca de 1,9 s depois de o turno começar.
 10. Com mouse/toque: use ← → F e segure ● (acima da barra, à direita) para carregar e soltar. Arrastar a tela fora da barra olha o mapa.
-11. Termine uma partida e faça revanche; o G mostra o XP ganho no fim. Feche e reabra: apelido e progresso continuam.
+11. Termine uma partida: a janela WIN/LOSE mostra você no time A e a CPU no B, com P (XP ganho) e G (Gold); OK volta à sala. Feche e reabra: apelido e progresso continuam.
 
 O roteiro das versões anteriores (0.2–0.9) valia para o console antigo, substituído pelo HUD de batalha em 0.10.
 

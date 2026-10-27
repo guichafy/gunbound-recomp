@@ -1749,3 +1749,25 @@ continua imediato, para a revanche e para as suítes que montam a batalha
 direto. A fórmula `map_id * 11 + lado` vista no carregamento do arquivo não
 foi usada para escolher o bitmap: o índice 11 é cópia do Cave, e o quadro
 com o rótulo MIRAMO TOWN é o `load_stage01`.
+
+## ADR-139 — Janela de resultado do cliente (27/10/2026)
+
+Pedido do usuário: encerrar a partida mostrando vencedores e perdedores
+como no cliente (imagem de referência). Substitui o cartão próprio de
+resultado com REVANCHE (REQ-09). Ghidra 12.2 no PE `4af6283d…` localizou o
+recurso 9001 `result_back.img`, o render `FUN_004c8890`, a linha
+`FUN_004d0260` e o botão OK criado na mensagem 0x4413 de `FUN_004b4100`.
+
+Painéis por time (A em 24,48; B em 403,48), WIN se o time venceu. Linhas a
+partir de y151, passo 66. Barra, patente `rank1`, apelido `font.fnt`, P
+`%3d` (numfont 80/90, letra 100/101) e G `%5d` (fonte por time 103/114,
+letra 113/124). Sem escurecer a batalha; um bloqueador transparente impede
+o HUD por baixo, como a remoção dos botões no cliente.
+
+Adaptações: OK volta à sala; o OK fica sobre o footer no canvas de 500 de
+altura; P mostra o XP do porte e a CPU não pontua; CPU como "CPU"/Chick;
+empate desenha LOSE nos dois lados; guild, marcador de evento e log no chat
+inativos; aviso discreto só quando o perfil não grava. Assets em catálogo
+próprio `assets/xfs/result`, sem derivado HD. Contrato em
+`RESULT_SCREEN_NATIVE.md`.
+

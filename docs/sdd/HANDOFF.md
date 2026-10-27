@@ -1,5 +1,49 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Encerramento da partida — ADR-139 / REQ-50
+
+Pedido de 27/10/2026 (imagem de referência WIN/LOSE): o fim do treino abre a
+janela de resultado do cliente no lugar do cartão com REVANCHE. Ghidra 12.2
+(JDK 26, `builds/ghidra-result`) no PE `4af6283d…`: `result_back.img` é o
+recurso 9001; `FUN_004c8890` desenha os painéis A (24,48) e B (403,48), WIN
+para o time vencedor, e as linhas de y151 com passo 66; `FUN_004d0260` fixa
+barra, rank1, guild/apelido em `font.fnt`, P `%3d` e G `%5d` em numfont; o OK
+`b_result_confirm` (671,441) nasce na mensagem 0x4413. Contrato completo em
+`RESULT_SCREEN_NATIVE.md`; extratos em `.tools/result-port/ev2..ev4`.
+
+Código: `classic_result.gd` (layout puro + nó ×1,6), `match_overlay.show_result`
+sem escurecer e com bloqueador transparente, catálogo `assets/xfs/result`
+(58 quadros) de `scripts/import_xfs_result.py`, incluído no filtro de export.
+Adaptações: OK volta à sala (despachante de 0x3f8 não localizado); OK sobre
+o footer no canvas de 500; P = XP do porte, CPU "CPU"/Chick com 0P; empate
+desenha LOSE nos dois; guild, marcador de evento e log no chat inativos;
+aviso discreto só se o perfil não gravar.
+
+Validação: `test_result_screen` 37/0 (oráculo dos offsets do ASM, cena, ESC,
+XP único, ajuda, clique no OK) e `test_import_xfs_result` 4/0 (decoder
+independente `gunbound_xfs.py`). Captura GPU 1280×800 em `docs/result-screen`
+(vitória, derrota, empate, OK hover/push; log sem ERROR). Sobreposição com a
+imagem do usuário recortada para 800×600 alinha painéis, barras, texto, P, G
+e OK sem desvio (`.tools/result-port/blend.png`, fora do Git).
+Harness completo `./scripts/check.sh`: **113 suítes, 28.338 checks Godot, 92
+testes Python e 29 partidas, zero falhas/exit0**, parse aprovado. Log
+`.tools/result-port/full-harness.log`, SHA-256 `4a526cfd…bde2`.
+
+Pendentes: aceite visual do usuário, cliente Windows não executado, áudio
+mudo nas capturas. Versão 0.20.5, app/ZIP não reexportados, sem push.
+
+## Integração do PR #5 — 27/10/2026
+
+A pedido do usuário, a branch `cursor/match-loading-screen-ba1a` (PR #5,
+tela de loading do Start) entrou na `main` local por merge (`650b871`), após
+versionar o delta pendente da ADR-137 (`8095e3e`). Conflitos nos documentos
+SDD, README e `check.sh` resolvidos mantendo os dois lados. O PR usava
+REQ-48/ADR-133, já ocupados: renumerado para REQ-49/ADR-138. O
+`assets/classic/loading/catalog.json` do PR faltava no filtro de exportação
+e foi incluído. Suítes dirigidas após o merge: 8 suítes, 1.213 checks, 0
+falhas; o harness completo acima já cobre o merge. O PR no GitHub continua
+aberto; nada foi enviado ao remoto.
+
 ## Versionamento local do menu clássico — 27/10/2026
 
 O usuário autorizou o commit local das alterações da ADR-137, incluindo
