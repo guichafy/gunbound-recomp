@@ -115,5 +115,5 @@ O rig do mobile aplica transformação conjunta e não modifica colisão.
 A partida copia atributos; dano e Dig são aplicados no laço comum ao tiro e à
 previsão. AttackDelay converte o inteiro original antes de dividir por7,5.
 Gold/Popularity ficam no modelo, e a concessão final usa o mesmo ID idempotente
-de XP. O fluxo C# multiplica Gold acumulado por tiro, usa4/1 Gold no resultado
+de XP. O fluxo herdado multiplica Gold acumulado por tiro, usa4/1 Gold no resultado
 e tem a condição2000 inalcançável: peculiaridades preservadas e testadas.

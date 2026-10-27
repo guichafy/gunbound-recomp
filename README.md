@@ -1,26 +1,46 @@
 # Gunbound Recomp
 
-Reescrita do cliente clássico de **GunBound Thor's Hammer** em **Godot 4.7.2 + GDScript**,
-guiada pelo próprio cliente original. Hoje é um treino offline **1×1 contra a máquina no
-macOS**, no mapa Miramo Town A, com os 16 mobiles, itens, clima, lobby, sala e Avatar Shop
-clássicos.
+Reescrita fiel, em **Godot 4.7.2 + GDScript**, dos projetos
+[jglim/gunbound-launcher](https://github.com/jglim/gunbound-launcher) (launcher e TestClient
+do cliente **GunBound Thor's Hammer**) e [jglim/gunbound-server](https://github.com/jglim/gunbound-server)
+(emulador do servidor). A meta é manter o jogo original e, sobre essa base, levá-lo a várias
+plataformas e estendê-lo com funcionalidades novas.
+
+Hoje o projeto cobre o cliente: um treino offline **1×1 contra a máquina no macOS**, no mapa
+Miramo Town A, com os 16 mobiles, itens, clima, lobby, sala e Avatar Shop clássicos.
 
 > **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem
 > publicação, notarização ou distribuição.
 
-<img src="docs/avatar-shop-original/battle.png" width="720" alt="Partida no Miramo Town com avatares originais vestidos, HUD e barra de itens">
+<img src="docs/readme/shot.gif" width="720" alt="Bigfoot dispara o T1 de quatro bombas contra o Mage no Miramo Town, com avatar original vestido">
+
+| Lobby | Sala 1×1 | Avatar Shop |
+|---|---|---|
+| <img src="docs/readme/lobby.png" width="280" alt="Lobby clássico com Create, Avatar e Exit"> | <img src="docs/readme/room.png" width="280" alt="Sala 1×1 com Bigfoot contra Mage, grade de mobiles e itens"> | <img src="docs/readme/shop.png" width="280" alt="Avatar Shop desenhada com os quadros originais do cliente"> |
+
+Capturas GPU do jogo atual, 1920×1080 ([como regenerar](docs/readme/README.md)).
 
 ## Visão
 
-O objetivo é reproduzir o comportamento **comprovado** do cliente, não reinventar o jogo.
+1. **Fidelidade.** Reproduzir o comportamento **comprovado** do cliente e do servidor
+   originais, não reinventar o jogo.
+2. **Multiplataforma.** A mesma base em macOS, Windows, Linux, Android e iOS. Hoje só o
+   macOS é exportado e validado.
+3. **Extensão.** Funcionalidades novas entram sobre o porte fiel, declaradas como extensão e
+   sem alterar o comportamento original.
+
 Cada regra, tiro ou animação segue uma ordem de fontes:
 
 1. **Cliente original** (binário e arquivos XFS/DAT, lidos com Ghidra ou REA). Prevalece
    quando a prova existe.
-2. **OpenBound em C#** (`~/Workspaces/Gunbound`, somente leitura). Preenche o que ainda não
-   foi provado no cliente.
-3. **Adaptação declarada.** Quando nenhuma fonte fecha a questão, a regra fica registrada
-   como adaptação, sem alegar paridade.
+2. **Projetos jglim** (TestClient e servidor), como referência do que se está reescrevendo.
+   O servidor sozinho não prova o render do cliente.
+3. **Adaptação declarada.** Quando o cliente ainda não fecha a questão, a regra fica
+   registrada como adaptação, sem alegar paridade, até ser portada.
+
+Versões posteriores do jogo, como o OpenBound (Season 2), estão fora do escopo deste
+repositório ([ADR-132](docs/sdd/DECISIONS.md)). O que ainda vem dessa fase é adaptação
+herdada, a substituir pelo cliente.
 
 Física, colisão e apresentação são contratos separados. Cada um exige a sua prova: oráculo
 independente para números, captura GPU temporal para animação, escuta e interação para som
@@ -89,7 +109,7 @@ tarefa está em [docs/sdd/TASKS.md](docs/sdd/TASKS.md).
 
 - Armor S2 com dois impactos, Trico S2 e Dragon S2/SS (família de rajadas).
 - Satélites do Knight, ricochetes do Grub e campo do Ice.
-- Revisão pelo cliente de Bigfoot, Nak e Boomer. Bigfoot usa ataques do C#, e Nak e Boomer
+- Revisão pelo cliente de Bigfoot, Nak e Boomer. Bigfoot usa ataques herdados, e Nak e Boomer
   têm porte parcial.
 - Dano, colisão, apoio e parede comuns. Hoje são adaptados fora das famílias já revisadas.
 - A máquina não se move nem usa itens. Mouse Speed segue desligado.
@@ -102,7 +122,8 @@ Planos de porte: [BATTLE_MOBILE_FAMILY_PLANS](docs/sdd/BATTLE_MOBILE_FAMILY_PLAN
 
 1. Ajustes de desktop depois do feedback: balanceamento, máquina, controles e apresentação.
 2. Builds de Windows e Linux. A engine também mantém Android e iOS possíveis.
-3. Multiplayer: autoridade, sincronização, salas, reconexão e segurança.
+3. Reescrita do servidor (jglim/gunbound-server) e multiplayer: autoridade, sincronização,
+   salas, reconexão e segurança.
 4. Ranking (retirado do treino offline), modos 2×2 e outros formatos.
 5. Mobile: interface de toque, Android, iOS e progresso compartilhado.
 6. Contas, campanha e distribuição.

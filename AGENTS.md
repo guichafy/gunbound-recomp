@@ -4,15 +4,38 @@ Leia primeiro `docs/sdd/HANDOFF.md`, depois `docs/sdd/SPEC.md` e
 `docs/sdd/DESIGN.md`. `docs/sdd/README.md` explica a organização SDD.
 Converse com o usuário em português.
 
+## Objetivo do projeto
+
+Reescrever em Godot, com fidelidade, os projetos de referência
+[jglim/gunbound-launcher](https://github.com/jglim/gunbound-launcher) (launcher e
+TestClient do cliente Thor's Hammer) e
+[jglim/gunbound-server](https://github.com/jglim/gunbound-server) (emulador do
+servidor). A meta é manter o comportamento original e, sobre essa base, dar
+suporte multiplataforma (macOS, Windows, Linux, Android e iOS) e permitir novas
+funcionalidades. A etapa atual cobre o cliente em treino offline 1×1; servidor,
+rede e multiplayer seguem no roadmap e só entram com pedido do usuário.
+Extensões e modernizações são declaradas como tais, nunca misturadas ao porte fiel.
+
+## Escopo de fontes — ADR-132
+
+Este repositório porta apenas o cliente clássico **GunBound Thor's Hammer**.
+OpenBound (versão Season 2, diferente) está fora do escopo: não consultar, não
+anexar como pasta adicional e não usar como fonte de regra, dado ou arte. Onde
+o cliente ainda não comprova um comportamento, o porte fica como adaptação
+declarada. Regras e assets herdados dessa fase continuam ativos até serem
+substituídos pelo cliente; a pasta `assets/openbound/` mantém o nome histórico
+e suas atribuições/licença. Registros antigos em `docs/sdd` citam o OpenBound
+como histórico, não como instrução.
+
 ## Restauração Bigfoot/Mage 0.20.3 — caminho atual
 
 Pedido posterior substitui a preservação HD desses dois mobiles na ADR-088.
 Ler docs/sdd/ORIGINAL_MAGE_BIGFOOT.md e ADR-089. Catálogo ativo usa
-ClassicSprite/ClassicMageSprite e subpastas assets/openbound/{mage,bigfoot}/original
+ClassicSprite/ClassicMageSprite e subpastas `original/` de mage e bigfoot
 (tank2/tank5, EPA, contato e RiderPivot nativos). Escala igual aos demais
 clássicos; tiros/impactos/miras/auras originais. HD anterior preservado em disco;
 avatares/equipamentos e regras mantidos. Mage T1/T2 conservam composição
-OpenBound adaptada, sem alegação de paridade integral do laser.
+adaptada, sem alegação de paridade integral do laser.
 Harness 8059 checks +17 Python +29 partidas aprovado; galeria GPU210 frames,
 pausa30 idênticos; app/ZIP0.20.3 assinados, PCK44/0. Aceite visual do usuário,
 escuta/mouse e captura específica menu/loja/arena pendentes (timeout UI).
@@ -34,7 +57,7 @@ Teste test_shop_original; captura tests/capture_shop_original.gd.
 
 ## Estado e escopo
 
-Protótipo 0.20.3 em Godot 4.7.2 + GDScript (versão única em
+Protótipo 0.20.5 em Godot 4.7.2 + GDScript (versão única em
 `application/config/version` do `project.godot`), identidade "Gunbound Recomp"
 (app/ZIP/bundle renomeados; documentos históricos citam o nome anterior
 "Brisa de Aço"). Escopo:
@@ -49,37 +72,30 @@ no roadmap; não os implemente sem uma nova solicitação. A engine deve preserv
 a possibilidade de exportar para macOS, Windows, Linux, Android e iOS.
 O usuário quer aprender com o resultado e validar um protótipo funcional.
 
-Pedido posterior ao baseline: integrar assets reais e mobiles do OpenBound,
-incluindo Bigfoot. A restrição de arte original descreve a entrega anterior e
-não veta essa nova solicitação. Ver `docs/sdd/ORIGINAL_ASSETS.md`: pacote externo
-recebido e validado em `.tools/source-assets/content/`, 813 arquivos. Bigfoot já
-integrado visualmente com piloto/quadros/projéteis em `assets/openbound/bigfoot/`.
-Mage substitui Carapaça com escudo/regen, mira própria, duplo laser helicoidal e
-EMP; ver `docs/sdd/MAGE_0_4.md`. Bigfoot tem T1 com 4 bombas, T2 duas rajadas de 3 e SS com 8, com lançamentos
-temporizados, dados/Fx/áudio originais e adaptações descritas em
-`docs/sdd/BIGFOOT_ATTACKS_0_5.md`. Itens entraram em 0.13 (ver seção abaixo);
-o roster completo entrou em 0.19 e os portes especiais restantes estão nos planos por família. A paridade de Mage e Bigfoot com o C#
-(escudo, SS, dano, caixa, queda) está em `docs/sdd/MOBILE_PARITY.md`. Ao portar
-outro mobile, siga `skills/gunbound-mobile-port/SKILL.md`. O C# não aplica uma
-tabela de resistências no dano; regen de vida é 0 nestes dois e 10 nos biônicos.
-Não pedir novamente caminho/ZIP/link. Ver `docs/sdd/BIGFOOT_0_3.md` e `docs/sdd/MAGE_0_4.md`.
+Mage tem escudo/regen, mira própria, duplo laser helicoidal e EMP, revisados
+pelo cliente (ADR-126/128/129). Bigfoot tem T1 com 4 bombas, T2 duas rajadas de 3
+e SS com 8, ainda como adaptação herdada (`docs/sdd/BIGFOOT_ATTACKS_0_5.md`).
+Itens entraram em 0.13 (ver seção abaixo); o roster completo entrou em 0.19 e os
+portes especiais restantes estão nos planos por família. Estado por mobile em
+`docs/MOBILES.md`. Ao portar outro mobile, siga a skill gunbound-client-port.
 
 ## Porte fiel do cliente e próxima modernização
 
 Usar `skills/gunbound-client-port/SKILL.md` (`$gunbound-client-port`) ao
 reescrever comportamento do cliente no Godot ou investigar diferenças de
 fidelidade. A skill reúne REA, evidência, aritmética, animação/raster e
-validação; complementa gunbound-mobile-port e gunbound-classic-hd.
+validação; complementa gunbound-classic-hd.
 O usuário autorizou engenharia reversa do binário client-side para informar
 e ajustar o porte. Cliente original comprovado prevalece; onde faltar prova,
-manter C#/adaptação identificados, sem anunciar paridade integral.
+manter a adaptação identificada, sem anunciar paridade integral.
 Ghidra headless é o caminho preferencial da skill, com runner/exportador
 incluídos. Ler `references/ghidra.md` e `docs/sdd/GHIDRA_SKILL_VALIDATION.md`.
 Ghidra12.2 direto funciona; REA6.7.0 aceita apenas12.1.x. Não confundir a
 compatibilidade do conector com a análise direta, nem copiar C decompilado
 sem confirmar ABI, ASM, LUTs e consumidores.
-Referências: jglim/gunbound-launcher (TestClient) e jglim/gunbound-server;
-servidor não comprova sozinho o render do cliente nem amplia o escopo offline.
+Projetos-alvo da reescrita: jglim/gunbound-launcher (TestClient) e
+jglim/gunbound-server. O servidor não comprova sozinho o render do cliente e,
+nesta etapa, não amplia o escopo offline.
 Preservar todos os 16 mobiles, avatares/equipamentos e HD já aprovados
 (avatares e loja: ADR-130 trocou o uso ativo do HD pelos originais).
 Modernização do design de mobile/avatar fica para uma etapa posterior
@@ -160,20 +176,9 @@ sem alterar a mecânica; paraTurtle isso foi substituído pelaADR-086. Contato A
 
 Dano/colisão refinada/tornado e famílias ASate/JD/Aduka/Grub/Knight não são
 paridade nativa completa; seguir `BATTLE_MOBILE_FAMILY_PLANS.md` em novo porte.
-Preservar originais/HD, perfil real e C#. Override local de certificados não
+Preservar originais/HD e perfil real. Override local de certificados não
 pode ser exportado. Rodar harness com modelos, cenas e 29 partidas previstas
 (13 seeds+16 mobiles); `--quick` omite as duas suítes de partidas.
-
-## Referência C# em `~/Workspaces/Gunbound`
-
-`/Users/guichafy/Workspaces/Gunbound` é o projeto open source em C# (OpenBound)
-que estamos reescrevendo em Godot neste repositório, com algumas melhorias e
-preferências do usuário. Está configurado como pasta adicional das sessões
-(devin-cli `.devin/config.json`, Claude Code `.claude/settings.json`, Codex
-`~/.codex/config.toml`). Consulte-o como fonte de dados, mecânicas e assets
-originais; não modifique essa fonte sem solicitação explícita. No Devin CLI,
-`/add-dir /Users/guichafy/Workspaces/Gunbound` anexa a pasta como workspace
-extra da sessão quando necessário.
 
 ## Trabalho orientado por especificação
 
@@ -262,7 +267,7 @@ Assets scarab/tortoise mantidos como histórico, excluídos do export macOS;
 
 ## Mapa Miramo Town 0.8 — estado atual
 
-Arena padrão é Miramo Town A do OpenBound (ID20), arena fixa 1280×800, escolhas
+Arena padrão é Miramo Town A (ID20), arena fixa 1280×800, escolhas
 do usuário. Ler MAP_0_8.md. Colisão = alpha do ForegroundA original amostrado
 na grade 640×400 (maps.gd/terrain.load_map); HD foreground_a.png é só visual,
 alpha = máscara original. Crateras apagam HD e escurecem anel ×0,4. Spawns
@@ -278,15 +283,15 @@ Ler WEATHER_CAMERA_0_9.md. Mundo do mapa é nativo 1:1 (1800×1800, grade
 900×900); ADR-044 substitui a arena fixa/escala de 0.8. Câmera em game.gd
 (seguimento 1/25, arrasto). Vento 2D e clima/Thor ficam em weather.gd e no laço
 comum de match.gd; previsão da CPU sempre simula em cópias. Wind fixtures usam
-Vector2; fixtures com literal 640 pedem `start(..., "")`. Arte/sons originais
-em assets/openbound/weather e thor. Usuário decidiu: sem outros mapas nem HD
+Vector2; fixtures com literal 640 pedem `start(..., "")`. Arte/sons herdados
+em assets/openbound/weather e thor (nome histórico). Usuário decidiu: sem outros mapas nem HD
 novo. Testes test_weather.gd/test_map.gd; capturas capture_weather.gd e
 capture_map.gd (docs/weather, docs/map).
 
 ## HUD original 0.10 — estado atual
 
-Ler HUD_0_10.md. HUD do OpenBound em hud_art.gd (offsets HUD.cs, tela virtual
-800×500 × 1,6; mundo 1280×664). Sprites originais em assets/openbound/hud;
+Ler HUD_0_10.md. HUD de batalha em hud_art.gd (offsets herdados, tela virtual
+800×500 × 1,6; mundo 1280×664). Sprites herdados em assets/openbound/hud;
 HD 3× GPT Images em assets/hd/hud via scripts/build_hud_hd.py (folhas brutas
 em hud/source com .gdignore; rodar `refs`, gerar, depois sem argumento).
 Carga original 0→100 em 2 s (+2/0,04 s); Tab/F8/↑↓ do original; extras
@@ -349,7 +354,7 @@ por gênero e unissex compartilhado. ShopModel mantém preview temporário;
 Profile valida/transaciona com rollback. PlayerAttributes:10por avanço do nível
 local,180total,50por atributo. Atores copiam atributos/equipamento no start;
 CPU/previsão usam mesmas regras. AvatarArt substitui piloto no rig quando
-recebe contexto; legado preservado sem contexto. GoldRewards segue fluxo C#
+recebe contexto; legado preservado sem contexto. GoldRewards segue fluxo herdado
 4/1resultado, Popularity cumulativa; XP separado. ItemDelay fórmula apenas
 até integrar código de itens. Assets originais, sem novo HD. Suites
 test_avatar_catalog/profile/shop/art, test_attributes e test_gold_rewards;
@@ -357,7 +362,7 @@ capture_avatar_shop gera capturas GPU e smoke separado confere PCK exportado.
 
 Encaixe0.14.1 (ADR-060): AvatarArt usa origem Body via registro nativo do
 MobileSprite no rig, não o pivô hip do pilot_side nem offset(0,−8). Chassis
-oculta parte inferior das peças equipadas como no C#. Ver AVATAR_MOUNT_FIX.md
+oculta parte inferior das peças equipadas. Ver AVATAR_MOUNT_FIX.md
 e test_avatar_mount24; comparação em docs/avatar-shop/mount-comparison.png.
 
 Avatares HD0.14.2 (ADR-061):13peças em5folhas GPT Images1254×1254, constantes
@@ -395,8 +400,8 @@ efeito de uma tarefa apenas de arte.
 Substituído pela ADR-130 na loja e nos avatares ativos; histórico abaixo.
 
 Ler AVATAR_SHOP_CLASSIC_0_14_5.md/ADR-064. Primeira foto do usuário define3×3,
-nove itens/página e inventário lateral vestível sempre visível. Fonte C# mantém
-catálogo/preços15registros; não inventar chapéus ou stats da imagem. Atributos
+nove itens/página e inventário lateral vestível sempre visível. Catálogo da época mantinha
+preços15registros; não inventar chapéus ou stats da imagem. Atributos
 em modal separado, confirmar/cancelar com rollback. Cards166×147, janela146×90,
 retratos126×78 com aspecto preservado. Test test_avatar_shop_classic e captura
 capture_avatar_shop_classic em1920×1080/120frames60Hz; smoke separado do PCK.
@@ -407,7 +412,7 @@ Branch/worktree preservados como referência, sem publicação.
 ## Nak 0.15 — estado atual
 
 Ler docs/sdd/NAK_0_15.md (REQ-43, ADR-074). Terceiro mobile, ID 3, contra o
-Mage na CPU; 1↔2 inalterado. Fork não tem o Nak: arte/flipbook/dano/voo vêm do
+Mage na CPU; 1↔2 inalterado. Arte/flipbook/dano/voo vêm do
 cliente original (jglim/gunbound-launcher TestClient, baixado com autorização em
 `.tools/gunbound-client/`) lido por `scripts/gunbound_xfs.py` (entradas em blocos
 LZHUF de 4 KB) e `scripts/import_nak_assets.py`. S2 `burrow` (vy ÷ 2, sobe 2×
@@ -422,11 +427,11 @@ tests/capture_nak.gd (docs/nak). Seeds 91–93 de test_matches jogam com o Nak.
 
 Ler docs/sdd/BATTLE_RULES_AUDIT.md (REQ-44, ADR-076). Política do usuário:
 regra original comprovada por engenharia reversa (GunBound-Decomp + `.dat`
-do cliente) prevalece; senão vale o C#. Delay original = `[28]` base + custo
+do cliente) prevalece; senão vale a adaptação declarada (ADR-132). Delay original = `[28]` base + custo
 do tiro `[30/31/32]` + segundos inteiros gastos até o disparo × `[29]` (10).
 `TurnTable.shot_cost` serve à agenda e à prévia. Turno 30 s; passe 200 sem
 tempo; abertura sorteada (`Match.RANDOM_OPENING`; fixtures usam o padrão
-PLAYER e testes de cena fixam `opening = 0`). Balística do C#: gravidade
+PLAYER e testes de cena fixam `opening = 0`). Balística herdada (0.18, substituída pela 0.20): gravidade
 196, força × 100 / massa 14, vento × 1,2; piso de força 15 e relógio real
 mantidos. Nak 770/920/1320, Mage 730/regen 30, itens do `itemdata.dat`.
 Mantidos: empate de iniciativa para o outro, empate por morte dupla, passe

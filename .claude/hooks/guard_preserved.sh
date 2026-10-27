@@ -7,8 +7,6 @@ case "$file" in
 		reason="metadados do Godot (.gd.uid/.png.import) devem ser preservados" ;;
 	*/override.cfg|override.cfg)
 		reason="override.cfg é local (certificados) e não pode ser editado nem exportado" ;;
-	/Users/guichafy/Workspaces/Gunbound/*)
-		reason="referência C# (OpenBound) é somente leitura sem solicitação explícita" ;;
 	*) exit 0 ;;
 esac
 echo "Bloqueado: $file — $reason. Peça autorização ao usuário se for intencional." >&2

@@ -8,9 +8,10 @@ essa cópia do projeto para princípios de geração/registro/animação.
 
 - Godot: `/Users/guichafy/Workspaces/DemoGame`; leia AGENTS.md e
   `docs/sdd/HANDOFF.md` → SPEC.md → DESIGN.md antes de alterar comportamento.
-- C# OpenBound: `/Users/guichafy/Workspaces/Gunbound`, fonte de mecânicas,
-  metadados e arte; não modificar a referência para ajustar um derivado.
-- Originais integrados: `assets/openbound/`, `assets/xfs/` e `assets/classic/`;
+- Cliente original: `.tools/gunbound-client/` (XFS/DAT) e o PE fixado na skill
+  gunbound-client-port; fonte de arte, metadados e pivôs.
+- Originais integrados: `assets/xfs/`, `assets/classic/` e as subpastas
+  `original/` (a pasta `assets/openbound/` tem nome histórico);
   derivados: `assets/hd/`. `assets/classic/manifest.json` descreve as janelas
   e a ordem dos estados dos botões de lobby/sala. Use-o como metadado,
   mantendo cada PNG como sua única referência visual na restauração.

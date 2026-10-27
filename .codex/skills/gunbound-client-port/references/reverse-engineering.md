@@ -4,13 +4,12 @@
 
 Identificar distribuição/build/região do cliente e SHA-256 do PE e dos
 XFS/DAT relevantes. Registrar commit das fontes consultadas. Reusar a cópia
-local existente; preservar binários e fonte C# sem edição.
+local existente; preservar binários sem edição.
 
 | Fonte | Uso |
 |---|---|
 | Cliente compatível: instruções + dados + ramo ativo | Regra nativa comprovada |
 | Captura/trace do mesmo cliente | Comportamento observado naquele cenário |
-| OpenBound C# | Referência legível e fallback onde falta prova nativa |
 | Emulador de servidor | Protocolo/dados; conferir o que realmente implementa |
 | Vídeo/lembrança | Hipótese visual a investigar |
 
@@ -22,7 +21,8 @@ Fontes públicas indicadas pelo usuário:
 Abrir as fontes e conferir a versão usada. Launcher não equivale ao código
 do jogo; servidor não comprova sozinho animação/física do cliente. Quando
 fontes discordarem, localizar o ramo ativo e registrar a divergência.
-Não misturar constantes de builds diferentes.
+Não misturar constantes de builds diferentes nem de versões posteriores do
+jogo (Season 2 e derivados ficam fora deste projeto).
 
 ## Escolher o caminho de análise
 
@@ -74,6 +74,6 @@ executado. Para observar o cliente, usar ambiente de teste isolado/offline
 apropriado. O porte não autoriza publicação, conexão a serviços externos ou
 adição de multiplayer ao protótipo.
 
-Se faltar evidência, manter o fallback existente identificado e registrar a
+Se faltar evidência, manter a adaptação existente identificada e registrar a
 pergunta exata, pesquisa feita e próximo experimento. Não inventar dano,
 resistência, som ou arte para preencher uma lacuna.

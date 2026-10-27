@@ -1,6 +1,6 @@
 ---
 name: gunbound-client-port
-description: "Use when porting GunBound Thor's Hammer client behavior to Godot/GDScript, analyzing its binary with Ghidra or REA, comparing OpenBound C# with native rules, or correcting mobile, projectile, avatar, EPA, XFS, timing, animation or rendering discrepancies."
+description: "Use when porting GunBound Thor's Hammer client behavior to Godot/GDScript, analyzing its binary with Ghidra or REA, separating proven native rules from declared adaptations, or correcting mobile, projectile, avatar, EPA, XFS, timing, animation or rendering discrepancies."
 ---
 
 # GunBound client → Godot
@@ -17,9 +17,9 @@ Preservar IDs, elenco, avatares, equipamentos, perfil e HD aprovados.
 Modernizar o design em etapa própria, quando solicitada.
 
 Consultar [mapa do projeto](references/project.md) em Gunbound Recomp.
-Usar **gunbound-mobile-port** para detalhes do fallback C# e
-**gunbound-classic-hd** para registro/rig/efeitos HD; evidência nativa
-comprovada prevalece sobre aproximações dessas referências.
+Usar **gunbound-classic-hd** para registro/rig/efeitos de arte; evidência
+nativa comprovada prevalece sobre aproximações. Este repositório cobre só o
+cliente clássico Thor's Hammer; versões posteriores do jogo ficam fora.
 
 ## Investigar e portar
 

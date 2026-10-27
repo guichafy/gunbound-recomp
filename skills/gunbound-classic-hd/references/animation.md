@@ -33,7 +33,7 @@ conserva seu próprio calendário e geometria original.
 Defina os espaços antes de calcular: origem do ator, apoio/chão, pivô do
 atlas, Body e quadris do piloto inteiro são pontos distintos.
 
-No OpenBound, RiderPivot registra **Body**, não o quadril do mestre HD.
+No cliente, RiderPivot registra **Body**, não o quadril do mestre HD.
 Na base visual do apoio, sejam `R` RiderPivot idle, `c=contact_y-pivot_y`,
 `H` largura nativa do hull e `W` largura do hull nessa base:
 

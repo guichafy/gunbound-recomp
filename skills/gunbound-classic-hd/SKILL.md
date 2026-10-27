@@ -1,6 +1,6 @@
 ---
 name: gunbound-classic-hd
-description: "Use quando a tarefa envolver ampliar ou suavizar imagens, botões, sprites e atlas Gunbound Classic/OpenBound em HD/4×, validar fidelidade/alpha/quadros, animar mobiles/avatares ou corrigir tremor, anatomia, proporção e encaixe."
+description: "Use quando a tarefa envolver ampliar ou suavizar imagens, botões, sprites e atlas Gunbound Classic em HD/4×, validar fidelidade/alpha/quadros, animar mobiles/avatares ou corrigir tremor, anatomia, proporção e encaixe."
 ---
 
 # Gunbound Classic: ampliação conservadora e animação

@@ -1,5 +1,13 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Objetivo e escopo de fontes — ADR-132
+
+Reescrever com fidelidade jglim/gunbound-launcher (TestClient) e jglim/gunbound-server,
+com suporte multiplataforma e extensões declaradas. Etapa atual: cliente em treino
+offline 1×1. Fonte de regra: cliente comprovado; onde faltar prova, adaptação
+declarada. OpenBound (Season 2) está fora do escopo; menções nas seções abaixo
+descrevem a origem histórica de regras ainda adaptadas, não uma instrução.
+
 ## Partículas em voo Mage — REQ-07/08/09/24/44
 
 Substituir a apresentação adaptada deForce/eletricidade nos tirosMage pelos

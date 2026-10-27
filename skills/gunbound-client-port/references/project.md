@@ -2,7 +2,9 @@
 
 Resolver caminhos a partir da raiz do checkout, nunca de um usuário fixo.
 Ler `docs/sdd/HANDOFF.md`, `SPEC.md`, `DESIGN.md`, `TASKS.md` e decisões
-vigentes. O projeto é treino offline 1×1; versão em `project.godot`.
+vigentes. O projeto reescreve com fidelidade jglim/gunbound-launcher (TestClient)
+e jglim/gunbound-server, com suporte multiplataforma e extensões declaradas; a
+etapa atual é o cliente em treino offline 1×1; versão em `project.godot`.
 
 ## Preservação e fontes
 
@@ -13,9 +15,9 @@ perfil, avatares e HD aprovados. REA do cliente está autorizada para informar
 os portes; modernização visual fica para etapa posterior solicitada.
 
 Reusar `.tools/gunbound-client/` e os caminhos de referência no AGENTS atual;
-não pedir novamente ZIP/link já disponível. OpenBound C# fica na pasta
-adicional Gunbound, somente leitura. Repositórios jglim são fontes auxiliares
-identificadas em reverse-engineering.md.
+não pedir novamente ZIP/link já disponível. Repositórios jglim são fontes
+auxiliares identificadas em reverse-engineering.md. A pasta `assets/openbound/`
+tem nome histórico; não é instrução de usar outra versão do jogo como fonte.
 
 Ghidra direto: ler `references/ghidra.md`. Instalação avaliada:
 `/opt/homebrew/Cellar/ghidra/12.2/libexec`, JDK25 Homebrew. PE local existente:

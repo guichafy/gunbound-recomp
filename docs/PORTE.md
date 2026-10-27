@@ -9,6 +9,12 @@ Este documento resume a vocação do projeto. O procedimento operacional é a sk
 
 ## O que se busca
 
+O projeto reescreve em Godot os projetos
+[jglim/gunbound-launcher](https://github.com/jglim/gunbound-launcher) (launcher e TestClient)
+e [jglim/gunbound-server](https://github.com/jglim/gunbound-server), mantendo o jogo fiel e
+acrescentando suporte multiplataforma e funcionalidades novas. Extensões são declaradas como
+tais e não alteram o comportamento original. A etapa atual é o cliente.
+
 Reproduzir no Godot o comportamento do GunBound Thor's Hammer que se pode provar a partir
 do cliente original, e manter o resultado visual que o usuário já aprovou. O usuário
 autorizou a engenharia reversa do binário do lado do cliente para isso.
@@ -21,9 +27,12 @@ está registrada.
 | Ordem | Fonte | Uso |
 |---|---|---|
 | 1 | Cliente original: `GunBound.gme` e os arquivos XFS/DAT em `.tools/` | Prevalece quando o comportamento está comprovado |
-| 2 | OpenBound em C# (`~/Workspaces/Gunbound`) | Preenche o que o cliente ainda não comprovou |
-| 3 | Repositórios jglim (TestClient e servidor) | Fontes auxiliares. O servidor não prova o render do cliente |
-| 4 | Adaptação declarada | Último recurso, sempre identificado como tal |
+| 2 | Projetos jglim (TestClient e servidor) | Alvo da reescrita e referência. O servidor não prova o render do cliente |
+| 3 | Adaptação declarada | Enquanto falta prova, sempre identificada como tal |
+
+O OpenBound é uma versão diferente do jogo (Season 2) e não é fonte deste projeto
+(ADR-132). Regras e assets que vieram dele numa fase anterior contam como adaptação
+herdada. A pasta `assets/openbound/` mantém o nome histórico e as atribuições.
 
 Os caminhos e hashes fixados estão em
 [references/project.md](../skills/gunbound-client-port/references/project.md).
@@ -35,7 +44,7 @@ Cada célula da matriz de um porte recebe uma das quatro classes:
 - **Comprovada:** lida no ASM, nas tabelas ou nos dados do cliente, com o consumidor real
   localizado.
 - **Derivada:** calculada a partir de dados comprovados, com a derivação registrada.
-- **Adaptada:** vem do C# ou de uma decisão local, porque falta prova.
+- **Adaptada:** herdada de uma fase anterior ou decidida localmente, porque falta prova.
 - **Pendente:** ainda não investigada.
 
 ## Contratos separados

@@ -1,5 +1,11 @@
 # Design implementado
 
+## Fontes — ADR-132
+
+Comportamento novo vem do cliente Thor's Hammer comprovado. Menções a OpenBound/C#
+nas seções abaixo descrevem origem histórica de partes ainda adaptadas; a pasta
+`assets/openbound/` mantém o nome. Substituir pelo cliente ao portar cada parte.
+
 ## Partículas Mage em voo — ADR-129
 
 O scanner nativo existente publica `mage_spark_samples` comoPackedInt32Array

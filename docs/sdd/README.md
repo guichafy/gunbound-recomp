@@ -21,13 +21,13 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 | [DESIGN.md](DESIGN.md) | Arquitetura implementada, estados, contratos e invariantes |
 | [DECISIONS.md](DECISIONS.md) | Decisões, motivos e consequências |
 | [TASKS.md](TASKS.md) | Entregas, rastreabilidade, tarefas abertas e roadmap |
-| [GUNBOUND_REFERENCES.md](GUNBOUND_REFERENCES.md) | Pesquisa dos três vídeos e do fork OpenBound, com origem e limites dos assets |
+| [GUNBOUND_REFERENCES.md](GUNBOUND_REFERENCES.md) | Histórico: pesquisa dos três vídeos e do pacote externo, fora do escopo pela ADR-132 |
 | [REFINEMENT_0_2.md](REFINEMENT_0_2.md) | Design aprovado, plano e evidência da entrega 0.2 |
-| [ORIGINAL_ASSETS.md](ORIGINAL_ASSETS.md) | Pedido de mobiles reais, auditoria do fork e arquivos externos necessários |
+| [ORIGINAL_ASSETS.md](ORIGINAL_ASSETS.md) | Histórico: pedido de mobiles reais e pacote externo, fora do escopo pela ADR-132 |
 | [BIGFOOT_0_3.md](BIGFOOT_0_3.md) | Recorte, plano e limites da integração Bigfoot 0.3 |
 | [MAGE_0_4.md](MAGE_0_4.md) | Mage: assets, ataques, escudo, adaptações e validação 0.4 |
 | [BIGFOOT_ATTACKS_0_5.md](BIGFOOT_ATTACKS_0_5.md) | T1/T2/SS Bigfoot: emitter, regras, áudio/Fx e validação 0.5 |
-| [ITEMS_0_13.md](ITEMS_0_13.md) | Itens de batalha: regras do OpenBound, Select Item, arte HD e validação 0.13 |
+| [ITEMS_0_13.md](ITEMS_0_13.md) | Itens de batalha: regras herdadas, Select Item, arte HD e validação 0.13 |
 | [QUALITY_REVIEW.md](QUALITY_REVIEW.md) | Revisão de qualidade 0.18.6: achados P1–P4, plano, portões e escopo reduzido |
 | [AVATAR_CLASSIC_CATALOG.md](AVATAR_CLASSIC_CATALOG.md) | Catálogo clássico versão 280 e códigos do servidor (REQ-46) |
 

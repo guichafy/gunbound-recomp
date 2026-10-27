@@ -8,7 +8,7 @@ por ADR no fim da tabela.
 | Versão | O que entrou |
 |---|---|
 | 0.1–0.2 | Partida 1×1, terreno destrutível, vento, dano, queda, fila por atraso, três dificuldades, pausa, ajuda, resultado, revanche e perfil local |
-| 0.3–0.5 | Bigfoot e Mage com sprites, áudio e ataques do pacote OpenBound. Bigfoot com salvas T1/T2/SS. Mage com escudo, regeneração, laser, hélice e EMP |
+| 0.3–0.5 | Bigfoot e Mage com sprites, áudio e ataques de um pacote externo, hoje fora do escopo (ADR-132). Bigfoot com salvas T1/T2/SS. Mage com escudo, regeneração, laser, hélice e EMP |
 | 0.6–0.6.4 | Arte HD, mobiles articulados, piloto no assento, tiros e impactos contínuos |
 | 0.7 | Nome Gunbound Recomp, aplicativo, perfil novo e `scripts/check.sh` |
 | 0.8–0.9 | Miramo Town A, câmera rolante, vento 2D, clima, Thor e partículas de chão |
@@ -32,3 +32,4 @@ por ADR no fim da tabela.
 | ADR-121 a 125 | Encaixe do piloto e combate do Aduka pelo cliente |
 | ADR-126 a 129 | Mage revisado pelo cliente: combate, climas secundários e partículas. Lightning revisado (ADR-127) |
 | ADR-130/131 | Avatar Shop e avatares com os quadros originais do cliente |
+| ADR-132 | OpenBound (Season 2) sai do escopo: skill de porte C# removida, docs e skills citam só o cliente |

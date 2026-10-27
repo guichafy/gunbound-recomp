@@ -1581,3 +1581,22 @@ ganham arquivo `_rle` (anterior preservado); frames da loja e derivados 4×
 foram regenerados. O catálogo grava `portrait_pivot`; o cliente desenha o
 retrato em card+(52,62)+pivô, confirmado nos nove cards da captura.
 Complementa a ADR-130 (que dizia 116 frames inalterados).
+
+## ADR-132 — objetivo jglim e OpenBound fora do escopo
+
+27/10/2026. Pedido do usuário: o objetivo do projeto é reescrever com fidelidade
+jglim/gunbound-launcher (launcher e TestClient do cliente Thor's Hammer) e
+jglim/gunbound-server, com suporte multiplataforma e novas funcionalidades sobre
+essa base. OpenBound é outra versão do jogo (Season 2) e sai do escopo: não é
+fonte de regra, dado ou arte, nem pasta anexada às sessões.
+
+Consequências: a skill gunbound-mobile-port foi apagada; `.claude/settings.json`,
+`.devin/config.json` e o hook deixam de anexar/proteger `~/Workspaces/Gunbound`;
+o agente fidelity-reviewer e as skills gunbound-client-port/gunbound-classic-hd
+citam só o cliente; `.claude/skills/gunbound-classic-hd` passa a link para
+`skills/`. A hierarquia vira cliente comprovado > projetos jglim > adaptação
+declarada. Regras e assets herdados dessa fase continuam ativos como adaptação
+até serem substituídos; `assets/openbound/` mantém nome, atribuição e licença.
+AGENTS, README e documentos de entrada foram limpos; registros e ADRs antigos
+ficam como histórico. Substitui a regra "senão vale o C#" da ADR-076 e o papel
+de fallback C# nas ADRs anteriores. Rede e servidor continuam no roadmap.

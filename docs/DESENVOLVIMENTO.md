@@ -47,10 +47,11 @@ editor não atualiza o `.app` já exportado. Confira a assinatura depois de cada
 | `scripts/*_effect.gd`, `*_combat.gd` | Efeitos e combate próprios das famílias portadas |
 | `scripts/lobby_screen.gd`, `menu_screen.gd` | Lobby e sala clássicos |
 | `scripts/avatar_shop.gd`, `classic_shop_art.gd` | Avatar Shop sobre os quadros originais |
-| `assets/openbound/`, `assets/xfs/` | Assets originais do OpenBound e do cliente |
+| `assets/xfs/`, `assets/classic/`, `*/original/` | Assets extraídos do cliente |
+| `assets/openbound/` | Assets herdados de uma fase anterior (nome histórico), a substituir pelo cliente |
 | `assets/hd/` | Derivados HD e 4×, preservados mesmo quando fora do uso ativo |
 | `tests/` | Suítes (`test_*.gd`) e capturas GPU (`capture_*.gd`) |
-| `skills/` | Skills de porte do cliente, de mobile e de arte clássica HD |
+| `skills/` | Skills de porte do cliente e de arte clássica HD |
 
 Uma leitura guiada do código está em [APRENDIZADO.md](APRENDIZADO.md). A arquitetura e os
 invariantes estão em [DESIGN.md](sdd/DESIGN.md). A origem da arte está em [ART.md](ART.md).

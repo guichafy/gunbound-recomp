@@ -7,7 +7,7 @@ As classes de evidência estão explicadas em [PORTE.md](PORTE.md).
 | ID | Mobile | Estado | Registro |
 |---|---|---|---|
 | 1 | Mage | Revisado pelo cliente: T1/T2/SS, força, climas secundários e partículas em voo. Aguarda aceite | [MAGE_CLIENT_REVIEW](sdd/MAGE_CLIENT_REVIEW.md), [MAGE_SECONDARY_WEATHER](sdd/MAGE_SECONDARY_WEATHER.md), [MAGE_FLIGHT_SPARKS](sdd/MAGE_FLIGHT_SPARKS.md) |
-| 2 | Bigfoot | Arte original, suavizada 4×. Ataques vêm do C#, com porte parcial de animações na 0.20.4 sem resultados registrados. Falta a revisão de combate pelo cliente | [ORIGINAL_MAGE_BIGFOOT](sdd/ORIGINAL_MAGE_BIGFOOT.md), [BIGFOOT_ATTACKS_0_5](sdd/BIGFOOT_ATTACKS_0_5.md), [BIGFOOT_SMOOTH_4X](sdd/BIGFOOT_SMOOTH_4X.md) |
+| 2 | Bigfoot | Arte original, suavizada 4×. Ataques herdados (adaptação), com porte parcial de animações na 0.20.4 sem resultados registrados. Falta a revisão de combate pelo cliente | [ORIGINAL_MAGE_BIGFOOT](sdd/ORIGINAL_MAGE_BIGFOOT.md), [BIGFOOT_ATTACKS_0_5](sdd/BIGFOOT_ATTACKS_0_5.md), [BIGFOOT_SMOOTH_4X](sdd/BIGFOOT_SMOOTH_4X.md) |
 | 3 | Nak | Arte, dano e voo com dados do cliente. Falta a revisão completa | [NAK_0_15](sdd/NAK_0_15.md) |
 | 4 | Armor | Balística comum. Falta o S2 com dois impactos | [BATTLE_MOBILE_FAMILY_PLANS §1](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
 | 5 | Trico | Balística comum. Falta o S2 de três componentes | [BATTLE_MOBILE_FAMILY_PLANS §1](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
@@ -33,7 +33,6 @@ alegada. A execução dinâmica do cliente original no Windows ainda não foi fe
 
 ## Portar um mobile
 
-Use a skill [gunbound-client-port](../skills/gunbound-client-port/SKILL.md). Para o
-fallback em C#, use [gunbound-mobile-port](../skills/gunbound-mobile-port/SKILL.md). Os
+Use a skill [gunbound-client-port](../skills/gunbound-client-port/SKILL.md). Os
 pré-requisitos e o aceite de cada família estão em
 [BATTLE_MOBILE_FAMILY_PLANS](sdd/BATTLE_MOBILE_FAMILY_PLANS.md).

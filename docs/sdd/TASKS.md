@@ -1,5 +1,14 @@
 # Entregas e próximos trabalhos
 
+## Objetivo jglim e OpenBound fora do escopo — ADR-132
+
+- [x] Objetivo jglim/multiplataforma/extensões em README, AGENTS, PORTE e skill.
+- [x] Apagar gunbound-mobile-port; desanexar `~/Workspaces/Gunbound`; limpar agente/hook.
+- [x] Limpar orientação vigente; registros antigos preservados como histórico.
+- [x] Capturas GPU atuais do README (`tests/capture_readme.gd`, `docs/readme`).
+- [ ] Remover `~/Workspaces/Gunbound` do `~/.codex/config.toml` (global, usuário).
+- [ ] Substituir pelo cliente o que ainda vem de `assets/openbound/` e o HD do Miramo/HUD.
+
 ## README e documentação de entrada — 27/10/2026
 
 - [x] README com visão, estado e TODOs; detalhe em `docs/PORTE.md`,

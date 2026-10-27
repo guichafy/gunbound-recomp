@@ -4,7 +4,7 @@
 
 Abra Avatar Shop e compare com a primeira imagem: três colunas, inventário
 lateral, prévia compacta e categorias no rodapé. Cabeças/corpos devem aparecer
-inteiros e centralizados, sem distorcer. O catálogo C# tem cinco cabeças
+inteiros e centralizados, sem distorcer. O catálogo da época tinha cinco cabeças
 masculinas, não os nove chapéus da foto, e mantém seus próprios preços.
 
 Compre uma peça, clique na sua linha em Meu Avatar e observe a prévia; volte
@@ -82,14 +82,14 @@ de 0.2 abaixo permanecem como histórico; o roteiro também serve para 0.3.
 7. No turno da máquina, o relógio some e um balão numerado aparece sobre ela nos últimos 20 s; o tique do relógio toca nos últimos 10 s.
 8. Ao acertar, o dano sobe como número vermelho e soma acertos seguidos; a barra de vida sob o mobile encolhe (azul = escudo do Mage; vermelha abaixo de 30%).
 9. F8 ou PASS passam o turno. ESC ou o botão ESC abre o popup OPTIONS original (o botão ESC fica desabilitado enquanto aberto): relógio, força e animações param e a carga é cancelada sem disparar. Arraste SFX (0 silencia), BGM (música de batalha; 0 silencia), Scroll Speed (arrastar o mapa fica mais lento/rápido) e Background Off (fundo preto); Aiming Mode, Mouse Speed e Interface aparecem esmaecidos. O popup aparece em HD. A barra de título arrasta a janela. Accept (✓) ou ESC fecham e gravam; reabra o jogo e confira que os valores voltam. P ou PAUSA abrem a pausa (recomeçar, menu, ajuda).
-   - Música (0.11): a batalha toca um tema original do OpenBound; ao terminar, outro aleatório; o menu fica sem música; "Som: desligado" na pausa silencia música e efeitos.
+   - Música (0.11): a batalha toca um tema herdado; ao terminar, outro aleatório; o menu fica sem música; "Som: desligado" na pausa silencia música e efeitos.
    - Mira Drag (0.12): no popup marque Aiming Mode → Drag e Accept. No seu turno, segure o botão esquerdo no mapa e arraste para a direita: a barra de força acompanha (largura da barra = 100) e treme se o cursor parar; soltar dispara uma vez (também soltando sobre a barra do HUD). Clique sem arrastar não atira; ESC durante o arraste cancela. Botão direito olha o mapa; Espaço continua funcionando. Volte para Slice e confira que o esquerdo só olha o mapa.
    - Itens (0.13): no menu, clique em **Itens**: o popup SELECT ITEM mostra as abas 2 Slots/1 Slot, nome colorido, Delay Cost e descrição ao passar o mouse; clique para equipar (até 6 slots) e clique na barra inferior para remover; Accept grava. Na batalha, os botões aparecem no painel F1–F6. Use Dual (clique ou F1): o SS fica cinza, a barra escurece, o Delayboard soma 80 e o tiro sai duas vezes (a segunda 1 s depois). No turno da máquina, clique num item para agendá-lo (aparece pressionado) e confira que ele é usado no início do seu turno e que o item usado antes sai da barra. Teleport: atire com S1/S2; um sinalizador ciano voa sem vento e, ao tocar o chão, o mobile aparece lá entre duas chamas. Em clima Ignorância a barra mostra ITEM LOCKED.
    - Performance (0.11): na troca para o turno da máquina não deve haver travada; a máquina dispara cerca de 1,9 s depois de o turno começar.
 10. Com mouse/toque: use ← → F e segure ● (acima da barra, à direita) para carregar e soltar. Arrastar a tela fora da barra olha o mapa.
 11. Termine uma partida e faça revanche; o G mostra o XP ganho no fim. Feche e reabra: apelido e progresso continuam.
 
-O roteiro das versões anteriores (0.2–0.9) valia para o console antigo, substituído pelo HUD do OpenBound em 0.10.
+O roteiro das versões anteriores (0.2–0.9) valia para o console antigo, substituído pelo HUD de batalha em 0.10.
 
 ## Evidência automatizada
 

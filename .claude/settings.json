@@ -1,9 +1,4 @@
 {
-  "permissions": {
-    "additionalDirectories": [
-      "/Users/guichafy/Workspaces/Gunbound"
-    ]
-  },
   "enabledPlugins": {
     "claude-code-setup@anthropic-plugin-directory": true
   },

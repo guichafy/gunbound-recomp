@@ -1,5 +1,21 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Objetivo jglim, OpenBound fora do escopo e capturas do README — ADR-132
+
+Pedido de27/10/2026: o projeto reescreve jglim/gunbound-launcher e
+jglim/gunbound-server com fidelidade, multiplataforma e extensões; OpenBound
+(Season 2) sai das instruções. Feito: skill gunbound-mobile-port apagada; pasta
+`~/Workspaces/Gunbound` desanexada (Claude settings, `.devin`, hook); agente,
+skills, AGENTS, README, PORTE/MOBILES/DESENVOLVIMENTO/HISTORICO, VALIDACAO,
+APRENDIZADO, topo de SPEC/DESIGN e sdd/README limpos. Registros antigos intactos
+como histórico. Código e `assets/openbound/` inalterados.
+
+Capturas: `tests/capture_readme.gd` (GPU 1920×1080, exit0, log sem ERROR) gerou
+lobby/sala/loja, um T1 real do Bigfoot (86 quadros) e `docs/readme/shot.gif/mp4`.
+Miramo e HUD ainda usam derivados HD/herdados: trocar pelo cliente é tarefa à
+parte. Pendente fora do repositório: `~/.codex/config.toml` ainda confia e dá
+escrita a `~/Workspaces/Gunbound` (configuração global do usuário, não alterada).
+
 ## README e documentação de entrada — 27/10/2026
 
 Pedido do usuário: README simples sobre a reescrita e seus TODOs, com o

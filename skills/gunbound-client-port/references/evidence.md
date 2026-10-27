@@ -12,7 +12,7 @@ grandes e binários na área local de pesquisa.
 | Ferramenta e cobertura | Versão Ghidra/REA, manifesto/comando/logs, entrada automática ou indicada; no fluxo direto, caminhos/hash em vez de IDs REA |
 | Contrato | Entradas, unidades, tipos, relógio, ordem e transições |
 | Confiança | Observado em execução / derivado de estática / inferido |
-| Decisão de porte | Comprovado / C# / adaptação / pendente; arquivos afetados |
+| Decisão de porte | Comprovado / derivado / adaptação / pendente; arquivos afetados |
 | Esperado independente | Derivação e amostras; origem distinta do produto |
 | Validação | Comandos, build/hash, resultados, frames/tempo e logs inspecionados |
 | Limites | O que foi exercitado; pergunta restante e próximo passo |
