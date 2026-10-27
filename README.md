@@ -54,7 +54,7 @@ Método completo em [docs/PORTE.md](docs/PORTE.md).
 | | |
 |---|---|
 | Versão do código | **0.20.5** (fonte única: `application/config/version` em `project.godot`) |
-| O que dá para jogar | Lobby → sala 1×1 → partida no Miramo Town A, loja, resultado, revanche e perfil local |
+| O que dá para jogar | Lobby → sala 1×1 → transição de 5 s com o mapa e os spawns → partida no Miramo Town A, loja, resultado, revanche e perfil local |
 | Última validação completa (ADR-137) | 110 suítes, 28.279 checks Godot, 88 testes Python e 29 partidas, zero falhas ([registro](docs/sdd/BATTLE_OPTIONS_NATIVE.md)) |
 | Aplicativo exportado | `builds/Gunbound Recomp.app` 0.20.5, **anterior** à loja original, aos assets e ao HUD corrigido (ADR-130/131/133/134/135/136/137). Reexporte para incluí-los |
 

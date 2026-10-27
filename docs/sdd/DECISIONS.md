@@ -1727,3 +1727,25 @@ validação por dimensão/hashRGBA. Originais/HD anteriores preservados;
 61atlasHUD/15entradas; sem alteração no decoder global, física, CPU ou perfil.
 Sem cliente Windows executado/escuta/aceite humano; sem versão/app/exportação,
 commit ou push. Regressão e capturas devem ser lidas no registro da entrega.
+
+## ADR-138 — tela de transição ao iniciar a partida
+
+Integrado à `main` local em 27/10/2026 (PR #5, branch `cursor/match-loading-screen-ba1a`).
+O PR numerava esta entrega como REQ-48/ADR-133, já usados pelos assets de
+batalha; foi renumerada para REQ-49/ADR-138 sem mudar o conteúdo.
+
+27/10/2026. O Start da sala mostra a tela de loading do cliente Thor's Hammer
+antes da batalha. No 1×1 local ela fica no mínimo 5 segundos: o tempo fixo
+substitui a espera de rede, que continua fora do escopo. A tela usa
+`load_back.img` e `load_stage01.img` (Miramo Town, rótulo no próprio bitmap;
+a máscara é o quadro 1). Os nomes seguem a conta de 0x004430c0: coluna
+`spawn_x * 748 / largura do mapa` e linha do primeiro pixel não zero da
+máscara, mais 18. Sem máscara, y = 122.
+
+Random é resolvido ao abrir a tela, não ao entrar na batalha. O card central
+e os dois lugares mostram o mobile sorteado (Dragon ou Knight). A partida
+recebe esses ids e os mesmos pontos de spawn. `start_match()` sem argumentos
+continua imediato, para a revanche e para as suítes que montam a batalha
+direto. A fórmula `map_id * 11 + lado` vista no carregamento do arquivo não
+foi usada para escolher o bitmap: o índice 11 é cópia do Cave, e o quadro
+com o rótulo MIRAMO TOWN é o `load_stage01`.

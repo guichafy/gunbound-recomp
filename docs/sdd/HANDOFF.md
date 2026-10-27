@@ -179,6 +179,37 @@ input/aceite humanos e execução do clienteWindows não realizados. Sem nova
 versão/export/app/PCK/ZIP, commit ou push; aplicativo exportado anterior não
 foi atualizado. Fonte permanece0.20.5. Perfil real não usado nas capturas/testes.
 
+## Tela de loading ao Start da sala — ADR-138 / REQ-49
+
+Integrado à `main` local em 27/10/2026 (PR #5, branch `cursor/match-loading-screen-ba1a`).
+O PR numerava esta entrega como REQ-48/ADR-133, já usados pelos assets de
+batalha; foi renumerada para REQ-49/ADR-138 sem mudar o conteúdo.
+
+Pedido de 27/10/2026: ao Start da sala, mostrar a transição do cliente (a
+imagem de referência é a loading com o mapa embaixo e os nomes nos spawns).
+No 1×1 local a tela fica no mínimo 5 segundos. Random já aparece resolvido.
+Não há rede nesta etapa.
+
+Fonte: `GunBound.gme` SHA-256 `4af6283d…`, `graphics.xfs` SHA-256 `a52f9f46…`.
+O painel é `load_back.img` (quadro 0, 800×244; quadro 1, barra 156×14).
+O mapa é `load_stage01.img` quadro 0, identificado pelo rótulo MIRAMO TOWN
+no bitmap. O quadro 1 é a máscara. Em 0x004430c0 a coluna é
+`spawn_x * 748 / largura` e a linha é o primeiro pixel não zero mais 18;
+sem máscara, y = 122. A largura do Miramo neste porte é 1800. A conta
+`map_id * 11 + lado` não seleciona esse arquivo: o índice 11 repete o Cave.
+
+`begin_loading` sorteia o mobile e um ponto por lado, desenha a tela e só
+então chama `start_match` com esses valores. `start_match()` direto e a
+revanche não esperam. A escolha Random da sala permanece pendente para a
+próxima visita.
+
+Validação: `test_match_loading` 21 checks, 0 falhas. `test_room_settings`,
+`test_room_reference` e `test_scene` conferem o Start e o caminho imediato.
+Captura GPU 1280×800 em `docs/match-loading/loading-random.png` (Knight/Knight,
+seed 7). Sem cliente Windows, sem escuta e sem aceite visual. Sem mudança de
+versão, app ou PCK. Partidas completas não foram reexecutadas: o caminho
+padrão de `Match.start` não muda quando não há override de spawn.
+
 ## Objetivo jglim, OpenBound fora do escopo e capturas do README — ADR-132
 
 Pedido de27/10/2026: o projeto reescreve jglim/gunbound-launcher e

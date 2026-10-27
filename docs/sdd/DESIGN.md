@@ -60,6 +60,16 @@ extraídos sob nomes históricos passam a caminhos xfs sem mudar UV/tick/regras.
 Som de turno recebe o papel do ator. Música permanece aleatória entre temas
 nativos. Lacunas ficam declaradas nos relatórios CLIENT_ASSETS_*.md.
 
+## Transição de partida — ADR-138
+
+`begin_loading` no Start da sala resolve Random, sorteia um ponto por lado
+com o mesmo critério de `Match.start` e segura a tela por `MatchLoading.HOLD`
+(5 s). `start_match()` direto, usado pelos testes e pela revanche, não espera.
+O painel inferior é `load_back.img`; o mapa é `load_stage01.img` (Miramo).
+A coluna do nome é `spawn_x * 748 / largura` e a linha é o primeiro pixel
+sólido da máscara mais 18, como em 0x004430c0. O override de spawn entra só
+quando a tela já mostrou os pontos.
+
 ## Fontes — ADR-132
 
 Comportamento novo vem do cliente Thor's Hammer comprovado. Menções a OpenBound/C#

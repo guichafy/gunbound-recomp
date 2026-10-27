@@ -52,6 +52,10 @@ var nickname_input: LineEdit
 var difficulty_buttons: Array[Button] = []
 var weather_buttons: Array[Button] = []
 var room_buttons: Array[BaseButton] = []
+var stage: Control
+var map_preview: TextureRect
+var loading_title: Label
+var loading_anchor := Vector2.INF
 var grid_buttons: Array[TextureButton] = []
 var grid_keys: Array[String] = []
 var vehicle_info: Label
@@ -115,7 +119,7 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	tag.add_theme_constant_override("outline_size", 3)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
 	tag.size = Vector2(96,42)
-	var stage: Control = Chrome.mount(root)
+	stage = Chrome.mount(root)
 	chrome.place(stage, "room_back", Vector2.ZERO)
 	build_header(stage,info)
 	figures = preload("res://scripts/room_figures.gd").new()
@@ -211,9 +215,13 @@ func build_slots(stage: Control) -> void:
 	cpu_random_preview.visible = false
 
 func build_centre(stage: Control, weather_label: String) -> void:
-	var preview := texture_rect(stage, "RoomMapPreview", room_art.frame("room_maps",1), Vector2(332,51),Vector2(136,84))
-	preview.mouse_filter = Control.MOUSE_FILTER_PASS
-	preview.tooltip_text = "Miramo Town A — mapa fixo do treino"
+	map_preview = texture_rect(stage, "RoomMapPreview", room_art.frame("room_maps",1), Vector2(332,51),Vector2(136,84))
+	map_preview.mouse_filter = Control.MOUSE_FILTER_PASS
+	map_preview.tooltip_text = "Miramo Town A — mapa fixo do treino"
+	loading_title = caption(stage, "", Vector2(336, 44), Vector2(128, 14), 11, Color("fff6d0"), true)
+	loading_title.name = "LoadingMobile"
+	loading_title.visible = false
+	loading_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	climate_weights.clear()
 	# O fundo original contém poços pretos. Repor somente essa base com uma
 	# amostra laranja limpa da textura ativa; os Labels não têm fundo próprio.
@@ -507,7 +515,7 @@ func build_bar(stage: Control) -> void:
 	room_buttons.append(change)
 	var start: TextureButton = text_button(stage, "START", Vector2(660, 552))
 	start.name = "Start"
-	start.tooltip_text = "Começa o treino com o ajuste gravado."
+	start.tooltip_text = "Mostra o mapa e onde cada piloto nasce, depois começa o treino."
 	start.pressed.connect(actions.start)
 	room_buttons.append(start)
 
@@ -846,6 +854,22 @@ func refresh_climate() -> void:
 			label = {"protection":"Lua","ignorance":"Eclipse","weakness":"—"}.get(label,label)
 		climate_weights[index].tooltip_text = "%s: peso %d"%[label,weights[index]] if native else "%s: peso %d\nEspelho: %d · Aleatório: %d" % [label,weights[index],weights[8],weights[9]]
 
+
+## The center window keeps the mobile's own art at its real aspect. Random is already rolled.
+func present_loading(player_id: int, cpu_id: int, preview: Texture2D) -> void:
+	if preview != null:
+		map_preview.texture = preview
+		map_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		map_preview.visible = true
+	loading_title.text = str(Mobiles.definition(player_id).name)
+	loading_title.visible = true
+	player_mobile.text = loading_title.text
+	player_mobile.visible = true
+	cpu_mobile.text = str(Mobiles.definition(cpu_id).name)
+	cpu_mobile.visible = true
+	loading_anchor = Vector2.INF
+	for button in room_buttons:
+		button.disabled = true
 
 func show_random(side: String) -> void:
 	if side=="cpu":

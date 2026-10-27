@@ -80,6 +80,14 @@ Evidência: `docs/client-assets/verified-source.json`.
 Registro: `CLIENT_ASSETS_PORT.md` e relatórios por grupo. Sem versão/app,
 commit/push. Escuta, cliente Windows executado e aceite humano são limites.
 
+## Transição de partida — ADR-138 / REQ-49
+
+- [x] Extrair `load_back` e `load_stage01` (Miramo + máscara) do `graphics.xfs`.
+- [x] Start da sala espera 5 s, mostra o mobile resolvido e os spawns no mapa.
+- [x] A batalha usa os mesmos mobiles e os mesmos pontos.
+- [x] `test_match_loading` 21/0; captura 1280×800 em `docs/match-loading`.
+- [ ] Aceite visual do usuário. Outros mapas e a espera real de rede ficam para quando existirem.
+
 ## Objetivo jglim e OpenBound fora do escopo — ADR-132
 
 - [x] Objetivo jglim/multiplataforma/extensões em README, AGENTS, PORTE e skill.
