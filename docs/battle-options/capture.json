@@ -1,0 +1,36 @@
+{
+	"audio": "muted",
+	"cases": [
+		{
+			"case": "slice",
+			"frames": 120,
+			"identical_paused_frames": 30,
+			"pause_sha256": "0128f6343753e0be65c71ee4fcadca3e14036b8db31d468bd1aaf0bab1553b53",
+			"resume": true
+		},
+		{
+			"case": "drag",
+			"frames": 120,
+			"identical_paused_frames": 30,
+			"pause_sha256": "1d960ec42bcede51b2b773bf757b0fc6cb77d73bee7cf5026895998153a6491c",
+			"resume": true
+		},
+		{
+			"case": "flight",
+			"frames": 120,
+			"identical_paused_frames": 30,
+			"pause_sha256": "f2add2adc2231aacca6165790869c63b937ecc3060e7c76193f0c30ba1e30d0a",
+			"resume": true
+		}
+	],
+	"clock_hz": 60,
+	"fallback_identical": true,
+	"frames": 360,
+	"input": "viewport clicks header/options/levels/OK/X/QUIT; ESC/P keys",
+	"native_sha256": "214600a681b72ab0b47668c875d2e95e682d99dadec58100ccbc4d22bd1f4d53",
+	"native_windows_client": "not executed",
+	"size": [
+		1920,
+		1080
+	]
+}

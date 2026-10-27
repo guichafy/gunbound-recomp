@@ -1,5 +1,15 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Menu clássico único na batalha — REQ-31/33/34/48 / ADR-137
+
+ESC/Options e o alias P abrem somente o painel play_option do cliente,
+sem o segundo menu de pausa ou botão PAUSA. Usar pixels/posição/estados e
+seleções discretas e curva de volume comprovados com REA. OK confirma; X/ESC cancelam a edição;
+QUIT retorna à sala no treino offline. Manter congelamento do treino como
+adaptação declarada. Sniper/MIDI/3d não portados ficam desabilitados.
+Substitui o layout herdado, sliders contínuos e o segundo menu de REQ-31.
+Contrato, fontes, plano e limites em `BATTLE_OPTIONS_NATIVE.md`.
+
 ## Background do footer — REQ-27/28/48 / ADR-136
 
 O rodapé deve preservar o fundo opaco RGB565 do cliente, inclusive pixels

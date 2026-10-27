@@ -6312,6 +6312,126 @@
         ]
       ]
     },
+    "b_option_confirm.img": {
+      "entry_sha256": "c2270c68653c52ed4602a4136004e3081c509ec7b70a89372ae2a21a0d2c13be",
+      "frames": 4,
+      "sizes": [
+        [
+          82,
+          33
+        ],
+        [
+          82,
+          33
+        ],
+        [
+          82,
+          33
+        ],
+        [
+          82,
+          33
+        ]
+      ],
+      "pivots": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "b_option_exitgame.img": {
+      "entry_sha256": "9276588bebd872f574738a204ebca67d072d35d967554afcd00c4d4fbe8d841f",
+      "frames": 4,
+      "sizes": [
+        [
+          82,
+          33
+        ],
+        [
+          82,
+          33
+        ],
+        [
+          83,
+          34
+        ],
+        [
+          82,
+          33
+        ]
+      ],
+      "pivots": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    "b_option_cancel.img": {
+      "entry_sha256": "a49ef807de73896812abf078361d5f137f8958de5e385ccfd12de4a7ebf6cad5",
+      "frames": 4,
+      "sizes": [
+        [
+          25,
+          22
+        ],
+        [
+          25,
+          22
+        ],
+        [
+          25,
+          23
+        ],
+        [
+          25,
+          22
+        ]
+      ],
+      "pivots": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    },
     "numfont.img": {
       "entry_sha256": "cdc866d4ba069522fd0e6f7ca059cf270a200ee649c802afb6fbf1936492867d",
       "frames": 289,
@@ -11322,6 +11442,535 @@
         }
       ]
     },
+    "NativeOptionsPanel.png": {
+      "file": "res://assets/xfs/hud/NativeOptionsPanel.png",
+      "size": [
+        276,
+        408
+      ],
+      "sha256": "4db1e334f04b791f80cf162b5ce230c92901cdb7115ba9ed501c97fab6defc0b",
+      "rgba_sha256": "83ce14614aee4571450db094a963c47874428ccd0087ed7e5b5442a860e8430a",
+      "composition": "unscaled native frames; transparent cell padding",
+      "operations": [
+        {
+          "entry": "play_option.img",
+          "frame": 0,
+          "crop": null,
+          "destination": [
+            0,
+            0,
+            276,
+            408
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        }
+      ],
+      "source_entry": "play_option.img",
+      "cell_size": [
+        276,
+        408
+      ],
+      "source_frames": [
+        {
+          "frame": 0,
+          "rect": [
+            0,
+            0,
+            276,
+            408
+          ],
+          "size": [
+            276,
+            408
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "NativeOptionRadio.png": {
+      "file": "res://assets/xfs/hud/NativeOptionRadio.png",
+      "size": [
+        12,
+        12
+      ],
+      "sha256": "128dbbe1a0d167ad46a219f42b5be784658daa0f0b4c4c40e0c12eb9ed485a8c",
+      "rgba_sha256": "2fe18f6a43dc817882ada4e939c1a8b648b1ce6bd9aac2fbc163fab406248a1e",
+      "composition": "unscaled native frames; transparent cell padding",
+      "operations": [
+        {
+          "entry": "play_option.img",
+          "frame": 1,
+          "crop": null,
+          "destination": [
+            0,
+            0,
+            12,
+            12
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        }
+      ],
+      "source_entry": "play_option.img",
+      "cell_size": [
+        12,
+        12
+      ],
+      "source_frames": [
+        {
+          "frame": 1,
+          "rect": [
+            0,
+            0,
+            12,
+            12
+          ],
+          "size": [
+            12,
+            12
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "NativeOptionOK.png": {
+      "file": "res://assets/xfs/hud/NativeOptionOK.png",
+      "size": [
+        328,
+        33
+      ],
+      "sha256": "1e0c68ad30216bf6f0244c574e1fdce88709433223cb97f365c7689dbd05e453",
+      "rgba_sha256": "b7e0f09895b6bfd6215d12da90ca692453ed43cccfca55b4be7a61bd39631717",
+      "composition": "unscaled native frames; transparent cell padding",
+      "operations": [
+        {
+          "entry": "b_option_confirm.img",
+          "frame": 0,
+          "crop": null,
+          "destination": [
+            0,
+            0,
+            82,
+            33
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_confirm.img",
+          "frame": 1,
+          "crop": null,
+          "destination": [
+            82,
+            0,
+            82,
+            33
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_confirm.img",
+          "frame": 2,
+          "crop": null,
+          "destination": [
+            164,
+            0,
+            82,
+            33
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_confirm.img",
+          "frame": 3,
+          "crop": null,
+          "destination": [
+            246,
+            0,
+            82,
+            33
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        }
+      ],
+      "source_entry": "b_option_confirm.img",
+      "cell_size": [
+        82,
+        33
+      ],
+      "source_frames": [
+        {
+          "frame": 0,
+          "rect": [
+            0,
+            0,
+            82,
+            33
+          ],
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 1,
+          "rect": [
+            82,
+            0,
+            82,
+            33
+          ],
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 2,
+          "rect": [
+            164,
+            0,
+            82,
+            33
+          ],
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 3,
+          "rect": [
+            246,
+            0,
+            82,
+            33
+          ],
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "NativeOptionQuit.png": {
+      "file": "res://assets/xfs/hud/NativeOptionQuit.png",
+      "size": [
+        332,
+        34
+      ],
+      "sha256": "e3780d84399ed0ed381a605d90bb27e8499cc99bf7277e7d36d594947e97cea1",
+      "rgba_sha256": "7ac5607d684ef6cfe178da0a70432b81bd83e4aa5a4c37e35528821780bb118b",
+      "composition": "unscaled native frames; transparent cell padding",
+      "operations": [
+        {
+          "entry": "b_option_exitgame.img",
+          "frame": 0,
+          "crop": null,
+          "destination": [
+            0,
+            0,
+            82,
+            33
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_exitgame.img",
+          "frame": 1,
+          "crop": null,
+          "destination": [
+            83,
+            0,
+            82,
+            33
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_exitgame.img",
+          "frame": 2,
+          "crop": null,
+          "destination": [
+            166,
+            0,
+            83,
+            34
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_exitgame.img",
+          "frame": 3,
+          "crop": null,
+          "destination": [
+            249,
+            0,
+            82,
+            33
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        }
+      ],
+      "source_entry": "b_option_exitgame.img",
+      "cell_size": [
+        83,
+        34
+      ],
+      "source_frames": [
+        {
+          "frame": 0,
+          "rect": [
+            0,
+            0,
+            82,
+            33
+          ],
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 1,
+          "rect": [
+            83,
+            0,
+            82,
+            33
+          ],
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 2,
+          "rect": [
+            166,
+            0,
+            83,
+            34
+          ],
+          "size": [
+            83,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 3,
+          "rect": [
+            249,
+            0,
+            82,
+            33
+          ],
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "NativeOptionClose.png": {
+      "file": "res://assets/xfs/hud/NativeOptionClose.png",
+      "size": [
+        100,
+        23
+      ],
+      "sha256": "d70aad3d663fb34e26ed35bb1c210e058091b3a7a8c07dbae372eaf7622bee39",
+      "rgba_sha256": "2b9be9d5419ab94c6325233827ff74ff2ff5f1f58bcb8b66f631b08fa5a1b202",
+      "composition": "unscaled native frames; transparent cell padding",
+      "operations": [
+        {
+          "entry": "b_option_cancel.img",
+          "frame": 0,
+          "crop": null,
+          "destination": [
+            0,
+            0,
+            25,
+            22
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_cancel.img",
+          "frame": 1,
+          "crop": null,
+          "destination": [
+            25,
+            0,
+            25,
+            22
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_cancel.img",
+          "frame": 2,
+          "crop": null,
+          "destination": [
+            50,
+            0,
+            25,
+            23
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        },
+        {
+          "entry": "b_option_cancel.img",
+          "frame": 3,
+          "crop": null,
+          "destination": [
+            75,
+            0,
+            25,
+            22
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": true
+        }
+      ],
+      "source_entry": "b_option_cancel.img",
+      "cell_size": [
+        25,
+        23
+      ],
+      "source_frames": [
+        {
+          "frame": 0,
+          "rect": [
+            0,
+            0,
+            25,
+            22
+          ],
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 1,
+          "rect": [
+            25,
+            0,
+            25,
+            22
+          ],
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 2,
+          "rect": [
+            50,
+            0,
+            25,
+            23
+          ],
+          "size": [
+            25,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        },
+        {
+          "frame": 3,
+          "rect": [
+            75,
+            0,
+            25,
+            22
+          ],
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ]
+        }
+      ]
+    },
     "NativeHeader.png": {
       "file": "res://assets/xfs/hud/NativeHeader.png",
       "size": [
@@ -13063,6 +13712,13 @@
     "WeatherFrame.png",
     "Crosshair*Ally.png",
     "Crosshair*Enemy.png"
+  ],
+  "native_options_group": [
+    "NativeOptionsPanel.png",
+    "NativeOptionRadio.png",
+    "NativeOptionOK.png",
+    "NativeOptionQuit.png",
+    "NativeOptionClose.png"
   ],
   "weather_gaps": [
     "weakness",

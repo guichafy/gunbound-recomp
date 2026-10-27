@@ -168,6 +168,57 @@ def build(archive, output=OUT):
     # The check mark exists in the configuration header. There is no matching
     # 20x25 four-state accept icon; repeat the native mark without inventing faces.
     save('PopupAccept.png', (80,25), lambda c: [layer(c,'play_option.img',0,(i*20,0,20,25),(8,4,39,32),mode='fit') for i in range(4)])
+    # Native battle Configuration: 4df84b loads play_option (not the compact
+    # playoption used in another flow), and 4b8850..4b88ed creates these buttons.
+    # Keep the built-in labels, exact pixels and the larger pressed faces.
+    native_options = [
+        ('NativeOptionsPanel.png','play_option.img',[0]),
+        ('NativeOptionRadio.png','play_option.img',[1]),
+        ('NativeOptionOK.png','b_option_confirm.img',[0,1,2,3]),
+        ('NativeOptionQuit.png','b_option_exitgame.img',[0,1,2,3]),
+        ('NativeOptionClose.png','b_option_cancel.img',[0,1,2,3]),
+    ]
+    for name, entry, indexes in native_options:
+        source(entry)
+        cell = (max(decoded[entry][i][0].width for i in indexes),
+                max(decoded[entry][i][0].height for i in indexes))
+        frame_info = []
+        for slot, index in enumerate(indexes):
+            image, pivot = decoded[entry][index]
+            frame_info.append({'frame':index,'rect':[slot*cell[0],0,*image.size],
+                               'size':list(image.size),'pivot':list(pivot)})
+        def native_option_frames(canvas, e=entry, rows=frame_info):
+            for row in rows:
+                layer(canvas,e,row['frame'],tuple(row['rect']),rgba_copy=True)
+        save(name,(cell[0]*len(indexes),cell[1]),native_option_frames)
+        files[name].update({'source_entry':entry,'cell_size':list(cell),
+                            'source_frames':frame_info,
+                            'composition':'unscaled native frames; transparent cell padding'})
+    # Independent native fallback group: an absent/corrupt active atlas or
+    # catalog must not restore the previous recomposed/translated menu.
+    # Preserve existing import UIDs; fallback pixels are exact copies.
+    fallback_output = output.parent/'hud_options_fallback'
+    fallback_output.mkdir(parents=True,exist_ok=True)
+    fallback_files = {}
+    for name, _, _ in native_options:
+        target = fallback_output/name
+        png = (output/name).read_bytes()
+        if not target.exists() or target.read_bytes() != png:
+            target.write_bytes(png)
+        config = target.with_suffix('.png.import')
+        if config.exists():
+            config.write_text(config.read_text().replace('process/fix_alpha_border=true',
+                                                         'process/fix_alpha_border=false'))
+        else:
+            config.write_text('[remap]\nimporter="texture"\ntype="CompressedTexture2D"\n\n[params]\ncompress/mode=0\nmipmaps/generate=false\nprocess/fix_alpha_border=false\n')
+        fallback_files[name] = dict(files[name],
+            file='res://assets/xfs/hud_options_fallback/'+name)
+    fallback_catalog = {'version':1,'archive_sha256':ARCHIVE_SHA,
+        'archive':'TestClient/graphics.xfs',
+        'scope':'complete native battle Configuration fallback group',
+        'entries':{entry:entries[entry] for _,entry,_ in native_options},
+        'files':fallback_files}
+    (fallback_output/'catalog.json').write_text(json.dumps(fallback_catalog,indent=2)+'\n')
     # REQ-27/48 correction: unscaled native bands, independent of the old
     # recomposition above (retained only as compatibility fallback).
     # Frame0 has pivot(-20,-12) and a loading spinner below the visible band.
@@ -220,6 +271,7 @@ def build(archive, output=OUT):
                'pixel_contract':'play_back RGB565 type0 is opaque, including black; other resources retain their own decoder contract',
                'resampling':'NEAREST; fit preserves aspect, stretch only panels and meter fills',
                'entries':entries,'files':files,'gaps':gaps,
+               'native_options_group':[name for name,_,_ in native_options],
                'weather_gaps':['weakness','mirror','random'],
                'limits':['Accept repeats the native configuration header check mark',
                          'Weather inactive row repeats native art; no grayscale art invented']}

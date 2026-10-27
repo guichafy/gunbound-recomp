@@ -1,5 +1,47 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Versionamento local do menu clássico — 27/10/2026
+
+O usuário autorizou o commit local das alterações da ADR-137, incluindo
+menu, assets/fallback, curva de áudio, testes, evidências e capturas.
+Hashes do snapshot validado reconferidos antes do registro. Mantida a versão
+0.20.5, sem reexportar aplicativo ou enviar ao remoto. Os registros abaixo
+descrevem a validação anterior a esse commit.
+
+## Menu clássico único durante a batalha — ADR-137
+
+Pedido de27/10/2026: portar com REA e manter somente o menu do cliente.
+Substituídos painel recomposto323×328 e pausa própria por play_option276×408
+em8,45 nativos, ×1,6, com labels/RLE/pivôs intactos e OK/QUIT/X originais.
+ESC/Options/P mostram o mesmo menu; show_pause é apenas alias. OK grava,
+X/ESC restauram snapshot e volumes; QUIT volta à sala sem premiar abandono.
+Pausa e disponibilidade de saída são adaptações explícitas do treino offline.
+Sniper/MIDI/3d ainda não portados ficam desabilitados; sem regra nova de combate.
+
+REA6.7.0/Hopper no PE4af6283d…/graphics.xfs a52f9f46…: loader, renderer,
+input, dispatch e dois setters de áudio;13registros portáveis emdocs/battle-options.
+Níveis nativos de scroll/áudio, limites estritos e estados dos botões portados.
+Curva SetVolume100*(valor−100)centésimosdB convertida para amplitude Godot,
+sem piso nos valores antigos1..19; OFF corta efeitos ativos. Master−19dB,
+backend/agendamento de faixas e resposta da câmera seguem adaptações declaradas.
+
+Cinco atlas novos,61HUD/15entradas, fallback nativo integral independente
+validado por hash. OráculoRLE bruto compara pixels de ativos/fallbacks;
+13Python aprovados. Revisão corrigiu scroll legado29/55/79 e piso/Stop de
+áudio;146checks do novo menu e925checks dirigidos/0, revisão final semP1/P2.
+GPU360quadros1920×1080,3×30quadrosRGBA idênticos na pausa e retomada,
+24PNGs, viewport header/níveis/OK/X/QUIT e ESC/P; fallback pixelidêntico.
+README4PNGs e86quadrosT1/GIF/MP4 regenerados emFullHD. Capturas finais
+semERROR/SCRIPT ERROR/leaks. Perfil real preservado, áudio mudo.
+
+Harness completo final `./scripts/check.sh`: **110 suítes,28.279 checks Godot,88 testes Python e29 partidas, zero falhas/exit0**. Parse aprovado; fontes inalteradas durante a rodada final. Log `.tools/battle-menu/full-harness-final.log`, SHA256 `088fff0db999b93aa0dce5da7b924eb44a0d99f6fb42bc14b9d9352cf9bdc5f2`.
+
+Sem cliente Windows executado, escuta/input humanos ou aceite visual;
+importeditor só reporta CA/editor_settings ambientais conhecidos, exit0.
+Versão0.20.5/app/ZIP anteriores mantidos, sem exportação, commit ou push.
+Contrato emBATTLE_OPTIONS_NATIVE.md; manifesto docs/battle-options/verified-source.json.
+
+
 ## Versionamento local autorizado — 27/10/2026
 
 O usuário solicitou versionar o delta acumulado das ADR-133 a ADR-136:

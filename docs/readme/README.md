@@ -1,5 +1,10 @@
 # Capturas do README
 
+Recaptura ADR-137 com o menu clássico único integrado: quatro telas e86
+quadros T1 novamente em1920×1080, por `tests/capture_readme.gd`; GIF/MP4
+recompostos. O menu não aparece nessas quatro telas: a captura específica
+está em [docs/battle-options](../battle-options/README.md).
+
 Capturas GPU de27/10/2026 do jogo atual, feitas por `tests/capture_readme.gd` com perfil isolado
 (o perfil real não é tocado). Mostram lobby, sala, Avatar Shop e um T1 real do Bigfoot
 contra o Mage no Miramo Town A, com o avatar vestido pelos quadros originais (ADR-130/131).

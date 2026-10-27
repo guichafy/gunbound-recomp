@@ -53,9 +53,12 @@ func run() -> void:
 	# REQ-31: ESC/Options opens the original PopupGameOptions over the battle.
 	view.show_options()
 	await snap("hud-options-popup")
-	# Same popup with the original sprites, for a side-by-side check.
-	view.overlays.options_popup.textures = view.overlays.options_popup.originals.duplicate()
-	view.overlays.options_popup.style_accept()
+	# Same native popup with the independent native fallback group.
+	var missing = load("res://scripts/client_hud_assets.gd").new("res://.tools/missing-options-catalog.json")
+	view.overlays.options_popup.art = load("res://scripts/classic_battle_options_art.gd").new(missing)
+	for button in [view.overlays.options_popup.accept_button,view.overlays.options_popup.cancel_button,view.overlays.options_popup.quit_button]:
+		button.art = view.overlays.options_popup.art
+		button.queue_redraw()
 	view.overlays.options_popup.queue_redraw()
 	await snap("hud-options-popup-original")
 	view.close_overlay()

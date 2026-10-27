@@ -1,5 +1,5 @@
 extends RefCounted
-## Help, options, item selection, pause and result layers (ADR-070). Owns the
+## Help, native battle options, item selection and result layers. Owns the
 ## open layer and its popups; the scene reacts to `opened`/`closed` (pause,
 ## charge, Options button) and the builders below only read the scene.
 
@@ -28,8 +28,8 @@ func is_open() -> bool:
 
 ## Full-screen layer that pauses the match and blocks the HUD below it.
 func open(kind_name: String) -> Control:
-	if kind == "options" and kind_name != "options":
-		options.save_options()
+	if kind == "options" and options_popup != null:
+		options_popup.restore()
 	if is_instance_valid(layer):
 		root.remove_child(layer)
 		layer.queue_free()
@@ -50,6 +50,8 @@ func make(host, kind_name: String) -> Panel:
 	return host.ui.panel(layer, Vector2(360, 155), Vector2(560, 490), host.ui.INK, 22)
 
 func close() -> void:
+	if kind == "options" and options_popup != null:
+		options_popup.restore()
 	if is_instance_valid(layer):
 		root.remove_child(layer)
 		layer.queue_free()
@@ -61,7 +63,7 @@ func close() -> void:
 func show_help(host) -> void:
 	var card := make(host, "help")
 	host.ui.label(card, "Como jogar", Vector2(32, 25), Vector2(490, 50), 32, host.ui.CREAM, true)
-	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "Modo Drag (ESC)    Arrastar → no mapa: força; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8  /  F                   Passar o turno  /  virar parado", "ESC  /  P                 Opções  /  pausa", "F1–F6 ou clique       Item da barra (um por turno; SS fica travado)", "Arrastar a tela        Olhar o mapa (botão direito no Drag)"]
+	var lines := ["← / → ou A / D        Mover o veículo", "↑ / ↓ ou W / S        Ângulo, 1° por toque", "ESPAÇO                  Segurar carrega a barra; soltar dispara", "Modo Drag (ESC)    Arrastar → no mapa: força; soltar dispara", "TAB  ou  1 / 2 / 3    Trocar o tiro (S1, S2, SS)", "F8  /  F                   Passar o turno  /  virar parado", "ESC  /  P                 Menu clássico (OK confirma, X cancela)", "F1–F6 ou clique       Item da barra (um por turno; SS fica travado)", "Arrastar a tela        Olhar o mapa (botão direito no Drag)"]
 	for index in range(lines.size()):
 		host.ui.label(card, lines[index], Vector2(32, 86 + index * 28), Vector2(500, 28), 16)
 	host.ui.label(card, "Vento 2D e clima mudam a cada rodada (ícones no topo). Colunas\nalteram o tiro: Força, Fraqueza, Espelho, Tornado, Elétrico; Thor\natinge o impacto. Zere a vida ou derrube o adversário para vencer.", Vector2(32, 344), Vector2(500, 70), 14, host.ui.MUTED)
@@ -70,16 +72,15 @@ func show_help(host) -> void:
 func show_options(host) -> void:
 	if host.screen != "match" or host.model.phase == Match.PHASE_FINISHED:
 		return
+	if kind == "options":
+		return
 	open("options")
 	options_popup = host.OptionsPopup.new(options)
 	options_popup.changed.connect(host.apply_options)
 	options_popup.accepted.connect(host.accept_options)
+	options_popup.cancelled.connect(host.cancel_options)
+	options_popup.quit_requested.connect(host.quit_battle_options)
 	layer.add_child(options_popup)
-	var pause_size := Vector2(84, 30)
-	var pause: Button = host.ui.button(options_popup, "PAUSA", options_popup.point(host.OptionsPopup.PAUSE_OFFSET) - pause_size * 0.5, pause_size, host.show_pause)
-	pause.add_theme_font_size_override("font_size", 13)
-	pause.modulate = Color(1, 1, 1, 0.82)
-	pause.tooltip_text = "Pausa, recomeçar ou voltar ao menu (P)"
 
 ## Menu: PopupSelectItem over a shade; Accept or ESC saves the loadout.
 func show_items(host) -> void:
@@ -95,17 +96,8 @@ func show_items(host) -> void:
 	layer.add_child(items_popup)
 
 func show_pause(host) -> void:
-	if host.screen != "match" or host.model.phase == Match.PHASE_FINISHED:
-		return
-	var card := make(host, "pause")
-	host.ui.label(card, "Uma pausa no combate.", Vector2(32, 27), Vector2(496, 55), 30, host.ui.CREAM, true)
-	host.ui.label(card, "A partida e o relógio estão pausados.", Vector2(32, 91), Vector2(496, 35), 17, host.ui.MUTED)
-	host.ui.button(card, "CONTINUAR", Vector2(32, 160), Vector2(496, 48), host.close_overlay, true)
-	host.ui.button(card, "Como jogar", Vector2(32, 226), Vector2(240, 45), host.show_help)
-	host.ui.button(card, "Som: " + ("ligado" if not host.sound.muted else "desligado"), Vector2(288, 226), Vector2(240, 45), func(): host.sound.muted = not host.sound.muted; host.show_pause())
-	host.ui.button(card, "Recomeçar treino", Vector2(32, 300), Vector2(496, 45), host.start_match)
-	host.ui.button(card, "Voltar ao menu", Vector2(32, 366), Vector2(496, 45), host.show_menu)
-	host.ui.label(card, "Seu progresso de partidas concluídas fica salvo.", Vector2(32, 438), Vector2(496, 28), 14, host.ui.MUTED)
+	# Compatibility for callers/captures; there is only one battle menu.
+	show_options(host)
 
 func show_result(host) -> void:
 	if host.screen != "match" or host.model.phase != Match.PHASE_FINISHED:

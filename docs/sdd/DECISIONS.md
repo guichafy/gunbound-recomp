@@ -1698,3 +1698,32 @@ independente do fundo magenta/verde. Mantêm-se layout e etapas daADR-135;
 a alegação anterior de fidelidade do raster do fundo fica substituída por este
 contrato. Não implica cliente Windows executado ou paridade integral do jogo.
 Registro emFOOTER_BACKGROUND_NATIVE.md; sem versão/export/commit/push.
+
+
+## ADR-137 — Menu clássico único na batalha (27/10/2026)
+
+Pedido do usuário substitui o menu de pausa próprio e a recomposição do
+PopupGameOptions das ADR-052/053/056/133. Usar play_option.img completo,
+rádio e b_option_cancel/exitgame/confirm sem apagar labels ou deformar frames.
+REA/Hopper no PE4af6283d… rastreou loader/render/input/dispatch e áudio;
+fonte, matriz e13registros portáveis em BATTLE_OPTIONS_NATIVE.md e docs/battle-options.
+
+O painel276×408 fica em8,45 nativos, escala1,6. Input conserva limites
+estritos e seis níveis de scroll/áudio; Drag/Slice fazem bridge para os IDs
+já existentes. Scroll desenha trunc(valor/10)-2; música/efeito usam LUT exata.
+SetVolume recebe100*(valor−100) centésimos de dB: converter para amplitude,
+sem piso artificial para valores1..19; OFF interrompe efeitos ativos.
+O master−19dB e o backend/agendamento de música permanecem adaptações.
+
+ESC/Options/P acionam o mesmo menu, show_pause permanece apenas como alias.
+OK confirma/grava; X/ESC restauram snapshot e volumes; QUIT cancela edição
+antes de voltar à sala, sem recompensar abandono. Disponibilidade/saída de
+QUIT e congelamento continuam adaptações do treino offline; não portar os
+estados de saída de rede ou impedir o usuário de deixar o treino.
+Sniper/MIDI/3d não portados ficam desabilitados, sem inventar efeitos.
+
+O grupo de cinco atlas tem cópia nativa independente para fallback, com
+validação por dimensão/hashRGBA. Originais/HD anteriores preservados;
+61atlasHUD/15entradas; sem alteração no decoder global, física, CPU ou perfil.
+Sem cliente Windows executado/escuta/aceite humano; sem versão/app/exportação,
+commit ou push. Regressão e capturas devem ser lidas no registro da entrega.

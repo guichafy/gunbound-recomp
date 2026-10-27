@@ -7,13 +7,14 @@ const BATTLE_MUSIC := ["stage1", "stage2", "stage3", "stage4", "stage5", "stage6
 const LEGACY_MUSIC := ["ThemeBeta-1", "ThemeBeta-2", "ThemeS1-1", "ThemeS1-2", "ThemeS1-3", "ThemeS1-4"]
 var streams: Dictionary = {}
 var players: Array[AudioStreamPlayer] = []
-# "Som" in the pause silences effects and music.
+# Test/global mute silences effects and music.
 var muted := false:
 	set(value):
 		muted = value
 		update_music()
 var next_player := 0
-# PopupGameOptions SFX/BGM sliders (0–100 → 0–1), linear over the base −19 dB.
+# Native option attenuation is converted to linear amplitude by Options.
+# The existing master −19dB normalization remains a declared adaptation.
 const BASE_DB := -19.0
 var volume := 1.0
 var music: AudioStreamPlayer
@@ -48,12 +49,14 @@ func _ready() -> void:
 func set_volume(value: float) -> void:
 	volume = clampf(value, 0.0, 1.0)
 	for player in players:
-		player.volume_db = BASE_DB + linear_to_db(maxf(volume, 0.0001))
+		player.volume_db = BASE_DB + (linear_to_db(volume) if volume>0.0 else -100.0)
+		if volume<=0.0:
+			player.stop()
 
 func set_music_volume(value: float) -> void:
 	music_volume = clampf(value, 0.0, 1.0)
 	if music != null:
-		music.volume_db = BASE_DB + linear_to_db(maxf(music_volume, 0.0001))
+		music.volume_db = BASE_DB + (linear_to_db(music_volume) if music_volume>0.0 else -100.0)
 	update_music()
 
 ## Battle starts the music; the menu stops it.

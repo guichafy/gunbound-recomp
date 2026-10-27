@@ -1,207 +1,157 @@
 extends Control
-## Existing option geometry/input with native Thor's Hammer configuration art.
-## The native shell is recomposed around the existing controls (REQ-48).
-## Values and enabled settings are unchanged; gaps fall back to preserved 1x art.
-
+## Native battle configuration: play_option.img, input4b9ed0/render4c8890.
+## Frozen offline match, Sniper/MIDI/3d and Godot backend bridges: ADR-137.
 signal changed
 signal accepted
+signal cancelled
+signal quit_requested
 
+const Art = preload("res://scripts/classic_battle_options_art.gd")
 const K := 1.6
-const SIZE := Vector2(323, 328)
-const TITLE_HEIGHT := 30.0
-const FONT_SIZE := 19  # Consolas 10 pt ≈ 7.3 px advance × 1.6 in a monospace font
-const CATEGORY := Color8(255, 172, 17)
-const SUB_CATEGORY := Color8(205, 206, 150)
-const ELEMENT := Color8(205, 206, 205)
-const DISABLED := Color(1, 1, 1, 0.38)
-const BAR_SIZE := Vector2(145, 3)
-const SLIDER_AREA := Vector2(145, 20)
-const TEXTS := [
-	["Gameplay", Vector2(-120, -120), CATEGORY], ["Aiming Mode", Vector2(-110, -100), SUB_CATEGORY],
-	["Scroll Speed", Vector2(-110, -80), ELEMENT], ["Mouse Speed", Vector2(-110, -60), ELEMENT],
-	["Sound", Vector2(-120, -40), CATEGORY], ["BGM", Vector2(-110, -20), ELEMENT], ["SFX", Vector2(-110, 0), ELEMENT],
-	["Miscelaneous", Vector2(-120, 20), CATEGORY], ["Background", Vector2(-110, 40), SUB_CATEGORY],
-	["Interface", Vector2(-110, 60), SUB_CATEGORY]]
-const SLIDERS := {"scroll": Vector2(60, -73), "mouse": Vector2(60, -53), "bgm": Vector2(60, -13), "sfx": Vector2(60, 7)}
-const RADIOS := {
-	"aiming": {"labels": ["Drag", "Slice"], "centers": [Vector2(10, -94), Vector2(80, -94)]},
-	"background": {"labels": ["On", "Off"], "centers": [Vector2(10, 46), Vector2(80, 46)]},
-	"interface": {"labels": ["Classic", "TH Blue", "TH White", "OpenBound"],
-		"centers": [Vector2(-90, 86), Vector2(30, 86), Vector2(-90, 106), Vector2(30, 106)]}}
-# Only these exist in this game; the rest keep the C# defaults, disabled.
-const ENABLED := ["aiming", "scroll", "sfx", "bgm", "background"]
-# TODO(Mouse Speed): enable this slider and scale the Drag aiming distance
-# (aim_control.gd DRAG_FULL_POWER) by it; kept disabled at the C# default for now.
-# Interface: only the Blue skin exists in this game (user decision, ADR-056).
-const FIXED := {"mouse": 50, "interface": 1}
-const ACCEPT_OFFSET := Vector2(130, 144)
-const PAUSE_OFFSET := Vector2(-112, 144)
-
+const SIZE := Vector2(276,408)
+const ORIGIN := Vector2(8,45)
+const AUDIO_LEVELS := [0,80,90,95,98,100]
+const SCROLL_LEVELS := [20,30,40,50,60,70]
+const VALUES := ["aiming","scroll","bgm","sfx","background"]
+# Strict x86 comparisons, original800x600 canvas. WM_LBUTTONDOWN only.
+const BOUNDS := {
+	"aiming": [Rect2(29,114,65,13),Rect2(113,114,65,13),Rect2(198,114,64,13)],
+	"scroll": [Rect2(39,168,26,12),Rect2(65,168,40,12),Rect2(105,168,40,12),Rect2(145,168,40,12),Rect2(185,168,40,12),Rect2(225,168,40,12)],
+	"bgm": [Rect2(89,248,21,12),Rect2(110,248,30,12),Rect2(140,248,30,12),Rect2(170,248,30,12),Rect2(200,248,30,12),Rect2(230,248,21,12)],
+	"sfx": [Rect2(89,274,21,12),Rect2(110,274,30,12),Rect2(140,274,30,12),Rect2(170,274,30,12),Rect2(200,274,30,12),Rect2(230,274,21,12)],
+	"background": [Rect2(35,374,39,13),Rect2(219,374,39,13)]}
+const RADIO_POSITIONS := {
+	"aiming": [Vector2(29,114),Vector2(113,114),Vector2(198,114)],
+	"scroll": [Vector2(39,168),Vector2(79,168),Vector2(119,168),Vector2(159,168),Vector2(199,168),Vector2(239,168)],
+	"bgm": [Vector2(89,248),Vector2(119,248),Vector2(149,248),Vector2(179,248),Vector2(209,248),Vector2(239,248)],
+	"sfx": [Vector2(89,274),Vector2(119,274),Vector2(149,274),Vector2(179,274),Vector2(209,274),Vector2(239,274)],
+	"background": [Vector2(35,374),Vector2(219,374)]}
 var options
-const ClientHudAssets = preload("res://scripts/client_hud_assets.gd")
-var client_assets := ClientHudAssets.new()
-var textures := {}
-var originals := {}
-var font: SystemFont
-var accept_button: TextureButton
-var drag_slider := ""
-var drag_window := false
-var drag_start := Vector2.ZERO
+var art
+var snapshot := {}
+var resolved := false
+var accept_button: BaseButton
+var cancel_button: BaseButton
+var quit_button: BaseButton
 
-func _init(values = null) -> void:
+# Sprite may extend beyond the native hitbox; never fit82x33 into74x26.
+class NativeButton extends BaseButton:
+	var art
+	var sprite: String
+	func _init(paint, key: String) -> void:
+		art = paint
+		sprite = key
+		focus_mode = Control.FOCUS_NONE
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		for event in [mouse_entered,mouse_exited,button_down,button_up]:
+			event.connect(queue_redraw)
+	func _draw() -> void:
+		var frame := 3 if disabled else (2 if is_pressed() else (1 if is_hovered() else 0))
+		art.draw(self,sprite,Vector2.ZERO,frame)
+
+func _init(values = null, paint = null) -> void:
 	options = values
-	size = SIZE * K
+	art = Art.new() if paint == null else paint
+	for key in VALUES:
+		snapshot[key] = options.get(key)
+	position = ORIGIN*K
+	size = SIZE*K
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	font = SystemFont.new()
-	font.font_names = PackedStringArray(["Consolas", "Menlo", "Monaco", "DejaVu Sans Mono", "monospace"])
-	for name in ["OptionsBackground.png", "OptionsBar.png", "OptionsBarFrame.bmp", "OptionsBarIntensityPointer.png", "OptionsRadioButton.png", "PopupAccept.png"]:
-		originals[name] = load("res://assets/openbound/hud/" + name)
-		textures[name] = client_assets.texture(name, originals[name])
-	# Button.cs Accept preset: 20×25 frames normal, hover, clicked, disabled.
-	accept_button = TextureButton.new()
-	accept_button.ignore_texture_size = true
-	accept_button.stretch_mode = TextureButton.STRETCH_SCALE
-	accept_button.focus_mode = Control.FOCUS_NONE
-	accept_button.size = Vector2(20, 25) * K
-	accept_button.position = point(ACCEPT_OFFSET) - accept_button.size * 0.5
-	accept_button.tooltip_text = "Accept (ESC)"
-	style_accept()
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	accept_button = make_button("NativeOptionOK.png",Rect2(187,408,74,26),"OK")
+	cancel_button = make_button("NativeOptionClose.png",Rect2(248,53,22,20),"Cancel (ESC)")
+	quit_button = make_button("NativeOptionQuit.png",Rect2(27,408,74,26),"Leave training")
 	accept_button.pressed.connect(func(): accepted.emit())
-	add_child(accept_button)
-	center_on(Vector2(640, 400))
+	cancel_button.pressed.connect(func(): cancelled.emit())
+	quit_button.pressed.connect(func(): quit_requested.emit())
+	unsupported(Rect2(198,114,64,13),"Sniper ainda não portado")
+	unsupported(Rect2(35,218,222,12),"MP3; MIDI ainda não portado")
+	unsupported(Rect2(29,323,234,14),"Qualidade 3d não se aplica ao renderer Godot; Normal fixo")
 
-func style_accept() -> void:
-	var frames: Array[AtlasTexture] = []
-	for frame in range(4):
-		var region := AtlasTexture.new()
-		region.atlas = textures["PopupAccept.png"]
-		region.region = scaled("PopupAccept.png", Rect2(frame * 20, 0, 20, 25))
-		frames.append(region)
-	accept_button.texture_normal = frames[0]
-	accept_button.texture_hover = frames[1]
-	accept_button.texture_pressed = frames[2]
-	accept_button.texture_disabled = frames[3]
+func make_button(sprite: String, bounds: Rect2, tooltip: String) -> BaseButton:
+	var button := NativeButton.new(art,sprite)
+	button.position = point(bounds.position)
+	button.size = bounds.size*K
+	button.tooltip_text = tooltip
+	add_child(button)
+	return button
 
-## HD pixels per original pixel (1 when the original is used).
-func density(name: String) -> float:
-	return float(textures[name].get_width()) / float(originals[name].get_width())
+func unsupported(bounds: Rect2, tooltip: String) -> void:
+	var region := Control.new()
+	region.position = point(bounds.position)
+	region.size = bounds.size*K
+	region.mouse_filter = Control.MOUSE_FILTER_STOP
+	region.tooltip_text = tooltip
+	add_child(region)
 
-func scaled(name: String, source: Rect2) -> Rect2:
-	var d := density(name)
-	return Rect2(source.position * d, source.size * d)
-
-## Local point of a PopupGameOptions offset (relative to the popup centre).
-func point(offset: Vector2) -> Vector2:
-	return (SIZE * 0.5 + offset) * K
-
-func center_on(screen_point: Vector2) -> void:
-	position = (screen_point - size * 0.5).round()
-
-func value_of(key: String) -> int:
-	if FIXED.has(key):
-		return FIXED[key]
-	if key == "background":
-		return 0 if options.background else 1
-	return int(options.get(key))
-
-func slider_rect(key: String) -> Rect2:
-	var center := point(SLIDERS[key])
-	return Rect2(center - SLIDER_AREA * K * 0.5, SLIDER_AREA * K)
+func point(native_point: Vector2) -> Vector2:
+	return (native_point-ORIGIN)*K
 
 func radio_rect(key: String, index: int) -> Rect2:
-	# RadioButtonSet.UpdateButtonPosition: from the 12 px sprite to the text end.
-	var center := point(RADIOS[key].centers[index])
-	var text_end: float = center.x + 11.0 * K + font.get_string_size(RADIOS[key].labels[index], HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE).x
-	return Rect2(center.x - 6.0 * K, center.y - 6.0 * K, text_end - center.x + 6.0 * K, 12.0 * K)
+	var bounds: Rect2 = BOUNDS[key][index]
+	return Rect2(point(bounds.position),bounds.size*K)
 
-## SliderBar.OnBeingDragged: intensity = (x − start) × 100 / 145, clamped.
-func set_slider_from_local(key: String, x: float) -> void:
-	if not ENABLED.has(key):
+func restore() -> void:
+	if resolved:
 		return
-	var start := point(SLIDERS[key]).x - BAR_SIZE.x * K * 0.5
-	var value := clampi(int((x - start) * 100.0 / (BAR_SIZE.x * K)), 0, 100)
-	if int(options.get(key)) != value:
-		options.set(key, value)
-		changed.emit()
+	resolved = true
+	for key in snapshot:
+		options.set(key,snapshot[key])
+	changed.emit()
 	queue_redraw()
 
+func commit() -> void:
+	resolved = true
+
 func select_radio(key: String, index: int) -> void:
-	if not ENABLED.has(key):
-		return
-	if key == "background" and options.background != (index == 0):
-		options.background = index == 0
-		changed.emit()
-	elif key == "aiming" and options.aiming != index:
+	if key == "aiming" and index < 2:
 		options.aiming = index
-		changed.emit()
+	elif key == "background":
+		options.background = index == 0
+	elif key in ["bgm","sfx"]:
+		options.set(key,AUDIO_LEVELS[index])
+	elif key == "scroll":
+		options.scroll = SCROLL_LEVELS[index]
+	else:
+		return
+	changed.emit()
 	queue_redraw()
 
 func pointer_down(local: Vector2) -> void:
-	if local.y < TITLE_HEIGHT * K:
-		drag_window = true
-		drag_start = local
-		return
-	for key in SLIDERS:
-		if ENABLED.has(key) and slider_rect(key).has_point(local):
-			drag_slider = key
-			set_slider_from_local(key, local.x)
-			return
-	for key in RADIOS:
-		for index in range(RADIOS[key].labels.size()):
-			if radio_rect(key, index).has_point(local):
-				select_radio(key, index)
+	var native := (local/K+ORIGIN).floor()
+	for key in BOUNDS:
+		for index in BOUNDS[key].size():
+			var r: Rect2 = BOUNDS[key][index]
+			if native.x>r.position.x and native.x<r.end.x and native.y>r.position.y and native.y<r.end.y:
+				select_radio(key,index)
 				return
 
-func pointer_move(local: Vector2) -> void:
-	if drag_slider != "":
-		set_slider_from_local(drag_slider, local.x)
-	elif drag_window:
-		# PopupMenu.OnBeingDragged keeps the whole window on the screen.
-		var target := position + local - drag_start
-		position = Vector2(clampf(target.x, 0.0, 1280.0 - size.x), clampf(target.y, 0.0, 800.0 - size.y)).round()
-
 func pointer_up() -> void:
-	drag_slider = ""
-	drag_window = false
+	pass
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			pointer_down(event.position)
-		else:
-			pointer_up()
 		accept_event()
 	elif event is InputEventMouseMotion:
-		if not (event.button_mask & MOUSE_BUTTON_MASK_LEFT):
-			pointer_up()
-		else:
-			pointer_move(event.position)
 		accept_event()
 
-func draw_text(text: String, top_left: Vector2, color: Color) -> void:
-	draw_string(font, Vector2(top_left.x, top_left.y + font.get_ascent(FONT_SIZE)), text, HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE, color)
+func selection_index(key: String) -> int:
+	match key:
+		"aiming": return options.aiming
+		"background": return 0 if options.background else 1
+		"scroll":
+			# 4c9ef9..4c9f15: trunc(scroll/10)-2; unsigned bound0..5.
+			var slot := int(options.scroll/10.0)-2
+			return slot if slot>=0 and slot<6 else -1
+		_: return AUDIO_LEVELS.find(options.get(key))
 
 func _draw() -> void:
-	draw_texture_rect(textures["OptionsBackground.png"], Rect2(Vector2.ZERO, size), false)
-	for row in TEXTS:
-		draw_text(row[0], point(row[1]), row[2])
-	# DepthParameter order: frame and pointer (buttons) below the bar (text).
-	for key in SLIDERS:
-		var tint := Color.WHITE if ENABLED.has(key) else DISABLED
-		var center := point(SLIDERS[key])
-		var value := value_of(key)
-		draw_texture_rect(textures["OptionsBarFrame.bmp"], Rect2(center - Vector2(147, 5) * K * 0.5, Vector2(147, 5) * K), false, tint)
-		var filled := float(int(value * BAR_SIZE.x / 100.0))
-		if filled > 0.0:
-			draw_texture_rect_region(textures["OptionsBar.png"], Rect2(center - BAR_SIZE * K * 0.5, Vector2(filled, BAR_SIZE.y) * K), scaled("OptionsBar.png", Rect2(0, 0, filled, BAR_SIZE.y)), tint)
-		var pointer := center + Vector2(-BAR_SIZE.x * 0.5 + float(int(value * BAR_SIZE.x / 100.0)), -5) * K
-		draw_texture_rect(textures["OptionsBarIntensityPointer.png"], Rect2(pointer - Vector2(9, 6) * K * 0.5, Vector2(9, 6) * K), false, tint)
-	for key in RADIOS:
-		var tint := Color.WHITE if ENABLED.has(key) else DISABLED
-		var selected := value_of(key)
-		for index in range(RADIOS[key].labels.size()):
-			var center := point(RADIOS[key].centers[index])
-			var source := Rect2(12, 0, 11, 12) if index == selected else Rect2(0, 0, 12, 12)
-			draw_texture_rect_region(textures["OptionsRadioButton.png"], Rect2(center - Vector2(6, 6) * K, source.size * K), scaled("OptionsRadioButton.png", source), tint)
-			var text_size := font.get_string_size(RADIOS[key].labels[index], HORIZONTAL_ALIGNMENT_LEFT, -1, FONT_SIZE)
-			draw_text(RADIOS[key].labels[index], Vector2(center.x + 11.0 * K, center.y + K - int(text_size.y * 0.5)), Color(ELEMENT, tint.a))
+	art.draw(self,"NativeOptionsPanel.png",Vector2.ZERO)
+	for key in RADIO_POSITIONS:
+		var index := selection_index(key)
+		if index >= 0:
+			art.draw(self,"NativeOptionRadio.png",point(RADIO_POSITIONS[key][index]))
+	art.draw(self,"NativeOptionRadio.png",point(Vector2(214,218)),0,Color(1,1,1,0.38))
+	art.draw(self,"NativeOptionRadio.png",point(Vector2(113,324)),0,Color(1,1,1,0.38))

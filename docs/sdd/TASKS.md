@@ -1,5 +1,21 @@
 # Entregas e próximos trabalhos
 
+## Menu clássico único durante a batalha — ADR-137
+
+- [x] REA do loader/render/input/dispatch e dos setters de áudio originais.
+- [x] Painel276×408 e OK/QUIT/X, sem distorção, labels sobrepostos ou PAUSA extra.
+- [x] Unificar ESC/Options/P/show_pause; OK grava, X/ESC restauram, QUIT volta à sala.
+- [x] Portar níveis e curva de atenuação; OFF corta efeitos ativos; preservar valores antigos.
+- [x] Validar fallback nativo integral e pixels RLE por oráculo independente.
+- [x] Revisão final semP1/P2 após corrigir scroll legado e piso/corte de áudio.
+- [x] GPU360quadrosFullHD,3pausas/retomadas, input via viewport e fallback idêntico.
+- [x] Recapturar README4telas/86quadrosT1/GIF/MP4.
+- [x] Harness completo final:110suítes/28.279Godot/88Python/29partidas/0; manifesto.
+- [ ] Aceite visual e escuta humanos.
+
+Contrato em `BATTLE_OPTIONS_NATIVE.md`. Treino congela como adaptação;
+Sniper/MIDI/3d não portados ficam desabilitados. Sem versão/app/commit/push.
+
 ## Fundo opaco do footer — ADR-136
 
 - [x] Confirmar RGB565 retangular, spans e flush da camada3 via REA/ASM.

@@ -1,0 +1,26 @@
+{
+  "method": "Pillow independent saved RGBA comparison",
+  "size": [
+    1920,
+    1080
+  ],
+  "cases": [
+    {
+      "case": "slice",
+      "full_frame_pause_identical": true,
+      "resume_differs": true
+    },
+    {
+      "case": "drag",
+      "full_frame_pause_identical": true,
+      "resume_differs": true
+    },
+    {
+      "case": "flight",
+      "full_frame_pause_identical": true,
+      "resume_differs": true
+    }
+  ],
+  "fallback_identical": true,
+  "png_count": 24
+}

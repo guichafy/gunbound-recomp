@@ -8,7 +8,7 @@ const Options = preload("res://scripts/options.gd")
 
 func run() -> void:
 	var assets := ClientHudAssets.new()
-	check(assets.files.size() == 56, "56 client texture records are available")
+	check(assets.files.size() == 61, "61 client texture records are available")
 	for name in assets.files:
 		var paint := assets.texture(name)
 		check(paint != null, "Validated client texture loads: " + name)
@@ -52,10 +52,10 @@ func run() -> void:
 	var options := Options.new("res://.tools/client-hud-options.json")
 	var popup := OptionsPopup.new(options)
 	host.add_child(popup)
-	check(popup.size == Vector2(323,328)*1.6, "Configuration popup retains its size")
-	check(popup.accept_button.size.is_equal_approx(Vector2(20,25)*1.6), "Native checkmark retains accept hitbox")
-	for name in popup.textures:
-		check(popup.textures[name] == assets.texture(name) and is_equal_approx(popup.density(name),1.0), "Options selects validated client art at1x: " + name)
+	check(popup.size == Vector2(276,408)*1.6, "Configuration retains the native276x408 panel")
+	check(popup.accept_button.size.is_equal_approx(Vector2(74,26)*1.6), "OK retains native74x26 hitbox independently of sprite size")
+	for name in popup.art.textures:
+		check(popup.art.textures[name] == assets.texture(name), "Options selects validated unscaled native art: " + name)
 	host.queue_free()
 	report("CLIENT HUD ASSETS CHECKS")
 	quit(exit_code())

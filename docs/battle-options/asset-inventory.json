@@ -1,0 +1,2861 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "entries": {
+    "b_buddy2_exit.img": {
+      "sha256": "252421ea85deaaa558eb0eb430c467db12d61e4538d157a4ca422c2d735a7c83",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            23,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1058,
+          "black_pixels": 68,
+          "zero_alpha_pixels": 68
+        },
+        {
+          "frame": 1,
+          "size": [
+            23,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1058,
+          "black_pixels": 68,
+          "zero_alpha_pixels": 68
+        },
+        {
+          "frame": 2,
+          "size": [
+            23,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1058,
+          "black_pixels": 68,
+          "zero_alpha_pixels": 68
+        },
+        {
+          "frame": 3,
+          "size": [
+            23,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1058,
+          "black_pixels": 68,
+          "zero_alpha_pixels": 68
+        }
+      ]
+    },
+    "b_buddy2_exit2.img": {
+      "sha256": "66f4d2479472435ac5cd3772c467f9257c24391c4125718657d0e24f1c0d04c7",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            19,
+            20
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 760,
+          "black_pixels": 142,
+          "zero_alpha_pixels": 142
+        },
+        {
+          "frame": 1,
+          "size": [
+            19,
+            20
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 760,
+          "black_pixels": 75,
+          "zero_alpha_pixels": 75
+        },
+        {
+          "frame": 2,
+          "size": [
+            19,
+            20
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 760,
+          "black_pixels": 75,
+          "zero_alpha_pixels": 75
+        },
+        {
+          "frame": 3,
+          "size": [
+            19,
+            20
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 760,
+          "black_pixels": 142,
+          "zero_alpha_pixels": 142
+        }
+      ]
+    },
+    "b_buddy_exit.img": {
+      "sha256": "9d897731de45c59791e1795068f124d9406e3ed3095a372333627ad251c35e1a",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1100,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1100,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            25,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1150,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 3,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1100,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_buddywindow_exittalk.img": {
+      "sha256": "f031fc39269f9c8155505f4d3e4e31317c96a0ea6225de8017955057cf66bbe0",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1276,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1276,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            25,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1334,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 3,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1276,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_gamelist_exit.img": {
+      "sha256": "c9102ad7390e65420f8a8ad8147633f4a5e1f0bb3f32e7090fd24fd78924fb8b",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        },
+        {
+          "frame": 1,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        },
+        {
+          "frame": 2,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        },
+        {
+          "frame": 3,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        }
+      ]
+    },
+    "b_gamelist_exitserver.img": {
+      "sha256": "f6b349e169faaa25f8382d962d53201086e64f0c7c770fa9ad7861d6903bdebb",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            112,
+            31
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 6944,
+          "black_pixels": 244,
+          "zero_alpha_pixels": 244
+        },
+        {
+          "frame": 1,
+          "size": [
+            112,
+            31
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 6944,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            112,
+            31
+          ],
+          "pivot": [
+            1,
+            2
+          ],
+          "kind": 0,
+          "payload_bytes": 6944,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 3,
+          "size": [
+            112,
+            31
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 6944,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_option_cancel.img": {
+      "sha256": "a49ef807de73896812abf078361d5f137f8958de5e385ccfd12de4a7ebf6cad5",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1276,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1276,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            25,
+            23
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1334,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 3,
+          "size": [
+            25,
+            22
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1276,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_option_confirm.img": {
+      "sha256": "c2270c68653c52ed4602a4136004e3081c509ec7b70a89372ae2a21a0d2c13be",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5676,
+          "black_pixels": 21,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5676,
+          "black_pixels": 21,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5676,
+          "black_pixels": 21,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 3,
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5676,
+          "black_pixels": 21,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_option_exitgame.img": {
+      "sha256": "9276588bebd872f574738a204ebca67d072d35d967554afcd00c4d4fbe8d841f",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5676,
+          "black_pixels": 21,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5676,
+          "black_pixels": 21,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            83,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5680,
+          "black_pixels": 137,
+          "zero_alpha_pixels": 116
+        },
+        {
+          "frame": 3,
+          "size": [
+            82,
+            33
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 5676,
+          "black_pixels": 21,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_play_all.img": {
+      "sha256": "cc5896b1be6f601224f8d2c6e8be1d99e621706fc6ef1f883171c0b1d7a4e491",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 90,
+          "zero_alpha_pixels": 4
+        },
+        {
+          "frame": 1,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 90,
+          "zero_alpha_pixels": 4
+        },
+        {
+          "frame": 2,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            1,
+            1
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 90,
+          "zero_alpha_pixels": 4
+        },
+        {
+          "frame": 3,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 90,
+          "zero_alpha_pixels": 4
+        }
+      ]
+    },
+    "b_play_down.img": {
+      "sha256": "aa0659176524ce6e5f166afb734d070072b2fcfefa37122f076661d6cbbf1a48",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            12,
+            7
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 168,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            12,
+            7
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 168,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            12,
+            7
+          ],
+          "pivot": [
+            1,
+            1
+          ],
+          "kind": 0,
+          "payload_bytes": 168,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_play_option.img": {
+      "sha256": "3a89fa92f49abed43f56a86a03fb1db38e3e232cedf53ce0fc27427eb59b50eb",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 196,
+          "zero_alpha_pixels": 196
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 136,
+          "zero_alpha_pixels": 136
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 136,
+          "zero_alpha_pixels": 136
+        },
+        {
+          "frame": 3,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 136,
+          "zero_alpha_pixels": 136
+        }
+      ]
+    },
+    "b_play_skip.img": {
+      "sha256": "29b781b7db002e06d5abe8e2baeb2ab6d9e5bd8d9da8c2c5876d05601f1ddfba",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 172,
+          "zero_alpha_pixels": 172
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 172,
+          "zero_alpha_pixels": 172
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 172,
+          "zero_alpha_pixels": 172
+        },
+        {
+          "frame": 3,
+          "size": [
+            40,
+            30
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2400,
+          "black_pixels": 172,
+          "zero_alpha_pixels": 172
+        }
+      ]
+    },
+    "b_play_ss.img": {
+      "sha256": "6c5921c116caf0d8459d7706a4ae0c511dbd9640efb882a6d0d668ba52281093",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2212,
+          "black_pixels": 160,
+          "zero_alpha_pixels": 46
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2212,
+          "black_pixels": 62,
+          "zero_alpha_pixels": 46
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2212,
+          "black_pixels": 62,
+          "zero_alpha_pixels": 46
+        }
+      ]
+    },
+    "b_play_tag.img": {
+      "sha256": "1e262e6559f7b0982a7aad03cc848aa013b59e94821b0e63289b520ae55e0643",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2720,
+          "black_pixels": 217,
+          "zero_alpha_pixels": 217
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2720,
+          "black_pixels": 144,
+          "zero_alpha_pixels": 144
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2720,
+          "black_pixels": 144,
+          "zero_alpha_pixels": 144
+        },
+        {
+          "frame": 3,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2720,
+          "black_pixels": 217,
+          "zero_alpha_pixels": 217
+        }
+      ]
+    },
+    "b_play_team.img": {
+      "sha256": "ca959d8ab8b1094257ff90dacaf97e0f5d03b3b18080efd60c4af0bc760aeb51",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 90,
+          "zero_alpha_pixels": 4
+        },
+        {
+          "frame": 1,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 4,
+          "zero_alpha_pixels": 4
+        },
+        {
+          "frame": 2,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            1,
+            1
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 4,
+          "zero_alpha_pixels": 4
+        },
+        {
+          "frame": 3,
+          "size": [
+            29,
+            16
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1048,
+          "black_pixels": 90,
+          "zero_alpha_pixels": 4
+        }
+      ]
+    },
+    "b_play_up.img": {
+      "sha256": "b5d57d0d1d6ae48b5ab61e8f6d985c02bda78891f1847989957a3df8ccfc8dc8",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            12,
+            7
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 168,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            12,
+            7
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 168,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            12,
+            7
+          ],
+          "pivot": [
+            1,
+            1
+          ],
+          "kind": 0,
+          "payload_bytes": 168,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_play_weapon1.img": {
+      "sha256": "4141961add1349040f9b5f81c15f58de96da8058eb6e0384d16e8b80dc5721f2",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 1,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 2,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 3,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 4,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 117,
+          "zero_alpha_pixels": 117
+        }
+      ]
+    },
+    "b_play_weapon11.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon12.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon13.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon14.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon15.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon16.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon17.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon18.img": {
+      "sha256": "759728a15ae73edee513320e5eb52a1df462e85e5df230edc00a637dac76de05",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 1,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        },
+        {
+          "frame": 2,
+          "size": [
+            32,
+            28
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1868,
+          "black_pixels": 74,
+          "zero_alpha_pixels": 74
+        }
+      ]
+    },
+    "b_play_weapon2.img": {
+      "sha256": "66bdc8315ac576faf347fb8edf1b7a7c2e17be0bdcd41cf7ec970d8e2c019723",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 153,
+          "zero_alpha_pixels": 153
+        },
+        {
+          "frame": 1,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 2,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 3,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 4,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 117,
+          "zero_alpha_pixels": 117
+        }
+      ]
+    },
+    "b_play_weapon21.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon22.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon23.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon24.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon25.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon26.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon27.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon28.img": {
+      "sha256": "72e19be08d25daff79687ec4b2b532410435a73c6da4025523101d1b88fa7f39",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 1,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 174,
+          "zero_alpha_pixels": 166
+        },
+        {
+          "frame": 2,
+          "size": [
+            40,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 2660,
+          "black_pixels": 177,
+          "zero_alpha_pixels": 166
+        }
+      ]
+    },
+    "b_play_weapon3.img": {
+      "sha256": "d0d3a8e0fbdfc8048b23209cae67078366a1fcea20a7873672b45da2ecd24da0",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 153,
+          "zero_alpha_pixels": 153
+        },
+        {
+          "frame": 1,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 2,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 170,
+          "zero_alpha_pixels": 170
+        },
+        {
+          "frame": 3,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 158,
+          "zero_alpha_pixels": 158
+        },
+        {
+          "frame": 4,
+          "size": [
+            35,
+            34
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 2380,
+          "black_pixels": 117,
+          "zero_alpha_pixels": 117
+        }
+      ]
+    },
+    "b_poption_cancel.img": {
+      "sha256": "45a1e263faab15fe99c8690d3444f288f9fbdc2b98016654989dce190127d7a7",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            11,
+            10
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 220,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            11,
+            10
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 220,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_poption_confirm.img": {
+      "sha256": "10aaabce8800acf4aa3cef1045cdb15e542f44a62d4955beebaacf8bf4766a6a",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            50,
+            15
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1500,
+          "black_pixels": 126,
+          "zero_alpha_pixels": 126
+        },
+        {
+          "frame": 1,
+          "size": [
+            50,
+            15
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1500,
+          "black_pixels": 126,
+          "zero_alpha_pixels": 126
+        },
+        {
+          "frame": 2,
+          "size": [
+            50,
+            15
+          ],
+          "pivot": [
+            1,
+            1
+          ],
+          "kind": 0,
+          "payload_bytes": 1500,
+          "black_pixels": 126,
+          "zero_alpha_pixels": 126
+        },
+        {
+          "frame": 3,
+          "size": [
+            50,
+            15
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1500,
+          "black_pixels": 126,
+          "zero_alpha_pixels": 126
+        }
+      ]
+    },
+    "b_poption_exitgame.img": {
+      "sha256": "8940eff765c7ab090ff6cf70368c7a18b1130bc41d132e5d572868db25b9aacf",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            52,
+            15
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1560,
+          "black_pixels": 130,
+          "zero_alpha_pixels": 130
+        },
+        {
+          "frame": 1,
+          "size": [
+            52,
+            15
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1560,
+          "black_pixels": 130,
+          "zero_alpha_pixels": 130
+        },
+        {
+          "frame": 2,
+          "size": [
+            52,
+            15
+          ],
+          "pivot": [
+            1,
+            1
+          ],
+          "kind": 0,
+          "payload_bytes": 1560,
+          "black_pixels": 130,
+          "zero_alpha_pixels": 130
+        },
+        {
+          "frame": 3,
+          "size": [
+            52,
+            15
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 1560,
+          "black_pixels": 129,
+          "zero_alpha_pixels": 129
+        }
+      ]
+    },
+    "b_ready_exit.img": {
+      "sha256": "256217065a98e848822eafff1577ecd6af5e90369b9a2f04f8f619d758b12b63",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        },
+        {
+          "frame": 1,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        },
+        {
+          "frame": 2,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        },
+        {
+          "frame": 3,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 9630,
+          "black_pixels": 504,
+          "zero_alpha_pixels": 504
+        }
+      ]
+    },
+    "b_ready_exitgame.img": {
+      "sha256": "30e4f6de0757a1e6133dc3f6f461742ba45f06608999c8f20277c6f65f7bb0c8",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1031,
+          "zero_alpha_pixels": 1031
+        },
+        {
+          "frame": 1,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1031,
+          "zero_alpha_pixels": 1031
+        },
+        {
+          "frame": 2,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1023,
+          "zero_alpha_pixels": 1023
+        },
+        {
+          "frame": 3,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1015,
+          "zero_alpha_pixels": 1015
+        },
+        {
+          "frame": 4,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1023,
+          "zero_alpha_pixels": 1023
+        },
+        {
+          "frame": 5,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1031,
+          "zero_alpha_pixels": 1031
+        },
+        {
+          "frame": 6,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1023,
+          "zero_alpha_pixels": 1023
+        },
+        {
+          "frame": 7,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 999,
+          "zero_alpha_pixels": 999
+        },
+        {
+          "frame": 8,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 983,
+          "zero_alpha_pixels": 983
+        },
+        {
+          "frame": 9,
+          "size": [
+            114,
+            38
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 8664,
+          "black_pixels": 1206,
+          "zero_alpha_pixels": 1206
+        }
+      ]
+    },
+    "b_report_exit.img": {
+      "sha256": "517f27bc280365f8bd8ff15038c15992c373572614d2842f3f52e33be3efc8aa",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            28,
+            25
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1600,
+          "black_pixels": 12,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 1,
+          "size": [
+            28,
+            25
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1600,
+          "black_pixels": 12,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 2,
+          "size": [
+            28,
+            25
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1600,
+          "black_pixels": 12,
+          "zero_alpha_pixels": 0
+        },
+        {
+          "frame": 3,
+          "size": [
+            28,
+            25
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 1600,
+          "black_pixels": 12,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "b_server_exitgame.img": {
+      "sha256": "fed63f71f1521392f17c0e329dd2b601cb3d0c655cb577eeb4a62759209a5fa5",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 626,
+          "zero_alpha_pixels": 92
+        },
+        {
+          "frame": 1,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 630,
+          "zero_alpha_pixels": 92
+        },
+        {
+          "frame": 2,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 631,
+          "zero_alpha_pixels": 92
+        },
+        {
+          "frame": 3,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 628,
+          "zero_alpha_pixels": 92
+        }
+      ]
+    },
+    "b_store_exit.img": {
+      "sha256": "4342931b19d3b834b63e644f87ac010d264870f2d72f0e0c9607ecaf72b6dc02",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 626,
+          "zero_alpha_pixels": 92
+        },
+        {
+          "frame": 1,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 630,
+          "zero_alpha_pixels": 92
+        },
+        {
+          "frame": 2,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 631,
+          "zero_alpha_pixels": 92
+        },
+        {
+          "frame": 3,
+          "size": [
+            107,
+            45
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 9806,
+          "black_pixels": 626,
+          "zero_alpha_pixels": 92
+        }
+      ]
+    },
+    "b_store_exitem.img": {
+      "sha256": "4d77bcf280eb7acf919279dec3589315c55dc3f33850e2990d2c63f081bdf8a2",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            49,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 3136,
+          "black_pixels": 116,
+          "zero_alpha_pixels": 116
+        },
+        {
+          "frame": 1,
+          "size": [
+            49,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 3136,
+          "black_pixels": 20,
+          "zero_alpha_pixels": 20
+        },
+        {
+          "frame": 2,
+          "size": [
+            49,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 3136,
+          "black_pixels": 20,
+          "zero_alpha_pixels": 20
+        },
+        {
+          "frame": 3,
+          "size": [
+            49,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 3136,
+          "black_pixels": 116,
+          "zero_alpha_pixels": 116
+        },
+        {
+          "frame": 4,
+          "size": [
+            49,
+            32
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 3136,
+          "black_pixels": 120,
+          "zero_alpha_pixels": 120
+        }
+      ]
+    },
+    "play_option.img": {
+      "sha256": "a1abbae8253d6ccb7431952fe3a96aa9ddf8de92d14cb4ce7ae3a705bd793031",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            276,
+            408
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 228280,
+          "black_pixels": 3952,
+          "zero_alpha_pixels": 100
+        },
+        {
+          "frame": 1,
+          "size": [
+            12,
+            12
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 384,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    },
+    "playoption.img": {
+      "sha256": "eecd681260e431c79ff06096517d2fb7f879f9f918c7af584a6732957ee3321f",
+      "frames": [
+        {
+          "frame": 0,
+          "size": [
+            153,
+            216
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 1,
+          "payload_bytes": 67816,
+          "black_pixels": 1960,
+          "zero_alpha_pixels": 4
+        },
+        {
+          "frame": 1,
+          "size": [
+            3,
+            3
+          ],
+          "pivot": [
+            0,
+            0
+          ],
+          "kind": 0,
+          "payload_bytes": 18,
+          "black_pixels": 0,
+          "zero_alpha_pixels": 0
+        }
+      ]
+    }
+  },
+  "epa": {
+    "b_option_confirm.epa": {
+      "sha256": "c4a8d60d07d9188ecdc799106a1f5bee65cc81ba60e91c1c1c887aeac78fa5b0",
+      "bytes": 139
+    },
+    "b_option_exitgame.epa": {
+      "sha256": "c4a8d60d07d9188ecdc799106a1f5bee65cc81ba60e91c1c1c887aeac78fa5b0",
+      "bytes": 139
+    },
+    "b_option_cancel.epa": {
+      "sha256": "c4a8d60d07d9188ecdc799106a1f5bee65cc81ba60e91c1c1c887aeac78fa5b0",
+      "bytes": 139
+    },
+    "b_poption_confirm.epa": {
+      "sha256": "99f1baeaf31fef855ec9a81d7ba17342afc3084ee890bad70cecc871517932e3",
+      "bytes": 116
+    },
+    "b_poption_exitgame.epa": {
+      "sha256": "99f1baeaf31fef855ec9a81d7ba17342afc3084ee890bad70cecc871517932e3",
+      "bytes": 116
+    },
+    "b_poption_cancel.epa": {
+      "sha256": "e2d11493324ff693a8cc532b0539bca7df1902471e05e2753954b0b32c773017",
+      "bytes": 116
+    }
+  }
+}

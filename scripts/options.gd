@@ -23,6 +23,12 @@ func _init(save_path: String = "user://profile-options.json") -> void:
 func drag_aiming() -> bool:
 	return aiming == 0
 
+## 4eeb10/4eeb30 pass(value-100)*100 to DirectSound SetVolume.
+## Godot expects linear amplitude: preserve the relative dB curve. Zero also
+## disables playback in the native callers; retain a true mute here.
+static func volume_gain(value: int) -> float:
+	return 0.0 if value<=0 else pow(10.0,(clampi(value,0,100)-100.0)/20.0)
+
 ## Camera drag multiplier: 0 → 0.5×, 50 → 1× (current behaviour), 100 → 2×.
 func scroll_factor() -> float:
 	return pow(2.0, (scroll - 50) / 50.0)

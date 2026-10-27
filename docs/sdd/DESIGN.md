@@ -1,5 +1,20 @@
 # Design implementado
 
+## Menu clássico único — ADR-137
+
+`OptionsPopup` usa somente play_option e b_option_* completos: painel276×408
+em8,45 e escala1,6. `ClassicBattleOptionsArt` valida o grupo de cinco atlas por
+dimensão/hash de pixels; qualquer falha troca todo o conjunto por cópias
+nativas independentes. Botões desenham seus quadros inteiros além do hitbox,
+sem comprimir arte82×33 em74×26. Input usa os limites estritos e níveis do PE;
+movimento do mouse não arrasta painel ou slider. O marcador scroll trunca÷10.
+
+`MatchOverlay` possui um único menu, acionado por ESC/Options/P e pelo alias
+de compatibilidade show_pause. Snapshot privado restaura opções e áudio ao
+cancelar; OK confirma/grava; QUIT cancela edição e volta à sala. O bloqueio e
+congelamento offline continuam explícitos; Match/CPU/física não mudam.
+Arte herdada do popup fica preservada fora do uso ativo. Ver `BATTLE_OPTIONS_NATIVE.md`.
+
 ## Fundo do footer — ADR-136
 
 A importação de `play_back.img` restaura alpha255 nos quadros RGB565 tipo0,

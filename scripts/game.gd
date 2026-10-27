@@ -363,7 +363,7 @@ func build_hud() -> void:
 		button.tooltip_text = "%s · atraso %d" % [model.weapon_rules(Match.PLAYER, index).name, model.weapon_rules(Match.PLAYER, index).delay]
 		weapon_buttons.append(button)
 	options_button = hud.make_button(root, "options")
-	options_button.tooltip_text = "Opções (ESC) · pausa (P)"
+	options_button.tooltip_text = "Configuration (ESC / P)"
 	options_button.pressed.connect(show_options)
 	pass_button = hud.make_button(root, "skip")
 	pass_button.tooltip_text = "Passar o turno (F8)"
@@ -641,7 +641,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		return
 	if event.pressed and event.physical_keycode == KEY_ESCAPE:
 		if overlays.kind == "options":
-			accept_options()
+			cancel_options()
 		elif overlays.kind == "items":
 			accept_items()
 		elif overlays.is_open():
@@ -692,13 +692,22 @@ func show_options() -> void:
 	overlays.show_options(self)
 
 func apply_options() -> void:
-	sound.set_volume(options.sfx / 100.0)
-	sound.set_music_volume(options.bgm / 100.0)
+	sound.set_volume(Options.volume_gain(options.sfx))
+	sound.set_music_volume(Options.volume_gain(options.bgm))
 	queue_redraw()
 
 func accept_options() -> void:
+	if overlays.options_popup != null:
+		overlays.options_popup.commit()
 	options.save_options()
 	close_overlay()
+
+func cancel_options() -> void:
+	close_overlay()
+
+func quit_battle_options() -> void:
+	cancel_options()
+	show_menu()
 
 ## A sala grava a carga no painel direito. Não abre o modal Select Item.
 func show_items() -> void:

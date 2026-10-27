@@ -143,119 +143,35 @@ func run() -> void:
 	key(scene, KEY_F8, true)
 	check(scene.model.active == 1 or scene.model.phase != "aim", "F8 passes the turn")
 
-	# REQ-31 PopupGameOptions: Options/ESC open it; SFX, scroll and background apply.
-	var Popup = load("res://scripts/options_popup.gd")
-	var options_file: String = scene.options.path
-	check(options_file == "res://.tools/hud-test-profile-options.json", "Options file sits next to the isolated test profile")
-	player_turn(scene)
-	key(scene, KEY_SPACE, true)
-	scene._process(0.1)
+	# ADR-137 owns native menu geometry/input/OK/cancellation/QUIT tests.
+	# Here retain integration with existing combat and camera contracts.
 	scene.options_button.pressed.emit()
-	var popup = scene.overlays.options_popup
-	check(scene.overlays.kind == "options" and popup != null and scene.paused, "Options opens the original options popup and pauses the training")
-	check(not scene.aim.charging and scene.model.phase == "aim", "Opening the options cancels the charge without firing")
-	check(scene.options_button.disabled, "Options stays disabled while its popup is open (HUD.cs)")
-	check(popup.size.is_equal_approx(Vector2(323, 328) * 1.6) and (popup.position + popup.size * 0.5).distance_to(Vector2(640, 400)) <= 0.6, "Popup background 323×328 × 1.6 centred on the screen")
-	for name in popup.textures:
-		check(is_equal_approx(popup.density(name), 1.0), "Popup %s uses the native client sprite" % name)
-	check(popup.scaled("OptionsRadioButton.png", Rect2(12, 0, 11, 12)) == Rect2(12, 0, 11, 12), "Radio frames select the native client density")
-	var fallback = Popup.new(scene.options)
-	fallback.textures = fallback.originals.duplicate()
-	check(fallback.density("OptionsBackground.png") == 1.0 and fallback.scaled("PopupAccept.png", Rect2(20, 0, 20, 25)) == Rect2(20, 0, 20, 25), "Without a valid client atlas the popup keeps the preserved original pixels")
-	fallback.free()
-	var accept: TextureButton = popup.accept_button
-	check(accept.size.is_equal_approx(Vector2(20, 25) * 1.6) and (accept.position + accept.size * 0.5).is_equal_approx(popup.point(Vector2(130, 144))), "Accept sits at the original (130, 144)")
-	var sfx_area: Rect2 = popup.slider_rect("sfx")
-	check(sfx_area.size.is_equal_approx(Vector2(145, 20) * 1.6) and sfx_area.get_center().is_equal_approx(popup.point(Vector2(60, 7))), "SFX slider area 145×20 at (60, 7)")
-	popup.pointer_down(Vector2(sfx_area.position.x + 2.0, sfx_area.get_center().y))
-	popup.pointer_up()
-	check(scene.options.sfx == 0 and scene.sound.volume == 0.0, "Dragging SFX to the start silences the effects")
-	popup.set_slider_from_local("sfx", popup.point(Vector2(60, 7)).x)
-	check(scene.options.sfx == 50 and is_equal_approx(scene.sound.volume, 0.5), "SFX at the middle halves the effects volume")
-	check(is_equal_approx(scene.sound.players[0].volume_db, -19.0 + linear_to_db(0.5)), "SFX scales the −19 dB players linearly")
-	popup.pointer_down(popup.slider_rect("mouse").get_center() + Vector2(60, 0))
-	popup.pointer_up()
-	check(popup.value_of("mouse") == 50 and popup.value_of("interface") == 1, "Mouse speed and interface keep the original defaults, disabled")
-	check(popup.value_of("aiming") == 1, "Aiming Mode starts on Slice like the original AimType")
-	# REQ-33 BGM: the slider drives the battle music volume.
-	check(scene.sound.music_wanted and not scene.sound.music.playing, "The battle wants music, but muted tests never play it")
-	popup.pointer_down(Vector2(popup.slider_rect("bgm").position.x + 2.0, popup.slider_rect("bgm").get_center().y))
-	popup.pointer_up()
-	check(scene.options.bgm == 0 and scene.sound.music_volume == 0.0, "BGM at the start silences the music")
-	popup.set_slider_from_local("bgm", popup.point(Vector2(60, -13)).x)
-	check(scene.options.bgm == 50 and is_equal_approx(scene.sound.music.volume_db, -19.0 + linear_to_db(0.5)), "BGM at the middle sets half the music volume")
-	popup.pointer_down(popup.radio_rect("background", 1).get_center())
-	popup.pointer_up()
-	check(not scene.options.background, "Background radio Off turns the map backdrop off")
-	popup.set_slider_from_local("scroll", popup.slider_rect("scroll").end.x + 50.0)
-	check(scene.options.scroll == 100 and is_equal_approx(scene.options.scroll_factor(), 2.0), "Scroll speed 100 doubles the drag")
-	var start_pos: Vector2 = popup.position
-	popup.pointer_down(Vector2(80, 10))
-	popup.pointer_move(Vector2(130, 30))
-	popup.pointer_up()
-	check(popup.position == start_pos + Vector2(50, 20), "The title bar drags the popup")
-	popup.pointer_down(Vector2(80, 10))
-	popup.pointer_move(Vector2(5000, -5000))
-	popup.pointer_up()
-	check(popup.position.x == roundf(1280.0 - popup.size.x) and popup.position.y == 0.0 and popup.position.x + popup.size.x <= 1280.0, "The dragged popup stays on the screen")
-	key(scene, KEY_ESCAPE, true)
-	check(scene.overlays.layer == null and not scene.paused and not scene.options_button.disabled, "ESC accepts and closes the popup, re-enabling Options")
-	var saved = load("res://scripts/options.gd").new(options_file)
-	saved.load_options()
-	check(saved.sfx == 50 and saved.bgm == 50 and saved.scroll == 100 and not saved.background, "Accept saves the options next to the profile")
-	# Scroll speed scales the manual camera drag; 50 keeps the original 1×.
-	scene.rig.position = Vector2(100, 100)
+	check(scene.overlays.kind == "options" and scene.paused and not scene.aim.charging, "Native menu cancels charging and freezes offline training")
+	scene.options.sfx = 80
+	scene.options.bgm = 90
+	scene.options.scroll = 70
+	scene.apply_options()
+	check(is_equal_approx(scene.sound.volume,0.1) and is_equal_approx(scene.sound.music_volume,0.31622776601683794), "Native selections drive SFX and BGM")
+	scene.accept_options()
+	check(not scene.paused and not scene.options_button.disabled, "OK restores battle input")
+	scene.rig.position = Vector2(100,100)
 	var press := InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_LEFT
 	press.pressed = true
-	press.position = Vector2(640, 300)
+	press.position = Vector2(640,300)
 	scene._unhandled_input(press)
 	var motion := InputEventMouseMotion.new()
 	motion.button_mask = MOUSE_BUTTON_MASK_LEFT
-	motion.relative = Vector2(-10, -5)
+	motion.relative = Vector2(-10,-5)
 	scene._unhandled_input(motion)
-	check(scene.rig.position.is_equal_approx(Vector2(120, 110)), "Scroll speed 100 moves the camera twice the drag")
-	scene.options.scroll = 50
-	scene._unhandled_input(motion)
-	check(scene.rig.position.is_equal_approx(Vector2(130, 115)), "Scroll speed 50 keeps the 1:1 drag")
+	check(scene.rig.position.is_equal_approx(Vector2(100,100)+Vector2(10,5)*pow(2.0,0.4)), "Native scroll70 uses declared Godot camera response")
 	press.pressed = false
 	scene._unhandled_input(press)
-	# The pause stays reachable: P from the match, P or "PAUSA" from the popup.
-	key(scene, KEY_ESCAPE, true)
-	check(scene.overlays.kind == "options", "ESC opens the options popup")
-	scene.overlays.options_popup.set_slider_from_local("sfx", scene.overlays.options_popup.slider_rect("sfx").position.x)
-	key(scene, KEY_P, true)
-	check(scene.overlays.kind == "pause" and not scene.options_button.disabled, "P opens the pause from the popup")
-	saved.load_options()
-	check(saved.sfx == 0, "Leaving the popup for the pause keeps its values like Accept")
-	key(scene, KEY_ESCAPE, true)
-	check(scene.overlays.layer == null, "ESC closes the pause")
-	key(scene, KEY_P, true)
-	check(scene.overlays.kind == "pause", "P opens the pause during the match")
-	scene.close_overlay()
-	scene.show_options()
-	var pause_button: Button = null
-	for child in scene.overlays.options_popup.get_children():
-		if child is Button and child.text == "PAUSA":
-			pause_button = child
-	check(pause_button != null and Rect2(Vector2.ZERO, scene.overlays.options_popup.size).encloses(Rect2(pause_button.position, pause_button.size)), "Discreet PAUSA extra sits inside the popup")
-	pause_button.pressed.emit()
-	check(scene.overlays.kind == "pause", "PAUSA opens the pause menu")
-	scene.close_overlay()
-	# Real mouse clicks routed by the viewport reach the slider and Accept.
-	scene.show_options()
-	var sfx_point: Vector2 = scene.overlays.options_popup.global_position + scene.overlays.options_popup.slider_rect("sfx").get_center()
-	click(sfx_point + Vector2(40, 0))
-	check(scene.options.sfx > 50 and scene.options.sfx < 80, "A real click on the SFX bar sets the volume (%d)" % scene.options.sfx)
-	var accept_point: Vector2 = scene.overlays.options_popup.accept_button.global_position + scene.overlays.options_popup.accept_button.size * 0.5
-	click(accept_point)
-	check(scene.overlays.layer == null, "A real click on Accept closes the popup")
 	scene.options.sfx = 100
 	scene.options.background = true
 	scene.apply_options()
-	check(scene.sound.volume == 1.0, "SFX 100 restores the original effects volume")
+	var options_file: String = scene.options.path
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(options_file))
-	check(Popup.ENABLED == ["aiming", "scroll", "sfx", "bgm", "background"], "Aiming, scroll, SFX, BGM and background are live; mouse speed and skin stay disabled")
 	for track in scene.sound.BATTLE_MUSIC:
 		var stream = scene.sound.music_stream(track)
 		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original client stage theme that ends (then a random one follows)" % track)

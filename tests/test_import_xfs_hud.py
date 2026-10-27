@@ -112,12 +112,12 @@ class NativeHudImport(unittest.TestCase):
 
     def test_native_source_identity(self):
         self.assertEqual(hashlib.sha256(self.archive.read_bytes()).hexdigest(), self.catalog['archive_sha256'])
-        self.assertEqual(len(self.catalog['entries']), 12)
+        self.assertEqual(len(self.catalog['entries']), 15)
         for name, entry in self.catalog['entries'].items():
             self.assertEqual(hashlib.sha256(xfs.read_entry(self.archive, self.toc[name])).hexdigest(), entry['entry_sha256'])
 
     def test_packaged_size_and_hash(self):
-        self.assertEqual(len(self.catalog['files']), 56)
+        self.assertEqual(len(self.catalog['files']), 61)
         for key, entry in self.catalog['files'].items():
             path = ROOT / entry['file'].removeprefix('res://')
             image = Image.open(path).convert('RGBA')
@@ -128,6 +128,82 @@ class NativeHudImport(unittest.TestCase):
             for operation in entry['operations']:
                 self.assertIn(operation['entry'], self.catalog['entries'])
                 self.assertIn(operation['mode'], ['fit', 'stretch'])
+
+    def test_native_options_frames_and_pivots_are_exact(self):
+        # Independent RLE oracle: reconstruct runs from the original payload,
+        # without the production importer's decoder/composition helpers.
+        expected_sources = {
+            'NativeOptionsPanel.png': ('play_option.img', [0], (276,408)),
+            'NativeOptionRadio.png': ('play_option.img', [1], (12,12)),
+            'NativeOptionOK.png': ('b_option_confirm.img', [0,1,2,3], (82,33)),
+            'NativeOptionQuit.png': ('b_option_exitgame.img', [0,1,2,3], (83,34)),
+            'NativeOptionClose.png': ('b_option_cancel.img', [0,1,2,3], (25,23)),
+        }
+        self.assertEqual(self.catalog['native_options_group'], list(expected_sources))
+        for name, (source, indexes, cell) in expected_sources.items():
+            raw = xfs.read_entry(self.archive, self.toc[source])
+            offset = 8
+            expected_frames = []
+            expected_atlas = Image.new('RGBA', (cell[0]*len(indexes),cell[1]))
+            for frame in range(struct.unpack_from('<I',raw,4)[0]):
+                kind, _, w, h, px, py, *rest = struct.unpack_from('<HH9i',raw,offset)
+                offset += 40
+                payload = raw[offset:offset+rest[-1]]
+                offset += rest[-1]
+                if frame not in indexes:
+                    continue
+                self.assertEqual(kind & 255,1,source)
+                pixels = bytearray(w*h*4)
+                cursor = 0
+                for y in range(h):
+                    _, runs = struct.unpack_from('<HH',payload,cursor)
+                    cursor += 4
+                    for _ in range(runs):
+                        start, count = struct.unpack_from('<HH',payload,cursor)
+                        cursor += 4
+                        for x in range(start,start+count):
+                            word = struct.unpack_from('<H',payload,cursor)[0]
+                            cursor += 2
+                            at = (y*w+x)*4
+                            pixels[at:at+4] = bytes(((word>>11)*255//31,
+                                                    (word>>5&63)*255//63,
+                                                    (word&31)*255//31,255))
+                self.assertEqual(cursor,len(payload),source)
+                image = Image.frombytes('RGBA',(w,h),bytes(pixels))
+                x = indexes.index(frame)*cell[0]
+                expected_atlas.paste(image,(x,0))
+                expected_frames.append({'frame':frame,'rect':[x,0,w,h],
+                                        'size':[w,h],'pivot':[px,py]})
+            info = self.catalog['files'].get(name)
+            self.assertIsNotNone(info,'Missing native menu asset '+name)
+            self.assertEqual(info['source_entry'],source)
+            self.assertEqual(info['cell_size'],list(cell))
+            self.assertEqual(info['source_frames'],expected_frames)
+            # Both independently loadable groups must match the raw oracle.
+            for folder in [self.folder,ROOT/'assets/xfs/hud_options_fallback']:
+                actual = Image.open(folder/name).convert('RGBA')
+                self.assertEqual(actual.size,expected_atlas.size,str(folder/name))
+                self.assertEqual(actual.tobytes(),expected_atlas.tobytes(),str(folder/name))
+
+    def test_native_options_fallback_has_its_own_complete_contract(self):
+        folder = ROOT/'assets/xfs/hud_options_fallback'
+        catalog = json.loads((folder/'catalog.json').read_text())
+        self.assertEqual(catalog['version'],1)
+        self.assertEqual(catalog['archive_sha256'],self.catalog['archive_sha256'])
+        self.assertEqual(list(catalog['files']),self.catalog['native_options_group'])
+        self.assertEqual(set(catalog['entries']),{
+            'play_option.img','b_option_confirm.img',
+            'b_option_exitgame.img','b_option_cancel.img'})
+        for name,info in catalog['files'].items():
+            self.assertEqual(info['file'],'res://assets/xfs/hud_options_fallback/'+name)
+            actual = Image.open(folder/name).convert('RGBA')
+            self.assertEqual(info['size'],list(actual.size))
+            self.assertEqual(info['rgba_sha256'],hashlib.sha256(actual.tobytes()).hexdigest())
+            self.assertEqual(info['sha256'],hashlib.sha256((folder/name).read_bytes()).hexdigest())
+            original = self.catalog['files'][name]
+            self.assertEqual(info['source_frames'],original['source_frames'])
+            self.assertEqual(info['rgba_sha256'],original['rgba_sha256'])
+            self.assertIn('process/fix_alpha_border=false',(folder/(name+'.import')).read_text())
 
     def test_native_charge_pixels(self):
         # Frame2 is the native red strength fill; it is 400x22 and the port's
