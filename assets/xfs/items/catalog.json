@@ -1,0 +1,559 @@
+{
+  "version": 1,
+  "graphics_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "archive": "TestClient/graphics.xfs",
+  "repository": "https://github.com/jglim/gunbound-launcher",
+  "commit": "2bc43c490ba727d6fce1a5b47ed9dc577d0f9cc1",
+  "entries": {
+    "item1": {
+      "sha256": "ea4da7045fe7486e065496637e9e1c1959ed95e8e5261ccd6458a51af5d9123d",
+      "frames": 58
+    },
+    "item2": {
+      "sha256": "b6bb4f7a1d24630cc2859c1320d5bcd5ecc1c64200677e8be565b3c18c283ea9",
+      "frames": 22
+    },
+    "teleport1": {
+      "sha256": "0f3ac10a8320e5d8b21839e80179568b59be4bc0e7cdb6f08dc676e951135a14",
+      "frames": 19
+    },
+    "teleport2": {
+      "sha256": "d76e3bd1b18927cdadac84b0f7fd9d49defc38a35a3e9cff2657c945a0350e18",
+      "frames": 19
+    },
+    "bulletiteml": {
+      "sha256": "3dae8b97e3044cf383746f2c1a6a92bfbfbc8594be47f1d6b2c7aab236518717",
+      "frames": 12
+    },
+    "playmode": {
+      "sha256": "df93ab11aeb2c26c0afd8d0c18306ebb601c24244b13c7c878a442c46f1985da",
+      "frames": 182
+    }
+  },
+  "files": {
+    "ItemBungeShot.png": {
+      "file": "res://assets/xfs/items/ItemBungeShot.png",
+      "source": {
+        "entry": "item1",
+        "frames": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        148,
+        36
+      ],
+      "sha256": "143d12bc5e20fcab00c0ce21993f7088a8b99c29b9997f90b1a8ebbe2343892f",
+      "matches_legacy": false
+    },
+    "ItemPowerUp.png": {
+      "file": "res://assets/xfs/items/ItemPowerUp.png",
+      "source": {
+        "entry": "item1",
+        "frames": [
+          2,
+          2,
+          3,
+          3
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        148,
+        36
+      ],
+      "sha256": "c961b1be21b7bcf9c5c44b60a8a12c05ce9fabbdbf89c81d356b069f5fa7b3a6",
+      "matches_legacy": false
+    },
+    "ItemBlood.png": {
+      "file": "res://assets/xfs/items/ItemBlood.png",
+      "source": {
+        "entry": "item1",
+        "frames": [
+          4,
+          4,
+          5,
+          5
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        148,
+        36
+      ],
+      "sha256": "0bffbec6ede76b4992326d05b2168444902b1a6316539b9ae64e605c07ac6d93",
+      "matches_legacy": false
+    },
+    "ItemEnergyUp1.png": {
+      "file": "res://assets/xfs/items/ItemEnergyUp1.png",
+      "source": {
+        "entry": "item1",
+        "frames": [
+          12,
+          12,
+          13,
+          13
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        148,
+        36
+      ],
+      "sha256": "54740f9de832de8499d44d91d7f4fa690df4a99f2a1772f9b71cc8d69565cb99",
+      "matches_legacy": false
+    },
+    "ItemChangeWind.png": {
+      "file": "res://assets/xfs/items/ItemChangeWind.png",
+      "source": {
+        "entry": "item1",
+        "frames": [
+          28,
+          28,
+          29,
+          29
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        148,
+        36
+      ],
+      "sha256": "b6d18a492b1a5b7349c64baa48d5c7bbddc56fb3d67e83a64244f8dec0791d74",
+      "matches_legacy": false
+    },
+    "ItemDual.png": {
+      "file": "res://assets/xfs/items/ItemDual.png",
+      "source": {
+        "entry": "item2",
+        "frames": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        292,
+        36
+      ],
+      "sha256": "e334cea5051fd4e3deede8407fa23417bb6f46f66fdce5cd8d89d76c56336b36",
+      "matches_legacy": false
+    },
+    "ItemDualPlus.png": {
+      "file": "res://assets/xfs/items/ItemDualPlus.png",
+      "source": {
+        "entry": "item2",
+        "frames": [
+          2,
+          2,
+          3,
+          3
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        292,
+        36
+      ],
+      "sha256": "ba855dff346fe3082024d200e1e22e153c1e13fe0034df92a5f85322d1594d8a",
+      "matches_legacy": false
+    },
+    "ItemThunder.png": {
+      "file": "res://assets/xfs/items/ItemThunder.png",
+      "source": {
+        "entry": "item2",
+        "frames": [
+          10,
+          10,
+          11,
+          11
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        292,
+        36
+      ],
+      "sha256": "02a14c101528a2187c83bde60599c46632f05684db5142f52c6979d7928953eb",
+      "matches_legacy": false
+    },
+    "ItemEnergyUp2.png": {
+      "file": "res://assets/xfs/items/ItemEnergyUp2.png",
+      "source": {
+        "entry": "item2",
+        "frames": [
+          12,
+          12,
+          13,
+          13
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        292,
+        36
+      ],
+      "sha256": "a6bc00729e88db5e51dfe7bc11eb4026ef5ea0b1eefe27f0bf8095a7e3c80bd7",
+      "matches_legacy": false
+    },
+    "ItemTeleport.png": {
+      "file": "res://assets/xfs/items/ItemTeleport.png",
+      "source": {
+        "entry": "item2",
+        "frames": [
+          18,
+          18,
+          19,
+          19
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        292,
+        36
+      ],
+      "sha256": "c5b1ae9bb10c5d026d5f8c99afe436517e505273c20ace9c611cd60fab323801",
+      "matches_legacy": false
+    },
+    "ItemTeamTeleport.png": {
+      "file": "res://assets/xfs/items/ItemTeamTeleport.png",
+      "source": {
+        "entry": "item2",
+        "frames": [
+          20,
+          20,
+          21,
+          21
+        ],
+        "margin": [
+          1,
+          1
+        ]
+      },
+      "size": [
+        292,
+        36
+      ],
+      "sha256": "1cdbb062f40394cded2e315edc3fb76a62002de8705096357b9f6da412b9a3fb",
+      "matches_legacy": false
+    },
+    "Teleport1.png": {
+      "file": "res://assets/xfs/items/Teleport1.png",
+      "source": {
+        "entry": "teleport1",
+        "frames": 19,
+        "cell": [
+          190,
+          192
+        ],
+        "pivot": [
+          95,
+          100
+        ],
+        "native_pivots": [
+          [
+            -22,
+            -20
+          ],
+          [
+            -51,
+            -49
+          ],
+          [
+            -57,
+            -56
+          ],
+          [
+            -52,
+            -49
+          ],
+          [
+            -57,
+            -55
+          ],
+          [
+            -61,
+            -62
+          ],
+          [
+            -62,
+            -64
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -59,
+            -62
+          ],
+          [
+            -59,
+            -64
+          ],
+          [
+            -62,
+            -61
+          ],
+          [
+            -61,
+            -64
+          ],
+          [
+            -58,
+            -64
+          ],
+          [
+            -59,
+            -64
+          ],
+          [
+            -61,
+            -64
+          ],
+          [
+            -62,
+            -62
+          ]
+        ]
+      },
+      "size": [
+        1900,
+        384
+      ],
+      "sha256": "ada2c50c5a9f777a024f2f108235d8b70ca38cdd446eaa919b4ef78c54080788",
+      "matches_legacy": false
+    },
+    "Teleport2.png": {
+      "file": "res://assets/xfs/items/Teleport2.png",
+      "source": {
+        "entry": "teleport2",
+        "frames": 19,
+        "cell": [
+          190,
+          192
+        ],
+        "pivot": [
+          95,
+          100
+        ],
+        "native_pivots": [
+          [
+            -62,
+            -62
+          ],
+          [
+            -61,
+            -64
+          ],
+          [
+            -59,
+            -64
+          ],
+          [
+            -58,
+            -64
+          ],
+          [
+            -61,
+            -64
+          ],
+          [
+            -62,
+            -61
+          ],
+          [
+            -59,
+            -64
+          ],
+          [
+            -59,
+            -62
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -64,
+            -64
+          ],
+          [
+            -62,
+            -64
+          ],
+          [
+            -61,
+            -62
+          ],
+          [
+            -57,
+            -55
+          ],
+          [
+            -52,
+            -49
+          ],
+          [
+            -57,
+            -56
+          ],
+          [
+            -51,
+            -49
+          ],
+          [
+            -22,
+            -20
+          ]
+        ]
+      },
+      "size": [
+        1900,
+        384
+      ],
+      "sha256": "c364d6a47e9be4b8fce8633f707f8126967368d00965edb10168f8667d791b7b",
+      "matches_legacy": false
+    },
+    "TeleportBullet.png": {
+      "file": "res://assets/xfs/items/TeleportBullet.png",
+      "source": {
+        "entry": "bulletiteml",
+        "frames": 12,
+        "cell": [
+          43,
+          39
+        ],
+        "pivot": [
+          30,
+          18
+        ],
+        "native_pivots": [
+          [
+            -18,
+            -12
+          ],
+          [
+            -21,
+            -12
+          ],
+          [
+            -21,
+            -12
+          ],
+          [
+            -22,
+            -13
+          ],
+          [
+            -25,
+            -13
+          ],
+          [
+            -24,
+            -12
+          ],
+          [
+            -25,
+            -12
+          ],
+          [
+            -21,
+            -13
+          ],
+          [
+            -25,
+            -12
+          ],
+          [
+            -20,
+            -13
+          ],
+          [
+            -23,
+            -13
+          ],
+          [
+            -18,
+            -12
+          ]
+        ]
+      },
+      "size": [
+        516,
+        39
+      ],
+      "sha256": "545346cbf8904d7858e69883b739bf0719b1664e1336915aa399ab7e6e3b79da",
+      "matches_legacy": false
+    },
+    "MatchStatus.png": {
+      "file": "res://assets/xfs/items/MatchStatus.png",
+      "source": {
+        "entry": "playmode",
+        "frame": 15
+      },
+      "size": [
+        217,
+        38
+      ],
+      "sha256": "60f8bf4b9c7a258d7018c11923f35032c1cd698318201d9af4c99c7a39285a36",
+      "matches_legacy": false
+    }
+  }
+}

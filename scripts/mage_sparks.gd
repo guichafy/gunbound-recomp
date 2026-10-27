@@ -1,6 +1,7 @@
 extends RefCounted
 ## Mage decorative Force/Electric FX from436dc0/436ec0. RNG belongs only
 ## to presentation; physical point records never consume it in Match/CPU.
+const Assets = preload("res://scripts/client_weather_assets.gd")
 const Art = preload("res://scripts/mage_spark_art.gd")
 const DEFAULT_SEED := 4242
 var quality := 3 # Explicit local Effect3D input; native setting allows1/2/3.
@@ -63,7 +64,8 @@ func _spawn(kind: String, point: Vector2i, birth: int) -> void:
 
 func draw(view: Node2D, offset: Vector2) -> void:
 	if particles.is_empty() and not canvases.has(view.get_instance_id()):return
-	if texture==null:texture=load(Art.TEXTURE)
+	if texture==null:texture=Assets.texture("CrashTexture")
+	if texture==null:return
 	var id:=view.get_instance_id()
 	var canvas: RID
 	if canvases.has(id):canvas=canvases[id]

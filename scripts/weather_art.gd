@@ -1,23 +1,31 @@
 extends RefCounted
 ## Presentation of weather columns, Thor, beams and ground
-## particles with the original OpenBound sprites. Never decides combat: it only
+## particles with original Thor's Hammer art where this client has an equivalent.
+## Historical calendar/layout adapters remain explicit. Never decides combat: it only
 ## reads match.gd state and events. Pause freezes it because game.gd stops ticking.
 
 const Weather = preload("res://scripts/weather.gd")
+const Maps = preload("res://scripts/maps.gd")
+const Assets = preload("res://scripts/client_weather_assets.gd")
 const ShotTiming = preload("res://scripts/classic_shot_timing.gd")
 var lightning_beam_art = preload("res://scripts/lightning_beam_art.gd").new()
 var native_beam_art = preload("res://scripts/aduka_beam_art.gd").new()
 var native_thor_art = preload("res://scripts/thor_native_art.gd").new()
 var native_columns = preload("res://scripts/mage_weather_art.gd").new()
 var mage_sparks = preload("res://scripts/mage_sparks.gd").new()
+var thor_glow = preload("res://scripts/additive_sprite_art.gd").new()
+var column_glow = preload("res://scripts/additive_sprite_art.gd").new()
+var beam_glow = preload("res://scripts/additive_sprite_art.gd").new()
+var mark_glow = preload("res://scripts/additive_sprite_art.gd").new()
 # Weather.cs: frames 128×64 (pivot 64,32), 8 frames at 15 fps, columns scroll 50 px/s.
 const FRAME := Vector2(128, 64)
 const SCROLL_SPEED := 50.0
 const FADE_TIME := 1.0
 const COLUMN_SHEETS := {
 	"force": ["Force", 2], "weakness": ["Weakness", 2], "mirror": ["Mirror", 2],
-	"random": ["Random", 2], "electricity": ["Electricity", 1], "tornado": ["Tornado", 1],
+	"random": ["Random", 2], "electricity": ["Electricity", 2], "tornado": ["Tornado", 2],
 }
+const CLIENT_COLUMNS := {"force":"FirewallTexture", "electricity":"LightningTexture", "tornado":"TornadoTexture"}
 # WeatherDisplay icon order (22×22): row 0 coloured, row 1 grayscale.
 const ICON_INDEX := {"force": 0, "tornado": 1, "electricity": 2, "wind": 3, "thor": 4, "protection": 5, "ignorance": 6, "weakness": 7, "mirror": 8, "random": 9}
 const NAMES := {"force": "Força", "tornado": "Tornado", "electricity": "Elétrico", "wind": "Vento", "thor": "Thor", "protection": "Proteção", "ignorance": "Ignorância", "weakness": "Fraqueza", "mirror": "Espelho", "random": "Aleatório"}
@@ -35,6 +43,8 @@ const PARTICLE_CAP := 80
 
 var sheets := {}
 var thor_sheet: Texture2D
+var thor_light: Texture2D
+var thor_meta: Dictionary
 var thor_laser: Texture2D
 var lightning: Texture2D
 var force_particle: Texture2D
@@ -55,12 +65,15 @@ var noise := RandomNumberGenerator.new()
 func _init() -> void:
 	noise.seed = 4242
 	for type in COLUMN_SHEETS:
-		sheets[type] = load("res://assets/openbound/weather/%s.png" % COLUMN_SHEETS[type][0])
-	thor_sheet = load("res://assets/openbound/thor/Spritesheet.png")
-	thor_laser = load("res://assets/openbound/thor/ThorLaser.png")
-	lightning = load("res://assets/openbound/weather/LightningSE.png")
-	force_particle = load("res://assets/openbound/weather/ForceParticle.png")
-	electric_particle = load("res://assets/openbound/weather/ElectricityParticle.png")
+		# Weakness/Mirror/Random have no category in this build (ADR-128).
+		sheets[type] = Assets.texture(CLIENT_COLUMNS[type]) if CLIENT_COLUMNS.has(type) else load("res://assets/openbound/weather/%s.png" % COLUMN_SHEETS[type][0])
+	thor_sheet = Assets.texture("ThorBody")
+	thor_light = Assets.texture("ThorLight")
+	thor_meta = Assets.thor_metadata()
+	thor_laser = Assets.texture("LaserEffect")
+	lightning = Assets.texture("Lightning")
+	force_particle = Assets.texture("CrashTexture")
+	electric_particle = force_particle
 	sounds = {
 		"mirror": load("res://assets/openbound/weather/Mirror.mp3"),
 		"wind": load("res://assets/openbound/weather/WindTransition.mp3"),
@@ -79,8 +92,8 @@ func reset(map: Dictionary) -> void:
 	column_age.clear()
 	thor_position = Vector2.INF
 	ground = null
-	if not map.is_empty() and ResourceLoader.exists(map.particle):
-		ground = load(map.particle)
+	if not map.is_empty() and ResourceLoader.exists(Maps.path(map, "particle")):
+		ground = load(Maps.path(map, "particle"))
 		ground_frames = int(map.particle_frames)
 		ground_pivot = map.particle_pivot
 
@@ -167,6 +180,7 @@ func particle_position(particle: Dictionary) -> Vector2:
 	return Vector2(particle.origin) + Vector2(particle.speed) * t + Vector2(particle.acceleration) * t * t * 0.5
 
 func draw_columns(view: Node2D, model, offset: Vector2) -> void:
+	RenderingServer.canvas_item_set_draw_index(column_glow.begin(view),-200)
 	var height: float = model.terrain.world_size().y
 	if model.weather.get("is_native")==true:
 		native_columns.draw(view,model.weather.columns,column_age,offset,height)
@@ -190,11 +204,14 @@ func draw_columns(view: Node2D, model, offset: Vector2) -> void:
 			# Variable columns animate at 15 fps; Random keeps a fixed frame per segment.
 			var frame := segment % 8 if column.type == "random" else (int(clock * 15.0) + segment) % 8
 			var source := Rect2(Vector2(frame % columns_in_sheet, frame / columns_in_sheet) * FRAME, FRAME)
-			view.draw_texture_rect_region(sheet, Rect2(Vector2(float(column.x) - size.x * 0.5, y) + offset, size), source, tint)
+			var target := Rect2(Vector2(float(column.x) - size.x * 0.5, y) + offset, size)
+			if column.type=="electricity":column_glow.draw(view,sheet,target,source,Transform2D.IDENTITY,tint)
+			else:view.draw_texture_rect_region(sheet,target,source,tint)
 			y += size.y
 			segment += 1
 
 func draw_thor(view: Node2D, model, offset: Vector2) -> void:
+	RenderingServer.canvas_item_set_draw_index(thor_glow.begin(view),-100)
 	if not (model.weather.thor.active or bool(model.weather.thor.get("present",false))) or thor_position == Vector2.INF:
 		return
 	if bool(model.weather.thor.get("native",false)):
@@ -208,7 +225,11 @@ func draw_thor(view: Node2D, model, offset: Vector2) -> void:
 	var frame := 20 + int(clock * 15.0) % 20
 	if thor_shot < 16.0 / 15.0:
 		frame = 40 + int(thor_shot * 15.0) % 16
-	var cell := Vector2(197, 190)
+	if thor_sheet==null or thor_meta.is_empty():return
+	# The historical adapter keeps its placement/15fps/scale. Native source
+	# windows and hotspots replace the composed sheet's transparent padding.
+	var body: Dictionary = thor_meta.sheets["ThorBody.png"]
+	var cell := Vector2(body.cell[0],body.cell[1])
 	var source := Rect2(Vector2(frame % 14, frame / 14) * cell, cell)
 	var bob := Vector2(sin(clock * 0.8) * 3.0, cos(clock * 0.4) * 2.0)
 	var focus := thor_position + Vector2(0, 400)
@@ -216,15 +237,25 @@ func draw_thor(view: Node2D, model, offset: Vector2) -> void:
 		if bool(projectile.get("thor", false)) and bool(projectile.launched):
 			focus = projectile.pos
 			break
-	view.draw_set_transform(thor_position + bob + offset, (focus - thor_position).angle() - PI, Vector2.ONE * 0.6)
-	view.draw_texture_rect_region(thor_sheet, Rect2(-Vector2(118, 111), cell), source)
+	var transform := Transform2D((focus-thor_position).angle()-PI,Vector2.ONE*0.6,0,thor_position+bob+offset)
+	view.draw_set_transform_matrix(transform)
+	view.draw_texture_rect_region(thor_sheet, Rect2(-Vector2(body.origin[0],body.origin[1]), cell), source)
 	view.draw_set_transform(Vector2.ZERO)
+	if thor_light!=null:
+		var light: Dictionary = thor_meta.sheets["ThorLight.png"]
+		var light_cell := Vector2(light.cell[0],light.cell[1])
+		var light_source := Rect2(Vector2(frame%14,frame/14)*light_cell,light_cell)
+		thor_glow.draw(view,thor_light,Rect2(-Vector2(light.origin[0],light.origin[1]),light_cell),light_source,transform)
 	var label := "LV %d · %d XP" % [int(model.weather.thor.level), int(model.weather.thor.xp)]
 	var font: Font = view.ui.bold
 	view.draw_string_outline(font, thor_position + offset + Vector2(30, 70), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, 4, view.ui.INK)
 	view.draw_string(font, thor_position + offset + Vector2(30, 70), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("9cff8a"))
 
 func clear_beams() -> void:
+	thor_glow.clear()
+	column_glow.clear()
+	beam_glow.clear()
+	mark_glow.clear()
 	mage_sparks.reset()
 	native_columns.clear()
 	beams.clear()
@@ -232,6 +263,7 @@ func clear_beams() -> void:
 	lightning_beam_art.clear()
 
 func draw_beams(view: Node2D, offset: Vector2) -> void:
+	RenderingServer.canvas_item_set_draw_index(beam_glow.begin(view),-100)
 	lightning_beam_art.draw(view,beams.filter(func(beam):return str(beam.kind)=="mobile_lightning"),offset)
 	var native_beams: Array = []
 	for beam in beams:
@@ -250,17 +282,19 @@ func draw_beams(view: Node2D, offset: Vector2) -> void:
 			continue
 		var fade := clampf(1.0 - float(beam.age) / 0.6, 0.0, 1.0)
 		var angle := (to - from).angle() - PI * 0.5
-		view.draw_set_transform(from, angle)
+		var transform := Transform2D(angle,from)
 		if beam.kind == "thor":
 			var color: Color = THOR_COLORS[clampi(int(beam.level) - 1, 0, THOR_COLORS.size() - 1)]
-			view.draw_texture_rect(thor_laser, Rect2(-12, 0, 24, length), false, Color(color, fade))
-			view.draw_texture_rect(thor_laser, Rect2(-5, 0, 10, length), false, Color(1, 1, 1, fade))
+			if thor_laser!=null:
+				var region := beam_region("thor",int(float(beam.age)*20.0))
+				beam_glow.draw(view,thor_laser,Rect2(-12,0,24,length),region,transform,Color(color,fade))
+				beam_glow.draw(view,thor_laser,Rect2(-5,0,10,length),region,transform,Color(1,1,1,fade))
 		else:
 			var frame := (int(beam.frame) + int(float(beam.age) * 20.0)) % 4
-			view.draw_texture_rect_region(lightning, Rect2(-24, 0, 48, length), Rect2(frame * 64, 0, 64, 256), Color(1, 1, 1, fade))
-		view.draw_set_transform(Vector2.ZERO)
+			if lightning!=null:beam_glow.draw(view,lightning,Rect2(-24,0,48,length),beam_region("lightning",frame),transform,Color(1,1,1,fade))
 
 func draw_shell_marks(view: Node2D, model, offset: Vector2) -> void:
+	RenderingServer.canvas_item_set_draw_index(mark_glow.begin(view),-150)
 	mage_sparks.draw(view,offset)
 	# Force sparks, electric arcs and Weakness darkening ride on influenced shells.
 	for projectile in model.projectiles:
@@ -270,14 +304,21 @@ func draw_shell_marks(view: Node2D, model, offset: Vector2) -> void:
 			continue
 		var position: Vector2 = Vector2(projectile.hit_pos) + offset
 		var frame := int(clock * 15.0) % 8
-		if "electricity" in projectile.influenced:
-			view.draw_texture_rect_region(electric_particle, Rect2(position - Vector2(20, 20), Vector2(40, 40)), Rect2(frame * 32, 0, 32, 32))
-		if "force" in projectile.influenced:
+		if "electricity" in projectile.influenced and electric_particle!=null:
+			mark_glow.draw(view,electric_particle,Rect2(position-Vector2(20,20),Vector2(40,40)),shell_mark_region("electricity",frame),Transform2D.IDENTITY)
+		if "force" in projectile.influenced and force_particle!=null:
 			for k in range(3):
 				var jitter := Vector2(sin(clock * 23.0 + k * 2.1), cos(clock * 19.0 + k * 1.7)) * 12.0
-				view.draw_texture_rect_region(force_particle, Rect2(position + jitter - Vector2(8, 8), Vector2(16, 16)), Rect2(((frame + k) % 8) * 32, 0, 32, 32))
+				mark_glow.draw(view,force_particle,Rect2(position+jitter-Vector2(8,8),Vector2(16,16)),shell_mark_region("force",frame+k),Transform2D.IDENTITY)
 		if "weakness" in projectile.influenced:
 			view.draw_circle(position, 9.0, Color(0.12, 0.12, 0.12, 0.55))
+
+## Source strips are native; non-Mage emission/layout above remain adapters.
+static func shell_mark_region(kind: String, frame: int) -> Rect2:
+	return Rect2(posmod(frame,8)*32,64 if kind=="force" else 96,32,32)
+
+static func beam_region(kind: String, frame: int) -> Rect2:
+	return Rect2(posmod(frame,8)*16,0,16,256) if kind=="thor" else Rect2(posmod(frame,4)*64,0,64,256)
 
 func draw_particles(view: Node2D, offset: Vector2) -> void:
 	if ground == null:

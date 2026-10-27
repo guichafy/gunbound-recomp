@@ -801,7 +801,7 @@ func highlight(buttons: Array[Button], chosen: int) -> void:
 	for index in buttons.size():
 		var selected := index==chosen
 		var icon := AtlasTexture.new()
-		icon.atlas = preload("res://assets/openbound/hud/OptionsRadioButton.png")
+		icon.atlas = preload("res://scripts/client_hud_assets.gd").new().texture("OptionsRadioButton.png", preload("res://assets/openbound/hud/OptionsRadioButton.png"))
 		icon.region = Rect2(12,0,11,12) if selected else Rect2(0,0,12,12)
 		buttons[index].icon = icon
 		buttons[index].add_theme_color_override("font_color",Color("ffe875") if selected else Color("edf5ff"))

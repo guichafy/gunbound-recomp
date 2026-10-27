@@ -1,11 +1,7 @@
 extends Control
-## PopupGameOptions.cs (PopupMenu, SliderBar, RadioButtonSet) with the original
-## Interface/Popup/Blue/Options sprites. Offsets are the C# ones, relative to the
-## popup centre on the 800×500 virtual screen, scaled by K = 1.6. HD sprites
-## (assets/hd/hud, 3× GPT Images remaster) fall back to the originals; frame
-## regions are in original pixels and scale by each texture's density. Values
-## live in options.gd; game.gd applies them. Controls with no equivalent in this
-## game are drawn with the original default and disabled.
+## Existing option geometry/input with native Thor's Hammer configuration art.
+## The native shell is recomposed around the existing controls (REQ-48).
+## Values and enabled settings are unchanged; gaps fall back to preserved 1x art.
 
 signal changed
 signal accepted
@@ -42,6 +38,8 @@ const ACCEPT_OFFSET := Vector2(130, 144)
 const PAUSE_OFFSET := Vector2(-112, 144)
 
 var options
+const ClientHudAssets = preload("res://scripts/client_hud_assets.gd")
+var client_assets := ClientHudAssets.new()
 var textures := {}
 var originals := {}
 var font: SystemFont
@@ -58,9 +56,7 @@ func _init(values = null) -> void:
 	font.font_names = PackedStringArray(["Consolas", "Menlo", "Monaco", "DejaVu Sans Mono", "monospace"])
 	for name in ["OptionsBackground.png", "OptionsBar.png", "OptionsBarFrame.bmp", "OptionsBarIntensityPointer.png", "OptionsRadioButton.png", "PopupAccept.png"]:
 		originals[name] = load("res://assets/openbound/hud/" + name)
-		# The HD remaster is always PNG (the original BarFrame is a BMP).
-		var hd_path: String = "res://assets/hd/hud/" + name.get_basename() + ".png"
-		textures[name] = load(hd_path) if ResourceLoader.exists(hd_path) else originals[name]
+		textures[name] = client_assets.texture(name, originals[name])
 	# Button.cs Accept preset: 20×25 frames normal, hover, clicked, disabled.
 	accept_button = TextureButton.new()
 	accept_button.ignore_texture_size = true

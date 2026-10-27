@@ -1,0 +1,57 @@
+{
+  "center": [
+    960,
+    153.36
+  ],
+  "directions": {
+    "right": {
+      "red_pixels": 138,
+      "red_centroid": [
+        1009.2536231884058,
+        152.8985507246377
+      ],
+      "direction_dot": 0.999956115315048,
+      "expected": [
+        1,
+        0
+      ]
+    },
+    "up": {
+      "red_pixels": 148,
+      "red_centroid": [
+        959.5472972972973,
+        103.47972972972973
+      ],
+      "direction_dot": 0.9999588175903416,
+      "expected": [
+        0,
+        -1
+      ]
+    },
+    "left": {
+      "red_pixels": 139,
+      "red_centroid": [
+        909.8201438848921,
+        152.79136690647482
+      ],
+      "direction_dot": 0.9999358002082056,
+      "expected": [
+        -1,
+        0
+      ]
+    },
+    "down": {
+      "red_pixels": 139,
+      "red_centroid": [
+        959.5467625899281,
+        202.20143884892087
+      ],
+      "direction_dot": 0.9999569456977366,
+      "expected": [
+        0,
+        1
+      ]
+    }
+  },
+  "method": "Red-pointer pixel centroid in native indicator neighborhood; independent physical cardinals"
+}

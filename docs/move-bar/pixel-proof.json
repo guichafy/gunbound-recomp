@@ -1,0 +1,43 @@
+{
+  "size": [
+    1920,
+    1080
+  ],
+  "fill_roi": [
+    623,
+    1043,
+    1488,
+    1070
+  ],
+  "directions": {
+    "left": {
+      "pause_full_equal": true,
+      "pause_move_roi_equal": true,
+      "resume_move_roi_changed": true,
+      "pause_roi_sha256": "74f643773dd14e2a3685f54a0ec140eca451eebc026eacc7679bda4d300f8578",
+      "resume_roi_sha256": "be767c7d8d48d75b583abbb7aefa4a0b5ebe03cc540edf6d69d86d9a62801525"
+    },
+    "right": {
+      "pause_full_equal": true,
+      "pause_move_roi_equal": true,
+      "resume_move_roi_changed": true,
+      "pause_roi_sha256": "74f643773dd14e2a3685f54a0ec140eca451eebc026eacc7679bda4d300f8578",
+      "resume_roi_sha256": "be767c7d8d48d75b583abbb7aefa4a0b5ebe03cc540edf6d69d86d9a62801525"
+    }
+  },
+  "static_fill": {
+    "0": {
+      "cyan_pixels": 2,
+      "expected_scaled_width": 2.16
+    },
+    "50": {
+      "cyan_pixels": 434,
+      "expected_scaled_width": 434.16
+    },
+    "100": {
+      "cyan_pixels": 864,
+      "expected_scaled_width": 864
+    }
+  },
+  "fallbacks_equal_compact": true
+}

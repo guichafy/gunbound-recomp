@@ -1,0 +1,188 @@
+{
+  "scope": "Native footer span flush to framebuffer, no color key",
+  "records": [
+    {
+      "evidence_id": "ev_baad5ceda925c2e1f74b81f43cc004bb6ba10a26ef89db31f6ac45cb857a5a6c",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "xrefs",
+      "parameters": {
+        "address": "0x00f22650"
+      },
+      "raw_result": null,
+      "normalized_result": [
+        "0x41343b",
+        "0x4c1d00",
+        "0x4c2d19",
+        "0x4c9bf0",
+        "0x4ebad5",
+        "0x4ed98a",
+        "0x4ed9c0",
+        "0x4eff66"
+      ],
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_b0b2a3b7c904b2036fd0fc881c905846d9d8eff8d1d51f50dc42dc180ecfd2c6",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x004c1c90"
+      },
+      "raw_result": null,
+      "normalized_result": "0x4c1c90: push ebx\n0x4c1c91: push esi\n0x4c1c92: push edi\n0x4c1c93: mov ebx, ecx\n0x4c1c95: mov esi, 0x22d\n0x4c1c9a: mov eax, 0x31f\n0x4c1c9f: mov edi, 0x26\n0x4c1ca4: xor ecx, ecx\n0x4c1ca6: call sub_4eadb0\n0x4c1cab: mov edx, dword [ebx+8]\n0x4c1cae: mov eax, dword [dword_5b3484]\n0x4c1cb3: inc edx\n0x4c1cb4: mov dword [ebx+8], edx\n0x4c1cb7: cmp byte [eax+0x5f2f55], 0x1\n0x4c1cbe: jne loc_4c1cd0\n0x4c1cc0: add eax, 0x6a7708\n0x4c1cc5: push eax\n0x4c1cc6: call sub_4e3aa0\n0x4c1ccb: mov eax, dword [dword_5b3484]\n0x4c1cd0: lea ecx, dword [eax+0x6a7708]\n0x4c1cd6: call sub_4e3bd0\n0x4c1cdb: mov esi, 0x257\n0x4c1ce0: mov eax, 0x31f\n0x4c1ce5: xor edi, edi\n0x4c1ce7: xor ecx, ecx\n0x4c1ce9: call sub_4eadb0\n0x4c1cee: mov eax, dword [dword_5b3484]\n0x4c1cf3: add eax, 0x6a647c\n0x4c1cf8: push eax\n0x4c1cf9: call sub_406990\n0x4c1cfe: push 0x1\n0x4c1d00: mov ebx, 0xf22650\n0x4c1d05: call sub_4e93e0\n0x4c1d0a: pop edi\n0x4c1d0b: pop esi\n0x4c1d0c: pop ebx\n0x4c1d0d: ret",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_5ec48ab9e88d4cc0a9019a92fa47e71648136e01b6f0b83dc5dc2f1bfb5f9af2",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x004e93e0"
+      },
+      "raw_result": null,
+      "normalized_result": "0x4e93e0: sub esp, 0x8\n0x4e93e3: push ebp\n0x4e93e4: mov ebp, dword [dword_79352c]\n0x4e93ea: test ebp, ebp\n0x4e93ec: je loc_4e9488\n0x4e93f2: mov eax, dword [ebx+0x1008]\n0x4e93f8: test eax, eax\n0x4e93fa: mov dword [esp+0xc+var_4], 0x0\n0x4e9402: jle loc_4e9488\n0x4e9408: lea eax, dword [ebx+0x100c]\n0x4e940e: push esi\n0x4e940f: mov dword [esp+0x10+var_8], eax\n0x4e9413: push edi\n0x4e9426: mov cl, byte [esp+0x14+arg_0]\n0x4e942a: cmp byte [eax+4], cl\n0x4e942d: jne loc_4e944f\n0x4e942f: movsx esi, word [eax]\n0x4e9432: movsx ecx, word [eax+2]\n0x4e9436: sub ecx, esi\n0x4e9438: mov esi, dword [eax+8]\n0x4e943b: shl ecx, 0x1\n0x4e943d: lea edi, dword [ebp+edx*2]\n0x4e9441: mov edx, ecx\n0x4e9443: shr ecx, 0x2\n0x4e9446: rep movsd dword [edi], dword [esi]\n0x4e9448: mov ecx, edx\n0x4e944a: and ecx, 0x3\n0x4e944d: rep movsb byte [edi], byte [esi]\n0x4e945e: mov ecx, dword [dword_5b3620]\n0x4e9464: mov eax, dword [esp+0x14+var_4]\n0x4e9468: mov edx, dword [esp+0x14+var_8]\n0x4e946c: inc eax\n0x4e946d: lea ebp, dword [ebp+ecx*2]\n0x4e9471: mov ecx, dword [ebx+0x1008]\n0x4e9477: add edx, 0x4\n0x4e947a: cmp eax, ecx\n0x4e947c: mov dword [esp+0x14+var_4], eax\n0x4e9480: mov dword [esp+0x14+var_8], edx\n0x4e9484: jl loc_4e9414\n0x4e9414: mov ecx, dword [esp+0x14+var_8]\n0x4e9418: mov eax, dword [ecx]\n0x4e941a: mov ecx, dword [ebx+0x1004]\n0x4e9420: xor edx, edx\n0x4e9422: test ecx, ecx\n0x4e9424: jle loc_4e945e\n0x4e9486: pop edi\n0x4e9487: pop esi\n0x4e944f: movsx edx, word [eax+2]\n0x4e9453: cmp edx, dword [ebx+0x1004]\n0x4e9459: mov eax, dword [eax+0xc]\n0x4e945c: jl loc_4e9426\n0x4e9488: pop ebp\n0x4e9489: add esp, 0x8\n0x4e948c: ret 0x4",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ]
+}

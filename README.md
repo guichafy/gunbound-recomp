@@ -55,8 +55,8 @@ Método completo em [docs/PORTE.md](docs/PORTE.md).
 |---|---|
 | Versão do código | **0.20.5** (fonte única: `application/config/version` em `project.godot`) |
 | O que dá para jogar | Lobby → sala 1×1 → partida no Miramo Town A, loja, resultado, revanche e perfil local |
-| Última validação completa | 99 suítes, 27.085 checks Godot e 29 partidas, sem falhas ([HANDOFF](docs/sdd/HANDOFF.md)) |
-| Aplicativo exportado | `builds/Gunbound Recomp.app` 0.20.5, **anterior** à loja original (ADR-130/131). Reexporte para incluí-la |
+| Última validação completa (ADR-136) | 109 suítes, 28.157 checks Godot, 86 testes Python e 29 partidas, zero falhas ([registro](docs/sdd/FOOTER_BACKGROUND_NATIVE.md)) |
+| Aplicativo exportado | `builds/Gunbound Recomp.app` 0.20.5, **anterior** à loja original, aos assets e ao HUD corrigido (ADR-130/131/133/134/135/136). Reexporte para incluí-los |
 
 ## TODOs
 
@@ -89,6 +89,8 @@ tarefa está em [docs/sdd/TASKS.md](docs/sdd/TASKS.md).
   aceitos pelo usuário (ADR-107 a 114).
 
 ### Em progresso
+
+- **Assets de batalha do cliente** (ADR-133): Miramo, HUD, clima/Thor, itens e música migrados, com fallback testado. Header/footer, cronômetro e vento corrigidos na ADR-134; lacunas declaradas, aceite/escuta e reexportação pendentes. [Inventário e validação](docs/sdd/CLIENT_ASSETS_PORT.md).
 
 - **Avatar Shop e avatares originais** (ADR-130/131): falta o aceite visual e de mouse. O
   popup de compra ainda é adaptado e o app não foi reexportado.

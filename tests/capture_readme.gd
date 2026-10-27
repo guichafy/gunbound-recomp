@@ -15,6 +15,7 @@ func snap(name: String, folder: String = OUT) -> Image:
 	await process_frame
 	RenderingServer.force_draw()
 	var image := root.get_texture().get_image()
+	assert(image.get_size() == Vector2i(1920, 1080), "README capture must contain the complete1920x1080window")
 	assert(image.save_png(folder + name + ".png") == OK)
 	return image
 func run() -> void:
@@ -23,11 +24,17 @@ func run() -> void:
 	for path in [PROFILE, PROFILE.get_basename() + "-options.json"]:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	root.size = Vector2i(1920, 1080)
+	# Capture physical window pixels, including the16:10canvas fit.
+	root.content_scale_size = Vector2i.ZERO
+	root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	root.content_scale_factor = 1.0
 	scene = load("res://scenes/main.tscn").instantiate()
 	scene.profile = load("res://scripts/profile.gd").new(PROFILE)
 	scene.profile.gender = 1
 	root.add_child(scene)
 	scene.set_process(false)
+	scene.scale = Vector2.ONE * 1.35
+	scene.position = Vector2(96, 0)
 	scene.sound.muted = true
 	# Same outfit as the ADR-130 shop evidence, bought with the test funds.
 	for key in ["xfs:1:0:1", "xfs:1:1:1", "xfs:1:2:1", "xfs:2:3:1", "xfs:2:3:3"]:

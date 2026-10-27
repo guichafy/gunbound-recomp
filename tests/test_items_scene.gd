@@ -62,9 +62,9 @@ func run() -> void:
 		scene.consume_events()
 	var bar = scene.item_bar
 	check(bar.buttons.size() == 4 and bar.visible_slots(scene) == [0, 1, 2, 3], "Four equipped buttons on the action bar")
-	var origin: Vector2 = HudArt.bar_point(Vector2(-116, -37)).round()
-	check(bar.buttons[0].position == origin and absf(bar.buttons[1].position.x - bar.buttons[0].position.x - 72.0 * 1.6) <= 1.0, "Bar starts at (−116, −37) of the action bar; buttons overlap by 1 px")
-	check(bar.buttons[0].size.is_equal_approx(Vector2(73, 36) * 1.6) and bar.buttons[2].size.is_equal_approx(Vector2(37, 36) * 1.6), "2-slot and 1-slot button sizes")
+	var origin: Vector2 = Vector2(501,2)*1.6
+	check(bar.buttons[0].position == origin and absf(bar.buttons[1].position.x - bar.buttons[0].position.x - 72.0 * 1.6) <= 1.0, "Items use native header501,2 and six36px slots")
+	check(bar.buttons[0].size.is_equal_approx(Vector2(71,31)*1.6) and bar.buttons[2].size.is_equal_approx(Vector2(35,31)*1.6), "2-slot and 1-slot button sizes")
 	scene.model.actors[0].turns = 3
 	scene.select_weapon(2)
 	check(scene.aim.weapon == 2, "SS is selectable before using an item")
@@ -166,11 +166,11 @@ func run() -> void:
 	var keys: Dictionary = ItemArt.flame_keys(5.0)
 	check(keys.first == 2 and keys.second == 3 and is_equal_approx(keys.blend, 0.5), "Frame 5 blends keyframes 4 and 6 half-way")
 	var art = ItemArt.new()
-	check(art.textures["ItemDual.png"].get_width() == 292 * 3 and is_equal_approx(art.density("ItemDual.png"), 3.0) and is_equal_approx(art.density("MatchStatus.png"), 3.0), "HD item sprites are 3× the originals")
-	check(art.textures["TeleportBullet.png"].get_width() == 516 * 2 and art.textures.has("TeleportFlame.png"), "Teleport beacon and flame keyframes are 2× HD")
+	check(art.textures["ItemDual.png"].get_width() == 292 and is_equal_approx(art.density("ItemDual.png"), 1.0) and is_equal_approx(art.density("MatchStatus.png"), 1.0), "Client item sprites retain logical atlas dimensions")
+	check(art.textures["TeleportBullet.png"].get_width() == 516 and not art.textures.has("TeleportFlame.png"), "Client beacon and all19flame frames replace HD")
 	check(art.using_frame(0.0) == 0 and art.using_frame(10.0 / 19.0) == 10 and art.using_frame(5.0) == 19, "UsingItem samples 20 frames at 19 fps and holds the last")
 	check(art.using_textures["bigfoot"].get_width() == 129 * 5 and art.using_textures["mage"].get_height() == 150 * 4 and is_equal_approx(art.using_density("bigfoot"), 1.0), "Original mobiles use native UsingItem aura sheets")
-	check(art.textures["ItemDual.png"].get_image().has_mipmaps(), "HD UI item sprites are imported with mipmaps")
+	check(art.textures["ItemDual.png"].resource_path.begins_with(ItemArt.CLIENT), "Item atlas comes from graphics.xfs")
 	art.textures = art.originals.duplicate()
 	check(is_equal_approx(art.density("MatchStatus.png"), 1.0) and art.button_frame("dual", 3).region == Rect2(219, 0, 73, 36), "Originals keep the Button.cs rectangles")
 

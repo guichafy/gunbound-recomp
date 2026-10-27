@@ -1,15 +1,16 @@
 extends RefCounted
-## OpenBound battle HUD (HUD.cs, Crosshair.cs, WindCompass.cs, Delayboard.cs,
-## HealthBar.cs, Nameplate.cs, FloatingText.cs) drawn with the original layout.
+## Battle HUD: native Thor's Hammer header/footer (HUD_CLIENT_LAYOUT.md).
+## World overlays keep their existing contracts; presentation only.
 ## Presentation only: reads match.gd state and events, never decides combat.
-## Offsets are the C# ones on an 800×500 virtual screen scaled by K = 1.6;
-## HD sprites (assets/hd/hud, 3× the original) fall back to the originals.
+## Native800px bands use uniform K=1.6 on the port's800×500 stage;
+## Missing native equivalents keep preserved 1x sprites; no GPT HUD is active.
 
 const Match = preload("res://scripts/match.gd")
 
-const K := 1.6
-const BAR_CENTER := Vector2(400, 457.5)  # origin = (0, (500 - 85) / 2) from the centre
-const COMPASS_CENTER := Vector2(400, 73.6)  # (0, (54 - 250) * 0.9) from the centre
+const Layout = preload("res://scripts/battle_hud_layout.gd")
+const K := Layout.K
+const BAR_CENTER := Vector2(400,478)  # native footer centre after shorter world fit
+const COMPASS_CENTER := Vector2(400,71)  # native wind centre, below header
 const TEAM_BLUE := Color8(98, 149, 230)
 const TEAM_RED := Color8(246, 161, 98)
 const HEALTH_GREEN := Color8(99, 182, 74)
@@ -23,12 +24,7 @@ const MAX_WIND := 26.0
 const TURN_TIME := 30
 # Button.cs presets: frame index of normal, hover, clicked, disabled, activated.
 const SHOT_FRAMES := [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14]]
-const SHOT_OFFSETS := [Vector2(-371, -4), Vector2(-328, -4), Vector2(-285, -4)]
-const OPTIONS_OFFSET := Vector2(-359, 26)
-const SKIP_OFFSET := Vector2(-296, 26)
-const STRENGTH_OFFSET := Vector2(41, 17)
-const MOVEMENT_OFFSET := Vector2(41, 35)
-const WEATHER_OFFSET := Vector2(157, -20)
+const SHOT_OFFSETS := [Vector2(-376.5, 1), Vector2(-335.5, 1), Vector2(-294.5, 1)]
 # SpriteNumericField presets: glyph size and where digit d / minus sit.
 const FONTS := {
 	"current_angle": {"file": "FontCurrentAngle.png", "size": Vector2(15, 15)},
@@ -44,6 +40,8 @@ const FONTS := {
 }
 const ICON_INDEX := {"force": 0, "tornado": 1, "electricity": 2, "wind": 3, "thor": 4, "protection": 5, "ignorance": 6, "weakness": 7, "mirror": 8, "random": 9}
 
+const ClientHudAssets = preload("res://scripts/client_hud_assets.gd")
+var client_assets := ClientHudAssets.new()
 var textures := {}
 var originals := {}
 var clock_sound: AudioStream
@@ -60,6 +58,8 @@ var shown_wind := 0
 var last_second := -1
 var floats: Array = []
 var selector_x := -160.0
+var move_active := false
+var move_expanded := true
 var previous_power := -1.0
 var previous_angle := -1
 var weather_slide := 0.0
@@ -86,15 +86,12 @@ func _init() -> void:
 		var original_path: String = "res://assets/openbound/weather/WeatherIcons.png" if name == "WeatherIcons.png" else "res://assets/openbound/hud/" + name
 		var original: Texture2D = load(original_path)
 		originals[name] = original
-		var hd_path: String = "res://assets/hd/hud/" + name
-		# Mobile-specific wedges follow the original mobile artwork (ADR-089).
-		var original_wedge: bool = name.begins_with("CrosshairMage") or name.begins_with("CrosshairBigfoot")
-		textures[name] = load(hd_path) if not original_wedge and ResourceLoader.exists(hd_path) else original
+		textures[name] = client_assets.texture(name, original)
 	clock_sound = load("res://assets/openbound/hud/ClockSecond.mp3")
 
 ## Screen position of a HUD.cs offset (relative to the action bar centre).
 static func bar_point(offset: Vector2) -> Vector2:
-	return (BAR_CENTER + offset) * K
+	return Layout.point(offset)
 
 func density(name: String) -> float:
 	# A texture that failed to load (e.g. missing import cache) keeps the original scale.
@@ -116,13 +113,15 @@ func sprite(view: CanvasItem, name: String, center: Vector2, scale: float, sourc
 
 func atlas(name: String, source: Rect2) -> AtlasTexture:
 	var texture := AtlasTexture.new()
-	texture.atlas = textures[name]
-	var d := density(name)
+	texture.atlas = client_assets.texture(name) if name.begins_with("Native") else textures[name]
+	var d := 1.0 if name.begins_with("Native") else density(name)
 	texture.region = Rect2(source.position * d, source.size * d)
 	return texture
 
 func reset(model) -> void:
 	floats.clear()
+	move_active = false
+	move_expanded = true
 	crosshair_age = 99.0
 	selector_x = -160.0
 	previous_power = -1.0
@@ -143,16 +142,9 @@ func make_button(parent: Node, kind: String, index: int = 0) -> TextureButton:
 	button.ignore_texture_size = true
 	button.stretch_mode = TextureButton.STRETCH_SCALE
 	button.focus_mode = Control.FOCUS_NONE
-	var size: Vector2
-	var center: Vector2
-	if kind == "shot":
-		size = Vector2(37, 37)
-		center = bar_point(SHOT_OFFSETS[index])
-	else:
-		size = Vector2(60, 23)
-		center = bar_point(OPTIONS_OFFSET if kind == "options" else SKIP_OFFSET)
-	button.size = size * K
-	button.position = center - button.size * 0.5
+	var box := Layout.button_rect(kind,index)
+	button.size = box.size
+	button.position = box.position
 	button.set_meta("kind", kind)
 	button.set_meta("index", index)
 	style_button(button, false)
@@ -165,13 +157,21 @@ func style_button(button: TextureButton, activated: bool) -> void:
 	var name: String
 	var size: Vector2
 	if kind == "shot":
-		frames = SHOT_FRAMES[int(button.get_meta("index"))]
-		name = "ShotSelector.png"
-		size = Vector2(37, 37)
+		var shot: int = button.get_meta("index")
+		frames = [0,1,2,3,4]
+		name = "NativeShot%d.png" % (shot+1)
+		size = Vector2(35,34)
+		if not client_assets.has(name):
+			name = "ShotSelector.png"
+			frames = SHOT_FRAMES[shot]
+			size = Vector2(37,37)
 	else:
-		frames = [0, 1, 2, 3, 3]
-		name = "Options.png" if kind == "options" else "SkipTurn.png"
-		size = Vector2(60, 23)
+		frames = [0,1,2,3,3]
+		name = "NativeOptions.png" if kind == "options" else "NativeSkip.png"
+		size = Vector2(40,30)
+		if not client_assets.has(name):
+			name = "Options.png" if kind == "options" else "SkipTurn.png"
+			size = Vector2(60,23)
 	var region := func(frame: int) -> AtlasTexture: return atlas(name, Rect2(Vector2(frame * size.x, 0), size))
 	# An activated button keeps its activated face on hover (Button.ChangeButtonState).
 	button.texture_normal = region.call(frames[4] if activated else frames[0])
@@ -290,57 +290,137 @@ func sync_weather(model) -> void:
 
 # ---------------------------------------------------------------- screen HUD
 
+## Draw a whole native component. Missing/corrupt pixels fall back to a
+## retained compatible atlas, in the new logical rectangle (never old hitboxes).
+func native_rect(view: CanvasItem, name: String, box: Rect2, fallback: String = "", source: Rect2 = Rect2()) -> void:
+	var texture := client_assets.texture(name)
+	if texture != null:
+		if source.size == Vector2.ZERO:
+			view.draw_texture_rect(texture,box,false)
+		else:
+			view.draw_texture_rect_region(texture,box,source)
+	elif not fallback.is_empty():
+		var src := Rect2(Vector2.ZERO,original_size(fallback))
+		blit(view,fallback,src,box)
+
+func native_digits(view: CanvasItem, name: String, value: int, right_top: Vector2, cell: Vector2, advance: float, slots: int, fallback: String) -> void:
+	var texture := client_assets.texture(name)
+	if texture == null:
+		draw_number(view,fallback,value,right_top,"right",K)
+		return
+	var text := str(maxi(0,value))
+	var factor := minf(1.0,float(slots)/text.length())
+	var step := advance*K*factor
+	for index in text.length():
+		view.draw_texture_rect_region(texture,Rect2(right_top+Vector2((index-text.length())*step,0),cell*K*factor),Rect2(Vector2(int(text[index])*cell.x,0),cell))
+
 func draw_screen(view, model, state: Dictionary) -> void:
 	draw_compass(view, model)
 	draw_timer(view, model)
 	draw_delayboard(view, model, state)
-	sprite(view, "ActionBar.png", bar_point(Vector2.ZERO), K)
+	native_rect(view,"NativeHeader.png",Layout.HEADER,"ActionBar.png")
+	native_rect(view,"NativeFooter.png",Layout.FOOTER,"ActionBar.png")
+	# Solo Gold has its own purple header panel. Do not borrow Jewel scores.
+	native_rect(view,Layout.MODE_PANELS.solo,Rect2(Vector2(321,0)*K,Vector2(156,37)*K),"ActionBar.png")
 	draw_weather(view, model)
-	# Strength (TimedProgressBar) and movement bars grow from the left edge.
-	var strength := clampf(float(state.power) / 100.0, 0.0, 1.0)
-	draw_meter(view, "StrenghtMetter.png", STRENGTH_OFFSET, strength)
-	draw_meter(view, "MovementMetter.png", MOVEMENT_OFFSET, clampf(float(state.movement), 0.0, 1.0))
-	if previous_power >= 0.0:
-		sprite(view, "PreviousShootingStrenghtPointer.png", bar_point(Vector2(-160.0 + 400.0 * previous_power / 100.0, 26)), K)
-	sprite(view, "ShotStrenghtSelector.png", bar_point(Vector2(selector_x, 17)), K)
-	draw_number(view, "current_angle", int(state.angle), bar_point(Vector2(-149, -26)), "right", K)
-	if previous_angle >= 0:
-		draw_number(view, "previous_angle", previous_angle, bar_point(Vector2(-185, -20)), "right", K)
-	draw_number(view, "gold", int(state.gold), bar_point(Vector2(372, 23)), "right", K)
+	var strength := clampf(float(state.power)/100.0,0.0,1.0)
+	var width := floorf(400*strength)
+	if width > 0:
+		native_rect(view,"NativeStrength.png",Rect2(Layout.STRENGTH.position,Vector2(width,22)*K),"StrenghtMetter.png",Rect2(0,0,width,22))
+	if previous_power >= 0:
+		var previous := Vector2(244+400*previous_power/100.0-10,Layout.FOOTER_Y+4)*K
+		native_rect(view,"NativePreviousPower.png",Rect2(previous,Vector2(10,31)*K),"PreviousShootingStrenghtPointer.png")
+	var pointer := Vector2(244+selector_x+160-6,Layout.FOOTER_Y-6)*K
+	native_rect(view,"NativeSelector.png",Rect2(pointer,Vector2(11,20)*K),"ShotStrenghtSelector.png")
+	var aim_name := "NativeDrag.png" if state.get("drag",false) else "NativeSlice.png"
+	native_rect(view,aim_name,Rect2(Vector2(170,Layout.FOOTER_Y+2)*K,Vector2(67,39)*K))
+	native_digits(view,"NativeAngleDigits.png",absi(int(state.angle)),Vector2(161,Layout.FOOTER_Y+25)*K,Vector2(8,10),8,2,"current_angle")
+	if int(state.angle) < 0:
+		native_rect(view,"NativeAngleMinus.png",Rect2(Vector2(138,Layout.FOOTER_Y+29)*K,Vector2(5,2)*K))
+	native_digits(view,"NativeGoldDigits.png",int(state.gold),Vector2(450,6)*K,Vector2(19,24),20,5,"gold")
+	if move_active:
+		# 407860..40796f: MOVE overlays the lower charge area, not the world.
+		var expanded := move_expanded and client_assets.has("NativeMoveExpanded.png")
+		var sample := move_bar_sample(float(state.movement),expanded)
+		native_rect(view,sample.texture,sample.frame)
+		native_rect(view,"NativeMoveFill.png",sample.fill,"MovementMetter.png",Rect2(0,0,sample.fill.size.x/K,12))
 
-func draw_meter(view: CanvasItem, name: String, offset: Vector2, fraction: float) -> void:
-	var size := original_size(name)
-	var left_top := bar_point(offset) - size * K * 0.5
-	var width := floorf(fraction * size.x)
-	if width <= 0.0:
-		return
-	blit(view, name, Rect2(Vector2.ZERO, Vector2(width, size.y)), Rect2(left_top, Vector2(width, size.y) * K))
+## Native input sets flag1/delta+1/stage0; next update clamps stage to1.
+## Sampling follows presentation updates; it never changes movement rules.
+func update_movement(active: bool) -> void:
+	move_expanded = move_active if active else true
+	move_active = active
+
+func move_bar_sample(fraction: float, expanded: bool = true) -> Dictionary:
+	# The native fill is clipped by an inclusive right bound, even at zero.
+	var width := mini(400,int(400*clampf(fraction,0,1))+1)
+	var origin := Vector2(169,Layout.FOOTER_Y+18)
+	var pivot := Vector2.ZERO if expanded else Vector2(0,10)
+	return {"texture":"NativeMoveExpanded.png" if expanded else "NativeMoveFrame.png",
+		"frame":Rect2((origin+pivot)*K,Vector2(485,26 if expanded else 16)*K),
+		"fill":Rect2(Vector2(244,Layout.FOOTER_Y+27)*K,Vector2(width,12)*K)}
 
 func strength_rect() -> Rect2:
-	var size := original_size("StrenghtMetter.png") * K
-	return Rect2(bar_point(STRENGTH_OFFSET) - size * 0.5, size)
+	return Layout.STRENGTH
 
 func set_selector_from_screen(x: float) -> void:
-	selector_x = clampf(x / K - BAR_CENTER.x, -160.0, 240.0)
+	selector_x = clampf((x-Layout.STRENGTH.position.x)/K-160.0,-160.0,240.0)
 
-func draw_weather(view: CanvasItem, model) -> void:
-	# WeatherDisplay roulette: previous, active (coloured, under the frame), next three.
-	var center := bar_point(WEATHER_OFFSET)
-	var left := center.x - 36.0 * K
-	var slots: Array = [weather_previous] + weather_shown
-	var top := center.y - 11.0 * K
-	for slot in range(slots.size()):
-		var type: String = slots[slot]
-		if type.is_empty() or slot > 4:
-			continue
-		var x := left + (slot * 24.0 + weather_slide) * K
-		if x < left - 1.0 or x > left + 96.0 * K:
-			continue
-		var row := 0 if slot == 1 else 1
-		blit(view, "WeatherIcons.png", Rect2(ICON_INDEX.get(type, 3) * 22, row * 22, 22, 22), Rect2(Vector2(x, top), Vector2(22, 22) * K))
-	sprite(view, "WeatherFrame.png", center, K)
+func current_weather_art(type: String) -> Dictionary:
+	var index: int = ICON_INDEX.get(type,3)
+	var texture := client_assets.texture("NativeWeather.png")
+	if texture != null and index < 7:
+		return {"texture":texture,"source":Rect2(index*31,0,31,27),"offset":Vector2.ZERO}
+	# A failed current-icon sheet must still show the current category.
+	texture = textures["WeatherIcons.png"] if index < 7 else originals["WeatherIcons.png"]
+	return {"texture":texture,"source":Rect2(index*22,0,22,22),"offset":Vector2(4,2)}
+
+func draw_weather(view: CanvasItem, _model) -> void:
+	var current := str(weather_shown[0]) if not weather_shown.is_empty() else "wind"
+	var icon := current_weather_art(current)
+	view.draw_texture_rect_region(icon.texture,Rect2((Vector2(81,4)+icon.offset)*K,Vector2(icon.source.size)*K),icon.source)
+	for slot in range(1,mini(weather_shown.size(),5)):
+		var type: String = weather_shown[slot]
+		var source := Rect2(ICON_INDEX.get(type,3)*22,0,22,22)
+		var target := Rect2(Vector2(175+(slot-1)*28,8)*K,Vector2(22,22)*K)
+		if type in ["weakness","mirror","random"]:
+			view.draw_texture_rect_region(originals["WeatherIcons.png"],target,source)
+		else:
+			blit(view,"WeatherIcons.png",source,target)
+
+func native_timer_available() -> bool:
+	return client_assets.has("NativeTimerDigits.png") and client_assets.has("NativeTimerFraction.png") and client_assets.has("NativeTimerDot.png")
+
+func native_wind_available() -> bool:
+	return client_assets.has("NativeWindTexture.png") and client_assets.has("NativeWindDigits.png") and client_assets.has("NativeWindLabel.png")
+
+## The native counter is20Hz; /200,/20%10,/2%10 choose the three glyphs.
+## The epsilon only restores exact tick boundaries after float subtraction.
+func timer_digits(model) -> Array:
+	var ticks := clampi(int(floorf(float(model.turn_time)*20.0+0.000001)),0,TURN_TIME*20)
+	return [ticks/200,(ticks/20)%10,(ticks/2)%10]
+
+func wind_display(model) -> Dictionary:
+	if model.weather == null:
+		return {"force":0,"rotation":0.0,"digit_right":407.0}
+	return {"force":maxi(0,int(model.weather.wind_force)),"rotation":-deg_to_rad(float(model.weather.wind_angle)),"digit_right":412.0 if int(model.weather.wind_force)>=10 else 407.0}
 
 func draw_compass(view: CanvasItem, model) -> void:
+	if not native_wind_available():
+		draw_legacy_compass(view,model)
+		return
+	var state := wind_display(model)
+	var center := COMPASS_CENTER*K
+	# ASM4caf8a..cafd7: UV(.755,.005)+.24, quad64x64 around400,71.
+	# The source already contains the red pointer: rotate the ring, not the text.
+	view.draw_set_transform(center,float(state.rotation),Vector2(K,K))
+	view.draw_texture_rect_region(client_assets.texture("NativeWindTexture.png"),Rect2(-32,-32,63,63),Rect2(0.755*256,0.005*256,0.24*256,0.24*256))
+	view.draw_set_transform(Vector2.ZERO)
+	var right: float = state.digit_right
+	native_digits(view,"NativeWindDigits.png",int(state.force),Vector2(right,60)*K,Vector2(10,17),11,2,"wind")
+	native_rect(view,"NativeWindLabel.png",Rect2(Vector2(391,79)*K,Vector2(19,5)*K))
+
+func draw_legacy_compass(view: CanvasItem, model) -> void:
 	var center := COMPASS_CENTER * K
 	sprite(view, "CompassBackground.png", center, K)
 	var squash := absf(cos(compass_spin))
@@ -358,11 +438,16 @@ func draw_compass(view: CanvasItem, model) -> void:
 	draw_number(view, "wind", force, center - Vector2(0, 10) * K, "middle", K)
 
 func draw_timer(view: CanvasItem, model) -> void:
-	# TurnTimer shows only on the player's own turn (HUD.ResetTimer).
-	var seconds := display_seconds(model)
-	if seconds < 0 or model.active != 0:
+	if model.phase != Match.PHASE_AIM or model.active != Match.PLAYER:
 		return
-	draw_number(view, "timer", seconds, Vector2(780, 12.5) * K, "right", K, 2)
+	if not native_timer_available():
+		draw_number(view,"timer",display_seconds(model),Vector2(780,52.5)*K,"right",K,2)
+		return
+	var digits := timer_digits(model)
+	for index in 2:
+		native_rect(view,"NativeTimerDigits.png",Rect2(Vector2(700+index*29,42)*K,Vector2(28,45)*K),"",Rect2(int(digits[index])*28,0,28,45))
+	native_rect(view,"NativeTimerDot.png",Rect2(Vector2(759,81)*K,Vector2(6,6)*K))
+	native_rect(view,"NativeTimerFraction.png",Rect2(Vector2(767,59)*K,Vector2(17,28)*K),"",Rect2(int(digits[2])*17,0,17,28))
 
 func draw_delayboard(view, model, state: Dictionary) -> void:
 	# Delayboard: bottom-left anchored at the bar's top-left, one 16 px row per player.
@@ -370,7 +455,7 @@ func draw_delayboard(view, model, state: Dictionary) -> void:
 	if entries.is_empty():
 		return
 	var row_height := 16.0
-	var base := Vector2(0, 415.0 - row_height * entries.size())
+	var base := Vector2(0, Layout.FOOTER_Y - row_height * entries.size())
 	var nick_size := 10.0 * K
 	var names: Array = []
 	var widest := 0.0

@@ -31,7 +31,7 @@ func load_map(id: String, with_visual: bool = true) -> bool:
 	if map.is_empty():
 		return false
 	if not mask_cache.has(id):
-		var source := texture_image(map.mask)
+		var source := texture_image(Maps.path(map, "mask"))
 		if source == null:
 			return false
 		mask_cache[id] = mask_from_source(source, map)
@@ -48,9 +48,8 @@ func load_map(id: String, with_visual: bool = true) -> bool:
 	visual_texture = null
 	visual_rect = Maps.foreground_rect(map)
 	if with_visual:
-		visual = texture_image(map.foreground_hd)
-		if visual == null:
-			visual = original_visual(map)
+		# Client foreground at density 1; craters edit this copy.
+		visual = original_visual(map)
 		if visual != null:
 			visual_texture = ImageTexture.create_from_image(visual)
 	revision += 1
@@ -72,8 +71,8 @@ static func texture_image(path: String) -> Image:
 	return result
 
 static func original_visual(map: Dictionary) -> Image:
-	# Fallback when the HD file is missing: never leave collision without a drawing.
-	var source := texture_image(map.mask)
+	# The drawn foreground is the collision source itself, cropped to its alpha box.
+	var source := texture_image(Maps.path(map, "mask"))
 	if source == null:
 		return null
 	return source.get_region(map.crop)
@@ -218,7 +217,7 @@ func enable_native() -> void:
 	var height := HEIGHT*SCALE
 	if not map_id.is_empty():
 		if not native_cache.has(map_id):
-			var source := texture_image(Maps.get_map(map_id).mask)
+			var source := texture_image(Maps.path(Maps.get_map(map_id), "mask"))
 			var pixels := source.get_data()
 			var mask := PackedByteArray()
 			mask.resize(width*height)

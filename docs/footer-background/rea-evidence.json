@@ -1,0 +1,353 @@
+{
+  "scope": "ADR-136 footer RGB565 background / static REA evidence",
+  "records": [
+    {
+      "evidence_id": "ev_fff9c8bb24b063c1852fcf772ba7e768496b749b57c64b73ed4e868287789060",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x00406990"
+      },
+      "raw_result": null,
+      "normalized_result": "0x406990: mov eax, dword [fs:0x0]\n0x406996: push 0xffffffff\n0x406998: push sub_538f51\n0x40699d: push eax\n0x40699e: mov eax, dword [dword_ea0e1c]\n0x4069a3: mov dword [fs:0x0], esp\n0x4069aa: mov byte [byte_f2465c], 0x3\n0x4069b1: mov eax, dword [eax+0x1c]\n0x4069b4: mov ecx, dword [eax+4]\n0x4069b7: sub esp, 0xf94\n0x4069bd: cmp ecx, 0x1b58\n0x4069c3: ja loc_406a12\n0x4069c5: je loc_4069d7\n0x4069c7: mov eax, dword [eax+0x1c]\n0x4069ca: mov ecx, dword [eax+4]\n0x4069cd: cmp ecx, 0x1b58\n0x4069d3: jbe loc_4069c5\n0x4069d5: jmp loc_406a12\n0x406a12: mov ecx, dword [dword_ea0e1c]\n0x406a18: mov eax, dword [ecx+0x1c]\n0x406a1b: mov ecx, dword [eax+4]\n0x406a1e: cmp ecx, 0x1b58\n0x406a24: ja loc_406a78\n0x406a26: je loc_406a38\n0x406a28: mov eax, dword [eax+0x1c]\n0x406a2b: mov ecx, dword [eax+4]\n0x406a2e: cmp ecx, 0x1b58\n0x406a34: jbe loc_406a26\n0x406a36: jmp loc_406a78\n0x406a78: mov eax, dword [dword_5b3484]\n0x406a7d: cmp byte [eax+0x3b6c0], 0xff\n0x406a84: je loc_408159\n0x406a8a: push ebx\n0x406a8b: push ebp\n0x406a8c: mov ebp, dword [dword_5440a0]\n0x406a92: push esi\n0x406a93: push edi\n0x406a94: push 0x5a9068\n0x406a99: lea esi, dword [eax+0x45354]\n0x406a9f: call ebp\n0x406aa1: mov eax, esi\n0x406aa3: call sub_40a2e0\n0x406aa8: mov edi, dword [dword_54409c]\n0x406aae: cmp eax, 0x1\n0x406ab1: push 0x5a9068\n0x406ab6: sete bl\n0x406ab9: call edi\n0x406abb: test bl, bl\n0x406abd: je loc_406af0\n0x406abf: mov edx, dword [dword_5b3484]\n0x406ac5: mov al, byte [edx+0x3b6c0]\n0x406acb: test al, al\n0x406acd: mov ebx, 0x299\n0x406ad2: push 0x1b58\n0x406ad7: mov eax, 0x229\n0x406adc: mov ecx, 0xad\n0x406ae1: jne loc_406ae8\n0x406ae3: mov ecx, 0xac\n0x406b1b: mov eax, dword [dword_5b3484]\n0x406b20: mov cl, byte [eax+0x3b6c0]\n0x406b26: test cl, cl\n0x406b28: mov ebx, 0x299\n0x406b2d: mov eax, 0x227\n0x406b32: push 0x1b58\n0x406b37: mov ecx, 0xb4\n0x406b3c: jne loc_406b43\n0x406b3e: mov ecx, 0xb3\n0x406b79: mov esi, 0x1\n0x406b7e: jmp loc_406ba9\n0x406ba9: mov ecx, dword [dword_5b3484]\n0x406baf: mov edx, dword [ecx+0x621e0]\n0x406bb5: push 0x28\n0x406bb7: lea eax, dword [esp+0xf98+var_880]\n0x406bbe: push eax\n0x406bbf: add edx, 0x7864\n0x406bc5: push edx\n0x406bc6: call sub_40a7d0\n0x406bcb: push esi\n0x406bcc: lea ecx, dword [esp+0xf98+var_65C]\n0x406bd3: push ecx\n0x406bd4: push eax\n0x406bd5: mov dword [esp+0xfa0+arg_14], 0x0\n0x406be0: call sub_40a8c0\n0x406be5: push 0xf4\n0x406bea: lea edx, dword [esp+0xf98+var_CC8]\n0x406bf1: push edx\n0x406bf2: push eax\n0x406bf3: mov byte [esp+0xfa0+arg_14], 0x1\n0x406bfb: call sub_40a5f0\n0x406c00: mov esi, eax\n0x406c02: push 0x5a9068\n0x406c07: mov byte [esp+0xf98+arg_14], 0x2\n0x406c0f: call ebp\n0x406c11: mov eax, esi\n0x406c13: call sub_40a2e0\n0x406c18: push 0x5a9068\n0x406c1d: mov edi, eax\n0x406c1f: call dword [dword_54409c]\n0x406c25: mov eax, edi\n0x406c27: mov esi, 0x257\n0x406c2c: xor edi, edi\n0x406c2e: xor ecx, ecx\n0x406c30: call sub_4eadb0\n0x406c35: mov byte [esp+0xf94+arg_14], 0x1\n0x406c3d: mov eax, dword [esp+0xf94+var_CB4]\n0x406c44: test eax, eax\n0x406c46: mov esi, eax\n0x406c48: je loc_406c6b\n0x406c4a: mov ebx, dword_79376c\n0x406c4f: call sub_40a240\n0x406c54: lea eax, dword [esp+0xf94+var_F80]\n0x406c58: push eax\n0x406c59: lea ebx, dword [esp+0xf98+var_F84]\n0x406c5d: mov eax, 0x793770\n0x406c62: mov dword [esp+0xf98+var_F84], esi\n0x406c66: call sub_40b540\n0x406c80: mov ebx, dword_79376c\n0x406c85: call sub_40a240\n0x406c8a: lea ecx, dword [esp+0xf94+var_F80]\n0x406c8e: push ecx\n0x406c8f: lea ebx, dword [esp+0xf98+var_F84]\n0x406c93: mov eax, 0x793770\n0x406c98: mov dword [esp+0xf98+var_F84], esi\n0x406c9c: call sub_40b540\n0x406cb9: mov ebx, dword_79376c\n0x406cbe: call sub_40a240\n0x406cc3: lea edx, dword [esp+0xf94+var_F80]\n0x406cc7: push edx\n0x406cc8: lea ebx, dword [esp+0xf98+var_F84]\n0x406ccc: mov eax, 0x793770\n0x406cd1: mov dword [esp+0xf98+var_F84], esi\n0x406cd5: call sub_40b540\n0x406ced: je loc_406cff\n0x406cef: mov eax, dword [eax+0x1c]\n0x406cf2: mov ecx, dword [eax+4]\n0x406cf5: cmp ecx, 0x1b58\n0x406cfb: jbe loc_406ced\n0x406cfd: jmp loc_406d42\n0x406d42: mov esi, 0x257\n0x406d47: mov eax, 0x31f\n0x406d4c: xor edi, edi\n0x406d4e: xor ecx, ecx\n0x406d50: call sub_4eadb0\n0x406d55: mov ecx, dword [dword_5b3484]\n0x406d5b: mov esi, dword [ecx+0x621e0]\n0x406d61: push 0x5a9068\n0x406d66: add esi, 0x7640\n0x406d6c: call ebp\n0x406d6e: mov eax, esi\n0x406d70: call sub_40a2e0\n0x406d75: mov edi, dword [dword_54409c]\n0x406d7b: push 0x5a9068\n0x406d80: mov esi, eax\n0x406d82: call edi\n0x406d84: cmp esi, 0x1\n0x406d87: jge loc_406d90\n0x406d89: mov esi, 0x1\n0x406d8e: jmp loc_406db9\n0x406db9: mov ecx, dword [dword_5b3484]\n0x406dbf: mov edx, dword [ecx+0x621e0]\n0x406dc5: push 0x28\n0x406dc7: lea eax, dword [esp+0xf90+var_CC0]\n0x406dce: push eax\n0x406dcf: add edx, 0x7a88\n0x406dd5: push edx\n0x406dd6: call sub_40a7d0\n0x406ddb: push esi\n0x406ddc: lea ecx, dword [esp+0xf90+var_654]\n0x406de3: push ecx\n0x406de4: push eax\n0x406de5: mov dword [esp+0xf98+arg_1C], 0x3\n0x406df0: call sub_40a8c0\n0x406df5: push 0xf5\n0x406dfa: lea edx, dword [esp+0xf90+var_878]\n0x406e01: push edx\n0x406e02: push eax\n0x406e03: mov byte [esp+0xf98+arg_1C], 0x4\n0x406e0b: call sub_40a5f0\n0x406e10: mov esi, eax\n0x406e12: push 0x5a9068\n0x406e17: mov byte [esp+0xf90+arg_1C], 0x5\n0x406e1f: call ebp\n0x406e21: mov eax, esi\n0x406e23: call sub_40a2e0\n0x406e28: push 0x5a9068\n0x406e2d: mov esi, eax\n0x406e2f: call edi\n0x406e31: mov eax, dword [dword_ea0e1c]\n0x406e36: mov eax, dword [eax+0x1c]\n0x406e39: mov ecx, dword [eax+4]\n0x406e3c: cmp ecx, 0x1b58\n0x406e42: ja loc_406e95\n0x406e44: je loc_406e56\n0x406e46: mov eax, dword [eax+0x1c]\n0x406e49: mov ecx, dword [eax+4]\n0x406e4c: cmp ecx, 0x1b58\n0x406e52: jbe loc_406e44\n0x406e54: jmp loc_406e95\n0x406e95: mov byte [esp+0xf88+arg_20], 0x4\n0x406e9d: mov eax, dword [esp+0xf88+var_860]\n0x406ea4: test eax, eax\n0x406ea6: mov esi, eax\n0x406ea8: je loc_406ecb\n0x406eaa: mov ebx, dword_79376c\n0x406eaf: call sub_40a240\n0x406eb4: lea ecx, dword [esp+0xf88+var_F74]\n0x406eb8: push ecx\n0x406eb9: lea ebx, dword [esp+0xf8c+var_F78]\n0x406ebd: mov eax, 0x793770\n0x406ec2: mov dword [esp+0xf8c+var_F78], esi\n0x406ec6: call sub_40b540\n0x406ee0: mov ebx, dword_79376c\n0x406ee5: call sub_40a240\n0x406eea: lea edx, dword [esp+0xf88+var_F74]\n0x406eee: push edx\n0x406eef: lea ebx, dword [esp+0xf8c+var_F78]\n0x406ef3: mov eax, 0x793770\n0x406ef8: mov dword [esp+0xf8c+var_F78], esi\n0x406efc: call sub_40b540\n0x406f19: mov ebx, dword_79376c\n0x406f1e: call sub_40a240\n0x406f23: lea eax, dword [esp+0xf88+var_F74]\n0x406f27: push eax\n0x406f28: lea ebx, dword [esp+0xf8c+var_F78]\n0x406f2c: mov eax, 0x793770\n0x406f31: mov dword [esp+0xf8c+var_F78], esi\n0x406f35: call sub_40b540\n0x406f48: mov esi, dword [dword_5b3484]\n0x406f4e: push 0x5a9068\n0x406f53: add esi, 0xebcbc\n0x406f59: call ebp\n0x406f5b: mov eax, esi\n0x406f5d: call sub_40a2e0\n0x406f62: cmp eax, 0x6\n0x406f65: push 0x5a9068\n0x406f6a: sete bl\n0x406f6d: call dword [dword_54409c]\n0x406f73: test bl, bl\n0x406f75: je loc_407175\n0x406f7b: mov ecx, 0xf\n0x406fb1: mov edx, dword [dword_5b3484]\n0x406fb7: mov eax, dword [edx+0x621e0]\n0x406fbd: push 0xc8\n0x406fc2: lea ecx, dword [esp+0xf8c+var_EE0]\n0x406fc9: push ecx\n0x406fca: add eax, 0x8bc4\n0x406fcf: push eax\n0x406fd0: call sub_40a8c0\n0x406fd5: mov esi, eax\n0x406fd7: mov dword [esp+0xf88+arg_20], 0xc\n0x406fe2: mov edi, dword [dword_5440a0]\n0x406fe8: push 0x5a9068\n0x406fed: call edi\n0x406fef: mov eax, esi\n0x406ff1: call sub_40a2e0\n0x406ff6: mov ebp, dword [dword_54409c]\n0x406ffc: push 0x5a9068\n0x407001: mov esi, eax\n0x407003: call ebp\n0x407005: lea ecx, dword [esi+0x92]\n0x40700b: push 0x1f4\n0x407010: mov eax, 0x2a\n0x407015: mov ebx, 0x2bc\n0x40701a: call sub_4eb8e0\n0x40701f: mov dword [esp+0xf8c+arg_20], 0xffffffff\n0x40702a: mov eax, dword [esp+0xf8c+var_ECC]\n0x407031: add esp, 0x4\n0x407034: test eax, eax\n0x407036: mov esi, eax\n0x407038: je loc_40705b\n0x40703a: mov ebx, dword_79376c\n0x40703f: call sub_40a240\n0x407044: lea ecx, dword [esp+0xf88+var_F74]\n0x407048: push ecx\n0x407049: lea ebx, dword [esp+0xf8c+var_F78]\n0x40704d: mov eax, 0x793770\n0x407052: mov dword [esp+0xf8c+var_F78], esi\n0x407056: call sub_40b540\n0x4070ea: mov ebx, dword_79376c\n0x4070ef: call sub_40a240\n0x4070f4: lea eax, dword [esp+0xf88+var_F74]\n0x4070f8: push eax\n0x4070f9: lea ebx, dword [esp+0xf8c+var_F78]\n0x4070fd: mov eax, 0x793770\n0x407102: mov dword [esp+0xf8c+var_F78], esi\n0x407106: call sub_40b540\n0x407123: mov ebx, dword_79376c\n0x407128: call sub_40a240\n0x40712d: lea ecx, dword [esp+0xf88+var_F74]\n0x407131: push ecx\n0x407132: lea ebx, dword [esp+0xf8c+var_F78]\n0x407136: mov eax, 0x793770\n0x40713b: mov dword [esp+0xf8c+var_F78], esi\n0x40713f: call sub_40b540\n0x40715c: je loc_4073e0\n0x407162: mov eax, dword [eax+0x1c]\n0x407165: mov ecx, dword [eax+4]\n0x407168: cmp ecx, 0x1f4\n0x40716e: jbe loc_40715c\n0x407170: jmp loc_407429\n0x407429: mov ecx, dword [dword_5b3484]\n0x40742f: mov edx, dword [ecx+0x621e0]\n0x407435: push 0x2\n0x407437: lea eax, dword [esp+0xf88+var_A94]\n0x40743e: push eax\n0x40743f: add edx, 0x8bc4\n0x407445: push edx\n0x407446: call sub_40a8c0\n0x40744b: push 0xa\n0x40744d: lea ecx, dword [esp+0xf88+var_EDC]\n0x407454: push ecx\n0x407455: push eax\n0x407456: mov dword [esp+0xf90+arg_24], 0xf\n0x407461: call sub_40a9c0\n0x407466: mov esi, eax\n0x407468: push 0x5a9068\n0x40746d: mov byte [esp+0xf88+arg_24], 0x10\n0x407475: call edi\n0x407477: mov eax, esi\n0x407479: call sub_40a2e0\n0x40747e: push 0x5a9068\n0x407483: mov esi, eax\n0x407485: call ebp\n0x407487: lea ecx, dword [esi+0x9d]\n0x40748d: push 0x1f4\n0x407492: mov eax, 0x3b\n0x407497: mov ebx, 0x2ff\n0x40749c: call sub_4eb8e0\n0x4074a1: mov byte [esp+0xf88+arg_24], 0xf\n0x4074a9: mov eax, dword [esp+0xf88+var_EC8]\n0x4074b0: add esp, 0x4\n0x4074b3: test eax, eax\n0x4074b5: mov esi, eax\n0x4074b7: je loc_4074da\n0x4074b9: mov ebx, dword_79376c\n0x4074be: call sub_40a240\n0x4074c3: lea edx, dword [esp+0xf84+var_F70]\n0x4074c7: push edx\n0x4074c8: lea ebx, dword [esp+0xf88+var_F74]\n0x4074cc: mov eax, 0x793770\n0x4074d1: mov dword [esp+0xf88+var_F74], esi\n0x4074d5: call sub_40b540\n0x4074f2: mov ebx, dword_79376c\n0x4074f7: call sub_40a240\n0x4074fc: lea eax, dword [esp+0xf84+var_F70]\n0x407500: push eax\n0x407501: lea ebx, dword [esp+0xf88+var_F74]\n0x407505: mov eax, 0x793770\n0x40750a: mov dword [esp+0xf88+var_F74], esi\n0x40750e: call sub_40b540\n0x407560: mov cl, byte [eax]\n0x407562: inc eax\n0x407563: test cl, cl\n0x407565: jne loc_407560\n0x407567: sub eax, edx\n0x407569: cmp eax, 0x2\n0x40756c: jne loc_4075a3\n0x40756e: xor esi, esi\n0x407570: mov ebx, 0x186\n0x40757d: movsx ecx, al\n0x407580: add ecx, 0x77\n0x407583: push 0x1f4\n0x407588: mov eax, 0x3c\n0x40758d: call sub_4eb8e0\n0x407592: add esp, 0x4\n0x407575: mov al, byte [esp+esi+0xf84+var_F5C]\n0x407579: cmp al, 0x20\n0x40757b: je loc_407595\n0x4075a1: jmp loc_4075c2\n0x4075c2: mov edx, dword [dword_ea0e1c]\n0x4075c8: mov eax, dword [edx+0x1c]\n0x4075cb: mov ecx, dword [eax+4]\n0x4075ce: cmp ecx, 0x1f4\n0x4075d4: ja loc_407631\n0x4075d6: je loc_4075e8\n0x4075d8: mov eax, dword [eax+0x1c]\n0x4075db: mov ecx, dword [eax+4]\n0x4075de: cmp ecx, 0x1f4\n0x4075e4: jbe loc_4075d6\n0x4075e6: jmp loc_407631\n0x407631: mov eax, dword [dword_5b3484]\n0x407636: mov esi, dword [eax+0x621e0]\n0x40763c: push 0x5a9068\n0x407641: add esi, 0x60d4\n0x407647: call edi\n0x407649: mov eax, esi\n0x40764b: call sub_40a2e0\n0x407650: test eax, eax\n0x407652: push 0x5a9068\n0x407657: setl bl\n0x40765a: call ebp\n0x40765c: test bl, bl\n0x40765e: je loc_4076cf\n0x407660: mov ecx, dword [dword_ea0e1c]\n0x407666: mov eax, dword [ecx+0x1c]\n0x407669: mov ecx, dword [eax+4]\n0x40766c: cmp ecx, 0x1f4\n0x407672: ja loc_4076cf\n0x407674: je loc_407686\n0x407676: mov eax, dword [eax+0x1c]\n0x407679: mov ecx, dword [eax+4]\n0x40767c: cmp ecx, 0x1f4\n0x407682: jbe loc_407674\n0x407684: jmp loc_4076cf\n0x4076cf: mov edx, dword [dword_5b3484]\n0x4076d5: mov esi, dword [edx+0x621e0]\n0x4076db: push 0x5a9068\n0x4076e0: add esi, 0x60d4\n0x4076e6: call edi\n0x4076e8: mov eax, esi\n0x4076ea: call sub_40a2e0\n0x4076ef: push 0x5a9068\n0x4076f4: mov esi, eax\n0x4076f6: call ebp\n0x4076f8: test esi, esi\n0x4076fa: mov eax, esi\n0x4076fc: jge loc_407702\n0x4076fe: neg esi\n0x407700: mov eax, esi\n0x407726: je loc_407738\n0x407728: mov eax, dword [eax+0x1c]\n0x40772b: mov edx, dword [eax+4]\n0x40772e: cmp edx, 0x1f4\n0x407734: jbe loc_407726\n0x407736: jmp loc_407778\n0x407778: mov eax, dword [dword_ea0e1c]\n0x40777d: mov eax, dword [eax+0x1c]\n0x407780: mov edx, dword [eax+4]\n0x407783: cmp edx, 0x1f4\n0x407789: lea ecx, dword [esi+0xb3]\n0x40778f: ja loc_4077e3\n0x407791: je loc_4077a3\n0x407793: mov eax, dword [eax+0x1c]\n0x407796: mov edx, dword [eax+4]\n0x407799: cmp edx, 0x1f4\n0x40779f: jbe loc_407791\n0x4077a1: jmp loc_4077e3\n0x4077e3: mov ecx, dword [dword_5b3484]\n0x4077e9: mov edx, dword [dword_ea0e1c]\n0x4077ef: movzx ecx, byte [ecx+0x5f2f40]\n0x4077f6: mov eax, dword [edx+0x1c]\n0x4077f9: mov edx, dword [eax+4]\n0x4077fc: add ecx, 0x9\n0x4077ff: cmp edx, 0x1b58\n0x407805: ja loc_407859\n0x407807: je loc_407819\n0x407809: mov eax, dword [eax+0x1c]\n0x40780c: mov edx, dword [eax+4]\n0x40780f: cmp edx, 0x1b58\n0x407815: jbe loc_407807\n0x407817: jmp loc_407859\n0x407859: mov ebp, dword [esp+0xf6c+arg_44]\n0x407860: mov al, byte [ebp+0x28]\n0x407863: test al, al\n0x407865: je loc_407989\n0x40786b: mov ecx, dword [ebp+0x30]\n0x40786e: dec al\n0x407870: neg al\n0x407872: push 0x1b58\n0x407877: mov ebx, 0xa9\n0x40787c: sbb eax, eax\n0x40787e: and eax, 0xa\n0x407881: add eax, 0x23e\n0x407886: add ecx, 0x5\n0x407889: call sub_4eb8e0\n0x40788e: mov eax, dword [dword_5b3484]\n0x407893: mov esi, dword [eax+0x621e0]\n0x407899: add esp, 0x4\n0x40789c: push 0x5a9068\n0x4078a1: add esi, 0x8318\n0x4078a7: call edi\n0x4078a9: mov eax, esi\n0x4078ab: call sub_40a2e0\n0x4078b0: push 0x5a9068\n0x4078b5: mov esi, eax\n0x4078b7: call dword [dword_54409c]\n0x4078bd: cmp esi, 0x1\n0x4078c0: jge loc_4078c9\n0x4078c2: mov edi, 0x1\n0x4078c7: jmp loc_4078fa\n0x4078fa: mov edx, dword [dword_5b3484]\n0x407900: mov esi, dword [edx+0x621e0]\n0x407906: push 0x5a9068\n0x40790b: add esi, 0x853c\n0x407911: call dword [dword_5440a0]\n0x407917: mov eax, esi\n0x407919: call sub_40a2e0\n0x40791e: push 0x5a9068\n0x407923: mov esi, eax\n0x407925: call dword [dword_54409c]\n0x40792b: mov eax, esi\n0x40792d: imul eax, eax, 0x190\n0x407933: cdq\n0x407934: idiv edi\n0x407936: mov esi, 0x257\n0x40793b: xor edi, edi\n0x40793d: xor ecx, ecx\n0x40793f: add eax, 0xf4\n0x407944: call sub_4eadb0\n0x407949: mov cl, byte [ebp+0x28]\n0x40794c: mov al, cl\n0x40794e: dec al\n0x407950: neg al\n0x407952: push 0x1b58\n0x407957: mov ebx, 0xf4\n0x40795c: sbb eax, eax\n0x40795e: and eax, 0x6\n0x407961: add eax, 0x247\n0x407966: dec cl\n0x407968: neg cl\n0x40796a: sbb ecx, ecx\n0x40796c: add ecx, 0x8\n0x40796f: call sub_4eb8e0\n0x407974: add esp, 0x4\n0x407977: mov eax, 0x31f\n0x40797c: xor ecx, ecx\n0x40797e: call sub_4eadb0\n0x407983: mov edi, dword [dword_5440a0]\n0x4079b9: jmp dword [switch_table_408170+esi*4]\n0x407b29: mov ecx, dword [dword_ea0e1c]\n0x407b2f: mov eax, dword [ecx+0x1c]\n0x407b32: mov ecx, dword [eax+4]\n0x407b35: cmp ecx, 0x1b58\n0x407b3b: ja loc_407b97\n0x407b3d: je loc_407b4f\n0x407b3f: mov eax, dword [eax+0x1c]\n0x407b42: mov ecx, dword [eax+4]\n0x407b45: cmp ecx, 0x1b58\n0x407b4b: jbe loc_407b3d\n0x407b4d: jmp loc_407b97\n0x407b97: mov edx, dword [ebp+0x34]\n0x407b9a: push edx\n0x407b9b: lea eax, dword [esp+0xf6c+var_F40]\n0x407b9f: push 0x551ed0\n0x407ba4: push eax\n0x407ba5: call sub_5255de\n0x407baa: add esp, 0xc\n0x407bad: xor edi, edi\n0x407baf: mov esi, 0x15e\n0x407bc0: cmp al, 0x2d\n0x407bc2: jne loc_407c35\n0x407bc4: mov ecx, dword [dword_ea0e1c]\n0x407bca: mov eax, dword [ecx+0x1c]\n0x407bcd: mov ecx, dword [eax+4]\n0x407bd0: cmp ecx, 0x1f4\n0x407bd6: ja loc_407c9d\n0x407bdc: je loc_407bf1\n0x407bde: mov eax, dword [eax+0x1c]\n0x407be1: mov ecx, dword [eax+4]\n0x407be4: cmp ecx, 0x1f4\n0x407bea: jbe loc_407bdc\n0x407bec: jmp loc_407c9d\n0x407c9d: add esi, 0x14\n0x407ca0: inc edi\n0x407ca1: cmp esi, 0x1c2\n0x407ca7: jl loc_407bb4\n0x407bb4: mov al, byte [esp+edi+0xf68+var_F40]\n0x407bb8: cmp al, 0x20\n0x407bba: je loc_407c9d\n0x407cad: mov esi, dword [dword_5b3484]\n0x407cb3: push 0x5a9068\n0x407cb8: add esi, 0xebcbc\n0x407cbe: call dword [dword_5440a0]\n0x407cc4: mov eax, esi\n0x407cc6: call sub_40a2e0\n0x407ccb: cmp eax, 0xffffffff\n0x407cce: push 0x5a9068\n0x407cd3: setne bl\n0x407cd6: call dword [dword_54409c]\n0x407cdc: test bl, bl\n0x407cde: je loc_407df7\n0x407ce4: mov ecx, dword [dword_5b3484]\n0x407cea: push 0x14\n0x407cec: lea eax, dword [esp+0xf68+var_EBC]\n0x407cf3: push eax\n0x407cf4: add ecx, 0xebcbc\n0x407cfa: push ecx\n0x407cfb: call sub_40a7d0\n0x407d00: mov esi, eax\n0x407d02: push 0x5a9068\n0x407d07: mov dword [esp+0xf68+arg_44], 0x11\n0x407d12: call dword [dword_5440a0]\n0x407d18: mov eax, esi\n0x407d1a: call sub_40a2e0\n0x407d1f: push 0x5a9068\n0x407d24: mov esi, eax\n0x407d26: call dword [dword_54409c]\n0x407d2c: mov eax, dword [ebp+0x3c]\n0x407d2f: cdq\n0x407d30: mov ecx, 0x14\n0x407d35: idiv ecx\n0x407d37: lea ecx, dword [edx+esi+0x19]\n0x407d3b: mov edx, dword [dword_ea0e1c]\n0x407d41: mov eax, dword [edx+0x1c]\n0x407d44: mov edx, dword [eax+4]\n0x407d47: cmp edx, 0x1b58\n0x407d4d: ja loc_407d9e\n0x407d4f: je loc_407d61\n0x407d51: mov eax, dword [eax+0x1c]\n0x407d54: mov edx, dword [eax+4]\n0x407d57: cmp edx, 0x1b58\n0x407d5d: jbe loc_407d4f\n0x407d5f: jmp loc_407d9e\n0x407d9e: mov dword [esp+0xf60+arg_48], 0xffffffff\n0x407da9: mov eax, dword [esp+0xf60+var_EA4]\n0x407db0: test eax, eax\n0x407db2: mov ebx, eax\n0x407db4: je loc_407df7\n0x407db6: shl eax, 0x4\n0x407db9: mov esi, eax\n0x407dbb: mov edi, 0x10\n0x407dcc: dec eax\n0x407dcd: or eax, 0xffffff00\n0x407dd2: inc eax\n0x407dc0: call sub_525c4f\n0x407dc5: and eax, 0x800000ff\n0x407dca: jns loc_407dd3\n0x407de0: lea edx, dword [esp+0xf60+var_F4C]\n0x407de4: mov dword [esp+0xf60+var_F50], ebx\n0x407de8: push edx\n0x407de9: lea ebx, dword [esp+0xf64+var_F50]\n0x407ded: mov eax, 0x793770\n0x407df2: call sub_40b540\n0x407e40: xor ebx, ebx\n0x407e42: jmp loc_407e6e\n0x407e6e: mov esi, dword [dword_5b3484]\n0x407e74: push 0x5a9068\n0x407e79: add esi, 0x473a0\n0x407e7f: call ebp\n0x407e81: mov eax, esi\n0x407e83: call sub_40a2e0\n0x407e88: push 0x5a9068\n0x407e8d: mov esi, eax\n0x407e8f: call dword [dword_54409c]\n0x407e95: cmp esi, 0x1\n0x407e98: jge loc_407ea1\n0x407e9a: mov edi, 0x1\n0x407e9f: jmp loc_407ec8\n0x407ec8: mov esi, dword [dword_5b3484]\n0x407ece: push 0x5a9068\n0x407ed3: add esi, 0x473a0\n0x407ed9: call ebp\n0x407edb: mov eax, esi\n0x407edd: call sub_40a2e0\n0x407ee2: push 0x5a9068\n0x407ee7: mov esi, eax\n0x407ee9: call dword [dword_54409c]\n0x407eef: mov eax, ebx\n0x407ef1: cdq\n0x407ef2: idiv esi\n0x407ef4: mov esi, dword [dword_5b3484]\n0x407efa: push 0x5a9068\n0x407eff: add esi, 0xeba98\n0x407f05: mov eax, edx\n0x407f07: imul eax, eax, 0x23\n0x407f0a: cdq\n0x407f0b: idiv edi\n0x407f0d: mov ebx, eax\n0x407f0f: call ebp\n0x407f11: mov eax, esi\n0x407f13: call sub_40a2e0\n0x407f18: push 0x5a9068\n0x407f1d: mov esi, eax\n0x407f1f: call dword [dword_54409c]\n0x407f25: dec esi\n0x407f26: jns loc_407f2c\n0x407f28: xor edi, edi\n0x407f2a: jmp loc_407f56\n0x407f56: mov esi, dword [dword_5b3484]\n0x407f5c: push 0x5a9068\n0x407f61: add esi, 0x473a0\n0x407f67: call ebp\n0x407f69: mov eax, esi\n0x407f6b: call sub_40a2e0\n0x407f70: push 0x5a9068\n0x407f75: mov esi, eax\n0x407f77: call dword [dword_54409c]\n0x407f7d: cmp esi, 0x1\n0x407f80: jge loc_407f89\n0x407f82: mov ecx, 0x1\n0x407f87: jmp loc_407fb2\n0x407fb2: mov eax, edi\n0x407fb4: cdq\n0x407fb5: idiv ecx\n0x407fb7: mov ebp, 0x80\n0x407fbc: mov dword [esp+0xf50+var_F40], 0x6\n0x407fc4: inc eax\n0x407fc5: mov dword [esp+0xf50+var_F34], eax\n0x407fc9: sub ebp, ebx\n0x407fcb: jmp sub_407fd0\n0x407f89: mov esi, dword [dword_5b3484]\n0x407f8f: push 0x5a9068\n0x407f94: add esi, 0x473a0\n0x407f9a: call ebp\n0x407f9c: mov eax, esi\n0x407f9e: call sub_40a2e0\n0x407fa3: push 0x5a9068\n0x407fa8: mov esi, eax\n0x407faa: call dword [dword_54409c]\n0x407fb0: mov ecx, esi\n0x407f2c: mov esi, dword [dword_5b3484]\n0x407f32: push 0x5a9068\n0x407f37: add esi, 0xeba98\n0x407f3d: call ebp\n0x407f3f: mov eax, esi\n0x407f41: call sub_40a2e0\n0x407f46: push 0x5a9068\n0x407f4b: mov esi, eax\n0x407f4d: call dword [dword_54409c]\n0x407f53: lea edi, dword [esi-1]\n0x407ea1: mov esi, dword [dword_5b3484]\n0x407ea7: push 0x5a9068\n0x407eac: add esi, 0x473a0\n0x407eb2: call ebp\n0x407eb4: mov eax, esi\n0x407eb6: call sub_40a2e0\n0x407ebb: push 0x5a9068\n0x407ec0: mov edi, eax\n0x407ec2: call dword [dword_54409c]\n0x407e44: mov esi, dword [dword_5b3484]\n0x407e4a: push 0x5a9068\n0x407e4f: add esi, 0xeba98\n0x407e55: call ebp\n0x407e57: mov eax, esi\n0x407e59: call sub_40a2e0\n0x407e5e: push 0x5a9068\n0x407e63: mov esi, eax\n0x407e65: call dword [dword_54409c]\n0x407e6b: lea ebx, dword [esi-1]\n0x407dd3: mov ecx, dword [dword_79376c]\n0x407dd9: mov byte [esi+ecx], al\n0x407ddc: inc esi\n0x407ddd: dec edi\n0x407dde: jne loc_407dc0\n0x407df7: mov esi, 0x1e\n0x407dfc: mov eax, 0x129\n0x407e01: mov edi, 0x5\n0x407e06: mov ecx, 0x7a\n0x407e0b: call sub_4eadb0\n0x407e10: mov esi, dword [dword_5b3484]\n0x407e16: mov ebp, dword [dword_5440a0]\n0x407e1c: push 0x5a9068\n0x407e21: add esi, 0xeba98\n0x407e27: call ebp\n0x407e29: mov eax, esi\n0x407e2b: call sub_40a2e0\n0x407e30: push 0x5a9068\n0x407e35: mov esi, eax\n0x407e37: call dword [dword_54409c]\n0x407e3d: dec esi\n0x407e3e: jns loc_407e44\n0x407d61: mov eax, dword [eax+0x10]\n0x407d64: mov edx, dword [eax+8]\n0x407d67: cmp edx, ecx\n0x407d69: ja loc_407d9e\n0x407d6b: je loc_407d79\n0x407d6d: mov eax, dword [eax+0x10]\n0x407d70: mov edx, dword [eax+8]\n0x407d73: cmp edx, ecx\n0x407d75: jbe loc_407d6b\n0x407d77: jmp loc_407d9e\n0x407d79: test ecx, ecx\n0x407d7b: jl loc_407d9e\n0x407d7d: cmp byte [eax+0x18], 0x1\n0x407d81: mov eax, 0x4\n0x407d86: push 0x53\n0x407d88: mov edx, 0x1b58\n0x407d8d: jne loc_407d96\n0x407d8f: call sub_4ed870\n0x407d94: jmp loc_407d9b\n0x407d9b: add esp, 0x4\n0x407d96: call sub_4ebaf0\n0x407bf1: mov eax, dword [eax+0x10]\n0x407bf4: mov ecx, dword [eax+8]\n0x407bf7: cmp ecx, 0x91\n0x407bfd: ja loc_407c9d\n0x407c03: je loc_407c18\n0x407c05: mov eax, dword [eax+0x10]\n0x407c08: mov ecx, dword [eax+8]\n0x407c0b: cmp ecx, 0x91\n0x407c11: jbe loc_407c03\n0x407c13: jmp loc_407c9d\n0x407c18: cmp byte [eax+0x18], 0x1\n0x407c1c: mov edx, 0x1f4\n0x407c21: mov eax, 0x6\n0x407c26: push esi\n0x407c27: mov ecx, 0x91\n0x407c2c: jne loc_407c95\n0x407c2e: call sub_4ed870\n0x407c33: jmp loc_407c9a\n0x407c9a: add esp, 0x4\n0x407c95: call sub_4ebaf0\n0x407c35: mov edx, dword [dword_ea0e1c]\n0x407c3b: movsx ecx, al\n0x407c3e: mov eax, dword [edx+0x1c]\n0x407c41: mov edx, dword [eax+4]\n0x407c44: add ecx, 0x57\n0x407c47: cmp edx, 0x1f4\n0x407c4d: ja loc_407c9d\n0x407c4f: je loc_407c61\n0x407c51: mov eax, dword [eax+0x1c]\n0x407c54: mov edx, dword [eax+4]\n0x407c57: cmp edx, 0x1f4\n0x407c5d: jbe loc_407c4f\n0x407c5f: jmp loc_407c9d\n0x407c61: mov eax, dword [eax+0x10]\n0x407c64: mov edx, dword [eax+8]\n0x407c67: cmp edx, ecx\n0x407c69: ja loc_407c9d\n0x407c6b: je loc_407c79\n0x407c6d: mov eax, dword [eax+0x10]\n0x407c70: mov edx, dword [eax+8]\n0x407c73: cmp edx, ecx\n0x407c75: jbe loc_407c6b\n0x407c77: jmp loc_407c9d\n0x407c79: test ecx, ecx\n0x407c7b: jl loc_407c9d\n0x407c7d: cmp byte [eax+0x18], 0x1\n0x407c81: mov eax, 0x6\n0x407c86: push esi\n0x407c87: mov edx, 0x1f4\n0x407c8c: jne loc_407c95\n0x407c8e: call sub_4ed870\n0x407c93: jmp loc_407c9a\n0x407b4f: mov eax, dword [eax+0x10]\n0x407b52: mov ecx, dword [eax+8]\n0x407b55: cmp ecx, 0xb2\n0x407b5b: ja loc_407b97\n0x407b5d: je loc_407b6f\n0x407b5f: mov eax, dword [eax+0x10]\n0x407b62: mov ecx, dword [eax+8]\n0x407b65: cmp ecx, 0xb2\n0x407b6b: jbe loc_407b5d\n0x407b6d: jmp loc_407b97\n0x407b6f: mov cl, byte [eax+0x18]\n0x407b72: xor eax, eax\n0x407b74: cmp cl, 0x1\n0x407b77: mov edx, 0x1b58\n0x407b7c: push 0x141\n0x407b81: mov ecx, 0xb2\n0x407b86: jne loc_407b8f\n0x407b88: call sub_4ed870\n0x407b8d: jmp loc_407b94\n0x407b94: add esp, 0x4\n0x407b8f: call sub_4ebaf0\n0x407ab6: mov eax, dword [dword_ea0e1c]\n0x407abb: mov eax, dword [eax+0x1c]\n0x407abe: mov ecx, dword [eax+4]\n0x407ac1: cmp ecx, 0x1b58\n0x407ac7: ja loc_407b97\n0x407acd: je loc_407ae2\n0x407acf: mov eax, dword [eax+0x1c]\n0x407ad2: mov ecx, dword [eax+4]\n0x407ad5: cmp ecx, 0x1b58\n0x407adb: jbe loc_407acd\n0x407add: jmp loc_407b97\n0x407ae2: mov eax, dword [eax+0x10]\n0x407ae5: mov ecx, dword [eax+8]\n0x407ae8: cmp ecx, 0xb0\n0x407aee: ja loc_407b97\n0x407af4: je loc_407b09\n0x407af6: mov eax, dword [eax+0x10]\n0x407af9: mov ecx, dword [eax+8]\n0x407afc: cmp ecx, 0xb0\n0x407b02: jbe loc_407af4\n0x407b04: jmp loc_407b97\n0x407b09: mov cl, byte [eax+0x18]\n0x407b0c: xor eax, eax\n0x407b0e: cmp cl, 0x1\n0x407b11: mov edx, 0x1b58\n0x407b16: push 0x141\n0x407b1b: mov ecx, 0xb0\n0x407b20: jne loc_407b8f\n0x407b22: call sub_4ed870\n0x407b27: jmp loc_407b94\n0x407a3b: mov edx, dword [dword_ea0e1c]\n0x407a41: mov eax, dword [edx+0x1c]\n0x407a44: mov ecx, dword [eax+4]\n0x407a47: cmp ecx, 0x1b58\n0x407a4d: ja loc_407b97\n0x407a53: je loc_407a68\n0x407a55: mov eax, dword [eax+0x1c]\n0x407a58: mov ecx, dword [eax+4]\n0x407a5b: cmp ecx, 0x1b58\n0x407a61: jbe loc_407a53\n0x407a63: jmp loc_407b97\n0x407a68: mov eax, dword [eax+0x10]\n0x407a6b: mov ecx, dword [eax+8]\n0x407a6e: cmp ecx, 0xb1\n0x407a74: ja loc_407b97\n0x407a7a: je loc_407a8f\n0x407a7c: mov eax, dword [eax+0x10]\n0x407a7f: mov ecx, dword [eax+8]\n0x407a82: cmp ecx, 0xb1\n0x407a88: jbe loc_407a7a\n0x407a8a: jmp loc_407b97\n0x407a8f: mov cl, byte [eax+0x18]\n0x407a92: xor eax, eax\n0x407a94: cmp cl, 0x1\n0x407a97: mov edx, 0x1b58\n0x407a9c: push 0x141\n0x407aa1: mov ecx, 0xb1\n0x407aa6: jne loc_407b8f\n0x407aac: call sub_4ed870\n0x407ab1: jmp loc_407b94\n0x4079c0: mov ecx, dword [dword_ea0e1c]\n0x4079c6: mov eax, dword [ecx+0x1c]\n0x4079c9: mov ecx, dword [eax+4]\n0x4079cc: cmp ecx, 0x1b58\n0x4079d2: ja loc_407b97\n0x4079d8: je loc_4079ed\n0x4079da: mov eax, dword [eax+0x1c]\n0x4079dd: mov ecx, dword [eax+4]\n0x4079e0: cmp ecx, 0x1b58\n0x4079e6: jbe loc_4079d8\n0x4079e8: jmp loc_407b97\n0x4079ed: mov eax, dword [eax+0x10]\n0x4079f0: mov ecx, dword [eax+8]\n0x4079f3: cmp ecx, 0xaf\n0x4079f9: ja loc_407b97\n0x4079ff: je loc_407a14\n0x407a01: mov eax, dword [eax+0x10]\n0x407a04: mov ecx, dword [eax+8]\n0x407a07: cmp ecx, 0xaf\n0x407a0d: jbe loc_4079ff\n0x407a0f: jmp loc_407b97\n0x407a14: mov cl, byte [eax+0x18]\n0x407a17: xor eax, eax\n0x407a19: cmp cl, 0x1\n0x407a1c: mov edx, 0x1b58\n0x407a21: push 0x141\n0x407a26: mov ecx, 0xaf\n0x407a2b: jne loc_407b8f\n0x407a31: call sub_4ed870\n0x407a36: jmp loc_407b94\n0x4078c9: mov ecx, dword [dword_5b3484]\n0x4078cf: mov esi, dword [ecx+0x621e0]\n0x4078d5: push 0x5a9068\n0x4078da: add esi, 0x8318\n0x4078e0: call dword [dword_5440a0]\n0x4078e6: mov eax, esi\n0x4078e8: call sub_40a2e0\n0x4078ed: push 0x5a9068\n0x4078f2: mov edi, eax\n0x4078f4: call dword [dword_54409c]\n0x407989: mov esi, dword [dword_5b3484]\n0x40798f: push 0x5a9068\n0x407994: add esi, 0x45354\n0x40799a: call edi\n0x40799c: mov eax, esi\n0x40799e: call sub_40a2e0\n0x4079a3: push 0x5a9068\n0x4079a8: mov esi, eax\n0x4079aa: call dword [dword_54409c]\n0x4079b0: cmp esi, 0x3\n0x4079b3: ja loc_407b97\n0x407819: mov eax, dword [eax+0x10]\n0x40781c: mov edx, dword [eax+8]\n0x40781f: cmp edx, ecx\n0x407821: ja loc_407859\n0x407823: je loc_407831\n0x407825: mov eax, dword [eax+0x10]\n0x407828: mov edx, dword [eax+8]\n0x40782b: cmp edx, ecx\n0x40782d: jbe loc_407823\n0x40782f: jmp loc_407859\n0x407831: test ecx, ecx\n0x407833: jl loc_407859\n0x407835: cmp byte [eax+0x18], 0x1\n0x407839: mov eax, 0x230\n0x40783e: push 0xab\n0x407843: mov edx, 0x1b58\n0x407848: jne loc_407851\n0x40784a: call sub_4ed870\n0x40784f: jmp loc_407856\n0x407856: add esp, 0x4\n0x407851: call sub_4ebaf0\n0x4077a3: mov eax, dword [eax+0x10]\n0x4077a6: mov edx, dword [eax+8]\n0x4077a9: cmp edx, ecx\n0x4077ab: ja loc_4077e3\n0x4077ad: je loc_4077bb\n0x4077af: mov eax, dword [eax+0x10]\n0x4077b2: mov edx, dword [eax+8]\n0x4077b5: cmp edx, ecx\n0x4077b7: jbe loc_4077ad\n0x4077b9: jmp loc_4077e3\n0x4077bb: test ecx, ecx\n0x4077bd: jl loc_4077e3\n0x4077bf: cmp byte [eax+0x18], 0x1\n0x4077c3: mov eax, 0x245\n0x4077c8: push 0x99\n0x4077cd: mov edx, 0x1f4\n0x4077d2: jne loc_4077db\n0x4077d4: call sub_4ed870\n0x4077d9: jmp loc_4077e0\n0x4077e0: add esp, 0x4\n0x4077db: call sub_4ebaf0\n0x407738: mov eax, dword [eax+0x10]\n0x40773b: mov edx, dword [eax+8]\n0x40773e: cmp edx, ecx\n0x407740: ja loc_407778\n0x407742: je loc_407750\n0x407744: mov eax, dword [eax+0x10]\n0x407747: mov edx, dword [eax+8]\n0x40774a: cmp edx, ecx\n0x40774c: jbe loc_407742\n0x40774e: jmp loc_407778\n0x407750: test ecx, ecx\n0x407752: jl loc_407778\n0x407754: cmp byte [eax+0x18], 0x1\n0x407758: mov eax, 0x245\n0x40775d: push 0x91\n0x407762: mov edx, 0x1f4\n0x407767: jne loc_407770\n0x407769: call sub_4ed870\n0x40776e: jmp loc_407775\n0x407775: add esp, 0x4\n0x407770: call sub_4ebaf0\n0x407702: cdq\n0x407703: mov ecx, 0xa\n0x407708: idiv ecx\n0x40770a: mov esi, edx\n0x40770c: mov edx, dword [dword_ea0e1c]\n0x407712: lea ecx, dword [eax+0xb3]\n0x407718: mov eax, dword [edx+0x1c]\n0x40771b: mov edx, dword [eax+4]\n0x40771e: cmp edx, 0x1f4\n0x407724: ja loc_407778\n0x407686: mov eax, dword [eax+0x10]\n0x407689: mov ecx, dword [eax+8]\n0x40768c: cmp ecx, 0xb2\n0x407692: ja loc_4076cf\n0x407694: je loc_4076a6\n0x407696: mov eax, dword [eax+0x10]\n0x407699: mov ecx, dword [eax+8]\n0x40769c: cmp ecx, 0xb2\n0x4076a2: jbe loc_407694\n0x4076a4: jmp loc_4076cf\n0x4076a6: cmp byte [eax+0x18], 0x1\n0x4076aa: mov edx, 0x1f4\n0x4076af: mov eax, 0x245\n0x4076b4: push 0x8a\n0x4076b9: mov ecx, 0xb2\n0x4076be: jne loc_4076c7\n0x4076c0: call sub_4ed870\n0x4076c5: jmp loc_4076cc\n0x4076cc: add esp, 0x4\n0x4076c7: call sub_4ebaf0\n0x4075e8: mov eax, dword [eax+0x10]\n0x4075eb: mov ecx, dword [eax+8]\n0x4075ee: cmp ecx, 0xb1\n0x4075f4: ja loc_407631\n0x4075f6: je loc_407608\n0x4075f8: mov eax, dword [eax+0x10]\n0x4075fb: mov ecx, dword [eax+8]\n0x4075fe: cmp ecx, 0xb1\n0x407604: jbe loc_4075f6\n0x407606: jmp loc_407631\n0x407608: cmp byte [eax+0x18], 0x1\n0x40760c: mov edx, 0x1f4\n0x407611: mov eax, 0x4f\n0x407616: push 0x187\n0x40761b: mov ecx, 0xb1\n0x407620: jne loc_407629\n0x407622: call sub_4ed870\n0x407627: jmp loc_40762e\n0x40762e: add esp, 0x4\n0x407629: call sub_4ebaf0\n0x407595: add ebx, 0xb\n0x407598: inc esi\n0x407599: cmp ebx, 0x19c\n0x40759f: jl loc_407575\n0x4075a3: movsx ecx, byte [esp+0xf84+var_F5C]\n0x4075a8: add ecx, 0x77\n0x4075ab: push 0x1f4\n0x4075b0: mov eax, 0x3c\n0x4075b5: mov ebx, 0x18c\n0x4075ba: call sub_4eb8e0\n0x4075bf: add esp, 0x4\n0x407513: mov esi, dword [dword_5b3484]\n0x407519: mov edi, dword [dword_5440a0]\n0x40751f: push 0x5a9068\n0x407524: add esi, 0x5af88\n0x40752a: call edi\n0x40752c: mov eax, esi\n0x40752e: call sub_40a2e0\n0x407533: mov ebp, dword [dword_54409c]\n0x407539: push 0x5a9068\n0x40753e: mov esi, eax\n0x407540: call ebp\n0x407542: push esi\n0x407543: lea ecx, dword [esp+0xf88+var_F5C]\n0x407547: push 0x551ed4\n0x40754c: push ecx\n0x40754d: call sub_5255de\n0x407552: lea eax, dword [esp+0xf90+var_F5C]\n0x407556: add esp, 0xc\n0x407559: lea edx, dword [eax+1]\n0x40755c: lea esp, dword [esp+0xf84+var_F84]\n0x4074da: mov dword [esp+0xf84+arg_24], 0xffffffff\n0x4074e5: mov eax, dword [esp+0xf84+var_A80]\n0x4074ec: test eax, eax\n0x4074ee: mov esi, eax\n0x4074f0: je loc_407513\n0x4073e0: mov eax, dword [eax+0x10]\n0x4073e3: mov ecx, dword [eax+8]\n0x4073e6: cmp ecx, 0x9c\n0x4073ec: ja loc_407429\n0x4073ee: je loc_407400\n0x4073f0: mov eax, dword [eax+0x10]\n0x4073f3: mov ecx, dword [eax+8]\n0x4073f6: cmp ecx, 0x9c\n0x4073fc: jbe loc_4073ee\n0x4073fe: jmp loc_407429\n0x407400: cmp byte [eax+0x18], 0x1\n0x407404: mov edx, 0x1f4\n0x407409: mov eax, 0x51\n0x40740e: push 0x2f7\n0x407413: mov ecx, 0x9c\n0x407418: jne loc_407421\n0x40741a: call sub_4ed870\n0x40741f: jmp loc_407426\n0x407426: add esp, 0x4\n0x407421: call sub_4ebaf0\n0x407144: mov edx, dword [dword_ea0e1c]\n0x40714a: mov eax, dword [edx+0x1c]\n0x40714d: mov ecx, dword [eax+4]\n0x407150: cmp ecx, 0x1f4\n0x407156: ja loc_407429\n0x40710b: mov dword [esp+0xf88+arg_20], 0xffffffff\n0x407116: mov eax, dword [esp+0xf88+var_A84]\n0x40711d: test eax, eax\n0x40711f: mov esi, eax\n0x407121: je loc_407144\n0x40705b: mov eax, dword [dword_5b3484]\n0x407060: mov ecx, dword [eax+0x621e0]\n0x407066: push 0x14\n0x407068: lea edx, dword [esp+0xf8c+var_A98]\n0x40706f: push edx\n0x407070: add ecx, 0x8bc4\n0x407076: push ecx\n0x407077: call sub_40a8c0\n0x40707c: push 0xa\n0x40707e: lea edx, dword [esp+0xf8c+var_EE0]\n0x407085: push edx\n0x407086: push eax\n0x407087: mov dword [esp+0xf94+arg_20], 0xd\n0x407092: call sub_40a9c0\n0x407097: mov esi, eax\n0x407099: push 0x5a9068\n0x40709e: mov byte [esp+0xf8c+arg_20], 0xe\n0x4070a6: call edi\n0x4070a8: mov eax, esi\n0x4070aa: call sub_40a2e0\n0x4070af: push 0x5a9068\n0x4070b4: mov esi, eax\n0x4070b6: call ebp\n0x4070b8: lea ecx, dword [esi+0x92]\n0x4070be: push 0x1f4\n0x4070c3: mov eax, 0x2a\n0x4070c8: mov ebx, 0x2d9\n0x4070cd: call sub_4eb8e0\n0x4070d2: mov byte [esp+0xf8c+arg_20], 0xd\n0x4070da: mov eax, dword [esp+0xf8c+var_ECC]\n0x4070e1: add esp, 0x4\n0x4070e4: test eax, eax\n0x4070e6: mov esi, eax\n0x4070e8: je loc_40710b\n0x407175: xor ebp, ebp\n0x407177: xor esi, esi\n0x407179: mov edi, 0x1f5\n0x40717e: mov edi, edi\n0x4071b7: mov eax, dword [dword_5b3484]\n0x4071bc: push 0x5a9068\n0x4071c1: lea ebx, dword [esi+eax+0x39f30]\n0x4071c8: call dword [dword_5440a0]\n0x4071ce: mov eax, ebx\n0x4071d0: call sub_40a2e0\n0x4071d5: cmp eax, 0xff\n0x4071da: push 0x5a9068\n0x4071df: sete bl\n0x4071e2: call dword [dword_54409c]\n0x4071e8: test bl, bl\n0x4071ea: push 0x1\n0x4071ec: je loc_4072e3\n0x4071f2: mov edx, dword [dword_5b3484]\n0x4071f8: lea ecx, dword [esp+0xf8c+var_CBC]\n0x4071ff: push ecx\n0x407200: lea eax, dword [esi+edx+0x3a154]\n0x407207: push eax\n0x407208: call sub_40a6e0\n0x40720d: push 0x2\n0x40720f: lea ecx, dword [esp+0xf8c+var_650]\n0x407216: push ecx\n0x407217: push eax\n0x407218: mov dword [esp+0xf94+arg_20], 0x6\n0x407223: call sub_40a7d0\n0x407228: mov byte [esp+0xf88+arg_20], 0x7\n0x407230: mov ecx, dword [dword_5b3484]\n0x407236: mov ebx, dword [ecx+0xf0374]\n0x40723c: xor edx, edx\n0x40723e: cmp ebp, ebx\n0x407240: sete dl\n0x407243: push edx\n0x407244: lea edx, dword [esp+0xf8c+var_874]\n0x40724b: push edx\n0x40724c: push eax\n0x40724d: call sub_40a5f0\n0x407252: mov ebx, eax\n0x407254: push 0x5a9068\n0x407259: mov byte [esp+0xf8c+arg_20], 0x8\n0x407261: call dword [dword_5440a0]\n0x407267: mov eax, ebx\n0x407269: call sub_40a2e0\n0x40726e: push 0x5a9068\n0x407273: mov dword [esp+0xf8c+var_F78], eax\n0x407277: call dword [dword_54409c]\n0x40727d: mov ecx, dword [esp+0xf88+var_F78]\n0x407281: push 0x1b5a\n0x407286: mov eax, 0x3\n0x40728b: mov ebx, edi\n0x40728d: call sub_4eb8e0\n0x407292: add esp, 0x4\n0x407295: lea ecx, dword [esp+0xf88+var_874]\n0x40729c: mov byte [esp+0xf88+arg_20], 0x7\n0x4072a4: call sub_40a2a0\n0x4072a9: lea ecx, dword [esp+0xf88+var_650]\n0x4072b0: mov byte [esp+0xf88+arg_20], 0x6\n0x4072b8: call sub_40a2a0\n0x4072bd: lea ecx, dword [esp+0xf88+var_CBC]\n0x4072c4: mov dword [esp+0xf88+arg_20], 0xffffffff\n0x4072cf: call sub_40a2a0\n0x4072d4: inc ebp\n0x4072d5: add esi, 0x224\n0x4072db: add edi, 0x24\n0x4072de: jmp loc_4073c5\n0x4073c5: add edi, 0x24\n0x4073c8: inc ebp\n0x4073c9: add esi, 0x224\n0x4073cf: cmp edi, 0x2cd\n0x4073d5: jl loc_407180\n0x407180: mov edx, dword [dword_5b3484]\n0x407186: push 0x5a9068\n0x40718b: lea ebx, dword [esi+edx+0x39f30]\n0x407192: call dword [dword_5440a0]\n0x407198: mov eax, ebx\n0x40719a: call sub_40a2e0\n0x40719f: test eax, eax\n0x4071a1: push 0x5a9068\n0x4071a6: sete bl\n0x4071a9: call dword [dword_54409c]\n0x4071af: test bl, bl\n0x4071b1: jne loc_4073c5\n0x4073db: jmp loc_406f94\n0x406f94: mov eax, dword [dword_5b3484]\n0x406f99: mov eax, dword [eax+0x621e0]\n0x406f9f: add eax, 0x8ba8\n0x406fa4: call sub_4065a0\n0x406fa9: test al, al\n0x406fab: je loc_407513\n0x4072e3: mov ecx, dword [dword_5b3484]\n0x4072e9: lea eax, dword [esp+0xf8c+var_EE0]\n0x4072f0: push eax\n0x4072f1: lea edx, dword [esi+ecx+0x39f30]\n0x4072f8: push edx\n0x4072f9: call sub_40a6e0\n0x4072fe: push 0x2\n0x407300: lea ecx, dword [esp+0xf8c+var_A98]\n0x407307: push ecx\n0x407308: push eax\n0x407309: mov dword [esp+0xf94+arg_20], 0x9\n0x407314: call sub_40a7d0\n0x407319: mov byte [esp+0xf88+arg_20], 0xa\n0x407321: mov ecx, dword [dword_5b3484]\n0x407327: mov ebx, dword [ecx+0xf0374]\n0x40732d: xor edx, edx\n0x40732f: cmp ebp, ebx\n0x407331: sete dl\n0x407334: push edx\n0x407335: lea edx, dword [esp+0xf8c+var_42C]\n0x40733c: push edx\n0x40733d: push eax\n0x40733e: call sub_40a5f0\n0x407343: mov ebx, eax\n0x407345: push 0x5a9068\n0x40734a: mov byte [esp+0xf8c+arg_20], 0xb\n0x407352: call dword [dword_5440a0]\n0x407358: mov eax, ebx\n0x40735a: call sub_40a2e0\n0x40735f: push 0x5a9068\n0x407364: mov dword [esp+0xf8c+var_F78], eax\n0x407368: call dword [dword_54409c]\n0x40736e: mov ecx, dword [esp+0xf88+var_F78]\n0x407372: push 0x1b59\n0x407377: mov eax, 0x3\n0x40737c: mov ebx, edi\n0x40737e: call sub_4eb8e0\n0x407383: add esp, 0x4\n0x407386: lea ecx, dword [esp+0xf88+var_42C]\n0x40738d: mov byte [esp+0xf88+arg_20], 0xa\n0x407395: call sub_40a2a0\n0x40739a: lea ecx, dword [esp+0xf88+var_A98]\n0x4073a1: mov byte [esp+0xf88+arg_20], 0x9\n0x4073a9: call sub_40a2a0\n0x4073ae: lea ecx, dword [esp+0xf88+var_EE0]\n0x4073b5: mov dword [esp+0xf88+arg_20], 0xffffffff\n0x4073c0: call sub_40a2a0\n0x406f80: mov ebx, 0x1f5\n0x406f85: xor eax, eax\n0x406f87: push 0x1b58\n0x406f8c: call sub_4eb8e0\n0x406f91: add esp, 0x4\n0x406f3a: mov ecx, dword [esp+0xf88+arg_28]\n0x406f41: mov ecx, dword [ecx]\n0x406f43: cmp ecx, 0xffffffff\n0x406f46: jne loc_406f80\n0x406f01: mov dword [esp+0xf88+arg_20], 0xffffffff\n0x406f0c: mov eax, dword [esp+0xf88+var_CA8]\n0x406f13: test eax, eax\n0x406f15: mov esi, eax\n0x406f17: je loc_406f3a\n0x406ecb: mov byte [esp+0xf88+arg_20], 0x3\n0x406ed3: mov eax, dword [esp+0xf88+var_63C]\n0x406eda: test eax, eax\n0x406edc: mov esi, eax\n0x406ede: je loc_406f01\n0x406e56: mov eax, dword [eax+0x10]\n0x406e59: mov ecx, dword [eax+8]\n0x406e5c: cmp ecx, 0x4\n0x406e5f: ja loc_406e95\n0x406e61: je loc_406e70\n0x406e63: mov eax, dword [eax+0x10]\n0x406e66: mov ecx, dword [eax+8]\n0x406e69: cmp ecx, 0x4\n0x406e6c: jbe loc_406e61\n0x406e6e: jmp loc_406e95\n0x406e70: cmp byte [eax+0x18], 0x1\n0x406e74: mov edx, 0x1b58\n0x406e79: mov eax, 0x239\n0x406e7e: push esi\n0x406e7f: mov ecx, 0x4\n0x406e84: jne loc_406e8d\n0x406e86: call sub_4ed870\n0x406e8b: jmp loc_406e92\n0x406e92: add esp, 0x4\n0x406e8d: call sub_4ebaf0\n0x406d90: mov edx, dword [dword_5b3484]\n0x406d96: mov esi, dword [edx+0x621e0]\n0x406d9c: push 0x5a9068\n0x406da1: add esi, 0x7640\n0x406da7: call ebp\n0x406da9: mov eax, esi\n0x406dab: call sub_40a2e0\n0x406db0: push 0x5a9068\n0x406db5: mov esi, eax\n0x406db7: call edi\n0x406cff: mov eax, dword [eax+0x10]\n0x406d02: mov ecx, dword [eax+8]\n0x406d05: cmp ecx, 0x2\n0x406d08: ja loc_406d42\n0x406d0a: je loc_406d19\n0x406d0c: mov eax, dword [eax+0x10]\n0x406d0f: mov ecx, dword [eax+8]\n0x406d12: cmp ecx, 0x2\n0x406d15: jbe loc_406d0a\n0x406d17: jmp loc_406d42\n0x406d19: cmp byte [eax+0x18], 0x1\n0x406d1d: mov edx, 0x1b58\n0x406d22: mov eax, 0x239\n0x406d27: push 0xf4\n0x406d2c: mov ecx, 0x2\n0x406d31: jne loc_406d3a\n0x406d33: call sub_4ed870\n0x406d38: jmp loc_406d3f\n0x406d3f: add esp, 0x4\n0x406d3a: call sub_4ebaf0\n0x406cda: mov eax, dword [dword_ea0e1c]\n0x406cdf: mov eax, dword [eax+0x1c]\n0x406ce2: mov ecx, dword [eax+4]\n0x406ce5: cmp ecx, 0x1b58\n0x406ceb: ja loc_406d42\n0x406ca1: mov dword [esp+0xf94+arg_14], 0xffffffff\n0x406cac: mov eax, dword [esp+0xf94+var_86C]\n0x406cb3: test eax, eax\n0x406cb5: mov esi, eax\n0x406cb7: je loc_406cda\n0x406c6b: mov byte [esp+0xf94+arg_14], 0x0\n0x406c73: mov eax, dword [esp+0xf94+var_648]\n0x406c7a: test eax, eax\n0x406c7c: mov esi, eax\n0x406c7e: je loc_406ca1\n0x406b80: mov edx, dword [dword_5b3484]\n0x406b86: mov esi, dword [edx+0x621e0]\n0x406b8c: push 0x5a9068\n0x406b91: add esi, 0x7640\n0x406b97: call ebp\n0x406b99: mov eax, esi\n0x406b9b: call sub_40a2e0\n0x406ba0: push 0x5a9068\n0x406ba5: mov esi, eax\n0x406ba7: call edi\n0x406b43: call sub_4eb8e0\n0x406b48: add esp, 0x4\n0x406b4b: mov ecx, dword [dword_5b3484]\n0x406b51: mov esi, dword [ecx+0x621e0]\n0x406b57: push 0x5a9068\n0x406b5c: add esi, 0x7640\n0x406b62: call ebp\n0x406b64: mov eax, esi\n0x406b66: call sub_40a2e0\n0x406b6b: push 0x5a9068\n0x406b70: mov esi, eax\n0x406b72: call edi\n0x406b74: cmp esi, 0x1\n0x406b77: jge loc_406b80\n0x406ae8: call sub_4eb8e0\n0x406aed: add esp, 0x4\n0x406af0: mov esi, dword [dword_5b3484]\n0x406af6: push 0x5a9068\n0x406afb: add esi, 0x45354\n0x406b01: call ebp\n0x406b03: mov eax, esi\n0x406b05: call sub_40a2e0\n0x406b0a: cmp eax, 0x3\n0x406b0d: push 0x5a9068\n0x406b12: sete bl\n0x406b15: call edi\n0x406b17: test bl, bl\n0x406b19: je loc_406b4b\n0x408159: mov ecx, dword [esp+0xf98+var_4]\n0x408160: mov dword [fs:0x0], ecx\n0x408167: add esp, 0xfa0\n0x40816d: ret 0x4\n0x406a38: mov eax, dword [eax+0x10]\n0x406a3b: mov ecx, dword [eax+8]\n0x406a3e: cmp ecx, 0x1\n0x406a41: ja loc_406a78\n0x406a43: je loc_406a52\n0x406a45: mov eax, dword [eax+0x10]\n0x406a48: mov ecx, dword [eax+8]\n0x406a4b: cmp ecx, 0x1\n0x406a4e: jbe loc_406a43\n0x406a50: jmp loc_406a78\n0x406a52: cmp byte [eax+0x18], 0x1\n0x406a56: mov edx, 0x1b58\n0x406a5b: mov eax, 0x22c\n0x406a60: push 0x0\n0x406a62: mov ecx, 0x1\n0x406a67: jne loc_406a70\n0x406a69: call sub_4ed870\n0x406a6e: jmp loc_406a75\n0x406a75: add esp, 0x4\n0x406a70: call sub_4ebaf0\n0x4069d7: mov eax, dword [eax+0x10]\n0x4069da: mov ecx, dword [eax+8]\n0x4069dd: test ecx, ecx\n0x4069df: ja loc_406a12\n0x4069e1: je loc_4069ef\n0x4069e3: mov eax, dword [eax+0x10]\n0x4069e6: mov ecx, dword [eax+8]\n0x4069e9: test ecx, ecx\n0x4069eb: jbe loc_4069e1\n0x4069ed: jmp loc_406a12\n0x4069ef: mov cl, byte [eax+0x18]\n0x4069f2: xor eax, eax\n0x4069f4: cmp cl, 0x1\n0x4069f7: mov edx, 0x1b58\n0x4069fc: push eax\n0x4069fd: jne loc_406a08\n0x4069ff: xor ecx, ecx\n0x406a01: call sub_4ed870\n0x406a06: jmp loc_406a0f\n0x406a0f: add esp, 0x4\n0x406a08: xor ecx, ecx\n0x406a0a: call sub_4ebaf0",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_65cae520e35b3225561b9885c44e85fb0f3edf23a27e7f0d860eac008d73a990",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x004ebaf0"
+      },
+      "raw_result": null,
+      "normalized_result": "0x4ebaf0: push ebx\n0x4ebaf1: push edi\n0x4ebaf2: mov edi, eax\n0x4ebaf4: mov eax, dword [dword_ea0e1c]\n0x4ebaf9: mov eax, dword [eax+0x1c]\n0x4ebafc: mov ebx, ecx\n0x4ebafe: mov ecx, dword [eax+4]\n0x4ebb01: cmp ecx, edx\n0x4ebb03: ja loc_4ebbb6\n0x4ebb09: je loc_4ebb18\n0x4ebb0b: mov eax, dword [eax+0x1c]\n0x4ebb0e: mov ecx, dword [eax+4]\n0x4ebb11: cmp ecx, edx\n0x4ebb13: jbe loc_4ebb09\n0x4ebb15: pop edi\n0x4ebb16: pop ebx\n0x4ebb17: ret\n0x4ebb18: push esi\n0x4ebb19: mov esi, dword [eax+0x10]\n0x4ebb1c: mov eax, dword [esi+8]\n0x4ebb1f: cmp eax, ebx\n0x4ebb21: ja loc_4ebbb5\n0x4ebb27: je loc_4ebb37\n0x4ebb29: mov esi, dword [esi+0x10]\n0x4ebb2c: mov eax, dword [esi+8]\n0x4ebb2f: cmp eax, ebx\n0x4ebb31: jbe loc_4ebb27\n0x4ebb33: pop esi\n0x4ebb34: pop edi\n0x4ebb35: pop ebx\n0x4ebb36: ret\n0x4ebb37: mov ecx, dword [esi+0x28]\n0x4ebb3a: mov eax, dword [esp+0xc+arg_0]\n0x4ebb3e: mov edx, dword [dword_793534]\n0x4ebb44: add eax, ecx\n0x4ebb46: mov ecx, dword [esi+0x20]\n0x4ebb49: push ebp\n0x4ebb4a: add edi, dword [esi+0x2c]\n0x4ebb4d: mov dword [esp+0x10+arg_0], eax\n0x4ebb51: mov eax, edx\n0x4ebb53: sub eax, edi\n0x4ebb55: mov ebx, 0x0\n0x4ebb5a: sets bl\n0x4ebb5d: mov ebp, ecx\n0x4ebb5f: dec ebx\n0x4ebb60: and ebx, eax\n0x4ebb62: imul ebp, ebx\n0x4ebb65: mov ebx, dword [esi+0x34]\n0x4ebb68: lea ebp, dword [ebx+ebp*2]\n0x4ebb6b: xor ebx, ebx\n0x4ebb6d: test eax, eax\n0x4ebb6f: setl bl\n0x4ebb72: dec ebx\n0x4ebb73: and ebx, eax\n0x4ebb75: mov eax, dword [esi+0x24]\n0x4ebb78: sub eax, ebx\n0x4ebb7a: cmp edx, edi\n0x4ebb7c: jle loc_4ebb80\n0x4ebb7e: mov edi, edx\n0x4ebb8d: mov eax, ebx\n0x4ebb8f: sub eax, edi\n0x4ebb91: inc eax\n0x4ebb96: mov ebx, eax\n0x4ebb98: push ecx\n0x4ebb99: mov ecx, dword [esp+0x14+arg_0]\n0x4ebb9d: mov edx, ebp\n0x4ebb9f: mov eax, edi\n0x4ebba1: call sub_4eba80\n0x4ebba6: mov ecx, dword [esi+0x20]\n0x4ebba9: add esp, 0x4\n0x4ebbac: inc edi\n0x4ebbad: dec ebx\n0x4ebbae: lea ebp, dword [ebp+ecx*2]\n0x4ebbb2: jne loc_4ebb98\n0x4ebbb4: pop ebp\n0x4ebb92: test eax, eax\n0x4ebb94: jle loc_4ebbb4\n0x4ebb80: mov ebx, dword [dword_56df34]\n0x4ebb86: lea edx, dword [eax+edi]\n0x4ebb89: cmp edx, ebx\n0x4ebb8b: jle loc_4ebb92\n0x4ebbb5: pop esi\n0x4ebbb6: pop edi\n0x4ebbb7: pop ebx\n0x4ebbb8: ret",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_9d907c0a952ac670aeddaf3609f963470daaec4b044c29ba1e761f5213aeaaba",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x004ed870"
+      },
+      "raw_result": null,
+      "normalized_result": "0x4ed870: sub esp, 0x10\n0x4ed873: push ebx\n0x4ed874: mov ebx, eax\n0x4ed876: mov eax, dword [dword_79352c]\n0x4ed87b: test eax, eax\n0x4ed87d: push esi\n0x4ed87e: mov esi, ecx\n0x4ed880: je loc_4ed9e2\n0x4ed886: test esi, esi\n0x4ed888: jl loc_4ed9e2\n0x4ed88e: mov eax, 0xea0e18\n0x4ed893: call sub_4f30c0\n0x4ed898: test eax, eax\n0x4ed89a: je loc_4ed9e2\n0x4ed8a0: mov ecx, dword [eax+0x28]\n0x4ed8a3: mov edx, dword [esp+0x18+arg_0]\n0x4ed8a7: mov esi, dword [dword_793534]\n0x4ed8ad: add edx, ecx\n0x4ed8af: add ebx, dword [eax+0x2c]\n0x4ed8b2: mov ecx, dword [eax+0x34]\n0x4ed8b5: mov eax, dword [eax+0x24]\n0x4ed8b8: mov dword [esp+0x18+arg_0], edx\n0x4ed8bc: xor edx, edx\n0x4ed8be: cmp ebx, esi\n0x4ed8c0: push edi\n0x4ed8c1: mov edi, eax\n0x4ed8c3: jge loc_4ed8cd\n0x4ed8c5: sub esi, ebx\n0x4ed8c7: mov edx, esi\n0x4ed8c9: add ebx, edx\n0x4ed8cb: sub edi, edx\n0x4ed8db: sub esi, ebx\n0x4ed8dd: inc esi\n0x4ed8de: mov edi, esi\n0x4ed8e8: test edx, edx\n0x4ed8ea: jle loc_4ed8fd\n0x4ed8ec: lea esp, dword [esp+0x20+var_20]\n0x4ed8f0: dec edx\n0x4ed8f1: movzx eax, word [ecx]\n0x4ed8f4: lea ecx, dword [ecx+eax*2]\n0x4ed8f7: mov dword [esp+0x20+var_10], ecx\n0x4ed8fb: jne loc_4ed8f0\n0x4ed8fd: test edi, edi\n0x4ed8ff: jle loc_4ed9e0\n0x4ed905: mov esi, dword [dword_56df30]\n0x4ed90b: mov dword [esp+0x20+var_8], edi\n0x4ed90f: jmp loc_4ed915\n0x4ed915: mov ax, word [ecx+2]\n0x4ed919: movzx edx, word [ecx]\n0x4ed91c: movzx eax, ax\n0x4ed91f: test eax, eax\n0x4ed921: lea edi, dword [ecx+4]\n0x4ed924: lea ecx, dword [ecx+edx*2]\n0x4ed927: mov dword [esp+0x20+var_10], ecx\n0x4ed92b: mov dword [esp+0x20+var_C], 0x0\n0x4ed933: mov dword [esp+0x20+var_4], eax\n0x4ed937: jle loc_4ed9d0\n0x4ed93d: lea ecx, dword [ecx]\n0x4ed954: cmp ecx, dword [dword_793530]\n0x4ed95a: jg loc_4ed962\n0x4ed95c: lea edi, dword [edi+edx*2+4]\n0x4ed960: jmp loc_4ed9a4\n0x4ed9a4: mov eax, dword [esp+0x20+var_C]\n0x4ed9a8: mov ecx, dword [esp+0x20+var_4]\n0x4ed9ac: inc eax\n0x4ed9ad: cmp eax, ecx\n0x4ed9af: mov dword [esp+0x20+var_C], eax\n0x4ed9b3: jl loc_4ed940\n0x4ed940: movzx eax, word [edi]\n0x4ed943: mov ecx, dword [esp+0x20+arg_0]\n0x4ed947: movzx edx, word [edi+2]\n0x4ed94b: add eax, ecx\n0x4ed94d: cmp eax, esi\n0x4ed94f: lea ecx, dword [edx+eax]\n0x4ed952: jg loc_4ed9d0\n0x4ed9b5: jmp loc_4ed9d0\n0x4ed9d0: mov eax, dword [esp+0x20+var_8]\n0x4ed9d4: inc ebx\n0x4ed9d5: dec eax\n0x4ed9d6: mov dword [esp+0x20+var_8], eax\n0x4ed9da: jne loc_4ed911\n0x4ed9e0: pop ebp\n0x4ed9e1: pop edi\n0x4ed911: mov ecx, dword [esp+0x20+var_10]\n0x4ed962: mov ebp, dword [dword_793530]\n0x4ed968: cmp eax, ebp\n0x4ed96a: jge loc_4ed980\n0x4ed96c: mov edx, ebp\n0x4ed96e: sub edx, eax\n0x4ed970: cmp ecx, esi\n0x4ed972: jle loc_4ed977\n0x4ed974: lea ecx, dword [esi+1]\n0x4ed98a: mov esi, 0xf22650\n0x4ed98f: mov eax, ebx\n0x4ed991: call sub_4e9130\n0x4ed996: movzx eax, word [edi+2]\n0x4ed99a: mov esi, dword [dword_56df30]\n0x4ed9a0: lea edi, dword [edi+eax*2+4]\n0x4ed977: lea edx, dword [edi+edx*2+4]\n0x4ed97b: push edx\n0x4ed97c: push ecx\n0x4ed97d: push ebp\n0x4ed97e: jmp loc_4ed98a\n0x4ed980: cmp ecx, esi\n0x4ed982: jg loc_4ed9b7\n0x4ed984: lea edx, dword [edi+4]\n0x4ed987: push edx\n0x4ed988: push ecx\n0x4ed989: push eax\n0x4ed9b7: add edi, 0x4\n0x4ed9ba: push edi\n0x4ed9bb: inc esi\n0x4ed9bc: push esi\n0x4ed9bd: push eax\n0x4ed9be: mov eax, ebx\n0x4ed9c0: mov esi, 0xf22650\n0x4ed9c5: call sub_4e9130\n0x4ed9ca: mov esi, dword [dword_56df30]\n0x4ed8e0: cmp edx, eax\n0x4ed8e2: jg loc_4ed9e0\n0x4ed8cd: mov esi, dword [dword_56df34]\n0x4ed8d3: push ebp\n0x4ed8d4: lea ebp, dword [edi+ebx]\n0x4ed8d7: cmp ebp, esi\n0x4ed8d9: jle loc_4ed8e0\n0x4ed9e2: pop esi\n0x4ed9e3: pop ebx\n0x4ed9e4: add esp, 0x10\n0x4ed9e7: ret",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_12e4a0d0f2976fd61c38177c333f76208eaef8d274454c164359e1afcf2589cc",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x004eb8e0"
+      },
+      "raw_result": null,
+      "normalized_result": "0x4eb8e0: mov edx, dword [esp+arg_0]\n0x4eb8e4: push esi\n0x4eb8e5: mov esi, dword [dword_ea0e1c]\n0x4eb8eb: mov esi, dword [esi+0x1c]\n0x4eb8ee: push edi\n0x4eb8ef: mov edi, dword [esi+4]\n0x4eb8f2: cmp edi, edx\n0x4eb8f4: ja loc_4eb902\n0x4eb8f6: je loc_4eb905\n0x4eb8f8: mov esi, dword [esi+0x1c]\n0x4eb8fb: mov edi, dword [esi+4]\n0x4eb8fe: cmp edi, edx\n0x4eb900: jbe loc_4eb8f6\n0x4eb902: pop edi\n0x4eb903: pop esi\n0x4eb904: ret\n0x4eb905: mov esi, dword [esi+0x10]\n0x4eb908: mov edi, dword [esi+8]\n0x4eb90b: cmp edi, ecx\n0x4eb90d: ja loc_4eb902\n0x4eb90f: je loc_4eb91e\n0x4eb911: mov esi, dword [esi+0x10]\n0x4eb914: mov edi, dword [esi+8]\n0x4eb917: cmp edi, ecx\n0x4eb919: jbe loc_4eb90f\n0x4eb91b: pop edi\n0x4eb91c: pop esi\n0x4eb91d: ret\n0x4eb91e: test ecx, ecx\n0x4eb920: jl loc_4eb902\n0x4eb922: cmp byte [esi+0x18], 0x1\n0x4eb926: pop edi\n0x4eb927: pop esi\n0x4eb928: jne loc_4eb933\n0x4eb92a: mov dword [esp+arg_0], ebx\n0x4eb92e: jmp sub_4ed870\n0x4eb933: mov dword [esp+arg_0], ebx\n0x4eb937: jmp sub_4ebaf0",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_646945bb6bf96b3a3c0a92c35bc8796e54a43f1bb16545df9159e7ad33d5ae3a",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x004eba80"
+      },
+      "raw_result": null,
+      "normalized_result": "0x4eba80: push ebx\n0x4eba81: mov ebx, edx\n0x4eba83: cmp eax, dword [dword_793534]\n0x4eba89: push esi\n0x4eba8a: mov esi, dword [esp+0x8+arg_0]\n0x4eba8e: jl loc_4ebae0\n0x4eba90: cmp eax, dword [dword_56df34]\n0x4eba96: jg loc_4ebae0\n0x4eba98: mov edx, dword [dword_793530]\n0x4eba9e: push edi\n0x4eba9f: lea edi, dword [ecx+esi]\n0x4ebaa2: cmp edi, edx\n0x4ebaa4: jl loc_4ebadf\n0x4ebaa6: mov edi, dword [dword_56df30]\n0x4ebaac: cmp ecx, edi\n0x4ebaae: jg loc_4ebadf\n0x4ebab0: cmp ecx, edx\n0x4ebab2: jge loc_4ebac3\n0x4ebab4: push ebp\n0x4ebab5: mov ebp, edx\n0x4ebab7: sub ebp, ecx\n0x4ebab9: sub ecx, edx\n0x4ebabb: lea ebx, dword [ebx+ebp*2]\n0x4ebabe: add esi, ecx\n0x4ebac0: mov ecx, edx\n0x4ebac2: pop ebp\n0x4ebaca: sub edi, ecx\n0x4ebacc: inc edi\n0x4ebacd: mov esi, edi\n0x4ebacf: push ebx\n0x4ebad0: lea edx, dword [ecx+esi]\n0x4ebad3: push edx\n0x4ebad4: push ecx\n0x4ebad5: mov esi, 0xf22650\n0x4ebada: call sub_4e9130\n0x4ebac3: lea edx, dword [ecx+esi]\n0x4ebac6: cmp edx, edi\n0x4ebac8: jle loc_4ebacf\n0x4ebadf: pop edi\n0x4ebae0: pop esi\n0x4ebae1: pop ebx\n0x4ebae2: ret",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    },
+    {
+      "evidence_id": "ev_53fdecd2a95a31af9eedd6545287209afe15dbb05a801098333fb145f80704c9",
+      "subject": {
+        "name": "GunBound.gme",
+        "digest": {
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+        },
+        "local_path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+        "format": "pe",
+        "architecture": "x86"
+      },
+      "provider": {
+        "id": "hopper",
+        "name": "Hopper Disassembler",
+        "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+      },
+      "analysis_profile": {
+        "provider": {
+          "id": "hopper",
+          "name": "Hopper Disassembler",
+          "version": "launcher-sha256:dad6f886261fad0d4cdd01aee6fcf57439c60d7b5c54e62fc97f0180116690e0"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "function_dossier_coverage": "observed-facets-and-call-relationships-v1",
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "loader": {
+            "source": "derived",
+            "arguments": [
+              "-l",
+              "WinPE",
+              "--intel-32"
+            ]
+          }
+        },
+        "digest": "1da1f2663f337d7f89d8a76608e1a499d471db799a491128b579a65e15b0d351"
+      },
+      "predicate_type": "rea.analysis",
+      "operation": "procedure_assembly",
+      "parameters": {
+        "procedure": "0x004e9130"
+      },
+      "raw_result": null,
+      "normalized_result": "0x4e9130: sub esp, 0x10\n0x4e9133: push ebx\n0x4e9134: push edi\n0x4e9135: mov edi, dword [esi+eax*4+0x100c]\n0x4e913c: lea esp, dword [esp+0x18+var_18]\n0x4e914b: movsx edx, word [edi+2]\n0x4e914f: cmp ebx, edx\n0x4e9151: jl loc_4e9158\n0x4e9153: mov edi, dword [edi+0xc]\n0x4e9156: jmp loc_4e9140\n0x4e9140: movsx ecx, word [edi]\n0x4e9143: mov ebx, dword [esp+0x18+arg_0]\n0x4e9147: cmp ecx, ebx\n0x4e9149: jg loc_4e9153\n0x4e9158: mov edx, dword [esp+0x18+arg_4]\n0x4e915c: test edx, edx\n0x4e915e: jle loc_4e93d5\n0x4e9164: push ebp\n0x4e9165: jmp loc_4e9170\n0x4e9170: mov al, byte [esi+0x200c]\n0x4e9176: cmp byte [edi+4], al\n0x4e9179: jbe loc_4e919f\n0x4e917b: jmp sub_4e9180\n0x4e919f: movsx ecx, word [edi+2]\n0x4e91a3: cmp ecx, edx\n0x4e91a5: mov ebp, edi\n0x4e91a7: mov dword [esp+0x10+ret_addr], ebp\n0x4e91ab: jge loc_4e91c4\n0x4e91ad: lea ecx, dword [ecx]\n0x4e91b5: mov ebp, dword [ebp+0xc]\n0x4e91b8: movsx ecx, word [ebp+2]\n0x4e91bc: cmp ecx, edx\n0x4e91be: mov dword [esp+0x10+ret_addr], ebp\n0x4e91c2: jl loc_4e91b0\n0x4e91b0: cmp byte [ebp+4], al\n0x4e91b3: ja loc_4e91c4\n0x4e91c4: movsx ecx, word [edi]\n0x4e91c7: cmp ecx, ebx\n0x4e91c9: jle loc_4e91cd\n0x4e91cb: mov ebx, ecx\n0x4e91d2: movsx eax, word [ebp+2]\n0x4e91d6: mov edx, dword [esp+0x10+arg_10]\n0x4e91da: cmp eax, edx\n0x4e91dc: jl loc_4e91e8\n0x4e91de: mov dword [esp+0x10+var_4], edx\n0x4e91e2: jmp loc_4e91ec\n0x4e91ec: cmp edi, ebp\n0x4e91ee: jne loc_4e931b\n0x4e91f4: mov ebp, dword [esi+0x1000]\n0x4e91fa: mov eax, ebp\n0x4e91fc: cdq\n0x4e91fd: and edx, 0x3ff\n0x4e9203: add eax, edx\n0x4e9205: sar eax, 0xa\n0x4e9208: and ebp, 0x800003ff\n0x4e920e: mov dword [esp+0x4+arg_C], eax\n0x4e9212: jns loc_4e921c\n0x4e9214: dec ebp\n0x4e9215: or ebp, 0xfffffc00\n0x4e921b: inc ebp\n0x4e9222: push 0x4000\n0x4e9227: call j_sub_52022d\n0x4e922c: mov ecx, dword [esp+0x8+arg_C]\n0x4e9230: mov dword [esi+ecx*4], eax\n0x4e9233: add esp, 0x4\n0x4e9236: mov eax, ecx\n0x4e926b: mov ecx, dword [esi+0x1000]\n0x4e9271: mov eax, ecx\n0x4e9273: cdq\n0x4e9274: and edx, 0x3ff\n0x4e927a: add edx, eax\n0x4e927c: sar edx, 0xa\n0x4e927f: and ecx, 0x800003ff\n0x4e9285: mov dword [esp+0x4+arg_C], edx\n0x4e9289: jns loc_4e9293\n0x4e928b: dec ecx\n0x4e928c: or ecx, 0xfffffc00\n0x4e9292: inc ecx\n0x4e929f: push 0x4000\n0x4e92a4: call j_sub_52022d\n0x4e92a9: mov ecx, dword [esp+0x8+arg_C]\n0x4e92ad: mov dword [esi+ecx*4], eax\n0x4e92b0: mov eax, dword [esp+0x8+arg_10]\n0x4e92b4: add esp, 0x4\n0x4e92b7: mov edx, ecx\n0x4e92d2: mov ecx, dword [esp-0x8+arg_10]\n0x4e92d6: mov word [eax+2], cx\n0x4e92da: mov word [eax], bx\n0x4e92dd: mov dl, byte [esi+0x200c]\n0x4e92e3: mov byte [eax+4], dl\n0x4e92e6: sub ebx, dword [esp-0x8+arg_24]\n0x4e92ea: mov edx, dword [esp-0x8+arg_2C]\n0x4e92ee: mov dword [eax+0xc], ebp\n0x4e92f1: lea edx, dword [edx+ebx*2]\n0x4e92f4: mov dword [eax+8], edx\n0x4e92f7: mov edx, dword [esp-0x8+arg_28]\n0x4e92fb: mov word [ebp], cx\n0x4e92ff: movsx eax, word [edi]\n0x4e9302: sub ecx, eax\n0x4e9304: mov eax, dword [ebp+8]\n0x4e9307: shl ecx, 0x1\n0x4e9309: add eax, ecx\n0x4e930b: mov dword [ebp+8], eax\n0x4e930e: mov ebp, dword [esp-0x8+arg_14]\n0x4e9312: mov eax, dword [esp-0x8+arg_10]\n0x4e9316: jmp loc_4e93ca\n0x4e93ca: cmp eax, edx\n0x4e93cc: mov edi, ebp\n0x4e93ce: jl loc_4e9167\n0x4e93d4: pop ebp\n0x4e9167: mov ebx, dword [esp-0x14+arg_30]\n0x4e916b: jmp loc_4e9170\n0x4e92b9: inc dword [esi+0x1000]\n0x4e92bf: mov ecx, dword [esi+edx*4]\n0x4e92c2: shl eax, 0x4\n0x4e92c5: add eax, ecx\n0x4e92c7: mov word [edi+2], bx\n0x4e92cb: mov dword [edi+0xc], eax\n0x4e92ce: jmp loc_4e92d2\n0x4e9293: mov eax, ecx\n0x4e9295: cmp dword [esi+edx*4], 0x0\n0x4e9299: mov dword [esp+0x4+arg_10], eax\n0x4e929d: jne loc_4e92b9\n0x4e92d0: mov eax, edi\n0x4e9238: inc dword [esi+0x1000]\n0x4e923e: mov edx, dword [esi+eax*4]\n0x4e9241: shl ebp, 0x4\n0x4e9244: add ebp, edx\n0x4e9246: mov edx, edi\n0x4e9248: mov ecx, dword [edx]\n0x4e924a: mov eax, ebp\n0x4e924c: mov dword [eax], ecx\n0x4e924e: mov ecx, dword [edx+4]\n0x4e9251: mov dword [eax+4], ecx\n0x4e9254: mov ecx, dword [edx+8]\n0x4e9257: mov dword [eax+8], ecx\n0x4e925a: mov edx, dword [edx+0xc]\n0x4e925d: mov ecx, dword [esp+0x4+arg_18]\n0x4e9261: mov dword [eax+0xc], edx\n0x4e9264: movsx eax, word [edi]\n0x4e9267: cmp eax, ecx\n0x4e9269: je loc_4e92d0\n0x4e921c: cmp dword [esi+eax*4], 0x0\n0x4e9220: jne loc_4e9238\n0x4e931b: cmp ecx, ebx\n0x4e931d: je loc_4e9388\n0x4e931f: mov ecx, dword [esi+0x1000]\n0x4e9325: mov eax, ecx\n0x4e9327: cdq\n0x4e9328: and edx, 0x3ff\n0x4e932e: add edx, eax\n0x4e9330: sar edx, 0xa\n0x4e9333: and ecx, 0x800003ff\n0x4e9339: mov dword [esp+0x4+arg_C], edx\n0x4e933d: jns loc_4e9347\n0x4e933f: dec ecx\n0x4e9340: or ecx, 0xfffffc00\n0x4e9346: inc ecx\n0x4e9353: push 0x4000\n0x4e9358: call j_sub_52022d\n0x4e935d: mov ecx, dword [esp+0x8+arg_C]\n0x4e9361: mov dword [esi+ecx*4], eax\n0x4e9364: mov eax, dword [esp+0x8+arg_10]\n0x4e9368: add esp, 0x4\n0x4e936b: mov edx, ecx\n0x4e938a: mov cx, word [esp-0x8+arg_10]\n0x4e938f: mov word [eax+2], cx\n0x4e9393: mov word [eax], bx\n0x4e9396: mov cl, byte [esi+0x200c]\n0x4e939c: mov byte [eax+4], cl\n0x4e939f: sub ebx, dword [esp-0x8+arg_24]\n0x4e93a3: mov ecx, dword [esp-0x8+arg_2C]\n0x4e93a7: lea ecx, dword [ecx+ebx*2]\n0x4e93aa: mov dword [eax+8], ecx\n0x4e93ad: mov dword [eax+0xc], ebp\n0x4e93b0: movsx ecx, word [ebp]\n0x4e93b4: mov eax, dword [esp-0x8+arg_10]\n0x4e93b8: mov edi, eax\n0x4e93ba: sub edi, ecx\n0x4e93bc: mov ecx, dword [ebp+8]\n0x4e93bf: shl edi, 0x1\n0x4e93c1: add ecx, edi\n0x4e93c3: mov dword [ebp+8], ecx\n0x4e93c6: mov word [ebp], ax\n0x4e936d: inc dword [esi+0x1000]\n0x4e9373: mov ecx, dword [esi+edx*4]\n0x4e9376: mov edx, dword [esp+0x4+arg_1C]\n0x4e937a: shl eax, 0x4\n0x4e937d: add eax, ecx\n0x4e937f: mov word [edi+2], bx\n0x4e9383: mov dword [edi+0xc], eax\n0x4e9386: jmp loc_4e938a\n0x4e9347: mov eax, ecx\n0x4e9349: cmp dword [esi+edx*4], 0x0\n0x4e934d: mov dword [esp+0x4+arg_10], eax\n0x4e9351: jne loc_4e936d\n0x4e9388: mov eax, edi\n0x4e91e8: mov dword [esp+0x10+var_4], eax\n0x4e91e4: movsx eax, word [ebp]\n0x4e91cd: cmp byte [ebp+4], al\n0x4e91d0: ja loc_4e91e4\n0x4e93d5: pop edi\n0x4e93d6: pop ebx\n0x4e93d7: add esp, 0x10\n0x4e93da: ret 0xc",
+      "confidence": "observed",
+      "authority": "shipped-artifact",
+      "environment": null,
+      "limitations": [
+        "Results depend on Hopper's completed static analysis."
+      ],
+      "relationship_coverage": null,
+      "locations": [],
+      "evidence_links": []
+    }
+  ]
+}

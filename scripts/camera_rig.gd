@@ -1,7 +1,8 @@
 extends RefCounted
 ## Follows the active mobile, the shell, then the impact. The scene owns panning.
 
-const VIEW_SIZE := Vector2(1280, 664)
+const Layout = preload("res://scripts/battle_hud_layout.gd")
+const VIEW_SIZE := Layout.WORLD.size
 const DAMPENING := 25.0
 
 var position := Vector2.ZERO

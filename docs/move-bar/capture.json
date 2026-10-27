@@ -1,0 +1,38 @@
+{
+	"cases": [
+		{
+			"direction": -1,
+			"entry_stage": 0,
+			"frames": 120,
+			"next_stage": 1,
+			"pause_rgba_sha256": "ba01411db3dcb40753df45738b9aed16b56cf3ec509a05429ef1097df0bac09e",
+			"paused_identical": 30,
+			"released_hidden": true,
+			"resumed": true
+		},
+		{
+			"direction": 1,
+			"entry_stage": 0,
+			"frames": 120,
+			"next_stage": 1,
+			"pause_rgba_sha256": "606130aeb802053e838e41817a2db03be04302ffa4447b202a6c6d426d03f940",
+			"paused_identical": 30,
+			"released_hidden": true,
+			"resumed": true
+		}
+	],
+	"clock_hz": 60,
+	"fallback_matches_compact": true,
+	"fallback_rgba_sha256": "91bbc9ca99b04f13a73b8db30e6c8359d1d4ab37facac9db301de49c19523353",
+	"fill_samples": [
+		0,
+		50,
+		100
+	],
+	"frames": 240,
+	"size": [
+		1920,
+		1080
+	],
+	"sound": "muted"
+}

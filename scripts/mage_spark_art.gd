@@ -3,7 +3,7 @@ extends RefCounted
 ## Caller warms ClassicBallistics on the main thread and owns the 20Hz clock.
 ## angle is the current angle, already advanced by Animate (+1/+6); no IO here.
 const Physics = preload("res://scripts/classic_ballistics.gd")
-const TEXTURE := "res://assets/openbound/mage/original/CrashTexture.png"
+const TEXTURE := "res://assets/xfs/weather/CrashTexture.png"
 
 static func quad(effect: Dictionary) -> Dictionary:
 	var kind := str(effect.get("kind",""))

@@ -332,18 +332,19 @@ func start_match() -> void:
 	update_hud()
 
 func build_hud() -> void:
-	# OpenBound action bar (HUD.cs): sprite buttons sit on the bar drawn in _draw.
+	# Native two-band interface: visual and input rectangles share Layout.
 	hud.reset(model)
 	screen_hud = Node2D.new()
 	screen_hud.name = "ScreenHud"
 	screen_hud.z_index = -1
 	screen_hud.draw.connect(_draw_screen_hud)
 	root.add_child(screen_hud)
-	var blocker := Control.new()
-	blocker.position = Vector2(0, VIEW_SIZE.y)
-	blocker.size = Vector2(1280, 800 - VIEW_SIZE.y)
-	blocker.mouse_filter = Control.MOUSE_FILTER_STOP
-	root.add_child(blocker)
+	for box in [HudArt.Layout.HEADER,HudArt.Layout.FOOTER]:
+		var blocker := Control.new()
+		blocker.position = box.position
+		blocker.size = box.size
+		blocker.mouse_filter = Control.MOUSE_FILTER_STOP
+		root.add_child(blocker)
 	# Shot strength selector: a draggable reference marker (does not set the power).
 	var selector := Control.new()
 	var area: Rect2 = hud.strength_rect().grow_individual(0, 8, 0, 8)
@@ -368,7 +369,7 @@ func build_hud() -> void:
 	pass_button.tooltip_text = "Passar o turno (F8)"
 	pass_button.pressed.connect(pass_turn)
 	# Discreet extras for mouse/touch play; the original only has the keyboard.
-	var extras := Vector2(1062, VIEW_SIZE.y - 40)
+	var extras := Vector2(1062, HudArt.Layout.FOOTER.position.y - 40)
 	move_left = ui.button(root, "←", extras, Vector2(40, 32), func(): pass)
 	move_right = ui.button(root, "→", extras + Vector2(44, 0), Vector2(40, 32), func(): pass)
 	flip_button = ui.button(root, "F", extras + Vector2(88, 0), Vector2(36, 32), flip)
@@ -469,6 +470,7 @@ func _process(delta: float) -> void:
 			model.move_actor(direction, frame_delta)
 		update_aim_keys(frame_delta)
 		aim.tick(self, frame_delta)
+	hud.update_movement(bool(hud_state().moving))
 	hud.tick(frame_delta, model, sound)
 	item_art.tick(frame_delta)
 	var shells_before: Array = model.projectiles.duplicate()
@@ -561,7 +563,7 @@ func consume_events() -> void:
 				if event.actor == Match.PLAYER:
 					# HUD.GrantTurn resets the strength bar; the marker keeps the last shot.
 					aim.power = 0.0
-				sound.play("turn")
+				sound.play_turn(event.actor == Match.PLAYER)
 				if aim.weapon == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER):
 					aim.weapon = 0
 			"fire":
@@ -629,6 +631,7 @@ func current_order() -> Array:
 func hud_state() -> Dictionary:
 	return {"power": aim.power, "angle": hud.hud_angle(model, aim.angle, aim.weapon),
 		"movement": model.movement_left / maxf(1.0, model.movement_budget()), "gold": maxi(0,int(model.actors[Match.PLAYER].gold_state.gold)), "queue": queue_entries,
+		"drag": options.drag_aiming(), "moving": model.phase==Match.PHASE_AIM and model.active==Match.PLAYER and (move_left.is_pressed() or move_right.is_pressed() or Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_LEFT) or Input.is_physical_key_pressed(KEY_RIGHT)),
 		"player_name": profile.nickname, "weapon": aim.weapon, "aim": aim.angle, "paused_cpu": false}
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -761,10 +764,10 @@ func _draw() -> void:
 		draw_texture_rect_region(backdrop.texture, Rect2(0, 0, 1280, 800), background_region(backdrop))
 	if model.terrain == null:
 		return
-	var offset := (Vector2(sin(elapsed * 81.0), cos(elapsed * 74.0)) * shake - rig.position).round()
+	var offset := (HudArt.Layout.WORLD.position + Vector2(sin(elapsed * 81.0), cos(elapsed * 74.0)) * shake - rig.position).round()
 	draw_set_transform(offset)
 	if not model.terrain.map_id.is_empty():
-		# Original map: HD foreground carries its own crater and blackmask pixels.
+		# Original map: client foreground carries its own crater and blackmask pixels.
 		if model.terrain.visual_texture != null:
 			draw_texture_rect(model.terrain.visual_texture, model.terrain.visual_rect, false)
 	else:
@@ -879,13 +882,13 @@ func draw_procedural_terrain() -> void:
 
 func draw_offscreen_markers() -> void:
 	# Edge arrows for actors the camera does not show, so the target is never lost.
-	var view := Rect2(Vector2.ZERO, VIEW_SIZE)
+	var view := HudArt.Layout.WORLD
 	for index in range(model.actors.size()):
 		var actor: Dictionary = model.actors[index]
-		var screen_pos: Vector2 = Vector2(actor.pos) - rig.position
+		var screen_pos: Vector2 = Vector2(actor.pos) - rig.position + view.position
 		if int(actor.hp) <= 0 or view.grow(-10).has_point(screen_pos):
 			continue
-		var edge := Vector2(clampf(screen_pos.x, 34.0, VIEW_SIZE.x - 34.0), clampf(screen_pos.y, 74.0, VIEW_SIZE.y - 30.0))
+		var edge := Vector2(clampf(screen_pos.x, 34.0, VIEW_SIZE.x - 34.0), clampf(screen_pos.y, view.position.y + 34.0, view.end.y - 30.0))
 		var direction := (screen_pos - edge).normalized()
 		if direction == Vector2.ZERO:
 			continue
@@ -902,18 +905,14 @@ func draw_offscreen_markers() -> void:
 		draw_string(ui.bold, text_pos, label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, tint.lightened(0.25))
 
 func map_background(id: String) -> Dictionary:
-	# HD stitched file first, original Background.png otherwise; source = covered original pixels.
+	# Client background (mos.img frame 1); source = the whole original raster.
 	if id.is_empty():
 		return {}
 	if not map_backgrounds.has(id):
-		var map: Dictionary = Maps.get_map(id)
+		var path := Maps.path(Maps.get_map(id), "background")
 		var entry := {}
-		if ResourceLoader.exists(map.background_hd):
-			var hd: Texture2D = load(map.background_hd)
-			var source: Rect2 = map.background_hd_source
-			entry = {"texture": hd, "source": source, "density": float(hd.get_width()) / source.size.x}
-		elif ResourceLoader.exists(map.background):
-			var original: Texture2D = load(map.background)
+		if ResourceLoader.exists(path):
+			var original: Texture2D = load(path)
 			entry = {"texture": original, "source": Rect2(Vector2.ZERO, original.get_size()), "density": 1.0}
 		map_backgrounds[id] = entry
 	return map_backgrounds[id]
@@ -963,7 +962,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if screen != "match" or overlays.is_open():
 		return
 	# Drag mode: a left press in the world during the player's aim starts the shot.
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and options.drag_aiming() and player_can_act() and event.position.y < VIEW_SIZE.y:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and options.drag_aiming() and player_can_act() and HudArt.Layout.in_world(event.position):
 		begin_drag(event.position.x)
 		dragging = false
 		return
@@ -974,10 +973,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	var touch_as_mouse: bool = ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch", true)
 	if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]:
 		# The right (or middle) button always looks around; Drag mode needs it.
-		dragging = event.pressed and event.position.y < VIEW_SIZE.y
+		dragging = event.pressed and HudArt.Layout.in_world(event.position)
 		pan_mask = {MOUSE_BUTTON_LEFT: MOUSE_BUTTON_MASK_LEFT, MOUSE_BUTTON_RIGHT: MOUSE_BUTTON_MASK_RIGHT, MOUSE_BUTTON_MIDDLE: MOUSE_BUTTON_MASK_MIDDLE}[event.button_index]
 	elif event is InputEventScreenTouch and not touch_as_mouse:
-		dragging = event.pressed and event.position.y < VIEW_SIZE.y
+		dragging = event.pressed and HudArt.Layout.in_world(event.position)
 	elif event is InputEventMouseMotion and dragging:
 		# A release consumed by the HUD must not leave the drag stuck on.
 		if not (event.button_mask & pan_mask):

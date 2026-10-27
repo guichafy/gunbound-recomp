@@ -2,12 +2,13 @@ extends RefCounted
 ## Private additive CanvasItem: never changes the game view's material.
 ## Native beam geometry/alpha/LUT/UV are isolated from collision and clocks.
 const Aduka = preload("res://scripts/aduka_effect.gd")
+const Assets = preload("res://scripts/client_weather_assets.gd")
 var texture: Texture2D
 var material := CanvasItemMaterial.new()
 var canvases := {}
 
 func _init() -> void:
-	texture = load("res://assets/openbound/aduka/ThorEffect.png")
+	texture = Assets.texture("LaserEffect")
 	material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
 	material.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
 

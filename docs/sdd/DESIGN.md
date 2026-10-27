@@ -1,5 +1,50 @@
 # Design implementado
 
+## Fundo do footer — ADR-136
+
+A importação de `play_back.img` restaura alpha255 nos quadros RGB565 tipo0,
+porque o cliente envia scanlines retangulares e copia seus spans completos,
+inclusive pixels pretos. O renderer continua usando os mesmos componentes e
+coordenadas. O decoder compartilhado, outras fontes IMG e alpha RLE/XTF ficam
+preservados. Oráculo bruto e probe GPU impedem regressão por color key.
+Detalhes em `FOOTER_BACKGROUND_NATIVE.md`.
+
+## Barra MOVE no footer — ADR-135
+
+`HudArt.update_movement` mantém somente flag/etapa visual: compacto na
+entrada, expandido na atualização seguinte e oculto ao soltar. Game envia o
+estado de movimento antes do tick do HUD; o retorno da pausa congela etapa.
+`move_bar_sample` aplica os pivôs5/6 em169,474 e fill8 em244,483, com corte
+inclusivo. O overlay fica dentro do footer, sobre a região de carga. Não
+altera Match/Actor/CPU. Quadro expandido inválido usa o compacto nativo.
+O scheduler de atualização continua o do porte; veja MOVE_BAR_NATIVE.md.
+
+## Header/footer do cliente — ADR-134
+
+`BattleHudLayout` centraliza regiões no canvas1280×800: header0..64,
+footer729,6..800, mundo64..729,6. `HudArt` desenha faixas/peças nativas
+inteiras e faz fallback por textura. `Game` cria blockers e botões a partir
+da mesma geometria, soma64px apenas ao draw do mundo e usa o retângulo
+aberto ao iniciar Drag/pan. `CameraRig.VIEW_SIZE` deriva do mesmo contrato.
+`ItemBar` usa a bandeja superior; `ItemArt.battle_frame` remove somente a
+margem transparente do atlas compatível, sem afetar seus outros consumidores.
+Gold/ângulo usam numfont/pivôs nativos. Cronômetro usa segundos/décimos
+com glyphs distintos; vento desenha o recorte de moon.xtf com rotação do
+vetor físico e numfont imóvel. Falha de um componente troca o grupo inteiro. ModoSolo escolhe Gold; modelos de
+vidas/pontos não existem neste corte. Detalhe em `HUD_CLIENT_LAYOUT.md`.
+
+## Assets de batalha — ADR-133
+
+Mapas priorizam `assets/xfs/maps` com fallback de pixels originais; o visual
+do terreno é cópia recortada da fonte da máscara, densidade1. Importadores
+`import_xfs_{map,hud,weather,items,audio}.py` mantêm manifestos/hash/proveniência.
+`ClientHudAssets`, `ClientWeatherAssets` e `ClientAudio` selecionam recursos
+com validação e fallback; ItemArt conserva suas janelas com margens transparentes.
+Nenhum desses apresentadores decide colisão/dano. Climas nativos anteriormente
+extraídos sob nomes históricos passam a caminhos xfs sem mudar UV/tick/regras.
+Som de turno recebe o papel do ator. Música permanece aleatória entre temas
+nativos. Lacunas ficam declaradas nos relatórios CLIENT_ASSETS_*.md.
+
 ## Fontes — ADR-132
 
 Comportamento novo vem do cliente Thor's Hammer comprovado. Menções a OpenBound/C#

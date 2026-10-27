@@ -1,0 +1,55 @@
+{
+	"cases": [
+		{
+			"angle": 0,
+			"case": "right",
+			"force": 26,
+			"frames": 120,
+			"pause_frames": 30,
+			"resumed": true,
+			"rgba_sha256": "f7ac891ac571d5b2404b913e9415defae428e8e2ff05135fa7820e4bb1f8bd8a"
+		},
+		{
+			"angle": 90,
+			"case": "up",
+			"force": 26,
+			"frames": 120,
+			"pause_frames": 30,
+			"resumed": true,
+			"rgba_sha256": "e3f43f3599ab857e3b1677f4a035a24d2c8e45cb617a405d7942c0153865a53b"
+		},
+		{
+			"angle": 180,
+			"case": "left",
+			"force": 26,
+			"frames": 120,
+			"pause_frames": 30,
+			"resumed": true,
+			"rgba_sha256": "4e89511e0291668d734d54b1b158a51920d7fff0633568e69340815631be5cb1"
+		},
+		{
+			"angle": 270,
+			"case": "down",
+			"force": 26,
+			"frames": 120,
+			"pause_frames": 30,
+			"resumed": true,
+			"rgba_sha256": "1488dee8173e828b08398de366b6fe357c6661d413a9ecd6db64c73afc64b7ec"
+		},
+		{
+			"angle": 0,
+			"case": "calm",
+			"force": 0,
+			"frames": 120,
+			"pause_frames": 30,
+			"resumed": true,
+			"rgba_sha256": "4ad1da3a9135d4cfd9ebfef0b88c91afd3c6ab0efaf0b363b4c95f980d5084ae"
+		}
+	],
+	"clock_hz": 60,
+	"frames": 600,
+	"size": [
+		1920,
+		1080
+	]
+}

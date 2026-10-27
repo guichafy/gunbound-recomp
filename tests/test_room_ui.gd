@@ -79,7 +79,7 @@ func run() -> void:
 	check(scene.vehicle == 1 and panel.portrait.texture.region.position.x == 904,"Actual grid click selects Mage and updates native portrait")
 	check(panel.grid_buttons.size()==15 and button.size==Vector2(63,44) and button.position==Vector2(99,396),"Requested5x3 grid uses correctly aligned hitboxes")
 	check(panel.icons_inside_slots() and panel.catalog_inside_panel(),"Item geometry stays in six slots and catalog")
-	check(scene.item_art.textures["ItemDual.png"].resource_path == "res://assets/hd/items/ItemDual.png","Battle item artwork is preserved")
+	check(scene.item_art.textures["ItemDual.png"].resource_path == "res://assets/xfs/items/ItemDual.png","Battle item artwork uses the original client extraction (REQ-48)")
 	test_resources(panel.room_art)
 	scene.free()
 	for path in [PATH,PATH.get_basename()+"-options.json"]:

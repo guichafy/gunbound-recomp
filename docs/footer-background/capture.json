@@ -1,0 +1,45 @@
+{
+	"cases": [
+		{
+			"frames": 120,
+			"mode": "slice",
+			"pause_sha256": "8d4551d005bfdb162a22b9c5af5f9773650845b9e75c09ce2bbcb91164ac29aa",
+			"paused_identical": 30,
+			"resumed": true
+		},
+		{
+			"frames": 120,
+			"mode": "drag",
+			"pause_sha256": "448df3615c2131f5f080a9de417eae700c596bd33f6a143368137d452efc6951",
+			"paused_identical": 30,
+			"resumed": true
+		},
+		{
+			"frames": 120,
+			"mode": "left",
+			"pause_sha256": "f94830cbb25c08e0cb074492f0b9daef86ac6ffff702ea91e11b0398db7a839b",
+			"paused_identical": 30,
+			"resumed": true
+		},
+		{
+			"frames": 120,
+			"mode": "right",
+			"pause_sha256": "126eb6532704aa865b928e7ff9a93a5f682c271da0b2fec7664d0e35138900cf",
+			"paused_identical": 30,
+			"resumed": true
+		}
+	],
+	"clock_hz": 60,
+	"frames": 480,
+	"probe_background_independent": true,
+	"probe_rgba_sha256": "e6ba6e4b6ed80ac13e6805603f94ff0b62915b0632ee4fcdb4848421908b357d",
+	"probe_size": [
+		800,
+		44
+	],
+	"size": [
+		1920,
+		1080
+	],
+	"sound": "muted"
+}

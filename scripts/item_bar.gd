@@ -6,12 +6,9 @@ const Match = preload("res://scripts/match.gd")
 const Items = preload("res://scripts/items.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
 
-# HUD.cs: EquippedButtonBar at (−116, −37) from the bar origin, buttons with
-# pivot zero placed side by side (previous width − 1). MatchStatusClosed sits at
-# (318, −20) with the full 868×35 sheet as pivot, i.e. over the same panel.
-const BAR_OFFSET := Vector2(-116, -37)
-const STATUS_TOP_LEFT := Vector2(318 - 434, -20 - 17.5)
-const STATUS_SIZE := Vector2(217, 35)
+# Native header tray:501,2, six36px slots. Used buttons compact immediately.
+const BAR_OFFSET := Vector2(501,2)
+const STATUS_SIZE := Vector2(217,38)
 
 var art
 var buttons: Array = []
@@ -39,10 +36,10 @@ func build(host, parent: Control) -> void:
 		button.ignore_texture_size = true
 		button.stretch_mode = TextureButton.STRETCH_SCALE
 		button.focus_mode = Control.FOCUS_NONE
-		button.size = Vector2(art.button_width(id), art.BUTTON_HEIGHT) * HudArt.K
+		button.size = Vector2(71 if Items.slots(id)==2 else 35,31) * HudArt.K
 		button.tooltip_text = "%s · atraso %d (F%d)" % [Items.definition(id).name, roundi(Items.delay(id)), slot + 1]
 		button.set_meta("slot", slot)
-		art.style_button(button, id, false)
+		art.style_button(button, id, false,true)
 		button.pressed.connect(func(): press(host, slot))
 		parent.add_child(button)
 		buttons.append(button)
@@ -50,8 +47,8 @@ func build(host, parent: Control) -> void:
 	lock_rect.texture = art.region("MatchStatus.png", Rect2(Vector2.ZERO, STATUS_SIZE))
 	lock_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	lock_rect.stretch_mode = TextureRect.STRETCH_SCALE
-	lock_rect.position = HudArt.bar_point(STATUS_TOP_LEFT)
-	lock_rect.size = STATUS_SIZE * HudArt.K
+	lock_rect.position = Vector2(500,1)*HudArt.K
+	lock_rect.size = Vector2(217,38)*HudArt.K
 	lock_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	lock_rect.tooltip_text = "Ignorância: itens travados"
 	lock_rect.visible = false
@@ -75,8 +72,8 @@ func layout(host) -> void:
 		var button: TextureButton = buttons[slot]
 		button.visible = slot in shown
 		if button.visible:
-			button.position = HudArt.bar_point(Vector2(x, BAR_OFFSET.y)).round()
-			x += art.button_width(host.model.actors[Match.PLAYER].items[slot].id) - 1.0
+			button.position = Vector2(x, BAR_OFFSET.y)*HudArt.K
+			x += 36.0*Items.slots(host.model.actors[Match.PLAYER].items[slot].id)
 
 ## HUD.UseItemAction.
 func press(host, slot: int) -> void:
@@ -140,6 +137,6 @@ func sync(host) -> void:
 		var button: TextureButton = buttons[slot]
 		var activated := slot == queued or slot == removal
 		if bool(button.get_meta("activated")) != activated:
-			art.style_button(button, items[slot].id, activated)
+			art.style_button(button, items[slot].id, activated,true)
 		button.disabled = finished or (locked and not activated) or bool(items[slot].used)
 	lock_rect.visible = host.model.items_locked()

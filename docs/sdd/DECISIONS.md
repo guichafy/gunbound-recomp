@@ -1600,3 +1600,101 @@ até serem substituídos; `assets/openbound/` mantém nome, atribuição e licen
 AGENTS, README e documentos de entrada foram limpos; registros e ADRs antigos
 ficam como histórico. Substitui a regra "senão vale o C#" da ADR-076 e o papel
 de fallback C# nas ADRs anteriores. Rede e servidor continuam no roadmap.
+
+
+## ADR-133 — Assets de batalha extraídos do cliente (27/10/2026)
+
+Pedido posterior manda substituir os recursos ativos de Miramo Town A, HUD,
+clima/Thor, itens e música/áudio por arquivos do Thor's Hammer. Supera o uso
+ativo de GPT nesses grupos das ADR-039/044/050/053/058 e demais decisões de
+arte dessa fase, preservando todos os derivados no disco e o histórico.
+Não altera o visual aprovado dos16mobiles/avatares nem regras de combate.
+
+Recursos novos em assets/xfs/{maps,hud,weather,thor,items,audio}, extraídos de
+graphics.xfs/sound.xfs e catalogados por hash. Miramo usa o próprio alpha de
+mos.img, comprovado contra mos.lnd em3.240.000pixels, idêntico à máscara
+anterior. HUD e itens usam composições explícitas dos recortes nativos nas
+caixas/hitboxes anteriores; isso não anuncia paridade de layout/animação com
+o cliente Windows. Hover/clique de itens repetem os dois estados existentes.
+Climas conservam os adaptadores de regra/calendário fora do porte Mage já
+aprovado; usar textura original não torna a simulação nativa.
+
+Lacunas ficam na arte herdada1×, sem GPT ativo ou recurso inventado: categorias
+Weakness/Mirror/Random, componentes de HUD sem equivalente, aura UsingItem,
+fundo/abas do antigo Select Item e sons cujo evento/arquivo não foi comprovado.
+PE pede itemblast.xes ausente e lightningblast.xes divergente do nome
+lightingblast.xes disponível. Não se estabelece equivalência por semelhança.
+A música usa stage1..6 e mantém agenda aleatória declarada; turn2/turn do
+cliente distinguem ator local/adversário. Fallback por grupo é testado.
+
+Inventário, fontes e limites em CLIENT_ASSETS_PORT.md e nos três relatórios
+de HUD/clima/áudio, mais CLIENT_ASSETS_ITEMS.md. Escuta, execução do cliente
+Windows e aceite humano continuam separados da validação automatizada.
+A solicitação não autoriza commit/push nem entrega de pacote exportado.
+
+## ADR-134 — Header e footer nativos separados (27/10/2026)
+
+Validação visual do usuário substitui a preservação das caixas antigas da
+ADR-133 para o HUD. Usar as faixas azuis de play_back.img: header com Options,
+clima, Gold, itens e Skip; footer com tiros, ângulo, modo de mira e carga.
+Peças/pivôs/fontes específicos vêm do cliente, inclusive numfont e os botões
+40×30/35×34. Botões/áreas de input acompanham as novas posições.
+
+`battle_hud_layout.gd` é o contrato compartilhado de geometria. Header64px,
+footer70,4px e mundo1280×665,6 desdey64 no canvas1280×800; escala uniforme1,6.
+Isso preserva o aspecto das peças, mantendo declarada a adaptação do miolo
+800×600→800×500. Câmera/draw/input recebem o recorte; modelo e colisão ficam
+em coordenadas do mundo. MOVE aparece durante input de movimento no turno
+próprio (visibilidade ainda adaptada). Fallback preserva caixas novas.
+
+A referência Jewel esclarece variantes, sem autorizar outro modo. TreinoSolo
+mostra Gold no painel roxo178; Life172/173 e Jewel179/180 são identificados
+separadamente e permanecem inativos, sem placares fictícios. F4/reserva amarela
+já pintados no fundo nativo ficam inativos. Não implementar Tag/Jewel/Score.
+
+Plano/fontes/evidência/QA em HUD_CLIENT_LAYOUT.md. Originais, HD anteriores,
+perfil, avatares, mobiles, regras e arquivos Git preexistentes preservados.
+Sem commit/push nem pacote exportado nesta correção.
+
+Extensão do mesmo pedido: cronômetro e vento também migram para os recursos
+comprovados. Clock usa numfont146..166 e ponto156 (segundos+décimos); vento
+usa moon.xtf e numfont167..177. Não altera o prazo30s nem vento físico.
+Orientação do anel segue o vetor real; texto imóvel. Ausência de qualquer
+parte nativa ativa o fallback integral do grupo. Detalhes/ASM/oráculos no
+mesmo registroHUD_CLIENT_LAYOUT.
+
+## ADR-135 — Posição e etapas da barra MOVE (27/10/2026)
+
+A validação do usuário corrige a suposição da ADR-134 de colocar MOVE acima
+do footer. O consumidor406990 desenha a moldura play_back[5+estágio] em169,574
+(flag1) e o preenchimento8 em244,583, com clip inclusivo. O quadro5 tem pivô
+(0,+10), o6 pivô(0,0); ambos terminam emy600 no cliente. No canvas curto,
+y484/474 da moldura e483 do fill, terminando no rodapé y500.
+
+Movimento próprio escreve flag1/delta+1/estágio0; atualização limita etapa a1;
+soltar escreve flag0/delta−1/estágio1. O porte replica essa progressão privada
+na apresentação; pausa não avança e nenhuma regra física/orçamento muda.
+Ritmo das atualizações segue o Godot, explicitamente sem afirmar scheduler
+nativo. Flag2 tem outro caminho, fora deste recorte de movimento próprio.
+
+Novo NativeMoveExpanded é quadro6 sem fit/recorte. Falha de origem/hash usa
+quadro5 compacto; GPU compara o resultado com uma referência compacta.
+Detalhes/ASM/fontes em MOVE_BAR_NATIVE.md. Header, Gold, itens, cronômetro,
+vento, mobiles, avatares e perfil preservados. Sem commit/push/exportação.
+
+## ADR-136 — Fundo opaco dos quadros do footer (27/10/2026)
+
+O usuário apontou background ausente após a correção de posição MOVE. O
+importador estava herdando uma chave de cor preta do decoder de sprites.
+REA/Hopper no PE fixado confirmou play_back[1] e overlays retangulares, o
+caminho RGB5654ebaf0/4eba80, os spans4e9130 e o flush4e93e0 por REP MOVSD/MOVSB.
+Preto0x0000 é copiado, sem transparência, nesse caminho. A importação local
+restaura alpha255 somente para tipo0 de play_back.img, sem alterar decoder
+global ou fontes/avatares/mobiles. RLE e XTF mantêm suas regras anteriores.
+
+Teste esperado por palavras brutas substitui a circularidade de comparar com
+o mesmo decoder. Probe GPU800×44 tem os35.200 pixels iguais ao raster bruto,
+independente do fundo magenta/verde. Mantêm-se layout e etapas daADR-135;
+a alegação anterior de fidelidade do raster do fundo fica substituída por este
+contrato. Não implica cliente Windows executado ou paridade integral do jogo.
+Registro emFOOTER_BACKGROUND_NATIVE.md; sem versão/export/commit/push.

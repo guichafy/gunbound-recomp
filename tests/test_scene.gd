@@ -72,7 +72,7 @@ func run() -> void:
 	scene.start_match()
 	check(scene.model.phase == "aim" and scene.fire_button != null, "Starting opens combat HUD")
 	check(scene.weapon_buttons.size() == 3 and scene.pass_button is TextureButton and scene.options_button is TextureButton, "Original S1/S2/SS, Options and SkipTurn sprite buttons")
-	check(scene.hud.textures["ActionBar.png"].get_width() == 2400 and scene.hud.originals["ActionBar.png"].get_width() == 800, "Action bar uses the 3× HD remaster of the original 800 px bar")
+	check(scene.hud.textures["ActionBar.png"].resource_path == "res://assets/xfs/hud/ActionBar.png" and scene.hud.textures["ActionBar.png"].get_width() == 800, "Action bar uses client pixels in the preserved 800 px layout")
 	scene.show_pause()
 	var before: float = scene.model.turn_time
 	scene._process(1.0)

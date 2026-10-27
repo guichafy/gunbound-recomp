@@ -1,10 +1,10 @@
 extends Node
-## Small pooled audio player; originals for Mage, synthesized fallback for others.
-## Also plays the original battle music (AudioHandler.ChangeSong/PlayRandomSong).
-
-# SongParameter.LevelScene: a random theme, then another random one when it ends.
-const BATTLE_MUSIC := ["ThemeBeta-1", "ThemeBeta-2", "ThemeS1-1", "ThemeS1-2", "ThemeS1-3", "ThemeS1-4",
-	"ThemeS1-5", "ThemeS1-6", "ThemeS2-1", "ThemeS2-2", "ThemeS2-3", "ThemeS2-4"]
+## Pooled audio. Original client music and proven turn sounds, with validated fallback.
+const ClientAudio = preload("res://scripts/client_audio.gd")
+# Random scheduling is a declared offline adaptation; resources are native.
+# sudden.mp3 is preserved, but there is no sudden-death rule in this training.
+const BATTLE_MUSIC := ["stage1", "stage2", "stage3", "stage4", "stage5", "stage6"]
+const LEGACY_MUSIC := ["ThemeBeta-1", "ThemeBeta-2", "ThemeS1-1", "ThemeS1-2", "ThemeS1-3", "ThemeS1-4"]
 var streams: Dictionary = {}
 var players: Array[AudioStreamPlayer] = []
 # "Som" in the pause silences effects and music.
@@ -80,8 +80,22 @@ func next_song() -> void:
 	if not music_wanted or muted or music_volume <= 0.0:
 		return
 	music_track = BATTLE_MUSIC[music_rng.randi_range(0, BATTLE_MUSIC.size() - 1)]
-	music.stream = load("res://assets/openbound/music/%s.mp3" % music_track)
+	music.stream = music_stream(music_track)
+	if music.stream == null:
+		return
 	music.play()
+
+func music_stream(track: String) -> AudioStream:
+	var index := BATTLE_MUSIC.find(track)
+	if index < 0:
+		return null
+	return ClientAudio.preferred(track + ".mp3", "res://assets/openbound/music/%s.mp3" % LEGACY_MUSIC[index])
+
+## Native 0x4ce1da compares the new actor with the local player before playback:
+## turn2.xes for local; turn.xes for the other actor. No pitch transposition.
+func play_turn(local_player: bool) -> void:
+	var original := ClientAudio.native_stream("turn2.xes" if local_player else "turn.xes")
+	play("turn", original)
 
 func play(kind: String, original: AudioStream = null, pitch: float = 1.0) -> void:
 	if muted or volume <= 0.0 or (original == null and not streams.has(kind)):

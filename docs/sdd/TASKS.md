@@ -1,5 +1,69 @@
 # Entregas e próximos trabalhos
 
+## Fundo opaco do footer — ADR-136
+
+- [x] Confirmar RGB565 retangular, spans e flush da camada3 via REA/ASM.
+- [x] Reproduzir preto transparente com oráculo independente de palavras brutas.
+- [x] Corrigir somente importação play_back, preservar decoder global e regras.
+- [x] Regerar atlas/catálogo/imports;11 Python +1.195 checks dirigidos aprovados.
+- [x] GPU480 quadrosFullHD,4 pausas/retomadas, fallback e probe35.200pixels.
+- [x] Regenerar README4telas/86quadrosT1/GIF/MP4 com fundo corrigido.
+- [x] Harness completo:109 suítes/28.157 checks Godot/86 Python/29 partidas, exit0; manifesto.
+- [ ] Aceite visual do usuário.
+
+Contrato em `FOOTER_BACKGROUND_NATIVE.md`. Sem versão/app/commit/push.
+
+## MOVE no footer — ADR-135
+
+- [x] Confirmar produtor/consumidor/estágios/pivôs/clip por Ghidra+ASM.
+- [x] Extrair play_back[6] nativo; preservar compact5/fill8 e fallbacks.
+- [x] Sobrepor MOVE à parte inferior da carga, dentro do footer.
+- [x] Oráculos de geometria0/50/100 e transições; cenas e107suítes quick verdes.
+- [x] GPU240quadrosFullHD, dois sentidos, pausa/retomada/soltura e fallbacks.
+- [x] Prova independente do preenchimento na pausa e retomada;22PNGs.
+- [x] Registrar contrato/manifesto e preservar evidências anteriores como histórico.
+- [ ] Aceite visual do usuário nesta correção.
+
+Cobertura combinada: 109 suítes/28.157 checks Godot/85 testes Python/29 partidas, zero falhas,
+exit0 (`--quick` + duas suítes de partidas; manifesto). Sem regra/app/versão/commit/push novos. Registro
+`MOVE_BAR_NATIVE.md`; evidência `docs/move-bar/verified-source.json`.
+
+## Header/footer, cronômetro e vento — ADR-134
+
+- [x] Substituir composição antiga por faixas nativas; fonte/pivô sem fit por peça.
+- [x] Header Options/clima/Gold/itens/Skip; footer tiros/ângulo/modo/carga/MOVE.
+- [x] Retângulos de input e câmera compartilham geometria; regras preservadas.
+- [x] Cronômetro numfont original, segundos/décimos e limites30.0..0.0.
+- [x] Vento moon.xtf+numfont, anel girado e WIND imóvel; força/direção físicas.
+- [x] Fallback por grupo, bytesRGBA e pivôs originais; cliques reais pelo viewport.
+- [x] GPU960quadros1920×1080,8pausas30idênticos/retomada e prova de direção.
+- [x] README4telas+86quadrosT1/GIF/MP4 regenerados depois de cronômetro/vento.
+- [x] Consolidar harness completo final29partidas e manifesto desta correção.
+- [ ] Aceite visual do usuário sobre estas capturas; escuta não realizada.
+
+Final: **109 suítes, 28.131 checks Godot, 85 testes Python e 29 partidas, zero falhas**; parse aprovado, exit0.
+Manifesto `docs/battle-hud-layout/verified-source.json`.
+
+Registro `HUD_CLIENT_LAYOUT.md`. ClienteWindows não executado. Sem versão,
+exportação/app/ZIP, commit ou push. Alterações anteriores do Git preservadas.
+
+## Assets de batalha do cliente — REQ-48 / ADR-133
+
+- [x] Retomar/preservar o delta existente e inventariar consumidor/origem/equivalente.
+- [x] Miramo mos.img/mos.lnd/pmos com alpha original e fallback de pixels idênticos.
+- [x] HUD do cliente em composição adaptada, sem GPT; lacunas1× identificadas.
+- [x] Clima/Thor/XTF/EPA nativos, preservando regras e adaptadores existentes.
+- [x] Itens/beacon/chamas/ITEM LOCKED nativos; lacunas declaradas.
+- [x] Música stage1..6 e turno local/adversário; áudio validado por payload.
+- [x] Revisão independente: P2 de dígitos da fila corrigido e coberto por oráculo.
+- [x] Consolidar harness completo29partidas, GPU final/pausa e capturas README.
+
+Resultado final: 107 suítes, 27.945 checks Godot, 82 testes Python e 29 partidas, zero falhas. GPU720quadros/7casos/pausa30; README86quadros e4telasFullHD.
+Evidência: `docs/client-assets/verified-source.json`.
+
+Registro: `CLIENT_ASSETS_PORT.md` e relatórios por grupo. Sem versão/app,
+commit/push. Escuta, cliente Windows executado e aceite humano são limites.
+
 ## Objetivo jglim e OpenBound fora do escopo — ADR-132
 
 - [x] Objetivo jglim/multiplataforma/extensões em README, AGENTS, PORTE e skill.

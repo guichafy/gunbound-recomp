@@ -41,24 +41,24 @@ func run() -> void:
 	var HudArt = load("res://scripts/hud_art.gd")
 
 	# REQ-27 layout: HUD.cs offsets on the 800×500 virtual screen, factor 1.6.
-	check(HudArt.bar_point(Vector2.ZERO) == Vector2(640, 732), "Action bar centre follows origin = (0, (500 − 85) / 2) × 1.6")
-	check(scene.VIEW_SIZE == Vector2(1280, 664) and is_equal_approx(732.0 - 85.0 * 1.6 * 0.5, 664.0), "World view ends where the 1280×136 action bar starts")
+	check(HudArt.bar_point(Vector2.ZERO).is_equal_approx(Vector2(640, 764.8)), "Footer centre follows native44px band at y456")
+	check(scene.VIEW_SIZE.is_equal_approx(Vector2(1280,665.6)) and HudArt.Layout.WORLD.end.is_equal_approx(HudArt.Layout.FOOTER.position + Vector2(1280,0)), "World is between native header64 and footer70.4")
 	for name in hud.textures:
 		var factor: float = hud.density(name)
-		# Mobiles without an approved HD sheet keep the original crosshair (Nak, and the classic roster).
-		if ResourceLoader.exists("res://assets/hd/hud/" + name):
-			var native_wedge: bool = name.begins_with("CrosshairMage") or name.begins_with("CrosshairBigfoot")
-			check(is_equal_approx(factor, 1.0 if native_wedge else 3.0), "%s uses the intended original/HD source" % name)
+		check(is_equal_approx(factor, 1.0), "%s uses native pixels or the declared 1x fallback" % name)
+		if hud.client_assets.has(name):
+			check(hud.textures[name] == hud.client_assets.texture(name), "%s selects the validated client atlas" % name)
 		else:
-			check(is_equal_approx(factor, 1.0) and hud.textures[name] == hud.originals[name], "%s falls back to the original sprite" % name)
+			check(hud.textures[name] == hud.originals[name], "%s retains declared 1x fallback" % name)
+
 	scene.select_vehicle(2)
 	scene.opening = 0
 	scene.start_match()
 	player_turn(scene)
 	var s1: TextureButton = scene.weapon_buttons[0]
-	check(s1.size.is_equal_approx(Vector2(37, 37) * 1.6) and (s1.position + s1.size * 0.5).is_equal_approx(HudArt.bar_point(Vector2(-371, -4))), "S1 button sits at the original (−371, −4)")
-	check((scene.weapon_buttons[2].position + scene.weapon_buttons[2].size * 0.5).is_equal_approx(HudArt.bar_point(Vector2(-285, -4))), "SS button sits at the original (−285, −4)")
-	check((scene.pass_button.position + scene.pass_button.size * 0.5).is_equal_approx(HudArt.bar_point(Vector2(-296, 26))), "SkipTurn button sits at the original (−296, 26)")
+	check(s1.size.is_equal_approx(Vector2(35, 34) * 1.6) and (s1.position + s1.size * 0.5).is_equal_approx(Vector2(23.5,479)*1.6), "S1 uses native footer6,462")
+	check((scene.weapon_buttons[2].position + scene.weapon_buttons[2].size * 0.5).is_equal_approx(Vector2(105.5,479)*1.6), "SS uses native footer88,462")
+	check((scene.pass_button.position + scene.pass_button.size * 0.5).is_equal_approx(Vector2(770,18)*1.6), "SkipTurn uses native header750,3")
 	check(s1.get_meta("activated") and not scene.weapon_buttons[1].get_meta("activated"), "S1 starts activated like HUD.cs")
 	check(not scene.weapon_buttons[2].disabled, "SS is available on the first turn")
 
@@ -81,7 +81,7 @@ func run() -> void:
 	scene._process(0.1)
 	scene._process(0.1)
 	check(scene.aim.charging and is_equal_approx(scene.aim.power, 100.0 / 15.0), "0.2 s of the 3 s charge = 6.6667 percent")
-	hud.set_selector_from_screen(HudArt.bar_point(Vector2(100, 17)).x)
+	hud.set_selector_from_screen((244+260)*1.6)
 	check(is_equal_approx(hud.selector_x, 100.0) and is_equal_approx(scene.aim.power, 100.0 / 15.0), "Dragging the selector marks the bar without changing power")
 	hud.set_selector_from_screen(5000.0)
 	check(hud.selector_x == 240.0, "Selector is clamped to the bar like the original")
@@ -157,11 +157,11 @@ func run() -> void:
 	check(scene.options_button.disabled, "Options stays disabled while its popup is open (HUD.cs)")
 	check(popup.size.is_equal_approx(Vector2(323, 328) * 1.6) and (popup.position + popup.size * 0.5).distance_to(Vector2(640, 400)) <= 0.6, "Popup background 323×328 × 1.6 centred on the screen")
 	for name in popup.textures:
-		check(is_equal_approx(popup.density(name), 3.0), "Popup %s uses the 3× HD sprite" % name)
-	check(popup.scaled("OptionsRadioButton.png", Rect2(12, 0, 11, 12)) == Rect2(36, 0, 33, 36), "Radio frames scale with the HD density")
+		check(is_equal_approx(popup.density(name), 1.0), "Popup %s uses the native client sprite" % name)
+	check(popup.scaled("OptionsRadioButton.png", Rect2(12, 0, 11, 12)) == Rect2(12, 0, 11, 12), "Radio frames select the native client density")
 	var fallback = Popup.new(scene.options)
 	fallback.textures = fallback.originals.duplicate()
-	check(fallback.density("OptionsBackground.png") == 1.0 and fallback.scaled("PopupAccept.png", Rect2(20, 0, 20, 25)) == Rect2(20, 0, 20, 25), "Without HD the popup falls back to the original pixels")
+	check(fallback.density("OptionsBackground.png") == 1.0 and fallback.scaled("PopupAccept.png", Rect2(20, 0, 20, 25)) == Rect2(20, 0, 20, 25), "Without a valid client atlas the popup keeps the preserved original pixels")
 	fallback.free()
 	var accept: TextureButton = popup.accept_button
 	check(accept.size.is_equal_approx(Vector2(20, 25) * 1.6) and (accept.position + accept.size * 0.5).is_equal_approx(popup.point(Vector2(130, 144))), "Accept sits at the original (130, 144)")
@@ -257,8 +257,8 @@ func run() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(options_file))
 	check(Popup.ENABLED == ["aiming", "scroll", "sfx", "bgm", "background"], "Aiming, scroll, SFX, BGM and background are live; mouse speed and skin stay disabled")
 	for track in scene.sound.BATTLE_MUSIC:
-		var stream = load("res://assets/openbound/music/%s.mp3" % track)
-		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original LevelScene theme that ends (then a random one follows)" % track)
+		var stream = scene.sound.music_stream(track)
+		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original client stage theme that ends (then a random one follows)" % track)
 	scene.show_menu()
 	check(not scene.sound.music_wanted, "The menu stops the battle music")
 	scene.opening = 0

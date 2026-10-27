@@ -1,0 +1,42 @@
+{
+	"audio": "muted; no listening",
+	"cases": [
+		{
+			"calendar": "adapter",
+			"facing": 1,
+			"frames": 90,
+			"pause30_identical": true,
+			"resume_changes_pixels": true
+		},
+		{
+			"calendar": "adapter",
+			"facing": -1,
+			"frames": 90,
+			"pause30_identical": true,
+			"resume_changes_pixels": true
+		},
+		{
+			"calendar": "native",
+			"facing": 1,
+			"frames": 90,
+			"pause30_identical": true,
+			"resume_changes_pixels": true
+		},
+		{
+			"calendar": "native",
+			"facing": -1,
+			"frames": 90,
+			"pause30_identical": true,
+			"resume_changes_pixels": true
+		}
+	],
+	"client_original_executed": false,
+	"controlled_presentation_events": true,
+	"frames": 360,
+	"performance_fps_measured": false,
+	"simulation_clock_hz": 60,
+	"size": [
+		1920,
+		1080
+	]
+}

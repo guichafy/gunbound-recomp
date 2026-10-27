@@ -18,7 +18,7 @@ func run() -> void:
 			var effect := {"kind":kind,"position":Vector2i(100,200),"tick":age,"angle":0}
 			q=art.quad(effect)
 			check(not q.is_empty(),"Native lifetime includes tick%d %s"%[age,kind])
-			check(q.blend=="add" and q.texture=="res://assets/openbound/mage/original/CrashTexture.png","Dispatcher450c20 selects SRCALPHA ONE for both families")
+			check(q.blend=="add" and q.texture=="res://assets/xfs/weather/CrashTexture.png","Dispatcher450c20 selects SRCALPHA ONE for both families")
 			check(q.color==Color(1,1,1,float(255-16*age)/255.0),"Native alpha byte fades by16 per Animate")
 			var v := 0.25 if kind=="force" else 0.375
 			check(q.uv==PackedVector2Array([Vector2(float(age/2)/8,v),Vector2(float(age/2)/8+0.125,v),Vector2(float(age/2)/8+0.125,v+0.125),Vector2(float(age/2)/8,v+0.125)]),"Two Animate ticks per atlas frame")
@@ -41,6 +41,6 @@ func run() -> void:
 		check(q.points==PackedVector2Array(row[1]),"Independent native float32 oracle angle%d"%row[0])
 	q=art.quad({"kind":"electricity","position":Vector2i(100,200),"tick":15,"angle":0})
 	check(q.points==PackedVector2Array([Vector2(99,199),Vector2(100,199),Vector2(100,200),Vector2(99,200)]),"Helper consumes current angle without applying six degrees times age again")
-	var picture := load("res://assets/openbound/mage/original/CrashTexture.png") as Texture2D
+	var picture := load("res://assets/xfs/weather/CrashTexture.png") as Texture2D
 	check(picture!=null and picture.get_size()==Vector2(256,256),"Imported native CrashTexture is available as an exportable256 square resource")
 	finish("MAGE SPARK ART CHECKS")

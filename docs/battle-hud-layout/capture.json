@@ -1,0 +1,32 @@
+{
+	"audio": "muted",
+	"cases": [
+		{
+			"case": "slice",
+			"frames": 120,
+			"pause_frames": 30,
+			"resume": true,
+			"rgba_sha256": "d6b35592894f81e5ec11bb88fd359cb74e92e397d395468e62c7628577304cdf"
+		},
+		{
+			"case": "drag",
+			"frames": 120,
+			"pause_frames": 30,
+			"resume": true,
+			"rgba_sha256": "d0c9be9296bb2322026e5c0ec353236874c43dc61d7d6412fb755a44737c0c19"
+		},
+		{
+			"case": "move",
+			"frames": 120,
+			"pause_frames": 30,
+			"resume": true,
+			"rgba_sha256": "e2dc19f70c49418d91ac6dcc66662f740a3992ebc42226ec35c24988f973edd6"
+		}
+	],
+	"clock_hz": 60,
+	"frames": 360,
+	"size": [
+		1920,
+		1080
+	]
+}

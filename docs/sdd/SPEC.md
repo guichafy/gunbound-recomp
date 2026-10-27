@@ -1,5 +1,39 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Background do footer — REQ-27/28/48 / ADR-136
+
+O rodapé deve preservar o fundo opaco RGB565 do cliente, inclusive pixels
+pretos, sem deixar o cenário aparecer pelos quadros retangulares. RLE e XTF
+mantêm sua transparência própria. Corrigir a importação HUD, preservar regras
+físicas e posicionamento aprovado pela evidência da ADR-135. Plano/fontes em
+`FOOTER_BACKGROUND_NATIVE.md`.
+
+## Barra MOVE no footer — REQ-27/28/48 / ADR-135
+
+Durante movimento próprio, a barra MOVE sobrepõe a parte inferior da área de
+carga no footer, nas posições/pivôs e etapas comprovadas do cliente. Substitui
+a faixa acima do footer da ADR-134. Contrato/plano em `MOVE_BAR_NATIVE.md`.
+Regras físicas e orçamento de movimento permanecem os mesmos.
+
+## HUD em duas faixas — REQ-27/28/30/35/48 / ADR-134
+
+Conforme validação visual do usuário, usar header e footer nativos separados:
+Options/clima/Gold/itens/Skip no topo; tiros/ângulo/modo/carga/movimento na base.
+`HUD_CLIENT_LAYOUT.md` registra contrato, plano, fontes e validação. Substitui
+a preservação da composição anterior na ADR-133 para essas faixas. Respeitar
+variantes por modo; treinoSolo não exibe placaresJewel ou vidas inventadas. Pedido adicional inclui cronômetro de segundos/décimos e
+indicador de vento com assets originais, mantendo30s e vetor físico.
+
+## Assets de batalha do cliente — REQ-48 / ADR-133
+
+Trocar os assets ativos de Miramo Town A, HUD, clima/Thor, itens e música/áudio
+herdados ou GPT por extrações do cliente Thor's Hammer disponível. Preservar
+máscara alpha, regras, layout e input; validar fallback por grupo. Lacunas sem
+equivalente comprovado permanecem adaptações declaradas, sem inventar arte.
+Inventário e plano em `CLIENT_ASSETS_PORT.md`. Afeta REQ-19/20/21..31/33/35..37.
+Aceitação: harness completo com 29 partidas, GPU1920×1080 com pausa e README
+regenerado. Não implica versão, exportação, commit ou publicação.
+
 ## Objetivo e escopo de fontes — ADR-132
 
 Reescrever com fidelidade jglim/gunbound-launcher (TestClient) e jglim/gunbound-server,
@@ -281,7 +315,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-27..31 | HUD original e popup de opções | HUD_0_10, BATTLE_FIDELITY_0_20 | Carga 3 s/mínimo nativo (REQ-28); bússola/vento coerentes; Mouse Speed desabilitado |
 | REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |
 | REQ-34 | Aiming Mode Drag/Slice | AIMING_0_12 | Vigente; TODO Mouse Speed |
-| REQ-35..37 | Itens de batalha, Select Item, arte HD | ITEMS_0_13 | Vigente; custos do `itemdata.dat`; CPU sem itens; Team Teleport sem aliado no 1×1 |
+| REQ-35..37 | Itens de batalha, Select Item, arte do cliente (REQ-48) | ITEMS_0_13 | Vigente; custos do `itemdata.dat`; CPU sem itens; Team Teleport sem aliado no 1×1 |
 | REQ-38..41 | Loja, composição, atributos e modificadores | AVATAR_SHOP_XFS_0_16, AVATAR_HD_MIGRATION, AVATAR_SHOP_ORIGINAL | Vigente; catálogo XFS com bônus por equipamento; composição e arte originais pela REQ-47 |
 | REQ-42 | Paridade Mage/Bigfoot com o C# | MOBILE_PARITY | Vigente, com os ajustes de REQ-44 |
 | REQ-43 | Nak (ID 3) com dados do cliente original | NAK_0_15 | Vigente; aura UsingItem ausente (sem arte original) |
@@ -289,6 +323,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-45 | Os 16 mobiles do cliente, IDs1–3 preservados | BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY, BATTLE_MOBILE_FAMILY_PLANS, RAON_CLASSIC_FIX | Boomer, onda Turtle T2, cronologia48 e tiros/minas Raon (ADR-116/117) implementados; demais limites/portes explícitos |
 | REQ-46 | Catálogo clássico: os 562 avatares do `avatar.xfs` 280 e o código do servidor | AVATAR_CLASSIC_CATALOG | Vigente; chaves salvas da loja não mudam |
 | REQ-47 | Avatar Shop e avatares com os assets originais do cliente | AVATAR_SHOP_ORIGINAL | Vigente (ADR-130); HD de avatares/loja preservado em disco, fora do uso ativo |
+| REQ-48 | Assets de batalha do cliente: Miramo, HUD, clima/Thor, itens e áudio | CLIENT_ASSETS_PORT | ADR-133; recursos nativos com fallback validado; composição e lacunas declaradas |
 
 ## Lobby clássico e sala — ADR-096
 
@@ -616,7 +651,8 @@ por decisão do usuário.
 REQ-27 barra de ação, REQ-28 barras de força/movimento e carga original,
 REQ-29 mira original, REQ-30 bússola, relógio, Delayboard, vida, nome e dano,
 conforme HUD_0_10.md. Substitui o console de REQ-03 (teclado e controles na
-tela continuam) e muda a altura visível do mundo de REQ-22 para 664 px.
+tela continuam). A altura664px desta etapa foi substituída pela ADR-134:
+mundo1280×665,6 entre header64 e footer70,4, sem mudar a colisão.
 
 ## Popup de opções 0.10.1 — escopo solicitado
 

@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "repository": "https://github.com/jglim/gunbound-launcher",
+  "commit": "2bc43c490ba727d6fce1a5b47ed9dc577d0f9cc1",
+  "archive": "TestClient/graphics.xfs",
+  "graphics_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "stage_sha256": "103c2b488977e1721becf8cb90496f95477302ec24141f94116d5214a3e6cfca",
+  "stage": {
+    "index": 1,
+    "name": "MiramoTown",
+    "prefix": "mos"
+  },
+  "entries": {
+    "mos.img": {
+      "frames": 2,
+      "entry_sha256": "caa1beb11afa8d397a53f428ba6506cc3a23c41efd566f22539a7a6f180d6651"
+    },
+    "mos.lnd": {
+      "size": [
+        1800,
+        1800
+      ],
+      "land_values": [
+        0,
+        2
+      ],
+      "entry_sha256": "aaa47197088c84d9eb6b7baf47708b1c308150de6b877a6915811eddf9f34013"
+    },
+    "pmos.img": {
+      "frames": 60,
+      "entry_sha256": "499f6c6591d437bb662bb977daddd89692e013bddd355eff23ac816f84aa465d"
+    }
+  },
+  "files": {
+    "foreground": {
+      "file": "res://assets/xfs/maps/mos/foreground.png",
+      "source": "mos.img:0",
+      "size": [
+        1800,
+        1800
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "sha256": "82f4e3c99d298ad74544d258f718f572e7fd7f3102d5a3613235885d350cdda9",
+      "land_pixels": 680299,
+      "alpha_equals_lnd": true,
+      "crop": [
+        17,
+        1344,
+        1783,
+        1800
+      ],
+      "matches_legacy": true
+    },
+    "background": {
+      "file": "res://assets/xfs/maps/mos/background.png",
+      "source": "mos.img:1",
+      "size": [
+        1300,
+        1300
+      ],
+      "pivot": [
+        0,
+        0
+      ],
+      "sha256": "d7d70a0f874a16398175271ce7069dfb42f5068ae3eaa7eabb233c0cdcd25a55",
+      "matches_legacy": true
+    },
+    "particle": {
+      "file": "res://assets/xfs/maps/mos/particle.png",
+      "source": "pmos.img",
+      "cell": [
+        48,
+        48
+      ],
+      "columns": 20,
+      "frames": 60,
+      "pivots": [
+        [
+          -13,
+          -14
+        ],
+        [
+          -12,
+          -16
+        ],
+        [
+          -11,
+          -16
+        ],
+        [
+          -10,
+          -16
+        ],
+        [
+          -10,
+          -14
+        ],
+        [
+          -11,
+          -13
+        ],
+        [
+          -14,
+          -13
+        ],
+        [
+          -16,
+          -13
+        ],
+        [
+          -16,
+          -12
+        ],
+        [
+          -15,
+          -11
+        ],
+        [
+          -14,
+          -10
+        ],
+        [
+          -13,
+          -11
+        ],
+        [
+          -13,
+          -12
+        ],
+        [
+          -13,
+          -14
+        ],
+        [
+          -12,
+          -16
+        ],
+        [
+          -10,
+          -16
+        ],
+        [
+          -10,
+          -15
+        ],
+        [
+          -11,
+          -14
+        ],
+        [
+          -10,
+          -9
+        ],
+        [
+          -11,
+          -9
+        ],
+        [
+          -11,
+          -9
+        ],
+        [
+          -10,
+          -9
+        ],
+        [
+          -9,
+          -9
+        ],
+        [
+          -9,
+          -9
+        ],
+        [
+          -10,
+          -9
+        ],
+        [
+          -10,
+          -9
+        ],
+        [
+          -9,
+          -9
+        ],
+        [
+          -10,
+          -10
+        ],
+        [
+          -10,
+          -9
+        ],
+        [
+          -10,
+          -9
+        ],
+        [
+          -9,
+          -8
+        ],
+        [
+          -9,
+          -7
+        ],
+        [
+          -5,
+          -5
+        ],
+        [
+          -5,
+          -5
+        ],
+        [
+          -5,
+          -5
+        ],
+        [
+          -5,
+          -5
+        ],
+        [
+          -5,
+          -5
+        ],
+        [
+          -5,
+          -5
+        ],
+        [
+          -5,
+          -5
+        ],
+        [
+          -4,
+          -4
+        ],
+        [
+          -6,
+          -6
+        ],
+        [
+          -7,
+          -6
+        ],
+        [
+          -7,
+          -6
+        ],
+        [
+          -7,
+          -5
+        ],
+        [
+          -6,
+          -6
+        ],
+        [
+          -6,
+          -6
+        ],
+        [
+          -8,
+          -5
+        ],
+        [
+          -9,
+          -6
+        ],
+        [
+          -8,
+          -6
+        ],
+        [
+          -8,
+          -7
+        ],
+        [
+          -7,
+          -8
+        ],
+        [
+          -7,
+          -8
+        ],
+        [
+          -6,
+          -8
+        ],
+        [
+          -6,
+          -8
+        ],
+        [
+          -6,
+          -8
+        ],
+        [
+          -6,
+          -8
+        ],
+        [
+          -5,
+          -8
+        ],
+        [
+          -6,
+          -7
+        ],
+        [
+          -6,
+          -8
+        ],
+        [
+          -6,
+          -7
+        ]
+      ],
+      "sha256": "fbf66b0227f4bb24579afb0e8dbf9013517c77cbe94b976d559c6f7c3cfd5361",
+      "matches_legacy": true
+    }
+  },
+  "not_exported": {
+    "mos1.img": {
+      "frames": 20,
+      "size": [
+        160,
+        165
+      ],
+      "position": [
+        89,
+        375
+      ]
+    },
+    "mos2.img": {
+      "frames": 24,
+      "size": [
+        96,
+        114
+      ],
+      "position": [
+        1065,
+        688
+      ]
+    },
+    "mos3.img": {
+      "frames": 11,
+      "size": [
+        108,
+        162
+      ],
+      "position": [
+        750,
+        342
+      ]
+    },
+    "mos4.img": {
+      "frames": 6,
+      "size": [
+        40,
+        98
+      ],
+      "position": [
+        1042,
+        388
+      ]
+    },
+    "mos5.img": {
+      "frames": 6,
+      "size": [
+        52,
+        94
+      ],
+      "position": [
+        716,
+        532
+      ]
+    }
+  }
+}

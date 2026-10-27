@@ -1,12 +1,13 @@
 extends RefCounted
 ## Exact native tile quads482130/4a6b10 and alpha4a6aa0. Variants use a
 ## presentation-local RNG; they do not consume the simulation's random stream.
+const Assets = preload("res://scripts/client_weather_assets.gd")
 var texture: Texture2D
 var material:=CanvasItemMaterial.new()
 var canvases: Dictionary={}
 
 func _init() -> void:
-	texture=load("res://assets/openbound/lightning/Lightning.png")
+	texture=Assets.texture("Lightning")
 	material.blend_mode=CanvasItemMaterial.BLEND_MODE_ADD
 	material.light_mode=CanvasItemMaterial.LIGHT_MODE_UNSHADED
 

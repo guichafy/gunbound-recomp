@@ -1,0 +1,119 @@
+{
+  "gpu": {
+    "audio": "muted; no listening",
+    "cases": [
+      {
+        "calendar": "adapter",
+        "facing": 1,
+        "frames": 90,
+        "pause30_identical": true,
+        "resume_changes_pixels": true
+      },
+      {
+        "calendar": "adapter",
+        "facing": -1,
+        "frames": 90,
+        "pause30_identical": true,
+        "resume_changes_pixels": true
+      },
+      {
+        "calendar": "native",
+        "facing": 1,
+        "frames": 90,
+        "pause30_identical": true,
+        "resume_changes_pixels": true
+      },
+      {
+        "calendar": "native",
+        "facing": -1,
+        "frames": 90,
+        "pause30_identical": true,
+        "resume_changes_pixels": true
+      }
+    ],
+    "client_original_executed": false,
+    "controlled_presentation_events": true,
+    "frames": 360,
+    "performance_fps_measured": false,
+    "simulation_clock_hz": 60,
+    "size": [
+      1920,
+      1080
+    ]
+  },
+  "independent_png_checks": [
+    {
+      "calendar": "native",
+      "facing": 1,
+      "pause_rgba_identical": true,
+      "resume_changes_rgba": true
+    },
+    {
+      "calendar": "native",
+      "facing": -1,
+      "pause_rgba_identical": true,
+      "resume_changes_rgba": true
+    },
+    {
+      "calendar": "adapter",
+      "facing": 1,
+      "pause_rgba_identical": true,
+      "resume_changes_rgba": true
+    },
+    {
+      "calendar": "adapter",
+      "facing": -1,
+      "pause_rgba_identical": true,
+      "resume_changes_rgba": true
+    }
+  ],
+  "source_sha256": {
+    "scripts/weather_art.gd": "dc21edf902cfb669012612ab29c833872e967c8a764224884180ad95e1238357",
+    "scripts/client_weather_assets.gd": "06e58ac543eec6d6afdc91880db3e7fb1f266bd49d3e4882a3135c1f6790b08b",
+    "scripts/mage_weather_art.gd": "b661ac44629d99f460c0191cdf9592a8dc6961a6d5ebc2be5775f96c6a0d6511",
+    "scripts/mage_spark_art.gd": "6bb73a0834e439cd8a1b21571255c35141593ae777fc776335eb6ae3d5500993",
+    "scripts/mage_sparks.gd": "8c5732ccfd9143eb802c2e0d5f687d9046d3b06df17c0304c6527f718593e903",
+    "scripts/thor_native_art.gd": "7a5a2262458cd26255306453f60670691a7a5c8d0306d283f741d211b3c29b60",
+    "scripts/aduka_beam_art.gd": "48d341552673eecb561ba179f273cd0c94b4bdf7262e4af87a43ca5c07309d98",
+    "scripts/lightning_beam_art.gd": "e12a83e8f0022c031ef2526c65e45b8c7047404ed4316b30ab730d0285b32189",
+    "scripts/import_xfs_weather.py": "60415f99fd3f81f7e2da1ea57f72f4ff89d0d4a3861fe07160ff78c4da8c6b3d",
+    "tests/capture_client_weather_assets.gd": "d55e41556c28296bbdf71fc0fed1d0891a55ddc573655bb6a4cc515b9ce12cd9",
+    "assets/xfs/weather/catalog.json": "a806d3dcae03834dc309dacf2f6839466492507e9b97578bdadf88093447aeb9",
+    "assets/xfs/thor/thor_native.json": "320f7612b3362be25984bdc6f25d6e7c6a54c8b84690c3ad4f51f036a5956dd9",
+    "assets/xfs/weather/FirewallTexture.png": "9cb988e4a74474d86beb56515f684d3c63154a7590eee7f7d822789f19963536",
+    "assets/xfs/weather/LightningTexture.png": "0b30981b8e81e995bd37ce74682c7fc4245cbfeb2ae4dded259a01ad9c6feb1d",
+    "assets/xfs/weather/TornadoTexture.png": "0d60c260133069d5d4ef0e9c1c1e59254136caefecdac64b385db4598b0fff80",
+    "assets/xfs/weather/Lightning.png": "c0d9da4e6ffdd9e20f78681e9563bf7cc19cad28b181bb922adb8674434fee45",
+    "assets/xfs/weather/CrashTexture.png": "57a74d0f004ced3226e6febecd21e837ce423d0db7282e6f76efff12d3373955",
+    "assets/xfs/thor/LaserEffect.png": "71ebc386de15aea7f34b6707083837c4cf4d181abd1d2c6543390561dfd204cd",
+    "assets/xfs/thor/ThorLight.png": "918d8b876c9fd7cf355f782db034e76ecacccd7960216f22af56fe112144cdea",
+    "assets/xfs/thor/ThorBody.png": "4b69c2c4996d66556f101455d0c3281358394e86f4ec6672efcd5e319bdcbdea"
+  },
+  "samples_sha256": {
+    "adapter-facing-1-frame59.png": "a3cc1617fbba9b4a42b34d1ab3d85091d01924f7e0f0058bc8c55ba720a5148f",
+    "native-facing1-frame15.png": "81c3177f2f01a5b4d13c2047430ed5a1968006841c99b0ef20cc61ee74e5ff3d",
+    "native-facing-1-frame30.png": "2f5c18f025f224be561a7d5e443ae578d998e3f7899bd3583839b1c4693d107c",
+    "adapter-facing1-frame15.png": "ef8ae53ba88f578b51b4bbd91b65b4dd9eb593f425a3f7ecd1f29a9bf1ff2243",
+    "adapter-facing-1-frame75.png": "f2638233dc2c950396c687823640e7131371dbde3956fbb072939381cbefb7ed",
+    "adapter-facing1-frame59.png": "d0cc880c109001b0ad84cca6a2152cf5d1d42ec7190ac09ccf25512beb025886",
+    "native-facing1-frame75.png": "7a555d9ce543ed027af483eea6b4782852f315ffc38e808520aec01770b52722",
+    "native-facing1-frame59.png": "a2fcac5f3af0d76eb176304628a571d5ef5d18ede794c7256c12b15ef6fbb778",
+    "adapter-facing-1-frame15.png": "cec380901a4a337a39a9e763ac124fe907a94e39ed7f474c8431dd34e43191d7",
+    "adapter-facing1-frame75.png": "4cbad84a36bfaaf8d0fc25ae174d19fb497414dc69d39cdf65b642e213ca5eba",
+    "native-facing-1-frame59.png": "2f5c18f025f224be561a7d5e443ae578d998e3f7899bd3583839b1c4693d107c",
+    "adapter-facing-1-frame30.png": "a3cc1617fbba9b4a42b34d1ab3d85091d01924f7e0f0058bc8c55ba720a5148f",
+    "native-facing-1-frame75.png": "d95de0b347af3d1ca79c4e2203d5c79b308426f9ba802c68ad7f167b741aa554",
+    "adapter-facing1-frame30.png": "d0cc880c109001b0ad84cca6a2152cf5d1d42ec7190ac09ccf25512beb025886",
+    "native-facing-1-frame15.png": "4543551a877f5459d601253d115edab879a777d5447f0594150a4078e3dd6003",
+    "native-facing1-frame30.png": "a2fcac5f3af0d76eb176304628a571d5ef5d18ede794c7256c12b15ef6fbb778"
+  },
+  "logs": [
+    ".tools/client-weather-assets-gpu-engine.log",
+    ".tools/check-logs/test_client_weather_assets.log",
+    ".tools/check-logs/test_client_weather_source.log"
+  ],
+  "client_executed": false,
+  "human_acceptance": false,
+  "audio_listened": false,
+  "app_exported": false
+}

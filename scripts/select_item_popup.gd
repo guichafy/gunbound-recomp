@@ -2,7 +2,7 @@ extends Control
 ## PopupSelectItem.cs (PopupMenu, TabButtonList, EquippedButtonBar) with the
 ## original Interface/Popup/Blue/SelectItem sprites. Offsets are the C# ones,
 ## relative to the popup centre on the 800×500 virtual screen, scaled by
-## K = 1.6. HD sprites (assets/hd/items, GPT Images) fall back to the originals.
+## K = 1.6. Client item/checkmark art with declared1x gaps (ADR-133).
 ## Edits the loadout in options.gd (PlayerInformation.SelectedItemTypeList).
 
 signal accepted
@@ -70,7 +70,7 @@ func _init(values, item_art) -> void:
 	accept_button.size = Vector2(20, 25) * K
 	accept_button.position = point(ACCEPT_OFFSET) - accept_button.size * 0.5
 	accept_button.tooltip_text = "Accept (ESC)"
-	var accept: Texture2D = load("res://assets/hd/hud/PopupAccept.png") if ResourceLoader.exists("res://assets/hd/hud/PopupAccept.png") else load("res://assets/openbound/hud/PopupAccept.png")
+	var accept: Texture2D = preload("res://scripts/client_hud_assets.gd").new().texture("PopupAccept.png", preload("res://assets/openbound/hud/PopupAccept.png"))
 	var accept_density := float(accept.get_width()) / 80.0
 	var faces: Array[AtlasTexture] = []
 	for frame in range(4):

@@ -1,14 +1,14 @@
 extends RefCounted
 ## Item presentation (EquippedButtonBar.cs, Button.cs presets, TeleportationBeacon,
 ## SpecialEffectBuilder.TeleportFlame1/2). Reads events and model state only.
-## HD derivatives (assets/hd/items, GPT Images) fall back to the originals.
+## Client XFS pixels use the existing UI windows; missing files fall back to retained originals (ADR-133).
 ## Reference logic: OpenBound, Copyright (C) 2020, Carlos H.M.S.; GPL-3.0-or-later.
 
 const Items = preload("res://scripts/items.gd")
 const MobileLooks = preload("res://scripts/mobile_looks.gd")
 
 const ORIGINALS := "res://assets/openbound/items/"
-const HD := "res://assets/hd/items/"
+const CLIENT := "res://assets/xfs/items/"
 # Button.cs SelectItem presets: Normal, Hoover, Clicked, Disabled; Activated = Clicked.
 const BUTTON_HEIGHT := 36
 const FRAME_NORMAL := 0
@@ -26,8 +26,6 @@ const FLAME_FRAMES := 19
 const FLAME_FPS := 30.0
 # Keyframes kept in the HD sheet (build_items_hd.py FLAME_KEYS).
 const FLAME_KEYS := [0, 2, 4, 6, 8, 11, 14, 18]
-# The HD MatchStatus keeps only the ITEM LOCKED frame (217 of the 868 px sheet).
-const HD_SOURCE_WIDTH := {"MatchStatus.png": 217.0}
 # MobileFlipbook UsingItem: 20 frames at 19 fps. Sheets are 5×4 cells; the
 # file and cell of each mobile live in MobileLooks ("using").
 const USING_FPS := 19.0
@@ -42,15 +40,15 @@ var flames: Array = []
 var using_textures := {}
 var rng := RandomNumberGenerator.new()
 
-func _init() -> void:
+func _init(client_root: String = CLIENT) -> void:
 	var names: Array = ["MatchStatus.png", "SelectItemBackground.png", "TabIndex.png", "TeleportBullet.png", "Teleport1.png"]
 	for id in Items.ORDER:
 		names.append(button_file(id))
 	for name in names:
 		originals[name] = load(ORIGINALS + name)
-		textures[name] = load(HD + name) if ResourceLoader.exists(HD + name) else originals[name]
-	if ResourceLoader.exists(HD + "TeleportFlame.png"):
-		textures["TeleportFlame.png"] = load(HD + "TeleportFlame.png")
+		textures[name] = client_texture(client_root + name, originals[name].get_size(), originals[name])
+	# Native ITEM LOCKED is 217×38; its full raster fits the existing 217×35 box.
+	textures["MatchStatus.png"] = client_texture(client_root + "MatchStatus.png", Vector2(217, 38), originals["MatchStatus.png"])
 	shoot_sound = load(ORIGINALS + "ShootTeleport.mp3")
 	blast_sound = load(ORIGINALS + "BlastTeleport.mp3")
 	for vehicle_id in MobileLooks.ids():
@@ -59,15 +57,17 @@ func _init() -> void:
 			_load_using(look.kind, look.using.file)
 	rng.randomize()
 
+static func client_texture(path: String, expected: Vector2, fallback: Texture2D) -> Texture2D:
+	if ResourceLoader.exists(path):
+		var candidate = load(path)
+		if candidate is Texture2D and candidate.get_size() == expected:
+			return candidate
+	return fallback
+
 func _load_using(kind: String, file_name: String) -> void:
-	var hd_path := HD + file_name
-	# Original mobile atlases use the original aura at the native atlas scale.
-	if MobileLooks.by_kind(kind).has("assets"):
-		hd_path = ""
+	# No client equivalent proved for this decorative aura. Retained adaptation.
 	var original_path := ORIGINALS + file_name
-	if not hd_path.is_empty() and ResourceLoader.exists(hd_path):
-		using_textures[kind] = load(hd_path)
-	elif ResourceLoader.exists(original_path):
+	if ResourceLoader.exists(original_path):
 		var canvas := CanvasTexture.new()
 		canvas.diffuse_texture = load(original_path)
 		canvas.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -80,17 +80,15 @@ static func button_file(id: String) -> String:
 static func button_width(id: String) -> float:
 	return 73.0 if Items.slots(id) == 2 else 37.0
 
-## HD pixels per original pixel (1 when the original is used).
-func density(name: String) -> float:
-	if textures[name] == originals[name]:
-		return 1.0
-	return float(textures[name].get_width()) / float(HD_SOURCE_WIDTH.get(name, originals[name].get_width()))
+## Native atlases retain logical pixels; kept as the shared region API.
+func density(_name: String) -> float:
+	return 1.0
 
 func region(name: String, source: Rect2) -> AtlasTexture:
 	var texture := AtlasTexture.new()
 	texture.atlas = textures[name]
 	var d := density(name)
-	texture.region = Rect2(source.position * d, source.size * d)
+	texture.region = Rect2(Vector2.ZERO, textures[name].get_size()) if name == "MatchStatus.png" and textures[name] != originals[name] else Rect2(source.position * d, source.size * d)
 	return texture
 
 func button_frame(id: String, frame: int) -> AtlasTexture:
@@ -98,11 +96,18 @@ func button_frame(id: String, frame: int) -> AtlasTexture:
 	return region(button_file(id), Rect2(frame * width, 0, width, BUTTON_HEIGHT))
 
 ## Button.ChangeButtonState: activated keeps the clicked face, also on hover.
-func style_button(button: TextureButton, id: String, activated: bool) -> void:
-	button.texture_normal = button_frame(id, FRAME_CLICKED if activated else FRAME_NORMAL)
-	button.texture_hover = button_frame(id, FRAME_CLICKED if activated else FRAME_HOVER)
-	button.texture_pressed = button_frame(id, FRAME_CLICKED)
-	button.texture_disabled = button_frame(id, FRAME_CLICKED if activated else FRAME_DISABLED)
+func battle_frame(id: String, frame: int) -> AtlasTexture:
+	var texture := button_frame(id,frame)
+	if textures[button_file(id)] != originals[button_file(id)]:
+		texture.region = Rect2(texture.region.position+Vector2.ONE,Vector2(button_width(id)-2,31))
+	return texture
+
+func style_button(button: TextureButton, id: String, activated: bool, native_battle: bool = false) -> void:
+	var face := battle_frame if native_battle else button_frame
+	button.texture_normal = face.call(id, FRAME_CLICKED if activated else FRAME_NORMAL)
+	button.texture_hover = face.call(id, FRAME_CLICKED if activated else FRAME_HOVER)
+	button.texture_pressed = face.call(id, FRAME_CLICKED)
+	button.texture_disabled = face.call(id, FRAME_CLICKED if activated else FRAME_DISABLED)
 	button.set_meta("activated", activated)
 
 # ---------------------------------------------------------------- events
@@ -169,17 +174,8 @@ func draw_flames(view: CanvasItem, offset: Vector2) -> void:
 		var position := flame_position(float(flame.age), bool(flame.reverse))
 		view.draw_set_transform(Vector2(flame.pos) + offset, float(flame.rotation))
 		var target := Rect2(-FLAME_PIVOT, FLAME_CELL)
-		if textures.has("TeleportFlame.png"):
-			var sheet: Texture2D = textures["TeleportFlame.png"]
-			var key_size := Vector2(sheet.get_width() / float(FLAME_KEYS.size()), sheet.get_height())
-			var keys := flame_keys(position)
-			for entry in [[keys.first, 1.0 - float(keys.blend)], [keys.second, float(keys.blend)]]:
-				if float(entry[1]) <= 0.0:
-					continue
-				view.draw_texture_rect_region(sheet, target, Rect2(Vector2(int(entry[0]) * key_size.x, 0), key_size), Color(1, 1, 1, float(entry[1])))
-		else:
-			var frame := int(position)
-			view.draw_texture_rect_region(originals["Teleport1.png"], target, Rect2(Vector2(frame % 10, int(frame / 10)) * FLAME_CELL, FLAME_CELL))
+		var frame := int(position)
+		view.draw_texture_rect_region(textures["Teleport1.png"], target, Rect2(Vector2(frame % 10, int(frame / 10)) * FLAME_CELL, FLAME_CELL))
 	view.draw_set_transform(Vector2.ZERO)
 
 ## Frame of the 20-frame UsingItem aura (holds the last frame).

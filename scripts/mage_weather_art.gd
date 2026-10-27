@@ -2,6 +2,7 @@ extends RefCounted
 ## Pure quads from Force471550/Electric46e020/Tornado4ac760, same client PE.
 ## Tick is the object's native Animate counter; the caller owns time/pause.
 ## Dispatcher4508a0: Force/Tornado19=5,20=6; Electric19=5,20=2.
+const Assets = preload("res://scripts/client_weather_assets.gd")
 const Integer = preload("res://scripts/classic_ballistics.gd")
 const TEXTURES := {"force":"FirewallTexture","electricity":"LightningTexture","tornado":"TornadoTexture"}
 var textures: Dictionary = {}
@@ -12,7 +13,7 @@ func _init() -> void:
 	additive.blend_mode=CanvasItemMaterial.BLEND_MODE_ADD
 	additive.light_mode=CanvasItemMaterial.LIGHT_MODE_UNSHADED
 	for kind in TEXTURES:
-		textures[kind]=load("res://assets/openbound/weather/native/%s.png"%TEXTURES[kind])
+		textures[kind]=Assets.texture(TEXTURES[kind])
 
 func draw(view: Node2D, columns: Array, ages: Dictionary, offset: Vector2, height: float) -> void:
 	var id:=view.get_instance_id()
@@ -71,7 +72,7 @@ static func quads(column: Dictionary, tick: int, world_height: float) -> Array:
 		result.append({"points":PackedVector2Array([Vector2(left,y),Vector2(right,y),Vector2(right,y+64),Vector2(left,y+64)]),
 			"uv":PackedVector2Array([Vector2(u,v),Vector2(u1,v),Vector2(u1,v1),Vector2(u,v1)]),
 			"color":Color.WHITE,"blend":"add" if kind=="electricity" else "mix",
-			"texture":"res://assets/openbound/weather/native/%s.png"%TEXTURES[kind]})
+			"texture":"res://assets/xfs/weather/%s.png"%TEXTURES[kind]})
 		y+=64
 		frame=(frame+1)%8
 	return result

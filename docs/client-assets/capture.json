@@ -1,0 +1,33 @@
+{
+	"cases": [
+		{
+			"case": "generic",
+			"frames": 120,
+			"pause_rgba_sha256": "cbd65774c46a600dde621adb0798bd689303dcb24468d619d9fc2bbafe097928",
+			"paused_identical": 30,
+			"resumed": true
+		},
+		{
+			"case": "mage",
+			"frames": 120,
+			"pause_rgba_sha256": "b664f78a41a0df0d3f791c378f65bab14687a2c329a75c63e84ac0efc27f9fe0",
+			"paused_identical": 30,
+			"resumed": true
+		},
+		{
+			"case": "teleport",
+			"frames": 120,
+			"pause_rgba_sha256": "1f8cc7aa0f563ef005c877799a193d9bf019895e6742d8046ff40d06f051df13",
+			"paused_identical": 30,
+			"resumed": true
+		}
+	],
+	"fixture": "controlled visual contacts; teleport fired through game",
+	"fps_clock": 60,
+	"frames": 360,
+	"size": [
+		1920,
+		1080
+	],
+	"sound": "muted; no listening validation"
+}

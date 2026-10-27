@@ -1,0 +1,26 @@
+{
+  "native_footer_pixels": 35200,
+  "gpu_equals_raw_rgb565": true,
+  "backdrop_independent": true,
+  "transparent_pixels": 0,
+  "black_pixels_restored": 1449,
+  "pngs": 35,
+  "cases": {
+    "slice": {
+      "pause_equal": true,
+      "resume_changed": true
+    },
+    "drag": {
+      "pause_equal": true,
+      "resume_changed": true
+    },
+    "left": {
+      "pause_equal": true,
+      "resume_changed": true
+    },
+    "right": {
+      "pause_equal": true,
+      "resume_changed": true
+    }
+  }
+}

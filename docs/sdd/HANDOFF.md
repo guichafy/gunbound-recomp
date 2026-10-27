@@ -1,5 +1,142 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Versionamento local autorizado — 27/10/2026
+
+O usuário solicitou versionar o delta acumulado das ADR-133 a ADR-136:
+assets do cliente, faixas do HUD, cronômetro/vento, MOVE e fundo opaco,
+com testes, documentação e capturas. O pedido autoriza o commit local.
+A versão do aplicativo permanece 0.20.5; não inclui exportação ou push.
+Os resultados abaixo e os hashes do manifesto final foram reconferidos
+antes do registro em Git.
+
+## Fundo do footer — ADR-136
+
+O usuário apontou background ausente após a correção MOVE. O importador HUD
+transformava preto RGB565 em transparência. REA/Hopper confirmou o desenho
+retangular de play_back, spans e flush da camada3 com REP MOVSD/MOVSB sem
+chave de cor. Restaura-se alpha255 somente em tipo0 de play_back.img; decoder
+global e demais recursos mantidos. Layout/movimento/regra/clock/vento intactos.
+Os pixels opacos do painel prevalecem também sob os controles e overlays.
+
+Oráculo novo falhou antes da correção e reconstrói RGBA das palavras brutas;
+11 testes Python aprovados. Sete suítes dirigidas:1.195 checks Godot +11 Python,
+exit0. Revisão independente sem P1/P2. Harness completo final:109 suítes,28.157 checks Godot,86 testes Python e29
+partidas, zero falhas/exit0; parse aprovado. Manifesto `docs/footer-background/verified-source.json`.
+GPU480 quadros1920×1080, Slice/Drag/esquerda/direita,4×30 quadros idênticos na
+pausa/retomada;35 PNGs. Probe800×44 sobre magenta/verde igual às35.200 palavras
+RGB565, zero transparentes e1.449 pixels pretos restaurados. README4telas e86
+quadros T1/GIF/MP4 regenerados. Contrato em `FOOTER_BACKGROUND_NATIVE.md`.
+
+As validações e capturas ADR-134/135 abaixo são históricas quanto ao fundo.
+Não alegar execução do cliente Windows ou paridade integral do jogo. Áudio
+mudo, aceite visual desta correção pendente; Godot import tem apenas erro
+ambiental ao salvar editor_settings fora do sandbox. App/ZIP não atualizados;
+versão0.20.5, sem commit/push. Delta Git preexistente preservado.
+
+## MOVE no footer durante a movimentação — ADR-135
+
+A posição anterior acima do footer foi substituída após a validação do usuário.
+Ghidra confirmou o consumidor 407860..40796f: moldura play_back[5/6] em
+(169,574), pivôs (0,+10)/(0,0), fill8 em (244,583), 400×12 com clip inclusivo.
+No canvas curto subtraem-se 100 px do y. MOVE agora sobrepõe a parte inferior
+da carga no footer; abertura compacta, expansão no próximo update e ocultação
+ao soltar. Apenas apresentação; regras, cronômetro e vento preservados.
+
+56 atlas/12 entradas XFS; quadro6 novo sem redimensionamento. Falha de quadro6
+usa o compacto5 com pivô10. Revisão independente aprovada, sem P1/P2.
+`check.sh --quick`: 107 suítes/28.157 checks Godot/85 testes Python, exit0.
+Mais duas suítes em chamada separada: 13 seeds +16 mobiles =29 partidas, exit0.
+**Cobertura combinada: 109 suítes, 28.157 checks Godot, 85 testes Python e
+29 partidas, zero falhas.** Código de produção estável entre as chamadas.
+
+GPU: 240 quadros 1920×1080, dois sentidos, 2×30 quadros RGBA idênticos na pausa,
+retomada comprovada no recorte MOVE, soltura e dois fallbacks idênticos ao
+compacto. 22 PNGs em `docs/move-bar`; contrato em `MOVE_BAR_NATIVE.md`,
+manifesto em `docs/move-bar/verified-source.json`.
+
+Sequências anteriores move-*.png da ADR-134 são históricas e foram rejeitadas;
+a validação abaixo pertence ao snapshot anterior. A frequência da UI continua
+adaptada ao porte. Cliente Windows não executado/áudio mudo; aceite visual desta
+correção pendente. README T1 não movimenta o ator e mantém a captura anterior.
+Versão 0.20.5/app/ZIP mantidos; sem commit/push.
+
+## HUD em duas faixas, cronômetro e vento — ADR-134
+
+Validação do usuário pediu corrigir assets e disposição: header com Options/clima/
+Gold/itens/Skip; footer com S1/S2/SS/ângulo/Slice/Drag/carga/MOVE. Pedido adicional
+incluiu cronômetro e vento. Correção pronta no fonte;55 atlas/12 entradas XFS,
+fontes/pivôs/PNG nativos, sem GPT ou fit individual nos componentes novos.
+ConsumidoresASM/contrato/limites em `HUD_CLIENT_LAYOUT.md`. Escopo Solo;
+variantes Life/Jewel identificadas, inativas e sem placares inventados.
+
+Layout compartilhado em battle_hud_layout.gd: header 64 px/footer 70,4 px,
+mundo1280×665,6 desde y64. Câmera/draw/input acompanham o recorte; modelo,
+terreno, colisão, vento físico e 30 s de ação não mudaram. Clock original mostra
+segundos+décimos; vento usa o próprio ponteiro do anel laranja moon.xtf,
+texto WIND/força em numfont imóvel e orientação coerente com vetor físico.
+Fallback integral por grupo de clock/vento, por textura nos demais.
+
+**109 suítes, 28.131 checks Godot, 85 testes Python e 29 partidas, zero falhas**; parse aprovado/exit0.
+Log `.tools/hud-layout/full-harness-final.log`; manifesto/hash em
+`docs/battle-hud-layout/verified-source.json`. Rodada intermediária exit2 porque
+a lista do runner foi alterada enquanto executava; `sh -n` aprovado e a rodada
+final completa repetida após estabilização. Não contar essa rodada como verde.
+
+GPU final 960 quadros1920×1080/8 casos,8×30 quadros RGBA idênticos na pausa,
+retomada confirmada. Centroide dos pixels do ponteiro prova quatro cardinais
+(produto escalar>0,9999). README com 4 PNGs + 86 quadros de T1 real/GIF/MP4 regenerados.
+Revisão independente: fallback de clima, altura do lock e 1 px do vento
+corrigidos; teste red/green. Cliques reais pelo viewport em S1/S2/SS, Options,
+itens, Skip e selector; Drag/pan bloqueados em ambas as faixas.
+
+Aceite humano desta correção, escuta e execução do cliente Windows pendentes.
+Canvas do porte mantém miolo mais curto que 800×600. Captura/clock 60 Hz não
+comprovam performance 60 FPS. Editor import só teve editor_settings ambiental;
+logsGPU finais sem ERROR/SCRIPT ERROR/leaks. Versão permanece 0.20.5; app/ZIP
+anteriores não atualizados. Sem commit/push; delta Git preexistente preservado.
+
+## Assets de batalha do cliente — REQ-48 / ADR-133
+
+Retomada de27/10/2026 concluída sobre os arquivos já modificados pelo trabalho
+anterior. Inventário e resultados em `CLIENT_ASSETS_PORT.md`, com relatórios
+por grupo de HUD, clima, itens e áudio. Miramo usa mos.img/pmos.img, alpha
+comprovado contra mos.lnd (3.240.000pixels) e fallback anterior idêntico.
+HUD:27atlas de recortes nativos nas caixas atuais; clima/Thor:8folhas originais
+com EPA/pivôs e fallback nativo; itens:ícones/beacon/19chamas/banner nativos;
+áudio:96entradas exatas, stage1..6 e turn2local/turnadversário ativos.
+
+Composição/layout do HUD e climas fora do modo Mage continuam adaptados.
+Lacunas ficam declaradas, sem GPT ativo nesses grupos: componentes do HUD,
+Weakness/Mirror/Random, aura UsingItem, fundo/abas do popup antigo e sons sem
+recurso/evento comprovado. O stage.dat nativo e outros imports já comprovados
+podem conservar caminhos históricos em assets/openbound. Originais e HD
+anteriores preservados, elenco/equipamentos/perfil e regras sem mudança.
+
+`./scripts/check.sh` final: **107 suítes, 27.945 checks Godot, 82 testes Python e 29 partidas, zero falhas**, parse aprovado,
+exit0. Log `.tools/client-assets-full-harness.log`; hashes, fontes e resultados
+em `docs/client-assets/verified-source.json`. Primeira rodada completa teve
+apenas test_room_ui exigindo caminhoHD antigo; expectativa atualizada para
+xfs/items, dirigida172/0 e harness completo repetido. Log inicial preservado.
+Revisão independente achouP2 nos dígitos0..7 da fila; mapeamento corrigido,
+oráculo de pixels e capturas finais refeitos. SS usa5faces nativas.
+
+GPU M4Pro:720quadros1920×1080, sete casos, sete pausas de30quadrosRGBA
+idênticos e retomada confirmada; galeria/MP4/GIF em `docs/client-assets` e
+quatro casos/dois sentidos em `docs/client-weather-assets`. Eventos Thor e
+chamas controlados são fixtures de apresentação; teleporte também disparado
+por Game. Relógio60Hz não comprova performance60FPS. Logs finais sem erro de
+script/recurso/leaks. GPU restrita abortou134; execuções finais fora do sandbox
+exit0. Import teve apenas CA/editor_settings ambientais conhecidos.
+
+README regenerado por `tests/capture_readme.gd`:4PNGs e86quadros de T1real,
+MP4/GIF recompostos. Corrigido stretch antigo que capturava1728×1080 e gerava
+MP41920×1200; cada snap agora exige1920×1080, conferido também por PIL/ffprobe.
+
+Limites:visor de ângulo branco tem contraste reduzido no painel claro; escuta,
+input/aceite humanos e execução do clienteWindows não realizados. Sem nova
+versão/export/app/PCK/ZIP, commit ou push; aplicativo exportado anterior não
+foi atualizado. Fonte permanece0.20.5. Perfil real não usado nas capturas/testes.
+
 ## Objetivo jglim, OpenBound fora do escopo e capturas do README — ADR-132
 
 Pedido de27/10/2026: o projeto reescreve jglim/gunbound-launcher e
