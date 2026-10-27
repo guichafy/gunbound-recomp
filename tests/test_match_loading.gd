@@ -64,8 +64,11 @@ func run() -> void:
 	var cpu_mark: Vector2 = Loading.point(int(cpu_spawn.x), scene.loading_width, catalog_rows)
 	var font: Font = load("res://assets/classic/room/settings/room_text.fnt")
 	var player_width := font.get_string_size("Piloto", HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
-	check(is_equal_approx(view.get_node("SpawnName0").position.x, 26 + player_mark.x - player_width * 0.5), "Player name is centered on the mask column")
-	check(is_equal_approx(view.get_node("SpawnName1").position.y, 374 + cpu_mark.y), "CPU name uses the mask row plus the 18 px drop")
+	var view_script = load("res://scripts/loading_view.gd")
+	var origin: Vector2 = view_script.STAGE_ORIGIN
+	var sink: float = view_script.SURFACE_SINK
+	check(is_equal_approx(view.get_node("SpawnName0").position.x, origin.x + player_mark.x - player_width * 0.5), "Player name is centered on the mask column")
+	check(is_equal_approx(view.get_node("SpawnName1").position.y, origin.y + cpu_mark.y + sink), "CPU name sits on the snow bank, below the mask outline")
 	var rolled_player: int = scene.loading_player
 	var rolled_cpu: int = scene.loading_cpu
 	scene.loading_elapsed = 0.0

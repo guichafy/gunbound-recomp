@@ -28,6 +28,9 @@ O card central mostra o quadro idle do mobile sorteado, com a proporção
 original (`STRETCH_KEEP_ASPECT_CENTERED`). Os lugares desenham só o casco
 nativo: a folha de piloto legada é a do Bigfoot e estica os outros mobiles.
 Os nomes no mapa usam a fonte 8×12 da sala, com contorno de 2 px.
+A prévia fica recortada no vão de `load_back` (28, 30, 741×207), sem cobrir
+a barra vermelha do cabeçalho. O pixel da máscara é o contorno escuro acima
+do banco de neve; o texto desce mais 20 px para ficar sobre a neve.
 
 ## Limites
 
