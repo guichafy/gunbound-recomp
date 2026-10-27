@@ -1,5 +1,159 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Versionamento local do trabalho Aduka
+
+Pedido posterior do usuário: registrar as alterações do Aduka no Git local.
+Verificação antes do commit:3856checks/0 em seis suítes dirigidas
+(combate, clima, apresentação, Thor, integração e cronologia), exit0;
+hashes da implementação coincidem com a validação completa daADR-125.
+Código, assets, fixtures, documentos e capturas fazem parte do registro.
+Trabalho simultâneo do Mage permanece separado. Versão do aplicativo0.20.5
+preservada; sem nova exportação nem envio ao remoto.
+
+## Aduka: dano/colisão/clima e T2 com3 bichos — ADR-125
+
+Validação final: **16544checksGodot +44testesPython +29partidas/0**,
+84suítes, parse aprovado e exit0 em `./scripts/check.sh`.
+Log final `.tools/aduka-combat/verified-harness.log`; revisão semP1/P2,
+GPU sem erros de script. Os números das seções anteriores são históricos.
+
+Pedido posterior substitui adaptações de dano/contato daADR-124 e exige3T2
+visíveis, vento atual e tornado sem força desproporcional. REA estático
+Ghidra12.2/JDK26 no mesmo PE/XFS;17extratos essenciais em
+`docs/aduka-combat/native-proof.json`, matriz/plano/limites em
+`ADUKA_COMBAT_REA.md`. `AdukaCombat` porta queda linear, aspecto, passes
+inteiros, Defense/tipos, escudo e XP; AABB sem rotação, offsets assimétricos,
+stride8/refino1, Thor2px e cratera de scanlines. Máscara1px original clonada
+na previsão; apoio/grade comum e demais ataques preservados.
+
+`AdukaWeather` conserva a velocidade24.8 dentro do tornado, faz duas
+inversões e libera na terceira saída; vento/gravidade da semente voltam no
+tick seguinte. Sem relançamento vetorial C#. Force acumula uma vez/tick em
+20..100, aplicado separadamente; Thor não herda atributos do guia. T2tem3
+emissões2/6/10 por pedido explícito (PE tem2); folha original`bullet16sl`
+em alpha como corpo fallback para não sumir sobre neve. PNG/pivôs intactos.
+
+Revisão independente do código/ASM corrigiu doisP2 de LUTnegativa/Ysuprimido
+e efeitoBunge; revisão posterior sem P1/P2. Novas suítes: combate661checks,
+clima2629checks (616fixtures de dano +2000ticks independentes de tornado,
+quatro ventos/dois sentidos real×CPU). Assets/PE auditados por Python.
+
+GPU M4Pro real: Miramo/T2com3spriteslegíveis, Thorquadro77, HUD protegido e
+semglow ao sair. GaleriaT1/T2/SS300quadros1920×1080, T1umimpacto/T2trêsThor/
+SStrêsThor por sentido; vento/tornado outros300quadros/dois sentidos.
+Ambas pausas30idênticas e retomada. Captura/escrita15,46s/19,66s, relógio60Hz;
+não é prova de performance60FPS. Clipes e JSON em `docs/aduka-combat`.
+Captura familiar inicialmente ociosa noquadro17; repetida integralmente com
+force_draw, sem reutilizar a tentativa parcial.
+
+Sem executar o cliente Windows/escuta humana; aceite visual do usuário
+pendente. Muzzle/origem convertida/apoio, calendário e climas adicionais,
+ativação nativa de itens ainda são bridges offline declarados. Import só
+teve os erros ambientais CA/editor_settings conhecidos; nenhum perfil real
+alterado. Sem versão/exportação/app/PCK/ZIP, commit ou push.
+
+As seções ADR-124 anteriores descrevem o estado antes deste porte.
+
+## Revisão Aduka T1/T2/SS e assets — ADR-124
+
+Pedido de revisão geral por REA após centralização (posição/orientação atuais
+preservadas). Ghidra12.2/JDK26 no mesmo PE/XFS, matriz e limites em
+`ADUKA_AUDIT.md`; extratos `.tools/aduka-audit/01..07`, essenciais em
+`docs/aduka-audit/source-proof.json`. T1tick1, T2ticks2/6 e SSticks2/6/10
+reconfirmados. `AdukaSprite` mantém montagem/atlas e corrige corpo alpha,
+glow aditivo e Facing vertical T2/SS. Sem rastro, conforme ADR-120.
+
+ThorBody/ThorLight/EPA originais em catálogo `aduka/thor_native.json`;
+renderer em escala nativa20Hz/ângulo sem PI extra/bob discreto. Estado
+normal/active/fire, ease e clocks em `weather.thor`, tick comum e cópia
+profunda para CPU. Thor preparado antes do impacto quando há Aduka, com
+posição inicial determinística adaptada; rota climática usa mesmo Thor.
+T2/SS produzem2/3feixes sem blast próprio do guia; efeito usa22blast PCM
+pela chamada432320(owner,1,1), sem som extra inventado do guiaSS23ausente.
+
+Revisão independente tratou dois P2: feixe sobre HUD e glows residuais ao
+trocar tela. Reprodução GPU antesfalse/false, depoistrue/true; HUD emz1,
+mundo/RIDs emz0, controles emz2; `replace_root` limpa todos os passes.
+Revisão final aprovada, sem P1/P2 restante.
+
+Validação: **harness completo13241checksGodot+42Python+29partidas/0**, parse
+aprovado/exit0. Após os ajustes só de HUD/limpeza:8suítes1004/0 e
+**quick final13253checksGodot+42Python,80suítes/0**, com12novos checks de
+Thor real/previsão/isolamento. Partidas completas anteriores usam o mesmo
+modelo final. Auditoria de495quadros, pivôs/EPA/ASM e PCM; originais intactos.
+GPU real M4Pro:300quadros1920×1080/relógio60Hz, pausa30idêntica e retomada,
+T1/T2/SS nos dois sentidos. Captura/escrita levou14,27s (não é prova de
+performance60FPS). Sala e Miramo/T2 reais com HUD; primeiro raio noquadro74.
+Imagens/vídeo/JSON em `docs/aduka-audit`; logs `.tools/aduka-audit`.
+
+Dano final C#, caixa/muzzle comuns, DDA2px e ramo de obstáculos de Thor
+seguem adaptações declaradas; sem alegar paridade integral. Cliente Windows
+original não executado; escuta/mouse/aceite visual pendentes. Import teve
+somente CA/editor_settings ambientais conhecidos; GPU sem erros de script.
+Sem nova versão, exportação/app/PCK/ZIP, commit ou push.
+
+## Piloto mais centralizado no Aduka — ADR-123
+
+Usuário aprovou a orientação da ADR-122 e pediu aproximar o piloto do centro.
+`MobileLooks` declara `rider_adjust=(8,0)` só no Aduka; `ClassicSprite` soma
+a constante ao RiderPivot no consumidor. Idle(-8,-23)→(0,-23), conservando
+deslocamentos relativos das poses e todos os Y. Sala/arena/loja e piloto
+padrão/equipado compartilham esse encaixe; orientação aprovada, casco,
+metadados/fontes e combate preservados. Adaptação visual solicitada, não
+alegação de paridade nativa. Evidência de origem/plano em `ADUKA_CENTER.md`.
+
+Verificação atual: **1018 checks/0, 11suítes, exit0** (classic_mobiles,
+original_mobiles, avatar_mount/art/hd/continuity, room_ui, room_reference,
+roster, scene, shop_wide). GPU real M4 Pro fora do sandbox, 1920×1080,
+relógio60Hz/150quadros, seis poses/dois sentidos/padrão/HD, pausa30 idêntica e
+retomada. Sala real A/B antes/depois, piloto padrão/Great Devil. Imagens e
+amostras temporais inspecionadas, JSON em `docs/aduka-center`; sequência/log
+local em `.tools/aduka-center`. Sem erro de script; partidas não repetidas
+(só encaixe visual). Sem nova versão, exportação/app/PCK, commit ou push.
+Aceite visual da centralização pendente; orientação anterior aprovada.
+
+## Orientação do conjunto Aduka na sala — ADR-122
+
+Usuário rejeitou a ADR-121 e enviou imagem do lado A: personagem olhando à
+direita, traseira/mira do Aduka à esquerda. O deslocamento X foi removido;
+RiderPivot original restaurado integralmente. `MobileLooks` declara
+`room_facing=-1` só no Aduka, consumido por `Game.draw_figure`, para converter
+a orientação visual da sala no sentido de tiro esperado por `ClassicSprite`.
+Casco/piloto giram juntos; B espelha A. Arena mantém `rear` e tiro pelas costas.
+
+Verificação desta correção: **982 checks/0, dez suítes, exit0** (`check.sh` com
+classic_mobiles, original_mobiles, avatar_mount/art/hd/continuity, room_ui,
+room_reference, roster e scene). `git diff --check` limpo. GPU real M4 Pro,
+1920×1080: sala A/B com Aduka, piloto padrão e Great Devil; galeria de seis
+poses, dois sentidos de tiro, padrão/HD, relógio60Hz/150quadros, pausa30
+idêntica e retomada. Capturas atuais e referência do usuário em
+`docs/aduka-orientation`, script `tests/capture_aduka_mount.gd`, log
+`.tools/aduka-rider/orientation-gpu.log`. Imagens da sala/galeria inspecionadas;
+não é execução do cliente original. Combate não alterado, partidas não
+repetidas; sem nova exportação/app, versão, commit ou push. Aceite visual
+da nova composição pendente. A seção ADR-121 abaixo é histórico rejeitado.
+
+## Piloto à direita no Aduka — ADR-121
+
+**Histórico rejeitado; substituído pela ADR-122.**
+
+Usuário esclareceu que deseja mover o piloto para o lado direito do mobile,
+sem virar o personagem. `ClassicSprite.rider_offset` inverte somente X no
+Aduka: idle(-8,-23)→(8,-23) no casco, com espelho automático no sentido
+oposto. Piloto padrão/equipado compartilham o encaixe; altura/EPA, direção das
+peças, metadados/PNG originais, outros mobiles e combate preservados.
+
+`./scripts/check.sh test_classic_mobiles test_original_mobiles test_avatar_mount
+test_avatar_art test_avatar_hd test_avatar_continuity test_room_ui test_scene`:
+**694 checks/0, oito suítes, exit0**. GPU real no M4 Pro fora do sandbox:
+`tests/capture_aduka_mount.gd`, 1920×1080, relógio60Hz, 150quadros, seis poses
+(hurt com inclinação15°), dois sentidos, padrão/HD, pausa30 idêntica e retomada.
+Antes/depois e amostra posterior em `docs/aduka-mount`; logs em
+`.tools/aduka-rider`. A primeira execução GPU no sandbox saiu134; repetição
+fora dele concluída. Imagens inspecionadas; sem alegação de execução do cliente
+original ou aceite do usuário. Partidas não repetidas (só encaixe visual).
+Sem app novo, versão, commit ou push; aceite visual pendente.
+
 ## Rastro só no T1 do Raon — ADR-120
 
 O usuário não quer rastro fora do T1 do Raon. `ClassicSprite.has_trail` liga

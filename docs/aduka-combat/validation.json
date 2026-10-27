@@ -1,0 +1,242 @@
+{
+  "source_proof": "native-proof.json",
+  "falloff_fixtures": 616,
+  "tornado_reference_ticks": 2000,
+  "tornado_fixtures": 20,
+  "native_weather_checks": 2629,
+  "capture_runtime": "Godot4.7.2 / M4 Pro OpenGL4.1",
+  "original_windows_client_executed": false,
+  "t2_override": "3 requested emissions at2/6/10; pinnedPE has2 at2/6",
+  "visibility_override": "Sourcebullet16sl alpha fallback on approved HD background; original pixels unchanged",
+  "characterdata_sha256": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+  "validated_sources_sha256": {
+    "scripts/aduka_combat.gd": "c2b0484c8df3d5a85de6b96a0eadf58ef2abbd294ab0ad0fc57b3a6e52f8c1d1",
+    "scripts/aduka_weather.gd": "d1e9bc078936ed120cacdcfd2da7a208063d18f228a83ee2633d21d760fad5d2",
+    "scripts/aduka_effect.gd": "2107ae9daffd60d344db704d53af0a9bcdee7bcb9a85f2bba72ee51db8de31b2",
+    "scripts/aduka_sprite.gd": "d1561c5161097f68708b36460c253ef99cb9e1e97c4fa0e3a3bb8c9552abe0b4",
+    "scripts/match.gd": "854fb9831aaa506a5a073de7f058e3459070c2a5b05c2c51bb72e44fe18bc0c9",
+    "scripts/terrain.gd": "f34cde9867b6a01d8cc4a844fbbf83cf2a9133dba74caad649f90e605d11977c",
+    "scripts/weather_contact.gd": "5141e444887d64c6a03a4052206b4a49295d706d6fe39e9ed19fcc09d26a92f0",
+    "scripts/weather_art.gd": "28a814a9708f65486a26cfc69b6c452b1bc54ed030cb1781e5bb589655b0f3fa",
+    "scripts/mobiles.gd": "0764cf83d73662bcb7df2d0cc59ff5cac76c1c9d545756c40d5d602bb97f37bd"
+  },
+  "native_combat_checks": 661,
+  "native_presentation_checks": 40,
+  "gpu_family": {
+    "elapsed_wall_seconds": 15.462236,
+    "events": [
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "explosion": 1,
+          "projectile_launch": 1,
+          "shield_damage": 1,
+          "turn": 1
+        },
+        "explosions": 1,
+        "facing": 1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 0
+      },
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "explosion": 1,
+          "projectile_launch": 1,
+          "shield_damage": 1,
+          "turn": 1
+        },
+        "explosions": 1,
+        "facing": -1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 0
+      },
+      {
+        "children": 0,
+        "effect_ticks": 93,
+        "event_types": {
+          "projectile_launch": 3,
+          "shield_damage": 1,
+          "thor": 3,
+          "turn": 1
+        },
+        "explosions": 0,
+        "facing": 1,
+        "maximum_mines": 0,
+        "thor": 3,
+        "weapon": 1
+      },
+      {
+        "children": 0,
+        "effect_ticks": 93,
+        "event_types": {
+          "projectile_launch": 3,
+          "shield_damage": 1,
+          "thor": 3,
+          "turn": 1
+        },
+        "explosions": 0,
+        "facing": -1,
+        "maximum_mines": 0,
+        "thor": 3,
+        "weapon": 1
+      },
+      {
+        "children": 0,
+        "effect_ticks": 93,
+        "event_types": {
+          "projectile_launch": 3,
+          "shield_damage": 1,
+          "thor": 3,
+          "turn": 1
+        },
+        "explosions": 0,
+        "facing": 1,
+        "maximum_mines": 0,
+        "thor": 3,
+        "weapon": 2
+      },
+      {
+        "children": 0,
+        "effect_ticks": 93,
+        "event_types": {
+          "projectile_launch": 3,
+          "shield_damage": 1,
+          "thor": 3,
+          "turn": 1
+        },
+        "explosions": 0,
+        "facing": -1,
+        "maximum_mines": 0,
+        "thor": 3,
+        "weapon": 2
+      }
+    ],
+    "frame_sha256": "see manifest.json",
+    "frames": 300,
+    "id": 16,
+    "mobile": "Aduka",
+    "pause30_identical": true,
+    "resume_changes_pixels": true
+  },
+  "gpu_weather": {
+    "elapsed_wall_seconds": 19.657514,
+    "events": [
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "miss": 3,
+          "projectile_launch": 3,
+          "turn": 1
+        },
+        "explosions": 0,
+        "facing": 1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 1
+      },
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "miss": 3,
+          "projectile_launch": 3,
+          "turn": 1
+        },
+        "explosions": 0,
+        "facing": -1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 1
+      },
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "miss": 3,
+          "projectile_launch": 3,
+          "turn": 1,
+          "weather_hit": 3
+        },
+        "explosions": 0,
+        "facing": 1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 1
+      },
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "miss": 3,
+          "projectile_launch": 3,
+          "turn": 1,
+          "weather_hit": 3
+        },
+        "explosions": 0,
+        "facing": -1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 1
+      },
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "miss": 3,
+          "projectile_launch": 3,
+          "turn": 1,
+          "weather_hit": 3
+        },
+        "explosions": 0,
+        "facing": 1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 1
+      },
+      {
+        "children": 0,
+        "effect_ticks": 0,
+        "event_types": {
+          "miss": 3,
+          "projectile_launch": 3,
+          "turn": 1,
+          "weather_hit": 3
+        },
+        "explosions": 0,
+        "facing": -1,
+        "maximum_mines": 0,
+        "thor": 0,
+        "weapon": 1
+      }
+    ],
+    "frame_sha256": "see weather/manifest.json",
+    "frames": 300,
+    "id": 16,
+    "mobile": "Aduka",
+    "pause30_identical": true,
+    "resume_changes_pixels": true
+  },
+  "actual_game": {
+    "actual_first_ray_frame": 77,
+    "hud_above_beam": true,
+    "no_glow_residue_after_leaving": true,
+    "three_launched_t2_creatures": true
+  },
+  "final_harness": {
+    "command": "./scripts/check.sh",
+    "exit_code": 0,
+    "godot_checks": 16544,
+    "python_tests": 44,
+    "full_matches": 29,
+    "suites": 84,
+    "parse": "passed",
+    "log": ".tools/aduka-combat/verified-harness.log",
+    "log_sha256": "708b119bfd944b84ae48ae46771ccbe0084a7fbf43300bb119633e4033c64ea4"
+  }
+}

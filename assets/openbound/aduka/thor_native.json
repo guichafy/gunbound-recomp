@@ -1,0 +1,170 @@
+{
+  "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+  "columns": 14,
+  "sheets": {
+    "ThorBody.png": {
+      "entry": "thor.img",
+      "entry_sha256": "eac79ab4e3d52bb64ba18204ed5126ce87252cc3729c66d2319c9befa1d971c4",
+      "frames": 56,
+      "cell": [
+        157,
+        150
+      ],
+      "origin": [
+        104,
+        75
+      ],
+      "image_sha256": "4b69c2c4996d66556f101455d0c3281358394e86f4ec6672efcd5e319bdcbdea"
+    },
+    "ThorLight.png": {
+      "entry": "thorl.img",
+      "entry_sha256": "633302ab465c251abfd0e33136b57e7a88f05e3cbfa7e84c59a598e0d1fdf4af",
+      "frames": 56,
+      "cell": [
+        175,
+        126
+      ],
+      "origin": [
+        100,
+        68
+      ],
+      "image_sha256": "918d8b876c9fd7cf355f782db034e76ecacccd7960216f22af56fe112144cdea"
+    }
+  },
+  "epa_sha256": "961c4998f3e36c8507678d86b4b5cf4cfa51f785e0ce02e5dbf638a6c2ae0947",
+  "states": {
+    "normal": {
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "durations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "active": {
+      "frames": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "durations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "fire": {
+      "frames": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "durations": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "unusable_states": {
+    "damage": "EPA references frames beyond this56-frame source"
+  }
+}

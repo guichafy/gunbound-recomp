@@ -1,0 +1,188 @@
+{
+  "binary_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "bodies": {
+    "1": {
+      "width": 28,
+      "height": 24,
+      "bottom": 3,
+      "vulnerability": 92,
+      "flags": 5,
+      "source_type": 1,
+      "origin_y": 28
+    },
+    "2": {
+      "width": 28,
+      "height": 24,
+      "bottom": 2,
+      "vulnerability": 100,
+      "flags": 8,
+      "source_type": 4,
+      "origin_y": 21
+    },
+    "3": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 90,
+      "flags": 8,
+      "source_type": 2,
+      "origin_y": 24
+    },
+    "4": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 84,
+      "flags": 8,
+      "source_type": 0,
+      "origin_y": 22
+    },
+    "5": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 92,
+      "flags": 2,
+      "source_type": 3,
+      "origin_y": 24
+    },
+    "6": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 94,
+      "flags": 2,
+      "source_type": 5,
+      "origin_y": 23
+    },
+    "7": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 85,
+      "flags": 8,
+      "source_type": 6,
+      "origin_y": 23
+    },
+    "8": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 86,
+      "flags": 4,
+      "source_type": 7,
+      "origin_y": 23
+    },
+    "9": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 94,
+      "flags": 4,
+      "source_type": 8,
+      "origin_y": 23
+    },
+    "10": {
+      "width": 28,
+      "height": 24,
+      "bottom": 4,
+      "vulnerability": 94,
+      "flags": 5,
+      "source_type": 9,
+      "origin_y": 27
+    },
+    "11": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 93,
+      "flags": 2,
+      "source_type": 10,
+      "origin_y": 23
+    },
+    "12": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 82,
+      "flags": 2,
+      "source_type": 11,
+      "origin_y": 23
+    },
+    "13": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 92,
+      "flags": 2,
+      "source_type": 12,
+      "origin_y": 21
+    },
+    "14": {
+      "width": 26,
+      "height": 26,
+      "bottom": 4,
+      "vulnerability": 95,
+      "flags": 3,
+      "source_type": 13,
+      "origin_y": 24
+    },
+    "15": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 88,
+      "flags": 8,
+      "source_type": 14,
+      "origin_y": 23
+    },
+    "16": {
+      "width": 28,
+      "height": 24,
+      "bottom": 0,
+      "vulnerability": 91,
+      "flags": 8,
+      "source_type": 15,
+      "origin_y": 20
+    }
+  },
+  "tilt": {
+    "y": [
+      0,
+      0,
+      1,
+      3,
+      4,
+      5
+    ],
+    "x_large": [
+      0,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15
+    ],
+    "x_small": [
+      0,
+      2,
+      4,
+      6,
+      9,
+      12,
+      13
+    ]
+  },
+  "t1": {
+    "power": 152,
+    "dimension": 64,
+    "aspect": 120,
+    "flags": 70
+  },
+  "thor": {
+    "aspect": 150,
+    "flags": 4,
+    "percent": 100
+  }
+}

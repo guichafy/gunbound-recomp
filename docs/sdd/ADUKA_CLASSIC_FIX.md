@@ -1,5 +1,12 @@
 # Aduka — guias e Thor do cliente clássico
 
+Estado atual: ADR-125, `ADUKA_COMBAT_REA.md`. Dano/colisão/tornado nativos
+delimitados; T2com3 por pedido explícito, com fonte gráfica preservada.
+
+Revisão posterior de27/10/2026: ADR-124, `ADUKA_AUDIT.md`. Renderer da família,
+Thor corpo/luz/EPA, relógios/cópias e som do efeito foram corrigidos. Os
+resultados abaixo são históricos e não comprovam a implementação revisada.
+
 REQ-04/05/07/08/19/44/45. Escopo desta correção: os guias S2/SS devem
 acionar Thor mesmo sem o clima Thor. S2 conserva duas emissões, SS três
 (cronologia em `classic_shot_timing.gd`). O poder zero do guia não é o poder

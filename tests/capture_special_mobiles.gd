@@ -24,6 +24,9 @@ var board
 var mobile := 10
 var elapsed := 0.0
 var capture_paused := false
+var output := OUT
+var frame_output := FRAMES
+var weather_capture := false
 var report: Dictionary = {"resolution":[1920,1080],"world_area":[1280,800],"native_scale":1,"simulation_hz":20,"presentation_hz":60,"frames_per_mobile":TOTAL,"pause_frames":[90,119],"fixtures":"six independent real short flights with controlled initial positions/velocities; common swept contact; no profile","runs":[]}
 
 class Board extends Node2D:
@@ -31,7 +34,7 @@ class Board extends Node2D:
 	var font := ThemeDB.fallback_font
 	func _draw() -> void:
 		draw_rect(Rect2(0,0,1920,1080),Color("11232e"))
-		draw_string(font,Vector2(320,60),"%s | T1 · T2 · SS | Gunbound Classic"%host.NAMES[host.mobile],HORIZONTAL_ALIGNMENT_LEFT,-1,32)
+		draw_string(font,Vector2(320,60),"%s | %s | Gunbound Classic"%[host.NAMES[host.mobile],"T2 · vento atual e tornado" if host.weather_capture else "T1 · T2 · SS"],HORIZONTAL_ALIGNMENT_LEFT,-1,32)
 		draw_string(font,Vector2(320,100),"Sprites nativos1:1 · modelo20Hz · captura60Hz · t=%.2fs · %s"%[host.elapsed,"PAUSA" if host.capture_paused else "ANIMAÇÃO"],HORIZONTAL_ALIGNMENT_LEFT,-1,20)
 		draw_string(font,Vector2(320,985),"Cada coluna: contato real em terreno simples, efeito e impacto. Sem perfil; áudio silenciado.",HORIZONTAL_ALIGNMENT_LEFT,-1,18)
 		draw_string(font,Vector2(320,1022),"Fixtures do Godot integrado; não são execução do cliente original nem aceite visual.",HORIZONTAL_ALIGNMENT_LEFT,-1,18,Color("9cb5c4"))
@@ -43,13 +46,18 @@ class Lane extends Node2D:
 	var font := ThemeDB.fallback_font
 	func _draw() -> void:
 		var model = host.models[index]
-		var weapon := int(index/2)
+		var group := int(index/2)
+		var weapon := 1 if host.weather_capture else group
 		var facing := 1 if index%2 == 0 else -1
 		var sprite = host.sprites[host.mobile]
+		if sprite.has_method("begin_projectiles"):
+			sprite.begin_projectiles(self)
 		draw_rect(Rect2(0,0,200,800),Color("18313c") if index%2 == 0 else Color("142c38"))
-		draw_string(font,Vector2(8,24),"%s · %s"%[["T1","T2","SS"][weapon],"direita" if facing == 1 else "esquerda"],HORIZONTAL_ALIGNMENT_LEFT,-1,18)
+		var caption: String = ["calmo","vento+27/tornado","vento−27/tornado"][group] if host.weather_capture else ["T1","T2","SS"][weapon]
+		draw_string(font,Vector2(8,24),"%s · %s"%[caption,"→" if facing == 1 else "←"],HORIZONTAL_ALIGNMENT_LEFT,-1,15)
 		# Flat fixture mask is the actual model's image and keeps crater changes.
 		draw_texture_rect(model.terrain.texture,Rect2(0,0,200,800),false)
+		host.weather_art[index].draw_columns(self,model,Vector2.ZERO)
 		for satellite in model.satellites.values():
 			sprite.satellite_art.draw_satellite(self,satellite,Vector2.ZERO,clampf(float(model.accumulator)/0.05,0,1))
 		for actor_index in 2:
@@ -83,13 +91,18 @@ func _initialize() -> void:
 
 func reset_models() -> void:
 	models.clear(); impacts.clear(); weather_art.clear(); records.clear()
-	for weapon in 3:
+	for group in 3:
+		var weapon := 1 if weather_capture else group
 		for facing in [1,-1]:
 			var model = Match.new()
 			model.start(mobile,1,42,"","original")
 			model.wind = Vector2.ZERO
 			model.weather.columns.clear()
 			model.weather.thor.active = false
+			if weather_capture:
+				model.wind = Vector2([0,27,-27][group],0)
+				if group>0:
+					model.weather.add_column("tornado",100,1.0)
 			var terrain = model.terrain
 			terrain.WIDTH = 100; terrain.HEIGHT = 400
 			terrain.cells.resize(40000); terrain.cells.fill(0)
@@ -101,6 +114,13 @@ func reset_models() -> void:
 					terrain.image.set_pixel(x,y,Color("685741") if y > 350 else Color("cdbd88"))
 			terrain.texture = ImageTexture.create_from_image(terrain.image)
 			terrain.visual = null
+			if mobile==16:
+				terrain.native_cells.clear()
+				terrain.enable_native()
+				# Native Thor stays inside this narrow controlled contact lane.
+				model.weather.thor.pos = Vector2(100,350)
+				model.weather.thor.display_pos = model.weather.thor.pos
+				model.weather.thor.previous_display_pos = model.weather.thor.pos
 			model.actors[0].pos = Vector2(45 if facing > 0 else 155,675)
 			model.actors[0].facing = facing
 			model.actors[1].pos = Vector2(155 if facing > 0 else 45,675)
@@ -116,6 +136,12 @@ func reset_models() -> void:
 				shell.previous_draw_pos = shell.pos
 				shell.previous_hit_pos = shell.pos
 				shell.velocity = Vector2(facing*8,180)
+				if weather_capture:
+					shell.pos = Vector2(50 if facing>0 else 150,550)
+					shell.hit_pos = shell.pos
+					shell.previous_draw_pos = shell.pos
+					shell.previous_hit_pos = shell.pos
+					shell.velocity = Vector2(facing*180,-25)
 				shell.trail = [shell.pos]
 				shell.age = 0.0; shell.fp_ready = false
 				shell.erase("launch_velocity_fp")
@@ -129,6 +155,8 @@ func advance() -> void:
 		var model = models[index]
 		if model.phase == Match.PHASE_FLIGHT:
 			model.advance_projectiles(1.0/60)
+		elif mobile==16:
+			model.tick(1.0/60)
 		weather_art[index].tick(1.0/60,model)
 		for effect in impacts[index]:
 			effect.age += 1.0/60
@@ -150,8 +178,22 @@ func advance() -> void:
 			records[index].effect_ticks += 1
 
 func run() -> void:
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(FRAMES))
+	var targets: Array = IDS
+	if "--aduka" in OS.get_cmdline_user_args():
+		targets = [16]
+		output = "res://docs/aduka-audit/"
+		frame_output = "res://.tools/aduka-audit/gpu-frames/"
+	if "--aduka-combat" in OS.get_cmdline_user_args():
+		targets = [16]
+		output = "res://docs/aduka-combat/"
+		frame_output = "res://.tools/aduka-combat/gpu-frames/"
+	if "--aduka-weather" in OS.get_cmdline_user_args():
+		targets = [16]
+		weather_capture = true
+		output = "res://docs/aduka-combat/weather/"
+		frame_output = "res://.tools/aduka-combat/weather-frames/"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(frame_output))
 	sprites = Game.build_sprites()
 	sound = Sound.new(); sound.muted = true; root.add_child(sound)
 	view = SubViewport.new(); view.size = Vector2i(1920,1080)
@@ -166,9 +208,9 @@ func run() -> void:
 		var display := TextureRect.new(); display.texture = lane_view.get_texture()
 		display.position = Vector2(320+index*200,140); display.size = Vector2(200,800)
 		view.add_child(display)
-	for id in IDS:
+	for id in targets:
 		mobile = id; elapsed = 0; reset_models()
-		var folder := FRAMES+str(id)+"/"
+		var folder := frame_output+str(id)+"/"
 		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(folder))
 		var hashes: Array = []
 		var begin_time := Time.get_ticks_usec()
@@ -180,19 +222,21 @@ func run() -> void:
 			for panel in panels:
 				panel.queue_redraw()
 			await process_frame
-			await RenderingServer.frame_post_draw
+			# Explicit offscreen draw also works when macOS occludes the empty
+			# parent window; waiting for its automatic frame can stop indefinitely.
+			RenderingServer.force_draw()
 			var picture := view.get_texture().get_image()
 			var path := folder+"%03d.png"%frame
 			picture.save_png(path)
 			hashes.append(FileAccess.get_sha256(path))
 			if frame in [18,60,90,119,150,210,299]:
-				picture.save_png(OUT+"%s-%03d.png"%[str(NAMES[id]).to_lower(),frame])
+				picture.save_png(output+"%s-%03d.png"%[str(NAMES[id]).to_lower(),frame])
 		var identical := true
 		for frame in range(91,120):
 			identical = identical and hashes[frame] == hashes[90]
 		report.runs.append({"id":id,"mobile":NAMES[id],"frames":TOTAL,"elapsed_wall_seconds":float(Time.get_ticks_usec()-begin_time)/1000000,"pause30_identical":identical,"resume_changes_pixels":hashes[120] != hashes[119],"frame_sha256":hashes,"events":records.duplicate(true)})
 		print("SPECIAL GPU ",NAMES[id],":300frames1920x1080, pause30=",identical,", resume=",hashes[120] != hashes[119])
-	var manifest := FileAccess.open(OUT+"manifest.json",FileAccess.WRITE)
+	var manifest := FileAccess.open(output+"manifest.json",FileAccess.WRITE)
 	manifest.store_string(JSON.stringify(report,"\t")+"\n")
 	sound.queue_free()
 	quit()

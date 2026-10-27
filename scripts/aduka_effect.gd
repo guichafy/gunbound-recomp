@@ -1,9 +1,10 @@
 extends RefCounted
 ## Aduka guides request Thor even outside Thor weather (PE0x4398e0).
 ## Native tables/SETG thresholds/beam raster: ADUKA_CLASSIC_FIX.md.
-## Combat.trace_segment, blast arithmetic and initial placement are adapters.
+## Initial Thor placement remains the deterministic offline world policy.
 
 const Combat = preload("res://scripts/combat.gd")
+const NativeCombat = preload("res://scripts/aduka_combat.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Items = preload("res://scripts/items.gd")
@@ -45,6 +46,31 @@ static func ensure_thor(model) -> void:
 	thor.present = true
 	thor.level = clampi(int(thor.get("level",1)),1,6)
 	thor.xp = maxi(0,int(thor.get("xp",0)))
+	if not bool(thor.get("native",false)):
+		thor.merge({"native":true,"state":"active" if thor.active else "normal","state_tick":0,
+			"idle_tick":0,"native_angle":270,"display_pos":thor.pos,"previous_display_pos":thor.pos,
+			"display_xp":int(thor.xp)})
+
+## Thor Animate4abda0: EPA20Hz, discrete22-tick bob and integer Y easing.
+## Called by the same fixed step in live play and copied CPU simulations.
+static func step_thor(model) -> void:
+	var thor: Dictionary = model.weather.thor
+	if not bool(thor.get("native",false)):
+		return
+	thor.previous_display_pos = thor.display_pos
+	var position: Vector2 = thor.display_pos
+	var target: Vector2 = thor.pos
+	thor.display_pos = Vector2(int(target.x),int(position.y)+Physics.quot(int(target.y-position.y)+7,8))
+	thor.display_xp = int(thor.display_xp)+Physics.quot(int(thor.xp)-int(thor.display_xp)+7,8)
+	thor.idle_tick = (int(thor.idle_tick)+1)%22
+	thor.state_tick = int(thor.state_tick)+1
+	if str(thor.state) == "fire" and int(thor.state_tick)<16:
+		return
+	var state := "active" if bool(thor.active) else "normal"
+	if str(thor.state)!=state:
+		thor.state = state
+		thor.state_tick = 0
+
 
 static func cannon(thor_position: Vector2, target: Vector2) -> Vector2:
 	# 0x4f1f10 takes integer deltas directly (EAX=x,ECX=y), halves toward
@@ -71,6 +97,11 @@ static func impact(model, projectile: Dictionary, position: Vector2) -> bool:
 		return false
 	projectile.aduka_struck = true
 	projectile.thor = false
+	return strike(model,projectile,position)
+
+## A shared native Thor request; weather-triggered beams in an Aduka match
+## use the same level/XP table and art instead of reverting to the C# table.
+static func strike(model, projectile: Dictionary, position: Vector2, source: String = "aduka") -> bool:
 	ensure_thor(model)
 	var thor: Dictionary = model.weather.thor
 	var level := int(thor.level)
@@ -78,24 +109,30 @@ static func impact(model, projectile: Dictionary, position: Vector2) -> bool:
 	var owner := int(projectile.get("owner",model.shot_actor))
 	var weapon := int(projectile.get("weapon",1))
 	var origin := cannon(Vector2(thor.pos),position)
-	# Shared offline contact adapter; both native callers force the same gate.
-	var contact := Combat.trace_segment(origin,position,model.terrain,model.actors,-1)
+	# Native producer computes/stores the contact; the consumer applies that
+	# record. One offline call combines those stages, without a swept DDA.
+	var contact := NativeCombat.thor_contact(Vector2i(origin),Vector2i(position),model.terrain,model.actors)
+	# Missing contact records suppress the blast, but the native consumer still
+	# publishes the visual ray to the guide. Do not invent damage at its target.
 	var strike: Vector2 = contact.get("position",position)
 	var radius := float(data.dimension)*0.5
-	var item := str(model.actors[owner].get("turn_item","")) if owner>=0 and owner<model.actors.size() else ""
-	var dig := Attributes.points(model.actors[owner],Attributes.DIG) if owner>=0 and owner<model.actors.size() else 0
-	var removed: int = model.terrain.carve(strike,Attributes.crater(radius,dig+int(Items.dig(item))))
-	var dealt: int = model.blast(strike,radius,float(data.power),0.0,Items.attack(item),owner)
-	# Keep damage credit and XP separate from the zero-power guide. Resolution
-	# remains the existing Damage adapter; its return value feeds native levels.
+	var removed: int = 0 if contact.is_empty() else model.terrain.carve_native(NativeCombat.crater_spans(Vector2i(strike),int(data.dimension),150))
+	#432320 creates a separate electrical blast with100%, aspect150 and no
+	# owner Attack/Dig transfer. Shield/overkill credit follows45db20.
+	var dealt: int = 0 if contact.is_empty() else NativeCombat.apply(model.actors,model.events,Vector2i(strike),
+		{"power":data.power,"dimension":data.dimension,"aspect":150,"flags":4,"percent":100},true)
 	thor.xp = int(thor.xp)+maxi(0,dealt)
 	thor.level = level_for_xp(int(thor.xp))
+	thor.state = "fire"
+	thor.state_tick = 0
+	thor.native_angle = target_angle(Vector2i(position)-Vector2i(thor.pos))
 	var color := Color8((int(data.rgb)>>16)&255,(int(data.rgb)>>8)&255,int(data.rgb)&255)
 	var effect := {"kind":"aduka","tick":-1,"owner":owner,"weapon":weapon,"vehicle":16,
 		"from":origin,"position":strike,"target":position,"level":level,"period":data.period,"rgb":data.rgb,
 		"native_angle":target_angle(Vector2i(position)-Vector2i(thor.pos))}
 	model.battle_effects.append(effect)
-	model.events.append({"type":"thor","native":true,"source":"aduka","actor":owner,
+	model.events.append({"type":"thor","native":true,"source":source,"actor":owner,
+		"contact":not contact.is_empty(),
 		"owner":owner,"weapon":weapon,"vehicle":16,"from":origin,"position":strike,
 		"target":position,"removed":removed,"level":level,"new_level":thor.level,
 		"xp":thor.xp,"guide_power":0,"power":data.power,"radius":radius,

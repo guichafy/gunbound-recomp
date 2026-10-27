@@ -33,6 +33,7 @@ const ItemBar = preload("res://scripts/item_bar.gd")
 const SelectItemPopup = preload("res://scripts/select_item_popup.gd")
 const Items = preload("res://scripts/items.gd")
 var hud = HudArt.new()
+var screen_hud: Node2D
 var item_art = ItemArt.new()
 var item_bar = ItemBar.new(item_art)
 var weather_art = WeatherArt.new()
@@ -146,10 +147,19 @@ func _on_overlay_closed() -> void:
 		show_result()
 
 func replace_root() -> void:
+	# Private world-effect canvases belong to Game, not to the replaced UI.
+	weather_art.native_beam_art.clear()
+	weather_art.native_thor_art.clear()
+	for sprite in sprites.values():
+		if sprite.has_method("clear_projectiles"):
+			sprite.clear_projectiles()
+	screen_hud = null
 	if is_instance_valid(root):
 		remove_child(root)
 		root.queue_free()
 	root = Control.new()
+	# World/RID effects z0, screen HUD z1, interactive UI z2.
+	root.z_index = 2
 	root.size = Vector2(1280, 800)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(root)
@@ -324,6 +334,11 @@ func start_match() -> void:
 func build_hud() -> void:
 	# OpenBound action bar (HUD.cs): sprite buttons sit on the bar drawn in _draw.
 	hud.reset(model)
+	screen_hud = Node2D.new()
+	screen_hud.name = "ScreenHud"
+	screen_hud.z_index = -1
+	screen_hud.draw.connect(_draw_screen_hud)
+	root.add_child(screen_hud)
 	var blocker := Control.new()
 	blocker.position = Vector2(0, VIEW_SIZE.y)
 	blocker.size = Vector2(1280, 800 - VIEW_SIZE.y)
@@ -721,7 +736,13 @@ func draw_room_figures(canvas: Node2D) -> void:
 	draw_figure(canvas, RoomChoice.RANDOM if player_random else vehicle, menu.player_anchor, 1, profile.equipped_set())
 	draw_figure(canvas, RoomChoice.RANDOM if cpu_random else resolved_cpu_id(), menu.cpu_anchor, -1, {})
 
+func _draw_screen_hud() -> void:
+	if screen == "match" and is_instance_valid(screen_hud) and model.terrain != null:
+		hud.draw_screen(screen_hud,model,hud_state())
+
 func _draw() -> void:
+	if is_instance_valid(screen_hud):
+		screen_hud.queue_redraw()
 	if screen == "shop":
 		draw_rect(Rect2(0,0,1280,800),Color("11223c"))
 		return
@@ -778,7 +799,6 @@ func _draw() -> void:
 	draw_floating(offset)
 	draw_set_transform(Vector2.ZERO)
 	draw_offscreen_markers()
-	hud.draw_screen(self, model, hud_state())
 
 ## A shell with the native afterimage history keeps draining after it leaves
 ## the model; the copy is presentation only and never reaches collision.
@@ -793,6 +813,9 @@ func collect_lingering(shells_before: Array) -> void:
 ## Shells in flight, in world space. Each shell keeps its weapon (Dual+ mixes
 ## S1 and S2 in one turn); the beacon has its own art.
 func draw_projectiles(offset: Vector2) -> void:
+	for sprite in sprites.values():
+		if sprite.has_method("begin_projectiles"):
+			sprite.begin_projectiles(self)
 	for ghost in lingering:
 		var ghost_body = sprite_for(int(ghost.vehicle))
 		if ghost_body != null:
@@ -973,7 +996,8 @@ func draw_figure(canvas: Node2D, kind: int, pos: Vector2, facing: int, equipment
 	var context := {}
 	if not equipment.is_empty():
 		context = {"equipment": equipment, "age": elapsed}
-	body.draw(canvas, SpritePose.new(pos.round(), MenuScreen.MOBILE_WIDTH, facing, {
+	var shot_facing := facing * int(MobileLooks.look(kind).get("room_facing", 1))
+	body.draw(canvas, SpritePose.new(pos.round(), MenuScreen.MOBILE_WIDTH, shot_facing, {
 		"frame": body.frame_index("idle", elapsed, 0, false),
 		"age": elapsed,
 		"avatar_context": context,

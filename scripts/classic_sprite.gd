@@ -21,11 +21,13 @@ var sheet_density: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []
 var rear := false
+var rider_adjust := Vector2.ZERO
 var satellite_art
 var satellite_sounds: Array = []
 
 func setup(kind: String) -> void:
 	mobile_kind = kind
+	rider_adjust = preload("res://scripts/mobile_looks.gd").by_kind(kind).get("rider_adjust", Vector2.ZERO)
 	if kind == "asate":
 		satellite_art = preload("res://scripts/asate_art.gd").new()
 		for number in range(1,4):
@@ -113,6 +115,10 @@ func pose_duration(pose: String, weapon: int = 0, low_health: bool = false) -> f
 
 func draw(view: Node2D, request) -> void:
 	super.draw(view, request.mirrored() if rear else request)
+
+func rider_offset(frame: int) -> Vector2:
+	# ADR-123: constant registration correction, preserving each EPA pose's motion.
+	return super.rider_offset(frame) + rider_adjust
 
 func sheet(name: String) -> Dictionary:
 	return meta.sheets.get(name, {})

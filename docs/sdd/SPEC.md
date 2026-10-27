@@ -1,5 +1,34 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Dano e colisão do Aduka — REQ-04/05/07/08/09/19/20/44/45
+
+Portar os consumidores nativos de dano/colisão/Thor e revisar seus assets.
+T2 deve emitir três bichos conforme solicitação posterior do usuário; a
+divergência com as duas chamadas da build analisada fica explícita. Plano,
+matriz e limites em `ADUKA_COMBAT_REA.md`. Preservar montagem aprovada.
+
+## Auditoria Aduka T1/T2/SS e assets — REQ-04/05/07/08/09/19/20/44/45
+
+Revisar a família pelo cliente original, corrigindo emissão, animação,
+composição, Thor e sons, principalmente no T2. Manter orientação/encaixe
+aprovados (ADR-122/123), demais mobiles/HD e perfil. Matriz, plano e limites
+em `ADUKA_AUDIT.md` (ADR-124).
+
+## Piloto centralizado no Aduka — REQ-02/19/20/45
+
+Orientação da ADR-122 aprovada; aproximar o piloto do centro do mobile com
+compensação fixa(+8,0) em pixels nativos no ponto de montagem, preservando
+altura e deslocamentos animados por quadro. Padrão/equipado, sala/arena/loja
+compartilham o encaixe. Plano e evidência: `ADUKA_CENTER.md`, ADR-123.
+
+## Orientação do Aduka na sala — REQ-02/19/20/45
+
+A imagem posterior do usuário substitui a interpretação da ADR-121. No lado A,
+o personagem olha para a direita e a traseira/mira do Aduka aponta para a
+esquerda. Restaurar o RiderPivot original e orientar o conjunto inteiro na
+prévia da sala; lado B espelhado. Na arena, continuar atirando pelas costas
+com o desenho vinculado à direção efetiva do tiro. ADR-122.
+
 ## Alinhamento visual de SETTINGS — REQ-02/12/19/20
 
 Corrigir os dois T que aparecem acima de SE/INGS, preservando fonte e

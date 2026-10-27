@@ -1341,3 +1341,80 @@ o T1 do Raon desenha as sete cópias e esvazia a cauda após o impacto
 sprite único aprovado; o espelho “Facing” de Nak/Grub/Aduka e as cópias do Nak
 foram retirados. O censo do slot3 continua registrado como evidência do cliente,
 sem efeito no Godot.
+
+## ADR-121 — piloto no lado direito do Aduka
+
+**Substituída pela ADR-122; implementação rejeitada pelo usuário.**
+
+26/10/2026, REQ-19/20/45. Usuário esclareceu: “Mover o piloto para o lado
+direito do mobile”. O Aduka mantém o espelho do casco contra a mira (`rear`),
+mas seu RiderPivot consumido pelo desenho passa a ter X invertido. O idle
+(-8,-23) torna-se (8,-23) nas coordenadas do casco; cada pose conserva seu Y.
+Aplicar tanto ao piloto padrão como ao avatar equipado, sem virar suas peças.
+É ajuste visual solicitado, não alegação de paridade nativa do encaixe.
+Metadados/PNG originais, EPA, outros mobiles e combate permanecem preservados.
+Plano: capturar antes/depois nos dois sentidos e poses; rodar regressões de
+mobiles, avatar, sala e cena. Sem nova versão, exportação ou publicação.
+
+## ADR-122 — orientação do conjunto Aduka na sala
+
+26/10/2026, REQ-02/19/20/45. A imagem e a correção posterior do usuário
+esclarecem que no lado A o personagem olha à direita e o Aduka mira à
+esquerda, pela traseira. A ADR-121 deslocou o assento incorretamente; remover
+essa compensação e restaurar integralmente o RiderPivot nativo. A sala passa
+a converter seu sentido visual em sentido de tiro pelo `room_facing=-1` do
+catálogo de apresentação do Aduka. Lado B espelhado, piloto padrão/equipado
+e casco giram juntos. Arena mantém `rear` e o sentido real do tiro.
+Plano: validar a sala real com Aduka nos dois lados e captura de poses nos
+dois sentidos de tiro; executar regressões de sala/cena/mobile/avatar. Manter
+as capturas da ADR-121 como histórico rejeitado, sem reutilizar seus números
+como evidência desta correção. Sem nova versão, app ou publicação.
+
+## ADR-123 — aproximar o piloto do centro do Aduka
+
+27/10/2026, REQ-02/19/20/45. Usuário aprova a orientação da ADR-122 e pede
+piloto mais centralizado. Somar(+8,0) em pixels nativos ao RiderPivot do
+Aduka, antes de escala/espelho/inclinação. Idle(-8,-23) torna-se(0,-23);
+demais poses preservam os deslocamentos relativos e todos os Y originais.
+Constante no catálogo `MobileLooks`, consumo único em `ClassicSprite`, para
+piloto padrão/equipado e sala/arena/loja. Não espelhar X (ADR-121 rejeitada),
+nem prender X=0 por quadro. Orientação aprovada, fontes/atlas, outros mobiles
+e combate preservados. É adaptação visual solicitada, sem alegação de
+paridade nativa do novo encaixe. Evidência/plano: `ADUKA_CENTER.md`.
+
+## ADR-124 — revisão da família Aduka pelo cliente original
+
+27/10/2026. Pedido posterior à centralização aprovada: revisar toda a família
+e os assets, com diferença percebida no T2. Auditar MainAction, vtables,
+detonação/Thor, EPA, camadas e sons no mesmo PE/XFS. Corrigir divergências
+comprovadas em módulos próprios, preservando ADR-122/123 e rastro ADR-120.
+Fontes e limites comuns explícitos; sem anunciar paridade integral da engine.
+Plano/evidências: `ADUKA_AUDIT.md`. Sem publicação ou nova exportação solicitada.
+
+## ADR-125 — núcleo nativo de dano/contato/clima do Aduka e T2 legível com3 criaturas
+
+27/10/2026. Solicitação posterior exige REA de dano/colisão, três bichos no
+T2 e correção de força desproporcional no tornado com o vento atual.
+`450eb0→45db20` calcula dano no cliente: substituir a lacuna/adapter da
+ADR-124 por raio/queda linear inteiros, aspecto, vulnerabilidade/defesa,
+tipos, escudo e XP próprios. Portar amostragem8/refino1px, raioThor2px com
+ponte produção→registro→consumo e cratera por scanlines; máscara1px do
+foreground original, cópia privada para CPU. Nova geometria fica restrita
+a tiros Aduka/Thor, mantendo caixas de outros ataques e o apoio global.
+
+Tornado do Aduka conserva velocidade24.8, mínimo|vx|200, duas inversões e
+terceira saída; sem aceleração dentro e sem restaurar impulso inicial. Vento
+atual congelado na semente volta a acelerar no tick seguinte à liberação.
+Force acumula+8/tick entre20..100 e entra separado no dano. Outros climas e
+itens ainda usam os contratos offline onde o consumidor nativo não foi portado.
+
+O PE fixado tem2emissões T2. Pedido explícito de3 prevalece: override único
+em `Mobiles.emission`, ticks2/6/10, sem adulterar catálogo extraído. T2 usa
+os pixels originais de`bullet16sl.img` em alpha como corpo fallback para
+ser legível no HD; só esse passe substitui ADD, que na captura produzia
+silhuetas brancas sobre neve. Não alegar que3emissões/alpha estão no PE.
+T1/SS, glows separados, posição/orientação aprovada e demais assets mantidos.
+
+Plano/matriz/limites: `ADUKA_COMBAT_REA.md`; evidência estática Ghidra em
+`docs/aduka-combat/native-proof.json`, fixtures independentes e GPU em
+`docs/aduka-combat`. Não é paridade integral da engine nem execução Windows.

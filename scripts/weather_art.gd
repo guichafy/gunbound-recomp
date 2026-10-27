@@ -4,7 +4,9 @@ extends RefCounted
 ## reads match.gd state and events. Pause freezes it because game.gd stops ticking.
 
 const Weather = preload("res://scripts/weather.gd")
+const ShotTiming = preload("res://scripts/classic_shot_timing.gd")
 var native_beam_art = preload("res://scripts/aduka_beam_art.gd").new()
+var native_thor_art = preload("res://scripts/thor_native_art.gd").new()
 # Weather.cs: frames 128×64 (pivot 64,32), 8 frames at 15 fps, columns scroll 50 px/s.
 const FRAME := Vector2(128, 64)
 const SCROLL_SPEED := 50.0
@@ -62,9 +64,13 @@ func _init() -> void:
 		"lightning": load("res://assets/openbound/weather/LightningS1.mp3"),
 		"thor": load("res://assets/openbound/thor/AdukaS2.mp3"),
 	}
+	ShotTiming.prewarm()
+	# SpawnThorEffect432320 uses the Mage T2 blast table slot for both guides.
+	sounds.thor_native = ShotTiming.stream(1,1,"blast")
 
 func reset(map: Dictionary) -> void:
 	native_beam_art.clear()
+	native_thor_art.clear()
 	particles.clear()
 	beams.clear()
 	column_age.clear()
@@ -85,7 +91,8 @@ func react(event: Dictionary, model, sound) -> void:
 				beams[-1].native_angle = int(event.native_angle)
 			thor_shot = 0.0
 			emit_ground(event.position, int(event.removed), (Vector2(event.position) - Vector2(event.from)).angle(), model)
-			sound.play("explosion", sounds.thor)
+			if bool(event.get("contact",true)):
+				sound.play("explosion", sounds.thor_native if bool(event.get("native",false)) else sounds.thor)
 		"lightning":
 			beams.append({"kind": "lightning", "from": event.top, "to": event.position, "age": 0.0, "frame": noise.randi_range(0, 3)})
 			emit_ground(event.position, int(event.removed), -PI * 0.5, model)
@@ -174,6 +181,13 @@ func draw_columns(view: Node2D, model, offset: Vector2) -> void:
 
 func draw_thor(view: Node2D, model, offset: Vector2) -> void:
 	if not (model.weather.thor.active or bool(model.weather.thor.get("present",false))) or thor_position == Vector2.INF:
+		return
+	if bool(model.weather.thor.get("native",false)):
+		var at: Vector2 = native_thor_art.draw(view,model.weather.thor,offset,clampf(float(model.accumulator)/0.05,0,1))
+		var text := "LV %d · %d XP"%[int(model.weather.thor.level),int(model.weather.thor.get("display_xp",model.weather.thor.xp))]
+		var native_font: Font = view.ui.bold
+		view.draw_string_outline(native_font,at+Vector2(30,70),text,HORIZONTAL_ALIGNMENT_LEFT,-1,13,4,view.ui.INK)
+		view.draw_string(native_font,at+Vector2(30,70),text,HORIZONTAL_ALIGNMENT_LEFT,-1,13,Color("9cff8a"))
 		return
 	# Stand 0–19, Active 20–39, ShootingS1 40–55 (ThorSatellite presets, 15 fps).
 	var frame := 20 + int(clock * 15.0) % 20

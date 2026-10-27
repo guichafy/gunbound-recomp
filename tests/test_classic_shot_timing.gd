@@ -16,7 +16,7 @@ func run() -> void:
 				for component in int(source.components_per_spawn[group]):
 					check(is_equal_approx(float(emitted[cursor].spawn),int(source.spawn_ticks[group])*0.05) and bool(emitted[cursor].sound) == (component == 0),"48 source contracts: ID%d weapon%d group%d component%d" % [id,weapon,group,component])
 					cursor += 1
-			check(cursor == emitted.size(),"Source total component count ID%d weapon%d" % [id,weapon])
+			check(cursor + (1 if id==16 and weapon==1 else 0) == emitted.size(),"Source count plus explicit Aduka T2 user override ID%d weapon%d" % [id,weapon])
 	var boomer := Mobiles.emission(6,1)
 	for i in 4:
 		check(is_equal_approx(float(boomer[i].spawn),(8+i*2)*0.05),"Boomer four source spawns without double delay")

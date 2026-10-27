@@ -22,6 +22,10 @@ static func apply(model, projectile: Dictionary) -> void:
 
 static func interact(model, projectile: Dictionary, column: Dictionary) -> void:
 	var type: String = column.type
+	# Aduka samples these at native coarse contact points, not the interpolated
+	# start of a tick. Its tornado keeps the fixed velocity and current wind.
+	if int(projectile.get("vehicle",0))==16 and not bool(projectile.get("beacon",false)) and type in ["force","tornado","electricity"]:
+		return
 	var first: bool = type not in projectile.influenced
 	if first and type != "tornado" and type != "random":
 		projectile.influenced.append(type)

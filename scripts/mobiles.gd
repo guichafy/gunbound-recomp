@@ -127,6 +127,14 @@ static func shot_sound_on(vehicle_id: int) -> String:
 
 ## Shells of one shot: the Bigfoot emitter salvo, else "count" shells at once.
 static func emission(vehicle_id: int, weapon_index: int) -> Array:
+	# Explicit user requirement after ADR-124: three T2 creatures. Keep the
+	# extracted PE catalog (two calls) intact and publish this override once.
+	if vehicle_id==16 and weapon_index==1:
+		var three: Array = []
+		for group in 3:
+			three.append({"spawn":(2+group*4)*ShotTiming.STEP,"angle":0.0,"power":0.0,
+				"sound_group":group,"sound":true,"pose_start_at":0.0})
+		return three
 	if bool(ALL[vehicle_id].get("salvo", false)):
 		return ShotTiming.emission(vehicle_id, weapon_index, BigfootAttacks.salvo(weapon_index))
 	var rules: Dictionary = weapon(vehicle_id, weapon_index)

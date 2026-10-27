@@ -57,7 +57,8 @@ const LOOKS := {
 	13: {"kind": "grub", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	14: {"kind": "dragon", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	15: {"kind": "knight", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
-	16: {"kind": "aduka", "sprite": "res://scripts/classic_sprite.gd", "native_animation": true, "rig": {}, "projectile": {}, "using": {}},
+	# Room figures face inward by the rider; Aduka shoots in the opposite direction.
+	16: {"kind": "aduka", "sprite": "res://scripts/aduka_sprite.gd", "native_animation": true, "room_facing": -1, "rider_adjust": Vector2(8,0), "rig": {}, "projectile": {}, "using": {}},
 }
 
 static func ids() -> Array:

@@ -10,6 +10,10 @@ var HEIGHT := 400
 const BLACKMASK_RADIUS := 3.0
 const BLACKMASK_FACTOR := 0.4
 var cells := PackedByteArray()
+# Aduka's native point sampler needs the original1px alpha, including odd pixels.
+# Other families keep their existing grid contract. Copies own both masks.
+var native_cells := PackedByteArray()
+static var native_cache := {}
 var image: Image
 var texture: ImageTexture
 var revision := 0
@@ -35,6 +39,7 @@ func load_map(id: String, with_visual: bool = true) -> bool:
 	WIDTH = int(cached.width)
 	HEIGHT = int(cached.height)
 	cells = PackedByteArray(cached.cells).duplicate()
+	native_cells = PackedByteArray()
 	first_solid_y = find_first_solid_y()
 	map_id = id
 	image = null
@@ -91,6 +96,7 @@ func generate() -> void:
 	WIDTH = 640
 	HEIGHT = 400
 	map_id = ""
+	native_cells = PackedByteArray()
 	visual = null
 	visual_texture = null
 	cells.resize(WIDTH * HEIGHT)
@@ -199,10 +205,83 @@ func collision_copy():
 	copy.WIDTH = WIDTH
 	copy.HEIGHT = HEIGHT
 	copy.cells = cells.duplicate()
+	copy.native_cells = native_cells.duplicate()
 	copy.first_solid_y = first_solid_y
 	copy.revision = revision
 	copy.map_id = map_id
 	return copy
+
+func enable_native() -> void:
+	if not native_cells.is_empty():
+		return
+	var width := WIDTH*SCALE
+	var height := HEIGHT*SCALE
+	if not map_id.is_empty():
+		if not native_cache.has(map_id):
+			var source := texture_image(Maps.get_map(map_id).mask)
+			var pixels := source.get_data()
+			var mask := PackedByteArray()
+			mask.resize(width*height)
+			for index in mask.size():
+				mask[index] = 1 if pixels[index*4+3]>0 else 0
+			native_cache[map_id] = mask
+		native_cells = PackedByteArray(native_cache[map_id]).duplicate()
+		# Enabled at Match.start, before any crater; keep odd source pixels even
+		# when the corresponding coarse cell sampled a transparent centre.
+	else:
+		# Procedural fixtures have no source raster: expand their explicit cells.
+		native_cells.resize(width*height)
+		for y in height:
+			for x in width:
+				native_cells[y*width+x] = cells[(y/SCALE)*WIDTH+x/SCALE]
+
+func _clear_native_cell(x: int, y: int) -> void:
+	if native_cells.is_empty():
+		return
+	for dy in SCALE:
+		for dx in SCALE:
+			native_cells[(y*SCALE+dy)*WIDTH*SCALE+x*SCALE+dx] = 0
+
+func native_solid(point: Vector2i) -> bool:
+	var width := WIDTH*SCALE
+	if point.x<0 or point.y<0 or point.x>=width or point.y>=HEIGHT*SCALE:
+		return false
+	assert(not native_cells.is_empty(),"Native mask must be prepared before CPU workers")
+	return native_cells[point.y*width+point.x]!=0
+
+func carve_native(spans: Array[Vector3i]) -> int:
+	var removed := 0
+	var width := WIDTH*SCALE
+	var changed := {}
+	for span in spans:
+		if span.x<0 or span.x>=HEIGHT*SCALE:
+			continue
+		var left := maxi(0,span.y)
+		var right := mini(width,span.z)
+		for x in range(left,right):
+			var at := span.x*width+x
+			removed += native_cells[at]
+			native_cells[at] = 0
+			changed[Vector2i(x/SCALE,span.x/SCALE)] = true
+		if visual!=null:
+			var density := float(visual.get_width())/visual_rect.size.x
+			var y0 := maxi(0,int(floor((span.x-visual_rect.position.y)*density)))
+			var y1 := mini(visual.get_height(),int(ceil((span.x+1-visual_rect.position.y)*density)))
+			var x0 := maxi(0,int(floor((left-visual_rect.position.x)*density)))
+			var x1 := mini(visual.get_width(),int(ceil((right-visual_rect.position.x)*density)))
+			if x1>x0 and y1>y0:
+				visual.fill_rect(Rect2i(x0,y0,x1-x0,y1-y0),Color.TRANSPARENT)
+	for cell in changed:
+		cells[cell.y*WIDTH+cell.x] = native_cells[(cell.y*SCALE+1)*width+cell.x*SCALE+1]
+		if image!=null and cells[cell.y*WIDTH+cell.x]==0:
+			image.set_pixel(cell.x,cell.y,Color.TRANSPARENT)
+	revision += 1
+	if visual_texture!=null:
+		visual_texture.update(visual)
+	if texture!=null:
+		texture.update(image)
+	# Presentation events retain their existing2×2-cell particle unit.
+	return removed/(SCALE*SCALE)
 
 func carve(center: Vector2, radius: float) -> int:
 	var left := maxi(0, int((center.x - radius) / SCALE) - 1)
@@ -216,6 +295,7 @@ func carve(center: Vector2, radius: float) -> int:
 			if Vector2(x * SCALE, y * SCALE).distance_squared_to(center) <= radius * radius:
 				removed += cells[y * WIDTH + x]
 				cells[y * WIDTH + x] = 0
+				_clear_native_cell(x,y)
 				if image != null:
 					image.set_pixel(x, y, Color.TRANSPARENT)
 	revision += 1

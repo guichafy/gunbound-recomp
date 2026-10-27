@@ -23,6 +23,8 @@ const ClassicFlight = preload("res://scripts/classic_flight.gd")
 const AsateEffect = preload("res://scripts/asate_effect.gd")
 const JDEffect = preload("res://scripts/jd_effect.gd")
 const AdukaEffect = preload("res://scripts/aduka_effect.gd")
+const AdukaCombat = preload("res://scripts/aduka_combat.gd")
+const AdukaWeather = preload("res://scripts/aduka_weather.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 # Training option "all": equal weight for every weather type, Thor included.
@@ -57,6 +59,7 @@ var satellites: Dictionary = {}
 var projectile_accumulator := 0.0
 
 static func _static_init() -> void:
+	AdukaCombat.warmup()
 	Physics.warmup()
 	VEHICLES = Mobiles.ALL
 var terrain
@@ -156,6 +159,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	for actor_index in actors.size():
 		if int(actors[actor_index].vehicle) == 10:
 			AsateEffect.ensure_satellite(self,actor_index)
+		elif int(actors[actor_index].vehicle) == 16:
+			terrain.enable_native()
+			AdukaEffect.ensure_thor(self)
 	# The server draws the turn order (MatchManager / jglim start_game); fixtures
 	# pass an explicit side so their first shot stays the player's.
 	active = rng.randi_range(PLAYER, CPU) if opening == RANDOM_OPENING else clampi(opening, PLAYER, CPU)
@@ -315,6 +321,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		# Preserve exact launch integers instead of re-quantizing their float projection.
 		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, entry.angle, entry.power, native) if spread_after else shot_velocity_fp(index, angle + float(entry.angle), power, weapon, 0.0, 0.0, native)
 		ClassicFlight.prepare(shell, entry)
+		AdukaCombat.prepare(shell,actors[index])
 		result.append(shell)
 	return result
 
@@ -441,6 +448,7 @@ func tick(delta: float) -> void:
 			accumulator = maxf(0.0, accumulator - Combat.STEP)
 			ClassicFlight.crawl_mines(self, Combat.STEP)
 			AsateEffect.step_satellites(self)
+			AdukaEffect.step_thor(self)
 			if int(actors[PLAYER].hp) <= 0 or int(actors[CPU].hp) <= 0:
 				finish_gold_shot()
 				check_end()
@@ -479,6 +487,7 @@ func advance_projectiles(delta: float) -> void:
 func advance_projectile_tick(delta: float) -> void:
 	ClassicFlight.crawl_mines(self, delta)
 	AsateEffect.step_satellites(self)
+	AdukaEffect.step_thor(self)
 	advance_battle_effects()
 	stamp_tilt()
 	flight_elapsed += delta
@@ -520,7 +529,8 @@ func advance_projectile_tick(delta: float) -> void:
 			continue
 		if not underground:
 			apply_weather_contact(projectile)
-		var external: bool = not projectile.tornado.is_empty()
+		var native_weather := AdukaWeather.active(projectile)
+		var external: bool = not projectile.tornado.is_empty() and not native_weather
 		if bool(projectile.get("boomer", false)):
 			if not BoomerFlight.begin_tick(projectile, not external, false):
 				projectile.age += travel_delta
@@ -541,7 +551,10 @@ func advance_projectile_tick(delta: float) -> void:
 		# The teleportation beacon only collides with the ground.
 		var beacon := bool(projectile.get("beacon", false))
 		var hit: Dictionary
-		if bool(projectile.get("ghost", false)) or underground:
+		if int(projectile.get("vehicle",0))==16 and not beacon:
+			var previous_fp := Physics.position_fp(projectile.hit_pos)
+			hit = AdukaCombat.projectile_contact(Vector2i(previous_fp.x>>8,previous_fp.y>>8),Physics.integer_position(projectile),terrain,actors,projectile,self)
+		elif bool(projectile.get("ghost", false)) or underground:
 			hit = Combat.trace_actors(projectile.hit_pos, actual, actors, ignored)
 			# A buried shell explodes on the first free pixel where it resurfaces.
 			if underground:
@@ -583,7 +596,8 @@ func advance_projectile_tick(delta: float) -> void:
 				explode(hit.position, int(hit.actor), projectile)
 				projectiles.remove_at(i)
 		else:
-			Physics.finish_tick(projectile, not external and not entered_burrow)
+			var accelerate := not native_weather or AdukaWeather.finish(projectile)
+			Physics.finish_tick(projectile, not external and not entered_burrow and accelerate)
 			ClassicFlight.finish_tick(projectile)
 			if bool(projectile.get("boomer", false)):
 				BoomerFlight.finish_tick(projectile, not external)
@@ -655,14 +669,20 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var radius := float(weapon.radius)
 	if projectile.has("blast_radius"):
 		radius = float(projectile.blast_radius)
-	var removed: int = terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
+	var native_aduka := int(projectile.get("vehicle",0))==16 and weapon_index==0 and not bool(projectile.get("beacon",false))
+	var native_data: Dictionary = AdukaCombat.t1_parameters(projectile,actors[shot_actor]) if native_aduka else {}
+	var crater_dimension := Physics.quot(int(native_data.get("dimension",0))*int(projectile.get("aduka_crater_percent",100)),100)
+	var removed: int = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect))) if native_aduka else terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
 	var heading := PI * 0.5
 	var velocity := Vector2.ZERO
 	if projectile.has("velocity"):
 		velocity = projectile.velocity
 		heading = velocity.angle()
 	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "child":bool(projectile.get("child",false)), "ss_state":str(projectile.get("ss_state","normal")), "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
+	if native_aduka:
+		AdukaCombat.apply(actors,events,Vector2i(position),native_data)
+	else:
+		blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
 	if not projectile.is_empty():
 		ClassicFlight.bolts(self, projectile, position)
 		ClassicFlight.chill(self, projectile, event_start)
@@ -713,6 +733,9 @@ func deal_damage(index: int, damage: int, kind: String = "") -> int:
 	return Damage.deal_damage(actors, events, index, damage, kind)
 
 func thor_strike(impact: Vector2) -> void:
+	if bool(weather.thor.get("native",false)):
+		AdukaEffect.strike(self,{"owner":shot_actor,"weapon":shot_weapon},impact,"weather")
+		return
 	# ThorProjectile: beam from the satellite to the impact hits the first solid
 	# point on its path (radius 25, damage 40 + 20/level); dealt damage is XP.
 	var origin: Vector2 = weather.thor.pos

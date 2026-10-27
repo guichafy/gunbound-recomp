@@ -1,5 +1,20 @@
 # Design implementado
 
+## Aduka: dano, contato e clima — ADR-125
+
+`AdukaCombat` lê catálogo nativo pré-aquecido no principal e resolve AABB,
+offsets assimétricos de inclinação, queda linear, passes inteiros de dano,
+escudo/XP e crateras de scanlines. Tiros usam stride8/refino1 e Thor stride2;
+`Terrain.native_cells` preserva alpha1px e é duplicado no snapshot. O grid
+anterior continua para apoio e demais famílias, sincronizado nas crateras.
+`AdukaWeather` amostra colunas nos mesmos pontos físicos; tornado conserva
+velocidade, faz duas inversões e libera na terceira saída. Não chama o
+antigo relançamento vetorial C#. Aceleração do vento atual/gravidade retoma
+no próximo tick. BônusForce fica separado do poder, e guias não transferem
+seus atributos ao Thor. `Mobiles.emission` publica o override solicitado de
+três T2; folha original colorida em alpha, demais glows aditivos.
+Contratos, fontes e bridges ainda existentes: `ADUKA_COMBAT_REA.md`.
+
 ## Registro vertical dos T de SETTINGS
 
 Implementado em `SETTINGS_BASELINE.md`: compensação óptica de1pixel nativo para
@@ -119,6 +134,33 @@ O lote `assets/hd/classic/buttons_4x` reúne42atlas/197estados. Seu catálogo
 guarda escala4, dimensão/célula/regiões ampliadas, ordem/registro nativo e
 hashes de origem/saída. Os consumidores atuais continuam usando o catálogo
 nativo: a entrega de PNGs ampliados não muda coordenadas lógicas da interface.
+
+## Centralização do piloto Aduka — ADR-123
+
+Revisão posterior da família: ADR-124/`ADUKA_AUDIT.md`. `AdukaSprite` herda a
+montagem clássica e usa `AdditiveSpriteArt` para glows, com corpo alpha e
+Facing apenas T2/SS. `ThorNativeArt` lê corpo/luz/EPA extraídos; `AdukaEffect`
+guarda relógios/estado/ângulo no `weather.thor`, já copiado pelo snapshot.
+Match prepara e avança no passo comum20Hz; WeatherArt só apresenta eventos
+e seleciona PCM22blast. Rotas climáticas em partidas com Aduka compartilham
+o mesmo Thor. Jogo desenha mundo/RIDs emz0, HUD emz1 e controles emz2;
+troca da root limpa os efeitos filhos. Demais limites de dano/colisão comuns
+permanecem explícitos no registro da auditoria.
+
+`ClassicSprite` lê `MobileLooks.rider_adjust` antes de configurar a montagem
+e soma a constante ao RiderPivot no consumidor `rider_offset`. Só Aduka
+declara(+8,0); outros clássicos usam zero. Compensação ocorre antes do mesmo
+espelho/escala/inclinação do casco, sem alterar fontes, direção ou variações
+animadas. `ADUKA_CENTER.md` delimita a adaptação solicitada.
+
+## Orientação do Aduka na sala — ADR-122
+
+O RiderPivot original é preservado (centralização posterior pela ADR-123).
+`MobileLooks.room_facing`
+converte a orientação da figura da sala na direção de tiro esperada pelo
+renderer: -1 só para Aduka, +1 por padrão. `Game.draw_figure` aplica a conversão
+ao conjunto inteiro. `ClassicSprite.rear` continua orientando a traseira pelo
+tiro na arena. Substitui o deslocamento incorreto da ADR-121.
 
 ## ASate/JD/Aduka/Raon 0.20.5
 

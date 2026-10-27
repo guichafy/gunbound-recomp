@@ -9,10 +9,10 @@ class TerrainStub extends RefCounted:
 	var blocked := false
 	var carved_at := Vector2.INF
 	func world_size() -> Vector2: return Vector2(1800,1800)
-	func raycast(_start: Vector2,_end: Vector2) -> Dictionary:
-		return {"position":Vector2(300,350),"fraction":0.5} if blocked else {}
-	func carve(position: Vector2,_radius: float) -> int:
-		carved_at = position
+	func native_solid(point: Vector2i) -> bool:
+		return blocked and point.y>=350
+	func carve_native(spans: Array[Vector3i]) -> int:
+		carved_at = Vector2((spans[0].y+spans[0].z)/2,spans[0].x)
 		return 3
 
 class ModelStub extends RefCounted:
@@ -22,10 +22,6 @@ class ModelStub extends RefCounted:
 	var events: Array = []
 	var battle_effects: Array = []
 	var shot_actor := 0
-	var blasts: Array = []
-	func blast(position: Vector2,radius: float,power: float,_emp: float,_attack: float,owner: int) -> int:
-		blasts.append([position,radius,power,owner])
-		return 17
 
 func run() -> void:
 	# Expectations transcribed from 0x541f10's PUSH immediates, not computed
@@ -50,15 +46,15 @@ func run() -> void:
 	var absent_guide := {"flight":"aduka","weapon":1,"owner":1}
 	check(Aduka.impact(stub,absent_guide,Vector2(600,600)),"Thor can be initialized without live climate")
 	check(stub.weather.thor.pos == Vector2(900,270) and stub.weather.thor.present,"Offline initial position is deterministic map state")
-	check(stub.weather.thor.level == 1 and stub.weather.thor.xp == 17,"XP receives effect damage, not guide metadata")
-	check(stub.blasts[0] == [Vector2(600,600),22.0,100.0,1],"Level1 strike carries native power plus explicit damage adapter radius/owner")
+	check(stub.weather.thor.level == 1 and stub.weather.thor.xp == 0,"Missing contact record cannot invent damage or XP")
+	check(stub.events[-1].power == 100 and stub.events[-1].owner == 1 and not stub.events[-1].contact,"A missing contact still publishes the level1 visual ray")
 	stub.terrain.blocked = true
 	stub.weather.thor.level = 6
 	stub.weather.thor.xp = 7000
 	var max_guide := {"flight":"aduka","weapon":2,"owner":1}
 	check(Aduka.impact(stub,max_guide,Vector2(600,600)),"SS produces its independent effect at level6")
-	check(stub.blasts[1] == [Vector2(300,350),27.0,300.0,1],"Obstacle is resolved before damage and crater at native maximum power")
-	check(stub.terrain.carved_at == Vector2(300,350),"Beam carves at contact, not guide target")
+	check(stub.events[-1].contact and stub.events[-1].power == 300 and stub.events[-1].position.y<600,"Native step2 resolves the obstacle before the requested guide target")
+	check(stub.terrain.carved_at == stub.events[-1].position,"Beam carves at its recorded contact")
 	check(stub.events[-1].level == 6 and stub.events[-1].new_level == 6 and stub.events[-1].rgb == 0xffffff,"Level6 preserves sixth native color")
 	var copied_effects: Array = stub.battle_effects.duplicate(true)
 	Aduka.tick(stub,copied_effects[0])

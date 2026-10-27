@@ -19,6 +19,10 @@ func fresh(vehicle: int, weapon: int):
 	model.actors[1].max_hp = 2000
 	model.actors[1].shield = 250
 	model.actors[0].ss_lock = 0
+	if vehicle==16:
+		# This fixture replaces the generated terrain after Match.start.
+		model.terrain.native_cells.clear()
+		model.terrain.enable_native()
 	model.fire(40,50,weapon)
 	model.events.clear()
 	return model
@@ -154,6 +158,8 @@ func test_shared_step(vehicle: int, weapon: int, facing: int, item: String = "")
 	check(model.events == sim.events,"Complete real/predicted effect events agree "+label)
 	check(model.actors == sim.actors and model.terrain.cells == sim.terrain.cells,"Real/predicted damage, movement and crater agree "+label)
 	check(model.mines == sim.mines and model.battle_effects == sim.battle_effects and model.satellites == sim.satellites,"Real/predicted private state agrees "+label)
+	if vehicle == 16:
+		check(model.weather.thor == sim.weather.thor,"Real/predicted native Thor clocks, level and XP agree "+label)
 	if item == "teleport":
 		check(model.battle_effects.is_empty() and model.mines.is_empty(),"Teleport discards the mobile special effect "+label)
 	if not model.satellites.is_empty():
@@ -167,9 +173,12 @@ func test_prediction_contract() -> void:
 			var model = fresh(vehicle,weapon)
 			model.phase = Match.PHASE_AIM
 			var before: Array = model.actors.duplicate(true)
+			var thor_before: Dictionary = model.weather.thor.duplicate(true)
 			var hit: Dictionary = model.predict_shot(0,40,40,weapon)
 			check(hit.has("position") and hit.has("hit") and hit.has("actor"),"CPU prediction returns a candidate for %d/%d" % [vehicle,weapon])
 			check(model.actors == before,"CPU prediction keeps live actors intact for %d/%d" % [vehicle,weapon])
+			if vehicle == 16:
+				check(model.weather.thor == thor_before,"CPU prediction keeps live native Thor intact for weapon%d"%weapon)
 
 func test_attached_actions() -> void:
 	for vehicle in [7,9,10,16]:

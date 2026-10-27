@@ -1,5 +1,64 @@
 # Entregas e próximos trabalhos
 
+## Aduka: dano/colisão/clima e T2 com3 criaturas — ADR-125
+
+- [x] REA dos consumidores nativos de dano, escudo/XP, caixa e contato.
+- [x] Portar queda linear/passes inteiros e cratera, sem inversa de distância C#.
+- [x] Máscara1px original, stride8/refino1, raioThor2 e snapshot profundo.
+- [x] T2 com3emissões explícitas e alpha do asset original legível no mapaHD.
+- [x] REA/porte do tornado: velocidade conservada, duas inversões, saída3 e vento.
+- [x] Force separado;616fixtures de dano e2000ticks de tornado independentes.
+- [x] Revisão independente: corrigir assimetriaLUT/Y0 e preservar efeitoBunge.
+- [x] GPU Miramo: três criaturas visíveis, feixe, HUD/saída;300quadros de
+  T1/T2/SS e300de vento/tornado, dois sentidos e pausa30 idêntica.
+- [x] Harness final16544checksGodot+44Python+29partidas/0,84suítes/parse/exit0;
+  registro e limites atualizados, semapp/export/commit/push.
+- [ ] Aceite visual/escuta do usuário e execução dinâmica do cliente original.
+
+Limites globais de clima, itens, muzzle/apoio e coordenadas continuam
+identificados no registro; sem publicar/reexportar aplicativo.
+
+## Auditoria da família Aduka — ADR-124
+
+- [x] Fixar PE/XFS; pesquisar MainAction, vtables, impacto/Thor e renderer.
+- [x] Matriz e plano antes do código: `ADUKA_AUDIT.md`.
+- [x] Reproduzir divergências e corrigir assets/camadas/Thor/sons.
+- [x] 495quadros/PCM/ASM auditados; harness13241Godot+42Python+29partidas/0.
+- [x] Corrigir dois P2 de HUD/limpeza; revisão final aprovada e quick13253/0.
+- [x] GPU300quadros/dois sentidos/pausa30; T2 na arena real, HUD/saída por pixels.
+- [x] Registro e limites em `ADUKA_AUDIT.md`; sem app/versão/commit/push.
+- [ ] Aceite visual e escuta do usuário; dano/colisão comuns ainda adaptados.
+
+## Centralização do piloto Aduka — ADR-123
+
+- [x] Orientação aprovada; delimitar só compensação horizontal constante.
+- [x] Conferir XFS/tank16 e pontos/poses; plano em `ADUKA_CENTER.md`.
+- [x] Aplicar(+8,0) ao encaixe no catálogo/consumidor, sem modificar fontes.
+- [x] GPU sala A/B antes/depois, padrão/HD, seis poses/dois sentidos;
+  150quadros, pausa30 idêntica e retomada. `docs/aduka-center`.
+- [x] 1018checks/0 em 11suítes; registrar resultados/limites no HANDOFF.
+- [ ] Aceite visual do encaixe; orientação anterior aprovada.
+
+## Orientação do Aduka na sala — ADR-122
+
+- [x] Corrigir contrato pela imagem: personagem à direita, mira traseira à esquerda no A.
+- [x] Restaurar RiderPivot original e converter apenas orientação da prévia.
+- [x] GPU da sala real A/B, padrão/GreatDevil; galeria seis poses/dois sentidos,
+  padrão/HD, 150quadros/pausa30 idêntica; `docs/aduka-orientation`.
+- [x] 982checks/0 em dez suítes; resultados e limites no HANDOFF.
+- [x] Orientação aprovada pelo usuário; centralização posterior pela ADR-123.
+
+## Encaixe do piloto no Aduka — ADR-121
+
+Histórico rejeitado pelo usuário; substituído pela ADR-122.
+
+- [x] Delimitar com o usuário: mover o piloto para a direita, sem virá-lo.
+- [x] Inverter somente X do RiderPivot do Aduka no consumidor; fontes intactas.
+- [x] 694 checks/0 em oito suítes; GPU150 quadros, seis poses, dois sentidos,
+  padrão/HD, pausa30 idêntica e retomada; `docs/aduka-mount`.
+- [x] Registrar evidência e limites; sem app novo, versão, commit ou publicação.
+- [ ] Aceite visual do usuário.
+
 ## Bigfoot com acabamento4× — 25/10/2026, ADR-115
 
 - [x] Plano SDD e ADR antes do código; escopo nas nove folhas originais.

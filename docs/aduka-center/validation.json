@@ -1,0 +1,149 @@
+{
+  "resolution": [
+    1920,
+    1080
+  ],
+  "presentation_clock_hz": 60,
+  "frames": 150,
+  "pause_frames": [
+    60,
+    89
+  ],
+  "pause_identical": true,
+  "first_changed_frame_after_resume": 92,
+  "pose_columns": [
+    "idle",
+    "moving",
+    "charging",
+    "recoil",
+    "hurt",
+    "using_item"
+  ],
+  "facing_directions": 2,
+  "avatar_variants": [
+    "legacy",
+    "equipped_hd"
+  ],
+  "native_adjust": [
+    8,
+    0
+  ],
+  "scene_room": [
+    "A",
+    "B"
+  ],
+  "room_heads": [
+    "default",
+    "great_devil"
+  ],
+  "source_evidence": {
+    "archive_sha256": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+    "tank16_sha256": "7130e022f6a3b62b9cbc1af94cc8f84a4db94edd6f897484d6905826cd2e7b44",
+    "imported_atlas_sha256": "140fca8ce204813b6989fe676ce36ee1ec35948d7d4b4a5c69f8cb1131b6e88f",
+    "frame0": {
+      "hotspot": [
+        -23,
+        -34
+      ],
+      "extra": [
+        -2069240576,
+        704597249,
+        15,
+        11
+      ],
+      "rider": [
+        -8,
+        -23
+      ],
+      "alpha_box_relative_origin": [
+        -23,
+        -34,
+        33,
+        5
+      ]
+    },
+    "source_frames": 323,
+    "pose_samples": {
+      "idle": [
+        {
+          "frame": 0,
+          "rider": [
+            -8,
+            -23
+          ]
+        },
+        {
+          "frame": 1,
+          "rider": [
+            -8,
+            -23
+          ]
+        }
+      ],
+      "moving": [
+        {
+          "frame": 62,
+          "rider": [
+            -8,
+            -22
+          ]
+        },
+        {
+          "frame": 63,
+          "rider": [
+            -8,
+            -22
+          ]
+        }
+      ],
+      "recoil_1": [
+        {
+          "frame": 265,
+          "rider": [
+            -11,
+            -19
+          ]
+        },
+        {
+          "frame": 266,
+          "rider": [
+            -12,
+            -18
+          ]
+        }
+      ],
+      "hurt": [
+        {
+          "frame": 139,
+          "rider": [
+            3,
+            -38
+          ]
+        },
+        {
+          "frame": 140,
+          "rider": [
+            5,
+            -39
+          ]
+        }
+      ],
+      "using_item": [
+        {
+          "frame": 118,
+          "rider": [
+            -8,
+            -20
+          ]
+        },
+        {
+          "frame": 119,
+          "rider": [
+            -8,
+            -18
+          ]
+        }
+      ]
+    }
+  }
+}
