@@ -62,6 +62,7 @@ var menu = null
 var shop_return := "lobby"
 const RoomChoice = preload("res://scripts/room_choice.gd")
 const MatchLoading = preload("res://scripts/match_loading.gd")
+const RoomArt = preload("res://scripts/classic_room_art.gd")
 const LoadingView = preload("res://scripts/loading_view.gd")
 var room_random_sprite = preload("res://scripts/room_random_sprite.gd").new()
 var player_random := false
@@ -329,7 +330,7 @@ func begin_loading() -> void:
 	loading_width = width
 	loading_elapsed = 0.0
 	screen = "loading"
-	menu.present_loading(player_id, cpu_id)
+	menu.present_loading(player_id, cpu_id, hull_preview(player_id))
 	loading_view = LoadingView.new()
 	menu.stage.add_child(loading_view)
 	var names := PackedStringArray([profile.nickname.left(12), "CPU"])
@@ -804,10 +805,14 @@ func draw_room_figures(canvas: Node2D) -> void:
 		player_kind = RoomChoice.RANDOM
 	if screen != "loading" and cpu_random:
 		cpu_kind = RoomChoice.RANDOM
+	if screen == "loading":
+		# The legacy rider sheet is the Bigfoot body. On other hulls it stretches
+		# the pilot. The loading screen draws the tank frame at one scale.
+		draw_hull(canvas, player_kind, menu.player_anchor, 1)
+		draw_hull(canvas, cpu_kind, menu.cpu_anchor, -1)
+		return
 	draw_figure(canvas, player_kind, menu.player_anchor, 1, profile.equipped_set())
 	draw_figure(canvas, cpu_kind, menu.cpu_anchor, -1, {})
-	if screen == "loading" and menu.loading_anchor != Vector2.INF:
-		draw_figure(canvas, player_kind, menu.loading_anchor, 1, profile.equipped_set())
 
 func _draw_screen_hud() -> void:
 	if screen == "match" and is_instance_valid(screen_hud) and model.terrain != null:
@@ -1061,6 +1066,37 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventScreenDrag and dragging and not touch_as_mouse:
 		rig.manual = true
 		rig.position = clamp_camera(rig.position - event.relative * options.scroll_factor())
+
+## Idle frame of the original sheet, uniform scale, no extra rider layer.
+func hull_preview(vehicle_id: int) -> Texture2D:
+	if menu != null and RoomArt.PORTRAITS.has(vehicle_id):
+		return menu.room_art.frame("room_portraits", int(RoomArt.PORTRAITS[vehicle_id]))
+	var body = sprite_for(vehicle_id)
+	if body == null or not body.has_method("frame_rect"):
+		return null
+	var atlas := AtlasTexture.new()
+	atlas.atlas = body.texture
+	var frame := 0
+	if body.has_method("frame_index"):
+		frame = int(body.frame_index("idle", 0.0, 0, false))
+	atlas.region = body.frame_rect(frame)
+	return atlas
+
+func draw_hull(canvas: Node2D, kind: int, pos: Vector2, facing: int) -> void:
+	var body = sprite_for(kind)
+	if body == null or not body.has_method("frame_rect") or not ("cell" in body):
+		draw_figure(canvas, kind, pos, facing, {})
+		return
+	var shot_facing := facing * int(MobileLooks.look(kind).get("room_facing", 1))
+	var amount := MenuScreen.MOBILE_WIDTH / float(body.hull_width)
+	var rect := Rect2(Vector2(-body.pivot.x * amount, 24.0 - body.contact_y * amount), body.cell * amount)
+	var frame := 0
+	if body.has_method("frame_index"):
+		frame = int(body.frame_index("idle", 0.0, 0, false))
+	var texture: Texture2D = body.paint_texture if body.paint_texture != null else body.texture
+	canvas.draw_set_transform(pos.round(), 0.0, Vector2(-shot_facing, 1.0))
+	canvas.draw_texture_rect_region(texture, rect, body.frame_rect(frame))
+	canvas.draw_set_transform(Vector2.ZERO)
 
 func draw_figure(canvas: Node2D, kind: int, pos: Vector2, facing: int, equipment: Dictionary) -> void:
 	var body = room_random_sprite if kind==RoomChoice.RANDOM else sprite_for(kind)

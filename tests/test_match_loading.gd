@@ -54,7 +54,7 @@ func run() -> void:
 	check(scene.screen == "loading" and scene.loading_player in [14, 15] and scene.loading_cpu == 4, "Room Start resolves Random before the match and keeps the CPU pick")
 	check(scene.room_rng.state != before, "Random and the two spawn draws happen when the loading screen opens")
 	check(scene.menu.loading_title.visible and scene.menu.loading_title.text == str(Mobiles.definition(scene.loading_player).name), "The center card names the rolled mobile")
-	check(scene.menu.loading_title.text != "Random" and not scene.menu.map_preview.visible, "Random art and the small map give way to the resolved mobile")
+	check(scene.menu.loading_title.text != "Random" and scene.menu.map_preview.visible and scene.menu.map_preview.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "The center window shows the rolled mobile at its own aspect")
 	check(scene.menu.cpu_mobile.visible and scene.menu.cpu_mobile.text == "Armor" and scene.menu.player_mobile.text == scene.menu.loading_title.text, "Both slots name the mobiles that will play")
 	var view = scene.menu.stage.get_node("MatchLoading")
 	check(view != null and view.get_node("SpawnName0").text == "Piloto" and view.get_node("SpawnName1").text == "CPU", "The map preview labels the player and the CPU")
@@ -62,8 +62,8 @@ func run() -> void:
 	var cpu_spawn := Vector2(scene.loading_spawns[1])
 	var player_mark: Vector2 = Loading.point(int(player_spawn.x), scene.loading_width, catalog_rows)
 	var cpu_mark: Vector2 = Loading.point(int(cpu_spawn.x), scene.loading_width, catalog_rows)
-	var font := ThemeDB.fallback_font
-	var player_width := font.get_string_size("Piloto", HORIZONTAL_ALIGNMENT_LEFT, -1, 11).x
+	var font: Font = load("res://assets/classic/room/settings/room_text.fnt")
+	var player_width := font.get_string_size("Piloto", HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
 	check(is_equal_approx(view.get_node("SpawnName0").position.x, 26 + player_mark.x - player_width * 0.5), "Player name is centered on the mask column")
 	check(is_equal_approx(view.get_node("SpawnName1").position.y, 374 + cpu_mark.y), "CPU name uses the mask row plus the 18 px drop")
 	var rolled_player: int = scene.loading_player

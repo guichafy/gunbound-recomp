@@ -24,6 +24,11 @@ Os pontos continuam os da lista já usada por `Match.start`: o piloto na
 metade esquerda, a máquina na direita. A tela mostra esses pontos e a
 partida recebe o mesmo par, sem novo sorteio.
 
+O card central mostra o quadro idle do mobile sorteado, com a proporção
+original (`STRETCH_KEEP_ASPECT_CENTERED`). Os lugares desenham só o casco
+nativo: a folha de piloto legada é a do Bigfoot e estica os outros mobiles.
+Os nomes no mapa usam a fonte 8×12 da sala, com contorno de 2 px.
+
 ## Limites
 
 Revanche e `start_match()` chamado direto não passam pela espera. Não há

@@ -855,16 +855,19 @@ func refresh_climate() -> void:
 		climate_weights[index].tooltip_text = "%s: peso %d"%[label,weights[index]] if native else "%s: peso %d\nEspelho: %d · Aleatório: %d" % [label,weights[index],weights[8],weights[9]]
 
 
-## The center card names the mobile that will actually play. Random is already rolled.
-func present_loading(player_id: int, cpu_id: int) -> void:
-	map_preview.visible = false
+## The center window keeps the mobile's own art at its real aspect. Random is already rolled.
+func present_loading(player_id: int, cpu_id: int, preview: Texture2D) -> void:
+	if preview != null:
+		map_preview.texture = preview
+		map_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		map_preview.visible = true
 	loading_title.text = str(Mobiles.definition(player_id).name)
 	loading_title.visible = true
 	player_mobile.text = loading_title.text
 	player_mobile.visible = true
 	cpu_mobile.text = str(Mobiles.definition(cpu_id).name)
 	cpu_mobile.visible = true
-	loading_anchor = Vector2(400, 104)
+	loading_anchor = Vector2.INF
 	for button in room_buttons:
 		button.disabled = true
 
