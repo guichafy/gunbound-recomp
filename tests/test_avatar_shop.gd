@@ -32,7 +32,8 @@ func run() -> void:
 	var fourth = shop.cards.get_child(3)
 	check(first.position == Vector2(21,69) and fourth.position == Vector2(21,230), "Client card grid (0x44a000): 163×161 steps from 21,69")
 	check(first.size == Vector2(160,156), "XFS card proportions")
-	check(shop.cards.get_child(1).get_node("Portrait").size == Vector2(86,79), "Portrait fills the light window of store_avatar")
+	var thumb = shop.cards.get_child(1).get_node("Portrait")
+	check(thumb.size == thumb.texture.get_size() and thumb.get_rect().get_center().is_equal_approx(Vector2(52,62)), "Legacy portrait keeps native size, centered on the client anchor")
 	click(shop.cards.get_child(1).get_global_rect().get_center())
 	await process_frame
 	check(shop.model.selected_key == "0:0:1", "Real card click")

@@ -82,6 +82,20 @@ func run() -> void:
 	var first = shop.cards.get_child(0)
 	check(first.get_node("Portrait").texture.resource_path == first.item.portrait and first.item.portrait.begins_with("res://assets/xfs/avatars/s"),"Card portrait is the original s*.img thumbnail")
 	check(first.get_node("AvatarName").text == "Space Marine" and first.get_node("AvatarName").position == Vector2(24,5),"Name uses the measured bitmap-font slot")
+	# Template matches of sfh00001..3 on gb-avatar.png (card-relative top-left).
+	var measured := [Vector2(20,40),Vector2(22,43),Vector2(29,47)]
+	for i in range(3):
+		var thumb: TextureRect = shop.cards.get_child(i).get_node("Portrait")
+		check(thumb.position == measured[i] and thumb.size == thumb.texture.get_size(),"Thumbnail %d at card+(52,62)+pivot, native size" % i)
+	# RLE runs carry transparency: black inside a run stays an opaque outline.
+	var image: Image = first.get_node("Portrait").texture.get_image()
+	var opaque_black := 0
+	for y in range(image.get_height()):
+		for x in range(image.get_width()):
+			var c := image.get_pixel(x,y)
+			if c.a > 0.99 and c.r8 == 0 and c.g8 == 0 and c.b8 == 0:
+				opaque_black += 1
+	check(opaque_black >= 100,"Space Marine thumbnail keeps its black outline opaque (%d px)" % opaque_black)
 	var used: Array = textures(shop,[])
 	var generated := used.filter(func(path): return str(path).begins_with("res://assets/hd/shop/") or str(path).begins_with("res://assets/hd/avatars/"))
 	check(generated.is_empty(),"No GPT shop/avatar HD texture in the shop tree: %s" % str(generated))

@@ -21,6 +21,9 @@ const CARD_STEP := Vector2(163,161)
 const CARD_SIZE := Vector2(160,156)
 ## Light portrait window inside store_avatar:0.
 const PORTRAIT_AREA := Rect2(9,23,86,79)
+## 0x44a000 draws the s*.img thumbnail at card+(52,62)+IMG pivot; all nine
+## cards of gb-avatar.png match this anchor.
+const PORTRAIT_ANCHOR := Vector2(52,62)
 const ROW_ORIGIN := Vector2(571,109)
 const ROW_SIZE := Vector2(176,17)
 const ROWS_VISIBLE := 14
@@ -291,6 +294,22 @@ func portrait_for(item: Dictionary) -> Texture2D:
 		portrait_cache[path] = load(path)
 	return portrait_cache[path]
 
+## Thumbnail at native size: anchor + pivot for XFS records; legacy
+## OpenBound portraits (no pivot) are centered on the same anchor.
+func portrait_rect(item: Dictionary, anchor: Vector2) -> TextureRect:
+	var node := TextureRect.new()
+	node.texture = portrait_for(item)
+	node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	node.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	node.stretch_mode = TextureRect.STRETCH_SCALE
+	var pivot = item.get("portrait_pivot")
+	var shown := portrait_size(node.texture)
+	node.position = anchor+(Vector2(pivot[0],pivot[1]) if pivot is Array and pivot.size()==2 else -shown*0.5)
+	return node
+
+func portrait_size(paint: Texture2D) -> Vector2:
+	return paint.get_size() if paint != null else Vector2.ZERO
+
 func bonus_description(item: Dictionary) -> String:
 	var names := ["Ataque","Vida","Defesa","Regeneração","Atraso do tiro","Atraso do item","Cratera","Gold"]
 	var values: Array=item.get("bonuses",[])
@@ -515,17 +534,10 @@ func refresh(category: int, page: int) -> void:
 		)
 		cards.add_child(card)
 		card.size = CARD_SIZE
-		var portrait_texture := portrait_for(item)
-		var portrait := TextureRect.new()
+		var portrait := portrait_rect(item,PORTRAIT_ANCHOR)
 		portrait.name = "Portrait"
-		portrait.texture = portrait_texture
-		portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		portrait.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-		portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		portrait.clip_contents = true
-		portrait.position = PORTRAIT_AREA.position
 		card.add_child(portrait)
-		portrait.size = PORTRAIT_AREA.size
+		portrait.size = portrait_size(portrait.texture)
 		var title := ClassicText.new()
 		title.name = "AvatarName"
 		title.art = art
@@ -588,15 +600,11 @@ func open_buy() -> void:
 	box.position = (CANVAS-window_size)*0.5
 	modal.add_child(box)
 	box.size = window_size
-	var portrait := TextureRect.new()
+	# Same anchor rule, centered on the window's left dark square.
+	var portrait := portrait_rect(item,box.position+Vector2(69,89))
 	portrait.name = "PurchasePortrait"
-	portrait.texture = portrait_for(item)
-	portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	portrait.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
-	portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	portrait.position = box.position+Vector2(26,50)
 	modal.add_child(portrait)
-	portrait.size = PORTRAIT_AREA.size
+	portrait.size = portrait_size(portrait.texture)
 	var details := Drawer.new()
 	details.name = "PurchaseDetails"
 	details.draw_call = func(view: CanvasItem): paint_purchase(view,item)

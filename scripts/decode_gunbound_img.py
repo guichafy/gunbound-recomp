@@ -16,9 +16,11 @@ def frames(data):
   def put(x,y,v):
    if kind==2:r,g,b,alpha=(v>>8&15)*17,(v>>4&15)*17,(v&15)*17,(v>>12)*17
    else:r,g,b,alpha=(v>>11)*255//31,(v>>5&63)*255//63,(v&31)*255//31,255
-   # ARGB4444 has explicit alpha: black glasses/scars remain opaque where
-   # alpha is nonzero. Only the RGB565 formats use the black color key.
-   if kind!=2 and r==g==b==0:alpha=0
+   # ARGB4444 has explicit alpha. RLE frames (kind 1) carry transparency in
+   # their runs, so black inside a run is an opaque outline: gb-avatar.png
+   # shows those pixels black (ADR-130). Only full RGB565 frames (kind 0)
+   # use black as the color key.
+   if kind==0 and r==g==b==0:alpha=0
    q=(y*w+x)*4;pixels[q:q+4]=bytes([r,g,b,alpha])
   if kind in [0,2]:
    assert len(raw)==w*h*2,(kind,w,h,n)

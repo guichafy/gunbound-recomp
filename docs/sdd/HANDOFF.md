@@ -1,5 +1,14 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Retratos da loja sem contorno pontilhado — ADR-131
+
+Correção pedida pelo usuário sobre a ADR-130: `decode_gunbound_img.py` só usa
+preto como chave em frames RGB565 cheios; RLE mantém o preto opaco (captura
+original confirma). 496 retratos `_rle`, 98 frames da loja e 4× regenerados;
+retrato em card+(52,62)+pivô (`portrait_pivot`). Peças vestidas inalteradas.
+`test_shop_original` 77/0, `test_xfs_import` 14/0, 14 suítes da loja/avatares
+sem falhas; harness `--quick` 97 suítes, 27092 checks, 0 falhas (partidas omitidas: sem mudança de regra). Sem commit novo.
+
 ## Avatar Shop e avatares originais — ADR-130 / REQ-47
 
 Pedido27/10/2026: corrigir assets/imagens do Avatar Shop com os originais do

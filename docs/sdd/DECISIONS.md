@@ -1564,3 +1564,20 @@ casamento de template na captura `gb-avatar.png`. Gênero/atributos ficam na
 faixa lateral fora do palco; Laundry restaura a prévia; Sell/Gift/BUDDY/CASH
 CHARGE desabilitados. Catálogo, preços, bônus, compra/rollback, atributos e
 perfil inalterados. Matriz e limites em `AVATAR_SHOP_ORIGINAL.md`.
+
+## ADR-131 — preto opaco nas faixas RLE e retrato pelo pivô
+
+27/10/2026, REQ-47. O usuário apontou contornos pontilhados nos retratos da
+loja. Causa: `decode_gunbound_img.py` aplicava a chave de cor preta também
+aos frames RLE (tipo 1), cuja transparência já está nas lacunas entre faixas;
+os pretos do contorno viravam furos. Na captura `gb-avatar.png` esses pixels
+são pretos (109 em `sfh00001`, média ≈20). Regra corrigida: só frames cheios
+RGB565 (tipo 0) usam preto como chave (os três retratos padrão 28×28 têm fundo
+preto); RLE mantém o preto opaco; ARGB4444 segue o alfa explícito.
+
+Afeta 496 dos 534 retratos e 98 frames da loja (contornos, dígitos com caixa
+preta, botões). Peças vestidas são ARGB4444 e não mudaram. Retratos corrigidos
+ganham arquivo `_rle` (anterior preservado); frames da loja e derivados 4×
+foram regenerados. O catálogo grava `portrait_pivot`; o cliente desenha o
+retrato em card+(52,62)+pivô, confirmado nos nove cards da captura.
+Complementa a ADR-130 (que dizia 116 frames inalterados).

@@ -40,6 +40,24 @@ class XfsImport(unittest.TestCase):
         image,_=frames(data)[0]
         self.assertEqual(image.getpixel((0,0)),(0,0,0,255))
         self.assertEqual(image.getpixel((1,0)),(0,0,0,0))
+    def test_rle_runs_keep_black_and_full_frames_key_it(self):
+        from decode_gunbound_img import frames
+        # Kind 1 transparency is the gap between runs; black inside a run is
+        # the outline the client draws (gb-avatar.png, ADR-130). Kind 0 has no
+        # runs, so black remains its color key (28x28 default thumbnails).
+        row=struct.pack('<HH',6,1)+struct.pack('<HH',1,2)+struct.pack('<HH',0x0000,0xFFFF)
+        rle=struct.pack('<II',0,1)+struct.pack('<HH9i',1,0,4,1,0,0,0,0,0,0,len(row))+row
+        image,_=frames(rle)[0]
+        self.assertEqual([image.getpixel((x,0)) for x in range(4)],[(0,0,0,0),(0,0,0,255),(255,255,255,255),(0,0,0,0)])
+        full=struct.pack('<II',0,1)+struct.pack('<HH9i',0,0,2,1,0,0,0,0,0,0,4)+struct.pack('<HH',0x0000,0xFFFF)
+        image,_=frames(full)[0]
+        self.assertEqual(image.getpixel((0,0)),(0,0,0,0))
+        self.assertEqual(image.getpixel((1,0)),(255,255,255,255))
+    def test_portraits_record_their_client_pivot(self):
+        rows=json.loads((ROOT/'assets/xfs/avatars/catalog.json').read_text())['records']
+        self.assertTrue(all(len(r['portrait_pivot'])==2 for r in rows))
+        marine=next(r for r in rows if r['key']=='xfs:1:0:1')
+        self.assertEqual(marine['portrait_pivot'],[-32,-22])
     def test_runtime_frame_manifest_matches_preserved_images(self):
         from PIL import Image
         manifest=json.loads((ROOT/'assets/xfs/shop/catalog.json').read_text())

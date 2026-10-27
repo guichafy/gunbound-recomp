@@ -45,7 +45,7 @@ template na captura original 1:1, erro RMS registrado), **adaptada**.
 | Tag BOY/GIRL | `store_avatar` 2/3 | card+(125,5); bandeiras sem tag | medida |
 | Nome | `font.fnt` ASCII 8×12, avanço 6 | card+(24,5), branco | medida; formato verificado |
 | Ícone da categoria | `store_icon` cabeça 2/3, corpo 0/1, óculos 4/5, bandeira 6 (+pivô) | card+(7,6) | medida |
-| Retrato | `s*.img` do XFS | centrado na área clara do card | medida |
+| Retrato | `s*.img` do XFS, tamanho nativo | card+(52,62)+pivô do IMG (ADR-131) | medida nos 9 cards |
 | Status do card | `store_icon` 8–23 + `numfont` 40–49 | ordem shot_delay, popularity, attack, defense, health, item_delay, bunge, shield; zeros omitidos; no máximo 3; ícone card+(104,34+18n), dígitos `%02d` card+(123,35+18n) avanço 6 | comprovada (0x44a000, `%02d`) |
 | Sinal do ícone | par par/ímpar | shot_delay: valor ≤0 → ícone ímpar (+) e valor negado; demais: valor <0 → ícone par (−) e valor negado | comprovada (SETLE/SETL+NEG) |
 | Preço Cash | `numfont` 50–59, vírgula 279 | `%8d`, card+(14,110), dígito avança 10, vírgula avança 4 a cada grupo e só desenha após o 1º dígito; rótulo `store_avatar`4 em card+(110,110) | comprovada (0x44c460, 0x44afb0) |
@@ -127,3 +127,14 @@ template na captura original 1:1, erro RMS registrado), **adaptada**.
 Limites: captura Godot não é execução do cliente Windows; popup de compra e
 posições não cobertas pela captura são adaptações; aceite visual e uso com
 mouse pelo usuário pendentes; aplicativo não reexportado.
+
+## Correção ADR-131 — contorno pontilhado dos retratos
+
+O usuário apontou contornos pontilhados (Safety Helmet, Marine Hat). O
+decodificador apagava o preto dentro das faixas RLE; o cliente o desenha opaco.
+Agora só frames cheios RGB565 usam preto como chave. 496 retratos ganharam
+versão `_rle` (anteriores preservados), 98 frames da loja e os derivados 4×
+foram regenerados, e o retrato usa `card+(52,62)+pivô` (`portrait_pivot` no
+catálogo), que casa com os nove cards da captura. Peças vestidas (ARGB4444) não
+mudaram. Testes: `test_shop_original` 77/0 (posições medidas e contorno opaco),
+`test_xfs_import` 14/0 (regra RLE/tipo 0 e pivô), suítes da loja/avatares 0 falhas.

@@ -1,7 +1,7 @@
 {
   "source": {
     "path": "/Users/guichafy/Workspaces/DemoGame/assets/xfs/shop/store_avatar/007.png",
-    "sha256": "239e64db8cd687b5a7c20c5a1e49463da4e64f81a494e5d76f09d13e520139eb",
+    "sha256": "4338859e27c1e8ac6341ecdb78ce223d0b8c78555a64a437fa4ecf5d45fce46c",
     "size": [
       81,
       14
@@ -14,7 +14,7 @@
   },
   "candidate": {
     "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/shop_smooth_4x/store_avatar/007.png",
-    "sha256": "4557cf97a2a47a595c057790be1a677f2c0f2dc6b7573dadb2639f1eb848de1c",
+    "sha256": "0798de82360c38aa0567e7e81822e5b448136874bd5ea512e1cdd8d59aada1a0",
     "size": [
       324,
       56
@@ -40,23 +40,23 @@
     {
       "column": 0,
       "row": 0,
-      "rgba_changed_pixels": 11711,
-      "max_rgba_delta": 255,
+      "rgba_changed_pixels": 11983,
+      "max_rgba_delta": 152,
       "alpha_support_changed_pixels": 0,
       "alpha_values_changed_pixels": 0,
       "alpha_mae": 0.0,
-      "visible_rgb_mae": 6.028169,
+      "visible_rgb_mae": 14.408333,
       "source_alpha_bbox_native": [
-        1,
-        1,
-        80,
-        13
+        0,
+        0,
+        81,
+        14
       ],
       "candidate_alpha_bbox_native": [
-        1,
-        1,
-        80,
-        13
+        0,
+        0,
+        81,
+        14
       ]
     }
   ],

@@ -14,11 +14,17 @@ STAT_ORDER = ['attack', 'health', 'defense', 'shield',
               'shot_delay', 'item_delay', 'bunge', 'popularity']
 
 
-def save_preserving_previous(image, path):
+def save_preserving_previous(image, path, suffix='_alpha'):
+    # Reuse any earlier variant with identical pixels; otherwise keep the
+    # previous file and write the corrected decode beside it.
+    candidates=[path]+[path.with_name(path.stem+name+'.png') for name in ('_alpha',suffix)]
+    for candidate in candidates:
+        if candidate.exists():
+            with Image.open(candidate) as previous:
+                if previous.size==image.size and previous.convert('RGBA').tobytes()==image.convert('RGBA').tobytes():
+                    return candidate
     if path.exists():
-        with Image.open(path) as previous:
-            if previous.size!=image.size or previous.convert('RGBA').tobytes()!=image.convert('RGBA').tobytes():
-                path=path.with_name(path.stem+'_alpha.png')
+        path=path.with_name(path.stem+suffix+'.png')
     image.save(path)
     return path
 
@@ -67,20 +73,25 @@ def build(graphics_path, avatar_path):
             missing.append(dict(key=item['key'], asset=stem+'.img', buyable=item['buyable']))
         portrait_name = lookup.get('s'+stem+'.img')
         if portrait_name:
-            portrait = frames(extract(graphics,index[portrait_name]))[0][0]
+            portrait, pivot = frames(extract(graphics,index[portrait_name]))[0]
         elif decoded:
             portrait = decoded[min(11,len(decoded)-1)][0]
+            pivot = (-(portrait.width//2), -(portrait.height//2))
         else:
-            portrait = Image.new('RGBA',(1,1))
+            portrait, pivot = Image.new('RGBA',(1,1)), (0, 0)
         file = output / f's{stem}.png'
-        file=save_preserving_previous(portrait,file)
+        # Earlier decodes keyed black inside RLE runs; the corrected
+        # thumbnail gets its own name so the previous file stays intact.
+        file=save_preserving_previous(portrait,file,'_rle')
         item['portrait'] = 'res://' + file.relative_to(ROOT).as_posix()
+        # Client draws the thumbnail at card+(52,62)+pivot (ADR-130).
+        item['portrait_pivot'] = list(pivot)
         item['art_available'] = bool(decoded) or empty
         item['empty'] = empty
         rows.append(item)
         if len(rows)%50 == 0:
             print(f'{len(rows)}/562 avatar records imported',flush=True)
-    data = dict(version=1,xfs_version=280,decoder='argb4444-alpha-v2',records=rows,missing=missing,
+    data = dict(version=1,xfs_version=280,decoder='rle-opaque-black-v3',records=rows,missing=missing,
                 sources={str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                          for p in [graphics_path,avatar_path]},
                 bonus_order=STAT_ORDER)

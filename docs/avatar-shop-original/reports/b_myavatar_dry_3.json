@@ -1,27 +1,27 @@
 {
   "source": {
     "path": "/Users/guichafy/Workspaces/DemoGame/assets/xfs/shop/b_myavatar_dry/003.png",
-    "sha256": "b520218f33988c34d63698560a9b3684cae11ca270dec77755cfbe54a5063567",
+    "sha256": "7c9708b1b809d7adddd32f6f77ce2bb7955c0f6e7182fbe35b645fda381b75c2",
     "size": [
       72,
       29
     ],
     "mode": "RGBA",
     "alpha_extrema": [
-      0,
+      255,
       255
     ]
   },
   "candidate": {
     "path": "/Users/guichafy/Workspaces/DemoGame/assets/hd/classic/shop_smooth_4x/b_myavatar_dry/003.png",
-    "sha256": "74be65496ea0451d13c512d5d979522e740f2010c59dfd138aa4afe17bbb12d0",
+    "sha256": "be8cc060bce1a8c881d7ebfee5aa3068280314cf67c1095148132f7643746ad5",
     "size": [
       288,
       116
     ],
     "mode": "RGBA",
     "alpha_extrema": [
-      0,
+      255,
       255
     ]
   },
@@ -40,12 +40,12 @@
     {
       "column": 0,
       "row": 0,
-      "rgba_changed_pixels": 31611,
-      "max_rgba_delta": 255,
+      "rgba_changed_pixels": 31621,
+      "max_rgba_delta": 97,
       "alpha_support_changed_pixels": 0,
       "alpha_values_changed_pixels": 0,
       "alpha_mae": 0.0,
-      "visible_rgb_mae": 5.859488,
+      "visible_rgb_mae": 5.961207,
       "source_alpha_bbox_native": [
         0,
         0,

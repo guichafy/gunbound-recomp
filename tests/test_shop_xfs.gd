@@ -26,7 +26,7 @@ func run() -> void:
 	var shop=scene.shop
 	shop.set_process(false)
 	check(shop.backdrop is ColorRect and shop.backdrop.size==Vector2(1920,1080),"Letterbox fills the window beyond the 4:3 store, without generated art")
-	check(shop.portrait_for(shop.model.catalog.find("xfs:0:0:1")).resource_path=="res://assets/xfs/avatars/smh00001.png","XFS portrait is the exact original thumbnail")
+	check(shop.portrait_for(shop.model.catalog.find("xfs:0:0:1")).resource_path=="res://assets/xfs/avatars/smh00001_rle.png","XFS portrait is the original thumbnail with opaque RLE outline")
 	check(shop.stat_entries(shop.cards.get_child(0).item).size()==2,"Marine card has its two real bonuses")
 	var equipped: Dictionary=scene.profile.equipped_set().duplicate(true)
 	var balance: int=scene.profile.gold
