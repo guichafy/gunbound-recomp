@@ -1,5 +1,12 @@
 # Entregas e próximos trabalhos
 
+## README e documentação de entrada — 27/10/2026
+
+- [x] README com visão, estado e TODOs; detalhe em `docs/PORTE.md`,
+  `MOBILES.md`, `JOGAR.md`, `DESENVOLVIMENTO.md` e `HISTORICO.md`.
+- [x] Links relativos conferidos. Só documentação, sem código/app/commit.
+- [ ] Revisão do texto pelo usuário.
+
 ## Avatar Shop original — ADR-130
 
 - [x] Fixar PE/XFS/captura; REA/Ghidra do card, preço e dígitos; matriz.

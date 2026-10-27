@@ -1,5 +1,15 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## README e documentação de entrada — 27/10/2026
+
+Pedido do usuário: README simples sobre a reescrita e seus TODOs, com o
+detalhe em documentos menores. README refeito (visão do porte fiel, estado,
+TODOs entregue/em progresso/pendente/roadmap); novos `docs/PORTE.md`,
+`MOBILES.md`, `JOGAR.md`, `DESENVOLVIMENTO.md` e `HISTORICO.md`, derivados de
+TASKS/DECISIONS/HANDOFF. Só documentação: sem mudança de código, versão,
+app, commit ou push. Atualizar o README e o MOBILES junto com o TASKS nas
+próximas entregas.
+
 ## Retratos da loja sem contorno pontilhado — ADR-131
 
 Correção pedida pelo usuário sobre a ADR-130: `decode_gunbound_img.py` só usa

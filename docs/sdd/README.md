@@ -1,4 +1,4 @@
-# SDD — contexto persistente 0.20.2
+# SDD — contexto persistente 0.20.5
 
 Neste repositório, SDD significa **desenvolvimento orientado por especificações**
 (Spec-Driven Development). Esta é uma documentação do protótipo já entregue,
@@ -42,15 +42,17 @@ especificação, registrar a divergência e resolvê-la dentro da solicitação 
 
 Os documentos em `docs/superpowers/` e `docs/progress.md` preservam o histórico
 da execução inicial. O conjunto `docs/sdd/` consolida o contexto atual.
-O [README principal](../../README.md), o [guia de aprendizado](../APRENDIZADO.md),
+O [README principal](../../README.md) traz a visão e os TODOs; [PORTE](../PORTE.md),
+[MOBILES](../MOBILES.md), [JOGAR](../JOGAR.md), [DESENVOLVIMENTO](../DESENVOLVIMENTO.md) e
+[HISTORICO](../HISTORICO.md) detalham cada tema. O [guia de aprendizado](../APRENDIZADO.md),
 o [roteiro funcional](../VALIDACAO.md) e a [origem da arte](../ART.md) o complementam.
 
-Baseline inicial: **0.1.0**; versão atual **0.20.2**, em **2026-10-24** (America/Sao_Paulo) (fonte única:
+Baseline inicial: **0.1.0**; versão atual **0.20.5**, em **2026-10-25** (America/Sao_Paulo) (fonte única:
 `application/config/version`). O histórico Git identifica as revisões; não manter
 hashes de commits dentro destes documentos. Os parágrafos abaixo sobre "entrega
 atual" descrevem a época de cada versão; o estado vigente está no topo da SPEC.
 
-Onda Turtle T2 0.20.2 implementada; revisão focal aprovada, suíte 588/0.
+Registro histórico da 0.20.2: onda Turtle T2 implementada; revisão focal aprovada, suíte 588/0.
 Harness 8020 checks Godot + 16 Python + 29 partidas sem falhas, parse aprovado.
 Captura temporal 1920×1080/60 FPS inspecionada com pausa e dois sentidos.
 App/ZIP 0.20.2 assinados, CRC/Info.plist válidos; fonte 163/0 e PCK 179/0
