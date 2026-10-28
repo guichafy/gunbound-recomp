@@ -1,5 +1,18 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Proposta de CI/CD desktop — 28/10/2026
+
+`CI_CD_DESIGN.md` registra o pedido de releases por push na main, versões por
+Conventional Commits, qualidade e ZIPs macOS/Windows. É somente um desenho:
+workflows, exportador Windows e cobertura ainda não implementados. Revisão
+independente pede fechar fila/reserva de versão, bootstrap, piso de cobertura
+e cobertura GDScript antes da execução. O pedido seguinte autoriza commitar,
+enviar a branch e abrir PR para main; não constitui aceite da implementação.
+Alterações locais de Grub/Boomer já estavam na main remota; sincronização
+preserva a seção de apresentação do GitHub no conflito de handoff.
+Validação desta mudança documental: diff e links locais; sem nova execução
+do jogo, harness, exportação ou release.
+
 ## English repository presentation — 2026-10-28
 
 At the user’s request, the public GitHub description and the entire root README

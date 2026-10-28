@@ -1,5 +1,11 @@
 # Entregas e próximos trabalhos
 
+## CI/CD desktop — proposta (28/10/2026)
+
+- [x] Registrar desenho de qualidade, versionamento e releases macOS/Windows em `CI_CD_DESIGN.md` e revisar suas lacunas.
+- [ ] Fechar cobertura GDScript, piso de cobertura, bootstrap e reserva/fila de versão.
+- [ ] Implementar e validar workflows, testes/lint/cobertura, compatibilidade e exportação Windows e publicação das releases.
+
 ## English repository presentation — 2026-10-28
 
 - [x] Translate the public description and complete root README into English.
