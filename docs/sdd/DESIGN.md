@@ -70,6 +70,20 @@ A coluna do nome é `spawn_x * 748 / largura` e a linha é o primeiro pixel
 sólido da máscara mais 18, como em 0x004430c0. O override de spawn entra só
 quando a tela já mostrou os pontos.
 
+Correção da validação do usuário (27/10/2026): `MenuScreen.present_loading`
+apenas bloqueia os controles. Mantém `room_maps[1]` e seu título embutido;
+nenhum retrato/nome de mobile substitui a prévia. `Game.draw_room_figures`
+usa `draw_figure` tanto na sala quanto no loading, conservando pilotos,
+equipamentos e proporções; durante loading apenas troca Random pelos IDs
+resolvidos. Cabeçalhos dos lugares continuam sem nomes de mobiles.
+
+Correção seguinte: `LoadingView` converte y=linha+18 do scan para o mapa já
+reposicionado por `STAGE_ORIGIN`, subtraindo 18 e usando o offset nativo +5
+para o texto. Remove o ajuste extra de 20; nomes sobem 33 px nativos.
+Somente os nomes/indicadores existentes mudam de posição, sem adicionar
+mobiles à prévia. Render/ASM em `docs/match-loading/native-surface`.
+
+
 ## Fontes — ADR-132
 
 Comportamento novo vem do cliente Thor's Hammer comprovado. Menções a OpenBound/C#

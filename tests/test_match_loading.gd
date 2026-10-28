@@ -2,7 +2,6 @@ extends "res://tests/support/suite.gd"
 
 const Loading = preload("res://scripts/match_loading.gd")
 const Maps = preload("res://scripts/maps.gd")
-const Mobiles = preload("res://scripts/mobiles.gd")
 const Choice = preload("res://scripts/room_choice.gd")
 const PROFILE := "res://.tools/match-loading/profile.json"
 
@@ -50,12 +49,14 @@ func run() -> void:
 	scene.select_vehicle(Choice.RANDOM)
 	scene.select_cpu_vehicle(4)
 	var before: int = scene.room_rng.state
+	var map_before: Texture2D = scene.menu.map_preview.texture
 	scene.menu.stage.get_node("Start").pressed.emit()
 	check(scene.screen == "loading" and scene.loading_player in [14, 15] and scene.loading_cpu == 4, "Room Start resolves Random before the match and keeps the CPU pick")
 	check(scene.room_rng.state != before, "Random and the two spawn draws happen when the loading screen opens")
-	check(scene.menu.loading_title.visible and scene.menu.loading_title.text == str(Mobiles.definition(scene.loading_player).name), "The center card names the rolled mobile")
-	check(scene.menu.loading_title.text != "Random" and scene.menu.map_preview.visible and scene.menu.map_preview.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED, "The center window shows the rolled mobile at its own aspect")
-	check(scene.menu.cpu_mobile.visible and scene.menu.cpu_mobile.text == "Armor" and scene.menu.player_mobile.text == scene.menu.loading_title.text, "Both slots name the mobiles that will play")
+	check(scene.menu.map_preview.texture == map_before, "Start preserves the selected map bitmap and its embedded MIRAMO TOWN title")
+	check(scene.menu.map_preview.visible and scene.menu.map_preview.position == Vector2(332, 51) and scene.menu.map_preview.size == Vector2(136, 84), "Selected map stays inside the native center window")
+	check(scene.menu.stage.get_node_or_null("LoadingMobile") == null, "No mobile name overlays the map title")
+	check(not scene.menu.cpu_mobile.visible and not scene.menu.player_mobile.visible, "Slot headers remain free of mobile names while loading")
 	var view = scene.menu.stage.get_node("MatchLoading")
 	check(view != null and view.get_node("SpawnName0").text == "Piloto" and view.get_node("SpawnName1").text == "CPU", "The map preview labels the player and the CPU")
 	var player_spawn := Vector2(scene.loading_spawns[0])
@@ -66,9 +67,16 @@ func run() -> void:
 	var player_width := font.get_string_size("Piloto", HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
 	var view_script = load("res://scripts/loading_view.gd")
 	var origin: Vector2 = view_script.STAGE_ORIGIN
-	var sink: float = view_script.SURFACE_SINK
 	check(is_equal_approx(view.get_node("SpawnName0").position.x, origin.x + player_mark.x - player_width * 0.5), "Player name is centered on the mask column")
-	check(is_equal_approx(view.get_node("SpawnName1").position.y, origin.y + cpu_mark.y + sink), "CPU name sits on the snow bank, below the mask outline")
+	check(is_equal_approx(view.get_node("SpawnName1").position.y, origin.y + cpu_mark.y - 18 + 5), "CPU name uses native map-margin conversion plus five pixels below the surface")
+	# Independent fixtures from the XFS mask scan, covering every legal Miramo spawn.
+	var spawn_x := [148, 325, 448, 596, 743, 883, 1041, 1192, 1363, 1515, 1673]
+	var surfaces := [152, 135, 120, 127, 106, 130, 111, 134, 120, 128, 141]
+	for i in 11:
+		var probe = view_script.new()
+		probe.show_marks(1800, [Vector2(spawn_x[i], 0)], PackedStringArray(["Pilot"]))
+		check(probe.get_node("SpawnName0").position.y == origin.y + surfaces[i] + 5, "Name stays five pixels below Miramo surface%d" % i)
+		probe.free()
 	var rolled_player: int = scene.loading_player
 	var rolled_cpu: int = scene.loading_cpu
 	scene.loading_elapsed = 0.0

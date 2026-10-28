@@ -1,5 +1,63 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Versionamento da pré-partida e posição dos nomes — 27/10/2026
+
+Pedido atual autoriza o commit local das correções anteriores e esclarece:
+somente reposicionar os nomes na prévia inferior, sem adicionar mobiles.
+Ghidra12.2 confirmou 0x4430c0 (linha+18) e o consumidor 0x442280 (mapa em y18,
+nome em y+5). O porte já soma STAGE_ORIGIN; retirar a margem repetida18 e o
+ajuste extra20, conservando somente +5. Nomes sobem33px nativos e mantêm x,
+fonte/cor/indicador existentes. Imagem/máscara atual do painel preservadas;
+`loadstage.img` do PE tem228px e não substitui o painel209px já aprovado.
+ASM, pseudocódigo e manifestos em `docs/match-loading/native-surface`.
+
+Validação final: **10 suítes / 1.401 checks Godot / zero falhas/exit0**,
+incluindo os11spawns (test_match_loading33/0) e menu clássico146/0. Log
+`.tools/match-loading/names-final-tests.log`. GPU1920×1080:18casos,
+72comparações idênticas e295passos temporais; nenhuma figura desaparece,
+mapa/título estáveis e entrada na batalha após5s. PNGs/relatório atualizados;
+log`.tools/match-loading/names-final-gpu.log` semERROR/SCRIPT ERROR.
+
+Cinco arquivos centrais do menu clássico idênticos ao HEAD anterior; física,
+perfil real e assets originais preservados. Sem harness completo novo/29
+partidas (apresentação), cliente Windows ou escuta; captura muda. Tentativa
+intermediária teve erro de inferência e foi descartada; o ramo experimental
+de marcadores nativos saiu após o esclarecimento do usuário. Somente as
+rodadas finais acima validam este snapshot. Capturas não comprovam60FPS.
+Fonte0.20.5, aplicativo/ZIP não reexportados; aceite visual pendente. Sem push.
+
+
+## Correção da pré-partida após validação — REQ-49 / ADR-138
+
+Pedido de 27/10/2026: painel central mostrava o mobile do piloto e os pilotos
+sumiam ao Start. `present_loading` passava um retrato para a prévia, criava
+um título de mobile e exibia os nomes nos slots; `draw_room_figures` desviava
+para um desenho só de casco. Removidos esses caminhos: `room_maps[1]` mantém
+a imagem e o título MIRAMO TOWN do cliente (`ready_selectmap.img`), sem label
+sobreposto. Sala/loading compartilham mobile+piloto/equipamento/animação e
+os cabeçalhos dos slots ficam livres de nomes de mobiles. Random, mínimo
+5 s e spawns mantidos. Arte/layout/menu clássico ADR-137 preservados.
+
+Regressão reproduzida antes do ajuste: três falhas headless e quatro recortes
+GPU diferentes. O teste antigo que exigia o comportamento errado foi corrigido.
+Validação dirigida: `./scripts/check.sh test_match_loading test_room_ui
+ test_room_reference test_room_polish test_room_settings test_scene
+ test_battle_options test_aiming test_hud test_result_screen`: **10 suítes,
+1.390 checks Godot, zero falhas/exit0**. Parse dos quatro scripts alterados
+aprovado. Log local `.tools/match-loading/correction-tests.log`.
+
+GPU real 1920×1080: **18 casos e 72 comparações RGBA idênticas** (16 mobiles,
+Random e fallback nativo da prévia). Sequência de **295 passos de 1/60 s**:
+zero desaparecimentos, mapa constante, 135 poses distintas; loading presente
+até 4,916 s e batalha após 5 s. PNGs inspecionados, relatório de hashes em
+`docs/match-loading/room-loading-proof.json`; log GPU sem ERROR/SCRIPT ERROR.
+A cadência simulada não comprova performance de 60 FPS.
+
+Contrato e comandos em `LOADING_SCREEN.md`. Sem harness completo/29 partidas
+novo (mudança de apresentação); sem cliente Windows ou escuta, captura muda.
+Aceite visual pendente. Versão 0.20.5/app/ZIP mantidos. Sem commit/push;
+seis untracked preexistentes de resultado/imports preservados.
+
 ## Encerramento da partida — ADR-139 / REQ-50
 
 Pedido de 27/10/2026 (imagem de referência WIN/LOSE): o fim do treino abre a

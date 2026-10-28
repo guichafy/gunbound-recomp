@@ -1771,3 +1771,26 @@ inativos; aviso discreto só quando o perfil não grava. Assets em catálogo
 próprio `assets/xfs/result`, sem derivado HD. Contrato em
 `RESULT_SCREEN_NATIVE.md`.
 
+
+### Correção da ADR-138 após validação — 27/10/2026
+
+O pedido atual substitui a decisão anterior da ADR-138 de mostrar o mobile
+sorteado no card central e somente cascos nos lugares. O centro mantém a
+imagem/título do mapa, vindos do quadro nativo `ready_selectmap.img` já importado
+como `room_maps[1]`; o título faz parte do bitmap. Os lugares usam a composição
+completa da sala (mobile e piloto, equipamento do usuário e animação). Nenhum
+nome de mobile aparece no canto dos slots. Random, espera de 5 segundos e
+spawns compartilhados com a batalha permanecem. Sem regra nova ou mudança no
+menu clássico da ADR-137; não implica commit, exportação ou push.
+
+### ADR-138 — posição dos nomes na superfície (27/10/2026)
+
+O usuário pediu o commit local da pré-partida e esclareceu que deseja apenas
+reposicionar os nomes na prévia inferior. Ghidra confirmou que 0x4430c0
+guarda linha+18 porque o mapa nativo é desenhado em y18; 0x442280 desenha o
+nome em y+5. `LoadingView` já posiciona a imagem por STAGE_ORIGIN: retirar os
+18 repetidos e o ajuste visual extra20, usando origem+linha+5. Isso substitui
+a adaptação anterior do deslocamento para o banco de neve. Imagem/máscara do
+painel aprovado, fonte, cor e indicadores existentes permanecem; não adicionar
+miniaturas de mobile. Menu clássico e regras preservados; commit autorizado,
+sem exportação ou push.

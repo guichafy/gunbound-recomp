@@ -13,9 +13,10 @@ const HOLE_SIZE := Vector2(741, 207)
 const STAGE_SIZE := Vector2(748, 209)
 const STAGE_ORIGIN := Vector2(24.5, 385)
 const BAR := Vector2(608, 363)
-## The mask pixel is the dark outline above the snow bank. The 8×12 font
-## needs this extra drop to sit on the bank instead of in the gap.
-const SURFACE_SINK := 20.0
+## The native scan stores row + 18 because its map starts at y=18.
+## Our STAGE_ORIGIN already positions the map: remove that native margin
+## before adding the native name offset +5 (4427e2 / 4427f0).
+const NAME_OFFSET := 5.0
 const TEAM_A := Color("f4f7ff")
 const TEAM_B := Color("ff4e3c")
 
@@ -59,7 +60,7 @@ func show_marks(world_width: int, points: Array, names: PackedStringArray) -> vo
 		var local := Loading.point(int(spawn.x), world_width, _rows)
 		var text := names[index]
 		var text_size := NAME_FONT.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 12)
-		var origin := STAGE_ORIGIN + local - Vector2(text_size.x * 0.5, -SURFACE_SINK)
+		var origin := STAGE_ORIGIN + local + Vector2(-text_size.x * 0.5, NAME_OFFSET - Loading.LABEL_DROP)
 		var mark := ColorRect.new()
 		mark.color = colors[index]
 		mark.mouse_filter = Control.MOUSE_FILTER_IGNORE

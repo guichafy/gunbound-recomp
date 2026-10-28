@@ -54,8 +54,6 @@ var weather_buttons: Array[Button] = []
 var room_buttons: Array[BaseButton] = []
 var stage: Control
 var map_preview: TextureRect
-var loading_title: Label
-var loading_anchor := Vector2.INF
 var grid_buttons: Array[TextureButton] = []
 var grid_keys: Array[String] = []
 var vehicle_info: Label
@@ -218,10 +216,6 @@ func build_centre(stage: Control, weather_label: String) -> void:
 	map_preview = texture_rect(stage, "RoomMapPreview", room_art.frame("room_maps",1), Vector2(332,51),Vector2(136,84))
 	map_preview.mouse_filter = Control.MOUSE_FILTER_PASS
 	map_preview.tooltip_text = "Miramo Town A — mapa fixo do treino"
-	loading_title = caption(stage, "", Vector2(336, 44), Vector2(128, 14), 11, Color("fff6d0"), true)
-	loading_title.name = "LoadingMobile"
-	loading_title.visible = false
-	loading_title.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	climate_weights.clear()
 	# O fundo original contém poços pretos. Repor somente essa base com uma
 	# amostra laranja limpa da textura ativa; os Labels não têm fundo próprio.
@@ -855,19 +849,9 @@ func refresh_climate() -> void:
 		climate_weights[index].tooltip_text = "%s: peso %d"%[label,weights[index]] if native else "%s: peso %d\nEspelho: %d · Aleatório: %d" % [label,weights[index],weights[8],weights[9]]
 
 
-## The center window keeps the mobile's own art at its real aspect. Random is already rolled.
-func present_loading(player_id: int, cpu_id: int, preview: Texture2D) -> void:
-	if preview != null:
-		map_preview.texture = preview
-		map_preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		map_preview.visible = true
-	loading_title.text = str(Mobiles.definition(player_id).name)
-	loading_title.visible = true
-	player_mobile.text = loading_title.text
-	player_mobile.visible = true
-	cpu_mobile.text = str(Mobiles.definition(cpu_id).name)
-	cpu_mobile.visible = true
-	loading_anchor = Vector2.INF
+## Keep the selected map and its embedded title, plus the room's figure composition.
+## Random is already resolved by Game; only the room controls become inactive.
+func present_loading() -> void:
 	for button in room_buttons:
 		button.disabled = true
 

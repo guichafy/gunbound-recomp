@@ -1,5 +1,30 @@
 # Entregas e próximos trabalhos
 
+## Posição dos nomes e commit local da pré-partida — 27/10/2026
+
+- [x] Esclarecer escopo: somente os nomes na prévia inferior, sem miniaturas de mobiles.
+- [x] Ghidra: confirmar linha+18, margem do mapa18 e offset do nome+5; guardar extratos portáveis.
+- [x] Corrigir a conversão para STAGE_ORIGIN e remover o ajuste extra20.
+- [x] Testar11spawns e preservar menu clássico:10suítes/1.401checks/0.
+- [x] Regenerar GPUFullHD18casos/72comparações/295passos, sem desaparecimentos.
+- [x] Preparar snapshot das correções anteriores e dos nomes para o commit local autorizado.
+- [ ] Aceite visual das posições atualizadas; sem execução do cliente Windows.
+
+Sem exportação ou push. Evidências em`docs/match-loading`.
+
+## Correção da pré-partida — REQ-49 / ADR-138 (27/10/2026)
+
+- [x] Reproduzir a troca mapa/mobile, títulos indevidos e perda dos pilotos antes de corrigir.
+- [x] Conservar imagem/título do mapa no painel central e cabeçalhos dos slots sem nomes de mobiles.
+- [x] Compartilhar a composição completa da sala com o loading, incluindo equipamento e animação.
+- [x] Manter Random resolvido uma vez, os mesmos spawns e espera mínima de 5 s.
+- [x] 10 suítes dirigidas / 1.390 checks / zero falhas; parse aprovado; menu clássico 146/0.
+- [x] GPU 1920×1080: 18 casos / 72 comparações idênticas; 295 passos sem desaparecimentos e transição após 5 s.
+- [ ] Aceite visual do usuário nas novas capturas.
+
+Registro: `LOADING_SCREEN.md`, PNGs/hashes em `docs/match-loading`.
+Sem nova versão, exportação, commit ou push.
+
 ## Encerramento da partida — ADR-139 / REQ-50
 
 - [x] Ghidra: recurso 9001 `result_back.img`, render `FUN_004c8890`, linha `FUN_004d0260`, OK na msg 0x4413.

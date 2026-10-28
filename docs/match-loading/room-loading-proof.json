@@ -1,0 +1,468 @@
+{
+	"cases": [
+		{
+			"case": "mobile-01",
+			"cpu": 1,
+			"cpu_figure": {
+				"after": "e5aa1322e112a33e9e7ae725ffee46d97b7ee600078abddabd12791f2bd76857",
+				"before": "e5aa1322e112a33e9e7ae725ffee46d97b7ee600078abddabd12791f2bd76857",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 1,
+			"player_figure": {
+				"after": "b29ef7c15ac0571feef7f341b83b98d90fb46625e32bebaffca2d86db9fa8128",
+				"before": "b29ef7c15ac0571feef7f341b83b98d90fb46625e32bebaffca2d86db9fa8128",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-02",
+			"cpu": 2,
+			"cpu_figure": {
+				"after": "25e2d73f9d9fa2e640dae16066c178d3ff4d2291d49f2fbeca6662bcb9785830",
+				"before": "25e2d73f9d9fa2e640dae16066c178d3ff4d2291d49f2fbeca6662bcb9785830",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 2,
+			"player_figure": {
+				"after": "986001e2ec1a9a5f29c113a02a63c5c1cb2774f64c330100011fed166020217e",
+				"before": "986001e2ec1a9a5f29c113a02a63c5c1cb2774f64c330100011fed166020217e",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-03",
+			"cpu": 3,
+			"cpu_figure": {
+				"after": "74ad98a10171061954994611ccd311616776e588a1273bb544b3024c964bd43c",
+				"before": "74ad98a10171061954994611ccd311616776e588a1273bb544b3024c964bd43c",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 3,
+			"player_figure": {
+				"after": "07f7ba844ac51e4b02a56288e8059debe9ef0bf44a65013a52fb92dac1ee9f26",
+				"before": "07f7ba844ac51e4b02a56288e8059debe9ef0bf44a65013a52fb92dac1ee9f26",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-04",
+			"cpu": 4,
+			"cpu_figure": {
+				"after": "5ff3be60654443df736e9317ce8cab6d280b4abf70cbd7712f1c0c108826c1be",
+				"before": "5ff3be60654443df736e9317ce8cab6d280b4abf70cbd7712f1c0c108826c1be",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 4,
+			"player_figure": {
+				"after": "c2e51a9dee4a07eaa194ea28fe28aa991af13d9d27abb15e98b68b236abb7fac",
+				"before": "c2e51a9dee4a07eaa194ea28fe28aa991af13d9d27abb15e98b68b236abb7fac",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-05",
+			"cpu": 5,
+			"cpu_figure": {
+				"after": "20ce984d700e01494f948c27bd5dce91464c8bad324a137d7e54eb882b85aa34",
+				"before": "20ce984d700e01494f948c27bd5dce91464c8bad324a137d7e54eb882b85aa34",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 5,
+			"player_figure": {
+				"after": "5ef9766ce700bdaeabdecd298b3e3b4de8c20c03c44b2c5d09b9b1b85dd5a32a",
+				"before": "5ef9766ce700bdaeabdecd298b3e3b4de8c20c03c44b2c5d09b9b1b85dd5a32a",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-06",
+			"cpu": 6,
+			"cpu_figure": {
+				"after": "9389e63c644c46b2a9e07c92021997407410bd410eec95a531731da98f0655d7",
+				"before": "9389e63c644c46b2a9e07c92021997407410bd410eec95a531731da98f0655d7",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 6,
+			"player_figure": {
+				"after": "e3cffd927ef70cef04ce87dc6ac1d581f90397dc2f51231e608c6e401a4df1b7",
+				"before": "e3cffd927ef70cef04ce87dc6ac1d581f90397dc2f51231e608c6e401a4df1b7",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-07",
+			"cpu": 7,
+			"cpu_figure": {
+				"after": "158f1e8dfc5261b9bfcabe3db651783b0c66c21b0edcfb6b38e7b8b306dfcb09",
+				"before": "158f1e8dfc5261b9bfcabe3db651783b0c66c21b0edcfb6b38e7b8b306dfcb09",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 7,
+			"player_figure": {
+				"after": "9f490d5ce549f9d856595c00bbbd3da8a9bae19524a08b53aa7c61f6ca5db3bd",
+				"before": "9f490d5ce549f9d856595c00bbbd3da8a9bae19524a08b53aa7c61f6ca5db3bd",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-08",
+			"cpu": 8,
+			"cpu_figure": {
+				"after": "946478c9bde6c2768ad31f2b1e9d021b8a5528995a26193624cb81254bd97438",
+				"before": "946478c9bde6c2768ad31f2b1e9d021b8a5528995a26193624cb81254bd97438",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 8,
+			"player_figure": {
+				"after": "fe531c51404e5a7598681521a49688428260258d34d32a476799566a1446f1df",
+				"before": "fe531c51404e5a7598681521a49688428260258d34d32a476799566a1446f1df",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-09",
+			"cpu": 9,
+			"cpu_figure": {
+				"after": "0e201c310d714d50aa2ac973c7b7ca3be725ef0d67b51ea596ddd8bb31df13db",
+				"before": "0e201c310d714d50aa2ac973c7b7ca3be725ef0d67b51ea596ddd8bb31df13db",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 9,
+			"player_figure": {
+				"after": "d7da70aa5ec0e02655f1463c939b3731b399501b9960c7c05145f5b8c41ea78d",
+				"before": "d7da70aa5ec0e02655f1463c939b3731b399501b9960c7c05145f5b8c41ea78d",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-10",
+			"cpu": 10,
+			"cpu_figure": {
+				"after": "b17fad319f68e7cac1cbee535cf1d8d64fafc12a67c15ccb15a06dc0e53888cb",
+				"before": "b17fad319f68e7cac1cbee535cf1d8d64fafc12a67c15ccb15a06dc0e53888cb",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 10,
+			"player_figure": {
+				"after": "df5c3b8d0ff3e3f8eb329e3b5e6e2cdaef56abbb5e96222d2165e0e2b4941395",
+				"before": "df5c3b8d0ff3e3f8eb329e3b5e6e2cdaef56abbb5e96222d2165e0e2b4941395",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-11",
+			"cpu": 11,
+			"cpu_figure": {
+				"after": "045d5c3148d84c763028d41a8dba37a88ced8bd432fd029271a9acfc840eb3d7",
+				"before": "045d5c3148d84c763028d41a8dba37a88ced8bd432fd029271a9acfc840eb3d7",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 11,
+			"player_figure": {
+				"after": "bfb2aa5fee699b3579918be2d54ee395e525e9035f57e83a11260c64f279183f",
+				"before": "bfb2aa5fee699b3579918be2d54ee395e525e9035f57e83a11260c64f279183f",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-12",
+			"cpu": 12,
+			"cpu_figure": {
+				"after": "c7c633e8f886b8a65450c4c7869803d7dc46461f5582582f08bd6e158a6eb9c3",
+				"before": "c7c633e8f886b8a65450c4c7869803d7dc46461f5582582f08bd6e158a6eb9c3",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 12,
+			"player_figure": {
+				"after": "e4c8b8e93f9c4e580d148ee8580c1002a829584516cdb334b537a397ef0da1d7",
+				"before": "e4c8b8e93f9c4e580d148ee8580c1002a829584516cdb334b537a397ef0da1d7",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-13",
+			"cpu": 13,
+			"cpu_figure": {
+				"after": "fffb968133e1c46f6ed80fd92ec1fd0052ed05a6a73e28abe558a80ea8948055",
+				"before": "fffb968133e1c46f6ed80fd92ec1fd0052ed05a6a73e28abe558a80ea8948055",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 13,
+			"player_figure": {
+				"after": "fd395161176a2174a47f6f41802f3f7fcc59299b27d2a0913ab7811987998648",
+				"before": "fd395161176a2174a47f6f41802f3f7fcc59299b27d2a0913ab7811987998648",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-14",
+			"cpu": 14,
+			"cpu_figure": {
+				"after": "dbdd0c44b0518a17aaa2ae100325c0447440dc8a6f4221075931c24a395f9f2e",
+				"before": "dbdd0c44b0518a17aaa2ae100325c0447440dc8a6f4221075931c24a395f9f2e",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 14,
+			"player_figure": {
+				"after": "f0aed703ad0d06e8262f50e61e3c75714d4e954ecfb043e2f36007eca61e228a",
+				"before": "f0aed703ad0d06e8262f50e61e3c75714d4e954ecfb043e2f36007eca61e228a",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-15",
+			"cpu": 15,
+			"cpu_figure": {
+				"after": "43c93d960402dad09ba157c57c08d44c63b74ebabda150f349b7170875aeb397",
+				"before": "43c93d960402dad09ba157c57c08d44c63b74ebabda150f349b7170875aeb397",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 15,
+			"player_figure": {
+				"after": "9b3c0a5ab853d597fef1fa2f3eebcec1eb58caf2f1fd9783c13a180663d353ea",
+				"before": "9b3c0a5ab853d597fef1fa2f3eebcec1eb58caf2f1fd9783c13a180663d353ea",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-16",
+			"cpu": 16,
+			"cpu_figure": {
+				"after": "723046136562c32f849ac151f719ab56d0fe74b43b67a8b13d707b80930a8c1c",
+				"before": "723046136562c32f849ac151f719ab56d0fe74b43b67a8b13d707b80930a8c1c",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 16,
+			"player_figure": {
+				"after": "9a1064b7cca36d7147dd23e7b60ff91e83d73fd559a127cf060aea5e95058dad",
+				"before": "9a1064b7cca36d7147dd23e7b60ff91e83d73fd559a127cf060aea5e95058dad",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "random",
+			"cpu": 15,
+			"cpu_figure": {
+				"after": "43c93d960402dad09ba157c57c08d44c63b74ebabda150f349b7170875aeb397",
+				"before": "43c93d960402dad09ba157c57c08d44c63b74ebabda150f349b7170875aeb397",
+				"equal": true
+			},
+			"map": {
+				"after": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"before": "d62f4d909afbe30fb7c06dbc2692955be87541e7aec8b4ab167acc810159790e",
+				"equal": true
+			},
+			"player": 15,
+			"player_figure": {
+				"after": "9b3c0a5ab853d597fef1fa2f3eebcec1eb58caf2f1fd9783c13a180663d353ea",
+				"before": "9b3c0a5ab853d597fef1fa2f3eebcec1eb58caf2f1fd9783c13a180663d353ea",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"before": "179617c0c26ca875ddffe512eb9a283d9756232f03f1fa64cabf879e6f396807",
+				"equal": true
+			}
+		},
+		{
+			"case": "mobile-02-native-map",
+			"cpu": 2,
+			"cpu_figure": {
+				"after": "25e2d73f9d9fa2e640dae16066c178d3ff4d2291d49f2fbeca6662bcb9785830",
+				"before": "25e2d73f9d9fa2e640dae16066c178d3ff4d2291d49f2fbeca6662bcb9785830",
+				"equal": true
+			},
+			"map": {
+				"after": "cab25a72aef0f15df285bdc8364fa013efe63044bd2d61411caf37adc8efd4a4",
+				"before": "cab25a72aef0f15df285bdc8364fa013efe63044bd2d61411caf37adc8efd4a4",
+				"equal": true
+			},
+			"player": 2,
+			"player_figure": {
+				"after": "986001e2ec1a9a5f29c113a02a63c5c1cb2774f64c330100011fed166020217e",
+				"before": "986001e2ec1a9a5f29c113a02a63c5c1cb2774f64c330100011fed166020217e",
+				"equal": true
+			},
+			"slot_headers": {
+				"after": "958748e7cf8c6c664a0762e60835188489afb7179933c26da94b5e577373bcef",
+				"before": "958748e7cf8c6c664a0762e60835188489afb7179933c26da94b5e577373bcef",
+				"equal": true
+			}
+		}
+	],
+	"failures": 0,
+	"timeline": {
+		"absent_figures": 0,
+		"distinct_poses": 135,
+		"entered_after_5s": true,
+		"frames": 295,
+		"held_until_4_916s": true,
+		"step": 0.0166666666666667,
+		"wrong_map": 0
+	},
+	"viewport": [
+		1920,
+		1080
+	]
+}

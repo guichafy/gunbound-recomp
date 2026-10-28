@@ -58,8 +58,13 @@ regenerado. Não implica versão, exportação, commit ou publicação.
 
 O Start da sala abre a tela de loading do cliente por no mínimo 5 segundos
 antes da batalha. Ela mostra o mobile já resolvido (Random vira Dragon ou
-Knight na hora) e o Miramo Town com o nome de cada piloto no ponto em que
-vai nascer. A partida usa esses mesmos mobiles e essas mesmas coordenadas.
+Knight na hora) nos lugares A/B, com os pilotos e equipamentos preservados.
+O painel central mantém a imagem e o título nativos do mapa selecionado; não
+mostra retrato nem nome do mobile, e os cabeçalhos dos lugares não exibem
+nomes de mobiles. A faixa inferior mostra Miramo Town com cada piloto no ponto em que
+vai nascer, com o nome junto à superfície visível da prévia. A margem do
+mapa não é somada duas vezes. A partida usa esses mesmos
+mobiles e essas mesmas coordenadas.
 Rede e salas maiores continuam fora desta etapa; o temporizador fixo ocupa
 o lugar da espera de carregamento multiplayer. Plano: `LOADING_SCREEN.md`.
 
