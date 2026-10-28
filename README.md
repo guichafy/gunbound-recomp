@@ -1,6 +1,6 @@
 # Gunbound Recomp
 
-Reescrita fiel, em **Godot 4.7.2 + GDScript**, dos projetos
+Projeto de reescrita com foco em fidelidade, em **Godot 4.7.2 + GDScript**, dos projetos
 [jglim/gunbound-launcher](https://github.com/jglim/gunbound-launcher) (launcher e TestClient
 do cliente **GunBound Thor's Hammer**) e [jglim/gunbound-server](https://github.com/jglim/gunbound-server)
 (emulador do servidor). A meta é manter o jogo original e, sobre essa base, levá-lo a várias
@@ -9,8 +9,9 @@ plataformas e estendê-lo com funcionalidades novas.
 Hoje o projeto cobre o cliente: um treino offline **1×1 contra a máquina no macOS**, no mapa
 Miramo Town A, com os 16 mobiles, itens, clima, lobby, sala e Avatar Shop clássicos.
 
-> **Gunbound** é marca de terceiros. Este repositório é um protótipo local de estudo, sem
-> publicação, notarização ou distribuição.
+> **GunBound** é marca de terceiros. Este é um protótipo de estudo com código publicado no GitHub.
+> Não há releases de aplicativos publicadas neste repositório; os builds macOS são locais e não notarizados.
+> O porte ainda contém adaptações documentadas e não alega paridade integral com o cliente original.
 
 <img src="docs/readme/shot.gif" width="720" alt="Bigfoot dispara o T1 de quatro bombas contra o Mage no Miramo Town, com avatar original vestido">
 
@@ -55,8 +56,8 @@ Método completo em [docs/PORTE.md](docs/PORTE.md).
 |---|---|
 | Versão do código | **0.20.5** (fonte única: `application/config/version` em `project.godot`) |
 | O que dá para jogar | Lobby → sala 1×1 → transição de 5 s com o mapa e os spawns → partida no Miramo Town A, janela WIN/LOSE do cliente com OK de volta à sala, loja e perfil local |
-| Última validação completa (ADR-137) | 110 suítes, 28.279 checks Godot, 88 testes Python e 29 partidas, zero falhas ([registro](docs/sdd/BATTLE_OPTIONS_NATIVE.md)) |
-| Aplicativo exportado | `builds/Gunbound Recomp.app` 0.20.5, **anterior** à loja original, aos assets e ao HUD corrigido (ADR-130/131/133/134/135/136/137). Reexporte para incluí-los |
+| Validação | Resultados, datas e limites por mudança em [HANDOFF](docs/sdd/HANDOFF.md). O harness completo inclui suítes Godot, testes Python e 29 partidas; `--quick` omite as partidas longas. Resultados anteriores não comprovam mudanças posteriores |
+| Aplicativo exportado | Build local em `builds/Gunbound Recomp.app`, fora do Git. A versão 0.20.5 exportada não inclui todas as mudanças posteriores da `main`; reexporte e confira a assinatura conforme [DESENVOLVIMENTO](docs/DESENVOLVIMENTO.md) |
 
 ## TODOs
 
@@ -107,13 +108,15 @@ tarefa está em [docs/sdd/TASKS.md](docs/sdd/TASKS.md).
 - **Bigfoot e Mage com arte original**, Bigfoot suavizado 4× (ADR-089/115): faltam o aceite e
   a captura específica de menu, loja e arena.
 - **Turtle SS:** dano e física dos seis filhos continuam adaptados.
+- **Grub** (ADR-150): T2 com quatro corpos, ricochetes e dano repetido do SS revisados pelo cliente. Tornado, atributos do dono e contato do T1 permanecem adaptações; aguarda aceite. [Registro](docs/sdd/GRUB_CLIENT_FIX.md).
+- **Boomer** (ADR-142 a 149): tiros, dano/cratera, boca, poses e vento na queda revisados; apoio em rampa com aceite visual delimitado. Pose do chassis apoiado dependente do vento ainda não comprovada. [Evidências e limites](docs/sdd/BOOMER_ISSUE_9.md).
 
 ### Pendente
 
 - Armor S2 com dois impactos, Trico S2 e Dragon S2/SS (família de rajadas).
-- Satélites do Knight, ricochetes do Grub e campo do Ice.
-- Revisão pelo cliente de Bigfoot, Nak e Boomer. Bigfoot usa ataques herdados, e Nak e Boomer
-  têm porte parcial.
+- Satélites do Knight e campo do Ice.
+- Revisão completa de Bigfoot e Nak. Bigfoot usa ataques herdados; Nak tem porte parcial.
+  Boomer e Grub têm revisões recentes, com limites e adaptações nos registros acima.
 - Dano, colisão, apoio e parede comuns. Hoje são adaptados fora das famílias já revisadas.
 - A máquina não se move nem usa itens. Mouse Speed segue desligado.
 - Uma queda depois do teleporte, sob um teto, não causa dano.
@@ -134,6 +137,15 @@ Planos de porte: [BATTLE_MOBILE_FAMILY_PLANS](docs/sdd/BATTLE_MOBILE_FAMILY_PLAN
 
 ## Começar
 
+Requisitos: Git, Godot **4.7.2** e Python 3 para os scripts de ferramentas e validação.
+O fluxo abaixo usa a instalação macOS em `/Applications/Godot.app`; ajuste o executável
+se o Godot estiver em outro local. Windows, Linux, Android e iOS ainda não têm builds validados.
+
+```bash
+git clone https://github.com/guichafy/gunbound-recomp.git
+cd gunbound-recomp
+```
+
 ```bash
 /Applications/Godot.app/Contents/MacOS/Godot --headless --editor --path . --import
 ```
@@ -142,8 +154,8 @@ Planos de porte: [BATTLE_MOBILE_FAMILY_PLANS](docs/sdd/BATTLE_MOBILE_FAMILY_PLAN
 ./scripts/check.sh --quick
 ```
 
-O primeiro comando importa o projeto, o que um checkout novo exige. O segundo roda as
-suítes sem as partidas longas. Para jogar, rode `scenes/main.tscn` no editor ou abra o app
+Após clonar, o comando do Godot importa o projeto, o que um checkout novo exige.
+`./scripts/check.sh --quick` roda as suítes sem as partidas longas. Para jogar, rode `scenes/main.tscn` no editor ou abra o app
 exportado. Controles em [docs/JOGAR.md](docs/JOGAR.md). Testes e exportação em
 [docs/DESENVOLVIMENTO.md](docs/DESENVOLVIMENTO.md).
 
@@ -159,3 +171,22 @@ exportado. Controles em [docs/JOGAR.md](docs/JOGAR.md). Testes e exportação em
 | [docs/sdd/HANDOFF.md](docs/sdd/HANDOFF.md) | Estado, evidências e como retomar |
 | [docs/sdd/README.md](docs/sdd/README.md) | Organização da documentação SDD (SPEC, DESIGN, DECISIONS, TASKS) |
 | [AGENTS.md](AGENTS.md) | Contexto para sessões de agentes |
+
+## Contribuir e relatar problemas
+
+Abra uma [issue](https://github.com/guichafy/gunbound-recomp/issues) com a versão ou commit,
+sistema operacional, passos para reproduzir, resultado esperado e observado. Para diferenças
+visuais, inclua uma captura e indique se a referência é o cliente Thor's Hammer ou uma
+adaptação documentada. Remova dados pessoais e caminhos privados dos anexos.
+
+Antes de propor uma mudança, consulte [PORTE](docs/PORTE.md) e os requisitos em
+[SPEC](docs/sdd/SPEC.md). Pull requests devem explicar o problema, a mudança e as verificações
+executadas, incluindo limites de validação. Mudanças de combate exigem o harness completo;
+navegação e input exigem os testes de cena. Use perfis isolados nos testes.
+
+## Referências e atribuições
+
+As referências principais são [jglim/gunbound-launcher](https://github.com/jglim/gunbound-launcher)
+e [jglim/gunbound-server](https://github.com/jglim/gunbound-server). A origem e as atribuições
+dos assets estão nos respectivos catálogos e registros de importação. Código, marcas e assets
+de terceiros não devem ser tratados como se compartilhassem uma licença única.
