@@ -1,5 +1,12 @@
 # Entregas e próximos trabalhos
 
+## English repository presentation — 2026-10-28
+
+- [x] Translate the public description and complete root README into English.
+- [x] Preserve existing links, technical scope and validation limits; translate image alt text.
+- [x] Check rendered Markdown and saved content in the browser; record the work in HANDOFF.
+- Documentation only: no harness run, behavior change, version bump or export.
+
 ## Apresentação do repositório GitHub — 28/10/2026
 
 - [x] Preencher descrição e dez tópicos pela interface do GitHub.
