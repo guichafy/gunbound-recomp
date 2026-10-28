@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Apresentação do repositório GitHub — 28/10/2026
+
+- [x] Preencher descrição e dez tópicos pela interface do GitHub.
+- [x] Corrigir README: código público/builds locais, validações por mudança e status de Grub/Boomer.
+- [x] Acrescentar requisitos, clone, orientação de issues/PRs e referências/atribuições.
+- [x] Conferir prévia renderizada e conteúdo salvo no navegador; registrar limites no HANDOFF.
+- Sem mudança de comportamento, nova execução do harness, versão ou exportação.
+
 ## Issue #8 — Grub pelo cliente — REQ-51 / ADR-150 (28/10/2026)
 
 - [x] Ghidra 12.2 headless: 5 execuções, manifestos `ok=true` (a 1ª, do issue, `ok=false` por `0x488780`; refeita com `--seed-known-entries`).
