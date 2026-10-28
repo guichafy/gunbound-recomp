@@ -156,6 +156,9 @@ static func regenerate(actor: Dictionary) -> void:
 	actor.max_shield = int(spec.shield)
 
 static func low_health(actor: Dictionary) -> bool:
+	# Boomer 461ca0: signed current HP < integer(maximum HP / 3).
+	if int(actor.get("vehicle", 0)) == 6:
+		return int(actor.hp) < int(int(actor.max_hp) / 3)
 	return float(actor.hp) <= float(actor.max_hp) * LOW_HEALTH
 
 ## Point bodies keep item fixtures that carry no vehicle id.

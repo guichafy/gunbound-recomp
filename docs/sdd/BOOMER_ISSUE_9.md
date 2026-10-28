@@ -6,6 +6,129 @@ treino offline contra Mage. A issue é a especificação de aceite; nenhuma
 paridade adicional é presumida. Preservar elenco, perfil, equipamentos e arte
 aprovada. A prova nativa prevalece; lacunas permanecem adaptações declaradas.
 
+## Investigação de apoio, vento e apresentação — 28/10/2026
+
+Continuação da pose: o PE seleciona `wnormal`/`wmove` por uma comparação
+entre vida atual e vida máxima/3. Corrigir o limiar apenas para Boomer e
+testar antes/exato/depois; continuar auditando os consumidores do vento sem
+assumir que o prefixo `w` signifique vento. REQ-09/19/20/45.
+
+### Continuação: sequências `wnormal` e `wmove` (ADR-149)
+
+O estado do `tank6.epa` foi reextraído de `graphics.xfs` SHA-256
+`a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08`;
+o EPA mede 4373 bytes e SHA-256
+`5b0f27bbff6717f61e2b5bdae9a75a367bf19efab97a3e84e0139c8c97d9d57c`.
+`normal`/`move` têm 20 quadros 0–19/20–39; `wnormal`/`wmove` têm 20
+quadros 40–59/60–79. Não há nome de estado com referência explícita a vento;
+nomes sozinhos não provam a ausência de controle indireto.
+
+O construtor 0x41c360 copia DAT[22] para +0x6744 e inicializa +0x6968
+com esse valor; o Boomer tem DAT[22]=1000. Em 0x461ca0, o helper
+0x40a8c0 calcula +0x6744/3 com `idiv`; 0x40b490 compara +0x6968 com
+esse quociente usando `setl` assinado (`ev_b696ae1b2512706905ea9edb977320f4a2ac9fac05e68163de96ae6c60883c84`).
+O ramo verdadeiro seleciona `wnormal` ou `wmove`; o falso, `normal` ou
+`move`. Portanto, nesse caminho o prefixo `w` corresponde a vida baixa,
+não a uma leitura de vento. Para máximo 1000, 332 é baixo e 333 não é.
+`Mobiles.low_health` usa essa regra apenas para Boomer; outros mobiles
+mantêm a regra anterior. O teste RED encontrou seis falhas nos casos 301 e
+332, e GREEN passou 928 checks. GPU 1920×1080/OpenGL4.1: 640 quadros,
+8 combinações de vida 332/333, vento 0/26 e ambos sentidos, pausa30 e
+retomada em `docs/boomer-weak-pose-20261028`.
+Harness completo após a alteração: 29.244 checks Godot, 92 testes Python,
+29 partidas, sem falhas/exit0; log
+`.tools/boomer-issue9/harness-wind-weak-adr149.log`, SHA-256
+`fd53eb788920a5ad5da811441453b2041ebd452ea3a23213b98ab7ab106af598`.
+
+Análise complementar: `0x439600` lê força e direção do vento e gera
+objetos animados aleatórios; seu chamador direto `0x4e4970` também é chamado
+por funções de impacto incluindo 0x48de60 (`ev_895e3a789c6a983b773d471a5ebcde44446a54228dd6ad6c39cd9b54157ff86d`,
+`ev_9923fe501a4684afaf4e5e0a1e29a95f9ac2e44b57ada61c66ca295c28c502ff`).
+Isso demonstra uma via de partículas ligadas ao impacto, não à pose em
+repouso. A varredura de deslocamentos nos bytes do PE também identificou
+0x4bb440 escrevendo os campos de vento no buffer 0xe9aacc, e 0x4cc5c0
+comparando a direção em seu caso 0xf; seus contextos não estabelecem
+alteração da pose apoiada. Ghidra 12.2 em
+`builds/boomer-wind-pose-sweep-20261028`: `run.json` e `manifest.json`
+`ok=true`, 6 seletores; aviso de truststore/CA. As funções têm indireções e
+0x4b7a80 foi agrupada por Ghidra em 0x4b5460. A varredura literal de
+deslocamentos não cobre valores copiados ou acessos indiretos: não permite
+concluir que a pose apoiada ignore o vento. Cliente Windows não executado.
+O snapshot REA com as evidências desta etapa está em
+`builds/boomer-wind-pose-sweep-20261028-rea.json`.
+
+Continuação solicitada: portar apenas o cálculo de apoio demonstrado em
+0x45ba50, na máscara e origem adaptadas do treino; testar central/lados,
+bordas, LUT, sentidos, e a coerência entre boca, mira e previsão. Comparar
+em GPU repouso e recuo nas duas rampas, com vento e pausa. A pose dependente
+de vento permanece pendente até identificar seu consumidor no cliente.
+
+### Continuação: alinhamento do apoio (ADR-148)
+
+`BoomerFlight.support_rotation` usa centro e ±14, ajuste dos lados que
+excedem centro+24 e LUT original de `0x4f1f10`; `Match.body_rotation`
+o usa somente para Boomer. A imagem que motivou o relato de flutuação era
+do recuo: `tank6` quadro 108 já levanta uma roda na fonte; preservá-lo,
+sem alinhar cada quadro pelo seu alpha. A captura em repouso mostrou também
+que a amostragem anterior dava ±6,34° na rampa da fixture. A nova dá +9° e
+−8° (assimetria da LUT original). A caixa física, solo em grade de 2 px,
+origem visual +23, distância de segurança de 60 px e interpolação do render
+são pontes do treino; a relação nativa exata dos hotspots segue em aberto.
+Não se afirma equivalência integral. A boca, HUD, velocidade e previsão
+continuam a receber `Match.body_rotation`.
+
+GPU OpenGL 4.1 Apple M4 Pro: `tests/capture_boomer_support.gd` produziu
+500 passos, quatro combinações de rampas/sentidos, repouso, recuo com vento
+e pausa 30; imagens em `docs/boomer-support-20261028`. A repetição de
+`capture_boomer_standing_wind.gd` no subdiretório `wind` passou 1000 passos
+e 10 cenários, item Change Wind, pausa/retomada. Isso confirma o render do
+porte, não uma alteração da pose do corpo pelo vento nativo. REA adicional
+`builds/boomer-support-follow-20261028-rea.json` confirma que o desenho usa
+o ângulo do apoio, mas não prova caminho de vento sobre a pose apoiada.
+O usuário avaliou a montagem em repouso: “O apoio nas rampas parece correto”.
+O cliente Windows segue não executado; isso não comprova paridade integral.
+O teste dirigido foi RED para as amostras de rampa e para o caso de reflexão
+em borda e GREEN com 913 checks. Harness completo: 29.229 checks Godot,
+92 testes Python e 29 partidas, exit0; log
+`.tools/boomer-issue9/harness-support-adr148.log`, SHA-256
+`4ab92b1f3a12d6adefc121508c0599a11e629689ff0b3cf111256b2965790498`.
+
+O PE e `characterdata.dat` foram novamente verificados: SHA-256
+`4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde` e
+`b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf`.
+REA/Hopper, snapshot local `builds/boomer-support-20261028-rea.json`:
+
+| Aspecto | Evidência e conclusão | Estado |
+|---|---|---|
+| Indireções do Animate | Os bytes da vtable 0x555c14 (`ev_1c106b785feaee801395c858fa18101d9bf63973f1bfff2176bdcecbf0696201`) resolvem +0x18 para 0x45f910 e +0x1c para 0x4542a0. Os acessos diretos ao vento identificados em 0x45f910 alimentam a mensagem de disparo; isso não fecha todas as indireções ou prova ausência de efeito visual. | Parcial; não inventar pose ao vento. |
+| Amostras de apoio | 0x41c360 copia campos DAT 0/1 para +0xd54/+0xf78, este último para +0x119c; Boomer tem 28/24. 0x45ba50 calcula três consultas de coluna, em x e x±14, iniciadas em y−12, via divisão assinada de 0x40a8c0 e operações 0x40aca0/0x40aba0. 0x4e4340 procura para baixo o primeiro byte sólido e devolve 10000 se não houver (`ev_33df71320091080f890df0680779d86397c852dc170a3eb84f3a38636494e574`, `ev_e5b14a5c16e841ad584170c25c760d6c4966fdcd72254838d61d3766fa857fbf`, `ev_fee8959dc69c6c3f23b7c5a699e89983cf0c655eea7f33dfce27d4cde8e3c3c5`, `ev_6015ac62d2796ad46a275029999c3febd70715968192d4fd2d9cc25c1c9c15bd`). | Geometria de consulta comprovada no trecho; correspondência dos campos x/y e do hotspot com o modelo ainda requer comparação integral. |
+| Borda e ângulo | 0x45bf1e–0x45bf5b compara lados com centro+24 e reflete ou substitui apoios afastados; 0x45bf5d–0x45bf84 usa a LUT 0x4f1f10 e divisão assinada. O construtor base inicializa divisor +0xbff0 a 1 e o ramo de criação tipo 5 chama esse construtor (`ev_ddfc0915208777a90e3be67e1f191852a180f6cf666929dc89a8fbe0a8a3d3cd`, `ev_3a22b762fde5ec41aa638cf7da208d6dfb84f9b70000bf88057a451fab505bb7`). Antes da ADR-148, o porte usava superfície a ±18, sem centro, grade 2px, `atan2` e clamp ±30°. | Histórico: regra substituída para Boomer pela ADR-148; origem, divisor e equivalência integral ainda têm limites. |
+| Inspeção humana | O usuário ouviu uma captura do mixer Godot de quatro disparos T2 e um impacto provocado e respondeu “Parece correto”. Ao ver a fixture de rampa informou “Precisa de ajuste” e “Parece flutuar”. | Escuta aceita para o cenário apresentado; contato visual precisa de ajuste. Não equivale a comparação com o cliente Windows. |
+
+`tests/capture_boomer_audio.gd` grava o bus master com `AudioEffectRecord`,
+sem música, a partir da cena de batalha: verifica quatro recursos `62fire`
+e um `62blast` da emissão/impacto. A fixture avança a cena manualmente e
+provoca o impacto; sua temporização de captura depende do relógio do mixer.
+Uma primeira captura foi ouvida pelo usuário (SHA-256
+`2a83d95cdf7e56be449d677f6dbaec26b6bba6b90af7c002f3faec65ec756af4`);
+a repetição, após acrescentar as verificações dos recursos, gerou
+`docs/boomer-audio/boomer-t2-mixer.wav`, SHA-256
+`c0c9d03971978a0361d35b64c0aa7fa3b47641297bcce193130ba63640ffd54b`.
+Não é gravação do cliente original nem cobre todas as armas.
+
+Na fixture de rampa, a posição usa `stance=25`; `MobileSprite.draw` aplica
+`ground=24` no referencial rotacionado do ator. A máscara procedural e o
+terreno desenhado são os mesmos, mas rotação, alpha dos quadros e raster
+podem deslocar o contato. A observação do usuário requer diagnóstico de
+contato por quadro e em ambos os sentidos antes de corrigir o encaixe;
+nenhuma alteração de regra ou de posição foi feita nesta investigação.
+O recorte ampliado `docs/boomer-muzzle-slope/slope1-facing1-detail.png`
+mostra a extremidade esquerda do chassis acima da superfície, enquanto a
+extremidade direita toca o terreno. É um único quadro de uma fixture, não
+uma medida de distância em todos os quadros. Parse da captura de áudio e
+suítes dirigidas `test_classic_shot_timing_scene` (49/0),
+`test_client_audio` (223/0) e `test_client_audio_source` (5 testes) passaram.
+
 ## Identidade e evidência inicial
 
 SHA-256 medidos em 27/10/2026: PE `4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde`, graphics.xfs `a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08`, sound.xfs `081c1b9f5751c486512a9df1a894f6db7a5ed891b8ebdad9fbce1b9169901023`, characterdata.dat `b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf`. PE x86 LE, image base 0x400000; endereços abaixo são VAs desta build.

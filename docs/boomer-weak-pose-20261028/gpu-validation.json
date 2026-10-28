@@ -1,0 +1,65 @@
+{
+	"cases": [
+		{
+			"facing": -1,
+			"hp": 332,
+			"pause": 30,
+			"resumed": true,
+			"wind": 0
+		},
+		{
+			"facing": -1,
+			"hp": 332,
+			"pause": 30,
+			"resumed": true,
+			"wind": 26
+		},
+		{
+			"facing": -1,
+			"hp": 333,
+			"pause": 30,
+			"resumed": true,
+			"wind": 0
+		},
+		{
+			"facing": -1,
+			"hp": 333,
+			"pause": 30,
+			"resumed": true,
+			"wind": 26
+		},
+		{
+			"facing": 1,
+			"hp": 332,
+			"pause": 30,
+			"resumed": true,
+			"wind": 0
+		},
+		{
+			"facing": 1,
+			"hp": 332,
+			"pause": 30,
+			"resumed": true,
+			"wind": 26
+		},
+		{
+			"facing": 1,
+			"hp": 333,
+			"pause": 30,
+			"resumed": true,
+			"wind": 0
+		},
+		{
+			"facing": 1,
+			"hp": 333,
+			"pause": 30,
+			"resumed": true,
+			"wind": 26
+		}
+	],
+	"frames": 640,
+	"size": [
+		1920,
+		1080
+	]
+}

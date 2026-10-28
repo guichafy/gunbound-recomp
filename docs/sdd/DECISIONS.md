@@ -1,5 +1,16 @@
 # Registro de decisões
 
+**ADR-149 — Boomer, EPA de vida baixa:** os estados `wnormal`/`wmove`
+são selecionados pela vida atual estritamente menor que máximo/3 inteiro,
+conforme 0x461ca0. Aplicar somente ao Boomer; os demais mantêm o limiar
+existente. O prefixo não é prova de pose sob vento. Ver `BOOMER_ISSUE_9.md`.
+
+**ADR-148 — Boomer, apoio em rampa:** o Boomer passa a usar três amostras,
+regra de borda e LUT de `0x45ba50`, substituindo para ele a inclinação
+compartilhada por duas amostras. Máscara de 2 px, origem +23 e limites de
+segurança continuam adaptações; sem inclinação de vento inventada. Preservar
+o recuo nativo que eleva uma roda. Ver `BOOMER_ISSUE_9.md`.
+
 Todas as decisões abaixo foram consolidadas em 2026-10-11. Não são exigências
 imutáveis: registrar substituição e motivo se uma solicitação futura as alterar.
 

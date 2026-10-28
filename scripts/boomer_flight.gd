@@ -4,6 +4,38 @@ const Physics = preload("res://scripts/classic_ballistics.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Items = preload("res://scripts/items.gd")
 
+## 45ba50: three column samples and source LUT; the training map's 2px
+## mask and actor→native hotspot conversion are explicit offline bridges.
+static func support_rotation(terrain, position: Vector2) -> float:
+	var start := position.y + 11.0 # current hotspot +23; native y−24/2
+	var center := int(terrain.surface_at(position.x, start))
+	if terrain.is_void(center) or absf(float(center) - position.y - 25.0) > 60.0:
+		return 0.0
+	var left := int(terrain.surface_at(position.x - 14.0, start))
+	var right := int(terrain.surface_at(position.x + 14.0, start))
+	# The native no-contact sentinel is 10000, beyond any map dimension.
+	if terrain.is_void(left):
+		left = 10000
+	if terrain.is_void(right):
+		right = 10000
+	if left > center + 24:
+		if right > center + 24:
+			left = center
+			right = center
+		elif right < center + 24:
+			left = 2 * center - right
+	if right > center + 24 and left < center + 24:
+		right = 2 * center - left
+	var dy := right - left
+	var dx := 28
+	while dy < -127 or dy > 128 or dx < -127 or dx > 128:
+		dx = Physics.quot(dx, 2)
+		dy = Physics.quot(dy, 2)
+	var angle := int(Physics.angles.decode_s16(2 * (dx + 127 + 256 * (dy + 127))))
+	if angle > 270:
+		angle -= 360
+	return deg_to_rad(float(-angle))
+
 ## 43c860/4542a0: fixed DAT angle75/length38, independent of aim. The
 ## 23px anchor converts the current Boomer visual support to tank6 hotspot;
 ## support-angle filtering remains the offline model's declared bridge.

@@ -1,6 +1,6 @@
 # Entregas e próximos trabalhos
 
-- [ ] Boomer: investigar pose ao vento apoiado e equivalência do apoio, além dos demais limites e do aceite visual/sonoro em `BOOMER_ISSUE_9.md`. O usuário solicitou encerrar a issue #9; dano, varredura, tornado, Lightning/Thor, minas, impacto SS, vento na queda, boca fixa, poses e áudio têm porte delimitado no registro.
+- [ ] Boomer: fechar conversão de origem/apoio e pose ao vento; validar sequência e outros sons. Alinhamento por três amostras/LUT foi portado (ADR-148) e o usuário considerou o apoio em repouso correto; uma roda levantada no recuo pertence ao quadro original. T2/impacto capturados no mixer soaram corretos ao usuário; limites e evidências em `BOOMER_ISSUE_9.md`. A issue #9 foi encerrada a pedido do usuário.
 
 ## Relevo dos poços da sala — ADR-141
 

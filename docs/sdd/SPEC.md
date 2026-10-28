@@ -1,5 +1,22 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Boomer: poses de vida baixa — REQ-09/19/20/45
+
+O Boomer seleciona `wnormal`/`wmove` quando a vida atual é estritamente
+menor que a vida máxima dividida por três com truncamento inteiro, conforme
+`0x461ca0`. Os demais mobiles mantêm a regra existente. Essa seleção é de
+vida baixa; não constitui prova de uma pose dependente do vento. Testar os
+limites e preservar a geometria e as sequências do atlas original.
+
+## Boomer: apoio em rampa — REQ-04/07/08/19/45
+
+Usar no Boomer as três colunas e o tratamento de borda do alinhamento
+0x45ba50, com largura DAT 28, altura 24 e LUT de ângulo nativa. A ponte
+do hotspot, a máscara de terreno do treino e o relógio visual permanecem
+adaptações documentadas. Mira, boca, disparo e previsão compartilham a
+inclinação do modelo. Validar rampas e bordas nos dois sentidos, repouso,
+recuo, pausa e vento; não inventar uma pose dependente de vento sem prova.
+
 ## Issue #9: boca do Boomer — REQ-04/07/08/19/44/45
 
 Os três tiros partem do ponto fixo do chassis calculado com ângulo 75° e

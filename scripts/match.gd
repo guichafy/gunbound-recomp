@@ -310,6 +310,8 @@ func move_actor(direction: float, delta: float) -> void:
 			break
 
 func body_rotation(index: int) -> float:
+	if int(actors[index].vehicle) == 6:
+		return BoomerFlight.support_rotation(terrain, Vector2(actors[index].pos))
 	# Nearby supports only: do not tilt toward a distant lower floor or the abyss.
 	var pos: Vector2 = actors[index].pos
 	var stance := stance_of(index)

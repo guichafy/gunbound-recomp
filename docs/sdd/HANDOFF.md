@@ -1,5 +1,45 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Boomer — sequência de vida baixa, ADR-149
+
+`wnormal`/`wmove` no caminho 0x461ca0 dependem de vida atual < máximo/3
+inteiro, não do vento. `Mobiles.low_health` aplica esse limite ao Boomer;
+outros mobiles mantêm a regra existente. `test_boomer` 928/0. GPU 640
+quadros: 332/333 de 1000 HP, vento 0/26, dois sentidos, pausa30/retomada;
+`docs/boomer-weak-pose-20261028`. O efeito do vento sobre o chassis apoiado
+segue sem consumidor comprovado, apesar da varredura adicional no PE.
+Detalhes, hashes, REA, Ghidra e limites em `BOOMER_ISSUE_9.md`.
+Harness completo: 29.244 checks Godot, 92 testes Python e 29 partidas,
+sem falhas/exit0. Log `.tools/boomer-issue9/harness-wind-weak-adr149.log`,
+SHA-256 `fd53eb788920a5ad5da811441453b2041ebd452ea3a23213b98ab7ab106af598`.
+
+## Boomer — apoio em rampa, ADR-148
+
+`Match.body_rotation` usa o alinhamento de três amostras e LUT nativos para
+o Boomer; máscara de 2 px, hotspot e ponte de posição seguem adaptações.
+Amostras GPU em `docs/boomer-support-20261028`: quatro combinações de rampa
+e sentido, repouso/recuo e pausa30; vento apoiado 10 casos com Change Wind.
+O usuário avaliou a montagem em repouso: “O apoio nas rampas parece correto”.
+Esse aceite visual não comprova a equivalência integral do apoio nativo.
+Recuo com roda elevada foi observado no quadro 108 do atlas nativo. Pose do
+corpo sob vento ainda não comprovada e não inventada; comparar os limites em
+`BOOMER_ISSUE_9.md`. Não há execução do cliente Windows.
+Harness completo: 29.229 checks Godot, 92 testes Python e 29 partidas,
+sem falhas/exit0; `.tools/boomer-issue9/harness-support-adr148.log`, SHA-256
+`4ab92b1f3a12d6adefc121508c0599a11e629689ff0b3cf111256b2965790498`.
+
+## Boomer — investigação anterior ao ADR-148, 28/10/2026 (histórico)
+
+REA confirma três amostras nativas de terreno para Boomer (centro e ±14 px;
+DAT 28×24), tratamento de borda e LUT de ângulo. O porte usa ±18 px,
+`atan2`, clamp e grade de 2 px; a origem, o apoio e a pose ao vento ainda
+precisam ser fechados. Snapshot e identificadores em `BOOMER_ISSUE_9.md`.
+O usuário observou que o Boomer parece flutuar na captura de rampa. Uma
+captura do mixer Godot de T2 e impacto foi ouvida e avaliada como correta
+para esse cenário; não é comparação com cliente Windows. Repetição reproduzível
+em `tests/capture_boomer_audio.gd` e `docs/boomer-audio/boomer-t2-mixer.wav`.
+Não houve alteração de regra nem correção visual nesta investigação.
+
 ## Issue #9 Boomer — boca, poses e PCM, ADR-147 (parcial)
 
 A boca usa o ponto fixo do chassis do cliente (DAT 75°/38, LUT e espelho),

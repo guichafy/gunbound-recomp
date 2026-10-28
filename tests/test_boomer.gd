@@ -8,6 +8,39 @@ const NativeWeather = preload("res://scripts/aduka_weather.gd")
 const ClassicSprite = preload("res://scripts/classic_sprite.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 
+func weak_pose_threshold() -> void:
+	# Client 41c360 DAT[22] → +6744; 461ca0 compares +6968 < +6744 / 3.
+	# DAT[22] for Boomer is 1000, so the transition is between 332 and 333.
+	var sprite = ClassicSprite.new()
+	sprite.setup("boomer")
+	for row in [[300,true], [301,true], [332,true], [333,false], [334,false]]:
+		var actor := {"vehicle":6,"hp":row[0],"max_hp":1000}
+		var weak: bool = Mobiles.low_health(actor)
+		check(weak == row[1], "Boomer low-health threshold hp %d" % row[0])
+		check(sprite.frame_index("idle", 0.0, 0, weak) == (40 if row[1] else 0), "Boomer idle EPA hp %d" % row[0])
+		check(sprite.frame_index("moving", 0.0, 0, weak) == (60 if row[1] else 20), "Boomer move EPA hp %d" % row[0])
+
+func support_alignment() -> void:
+	var model = model_with_item()
+	var terrain = model.terrain
+	terrain.WIDTH = 640
+	terrain.HEIGHT = 400
+	terrain.cells.resize(640 * 400)
+	model.actors[0].pos = Vector2(250, 575)
+	# Three columns measured in world pixels: x−14, x, x+14.
+	# Independent signed degree oracles are raw i16 entries in the client's LUT.
+	for sample in [[600,600,600,0], [598,600,602,9], [602,600,598,-8],
+		[600,600,624,41], [600,600,626,0], [626,600,610,36], [626,600,626,0]]:
+		terrain.cells.fill(0)
+		for i in 3:
+			var x: int = [118,125,132][i]
+			for y in range(int(sample[i]) / 2, 400):
+				terrain.cells[y * 640 + x] = 1
+		for facing in [-1,1]:
+			model.actors[0].facing = facing
+			check(is_equal_approx(rad_to_deg(model.body_rotation(0)), float(sample[3])),
+				"Boomer support samples=%s facing=%d" % [str(sample),facing])
+
 func model_with_item(item: String = ""):
 	var model = Match.new()
 	model.start(6,1,42,"","original",null,[] if item.is_empty() else [item])
@@ -423,6 +456,8 @@ func frame_rates() -> void:
 	check(states[0] == states[1] and states[1] == states[2],"exact FP state3s at30/60/120Hz")
 
 func run() -> void:
+	weak_pose_threshold()
+	support_alignment()
 	launch_clock()
 	transformation()
 	parity()
