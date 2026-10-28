@@ -96,7 +96,9 @@ logs sem erros. Smoke headless não comprova GPU, áudio ou input humanos.
 Permissão padrão contents/read; só a publicação recebe contents/write. PRs
 não publicam nem recebem token de escrita; sem pull_request_target, PAT ou
 segredos de assinatura. Actions fixadas por SHA, dependências por versão,
-Dependabot semanal, timeout e retenção de artifacts14dias.
+Dependabot semanal, timeout e retenção de artifacts14dias. Checkouts esparsos
+evitam materializar os1,4GB de galerias históricas; os runners mantêm assets, cenas,
+scripts, testes, evidências SDD, referência do botão Exit e avisos legais.
 
 Configuração recomendada no GitHub: proteger main, exigir revisão e checks
 `Lint and automation tests`, `Calculate release version` e os dois jobs
