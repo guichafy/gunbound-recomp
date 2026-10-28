@@ -28,6 +28,8 @@ const AdukaEffect = preload("res://scripts/aduka_effect.gd")
 const AdukaCombat = preload("res://scripts/aduka_combat.gd")
 const LightningCombat = preload("res://scripts/lightning_combat.gd")
 const MageCombat = preload("res://scripts/mage_combat.gd")
+const GrubCombat = preload("res://scripts/grub_combat.gd")
+const GrubFlight = preload("res://scripts/grub_flight.gd")
 const AdukaWeather = preload("res://scripts/aduka_weather.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
 const PROCEDURAL_WEATHER := [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
@@ -68,6 +70,7 @@ var spark_tick := 0
 static func _static_init() -> void:
 	AdukaCombat.warmup()
 	MageCombat.warmup()
+	GrubCombat.warmup()
 	LightningCombat.warmup()
 	NATIVE_STAGE = JSON.parse_string(FileAccess.get_file_as_string("res://assets/openbound/weather/native_stage.json"))
 	Physics.warmup()
@@ -349,9 +352,12 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 	var spread_after: bool = Mobiles.spread_after_clamp(vehicle_id)
 	for component in range(emission.size()):
 		var entry: Dictionary = emission[component]
-		var initial := muzzle(index, angle if spread_after else angle + float(entry.angle), weapon)
+		var initial := muzzle(index, angle if spread_after else angle + float(entry.angle) + float(entry.get("native_angle", 0)) * float(actors[index].facing), weapon)
 		var native := int(entry.get("native_power", 0))
-		var velocity := shot_velocity(index, angle, power, weapon, entry.angle, entry.power, native) if spread_after else shot_velocity(index, angle + float(entry.angle), power, weapon, 0.0, 0.0, native)
+		# native_angle is a client-cell offset (theta); on the left-facing side the
+		# HUD angle runs the other way (Grub MainAction: S1/SS theta + 2).
+		var turn := float(entry.angle) + float(entry.get("native_angle", 0)) * float(actors[index].facing)
+		var velocity := shot_velocity(index, angle, power, weapon, turn, entry.power, native) if spread_after else shot_velocity(index, angle + turn, power, weapon, 0.0, 0.0, native)
 		var shell := ShellState.create(initial, velocity, entry.spawn, rules, weapon, component)
 		shell.owner = index
 		shell.vehicle = vehicle_id
@@ -359,12 +365,13 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		shell.sound = bool(entry.get("sound", true))
 		shell.pose_start_at = float(entry.get("pose_start_at", 0.0))
 		# Preserve exact launch integers instead of re-quantizing their float projection.
-		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, entry.angle, entry.power, native) if spread_after else shot_velocity_fp(index, angle + float(entry.angle), power, weapon, 0.0, 0.0, native)
+		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, turn, entry.power, native) if spread_after else shot_velocity_fp(index, angle + turn, power, weapon, 0.0, 0.0, native)
 		ClassicFlight.prepare(shell, entry)
 		BoomerFlight.prepare(shell,actors[index])
 		AdukaCombat.prepare(shell,actors[index])
 		MageCombat.prepare(shell,actors[index])
 		LightningCombat.prepare(shell,actors[index])
+		GrubCombat.prepare(shell,actors[index])
 		result.append(shell)
 	return result
 
@@ -400,6 +407,9 @@ func seed_projectile(projectile: Dictionary) -> void:
 	projectile.launch_speed = Vector2(projectile.velocity).length()
 	if bool(projectile.get("boomer", false)):
 		BoomerFlight.seed(projectile)
+	var grub_kind := GrubFlight.kind_of(projectile)
+	if grub_kind != 0:
+		GrubFlight.begin(projectile, grub_kind)
 
 func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictionary:
 	var shells := shot_shells(index, angle, power, weapon)
@@ -568,6 +578,9 @@ func advance_projectile_tick(delta: float) -> void:
 		seed_projectile(projectile)
 		projectile.previous_draw_pos = projectile.pos
 		projectile.previous_hit_pos = projectile.hit_pos
+		if GrubFlight.active(projectile):
+			advance_grub(projectile, i, travel_delta)
+			continue
 		var underground := bool(projectile.get("underground", false))
 		var entered_burrow := false
 		var next: Dictionary
@@ -660,6 +673,47 @@ func advance_projectile_tick(delta: float) -> void:
 		phase = PHASE_SETTLE
 		resolve_wait = RESOLVE_WAIT
 
+## Grub T2 / SS (ADR-150): one native tick of grub_flight.gd. Collision never uses
+## the interpolated positions; the CPU prediction runs this same function.
+func advance_grub(projectile: Dictionary, index: int, travel: float) -> void:
+	var width: int = terrain.WIDTH * terrain.SCALE
+	var height: int = terrain.HEIGHT * terrain.SCALE
+	var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
+	var hit_body := func(x: int, y: int) -> bool:
+		for slot in range(actors.size()):
+			if slot != ignored and AdukaCombat.hit_actor(Vector2i(x, y), actors[slot]):
+				return true
+		return false
+	projectile.age += travel
+	var outcome: Dictionary = GrubFlight.tick(projectile, terrain.native_cells, width, height, hit_body)
+	Physics.publish_motion(projectile)
+	projectile.hit_pos = Vector2(projectile.g_int)
+	projectile.trail.append(projectile.hit_pos)
+	if projectile.trail.size() > 28:
+		projectile.trail.pop_front()
+	if outcome.event == "explode":
+		var collided := -1
+		if bool(outcome.mobile):
+			for slot in range(actors.size()):
+				if slot != ignored and AdukaCombat.hit_actor(Vector2i(outcome.position), actors[slot]):
+					collided = slot
+					break
+		explode(Vector2(outcome.position), collided, projectile)
+		projectiles.remove_at(index)
+		return
+	if outcome.event == "oob" or (int(projectile.g_ctr) < 0 and float(projectile.age) > Combat.MAX_FLIGHT_AGE):
+		events.append({"type": "miss", "position": projectile.hit_pos})
+		projectiles.remove_at(index)
+		return
+	if bool(outcome.ricochet):
+		events.append({"type": "ricochet", "position": projectile.hit_pos, "weapon": int(projectile.weapon)})
+	# SuperShot_Bullet13 Animate (0x488780) damages around its position every frame.
+	if int(projectile.g_kind) == GrubFlight.SS:
+		var event_start := events.size()
+		GrubCombat.apply(actors, events, Vector2i(projectile.g_int), projectile, actors[shot_actor])
+		collect_gold_damage(event_start, projectile.hit_pos, projectile)
+	GrubFlight.finish_frame(projectile)
+
 func advance_battle_effects() -> void:
 	var asate_owners := {}
 	var finished: Array[int] = []
@@ -730,23 +784,34 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var native_aduka := int(projectile.get("vehicle",0))==16 and weapon_index==0 and not bool(projectile.get("beacon",false))
 	var native_mage := MageCombat.active(projectile)
 	var native_boomer := BoomerFlight.active(projectile)
+	var native_grub := GrubCombat.active(projectile)
 	var native_data: Dictionary = AdukaCombat.t1_parameters(projectile,actors[shot_actor]) if native_aduka else {}
 	if native_mage:
 		native_data = MageCombat.parameters(projectile,actors[shot_actor])
 	elif native_boomer:
 		native_data = BoomerFlight.parameters(projectile,actors[shot_actor])
+	elif native_grub:
+		native_data = GrubCombat.parameters(projectile,actors[shot_actor])
 	var crater_percent := int(projectile.get("mage_crater_percent",100)) if native_mage else int(projectile.get("aduka_crater_percent",100))
 	if native_boomer:
 		crater_percent = int(projectile.get("boomer_crater_percent",100))
 	var crater_dimension := Physics.quot(int(native_data.get("dimension",0))*crater_percent,100)
-	var removed: int = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect))) if native_aduka or native_mage or native_boomer else terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
+	var removed: int
+	if native_grub:
+		removed = terrain.carve_native(GrubCombat.crater_spans(projectile,Vector2i(position)))
+	elif native_aduka or native_mage or native_boomer:
+		removed = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect)))
+	else:
+		removed = terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
 	var heading := PI * 0.5
 	var velocity := Vector2.ZERO
 	if projectile.has("velocity"):
 		velocity = projectile.velocity
 		heading = velocity.angle()
 	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "child":bool(projectile.get("child",false)), "ss_state":str(projectile.get("ss_state","normal")), "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	if native_mage:
+	if native_grub:
+		GrubCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
+	elif native_mage:
 		MageCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
 	elif native_aduka or native_boomer:
 		AdukaCombat.apply(actors,events,Vector2i(position),native_data)

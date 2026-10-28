@@ -109,7 +109,9 @@ func run() -> void:
 	shell.launched = true
 	grub.projectiles = [shell]
 	grub.advance_projectiles(0.25)
-	check(int(grub.actors[1].hp) == 1000 and grub.projectiles.size() == 1, "Grub SS crosses a mobile and keeps flying")
+	# SuperShot_Bullet13 never tests mobiles in Simulate (0x4857f0) and Animate (0x488780)
+	# damages around the shell every frame: crossing a mobile hurts without detonating.
+	check(int(grub.actors[1].hp) < 1000 and grub.projectiles.size() == 1, "Grub SS crosses a mobile, keeps flying and damages it each frame")
 	var raon = Match.new()
 	raon.start(7, 1, 2, "")
 	var mine_pos := Vector2(raon.actors[0].pos.x + 30.0, raon.actors[0].pos.y)

@@ -75,11 +75,19 @@ static func definitions() -> Dictionary:
 			shot("SS", 300, 23, 1290, {"flight": "open", "transform_at": 2.2, "transform_ticks": 44, "transform_hold": 0.5, "extra_damage": 0, "extra_radius": 23.0, "burst": 6, "burst_spread": 12.0})],
 			[Vector2(25, 50), Vector2(25, 50), Vector2(25, 50)],
 			"960 de vida · o tempo gasto pesa 12."),
-		13: _body("Grub", "grub", 1000, 0, 0, 10, true, Vector2(40, 34), 25.0, 0.0, false,
-			[shot("Tiro 1", 190, 25, 740), shot("Tiro 2", 94, 19, 890),
-			shot("SS", 26, 18, 1290, {"skip_actors": true})],
+		# Grub (client type 12): S1/SS fire at theta + 2; S2 is four shells with
+		# theta +1/0/-1/-2 and native power +5/0/-5/-10 (MainAction 0x471fd0, run in
+		# an x86 emulator for docs/sdd/GRUB_CLIENT_FIX.md). S2 and SS ricochet.
+		13: _grub(_body("Grub", "grub", 1000, 0, 0, 10, true, Vector2(40, 34), 25.0, 0.0, false,
+			[shot("Tiro 1", 190, 25, 740, {"shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": 2}]}),
+			shot("Tiro 2", 94, 19, 890, {"flight": "grub_t2", "shells": [
+				{"spawn": 0.0, "angle": 1.0, "power": 0.0, "native_power": 5},
+				{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_power": 0},
+				{"spawn": 0.0, "angle": -1.0, "power": 0.0, "native_power": -5},
+				{"spawn": 0.0, "angle": -2.0, "power": 0.0, "native_power": -10}]}),
+			shot("SS", 26, 18, 1290, {"flight": "grub_ss", "skip_actors": true, "shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": 2}]})],
 			[Vector2(30, 60), Vector2(30, 60), Vector2(30, 60)],
-			"1000 de vida · biônico."),
+			"1000 de vida · S2 e SS ricocheteiam.")),
 		# tank14.img is the Dragon. Bullet14's SS spawns the five children.
 		14: _body("Dragon", "dragon", 1000, 0, 0, 10, false, Vector2(40, 34), 25.0, 0.0, false,
 			[shot("Tiro 1", 290, 29, 800), shot("Tiro 2", 200, 27, 950),
@@ -98,6 +106,17 @@ static func definitions() -> Dictionary:
 			[Vector2(10, 50), Vector2(10, 50), Vector2(10, 50)],
 			"1000 de vida · atira pelas costas.", true),
 	}
+
+## Grub emits after the clamp: the +/- offsets of MainAction are not aim-limited.
+## Its type-12 row and CreateMobile (0x41c360) hold no 10 / 70: the shared "bionic"
+## pair (regen 10, protection 70, Energy Up +3 %) is dropped for the Grub only and
+## replaced by the non-bionic defaults (issue #8, user decision; the 35 is not proven).
+static func _grub(body: Dictionary) -> Dictionary:
+	body.spread_after_clamp = true
+	body.bionic = false
+	body.hp_regen = 0
+	body.protection = 35
+	return body
 
 static func _body(label: String, kind: String, hp: int, shield: int, shield_regen: int, time_delay: int, bionic: bool, box: Vector2, stance: float, beacon: float, smoke: bool, weapons: Array, aims: Array, summary: String, rear: bool = false) -> Dictionary:
 	return {

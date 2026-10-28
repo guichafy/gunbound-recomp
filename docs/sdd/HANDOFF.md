@@ -1,5 +1,34 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Boomer — rastreamento de indireções do repouso
+
+REA e Ghidra fecharam a chamada virtual do objeto interno de piloto:
+o construtor 0x458b80 chama 0x44fb40 em +0x38, que instala a vtable
+0x555b38; sua entrada +8 é 0x44fcb0. Esse passo avança o EPA e escolhe
+`normal`/`look` por sorteio e flag, não por leitura direta do vento.
+Ao terminar `normal` do chassis, 0x45ed80 também pode escolher `emotion1`
+quando o sorteio e a flag +0x8ba8 permitem; `tank6.epa` contém 30 quadros
+para essa sequência. O porte ainda não implementa esse ramo de repouso.
+Isso é evidência de variação visual sem leitura direta de vento, não prova
+que o vento jamais a influencie indiretamente. A chamada ao cliente Windows
+não foi executada. Vtables, hashes, evidência REA e limites documentados em
+`BOOMER_ISSUE_9.md`; código e apoio aprovado não foram alterados nesta etapa.
+O armazenamento de booleanos 0x4064a0 também consome duas chamadas a
+`_rand`; a flag +0x8ba8 pode ser zerada ou copiada por caminhos identificados.
+Essa concorrência de consumo é uma hipótese de influência indireta, ainda
+sem prova para mudança de vento. Probe de vtables/PE/XFS passou novamente e
+`./scripts/check.sh test_boomer` passou 928/0 nesta investigação.
+
+## Issue #8 — Grub pelo cliente, 28/10/2026
+
+REQ-51/ADR-150. Ghidra 12.2 + execução das rotinas do PE num emulador x86 (Unicorn, `tests/tools/grub_oracle`).
+S1/SS θ+2; S2 emite 4 corpos; S2 e SS ricocheteiam (`grub_flight.gd`/`grub_surface.gd`, módulo constante
+1800/1600, detonam em 44/40 ou ao tocar com o contador no limite); SS atravessa mobiles e fere a cada quadro;
+dano e cratera da linha type 12 (`grub_combat.gd`). Rastro S2/SS e espelho SS. O par biônico 10/70 saiu só do Grub (a
+linha type 12 não o tem); tornado, atributos do dono e contato do T1 permanecem adaptações. Matriz, hashes, comandos e perguntas em
+`GRUB_CLIENT_FIX.md`. Resultados observados na seção de validação ao final dele. Sem versão nova,
+exportação, commit ou push; cliente Windows e escuta não exercitados.
+
 ## Boomer — sequência de vida baixa, ADR-149
 
 `wnormal`/`wmove` no caminho 0x461ca0 dependem de vida atual < máximo/3

@@ -1891,3 +1891,22 @@ previsão compartilham a mesma boca. As poses de dano, item e morte seguem
 as durações do tank6.epa, sem efeitos genéricos de tinta/rolagem/fade.
 `62fire` e `62blast` são importados como PCM sem perda; os dois WAVs e seus
 UIDs permanecem. A evidência, capturas e limites estão em `BOOMER_ISSUE_9.md`.
+
+## ADR-150 — Grub pelo cliente: ricochete, SS contínuo e linha type 12
+
+28/10/2026, issue #8, REQ-51. O pedido autoriza reescrever o comportamento do Grub (ID 13 / type 12)
+a partir do PE pinado. Decisões: (1) provar por execução das rotinas do PE num emulador x86
+(Unicorn, venv fora do repositório, ferramenta versionada em `tests/tools/grub_oracle`) além do
+Ghidra; fixtures independentes substituem o esperado escrito à mão; (2) o ricochete usa módulo
+constante `[69]/[82]` e normal tangencial `0x4a1740`; a reflexão é `2(S+90)−H` com `H` o rumo da
+velocidade **já invertida** por `0x40a500` (NEG), o que a execução confirmou como `2S−H_antes`
+(uma primeira leitura sem o `NEG` parecia contradizê-la); (3) o SS causa dano a cada quadro e atravessa mobiles (substitui o teste
+"cruza e não fere" de `test_classic_mobiles`); (4) rastro e espelho: `0x458690`/`0x488880` são
+publicadores de render, o que religa o rastro do S2/SS sem tocar a ADR-120 dos demais; (5) o par
+biônico 10/70 (regen, proteção) e o +3 % de Energy Up **saem só do Grub**: a linha type 12 e
+`CreateMobile` não o contêm; o usuário respondeu «só o Grub» e confirmou a remoção, e os quatro outros
+biônicos (atalho `_body`) ficam como estão. O valor 35 que o substitui é o padrão dos não-biônicos, não um
+dado do PE.
+Tornado, atributos do dono (divisor de `0x41da80`) e o contato do T1 seguem adaptados. Substitui a
+nota "falta o ricochete" de `MOBILES.md` e o `skip_actors` do SS. Sem versão, exportação ou push.
+

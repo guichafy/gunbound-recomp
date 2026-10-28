@@ -8,6 +8,50 @@ aprovada. A prova nativa prevalece; lacunas permanecem adaptações declaradas.
 
 ## Investigação de apoio, vento e apresentação — 28/10/2026
 
+### Indireções adicionais: piloto e término da pose normal
+
+| Caminho | Resultado observado em estática | Limite |
+|---|---|---|
+| 0x461ccb → objeto +0x38 | O construtor base 0x458b80 passa `this+0x38` a 0x44fb40 (`ev_60ec6526849b17a683d453b823b5e0000665d1ffdd7c8fb2881c4bb77447ebd5`); 0x44fb40 instala 0x555b38 (`ev_970726cd0a295dfa5d4aef238ac429b3f9f400958e2ac56dddac086b81f3fe19`). Bytes dessa vtable: +4 = 0x461c60, +8 = 0x44fcb0 (`ev_af6b4f9ef1cc654c1d283b8469e4d143cd28bf2254a8857c9188839c55209847`). A fábrica atribui `avata` ao objeto interno. | Destino derivado do construtor/tabela, não rastreado em execução; alterações dinâmicas não estão excluídas. |
+| 0x44fcb0 → 0x450730 / 0x461c60 | O objeto interno avança seu EPA; ao completar, `_rand()%10` e a flag +0x8c8 escolhem `normal` ou `look` (`ev_f2cb6e8afab4e229c963afe3083b4544ea053d0e380a2c3a454ee06d3da8dd50`). +4 resolve ao seletor 0x461c60, que procura o nome no EPA e reinicia seus índices. | Sem leitura direta dos dois campos de vento no corpo analisado. Estado do gerador, outras chamadas e influência indireta não foram esgotados. |
+| 0x461e49/0x461e57 → 0x450730/0x45ed80 | `normal` é estado índice 0, contém 20 ticks, flag EPA 0; ao terminar, 0x450730 marca +0x34. Em 0x45ed80 caso 0, `_rand()%8 == 0` e flag +0x8ba8 falsa selecionam `emotion1`; caso contrário, `normal`. `emotion1` tem 30 quadros/ticks, índices 318–347. `ev_7c20a8daa07ef4d91e314729b4c1eb5d8317f5a2ff1f4af1bc836f4e6b5c5780` e Ghidra ASM confirmam as ramificações. | Variação de repouso com sorteio é comprovada no recorte; não é prova de que vento controla ou não o estado. A semântica da flag +0x8ba8 e a sequência global do RNG não foram fechadas. |
+| Porte | `BattleArt.state_name` retorna `idle` em repouso e `ClassicSprite` repete `normal`; `emotion1` do Boomer não está integrado. | Diferença identificada, não corrigida nesta investigação; precisa de contrato de RNG, interrupções e pausa antes de alterar apresentação. |
+
+REA/Hopper snapshot `builds/boomer-wind-indirect-20261028-rea.json`
+(SHA-256 `5f1f4324aeb4d36ac05b71f9ebcfcec8d86953abd2d458279ef0e12b547a5b7a`);
+Ghidra12.2 `builds/boomer-wind-indirect-20261028`, `run.json` e
+`manifest.json` `ok=true`, sete funções e duas tabelas, aviso de CA.
+Probe independente `.tools/boomer-issue9/wind-indirect/probe.py` leu o PE,
+comparou cinco bytes de chamadas indiretas e as duas tabelas e reextraíu
+`tank6.epa` do XFS; saiu 0 e escreveu
+`builds/boomer-wind-indirect-probe.json` (SHA-256
+`e502bb9d260fc6e03a0687341d1657153f2be24335786d2760c31094117e293c`).
+REA/Hopper não suporta `resolve_native_call_targets`; a resolução acima é
+uma derivação das tabelas/construtores e não cobertura dinâmica completa.
+
+Seguimento da flag e RNG: 0x4064a0 codifica um booleano em três bytes e
+consome **duas chamadas a `_rand`** por escrita (`ev_6d5cc998765bf89d683e58bbf4628402c8c2bb72c93cf41e520a33d2cf599fa9`).
+0x406530 lê o booleano protegido e o atribui a outro via 0x4064a0
+(`ev_11c844a8cd7368f89a3ca28034be3331f92a4b58d2495ebcb12b9bd13dd2c607`).
+A varredura literal de +0x8ba8 encontrou chamadas que a zeram em 0x43e598
+e 0x4b6b6b, e cópias em 0x420a6c e 0x4d118c; a origem de todos os valores
+verdadeiros e a semântica completa da flag não estão provadas. `_rand`
+0x525c4f acessa estado da thread, atualiza-o por `state*0x343fd+0x269ec3`
+e retorna bits 16–30 (`ev_49470c8bd02005ec03b2e62854c4c303193bb629448c49ec64d2d716bd60da63`).
+Assim, escritas de estado na mesma thread podem alterar sorteios subsequentes,
+inclusive a seleção de `look`/`emotion1`. Isso é uma possibilidade de
+acoplamento indireto, não prova de que uma mudança de vento o provoque:
+faltam sequência de chamadas, seed e threads do cenário de partida.
+Snapshot REA adicional `builds/boomer-wind-rng-flag-20261028-rea.json`,
+SHA-256 `41d4d8730dd06d4a1fe9934cb5a4c0109c7eeb1842b7f55652511b69758fea90`.
+
+Próxima investigação: rastrear demais produtores da flag, eventuais
+mutações do objeto interno, seed e consumo do RNG no caminho de mudança de
+vento, e comparar cenário controlado do cliente original em ambiente offline.
+Não alterar a pose por vento sem fechar esse vínculo. Nesta etapa o probe
+independente voltou a passar e `./scripts/check.sh test_boomer` passou 928/0;
+nenhum comportamento de produto foi alterado.
+
 Continuação da pose: o PE seleciona `wnormal`/`wmove` por uma comparação
 entre vida atual e vida máxima/3. Corrigir o limiar apenas para Boomer e
 testar antes/exato/depois; continuar auditando os consumidores do vento sem
