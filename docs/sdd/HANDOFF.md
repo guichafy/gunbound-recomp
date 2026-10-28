@@ -1,5 +1,13 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## English repository presentation — 2026-10-28
+
+At the user’s request, the public GitHub description and the entire root README
+were translated into English, including headings, tables and image alt text.
+Existing links, technical scope and validation limits were preserved. Linked
+Portuguese documents are identified as such. The rendered preview and saved
+README were checked in the browser; no harness run, behavior change or export.
+
 ## Apresentação do repositório GitHub — 28/10/2026
 
 Revisão solicitada pelo usuário e realizada pela interface do GitHub: descrição
