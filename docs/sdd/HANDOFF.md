@@ -1,5 +1,20 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Grub: clima no S2/SS e luz do casco na sala — 28/10/2026
+
+Relato do usuário na `main`: tiros do Grub não interagiam com eletricidade/tornado e a imagem do
+Grub na sala ficava errada, piorando depois do Start. Emenda 2 da ADR-150 (REQ-51).
+S2/SS chamam `AdukaWeather.sample` em cada amostra grossa da varredura (antes do terreno) e
+`AdukaWeather.finish` no lugar de `v+=a` com tornado, como `0x49e650`/`0x4857f0` e `0x49fd40`/`0x486ea0`
+(prova estática; o emulador não exercitou colunas). T1 segue o contato comum. A luz `tank13l` passou a
+valer por view (`hull_view`): sala/loading mostram o casco aceso como na batalha e não acumulam mais a
+luz no loading seguinte a uma partida. `test_grub_model` 300/0 (12 checks novos de clima falham sem a
+ligação); sonda GPU local `.tools/grub-room/proof.gd` com recorte da figura idêntico entre 2 e 40 quadros,
+após a partida e no segundo loading. Harness completo: parse OK, todas as suítes Godot sem falha,
+`test_matches` 13/0 e `test_classic_matches` 16/0; exit 5 por 5 suítes Python de assets que exigem
+`.tools/gunbound-client/sound.xfs`, ausente neste checkout (não tocadas). Sem versão, exportação ou
+push; aceite visual do usuário pendente. `project.godot` reformatado pelo editor ficou fora do commit.
+
 ## Main protegida e anexos das próximas releases — 28/10/2026
 
 Nova branch codex/main-protection-release-assets criada de origin/main

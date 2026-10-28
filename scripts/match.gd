@@ -684,8 +684,12 @@ func advance_grub(projectile: Dictionary, index: int, travel: float) -> void:
 			if slot != ignored and AdukaCombat.hit_actor(Vector2i(x, y), actors[slot]):
 				return true
 		return false
+	# 0x49e650 / 0x4857f0 sample force, tornado and electricity like the Aduka
+	# family; weakness/mirror/random are not sampled by these sweeps.
+	var weather_sample := func(x: int, y: int, force_sampled: bool) -> bool:
+		return AdukaWeather.sample(self, projectile, Vector2i(x, y), force_sampled)
 	projectile.age += travel
-	var outcome: Dictionary = GrubFlight.tick(projectile, terrain.native_cells, width, height, hit_body)
+	var outcome: Dictionary = GrubFlight.tick(projectile, terrain.native_cells, width, height, hit_body, weather_sample)
 	Physics.publish_motion(projectile)
 	projectile.hit_pos = Vector2(projectile.g_int)
 	projectile.trail.append(projectile.hit_pos)

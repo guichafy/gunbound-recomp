@@ -7,6 +7,7 @@ const Flight = preload("res://scripts/grub_flight.gd")
 const Combat = preload("res://scripts/combat.gd")
 const ClassicSprite = preload("res://scripts/classic_sprite.gd")
 const GrubSprite = preload("res://scripts/grub_sprite.gd")
+const SpritePose = preload("res://scripts/sprite_pose.gd")
 
 func fresh(facing: int = 1, item: String = ""):
 	var model = Match.new()
@@ -135,6 +136,81 @@ func test_prediction_matches_real() -> void:
 				best = position
 		check(not predicted.is_empty() and Vector2(predicted.position) == best, "weapon %d: prediction %s = executed %s" % [weapon, str(predicted.get("position")), str(best)])
 
+## 0x49e650 / 0x4857f0 call the native weather samplers on every coarse sample and
+## 0x49fd40 / 0x486ea0 swap v += a for the tornado branch (ADR-150 amendment).
+func column_x(weapon: int) -> int:
+	var probe = floor_model()
+	probe.fire(45.0, 35.0, weapon)
+	var path: Array = []
+	for tick in 12:
+		probe.advance_projectiles(Combat.STEP)
+		if not probe.projectiles.is_empty() and probe.projectiles[0].has("g_int"):
+			path.append(Vector2i(probe.projectiles[0].g_int))
+	return path[6].x
+
+func test_weather_columns() -> void:
+	# T1 is an ordinary Projectile: it keeps the common weather contact.
+	var probe = floor_model()
+	probe.fire(45.0, 35.0, 0)
+	for tick in 6:
+		probe.advance_projectiles(Combat.STEP)
+	var t1 = floor_model()
+	t1.weather.add_column("electricity", probe.projectiles[0].hit_pos.x, 1.0)
+	var t1_result := fly(t1, 0, 45.0, 35.0)
+	check(int(t1_result.kinds.get("weather_hit", 0)) >= 1 and int(t1_result.kinds.get("lightning", 0)) >= 1, "T1 crosses electricity on the common path (%s)" % str(t1_result.kinds))
+	for weapon in [1, 2]:
+		var x := column_x(weapon)
+		for type in ["electricity", "tornado", "force"]:
+			var model = floor_model()
+			model.weather.add_column(type, float(x), 1.0)
+			model.actors[1].pos = Vector2(1300, 690)
+			var predicted: Dictionary = model.predict_shot(0, 45.0, 35.0, weapon)
+			check(model.fire(45.0, 35.0, weapon), "fire weapon %d through %s" % [weapon, type])
+			var kinds := {}
+			var explosions: Array = []
+			var tornado_ticks := 0
+			var tornado_ok := true
+			var force := 0
+			for tick in 4000:
+				var before: Array = []
+				for shell in model.projectiles:
+					if shell.has("g_kind") and not shell.tornado.is_empty():
+						before.append([shell, Vector2i(shell.fp_velocity)])
+				model.advance_projectiles(Combat.STEP)
+				var bounced: bool = model.events.any(func(event): return event.type == "ricochet")
+				for shell in model.projectiles:
+					force = maxi(force, int(shell.get("native_force", 0)))
+				for pair in before:
+					if not bounced and model.projectiles.any(func(live): return is_same(live, pair[0])):
+						tornado_ticks += 1
+						var then: Vector2i = pair[1]
+						var now: Vector2i = pair[0].fp_velocity
+						# No gravity inside the column, |vx| >= 200 and a pure horizontal flip.
+						tornado_ok = tornado_ok and now.y == then.y and absi(now.x) >= 200 and (absi(now.x) == maxi(absi(then.x), 200))
+				for event in model.events:
+					kinds[event.type] = int(kinds.get(event.type, 0)) + 1
+					if event.type == "explosion":
+						explosions.append(Vector2(event.position))
+				model.events.clear()
+				if model.phase != Match.PHASE_FLIGHT:
+					break
+			var label := "weapon %d %s" % [weapon, type]
+			check(int(kinds.get("weather_hit", 0)) >= 1, "%s: the shell samples the column (%s)" % [label, str(kinds)])
+			match type:
+				"electricity":
+					check(int(kinds.get("lightning", 0)) >= 1, "%s: the impact adds the electric strike" % label)
+				"tornado":
+					check(tornado_ticks > 0 and tornado_ok, "%s: tornado clamps |vx| to 200, skips gravity and flips at the border (%d ticks)" % [label, tornado_ticks])
+				"force":
+					check(force >= 20 and force <= 100, "%s: force accumulates within 20..100 (%d)" % [label, force])
+			var best := Vector2.ZERO
+			var distance := INF
+			for position in explosions:
+				if position.distance_to(model.actors[1].pos) < distance:
+					distance = position.distance_to(model.actors[1].pos)
+					best = position
+			check(not predicted.is_empty() and Vector2(predicted.position) == best, "%s: prediction %s = executed %s" % [label, str(predicted.get("position")), str(best)])
+
 func test_ss_passes_through_and_repeats() -> void:
 	var probe = floor_model()
 	probe.fire(45.0, 35.0, 2)
@@ -170,14 +246,22 @@ func test_light_layers() -> void:
 	for light in ["Bullet1Light.png", "Bullet2Light.png"]:
 		check(not sprite.sheet(light).is_empty(), "%s is available for the additive pass" % light)
 	check(sprite.sheet("Bullet3Light.png").is_empty(), "the SS has no light entry in the client (bullet13p only)")
-	check(not sprite.hull_active, "hull glow stays off outside the battle pass")
+	check(sprite.hull_view == 0, "hull glow stays off until a view opens it")
 	var view := Node2D.new()
+	var other := Node2D.new()
 	sprite.begin_hull_glow(view)
-	check(sprite.hull_active, "begin_hull_glow arms the hull pass")
+	check(sprite.hull_view == view.get_instance_id(), "begin_hull_glow arms the hull pass for that view")
+	# A view that never opened the pass draws the plain body: no private additive
+	# canvas that nobody clears (the room glow piled up after a match).
+	sprite.draw_hull_glow(other, SpritePose.new(Vector2(100, 100), 70.0, 1, {"frame": 0}))
+	check(not sprite.hull_glow.canvases.has(other.get_instance_id()), "another view does not get a hull glow canvas")
+	sprite.draw_hull_glow(view, SpritePose.new(Vector2(100, 100), 70.0, 1, {"frame": 0}))
+	check(sprite.hull_glow.canvases.has(view.get_instance_id()), "the opened view draws the hull glow")
 	sprite.clear_hull_glow()
+	check(sprite.hull_view == 0, "clear_hull_glow disarms it")
 	sprite.hull_glow = null
 	view.free()
-	check(not sprite.hull_active, "clear_hull_glow disarms it")
+	other.free()
 
 func run() -> void:
 	Physics.warmup()
@@ -190,4 +274,5 @@ func run() -> void:
 	test_teleport_beacon_is_not_a_ricochet()
 	test_prediction_matches_real()
 	test_ss_passes_through_and_repeats()
+	test_weather_columns()
 	finish("GRUB MODEL CHECKS")

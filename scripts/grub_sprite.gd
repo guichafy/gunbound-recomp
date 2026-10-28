@@ -8,9 +8,10 @@ var glow = AdditiveArt.new()
 var hull_glow = AdditiveArt.new()
 var hull_info: Dictionary = {}
 var hull_light: CanvasTexture
-## The hull glow only exists inside the battle pass (game.gd begin/clear it once
-## per frame); menus and previews draw the plain body.
-var hull_active := false
+## The hull glow belongs to the view that opened it this frame (game.gd's battle
+## pass, the room figures). Any other view draws the plain body: the private
+## additive canvas of a view nobody clears would pile up a glow per redraw.
+var hull_view := 0
 
 func setup(kind: String) -> void:
 	super.setup(kind)
@@ -27,15 +28,19 @@ func clear_projectiles() -> void:
 
 func begin_hull_glow(view: Node2D) -> void:
 	hull_glow.begin(view)
-	hull_active = true
+	hull_view = view.get_instance_id()
 
 func clear_hull_glow() -> void:
 	hull_glow.clear()
-	hull_active = false
+	hull_view = 0
 
 func draw(view: Node2D, request) -> void:
 	super.draw(view, request)
-	if not hull_active or hull_light == null:
+	draw_hull_glow(view, request)
+
+## Additive tank13l pass over the body drawn by MobileSprite.draw.
+func draw_hull_glow(view: Node2D, request) -> void:
+	if hull_view != view.get_instance_id() or hull_light == null:
 		return
 	var amount: float = request.width / hull_width
 	var ground: float = 24.0 if request.width < 150.0 else request.width * 0.23

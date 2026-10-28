@@ -1922,6 +1922,18 @@ Adaptação declarada: o modo de mistura aditivo do Grub segue a precedência de
 render das camadas do Grub não foi lido no PE. A luz do casco é desenhada acima do piloto (passe aditivo
 do `Game`, ligado por `begin_hull_glow` só na batalha).
 
+**Emenda 2, 28/10/2026 (relato do usuário na `main`: "tiros não interagem com eletricidade/tornado" e
+"imagem do Grub na sala errada, pior depois do Start").** (a) S2/SS passam a amostrar o clima pelas
+rotinas do PE: `0x49e650`/`0x4857f0` chamam `0x4510f0`/`0x451030`/`0x4511b0` em cada amostra grossa antes
+do terreno, e `0x49fd40`/`0x486ea0` trocam `v+=a` pelo ramo do tornado; é o par
+`AdukaWeather.sample/finish`, reaproveitado sem pôr o ID 13 em `AdukaWeather.active` (o T1 segue no
+contato comum). Substitui a adaptação "Grub T2/SS ignoram o tornado" e a leitura de que esses
+endereços seriam objetos inexistentes no treino. Weakness/Mirror/Random não entram nessas varreduras.
+(b) O passe aditivo da luz do casco vira **por view** (`hull_view`): só desenha na view que chamou
+`begin_hull_glow` no quadro. As figuras da sala/loading abrem o próprio passe e mostram a luz, como na
+batalha; isso substitui "menus e previews desenham o corpo simples", que deixava a sala sem luz e,
+depois de uma partida, acumulava a luz num canvas nunca limpo.
+
 
 ## ADR-151 — CI/CD desktop e versões por push (28/10/2026)
 
