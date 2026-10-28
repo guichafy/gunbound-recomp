@@ -14,7 +14,9 @@
 - [ ] Tornado, atributos do dono (divisor `0x41da80`) e contato do T1: **adaptações declaradas** (perguntas em `GRUB_CLIENT_FIX.md`).
 - [ ] Aceite visual/auditivo do usuário; cliente Windows não executado.
 
-- [ ] Boomer: fechar conversão de origem/apoio e pose ao vento; rastrear flag +0x8ba8/RNG e investigar porte da sequência `emotion1` observada no repouso nativo; validar sequência e outros sons. Alinhamento por três amostras/LUT foi portado (ADR-148) e o usuário considerou o apoio em repouso correto; uma roda levantada no recuo pertence ao quadro original. T2/impacto capturados no mixer soaram corretos ao usuário; limites e evidências em `BOOMER_ISSUE_9.md`. A issue #9 foi encerrada a pedido do usuário.
+- [ ] Boomer: fechar conversão de origem/apoio e pose ao vento; investigar a ordem global do RNG entre quadros, demais consumidores da flag +0x8ba8 e uso efetivo das sequências EPA; validar apresentação e outros sons. A recepção 0xc300 pelo laço principal precede os passos da cena na mesma thread, enquanto o Change Wind temporizado ocorre após o passo de objetos; o produtor de verdadeiro foi localizado e o sorteio `emotion1` do tipo 0 não é o caso do Boomer tipo 5. Alinhamento por três amostras/LUT foi portado (ADR-148) e o usuário considerou o apoio em repouso correto; uma roda levantada no recuo pertence ao quadro original. T2/impacto capturados no mixer soaram corretos ao usuário; limites e evidências em `BOOMER_ISSUE_9.md`. A issue #9 foi encerrada a pedido do usuário.
+
+- [x] Boomer/RNG: identificar recodificação de inteiros protegidos (16 sorteios por chave não nula, inclusive após leitura válida) e mapear callbacks intermediários; grafo estático e limites em `BOOMER_ISSUE_9.md`.
 
 ## Relevo dos poços da sala — ADR-141
 

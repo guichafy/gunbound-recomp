@@ -14,8 +14,8 @@ aprovada. A prova nativa prevalece; lacunas permanecem adaptações declaradas.
 |---|---|---|
 | 0x461ccb → objeto +0x38 | O construtor base 0x458b80 passa `this+0x38` a 0x44fb40 (`ev_60ec6526849b17a683d453b823b5e0000665d1ffdd7c8fb2881c4bb77447ebd5`); 0x44fb40 instala 0x555b38 (`ev_970726cd0a295dfa5d4aef238ac429b3f9f400958e2ac56dddac086b81f3fe19`). Bytes dessa vtable: +4 = 0x461c60, +8 = 0x44fcb0 (`ev_af6b4f9ef1cc654c1d283b8469e4d143cd28bf2254a8857c9188839c55209847`). A fábrica atribui `avata` ao objeto interno. | Destino derivado do construtor/tabela, não rastreado em execução; alterações dinâmicas não estão excluídas. |
 | 0x44fcb0 → 0x450730 / 0x461c60 | O objeto interno avança seu EPA; ao completar, `_rand()%10` e a flag +0x8c8 escolhem `normal` ou `look` (`ev_f2cb6e8afab4e229c963afe3083b4544ea053d0e380a2c3a454ee06d3da8dd50`). +4 resolve ao seletor 0x461c60, que procura o nome no EPA e reinicia seus índices. | Sem leitura direta dos dois campos de vento no corpo analisado. Estado do gerador, outras chamadas e influência indireta não foram esgotados. |
-| 0x461e49/0x461e57 → 0x450730/0x45ed80 | `normal` é estado índice 0, contém 20 ticks, flag EPA 0; ao terminar, 0x450730 marca +0x34. Em 0x45ed80 caso 0, `_rand()%8 == 0` e flag +0x8ba8 falsa selecionam `emotion1`; caso contrário, `normal`. `emotion1` tem 30 quadros/ticks, índices 318–347. `ev_7c20a8daa07ef4d91e314729b4c1eb5d8317f5a2ff1f4af1bc836f4e6b5c5780` e Ghidra ASM confirmam as ramificações. | Variação de repouso com sorteio é comprovada no recorte; não é prova de que vento controla ou não o estado. A semântica da flag +0x8ba8 e a sequência global do RNG não foram fechadas. |
-| Porte | `BattleArt.state_name` retorna `idle` em repouso e `ClassicSprite` repete `normal`; `emotion1` do Boomer não está integrado. | Diferença identificada, não corrigida nesta investigação; precisa de contrato de RNG, interrupções e pausa antes de alterar apresentação. |
+| 0x461e49/0x461e57 → 0x450730/0x45ed80 | `normal` é estado índice 0 no EPA e contém 20 ticks. **Correção:** o `case 0` de 0x45ed80 se refere ao tipo nativo em `actor+0x24`, não ao índice do estado EPA: somente nesse caso `_rand()%8` e +0x8ba8 selecionam `emotion1`. Boomer é tipo 5 e despacha para 0x45ee25. | `tank6.epa` contém `emotion1`, mas sua existência não prova uso pelo caminho de repouso do Boomer. A afirmação anterior de que o Boomer usa esse sorteio estava incorreta. |
+| Porte | `BattleArt.state_name` retorna `idle` em repouso e `ClassicSprite` repete `normal`. | O ramo nativo do tipo 5 usa `normal`/`wnormal` e outras condições; a análise deste seletor não comprova ausência de `emotion1` em outros caminhos. |
 
 REA/Hopper snapshot `builds/boomer-wind-indirect-20261028-rea.json`
 (SHA-256 `5f1f4324aeb4d36ac05b71f9ebcfcec8d86953abd2d458279ef0e12b547a5b7a`);
@@ -39,13 +39,13 @@ verdadeiros e a semântica completa da flag não estão provadas. `_rand`
 0x525c4f acessa estado da thread, atualiza-o por `state*0x343fd+0x269ec3`
 e retorna bits 16–30 (`ev_49470c8bd02005ec03b2e62854c4c303193bb629448c49ec64d2d716bd60da63`).
 Assim, escritas de estado na mesma thread podem alterar sorteios subsequentes,
-inclusive a seleção de `look`/`emotion1`. Isso é uma possibilidade de
+inclusive a seleção de `look` e, no tipo nativo 0, `emotion1`. Isso é uma possibilidade de
 acoplamento indireto, não prova de que uma mudança de vento o provoque:
 faltam sequência de chamadas, seed e threads do cenário de partida.
 Snapshot REA adicional `builds/boomer-wind-rng-flag-20261028-rea.json`,
 SHA-256 `41d4d8730dd06d4a1fe9934cb5a4c0109c7eeb1842b7f55652511b69758fea90`.
 
-Próxima investigação: rastrear demais produtores da flag, eventuais
+Investigação inicialmente proposta: rastrear demais produtores da flag, eventuais
 mutações do objeto interno, seed e consumo do RNG no caminho de mudança de
 vento, e comparar cenário controlado do cliente original em ambiente offline.
 Não alterar a pose por vento sem fechar esse vínculo. Nesta etapa o probe
@@ -628,6 +628,231 @@ a nova captura, criada após o parse global, passou em parse dirigido e na GPU.
 O editor headless gerou seu `.gd.uid` após a rodada, exit 0, com erros
 ambientais de leitura de certificados e gravação de `editor_settings` fora
 do workspace em `/private/tmp/boomer-wind-import.log`; não são logs do harness.
+
+### Continuação: flag e RNG no fluxo de clima
+
+**Correção posterior:** a investigação seguinte identificou um produtor da
+flag e estabeleceu que `emotion1` nesse seletor é do tipo 0, não do Boomer
+tipo 5. O texto abaixo registra hipóteses e limites da etapa anterior.
+
+REA/Hopper rastreou a chamada direta 0x406500 → 0x4064a0 → `_rand`
+0x525c4f (`ev_ea42a1aebc7b97b93367bcb0bf3ae348761e023c8853769f1b4c74ba45a0c417`).
+O setter de booleano chama `_rand` duas vezes mesmo ao gravar falso; a cópia
+0x406530 também usa o setter. O estado do gerador fica em +0x14 dos dados
+da thread retornados por 0x52a4d4; o avanço é
+`state = state * 0x343fd + 0x269ec3` módulo 2³², saída `(state >> 16) & 0x7fff`.
+Assim, a mesma implementação não garante sequência compartilhada entre threads.
+
+O REA encontrou 0x4d0a10 → 0x41ebf0 → `_rand`
+(`ev_396b7933f23bd03517ab7ca68df5f23c816e44c04e32237aa2d8c65f5beaf6b4`).
+0x41ebf0 grava os campos que incluem força e direção de vento, mas os dois
+sorteios em 0x41ed67/0x41ed7c ocorrem somente quando um campo de modo vale 3
+e um byte dos dados recebidos difere de 0xff; eles escrevem o booleano global
+`base+0x6a7f90`, não `ator+0x8ba8`. Não se pode atribuir esses sorteios à
+alteração do vento isoladamente. Evidência da função
+`ev_483b5200b491837974865063e033d89471d5ac8121c0aa29b6bbd845de2fc891`.
+
+Na fila 0x4ce610, o caso 6 adiciona 180 graus à direção com normalização;
+o ramo que chama `_rand` duas vezes em 0x4ce92d/0x4ce942 fica no caminho
+de fila vazia ou prazo ainda não atingido e depende de outras condições.
+Ele escreve `ator+0x8bc0`, distinto de +0x8ba8; 0x45ea40, chamada para
+atores nesse caminho, pode limpar outra flag, +0xb0b5, pelo setter aleatório.
+Esses caminhos mostram possíveis consumidores da sequência, não que o caso
+Change Wind por si altere o RNG ou a pose. REA
+`ev_5fa0e20bcff08e757f9f2776059bcb9b01b40cbd3ac9a61fbc1b7a903c378545`,
+`ev_0a292346825210162790abba02b453422691a03606931ed0c482a11dfe9a260c`;
+Ghidra 12.2 `builds/boomer-wind-rng-chain-verified-20261028` (`ok=true`).
+O primeiro lote Ghidra teve `ok=false` por não localizar 0x43e440 como entrada;
+foi repetido sem esse endereço. Snapshot REA
+`builds/boomer-wind-flag-flow-20261028-rea.json` contém 104 evidências.
+
+Uma tentativa de executar o setter e RNG nativos no harness Unicorn existente,
+com TLS e locks simulados, terminou por instrução ilegal (exit 132), antes de
+produzir resultados. Não é validação dinâmica. Permanecem abertos o produtor
+de verdadeiro em +0x8ba8, a thread e a ordem real dos sorteios, e a relação
+causal com a pose apoiada. Nenhuma reação de vento foi acrescentada ao jogo.
+
+### Continuação: produtor e ordem no quadro
+
+Em 0x439e40, o ator anterior apontado por `base+0x621e4`, quando existe,
+tem +0x8ba8 escrito como falso inline com dois sorteios. Após 0x43a670,
+0x4206f0 seleciona outro ator; se passa as verificações de existência,
+flags e demais condições em 0x43a112–0x43a193, 0x43a1a4–0x43a1ab
+grava **verdadeiro** em `novo_ator+0x8ba8` via 0x406500. Em seguida,
+as flags +0x8bab/+0x8bae/+0x8bb1/+0x8bb4 recebem respectivamente
+falso/verdadeiro/verdadeiro/falso: cinco setters consecutivos consomem
+dez sorteios no total. O produtor é associado à seleção de ator na transição
+de batalha; seu significado completo não foi inferido. A rotina é chamada
+por 0x4ccd10 (REA `ev_7f90ca722e615db8a4a709ab3002a27f01e214a154aeec4a12807faa9c8f9ec8`,
+`ev_1d7273d672f97bf59f11c483bdc849dc1fb69057ba1cf8715844bdf007ff7413`).
+0x4ccd10 também pode zerar +0x8ba8 de outro ponteiro de ator mais tarde,
+em ramo condicionado; não presumir identidade desses ponteiros.
+
+Correção importante da análise anterior: 0x45edd5 carrega `actor+0x24`
+e a tabela em 0x45f2d4 leva tipo 0 a 0x45ede8 e tipo 5 a 0x45ee25.
+O sorteio `_rand()%8` com +0x8ba8 pertence ao tipo 0, não ao Boomer
+tipo 5. A existência de `emotion1` em tank6 não demonstra que esse ramo
+seja usado pelo Boomer. O caso 5 segue outros testes e seleciona
+`normal`/`wnormal`; não implementar o sorteio do caso 0 no Boomer.
+REA `ev_d4973a24a3817c03cdf782280c0867fda8c83883ccd070a9a167c74b2bdaf80b`,
+Ghidra e tabela de nove entradas extraída do PE em
+`builds/boomer-flag-producer-20261028` (`ok=true`). O snapshot REA
+`builds/boomer-flag-producer-20261028-rea.json` reúne 124 evidências.
+
+Dentro de 0x461ca0, o passo virtual do piloto (0x44fcb0 por vtable)
+precede 0x450730 e 0x45ed80 do chassis. O piloto só sorteia quando seu
+EPA termina; para o tipo 5 o ramo de chassis acima não contém o sorteio
+do tipo 0. Na rotina 0x4bd8b0, 0x4507d0 percorre objetos e chama slot
+virtual +8; para a vtable do mobile esse slot é 0x461ca0. Depois, no
+mesmo corpo e quando as condições de contagem permitem, há chamada a
+0x4cf310, que pode chegar a 0x4ccd10 → 0x439e40. Esse encadeamento
+síncrono ocorre na mesma thread **quando executado**, com a atualização
+dos objetos antes da transição. Isso não prova quais ramos são tomados
+nem a ordem completa dos sorteios entre quadros. Ghidra
+`builds/boomer-flag-frame-20261028` (`ok=true`); REA
+`ev_4262946d5a5100de9f0bfd4153554ce75bc495eb6f21960c8d564300d13cd690`.
+
+O caminho de entrada de dados 0x4d0a10 chama 0x41ebf0 antes de
+0x4cf310 na mesma thread. Ele define o estado do despacho como 1; a
+existência do grafo 0x4d0a10 → 0x4cf310 → 0x4ccd10 → 0x439e40
+(`ev_e162df9b587cd9d7985235853aacc3c183fd1bf54a2bcb405dae59fc535fc822`)
+não prova que esse ramo seja imediatamente executado nessa chamada.
+O vínculo entre entrada de vento e o passo de animação segue sem prova
+dinâmica. O Unicorn local aborta em `mem_map` com SIGILL, antes do PE;
+não houve execução do cliente nem resultado de oráculo nesta rodada.
+
+### Continuação: ordem entre animação e fila de clima
+
+No caminho do quadro 0x4bd8b0, 0x4be239 chama 0x4507d0, que percorre
+objetos e invoca slot virtual +8; para a vtable 0x555c14 do mobile, esse
+slot resolve a 0x461ca0. Mais adiante no mesmo corpo, 0x4c0fb0–0x4c107c
+verifica o contador protegido `base+0x6240c` positivo e o campo de espera
+`scene+0x10b4 == -1`, decrementa o contador e, ao atingir zero, escolhe
+0x4ce610 se `scene+0x94 == 0` ou 0x4ce3d0 caso contrário. Portanto, quando
+esse caminho chega à fila 0x4ce610, a iteração de objetos já ocorreu na
+mesma chamada e thread; uma atualização posterior do mobile pode observar
+o novo estado. Isso não afirma o momento da renderização nem que todo
+evento de vento use esse caminho.
+
+No caso 6 de 0x4ce610, 0x4ce796–0x4ce7da soma 180 à direção e aplica
+normalização condicional. Em seguida 0x4ce7ee–0x4ce803 ajusta o contador
+e a função retira o evento da fila. A sequência não contém chamada direta
+ao `_rand` nem ao seletor de chassis; os auxiliares chamados não foram
+esgotados transitivamente. O ramo separado de fila vazia ou prazo pendente
+pode fazer outras ações e consumir RNG sob condições, conforme registrado
+acima. Não atribuir o consumo desse ramo ao caso 6 automaticamente.
+
+Entre uma iteração e outra outros objetos e rotinas condicionais podem
+consumir RNG: a análise não estabelece uma contagem global nem prova que
+mudança de vento altere a pose apoiada. A rotina de recepção 0x4d0a10 tem
+outra entrada e não está ordenada aqui em relação ao mesmo passo de
+animação. REA `ev_0399030120f79fbe33a101db8577e18f0f179bfe2b794a65b1bdbf47f6a13a83`,
+`ev_44f663b7ddc773eb10e7c339df203ee33db1028934def514e4cc10f8f7157e38`,
+`ev_3f1f6a818ff502099e0ac08e63ddd200774ef2df7fd69772d3c081e8397c9b0d`;
+snapshot `builds/boomer-frame-order-20261028-rea.json` (129 evidências).
+Ghidra `builds/boomer-flag-frame-20261028` e
+`builds/boomer-wind-rng-chain-verified-20261028` com `ok=true`.
+Probe estático `.tools/boomer-issue9/frame_order_probe.py` passou e gravou
+`builds/boomer-frame-order-probe-20261028.json`: confirma SHA, bytes dos
+calls, vtable e tabela de tipos, não é trace de execução. Cliente Windows
+e emulador não foram executados com sucesso nesta investigação; não houve
+alteração de comportamento nem nova validação visual.
+
+### Continuação: recepção e sequência entre passos
+
+O laço Windows 0x40d8e0 chama 0x413130 quando `PeekMessageA` não encontra
+mensagem; 0x413130 calcula a quantidade de passos por intervalos de 50 ms
+e, quando é positiva, chama 0x4129c0 antes de invocar o slot +0x24 da cena.
+0x4129c0 drena primeiro uma fila por 0x4e7b60 e depois outra por 0x4e80d0;
+em cada mensagem chama o slot +8 da cena ativa. No construtor 0x4b3f90,
+a vtable instalada é 0x5566d8: +8 = 0x4b5460 e +0x24 = 0x4bd8b0.
+Assim, **se a cena ativa for essa e a mensagem for entregue por esse
+despacho**, o tratamento ocorre na mesma thread do laço e antes dos passos
+da cena nessa invocação. A cena pode mudar e condições do laço ou outras
+entradas podem alterar o fluxo; isso não é uma garantia sobre a hora de
+chegada da mensagem à fila nem uma observação dinâmica.
+
+0x4b5460 lê o código em `packet+2` e um byte em `packet+5` que limita a
+0–7. O caso 0xc300 executa primeiro um setter falso em `base+0x6aa62b`,
+consumindo dois `_rand`, e só chama 0x4d0a10 se `scene+0x11d0 == 0`.
+0x4d0a10 chama 0x41ebf0, que atualiza dados incluindo vento; o ramo
+condicionado anteriormente descrito em 0x41ed67/0x41ed7c pode consumir
+mais dois sorteios. Na execução posterior de 0x4bd8b0, mais dois sorteios
+em 0x4be1d5/0x4be1ea codificam outra flag antes de 0x4507d0 percorrer
+os objetos. Se o objeto do Boomer for alcançado, o slot +8 leva a 0x461ca0,
+que chama o passo do piloto antes do chassis; o piloto sorteia somente se
+o EPA tiver terminado. Outras mensagens, objetos e auxiliares podem consumir
+RNG entre os pontos citados: não há contagem exata global nem prova de uma
+pose do chassis causada pelo vento. Não atribuir os sorteios do pacote à
+mudança de vento em si; pertencem ao caminho de processamento observado.
+
+REA: `ev_9680336cb7d21dbc5bb7b0324db80e07675c43f582d70e5b10c79002defaf0ea`,
+`ev_411d771ecd76d84b26890409f74286aed04be42850f5b7e6650349b407b74f5e`,
+`ev_b92e94452b97e0ccf2e1a49a4e44e5db78f3cd4e9b3687be0d3cc1fbaa03c374`,
+`ev_ba15dd980064e487c67927f4df338373a08f03e3dabee53a304189aa12b7a98c`,
+`ev_a6a05d5d4b552443accd90e64f0eb0ac2e59ac748d867beb3c5444f3d923eaa1`;
+snapshot `builds/boomer-weather-reception-20261028-rea.json` (140 evidências).
+Ghidra `builds/boomer-packet-loop-20261028` e
+`builds/boomer-weather-reception-20261028`, `ok=true`; os manifestos
+registram função agregada de despacho e pseudocódigo com advertências.
+Probe estático `.tools/boomer-issue9/frame_order_probe.py` confirmou
+os slots, a tabela do pacote e calls; resultado
+`builds/boomer-packet-order-probe-20261028.json`. Não houve execução do
+cliente Windows nem mudança no jogo nesta etapa.
+
+### Continuação: consumidores intermediários do RNG
+
+O grafo de chamadas diretas exportado do projeto Ghidra contém 2207
+funções. Ele revelou um consumidor que faltava no levantamento anterior:
+0x40a240 executa um laço de **16 chamadas a `_rand`**, uma por byte da
+chave. 0x40a380 chama esse laço quando a chave antiga do objeto em +0x14
+é não nula. Além disso, uma leitura íntegra por 0x40a2e0/0x40a330 termina
+em 0x40a380 para recodificar o mesmo valor: nesse caso uma leitura também
+pode consumir os 16 sorteios. A falha de integridade retorna por outro
+ramo. Não tratar leitura de inteiro protegido como operação sem efeito no
+RNG nem somar apenas os pares de booleanos mencionados acima.
+
+0x40aab0 (soma) e 0x40aaf0 (subtração) fazem leitura e escrita: sob a
+condição de chaves não nulas em ambas, essas duas recodificações consomem
+32 sorteios. Isso alcança o contador condicionado em 0x413265 e as
+operações de vento, além das leituras/escritas em 0x4d0a10/0x41ebf0 e
+no início de 0x4bd8b0. O inicializador 0x40a0a0 prepara a tabela de chaves
+com RNG; não foi observado o estado de alocação das chaves numa partida.
+Os números 16/32 são do recorte com a condição descrita, não totais por
+quadro nem prova de que mudar o valor do vento altere o número de chamadas.
+
+| Intervalo antes da iteração dos mobiles | Resultado estático | Limite |
+|---|---|---|
+| 0x413258–0x41328a | Contador opcional por 0x40aaf0; teste por 0x40b360 lê inteiro protegido; um ramo limpa booleano por 0x406500 (mais 2 sorteios). | Depende de flags e chaves; não é um custo fixo. |
+| 0x50f290 | Invoca callbacks virtuais +0x20 e +0x18 em objetos da lista. | Destinos dependem dos objetos; não inferir ausência de RNG a partir dos calls diretos. |
+| 0x406280 | Percorre objetos de interface e chama slot +8. | O único call do corpo é indireto, em 0x40629b. |
+| 0x41b6f0, 0x41c0a0, 0x4022b0, 0x41ee10 | Nenhuma chamada ao RNG ou callback nos corpos analisados; ajustam campos ou deslocam dados. | Resultado restrito a essas funções e build. |
+| 0x40cf00 | Fronteira `GetWindowTextA`, sem call direto a RNG nativo. | A fronteira Windows permanece fora do grafo nativo direto. |
+| 0x412130 | Drena eventos e chama o slot +0x14 da cena; também pode mudar a cena. | Callback e ramos impedem sequência global fixa. |
+| Prefixo de 0x4bd8b0 | Várias leituras/escritas protegidas antes do par direto 0x4be1d5/0x4be1ea. | Chaves e condições não foram medidas em execução. |
+| 0x4507d0 → mobiles | Outros objetos podem ser atualizados antes do Boomer e consumir RNG. | Ordem efetiva dos objetos e seus estados não foram capturados. |
+
+REA confirmou 0x40a380 → 0x40a240 → `_rand`
+(`ev_629e25fd4066a0cf71243d390237cb9f032165eecf62d9508918694c87df2d55`)
+e 0x40a2e0 → 0x40a330 → 0x40a380 → 0x40a240 → `_rand`
+(`ev_e82d152d8ef84a639244d725dbface902127770812aa3e706b1a740ea7ee95a4`).
+O ASM do laço 0x40a240 é
+`ev_9a8a2cd71382aba1e5affe988c9a13ac85571f0f479bf4a28a87c35e04019a55`;
+snapshot `builds/boomer-rng-consumers-20261028-rea.json` (155 evidências).
+Ghidra `builds/boomer-rng-consumers-20261028` e
+`builds/boomer-protected-rng-verified-20261028` têm `ok=true`. O lote
+`boomer-protected-rng-20261028` foi parcial porque não encontrou a entrada
+0x4b82b0; foi repetido sem ela. Não foi criada função artificial nesse endereço.
+
+O grafo `builds/boomer-rng-callgraph-20261028.json` foi gerado em modo
+readOnly por `.tools/boomer-issue9/ExportRngGraph.java`; log confirma exit0
+e 2207 funções. O relatório
+`builds/boomer-rng-consumers-report-20261028.json` conserva chamadas
+indiretas e corpos ausentes como desconhecidos, sem afirmar ausência de
+RNG nesses caminhos. Probe independente dos bytes do PE confirma o limite
+16, o ramo de chave não nula e o call de recodificação após leitura em
+`builds/boomer-protected-rng-probe-20261028.json` (passou).
+Não houve execução do cliente, mudança de pose nem nova validação visual.
 
 Harness final `./scripts/check.sh`: 113 suítes, 29.102 checks Godot, 92
 testes Python em 17 suítes e 29 partidas, exit 0/sem falhas. Log

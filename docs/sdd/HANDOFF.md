@@ -1,14 +1,70 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Boomer — consumidores intermediários e inteiros protegidos
+
+REA/Ghidra mostraram que 0x40a380 renova a chave com 16 `_rand` quando
+a chave antiga é não nula. Uma leitura íntegra por 0x40a2e0 também chama
+o setter e pode consumir esses 16 valores; soma/subtração protegida pode
+consumir 32 no mesmo recorte. Contar apenas os pares booleanos subestima
+o consumo entre clima e animação. Callbacks de UI e eventos da cena antes
+dos mobiles continuam com destinos dependentes do estado. Quatro auxiliares
+foram delimitados sem calls a RNG; o relatório conserva indireções como
+desconhecidas. Evidências, grafo de 2207 funções e probes em
+`BOOMER_ISSUE_9.md`. Nenhuma pose de chassis sob vento foi comprovada.
+
+## Boomer — recepção de clima e ordem do RNG
+
+No caminho do laço principal, 0x413130 drena mensagens por 0x4129c0
+antes de executar passos de 50 ms da cena. A vtable 0x5566d8 encaminha
+o pacote pelo slot +8 a 0x4b5460 e o passo +0x24 a 0x4bd8b0. Se a
+cena ativa e o pacote 0xc300 forem esses, seu tratamento ocorre na mesma
+thread antes dos passos: dois sorteios no setter inicial, mais dois no
+ramo opcional do parser de clima. O passo da cena tem outros dois antes
+de iterar objetos; demais consumidores impedem contagem global exata.
+Não foi demonstrada pose apoiada dependente de vento. Evidências e limites
+em `BOOMER_ISSUE_9.md`; somente documentação alterada nesta investigação.
+
+## Boomer — ordem da fila de clima no quadro
+
+Em 0x4bd8b0, a iteração virtual dos objetos ocorre antes da chamada
+condicionada a 0x4ce610, que processa o Change Wind da fila quando o
+contador chega a zero. No caminho observado estaticamente, ambos ocorrem
+na mesma thread; o passo já realizado não é reexecutado por esse caso.
+Recepção externa e ordem global do RNG entre quadros continuam abertas.
+O código não prova pose de chassis apoiado dependente do vento. Probe
+estático dos bytes passou; detalhes e limites em `BOOMER_ISSUE_9.md`.
+
+## Boomer — correção do ramo `emotion1` e produtor da flag
+
+O `case 0` de 0x45ed80 é o tipo do mobile, não o estado EPA. Boomer é
+tipo 5 e não percorre o sorteio `emotion1`/flag do caso 0; a afirmação
+anterior estava incorreta. 0x439e40 grava +0x8ba8 como verdadeiro no ator
+selecionado sob condições, usando dois sorteios, e limpa o anterior.
+O passo do piloto precede o chassis; no laço 0x4bd8b0 a atualização de
+objetos antecede uma transição condicionada na mesma thread. A ordem
+entre eventos de vento e quadros completos ainda não está demonstrada.
+Detalhes e limites em `BOOMER_ISSUE_9.md`; nenhum código do jogo mudou.
+
+## Boomer — flag e RNG no caminho de clima
+
+REA rastreou 0x4d0a10 → 0x41ebf0 → `_rand`: a rotina que recebe dados
+incluindo o vento consome dois sorteios apenas num ramo condicionado pelo
+modo e pelos dados. A fila 0x4ce610 também tem um ramo condicionado com
+dois sorteios, separado do caso Change Wind; as flags escritas nesses ramos
+não são a +0x8ba8 que controla `emotion1`. O RNG é por thread: a sequência
+e uma influência sobre o sorteio da pose continuam sem prova em execução.
+O apoio aprovado e o código do jogo não foram alterados. Evidências, limites
+e tentativa de emulação em `BOOMER_ISSUE_9.md`.
+
 ## Boomer — rastreamento de indireções do repouso
 
 REA e Ghidra fecharam a chamada virtual do objeto interno de piloto:
 o construtor 0x458b80 chama 0x44fb40 em +0x38, que instala a vtable
 0x555b38; sua entrada +8 é 0x44fcb0. Esse passo avança o EPA e escolhe
 `normal`/`look` por sorteio e flag, não por leitura direta do vento.
-Ao terminar `normal` do chassis, 0x45ed80 também pode escolher `emotion1`
-quando o sorteio e a flag +0x8ba8 permitem; `tank6.epa` contém 30 quadros
-para essa sequência. O porte ainda não implementa esse ramo de repouso.
+Ao terminar `normal`, o caso do tipo nativo 0 em 0x45ed80 pode escolher
+`emotion1` por sorteio e flag +0x8ba8; esse caso não é do Boomer tipo 5.
+`tank6.epa` contém 30 quadros para essa sequência, mas seu uso não foi provado.
 Isso é evidência de variação visual sem leitura direta de vento, não prova
 que o vento jamais a influencie indiretamente. A chamada ao cliente Windows
 não foi executada. Vtables, hashes, evidência REA e limites documentados em
