@@ -938,3 +938,14 @@ pacotes, ZIP macOS universal e Windows x86_64, checksums e manifesto da entrega.
 Não publicar em caso de falha de qualquer plataforma. Permissões mínimas e actions
 fixadas por SHA. Reexecução não duplica release; fila evita disputa de versão.
 Plano em CI_CD_PLAN.md; alcance e limites da cobertura devem ficar explícitos.
+
+Complemento de 28/10/2026: main exige PR, branch atualizada, histórico linear e
+sucesso dos checks de lint, versão e testes/build/smoke nativos macOS e Windows,
+inclusive para administradores. A integração usa somente Rebase and merge;
+nenhuma aprovação de outro usuário é exigida neste repositório individual.
+O título do PR e todos os commits novos devem ser convencionais: a prévia de
+versão usa os commits que serão preservados pelo rebase, assim como a main.
+Próximas releases publicam apenas os dois ZIPs e um SHA256SUMS consolidado.
+Manifestos JSON e checksums individuais permanecem nos artifacts desktop da CI
+e continuam obrigatórios na validação antes de publicar. Releases já publicadas
+ficam preservadas; os dois arquivos Source code são anexos automáticos do GitHub.

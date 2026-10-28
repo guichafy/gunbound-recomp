@@ -1024,3 +1024,12 @@ extraem e validam ZIP/PCK. `smoke.gd` é carregado opt-in antes de Game._ready
 criar o perfil padrão, usando perfil temporário absoluto. `publish.py` verifica
 os dois manifestos e publica o draft somente após anexos completos. Workflow
 serializa main desde o cálculo; jobs de jogo têm apenas contents/read.
+
+Complemento de28/10: configuração administrativa versionada em
+`.github/main-protection.json`/`merge-settings.json`, aplicada fora de Actions;
+PR obrigatório, quatro checks da app GitHub Actions, main atualizada e histórico
+linear, sem bypass de administradores e só Rebase and merge. Prévia e main
+analisam os commits reais; título convencional continua obrigatório no PR.
+`publish.py` valida os seis inputs internos e publica dois ZIPs + SHA256SUMS
+temporário em UTF-8/LF. Manifestos/sidecars individuais ficam nos artifacts da CI;
+draft retoma uploads e o layout de releases já publicadas permanece intacto.

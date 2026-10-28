@@ -9,15 +9,16 @@ implementação; substitui a proposta documental inicial do PR #11.
 
 1. Lint de correção Python (Ruff E9/F63/F7/F82), testes da automação, título
    convencional no PR e actionlint.
-2. Versão calculada em checkout com histórico/tags completos. PR usa o título
-   (adequado a squash); main valida os commits novos, ignorando merges.
+2. Versão calculada em checkout com histórico/tags completos. PR e main validam
+   os commits novos, ignorando merges. PR também exige título convencional;
+   o cálculo usa as mensagens reais preservadas pelo Rebase and merge.
 3. Matriz nativa macOS14 ARM e Windows2022 x86_64: dependências Python fixadas,
    Godot4.7.2/templates e TestClient pinados por hash; importação, parse de todos
    os scripts/capturas, todas as suítes do harness e 29 partidas.
 4. Python coverage XML/HTML, exportação release, ZIP, extração em pasta
    temporária e smoke do executável nativo sem apoio do projeto-fonte.
 5. Ambos os pacotes precisam passar. Somente push main publica release em draft,
-   anexa ZIPs, manifestos e checksums e só então publica. Notas de release geradas
+   valida manifestos, anexa dois ZIPs e SHA256SUMS e só então publica. Notas geradas
    pelo GitHub incluem o SHA e os limites de assinatura/QA.
 
 A fila `concurrency.queue: max` cobre o workflow inteiro: o cálculo de versão só
@@ -78,6 +79,18 @@ Não se consulta OpenBound nem se baixa qualquer versão posterior como fonte.
 - Um `.json` e um `.zip.sha256` por ZIP, com SHA do commit, versão Godot,
   tamanho/hash, plataforma, arquitetura, smoke e estado de assinatura.
 
+Os seis arquivos permanecem nos artifacts `desktop-macos`/`desktop-windows`
+(retenção14dias). O publisher valida todos antes de qualquer escrita remota;
+próximas releases públicas recebem somente os dois ZIPs e `SHA256SUMS`, contendo
+duas linhas UTF-8/LF compatíveis com `sha256sum -c SHA256SUMS` ou
+`shasum -a 256 -c SHA256SUMS`. Os JSONs são metadados operacionais da CI,
+não downloads necessários para jogar. O consolidado é temporário e não altera
+os inputs, permitindo retry local sem limpeza. Falha de upload mantém draft;
+releases publicadas com seis anexos (como0.21.0) não são modificadas em retry.
+GitHub acrescenta automaticamente Source code.zip/tar.gz como snapshots da tag;
+eles não são os aplicativos prontos. Serão cinco itens visíveis nas próximas
+releases: três arquivos da pipeline e esses dois arquivos automáticos.
+
 Ambos incluem licenças e atribuições. Override de certificados, credenciais,
 fontes de pesquisa, testes e configurações CI são excluídos e auditados.
 macOS preserva assinatura ad-hoc e verificação codesign, sem notarização;
@@ -100,10 +113,33 @@ Dependabot semanal, timeout e retenção de artifacts14dias. Checkouts esparsos
 evitam materializar os1,4GB de galerias históricas; os runners mantêm assets, cenas,
 scripts, testes, evidências SDD, referência do botão Exit e avisos legais.
 
-Configuração recomendada no GitHub: proteger main, exigir revisão e checks
-`Lint and automation tests`, `Calculate release version` e os dois jobs
-`Test, build and smoke`. Habilitar Actions e permitir ao GITHUB_TOKEN criar
-releases. Este workflow não altera regras de proteção do repositório.
+## Proteção aplicada na main
+
+`.github/main-protection.json` e `.github/merge-settings.json` registram a
+configuração aplicada em28/10/2026, fora do workflow. Exigir PR (zero aprovações
+de terceiros no repositório individual), atualização com main e estes checks,
+obrigatoriamente emitidos pelo GitHub Actions (app15368):
+
+- `Lint and automation tests`.
+- `Calculate release version`.
+- `Test, build and smoke (macos)`.
+- `Test, build and smoke (windows)`.
+
+Administradores também cumprem as regras; histórico linear obrigatório, force
+push e exclusão bloqueados. Somente Rebase and merge é permitido no repositório.
+Não exigir o job de publicação: ele só roda após push main. Alterações em nomes
+dos jobs precisam atualizar a configuração remota para não bloquear os PRs.
+
+Reaplicação administrativa explícita (não executada pela CI):
+
+```bash
+gh api --method PATCH repos/guichafy/gunbound-recomp --input .github/merge-settings.json
+gh api --method PUT repos/guichafy/gunbound-recomp/branches/main/protection --input .github/main-protection.json
+```
+
+Actions usa contents/write somente para tags/releases; não recebe permissão de
+administrar proteções. Os JSONs versionados documentam a política; editá-los no
+PR não muda a configuração remota automaticamente.
 
 Repetição local (Python3.13):
 

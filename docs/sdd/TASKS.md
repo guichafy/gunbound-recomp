@@ -1,5 +1,20 @@
 # Entregas e próximos trabalhos
 
+## Proteção main e anexos públicos — REQ-52 / emenda ADR-151 (28/10/2026)
+
+- [x] Nova branch da main atualizada por pull --ff-only.
+- [x] Aplicar e reler proteção: PR, main atualizada, quatro checks da app15368,
+  administradores, histórico linear, bloqueio de force push/exclusão e só rebase.
+- [x] Versionar política administrativa sem dar permissões de administração à CI.
+- [x] Próximas releases: dois ZIPs + SHA256SUMS; validar seis inputs e preservar
+  manifestos/hashes individuais nos artifacts, com falha/retry e layout legado.
+- [x] PR calcula versão pelos commits reais e rejeita mensagens inválidas antes
+  do rebase, mantendo validação de título convencional.
+- [x] 39 testes de automação, Ruff/actionlint e regressões red/green de publicação/versão.
+- [x] Suíte Python completa: 144 testes, zero falhas/skips; revisão independente
+  aprovada, branch e documentação preparadas para entrega por PR.
+- [ ] Conferir os checks hospedados da nova revisão; sem merge/publicação desta branch.
+
 ## CI/CD desktop — REQ-52 / ADR-151 (28/10/2026)
 
 - [x] Implementar workflow PR/main com fila, versão convencional, lint e testes de automação.
@@ -9,7 +24,9 @@
 - [x] Publicação por draft e tag-reserva, retry idempotente e validação de SHA/arquivos.
 - [x] Smoke real macOS universal: lobby/sala/loja, perfil temporário, codesign e arquitetura.
 - [x] Diagnosticar falha Windows hospedada e fixar JSON/sidecars UTF-8/LF, com regressão que reproduz CRLF também no macOS/Linux.
-- [ ] Observar os dois jobs hospedados, em especial execução Windows; não alegar validação nativa Windows local.
+- [x] Jobs hospedados macOS/Windows e publicação aprovados na main40752719203:
+  100suítes/45.935checks/29partidas/139Python por SO; v0.21.0 publicada e conferida.
+  Windows validado no runner, sem alegação de execução Windows local.
 - [ ] Cobertura de linhas GDScript: sem instrumentação nesta entrega; relatório Python não mede o jogo.
 
 ## English repository presentation — 2026-10-28

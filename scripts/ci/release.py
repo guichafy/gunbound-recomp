@@ -36,6 +36,8 @@ def git(root, *arguments):
 
 
 def plan(root, config, pr_title=None):
+    if pr_title:
+        next_version('0.0.0', [pr_title])
     sha = git(root, 'rev-parse', 'HEAD')
     floor = tuple(map(int, config['baseline_version'].split('.')))
     tags = [tag for tag in git(root, 'tag', '--merged', 'HEAD').splitlines()
@@ -53,7 +55,9 @@ def plan(root, config, pr_title=None):
         base, version = config['baseline_sha'], config['baseline_version']
     subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor', base, sha], check=True)
     commits = git(root, 'rev-list', '--reverse', '--no-merges', f'{base}..{sha}').splitlines()
-    messages = [pr_title] if pr_title else [git(root, 'show', '-s', '--format=%B', commit) for commit in commits]
+    # Rebase and merge preserves commit messages; the title alone cannot prove
+    # that main will accept this history or predict its release version.
+    messages = [git(root, 'show', '-s', '--format=%B', commit) for commit in commits]
     if not messages:
         raise ValueError('No new commits to release')
     version = next_version(version, messages)

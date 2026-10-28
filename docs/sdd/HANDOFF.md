@@ -1,5 +1,44 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Main protegida e anexos das próximas releases — 28/10/2026
+
+Nova branch codex/main-protection-release-assets criada de origin/main
+f4cdbbc3, com pull --ff-only. Configuração administrativa aplicada e relida:
+main exige PR, branch atualizada, histórico linear e quatro checks de
+lint/versão/testes-build-smoke macOS/Windows da app GitHub Actions15368;
+administradores sujeitos às regras, sem force push/exclusão. Somente Rebase and
+merge permitido; zero aprovações externas no repositório individual.
+Política versionada em .github/main-protection.json e merge-settings.json;
+editar os JSONs não altera configurações remotas automaticamente.
+
+Usuário aprovou dois ZIPs + SHA256SUMS nas próximas releases. Todos os seis
+arquivos internos continuam validados; manifestos e hashes individuais ficam
+nos artifacts desktop (14dias). Consolidado temporário UTF-8/LF, falha de upload
+mantém draft e retry não altera inputs nem migra releases publicadas.0.21.0
+preservada com seis anexos; os dois Source code são automáticos do GitHub.
+Prévia do PR agora valida os commits reais preservados pelo rebase, além do
+título, para antecipar erros convencionais antes do merge.
+
+Testes de publicação/versão reproduziram o comportamento antigo antes da
+correção. 39 testes da automação, Ruff e actionlint aprovados. Suíte Python
+completa: 144 testes em 60,929 s, zero falhas/skips; revisão independente sem
+achados novos. Log .tools/main-protection-python.log. CI da nova revisão deve
+ser conferida no PR; não reutilizar o resultado da release anterior como prova
+desta mudança. Sem alteração no jogo, assets, perfil ou versão de desenvolvimento.
+
+## Primeira release automática publicada — 28/10/2026
+
+Pipeline main40752719203 no SHA f4cdbbc39453bddfb3eb121ff5102b14e816542b:
+lint, versão, macOS, Windows e publicação aprovados. Em cada runner nativo:
+100suítes Godot/45.935checks,29partidas,139testes Python sem falhas/skips;
+cobertura da automação Python51%. Ambos ZIPs extraídos passaram smoke
+lobby/sala/loja. Release pública v0.21.0, tag no SHA testado, seis arquivos
+anexados; manifestos, tamanhos e SHA256 do servidor conferidos.
+macOS universal com assinatura ad-hoc, sem notarização; Windows x86_64 unsigned.
+Execução: https://github.com/guichafy/gunbound-recomp/actions/runs/40752719203
+Release: https://github.com/guichafy/gunbound-recomp/releases/tag/v0.21.0
+Esses resultados são da primeira release, não da revisão posterior dos anexos.
+
 ## Validação hospedada do PR11 — JSON canônico no Windows (28/10/2026)
 
 Execução Actions40738742117, revisão daec5b63: macOS aprovou testes, cobertura,
