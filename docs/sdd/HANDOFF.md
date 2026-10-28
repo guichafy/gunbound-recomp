@@ -1,17 +1,31 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
-## Proposta de CI/CD desktop — 28/10/2026
+## CI/CD desktop implementado — REQ-52 / ADR-151 (28/10/2026)
 
-`CI_CD_DESIGN.md` registra o pedido de releases por push na main, versões por
-Conventional Commits, qualidade e ZIPs macOS/Windows. É somente um desenho:
-workflows, exportador Windows e cobertura ainda não implementados. Revisão
-independente pede fechar fila/reserva de versão, bootstrap, piso de cobertura
-e cobertura GDScript antes da execução. O pedido seguinte autoriza commitar,
-enviar a branch e abrir PR para main; não constitui aceite da implementação.
-Alterações locais de Grub/Boomer já estavam na main remota; sincronização
-preserva a seção de apresentação do GitHub no conflito de handoff.
-Validação desta mudança documental: diff e links locais; sem nova execução
-do jogo, harness, exportação ou release.
+O pedido posterior corrige a entrega documental e autoriza implementar a pipeline
+no PR11. Workflow em PR/main: lint, versão convencional, bootstrap Godot4.7.2 e
+TestClient por hash, matriz nativa macOS/Windows, harness completo/29partidas,
+cobertura Python (piso40% na automação), exports e smoke de ZIP extraído fora
+projeto. Release somente main, após ambos pacotes; tag-reserva durável, draft,
+checksums/manifestos, retomada de upload e validação do SHA. Título de PR é
+revalidado inclusive ao editar; main exige commits convencionais novos.
+
+Revisão independente: corrigidos lookup de drafts, validação de tag divergente,
+reservas de versão e título do PR. Script de smoke opt-in injeta perfil isolado
+antes de criar o perfil normal; o template release não aceita --script do editor.
+macOS universal validado com ZIP real, lobby/sala/loja e codesign estrito; versão
+local0.20.5, sem release publicada nesta sessão. Windows está configurado para
+execução no runner hospedado, ainda sem prova nativa local. Cobertura de linhas
+GDScript, notarização/Authenticode e QA humano continuam limites explícitos.
+Plano, comandos e política em CI_CD_PLAN.md/CI_CD_DESIGN.md.
+
+Validação local final: `GODOT=… python scripts/ci/check.py`, exit0, parse
+aprovado, 99suítes Godot/45.926checks/zero falhas, 13+16partidas e139testes
+Python/zero skips. Smoke isolado adicional:9checks/0. Cobertura da automação
+Python52% (piso40%), XML/HTML gerados. Ruff e actionlint passaram; a única
+exceção documentada é o schema antigo de concurrency.queue do actionlint.
+Log `.tools/full-ci-check.log`; relatório `.tools/check-logs/report.json`.
+ZIP macOS real passou; Windows ainda precisa do runner hospedado no PR.
 
 ## English repository presentation — 2026-10-28
 

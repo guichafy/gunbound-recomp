@@ -64,7 +64,7 @@ class MageAssets(unittest.TestCase):
             self.assertEqual(meta['poses'][pose],source['frames']); self.assertEqual(meta['pose_durations'][pose],source['durations'])
 
     def test_native_pcm_and_laser(self):
-        sound = ROOT.parent / 'GunboundClassic/gunbound-launcher/TestClient/sound.xfs'
+        sound = ROOT / '.tools/gunbound-client/sound.xfs'
         toc = {e['name']:e for e in xfs.read_toc(sound)}
         for name in ['21fire','22blast']:
             native = xfs.read_entry(sound,toc[name+'.xes'])

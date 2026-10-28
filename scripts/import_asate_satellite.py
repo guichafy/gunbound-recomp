@@ -6,6 +6,7 @@ Run: python3 scripts/import_asate_satellite.py [--archive /path/sound.xfs]
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
 import struct
 import wave
@@ -15,7 +16,7 @@ import gunbound_xfs as xfs
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_SHA = "081c1b9f5751c486512a9df1a894f6db7a5ed891b8ebdad9fbce1b9169901023"
 PE_SHA = "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
-DEFAULT_ARCHIVE = Path("/Users/guichafy/Workspaces/GunboundClassic/gunbound-launcher/TestClient/sound.xfs")
+DEFAULT_ARCHIVE = Path(os.environ.get("GUNBOUND_SOUND_XFS", str(ROOT / ".tools/gunbound-client/sound.xfs")))
 EXPECTED = {
     "10s1fire.xes": "2300d4652a3e9814f519b9858c38298f653efcb986271296387315f2185edd9b",
     "10s2fire.xes": "6de236b4088f4351df49eb341745417eb9a8d8b8814df842edf729e09fc5f077",

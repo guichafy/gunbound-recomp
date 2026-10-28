@@ -1,0 +1,17 @@
+* text=auto
+*.gd text eol=lf
+*.gd.uid text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.cfg text eol=lf
+*.godot text eol=lf
+*.tscn text eol=lf
+*.import text eol=lf
+*.png binary
+*.wav binary
+*.mp3 binary
+*.bin binary
+*.xfs binary
+*.dat binary

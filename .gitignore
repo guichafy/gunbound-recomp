@@ -16,3 +16,7 @@ assets/xfs/reference/*.dat
 
 # Machine-local Godot settings (including certificate paths)
 /override.cfg
+
+# Python coverage reports are retained as CI artifacts, never source.
+/.coverage
+/.coverage.*

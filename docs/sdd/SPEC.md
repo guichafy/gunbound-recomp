@@ -927,3 +927,14 @@ contador atinge 44 (S2) ou 40 (SS) ou ao tocar de novo com o contador no limite.
 usam a linha type 12 (`combat_native.json`). Arte, EPA e sons são os do `graphics.xfs`/`sound.xfs`.
 Rastro (8 níveis) no S2/SS e espelho vertical no SS; o resto segue ADR-120. Matriz, adaptações
 (tornado, atributos do dono, contato do T1; o par biônico 10/70 saiu só do Grub) e perguntas em `GRUB_CLIENT_FIX.md`.
+
+## CI/CD desktop — REQ-52 / REQ-01 / REQ-12
+
+Pedido de 28/10/2026: implementar validação automática em PR e release por push
+aprovado na main. Conventional Commits determina major/minor/patch; manutenção
+usa patch para atender cada push. Build com Godot 4.7.2, testes completos nativos,
+lint, cobertura Python identificada e resultados GDScript separados, smoke dos
+pacotes, ZIP macOS universal e Windows x86_64, checksums e manifesto da entrega.
+Não publicar em caso de falha de qualquer plataforma. Permissões mínimas e actions
+fixadas por SHA. Reexecução não duplica release; fila evita disputa de versão.
+Plano em CI_CD_PLAN.md; alcance e limites da cobertura devem ficar explícitos.

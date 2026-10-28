@@ -1,0 +1,22 @@
+{
+  "godot_version": "4.7.2",
+  "godot_release": "https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable",
+  "godot_sha256": {
+    "Godot_v4.7.2-stable_export_templates.tpz": "f298490b8d44d934be425a5a65a51bf15f422428b229a06a6e11d9ffea248011",
+    "Godot_v4.7.2-stable_linux.x86_64.zip": "cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4",
+    "Godot_v4.7.2-stable_macos.universal.zip": "c58a24e31d720be9d62f60cb5627c4e695fb72f21b0cfe1bc9ccaa9a3b3ba63e",
+    "Godot_v4.7.2-stable_win64.exe.zip": "731980f9608d61333e5baf54a2ef17210acc7a538446c0cb9969f002aca1e953",
+    "SHA512-SUMS.txt": "b8bdff6704f833e7a021df16ec08e1478edd5a285c1f894929b91a7f74a5c7c0"
+  },
+  "client_revision": "2bc43c490ba727d6fce1a5b47ed9dc577d0f9cc1",
+  "client_sha256": {
+    "characterdata.dat": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+    "graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+    "sound.xfs": "081c1b9f5751c486512a9df1a894f6db7a5ed891b8ebdad9fbce1b9169901023",
+    "GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "stage.dat": "103c2b488977e1721becf8cb90496f95477302ec24141f94116d5214a3e6cfca",
+    "itemdata.dat": "de6f4d3c424df046d344c4f952542255a1eeb2898457eac74ff6379051b48523",
+    "specialdata.dat": "9cc0d99f87e4fff6fd56160c3737fb966546ab9bb77a6a33374cb4642233e086",
+    "avatar.xfs": "829be830e0c50c273d5e0ece03c22fbe0c45e07527129e60e8843d16a1df0e6d"
+  }
+}

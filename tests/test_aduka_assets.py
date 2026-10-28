@@ -125,7 +125,7 @@ class AdukaAssets(unittest.TestCase):
                 self.assertEqual(metadata["states"][state["name"]], {"frames":state["frames"], "durations":state["durations"]})
 
     def test_original_thor_impact_pcm(self):
-        sound = ROOT.parent / "GunboundClassic/gunbound-launcher/TestClient/sound.xfs"
+        sound = ROOT / ".tools/gunbound-client/sound.xfs"
         toc = {e["name"]:e for e in xfs.read_toc(sound)}
         native = xfs.read_entry(sound, toc["22blast.xes"])
         with wave.open(str(ROOT / "assets/openbound/classic/22blast.wav"), "rb") as audio:

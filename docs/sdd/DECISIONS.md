@@ -1922,3 +1922,18 @@ Adaptação declarada: o modo de mistura aditivo do Grub segue a precedência de
 render das camadas do Grub não foi lido no PE. A luz do casco é desenhada acima do piloto (passe aditivo
 do `Game`, ligado por `begin_hull_glow` só na batalha).
 
+
+## ADR-151 — CI/CD desktop e versões por push (28/10/2026)
+
+REQ-52 amplia REQ-01/12: implementar no PR11 a pipeline que antes continha
+somente proposta. Fila nativa queue/max no workflow inteiro, baseline pinada
+0.20.5 sem reinterpretar tags legadas, maior bump convencional e patch para
+manutenção. PR usa título convencional; main valida commits novos. Versão
+aplicada só no checkout, sem commits automáticos do bot. Dois runners nativos,
+harness completo/29partidas, lint e cobertura Python identificada; piso40%
+apenas na automação CI, sem chamar checks de cobertura GDScript. Release
+em draft, dois ZIPs, manifestos, hashes e smoke nativo fora do projeto antes
+de publicar. Sem certificado comercial, mantém ad-hoc macOS e Windows unsigned.
+O template release não suporta --script do editor: hook opt-in --ci-smoke
+injeta perfil temporário antes da inicialização normal e valida o PCK real.
+Detalhes, configuração e limites em CI_CD_DESIGN.md; validação no HANDOFF.

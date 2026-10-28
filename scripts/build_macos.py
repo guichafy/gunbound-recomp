@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Export, normalize internal executable names, sign locally and package macOS."""
 import argparse
+import os
 import plistlib
-import shutil
 import subprocess
 from pathlib import Path
+
+from ci.package_common import copy_notices, project_version as read_project_version
 
 ROOT = Path(__file__).resolve().parent.parent
 APP = ROOT / "builds" / "Gunbound Recomp.app"
@@ -12,15 +14,7 @@ GODOT = Path("/Applications/Godot.app/Contents/MacOS/Godot")
 
 
 def project_version() -> str:
-    """Single source of the version: application/config/version in project.godot."""
-    section = ""
-    for line in (ROOT / "project.godot").read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line.startswith("["):
-            section = line
-        elif section == "[application]" and line.startswith("config/version="):
-            return line.split("=", 1)[1].strip().strip('"')
-    raise SystemExit("project.godot has no application/config/version")
+    return read_project_version(ROOT)
 
 
 def run(*arguments: str) -> None:
@@ -30,10 +24,11 @@ def run(*arguments: str) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--skip-export", action="store_true")
+    parser.add_argument("--godot", default=os.environ.get("GODOT", str(GODOT)))
     args = parser.parse_args()
     APP.parent.mkdir(exist_ok=True)
     if not args.skip_export:
-        run(str(GODOT), "--headless", "--path", str(ROOT), "--export-release", "macOS", str(APP))
+        run(args.godot, "--headless", "--path", str(ROOT), "--export-release", "macOS", str(APP))
     contents = APP / "Contents"
     plist_path = contents / "Info.plist"
     with plist_path.open("rb") as source:
@@ -50,23 +45,13 @@ def main() -> None:
     info["CFBundleVersion"] = version
     with plist_path.open("wb") as target:
         plistlib.dump(info, target)
-    notices = {
-        "docs/GODOT_LICENSE.txt": "GODOT_LICENSE.txt",
-        "docs/GODOT_COPYRIGHT.txt": "GODOT_COPYRIGHT.txt",
-        "assets/openbound/OPENBOUND_CODE_LICENSE.GPL": "OPENBOUND_CODE_LICENSE.GPL",
-        "assets/openbound/ATTRIBUTION.md": "OPENBOUND_ATTRIBUTION.md",
-        "assets/xfs/ATTRIBUTION.md": "XFS_ATTRIBUTION.md",
-    }
-    for relative, name in notices.items():
-        source = ROOT / relative
-        if source.exists():
-            shutil.copy2(source, contents / "Resources" / name)
+    copy_notices(ROOT, contents / "Resources")
     # Normalize executable metadata before sealing resources. This avoids the
     # observed accented-filename resource mismatch in the native signer.
     run("codesign", "--force", "--sign", "-", "--timestamp=none", str(contents / "MacOS" / internal))
     run("codesign", "--force", "--sign", "-", "--timestamp=none", str(APP))
     run("codesign", "--verify", "--deep", "--strict", "--verbose=2", str(APP))
-    run("ditto", "-c", "-k", "--keepParent", str(APP), str(APP.parent / "Gunbound-Recomp-macOS.zip"))
+    run("ditto", "-c", "-k", "--norsrc", "--keepParent", str(APP), str(APP.parent / "Gunbound-Recomp-macOS.zip"))
     print("Ready:", APP)
 
 

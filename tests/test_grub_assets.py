@@ -25,7 +25,7 @@ def find_sound_xfs():
     """sound.xfs sits in the launcher checkout next to this one (../GunboundClassic/...); a
     worktree is deeper, so look beside every ancestor. GUNBOUND_SOUND_XFS overrides."""
     override = os.environ.get("GUNBOUND_SOUND_XFS")
-    candidates = [Path(override)] if override else []
+    candidates = [Path(override)] if override else [ROOT / ".tools/gunbound-client/sound.xfs"]
     candidates += [p.parent / "GunboundClassic/gunbound-launcher/TestClient/sound.xfs" for p in [ROOT, *ROOT.parents]]
     return next((c for c in candidates if c.exists()), None)
 
