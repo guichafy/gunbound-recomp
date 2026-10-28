@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import gunbound_xfs as xfs
 import import_asate_satellite as importer
 
-ARCHIVE = Path("/Users/guichafy/Workspaces/GunboundClassic/gunbound-launcher/TestClient/sound.xfs")
+ARCHIVE = ROOT / ".tools/gunbound-client/sound.xfs"
 OUTPUT = ROOT / "assets/openbound/asate"
 
 

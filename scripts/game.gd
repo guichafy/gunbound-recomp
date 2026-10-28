@@ -120,6 +120,15 @@ static func build_sprites() -> Dictionary:
 	return result
 
 func _ready() -> void:
+	# Official release templates disable --script. Select the package smoke at
+	# runtime and inject its temporary profile before any normal profile read.
+	if OS.get_cmdline_user_args().has("--ci-smoke"):
+		var smoke = load("res://scripts/ci/smoke.gd").new()
+		if not smoke.prepare(self):
+			smoke.free()
+			get_tree().quit(1)
+			return
+		get_tree().root.add_child.call_deferred(smoke)
 	room_rng.randomize()
 	impact_rng.randomize()
 	# HUD HD sprites (3×) are drawn smaller than their pixels; mipmaps keep 1 px borders.

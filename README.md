@@ -149,6 +149,16 @@ Porting plans: [BATTLE_MOBILE_FAMILY_PLANS](docs/sdd/BATTLE_MOBILE_FAMILY_PLANS.
 6. Accounts, campaign, and distribution.
 7. Visual modernization of mobiles and avatars.
 
+## Desktop CI and releases
+
+Pull requests run lint, automation tests, the complete game harness and package
+smoke checks on macOS and Windows. Successful pushes to `main` calculate a version
+from Conventional Commits and publish both ZIPs with manifests and SHA-256 files.
+macOS packages are ad-hoc signed, not notarized; Windows packages are unsigned.
+Python line coverage and Godot suite results are reported separately.
+See [CI/CD implementation and limits](docs/sdd/CI_CD_DESIGN.md) (Portuguese).
+Native Windows execution is verified by the hosted pipeline; local validation was on macOS.
+
 ## Getting started
 
 Requirements: Git, Godot **4.7.2**, and Python 3 for tooling and validation scripts.

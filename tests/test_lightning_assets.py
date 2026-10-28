@@ -76,7 +76,7 @@ class LightningAssets(unittest.TestCase):
         for va,name in [(0x55565c,b'AvataTexture1'),(0x556914,b'AvataTexture2'),(0x556900,b'AvataEffectTexture1'),(0x5568ec,b'AvataEffectTexture2')]:
             self.assertEqual(pe_bytes(self.pe,va,len(name)+1),name+b'\x00')
     def test_shoot_blast_pcm_matches_original(self):
-        archive=ROOT.parent/'GunboundClassic/gunbound-launcher/TestClient/sound.xfs'
+        archive=ROOT/'.tools/gunbound-client/sound.xfs'
         toc={e['name']:e for e in xfs.read_toc(archive)}
         timing=json.loads((ROOT/'assets/openbound/classic/shot_timing.json').read_text())['records']
         for record in timing:

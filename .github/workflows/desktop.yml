@@ -1,0 +1,170 @@
+name: Desktop CI and Release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+
+# Serialize the WHOLE main workflow, including version calculation and builds.
+# GitHub queues up to 100 runs with queue:max; it does not replace pending pushes.
+concurrency:
+  group: ${{ github.event_name == 'push' && 'desktop-main-releases' || format('desktop-pr-{0}', github.event.pull_request.number) }}
+  queue: max
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  PYTHONUTF8: '1'
+  PYTHONUNBUFFERED: '1'
+  SUITE_TIMEOUT: '900'
+
+jobs:
+  lint:
+    name: Lint and automation tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: .github/requirements-ci.txt
+      - run: python -m pip install -r .github/requirements-ci.txt
+      - name: Validate PR title
+        if: github.event_name == 'pull_request'
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: python scripts/ci/release.py --title "$PR_TITLE"
+      - name: Python correctness lint
+        run: python -m ruff check --select E9,F63,F7,F82 scripts tests
+      - name: Test automation
+        run: python -m unittest discover -s tests -p 'test_ci_*.py' -v
+      - name: Workflow lint
+        # actionlint 1.7.12 predates GitHub's concurrency.queue. Ignore ONLY
+        # that diagnostic; tests/test_ci_workflow.py validates its exact policy.
+        run: |
+          go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.12
+          "$(go env GOPATH)/bin/actionlint" -ignore 'unexpected key "queue" for "concurrency" section' .github/workflows/desktop.yml
+
+  version:
+    name: Calculate release version
+    needs: lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      sha: ${{ steps.release.outputs.sha }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+      - id: release
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            python scripts/ci/release.py --pr-title "$PR_TITLE"
+          else
+            python scripts/ci/release.py
+          fi
+
+  desktop:
+    name: Test, build and smoke (${{ matrix.platform }})
+    needs: [lint, version]
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-14
+            platform: macos
+          - runner: windows-2022
+            platform: windows
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: .github/requirements-ci.txt
+      - run: python -m pip install -r .github/requirements-ci.txt
+      - name: Install verified editor, templates and original test inputs
+        run: python scripts/ci/bootstrap.py --no-legacy-sound
+      - name: Apply the same version to both packages
+        env:
+          RELEASE_VERSION: ${{ needs.version.outputs.version }}
+        run: python scripts/ci/release.py --apply "$RELEASE_VERSION"
+      - name: Parse, all model/scene suites, 29 matches and Python coverage
+        run: python scripts/ci/check.py
+      - name: Build and smoke extracted package outside project
+        env:
+          RELEASE_SHA: ${{ needs.version.outputs.sha }}
+          TARGET_PLATFORM: ${{ matrix.platform }}
+        run: python scripts/ci/package.py --platform "$TARGET_PLATFORM" --commit "$RELEASE_SHA"
+      - name: Upload tested packages
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: desktop-${{ matrix.platform }}
+          overwrite: true
+          path: builds/dist/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload logs and coverage even on failure
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: quality-${{ matrix.platform }}
+          overwrite: true
+          path: |
+            .tools/check-logs/
+            .tools/package-logs/
+            .tools/coverage.xml
+            .tools/coverage-html/
+          if-no-files-found: warn
+          retention-days: 14
+
+  release:
+    name: Publish verified desktop release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [version, desktop]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          pattern: desktop-*
+          merge-multiple: true
+          path: release-assets
+      - name: Verify manifests and publish draft only after all uploads
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ needs.version.outputs.version }}
+          RELEASE_SHA: ${{ needs.version.outputs.sha }}
+        run: python scripts/ci/publish.py --version "$RELEASE_VERSION" --sha "$RELEASE_SHA"

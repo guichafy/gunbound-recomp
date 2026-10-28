@@ -62,3 +62,15 @@ Antes de mudar comportamento, identifique os `REQ-*` afetados em [SPEC.md](sdd/S
 Registre decisões em [DECISIONS.md](sdd/DECISIONS.md) e atualize [TASKS.md](sdd/TASKS.md)
 e [HANDOFF.md](sdd/HANDOFF.md) ao concluir. A organização completa está em
 [sdd/README.md](sdd/README.md).
+
+## Pipeline desktop
+
+O workflow `.github/workflows/desktop.yml` executa o harness em macOS e Windows,
+incluindo 29 partidas, e publica os ZIPs só após validar ambos. A preparação é
+reproduzível com `python scripts/ci/bootstrap.py --no-legacy-sound`; instalar
+antes `.github/requirements-ci.txt`. O runner multiplataforma é
+`python scripts/ci/check.py`; para exportar/empacotar usar
+`python scripts/ci/package.py --platform macos` ou `--platform windows` no SO
+correspondente. O editor vem de `GODOT` (caminho absoluto). O script de versão
+modifica apenas o checkout do build. Detalhes e limites em
+[CI_CD_DESIGN.md](sdd/CI_CD_DESIGN.md).

@@ -1,10 +1,15 @@
 # Entregas e próximos trabalhos
 
-## CI/CD desktop — proposta (28/10/2026)
+## CI/CD desktop — REQ-52 / ADR-151 (28/10/2026)
 
-- [x] Registrar desenho de qualidade, versionamento e releases macOS/Windows em `CI_CD_DESIGN.md` e revisar suas lacunas.
-- [ ] Fechar cobertura GDScript, piso de cobertura, bootstrap e reserva/fila de versão.
-- [ ] Implementar e validar workflows, testes/lint/cobertura, compatibilidade e exportação Windows e publicação das releases.
+- [x] Implementar workflow PR/main com fila, versão convencional, lint e testes de automação.
+- [x] Preparar editor/templates/TestClient pinados e fixtures para checkout limpo.
+- [x] Runner nativo macOS/Windows, harness completo/29partidas, cobertura Python e resultados Godot separados.
+- [x] Preset/exportador Windows x86_64; ZIPs, avisos legais, manifestos e checksums; smoke nativo com perfil isolado.
+- [x] Publicação por draft e tag-reserva, retry idempotente e validação de SHA/arquivos.
+- [x] Smoke real macOS universal: lobby/sala/loja, perfil temporário, codesign e arquitetura.
+- [ ] Observar os dois jobs hospedados, em especial execução Windows; não alegar validação nativa Windows local.
+- [ ] Cobertura de linhas GDScript: sem instrumentação nesta entrega; relatório Python não mede o jogo.
 
 ## English repository presentation — 2026-10-28
 

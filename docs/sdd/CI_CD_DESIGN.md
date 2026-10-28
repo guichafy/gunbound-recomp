@@ -1,129 +1,123 @@
-# CI/CD e releases desktop — proposta para aprovação
+# CI/CD e releases desktop — implementação
 
-Pedido de 28/10/2026. Requisitos afetados: REQ-01 (plataformas) e REQ-12
-(qualidade e entrega); novo requisito proposto REQ-52 (automação de releases).
-Este documento é um desenho, ainda não uma implementação ou validação.
+REQ-52/REQ-01/REQ-12, ADR-151. O pedido posterior de 28/10/2026 determina a
+implementação; substitui a proposta documental inicial do PR #11.
 
-## Resultado esperado
+## Fluxo
 
-Cada push na `main` passa pelos controles de qualidade e produz uma release
-com dois ZIPs versionados: macOS universal (Intel/Apple Silicon) e Windows
-x86_64. Pull requests executam os mesmos controles sem publicar. Linux,
-mobile, servidor e multiplayer continuam fora deste pedido.
+`.github/workflows/desktop.yml` roda em PR para main e em push na main:
 
-## Versão e histórico
+1. Lint de correção Python (Ruff E9/F63/F7/F82), testes da automação, título
+   convencional no PR e actionlint.
+2. Versão calculada em checkout com histórico/tags completos. PR usa o título
+   (adequado a squash); main valida os commits novos, ignorando merges.
+3. Matriz nativa macOS14 ARM e Windows2022 x86_64: dependências Python fixadas,
+   Godot4.7.2/templates e TestClient pinados por hash; importação, parse de todos
+   os scripts/capturas, todas as suítes do harness e 29 partidas.
+4. Python coverage XML/HTML, exportação release, ZIP, extração em pasta
+   temporária e smoke do executável nativo sem apoio do projeto-fonte.
+5. Ambos os pacotes precisam passar. Somente push main publica release em draft,
+   anexa ZIPs, manifestos e checksums e só então publica. Notas de release geradas
+   pelo GitHub incluem o SHA e os limites de assinatura/QA.
 
-- `feat:` incrementa minor; `fix:` e `perf:` incrementam patch;
-  `!` ou footer `BREAKING CHANGE:` incrementam major, inclusive antes de 1.0.
-  O maior incremento entre os commits ainda não publicados prevalece.
-- Para cumprir literalmente uma versão por push, pushes contendo somente
-  `docs:`, `ci:`, `test:`, `chore:` ou outros tipos válidos incrementam patch.
-  Essa é uma extensão deliberada da convenção, que não exige releases para
-  esses tipos. Commits novos devem seguir Conventional Commits.
-- Base normal: última tag de release `vX.Y.Z` ancestral do commit em teste.
-  Na primeira execução, usar `project.godot` (atualmente 0.20.5) como base e
-  analisar apenas os commits do push, sem reinterpretar todo o histórico antigo.
-- A versão calculada é aplicada em `application/config/version` no checkout
-  de build e lida pelos exportadores. Não criar commits automáticos na main.
-  Tag, release, metadados e os dois pacotes devem apontar ao mesmo SHA e versão.
-  O valor versionado no Git é a base de desenvolvimento; tags registram entregas.
-- Reexecução do mesmo SHA reutiliza a mesma versão; release completa não deve
-  ser sobrescrita. Falha parcial deve permitir retomar a release em draft.
-  Concorrência da publicação deve ser serializada e não cancelar publicação ativa.
-  Publicar todos os pushes, sem descartar intermediários por uma fila que só
-  conserva a execução pendente mais recente.
+A fila `concurrency.queue: max` cobre o workflow inteiro: o cálculo de versão só
+começa quando a entrega anterior termina. Até100 execuções pendentes, limite
+nativo GitHub; acima disso o GitHub rejeita a execução e ela precisa de reexecução.
+PRs usam grupo separado por número. Não há cancelamento voluntário de pushes.
+Actionlint1.7.12 ainda rejeita a chave oficial `queue`; ignora-se somente esse
+alerta, e `test_ci_workflow.py` valida queue/max, não cancelamento, SHAs e gates.
 
-## Controles antes de publicar
+## SemVer e reexecução
 
-1. Validar mensagens dos commits novos, YAML/workflows com actionlint, Python
-   com Ruff e scripts GDScript com o compilador Godot. Introduzir lint de
-   estilo GDScript somente com baseline explícita, sem reformatar todo o jogo.
-2. Preparar checkout limpo: Python e dependências fixadas, Godot 4.7.2 e
-   templates correspondentes, importação dos recursos antes dos testes.
-   Downloads devem verificar hashes; caches são otimização, nunca pré-requisito.
-3. Rodar o harness completo, incluindo modelos, cenas e as 29 partidas, em
-   macOS e Windows. Remover dependência do caminho fixo de `/Applications`.
-   O runner de testes precisa preservar timeout, saída não zero e detecção de
-   `SCRIPT ERROR`, erro de parse e ausência de resumo, nos dois sistemas.
-4. Preparar as fontes Thor's Hammer usadas por testes a partir de uma revisão
-   fixa do TestClient autorizado, conferindo hashes conhecidos. Resolver caminhos
-   dependentes de pastas vizinhas. Não desabilitar testes obrigatórios para
-   obter verde. Suítes exclusivamente investigativas que exigem ferramentas
-   externas devem aparecer como tais no relatório, nunca como checks executados.
-5. Medir cobertura de linhas Python, publicar XML/HTML e estabelecer um piso
-   baseado na primeira medição real. Esse número não representa o jogo GDScript.
-   Publicar separadamente inventário de suítes GDScript, resultados/checks e
-   partidas; não chamar inventário de cobertura de linhas. Cobertura dinâmica
-   GDScript exigiria instrumentação compatível com o harness atual e fica
-   explicitamente fora do indicador Python desta primeira entrega.
-6. Exportar em runners nativos e executar smoke do artefato empacotado, fora
-   do projeto: inicialização, recursos essenciais, versão e perfil temporário.
-   Testes headless não substituem aceite visual, áudio e input humanos.
-7. Conferir ZIPs, licenças/atribuições, ausência de `override.cfg`, credenciais,
-   `.tools`, testes e fontes de pesquisa nos pacotes. Gerar SHA-256 e manifesto
-   contendo versão, SHA do projeto e versão Godot. Guardar logs mesmo em falha.
-8. Somente depois de ambos passarem, anexar os dois ZIPs, checksums e manifesto
-   à release em draft; conferir assets esperados e então torná-la pública.
+`feat` sobe minor; `!`/`BREAKING CHANGE` sobe major, inclusive antes de1.0;
+`fix`, `perf` e manutenção sobem patch (extensão explícita para release por push).
+O maior incremento desde a última tag aplicável prevalece. `.github/release.json`
+fixa baseline0.20.5 e revisão anterior à implantação: tags antigas menores e
+commits anteriores não são reinterpretados. Baseline divergente falha, sem
+inferir versão de um histórico reescrito. Mensagem inválida na main bloqueia.
 
-## Exportação e compatibilidade
+O checkout recebe a versão em `application/config/version` antes dos testes e
+exports. Não há commit de versão gerado pelo bot nem loop de push. A versão do
+arquivo na branch é a base de desenvolvimento; a tag e os manifestos identificam
+a entrega. A tag exata no mesmo SHA é reutilizada em retry. Release publicada
+não é sobrescrita. Draft é localizado inclusive antes de existir tag Git e
+retomado apenas para o SHA validado; upload parcial nunca é publicado. Depois
+dos dois pacotes aprovados e antes do draft, o publisher cria uma tag lightweight
+como reserva durável. Mesmo se o upload falhar, o próximo push vê a reserva
+com contents/read e calcula a próxima versão. Retry no SHA reservado reutiliza-a.
+A presença da tag, sozinha, não anuncia uma release concluída.
 
-- Acrescentar preset Windows Desktop x86_64 com os mesmos filtros de recursos
-  e exclusões do macOS, PCK separado e metadados de versão consistentes.
-- Tornar o exportador macOS configurável por CLI/ambiente, preservando
-  normalização do executável, assinatura ad-hoc e verificação `codesign`.
-- Acrescentar exportador Windows e empacotamento com executável, PCK e avisos
-  legais. Corrigir caminhos, diferenças de filesystem e processo identificadas
-  pelos testes, preservando regras, assets e perfil do jogo.
-- Sem certificados fornecidos: macOS com assinatura ad-hoc, sem notarização;
-  Windows sem Authenticode. Documentar isso na release. Assinatura comercial
-  e notarização exigem certificados/contas do proprietário e não serão alegadas.
+## Qualidade e cobertura
 
-## Segurança e manutenção
+`scripts/ci/check.py` preserva a lista de suítes de `scripts/check.sh`, com
+processos e timeout multiplataforma. Parse, erro de script, exit não zero,
+ausência de resumo e testes Python pulados bloqueiam a entrega. Logs e relatório
+JSON são artifacts mesmo em falha. Fixtures de cena preparam apenas os diretórios
+necessários; caminhos propositalmente ausentes dos testes de rollback continuam
+ausentes. Perfis de testes usam `.tools` ou pasta temporária.
 
-Permissão padrão `contents: read`; somente o job de publicação recebe
-`contents: write`. PRs não recebem segredos nem permissão de publicação;
-não usar `pull_request_target` para executar código do PR. Fixar actions em
-SHA completo e dependências em versão; Dependabot atualiza essas referências.
-Evitar interpolar mensagens de commit em shell. Timeouts e retenção limitada
-de artifacts; não executar código do jogo num job com credenciais de escrita.
-Proteções da main e checks obrigatórios serão documentados; sua ativação no
-GitHub é uma configuração separada, não efeito de criar arquivos locais.
+A cobertura de linhas/branches mede **Python**, com relatório completo em
+`.tools/coverage.xml` e `.tools/coverage-html/`. O gate inicial de40% aplica-se
+somente a `scripts/ci/*`, não ao jogo. O restante Python aparece no relatório
+sem piso global artificial. O inventário e os checks Godot são publicados
+separadamente em `report.json`; não representam cobertura de linhas GDScript.
+Instrumentação de linhas GDScript ainda é uma limitação desta entrega.
 
-## Entrega e validação
+Dependências dos testes de fidelidade são preparadas a partir do TestClient
+Thor's Hammer fixado por revisão e SHA256. Avatares/DAT de referência são
+extraídos para a pasta ignorada `assets/xfs/reference`, excluída do PCK. Caminhos
+absolutos do áudio foram trocados por `.tools/gunbound-client/sound.xfs`.
+Não se consulta OpenBound nem se baixa qualquer versão posterior como fonte.
 
-### Revisão do desenho e pendências antes da implementação
+## Pacotes e smoke
 
-A revisão independente identificou pontos que precisam ser fechados no plano:
+`package.py --platform macos|windows` produz em `builds/dist`:
 
-- Serializar somente a publicação não impede dois builds de calcularem a mesma
-  versão. Definir reserva/fila durável antes do build, com recuperação de falhas,
-  sem perder pushes intermediários; `concurrency` padrão sozinho não basta.
-- Precisar o bootstrap `before..sha`, incluindo `before` zerado, force push,
-  histórico legado sem Conventional Commits e tags já existentes.
-- Medir a cobertura inicial para definir o piso numérico e a política de lint
-  do legado, sem anunciar gates que ainda não foram executados.
-- Confirmar com o usuário se cobertura Python com relatórios GDScript separados
-  atende à primeira entrega ou se cobertura de linhas GDScript é obrigatória.
+- `Gunbound-Recomp-VERSION-macOS.zip` (universal Intel/Apple Silicon).
+- `Gunbound-Recomp-VERSION-Windows-x86_64.zip` (exe e PCK separados).
+- Um `.json` e um `.zip.sha256` por ZIP, com SHA do commit, versão Godot,
+  tamanho/hash, plataforma, arquitetura, smoke e estado de assinatura.
 
-O envio desta proposta para revisão não implementa a automação. Não existem
-workflows novos, exportador Windows ou relatórios de cobertura nesta mudança.
+Ambos incluem licenças e atribuições. Override de certificados, credenciais,
+fontes de pesquisa, testes e configurações CI são excluídos e auditados.
+macOS preserva assinatura ad-hoc e verificação codesign, sem notarização;
+Windows fica sem Authenticode. Assinatura comercial depende de certificados
+que não foram fornecidos; não é alegada nesta entrega.
 
-### Execução futura
+O template release ignora opções de editor como `--script`; por isso o
+smoke usa `-- --ci-smoke`. O hook no começo de `Game._ready` injeta um perfil
+absoluto temporário antes do perfil padrão. Sem flag, esse script não é
+carregado. Testa versão, recursos, catálogos, lobby/sala/loja e persistência
+isolada. O pacote só ganha manifesto após `PACKAGED SMOKE: PASS`, exit0 e
+logs sem erros. Smoke headless não comprova GPU, áudio ou input humanos.
 
-Implementação prevista: workflow CI/release, bootstrap reproduzível,
-versionador testado, runner multiplataforma, exportadores/presets, relatórios,
-testes de automação e documentação SDD. Preservar as alterações locais já
-existentes em Grub/Boomer. Não enviar commits ou publicar uma release nesta
-sessão sem pedido explícito; a pipeline passa a agir quando enviada à main.
+## Segurança e operação
 
-Validar localmente os scripts novos e as verificações disponíveis, registrando
-resultados e falhas reais. Builds nativos Windows e execução hospedada do
-Actions dependem dos runners: não anunciar compatibilidade comprovada nem
-release publicada apenas pela revisão estática da configuração.
+Permissão padrão contents/read; só a publicação recebe contents/write. PRs
+não publicam nem recebem token de escrita; sem pull_request_target, PAT ou
+segredos de assinatura. Actions fixadas por SHA, dependências por versão,
+Dependabot semanal, timeout e retenção de artifacts14dias.
 
-## Referências consultadas
+Configuração recomendada no GitHub: proteger main, exigir revisão e checks
+`Lint and automation tests`, `Calculate release version` e os dois jobs
+`Test, build and smoke`. Habilitar Actions e permitir ao GITHUB_TOKEN criar
+releases. Este workflow não altera regras de proteção do repositório.
 
-- [Conventional Commits 1.0](https://www.conventionalcommits.org/en/v1.0.0/)
-- [Segurança de GitHub Actions](https://docs.github.com/en/actions/reference/security/secure-use)
-- [Exportação Windows no Godot](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_windows.html)
-- [Godot 4.7.2](https://godotengine.org/download/archive/4.7.2-stable/)
+Repetição local (Python3.13):
+
+```bash
+python -m pip install -r .github/requirements-ci.txt
+python scripts/ci/bootstrap.py --no-legacy-sound
+python scripts/ci/check.py
+python scripts/ci/package.py --platform windows  # no Windows; macos no Mac
+```
+
+Com editor já instalado, `bootstrap.py --skip-godot --no-legacy-sound` prepara
+somente as fontes. Definir `GODOT` para o binário do editor. Bootstrap normal
+confere os hashes do editor/template e publica GODOT em GITHUB_ENV no Actions.
+Publicação é exclusiva da main após aprovação dos gates, não ao enviar o PR.
+
+Referências: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/),
+[concorrência GitHub](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency),
+[segurança GitHub](https://docs.github.com/en/actions/reference/security/secure-use),
+[export Windows](https://docs.godotengine.org/en/stable/tutorials/export/exporting_for_windows.html).

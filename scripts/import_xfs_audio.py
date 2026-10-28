@@ -16,7 +16,7 @@ import gunbound_xfs as xfs
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_SHA = "081c1b9f5751c486512a9df1a894f6db7a5ed891b8ebdad9fbce1b9169901023"
-DEFAULT_SOURCE = ROOT.parent / "GunboundClassic/gunbound-launcher/TestClient/sound.xfs"
+DEFAULT_SOURCE = ROOT / ".tools/gunbound-client/sound.xfs"
 OUTPUT = ROOT / "assets/xfs/audio"
 
 

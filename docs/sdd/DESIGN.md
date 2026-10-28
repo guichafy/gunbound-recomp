@@ -1014,3 +1014,13 @@ Saldo de teste0.18.5/ADR-080: Profile usa 999.999.999 em cada moeda como padrão
 sem marcador recebe o novo saldo e marcador na mesma transação. Snapshots
 carregam o marcador para rollback. Carteiras inválidas não ganham recarga por
 essa migração. Fixture explícita do catálogo legado conserva 1000 por moeda.
+
+## CI/CD desktop — ADR-151 / REQ-52
+
+`release.py` calcula SemVer de tags/baseline e aplica ao checkout; `bootstrap.py`
+prepara editor/templates/fontes com hashes; `check.py` executa o contrato do
+harness em Python multiplataforma. Exportadores nativos e `package.py` geram,
+extraem e validam ZIP/PCK. `smoke.gd` é carregado opt-in antes de Game._ready
+criar o perfil padrão, usando perfil temporário absoluto. `publish.py` verifica
+os dois manifestos e publica o draft somente após anexos completos. Workflow
+serializa main desde o cálculo; jobs de jogo têm apenas contents/read.
