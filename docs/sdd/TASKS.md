@@ -1,5 +1,19 @@
 # Entregas e próximos trabalhos
 
+## Issue #8 — Grub pelo cliente — REQ-50 / ADR-142 (28/10/2026)
+
+- [x] Ghidra 12.2 headless: 5 execuções, manifestos `ok=true` (a 1ª, do issue, `ok=false` por `0x488780`; refeita com `--seed-known-entries`).
+- [x] ABI das células protegidas, MainAction, spawner, varredura, tick, normal `0x4a1740`, explosão (`GRUB_CLIENT_FIX.md`).
+- [x] Emulador x86 (Unicorn) executa as rotinas do PE: fixtures `grub_{emission,surface,flight}_native.json`, regeneradas byte a byte.
+- [x] Emissão: S1/SS θ+2; S2 com 4 corpos (θ +1/0/−1/−2, força +5/0/−5/−10): 230 checks.
+- [x] `grub_surface.gd` (720 consultas) e `grub_flight.gd` (160 voos, 15.690 checks): ricochete, módulo constante, detonação em 44/40, SS que atravessa e fere por quadro, saída do mapa.
+- [x] Dano e cratera da linha type 12 (`grub_combat.gd`); cratera idêntica ao PE (738 px).
+- [x] Arte/EPA/sons conferidos no XFS (`test_grub_assets.py`); rastro S2/SS e espelho do SS.
+- [x] Execução = previsão para S2 e SS (`test_grub_model`).
+- [x] Par biônico 10/70 removido só do Grub (sem prova na linha type 12; decisão do usuário); `hp_regen 0`/`protection 35`.
+- [ ] Tornado, atributos do dono (divisor `0x41da80`) e contato do T1: **adaptações declaradas** (perguntas em `GRUB_CLIENT_FIX.md`).
+- [ ] Aceite visual/auditivo do usuário; cliente Windows não executado.
+
 ## Relevo dos poços da sala — ADR-141
 
 - [x] Investigar `ready_back.img` no PE com REA e comparar o quadro XFS.

@@ -21,6 +21,7 @@ ALL="$ALL test_mage_sparks test_mage_spark_art test_mage_spark_source"
 ALL="$ALL test_client_item_assets test_client_item_source test_client_audio test_client_audio_source test_client_weather_assets test_client_weather_source test_client_hud_assets test_import_xfs_hud test_battle_hud_layout test_hud_clock_wind"
 ALL="$ALL test_battle_options"
 ALL="$ALL test_match_loading test_result_screen test_import_xfs_result"
+ALL="$ALL test_grub_surface test_grub_flight test_grub_model test_grub_assets test_grub_evidence"
 # --quick: todas as suites Godot/Python menos as partidas completas.
 QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches)$' | tr '\n' ' ')
 

@@ -8,6 +8,7 @@ const Timing = preload("res://scripts/classic_shot_timing.gd")
 const ClassicProjectileArt = preload("res://scripts/classic_projectile_art.gd")
 const SmoothArt = preload("res://scripts/mobile_smooth_art.gd")
 const RaonEffect = preload("res://scripts/raon_effect.gd")
+const NativeBallistics = preload("res://scripts/classic_ballistics.gd")
 const RAYON_CELL := Rect2(-16, -24, 32, 32)
 ## Client afterimage history depth (ADR-118); shown only where has_trail().
 const NATIVE_TRAIL_LEVELS := 8
@@ -180,17 +181,18 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 	var light_name := name.replace(".png","Light.png")
 	var light_info := sheet(light_name)
 	var light_index := projectile_frame(light_info,projectile) if not light_info.is_empty() else -1
+	var mirror := mobile_kind == "grub" and weapon == 2 and projectile.has("fp_velocity") and ss_mirrored(NativeBallistics.velocity_angle(projectile.fp_velocity))
 	if has_trail(mobile_kind, weapon):
 		# BulletTexture1/2 levels 7..1 reuse this frame's cells at older positions.
 		for level in trail_levels(projectile):
-			_draw_bullet(view, name, index, light_name, light_index, Vector2(level.pos) + offset, float(level.angle), float(level.alpha))
+			_draw_bullet(view, name, index, light_name, light_index, Vector2(level.pos) + offset, float(level.angle), float(level.alpha), mirror)
 	var position: Vector2 = projectile.get("hit_pos", projectile.pos) + offset
-	_draw_bullet(view, name, index, light_name, light_index, position, Vector2(projectile.velocity).angle(), 1.0)
+	_draw_bullet(view, name, index, light_name, light_index, position, Vector2(projectile.velocity).angle(), 1.0, mirror)
 	view.draw_set_transform(Vector2.ZERO)
 
 ## One published bullet level: light cell then body cell, rotated by the heading.
-func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float) -> void:
-	view.draw_set_transform(at, angle)
+func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float, mirror: bool = false) -> void:
+	view.draw_set_transform(at, angle, Vector2(1, -1) if mirror else Vector2.ONE)
 	if light_index >= 0:
 		var light := cell_frame(light_name, light_index)
 		view.draw_texture_rect_region(_optional_cached(light_name), light[1], light[0], Color(1, 1, 1, alpha))
@@ -200,7 +202,14 @@ func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, li
 ## User decision (ADR-120): the client's afterimage history is shown only on
 ## the Raon T1 (ADR-118); every other shot keeps the approved single sprite.
 static func has_trail(kind: String, weapon: int) -> bool:
-	return kind == "raon" and weapon == 0
+	# Grub S2/SS: Shot2_Bullet13 and SuperShot_Bullet13 publish the same render
+	# record through 0x458690 / 0x488880 (issue #8, GRUB_CLIENT_FIX.md).
+	return (kind == "raon" and weapon == 0) or (kind == "grub" and weapon >= 1)
+
+## 0x488880: the published direction flag is heading > 90 and heading < 270; the
+## SS draws vertically mirrored while it flies that way.
+static func ss_mirrored(heading: int) -> bool:
+	return heading > 90 and heading < 270
 
 ## Native afterimages (0x458690 publish, render 0x4c4e93, shift at frame end):
 ## level k is the bullet k model ticks ago, alpha 255-32k, oldest first. The

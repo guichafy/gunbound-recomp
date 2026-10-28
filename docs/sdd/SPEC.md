@@ -359,6 +359,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-47 | Avatar Shop e avatares com os assets originais do cliente | AVATAR_SHOP_ORIGINAL | Vigente (ADR-130); HD de avatares/loja preservado em disco, fora do uso ativo |
 | REQ-48 | Assets de batalha do cliente: Miramo, HUD, clima/Thor, itens e áudio | CLIENT_ASSETS_PORT | ADR-133; recursos nativos com fallback validado; composição e lacunas declaradas |
 | REQ-49 | Start da sala mostra a transição com mapa, spawns e mobile resolvido | LOADING_SCREEN | Vigente (ADR-138); 1×1 local, espera mínima de 5 s |
+| REQ-50 | Grub (ID 13) pelo cliente: T1/T2/SS, ricochete, dano repetido do SS, linha type 12 | GRUB_CLIENT_FIX | ADR-142; fixtures do PE em emulador; biônico, tornado e atributos do dono são adaptações declaradas |
 | REQ-50 | Encerramento com a janela WIN/LOSE do cliente e o botão OK | RESULT_SCREEN_NATIVE | Vigente (ADR-139); P = XP do porte, OK volta à sala |
 
 ## Lobby clássico e sala — ADR-096
@@ -851,3 +852,15 @@ vestida, a sala e a batalha desenham as peças nativas do avatar. Não há busca
 contador, rótulos em português nem prévia de mobile; gênero e atributos ficam
 fora do palco 800×600. Compra, vestir, rollback, atributos, bônus e perfil
 continuam os da REQ-38..41/46. Matriz e limites em AVATAR_SHOP_ORIGINAL.md.
+
+## Grub pelo cliente — REQ-50
+
+REQ-50 (ADR-142, issue #8): o Grub (ID 13, type 12) usa as regras comprovadas do cliente. S1 e SS
+saem em θ+2 e o S2 emite **quatro** corpos no mesmo quadro (θ +1/0/−1/−2, força nativa
++5/0/−5/−10). S2 e SS voam pelo tick nativo (`grub_flight.gd`): varredura de 8 px com refino,
+S2 detona em mobile, SS atravessa mobiles e causa dano a cada quadro, ambos ricocheteiam pela
+normal tangencial `0x4a1740` com módulo constante `[69]=1800`/`[82]=1600` e detonam quando o
+contador atinge 44 (S2) ou 40 (SS) ou ao tocar de novo com o contador no limite. Dano e cratera
+usam a linha type 12 (`combat_native.json`). Arte, EPA e sons são os do `graphics.xfs`/`sound.xfs`.
+Rastro (8 níveis) no S2/SS e espelho vertical no SS; o resto segue ADR-120. Matriz, adaptações
+(tornado, atributos do dono, contato do T1; o par biônico 10/70 saiu só do Grub) e perguntas em `GRUB_CLIENT_FIX.md`.

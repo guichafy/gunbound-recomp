@@ -111,6 +111,15 @@ Preservar todos os 16 mobiles, avatares/equipamentos e HD já aprovados
 Modernização do design de mobile/avatar fica para uma etapa posterior
 solicitada pelo usuário. Não substituir a aparência atual durante o porte.
 
+## Grub — ADR-142
+
+Ler docs/sdd/GRUB_CLIENT_FIX.md. S1/SS θ+2 e S2 com 4 corpos vêm do MainAction `0x471fd0`.
+S2/SS ricocheteiam por `grub_flight.gd` (tick `0x49fd40`/`0x486ea0`) e `grub_surface.gd`
+(`0x4a1740`); fixtures em `tests/fixtures/grub_*_native.json` foram geradas rodando o PE num
+emulador (`tests/tools/grub_oracle`, Unicorn fora do projeto). SS fere a cada quadro; dano/cratera
+da linha type 12. Sem o par biônico 10/70 (a linha type 12 não o contém; só o Grub). Tornado, atributos do dono e contato do T1 são adaptações.
+Testes test_grub_{surface,flight,model} e test_grub_assets.py; captura tests/capture_grub.gd.
+
 ## Tiros Raon — ADR-116
 
 Ler RAON_CLASSIC_FIX.md (seção ADR-116). Mobile06_MainAction: T1 idx0/2/3

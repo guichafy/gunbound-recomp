@@ -54,6 +54,10 @@ Pacote2: aplicar exatamente tabelas/regras fechadas; S2 tem2 impactos e SS3. A l
 
 ## 5. Ricochetes — Grub
 
+**Atualização 28/10/2026 (issue #8, ADR-142):** executado e fechado. Normal tangencial `0x4a1740`, módulo
+constante `[69]=1800`/`[82]=1600`, limite 44/40, SS que atravessa mobiles e fere por quadro e emissão
+de 4 corpos estão em `GRUB_CLIENT_FIX.md`; o texto abaixo é o plano original.
+
 Gate: fechar normal tangencial, retenção de velocidade, relógio após primeiro contato, limiar de término e energia de cada explosão em0x49e650/0x49fd40 e0x4857f0/0x486ea0. Há contadores44 (S2) e40 (SS); não são automaticamente TTL desde o lançamento. SS não consulta mobile no Simulate.
 
 Pacote1: Grub S2, quatro spawns no mesmo frame2 com ajustes de força/ângulo por ramo. Fixtures em plano, rampa, teto, quina e vão; comparar cada colisão/velocidade à referência e preservar vento original.

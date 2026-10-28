@@ -190,7 +190,7 @@ S2 tick0x4aafd0 chama0x4398e0 em0x4ab292; SS Explode0x4685b0 faz o mesmo em0x468
 
 ### Grub e demais especiais
 
-Grub S2: quatro chamadas por ramo angular em MainAction0x471fd0/frame2; contador +0x3f9c e ricochete no tick0x49fd40. Finalização usa44 e condições de contato; não traduzir como TTL de44 ticks desde o lançamento. SS usa Simulate0x4857f0, sem teste de mobile, e tick0x486ea0 com contador40 após contato. Fórmula da velocidade tangencial, energia de cada ricochete e dano repetido ainda não fechada.
+Grub S2: quatro chamadas por ramo angular em MainAction0x471fd0/frame2; contador +0x3f9c e ricochete no tick0x49fd40. Finalização usa44 e condições de contato; não traduzir como TTL de44 ticks desde o lançamento. SS usa Simulate0x4857f0, sem teste de mobile, e tick0x486ea0 com contador40 após contato. Fórmula da velocidade tangencial, energia de cada ricochete e dano repetido ainda não fechada. **Fechada em 28/10/2026 (issue #8): ver `GRUB_CLIENT_FIX.md`** — normal em `0x4a1740`, módulo constante `[69]/[82]` após cada ricochete, dano repetido do SS por `Animate` `0x488780`.
 
 Dragon: S1/S2 Simulate0x46fb20 (tick comum) adiciona faíscas via0x436fd0. SS Explode0x46ca60 gera exatamente5 filhos pelo laço i<5; extras30/200 dão ângulos30,60,90,120,150 e força200 antes das conversões originais. `SpawnShot_Type13`0x4388e0 inicializa filho e copia dados do estágio; dano/raio final de cada filho ainda precisa conferir ajustes, não presumir160×5.
 

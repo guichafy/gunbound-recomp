@@ -38,9 +38,10 @@ func run() -> void:
 			check(int(left[0].level) == 7 and int(left[-1].level) == ticks,"Drain draws levels 7..%d" % ticks)
 			check(Vector2(left[-1].pos) == Vector2(history[-1]),"Newest remaining copy stays on the last published point")
 			check(is_equal_approx(float(left[-1].alpha),float(255-32*ticks)/255.0),"Remaining copy keeps its level alpha")
-	# ADR-120 (user decision): only the Raon T1 shows the native history.
+	# ADR-120 (user decision): only the Raon T1 shows the native history; issue #8
+	# adds the Grub S2/SS (their render records are published by 0x458690 / 0x488880).
 	for kind in ["armor","trico","boomer","raon","lightning","jd","asate","ice","turtle","grub","dragon","knight","aduka","bigfoot","mage","nak"]:
 		for weapon in 3:
-			var wanted: bool = kind == "raon" and weapon == 0
+			var wanted: bool = (kind == "raon" and weapon == 0) or (kind == "grub" and weapon >= 1)
 			check(Sprite.has_trail(kind,weapon) == wanted,"%s weapon%d trail=%s" % [kind,weapon,wanted])
 	finish("RAON TRAIL CHECKS")

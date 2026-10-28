@@ -1,5 +1,15 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Issue #8 — Grub pelo cliente, 28/10/2026
+
+REQ-50/ADR-142. Ghidra 12.2 + execução das rotinas do PE num emulador x86 (Unicorn, `tests/tools/grub_oracle`).
+S1/SS θ+2; S2 emite 4 corpos; S2 e SS ricocheteiam (`grub_flight.gd`/`grub_surface.gd`, módulo constante
+1800/1600, detonam em 44/40 ou ao tocar com o contador no limite); SS atravessa mobiles e fere a cada quadro;
+dano e cratera da linha type 12 (`grub_combat.gd`). Rastro S2/SS e espelho SS. O par biônico 10/70 saiu só do Grub (a
+linha type 12 não o tem); tornado, atributos do dono e contato do T1 permanecem adaptações. Matriz, hashes, comandos e perguntas em
+`GRUB_CLIENT_FIX.md`. Resultados observados na seção de validação ao final dele. Sem versão nova,
+exportação, commit ou push; cliente Windows e escuta não exercitados.
+
 ## Relevo dos poços da sala — ADR-141, 27/10/2026
 
 Pedido posterior restaura os seis poços rebaixados visíveis no `room_back`;
