@@ -1937,3 +1937,16 @@ de publicar. Sem certificado comercial, mantém ad-hoc macOS e Windows unsigned.
 O template release não suporta --script do editor: hook opt-in --ci-smoke
 injeta perfil temporário antes da inicialização normal e valida o PCK real.
 Detalhes, configuração e limites em CI_CD_DESIGN.md; validação no HANDOFF.
+
+**Emenda28/10/2026 — proteção e apresentação das releases.** O usuário solicita
+checks obrigatórios e mantém Rebase and merge; aprova dois ZIPs + SHA256SUMS
+nas próximas releases. Política aplicada administrativamente: PR, branch
+atualizada, quatro checks de lint/versão/macOS/Windows vinculados à app15368,
+histórico linear e aplicação a administradores, sem force push/exclusão;
+repositório permite apenas rebase. Zero aprovações de terceiros evita impedir
+o fluxo individual. PR valida todos os commits reais (substitui o cálculo só
+pelo título, antes pensado para squash) e continua exigindo título convencional.
+Os seis arquivos internos seguem validados; apenas três são publicados. JSONs
+e hashes individuais ficam nos artifacts desktop, retenção14dias; consolidado
+temporário UTF-8/LF não modifica inputs. Preservar releases antigas em retry,
+inclusive0.21.0. Dois Source code automáticos do GitHub permanecem visíveis.

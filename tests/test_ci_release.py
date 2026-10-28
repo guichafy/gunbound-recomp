@@ -43,10 +43,12 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(self.module.plan(root, config)['version'], '0.21.0')
             git('commit', '--allow-empty', '-qm', 'fix: path')
             self.assertEqual(self.module.plan(root, config)['version'], '0.21.1')
+            self.assertEqual(self.module.plan(root, config, pr_title='feat: windows')['version'], '0.21.1')
             git('tag', 'v0.21.1')
             self.assertEqual(self.module.plan(root, config)['version'], '0.21.1')
             git('commit', '--allow-empty', '-qm', 'work in progress')
-            self.assertEqual(self.module.plan(root, config, pr_title='feat: windows')['version'], '0.22.0')
+            with self.assertRaisesRegex(ValueError, 'Expected Conventional Commit: work in progress'):
+                self.module.plan(root, config, pr_title='feat: windows')
 
     def test_divergent_baseline_fails_closed(self):
         with tempfile.TemporaryDirectory() as temp:

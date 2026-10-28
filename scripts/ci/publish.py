@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -59,7 +60,9 @@ class GitHub:
 
 
 def publish(api, folder, version, sha):
-    assets = validate_assets(folder, version, sha)
+    validated = validate_assets(folder, version, sha)
+    archives = [path for path in validated if path.suffix == '.zip']
+    expected_names = {path.name for path in archives} | {'SHA256SUMS'}
     tag = f'v{version}'
     release = api.request('GET', f'/releases/tags/{tag}')
     if not release:
@@ -90,23 +93,39 @@ def publish(api, folder, version, sha):
             raise ValueError('Version reservation verification failed')
     if release:
         if not release['draft']:
-            if {a['name'] for a in release['assets']} != {p.name for p in assets}:
+            # Already published releases retain their original layout, including
+            # the six-file layout used by 0.21.0. Never migrate them on retry.
+            names = {a['name'] for a in release['assets']}
+            if names not in (expected_names, {path.name for path in validated}):
                 raise ValueError('Published release is incomplete; refusing overwrite')
             print('Release already published:', release['html_url'])
             return
     else:
         notes = ('Tested desktop packages for commit ' + sha + '.\n\n'
                  'macOS: universal, ad-hoc signed, not notarized. Windows: x86_64, unsigned.\n'
-                 'SHA-256 and build manifests are attached. Headless smoke does not replace visual/audio QA.')
+                 'Download the ZIP for your operating system; SHA256SUMS verifies both archives.\n'
+                 'Build manifests and individual checksums remain in the desktop workflow artifacts.\n'
+                 'The Source code archives are repository snapshots. '
+                 'Headless smoke does not replace visual/audio QA.')
         release = api.request('POST', '/releases', {'tag_name': tag, 'target_commitish': sha,
                               'name': f'Gunbound Recomp {version}', 'body': notes, 'draft': True, 'generate_release_notes': True})
-    for asset in release['assets']:
-        api.request('DELETE', f"/releases/assets/{asset['id']}")
-    upload = release['upload_url'].split('{')[0]
-    for path in assets:
-        api.request('POST', upload + '?name=' + urllib.parse.quote(path.name), path.read_bytes(), True)
+    # Keep generated publication files outside the validated input directory so
+    # a local retry sees the same six trusted inputs, even after an upload fails.
+    with tempfile.TemporaryDirectory(prefix='gunbound-release-') as temporary:
+        checksum = Path(temporary) / 'SHA256SUMS'
+        lines = []
+        for archive in archives:
+            with archive.open('rb') as source:
+                digest = hashlib.file_digest(source, 'sha256').hexdigest()
+            lines.append(f'{digest}  {archive.name}\n')
+        checksum.write_bytes(''.join(lines).encode('utf-8'))
+        for asset in release['assets']:
+            api.request('DELETE', f"/releases/assets/{asset['id']}")
+        upload = release['upload_url'].split('{')[0]
+        for path in [*archives, checksum]:
+            api.request('POST', upload + '?name=' + urllib.parse.quote(path.name), path.read_bytes(), True)
     final = api.request('GET', f"/releases/{release['id']}")
-    if {a['name'] for a in final['assets']} != {p.name for p in assets}:
+    if {a['name'] for a in final['assets']} != expected_names:
         raise ValueError('Release upload incomplete; draft preserved')
     api.request('PATCH', f"/releases/{release['id']}", {'draft': False, 'make_latest': 'legacy'})
     ref = api.request('GET', f'/git/ref/tags/{tag}')
