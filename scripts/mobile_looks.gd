@@ -54,7 +54,7 @@ const LOOKS := {
 	10: {"kind": "asate", "sprite": "res://scripts/classic_sprite.gd", "native_animation": true, "rig": {}, "projectile": {}, "using": {}},
 	11: {"kind": "ice", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	12: {"kind": "turtle", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
-	13: {"kind": "grub", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
+	13: {"kind": "grub", "sprite": "res://scripts/grub_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	14: {"kind": "dragon", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	15: {"kind": "knight", "sprite": "res://scripts/classic_sprite.gd", "rig": {}, "projectile": {}, "using": {}},
 	# Room figures face inward by the rider; Aduka shoots in the opposite direction.

@@ -2,7 +2,7 @@ extends SceneTree
 ## Grub QA (issue #8): T1 / T2 / SS in both directions, ricochet, impact, pause and
 ## resume. 1920x1080, 60 Hz presentation over the 20 Hz native model.
 const Match = preload("res://scripts/match.gd")
-const Sprite = preload("res://scripts/classic_sprite.gd")
+const Sprite = preload("res://scripts/grub_sprite.gd")
 const OUT := "res://docs/grub/"
 const FRAMES := "res://.tools/grub/gpu-frames/"
 const PAUSE_FROM := 150
@@ -39,6 +39,7 @@ class ShotPanel extends Node2D:
 		var offset: Vector2 = Vector2(480, 170) - host.centers[index]
 		var weapon := int(index / 2)
 		var blend := clampf(float(model.accumulator) / 0.05, 0, 1)
+		host.sprite.begin_projectiles(self)
 		for source in model.projectiles:
 			var shot: Dictionary = source.duplicate()
 			shot.draw_fraction = blend

@@ -54,6 +54,8 @@ POSES = {
     "unable": "unmove", "using_item": "item", "shock": "shock",
 }
 COLUMNS = 20
+# Mobiles whose tankNl.img glow layer is drawn (additive, like the client's "l" images).
+HULL_LIGHT = {"grub"}
 
 
 def pack(frames, columns):
@@ -254,6 +256,15 @@ def main():
             "contact": frames[poses["idle"][0]]["h"] if "idle" in poses else cell[1],
             "sheets": meta["sheets"],
         }
+        if folder in HULL_LIGHT:
+            raw_light = xfs.read_entry(ARCHIVE, toc[f"tank{number}l.img"])
+            light_frames = xfs.frames(raw_light)
+            if len(light_frames) != len(frames):
+                raise ValueError("tank%dl.img does not match tank%d.img frame count" % (number, number))
+            light_image, light_cell, light_origin = pack(light_frames, COLUMNS)
+            light_image.save(out / "CharacterSpritesheetLight.png")
+            info["hull_light"] = {"entry": f"tank{number}l.img", "entry_sha256": hashlib.sha256(raw_light).hexdigest(),
+                                  "frames": len(light_frames), "columns": COLUMNS, "cell": list(light_cell), "origin": light_origin}
         if number == 2:
             raw_laser = xfs.read_entry(ARCHIVE, toc["LaserEffect.xtf"])
             width, height, fmt = struct.unpack_from("<IIB", raw_laser)

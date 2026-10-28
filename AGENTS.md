@@ -118,7 +118,9 @@ S2/SS ricocheteiam por `grub_flight.gd` (tick `0x49fd40`/`0x486ea0`) e `grub_sur
 (`0x4a1740`); fixtures em `tests/fixtures/grub_*_native.json` foram geradas rodando o PE num
 emulador (`tests/tools/grub_oracle`, Unicorn fora do projeto). SS fere a cada quadro; dano/cratera
 da linha type 12. Sem o par biônico 10/70 (a linha type 12 não o contém; só o Grub). Tornado, atributos do dono e contato do T1 são adaptações.
-Testes test_grub_{surface,flight,model} e test_grub_assets.py; captura tests/capture_grub.gd.
+Sem rastro (ADR-120). Luz: `bullet13nl/sl` e `tank13l.img` (`CharacterSpritesheetLight.png`) são
+aditivas via `grub_sprite.gd` (emenda da ADR-150). Testes test_grub_{surface,flight,model} e
+test_grub_assets.py; captura tests/capture_grub.gd.
 
 ## Tiros Raon — ADR-116
 

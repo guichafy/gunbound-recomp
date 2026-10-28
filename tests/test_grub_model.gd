@@ -6,6 +6,7 @@ const Mobiles = preload("res://scripts/mobiles.gd")
 const Flight = preload("res://scripts/grub_flight.gd")
 const Combat = preload("res://scripts/combat.gd")
 const ClassicSprite = preload("res://scripts/classic_sprite.gd")
+const GrubSprite = preload("res://scripts/grub_sprite.gd")
 
 func fresh(facing: int = 1, item: String = ""):
 	var model = Match.new()
@@ -153,12 +154,30 @@ func test_ss_passes_through_and_repeats() -> void:
 	check(int(result.kinds.get("explosion", 0)) == 1, "crossing a mobile does not detonate the SS (%d explosions)" % int(result.kinds.get("explosion", 0)))
 
 func test_presentation_rules() -> void:
-	check(ClassicSprite.has_trail("grub", 1) and ClassicSprite.has_trail("grub", 2) and not ClassicSprite.has_trail("grub", 0), "afterimage history only on the Grub shots whose class publishes it (S2, SS)")
+	for weapon in 3:
+		check(not ClassicSprite.has_trail("grub", weapon), "Grub weapon %d keeps the single sprite (ADR-120, no afterimage blur)" % weapon)
 	check(ClassicSprite.has_trail("raon", 0) and not ClassicSprite.has_trail("raon", 1) and not ClassicSprite.has_trail("nak", 1), "ADR-120: other mobiles keep the single sprite")
 	for heading in [0, 45, 90, 270, 315]:
 		check(not ClassicSprite.ss_mirrored(heading), "SS heading %d is not mirrored" % heading)
 	for heading in [91, 180, 269]:
 		check(ClassicSprite.ss_mirrored(heading), "SS heading %d is mirrored (0x488880: >90 and <270)" % heading)
+
+func test_light_layers() -> void:
+	var sprite = GrubSprite.new()
+	sprite.setup("grub")
+	check(sprite is GrubSprite and sprite.hull_light != null, "Grub sprite loads tank13l as the hull light sheet")
+	check(int(sprite.hull_info.frames) == int(362) and str(sprite.hull_info.entry) == "tank13l.img", "hull light covers the 362 tank13 frames")
+	for light in ["Bullet1Light.png", "Bullet2Light.png"]:
+		check(not sprite.sheet(light).is_empty(), "%s is available for the additive pass" % light)
+	check(sprite.sheet("Bullet3Light.png").is_empty(), "the SS has no light entry in the client (bullet13p only)")
+	check(not sprite.hull_active, "hull glow stays off outside the battle pass")
+	var view := Node2D.new()
+	sprite.begin_hull_glow(view)
+	check(sprite.hull_active, "begin_hull_glow arms the hull pass")
+	sprite.clear_hull_glow()
+	sprite.hull_glow = null
+	view.free()
+	check(not sprite.hull_active, "clear_hull_glow disarms it")
 
 func run() -> void:
 	Physics.warmup()
@@ -166,6 +185,7 @@ func run() -> void:
 	test_emission()
 	test_flight_modes()
 	test_presentation_rules()
+	test_light_layers()
 	test_live_flight()
 	test_teleport_beacon_is_not_a_ricochet()
 	test_prediction_matches_real()

@@ -208,10 +208,9 @@ func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, li
 
 ## User decision (ADR-120): the client's afterimage history is shown only on
 ## the Raon T1 (ADR-118); every other shot keeps the approved single sprite.
+## The Grub S2/SS briefly had it (issue #8) and the user reported it as a blur.
 static func has_trail(kind: String, weapon: int) -> bool:
-	# Grub S2/SS: Shot2_Bullet13 and SuperShot_Bullet13 publish the same render
-	# record through 0x458690 / 0x488880 (issue #8, GRUB_CLIENT_FIX.md).
-	return (kind == "raon" and weapon == 0) or (kind == "grub" and weapon >= 1)
+	return kind == "raon" and weapon == 0
 
 ## 0x488880: the published direction flag is heading > 90 and heading < 270; the
 ## SS draws vertically mirrored while it flies that way.

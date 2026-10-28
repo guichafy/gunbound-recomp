@@ -164,6 +164,8 @@ func replace_root() -> void:
 	for sprite in sprites.values():
 		if sprite.has_method("clear_projectiles"):
 			sprite.clear_projectiles()
+		if sprite.has_method("clear_hull_glow"):
+			sprite.clear_hull_glow()
 	screen_hud = null
 	if is_instance_valid(root):
 		remove_child(root)
@@ -867,6 +869,9 @@ func _draw() -> void:
 	for satellite in model.satellites.values():
 		satellite_sprite.satellite_art.draw_satellite(self,satellite,offset,clampf(float(model.accumulator)/0.05,0,1))
 	draw_set_transform(offset)
+	for sprite in sprites.values():
+		if sprite.has_method("begin_hull_glow"):
+			sprite.begin_hull_glow(self)
 	for index in range(model.actors.size()):
 		art.draw_actor(self, model, index, offset, actor_context(index))
 		if art.motion[index].pose == "using_item":

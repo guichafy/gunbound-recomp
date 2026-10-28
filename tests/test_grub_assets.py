@@ -93,6 +93,22 @@ class GrubAssets(unittest.TestCase):
             self.assertEqual(crop.tobytes(), frame["image"].convert("RGBA").tobytes(), f"hull frame {index}")
             self.assertEqual(meta["rider"][index], [frame["hx"] + frame["extra"][2], frame["hy"] + frame["extra"][3]], f"rider pivot {index}")
 
+    def test_hull_light_pixels_and_registration(self):
+        meta = json.loads((GRUB / "frames.json").read_text())
+        light_meta = meta["hull_light"]
+        raw = xfs.read_entry(GRAPHICS, self.toc["tank13l.img"])
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), light_meta["entry_sha256"])
+        image = Image.open(GRUB / "CharacterSpritesheetLight.png").convert("RGBA")
+        cell, origin = light_meta["cell"], light_meta["origin"]
+        frames = xfs.frames(raw)
+        self.assertEqual(len(frames), light_meta["frames"])
+        self.assertEqual(len(frames), len(xfs.frames(xfs.read_entry(GRAPHICS, self.toc["tank13.img"]))))
+        for index, frame in enumerate(frames):
+            left = (index % light_meta["columns"]) * cell[0] + origin[0] + frame["hx"]
+            top = (index // light_meta["columns"]) * cell[1] + origin[1] + frame["hy"]
+            crop = image.crop((left, top, left + frame["w"], top + frame["h"]))
+            self.assertEqual(crop.tobytes(), frame["image"].convert("RGBA").tobytes(), f"hull light frame {index}")
+
     def test_projectile_sheets_and_epa(self):
         meta = json.loads((GRUB / "frames.json").read_text())
         for name, info in meta["sheets"].items():
