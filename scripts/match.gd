@@ -359,6 +359,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		# Preserve exact launch integers instead of re-quantizing their float projection.
 		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, entry.angle, entry.power, native) if spread_after else shot_velocity_fp(index, angle + float(entry.angle), power, weapon, 0.0, 0.0, native)
 		ClassicFlight.prepare(shell, entry)
+		BoomerFlight.prepare(shell,actors[index])
 		AdukaCombat.prepare(shell,actors[index])
 		MageCombat.prepare(shell,actors[index])
 		LightningCombat.prepare(shell,actors[index])
@@ -426,6 +427,8 @@ func cannon_pivot(index: int) -> Vector2:
 	return actors[index].pos + Vector2(0, -14).rotated(body_rotation(index))
 
 func muzzle(index: int, angle: float, weapon: int = 0) -> Vector2:
+	if int(actors[index].vehicle) == 6:
+		return BoomerFlight.muzzle(Vector2(actors[index].pos),int(actors[index].facing),body_rotation(index))
 	return cannon_pivot(index) + shot_velocity(index, angle, 100.0, weapon).normalized() * 38.0
 
 func current_order() -> Array:
@@ -575,7 +578,7 @@ func advance_projectile_tick(delta: float) -> void:
 		var native_weather := AdukaWeather.active(projectile)
 		var external: bool = not projectile.tornado.is_empty() and not native_weather
 		if bool(projectile.get("boomer", false)):
-			if not BoomerFlight.begin_tick(projectile, not external, false):
+			if not BoomerFlight.begin_tick(projectile, projectile.tornado.is_empty(), false):
 				projectile.age += travel_delta
 				continue
 		else:
@@ -645,7 +648,7 @@ func advance_projectile_tick(delta: float) -> void:
 			Physics.finish_tick(projectile, not external and not entered_burrow and accelerate)
 			ClassicFlight.finish_tick(projectile)
 			if bool(projectile.get("boomer", false)):
-				BoomerFlight.finish_tick(projectile, not external)
+				BoomerFlight.finish_tick(projectile, not external and accelerate)
 		if hit.is_empty() and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
@@ -710,7 +713,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	# Tilt stays as stamped at the start of the step. A crater must not
 	# rotate the target before this explosion's damage is measured.
 	var event_start := events.size()
-	if MageCombat.active(projectile):
+	if MageCombat.active(projectile) or BoomerFlight.active(projectile):
 		#4572b0/4a4950/483ff0: attached electricity and Thor precede
 		# even the SS EMP; shock pending is flushed at the shared tick end.
 		MageWeatherEffects.impact(self,projectile,position)
@@ -724,12 +727,17 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		radius = float(projectile.blast_radius)
 	var native_aduka := int(projectile.get("vehicle",0))==16 and weapon_index==0 and not bool(projectile.get("beacon",false))
 	var native_mage := MageCombat.active(projectile)
+	var native_boomer := BoomerFlight.active(projectile)
 	var native_data: Dictionary = AdukaCombat.t1_parameters(projectile,actors[shot_actor]) if native_aduka else {}
 	if native_mage:
 		native_data = MageCombat.parameters(projectile,actors[shot_actor])
+	elif native_boomer:
+		native_data = BoomerFlight.parameters(projectile,actors[shot_actor])
 	var crater_percent := int(projectile.get("mage_crater_percent",100)) if native_mage else int(projectile.get("aduka_crater_percent",100))
+	if native_boomer:
+		crater_percent = int(projectile.get("boomer_crater_percent",100))
 	var crater_dimension := Physics.quot(int(native_data.get("dimension",0))*crater_percent,100)
-	var removed: int = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect))) if native_aduka or native_mage else terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
+	var removed: int = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect))) if native_aduka or native_mage or native_boomer else terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
 	var heading := PI * 0.5
 	var velocity := Vector2.ZERO
 	if projectile.has("velocity"):
@@ -738,7 +746,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "child":bool(projectile.get("child",false)), "ss_state":str(projectile.get("ss_state","normal")), "collided_actor": collided_actor, "removed": removed, "angle": heading})
 	if native_mage:
 		MageCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
-	elif native_aduka:
+	elif native_aduka or native_boomer:
 		AdukaCombat.apply(actors,events,Vector2i(position),native_data)
 	else:
 		blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
@@ -754,13 +762,34 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 					battle_effects.remove_at(index)
 			battle_effects.append(JDEffect.create(projectile,position,owner))
 	explode_actions(position, projectile, event_start)
+	if native_boomer:
+		detonate_boomer_mines(Vector2i(position), projectile, native_data)
+
+## 450eb0 -> 499650: only the blast, not the flight scan, tests Raon mines.
+## The mine's existing blast remains the declared offline bridge. Collect the
+## primary shot before this stage so mine credit cannot be counted twice.
+func detonate_boomer_mines(impact: Vector2i, projectile: Dictionary, data: Dictionary) -> void:
+	var index := 0
+	var radius := Physics.quot(int(data.dimension),2) + 10
+	while index < mines.size():
+		var mine: Dictionary = mines[index]
+		if not bool(mine.get("raon_mine",false)) or bool(mine.get("lost",false)):
+			index += 1
+			continue
+		var delta := Vector2i(Vector2(mine.pos).floor()) - impact
+		var dx := Physics.quot(delta.x * 100, int(data.aspect))
+		if dx * dx + delta.y * delta.y >= radius * radius:
+			index += 1
+			continue
+		mine.owner = int(projectile.get("owner",shot_actor))
+		ClassicFlight._detonate_mine(self,index)
 
 ## OnExplodeAction order: Thor attached at launch, then Electricity; then the
 ## Gold metadata of everything this impact dealt.
 func explode_actions(position: Vector2, projectile: Dictionary, event_start: int) -> void:
-	if not MageCombat.active(projectile) and bool(projectile.get("thor", false)):
+	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and bool(projectile.get("thor", false)):
 		thor_strike(position)
-	if not MageCombat.active(projectile) and bool(projectile.get("electric", false)):
+	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and bool(projectile.get("electric", false)):
 		lightning_strike(position)
 	collect_gold_damage(event_start, position, projectile)
 
@@ -837,16 +866,25 @@ const FALL_SPEED_STEP := 0.15
 const FALL_WIND_DIVISOR := 45.0
 
 func drift_fall(actor: Dictionary, drop: float) -> void:
-	# ADR-077: the C# intent, one wind push of wind.x / 45 per gravity step.
-	# Each step falls int(GravitySpeed) px (starting at 3, +0.15 per step); the
-	# literal C# accumulator reset is not reproduced. Walls stop the push.
+	# The offline fall and wall check remain approximations. Other mobiles keep
+	# ADR-077; Boomer uses the client's integer wind accumulation per step.
+	# Vertical steps fall int(GravitySpeed) px (starting at 3, +0.15 per step).
 	var x := float(actor.pos.x)
 	var y := float(actor.pos.y)
 	var remaining := drop
 	var speed := FALL_INITIAL_SPEED
+	var boomer_fall := int(actor.get("vehicle",0)) == 6
+	var remainder := 0
+	var wind_force := roundi(wind.length())
+	var wind_angle := roundi(-rad_to_deg(wind.angle())) if wind_force > 0 else 0
 	while remaining > 0.0:
 		var fall := minf(float(int(speed)), remaining)
-		var next := clampf(x + wind.x / FALL_WIND_DIVISOR, WORLD_MARGIN, terrain.world_size().x - WORLD_MARGIN)
+		var delta := wind.x / FALL_WIND_DIVISOR
+		if boomer_fall:
+			var wind_step := BoomerFlight.fall_wind_step(remainder,wind_force,wind_angle)
+			delta = float(wind_step.x)
+			remainder = wind_step.y
+		var next := clampf(x + delta, WORLD_MARGIN, terrain.world_size().x - WORLD_MARGIN)
 		if not terrain.is_solid(Vector2(next, y)):
 			x = next
 		y += fall

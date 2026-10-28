@@ -1,0 +1,271 @@
+{
+  "size": [
+    1280,
+    800
+  ],
+  "fps": 60,
+  "gpu": "Apple M4 Pro OpenGL 4.1 Compatibility",
+  "source": "tests/capture_boomer_issue9.gd",
+  "cases": [
+    {
+      "weapon": 0,
+      "facing": 1,
+      "wind": [
+        -27,
+        0
+      ],
+      "frames": 240,
+      "saved_png": 105,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "ss_boundaries": []
+    },
+    {
+      "weapon": 0,
+      "facing": -1,
+      "wind": [
+        27,
+        0
+      ],
+      "frames": 240,
+      "saved_png": 105,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "ss_boundaries": []
+    },
+    {
+      "weapon": 1,
+      "facing": 1,
+      "wind": [
+        -27,
+        0
+      ],
+      "frames": 240,
+      "saved_png": 105,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "ss_boundaries": []
+    },
+    {
+      "weapon": 1,
+      "facing": -1,
+      "wind": [
+        27,
+        0
+      ],
+      "frames": 240,
+      "saved_png": 105,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "ss_boundaries": []
+    },
+    {
+      "weapon": 2,
+      "facing": 1,
+      "wind": [
+        -27,
+        0
+      ],
+      "frames": 240,
+      "saved_png": 105,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "ss_boundaries": [
+        [
+          35,
+          "normal"
+        ],
+        [
+          36,
+          "change"
+        ],
+        [
+          45,
+          "change"
+        ],
+        [
+          46,
+          "cnormal"
+        ]
+      ]
+    },
+    {
+      "weapon": 2,
+      "facing": -1,
+      "wind": [
+        27,
+        0
+      ],
+      "frames": 240,
+      "saved_png": 105,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "ss_boundaries": [
+        [
+          35,
+          "normal"
+        ],
+        [
+          36,
+          "change"
+        ],
+        [
+          45,
+          "change"
+        ],
+        [
+          46,
+          "cnormal"
+        ]
+      ]
+    }
+  ],
+  "wind_quadrants": [
+    {
+      "weapon": 0,
+      "facing": 1,
+      "wind": [
+        24,
+        24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    },
+    {
+      "weapon": 0,
+      "facing": 1,
+      "wind": [
+        24,
+        -24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    },
+    {
+      "weapon": 0,
+      "facing": 1,
+      "wind": [
+        -24,
+        24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    },
+    {
+      "weapon": 0,
+      "facing": 1,
+      "wind": [
+        -24,
+        -24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    },
+    {
+      "weapon": 0,
+      "facing": -1,
+      "wind": [
+        24,
+        24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    },
+    {
+      "weapon": 0,
+      "facing": -1,
+      "wind": [
+        24,
+        -24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    },
+    {
+      "weapon": 0,
+      "facing": -1,
+      "wind": [
+        -24,
+        24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    },
+    {
+      "weapon": 0,
+      "facing": -1,
+      "wind": [
+        -24,
+        -24
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false,
+      "sample_rows": 75
+    }
+  ],
+  "wind_zero": [
+    {
+      "weapon": 0,
+      "facing": 1,
+      "wind": [
+        0,
+        0
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false
+    },
+    {
+      "weapon": 0,
+      "facing": -1,
+      "wind": [
+        0,
+        0
+      ],
+      "frames": 180,
+      "saved_png": 75,
+      "pause_identical": true,
+      "resume_changes": true,
+      "errors": false
+    }
+  ]
+}

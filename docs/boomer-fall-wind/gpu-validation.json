@@ -1,0 +1,249 @@
+{
+	"adapted_interpolation": true,
+	"cases": [
+		{
+			"after": [
+				500.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				0.0,
+				0.0
+			]
+		},
+		{
+			"after": [
+				518.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				26.0,
+				0.0
+			]
+		},
+		{
+			"after": [
+				482.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				-26.0,
+				0.0
+			]
+		},
+		{
+			"after": [
+				512.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				18.0,
+				18.0
+			]
+		},
+		{
+			"after": [
+				488.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				-18.0,
+				18.0
+			]
+		},
+		{
+			"after": [
+				488.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				-18.0,
+				-18.0
+			]
+		},
+		{
+			"after": [
+				512.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				18.0,
+				-18.0
+			]
+		},
+		{
+			"after": [
+				500.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				0.0,
+				0.0
+			]
+		},
+		{
+			"after": [
+				518.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				26.0,
+				0.0
+			]
+		},
+		{
+			"after": [
+				482.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				-26.0,
+				0.0
+			]
+		},
+		{
+			"after": [
+				512.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				18.0,
+				18.0
+			]
+		},
+		{
+			"after": [
+				488.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				-18.0,
+				18.0
+			]
+		},
+		{
+			"after": [
+				488.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				-18.0,
+				-18.0
+			]
+		},
+		{
+			"after": [
+				512.0,
+				575.0
+			],
+			"before": [
+				500.0,
+				475.0
+			],
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"resume": true,
+			"wind": [
+				18.0,
+				-18.0
+			]
+		}
+	],
+	"clock_hz": 60,
+	"frames": 1120,
+	"size": [
+		1920,
+		1080
+	]
+}

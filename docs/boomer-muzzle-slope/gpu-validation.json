@@ -1,0 +1,55 @@
+{
+	"cases": [
+		{
+			"angle": 45,
+			"facing": 1,
+			"muzzle": [
+				507.0,
+				560.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"slope": -1
+		},
+		{
+			"angle": 45,
+			"facing": -1,
+			"muzzle": [
+				489.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"slope": -1
+		},
+		{
+			"angle": 45,
+			"facing": 1,
+			"muzzle": [
+				510.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"slope": 1
+		},
+		{
+			"angle": 45,
+			"facing": -1,
+			"muzzle": [
+				492.0,
+				560.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"slope": 1
+		}
+	],
+	"clock_hz": 60,
+	"frames": 360,
+	"size": [
+		1920,
+		1080
+	],
+	"sloped_fixture": true
+}

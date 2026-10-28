@@ -1,0 +1,59 @@
+{
+	"cases": [
+		{
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"pose": "hurt",
+			"resumed": true
+		},
+		{
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"pose": "hurt_2",
+			"resumed": true
+		},
+		{
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"pose": "using_item",
+			"resumed": true
+		},
+		{
+			"facing": 1,
+			"pause_frames_identical": 30,
+			"pose": "destroyed",
+			"resumed": true
+		},
+		{
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"pose": "hurt",
+			"resumed": true
+		},
+		{
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"pose": "hurt_2",
+			"resumed": true
+		},
+		{
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"pose": "using_item",
+			"resumed": true
+		},
+		{
+			"facing": -1,
+			"pause_frames_identical": 30,
+			"pose": "destroyed",
+			"resumed": true
+		}
+	],
+	"clock_hz": 60,
+	"controlled_events": true,
+	"frames": 720,
+	"size": [
+		1920,
+		1080
+	]
+}

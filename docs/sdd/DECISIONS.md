@@ -1813,3 +1813,70 @@ faixas A/B excedentes. O fundo nativo e seu derivado 4× são preservados.
 REA e comparação do quadro XFS estão em `ROOM_REFERENCE_LAYOUT.md`; o
 carregamento está comprovado por análise estática, não por execução do
 cliente Windows. Capacidade 1×1 e controles existentes permanecem.
+
+
+## ADR-142 — Dano do Boomer pelo consumidor comum (parcial)
+
+Issue #9, REQ-04/05/07/08/19/44/45. `0x41da80` recebe count1/4/1 e
+adiciona `3*Attack/count` ao poder e `(Dig/2)/count` à dimensão. Dados
+254/48/124/2, 118/42/114/2 e 350/46/120/2 são do DAT fixado. SS aplica
+200% e 120% à dimensão já preparada no tick46. O impacto usa 450eb0→45db20
+e a cratera nativa compartilhados. Bunge/itens, origem espacial, colisão e
+climas permanecem pontes do porte; esta decisão não encerra a issue. Evidência
+e testes em `BOOMER_ISSUE_9.md`.
+
+## ADR-143 — Varredura, tornado e orientação dos tiros do Boomer
+
+Issue #9, REQ-04/07/08/09/19/23/24/44/45. A vtable dos três tiros usa
+0x455cc0: passo e refinamento compartilhados, com clima amostrado no ponto
+físico. O tornado conserva velocidade, força mínimo |vx|=200 e inverte nas
+duas primeiras saídas; a terceira libera sem acelerar nesse tick. A curva
+continua avançando dentro da coluna, sem reset por velocidade descendente.
+O renderer usa o campo de ângulo publicado em 0x458690, com sinal confirmado
+pelo raster 0x4ebdd0. Estes passos são comuns a execução e previsão.
+Geometria de origem, vento sobre o chassis, eletricidade/Thor anexos e climas
+restantes mantêm os limites de `BOOMER_ISSUE_9.md`; não fecha a issue.
+
+
+## ADR-144 — Eletricidade e Thor anexos do Boomer
+
+Issue #9, REQ-04/07/08/23–25/35/44/45. As rotinas 0x45190b e
+0x4536d3 chamam o anexo elétrico; 0x451bf2 e 0x453732→0x4398e0
+encaminham Thor pelo clima atual. A ordem é elétrico, Thor, impacto próprio;
+count1/4/1 divide choque primário e potência de Thor, e multiplica o período
+do feixe. O caminho comum executa apenas uma vez em partida e previsão.
+Geometria do feixe e ativação offline de itens permanecem pontes declaradas;
+a classificação completa e evidências estão em `BOOMER_ISSUE_9.md`.
+
+
+## ADR-145 — Minas na explosão e camadas do impacto Boomer
+
+Issue #9, REQ-04/07/08/19/44/45. A explosão do Boomer aciona minas
+Raon ativas no interior estrito da elipse nativa, com autoria transferida;
+partida e previsão usam o mesmo passo. Dano e cratera das minas, cadeia
+secundária e ordem da coleta de Gold continuam adaptações. O SS transformado
+compõe flame63 e ssflame6, com rotações visuais independentes e avanço de
+2 graus por tick; RNG Godot e a alternativa nativa de 5 graus permanecem
+limites documentados. Evidências, verificações e lacunas em BOOMER_ISSUE_9.md.
+
+## ADR-146 — Vento na queda do Boomer
+
+Issue #9, REQ-04/05/08/19/23/44/45. O Animate comum do mobile chama
+0x45cb50, que desloca a posição durante a queda usando a componente
+horizontal do vento truncada, acumulação 3× e divisão inteira por 100 com
+resto assinado. O laço offline aplica esta aritmética ao Boomer, mantendo
+outros mobiles na ADR-077. A queda instantânea e sua interpolação, a
+aproximação das paredes, a conversão do vetor e as condições nativas de
+estado permanecem adaptações. Este achado não prova uma pose especial ao
+vento enquanto apoiado. Evidências e limites em `BOOMER_ISSUE_9.md`.
+
+## ADR-147 — Boca, poses e áudio do Boomer
+
+Issue #9, REQ-04/07/08/09/19/20/44/45. Os três tiros usam boca fixa no
+chassis, calculada a partir do par nativo 75°/38 e da LUT, espelhada e
+inclinada; a conversão para o hotspot do renderer existente e a inclinação
+offline permanecem pontes. A mira só muda a velocidade. O sinalizador e a
+previsão compartilham a mesma boca. As poses de dano, item e morte seguem
+as durações do tank6.epa, sem efeitos genéricos de tinta/rolagem/fade.
+`62fire` e `62blast` são importados como PCM sem perda; os dois WAVs e seus
+UIDs permanecem. A evidência, capturas e limites estão em `BOOMER_ISSUE_9.md`.

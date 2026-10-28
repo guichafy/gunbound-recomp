@@ -4,7 +4,7 @@ extends RefCounted
 const Physics = preload("res://scripts/classic_ballistics.gd")
 
 static func active(projectile: Dictionary) -> bool:
-	return int(projectile.get("vehicle",0)) in [1,8,16] and not bool(projectile.get("beacon",false))
+	return int(projectile.get("vehicle",0)) in [1,6,8,16] and not bool(projectile.get("beacon",false))
 
 static func geometry(column: Dictionary) -> Vector2i:
 	# Bridge the existing world's displayed128px columns to native full width.

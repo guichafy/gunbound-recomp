@@ -1,5 +1,104 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Issue #9 Boomer — boca, poses e PCM, ADR-147 (parcial)
+
+A boca usa o ponto fixo do chassis do cliente (DAT 75°/38, LUT e espelho),
+independente da mira; suporte/inclinação no modelo offline e a conversão ao
+hotspot continuam adaptações. HUD, sinalizador e previsão compartilham as
+funções existentes. `tank6.epa` controla os tempos das poses de dano, item
+e morte, sem a tinta/rolagem/fade genéricos. Os WAVs ativos de disparo e
+impacto foram reimportados em PCM sem perda; seus dados importados coincidem
+com `sound.xfs` do TestClient, cujo hash foi reconfirmado nesta etapa.
+
+Harness completo: 113 suítes, 29.215 checks Godot, 92 testes Python e 29
+partidas, sem falhas/exit0. `test_boomer` 899/0 e
+`test_classic_shot_timing_scene` 49/0. Log
+`.tools/boomer-issue9/harness-adr147.log`, SHA256
+`f299d75c1151bb2f6609407058af44bc9a433023632bf7b07b0ffe6ed0ee8a79`.
+Reexecução antes do commit: mesmo resultado, exit0; log
+`.tools/boomer-issue9/harness-push.log`, SHA256
+`bc37912d923e314ccb2ef28f6908ebf0521a0306c9312a662f92bdbcf7e53915`.
+Capturas GPU 1920×1080: boca plana 540 passos/6 casos, boca inclinada 360/4,
+poses nativas 720/8 e vento apoiado com Change Wind 1000/10; pausa30 e
+retomada em todos. As fixtures tardias tiveram parse dirigido e execução
+GPU; detalhes, repetição de fixtures e limites em `BOOMER_ISSUE_9.md`.
+
+0x450730 avança o EPA sem leitura direta do vento; 0x45cb50 o aplica à
+posição em queda. As chamadas indiretas não excluem outra influência sobre
+a pose apoiada. O áudio `docs/boomer-audio/boomer-t2-audicao.wav` é uma
+mistura de referência dos PCM nativos, não gravação do aplicativo; escuta
+humana, aceite visual e cliente Windows seguem não exercitados. O usuário
+solicitou o encerramento da issue e o envio à main; essa decisão não elimina
+os limites registrados. Não houve nova exportação de app/ZIP.
+
+## Issue #9 Boomer — vento na queda, ADR-146 (parcial)
+
+Animate 0x461ca0 chama 0x45cb50, que em queda acumula o vento horizontal
+quantizado e desloca o chassis com quociente/resto assinados; o Boomer usa
+esse passo no laço comum real/previsão. Os outros mobiles preservam ADR-077.
+Queda instantânea, interpolação, paredes e condições nativas de estado
+continuam adaptações. Não foi demonstrada pose dependente do vento apoiado.
+Change Wind e Moon/Eclipse foram exercitados especificamente no Boomer;
+Moon/Eclipse foram forçados nas fixtures, não sorteados em Miramo.
+
+Harness completo: 29.146 checks Godot, 92 testes Python, 13 partidas gerais
+e 16 clássicas, sem falhas/exit 0; log `.tools/boomer-issue9/harness-adr146.log`,
+SHA256 `2d66da3b9934e5e32614aa2f3fb2b11831ee84242c72dbe8328cd603afac4d1e`.
+O teste Boomer atualizado passou 861/0. A nova captura foi criada após o
+parse global e passou em parse dirigido. GPU 1920×1080: 1120 passos, 14
+casos, dois sentidos, pausa30 e retomada. Uma primeira captura com terreno
+visual incorreto foi descartada; a final tem máscara e desenho alinhados.
+
+REA/Ghidra e classificação dos sete climas em `BOOMER_ISSUE_9.md`. A boca
+nativa usa pares DAT 75/38 e inclinação do apoio; falta reconciliar o ponto
+de referência do ator e o movimento do apoio antes de alterar a geometria.
+Cliente Windows, escuta/mouse e aceite visual não foram exercitados. A cópia
+local de sound.xfs não foi reencontrada; mantém-se a verificação histórica.
+Issue #9 não concluída; sem reexportação de app/ZIP, commit ou push.
+
+## Issue #9 Boomer — continuação ADR-145 (parcial)
+
+Harness completo: 29.102 checks Godot, 92 testes Python, 13 partidas gerais e
+16 clássicas, exit 0. Log `.tools/boomer-issue9/harness-adr145.log`, SHA256
+`f744fb5131398d5d5ecd266275d1a2209a8a810953bdb17c56b1672f3c7bdb97`.
+Após o harness, houve apenas limpeza dos PNGs da captura e parse dirigido.
+
+Explosões do Boomer acionam minas na elipse comprovada, com borda estrita e
+autoria; o SS transformado compõe flame63/ssflame6 e gira as duas camadas.
+O dano/cratera das minas, RNG visual e ramo nativo de 5 graus permanecem
+adaptações. Suites dirigidas: Boomer 817, minas 33, Gold 43 e itens de cena 49,
+sem falhas. GPU 1920×1080: 360 passos, quatro cenários normal/transformado e
+dois sentidos, pausa de 30 quadros idênticos. Registros e limites em
+`BOOMER_ISSUE_9.md`; evidência REA em `builds/boomer-issue9-rea-impact.json`.
+A emissão usa LUT e campos 36/37 do characterdata (75/38 para T1 do Boomer);
+composição e conversão ainda não foram fechadas, então a boca segue adaptação.
+Consumidor do vento no chassis, critérios restantes,
+escuta e aceite visual continuam pendentes: issue não concluída. A captura não
+executa o cliente Windows; app/ZIP não reexportados.
+
+## Issue #9 Boomer — histórico ADR-142/143/144
+
+Dano/cratera e atributos (ADR-142); varredura 455cc0, Force/tornado e
+orientação dos tiros (ADR-143); eletricidade/Thor anexos (ADR-144). Harness
+`./scripts/check.sh`: 29.069 checks Godot, 13 partidas gerais e 16 clássicas,
+zero falhas/exit0, parse aprovado; `.tools/boomer-issue9/harness-adr144.log`,
+SHA256 `711f1b12b445c90d362d4cb60cbedf11be4e922ad0a0d9a41ba7b75843810a58`.
+Depois do harness, quatro checks de Thunder, Teleport e vento foram adicionados
+sem alterar produção; rodada dirigida `test_boomer` 788/0, `test_items` 49/0,
+`test_mage_weather_effects` 57/0. A captura climática criada após o parse do
+harness foi compilada e executada separadamente.
+
+GPU: seis capturas de tiros, 240 passos/1280×800, SS35/36/45/46; mais dez
+T1 com vento zero/quadrantes, 180 passos, ambos sentidos. Todas com pausa30
+idêntica e retomada. Seis cenas climáticas controladas, 540 quadros/1920×1080,
+1/4/1 efeitos elétricos e Thor por arma/sentido, pausa30 e retomada. Amostras
+em `docs/boomer-issue9` e `docs/boomer-weather`. Captura anterior descartada:
+máscara de terreno e indicador de vento estavam inconsistentes; final corrigida.
+REA/Ghidra e matriz em `BOOMER_ISSUE_9.md`. Vento no chassis, colisão com
+minas e efeitos/impactos ainda precisam de auditoria; não anunciar paridade
+integral. Sem cliente Windows, escuta/mouse ou aceite visual; app/ZIP não
+reexportados. Issue #9 ainda aberta e não concluída.
+
 ## Relevo dos poços da sala — ADR-141, 27/10/2026
 
 Pedido posterior restaura os seis poços rebaixados visíveis no `room_back`;

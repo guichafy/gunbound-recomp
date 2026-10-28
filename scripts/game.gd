@@ -74,6 +74,7 @@ var loading_width := 0
 var loading_elapsed := 0.0
 var loading_view: Control = null
 var room_rng := RandomNumberGenerator.new()
+var impact_rng := RandomNumberGenerator.new()
 var vehicle := 2
 # -1 follows Mobiles.opponent. A room pick stores that mobile until changed.
 var cpu_vehicle := -1
@@ -120,6 +121,7 @@ static func build_sprites() -> Dictionary:
 
 func _ready() -> void:
 	room_rng.randomize()
+	impact_rng.randomize()
 	# HUD HD sprites (3×) are drawn smaller than their pixels; mipmaps keep 1 px borders.
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	background = load("res://assets/art/background.png")
@@ -623,7 +625,12 @@ func consume_events() -> void:
 			"explosion":
 				rig.last_impact = event.position
 				var vehicle_id := int(event.get("vehicle", Mobiles.DEFAULT_ID))
-				effects.append({"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "child":bool(event.get("child",false)), "raon_mine":bool(event.get("raon_mine",false)), "ss_state":str(event.get("ss_state","normal")), "age": 0.0, "angle":float(event.get("angle",0.0))})
+				var effect := {"pos": event.position, "radius": event.radius, "weapon": event.weapon, "vehicle": vehicle_id, "child":bool(event.get("child",false)), "raon_mine":bool(event.get("raon_mine",false)), "ss_state":str(event.get("ss_state","normal")), "age": 0.0, "angle":float(event.get("angle",0.0))}
+				if vehicle_id == 6:
+					effect.primary_angle = impact_rng.randi_range(0,359)
+					if int(event.weapon) == 2 and str(effect.ss_state) == "cnormal":
+						effect.secondary_angle = impact_rng.randi_range(0,359)
+				effects.append(effect)
 				shake = 7.0
 				var original: AudioStream = null
 				var body = sprite_for(vehicle_id)

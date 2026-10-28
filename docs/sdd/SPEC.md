@@ -1,5 +1,51 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Issue #9: boca do Boomer — REQ-04/07/08/19/44/45
+
+Os três tiros partem do ponto fixo do chassis calculado com ângulo 75° e
+comprimento 38 do `characterdata.dat`, espelhado e inclinado pelo apoio;
+a mira altera a velocidade, não desloca a boca. O ponto do cliente é
+convertido pelo registro visual existente do Boomer e a inclinação continua
+aproximação do modelo offline. Sinalizador, HUD e previsão usam a mesma
+função de boca. Evidência e plano em `BOOMER_ISSUE_9.md`.
+
+## Issue #9: poses nativas do Boomer — REQ-09/19/20/45
+
+O Boomer usa o relógio das poses do `tank6.epa` para dano, item, queda e
+morte, e a apresentação nativa mantém opacidade e ângulo do apoio. A morte
+usa dez ticks e dano frontal/traseiro 25 ticks. As poses dos demais mobiles
+não mudam. Ver plano, fonte e limites em `BOOMER_ISSUE_9.md`.
+
+## Issue #9: áudio do Boomer — REQ-07/19/20/45
+
+Os streams efetivamente reproduzidos para `62fire` e `62blast` devem
+preservar o PCM estéreo do XFS, sem compressão com perda na importação
+Godot. Os outros sons e suas configurações permanecem inalterados. Testar
+seleção, quatro emissões de T2, pausa e PCM importado; a escuta humana é um
+aceite separado. Evidência e limites em `BOOMER_ISSUE_9.md`.
+
+## Issue #9: vento na queda do Boomer — REQ-04/05/08/19/23/44/45
+
+O deslocamento horizontal da queda do Boomer usa a componente do vento
+quantizada pelo cliente, acumulando três vezes essa componente e aplicando
+quociente e resto assinados por 100 por passo. A queda instantânea do treino
+offline, a aproximação de paredes e a conversão do vetor de vento permanecem
+adaptações. O efeito não demonstra troca de pose do chassis apoiado. Evidência
+e plano em `BOOMER_ISSUE_9.md`.
+
+## Boomer — dano delimitado (issue #9 / ADR-142)
+
+REQ-04/05/07/08/19/44/45: aplicar ao Boomer a inicialização de dano e
+dimensão e a resolução comprovadas no cliente, incluindo divisores por
+rajada e transformação SS; manter itens offline como ponte declarada.
+Varredura comum e tornado do Boomer usam o passo nativo comprovado;
+o sprite do tiro usa o ângulo nativo publicado; Lightning e Thor anexos
+precedem a explosão, com divisão por emissão. Explosão detona minas em
+elipse estrita e transfere autoria; o dano da mina mantém a ponte existente.
+SS transformado compõe flame63 e ssflame6, com relógios visuais separados.
+Climas restantes e validação visual continuam em `BOOMER_ISSUE_9.md`.
+
+
 ## Encerramento da partida — REQ-50 / ADR-139
 
 Ao fim do treino, mostrar a janela de resultado do cliente: painel do time A

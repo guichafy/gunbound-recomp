@@ -185,8 +185,15 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 		for level in trail_levels(projectile):
 			_draw_bullet(view, name, index, light_name, light_index, Vector2(level.pos) + offset, float(level.angle), float(level.alpha))
 	var position: Vector2 = projectile.get("hit_pos", projectile.pos) + offset
-	_draw_bullet(view, name, index, light_name, light_index, position, Vector2(projectile.velocity).angle(), 1.0)
+	_draw_bullet(view, name, index, light_name, light_index, position, projectile_angle(projectile), 1.0)
 	view.draw_set_transform(Vector2.ZERO)
+
+## 458690 publishes Boomer's model angle; 4ebdd0 rotates it toward negative
+## screen Y. Other mobiles retain their established heading bridge.
+static func projectile_angle(projectile: Dictionary) -> float:
+	if bool(projectile.get("boomer",false)) and projectile.has("boomer_angle"):
+		return -deg_to_rad(float(projectile.boomer_angle))
+	return Vector2(projectile.velocity).angle()
 
 ## One published bullet level: light cell then body cell, rotated by the heading.
 func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float) -> void:
@@ -348,11 +355,21 @@ func effect_sheets(effect: Dictionary) -> Array:
 	# stage. A bullet12c fragment only calls flame123 (PE 0x432b5c).
 	if mobile_kind == "turtle" and weapon == 2 and not bool(effect.get("child",false)) and str(effect.get("ss_state","normal")) == "normal":
 		return [name,"SSFlame.png"]
+	# 45373e: transformed Boomer SS publishes flame63 then ssflame6.
+	if mobile_kind == "boomer" and weapon == 2 and str(effect.get("ss_state","normal")) == "cnormal":
+		return [name,"SSFlame.png"]
 	# Existing special detonation paths with no primary flame have their own
 	# secondary resource. Never overlay both stages automatically.
 	if sheet(name).is_empty() and weapon == 2 and mobile_kind in ["lightning", "ice", "mage"]:
 		name = "SSFlame.png"
 	return [name]
+
+## 471c70: two degrees per 20Hz tick in the default client branch.
+## Initial angles are sampled independently by the scene, never by the model.
+static func effect_rotation(effect: Dictionary, name: String) -> float:
+	var key := "secondary_angle" if name == "SSFlame.png" else "primary_angle"
+	var tick := floori(float(effect.get("age",0.0)) / Timing.STEP + 0.000001)
+	return -deg_to_rad(float(posmod(int(effect.get(key,0)) + tick * 2, 360)))
 
 func draw_effect(view: Node2D, effect: Dictionary, offset: Vector2 = Vector2.ZERO) -> void:
 	if int(effect.weapon) < 0 or int(effect.weapon) >= effects.size():
@@ -373,6 +390,7 @@ func draw_effect_sheet(view: Node2D, effect: Dictionary, name: String, offset: V
 	var parts := cell_frame(name, frame)
 	if parts[0].size == Vector2.ZERO:
 		return
-	view.draw_set_transform(Vector2(effect.pos) + offset, float(effect.get("angle",0.0)) if mobile_kind == "turtle" else 0.0)
+	var angle := effect_rotation(effect,name) if mobile_kind == "boomer" else (float(effect.get("angle",0.0)) if mobile_kind == "turtle" else 0.0)
+	view.draw_set_transform(Vector2(effect.pos) + offset, angle)
 	view.draw_texture_rect_region(_optional_cached(name), parts[1], parts[0])
 	view.draw_set_transform(Vector2.ZERO)

@@ -1,0 +1,101 @@
+{
+	"cases": [
+		{
+			"after": 180,
+			"before": 0,
+			"facing": 1,
+			"force": 0,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 180,
+			"before": 0,
+			"facing": 1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 270,
+			"before": 90,
+			"facing": 1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 0,
+			"before": 180,
+			"facing": 1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 90,
+			"before": 270,
+			"facing": 1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 180,
+			"before": 0,
+			"facing": -1,
+			"force": 0,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 180,
+			"before": 0,
+			"facing": -1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 270,
+			"before": 90,
+			"facing": -1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 0,
+			"before": 180,
+			"facing": -1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		},
+		{
+			"after": 90,
+			"before": 270,
+			"facing": -1,
+			"force": 26,
+			"pause_frames_identical": 30,
+			"resumed": true,
+			"stationary": true
+		}
+	],
+	"clock_hz": 60,
+	"frames": 1000,
+	"model_poses_are_port_adaptation": true,
+	"size": [
+		1920,
+		1080
+	]
+}

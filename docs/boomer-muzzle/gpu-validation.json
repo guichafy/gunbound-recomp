@@ -1,0 +1,71 @@
+{
+	"cases": [
+		{
+			"angle": 10,
+			"facing": 1,
+			"muzzle": [
+				509.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true
+		},
+		{
+			"angle": 45,
+			"facing": 1,
+			"muzzle": [
+				509.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true
+		},
+		{
+			"angle": 90,
+			"facing": 1,
+			"muzzle": [
+				509.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true
+		},
+		{
+			"angle": 10,
+			"facing": -1,
+			"muzzle": [
+				491.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true
+		},
+		{
+			"angle": 45,
+			"facing": -1,
+			"muzzle": [
+				491.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true
+		},
+		{
+			"angle": 90,
+			"facing": -1,
+			"muzzle": [
+				491.0,
+				562.0
+			],
+			"pause_frames_identical": 30,
+			"resumed": true
+		}
+	],
+	"clock_hz": 60,
+	"flat_fixture": true,
+	"frames": 540,
+	"size": [
+		1920,
+		1080
+	]
+}
