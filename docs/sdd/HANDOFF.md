@@ -1,5 +1,16 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Apresentação do repositório GitHub — 28/10/2026
+
+Revisão solicitada pelo usuário e realizada pela interface do GitHub: descrição
+e dez tópicos salvos; README corrigido para distinguir código público de builds
+locais, atualizar Grub/Boomer e vincular validações por mudança. Acrescentados
+requisitos, clone, orientações de issues/PRs e referências/atribuições.
+Validação: prévia renderizada e conteúdo salvo conferidos no navegador.
+Sem alteração de comportamento, execução do harness, versão ou exportação.
+Servidor, multiplayer e demais plataformas continuam no roadmap.
+
+
 ## Boomer — consumidores intermediários e inteiros protegidos
 
 REA/Ghidra mostraram que 0x40a380 renova a chave com 16 `_rand` quando
