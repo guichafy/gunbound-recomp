@@ -58,7 +58,7 @@ Confiança: **E** = observado ao executar a rotina do PE no emulador; **D** = de
 | 2 | Emissão T2 | idem evento 6, quadro 2; ramo `θ>90` por `0x40b2d0(θ,90)` | **4** corpos no mesmo quadro: θ +1/0/−1/−2 (HUD; espelhado à esquerda), força nativa +5/0/−5/−10, sem clamp | E | Comprovado | idem; 8 colchetes `0x472367…0x473021` = 2 ramos × 4, só um ramo roda por disparo | índice Dual (0/8) não usado pelo Godot |
 | 3 | Emissão SS | `0x471fd0` evento 10 → spawner `0x42de70` | 1 corpo, θ+2, força P | E | Comprovado | idem | idem |
 | 4 | Velocidade de lançamento | spawner `0x42bbb0`: `((int(sen[(θ+90)%360]·P))<<8)/10`, `y=−…` | = `Physics.launch_velocity_fp` | E | Comprovado | cells reais `(5401,−5606)` para θ46/P305 | — |
-| 5 | Varredura T2 | `Simulate 0x49e650` | passo 8 no eixo dominante, 1ª amostra a +1, `n+8` amostras, refino de 1 px (`0x458920` x-maior / `0x458a00` y-maior) em `[n−8,n)`, terreno antes de mobile, mobile = `0x450e10→0x45d640` (AABB inclusivo), fora do mapa vira contato no limite (x∈[0,W−1], y∈[−0x113,H−1]) | E | Comprovado | `grub_flight_native.json`: 160 voos reais, 7.7k ticks | objetos especiais `0x4510f0/0x451030/0x4511b0` retornam 0 (inexistentes no treino) |
+| 5 | Varredura T2 | `Simulate 0x49e650` | passo 8 no eixo dominante, 1ª amostra a +1, `n+8` amostras, refino de 1 px (`0x458920` x-maior / `0x458a00` y-maior) em `[n−8,n)`, clima antes do terreno, terreno antes de mobile, mobile = `0x450e10→0x45d640` (AABB inclusivo), fora do mapa vira contato no limite (x∈[0,W−1], y∈[−0x113,H−1]) | E | Comprovado | `grub_flight_native.json`: 160 voos reais, 7.7k ticks | as fixtures rodaram sem colunas: `0x4510f0/0x451030/0x4511b0` são os amostradores de clima (linha 22), não objetos inexistentes |
 | 6 | Varredura SS | `Simulate 0x4857f0` | igual, **sem** `0x450e10`: atravessa mobiles | E | Comprovado | idem (80 voos SS) | — |
 | 7 | Máquina do tick | `0x49fd40` (T2) / `0x486ea0` (SS) | `x+=vx; y+=vy` → varredura → se contato **ou** `ctr==limite`: se `ctr≥limite` (ou mobile, T2) **detona**, senão **ricocheteia**; sem contato: sincroniza pixel; `v+=a` (exceto detonação); fora do mapa `x<0∨x>W∨y>H∨y<−1000` remove sem explosão | E | Comprovado | idem; contador −1 até o 1º ricochete, +1 por quadro (`Animate`); limite **44** (T2, literal `0x2c`) e **40** (SS, `2×[0xe55ab8]`) | `ctr==limite` sem contato detona na última posição sincronizada (observado) |
 | 8 | Ricochete: encaixe | `0x49fd40` `0x49fe42…0x4a0259` | pixel de contato puxado até a face livre com `0x4e43d0/0x4e4410` (x±8) e `0x4e4340/0x4e4390` (y±8); `x_fp=x<<8`, `y_fp=y<<8` | E | Comprovado | idem | varredores sem limite inferior/superior reproduzem a leitura além da linha |
@@ -73,11 +73,11 @@ Confiança: **E** = observado ao executar a rotina do PE no emulador; **D** = de
 | 17 | Biônico (regen 10 / proteção 70 / Energy Up +3 %) | atalho `_body`; `item_effects.gd:17` | **a linha type 12 não contém 10 nem 70** (o `10` de `[29]` é o fator de tempo) e `CreateMobile 0x41c360` só copia `[21..43]`; os consumidores localizados são o de atraso `0x45d150` (`[33]→+0x989c`, ramo `+0x8bb4==1`) e `0x45d360`/`0x458b80` (`[33]/[34]`), nenhum cura | D | **Removido só do Grub** (decisão do usuário): `hp_regen 0`, `protection 35`, sem bônus de Energy Up | `test_grub_model` (Grub sem o par; Trico/Boomer/Ice/Turtle intactos); Ghidra execução 6 (`grub-evidence-6-fields`, `ok=true`) | O **35** é o padrão dos não-biônicos, não vem do PE (adaptação). Pergunta: o cliente cura o Grub por turno? Próximo experimento: rastrear escritas de HP em `BeginTurn` e o consumidor de `+0x9ac0` |
 | 18 | Caixa/apoio | `AdukaCombat.catalog.bodies[13]` (28×24, origem y 21, flags 2) | já extraído do mesmo PE | D | Derivado | `test_aduka_native` | `Vector2(40,34)` do catálogo (hit-box de movimento) segue adaptado |
 | 19 | Casco, poses, projéteis, impactos | `graphics.xfs`: `tank13.img/.epa/l`, `bullet13n/nl/s/sl/p`, `flame131/132/133`, `ssflame13` | quadros idênticos pixel a pixel, pivôs do piloto, EPA `fire1/fire2/sfire` (20 ticks), 1º spawn no tick 2 | E | Comprovado | `tests/test_grub_assets.py` (5 testes) | camadas/ordem: as do rig comum |
-| 19b | Luz do casco e dos tiros | `graphics.xfs`: `tank13l.img` (362 quadros), `bullet13nl/sl.img` | pixels idênticos ao XFS (`CharacterSpritesheetLight.png`, `Bullet1/2Light.png`); desenho **aditivo** sobre o corpo (como Aduka/Lightning) | E / D | Comprovado (pixels) / Adaptação (mistura aditiva por precedência, não lida no PE) | `test_grub_assets.py::test_hull_light_pixels_and_registration`, `test_grub_model::test_light_layers`, GPU `docs/grub` | luz do casco desenhada acima do piloto |
+| 19b | Luz do casco e dos tiros | `graphics.xfs`: `tank13l.img` (362 quadros), `bullet13nl/sl.img` | pixels idênticos ao XFS (`CharacterSpritesheetLight.png`, `Bullet1/2Light.png`); desenho **aditivo** sobre o corpo (como Aduka/Lightning) | E / D | Comprovado (pixels) / Adaptação (mistura aditiva por precedência, não lida no PE) | `test_grub_assets.py::test_hull_light_pixels_and_registration`, `test_grub_model::test_light_layers`, GPU `docs/grub` | luz do casco desenhada acima do piloto; o passe vale só para a view que o abriu no quadro (batalha ou figuras da sala/loading) |
 | 20 | Sons | tabelas do PE por type (índice 12): `0x56d1d0/0x56d210/0x56d250` → `131fire.xes`; `0x56d290/0x56d2d0` → `132blast.xes`; `0x56d310` → `11blast.xes` | S1/S2/SS atiram `131fire`; S1/S2 explodem `132blast`; SS explode `11blast` (som do Armor: **registrado, não trocado**) | E | Comprovado | `test_grub_assets.py` lê as tabelas no PE e os hashes em `assets/xfs/audio/catalog.json` | escuta humana não feita |
 | 20b | Miras | `graphics.xfs` não tem entrada de mira (nenhum nome com `cross`; nada de `tank13` além de casco/luz/EPA) | `CrosshairGrub*` herdados **permanecem** (o cliente não traz a peça) | D | Mantido | TOC conferido na `test_grub_assets.py` | — |
 | 21 | Rastro e espelho | slot 3 de ambas as vtables (`0x458690` T2, `0x488880` SS) | publicam x, y, rumo e o sinalizador `rumo>90 ∧ rumo<270`; **sem rastro** (ADR-120; o de 8 níveis foi retirado após relato de blur) e **espelho vertical só no SS** | D | Comprovado (publicação) / Adaptação (consumidor) | `test_raon_trail`, `test_grub_model` | ADR-120 continua para os outros mobiles; consumidor do espelho no T2 não provado (espelho não aplicado) |
-| 22 | Tornado e clima | `apply_weather_contact/tornado_step` | Grub T2/SS **ignoram** o ramo de coluna do passo comum | I | **Adaptação** | — | a mínima \|vx\| 200 do cliente só existe com o objeto especial (`[0xf48]`) |
+| 22 | Clima no S2/SS (força, tornado, eletricidade) | varreduras `0x49e650`/`0x4857f0`: a cada amostra grossa, **antes** do terreno, `0x4510f0` (força: uma vez por varredura, +8, clamp 20..100), `0x451030` (tornado → `+0xf48`, só se a flag `+0xf4c` estiver livre, `0x406860`) e `0x4511b0` (eletricidade, só se `+0x3918` estiver livre, `0x4065a0`); tick `0x49fd40`/`0x486ea0`: com `+0xf48` o `v+=a` é trocado pelo ramo do tornado (\|vx\| ≥ 200 com o sinal de vx, borda estrita centro±largura/4, `NEG vx` até 3 voltas, depois solta) | mesmos amostradores de `AdukaWeather.sample/finish`; `grub_flight.gd` recebe o `Callable` de clima e chama `finish` no lugar da aceleração | D | **Comprovado (estática)** — corrige a leitura anterior de "objetos inexistentes" | `test_grub_model.test_weather_columns`: S2 e SS × eletricidade/tornado/força (amostra, raio elétrico na explosão, \|vx\| 200 sem gravidade, força 20..100) e previsão = execução com coluna; os 12 checks falham sem a ligação | emulador não exercitou colunas; Weakness/Mirror/Random não são amostrados por essas varreduras (como no Mage); T1 segue o contato comum |
 | 23 | Itens, Dual, Thor | — | mesmas regras do passo comum | I | Adaptação | — | Dual duplica o disparo, não o índice 0/8 |
 
 ## Descobertas que corrigem leituras anteriores
@@ -87,6 +87,19 @@ Confiança: **E** = observado ao executar a rotina do PE no emulador; **D** = de
 - O SS **não** é um tiro sem dano ao cruzar mobiles: `Animate` aplica `0x450eb0` a cada quadro.
 - A energia do ricochete não é fração da velocidade: é a constante `[69]/[82]` do próprio mobile.
 - `0x450e10` é o teste de mobile (e joias); o T2 o chama, o SS não.
+
+## Correção 28/10/2026 (relato do usuário na `main`)
+
+Relato: tiros do Grub não interagem com eletricidade/tornado e a imagem do Grub na sala fica errada,
+piorando depois do Start. Causas: (1) `advance_grub` não chamava nenhum clima; as varreduras nativas
+chamam os amostradores da linha 22. (2) `GrubSprite.hull_active` era um flag global: no loading
+seguinte a uma partida o `Game._draw` ainda desenha o mundo anterior e liga o flag, e as figuras da
+sala desenhavam a luz `tank13l` num canvas aditivo que ninguém limpava, somando uma camada por
+redesenho (estouro amarelo). Antes da partida a sala mostrava o casco sem a luz (áreas translúcidas).
+Correção: `hull_view` por view; `draw_room_figures` abre o passe no próprio canvas a cada redesenho, então
+a sala e o loading mostram o casco com a luz, como na batalha. Prova GPU (sonda local
+`.tools/grub-room/proof.gd`, 1920×1080, `elapsed` fixo): recorte da figura idêntico entre 2 e 40 quadros,
+após a partida e após 40 redesenhos no segundo loading.
 
 ## Perguntas abertas e próximos experimentos
 
@@ -119,7 +132,7 @@ Confiança: **E** = observado ao executar a rotina do PE no emulador; **D** = de
 | Captura GPU `tests/capture_grub.gd` | 270 quadros 1920×1080 a 60 Hz, T1/T2/SS à direita e à esquerda, 89 ricochetes, impactos, pausa 150–179 **idêntica** (comparação byte a byte), 0 erros no log; `docs/grub/time-*.png` e `grub-gpu-1920x1080.mp4` |
 | Reprodutibilidade | os 3 JSONs de fixtures foram regenerados pelo `tests/tools/grub_oracle` com SHA-256 idêntico |
 
-Não exercitados: cliente Windows, escuta dos sons, mouse físico, atributos do dono ≠ 0 no PE, tornado.
+Não exercitados: cliente Windows, escuta dos sons, mouse físico, atributos do dono ≠ 0 no PE, colunas de clima no emulador (o clima do S2/SS vem da estática, linha 22).
 
 ## Aceite
 

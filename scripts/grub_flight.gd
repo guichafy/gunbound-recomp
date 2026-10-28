@@ -8,6 +8,7 @@ extends RefCounted
 
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const Surface = preload("res://scripts/grub_surface.gd")
+const NativeWeather = preload("res://scripts/aduka_weather.gd")
 
 const T2 := 1
 const SS := 2
@@ -34,9 +35,12 @@ static func kind_of(shell: Dictionary) -> int:
 	return {"grub_t2": T2, "grub_ss": SS}.get(str(shell.get("flight", "")), 0)
 
 ## One native tick. `cells` is the 1 px solid mask (w x h). `hit_mobile` is called
-## as hit_mobile.call(x, y) -> bool for T2 only. Returns
+## as hit_mobile.call(x, y) -> bool for T2 only. `weather`, when valid, is called as
+## weather.call(x, y, force_sampled) -> bool on every coarse sample before the terrain
+## test: both sweeps call 0x4510f0 (force), 0x451030 (tornado) and 0x4511b0
+## (electricity) there, the samplers of AdukaWeather.sample. Returns
 ## {"event": "", "explode" or "oob", "position": Vector2i, "mobile": bool, "ricochet": bool}.
-static func tick(shell: Dictionary, cells: PackedByteArray, w: int, h: int, hit_mobile: Callable) -> Dictionary:
+static func tick(shell: Dictionary, cells: PackedByteArray, w: int, h: int, hit_mobile: Callable, weather: Callable = Callable()) -> Dictionary:
 	var kind := int(shell.g_kind)
 	var limit := int(shell.g_limit)
 	var pos: Vector2i = shell.fp_pos
@@ -45,7 +49,7 @@ static func tick(shell: Dictionary, cells: PackedByteArray, w: int, h: int, hit_
 	pos += velocity
 	var terrain_hit := false
 	var mobile_hit := false
-	var contact := _sweep(cells, w, h, Vector2i((pos - velocity).x >> 8, (pos - velocity).y >> 8), Vector2i(pos.x >> 8, pos.y >> 8), hit_mobile, kind == T2)
+	var contact := _sweep(cells, w, h, Vector2i((pos - velocity).x >> 8, (pos - velocity).y >> 8), Vector2i(pos.x >> 8, pos.y >> 8), hit_mobile, kind == T2, weather)
 	if not contact.is_empty():
 		inside = Vector2i(contact.x, contact.y)
 		pos = Vector2i(inside.x << 8, inside.y << 8)
@@ -74,8 +78,15 @@ static func tick(shell: Dictionary, cells: PackedByteArray, w: int, h: int, hit_
 		var speed := int(shell.g_speed)
 		velocity = Vector2i(int(Physics.s(turned + 90) * speed), int(-(Physics.s(turned) * speed)))
 	inside = Vector2i(pos.x >> 8, pos.y >> 8)
-	velocity += Vector2i(shell.fp_acceleration)
 	shell.fp_pos = pos
+	# 0x49fd40 / 0x486ea0: with a tornado object at +0xf48 the |vx| >= 200 clamp and
+	# the border flips replace v += a (the AdukaWeather.finish branch).
+	if not shell.get("tornado", {}).is_empty():
+		shell.fp_velocity = velocity
+		NativeWeather.finish(shell)
+		velocity = shell.fp_velocity
+	else:
+		velocity += Vector2i(shell.fp_acceleration)
 	shell.fp_velocity = velocity
 	shell.g_int = inside
 	shell.g_ctr = counter
@@ -90,7 +101,7 @@ static func finish_frame(shell: Dictionary) -> void:
 ## 0x49e650 / 0x4857f0: sample every 8 px along the dominant axis, refine the last
 ## 8 px one pixel at a time (0x458920 / 0x458a00) and clamp leaving the map to a
 ## contact on the map edge.
-static func _sweep(cells: PackedByteArray, w: int, h: int, previous: Vector2i, current: Vector2i, hit_mobile: Callable, mobiles: bool) -> Dictionary:
+static func _sweep(cells: PackedByteArray, w: int, h: int, previous: Vector2i, current: Vector2i, hit_mobile: Callable, mobiles: bool, weather: Callable = Callable()) -> Dictionary:
 	var dx := absi(previous.x - current.x)
 	var dy := absi(previous.y - current.y)
 	var horizontal := dy + 1 < dx + 1
@@ -114,11 +125,14 @@ static func _sweep(cells: PackedByteArray, w: int, h: int, previous: Vector2i, c
 	var start := major
 	var count := length + SWEEP_STRIDE
 	var distance := 0
+	var force_sampled := false
 	while distance < count:
 		acc += slope * SWEEP_STRIDE
 		var minor := acc >> 16
 		var x := major if horizontal else minor
 		var y := minor if horizontal else major
+		if weather.is_valid():
+			force_sampled = weather.call(x, y, force_sampled)
 		if _solid(cells, w, h, x, y):
 			var fine := _refine(cells, w, h, start, distance, step, slope, acc, horizontal, true, hit_mobile, mobiles)
 			return {"x": fine.x if fine.found else x, "y": fine.y if fine.found else y, "mobile": false}

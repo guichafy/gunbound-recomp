@@ -834,6 +834,11 @@ func draw_room_figures(canvas: Node2D) -> void:
 		player_kind = RoomChoice.RANDOM
 	if screen != "loading" and cpu_random:
 		cpu_kind = RoomChoice.RANDOM
+	# The Grub hull light (tank13l) is part of the mobile, here as in the battle;
+	# opening it on this canvas clears the previous redraw.
+	for sprite in sprites.values():
+		if sprite.has_method("begin_hull_glow"):
+			sprite.begin_hull_glow(canvas)
 	draw_figure(canvas, player_kind, menu.player_anchor, 1, profile.equipped_set())
 	draw_figure(canvas, cpu_kind, menu.cpu_anchor, -1, {})
 
