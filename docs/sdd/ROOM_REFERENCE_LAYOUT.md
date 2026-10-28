@@ -1,5 +1,36 @@
 # Sala conforme referência do usuário — REQ-02/12/19/20/36
 
+## Correção do relevo dos poços — plano (27/10/2026)
+
+Pedido posterior substitui a cobertura azul da ADR-140: no 1×1 ocultar as
+seis faixas A/B, preservando os poços rebaixados do próprio fundo original,
+como na imagem fornecida. Manter apenas dois controles de seleção. Remover
+as coberturas, testar a ausência delas, as faixas e cliques, e conferir a
+captura GPU e o recurso nativo. Sem alterar assets, tamanho ou combate.
+
+Evidência: REA/Hopper, PE x86 SHA-256 `4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde`,
+string VA `0x557088`, referência `0x4d6839` em `0x4d6810`: carrega
+`ready_back.img` com ID 10000 via `0x4f1790`. Evidências REA
+`ev_0e1b7bea7c8cc32cd38994dea15eef05f05f6d7141420f2f3da3decadba30ea3`,
+`ev_83f2a8e5e4ac11dc53b35ec0a0e025165d8e16b793d394b9bd287d02aafdfe3c`
+e `ev_59e213236ec08c704481e7477c4f33716a6cf8af5536c9b8af3a94acb4452837`.
+XFS SHA-256 `a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08`;
+quadro 0 do recurso (entrada `d1042b8a8913a0c5ccbf5dfa7b6b7193116b38abad941c6329e8f230f9c021b9`)
+é pixel idêntico ao `assets/classic/room/back.png`: borda e interior já
+estão desenhados na imagem. Contrato comprovado no arquivo e carregamento;
+visibilidade das faixas é adaptação do treino. Imagem do usuário é referência
+visual, não prova de execução da mesma build. HD continua derivado do ativo.
+
+Resultado: retiradas as coberturas da ADR-140; o próprio `room_back` volta
+a mostrar os seis poços. Teste red anterior: oito falhas por coberturas
+presentes; após correção, seis suítes (`test_room_reference`, `test_room_ui`,
+`test_room_polish`, `test_room_settings`, `test_scene`, `test_match_loading`)
+somaram 685 checks e zero falhas. Cliques nos seis poços não mudam o lado.
+GPU OpenGL/Metal 1920×1080: sala, Random, rolagem e modal; nativo e HD
+mantiveram geometria/hitboxes nas três comparações. Capturas e evidência REA
+em `.tools/room-depth`; inspeção mostra os seis relevos. Sem cliente Windows,
+mouse físico ou aceite visual humano; sem alteração de versão ou app/ZIP.
+
 ## Correção da issue #10 — plano
 
 No treino 1×1, somente TeamA0 e TeamB0 aparecem e recebem os controles

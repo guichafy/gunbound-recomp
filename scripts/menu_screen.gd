@@ -22,7 +22,6 @@ const WEATHER_LABELS := ["Original do mapa", "Todos os efeitos"]
 const PLAYER_SLOT := Rect2(39, 63, 124, 125)
 const CPU_SLOT := Rect2(497, 63, 124, 125)
 const TEAM_CAPACITY := 1
-const ROOM_PANEL_BLUE := Color8(0, 137, 197)
 # Casco nativo no palco (o pai escala 4/3). 52 px mantém o Lightning
 # dentro dos 124 px do lugar. A arena continua no casco de 60.
 const MOBILE_WIDTH := 52.0
@@ -189,15 +188,7 @@ func build_slots(stage: Control) -> void:
 			var bottom := 188 + int(index/2.0)*152
 			var height := 71 if team=="A" else 72
 			var active := slot_visible(index, TEAM_CAPACITY)
-			# O fundo inclui o contorno do poço mesmo sem a faixa de time.
-			var cover := ColorRect.new()
-			cover.name = "EmptyWell%s%d"%[team,index]
-			cover.position = Vector2(x-3,bottom-129)
-			cover.size = Vector2(130,132)
-			cover.color = ROOM_PANEL_BLUE
-			cover.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			cover.visible = not active
-			stage.add_child(cover)
+			# O poço rebaixado pertence ao fundo, inclusive quando a faixa está oculta.
 			var strip := texture_rect(stage,"Team%s%d"%[team,index],room_art.image("room_team_a" if team=="A" else "room_team_b"),Vector2(x-1,bottom+1-height),Vector2(127,height))
 			strip.visible = active
 	# Team strips include opaque blue above the floor; draw the mobile over them.

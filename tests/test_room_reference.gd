@@ -38,13 +38,14 @@ func run() -> void:
 			var cover = scene.root.find_child("EmptyWell%s%d"%[team,index],true,false)
 			check(node!=null and node.texture.resource_path == ROOT+"room/reference/room_team_%s.png"%team.to_lower(),"Team strip retains original art")
 			check(node.visible == (index == 0),"Only occupied 1x1 strip is visible")
-			check(cover != null and cover.visible == (index != 0) and cover.mouse_filter == Control.MOUSE_FILTER_IGNORE,"Unused background well is covered without intercepting input")
+			check(cover == null,"Native recessed background remains visible without a cover")
 	check(panel.slot_visible(1, 2) and not panel.slot_visible(2, 2),"Visibility follows capacity for a future larger room")
 	panel.choose_cpu_side()
 	for team in ["A","B"]:
 		for index in range(1, 4):
-			var cover: ColorRect = scene.root.find_child("EmptyWell%s%d"%[team,index],true,false)
-			click(cover.get_global_rect().get_center())
+			var x := (39 if team == "A" else 497) + (index % 2) * 138
+			var y := 63 + int(index / 2.0) * 152
+			click(panel.stage.get_global_transform_with_canvas() * (Vector2(x,y) + Vector2(62,62)))
 			check(panel.mobile_for == "cpu", "Click on unused well does not select a side")
 	panel.choose_player_side()
 	check(panel.player_name.position.y==172 and panel.player_anchor.y+panel.NATIVE_GROUND==155,"Nameplate remains below the native room composition point")

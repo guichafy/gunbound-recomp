@@ -1,5 +1,16 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Relevo dos poços da sala — ADR-141, 27/10/2026
+
+Pedido posterior restaura os seis poços rebaixados visíveis no `room_back`;
+as seis faixas A/B vazias continuam ocultas e sem controles. Substitui a
+cobertura da ADR-140. REA/Hopper confirmou carregamento `ready_back.img`,
+e quadro 0 do XFS é pixel idêntico ao PNG nativo; detalhes e evidências em
+`ROOM_REFERENCE_LAYOUT.md` e `.tools/room-depth`. Seis suítes dirigidas:
+685 checks/0; captura GPU 1920×1080, nativo/HD com geometria igual. Cliente
+Windows, mouse físico e aceite visual não exercitados. Sem novo app/ZIP,
+versão, commit ou push; harness completo não repetido para esta apresentação.
+
 ## Issue #10 — sala 1×1, 27/10/2026
 
 REQ-02/ADR-140: somente TeamA0 e TeamB0 aparecem no 1×1. Os seis poços

@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Relevo dos poços da sala — ADR-141
+
+- [x] Investigar `ready_back.img` no PE com REA e comparar o quadro XFS.
+- [x] Exibir o relevo nativo e manter as seis faixas vazias ocultas.
+- [x] Testar sala, cliques, cena e loading: 685 checks, zero falhas.
+- [x] Inspecionar captura GPU 1920×1080; nativo e HD com mesma geometria.
+- [ ] Aceite visual do usuário e mouse físico.
+
 ## Issue #10 — sala 1×1
 
 - [x] Ocultar seis faixas e poços de fundo conforme capacidade por time.

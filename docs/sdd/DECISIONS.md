@@ -1803,3 +1803,13 @@ poços; não há seletor de capacidade ou novos modos. O próprio `room_back`
 contém os seis poços excedentes: coberturas na cor do painel os ocultam,
 sem interceptar input ou alterar o asset. Isso substitui as oito faixas da
 ADR-105 para 1×1; grade, Random, itens e fluxo permanecem.
+
+## ADR-141 — restaurar o relevo dos poços vazios
+
+27/10/2026, REQ-02. A imagem de referência e o pedido posterior substituem
+a cobertura azul da ADR-140. O quadro 0 de `ready_back.img` já contém os
+poços rebaixados; a sala deve deixá-los visíveis, escondendo somente as seis
+faixas A/B excedentes. O fundo nativo e seu derivado 4× são preservados.
+REA e comparação do quadro XFS estão em `ROOM_REFERENCE_LAYOUT.md`; o
+carregamento está comprovado por análise estática, não por execução do
+cliente Windows. Capacidade 1×1 e controles existentes permanecem.
