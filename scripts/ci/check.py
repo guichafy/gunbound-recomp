@@ -93,6 +93,8 @@ def main():
             print(('OK' if results[name]['ok'] else 'FAIL'), name, results[name]['checks'], flush=True)
         if not args.suites:
             results['python'] = run_logged([sys.executable, '-m', 'coverage', 'run', '--branch', '--source=scripts', str(Path(__file__).resolve()), '--python-tests'], logs / 'python.log', 900, env=env)
+            if not results['python']['ok']:
+                print((logs / 'python.log').read_text(encoding='utf-8', errors='replace')[-12000:], flush=True)
             for mode, path in [('xml', '.tools/coverage.xml'), ('html', '.tools/coverage-html')]:
                 subprocess.run([sys.executable, '-m', 'coverage', mode, '-o' if mode == 'xml' else '-d', path], cwd=ROOT, check=True)
             coverage = subprocess.run([sys.executable, '-m', 'coverage', 'report', '--include=scripts/ci/*', '--fail-under=40'], cwd=ROOT, check=False)

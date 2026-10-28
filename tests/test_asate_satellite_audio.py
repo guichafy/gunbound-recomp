@@ -6,6 +6,7 @@ import struct
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import wave
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,7 +49,14 @@ class SatelliteAudio(unittest.TestCase):
     @unittest.skipUnless(ARCHIVE.exists(), "local original sound.xfs required")
     def test_import_is_reproducible(self):
         with tempfile.TemporaryDirectory() as folder:
-            importer.extract(ARCHIVE, folder)
+            # Exercise Windows text-mode newline translation on every OS.
+            def windows_write_text(path, text, *args, **kwargs):
+                separator = kwargs.get("newline")
+                separator = "\r\n" if separator is None else separator
+                rendered = text.replace("\n", separator) if separator else text
+                return path.write_bytes(rendered.encode(kwargs.get("encoding") or "utf-8"))
+            with patch.object(Path, "write_text", windows_write_text):
+                importer.extract(ARCHIVE, folder)
             for name in ("Satellite1.wav", "Satellite2.wav", "satellite_audio.json"):
                 self.assertEqual((Path(folder) / name).read_bytes(), (OUTPUT / name).read_bytes())
 

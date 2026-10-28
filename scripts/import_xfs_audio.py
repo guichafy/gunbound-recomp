@@ -88,13 +88,13 @@ def extract(source=DEFAULT_SOURCE, output=OUTPUT):
                     settings += "\ncompress/mode=0\n"
             else:
                 settings = '[remap]\nimporter="wav"\ntype="AudioStreamWAV"\n\n[params]\ncompress/mode=0\n'
-            sidecar.write_text(settings)
+            sidecar.write_bytes(settings.encode("utf-8"))
     catalog = {"schema": 1, "source": "jglim/gunbound-launcher/TestClient/sound.xfs",
         "source_commit": "2bc43c490ba727d6fce1a5b47ed9dc577d0f9cc1", "source_sha256": archive_sha,
         "records": records,
         "battle_playlist": ["stage%d.mp3" % n for n in range(1, 7)],
         "scheduling": "adaptation: random stage1..6 on battle start and each finished track; sudden is not scheduled"}
-    (output / "catalog.json").write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n")
+    (output / "catalog.json").write_bytes((json.dumps(catalog, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
     return catalog
 
 

@@ -1,5 +1,18 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Validação hospedada do PR11 — JSON canônico no Windows (28/10/2026)
+
+Execução Actions40738742117, revisão daec5b63: macOS aprovou testes, cobertura,
+exportação universal, smoke do ZIP e upload. Windows aprovou as100suítes Godot,
+45.935checks e29partidas, mas dois dos139testes Python falharam: catálogos
+regenerados pelos importadores ASate/áudio tinham CRLF em vez do LF versionado.
+A gravação dos JSONs e sidecars de áudio agora usa bytes UTF-8/LF; WAV/MP3,
+regras e assets versionados preservados. Os testes de reprodução simulam a
+conversão de newline Windows em qualquer SO; ambos falharam antes e passaram
+com a correção. Workflow antecipa esses dois checks e mostra log Python em
+caso de falha. O resultado da nova revisão deve ser conferido nos checks do PR;
+não confundir o sucesso macOS da revisão anterior com validação da nova.
+
 ## CI/CD desktop implementado — REQ-52 / ADR-151 (28/10/2026)
 
 O pedido posterior corrige a entrega documental e autoriza implementar a pipeline

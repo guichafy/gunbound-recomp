@@ -124,6 +124,13 @@ jobs:
       - run: python -m pip install -r .github/requirements-ci.txt
       - name: Install verified editor, templates and original test inputs
         run: python scripts/ci/bootstrap.py --no-legacy-sound
+      - name: Fast cross-platform audio reproducibility checks
+        env:
+          PYTHONPATH: tests
+        run: >-
+          python -m unittest -v
+          test_asate_satellite_audio.SatelliteAudio.test_import_is_reproducible
+          test_client_audio_source.ClientAudio.test_reproducible_and_wrong_source_rejected_before_write
       - name: Apply the same version to both packages
         env:
           RELEASE_VERSION: ${{ needs.version.outputs.version }}

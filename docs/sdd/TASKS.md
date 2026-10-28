@@ -8,6 +8,7 @@
 - [x] Preset/exportador Windows x86_64; ZIPs, avisos legais, manifestos e checksums; smoke nativo com perfil isolado.
 - [x] Publicação por draft e tag-reserva, retry idempotente e validação de SHA/arquivos.
 - [x] Smoke real macOS universal: lobby/sala/loja, perfil temporário, codesign e arquitetura.
+- [x] Diagnosticar falha Windows hospedada e fixar JSON/sidecars UTF-8/LF, com regressão que reproduz CRLF também no macOS/Linux.
 - [ ] Observar os dois jobs hospedados, em especial execução Windows; não alegar validação nativa Windows local.
 - [ ] Cobertura de linhas GDScript: sem instrumentação nesta entrega; relatório Python não mede o jogo.
 
