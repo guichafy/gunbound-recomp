@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Issue #10 — sala 1×1
+
+- [x] Ocultar seis faixas e poços de fundo conforme capacidade por time.
+- [x] Verificar cliques nas áreas vazias, seleção e Random na suíte de sala.
+- [x] Capturar sala GPU em 1920×1080 com arte nativa e suavizada.
+- [x] Harness completo: 28.373 checks Godot, 29 partidas e suítes Python,
+  zero falhas; parse aprovado.
+- [ ] Aceite visual do usuário; mouse físico não exercitado.
+
+Detalhes em `ROOM_REFERENCE_LAYOUT.md` e ADR-140. Sem nova versão ou exportação.
+
 ## Posição dos nomes e commit local da pré-partida — 27/10/2026
 
 - [x] Esclarecer escopo: somente os nomes na prévia inferior, sem miniaturas de mobiles.

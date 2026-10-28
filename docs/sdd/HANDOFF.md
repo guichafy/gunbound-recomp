@@ -1,5 +1,17 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Issue #10 — sala 1×1, 27/10/2026
+
+REQ-02/ADR-140: somente TeamA0 e TeamB0 aparecem no 1×1. Os seis poços
+desenhados pelo próprio `room_back` são cobertos pelo azul do painel; faixas
+e coberturas seguem capacidade por time, sem novo modo. Coberturas ignoram
+mouse. `test_room_reference` 232/0, incluindo cliques nos poços, Random e
+capacidade maior; GPU 1920×1080 em `.tools/issue-10`, nativo e HD com
+geometria/hitboxes iguais. Sem mouse físico ou aceite visual humano. Não
+alterados versão, app/ZIP ou assets. Registro `ROOM_REFERENCE_LAYOUT.md`.
+Harness completo `./scripts/check.sh`: 28.373 checks Godot, 29 partidas e
+suítes Python, zero falhas, parse aprovado e exit 0.
+
 ## Versionamento da pré-partida e posição dos nomes — 27/10/2026
 
 Pedido atual autoriza o commit local das correções anteriores e esclarece:

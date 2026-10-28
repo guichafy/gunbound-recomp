@@ -1794,3 +1794,12 @@ a adaptação anterior do deslocamento para o banco de neve. Imagem/máscara do
 painel aprovado, fonte, cor e indicadores existentes permanecem; não adicionar
 miniaturas de mobile. Menu clássico e regras preservados; commit autorizado,
 sem exportação ou push.
+
+## ADR-140 — posições da sala conforme capacidade
+
+27/10/2026, issue #10, REQ-02. A sala 1×1 mostra apenas TeamA0 e
+TeamB0. A capacidade por time determina a visibilidade das faixas e dos
+poços; não há seletor de capacidade ou novos modos. O próprio `room_back`
+contém os seis poços excedentes: coberturas na cor do painel os ocultam,
+sem interceptar input ou alterar o asset. Isso substitui as oito faixas da
+ADR-105 para 1×1; grade, Random, itens e fluxo permanecem.

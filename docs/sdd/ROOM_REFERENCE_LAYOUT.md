@@ -1,5 +1,26 @@
 # Sala conforme referência do usuário — REQ-02/12/19/20/36
 
+## Correção da issue #10 — plano
+
+No treino 1×1, somente TeamA0 e TeamB0 aparecem e recebem os controles
+existentes. A capacidade por time determina a visibilidade dos demais; não
+há seletor de tamanho novo. O fundo também desenha os poços: cobrir os seis
+excedentes com o azul do painel, sem alterar o asset. Testar visibilidade,
+ausência de captura de clique e capacidade maior, além das regressões de
+sala, loading e cena. A parte das oito faixas da ADR-105 fica substituída
+para 1×1; grade, Random, itens e fluxo continuam vigentes.
+
+Implementação: `TEAM_CAPACITY` é 1 por time; faixas excedentes ficam
+invisíveis e retângulos sem captura de mouse cobrem os poços do fundo com
+RGB (0,137,197), amostrado no painel nativo e no suavizado. Os assets não
+foram alterados. `test_room_reference`: 232 checks, zero falhas, incluindo
+cliques nas seis áreas e regra de capacidade 2. Captura GPU 1920×1080 em
+`.tools/issue-10`: sala, Random, rolagem e modal; comparação nativo/HD
+mantém geometria e hitboxes. Não é aceite visual humano nem teste de mouse
+físico. A versão e o aplicativo exportado não mudaram.
+Harness completo: 28.373 checks Godot, 29 partidas e suítes Python, sem
+falhas, parse aprovado e exit 0.
+
 Pedido25/10/2026 substitui a grade8×2 e catálogo em abas dasADR096/104.
 A foto do usuário define composição, não dados de rede/regras novas.
 

@@ -35,7 +35,18 @@ func run() -> void:
 	for team in ["A","B"]:
 		for index in 4:
 			var node = scene.root.find_child("Team%s%d"%[team,index],true,false)
-			check(node!=null and node.texture.resource_path == ROOT+"room/reference/room_team_%s.png"%team.to_lower(),"All eight slots carry original team identification")
+			var cover = scene.root.find_child("EmptyWell%s%d"%[team,index],true,false)
+			check(node!=null and node.texture.resource_path == ROOT+"room/reference/room_team_%s.png"%team.to_lower(),"Team strip retains original art")
+			check(node.visible == (index == 0),"Only occupied 1x1 strip is visible")
+			check(cover != null and cover.visible == (index != 0) and cover.mouse_filter == Control.MOUSE_FILTER_IGNORE,"Unused background well is covered without intercepting input")
+	check(panel.slot_visible(1, 2) and not panel.slot_visible(2, 2),"Visibility follows capacity for a future larger room")
+	panel.choose_cpu_side()
+	for team in ["A","B"]:
+		for index in range(1, 4):
+			var cover: ColorRect = scene.root.find_child("EmptyWell%s%d"%[team,index],true,false)
+			click(cover.get_global_rect().get_center())
+			check(panel.mobile_for == "cpu", "Click on unused well does not select a side")
+	panel.choose_player_side()
 	check(panel.player_name.position.y==172 and panel.player_anchor.y+panel.NATIVE_GROUND==155,"Nameplate remains below the native room composition point")
 	await process_frame
 	check(panel.item_catalog.get_v_scroll_bar().max_value>panel.item_catalog.get_v_scroll_bar().page,"Unified catalog contains scrollable overflow")

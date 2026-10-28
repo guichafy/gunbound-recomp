@@ -331,7 +331,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | ID | Requisito vigente | Documento | Estado |
 |---|---|---|---|
 | REQ-01 | Engine multiplataforma; entrega executável no Mac | este arquivo, `build_macos.py` | macOS entregue; Windows/Linux/Android/iOS não testados |
-| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente; lobby clássico e sala pelo Create (ADR-096); 16 mobiles (REQ-45) |
+| REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente; sala exibe uma posição por time e oculta os demais poços conforme capacidade (issue #10); 16 mobiles (REQ-45) |
 | REQ-03 | Mira, força e movimento; teclado e extras na tela | HUD_0_10, AIMING_0_12 | Vigente; console original substituído por REQ-27..30 |
 | REQ-04 | Balística, colisão e crateras | CLASSIC_BALLISTICS_0_20, BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY | Física comum 20 Hz/24.8 e onda Turtle T2 implementadas; colisão/dano continuam adaptações declaradas |
 | REQ-05 | Vida, dano, queda e resultado | MOBILE_PARITY, BATTLE_RULES_AUDIT, BATTLE_FIDELITY_0_20 | Vigente; autoria/Gold de minas corrigidos; deriva na queda ADR-077 |
