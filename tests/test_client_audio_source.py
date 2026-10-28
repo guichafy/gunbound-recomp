@@ -6,6 +6,7 @@ import struct
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import wave
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -72,10 +73,19 @@ class ClientAudio(unittest.TestCase):
     def test_reproducible_and_wrong_source_rejected_before_write(self):
         with tempfile.TemporaryDirectory() as tmp:
             destination = Path(tmp) / 'extracted'
-            importer.extract(importer.DEFAULT_SOURCE, destination)
+            # Exercise Windows text-mode newline translation on every OS.
+            def windows_write_text(path, text, *args, **kwargs):
+                separator = kwargs.get("newline")
+                separator = "\r\n" if separator is None else separator
+                rendered = text.replace("\n", separator) if separator else text
+                return path.write_bytes(rendered.encode(kwargs.get("encoding") or "utf-8"))
+            with patch.object(Path, "write_text", windows_write_text):
+                importer.extract(importer.DEFAULT_SOURCE, destination)
             for record in CATALOG['records']:
                 self.assertEqual((destination / record['file']).read_bytes(), (OUTPUT / record['file']).read_bytes())
             self.assertEqual((destination / 'catalog.json').read_bytes(), (OUTPUT / 'catalog.json').read_bytes())
+            for sidecar in destination.glob('*.import'):
+                self.assertNotIn(b'\r\n', sidecar.read_bytes())
             wrong = Path(tmp) / 'wrong.xfs'
             wrong.write_bytes(b'wrong')
             with self.assertRaisesRegex(ValueError, 'unexpected sound.xfs hash'):

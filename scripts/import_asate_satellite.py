@@ -78,7 +78,7 @@ def extract(archive, output):
                 "consumer_va": "0x00480310", "play_helper_va": "0x004ee9b0",
                 "conversion": "XES WAVEFORMAT16 header removed; PCM bytes copied unchanged into WAV",
                 "records": records}
-    (output / "satellite_audio.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    (output / "satellite_audio.json").write_bytes((json.dumps(manifest, indent=2) + "\n").encode("utf-8"))
     return manifest
 
 
