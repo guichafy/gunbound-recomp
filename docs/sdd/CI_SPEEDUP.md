@@ -88,3 +88,11 @@ do pool, com o mesmo perfil e o mesmo limite (nenhum teste afrouxado).
 `test_ci_runner` cobre a ordem (faixa → pool → isolada) e falhou antes da
 mudança. Local: automação 13/0, Ruff aprovado, runner real com
 test_hud/test_grub_model/test_performance exit 0.
+
+Run 40794159479 (com a correção acima): Windows aprovado; macOS falhou só em
+`test_client_audio`, com 223/0 checks mas `ERROR: 4 resources still in use at
+exit`. O teste esperava 0,1 s fixo para o servidor de áudio liberar os
+playbacks parados no `_exit_tree`; no runner carregado não bastou. Removendo
+as esperas, a mesma assinatura (8–10 objetos, 3–5 recursos) aparece local.
+Agora a suíte guarda `weakref` dos playbacks e espera até todos sumirem (prazo
+5 s), com um check novo (224/0); sem vazamento local mesmo sem a espera final.
