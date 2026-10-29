@@ -1,5 +1,30 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Desempenho CI do PR20 — 28/10/2026
+
+REQ-52/emenda ADR-151, branch fix/grub-weather-room. Runner usa pool limitado
+por núcleos (máximo4 padrão), Python/cobertura paralelos e grupos determinísticos
+das13+16 partidas. Faixa de parse/cenas segue sequencial; perfis/logs isolados,
+inventário exato por grupo e falhas/exceções propagadas. report.json inclui
+tempos/partidas; python-times.json e top15 no Actions. Instrumentação completa
+Python e gate40% intactos. Jobs PR substituem os antigos por etapa/plataforma
+quando a etapa nova é alcançada; main conserva fila max literal sem cancelamento.
+Quatro nomes protegidos e gates de pacote/publicação preservados.
+
+Final local:327 parses,101 suítes Godot/46.116 checks,29partidas e151 testes
+Python/zero skips, zero falhas/exit0 em270,535s; cobertura CI62%. Ruff/actionlint
+e diff--check aprovados. TDD de partição/concorrência/inventário/tempos e integração
+com subprocessos/coverage reais; revisão independente tratou queue expressão
+(GitHub exige literal), sem outros achados. Log `.tools/ci-speed-final.log`.
+Comparação adicional sem argumentos de partição:29/29 linhas idênticas aos
+grupos, incluindo abertura/disparos/vencedor/HP, zero falhas. Evidência
+`.tools/ci-speed-match-parity.json`. Medida hospedada ainda pendente.
+Python local3.12 versus3.13 nos runners. Importação dentro do sandbox bloqueada
+nos certificados macOS; fora passou. Override TLS preexistente fica local e
+excluído de export. project.godot já modificado pelo editor permanece fora do
+commit. Sem mudança de jogo/versão; aplicativo local não reexportado.
+Plano, resultados e limites: CI_SPEEDUP.md.
+
 ## Grub: clima no S2/SS e luz do casco na sala — 28/10/2026
 
 Relato do usuário na `main`: tiros do Grub não interagiam com eletricidade/tornado e a imagem do

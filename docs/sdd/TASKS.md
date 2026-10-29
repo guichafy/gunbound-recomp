@@ -1,5 +1,19 @@
 # Entregas e próximos trabalhos
 
+## Desempenho CI no PR20 — REQ-52 / emenda ADR-151 (28/10/2026)
+
+- [x] Grupos determinísticos das13+16 partidas, com inventário exato e modo sem filtros preservado.
+- [x] Pool limitado: Python/cobertura paralelos ao Godot, cenas sequenciais, perfis/logs isolados.
+- [x] Tempos por comando e teste Python, cobertura nova por execução e mesmos gates/relatórios.
+- [x] Main mantém fila max literal; jobs PR correspondentes substituídos por etapa/plataforma.
+- [x] TDD de partição/runner/workflow e integração real com engine substituída; revisão independente tratada.
+- [x] Harness final:327 parses,101 suítes/46.116 checks/29partidas/151Python, zero falhas; cobertura62%.
+- [x] Execução sem grupos:29/29 linhas de resultado idênticas (abertura/disparos/vencedor/HP), zero falhas.
+- [ ] Medir tempo hospedado da nova execução em macOS/Windows.
+- [ ] Atualizar a branch do PR20 e conferir checks nativos; sem merge/release nesta tarefa.
+
+Plano/evidência: CI_SPEEDUP.md. Nomes dos quatro checks protegidos preservados.
+
 ## Proteção main e anexos públicos — REQ-52 / emenda ADR-151 (28/10/2026)
 
 - [x] Nova branch da main atualizada por pull --ff-only.

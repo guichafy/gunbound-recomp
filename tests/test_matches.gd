@@ -2,6 +2,7 @@ extends SceneTree
 
 const Match = preload("res://scripts/match.gd")
 const Maps = preload("res://scripts/maps.gd")
+const Partition = preload("res://tests/support/match_partition.gd")
 var failures := 0
 
 func _initialize() -> void:
@@ -10,6 +11,11 @@ func _initialize() -> void:
 	# rules on purpose (C# ballistics, time-spent delay, drawn opening), so the
 	# reference results in HANDOFF.md were recorded again.
 	var seeds := [81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93]
+	seeds = Partition.select(seeds, OS.get_cmdline_user_args())
+	if seeds.is_empty():
+		printerr("FAIL: invalid match partition")
+		quit(1)
+		return
 	for seed_value in seeds:
 		var model = Match.new()
 		model.start(3 if seed_value > 90 else (1 if seed_value % 2 else 2), seed_value % 3, seed_value, Maps.DEFAULT, "original", null, [], [], [], Match.RANDOM_OPENING)
