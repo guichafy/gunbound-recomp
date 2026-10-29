@@ -66,12 +66,12 @@ Confiança: **E** = observado ao executar a rotina do PE no emulador; **D** = de
 | 10 | Ricochete: reflexão | `0x49fd40` `0x4a02b7…0x4a03e0` | `0x40a500` (**NEG**) inverte `vx` e `vy`; `H` = rumo quantizado (`0x4585e0`) da velocidade invertida; superfície achada → soma 90 à célula `0x3fa4` e `H'=2·(S+90)−H`; as 4 varreduras bloqueadas → `H'=H` (**volta**, pois `H` já é o rumo invertido); módulo **constante** `[69]=1800` (T2) / `[82]=1600` (SS) em 24.8; `vx=trunc(sen(H'+90)·m)`, `vy=trunc(−sen(H')·m)` | E | Comprovado | idem. Equivale a `2S−H_antes` e `H_antes+180` (o que a 1ª leitura sem o `NEG` parecia contradizer); estática e execução concordam | — |
 | 11 | Energia do ricochete | acima | **fechada**: velocidade reposta a magnitude fixa, sem perda proporcional | E | Comprovado | idem | — |
 | 12 | Detonação | `0x49fd40` bloco `0x4a09a3…` | crater `0x4e4970/0x4e4d00` no pixel `(ix,iy)` com dimensão `[60]/[73]` e aspecto `[63]/[76]`; dano `0x450eb0` em `(ix,iy)` | E | Comprovado | cratera real: 738 px idênticos a `crater_spans((1387,1001),38,120)` | efeitos visuais/sons: só os nomes (`0x436070/0x43af40/0x431d90`) |
-| 13 | SS: dano repetido | `Animate 0x488780` → `0x450eb0(ix,iy)` **todo quadro**, mesmo ricocheteando; detonação final em `Explode 0x48de60` | dano `[70]=26` com queda elíptica a cada quadro enquanto o corpo estiver na caixa | E | Comprovado | `fx450eb0` registrado em cada tick dos 80 voos SS; `test_ss_passes_through_and_repeats` | atributo Attack/Dig do dono: divisor de `0x41da80` não exercitado (**adaptação**: 3×Attack no poder, Dig/2 na dimensão, divisor 1) |
+| 13 | SS: dano repetido | `Animate 0x488780` → `0x450eb0(ix,iy)` **todo quadro**, mesmo ricocheteando; detonação final em `Explode 0x48de60` | dano `[70]=26` com queda elíptica a cada quadro enquanto o corpo estiver na caixa | E | Comprovado | `fx450eb0` registrado em cada tick dos 80 voos SS; `test_ss_passes_through_and_repeats` | `0x41da80` soma 3×Attack e Dig/2 e divide pelo argumento do chamador. Cada spawn do Grub é um corpo (o T2 são quatro chamadas), então o divisor é 1, o mesmo dos tiros de um corpo do Mage. `test_owner_attributes` |
 | 14 | Dano/queda/defesa | `0x45db20` (mesmo de Mage/Aduka) | `falloff`, passes inteiros, `vulnerabilidade` do alvo | D | Derivado | reaproveita `AdukaCombat.amount` (fixtures próprias) | — |
-| 15 | T1 | `Projectile` comum | voo/contato **atuais** (`Combat.trace_segment`); dano e cratera nativos `[44]/[47]/[50]` | D | Parcial | `test_grub_model` | contato do T1 pelo `0x455cc0` não foi reconferido (**adaptação**) |
+| 15 | T1 | `Projectile`, Simulate `0x455cc0` | o mesmo contato inteiro já portado em `AdukaCombat.projectile_contact` (passo 8, refino, clima antes do terreno). O ID 13 entrou em `AdukaWeather.active`; S2/SS saem antes, em `advance_grub` | D | Comprovado (reuso da rotina já portada) | `test_t1_uses_native_contact`: tornado com \|vx\|≥200 e sem gravidade; previsão = execução | a diferença de uma amostra contra a varredura do T2 permanece: o T2 começa em +1, o T1 segue `0x455cc0` |
 | 16 | Linha type 12 | `characterdata.dat`, `CreateMobile 0x41c360` copia `[21..43]` | vida 1000 `[22]`, escudo 0 `[23]`, regen escudo 0 `[24]`, força `[25]=50`, atraso `[28]=490`+`[30/31/32]=250/400/800`, fator `[29]=10`, gravidade `[40]=98`, mira `[3/4,9/10,15/16]=60/30`, vulnerabilidade `[21]=92`, flags de defesa `[35]=2` | E | Comprovado | `test_grub_model.test_row` | — |
-| 17 | Biônico (regen 10 / proteção 70 / Energy Up +3 %) | atalho `_body`; `item_effects.gd:17` | **a linha type 12 não contém 10 nem 70** (o `10` de `[29]` é o fator de tempo) e `CreateMobile 0x41c360` só copia `[21..43]`; os consumidores localizados são o de atraso `0x45d150` (`[33]→+0x989c`, ramo `+0x8bb4==1`) e `0x45d360`/`0x458b80` (`[33]/[34]`), nenhum cura | D | **Removido só do Grub** (decisão do usuário): `hp_regen 0`, `protection 35`, sem bônus de Energy Up | `test_grub_model` (Grub sem o par; Trico/Boomer/Ice/Turtle intactos); Ghidra execução 6 (`grub-evidence-6-fields`, `ok=true`) | O **35** é o padrão dos não-biônicos, não vem do PE (adaptação). Pergunta: o cliente cura o Grub por turno? Próximo experimento: rastrear escritas de HP em `BeginTurn` e o consumidor de `+0x9ac0` |
-| 18 | Caixa/apoio | `AdukaCombat.catalog.bodies[13]` (28×24, origem y 21, flags 2) | já extraído do mesmo PE | D | Derivado | `test_aduka_native` | `Vector2(40,34)` do catálogo (hit-box de movimento) segue adaptado |
+| 17 | Cura e Lua | linha type 12; `CreateMobile 0x41c360` copia `[21..43]`; consumidores `0x45d150`/`0x45d360`/`0x458b80` não escrevem HP; Lua `moon_heal` usa `(flags & 2)` | sem cura por turno (`hp_regen 0`). Flags `[35]=2`, então a Lua cura 8% da vida máxima, não um número plano 35 ou 70. O termo de atraso `[33]=50` só entra quando `+0x8bb4==1`; o escritor conhecido dessa flag grava falso na seleção do ator, e o custo do treino não soma 50 | D | Comprovado | `test_moon_and_no_turn_heal`; `test_row` (atraso continua `[28]+[30/31/32]`) | o ramo `+0x8bb4==1` não é exercitado porque a flag fica limpa |
+| 18 | Caixa/apoio | `AdukaCombat.catalog.bodies[13]` (28×24, origem y 21, flags 2) e células `[0]/[1]` da linha | a caixa de movimento do Godot passou a 28×24. O apoio visual permanece 25, o mesmo encaixe de pé já importado do EPA | D | Comprovado (caixa) / adaptação (apoio visual) | `test_row` | mudar o apoio 25 deslocaria o casco já conferido na sala |
 | 19 | Casco, poses, projéteis, impactos | `graphics.xfs`: `tank13.img/.epa/l`, `bullet13n/nl/s/sl/p`, `flame131/132/133`, `ssflame13` | quadros idênticos pixel a pixel, pivôs do piloto, EPA `fire1/fire2/sfire` (20 ticks), 1º spawn no tick 2 | E | Comprovado | `tests/test_grub_assets.py` (5 testes) | camadas/ordem: as do rig comum |
 | 19b | Luz do casco e dos tiros | `graphics.xfs`: `tank13l.img` (362 quadros), `bullet13nl/sl.img` | pixels idênticos ao XFS (`CharacterSpritesheetLight.png`, `Bullet1/2Light.png`); desenho **aditivo** sobre o corpo (como Aduka/Lightning) | E / D | Comprovado (pixels) / Adaptação (mistura aditiva por precedência, não lida no PE) | `test_grub_assets.py::test_hull_light_pixels_and_registration`, `test_grub_model::test_light_layers`, GPU `docs/grub` | luz do casco desenhada acima do piloto; o passe vale só para a view que o abriu no quadro (batalha ou figuras da sala/loading) |
 | 20 | Sons | tabelas do PE por type (índice 12): `0x56d1d0/0x56d210/0x56d250` → `131fire.xes`; `0x56d290/0x56d2d0` → `132blast.xes`; `0x56d310` → `11blast.xes` | S1/S2/SS atiram `131fire`; S1/S2 explodem `132blast`; SS explode `11blast` (som do Armor: **registrado, não trocado**) | E | Comprovado | `test_grub_assets.py` lê as tabelas no PE e os hashes em `assets/xfs/audio/catalog.json` | escuta humana não feita |
@@ -101,14 +101,22 @@ a sala e o loading mostram o casco com a luz, como na batalha. Prova GPU (sonda 
 `.tools/grub-room/proof.gd`, 1920×1080, `elapsed` fixo): recorte da figura idêntico entre 2 e 40 quadros,
 após a partida e após 40 redesenhos no segundo loading.
 
-## Perguntas abertas e próximos experimentos
+## Emenda 3 — fechamento da issue #8 (29/10/2026)
 
-1. Cura do biônico (linha 17). Achado lateral: `0x45d150` soma `[33]` (Grub 50) quando `+0x8bb4==1`; `TurnTable.shot_cost` não modela esse ramo.
-2. Divisor de `0x41da80` para Attack/Dig do Grub: rodar o spawner com atributos no dono no emulador
-   (hoje o dono é nulo: `0x4206f0` devolve 0).
-3. Contato do T1 (`Projectile::Simulate 0x455cc0`): diferença de uma amostra com o T2 (`+1`); o T1 segue pelo trace atual.
-4. Consumidor do espelho/rastro no render `0x4c4e93` para S2 (o espelho foi aplicado só ao SS por pedido do issue).
-5. Cliente Windows (execução dinâmica) e escuta dos três sons.
+O T1 deixou o `trace_segment` e passou a usar `0x455cc0`, a rotina já portada para o
+Projectile comum. A cura plana 35 saiu: não há regen de turno, e a Lua usa os flags.
+A caixa de movimento acompanha o corpo 28×24. O divisor de atributo fica 1 porque cada
+chamada de spawn cria um corpo.
+
+Limites que permanecem escritos, e não bloqueiam o contrato da issue: a boca do tiro
+usa o `muzzle()` genérico (offsets de EPA `0x53fc/0x5620/0x5844/0x5a68` não portados);
+a mistura aditiva da luz segue Aduka/Lightning; o cliente Windows não foi executado de
+novo e os três sons não foram escutados nesta máquina.
+
+## Perguntas que ficaram
+
+1. Offsets de boca do EPA, no próximo porte visual do canhão.
+2. Cliente Windows e escuta dos sons `131fire`, `132blast` e `11blast`.
 
 ## Arquivos
 

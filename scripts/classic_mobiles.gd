@@ -78,7 +78,7 @@ static func definitions() -> Dictionary:
 		# Grub (client type 12): S1/SS fire at theta + 2; S2 is four shells with
 		# theta +1/0/-1/-2 and native power +5/0/-5/-10 (MainAction 0x471fd0, run in
 		# an x86 emulator for docs/sdd/GRUB_CLIENT_FIX.md). S2 and SS ricochet.
-		13: _grub(_body("Grub", "grub", 1000, 0, 0, 10, true, Vector2(40, 34), 25.0, 0.0, false,
+		13: _grub(_body("Grub", "grub", 1000, 0, 0, 10, true, Vector2(28, 24), 25.0, 0.0, false,
 			[shot("Tiro 1", 190, 25, 740, {"shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": 2}]}),
 			shot("Tiro 2", 94, 19, 890, {"flight": "grub_t2", "shells": [
 				{"spawn": 0.0, "angle": 1.0, "power": 0.0, "native_power": 5},
@@ -108,14 +108,14 @@ static func definitions() -> Dictionary:
 	}
 
 ## Grub emits after the clamp: the +/- offsets of MainAction are not aim-limited.
-## Its type-12 row and CreateMobile (0x41c360) hold no 10 / 70: the shared "bionic"
-## pair (regen 10, protection 70, Energy Up +3 %) is dropped for the Grub only and
-## replaced by the non-bionic defaults (issue #8, user decision; the 35 is not proven).
+## The type-12 row and CreateMobile (0x41c360) hold no per-turn heal and no flat
+## 35/70. Moon uses the defense flags already on the native body (bit 2 → 8%).
+## The movement box is the PE body, 28×24 (row [0]/[1], catalog bodies["13"]).
 static func _grub(body: Dictionary) -> Dictionary:
 	body.spread_after_clamp = true
 	body.bionic = false
 	body.hp_regen = 0
-	body.protection = 35
+	body.protection = 0
 	return body
 
 static func _body(label: String, kind: String, hp: int, shield: int, shield_regen: int, time_delay: int, bionic: bool, box: Vector2, stance: float, beacon: float, smoke: bool, weapons: Array, aims: Array, summary: String, rear: bool = false) -> Dictionary:

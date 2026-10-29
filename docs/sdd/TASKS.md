@@ -80,13 +80,13 @@ Plano/evidência: CI_SPEEDUP.md. Nomes dos quatro checks protegidos preservados.
 - [x] Emissão: S1/SS θ+2; S2 com 4 corpos (θ +1/0/−1/−2, força +5/0/−5/−10): 230 checks.
 - [x] `grub_surface.gd` (720 consultas) e `grub_flight.gd` (160 voos, 15.690 checks): ricochete, módulo constante, detonação em 44/40, SS que atravessa e fere por quadro, saída do mapa.
 - [x] Dano e cratera da linha type 12 (`grub_combat.gd`); cratera idêntica ao PE (738 px).
-- [x] Arte/EPA/sons conferidos no XFS (`test_grub_assets.py`); rastro S2/SS e espelho do SS.
-- [x] Execução = previsão para S2 e SS (`test_grub_model`).
-- [x] Par biônico 10/70 removido só do Grub (sem prova na linha type 12; decisão do usuário); `hp_regen 0`/`protection 35`.
-- [x] Clima no S2/SS pelas varreduras `0x49e650`/`0x4857f0` e ramo do tornado do tick (emenda 2 da ADR-150); `test_weather_columns` (12 checks que falham sem a ligação) e T1 no contato comum.
+- [x] Arte/EPA/sons conferidos no XFS (`test_grub_assets.py`); sem rastro (ADR-120, emenda da ADR-150) e com espelho do SS.
+- [x] Execução = previsão para T1, S2 e SS (`test_grub_model`).
+- [x] Sem cura por turno. A Lua cura 8% da vida (flags de defesa, bit 2). O número plano 35 saiu. Caixa de movimento 28×24.
+- [x] Clima no S2/SS pelas varreduras `0x49e650`/`0x4857f0` e ramo do tornado do tick (emenda 2 da ADR-150). O T1 usa o mesmo amostrador de `0x455cc0`.
 - [x] Luz do casco por view: sala/loading com `tank13l` e sem acúmulo após a partida; prova GPU de recorte idêntico.
-- [ ] Atributos do dono (divisor `0x41da80`) e contato do T1: **adaptações declaradas** (perguntas em `GRUB_CLIENT_FIX.md`).
-- [ ] Aceite visual/auditivo do usuário; cliente Windows não executado.
+- [x] Atributos do dono: cada spawn é um corpo, divisor 1 de `0x41da80` (3×Attack e Dig/2). Contato do T1 é `0x455cc0`.
+- [x] Critérios da issue #8 fechados no código e nos testes. Cliente Windows e escuta humana não foram repetidos; a boca do tiro segue o `muzzle()` genérico.
 
 - [ ] Boomer: fechar conversão de origem/apoio e pose ao vento; investigar a ordem global do RNG entre quadros, demais consumidores da flag +0x8ba8 e uso efetivo das sequências EPA; validar apresentação e outros sons. A recepção 0xc300 pelo laço principal precede os passos da cena na mesma thread, enquanto o Change Wind temporizado ocorre após o passo de objetos; o produtor de verdadeiro foi localizado e o sorteio `emotion1` do tipo 0 não é o caso do Boomer tipo 5. Alinhamento por três amostras/LUT foi portado (ADR-148) e o usuário considerou o apoio em repouso correto; uma roda levantada no recuo pertence ao quadro original. T2/impacto capturados no mixer soaram corretos ao usuário; limites e evidências em `BOOMER_ISSUE_9.md`. A issue #9 foi encerrada a pedido do usuário.
 

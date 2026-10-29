@@ -23,10 +23,12 @@ static func prepare(projectile: Dictionary, actor: Dictionary) -> void:
 	if not active(projectile):
 		return
 	var data: Dictionary = catalog.weapons[int(projectile.weapon)]
-	# 41da80 adds 3 x Attack to the power and Dig / 2 to the dimension. The caller
-	# divisor of Mage (0x488ac0) is not proven for Grub: kept at 1 (adaptation).
-	projectile.damage = int(data.power) + 3 * Attributes.points(actor, Attributes.ATTACK)
-	projectile.grub_dimension = int(data.dimension) + Physics.quot(Attributes.points(actor, Attributes.DIG), 2)
+	# 41da80 adds 3 x Attack to the power and Dig / 2 to the dimension, then
+	# divides by the caller's divisor. Each Grub spawn is one shell (T2 is four
+	# separate calls), so the divisor is 1, the same single-shell argument Mage
+	# passes for T1 and SS. A paired emission would pass 2; Grub has none.
+	projectile.damage = int(data.power) + Physics.quot(3 * Attributes.points(actor, Attributes.ATTACK), 1)
+	projectile.grub_dimension = int(data.dimension) + Physics.quot(Physics.quot(Attributes.points(actor, Attributes.DIG), 2), 1)
 	projectile.blast_radius = Physics.quot(int(projectile.grub_dimension), 2)
 	projectile.grub_crater_percent = 100 + int(Items.dig(str(actor.get("turn_item", ""))))
 

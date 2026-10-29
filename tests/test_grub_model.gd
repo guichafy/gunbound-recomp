@@ -8,6 +8,7 @@ const Combat = preload("res://scripts/combat.gd")
 const ClassicSprite = preload("res://scripts/classic_sprite.gd")
 const GrubSprite = preload("res://scripts/grub_sprite.gd")
 const SpritePose = preload("res://scripts/sprite_pose.gd")
+const GrubCombat = preload("res://scripts/grub_combat.gd")
 
 func fresh(facing: int = 1, item: String = ""):
 	var model = Match.new()
@@ -40,7 +41,8 @@ func test_row() -> void:
 	check(int(Mobiles.definition(13).time_delay) == int(row[29]), "time factor [29]")
 	# No 10 / 70 in the row or in CreateMobile: the bionic pair is gone for the Grub only.
 	var grub: Dictionary = Mobiles.definition(13)
-	check(int(grub.hp_regen) == 0 and int(grub.protection) == 35 and not bool(grub.bionic), "Grub has no bionic regen/protection (type-12 row holds none)")
+	check(int(grub.hp_regen) == 0 and int(grub.protection) == 0 and not bool(grub.bionic), "Grub has no per-turn heal and no flat protection number")
+	check(grub.box == Vector2(28, 24), "movement box is the PE body 28x24")
 	for other in [5, 6, 11, 12]:
 		var spec: Dictionary = Mobiles.definition(other)
 		check(bool(spec.bionic) and int(spec.hp_regen) == 10 and int(spec.protection) == 70, "mobile %d keeps the shared bionic adaptation (out of scope)" % other)
@@ -149,7 +151,7 @@ func column_x(weapon: int) -> int:
 	return path[6].x
 
 func test_weather_columns() -> void:
-	# T1 is an ordinary Projectile: it keeps the common weather contact.
+	# T1 is Projectile::Simulate 0x455cc0: the shared native sampler, not the C# trace.
 	var probe = floor_model()
 	probe.fire(45.0, 35.0, 0)
 	for tick in 6:
@@ -229,6 +231,66 @@ func test_ss_passes_through_and_repeats() -> void:
 	check(int(model.actors[1].hp) + int(model.actors[1].shield) < before and int(result.damages) >= 2, "SS damages a mobile on several frames while crossing it (%d events)" % int(result.damages))
 	check(int(result.kinds.get("explosion", 0)) == 1, "crossing a mobile does not detonate the SS (%d explosions)" % int(result.kinds.get("explosion", 0)))
 
+func test_owner_attributes() -> void:
+	GrubCombat.warmup()
+	var model = fresh()
+	model.actors[0].attributes = [10, 0, 0, 0, 0, 0, 10, 0]
+	var shells: Array = model.projectile_parameters(0, 45.0, 50.0, 0)
+	check(shells.size() == 1, "T1 is still one shell when the owner has attributes")
+	check(int(shells[0].damage) == 190 + 30, "41da80 divisor 1 adds 3 x Attack 10 to power 190 (%d)" % int(shells[0].damage))
+	check(int(shells[0].grub_dimension) == 50 + 5, "41da80 divisor 1 adds Dig 10 / 2 to dimension 50 (%d)" % int(shells[0].grub_dimension))
+	var four: Array = model.projectile_parameters(0, 45.0, 50.0, 1)
+	check(four.size() == 4 and int(four[0].damage) == 94 + 30 and int(four[3].damage) == 94 + 30, "each S2 spawn keeps the full attribute addition")
+
+func test_moon_and_no_turn_heal() -> void:
+	var model = fresh()
+	model.actors[0].hp = 500
+	model.actors[0].max_hp = 1000
+	Mobiles.regenerate(model.actors[0])
+	check(int(model.actors[0].hp) == 500, "a turn does not heal the Grub (hp_regen 0)")
+	model.weather.queue = [{"type": "protection"}]
+	var gained := int(model.weather.moon_heal(model.actors[0]))
+	check(gained == 80 and int(model.actors[0].hp) == 580, "Moon heals 8 percent because defense flags bit 2 is set (%d)" % gained)
+
+func test_t1_uses_native_contact() -> void:
+	var probe = floor_model()
+	probe.fire(45.0, 35.0, 0)
+	for tick in 8:
+		probe.advance_projectiles(Combat.STEP)
+	check(not probe.projectiles.is_empty(), "T1 is still in flight after 8 ticks")
+	var x := float(probe.projectiles[0].hit_pos.x)
+	var model = floor_model()
+	model.weather.add_column("tornado", x, 1.0)
+	model.fire(45.0, 35.0, 0)
+	var native := false
+	var samples := 0
+	for tick in 80:
+		var before: Array = []
+		for shell in model.projectiles:
+			if shell.tornado.is_empty():
+				continue
+			before.append([shell, Vector2i(shell.fp_velocity)])
+		model.advance_projectiles(Combat.STEP)
+		for pair in before:
+			if not model.projectiles.any(func(live): return is_same(live, pair[0])):
+				continue
+			samples += 1
+			var now: Vector2i = pair[0].fp_velocity
+			native = native or (now.y == pair[1].y and absi(now.x) >= 200)
+		if model.phase != Match.PHASE_FLIGHT:
+			break
+	check(samples > 0 and native, "T1 tornado follows 0x455cc0 (|vx| >= 200, no gravity) for %d ticks" % samples)
+	var predicted: Dictionary = floor_model().predict_shot(0, 45.0, 35.0, 0)
+	var played = floor_model()
+	var result := fly(played, 0, 45.0, 35.0)
+	var best := Vector2.ZERO
+	var distance := INF
+	for position in result.explosions:
+		if position.distance_to(played.actors[1].pos) < distance:
+			distance = position.distance_to(played.actors[1].pos)
+			best = position
+	check(not predicted.is_empty() and Vector2(predicted.position) == best, "T1 prediction %s = executed %s" % [str(predicted.get("position")), str(best)])
+
 func test_presentation_rules() -> void:
 	for weapon in 3:
 		check(not ClassicSprite.has_trail("grub", weapon), "Grub weapon %d keeps the single sprite (ADR-120, no afterimage blur)" % weapon)
@@ -268,6 +330,9 @@ func run() -> void:
 	test_row()
 	test_emission()
 	test_flight_modes()
+	test_owner_attributes()
+	test_moon_and_no_turn_heal()
+	test_t1_uses_native_contact()
 	test_presentation_rules()
 	test_light_layers()
 	test_live_flight()
