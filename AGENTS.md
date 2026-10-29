@@ -117,8 +117,10 @@ Ler docs/sdd/GRUB_CLIENT_FIX.md. S1/SS θ+2 e S2 com 4 corpos vêm do MainAction
 S2/SS ricocheteiam por `grub_flight.gd` (tick `0x49fd40`/`0x486ea0`) e `grub_surface.gd`
 (`0x4a1740`); fixtures em `tests/fixtures/grub_*_native.json` foram geradas rodando o PE num
 emulador (`tests/tools/grub_oracle`, Unicorn fora do projeto). SS fere a cada quadro; dano/cratera
-da linha type 12. Sem o par biônico 10/70 (a linha type 12 não o contém; só o Grub). S2/SS amostram força/tornado/
-eletricidade nas varreduras (`0x4510f0/0x451030/0x4511b0`, `AdukaWeather.sample/finish`; emenda 2). Atributos do dono e contato do T1 são adaptações.
+da linha type 12. Sem cura por turno; a Lua cura 8% porque os flags de defesa têm o bit 2.
+O T1 usa o contato `0x455cc0` (ID 13 em `AdukaWeather.active`). Cada spawn soma 3×Attack e Dig/2
+com divisor 1. A caixa de movimento é 28×24. S2/SS amostram força/tornado/
+eletricidade nas varreduras (`0x4510f0/0x451030/0x4511b0`, `AdukaWeather.sample/finish`; emenda 2). A boca do tiro segue o muzzle genérico.
 Sem rastro (ADR-120). Luz: `bullet13nl/sl` e `tank13l.img` (`CharacterSpritesheetLight.png`) são
 aditivas via `grub_sprite.gd` (emenda da ADR-150); a luz do casco vale por view (`hull_view`): batalha e figuras da sala/loading. Testes test_grub_{surface,flight,model} e
 test_grub_assets.py; captura tests/capture_grub.gd.

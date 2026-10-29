@@ -422,7 +422,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-47 | Avatar Shop e avatares com os assets originais do cliente | AVATAR_SHOP_ORIGINAL | Vigente (ADR-130); HD de avatares/loja preservado em disco, fora do uso ativo |
 | REQ-48 | Assets de batalha do cliente: Miramo, HUD, clima/Thor, itens e áudio | CLIENT_ASSETS_PORT | ADR-133; recursos nativos com fallback validado; composição e lacunas declaradas |
 | REQ-49 | Start da sala mostra a transição com mapa, spawns e mobile resolvido | LOADING_SCREEN | Vigente (ADR-138); 1×1 local, espera mínima de 5 s |
-| REQ-51 | Grub (ID 13) pelo cliente: T1/T2/SS, ricochete, dano repetido do SS, clima do S2/SS, linha type 12 | GRUB_CLIENT_FIX | ADR-150 (+emenda 2); fixtures do PE em emulador; biônico e atributos do dono são adaptações declaradas |
+| REQ-51 | Grub (ID 13) pelo cliente: T1/T2/SS, ricochete, dano repetido do SS, clima, linha type 12 | GRUB_CLIENT_FIX | ADR-150 (+emendas); T1 no contato 0x455cc0; Lua 8% pelos flags; boca do tiro segue adaptação |
 | REQ-50 | Encerramento com a janela WIN/LOSE do cliente e o botão OK | RESULT_SCREEN_NATIVE | Vigente (ADR-139); P = XP do porte, OK volta à sala |
 
 ## Lobby clássico e sala — ADR-096
@@ -925,10 +925,12 @@ S2 detona em mobile, SS atravessa mobiles e causa dano a cada quadro, ambos rico
 normal tangencial `0x4a1740` com módulo constante `[69]=1800`/`[82]=1600` e detonam quando o
 contador atinge 44 (S2) ou 40 (SS) ou ao tocar de novo com o contador no limite. Dano e cratera
 usam a linha type 12 (`combat_native.json`). Arte, EPA e sons são os do `graphics.xfs`/`sound.xfs`.
-Sem rastro (ADR-120) e espelho vertical no SS. S2 e SS amostram força, tornado e eletricidade nas
-varreduras nativas e seguem o ramo do tornado do tick. Na sala, no loading e na batalha o casco
-recebe a luz `tank13l`. Matriz, adaptações (atributos do dono, contato do T1; o par biônico 10/70
-saiu só do Grub) e perguntas em `GRUB_CLIENT_FIX.md`.
+Sem rastro (ADR-120) e espelho vertical no SS. O T1 usa o contato `0x455cc0` já portado
+(`AdukaWeather.active` inclui o ID 13). S2 e SS amostram força, tornado e eletricidade nas
+varreduras nativas e seguem o ramo do tornado do tick. A caixa de movimento é 28×24, a do PE.
+Não há cura por turno. A Lua cura 8% da vida porque o bit 2 dos flags de defesa está ligado.
+Cada spawn soma 3×Attack e Dig/2 com divisor 1. Na sala, no loading e na batalha o casco
+recebe a luz `tank13l`. A boca do tiro continua o `muzzle()` genérico. Matriz em `GRUB_CLIENT_FIX.md`.
 
 ## CI/CD desktop — REQ-52 / REQ-01 / REQ-12
 

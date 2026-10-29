@@ -1905,9 +1905,9 @@ velocidade **já invertida** por `0x40a500` (NEG), o que a execução confirmou 
 publicadores de render (**revisto na emenda abaixo: o rastro do S2/SS saiu**); (5) o par
 biônico 10/70 (regen, proteção) e o +3 % de Energy Up **saem só do Grub**: a linha type 12 e
 `CreateMobile` não o contêm; o usuário respondeu «só o Grub» e confirmou a remoção, e os quatro outros
-biônicos (atalho `_body`) ficam como estão. O valor 35 que o substitui é o padrão dos não-biônicos, não um
-dado do PE.
-Tornado, atributos do dono (divisor de `0x41da80`) e o contato do T1 seguem adaptados. Substitui a
+biônicos (atalho `_body`) ficam como estão. O valor 35 foi o padrão dos não-biônicos e
+saiu na emenda 3: a Lua usa os flags, não um número plano.
+A emenda 3 substitui a adaptação do contato do T1 e do divisor de `0x41da80`. Substitui a
 nota "falta o ricochete" de `MOBILES.md` e o `skip_actors` do SS. Sem versão, exportação ou push.
 
 **Emenda 28/10/2026 (relato do usuário na `main`: "T2 e SS com blur" e "assets não iguais ao original").**
@@ -1933,6 +1933,14 @@ endereços seriam objetos inexistentes no treino. Weakness/Mirror/Random não en
 `begin_hull_glow` no quadro. As figuras da sala/loading abrem o próprio passe e mostram a luz, como na
 batalha; isso substitui "menus e previews desenham o corpo simples", que deixava a sala sem luz e,
 depois de uma partida, acumulava a luz num canvas nunca limpo.
+
+**Emenda 3, 29/10/2026 (fechamento da issue #8).** (a) O T1 usa `0x455cc0`
+(`AdukaCombat.projectile_contact`): o ID 13 entrou em `AdukaWeather.active`. S2/SS
+continuam em `advance_grub`. (b) Sem cura por turno e sem o número plano 35. A Lua
+cura 8% porque `[35]=2` liga o bit de defesa que `moon_heal` já lê. (c) A caixa de
+movimento é 28×24, o corpo do PE. O apoio visual 25 permanece. (d) `0x41da80` aplica
+3×Attack e Dig/2 com divisor 1, porque cada spawn é um corpo. O termo de atraso
+`[33]` continua fora do custo: a flag `+0x8bb4` fica limpa.
 
 
 ## ADR-151 — CI/CD desktop e versões por push (28/10/2026)

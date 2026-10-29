@@ -18,7 +18,7 @@ As classes de evidência estão explicadas em [PORTE.md](PORTE.md).
 | 10 | ASate | Guia, Ion e 1/3/6 filhos. Falta a captura GPU | [ASATE_CLASSIC_FIX](sdd/ASATE_CLASSIC_FIX.md) |
 | 11 | Ice | Balística comum. Falta o campo do S2/SS | [BATTLE_MOBILE_FAMILY_PLANS §6](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
 | 12 | Turtle | T1/T2 com a onda original (T2 aceito). Dano e física dos filhos do SS adaptados | [TURTLE_T2_FIDELITY](sdd/TURTLE_T2_FIDELITY.md), [TURTLE_ANIMATION_FIX](sdd/TURTLE_ANIMATION_FIX.md) |
-| 13 | Grub | Revisado pelo cliente: T1/T2 (4 corpos)/SS, ricochete, dano repetido do SS e linha type 12. Sem o par biônico 10/70 (a linha type 12 não o tem). S2/SS amostram força, tornado e eletricidade pelas varreduras nativas. Atributos do dono e contato do T1 são adaptações. Aguarda aceite | [GRUB_CLIENT_FIX](sdd/GRUB_CLIENT_FIX.md) |
+| 13 | Grub | Revisado pelo cliente: T1 no contato 0x455cc0, T2 (4 corpos)/SS com ricochete, dano repetido do SS, linha type 12, caixa 28×24 e Lua 8%. Sem cura por turno. A boca do tiro segue o muzzle genérico | [GRUB_CLIENT_FIX](sdd/GRUB_CLIENT_FIX.md) |
 | 14 | Dragon | Balística comum. Faltam a cadência do S2 e os filhos do SS | [BATTLE_MOBILE_FAMILY_PLANS §1](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
 | 15 | Knight | Balística comum. Faltam os satélites do SS | [BATTLE_MOBILE_FAMILY_PLANS §2](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
 | 16 | Aduka | Revisado pelo cliente: T1/T2/SS, Thor, dano, colisão e tornado. O T2 mostra três criaturas a pedido do usuário. Aguarda aceite | [ADUKA_AUDIT](sdd/ADUKA_AUDIT.md), [ADUKA_COMBAT_REA](sdd/ADUKA_COMBAT_REA.md) |

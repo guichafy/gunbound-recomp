@@ -1,5 +1,19 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Issue #8 — fechamento do Grub — 29/10/2026
+
+Emenda 3 da ADR-150 / REQ-51. O T1 passou a usar o contato `0x455cc0` já portado.
+A cura plana 35 saiu: não há regen de turno, e a Lua cura 8% pelos flags de defesa.
+A caixa de movimento é 28×24. Cada spawn soma 3×Attack e Dig/2 com divisor 1.
+Sem rastro. A boca do tiro segue o `muzzle()` genérico. Cliente Windows e escuta
+não foram repetidos.
+
+Validação desta entrega (Godot 4.7.2, Linux): `test_grub_model` 311/0,
+`test_grub_flight` 15690/0, `test_grub_surface` 720/0, `test_classic_mobiles` 141/0,
+`test_battle_rules` 60/0, `test_aduka_weather` 2628/0, `test_mage_weather` 687/0,
+`test_matches` 13/0 e `test_classic_matches` 16/0. Sem captura GPU nova e sem
+reexportar o aplicativo.
+
 ## Consolidação Dependabot — REQ-52 / ADR-151 (28/10/2026)
 
 **Etapa posterior autorizada:** enviar a branch, abrir PR consolidado e acompanhar
