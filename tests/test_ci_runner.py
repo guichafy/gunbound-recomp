@@ -157,6 +157,37 @@ print('OK')
             self.assertTrue((root/'.tools/coverage.xml').is_file())
             self.assertTrue((root/'.tools/coverage-html/index.html').is_file())
 
+    def test_wall_clock_suites_run_alone_after_parallel_lanes(self):
+        # test_performance times real frames; sharing cores with matches and
+        # coverage made a Windows frame take 87 ms against its 40 ms budget.
+        self.assertIn('test_performance', getattr(self.module, 'ISOLATED_SUITES', ()))
+        order = []
+        def parallel(tasks, workers):
+            results = {}
+            for task in tasks.values():
+                results.update(task())
+            order.append(('parallel', sorted(tasks)))
+            return results
+        def lane(godot, logs, profile, suites, parse):
+            order.append(('lane', list(suites)))
+            return {}
+        def single(godot, logs, profile, name, shard=0, shards=1):
+            order.append(('alone', name))
+            return {name: {'ok': True}}
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root/'scripts').mkdir()
+            (root/'scripts/check.sh').write_text('ALL="test_scene test_performance"\n')
+            with patch.object(self.module, 'ROOT', root), \
+                 patch.object(sys, 'argv', ['check.py', '--godot', sys.executable, '--suites', 'test_scene', 'test_performance']), \
+                 patch.object(self.module, 'run_logged', lambda *a, **k: {'ok': True}), \
+                 patch.object(self.module, 'run_parallel', parallel), \
+                 patch.object(self.module, 'godot_lane', lane), patch.object(self.module, 'match_or_suite', single), \
+                 redirect_stdout(io.StringIO()), self.assertRaises(SystemExit) as exit_status:
+                self.module.main()
+        self.assertEqual(exit_status.exception.code, False)
+        self.assertEqual(order, [('lane', ['test_scene']), ('parallel', ['godot']), ('alone', 'test_performance')])
+
 
 if __name__ == '__main__':
     unittest.main()
