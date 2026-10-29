@@ -14,6 +14,10 @@ Validação desta entrega (Godot 4.7.2, Linux): `test_grub_model` 311/0,
 `test_matches` 13/0 e `test_classic_matches` 16/0. Sem captura GPU nova e sem
 reexportar o aplicativo.
 
+No CI Windows do PR #22, `test_performance` não via a CPU atirar em 600 quadros
+(macOS passou no mesmo run). A espera passou a ser o relógio, até 12 s, e cada
+quadro continua abaixo de 40 ms. Suíte local: 19/0.
+
 ## Consolidação Dependabot — REQ-52 / ADR-151 (28/10/2026)
 
 **Etapa posterior autorizada:** enviar a branch, abrir PR consolidado e acompanhar

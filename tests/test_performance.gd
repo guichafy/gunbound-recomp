@@ -68,7 +68,9 @@ func run() -> void:
 	var fired := false
 	var started_at := Time.get_ticks_msec()
 	var first_task := -2
-	for frame in range(600):
+	# A fixed frame count finishes before a slow CI worker. The turn timer is
+	# the deadline; each frame still has to stay off the search.
+	while Time.get_ticks_msec() - started_at < 12000:
 		var before := Time.get_ticks_usec()
 		scene._process(1.0 / 60.0)
 		worst = maxi(worst, Time.get_ticks_usec() - before)
