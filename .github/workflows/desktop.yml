@@ -11,9 +11,10 @@ permissions:
   contents: read
 
 # Serialize the WHOLE main workflow, including version calculation and builds.
-# GitHub queues up to 100 runs with queue:max; it does not replace pending pushes.
+# queue must be literal, and max cannot coexist with cancel-in-progress:true.
+# Give each PR run its own workflow group; cancel obsolete work at job level.
 concurrency:
-  group: ${{ github.event_name == 'push' && 'desktop-main-releases' || format('desktop-pr-{0}', github.event.pull_request.number) }}
+  group: ${{ github.event_name == 'push' && 'desktop-main-releases' || format('desktop-pr-run-{0}', github.run_id) }}
   queue: max
   cancel-in-progress: false
 
@@ -29,6 +30,9 @@ env:
 jobs:
   lint:
     name: Lint and automation tests
+    concurrency:
+      group: ${{ format('desktop-{0}-lint', github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id) }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -63,6 +67,9 @@ jobs:
 
   version:
     name: Calculate release version
+    concurrency:
+      group: ${{ format('desktop-{0}-version', github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id) }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     needs: lint
     runs-on: ubuntu-24.04
     timeout-minutes: 5
@@ -93,6 +100,9 @@ jobs:
 
   desktop:
     name: Test, build and smoke (${{ matrix.platform }})
+    concurrency:
+      group: ${{ format('desktop-{0}-desktop-{1}', github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id, matrix.platform) }}
+      cancel-in-progress: ${{ github.event_name == 'pull_request' }}
     needs: [lint, version]
     strategy:
       fail-fast: false

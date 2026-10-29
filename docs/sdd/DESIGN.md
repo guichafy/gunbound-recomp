@@ -1017,6 +1017,19 @@ essa migração. Fixture explícita do catálogo legado conserva 1000 por moeda.
 
 ## CI/CD desktop — ADR-151 / REQ-52
 
+Emenda de desempenho do PR20: importação antecede os consumidores; parse e
+suítes de cena seguem sequenciais na sua faixa. Um pool limitado executa essa
+faixa, Python/cobertura e grupos das duas suítes de partidas; cada processo
+Godot usa log próprio e cada faixa tem perfil temporário. Partidas mantêm
+seeds/IDs/assertivas e só particionam o inventário. O relatório agrega todos
+os grupos e seus tempos. Python continua num processo próprio e mantém
+instrumentação/relatórios/gate; um TestResult registra tempos individuais.
+Workflow mantém queue:max/false e grupo main fixo; PR recebe grupo por run_id.
+Os jobs lint/versão/desktop têm grupos por PR/etapa/plataforma, fila single
+padrão e cancelamento só em PR: uma nova etapa substitui a correspondente
+anterior. Se lint novo falha, os builds anteriores já iniciados podem terminar.
+Queue exige literal e max não pode coexistir com cancel-in-progress:true.
+
 `release.py` calcula SemVer de tags/baseline e aplica ao checkout; `bootstrap.py`
 prepara editor/templates/fontes com hashes; `check.py` executa o contrato do
 harness em Python multiplataforma. Exportadores nativos e `package.py` geram,

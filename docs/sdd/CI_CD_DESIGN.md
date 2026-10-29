@@ -24,7 +24,12 @@ implementação; substitui a proposta documental inicial do PR #11.
 A fila `concurrency.queue: max` cobre o workflow inteiro: o cálculo de versão só
 começa quando a entrega anterior termina. Até100 execuções pendentes, limite
 nativo GitHub; acima disso o GitHub rejeita a execução e ela precisa de reexecução.
-PRs usam grupo separado por número. Não há cancelamento voluntário de pushes.
+Main mantém grupo fixo; PRs usam grupo de workflow por run_id e grupos de
+jobs lint/versão/desktop por PR/etapa/plataforma com fila single padrão e
+cancelamento só em PR. Ao alcançar uma etapa, a execução nova substitui o
+job correspondente antigo. Lint novo falhando pode deixar builds antigos
+terminarem. Não há cancelamento voluntário de pushes. `queue` é literal;
+não pode ser expressão nem combinar max com cancel-in-progress:true.
 Actionlint1.7.12 ainda rejeita a chave oficial `queue`; ignora-se somente esse
 alerta, e `test_ci_workflow.py` valida queue/max, não cancelamento, SHAs e gates.
 
@@ -56,6 +61,18 @@ ausência de resumo e testes Python pulados bloqueiam a entrega. Logs e relatór
 JSON são artifacts mesmo em falha. Fixtures de cena preparam apenas os diretórios
 necessários; caminhos propositalmente ausentes dos testes de rollback continuam
 ausentes. Perfis de testes usam `.tools` ou pasta temporária.
+
+Otimização PR20: após importação única, um pool de no máximo4 tarefas por
+padrão (também limitado por os.cpu_count) roda a faixa parse/suítes comuns,
+Python/cobertura e grupos determinísticos das13+16 partidas. `--workers N`
+permite ajuste e1 executa sequencialmente. Cada grupo tem perfil/log de engine
+próprio; cenas mantêm a ordem e as fixtures anteriores. A união das partidas
+é conferida por seed/ID e contagem no log, sem aceitar ausência/duplicação.
+Qualquer erro/timeout/exceção bloqueia o job, coletando os demais resultados.
+XML/HTML usam dados de cobertura novos e separados por execução. `report.json`
+inclui duração por comando/total e partidas; `python-times.json` registra
+tempos de cada teste e os15 maiores aparecem no log do Actions. Esses tempos
+não incluem o setUpClass como teste individual; o tempo total Python inclui-o.
 
 A cobertura de linhas/branches mede **Python**, com relatório completo em
 `.tools/coverage.xml` e `.tools/coverage-html/`. O gate inicial de40% aplica-se

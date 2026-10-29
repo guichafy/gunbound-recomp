@@ -1962,3 +1962,19 @@ Os seis arquivos internos seguem validados; apenas três são publicados. JSONs
 e hashes individuais ficam nos artifacts desktop, retenção14dias; consolidado
 temporário UTF-8/LF não modifica inputs. Preservar releases antigas em retry,
 inclusive0.21.0. Dois Source code automáticos do GitHub permanecem visíveis.
+
+**Emenda PR20 — desempenho CI (28/10/2026).** Manter inventário completo,
+29partidas, instrumentação de linhas/branches Python e gate40%. Após importação
+única, pool limitado por núcleos (máximo4 padrão, configurável) executa faixa
+sequencial de parse/cenas, Python em processo independente e grupos de
+partidas com mesmos seeds/IDs/RNG/assertivas. Perfis/logs isolados e conferência
+dos casos/contagens; qualquer falha bloqueia export. Tempos por comando e teste
+Python facilitam novos diagnósticos; verificações de pixels continuam integrais.
+Workflow main mantém queue:max literal e sem cancelamento; PR recebe grupo
+de workflow por run_id, e jobs usam grupo por PR/etapa/plataforma com single
+padrão e cancelamento condicional. Substituição só ocorre quando a etapa nova
+é alcançada; lint novo falhando pode deixar build antigo concluir. Substitui
+somente a política anterior que enfileirava integralmente execuções de PR.
+`queue` não aceita expressão, segundo documentação primária GitHub; corrigido
+após revisão e teste RED→GREEN. Nomes protegidos, versões e publicação intactos.
+Plano, medidas e limites em CI_SPEEDUP.md.

@@ -932,6 +932,16 @@ saiu só do Grub) e perguntas em `GRUB_CLIENT_FIX.md`.
 
 ## CI/CD desktop — REQ-52 / REQ-01 / REQ-12
 
+Otimização autorizada no PR20 (28/10/2026): preservar todas as suítes, as
+13+16 partidas e a instrumentação Python com piso de40% da automação.
+Executar partidas em grupos determinísticos e Python em paralelo ao Godot,
+com concorrência limitada, logs/perfis isolados e falha de qualquer grupo
+bloqueando o pacote. Registrar duração de comandos e de cada teste Python.
+Jobs de novas execuções do mesmo PR substituem os correspondentes antigos
+quando alcançam a mesma etapa; pushes main continuam enfileirados sem
+cancelamento. Não alterar os nomes dos checks obrigatórios.
+Plano e critérios em CI_SPEEDUP.md.
+
 Pedido de 28/10/2026: implementar validação automática em PR e release por push
 aprovado na main. Conventional Commits determina major/minor/patch; manutenção
 usa patch para atender cada push. Build com Godot 4.7.2, testes completos nativos,

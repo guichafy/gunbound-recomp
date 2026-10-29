@@ -6,11 +6,17 @@ extends SceneTree
 const Match = preload("res://scripts/match.gd")
 const Maps = preload("res://scripts/maps.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
+const Partition = preload("res://tests/support/match_partition.gd")
 var failures := 0
 
 func _initialize() -> void:
 	var started := Time.get_ticks_msec()
-	for vehicle in Mobiles.PLAYABLE:
+	var vehicles := Partition.select(Mobiles.PLAYABLE, OS.get_cmdline_user_args())
+	if vehicles.is_empty():
+		printerr("FAIL: invalid match partition")
+		quit(1)
+		return
+	for vehicle in vehicles:
 		var model = Match.new()
 		var seed_value := 1700 + int(vehicle)
 		model.start(int(vehicle), 2, seed_value, Maps.DEFAULT, "original", null, [], [], [], Match.RANDOM_OPENING)
@@ -39,6 +45,6 @@ func _initialize() -> void:
 			failures += 1
 		print("CLASSIC MATCH id=", vehicle, " seed=", seed_value, " shots=", shots, " winner=", model.winner,
 			" remaining_hp=", [model.actors[0].hp, model.actors[1].hp])
-	print("CLASSIC MATCHES: ", Mobiles.PLAYABLE.size(), " | FAILURES: ", failures,
+	print("CLASSIC MATCHES: ", vehicles.size(), " | FAILURES: ", failures,
 		" | TIME MS: ", Time.get_ticks_msec() - started)
 	quit(0 if failures == 0 else 1)
