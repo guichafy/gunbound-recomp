@@ -1,0 +1,126 @@
+{
+  "date_local": "2026-10-28",
+  "tool": "pip-audit 2.10.1",
+  "service": "PyPI",
+  "manifest": ".github/requirements-ci.txt",
+  "scope": "Four pinned CI packages; excludes Actions JavaScript, Godot and reference client",
+  "before": {
+    "advisory_records": 76,
+    "unique_ids": 58,
+    "dependencies": [
+      {
+        "name": "coverage",
+        "version": "7.11.0",
+        "advisory_records": 0,
+        "unique_ids": []
+      },
+      {
+        "name": "pillow",
+        "version": "12.0.0",
+        "advisory_records": 76,
+        "unique_ids": [
+          "CVE-2026-112390",
+          "CVE-2026-112391",
+          "CVE-2026-112393",
+          "CVE-2026-112395",
+          "CVE-2026-112399",
+          "CVE-2026-112400",
+          "CVE-2026-112401",
+          "CVE-2026-112404",
+          "CVE-2026-112406",
+          "CVE-2026-112891",
+          "CVE-2026-112892",
+          "CVE-2026-112893",
+          "CVE-2026-112894",
+          "CVE-2026-112895",
+          "CVE-2026-112897",
+          "CVE-2026-112899",
+          "CVE-2026-112900",
+          "CVE-2026-96638",
+          "CVE-2026-96640",
+          "CVE-2026-96778",
+          "GHSA-78g4-xqwv-q3g8",
+          "PYSEC-2026-165",
+          "PYSEC-2026-2249",
+          "PYSEC-2026-2250",
+          "PYSEC-2026-2251",
+          "PYSEC-2026-2252",
+          "PYSEC-2026-2253",
+          "PYSEC-2026-2254",
+          "PYSEC-2026-2255",
+          "PYSEC-2026-2256",
+          "PYSEC-2026-2257",
+          "PYSEC-2026-2874",
+          "PYSEC-2026-3451",
+          "PYSEC-2026-3452",
+          "PYSEC-2026-3453",
+          "PYSEC-2026-3454",
+          "PYSEC-2026-3493",
+          "PYSEC-2026-3494",
+          "PYSEC-2026-3495",
+          "PYSEC-2026-3496",
+          "PYSEC-2026-4326",
+          "PYSEC-2026-4327",
+          "PYSEC-2026-4328",
+          "PYSEC-2026-4329",
+          "PYSEC-2026-4330",
+          "PYSEC-2026-4331",
+          "PYSEC-2026-4332",
+          "PYSEC-2026-4333",
+          "PYSEC-2026-4334",
+          "PYSEC-2026-4335",
+          "PYSEC-2026-4336",
+          "PYSEC-2026-4337",
+          "PYSEC-2026-4338",
+          "PYSEC-2026-4339",
+          "PYSEC-2026-4340",
+          "PYSEC-2026-4341",
+          "PYSEC-2026-4342",
+          "PYSEC-2026-4343"
+        ]
+      },
+      {
+        "name": "ruff",
+        "version": "0.14.2",
+        "advisory_records": 0,
+        "unique_ids": []
+      },
+      {
+        "name": "pyyaml",
+        "version": "6.0.3",
+        "advisory_records": 0,
+        "unique_ids": []
+      }
+    ]
+  },
+  "after": {
+    "advisory_records": 0,
+    "unique_ids": 0,
+    "dependencies": [
+      {
+        "name": "coverage",
+        "version": "7.17.0",
+        "advisory_records": 0,
+        "unique_ids": []
+      },
+      {
+        "name": "pillow",
+        "version": "13.0.0",
+        "advisory_records": 0,
+        "unique_ids": []
+      },
+      {
+        "name": "ruff",
+        "version": "0.17.2",
+        "advisory_records": 0,
+        "unique_ids": []
+      },
+      {
+        "name": "pyyaml",
+        "version": "6.0.3",
+        "advisory_records": 0,
+        "unique_ids": []
+      }
+    ]
+  }
+}

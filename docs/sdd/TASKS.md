@@ -1,5 +1,19 @@
 # Entregas e próximos trabalhos
 
+## Consolidação Dependabot — REQ-52 / ADR-151 (28/10/2026)
+
+- [x] Branch local codex/dependabot-security-quality sobre main044e1b81, worktree separado.
+- [x] Consolidar os sete PRs12–18, preservando pins SHA e gates da pipeline.
+- [x] Validar Python3.13,47testes de automação,Ruff,actionlint e pip check.
+- [x] Auditar antes/depois:76registros/58IDs do Pillow antigo para zero nos quatro pins.
+- [x] Harness completo:327 parses,101suítes/46.117checks,29partidas,152Python;zero falhas/skips.
+- [x] Cobertura Python CI acima do piso40%,relatórios e revisão independente sem achados.
+- [x] Registrar limitações:alertas remotos desabilitados,Code Scanning sem análise.
+- [ ] Conferir actions e pacotes nos runners hospedados após autorização de envio.
+
+Plano e evidências: DEPENDABOT_CONSOLIDATION.md. PRs originais permanecem abertos;
+nenhum push,merge ou release. Alteração local preexistente de project.godot preservada.
+
 ## Desempenho CI no PR20 — REQ-52 / emenda ADR-151 (28/10/2026)
 
 - [x] Grupos determinísticos das13+16 partidas, com inventário exato e modo sem filtros preservado.

@@ -1978,3 +1978,14 @@ somente a política anterior que enfileirava integralmente execuções de PR.
 `queue` não aceita expressão, segundo documentação primária GitHub; corrigido
 após revisão e teste RED→GREEN. Nomes protegidos, versões e publicação intactos.
 Plano, medidas e limites em CI_SPEEDUP.md.
+
+
+**Emenda28/10/2026 — consolidação Dependabot (REQ-52 / ADR-151).** Reunir os
+PRs12–18 sobre a main atual em `codex/dependabot-security-quality`; os três
+pins Python e quatro actions continuam em fontes únicas existentes, com SHA
+completo para actions. Preservar Python3.13, runners, permissões, fila, quatro
+checks protegidos, testes e gates de pacote/publicação. A auditoria local de
+pacotes CI é separada da consulta de alertas remotos; API informou alertas
+Dependabot desabilitados e Code Scanning sem análise. Não alterar configurações
+remotas, fechar PRs ou publicar nesta manutenção local. A atualização não muda
+jogo/arte/versão. Plano e evidências em DEPENDABOT_CONSOLIDATION.md.

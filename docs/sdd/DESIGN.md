@@ -1046,3 +1046,11 @@ analisam os commits reais; título convencional continua obrigatório no PR.
 `publish.py` valida os seis inputs internos e publica dois ZIPs + SHA256SUMS
 temporário em UTF-8/LF. Manifestos/sidecars individuais ficam nos artifacts da CI;
 draft retoma uploads e o layout de releases já publicadas permanece intacto.
+
+
+Manutenção Dependabot de28/10/2026: `.github/requirements-ci.txt` continua
+como fonte das versões Python exatas; actions em `desktop.yml` mantêm SHA
+completo. Consolidar patches sobre a main atual e testar em venv Python3.13
+isolado. Auditoria de vulnerabilidades usa ambiente separado do harness,
+sem acrescentar dependências ao jogo. DEPENDABOT_CONSOLIDATION.md registra
+compatibilidade, escopo e limites dos serviços de análise remota.
