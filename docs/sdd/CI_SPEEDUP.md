@@ -76,3 +76,15 @@ Override local preexistente permanece ignorado e excluído do pacote.
 
 Fontes da política: [GitHub Actions concurrency](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency)
 e [restrição de queue literal](https://github.github.com/gh-aw/reference/concurrency/#queue-behavior-queue).
+
+## Correção pós-run 40791957919
+
+Primeiro run hospedado com o pool: Windows falhou só em `test_performance`
+(quadro de 87,4 ms contra o limite de 40 ms) porque a suíte, que cronometra
+quadros reais, dividia os 4 núcleos com a faixa Python/cobertura e oito grupos
+de partidas; o macOS foi cancelado junto. `ISOLATED_SUITES` em
+`scripts/ci/check.py` tira essa suíte da faixa comum e a roda sozinha depois
+do pool, com o mesmo perfil e o mesmo limite (nenhum teste afrouxado).
+`test_ci_runner` cobre a ordem (faixa → pool → isolada) e falhou antes da
+mudança. Local: automação 13/0, Ruff aprovado, runner real com
+test_hud/test_grub_model/test_performance exit 0.

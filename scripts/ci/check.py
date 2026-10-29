@@ -15,6 +15,8 @@ import unittest
 ROOT = Path(__file__).resolve().parents[2]
 ERRORS = re.compile(r'SCRIPT ERROR|Parse Error|Failed to load script|^ERROR:|^FAIL:|FAILURES: [1-9]', re.M)
 MATCH_CASES = {'test_matches': list(range(81, 94)), 'test_classic_matches': list(range(1, 17))}
+# Suites that time real frames; they run alone once the parallel lanes finish.
+ISOLATED_SUITES = ('test_performance',)
 
 
 class TimedResult(unittest.TextTestResult):
@@ -205,7 +207,7 @@ def main():
             print((logs / 'import.log').read_text(errors='replace')[-6000:])
             raise SystemExit(1)
         suites = args.suites or godot_suites()
-        common = [name for name in suites if name not in MATCH_CASES]
+        common = [name for name in suites if name not in MATCH_CASES and name not in ISOLATED_SUITES]
         common_profile = profile('godot')
         tasks = {'godot': lambda: godot_lane(godot, logs, common_profile, common, not args.suites)}
         if not args.suites:
@@ -220,6 +222,9 @@ def main():
                     tasks[label] = lambda n=name, s=shard, p=shard_profile: match_or_suite(godot, logs, p, n, s, shards)
         print(f'CI workers: {args.workers}; match groups per suite: {shards}', flush=True)
         results.update(run_parallel(tasks, args.workers))
+        for name in suites:
+            if name in ISOLATED_SUITES:
+                results.update(match_or_suite(godot, logs, common_profile, name))
     report = {'scope': 'GDScript suite results; line coverage is Python only', 'workers': args.workers,
               'seconds': round(time.perf_counter() - started, 3),
               'matches': sum(value.get('matches', 0) for value in results.values()), 'results': results}
