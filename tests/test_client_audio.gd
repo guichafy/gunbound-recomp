@@ -65,9 +65,17 @@ func exercise_audio() -> void:
 	var previous := sound.next_player
 	sound.play_turn(true)
 	check(sound.next_player == previous, "Mute suppresses native turn playback")
+	var playbacks: Array[WeakRef] = []
+	for player in sound.players + [sound.music]:
+		if player.has_stream_playback():
+			playbacks.append(weakref(player.get_stream_playback()))
 	sound.queue_free()
 	await process_frame
-	# Let the audio server release the playback instances stopped by _exit_tree.
-	await create_timer(0.1).timeout
+	# The audio server releases the playbacks stopped by _exit_tree on its mix
+	# thread; a loaded CI runner needed more than a fixed 0.1 s, so wait for them.
+	var deadline := Time.get_ticks_msec() + 5000
+	while playbacks.any(func(ref: WeakRef) -> bool: return ref.get_ref() != null) and Time.get_ticks_msec() < deadline:
+		await create_timer(0.05).timeout
+	check(playbacks.all(func(ref: WeakRef) -> bool: return ref.get_ref() == null), "The audio server releases every stopped playback")
 	ClientAudio.cache.clear()
 
