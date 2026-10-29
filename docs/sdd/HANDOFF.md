@@ -1,5 +1,25 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Consolidação Dependabot — REQ-52 / ADR-151 (28/10/2026)
+
+Branch local `codex/dependabot-security-quality`, base main044e1b81, em worktree
+separado. PRs12–18 consolidados: checkout7.0.1,upload7.0.2,setup-python7.1.0,
+download8.0.2 (SHA completo); coverage7.17.0,Pillow13.0.0,ruff0.17.2.
+Gates/checks/fila/permissões/inventário preservados. Python3.13.11/Godot4.7.2.
+Auditoria pip-audit/PyPI: Pillow12 tinha76registros/58IDs únicos; conjunto final
+com quatro pins retornou zero vulnerabilidades conhecidas. API informa alertas
+Dependabot desabilitados e Code Scanning sem análise; configurações inalteradas.
+
+Final local:327 parses,101suítes Godot/46.117checks,29partidas,152testes Python,
+zero falhas/skips/exit0 em331,137s; cobertura CI62%. Ruff/actionlint/pip check e
+47testes de automação dirigidos aprovados. Revisão independente sem achados.
+Logs `.tools/dependabot-full-harness.log` e `.tools/check-logs/report.json`;
+resumo versionado em `docs/sdd/dependabot/2026-10-28-audit.json`.
+Plano, hash e limites em DEPENDABOT_CONSOLIDATION.md. Execução hospedada das
+actions/macOS/Windows pendente; auditoria restrita aos pacotes Python CI.
+Sem push,PR novo,merge,fechamento de PRs,release ou exportação. Sem alteração do
+jogo/arte/versão; `project.godot` sujo no checkout original foi preservado.
+
 ## Desempenho CI do PR20 — 28/10/2026
 
 REQ-52/emenda ADR-151, branch fix/grub-weather-room. Runner usa pool limitado

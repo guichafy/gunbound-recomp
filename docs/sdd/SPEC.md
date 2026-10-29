@@ -961,3 +961,9 @@ Próximas releases publicam apenas os dois ZIPs e um SHA256SUMS consolidado.
 Manifestos JSON e checksums individuais permanecem nos artifacts desktop da CI
 e continuam obrigatórios na validação antes de publicar. Releases já publicadas
 ficam preservadas; os dois arquivos Source code são anexos automáticos do GitHub.
+
+
+Manutenção Dependabot de28/10/2026 (REQ-52): consolidar os sete PRs abertos
+#12–18 numa branch local, validar segurança e compatibilidade do conjunto sem
+reduzir os gates existentes. Inventário, plano e limites em
+DEPENDABOT_CONSOLIDATION.md. Não inclui mudanças no jogo nem publicação.
