@@ -93,6 +93,8 @@ A execução real das actions, cache, artifacts e build Windows dependem dos
 runners GitHub e continuam pendentes. Auditoria não cobre JavaScript das
 actions, Godot ou cliente original. Não houve validação visual/GPU nova;
 nenhuma arte ou código do jogo mudou.
-Nenhum push, merge, encerramento dos PRs, release ou exportação está incluído
-neste pedido de branch local. `project.godot` modificado no checkout original
+A primeira etapa terminou localmente. Pedido posterior autoriza push, abertura
+do PR consolidado e acompanhamento dos checks hospedados; seus resultados
+serão vinculados no PR. Merge, encerramento dos PRs originais e release
+não foram solicitados. `project.godot` modificado no checkout original
 fica preservado; o worktree usa o arquivo versionado da main.

@@ -9,7 +9,7 @@
 - [x] Harness completo:327 parses,101suítes/46.117checks,29partidas,152Python;zero falhas/skips.
 - [x] Cobertura Python CI acima do piso40%,relatórios e revisão independente sem achados.
 - [x] Registrar limitações:alertas remotos desabilitados,Code Scanning sem análise.
-- [ ] Conferir actions e pacotes nos runners hospedados após autorização de envio.
+- [ ] Enviar branch, abrir PR consolidado e acompanhar checks/actions/pacotes hospedados (autorizado na etapa posterior).
 
 Plano e evidências: DEPENDABOT_CONSOLIDATION.md. PRs originais permanecem abertos;
 nenhum push,merge ou release. Alteração local preexistente de project.godot preservada.
