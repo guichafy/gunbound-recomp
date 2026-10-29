@@ -2,6 +2,11 @@
 
 ## Consolidação Dependabot — REQ-52 / ADR-151 (28/10/2026)
 
+**Etapa posterior autorizada:** enviar a branch, abrir PR consolidado e acompanhar
+os checks GitHub Actions até terminarem. Evidência hospedada será vinculada no PR;
+merge, fechamento dos PRs originais e release não foram solicitados. Os resultados
+e a ausência de push abaixo descrevem a etapa inicial local.
+
 Branch local `codex/dependabot-security-quality`, base main044e1b81, em worktree
 separado. PRs12–18 consolidados: checkout7.0.1,upload7.0.2,setup-python7.1.0,
 download8.0.2 (SHA completo); coverage7.17.0,Pillow13.0.0,ruff0.17.2.
