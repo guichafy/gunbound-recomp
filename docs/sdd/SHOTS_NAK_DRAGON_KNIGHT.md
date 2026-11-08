@@ -6,9 +6,10 @@ implementados igual ao GunBound clássico". Cliente fixado: `GunBound.gme` SHA-2
 `4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde`, `graphics.xfs`
 `a52f9f46…`, `characterdata.dat` da TestClient jglim.
 
-Ferramentas: Ghidra 12.2 headless (runner da skill, projeto copiado em
-`builds/ghidra-knight-dragon`) e REA/Hopper para leituras pontuais. Extratos em
-`.tools/knight-dragon/01-main` … `07-child` (manifestos `ok`). Nenhuma execução do
+Ferramenta: Ghidra 12.2 headless (runner da skill, projeto copiado em
+`builds/ghidra-knight-dragon`). Extratos em `.tools/knight-dragon/01-main` … `08-consts`
+(manifestos `ok`); as constantes e strings citadas foram relidas no Ghidra em `08-consts`.
+Por decisão do usuário, o REA só deve ser usado com o provedor Ghidra (licença). Nenhuma execução do
 cliente Windows. Classes: **C** comprovado no ASM/dados, **D** derivado, **A** adaptação.
 
 ## Plano
@@ -69,10 +70,14 @@ nesta entrega; Dragon e Knight usam a ordem do cliente (`ADDITIVE_LIGHT_KINDS`).
 | Filho espera `[0x3f9c]` ticks parado e voa a partir do tick do atraso (toca o som de disparo ali) | Animate `0x47ab00` | `KnightEffect.waiting` (som: A, não tocado) | C |
 | Dano: linha type 14 S1 136 / S2 128 / SS 126 por filho | `characterdata` | catálogo | C (fórmula e contato comuns: A) |
 | Arte do Ion e do filho: `knightion(l)`, `knightbullet(l)`; corpo alfa + luz aditiva; Ion gira para θ e balança no `normal` (tabela de 22 passos de `0x47dc00`) | `graphics.xfs`; `0x47dc00` | `import_knight_ion.py`, `knight_art.gd` | C (mistura do Ion: D, mesma do bullet) |
+| `bullet15p` e `bullet15pl` têm os mesmos pixels nos 20 quadros (só o cabeçalho difere): o guia do SS soma a própria imagem por cima de si | decodificação do XFS; `test_knight_assets.py` | corpo + luz aditiva | C |
 | Impacto `knightflame` não existe no `graphics.xfs` | strings `0x553d20`; índice do XFS | sem quadro de impacto, como antes | C |
 
 ## Validação
 
 `test_dragon_shots` (58), `test_knight_shots` (92), `test_nak` (62), `test_classic_mobiles`,
-`test_classic_flight_parity`, `test_mage_spark_art`, `test_mage_sparks`. Captura GPU `tests/capture_mobile_shots.gd -- <id> [tag] [dark]` em
+`test_classic_flight_parity`, `test_mage_spark_art`, `test_mage_sparks`. `test_knight_assets.py` confere cada quadro do Ion/filho com o `graphics.xfs`. Sonda local na cena
+real (`main.tscn`, fora do repositório): Dragon S1 → 110 faíscas pelo `weather_art`, Knight S1/SS e
+ASate desenhando os dois Ions, sem erros no log.
+Captura GPU `tests/capture_mobile_shots.gd -- <id> [tag] [dark]` em
 `docs/mobile-shots/` (Nak antes/depois, Dragon claro/escuro). Partidas completas no HANDOFF.

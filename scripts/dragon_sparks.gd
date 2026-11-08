@@ -73,6 +73,9 @@ func accept(event: Dictionary) -> void:
 		sync(birth)
 	var from: Vector2i = event.from
 	var key := str(event.get("key", ""))
+	# 0x3f9c starts at 0 on every new shell.
+	if bool(event.get("first", false)):
+		counters.erase(key)
 	for point in samples(from, Vector2i(event.to)):
 		var counter := int(counters.get(key, 0))
 		if counter < quality:

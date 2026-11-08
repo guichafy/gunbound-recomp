@@ -667,7 +667,7 @@ func advance_projectile_tick(delta: float) -> void:
 		var previous: Vector2 = projectile.hit_pos
 		# Dragon S1/S2 (0x46fb20): sparks along this tick's sweep; presentation owns the RNG.
 		if str(projectile.get("flight", "")) == ClassicFlight.DRAGON_SPARKS:
-			events.append({"type": "dragon_spark_sweep", "tick": spark_tick, "key": "%d:%d" % [int(projectile.volley), int(projectile.get("sound_group", 0))],
+			events.append({"type": "dragon_spark_sweep", "tick": spark_tick, "key": "%d:%d" % [int(projectile.volley), int(projectile.get("sound_group", 0))], "first": int(projectile.flight_ticks) <= 1,
 				"from": Vector2i(previous.floor()), "to": Vector2i((Vector2(hit.position) if not hit.is_empty() else actual).floor())})
 		projectile.hit_pos = actual
 		projectile.age += travel_delta
