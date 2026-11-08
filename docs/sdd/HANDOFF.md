@@ -1,5 +1,21 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Integração da gravidade à main local — 07/11/2026
+
+Solicitação posterior do usuário: trazer a worktree para a `main` local.
+A correção foi reaplicada sobre `origin/main` já disponível localmente,
+preservando o fechamento do Grub e as atualizações de CI/dependências.
+Conflitos somente em DECISIONS/HANDOFF/TASKS, resolvidos mantendo os registros
+dos dois lados. Código de gravidade e testes permaneceram idênticos ao aceite
+técnico anterior. `main` avançada por fast-forward no checkout principal.
+
+Harness na base integrada: exit0 em330,063s,100suítes de modelos/cenas,
+46.124checks,29partidas,152Python/zero skips e330parses sem falhas.
+Confirmação adicional no checkout principal: `test_actor_gravity`68/0.
+`project.godot` preexistente preservado por SHA-256; worktree e evidências
+mantidas. Sem push, publicação ou reexportação. Logs/relatório em
+`.tools/gravity-during-shots/main-integration-*` e `main-checkout.log`.
+
 ## Gravidade durante tiros — REQ-04/05/08/19/32/42/44/45 / ADR-152 (07/11/2026)
 
 Correção na worktree `gravity-during-shots/DemoGame`, branch
