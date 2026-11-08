@@ -976,7 +976,10 @@ ordem; o SS fica como estava. O Dragon emite S1 θ/P+10, S2 quatro corpos nos qu
 1/6/11/16 com (θ±1, P±10) e SS θ/P+10; S1/S2 não têm corpo e deixam o rastro de faíscas
 `CrashTexture` de `0x46fb20`; o SS explode e chama cinco filhos que nascem no semicírculo de
 200 px (30…150°) acima do impacto e voam a 10 px/tick até ele, sem gravidade nem vento. O
-Knight usa guia → Ion → filhos (3/5/8). Matriz e limites em `SHOTS_NAK_DRAGON_KNIGHT.md`.
+Knight usa guia → Ion → filhos (3/5/8). O casco do Nak soma a luz `tank3l` (brilho da carga do
+T2) e o SS do Nak é o mini-Nak `bullet3pl` somado, girado pelo rumo e espelhado na vertical. Todo
+tiro que cruza um tornado conserva a velocidade e só tem o X invertido nas bordas (ADR-155).
+Matriz e limites em `SHOTS_NAK_DRAGON_KNIGHT.md`.
 
 ## CI/CD desktop — REQ-52 / REQ-01 / REQ-12
 

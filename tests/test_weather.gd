@@ -168,24 +168,15 @@ func run() -> void:
 	model.apply_weather_contact(shell)
 	check(random_column.used and model.weather.columns.size() == 2 and model.weather.columns[1].type == "force" and shell.damage == 118, "Random activates once, spawning its extra weather that then acts")
 
-	# Tornado: across the column, back mirrored, out along the heading; relaunch.
+	# Tornado (ADR-155): the client's branch, velocity kept; see test_classic_ballistics.
 	shell = model.projectile_parameters(0, 45, 60, 0)[0]
 	model.weather.columns.clear()
 	var tornado: Dictionary = model.weather.add_column("tornado", 600, 1)
 	shell.pos = Vector2(570, 300)
 	shell.velocity = Vector2(300, -100)
 	model.apply_weather_contact(shell)
-	check(not shell.tornado.is_empty() and shell.tornado.step == 1, "Tornado captures the shell")
-	var steps := {}
-	for i in range(400):
-		if shell.tornado.is_empty():
-			break
-		steps[int(shell.tornado.step)] = true
-		var moved: Dictionary = model.tornado_step(shell, 1.0 / 120.0)
-		shell.pos = moved.position
-		shell.velocity = moved.velocity
-	check(shell.tornado.is_empty() and steps.has(1) and steps.has(2) and steps.has(3), "Tornado runs its three steps and releases the shell")
-	check(shell.pos.x > 600 + model.weather.outer_half(tornado) and shell.velocity.distance_to(Vector2(300, -100).normalized() * float(shell.launch_speed)) < 0.01, "Release continues along the entry heading at the launch speed")
+	check(bool(shell.tornado.get("native", false)) and int(shell.tornado.column) == int(tornado.id) and int(shell.tornado.turns) == 0, "Tornado captures the shell in the native branch")
+	check(not shell.has("launch_speed") or shell.tornado.get("speed") == null, "No relaunch speed is stored")
 
 	# Thor strike: beam from the satellite, damage 40 + 20/level, XP from damage.
 	model.start(2, 1, 13, "", "original", null, [], [], [], 0, 4)

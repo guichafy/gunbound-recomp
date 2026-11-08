@@ -73,9 +73,30 @@ nesta entrega; Dragon e Knight usam a ordem do cliente (`ADDITIVE_LIGHT_KINDS`).
 | `bullet15p` e `bullet15pl` têm os mesmos pixels nos 20 quadros (só o cabeçalho difere): o guia do SS soma a própria imagem por cima de si | decodificação do XFS; `test_knight_assets.py` | corpo + luz aditiva | C |
 | Impacto `knightflame` não existe no `graphics.xfs` | strings `0x553d20`; índice do XFS | sem quadro de impacto, como antes | C |
 
+## Revisão de 08/11/2026 — carga e SS do Nak, clima e tornado
+
+Pedido: "Nak T2 ao carregar a barra ainda parece com o efeito errado; SS do Nak diferente do
+clássico; revisar os tiros com clima e outras variações; tiros que passam pelo tornado pegam
+muita velocidade". Extratos Ghidra em `.tools/knight-dragon/09-nak-ss` (manifesto `ok`).
+
+| Comportamento | Evidência | Godot | Classe |
+|---|---|---|---|
+| Luz do casco `tank3l.img` (382 quadros; corpo 392, `sfire` sem luz): a carga `bfire2` mostra só a bola escura no corpo e o brilho elétrico na luz | loader `0x43f6d0..0x43f6f3` carrega `tank3.img` e `tank3l.img`; pixels do XFS | `CharacterSpritesheetLight.png`, `NakSprite.draw_hull_glow` aditivo por view | C (pixels); mistura aditiva: D (mesma regra do Grub/ADR-150) |
+| SS: vtable `0x556284` — Animate `0x48d110`, publish `0x488880`, Simulate `0x48b7f0`, Explode `0x48b420` (`ssflame3`) | `09-nak-ss` | — | C |
+| SS sem corpo: o XFS não tem `bullet3p.img`; só a luz `bullet3pl` vai ao passe aditivo | índice do `graphics.xfs` | `NakSprite.ss_layer`, passe aditivo | C |
+| SS gira pelo rumo e espelha na vertical para 90 < rumo < 270 | `0x488880` (`[0x20c34]`) | `ss_layer` | C |
+| SS sem teste de terreno; explode em mobile (`0x450e10`) e objetos (`0x425ac0/0x425c90/0x425e60`); amostra força/tornado/eletricidade | `0x48b7f0` | `ghost` já existente (objetos: A) | C |
+| T1/T2 giram pelo rumo publicado | `0x458690` | rotação pelo `velocity` | D |
+| Tornado: velocidade conservada, |vx| ≥ 200, X invertido em cada borda até a 3ª saída, sem gravidade/vento dentro; nada de relançar na velocidade de lançamento | ramo `0x451030` de `0x455cc0` (ADR-150/Aduka), `0x46fb20`, `0x48b7f0` | `WeatherContact.interact` cria o estado nativo; `AdukaWeather.finish` para todos | C (comum); entrada pelo retângulo interno: A |
+| Eletricidade/Thor do pai não passam aos 5 filhos do Dragon; Teleport do Dragon sem faíscas | política do ASate (guia) | `dragon_children`, `match.gd` | A declarada |
+
+Clima já coberto sem mudança: força/fraqueza/espelho seguem a ponte comum (dano ×1,2+10 etc.)
+para Nak/Dragon/Knight; o guia do Knight aplica itens/clima uma vez (`explode_actions`) e os filhos
+não recebem Thor (não passam por `launch_projectile`).
+
 ## Validação
 
-`test_dragon_shots` (58), `test_knight_shots` (92), `test_nak` (62), `test_classic_mobiles`,
+`test_dragon_shots` (61), `test_knight_shots` (92), `test_nak` (68), `test_classic_ballistics`/`test_weather` (tornado nativo), `test_classic_mobiles`,
 `test_classic_flight_parity`, `test_mage_spark_art`, `test_mage_sparks`. `test_knight_assets.py` confere cada quadro do Ion/filho com o `graphics.xfs`. Sonda local na cena
 real (`main.tscn`, fora do repositório): Dragon S1 → 110 faíscas pelo `weather_art`, Knight S1/SS e
 ASate desenhando os dois Ions, sem erros no log.

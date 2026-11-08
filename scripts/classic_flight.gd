@@ -376,8 +376,10 @@ static func dragon_children(projectile: Dictionary, impact: Vector2i, rules: Dic
 		shell.owner = int(projectile.get("owner", 0))
 		shell.vehicle = int(projectile.get("vehicle", 14))
 		shell.volley = int(projectile.get("volley", 0))
-		shell.electric = bool(projectile.get("electric", false))
-		shell.thor = bool(projectile.get("thor", false))
+		# Electricity/Thor stay with the shell that met them, once (as ASate's
+		# guide): five children must not multiply the shock or the beam.
+		shell.electric = false
+		shell.thor = false
 		shell.dragon_index = index
 		children.append(shell)
 		theta += step

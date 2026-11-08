@@ -162,6 +162,21 @@ func test_light_layers(sprite) -> void:
 	check(sprite.glow.canvases.has(view.get_instance_id()), "begin_projectiles opens the additive canvas of the battle view")
 	sprite.clear_projectiles()
 	view.free()
+	# tank3l.img: the hull light of the T2 charge (bfire2 243..250), none for sfire.
+	var hull: Dictionary = sprite.sheet("CharacterSpritesheetLight.png")
+	check(str(hull.entry) == "tank3l.img" and int(hull.frames) == 382 and sprite.hull_light != null, "Nak loads tank3l as its hull light (382 frames)")
+	var pose = load("res://scripts/sprite_pose.gd").new(Vector2(100, 100), 70.0, 1, {"frame": 245})
+	check(not sprite.hull_light_layer(pose).is_empty(), "the T2 charge frame 245 has its electric glow")
+	check(sprite.hull_light_layer(load("res://scripts/sprite_pose.gd").new(Vector2(100, 100), 70.0, 1, {"frame": 385})).is_empty(), "sfire frames past 381 have no light")
+	var other := Node2D.new()
+	sprite.draw_hull_glow(other, pose)
+	check(not sprite.hull_glow.canvases.has(other.get_instance_id()), "a view that did not open the pass gets no hull glow")
+	other.free()
+	# SS (0x488880): heading turn, vertical mirror for 90 < heading < 270, additive.
+	var left := {"pos": Vector2.ZERO, "hit_pos": Vector2.ZERO, "velocity": Vector2(-200, -50), "fp_velocity": Vector2i(-2560, -640), "age": 0.0, "launched": true}
+	var right := {"pos": Vector2.ZERO, "hit_pos": Vector2.ZERO, "velocity": Vector2(200, -50), "fp_velocity": Vector2i(2560, -640), "age": 0.0, "launched": true}
+	check(bool(sprite.ss_layer(left, Vector2.ZERO).mirror) and not bool(sprite.ss_layer(right, Vector2.ZERO).mirror), "SS mirrors vertically only while flying left")
+	check(is_equal_approx(Transform2D(sprite.ss_layer(right, Vector2.ZERO).transform).get_rotation(), Vector2(200, -50).angle()), "SS turns with its heading")
 	# The SS has no separate light: bullet3pl is its only sheet.
 	check(sprite.lights.size() == 2, "only S1/S2 carry a light sheet")
 	sprite.glow = null

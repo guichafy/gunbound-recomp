@@ -1957,6 +1957,28 @@ movimento é 28×24, o corpo do PE. O apoio visual 25 permanece. (d) `0x41da80` 
 `[33]` continua fora do custo: a flag `+0x8bb4` fica limpa.
 
 
+## ADR-155 — Tornado do cliente para todos os tiros (08/11/2026)
+
+REQ-24/REQ-54. Relato do usuário: tiros que passam pelo tornado ganham velocidade demais;
+deveriam ganhar só um pouco. Causa: os mobiles fora do caminho nativo usavam a ponte do
+Tornado.cs (`WeatherContact.tornado_step`), que, ao sair da coluna, relança o tiro na direção
+de entrada com a **velocidade de lançamento**. Decisão: todo tiro do laço comum entra no ramo
+do tornado já comprovado para `0x455cc0` (amostra `0x451030`, `AdukaWeather.finish`): velocidade
+conservada, |vx| mínimo 200 em ponto fixo, X invertido ao cruzar a borda (até três vezes) e sem
+gravidade/vento enquanto dentro. As varreduras próprias que amostram `0x451030` (Dragon
+`0x46fb20`, Nak SS `0x48b7f0`, Grub) têm o mesmo ramo. A entrada na coluna continua pela
+detecção comum (retângulo interno); a borda da volta usa a meia largura nativa (`geometry`).
+Substitui o tornado do Tornado.cs da 0.9 (WEATHER_CAMERA_0_9) e remove `tornado_step`.
+
+**Emenda 08/11/2026 da ADR-154 (Nak).** (a) `tank3l.img` é a luz do casco: a carga do T2
+(`bfire2`, quadros 243–250) segura uma bola escura cujo brilho elétrico só existe nessa camada.
+Importada como `CharacterSpritesheetLight.png` (382 quadros; `sfire` 382–391 sem luz) e somada
+ao corpo por view, como o `tank13l` do Grub. (b) SS: a classe `0x556284` publica por `0x488880`
+e não existe `bullet3p.img`, só a luz `bullet3pl`; o mini-Nak gira pelo rumo, espelha na
+vertical entre 90° e 270° e é somado (não mais alfa com espelho horizontal). (c) T1/T2 giram
+pelo rumo publicado por `0x458690`. (d) Revisão de clima/itens: filhos do SS do Dragon não
+herdam eletricidade/Thor do pai; o sinalizador do Teleport do Dragon não solta faíscas.
+
 ## ADR-154 — Luz dos tiros, Dragon e Knight pelo cliente (07/11/2026)
 
 REQ-54. Contexto: o Nak T1/T2 aparecia escurecido e Dragon/Knight usavam a balística comum.

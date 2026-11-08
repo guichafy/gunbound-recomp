@@ -614,19 +614,14 @@ func advance_projectile_tick(delta: float) -> void:
 		if not underground:
 			apply_weather_contact(projectile)
 		var native_weather := AdukaWeather.active(projectile)
-		var external: bool = not projectile.tornado.is_empty() and not native_weather
 		if bool(projectile.get("boomer", false)):
 			if not BoomerFlight.begin_tick(projectile, projectile.tornado.is_empty(), false):
 				projectile.age += travel_delta
 				continue
 		else:
 			projectile.flight_ticks = int(projectile.get("flight_ticks", 0)) + 1
-		if external:
-			next = tornado_step(projectile, Combat.STEP)
-			Physics.import_external_motion(projectile, next.position, next.velocity)
-		else:
-			Physics.move(projectile)
-			next = {"position": projectile.pos, "velocity": projectile.velocity}
+		Physics.move(projectile)
+		next = {"position": projectile.pos, "velocity": projectile.velocity}
 		# Only ignore the firing actor until the shell has cleared its muzzle.
 		var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
 		ClassicFlight.open_shell(projectile)
@@ -666,7 +661,7 @@ func advance_projectile_tick(delta: float) -> void:
 				events.append({"type": "burrow", "position": actual})
 		var previous: Vector2 = projectile.hit_pos
 		# Dragon S1/S2 (0x46fb20): sparks along this tick's sweep; presentation owns the RNG.
-		if str(projectile.get("flight", "")) == ClassicFlight.DRAGON_SPARKS:
+		if str(projectile.get("flight", "")) == ClassicFlight.DRAGON_SPARKS and not bool(projectile.get("beacon", false)):
 			events.append({"type": "dragon_spark_sweep", "tick": spark_tick, "key": "%d:%d" % [int(projectile.volley), int(projectile.get("sound_group", 0))], "first": int(projectile.flight_ticks) <= 1,
 				"from": Vector2i(previous.floor()), "to": Vector2i((Vector2(hit.position) if not hit.is_empty() else actual).floor())})
 		projectile.hit_pos = actual
@@ -686,11 +681,11 @@ func advance_projectile_tick(delta: float) -> void:
 				explode(hit.position, int(hit.actor), projectile)
 				projectiles.remove_at(i)
 		else:
-			var accelerate := not native_weather or AdukaWeather.finish(projectile)
-			Physics.finish_tick(projectile, not external and not entered_burrow and accelerate)
+			var accelerate := AdukaWeather.finish(projectile) if native_weather or bool(projectile.tornado.get("native", false)) else true
+			Physics.finish_tick(projectile, not entered_burrow and accelerate)
 			ClassicFlight.finish_tick(projectile)
 			if bool(projectile.get("boomer", false)):
-				BoomerFlight.finish_tick(projectile, not external and accelerate)
+				BoomerFlight.finish_tick(projectile, accelerate)
 		if hit.is_empty() and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
@@ -970,9 +965,6 @@ func apply_weather_contact(projectile: Dictionary) -> void:
 
 func weather_interact(projectile: Dictionary, column: Dictionary) -> void:
 	WeatherContact.interact(self, projectile, column)
-
-func tornado_step(projectile: Dictionary, delta: float) -> Dictionary:
-	return WeatherContact.tornado_step(self, projectile, delta)
 
 # Movement.ApplyGravity (Parameter.cs TankMovementInitialGravity/GravityFactor).
 const FALL_INITIAL_SPEED := 3.0

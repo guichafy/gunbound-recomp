@@ -1,5 +1,23 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Revisão: carga e SS do Nak, clima e tornado — ADR-155 e emenda ADR-154 — 08/11/2026
+
+- **Nak T2 carregando**: o brilho elétrico da carga (`bfire2`) mora na luz do casco `tank3l.img`, que
+  não existia no porte; agora é importada e somada ao corpo por view, como o `tank13l` do Grub.
+- **Nak SS**: só existe a luz `bullet3pl` (não há `bullet3p.img`); o mini-Nak é somado, gira pelo rumo
+  e espelha na vertical (`0x488880`). T1/T2 também giram pelo rumo.
+- **Tornado (todos os mobiles)**: a ponte do Tornado.cs relançava o tiro na velocidade de lançamento;
+  agora todo tiro usa o ramo do cliente (velocidade conservada, |vx| ≥ 200, só inverte X nas bordas).
+- **Clima/itens**: filhos do Dragon não herdam eletricidade/Thor; Teleport do Dragon sem faíscas.
+
+Validação (Godot 4.7.2, macOS, 08/11/2026): `scripts/check.sh` completo — parse aprovado, 105 suítes
+Godot/46.381 checks, 13 + 16 partidas completas e 20 suítes Python/108 testes, zero falhas.
+`test_nak` 68/0, `test_dragon_shots` 61/0, `test_classic_ballistics` 1081/0 (tornado com esperado
+à mão: 17 ticks, saída (645,215), mesma velocidade), `test_weather` 68/0. Capturas
+`docs/mobile-shots/nak-ss-048.png` e `nak-ss-dark-048.png`; sonda local da carga do T2 em `main.tscn`.
+Extratos Ghidra em `.tools/knight-dragon/09-nak-ss`. Sem execução do cliente Windows, escuta ou
+reexportação do aplicativo; aceite visual pendente.
+
 ## Emenda: Settings antes de Create, no lobby — REQ-55 / ADR-155 (08/11/2026)
 
 Correção solicitada após a entrega i18n: botão Settings movido para (163,551)

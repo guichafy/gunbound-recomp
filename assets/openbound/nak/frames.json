@@ -2053,6 +2053,20 @@
     ]
    ]
   },
+  "CharacterSpritesheetLight.png": {
+   "entry": "tank3l.img",
+   "frames": 382,
+   "columns": 20,
+   "cell": [
+    89,
+    117
+   ],
+   "origin": [
+    42,
+    114
+   ],
+   "entry_sha256": "092bf6a890d5d6a1707fc95db13ad02a96462bb8d37e6efa21215521103827de"
+  },
   "Bullet1.png": {
    "entry": "bullet3n.img",
    "frames": 10,
