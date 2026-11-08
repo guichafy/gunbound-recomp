@@ -1,5 +1,24 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## PR24 — runner macOS desativado — REQ-52 / emenda ADR-151 (08/11/2026)
+
+Execução42452525958, head d37992be: lint, versão e Windows aprovados;
+macOS cancelado em2s, sem steps/log, com anotação
+`The configuration 'macos-14-arm64-us-default' is not supported`.
+Imagem aposentada pelo GitHub em02/11/2026; matriz corrigida para `macos-15`.
+Bootstrap existente aceita Darwin/arm64/Godot universal. Nenhum código do
+jogo, versão ou política de merge/release alterado.
+
+Validação local:47 testes `test_ci_*.py` aprovados em Python3.12.14,
+Ruff e actionlint aprovados, diff sem erros. Primeira tentativa com Python3.9.6
+do sistema falhou (8 erros em test_ci_publish por hashlib.file_digest ausente
+e1 falha em test_ci_runner); repetição no ambiente compatível passou integralmente.
+Python3.13 local sem PyYAML; runner hospedado permanece em3.13.
+Harness Godot/export não repetidos: mudança exclusiva de runner.
+Pedido posterior do usuário autoriza commit/push para a branch
+`feature/updates-recomp` do PR24. Aprovação da nova execução hospedada
+pendente; merge/publicação de release não fazem parte deste envio.
+
 ## Versionamento e integração — 08/11/2026
 
 Pedido atual autoriza versionar a investigação/liberação offline e enviar

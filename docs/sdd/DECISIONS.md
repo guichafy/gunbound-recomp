@@ -2057,6 +2057,16 @@ Dependabot desabilitados e Code Scanning sem análise. Não alterar configuraç�
 remotas, fechar PRs ou publicar nesta manutenção local. A atualização não muda
 jogo/arte/versão. Plano e evidências em DEPENDABOT_CONSOLIDATION.md.
 
+**Emenda08/11/2026 — runner macOS do PR24 (REQ-52 / ADR-151).**
+Substituir `macos-14` por `macos-15` na matriz desktop. A execução
+42452525958 cancelou o job macOS antes de qualquer step: configuração
+`macos-14-arm64-us-default` sem suporte. O GitHub aposentou a imagem em
+02/11/2026 e recomenda `macos-15` entre os substitutos:
+https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement/.
+Versão explícita evita a troca automática de SO por `macos-latest`.
+Bootstrap já aceita Darwin/arm64 e usa Godot universal. Checks protegidos,
+Windows, testes, exportadores e política de publicação permanecem os mesmos.
+
 ## ADR-152 — Apoio dos mobiles durante a ação de tiro (07/11/2026)
 
 REQ-04/05/08/19/32/42/44/45. O usuário relata mobiles suspensos até o fim

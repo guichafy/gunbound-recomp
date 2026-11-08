@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## PR24 — runner macOS — REQ-52 / emenda ADR-151 (08/11/2026)
+
+- [x] Identificar anotação do cancelamento: imagem macos-14 sem suporte.
+- [x] Migrar matriz para macos-15, substituto oficial com versão explícita.
+- [x] Validar47 testes de automação, Ruff, actionlint e diff localmente.
+- [x] Preparar correção para commit/push ao PR24, autorizado pelo usuário.
+- [ ] Conferir aprovação da CI hospedada na nova revisão do PR24.
+
+Resultado e limites em HANDOFF.md; sem mudança no jogo ou exportação local.
+
 ## Peças offline e gêneros juntos — ADR-157 (08/11/2026)
 
 - [x] Conceder as67 peças auditadas sem alterar disponibilidade/preços nativos.
