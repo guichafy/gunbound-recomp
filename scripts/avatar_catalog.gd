@@ -42,6 +42,24 @@ func inventory_items(gender: int, category: int) -> Array:
 			if item.get("source")!="xfs" and canonical_key(item.key,gender)==item.key and int(item.category)==category and int(item.gender) in [gender,2]:
 				result.append(item)
 	return result
+
+## ADR-157: availability in offline training, separate from the native sale bit.
+func offline_piece(item: Dictionary) -> bool:
+	return item.get("source")=="xfs" and int(item.get("id",0))>0 and not item.get("buyable",false) and item.get("art_available",false) and not item.get("layers",[]).is_empty()
+
+## The native shop enumerates the wearer's gender first, then the other one.
+## Keep items()/compatible() restricted for equipment and non-shop consumers.
+func shop_items(gender: int, category: int, inventory: bool = false) -> Array:
+	if not xfs_active:
+		return inventory_items(gender,category) if inventory else items(gender,category)
+	var result: Array = []
+	var seen := {}
+	for kind in [gender,1-gender]:
+		for item in (inventory_items(kind,category) if inventory else items(kind,category)):
+			if not seen.has(item.key):
+				seen[item.key] = true
+				result.append(item)
+	return result
 func bonuses(equipment: Dictionary) -> Array:
 	var total: Array=[0,0,0,0,0,0,0,0]
 	for category in range(4):

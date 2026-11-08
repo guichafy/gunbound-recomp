@@ -25,6 +25,7 @@ ALL="$ALL test_grub_surface test_grub_flight test_grub_model test_grub_assets te
 ALL="$ALL test_dragon_shots test_knight_shots test_knight_assets"
 ALL="$ALL test_ci_smoke test_i18n test_settings_i18n test_lobby_settings"
 ALL="$ALL test_match_partition test_actor_gravity"
+ALL="$ALL test_avatar_offline"
 # --quick: todas as suites Godot/Python menos as partidas completas.
 QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches)$' | tr '\n' ' ')
 

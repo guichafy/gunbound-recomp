@@ -1,5 +1,30 @@
 # Entregas e próximos trabalhos
 
+## Peças offline e gêneros juntos — ADR-157 (08/11/2026)
+
+- [x] Conceder as67 peças auditadas sem alterar disponibilidade/preços nativos.
+- [x] Listar ambos os gêneros e inventário misto, sem duplicar compartilhados.
+- [x] Seleção/prévia/compra temporárias; vestir com troca de gênero e rollback.
+- [x] Preservar seleção após reordenação, conjuntos e progresso existente.
+- [x] Teste novo1195/0; rodada final5819checksGodot+14Python sem falhas.
+- [x] Conferir capturas de loja, sala/loading/batalha e revisão independente.
+
+Contrato/resultados/limites: `AVATAR_OFFLINE_ACCESS.md`. Sem exportação ou
+publicação; aceite visual/uso manual não substituídos por testes automáticos.
+
+## Auditoria de avatares — REQ-46/47 (08/11/2026)
+
+- [x] Criar worktree isolada e fixar hashes do TestClient em GunboundClassic.
+- [x] Conferir todos os DATs, registros, camadas, retratos e PNGs do porte.
+- [x] Ghidra: confirmar disponibilidade, listagem dos gêneros e caminho da loja.
+- [x] Registrar 67 peças não padrão já migradas mas fora de venda, nove lacunas da fonte e ff00001 sem DAT.
+- [x] Gerar inventário/galerias e auditoria reproduzível; 10.466 quadros/534 retratos sem divergências.
+- [x] 14 testes Python e 3.924 checks Godot/zero falhas; sem mudar runtime/perfil.
+
+Resultado e limites: `AVATAR_CATALOG_AUDIT.md`. Não há migração de peça
+pendente identificada neste TestClient; eventual acesso offline ou lista
+mista de gêneros constitui mudança futura, não parte desta investigação.
+
 ## Revisão Nak/clima/tornado — ADR-156 e emenda ADR-154 (08/11/2026)
 
 - [x] Luz do casco `tank3l` do Nak (carga do T2) importada e somada por view.

@@ -139,6 +139,7 @@ func _ready() -> void:
 		profile = Profile.new()
 	profile.load_profile()
 	profile.grant_test_funds()
+	profile.grant_offline_avatars()
 	if options == null:
 		options = Options.new(profile.path.get_basename() + "-options.json")
 		options.load_options()

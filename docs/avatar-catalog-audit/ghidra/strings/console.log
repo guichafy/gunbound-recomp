@@ -1,0 +1,180 @@
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-avatar-audit-20261108/profile" "-Dapplication.cachedir=/private/tmp/gunbound-avatar-audit-20261108/cache" "-Dapplication.tempdir=/private/tmp/gunbound-avatar-audit-20261108/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-avatar-audit-20261108/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-avatar-audit-20261108/profile" "-Dapplication.cachedir=/private/tmp/gunbound-avatar-audit-20261108/cache" "-Dapplication.tempdir=/private/tmp/gunbound-avatar-audit-20261108/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-avatar-audit-20261108/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-avatar-audit-20261108/profile" "-Dapplication.cachedir=/private/tmp/gunbound-avatar-audit-20261108/cache" "-Dapplication.tempdir=/private/tmp/gunbound-avatar-audit-20261108/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-avatar-audit-20261108/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-avatar-audit-20261108/profile" "-Dapplication.cachedir=/private/tmp/gunbound-avatar-audit-20261108/cache" "-Dapplication.tempdir=/private/tmp/gunbound-avatar-audit-20261108/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-avatar-audit-20261108/tmp"
+java version "26.0.1" 2026-04-21
+Java(TM) SE Runtime Environment (build 26.0.1+8-34)
+Java HotSpot(TM) 64-Bit Server VM (build 26.0.1+8-34, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: /private/tmp/gunbound-avatar-audit-evidence/strings/analysis.log (LoggingInitialization)  
+INFO  Loading user preferences: /private/tmp/gunbound-avatar-audit-20261108/profile/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (527 ms) (ClassSearcher)  
+WARNING: Final field name in class ghidra.util.charset.CharsetInfo has been mutated reflectively by class com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$2 in unnamed module @3c73951 (file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/gson-2.13.2.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)  
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)  
+INFO  Loaded 109 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)  
+INFO  Starting cache cleanup: /private/tmp/gunbound-avatar-audit-20261108/cache/guichafy-ghidra/fscache2 (FileCacheMaintenanceDaemon)  
+INFO  Finished cache cleanup, estimated storage used: 0 (FileCacheMaintenanceDaemon)  
+INFO  Headless startup complete (1239 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 60 extension points (19 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /Users/guichafy/.codex/worktrees/avatar-catalog-ghidra-audit/DemoGame/.codex/skills/gunbound-client-port/scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/gunbound-avatar-audit-20261108/projects/GunboundClient (HeadlessAnalyzer)  
+INFO  Creating project: /private/tmp/gunbound-avatar-audit-20261108/projects/GunboundClient (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: /private/tmp/gunbound-avatar-audit-20261108/projects/GunboundClient (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///Users/guichafy/Workspaces/DemoGame/.tools/gunbound-client/GunBound.gme (HeadlessAnalyzer)  
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:32:default:windows (ProgramLoader)  
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/guichafy/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)  
+INFO  Removing 2 unused filesystems from cache (FileSystemInstanceManager)  
+INFO  Additional info:
+Loading file:///Users/guichafy/Workspaces/DemoGame/.tools/gunbound-client/GunBound.gme?MD5=f38da743e00edccc31fb2bdc95c02032...
+------------------------------------------------
+
+Searching 4 paths for library ADVAPI32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library GDI32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library IMM32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library KERNEL32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library NTDLL.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library OLE32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library OLEAUT32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library SHELL32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library USER32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library WINMM.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library WS2_32.DLL...
+Library not found.
+------------------------------------------------
+
+Linking the External Programs of 'GunBound.gme' to imported libraries...
+  [ADVAPI32.DLL] -> not found in project
+  [GDI32.DLL] -> not found in project
+  [IMM32.DLL] -> not found in project
+  [KERNEL32.DLL] -> not found in project
+  [OLEAUT32.DLL] -> not found in project
+  [SHELL32.DLL] -> not found in project
+  [USER32.DLL] -> not found in project
+  [WINMM.DLL] -> not found in project
+  [WS2_32.DLL] -> not found in project
+  [OLE32.DLL] -> not found in project
+  [NTDLL.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///Users/guichafy/Workspaces/DemoGame/.tools/gunbound-client/GunBound.gme (HeadlessAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/data/PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/data/PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)  
+INFO  Skipping PDB processing: missing PDB information in program metadata (PdbUniversalAnalyzer)  
+INFO  Packed database cache: /private/tmp/gunbound-avatar-audit-20261108/cache/guichafy-ghidra/packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: windows_vs12_32 (ApplyDataArchiveAnalyzer)  
+INFO  Applied data type archive: windows_vs12_32 (ApplyDataArchiveAnalyzer)  
+INFO  No functions detected that make variadic function calls with format strings containing format specifiers (FormatStringAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.362 secs
+    Apply Data Archives                        0.434 secs
+    Call Convention ID                         0.687 secs
+    Call-Fixup Installer                       0.045 secs
+    Create Address Tables                      0.087 secs
+    Create Address Tables - One Time           0.504 secs
+    Create Function                            0.442 secs
+    DWARF                                      0.000 secs
+    Data Reference                             0.332 secs
+    Decompiler Switch Analysis                11.291 secs
+    Demangler Microsoft                        0.035 secs
+    Disassemble                                1.289 secs
+    Disassemble Entry Points                   0.555 secs
+    Embedded Media                             0.050 secs
+    External Entry References                  0.001 secs
+    Function ID                                0.944 secs
+    Function Start Pre Search                  0.024 secs
+    Function Start Search                      0.128 secs
+    Function Start Search After Code           0.037 secs
+    Function Start Search After Data           0.082 secs
+    Function Start Search delayed - One Time   0.005 secs
+    Non-Returning Functions - Discovered       0.521 secs
+    Non-Returning Functions - Known            0.004 secs
+    PDB Universal                              0.001 secs
+    Reference                                  0.463 secs
+    Scalar Operand References                  0.848 secs
+    Shared Return Calls                        0.310 secs
+    Source Language Support                    0.001 secs
+    Stack                                      1.744 secs
+    Subroutine References                      0.601 secs
+    Subroutine References - One Time           0.043 secs
+    Variadic Function Signature Override       0.048 secs
+    WindowsResourceReference                   1.693 secs
+    X86 Function Callee Purge                  0.262 secs
+    x86 Constant Reference Analyzer            2.389 secs
+-----------------------------------------------------
+     Total Time   26 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///Users/guichafy/Workspaces/DemoGame/.tools/gunbound-client/GunBound.gme (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: ExportClientEvidence.java '/private/tmp/gunbound-avatar-audit-evidence/strings' 'inspect' '-' '0x00552c70:80'  (HeadlessAnalyzer)  
+INFO  SCRIPT: /Users/guichafy/.codex/worktrees/avatar-catalog-ghidra-audit/DemoGame/.codex/skills/gunbound-client-port/scripts/ExportClientEvidence.java (HeadlessAnalyzer)  
+INFO  ExportClientEvidence.java> CLIENT_EVIDENCE ok=true output=/private/tmp/gunbound-avatar-audit-evidence/strings (GhidraScript)  
+INFO  ANALYZING changes made by post scripts: file:///Users/guichafy/Workspaces/DemoGame/.tools/gunbound-client/GunBound.gme (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///Users/guichafy/Workspaces/DemoGame/.tools/gunbound-client/GunBound.gme (HeadlessAnalyzer)  
+INFO  /GunBound.gme: file created (guichafy) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /GunBound.gme (GunboundClient:/GunBound.gme) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  

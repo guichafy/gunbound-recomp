@@ -2096,3 +2096,26 @@ o mesmo painel completo abre por MatchOverlay. Salvar/Cancelar/ESC permanecem
 no lobby; identidade/idioma atualizam sem reconstruir histórico/rascunho de chat.
 Create herda treino e preferências confirmados. Arte, menu de batalha, regras
 e perfil real preservados; sem export/push. Contrato em I18N_SETTINGS.md.
+
+## Evidência complementar às ADR-089/130 — auditoria de 08/11/2026
+
+A investigação solicitada em worktree confirma cobertura integral do
+TestClient280 disponível em GunboundClassic; não há decisão nova de liberar
+peças ou ampliar a versão de origem. Ghidra comprova o filtro de
+disponibilidade e a lista nativa com os dois gêneros. O filtro de gênero
+atual do porte fica identificado como adaptação existente, preservado nesta
+tarefa. Os 67 registros não padrão com arte fora de venda não são lacunas
+de migração. Nove registros sem arte na fonte e ff00001 sem DAT não autorizam
+completar recursos ou metadados inventados. Ver `AVATAR_CATALOG_AUDIT.md`.
+
+## ADR-157 — 67 peças offline e loja mista (08/11/2026)
+
+Pedido posterior à auditoria autoriza a concessão gratuita das 67 peças
+não padrão com arte, mantendo buyable/preços originais. A loja reúne os
+dois gêneros por categoria, atual primeiro, compartilhados uma vez, como
+0x00449540. Vestir uma peça possuída do outro gênero troca conjunto e gênero
+atomicamente; seleção/prévia/compra não mudam o piloto salvo. Concessão e
+integração de troca são adaptações offline explícitas. Nove lacunas da fonte
+e ff00001 sem DAT continuam excluídos. Contrato: AVATAR_OFFLINE_ACCESS.md.
+Substitui a manutenção do filtro único e da inacessibilidade descrita na
+auditoria, preservando a evidência e as demais decisões ADR-089/130.

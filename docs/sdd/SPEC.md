@@ -925,6 +925,11 @@ concessão. Não liberar itens indisponíveis nem alterar preços/bônus.
 
 ## Catálogo clássico de avatares — REQ-46
 
+Auditoria de 08/11/2026: `AVATAR_CATALOG_AUDIT.md` confirma cobertura integral
+dos registros e camadas disponíveis nesta build. Distinguir ausência de fonte,
+indisponibilidade de venda e filtro de gênero da loja; a investigação não
+autoriza liberar itens ou inventar registros.
+
 Pedido: manter todos os avatares originais do Gunbound clássico e refazer o
 catálogo com equivalência máxima a `jglim/gunbound-launcher` e
 `jglim/gunbound-server`. Plano e evidência em `AVATAR_CLASSIC_CATALOG.md`.
@@ -1018,3 +1023,13 @@ Manutenção Dependabot de28/10/2026 (REQ-52): consolidar os sete PRs abertos
 #12–18 numa branch local, validar segurança e compatibilidade do conjunto sem
 reduzir os gates existentes. Inventário, plano e limites em
 DEPENDABOT_CONSOLIDATION.md. Não inclui mudanças no jogo nem publicação.
+
+## Peças offline e listagem mista — REQ-38..41/46/47 (08/11/2026)
+
+Pedido posterior autoriza conceder gratuitamente as 67 peças não padrão
+com arte identificadas na auditoria e listar os dois gêneros juntos na loja,
+atual primeiro. Disponibilidade offline é separada do buyable original;
+IDs/preços/bônus/arte ficam intactos. Seleção/prévia/compra não trocam o
+piloto salvo; vestir possuído troca conjunto de gênero numa transação.
+Contrato e plano: `AVATAR_OFFLINE_ACCESS.md`; substitui apenas as restrições
+de acesso e listagem descritas na auditoria anterior.

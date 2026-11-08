@@ -149,10 +149,24 @@ func grant_test_funds() -> bool:
 	cash=INITIAL_TEST_BALANCE
 	test_funds_granted=true
 	return persist(previous)
+
+## Free offline entitlement; original buyable/prices remain untouched.
+func grant_offline_avatars() -> bool:
+	# A startup entitlement must not replace an existing unreadable save.
+	if FileAccess.file_exists(path) and JsonStore.read_dict(path)==null:
+		return false
+	var previous := snapshot()
+	for item in catalog.entries.values():
+		if catalog.offline_piece(item) and not owns(item.key):
+			owned.append(item.key)
+	if owned==previous.shop.owned:
+		return true
+	return persist(previous)
+
 func purchase(key: String, currency: String) -> String:
 	key=catalog.canonical_key(key,gender)
 	var item: Dictionary = catalog.find(key)
-	if not catalog.compatible(key, gender) or currency not in ["gold","cash"]:
+	if item.is_empty() or (item.get("source")!="xfs" and not catalog.compatible(key, gender)) or currency not in ["gold","cash"]:
 		return "invalid"
 	if owns(key):
 		return "owned"
@@ -170,12 +184,17 @@ func purchase(key: String, currency: String) -> String:
 		cash -= price
 	owned.append(key)
 	return "ok" if persist(previous) else "save"
-func equip(key: String) -> bool:
+func equip(key: String, switch_gender: bool = false) -> bool:
 	key=catalog.canonical_key(key,gender)
-	if not owns(key) or not catalog.compatible(key, gender):
+	var item: Dictionary = catalog.find(key)
+	var wearer := gender
+	if switch_gender and int(item.get("gender",2)) in [0,1]:
+		wearer = int(item.gender)
+	if not owns(key) or not catalog.compatible(key, wearer):
 		return false
 	var previous := snapshot()
-	equipped[str(gender)][str(int(catalog.find(key).category))] = key
+	gender = wearer
+	equipped[str(gender)][str(int(item.category))] = key
 	return persist(previous)
 func set_gender(value: int) -> bool:
 	if value not in [0,1]:
