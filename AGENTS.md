@@ -144,7 +144,7 @@ na cena, evento `dragon_spark_sweep`); SS chama 5 filhos (`ClassicFlight.dragon_
 Knight: guia → Ion (`knight_effect.gd`, `knight_art.gd`, sprites de `import_knight_ion.py`) →
 leques de 3/5 e chuva de 8. Testes test_dragon_shots/test_knight_shots/test_nak; captura
 tests/capture_mobile_shots.gd (`-- <id> [tag] [dark]`, docs/mobile-shots).
-Emenda/ADR-155 (08/11): luz do casco `tank3l` do Nak (carga do T2), SS do Nak somado com rumo e
+Emenda/ADR-156 (08/11): luz do casco `tank3l` do Nak (carga do T2), SS do Nak somado com rumo e
 espelho vertical, e tornado do cliente para todos os tiros (`AdukaWeather.finish`; não há mais
 relançamento na velocidade de lançamento).
 

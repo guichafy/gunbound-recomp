@@ -153,7 +153,7 @@ func charge() -> void:
 	check(host.shots == 1,"Drag releases native P1")
 	check(host.model.projectiles[0].launch_velocity_fp == Vector2i.ZERO,"Drag native diagonal P1, no15percent floor")
 
-## ADR-155: the client's tornado branch for every shell. Column x=600 at scale 1
+## ADR-156: the client's tornado branch for every shell. Column x=600 at scale 1
 ## has the native half width 128/4 = 32 (568..632). v=(3840,-1280) is kept while
 ## inside, X turns at x=645 and x=555, and the third crossing (x=645, tick 17)
 ## releases the shell with the same velocity: nothing is relaunched.
