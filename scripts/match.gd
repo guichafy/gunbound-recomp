@@ -360,6 +360,8 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		var velocity := shot_velocity(index, angle, power, weapon, turn, entry.power, native) if spread_after else shot_velocity(index, angle + turn, power, weapon, 0.0, 0.0, native)
 		var shell := ShellState.create(initial, velocity, entry.spawn, rules, weapon, component)
 		shell.owner = index
+		# Pending emissions follow displacement of their owner until launch.
+		shell.launch_actor_pos = Vector2(actors[index].pos)
 		shell.vehicle = vehicle_id
 		shell.sound_group = int(entry.get("sound_group", component))
 		shell.sound = bool(entry.get("sound", true))
@@ -385,6 +387,18 @@ func shot_shells(index: int, angle: float, power: float, weapon: int) -> Array:
 	return ItemEffects.modify_shells(self, index, angle, power, weapon, Items.definition(item), shells)
 
 func launch_projectile(projectile: Dictionary) -> void:
+	if projectile.has("launch_actor_pos"):
+		var owner := int(projectile.get("owner", shot_actor))
+		var offset: Vector2 = Vector2(actors[owner].pos) - Vector2(projectile.launch_actor_pos)
+		if offset != Vector2.ZERO:
+			# Keep the chosen velocity; only the unlaunched origin follows the body.
+			for field in ["pos", "hit_pos", "previous_draw_pos", "previous_hit_pos"]:
+				projectile[field] = Vector2(projectile[field]) + offset
+			for point in range(projectile.trail.size()):
+				projectile.trail[point] = Vector2(projectile.trail[point]) + offset
+			if bool(projectile.get("fp_ready", false)):
+				projectile.fp_pos = Physics.position_fp(projectile.pos)
+		projectile.erase("launch_actor_pos")
 	projectile.launched = true
 	seed_projectile(projectile)
 	# Thor intersects everything: every shell fired while active attaches to it.
@@ -506,6 +520,7 @@ func tick(delta: float) -> void:
 			ClassicFlight.crawl_mines(self, Combat.STEP)
 			AsateEffect.step_satellites(self)
 			AdukaEffect.step_thor(self)
+			settle_actors()
 			if int(actors[PLAYER].hp) <= 0 or int(actors[CPU].hp) <= 0:
 				finish_gold_shot()
 				check_end()
@@ -668,6 +683,9 @@ func advance_projectile_tick(delta: float) -> void:
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
 	LightningCombat.resolve(self)
+	# Resolve support after this tick's damage/craters, before the next flight
+	# tick tests contact. Prediction runs this same path on its own actors.
+	settle_actors()
 	var pending_supermine := mines.any(func(mine):return bool(mine.get("raon_mine",false)) and bool(mine.get("crawl",false)) and int(mine.get("owner",-1)) == shot_actor)
 	if projectiles.is_empty() and battle_effects.is_empty() and not pending_supermine:
 		phase = PHASE_SETTLE

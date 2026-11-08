@@ -96,6 +96,7 @@ func test_rates_and_prediction() -> void:
 			model.terrain.HEIGHT = 1000
 			model.terrain.cells.resize(model.terrain.WIDTH*model.terrain.HEIGHT)
 			model.terrain.cells.fill(0)
+			preload("res://tests/support/actor_platforms.gd").add(model)
 			model.wind = Vector2(26,0)
 			model.fire(45,60,1)
 			model.events.clear()

@@ -1,5 +1,14 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Gravidade durante tiros — REQ-04/05/08/19/32/42/44/45
+
+Atores vivos que perdem sustentação em uma cratera devem se acomodar ainda
+na ação de tiro, a cada tick fixo após os impactos/efeitos. As colisões dos
+ticks seguintes e a previsão da CPU devem usar essas posições. Minas e efeitos
+persistentes seguem o mesmo contrato fora do voo. Preservar dano, Gold,
+resultado e as regras atuais de queda/vento, ainda adaptações declaradas.
+Plano, reprodução e limites em `GRAVITY_DURING_SHOTS.md`.
+
 ## Boomer: poses de vida baixa — REQ-09/19/20/45
 
 O Boomer seleciona `wnormal`/`wmove` quando a vida atual é estritamente
