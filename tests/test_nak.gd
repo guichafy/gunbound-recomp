@@ -144,4 +144,24 @@ func _initialize() -> void:
 	check(sprite.frame_index("idle", 5.5, 0, true) == sprite.frame_index("idle_low", 5.5, 0, true), "Low health idle skips the bubble")
 	check(sprite.effect_capacity(0) == 11 and sprite.effect_capacity(2) == 25, "Original impact lengths")
 	check(sprite.shoot_sounds.size() == 3 and sprite.blast_sounds.size() == 3, "Original Nak sounds")
+	test_light_layers(sprite)
 	finish("NAK CHECKS")
+
+## ADR-152: 0x4c3020 draws the BulletTexture1 bodies (SRCALPHA/INVSRCALPHA) and then
+## the BulletTexture2 lights (SRCALPHA/ONE, level 0 at alpha 255). bullet3nl/sl
+## must go to the additive pass, never as a translucent alpha veil under the body.
+func test_light_layers(sprite) -> void:
+	check(sprite.glow.material.blend_mode == CanvasItemMaterial.BLEND_MODE_ADD, "Nak light layer uses the additive material")
+	for weapon in [0, 1]:
+		var bullet := {"pos": Vector2(50, 60), "hit_pos": Vector2(50, 60), "velocity": Vector2(10, -5), "age": 0.1, "launched": true}
+		var layers: Array = sprite.shell_layers(bullet, weapon, Vector2(50, 60))
+		check(layers.size() == 2 and not bool(layers[0].additive) and bool(layers[1].additive), "shot %d: alpha body first, light added after it" % weapon)
+		check(layers[0].texture == sprite.bullets[weapon] and layers[1].texture == sprite.lights[weapon], "shot %d: body bullet3%s, light bullet3%sl" % [weapon, "ns"[weapon], "ns"[weapon]])
+	var view := Node2D.new()
+	sprite.begin_projectiles(view)
+	check(sprite.glow.canvases.has(view.get_instance_id()), "begin_projectiles opens the additive canvas of the battle view")
+	sprite.clear_projectiles()
+	view.free()
+	# The SS has no separate light: bullet3pl is its only sheet.
+	check(sprite.lights.size() == 2, "only S1/S2 carry a light sheet")
+	sprite.glow = null

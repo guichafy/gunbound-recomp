@@ -37,6 +37,9 @@ const FOLDER := "res://assets/openbound/nak"
 var meta: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []
+# bullet3nl/sl are light layers: 0x458690 publishes them to BulletTexture2, which
+# 0x4c3020 draws SRCALPHA/ONE after the BulletTexture1 bodies (ADR-152).
+var glow = preload("res://scripts/additive_sprite_art.gd").new()
 
 func _init() -> void:
 	configure(FOLDER, CELL, PIVOT, SEQUENCES, 51.0, 53.0)
@@ -74,6 +77,12 @@ func cell_frame(name: String, index: int) -> Array:
 	var source := Rect2(Vector2(index % columns, int(index / columns)) * cell, cell)
 	return [source, Rect2(-Vector2(info.origin[0], info.origin[1]), cell)]
 
+func begin_projectiles(view: Node2D) -> void:
+	glow.begin(view)
+
+func clear_projectiles() -> void:
+	glow.clear()
+
 func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: Vector2 = Vector2.ZERO) -> void:
 	if not projectile.get("launched", true):
 		return
@@ -86,17 +95,25 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 		view.draw_set_transform(position, 0.0, Vector2(flip, 1))
 		view.draw_texture_rect_region(bullets[2], parts[1], parts[0])
 	else:
-		var name := "Bullet%d" % (weapon + 1)
-		# bullet3s: "normal" in the air, "special" once buried (SimulateShot2_Bullet3).
-		var state := "special" if bool(projectile.get("underground", false)) else "normal"
-		var frames: Array = sheet(name + ".png").states.get(state, [0])
-		var index := int(frames[step % frames.size()])
-		view.draw_set_transform(position)
-		var light := cell_frame(name + "Light.png", index)
-		view.draw_texture_rect_region(lights[weapon], light[1], light[0], Color(1, 1, 1, 0.75))
-		var body := cell_frame(name + ".png", index)
-		view.draw_texture_rect_region(bullets[weapon], body[1], body[0])
+		for layer in shell_layers(projectile, weapon, position):
+			if layer.additive:
+				glow.draw(view, layer.texture, layer.target, layer.source, Transform2D(0.0, position))
+			else:
+				view.draw_set_transform(position)
+				view.draw_texture_rect_region(layer.texture, layer.target, layer.source)
 	view.draw_set_transform(Vector2.ZERO)
+
+## S1/S2 cells in draw order: the alpha body, then its light added on top.
+func shell_layers(projectile: Dictionary, weapon: int, position: Vector2) -> Array:
+	var name := "Bullet%d" % (weapon + 1)
+	# bullet3s: "normal" in the air, "special" once buried (SimulateShot2_Bullet3).
+	var state := "special" if bool(projectile.get("underground", false)) else "normal"
+	var frames: Array = sheet(name + ".png").states.get(state, [0])
+	var index := int(frames[int(float(projectile.age) * SHOT_FPS) % frames.size()])
+	var body := cell_frame(name + ".png", index)
+	var light := cell_frame(name + "Light.png", index)
+	return [{"texture": bullets[weapon], "source": body[0], "target": body[1], "additive": false, "at": position},
+		{"texture": lights[weapon], "source": light[0], "target": light[1], "additive": true, "at": position}]
 
 ## Nak explosions are irregular client sheets: frame count from frames.json.
 func effect_capacity(weapon: int) -> int:
