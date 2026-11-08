@@ -190,14 +190,13 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	else:
 		apply_weather(initial)
 	for actor_index in actors.size():
-		if int(actors[actor_index].vehicle) in [1,8]:
+		if int(actors[actor_index].vehicle) in AdukaWeather.NATIVE_TERRAIN_VEHICLES:
 			terrain.enable_native()
 		if int(actors[actor_index].vehicle) == 10:
 			AsateEffect.ensure_satellite(self,actor_index)
 		elif int(actors[actor_index].vehicle) == KnightEffect.VEHICLE:
 			KnightEffect.ensure_ion(self,actor_index)
 		elif int(actors[actor_index].vehicle) == 16:
-			terrain.enable_native()
 			AdukaEffect.ensure_thor(self)
 	# The server draws the turn order (MatchManager / jglim start_game); fixtures
 	# pass an explicit side so their first shot stays the player's.

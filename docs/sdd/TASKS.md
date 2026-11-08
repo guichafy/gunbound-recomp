@@ -1,5 +1,20 @@
 # Entregas e próximos trabalhos
 
+## Colisão de Grub/Boomer no build — ADR-158 (08/11/2026)
+
+- [x] Conferir ZIP/assinatura da 0.22.0 e reproduzir com template release/PCK original.
+- [x] Identificar máscara1px ausente em Grub/Boomer sem adversário Mage/Lightning/Aduka.
+- [x] Regressão vermelha107falhas; centralizar inventário/preparo antes da CPU.
+- [x] Inicialização, reinício, terreno real/procedural e cópias:477checks/0.
+- [x] Smoke real dos48tiros + UI:230checks/0; gatePython12testes/0.
+- [x] Mesmo executávelrelease confirma T1 em voo e T2/SS ricocheteando na plataforma.
+- [x] ZIP local extraído/aprovado, universal e assinado; revisão sem achados.
+- [x] Harness integral:348parses,109suítes/48.540checks,29partidas,156Python/0falhas.
+- [ ] Aceite visual/manual e eventual envio/publicação por novo pedido.
+
+Registro: `BUILD_COLLISION_AUDIT.md`. Release0.22.0 pública permanece intacta;
+artefatos locais preservam versão0.20.5 do checkout. Sem commit/push.
+
 ## PR24 — runner macOS — REQ-52 / emenda ADR-151 (08/11/2026)
 
 - [x] Identificar anotação do cancelamento: imagem macos-14 sem suporte.

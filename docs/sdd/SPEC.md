@@ -957,6 +957,15 @@ contador, rótulos em português nem prévia de mobile; gênero e atributos fica
 fora do palco 800×600. Compra, vestir, rollback, atributos, bônus e perfil
 continuam os da REQ-38..41/46. Matriz e limites em AVATAR_SHOP_ORIGINAL.md.
 
+## Inicialização da colisão no pacote — REQ-04/07/08/19/32/44/45/51/52
+
+Todo mobile que usa o contato nativo deve receber a máscara de 1 px no
+início da partida, em qualquer lado e independentemente do adversário.
+A previsão copia a máscara pronta antes do worker. O smoke do executável
+exportado deve carregar Miramo e disparar T1/T2/SS dos 16 mobiles contra
+Bigfoot, verificando voo, contato com terreno e conclusão sem erros.
+Plano/reprodução: `BUILD_COLLISION_AUDIT.md`.
+
 ## Grub pelo cliente — REQ-51
 
 REQ-51 (ADR-150, issue #8): o Grub (ID 13, type 12) usa as regras comprovadas do cliente. S1 e SS

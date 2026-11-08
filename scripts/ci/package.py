@@ -73,7 +73,8 @@ def zip_windows(folder: Path, archive: Path) -> None:
 
 
 def smoke_passed(returncode: int, output: str) -> bool:
-    return returncode == 0 and 'PACKAGED SMOKE: PASS' in output and not ERRORS.search(output)
+    return (returncode == 0 and 'PACKAGED SMOKE: PASS' in output
+            and 'PACKAGED COMBAT: PASS (48 shots)' in output and not ERRORS.search(output))
 
 
 def write_manifest(archive: Path, platform: str, version: str, commit: str,

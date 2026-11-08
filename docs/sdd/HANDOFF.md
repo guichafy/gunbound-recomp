@@ -1,5 +1,47 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Autorização de entrega da correção — 08/11/2026
+
+Pedido posterior autoriza commit/push da ADR-158 e geração de nova versão
+para validar o buildmacOS. Publicar por PR sobre main e seguir os checks
+obrigatórios, sem bypass da proteção. A árvore de origem da correção é
+idêntica à main/tagv0.22.0 (a6246e40); branch `codex/fix-native-terrain` criada
+sobre essa main. Commitfix deve produzir0.22.1 pelo versionamento automático.
+A CI aplica a versão no checkout de exportação; não alterar o baseline do
+project.godot manualmente. Acompanhar PR, integração e release com ZIPs e
+checksums, mantendo a release0.22.0 existente. Resultado remoto será
+registrado no retorno da entrega; validações da seção abaixo permanecem
+como evidência da implementação exata.
+
+
+## Colisão no build macOS — REQ-04/07/08/19/32/44/45/51/52 / ADR-158 (08/11/2026)
+
+Relato na release0.22.0 confirmado com ZIP/hash/assinatura e seu executável
+release/PCK original em sonda isolada: Grub×Bigfoot começa com máscara1px
+vazia; T1 explode no tick2 no ar e T2/SS atravessam a plataforma. Código
+Match.start habilitava máscara apenas para1/8/16, mas contato nativo atende
+também6/13 (Boomer/Grub). CPU Mage e fixtures manuais ocultavam a omissão.
+Inventário agora compartilhado em AdukaWeather.NATIVE_TERRAIN_VEHICLES;
+preparo ocorre para ambos os lados antes das cópias/threads da CPU.
+
+Regressão nova:324checks/107falhas antes; final477/0 com matriz de adversários,
+dois lados, terreno real/procedural, reinício e24disparos com igualdade entre
+execução e snapshot. Smoke embarcado agora dispara48casos dos16mobiles contra
+Bigfoot (221/0), além de UI9/0; gatePython12/0 rejeita smoke só de UI.
+Mesmo executávelrelease com PCK corrigido confirma T1 em voo e ricochete
+T2/SS na plataforma. Revisão independente sem achados acionáveis.
+
+Harness integral final exit0/304,292s:348parses,109suítesGodot/48.540checks,
+29partidas,156Python/zero falhas/skips; coberturaPython62%. Ruff/diff aprovados.
+Empacotamento macOS local exit0, universal, assinatura deep/strict válida,
+ZIP extraído fora do projeto com smoke48tiros+UI aprovado. Artefatos mantêm
+0.20.5 do checkout e fontes ainda não commitados (manifest aponta baseHEAD,
+hashes efetivos registrados). Release0.22.0 pública permanece intacta.
+Sem commit/push/publicação, clienteWindows/pacoteWindows/GPU/input/escuta
+manual; perfil real preservado. Registro/hashes/logs e limites completos em
+`BUILD_COLLISION_AUDIT.md` e `.tools/grub-build-audit/`.
+
+
 ## PR24 — runner macOS desativado — REQ-52 / emenda ADR-151 (08/11/2026)
 
 Execução42452525958, head d37992be: lint, versão e Windows aprovados;

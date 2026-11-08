@@ -2,11 +2,14 @@ extends RefCounted
 ## Shared native weather sampling,455cc0/451030/4510f0. Mage4572b0/4a4950/
 ##483ff0, Lightning482550/4a8360 and Aduka share the velocity-preserving tornado.
 const Physics = preload("res://scripts/classic_ballistics.gd")
+## Shared inventory for common contact and Match.start's 1 px terrain warmup.
+## Grub T2/SS also consume this mask through their separate ricochet loop.
+const NATIVE_TERRAIN_VEHICLES := [1, 6, 8, 13, 16]
 
 static func active(projectile: Dictionary) -> bool:
 	# Grub T1 is Projectile::Simulate 0x455cc0, the same sampler as Mage/Aduka.
 	# S2/SS leave the common loop in advance_grub before this flag is read.
-	return int(projectile.get("vehicle",0)) in [1,6,8,13,16] and not bool(projectile.get("beacon",false))
+	return int(projectile.get("vehicle",0)) in NATIVE_TERRAIN_VEHICLES and not bool(projectile.get("beacon",false))
 
 static func geometry(column: Dictionary) -> Vector2i:
 	# Bridge the existing world's displayed128px columns to native full width.
