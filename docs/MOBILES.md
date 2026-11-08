@@ -8,7 +8,7 @@ As classes de evidência estão explicadas em [PORTE.md](PORTE.md).
 |---|---|---|---|
 | 1 | Mage | Revisado pelo cliente: T1/T2/SS, força, climas secundários e partículas em voo. Aguarda aceite | [MAGE_CLIENT_REVIEW](sdd/MAGE_CLIENT_REVIEW.md), [MAGE_SECONDARY_WEATHER](sdd/MAGE_SECONDARY_WEATHER.md), [MAGE_FLIGHT_SPARKS](sdd/MAGE_FLIGHT_SPARKS.md) |
 | 2 | Bigfoot | Arte original, suavizada 4×. Ataques herdados (adaptação), com porte parcial de animações na 0.20.4 sem resultados registrados. Falta a revisão de combate pelo cliente | [ORIGINAL_MAGE_BIGFOOT](sdd/ORIGINAL_MAGE_BIGFOOT.md), [BIGFOOT_ATTACKS_0_5](sdd/BIGFOOT_ATTACKS_0_5.md), [BIGFOOT_SMOOTH_4X](sdd/BIGFOOT_SMOOTH_4X.md) |
-| 3 | Nak | Arte, dano e voo com dados do cliente. Falta a revisão completa | [NAK_0_15](sdd/NAK_0_15.md) |
+| 3 | Nak | Arte, dano e voo com dados do cliente. Luz dos tiros T1/T2 aditiva sobre o corpo como no cliente (ADR-152). Falta a revisão completa | [NAK_0_15](sdd/NAK_0_15.md), [SHOTS_NAK_DRAGON_KNIGHT](sdd/SHOTS_NAK_DRAGON_KNIGHT.md) |
 | 4 | Armor | Balística comum. Falta o S2 com dois impactos | [BATTLE_MOBILE_FAMILY_PLANS §1](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
 | 5 | Trico | Balística comum. Falta o S2 de três componentes | [BATTLE_MOBILE_FAMILY_PLANS §1](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
 | 6 | Boomer | Curva, S2 temporizado, SS com congelamento e dano/cratera delimitados pelo cliente (ADR-142). Varredura, tornado e orientação (ADR-143), Lightning/Thor (ADR-144), minas e camadas do SS (ADR-145), vento na queda (ADR-146), boca fixa, poses e áudio (ADR-147); registro do apoio, pose ao vento apoiado e aceite visual/sonoro pendentes | [CLASSIC_BALLISTICS_0_20](sdd/CLASSIC_BALLISTICS_0_20.md) |
@@ -19,8 +19,8 @@ As classes de evidência estão explicadas em [PORTE.md](PORTE.md).
 | 11 | Ice | Balística comum. Falta o campo do S2/SS | [BATTLE_MOBILE_FAMILY_PLANS §6](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
 | 12 | Turtle | T1/T2 com a onda original (T2 aceito). Dano e física dos filhos do SS adaptados | [TURTLE_T2_FIDELITY](sdd/TURTLE_T2_FIDELITY.md), [TURTLE_ANIMATION_FIX](sdd/TURTLE_ANIMATION_FIX.md) |
 | 13 | Grub | Revisado pelo cliente: T1 no contato 0x455cc0, T2 (4 corpos)/SS com ricochete, dano repetido do SS, linha type 12, caixa 28×24 e Lua 8%. Sem cura por turno. A boca do tiro segue o muzzle genérico | [GRUB_CLIENT_FIX](sdd/GRUB_CLIENT_FIX.md) |
-| 14 | Dragon | Balística comum. Faltam a cadência do S2 e os filhos do SS | [BATTLE_MOBILE_FAMILY_PLANS §1](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
-| 15 | Knight | Balística comum. Faltam os satélites do SS | [BATTLE_MOBILE_FAMILY_PLANS §2](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
+| 14 | Dragon | Pelo cliente: S1/SS P+10, S2 quatro corpos (θ±1, P±10) em 1/6/11/16, rastro de faíscas `CrashTexture` e cinco filhos do SS no semicírculo de 200 px (ADR-152). Contato comum. Aguarda aceite | [SHOTS_NAK_DRAGON_KNIGHT](sdd/SHOTS_NAK_DRAGON_KNIGHT.md) |
+| 15 | Knight | Pelo cliente: guia → Ion → leques convergentes de 3/5 filhos e chuva de 8 no SS, filhos 6144/768 sem gravidade (ADR-152). Altura −400 do Ion e contato comum adaptados. Aguarda aceite | [SHOTS_NAK_DRAGON_KNIGHT](sdd/SHOTS_NAK_DRAGON_KNIGHT.md) |
 | 16 | Aduka | Revisado pelo cliente: T1/T2/SS, Thor, dano, colisão e tornado. O T2 mostra três criaturas a pedido do usuário. Aguarda aceite | [ADUKA_AUDIT](sdd/ADUKA_AUDIT.md), [ADUKA_COMBAT_REA](sdd/ADUKA_COMBAT_REA.md) |
 
 Os IDs são fixos e não devem mudar. O ID 0 (Escaravelho) foi retirado e não volta.

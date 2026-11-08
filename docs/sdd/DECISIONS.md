@@ -1957,6 +1957,29 @@ movimento é 28×24, o corpo do PE. O apoio visual 25 permanece. (d) `0x41da80` 
 `[33]` continua fora do custo: a flag `+0x8bb4` fica limpa.
 
 
+## ADR-152 — Luz dos tiros, Dragon e Knight pelo cliente (07/11/2026)
+
+REQ-53. Contexto: o Nak T1/T2 aparecia escurecido e Dragon/Knight usavam a balística comum.
+Decisão: (a) para os tiros publicados por `0x458690`, o corpo vai no passe alfa de
+`BulletTexture1` e a luz `*l` no passe SRCALPHA/ONE de `BulletTexture2`, depois do corpo e com
+alfa 255 no nível 0 (`0x4c3020`, comprovado). Aplicado ao Nak T1/T2 e aos Dragon/Knight
+(`ADDITIVE_LIGHT_KINDS`); os demais mobiles clássicos não mudam nesta decisão. Folhas que são
+só luz (guia do Knight `bullet15nl/sl`) entram inteiras no passe aditivo. (b) Dragon: emissão do
+MainAction `0x46d070` (S1/SS P+10, S2 quatro corpos (θ±1, P±10) em 1/6/11/16, após o clamp);
+S1/S2 sem corpo, com o rastro de faíscas de `0x46fb20`/`0x436fd0`/`0x471240` na apresentação
+(RNG fora do modelo, evento `dragon_spark_sweep`); SS com os cinco filhos de `0x46ca60`/`0x4388e0`
+(semicírculo `[82]`=200 a 30…150°, rumo para o centro, 2560 fp, aceleração 0, `normal`→`fly`,
+espelho `0x488880`). Substitui a rajada relativa à velocidade (`burst` 5 × 18°, 0,45·|v|) e os
+quadrados laranja do rastro. Adaptações declaradas: contato comum em vez de `0x455cc0`, passo
+de 8 px e qualidade 3 das faíscas, dano 160/27 por filho sem o divisor 5 de `0x41da80`.
+(c) Knight: guia → Ion → filhos sobre o modelo do ASate (`knight_effect.gd`): o guia não explode e
+acorda o Ion acima do dono; S1/S2 disparam leques convergentes de 3/5 filhos (θ, ±4 / ±2, ±4) com
+atrasos 3/7/7(/11/11), cada um a R do alvo no seu ângulo; o SS cobre a varredura de 27 px a y−400
+com 8 filhos 276…264 e de volta, atrasos i·2; filhos `(cos, −sen)·6144` com aceleração ·768, sem
+gravidade nem vento; arte `knightion(l)`/`knightbullet(l)` importada do `graphics.xfs`. Substitui a
+balística comum de um corpo. Adaptações: altura −400 do Ion ocioso não ativada, ramo de sinal do
+SS como no ASate, som do filho não tocado, contato e dano comuns.
+
 ## ADR-151 — CI/CD desktop e versões por push (28/10/2026)
 
 REQ-52 amplia REQ-01/12: implementar no PR11 a pipeline que antes continha

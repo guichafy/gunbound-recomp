@@ -23,6 +23,7 @@ const ActorState = preload("res://scripts/actor_state.gd")
 const ShellState = preload("res://scripts/shell_state.gd")
 const ClassicFlight = preload("res://scripts/classic_flight.gd")
 const AsateEffect = preload("res://scripts/asate_effect.gd")
+const KnightEffect = preload("res://scripts/knight_effect.gd")
 const JDEffect = preload("res://scripts/jd_effect.gd")
 const AdukaEffect = preload("res://scripts/aduka_effect.gd")
 const AdukaCombat = preload("res://scripts/aduka_combat.gd")
@@ -193,6 +194,8 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 			terrain.enable_native()
 		if int(actors[actor_index].vehicle) == 10:
 			AsateEffect.ensure_satellite(self,actor_index)
+		elif int(actors[actor_index].vehicle) == KnightEffect.VEHICLE:
+			KnightEffect.ensure_ion(self,actor_index)
 		elif int(actors[actor_index].vehicle) == 16:
 			terrain.enable_native()
 			AdukaEffect.ensure_thor(self)
@@ -519,6 +522,7 @@ func tick(delta: float) -> void:
 			if phase==PHASE_FINISHED:continue
 			ClassicFlight.crawl_mines(self, Combat.STEP)
 			AsateEffect.step_satellites(self)
+			KnightEffect.step_ions(self)
 			AdukaEffect.step_thor(self)
 			settle_actors()
 			if int(actors[PLAYER].hp) <= 0 or int(actors[CPU].hp) <= 0:
@@ -560,6 +564,7 @@ func advance_projectile_tick(delta: float) -> void:
 	spark_tick+=1
 	ClassicFlight.crawl_mines(self, delta)
 	AsateEffect.step_satellites(self)
+	KnightEffect.step_ions(self)
 	AdukaEffect.step_thor(self)
 	advance_battle_effects()
 	stamp_tilt()
@@ -593,6 +598,9 @@ func advance_projectile_tick(delta: float) -> void:
 		seed_projectile(projectile)
 		projectile.previous_draw_pos = projectile.pos
 		projectile.previous_hit_pos = projectile.hit_pos
+		if KnightEffect.waiting(projectile):
+			projectile.age += travel_delta
+			continue
 		if GrubFlight.active(projectile):
 			advance_grub(projectile, i, travel_delta)
 			continue
@@ -657,6 +665,10 @@ func advance_projectile_tick(delta: float) -> void:
 				hit = {}
 				events.append({"type": "burrow", "position": actual})
 		var previous: Vector2 = projectile.hit_pos
+		# Dragon S1/S2 (0x46fb20): sparks along this tick's sweep; presentation owns the RNG.
+		if str(projectile.get("flight", "")) == ClassicFlight.DRAGON_SPARKS:
+			events.append({"type": "dragon_spark_sweep", "tick": spark_tick, "key": "%d:%d" % [int(projectile.volley), int(projectile.get("sound_group", 0))],
+				"from": Vector2i(previous.floor()), "to": Vector2i((Vector2(hit.position) if not hit.is_empty() else actual).floor())})
 		projectile.hit_pos = actual
 		projectile.age += travel_delta
 		projectile.pos = next.position
@@ -738,6 +750,7 @@ func advance_grub(projectile: Dictionary, index: int, travel: float) -> void:
 
 func advance_battle_effects() -> void:
 	var asate_owners := {}
+	var knight_owners := {}
 	var finished: Array[int] = []
 	for effect_index in battle_effects.size():
 		var effect: Dictionary = battle_effects[effect_index]
@@ -749,6 +762,12 @@ func advance_battle_effects() -> void:
 				continue
 			asate_owners[int(effect.owner)] = true
 			alive = AsateEffect.step(effect,self)
+		elif str(effect.kind) == "knight":
+			# One Ion per owner, as ASate: a Dual guide waits for the first.
+			if knight_owners.has(int(effect.owner)):
+				continue
+			knight_owners[int(effect.owner)] = true
+			alive = KnightEffect.step(effect,self)
 		elif str(effect.kind) == "jd_crystal":
 			var event_start := events.size()
 			alive = JDEffect.step(effect,actors,mines,terrain,events)
@@ -772,6 +791,12 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		var effect_start := events.size()
 		if AdukaEffect.impact(self,projectile,position):
 			explode_actions(position,projectile,effect_start)
+		return
+	if KnightEffect.guide(projectile):
+		var knight_start := events.size()
+		# The guide (0x47b2f0/0x47de50) only wakes the Ion: no blast of its own.
+		battle_effects.append(KnightEffect.begin(self,projectile,position))
+		explode_actions(position,projectile,knight_start)
 		return
 	if AsateEffect.guide(projectile):
 		var guide_start := events.size()

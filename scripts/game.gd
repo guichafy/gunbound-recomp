@@ -882,9 +882,13 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO)
 	weather_art.draw_columns(self, model, offset)
 	weather_art.draw_thor(self, model, offset)
-	var satellite_sprite = sprite_for(10)
+	for sprite in sprites.values():
+		if sprite.has_method("begin_satellites"):
+			sprite.begin_satellites(self)
 	for satellite in model.satellites.values():
-		satellite_sprite.satellite_art.draw_satellite(self,satellite,offset,clampf(float(model.accumulator)/0.05,0,1))
+		var satellite_sprite = sprite_for(15 if str(satellite.get("kind","")) == "knight" else 10)
+		if satellite_sprite != null:
+			satellite_sprite.draw_satellite(self,satellite,offset,clampf(float(model.accumulator)/0.05,0,1))
 	draw_set_transform(offset)
 	for sprite in sprites.values():
 		if sprite.has_method("begin_hull_glow"):

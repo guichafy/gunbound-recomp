@@ -13,6 +13,7 @@ var native_beam_art = preload("res://scripts/aduka_beam_art.gd").new()
 var native_thor_art = preload("res://scripts/thor_native_art.gd").new()
 var native_columns = preload("res://scripts/mage_weather_art.gd").new()
 var mage_sparks = preload("res://scripts/mage_sparks.gd").new()
+var dragon_sparks = preload("res://scripts/dragon_sparks.gd").new()
 var thor_glow = preload("res://scripts/additive_sprite_art.gd").new()
 var column_glow = preload("res://scripts/additive_sprite_art.gd").new()
 var beam_glow = preload("res://scripts/additive_sprite_art.gd").new()
@@ -101,6 +102,8 @@ func react(event: Dictionary, model, sound) -> void:
 	match event.type:
 		"mage_spark_samples":
 			mage_sparks.accept(event)
+		"dragon_spark_sweep":
+			dragon_sparks.accept(event)
 		"explosion":
 			emit_ground(event.position, int(event.get("removed", 0)), float(event.get("angle", PI * 0.5)), model)
 		"mobile_lightning":
@@ -148,6 +151,7 @@ func emit_ground(position: Vector2, removed_cells: int, angle: float, model) -> 
 
 func tick(delta: float, model) -> void:
 	mage_sparks.sync(int(model.spark_tick))
+	dragon_sparks.sync(int(model.spark_tick))
 	clock += delta
 	scroll = fmod(scroll + SCROLL_SPEED * delta, FRAME.y * 8.0)
 	var alive := {}
@@ -257,6 +261,7 @@ func clear_beams() -> void:
 	beam_glow.clear()
 	mark_glow.clear()
 	mage_sparks.reset()
+	dragon_sparks.reset()
 	native_columns.clear()
 	beams.clear()
 	native_beam_art.clear()
@@ -296,6 +301,7 @@ func draw_beams(view: Node2D, offset: Vector2) -> void:
 func draw_shell_marks(view: Node2D, model, offset: Vector2) -> void:
 	RenderingServer.canvas_item_set_draw_index(mark_glow.begin(view),-150)
 	mage_sparks.draw(view,offset)
+	dragon_sparks.draw(view,offset)
 	# Force sparks, electric arcs and Weakness darkening ride on influenced shells.
 	for projectile in model.projectiles:
 		if not bool(projectile.launched):

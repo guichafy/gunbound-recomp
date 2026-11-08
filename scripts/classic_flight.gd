@@ -23,8 +23,18 @@ const TurtleFlight = preload("res://scripts/turtle_flight.gd")
 const RaonEffect = preload("res://scripts/raon_effect.gd")
 const AsateEffect = preload("res://scripts/asate_effect.gd")
 const AdukaEffect = preload("res://scripts/aduka_effect.gd")
+const Physics = preload("res://scripts/classic_ballistics.gd")
 const MINE_RANGE := 90.0
 const MINE_STEPS := 90
+# Dragon (ADR-152). S1/S2 are PrimaryShot_Bullet14 (sparks only, no body); the
+# SS Explode 0x46ca60 calls the spawner 0x4388e0 five times.
+const DRAGON_SPARKS := "dragon_sparks"
+const DRAGON_SS := "dragon_ss"
+const DRAGON_CHILD := "dragon_child"
+const DRAGON_CHILDREN := 5
+# 0x4388e0 velocity: (cos, -sin) of the inward heading times 2560 (0x55808c /
+# 0x558088), acceleration cells 0xaf4/0xd18 written 0: no gravity, no wind.
+const DRAGON_CHILD_SPEED := 2560.0
 
 static func prepare(projectile: Dictionary, entry: Dictionary) -> void:
 	AdukaEffect.prepare(projectile)
@@ -318,6 +328,10 @@ static func chill(model, projectile: Dictionary, event_start: int) -> void:
 
 static func burst(model, projectile: Dictionary, position: Vector2, velocity: Vector2) -> void:
 	var flight := str(projectile.get("flight", ""))
+	if flight == DRAGON_SS:
+		for shell in dragon_children(projectile, Vector2i(position.floor()), model.weapon_rules(int(projectile.get("owner", model.shot_actor)), 2)):
+			model.projectiles.append(shell)
+		return
 	# Dragon SS (ExplodeSuperShot_Bullet14) spawns five child shots at the
 	# impact. Turtle SS only bursts after the shell has opened.
 	if flight == "open" and str(projectile.get("ss_state","")) != "split":
@@ -338,3 +352,33 @@ static func burst(model, projectile: Dictionary, position: Vector2, velocity: Ve
 		shell.child = true
 		shell.launched = true
 		model.projectiles.append(shell)
+
+## 0x46ca60 -> 0x4388e0(i, x, y, theta, radius, 5, parent). theta starts at
+## (45 - step) * 2 and grows by step (cells 0x33c8 / 0x35ec of the SS: the
+## type-13 extras 30 / 200), so the children wait on the upper half circle at
+## 30..150 degrees and fly in toward the impact (theta + 180).
+static func dragon_children(projectile: Dictionary, impact: Vector2i, rules: Dictionary) -> Array:
+	var step := int(rules.get("dragon_step", 30))
+	var radius := int(rules.get("dragon_radius", 200))
+	var theta := (45 - step) * 2
+	var children: Array = []
+	for index in DRAGON_CHILDREN:
+		var start := impact + Vector2i(int(Physics.s(theta + 90) * float(radius)), int(-(Physics.s(theta) * float(radius))))
+		var heading := theta + 180
+		var velocity := Vector2i(int(Physics.s(heading + 90) * DRAGON_CHILD_SPEED), int(Physics.s(heading) * -DRAGON_CHILD_SPEED))
+		var child_rules: Dictionary = rules.duplicate(true)
+		child_rules.flight = DRAGON_CHILD
+		var shell := ShellState.create(Vector2(start), Vector2(velocity) / (256.0 * Combat.STEP), 0.0, child_rules, 2, index)
+		Physics.seed(shell, start * 256, velocity, Vector2i.ZERO)
+		shell.launch_velocity_fp = velocity
+		shell.child = true
+		shell.launched = true
+		shell.owner = int(projectile.get("owner", 0))
+		shell.vehicle = int(projectile.get("vehicle", 14))
+		shell.volley = int(projectile.get("volley", 0))
+		shell.electric = bool(projectile.get("electric", false))
+		shell.thor = bool(projectile.get("thor", false))
+		shell.dragon_index = index
+		children.append(shell)
+		theta += step
+	return children

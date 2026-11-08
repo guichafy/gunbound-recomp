@@ -146,9 +146,6 @@ func run() -> void:
 	check(str(ClassicSprite.bullet_state(boomer_sheet, 0.2).frames) != "" and ClassicSprite.bullet_state(boomer_sheet, 0.2).frames == boomer_sheet.states.normal, "Boomer SS starts in the normal frames")
 	check(ClassicSprite.bullet_state(boomer_sheet, 1.2, "change", 0).frames == boomer_sheet.states.change, "Boomer SS plays the change frames when simulation changes")
 	check(ClassicSprite.bullet_state(boomer_sheet, 2.0, "cnormal", 0).frames == boomer_sheet.states.cnormal, "Boomer SS stays on cnormal when simulation opens")
-	for spark_index in 12:
-		var spark: Vector2 = ClassicSprite.spark_offset(spark_index)
-		check(absi(int(spark.x)) <= 4 and absi(int(spark.y)) <= 4, "Dragon spark stays inside the client's -4..+4 scatter")
 	if view.screen == "lobby":
 		view.show_menu()
 	var by_id := {}

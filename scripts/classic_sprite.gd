@@ -12,7 +12,14 @@ const NativeBallistics = preload("res://scripts/classic_ballistics.gd")
 const RAYON_CELL := Rect2(-16, -24, 32, 32)
 ## Client afterimage history depth (ADR-118); shown only where has_trail().
 const NATIVE_TRAIL_LEVELS := 8
+## ADR-152: 0x4c3020 draws BulletTexture1 bodies with SRCALPHA/INVSRCALPHA and
+## then BulletTexture2 lights with SRCALPHA/ONE. Kinds listed here use that
+## order; the others keep the approved translucent light under the body.
+const ADDITIVE_LIGHT_KINDS := ["dragon", "knight"]
 var classic_art = ClassicProjectileArt.new()
+var light_pass = preload("res://scripts/additive_sprite_art.gd").new()
+# The Ion is drawn before the shells, so it owns a pass begun with the satellites.
+var satellite_pass = preload("res://scripts/additive_sprite_art.gd").new()
 var meta: Dictionary = {}
 var mobile_kind := ""
 var asset_folder := ""
@@ -25,10 +32,13 @@ var rear := false
 var rider_adjust := Vector2.ZERO
 var satellite_art
 var satellite_sounds: Array = []
+var ion_art
 
 func setup(kind: String) -> void:
 	mobile_kind = kind
 	rider_adjust = preload("res://scripts/mobile_looks.gd").by_kind(kind).get("rider_adjust", Vector2.ZERO)
+	if kind == "knight":
+		ion_art = preload("res://scripts/knight_art.gd").new()
 	if kind == "asate":
 		satellite_art = preload("res://scripts/asate_art.gd").new()
 		for number in range(1,4):
@@ -138,8 +148,41 @@ static func bullet_state(info: Dictionary, age: float, state: String = "normal",
 	return {"frames":states.get(key, []), "age":state_tick * Timing.STEP if key != "normal" else age, "state":key}
 
 func projectile_frame(info: Dictionary, projectile: Dictionary) -> int:
+	if str(projectile.get("flight", "")) == "dragon_child":
+		return dragon_child_frame(info, float(projectile.age))
 	var played := bullet_state(info,float(projectile.age),str(projectile.get("ss_state","normal")),int(projectile.get("ss_state_tick",0)))
 	return Timing.frame(played.frames, info.get("durations",{}).get(played.state,[]), played.age, played.state != "change")
+
+## bullet14c.epa: Animate 0x46c990 plays "normal" once, then SetState("fly") loops.
+static func dragon_child_frame(info: Dictionary, age: float) -> int:
+	var states: Dictionary = info.get("states", {})
+	var durations: Dictionary = info.get("durations", {})
+	var opening := 0
+	for duration in durations.get("normal", []):
+		opening += maxi(1, int(duration))
+	var tick := maxi(0, int(floor((age + 0.000001) / Timing.STEP)))
+	if tick < opening:
+		return Timing.frame(states.get("normal", [0]), durations.get("normal", []), age, false)
+	return Timing.frame(states.get("fly", [0]), durations.get("fly", []), float(tick - opening) * Timing.STEP, true)
+
+func begin_projectiles(view: Node2D) -> void:
+	if mobile_kind in ADDITIVE_LIGHT_KINDS:
+		light_pass.begin(view)
+
+## Satellite of this mobile (ASate laser Ion or Knight Ion) from model state.
+func draw_satellite(view: Node2D, satellite: Dictionary, offset: Vector2, fraction: float) -> void:
+	if ion_art != null:
+		ion_art.draw(view,ion_art.ion_layers(satellite,offset,fraction),satellite_pass)
+	elif satellite_art != null:
+		satellite_art.draw_satellite(view,satellite,offset,fraction)
+
+func clear_projectiles() -> void:
+	light_pass.clear()
+	satellite_pass.clear()
+
+func begin_satellites(view: Node2D) -> void:
+	if ion_art != null:
+		satellite_pass.begin(view)
 
 func cell_frame(name: String, index: int) -> Array:
 	var info := sheet(name)
@@ -161,17 +204,14 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 	if mobile_kind == "asate" and bool(projectile.get("child",false)):
 		satellite_art.draw_child(view,projectile,weapon,offset)
 		return
+	if mobile_kind == "knight" and bool(projectile.get("child",false)):
+		ion_art.draw(view,ion_art.child_layers(projectile,offset),light_pass)
+		return
 	if mobile_kind == "turtle" and weapon < 2:
 		classic_art.draw_water(view,projectile,offset)
 		return
-	# Missing Dragon primary body must not suppress its particles.
-	if mobile_kind == "dragon" and weapon < 2:
-		var trail: Array = projectile.get("trail", [])
-		view.draw_set_transform(offset)
-		for point_index in trail.size():
-			var spark: Vector2 = Vector2(trail[point_index]) + spark_offset(point_index)
-			view.draw_rect(Rect2(spark - Vector2(1, 1), Vector2(2, 2)), Color(1, 0.55, 0.2, 0.85))
-		view.draw_set_transform(Vector2.ZERO)
+	# Dragon S1/S2 publish no body (0x429800); WeatherArt draws their sparks.
+	if mobile_kind == "dragon" and weapon < 2 and not bool(projectile.get("child", false)):
 		return
 	var name := projectile_sheet(projectile,weapon)
 	var info := sheet(name)
@@ -181,7 +221,10 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 	var light_name := name.replace(".png","Light.png")
 	var light_info := sheet(light_name)
 	var light_index := projectile_frame(light_info,projectile) if not light_info.is_empty() else -1
-	var mirror := mobile_kind == "grub" and weapon == 2 and projectile.has("fp_velocity") and ss_mirrored(NativeBallistics.velocity_angle(projectile.fp_velocity))
+	if light_index >= int(light_info.get("frames", 0)):
+		light_index = -1
+	# 0x488880 (Grub SS, Dragon children) publishes the vertical mirror flag.
+	var mirror := (mobile_kind == "grub" and weapon == 2 or str(projectile.get("flight", "")) == "dragon_child") and projectile.has("fp_velocity") and ss_mirrored(NativeBallistics.velocity_angle(projectile.fp_velocity))
 	if has_trail(mobile_kind, weapon):
 		# BulletTexture1/2 levels 7..1 reuse this frame's cells at older positions.
 		for level in trail_levels(projectile):
@@ -199,12 +242,34 @@ static func projectile_angle(projectile: Dictionary) -> float:
 
 ## One published bullet level: light cell then body cell, rotated by the heading.
 func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float, mirror: bool = false) -> void:
+	if mobile_kind in ADDITIVE_LIGHT_KINDS:
+		_draw_lit_bullet(view, name, index, light_name, light_index, at, angle, alpha, mirror)
+		return
 	view.draw_set_transform(at, angle, Vector2(1, -1) if mirror else Vector2.ONE)
 	if light_index >= 0:
 		var light := cell_frame(light_name, light_index)
 		view.draw_texture_rect_region(_optional_cached(light_name), light[1], light[0], Color(1, 1, 1, alpha))
 	var body := cell_frame(name, index)
 	view.draw_texture_rect_region(_optional_cached(name), body[1], body[0], Color(1, 1, 1, alpha))
+
+## Body in the alpha pass, then its light added on top (ADR-152). The Knight
+## S1/S2 guide has only bullet15nl/sl: its single sheet is a light.
+func _draw_lit_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float, mirror: bool) -> void:
+	var transform := Transform2D(angle, Vector2(1, -1) if mirror else Vector2.ONE, 0.0, at)
+	var body := cell_frame(name, index)
+	if light_only(name):
+		light_pass.draw(view, _optional_cached(name), body[1], body[0], transform, Color(1, 1, 1, alpha))
+	else:
+		view.draw_set_transform_matrix(transform)
+		view.draw_texture_rect_region(_optional_cached(name), body[1], body[0], Color(1, 1, 1, alpha))
+		view.draw_set_transform(Vector2.ZERO)
+	if light_index >= 0:
+		var light := cell_frame(light_name, light_index)
+		light_pass.draw(view, _optional_cached(light_name), light[1], light[0], transform, Color(1, 1, 1, alpha))
+
+## The sheet itself is a client light layer (an "l" entry of graphics.xfs).
+func light_only(name: String) -> bool:
+	return str(sheet(name).get("entry", "")).ends_with("l.img")
 
 ## User decision (ADR-120): the client's afterimage history is shown only on
 ## the Raon T1 (ADR-118); every other shot keeps the approved single sprite.
@@ -272,10 +337,6 @@ func _optional_cached(name: String) -> CanvasTexture:
 	if not placed.has(name):
 		placed[name] = _optional(asset_folder,name.trim_suffix(".png"))
 	return placed[name]
-
-## Stable stand-in for `_rand() % 9` in FUN_00436fd0: the span is -4..+4.
-static func spark_offset(index: int) -> Vector2:
-	return Vector2(-4 + (index * 3) % 9, -4 + (index * 5) % 9)
 
 func _placed_texture(name: String) -> CanvasTexture:
 	if not placed.has(name):

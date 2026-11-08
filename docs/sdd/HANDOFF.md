@@ -1,5 +1,28 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Tiros do Nak, Dragon e Knight — REQ-53 / ADR-152 — 07/11/2026
+
+Pedido: o Nak T1/T2 parecia "passar por um eclipse" e Dragon/Knight não tinham os tiros do cliente.
+Registro completo em `SHOTS_NAK_DRAGON_KNIGHT.md`; extratos Ghidra 12.2 em `.tools/knight-dragon/`.
+
+- **Nak**: o render `0x4c3020` desenha o corpo em alfa e depois a luz `*l` somada (SRCALPHA/ONE,
+  alfa 255). O porte invertia a ordem e usava alfa normal 0,75; agora segue o cliente. SS intocado.
+- **Dragon**: S1 θ/P+10; S2 quatro corpos em 1/6/11/16 com (θ±1, P±10); SS θ/P+10. S1/S2 não têm
+  corpo: o rastro é de faíscas `CrashTexture` (`dragon_sparks.gd`, RNG só na cena). O SS chama cinco
+  filhos no semicírculo de 200 px a 30…150° que voam a 10 px/tick até o impacto, sem gravidade.
+- **Knight**: guia → Ion sobre o dono → leques convergentes de 3 (S1) e 5 (S2) filhos com atrasos
+  3/7/7(/11/11); SS faz a varredura de 27 px a y−400 com 8 filhos (atraso i·2). Filhos 6144/768 sem
+  gravidade. Sprites `knightion(l)`/`knightbullet(l)` importados por `scripts/import_knight_ion.py`.
+
+Adaptações declaradas: contato comum (não `0x455cc0`) para Dragon/Knight, passo 8 e qualidade 3 das
+faíscas, divisor 5 de bônus dos filhos do Dragon, altura −400 do Ion ocioso, ramo de sinal do SS do
+Knight (igual ao ASate), som do filho do Knight. Os outros mobiles clássicos ainda desenham a luz dos
+tiros em mistura normal sob o corpo (`ClassicSprite._draw_bullet`); não foram alterados aqui.
+
+Validação: HARNESS_PLACEHOLDER
+Capturas GPU em `docs/mobile-shots/` (Nak antes/depois, Dragon claro/escuro, Knight). Cliente Windows
+não executado; aceite visual do usuário, escuta e exportação do aplicativo pendentes.
+
 ## Issue #7 — música por tela — REQ-53 / ADR-153 (07/11/2026)
 
 Lobby e loja tocam `channel.mp3`, sala e loading `ready.mp3`, batalha o

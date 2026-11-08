@@ -88,17 +88,27 @@ static func definitions() -> Dictionary:
 			shot("SS", 26, 18, 1290, {"flight": "grub_ss", "skip_actors": true, "shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": 2}]})],
 			[Vector2(30, 60), Vector2(30, 60), Vector2(30, 60)],
 			"1000 de vida · S2 e SS ricocheteiam.")),
-		# tank14.img is the Dragon. Bullet14's SS spawns the five children.
-		14: _body("Dragon", "dragon", 1000, 0, 0, 10, false, Vector2(40, 34), 25.0, 0.0, false,
-			[shot("Tiro 1", 290, 29, 800), shot("Tiro 2", 200, 27, 950),
-			shot("SS", 160, 27, 1390, {"flight": "split", "burst": 5, "burst_spread": 18.0})],
+		# tank14.img is the Dragon (client type 13). MainAction 0x46d070 (ADR-152):
+		# S1 theta, P+10; S2 frames 1/6/11/16 (theta+1,P+10) (theta+1,P-10)
+		# (theta-1,P+10) (theta-1,P-10); SS theta, P+10. S1/S2 are spark trails;
+		# the SS Explode 0x46ca60 calls five children in from the upper half circle.
+		14: _dragon(_body("Dragon", "dragon", 1000, 0, 0, 10, false, Vector2(40, 34), 25.0, 0.0, false,
+			[shot("Tiro 1", 290, 29, 800, {"flight": "dragon_sparks", "shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_power": 10}]}),
+			shot("Tiro 2", 200, 27, 950, {"flight": "dragon_sparks", "shells": [
+				{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": 1, "native_power": 10},
+				{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": 1, "native_power": -10},
+				{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": -1, "native_power": 10},
+				{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": -1, "native_power": -10}]}),
+			shot("SS", 160, 27, 1390, {"flight": "dragon_ss", "dragon_step": 30, "dragon_radius": 200, "shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_power": 10}]})],
 			[Vector2(30, 60), Vector2(30, 60), Vector2(30, 60)],
-			"1000 de vida · atraso alto."),
-		# tank15.img is the Knight. The client simulates it with the common shell.
+			"1000 de vida · S2 em quatro · SS chama cinco dragões.")),
+		# tank15.img is the Knight (client type 14). MainAction 0x47ab90 fires one
+		# guide per shot (S1 frame 1, S2 frame 7, SS frame 1, no offsets); the guide
+		# wakes the Ion, whose children carry the row power (knight_effect.gd).
 		15: _body("Knight", "knight", 1000, 0, 0, 10, false, Vector2(40, 34), 25.0, 0.0, false,
-			[shot("Tiro 1", 136, 24, 800), shot("Tiro 2", 128, 20, 950), shot("SS", 126, 20, 1390)],
+			[shot("Tiro 1", 136, 24, 800, {"flight": "knight_guide"}), shot("Tiro 2", 128, 20, 950, {"flight": "knight_guide"}), shot("SS", 126, 20, 1390, {"flight": "knight_guide"})],
 			[Vector2(10, 80), Vector2(10, 80), Vector2(10, 80)],
-			"1000 de vida · mira 10–80°."),
+			"1000 de vida · Ion dispara leques de 3/5/8."),
 		# tank16.img is the Aduka. It aims 130–170°, so the art faces the other way.
 		# Power slots [57..82] of this row are 0.
 		16: _body("Aduka", "aduka", 1000, 0, 0, 10, false, Vector2(40, 34), 25.0, 0.0, false,
@@ -116,6 +126,11 @@ static func _grub(body: Dictionary) -> Dictionary:
 	body.bionic = false
 	body.hp_regen = 0
 	body.protection = 0
+	return body
+
+## The MainAction offsets are added to the clamped cells 0x4d90/0x7864.
+static func _dragon(body: Dictionary) -> Dictionary:
+	body.spread_after_clamp = true
 	return body
 
 static func _body(label: String, kind: String, hp: int, shield: int, shield_regen: int, time_delay: int, bionic: bool, box: Vector2, stance: float, beacon: float, smoke: bool, weapons: Array, aims: Array, summary: String, rear: bool = false) -> Dictionary:
