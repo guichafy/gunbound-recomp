@@ -107,7 +107,7 @@ class DesktopPackages(unittest.TestCase):
         folder = self.windows()
         archive = self.root / 'Gunbound-Recomp-0.20.6-Windows-x86_64.zip'
         self.package.zip_windows(folder, archive)
-        result = self.package.write_manifest(archive, 'windows', '0.20.6', 'a' * 40, '4.7.2.stable', 'PACKAGED SMOKE: PASS')
+        result = self.package.write_manifest(archive, 'windows', '0.20.6', 'a' * 40, '4.7.2.stable', 'PACKAGED COMBAT: PASS (48 shots)\nPACKAGED SMOKE: PASS')
         manifest = json.loads(result.read_text())
         self.assertEqual(manifest['sha256'], hashlib.sha256(archive.read_bytes()).hexdigest())
         self.assertEqual(manifest['version'], '0.20.6')
@@ -121,7 +121,7 @@ class DesktopPackages(unittest.TestCase):
     def test_windows_smoke_can_use_engine_log_without_stdout(self):
         engine_log = self.root / 'engine.log'
         runner_log = self.root / 'runner.log'
-        command = [sys.executable, '-c', 'from pathlib import Path; import sys; Path(sys.argv[1]).write_text("PACKAGED SMOKE: PASS")', str(engine_log)]
+        command = [sys.executable, '-c', 'from pathlib import Path; import sys; Path(sys.argv[1]).write_text("PACKAGED COMBAT: PASS (48 shots)\\nPACKAGED SMOKE: PASS")', str(engine_log)]
         with redirect_stdout(io.StringIO()):
             output = self.package.run_logged(command, self.root, runner_log, 5, engine_log=engine_log)
         self.assertTrue(self.package.smoke_passed(0, output))
@@ -137,11 +137,15 @@ class DesktopPackages(unittest.TestCase):
             with redirect_stdout(io.StringIO()), self.assertRaisesRegex(RuntimeError, 'failed'):
                 self.package.run_logged(command, self.root, self.root / 'failed.log', 5)
 
+    def test_ui_only_smoke_cannot_approve_a_release(self):
+        self.assertFalse(self.package.smoke_passed(0, 'PACKAGED SMOKE: PASS'))
+        self.assertFalse(self.package.smoke_passed(0, 'PACKAGED COMBAT: PASS (47 shots)\nPACKAGED SMOKE: PASS'))
+
     def test_smoke_requires_success_marker_and_rejects_script_errors(self):
-        self.assertTrue(self.package.smoke_passed(0, 'PACKAGED SMOKE: PASS'))
+        self.assertTrue(self.package.smoke_passed(0, 'PACKAGED COMBAT: PASS (48 shots)\nPACKAGED SMOKE: PASS'))
         self.assertFalse(self.package.smoke_passed(0, 'SCRIPT ERROR: failed\nPACKAGED SMOKE: PASS'))
         self.assertFalse(self.package.smoke_passed(0, 'Godot started'))
-        self.assertFalse(self.package.smoke_passed(1, 'PACKAGED SMOKE: PASS'))
+        self.assertFalse(self.package.smoke_passed(1, 'PACKAGED COMBAT: PASS (48 shots)\nPACKAGED SMOKE: PASS'))
 
 
 if __name__ == '__main__':

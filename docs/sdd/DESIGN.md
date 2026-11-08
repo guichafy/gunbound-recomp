@@ -1092,3 +1092,16 @@ ativa `AvatarCatalog.offline_piece` (critério da concessão) e `shop_items`
 mantém o card em vista após reordenar grupos. AvatarShop reúne inventários e
 omite preços dos concedidos. Fonte/dados nativos e cálculo de atributos não
 mudam. Contrato/validação: `AVATAR_OFFLINE_ACCESS.md`.
+
+
+## Inicialização da máscara nativa — ADR-158 / REQ-51/52
+
+`AdukaWeather.NATIVE_TERRAIN_VEHICLES` é o inventário compartilhado de
+consumidores de contato de 1 px (Mage/Boomer/Lightning/Grub/Aduka).
+`Match.start` o consulta para ambos os atores antes de qualquer disparo ou
+snapshot; Grub T2/SS usam a mesma máscara no laço de ricochete. Não inicializar
+recursos no worker nem reparar a máscara depois de crateras.
+`scripts/ci/combat_smoke.gd` executa os 48 casos no mapa real, sem substituir
+o terreno; `smoke.gd` o chama após lobby/sala/loja e `package.py` exige também
+seu marcador de aprovação. O mesmo código roda no harness via `test_ci_combat`.
+Reprodução, matriz de regressão e limites: `BUILD_COLLISION_AUDIT.md`.

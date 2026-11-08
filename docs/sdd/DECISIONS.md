@@ -2129,3 +2129,21 @@ integração de troca são adaptações offline explícitas. Nove lacunas da fon
 e ff00001 sem DAT continuam excluídos. Contrato: AVATAR_OFFLINE_ACCESS.md.
 Substitui a manutenção do filtro único e da inacessibilidade descrita na
 auditoria, preservando a evidência e as demais decisões ADR-089/130.
+
+
+## ADR-158 — Máscara nativa independente do adversário e smoke de combate (08/11/2026)
+
+O relato no macOS 0.22.0 revelou uma omissão compartilhada: o contato nativo
+já atendia Boomer/Grub, mas Match.start habilitava o terreno de 1 px apenas
+para Mage/Lightning/Aduka. CPU Mage e fixtures que montavam a máscara
+escondiam a dependência nos testes. O release executava leituras na máscara
+vazia sem registrar SCRIPT ERROR; uma asserção de debug não protege o pacote.
+
+Centralizar o inventário no módulo de contato já existente e usá-lo na
+inicialização para qualquer lado/adversário, antes das cópias da CPU.
+Preservar física, render, suporte e as duas representações do terreno.
+Ampliar a verificação do ZIP para T1/T2/SS dos 16 mobiles contra Bigfoot,
+com prova de voo/contato/cratera e ricochete do Grub na plataforma. O gate de
+empacotamento passa a exigir o marcador dos 48 disparos além do smoke de UI.
+Não altera o contrato nativo da ADR-150; corrige sua preparação e a lacuna
+da ADR-151. Registro, resultados e limites: `BUILD_COLLISION_AUDIT.md`.
