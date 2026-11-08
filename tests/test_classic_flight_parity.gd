@@ -162,7 +162,8 @@ func test_children(vehicle: int, count: int) -> void:
 			complete_children = true
 			for child in model.projectiles:
 				complete_children = complete_children and child.has("skip_actors") and child.has("blast_radius") and child.has("bolt_angles")
-				check(str(child.flight).is_empty() and int(child.weapon) == 2 and float(child.blast_radius) == (23.0 if vehicle == 12 else 27.0), "SS child preserves its weapon and explicit radius without recursively splitting")
+				# ADR-152: Dragon children keep their own non-splitting flight (0x555e0c).
+				check(str(child.flight) == ("dragon_child" if vehicle == 14 else "") and int(child.weapon) == 2 and float(child.blast_radius) == (23.0 if vehicle == 12 else 27.0), "SS child preserves its weapon and explicit radius without recursively splitting")
 	check(saw_children and complete_children, "Mobile %d emits %d complete factory children" % [vehicle, count])
 	check(model.projectiles.is_empty() and model.phase == Match.PHASE_SETTLE, "Mobile %d children all finish normally" % vehicle)
 

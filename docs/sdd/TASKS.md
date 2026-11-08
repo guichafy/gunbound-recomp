@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Tiros do Nak, Dragon e Knight — REQ-53 / ADR-152 (07/11/2026)
+
+- [x] Provar no PE a ordem/mistura corpo → luz aditiva (`0x458690`, `0x4c3020`) e corrigir o Nak T1/T2.
+- [x] Dragon: emissão do MainAction `0x46d070`, rastro de faíscas e cinco filhos do SS.
+- [x] Knight: guia → Ion → leques 3/5 e chuva de 8, sprites do Ion/filho importados.
+- [x] Testes `test_dragon_shots`, `test_knight_shots`, `test_nak`; captura `capture_mobile_shots.gd`.
+- [x] Harness completo com as 29 partidas.
+- [ ] Aceite visual do usuário (Nak, Dragon, Knight) e escuta.
+- [ ] Levar a luz aditiva aos demais mobiles clássicos, se o usuário pedir.
+- [ ] Contato `0x455cc0`, altura −400 do Ion e som do filho do Knight, se o porte continuar.
+- [ ] Reexportar o aplicativo quando a entrega for publicada.
+
 ## Issue #7 — música por tela — REQ-53 / ADR-153 (07/11/2026)
 
 - [x] TOC do `sound.xfs` e strings do PE: `channel`, `ready`, `stage%d`, `sudden`, `title`, `logo*`; nenhuma faixa de resultado.

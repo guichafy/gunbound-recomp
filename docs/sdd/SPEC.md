@@ -444,6 +444,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-48 | Assets de batalha do cliente: Miramo, HUD, clima/Thor, itens e áudio | CLIENT_ASSETS_PORT | ADR-133; recursos nativos com fallback validado; composição e lacunas declaradas |
 | REQ-49 | Start da sala mostra a transição com mapa, spawns e mobile resolvido | LOADING_SCREEN | Vigente (ADR-138); 1×1 local, espera mínima de 5 s |
 | REQ-51 | Grub (ID 13) pelo cliente: T1/T2/SS, ricochete, dano repetido do SS, clima, linha type 12 | GRUB_CLIENT_FIX | ADR-150 (+emendas); T1 no contato 0x455cc0; Lua 8% pelos flags; boca do tiro segue adaptação |
+| REQ-53 | Tiros do Nak (luz), Dragon e Knight pelo cliente | SHOTS_NAK_DRAGON_KNIGHT | ADR-152; Nak, Dragon e Knight implementados; contato comum, divisor de bônus e altura −400 do Ion seguem adaptação |
 | REQ-50 | Encerramento com a janela WIN/LOSE do cliente e o botão OK | RESULT_SCREEN_NATIVE | Vigente (ADR-139); P = XP do porte, OK volta à sala |
 | REQ-53 | Música do cliente por tela: lobby/loja, sala e batalha; resultado mantém a batalha | CLIENT_MUSIC_SCREENS | Vigente (ADR-153); sem faixa de resultado no cliente; escuta pendente |
 
@@ -953,6 +954,16 @@ varreduras nativas e seguem o ramo do tornado do tick. A caixa de movimento é 2
 Não há cura por turno. A Lua cura 8% da vida porque o bit 2 dos flags de defesa está ligado.
 Cada spawn soma 3×Attack e Dig/2 com divisor 1. Na sala, no loading e na batalha o casco
 recebe a luz `tank13l`. A boca do tiro continua o `muzzle()` genérico. Matriz em `GRUB_CLIENT_FIX.md`.
+
+## Tiros do Nak, Dragon e Knight — REQ-53
+
+REQ-53 (ADR-152): os tiros publicados por `0x458690` desenham o corpo em mistura alfa e
+depois a luz `*l` somada (SRCALPHA/ONE, alfa cheio), como `0x4c3020`. O Nak T1/T2 segue essa
+ordem; o SS fica como estava. O Dragon emite S1 θ/P+10, S2 quatro corpos nos quadros
+1/6/11/16 com (θ±1, P±10) e SS θ/P+10; S1/S2 não têm corpo e deixam o rastro de faíscas
+`CrashTexture` de `0x46fb20`; o SS explode e chama cinco filhos que nascem no semicírculo de
+200 px (30…150°) acima do impacto e voam a 10 px/tick até ele, sem gravidade nem vento. O
+Knight usa guia → Ion → filhos (3/5/8). Matriz e limites em `SHOTS_NAK_DRAGON_KNIGHT.md`.
 
 ## CI/CD desktop — REQ-52 / REQ-01 / REQ-12
 
