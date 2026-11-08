@@ -121,6 +121,7 @@ jobs:
           sparse-checkout: |
             .github
             assets
+            locales
             scenes
             scripts
             tests
