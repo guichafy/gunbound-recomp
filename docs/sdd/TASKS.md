@@ -1,5 +1,19 @@
 # Entregas e próximos trabalhos
 
+## Gravidade durante tiros — ADR-152 (07/11/2026)
+
+- [x] Worktree/branch `codex/gravity-during-shots`, base validada e reprodução54/44.
+- [x] Acomodação no tick comum após impactos/efeitos, execução e previsão iguais.
+- [x] Emissões pendentes acompanham o dono; red65/2 e green65/0.
+- [x] Regressão final68/0 e revisão independente sem achados pendentes.
+- [x] Harness completo:46.113checks Godot,29partidas,152Python/zero skips,
+  329parses/zero falhas; cobertura automação Python62%.
+- [x] GPU180quadros FullHD, ambos sentidos, pausa30idêntica e retomada.
+- [ ] Aceite visual do usuário; pacote atualizado somente se solicitado.
+
+Contrato, validação e limites: `GRAVITY_DURING_SHOTS.md`. Worktree preservada;
+sem merge, push ou publicação.
+
 ## Consolidação Dependabot — REQ-52 / ADR-151 (28/10/2026)
 
 - [x] Branch local codex/dependabot-security-quality sobre main044e1b81, worktree separado.

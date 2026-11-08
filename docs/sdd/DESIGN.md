@@ -496,8 +496,11 @@ Não há backend, servidor, banco externo, serviço de conta ou dependência npm
 - `start`: gera arena, cria dois atores, limpa filas/projéteis/especial e inicia
   o jogador em `aim` com vento, orçamento e 30 segundos novos.
 - `aim`: aceita deslocamento e um disparo válido; timeout/passar agenda novo ator.
-- `flight`: usa acumulador com passo `1/120 s`; varre todo o segmento entre posições.
-- `settle`: espera 0,55 s, acomoda veículos, aplica quedas e decide o resultado
+- `flight`: usa ticks fixos de 0,05 s; depois dos impactos/efeitos e dano
+  pendente, acomoda atores sobre a máscara atual. Colisões do tick seguinte
+  e previsão usam as posições novas (ADR-152). Emissões pendentes seguem o
+  deslocamento do dono até nascer; velocidade escolhida preservada.
+- `settle`: mantém o intervalo de resolução, a acomodação final idempotente e decide o resultado
   antes de agendar a próxima ação.
 - `finished`: elimina projéteis, emite resultado; a apresentação concede XP uma
   vez e abre a janela nativa WIN/LOSE (ADR-139), cujo OK volta à sala. Ajuda fechada nessa fase restaura resultado.

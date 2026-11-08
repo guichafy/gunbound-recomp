@@ -1,5 +1,25 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Gravidade durante tiros — REQ-04/05/08/19/32/42/44/45 / ADR-152 (07/11/2026)
+
+Correção na worktree `gravity-during-shots/DemoGame`, branch
+`codex/gravity-during-shots`. Crateras mudavam a máscara no voo, mas atores
+só eram acomodados após a rajada. Agora a acomodação ocorre no fim de cada
+tick fixo, após dano/efeitos, no mesmo caminho da previsão. Emissões pendentes
+acompanham o deslocamento do dono uma vez até nascer; velocidade preservada.
+Queda e suavização existentes continuam adaptações declaradas.
+
+Reprodução54checks/44falhas; caso adicional de emissão65/2; regressão final68/0.
+Harness final exit0:100suítes de modelos/cenas,46.113checks,29partidas,
+152Python/zero skips,329parses; cobertura automação Python62%. GPU180quadros
+1920×1080/60Hz, dois sentidos, pausa30idêntica/retomada; y375→421→433 ainda
+em `flight`. Revisão independente sem achados após corrigir a emissão e uma
+fixture nova. Fixtures aéreas antigas receberam suporte real; expectativas
+preservadas. Fonte original/cliente Windows não executado nesta correção;
+escuta/input humano e aceite visual pendentes. Sem nova versão/export/merge/
+push. `project.godot` preexistente no checkout original preservado.
+Plano, comandos, evidências locais e limites: `GRAVITY_DURING_SHOTS.md`.
+
 ## Issue #8 — fechamento do Grub — 29/10/2026
 
 Emenda 3 da ADR-150 / REQ-51. O T1 passou a usar o contato `0x455cc0` já portado.

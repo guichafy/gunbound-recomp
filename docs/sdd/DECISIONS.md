@@ -1997,3 +1997,23 @@ pacotes CI é separada da consulta de alertas remotos; API informou alertas
 Dependabot desabilitados e Code Scanning sem análise. Não alterar configurações
 remotas, fechar PRs ou publicar nesta manutenção local. A atualização não muda
 jogo/arte/versão. Plano e evidências em DEPENDABOT_CONSOLIDATION.md.
+
+## ADR-152 — Apoio dos mobiles durante a ação de tiro (07/11/2026)
+
+REQ-04/05/08/19/32/42/44/45. O usuário relata mobiles suspensos até o fim
+da rajada e solicita correção em worktree. A máscara já mudava em `explode`,
+mas a acomodação só ocorria depois de `resolve_wait`. A previsão nem passava
+por essa resolução final. Acomodar atores no fim de cada tick fixo, após
+impactos/efeitos e `LightningCombat.resolve`; ticks sem voo fazem o mesmo
+após minas/satélites/Thor. Dano do mesmo tick conserva a pose carimbada.
+A acomodação final permanece idempotente; resultado/Gold não são antecipados
+no voo. A revisão encontrou emissões pendentes na origem antiga: guardar a
+posição inicial do dono por projétil e transladar sua origem uma vez no
+lançamento, preservando a velocidade escolhida e os projéteis já em voo.
+O snapshot copia esse campo junto do Dictionary, sem estado vivo compartilhado.
+
+Substitui somente o momento da acomodação descrito no fluxo antigo do DESIGN.
+Queda vertical instantânea, deriva/parede, apoio e suavização visual continuam
+adaptações; não é porte novo da cadência de gravidade do PE. Fixtures balísticas
+antes suspensas recebem plataformas, sem remover expectativas de trajetória.
+Reprodução, plano, revisão e resultados em `GRAVITY_DURING_SHOTS.md`.

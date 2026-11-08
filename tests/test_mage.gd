@@ -50,12 +50,13 @@ func _initialize() -> void:
 	model.actors[1].ready = 215
 	model.clock = 100
 	check(model.initiative_preview(0)[0].actor == 0 and model.initiative_preview(1)[0].actor == 1, "Preview uses selected Mage delay")
-	model.start(1, 2, 45, "")
-	model.terrain.cells.fill(0)
-	model.actors[0].pos = Vector2(640, 300)
-	model.actors[1].pos = Vector2(900, 126)
-	model.wind = Vector2.ZERO
 	for weapon in [0, 1, 2]:
+		model.start(1, 2, 45, "")
+		model.terrain.cells.fill(0)
+		model.actors[0].pos = Vector2(640, 300)
+		model.actors[1].pos = Vector2(900, 126)
+		model.wind = Vector2.ZERO
+		preload("res://tests/support/actor_platforms.gd").add(model)
 		model.actors[0].turns = 3
 		model.actors[0].special_used = false
 		model.phase = "aim"
@@ -93,8 +94,7 @@ func _initialize() -> void:
 	model.wind = Vector2.ZERO
 	for row in range(400):
 		model.terrain.cells[row * 640 + 235] = 1
-	model.terrain.native_cells = PackedByteArray()
-	model.terrain.enable_native()
+	preload("res://tests/support/actor_platforms.gd").add(model)
 	var before: PackedByteArray = model.terrain.cells.duplicate()
 	var state: Array = model.actors.duplicate(true)
 	var predicted_wall: Dictionary = model.predict_shot(0, 40, 70, 1)

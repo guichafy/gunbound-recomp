@@ -47,6 +47,7 @@ func test_opening_flight(vehicle: int, sprite) -> void:
 	model.terrain.cells.fill(0)
 	model.actors[0].pos = Vector2(100,650)
 	model.actors[1].pos = Vector2(1200,700)
+	preload("res://tests/support/actor_platforms.gd").add(model)
 	model.actors[0].ss_lock = 0
 	model.fire(45,50,2)
 	var info: Dictionary = sprite.sheet("Bullet3.png")

@@ -197,8 +197,9 @@ func muzzle_contact_bridge() -> void:
 			model.terrain.cells[y*640+x] = 1
 	model.terrain.native_cells.clear()
 	model.terrain.enable_native()
-	model.actors[0].pos = Vector2(250,595)
-	model.actors[1].pos = Vector2(1000,595)
+	# Keep both feet supported: gravity now also runs during the wind-up.
+	model.actors[0].pos = Vector2(250,600-model.stance_of(0))
+	model.actors[1].pos = Vector2(1000,600-model.stance_of(1))
 	check(model.fire(65,70,0),"disparo Boomer válido")
 	for tick in 10:
 		model.advance_projectile_tick(0.05)
@@ -237,6 +238,7 @@ func native_weather_parity() -> void:
 	for wind in [Vector2(27,0),Vector2(-27,0),Vector2(0,27),Vector2(0,-27)]:
 		for facing in [-1,1]:
 			var model = model_with_item()
+			preload("res://tests/support/actor_platforms.gd").add(model)
 			model.actors[0].facing = facing
 			model.wind = wind
 			var shells: Array = model.shot_shells(0,45,60,0)
