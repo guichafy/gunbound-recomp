@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## Issue #7 — música por tela — REQ-53 / ADR-153 (07/11/2026)
+
+- [x] TOC do `sound.xfs` e strings do PE: `channel`, `ready`, `stage%d`, `sudden`, `title`, `logo*`; nenhuma faixa de resultado.
+- [x] 24 chamadas de `0x4eea30` classificadas (Ghidra `builds/music-ev1`/`music-ev2` `ok=true` + `objdump`): lobby/loja `channel`, sala `ready`, batalha `stage%d` de `byte % 11`.
+- [x] `sound.request_music`/`battle_music`: faixa por tela, sem reinício da mesma faixa, repetição ao fim, BGM 0/mudo silenciam e guardam o pedido.
+- [x] Lobby, loja, sala, loading, batalha, resultado (vitória, derrota, empate) e OK/QUIT pedem a faixa do contrato; Miramo com `client_stage` 1.
+- [x] Resultado mantém a faixa de batalha, por escolha do usuário de seguir o cliente.
+- [x] Suíte `test_music_screens` (55/0) registrada no harness; `test_client_audio` e `test_hud` atualizados.
+- [ ] Escuta humana das três telas e da repetição; cliente Windows não executado.
+- [ ] Reexportar o app só se uma entrega empacotada for pedida.
+
 ## Gravidade durante tiros — ADR-152 (07/11/2026)
 
 - [x] Worktree/branch `codex/gravity-during-shots`, base validada e reprodução54/44.

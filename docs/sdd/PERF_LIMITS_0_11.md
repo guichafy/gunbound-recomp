@@ -37,7 +37,9 @@ GPU (atualização da textura HD 2560×661), sem pico relevante. O pico de
   Primeira tentativa (descartada): fatiar a busca em frames com orçamento de
   5 ms. Eliminava os picos, mas a CPU passava a disparar em ~3,3 s em vez de
   ~1,9 s, porque a grade inteira leva ~0,5 s de CPU.
-- **REQ-33 — Música de batalha original (BGM).** A batalha toca as 12 faixas
+- **REQ-33 — Música de batalha original (BGM).** Histórico: substituído pela
+  ADR-133 (faixas `stage1..6` do cliente) e pela ADR-153 (faixa por tela e por
+  mapa, `CLIENT_MUSIC_SCREENS.md`). Na 0.11, a batalha tocava as 12 faixas
   `Audio/Music/LevelScene/Theme*` do OpenBound (`SongParameter.LevelScene`):
   uma faixa aleatória ao iniciar a partida e outra aleatória quando ela
   termina (`AudioHandler.PlayRandomSong`), parando no menu. Volume pelo

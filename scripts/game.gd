@@ -196,7 +196,6 @@ func _clear_front() -> void:
 		profile.save_profile()
 	weather_art.clear_beams()
 	cpu.discard()
-	sound.stop_music()
 	result_wait = -1.0
 	effects.clear()
 	lingering.clear()
@@ -209,6 +208,7 @@ func show_lobby() -> void:
 	_clear_front()
 	screen = "lobby"
 	model.phase = Match.PHASE_MENU
+	sound.request_music(Sound.LOBBY_MUSIC)
 	lobby = LobbyScreen.new()
 	lobby.build(root, ui, {"version": version(), "nickname": profile.nickname, "level": profile.level(),
 		"rank": profile.rank, "xp": profile.xp, "gold": profile.gold, "cash": profile.cash},
@@ -219,6 +219,8 @@ func show_menu() -> void:
 	_clear_front()
 	screen = "menu"
 	model.phase = Match.PHASE_MENU
+	# The room keeps ready.mp3 through its popups and the loading screen.
+	sound.request_music(Sound.ROOM_MUSIC)
 	menu = MenuScreen.new()
 	menu.build(root, ui, {"version": version(), "nickname": profile.nickname, "difficulty": cpu_difficulty,
 		"weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
@@ -251,7 +253,8 @@ func show_shop() -> void:
 	if screen == "lobby" or screen == "menu":
 		shop_return = screen
 	cpu.discard()
-	sound.stop_music()
+	# The store plays channel.mp3 too: from the lobby it carries on.
+	sound.request_music(Sound.LOBBY_MUSIC)
 	replace_root()
 	menu = null
 	lobby = null
@@ -362,8 +365,8 @@ func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Arra
 	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle, spawns)
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
-	# LevelScene: ChangeSong(SongParameter.LevelScene); keeps playing across rematches.
-	sound.play_music()
+	# The map's stage track; the result window keeps it until OK returns to the room.
+	sound.request_music(sound.battle_music(int(Maps.get_map(model.map_id).get("client_stage", 0))))
 	art.bind_sprites(sprites)
 	art.reset(model.actors)
 	rig.manual = false

@@ -1,5 +1,16 @@
 # Registro de decisões
 
+**ADR-153 — Música por tela pelo cliente (issue #7, 07/11/2026):** lobby e
+loja pedem `channel.mp3`, a sala e o loading `ready.mp3`, a batalha
+`stage%d.mp3` com o mapa sem lado (`client_stage % 11`; Miramo → `stage1`,
+sem faixa → `rand()%6+1`), conforme as chamadas de `0x4eea30`. Pedir a faixa
+atual não reinicia; o fim a recomeça. O usuário escolheu seguir o cliente no
+resultado: nenhum consumidor de música foi achado nesse caminho e o
+`sound.xfs` não tem faixa de vitória/derrota/empate, então a batalha segue
+sob a janela até o OK, que volta ao `ready`. Substitui "Menu sem música" da
+ADR-054 e o sorteio a cada faixa da ADR-133; `Theme*` continua só fallback
+de `stage*` inválido. Ver `CLIENT_MUSIC_SCREENS.md`.
+
 **ADR-149 — Boomer, EPA de vida baixa:** os estados `wnormal`/`wmove`
 são selecionados pela vida atual estritamente menor que máximo/3 inteiro,
 conforme 0x461ca0. Aplicar somente ao Boomer; os demais mantêm o limiar
@@ -267,6 +278,8 @@ ADR-054 — adotada por solicitação explícita de implementar os limites: BGM
 com as 12 faixas originais `LevelScene/Theme*` (≈17 MB a mais no app), faixa
 aleatória ao iniciar e ao terminar cada uma, volume pelo slider BGM (padrão
 50). Menu sem música. Substitui o "BGM desabilitado" de ADR-052.
+Substituída: as faixas são as `stage1..6` do cliente desde a ADR-133, e
+lobby, loja e sala tocam `channel`/`ready` desde a ADR-153.
 
 ADR-055 — adotada por pedido explícito: o popup de opções ganha derivados HD
 3× por GPT Images (Codex `image_gen`), como o HUD de ADR-051. Aiming Mode,
@@ -1635,7 +1648,8 @@ Weakness/Mirror/Random, componentes de HUD sem equivalente, aura UsingItem,
 fundo/abas do antigo Select Item e sons cujo evento/arquivo não foi comprovado.
 PE pede itemblast.xes ausente e lightningblast.xes divergente do nome
 lightingblast.xes disponível. Não se estabelece equivalência por semelhança.
-A música usa stage1..6 e mantém agenda aleatória declarada; turn2/turn do
+A música usa stage1..6 e mantém agenda aleatória declarada (substituída pela
+ADR-153: faixa do mapa, repetida); turn2/turn do
 cliente distinguem ator local/adversário. Fallback por grupo é testado.
 
 Inventário, fontes e limites em CLIENT_ASSETS_PORT.md e nos três relatórios

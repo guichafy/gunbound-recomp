@@ -1,5 +1,28 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Issue #7 — música por tela — REQ-53 / ADR-153 (07/11/2026)
+
+Lobby e loja tocam `channel.mp3`, sala e loading `ready.mp3`, batalha o
+`stage%d.mp3` do mapa (Miramo → `stage1`), pelas chamadas de `0x4eea30` do PE
+(`CLIENT_MUSIC_SCREENS.md`). A mesma faixa não reinicia; o fim a recomeça.
+O cliente não tem música de resultado: a pedido do usuário, a batalha segue
+sob a janela até o OK, que volta ao `ready`. A issue partia da 0.11 (Theme* e
+Revanche); a batalha já usava `stage1..6` sorteados (ADR-133) e a Revanche saiu
+com a ADR-139. `Theme*` segue só como fallback de `stage*` inválido.
+
+Validação (Godot 4.7.2, macOS, worktree importado do zero): `test_music_screens`
+55/0 (mutações sem o não-reinício e sem a faixa da sala derrubam 2 e 10 checks),
+`test_client_audio` 224/0, `test_hud` 531/0, `test_scene` 27/0. `check.sh --quick`:
+parse aprovado, 114 suítes OK (97 Godot com 46.038 checks + Python) e 6 falhas de
+ambiente do worktree novo (pastas/links locais de `.tools` e
+`assets/xfs/reference` ausentes); repetidas pelo harness depois de recriar os
+links: `test_lobby_ui` 96/0, `test_avatar_profile` 25/0, `test_avatar_shop_classic`
+24/0, `test_xfs_import`, `test_raon_native_source` e `test_aduka_assets` OK.
+Pastas `missing-*`/`no-*-hd` precisam continuar ausentes. Partidas completas não
+rodadas: não instanciam a cena nem `game.gd`, e nenhuma regra mudou. O export
+inclui `assets/xfs/audio/catalog.json` e os MP3 (`all_resources`); app não
+reexportado. Sem escuta humana, cliente Windows, captura GPU nem reexport.
+
 ## Integração da gravidade à main local — 07/11/2026
 
 Solicitação posterior do usuário: trazer a worktree para a `main` local.

@@ -72,6 +72,18 @@ SS transformado compõe flame63 e ssflame6, com relógios visuais separados.
 Climas restantes e validação visual continuam em `BOOMER_ISSUE_9.md`.
 
 
+## Música por tela — REQ-53 / ADR-153
+
+Issue #7. Lobby e loja tocam `channel.mp3`; a sala, inclusive popups, grade
+de mobiles, itens e o loading, toca `ready.mp3`; a batalha toca o
+`stage%d.mp3` do mapa (Miramo → `stage1`), todos do `sound.xfs`. A janela de
+resultado mantém a faixa da batalha até o OK, que volta à sala e ao
+`ready`: o cliente não tem música de vitória, derrota ou empate. Pedir a
+faixa que já toca não a reinicia; o fim da faixa a recomeça. BGM 0 ou mudo
+silenciam as três telas; o slider BGM é o único volume. Substitui o "menu sem
+música" da ADR-054 e o sorteio de `stage1..6` da ADR-133. Evidência e
+contrato em `CLIENT_MUSIC_SCREENS.md`.
+
 ## Encerramento da partida — REQ-50 / ADR-139
 
 Ao fim do treino, mostrar a janela de resultado do cliente: painel do time A
@@ -419,7 +431,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-20 | Derivados HD com aparência clássica | HD_ASSETS_0_6, NAK_HD, HORN_AURA_FIX, BIGFOOT_SMOOTH_4X | Vigente; HD do Nak gerado e pendente de integração; brilho do Great Devil derivado do chifre (ADR-082); Bigfoot original com acabamento4× (ADR-115) |
 | REQ-21..26 | Mapa Miramo A, câmera 1: 1, vento 2D, clima, Thor, partícula | MAP_0_8, WEATHER_CAMERA_0_9 | Vigente |
 | REQ-27..31 | HUD original e popup de opções | HUD_0_10, BATTLE_FIDELITY_0_20 | Carga 3 s/mínimo nativo (REQ-28); bússola/vento coerentes; Mouse Speed desabilitado |
-| REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11 | Vigente; relógio da CPU congelado na busca (ADR-076) |
+| REQ-32..33 | CPU sem travar a troca de turno; música original | PERF_LIMITS_0_11, CLIENT_MUSIC_SCREENS | Vigente; relógio da CPU congelado na busca (ADR-076); faixas por tela pela REQ-53 |
 | REQ-34 | Aiming Mode Drag/Slice | AIMING_0_12 | Vigente; TODO Mouse Speed |
 | REQ-35..37 | Itens de batalha, Select Item, arte do cliente (REQ-48) | ITEMS_0_13 | Vigente; custos do `itemdata.dat`; CPU sem itens; Team Teleport sem aliado no 1×1 |
 | REQ-38..41 | Loja, composição, atributos e modificadores | AVATAR_SHOP_XFS_0_16, AVATAR_HD_MIGRATION, AVATAR_SHOP_ORIGINAL | Vigente; catálogo XFS com bônus por equipamento; composição e arte originais pela REQ-47 |
@@ -433,6 +445,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 | REQ-49 | Start da sala mostra a transição com mapa, spawns e mobile resolvido | LOADING_SCREEN | Vigente (ADR-138); 1×1 local, espera mínima de 5 s |
 | REQ-51 | Grub (ID 13) pelo cliente: T1/T2/SS, ricochete, dano repetido do SS, clima, linha type 12 | GRUB_CLIENT_FIX | ADR-150 (+emendas); T1 no contato 0x455cc0; Lua 8% pelos flags; boca do tiro segue adaptação |
 | REQ-50 | Encerramento com a janela WIN/LOSE do cliente e o botão OK | RESULT_SCREEN_NATIVE | Vigente (ADR-139); P = XP do porte, OK volta à sala |
+| REQ-53 | Música do cliente por tela: lobby/loja, sala e batalha; resultado mantém a batalha | CLIENT_MUSIC_SCREENS | Vigente (ADR-153); sem faixa de resultado no cliente; escuta pendente |
 
 ## Lobby clássico e sala — ADR-096
 
