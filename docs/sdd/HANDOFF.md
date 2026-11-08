@@ -19,7 +19,13 @@ faíscas, divisor 5 de bônus dos filhos do Dragon, altura −400 do Ion ocioso,
 Knight (igual ao ASate), som do filho do Knight. Os outros mobiles clássicos ainda desenham a luz dos
 tiros em mistura normal sob o corpo (`ClassicSprite._draw_bullet`); não foram alterados aqui.
 
-Validação: HARNESS_PLACEHOLDER
+Validação (Godot 4.7.2, macOS, 08/11/2026): `scripts/check.sh` completo depois de todas as edições —
+parse de todos os scripts, 103 suítes Godot/46.303 checks, 13 + 16 partidas completas e 20 suítes
+Python/108 testes. Novas: `test_dragon_shots` 59/0, `test_knight_shots` 92/0, `test_knight_assets`
+3/0; `test_nak` 62/0. Seis suítes de loja/avatar/XFS falharam só por ambiente do worktree (pastas
+`.tools/missing-*` criadas por engano e `assets/xfs/reference/*` ignorados pelo Git ausentes);
+corrigido o ambiente, sem mudança de código, as seis passaram. Sonda local em `main.tscn`: faíscas
+do Dragon pelo `weather_art` e Ions do Knight/ASate desenhados sem erro.
 Capturas GPU em `docs/mobile-shots/` (Nak antes/depois, Dragon claro/escuro, Knight). Cliente Windows
 não executado; aceite visual do usuário, escuta e exportação do aplicativo pendentes.
 

@@ -94,5 +94,8 @@ adequado. Ghidra não converte automaticamente o cliente em um projeto Godot.
 Conferir versão e disponibilidade reais do provedor antes de abrir o alvo.
 Na avaliação do projeto, Ghidra12.2/JDK25 direto funcionou, enquanto REA6.7.0
 aceita somente12.1.x (verificada12.1.4). Usar CLI direta nesse caso; não editar
-a política de versão para forçar compatibilidade. Hopper permanece segunda
-fonte para comparar extratos existentes, com endereços/hash da mesma build.
+a política de versão para forçar compatibilidade. Decisão do usuário
+(07/11/2026): no REA, selecionar o provedor Ghidra (`provider_id`), nunca o
+Hopper, por licença; se o REA não aceitar o Ghidra instalado, usar o runner
+headless acima (`--data VA:len` para bytes e strings). Extratos antigos feitos
+com Hopper ficam como histórico e não devem ser citados como evidência nova.

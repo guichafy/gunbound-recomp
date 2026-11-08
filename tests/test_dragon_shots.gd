@@ -103,6 +103,9 @@ func test_sparks() -> void:
 		inside = inside and at.x >= -4 and at.x <= 40 and absi(at.y) <= 4
 	check(inside, "sparks sit between the previous position and the samples, within ±4 px")
 	check(Sparks.samples(Vector2i(0, 0), Vector2i(40, 0)).size() == 6 and int(sparks.counters["0:0"]) == 0, "the per-shell counter advances once per sample, mod 6 (six samples wrap to 0)")
+	sparks.counters["0:0"] = 5
+	sparks.accept({"type": "dragon_spark_sweep", "tick": 3, "key": "0:0", "first": true, "from": Vector2i(0, 0), "to": Vector2i(0, 0)})
+	check(int(sparks.counters["0:0"]) == 1, "a new shell restarts its counter at 0 (one sample later: 1)")
 	var count: int = sparks.particles.size()
 	sparks.sync(3 + 15)
 	check(sparks.particles.is_empty() and count > 0, "a spark lives 16 ticks (0x4711f0)")
