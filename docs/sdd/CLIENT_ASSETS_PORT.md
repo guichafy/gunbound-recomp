@@ -152,7 +152,8 @@ os atlas de teleporte herdados não eram RGBA/pivô idênticos ao cliente.
 ### Música e áudio — implementado nos eventos comprovados
 
 96entradas extraídas (11MP3/85XES); seis temas nativos stage1..6 ativos,
-agenda aleatória declarada; turn2 local/turn adversário por ASM. Payload
+agenda aleatória declarada (substituída pela ADR-153: faixa do mapa, repetida;
+lobby/loja `channel`, sala `ready`); turn2 local/turn adversário por ASM. Payload
 MP3/PCM validado após import, com fallback testado. Eventos sem prova e nomes
 pedidos pelo PE mas ausentes no arquivo permanecem lacunas, sem associação
 inventada. [CLIENT_ASSETS_AUDIO.md](CLIENT_ASSETS_AUDIO.md).

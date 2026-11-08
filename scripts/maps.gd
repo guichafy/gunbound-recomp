@@ -9,6 +9,8 @@ const MAPS := {
 	"miramo_town_a": {
 		"name": "Miramo Town",
 		"openbound_id": 20,
+		# stage.dat record of the client; its % 11 picks stage%d.mp3 (ADR-153).
+		"client_stage": 1,
 		"type": "A",
 		# Force, Tornado, Electricity, Wind, Weakness, Protection, Ignorance, Thor, Mirror, Random.
 		"weather": [2, 1, 2, 1, 0, 2, 0, 0, 0, 1],

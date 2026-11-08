@@ -45,6 +45,15 @@ assets/hd/classic/mobiles_smooth_4x/bigfoot; MobileLooks `smooth` e
 mobile_smooth_art.gd validam/caem no nativo; só recortes de origem ×4. Ler
 docs/sdd/BIGFOOT_SMOOTH_4X.md. Regenerar com scripts/build_bigfoot_smooth_hd.py.
 
+## Música por tela — ADR-153
+
+Ler docs/sdd/CLIENT_MUSIC_SCREENS.md (REQ-53, issue #7). `sound.request_music`
+grava a faixa da tela mesmo mudo/BGM 0: lobby e loja `channel`, sala e loading
+`ready`, batalha `sound.battle_music(client_stage)` (Miramo → `stage1`). Mesma
+faixa não reinicia; fim recomeça (MP3 segue sem `loop`). O cliente não tem
+música de resultado: a batalha segue sob a janela até o OK (escolha do usuário).
+Teste test_music_screens.
+
 ## Resultado da partida e loading — ADR-139/138
 
 Fim do treino abre a janela do cliente (`classic_result.gd`, catálogo
@@ -331,8 +340,8 @@ no extra PAUSA. Ver seção 0.10.1 de HUD_0_10.md/ADR-052.
 Ler PERF_LIMITS_0_11.md. Busca da CPU: begin_cpu_plan (principal) →
 search_cpu_plan (WorkerThreadPool, só o retrato) → finish_cpu_plan; plano
 idêntico a choose_cpu_shot (wrapper dos testes). Nunca ler estado vivo na
-thread; descartar com discard_cpu_search. BGM: temas LevelScene em
-assets/openbound/music, sound.play_music/stop_music, mudo cobre música.
+thread; descartar com discard_cpu_search. BGM: faixas do cliente por tela
+(ADR-153, acima); `Theme*` do OpenBound só como fallback de `stage*`.
 Popup HD pela folha options de build_hud_hd.py. Teste test_performance.gd.
 
 ## Modo de mira 0.12 — estado atual

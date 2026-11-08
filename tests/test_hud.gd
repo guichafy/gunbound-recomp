@@ -174,9 +174,9 @@ func run() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(options_file))
 	for track in scene.sound.BATTLE_MUSIC:
 		var stream = scene.sound.music_stream(track)
-		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original client stage theme that ends (then a random one follows)" % track)
+		check(stream is AudioStreamMP3 and not stream.loop, "%s is an original client stage theme that ends (then repeats)" % track)
 	scene.show_menu()
-	check(not scene.sound.music_wanted, "The menu stops the battle music")
+	check(scene.sound.music_request == scene.sound.ROOM_MUSIC, "The room replaces the battle music with ready.mp3")
 	scene.opening = 0
 	scene.start_match()
 	player_turn(scene)

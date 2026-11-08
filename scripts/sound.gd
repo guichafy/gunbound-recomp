@@ -1,9 +1,13 @@
 extends Node
 ## Pooled audio. Original client music and proven turn sounds, with validated fallback.
 const ClientAudio = preload("res://scripts/client_audio.gd")
-# Random scheduling is a declared offline adaptation; resources are native.
-# sudden.mp3 is preserved, but there is no sudden-death rule in this training.
+# Screen tracks of the client player 0x4eea30 (ADR-153): gamelist/store play
+# channel, the room ready, the battle stage%d of the map. sudden.mp3 is
+# preserved, but there is no sudden-death rule in this training.
+const LOBBY_MUSIC := "channel"
+const ROOM_MUSIC := "ready"
 const BATTLE_MUSIC := ["stage1", "stage2", "stage3", "stage4", "stage5", "stage6"]
+# Fallback only when a native stage track is missing or invalid (ADR-133).
 const LEGACY_MUSIC := ["ThemeBeta-1", "ThemeBeta-2", "ThemeS1-1", "ThemeS1-2", "ThemeS1-3", "ThemeS1-4"]
 var streams: Dictionary = {}
 var players: Array[AudioStreamPlayer] = []
@@ -19,7 +23,8 @@ const BASE_DB := -19.0
 var volume := 1.0
 var music: AudioStreamPlayer
 var music_volume := 0.5
-var music_wanted := false
+# The screen's track, kept while muted or at BGM 0; music_track is what plays.
+var music_request := ""
 var music_track := ""
 var music_rng := RandomNumberGenerator.new()
 
@@ -39,7 +44,7 @@ func _ready() -> void:
 		players.append(player)
 	set_volume(volume)
 	music = AudioStreamPlayer.new()
-	music.finished.connect(next_song)
+	music.finished.connect(start_track)
 	add_child(music)
 	set_music_volume(music_volume)
 	music_rng.randomize()
@@ -59,36 +64,60 @@ func set_music_volume(value: float) -> void:
 		music.volume_db = BASE_DB + (linear_to_db(music_volume) if music_volume>0.0 else -100.0)
 	update_music()
 
-## Battle starts the music; the menu stops it.
-func play_music() -> void:
-	music_wanted = true
+## Each screen asks for its track. Like 0x4eea30, the track already asked for
+## keeps playing; another one stops it and starts from the beginning.
+func request_music(track: String) -> void:
+	if track == music_request:
+		update_music()
+		return
+	music_request = track
+	release_music()
 	update_music()
 
 func stop_music() -> void:
-	music_wanted = false
-	update_music()
+	request_music("")
+
+## FUN_004bb730: stage%d.mp3 of the map without side (stage.dat % 11); a map
+## without its own track draws rand() % 6 + 1 once, then that file repeats.
+func battle_music(client_stage: int) -> String:
+	var track := "stage%d" % (client_stage % 11)
+	if music_stream(track) == null:
+		track = BATTLE_MUSIC[music_rng.randi_range(0, BATTLE_MUSIC.size() - 1)]
+	return track
+
+func audible_music() -> bool:
+	return not music_request.is_empty() and not muted and music_volume > 0.0
 
 func update_music() -> void:
 	if music == null:
 		return
-	var audible := music_wanted and not muted and music_volume > 0.0
-	if audible and not music.playing:
-		next_song()
-	elif not audible and music.playing:
-		music.stop()
-		music.stream = null
-		music_track = ""
+	if audible_music() and not music.playing:
+		start_track()
+	elif not audible_music() and music.playing:
+		release_music()
 
-func next_song() -> void:
-	if not music_wanted or muted or music_volume <= 0.0:
+func release_music() -> void:
+	if music == null:
 		return
-	music_track = BATTLE_MUSIC[music_rng.randi_range(0, BATTLE_MUSIC.size() - 1)]
-	music.stream = music_stream(music_track)
+	music.stop()
+	music.stream = null
+	music_track = ""
+
+## Start, and restart when it ends: the client passes 1 to every screen track.
+## The imported MP3 stays without loop (client_audio.gd validates that).
+func start_track() -> void:
+	if not audible_music():
+		return
+	music.stream = music_stream(music_request)
 	if music.stream == null:
+		music_track = ""
 		return
+	music_track = music_request
 	music.play()
 
 func music_stream(track: String) -> AudioStream:
+	if track == LOBBY_MUSIC or track == ROOM_MUSIC:
+		return ClientAudio.native_stream(track + ".mp3")
 	var index := BATTLE_MUSIC.find(track)
 	if index < 0:
 		return null
