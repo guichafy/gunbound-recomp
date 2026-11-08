@@ -23,9 +23,10 @@ func run() -> void:
 	await process_frame
 	var menu = scene.menu
 	var stage: Node = menu.figures.get_parent()
-	var settings: TextureButton = stage.get_node("Settings")
-	for name in ["Settings","Start"]:
-		var button: TextureButton = stage.get_node(name)
+	var settings: TextureButton = preload("res://scripts/classic_text_button.gd").create(stage,"SETTINGS",Vector2(545,552),menu.chrome,menu.room_art)
+	settings.name = "SettingsArtProbe"
+	for button: TextureButton in [settings,stage.get_node("Start")]:
+		var name: String = button.name
 		for texture in [button.texture_normal,button.texture_hover,button.texture_pressed,button.texture_disabled]:
 			var skin: Image = texture.get_image()
 			var transparent := true
@@ -42,9 +43,9 @@ func run() -> void:
 				var alpha := image.get_pixel(x,y).a
 				if alpha>0 and alpha<1:soft_edge=true
 		check(soft_edge,"SETTINGS word has a finished alpha edge instead of hard clipping around each letter")
-	check(menu.settings_font.get_font_name()=="GunBound Classic ASCII","Modal primary font is the native bitmap subset, without system-font substitution")
+	check(menu.settings_font is SystemFont,"Settings uses a scalable font for translated text")
 	check(menu.nickname_input.get_theme_font("font")==menu.settings_font,"Nickname input shares the classic font and fallback")
-	click(stage.get_node("Settings").get_global_rect().get_center())
+	menu.open_settings()
 	await process_frame
 	check(menu.popup_open() and menu.settings_popup.visible and menu.dimmer.visible,"SETTINGS click opens classic modal with backdrop")
 	check(root.gui_get_focus_owner()==menu.nickname_input,"Opening settings focuses nickname input")
@@ -62,15 +63,15 @@ func run() -> void:
 	click(menu.settings_popup.get_node("SettingsCancel").get_global_rect().get_center())
 	await process_frame
 	check(not menu.popup_open() and menu.nickname_input.text==nickname and scene.cpu_difficulty==1,"Native Cancel discards nickname and choices")
-	click(stage.get_node("Settings").get_global_rect().get_center())
+	menu.open_settings()
 	await process_frame
 	click(menu.difficulty_buttons[0].get_global_rect().get_center())
 	menu.nickname_input.text = "Piloto clássico"
 	click(menu.settings_popup.get_node("SettingsAccept").get_global_rect().get_center())
 	await process_frame
-	check(not menu.popup_open() and scene.cpu_difficulty==0 and menu.cpu_detail.text=="CPU · Leve","Native OK applies difficulty to CPU card")
+	check(not menu.popup_open() and scene.cpu_difficulty==0 and menu.cpu_detail.text=="CPU · Easy","Native OK applies difficulty to CPU card")
 	check(menu.player_name.text=="Piloto clássico" and scene.screen=="menu","OK updates nickname and remains in room")
-	click(stage.get_node("Settings").get_global_rect().get_center())
+	menu.open_settings()
 	await process_frame
 	var esc := InputEventKey.new()
 	esc.keycode = KEY_ESCAPE
@@ -79,7 +80,7 @@ func run() -> void:
 	root.push_input(esc)
 	await process_frame
 	check(not menu.popup_open() and scene.screen=="menu","ESC dismisses classic modal without leaving room")
-	check(not stage.get_node("Start").disabled and not stage.get_node("Settings").disabled,"Closing restores room button input")
+	check(not stage.get_node("Start").disabled and not settings.disabled,"Closing restores room button input")
 	var art = menu.room_art
 	var saved: Dictionary = art.settings_art.catalog.duplicate(true)
 	for key in art.settings_keys:

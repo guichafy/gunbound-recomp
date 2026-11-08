@@ -1,4 +1,5 @@
 extends RefCounted
+const I18n = preload("res://scripts/i18n.gd")
 ## Battle HUD: native Thor's Hammer header/footer (HUD_CLIENT_LAYOUT.md).
 ## World overlays keep their existing contracts; presentation only.
 ## Presentation only: reads match.gd state and events, never decides combat.
@@ -460,7 +461,7 @@ func draw_delayboard(view, model, state: Dictionary) -> void:
 	var names: Array = []
 	var widest := 0.0
 	for entry in entries:
-		var name: String = state.player_name if entry.actor == Match.PLAYER else "Autômato"
+		var name: String = state.player_name if entry.actor == Match.PLAYER else I18n.text("Autômato")
 		names.append(name)
 		widest = maxf(widest, font.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size)).x / K)
 	var delay_width := 0.0
@@ -490,7 +491,7 @@ func draw_world(view, model, offset: Vector2, state: Dictionary) -> void:
 		if int(actor.hp) <= 0:
 			continue
 		draw_health(view, actor, Vector2(actor.pos) + offset)
-		var name: String = state.player_name if index == Match.PLAYER else "Autômato"
+		var name: String = state.player_name if index == Match.PLAYER else I18n.text("Autômato")
 		draw_nameplate(view, name, TEAM_BLUE if index == Match.PLAYER else TEAM_RED, Vector2(actor.pos) + offset + Vector2(0, 70))
 	if model.phase == Match.PHASE_AIM and model.active == Match.PLAYER and not state.paused_cpu:
 		draw_crosshair(view, model, offset, state)

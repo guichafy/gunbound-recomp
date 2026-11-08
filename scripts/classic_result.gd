@@ -1,4 +1,5 @@
 extends Control
+const I18n = preload("res://scripts/i18n.gd")
 ## Thor's Hammer result window (REQ-50/ADR-139). Layout from FUN_004c8890
 ## (panels and rows) and FUN_004d0260 (one row), in the client's 800×600
 ## virtual pixels; the scene scales the node by 1.6. Every frame is drawn at
@@ -127,4 +128,4 @@ func _draw() -> void:
 			"text":
 				art.draw_text(self,op[1],op[2],op[3])
 	if not notice.is_empty():
-		draw_string(ThemeDB.fallback_font,Vector2(26,446),notice,HORIZONTAL_ALIGNMENT_LEFT,-1,10,Color(1,0.86,0.6))
+		draw_string(ThemeDB.fallback_font,Vector2(26,446),I18n.text(notice),HORIZONTAL_ALIGNMENT_LEFT,-1,10,Color(1,0.86,0.6))

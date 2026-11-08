@@ -1,6 +1,7 @@
 extends Node2D
 ## Presentation and input. Combat outcomes belong exclusively to MatchModel.
 
+const I18n = preload("res://scripts/i18n.gd")
 const Match = preload("res://scripts/match.gd")
 const CpuTurn = preload("res://scripts/cpu_turn.gd")
 const MenuScreen = preload("res://scripts/menu_screen.gd")
@@ -161,6 +162,8 @@ func _on_overlay_opened(kind: String) -> void:
 ## Closing resumes; after the match ends, the result comes back.
 func _on_overlay_closed() -> void:
 	paused = false
+	if screen=="lobby" and lobby!=null:
+		lobby.refresh_settings(profile.nickname,version())
 	if is_instance_valid(options_button):
 		options_button.disabled = false
 	if screen == "match" and model.phase == Match.PHASE_FINISHED:
@@ -191,6 +194,8 @@ func replace_root() -> void:
 
 ## Drops the room controls after replace_root has queued them for deletion.
 func _clear_front() -> void:
+	if overlays.kind=="settings":
+		overlays.close()
 	if screen == "menu" and menu != null and is_instance_valid(menu.nickname_input):
 		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
 		profile.save_profile()
@@ -212,7 +217,7 @@ func show_lobby() -> void:
 	lobby = LobbyScreen.new()
 	lobby.build(root, ui, {"version": version(), "nickname": profile.nickname, "level": profile.level(),
 		"rank": profile.rank, "xp": profile.xp, "gold": profile.gold, "cash": profile.cash},
-		{"create": show_menu, "show_shop": show_shop, "quit": quit_game})
+		{"create": show_menu, "show_shop": show_shop, "quit": quit_game, "settings": show_lobby_settings})
 	queue_redraw()
 
 func show_menu() -> void:
@@ -228,7 +233,8 @@ func show_menu() -> void:
 		"cpu_vehicle": resolved_cpu_id(), "item_art": item_art},
 		{"select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
 		"set_weather": set_weather, "show_items": show_items, "start": begin_loading, "show_shop": show_shop,
-		"show_help": show_help, "leave": show_lobby, "commit_items": commit_items})
+		"show_help": show_help, "leave": show_lobby, "commit_items": commit_items,
+		"options": options, "apply_options": apply_options, "save_settings": save_front_settings, "weather_label": weather_label})
 	menu.figures.paint = draw_room_figures
 	menu.show_vehicle(vehicle)
 	if player_random:
@@ -283,7 +289,7 @@ func toggle_weather() -> String:
 	return set_weather("all" if weather_mode == "original" else "original")
 
 func weather_label() -> String:
-	return "Clima: " + ("original do mapa" if weather_mode == "original" else "todos (Thor)")
+	return I18n.text("Clima: ") + I18n.text("original do mapa" if weather_mode == "original" else "todos (Thor)")
 
 ## The mobile the machine will drive. An explicit pick wins over the pairing.
 func resolved_cpu_id() -> int:
@@ -420,7 +426,7 @@ func build_hud() -> void:
 	for index in range(Mobiles.weapon_count(model.actors[Match.PLAYER].vehicle)):
 		var button: TextureButton = hud.make_button(root, "shot", index)
 		button.pressed.connect(func(): select_weapon(index))
-		button.tooltip_text = "%s · atraso %d" % [model.weapon_rules(Match.PLAYER, index).name, model.weapon_rules(Match.PLAYER, index).delay]
+		button.tooltip_text = I18n.text("%s · atraso %d") % [I18n.text(model.weapon_rules(Match.PLAYER, index).name), model.weapon_rules(Match.PLAYER, index).delay]
 		weapon_buttons.append(button)
 	options_button = hud.make_button(root, "options")
 	options_button.tooltip_text = "Configuration (ESC / P)"
@@ -681,7 +687,7 @@ func update_hud() -> void:
 		button.disabled = index == Match.SPECIAL_WEAPON and not model.can_use_special(Match.PLAYER)
 		if bool(button.get_meta("activated")) != (index == aim.weapon):
 			hud.style_button(button, index == aim.weapon)
-	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = "%s: liberado no primeiro turno; depois do uso, volta em quatro turnos próprios." % model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name
+	weapon_buttons[Match.SPECIAL_WEAPON].tooltip_text = I18n.text("%s: liberado no primeiro turno; depois do uso, volta em quatro turnos próprios.") % I18n.text(model.weapon_rules(Match.PLAYER, Match.SPECIAL_WEAPON).name)
 	var displayed_weapon: int = aim.weapon if model.active == Match.PLAYER else cpu.weapon()
 	if model.phase == Match.PHASE_FINISHED:
 		queue_entries = []
@@ -723,7 +729,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or event.echo:
 		return
 	if event.pressed and event.physical_keycode == KEY_ESCAPE:
-		if overlays.kind == "options":
+		if overlays.kind == "settings":
+			close_overlay()
+		elif overlays.kind == "options":
 			cancel_options()
 		elif overlays.kind == "items":
 			accept_items()
@@ -737,7 +745,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		elif screen == "match":
 			show_options()
 		return
-	if screen == "menu" and menu != null and menu.popup_open():
+	if overlays.kind=="settings" or (screen == "menu" and menu != null and menu.popup_open()):
 		return
 	if event.pressed and event.physical_keycode == KEY_P and screen == "match" and overlays.kind in ["", "options"]:
 		show_pause()
@@ -771,13 +779,31 @@ func close_overlay() -> void:
 func show_help() -> void:
 	overlays.show_help(self)
 
+func show_lobby_settings() -> void:
+	overlays.show_settings(self)
+
 func show_options() -> void:
 	overlays.show_options(self)
 
 func apply_options() -> void:
+	I18n.set_locale(options.language)
 	sound.set_volume(Options.volume_gain(options.sfx))
 	sound.set_music_volume(Options.volume_gain(options.bgm))
 	queue_redraw()
+
+func save_front_settings(nickname: String) -> bool:
+	var previous: String = profile.nickname
+	profile.nickname = profile.clean_nickname(nickname)
+	if not profile.save_profile():
+		profile.nickname = previous
+		return false
+	if not options.save_options():
+		profile.nickname = previous
+		profile.save_profile()
+		return false
+	if menu!=null:
+		menu.nickname_input.text = profile.nickname
+	return true
 
 func accept_options() -> void:
 	if overlays.options_popup != null:
@@ -797,7 +823,7 @@ func show_items() -> void:
 	pass
 
 func items_label() -> String:
-	return "Itens (%d/6)" % Items.used_slots(options.items)
+	return I18n.text("Itens (%d/6)") % Items.used_slots(options.items)
 
 func commit_items(next: Array) -> void:
 	options.items = Items.sanitize(next)
@@ -979,8 +1005,8 @@ func draw_floating(offset: Vector2) -> void:
 	draw_set_transform(offset)
 	for item in floating:
 		var pos: Vector2 = item.pos + Vector2(-22, -70 - float(item.age) * 34.0)
-		draw_string_outline(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32, 5, Color(0.05, 0.12, 0.18, 1.0 - float(item.age) / 1.5))
-		draw_string(ui.bold, pos, item.text, HORIZONTAL_ALIGNMENT_LEFT, -1, 32, Color(item.color, 1.0 - float(item.age) / 1.5))
+		draw_string_outline(ui.bold, pos, I18n.text(item.text), HORIZONTAL_ALIGNMENT_LEFT, -1, 32, 5, Color(0.05, 0.12, 0.18, 1.0 - float(item.age) / 1.5))
+		draw_string(ui.bold, pos, I18n.text(item.text), HORIZONTAL_ALIGNMENT_LEFT, -1, 32, Color(item.color, 1.0 - float(item.age) / 1.5))
 
 func draw_procedural_terrain() -> void:
 	draw_texture_rect(model.terrain.texture, Rect2(0, 0, 1280, 800), false)
@@ -1010,7 +1036,7 @@ func draw_offscreen_markers() -> void:
 		var side := direction.orthogonal() * 10.0
 		draw_colored_polygon(PackedVector2Array([tip, edge - side, edge + side]), tint)
 		draw_polyline(PackedVector2Array([tip, edge - side, edge + side, tip]), ui.INK, 2.0, true)
-		var label := "%s · %dm" % ["Você" if index == Match.PLAYER else "Autômato", int(screen_pos.distance_to(edge) / 10.0)]
+		var label := "%s · %dm" % [I18n.text("Você" if index == Match.PLAYER else "Autômato"), int(screen_pos.distance_to(edge) / 10.0)]
 		var width: float = ui.bold.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x
 		var text_pos := edge - direction * 22.0 + Vector2(-width * 0.5, 5)
 		text_pos.x = clampf(text_pos.x, 8.0, VIEW_SIZE.x - width - 8.0)

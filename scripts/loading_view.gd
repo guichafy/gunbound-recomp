@@ -68,6 +68,7 @@ func show_marks(world_width: int, points: Array, names: PackedStringArray) -> vo
 		mark.size = Vector2(4, 4)
 		add_child(mark)
 		var label := Label.new()
+		label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 		label.text = text
 		label.position = origin
 		label.custom_minimum_size = text_size

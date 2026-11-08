@@ -15,6 +15,8 @@ var kind := ""
 var layer: Control = null
 var options_popup: Control = null
 var items_popup: Control = null
+var settings_popup: Control = null
+var settings_draft := {}
 
 ## A new screen root: nothing is open on it.
 func attach(new_root: Control, saved_options) -> void:
@@ -23,6 +25,7 @@ func attach(new_root: Control, saved_options) -> void:
 	layer = null
 	kind = ""
 	options_popup = null
+	settings_popup = null
 
 func is_open() -> bool:
 	return layer != null
@@ -31,6 +34,8 @@ func is_open() -> bool:
 func open(kind_name: String) -> Control:
 	if kind == "options" and options_popup != null:
 		options_popup.restore()
+	if kind == "settings" and settings_popup != null:
+		settings_popup.restore()
 	if is_instance_valid(layer):
 		root.remove_child(layer)
 		layer.queue_free()
@@ -39,6 +44,7 @@ func open(kind_name: String) -> Control:
 	layer.size = Vector2(1280, 800)
 	root.add_child(layer)
 	options_popup = null
+	settings_popup = null
 	opened.emit(kind_name)
 	return layer
 
@@ -53,12 +59,15 @@ func make(host, kind_name: String) -> Panel:
 func close() -> void:
 	if kind == "options" and options_popup != null:
 		options_popup.restore()
+	if kind == "settings" and settings_popup != null:
+		settings_popup.restore()
 	if is_instance_valid(layer):
 		root.remove_child(layer)
 		layer.queue_free()
 	layer = null
 	kind = ""
 	options_popup = null
+	settings_popup = null
 	closed.emit()
 
 func show_help(host) -> void:
@@ -113,3 +122,39 @@ func show_result(host) -> void:
 	if not host.profile.last_save_ok:
 		window.notice = "Não foi possível salvar o progresso."
 	layer.add_child(window)
+
+## Global preferences are accessible before Create, over the lobby.
+func show_settings(host) -> void:
+	if host.screen!="lobby" or kind=="settings":
+		return
+	open("settings")
+	var shade := ColorRect.new()
+	shade.size = Vector2(1280,800)
+	shade.color = Color(0.02,0.05,0.1,0.62)
+	layer.add_child(shade)
+	settings_draft = {"difficulty":host.cpu_difficulty,"weather":host.weather_mode}
+	settings_popup = preload("res://scripts/settings_panel.gd").new(host.ui,options,host.profile.nickname,
+		func(): accept_settings(host), close,
+		func(index: int): settings_draft.difficulty=index,
+		func(mode: String): settings_draft.weather=mode)
+	settings_popup.changed.connect(host.apply_options)
+	settings_popup.cancelled.connect(close)
+	layer.add_child(settings_popup)
+	settings_popup.begin_edit()
+	for index in settings_popup.difficulty_buttons.size():
+		settings_popup.difficulty_buttons[index].set_pressed_no_signal(index==host.cpu_difficulty)
+	for index in settings_popup.weather_buttons.size():
+		settings_popup.weather_buttons[index].set_pressed_no_signal(index==(1 if host.weather_mode=="all" else 0))
+	settings_popup.visible = true
+	settings_popup.nickname_input.grab_focus()
+
+func accept_settings(host) -> void:
+	if kind!="settings" or settings_popup==null:
+		return
+	if not host.save_front_settings(settings_popup.nickname_input.text):
+		settings_popup.show_save_error()
+		return
+	host.cpu_difficulty = settings_draft.difficulty
+	host.set_weather(settings_draft.weather)
+	settings_popup.commit()
+	close()

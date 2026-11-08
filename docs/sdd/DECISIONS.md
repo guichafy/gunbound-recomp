@@ -2054,3 +2054,23 @@ Queda vertical instantânea, deriva/parede, apoio e suavização visual continua
 adaptações; não é porte novo da cadência de gravidade do PE. Fixtures balísticas
 antes suspensas recebem plataformas, sem remover expectativas de trajetória.
 Reprodução, plano, revisão e resultados em `GRAVITY_DURING_SHOTS.md`.
+
+## ADR-155 — Idiomas e Settings legível na sala (08/11/2026)
+
+Pedido atual autoriza modernizar o modal da sala, substituindo a moldura/fonte
+bitmap ampliada da ADR-109; assets preservados. Inglês padrão,
+português opcional em options; tradução só na apresentação. Todos os controles
+ativos de preferências entram na sala; limitações existentes são informadas.
+Salvar confirma, Cancelar/ESC restaura prévia, erro mantém edição aberta.
+Menu de batalha nativo ADR-137 preservado; textos de imagens adiados pelo usuário.
+Contrato e plano: `I18N_SETTINGS.md`. Sem mudança de regra ou publicação.
+
+### Emenda da ADR-155 — acesso no lobby, antes de Ranking (08/11/2026)
+
+Solicitação posterior substitui o acesso pela sala: Settings passa ao lobby,
+(163,551), antes de Ranking desabilitado (286,551); Create continua entrando
+na sala. A sala deixa de exibir Settings. Reutiliza casca/lettering existentes;
+o mesmo painel completo abre por MatchOverlay. Salvar/Cancelar/ESC permanecem
+no lobby; identidade/idioma atualizam sem reconstruir histórico/rascunho de chat.
+Create herda treino e preferências confirmados. Arte, menu de batalha, regras
+e perfil real preservados; sem export/push. Contrato em I18N_SETTINGS.md.

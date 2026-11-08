@@ -1,4 +1,5 @@
 extends RefCounted
+const I18n = preload("res://scripts/i18n.gd")
 ## Lobby clássico (ADR-096). A entrada do jogo. Create abre a sala 1×1.
 ## Patente atribuída do cliente Thor; GP usa a progressão local (ADR-102).
 ## Não há Buddy, rede nem classificação competitiva.
@@ -7,6 +8,8 @@ const Chrome = preload("res://scripts/classic_chrome.gd")
 const Ranks = preload("res://scripts/classic_ranks.gd")
 const CHAT_LIMIT := 64
 
+var root: Control
+var version_tag: Label
 var create_button: TextureButton
 var chrome
 var view_all: TextureButton
@@ -21,10 +24,12 @@ var rank_code := Ranks.GM
 ## `info`: version, nickname, rank, xp, gold, cash.
 ## `actions`: create, show_shop, quit.
 func build(root: Control, ui, info: Dictionary, actions: Dictionary) -> void:
+	self.root = root
 	chrome = Chrome.new()
 	nickname = str(info.nickname)
 	rank_code = Ranks.normalize(info.get("rank", Ranks.GM))
-	var tag: Label = ui.label(root, "TREINO OFFLINE\n/   " + str(info.version), Vector2(6, 8), Vector2(96, 42), 10, ui.CREAM, true)
+	var tag: Label = ui.label(root, I18n.text("TREINO OFFLINE\n/   ") + str(info.version), Vector2(6, 8), Vector2(96, 42), 10, ui.CREAM, true)
+	version_tag = tag
 	tag.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tag.add_theme_constant_override("outline_size", 3)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
@@ -56,6 +61,8 @@ func build_card(stage: Control, ui, info: Dictionary) -> void:
 func card_label(stage: Control, ui, key: String, text: String, at: Vector2, bounds: Vector2, font_size: int, color: Color) -> Label:
 	var label: Label = ui.label(stage, text, at, bounds, font_size, color, true)
 	label.name = key
+	if key=="PilotName":
+		label.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	label.clip_text = true
 	label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	label.tooltip_text = text
@@ -118,6 +125,7 @@ func build_channels(stage: Control) -> void:
 
 func build_chat(stage: Control, ui) -> void:
 	chat_log = RichTextLabel.new()
+	chat_log.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	chat_log.name = "LocalChatHistory"
 	chat_log.position = Vector2(42, 324)
 	chat_log.size = Vector2(477, 188)
@@ -131,11 +139,12 @@ func build_chat(stage: Control, ui) -> void:
 	chat_log.add_theme_font_size_override("normal_font_size", 11)
 	chat_log.add_theme_color_override("default_color", Color("e7f6ff"))
 	stage.add_child(chat_log)
-	push_line("[color=#b6ffc8]Treino offline — canal local.[/color]")
+	push_line(I18n.text("[color=#b6ffc8]Treino offline — canal local.[/color]"))
 	chat_input = LineEdit.new()
+	chat_input.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	chat_input.name = "LocalChatInput"
 	chat_input.position = Vector2(42, 518)
-	chat_input.placeholder_text = "Mensagem local"
+	chat_input.placeholder_text = I18n.text("Mensagem local")
 	chat_input.max_length = 80
 	chat_input.focus_mode = Control.FOCUS_CLICK
 	chat_input.add_theme_font_override("font", ui.font)
@@ -169,9 +178,10 @@ func build_roster(stage: Control, ui) -> void:
 	rank_icon(stage, "ChannelRankIcon", Vector2(589, 333), true)
 	var who: Label = ui.label(stage, nickname, Vector2(618, 331), Vector2(128, 18), 12, ui.CREAM, true)
 	who.name = "ChannelPilotName"
+	who.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	who.clip_text = true
 	who.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	who.tooltip_text = nickname + " · " + Ranks.description(rank_code)
+	who.tooltip_text = nickname + " · " + I18n.text(Ranks.description(rank_code))
 	who.mouse_filter = Control.MOUSE_FILTER_PASS
 	who.add_theme_constant_override("outline_size", 2)
 	who.add_theme_color_override("font_outline_color", ui.INK)
@@ -182,6 +192,10 @@ func build_actions(stage: Control, actions: Dictionary) -> void:
 	exit_button.name = "ExitLobby"
 	exit_button.tooltip_text = "Encerra o jogo."
 	exit_button.pressed.connect(actions.quit)
+	var settings: TextureButton = preload("res://scripts/classic_text_button.gd").create(stage,"SETTINGS",Vector2(163,551),chrome,preload("res://scripts/classic_room_art.gd").new())
+	settings.name = "Settings"
+	settings.tooltip_text = "Apelido, treino, áudio, mira e idioma."
+	settings.pressed.connect(actions.get("settings",func(): pass))
 	var ranking: TextureButton = chrome.button(stage, "b_gamelist_ranking", Vector2(286, 551))
 	ranking.name = "Ranking"
 	lock(ranking, "Ranking continua fora do treino offline.")
@@ -201,3 +215,13 @@ func lock(node: TextureButton, tip: String) -> void:
 	node.disabled = true
 	node.tooltip_text = tip
 	node.mouse_default_cursor_shape = Control.CURSOR_ARROW
+
+## Refresh identity/locale while preserving local chat history and draft input.
+func refresh_settings(next_name: String, version: String) -> void:
+	nickname = next_name
+	for key in ["PilotName","ChannelPilotName"]:
+		var label: Label = root.find_child(key,true,false)
+		label.text = nickname
+		label.tooltip_text = nickname if key=="PilotName" else nickname+" · "+I18n.text(Ranks.description(rank_code))
+	version_tag.text = I18n.text("TREINO OFFLINE\n/   ") + version
+	chat_input.placeholder_text = I18n.text("Mensagem local")

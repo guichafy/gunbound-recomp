@@ -21,3 +21,26 @@ func _draw() -> void:
 		return
 	if word_frames.size()==4 and word_frames[state]!=null:
 		draw_texture_rect(word_frames[state],Rect2(Vector2(floorf((size.x-word_size.x)*0.5),13),word_size),false)
+
+static func create(parent: Control, text: String, at: Vector2, chrome, paint) -> TextureButton:
+	var button = load("res://scripts/classic_text_button.gd").new()
+	button.text = text
+	if text=="SETTINGS":
+		var cell: Array = paint.records.room_settings_word.frame_size
+		button.word_size = Vector2(cell[0],cell[1])
+		for state in 4:button.word_frames.append(paint.frame("room_settings_word",state))
+	button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	button.focus_mode = Control.FOCUS_NONE
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	button.ignore_texture_size = true
+	button.stretch_mode = TextureButton.STRETCH_SCALE
+	button.position = at
+	button.custom_minimum_size = Vector2(107,45)
+	for state in 4:button.lettering_frames.append(chrome.frame("b_ready_startgame",state))
+	button.texture_normal = paint.frame("room_footer_shell",0)
+	button.texture_hover = paint.frame("room_footer_shell",1)
+	button.texture_pressed = paint.frame("room_footer_shell",2)
+	button.texture_disabled = paint.frame("room_footer_shell",3)
+	parent.add_child(button)
+	button.size = Vector2(107,45)
+	return button

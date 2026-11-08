@@ -1,4 +1,5 @@
 extends RefCounted
+const I18n = preload("res://scripts/i18n.gd")
 ## EquippedButtonBar in the battle HUD and HUD.UseItemAction / GrantTurn /
 ## LockItem. Presentation and input only: match.gd validates and applies items.
 
@@ -37,7 +38,7 @@ func build(host, parent: Control) -> void:
 		button.stretch_mode = TextureButton.STRETCH_SCALE
 		button.focus_mode = Control.FOCUS_NONE
 		button.size = Vector2(71 if Items.slots(id)==2 else 35,31) * HudArt.K
-		button.tooltip_text = "%s · atraso %d (F%d)" % [Items.definition(id).name, roundi(Items.delay(id)), slot + 1]
+		button.tooltip_text = I18n.text("%s · atraso %d (F%d)") % [Items.definition(id).name, roundi(Items.delay(id)), slot + 1]
 		button.set_meta("slot", slot)
 		art.style_button(button, id, false,true)
 		button.pressed.connect(func(): press(host, slot))

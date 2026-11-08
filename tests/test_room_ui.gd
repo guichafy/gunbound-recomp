@@ -35,7 +35,7 @@ func run() -> void:
 	var preview: TextureRect = scene.root.find_child("RoomMapPreview",true,false)
 	check(preview.position == Vector2(332,51) and preview.size == Vector2(136,84),"Map uses proven native window332,51")
 	check(preview.mouse_filter == Control.MOUSE_FILTER_PASS and preview.tooltip_text.contains("Miramo"),"Fixed map remains discoverable by hover")
-	check(panel.portrait.mouse_filter == Control.MOUSE_FILTER_PASS and panel.portrait.tooltip_text.contains("vida"),"Native portrait keeps stats available through tooltip")
+	check(panel.portrait.mouse_filter == Control.MOUSE_FILTER_PASS and panel.portrait.tooltip_text.contains("health"),"Native portrait keeps stats available through tooltip")
 	var motion := InputEventMouseMotion.new()
 	motion.position = panel.portrait.get_global_rect().get_center()
 	motion.global_position = motion.position
@@ -54,7 +54,7 @@ func run() -> void:
 	await process_frame
 	var owner: Label = scene.root.find_child("RoomOwner",true,false)
 	check(owner.text.begins_with("WWWW") and owner.text.ends_with("GM") and owner.size == Vector2(155,17),"Header follows accepted name and stays in native window")
-	check(owner.tooltip_text.contains("Administrador"),"GM remains assigned administrator")
+	check(owner.tooltip_text.contains("Administrator"),"GM remains assigned administrator")
 	for i in 8:
 		check(panel.climate_weights[i].text == str([1,1,1,1,0,1,1,1][i]),"Mage all-weather display includes seven native categories")
 	panel.open_settings()

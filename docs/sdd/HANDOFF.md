@@ -1,5 +1,70 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Emenda: Settings antes de Create, no lobby — REQ-55 / ADR-155 (08/11/2026)
+
+Correção solicitada após a entrega i18n: botão Settings movido para (163,551)
+no lobby, imediatamente à esquerda de Ranking desabilitado (286,551). Removido
+o botão da sala. O lettering/casca existentes são reutilizados por factory
+em `classic_text_button.gd`; modal completo abre via MatchOverlay sobre o lobby.
+Salvar/Cancelar/ESC permanecem no lobby; Create herda opções confirmadas.
+Atualização de nome/idioma preserva histórico e rascunho do chat. Trocar tela
+com prévia ainda aberta cancela os valores não confirmados. SettingsPanel
+consome ESC antes de emitir cancelamento, pois a camada pode sair da árvore.
+
+Godot 4.7.2/macOS: reprodução inicial `test_lobby_settings` 1/1 (botão ausente);
+final 14/0, cobrindo cliques reais, posição, bloqueio do Create, cancelamento,
+persistência, falha de gravação, chat e entrada na sala. Regressão final de
+18 suítes de cenas/i18n/UI: 1.582 checks/zero falhas/exit0, mais confirmação
+isolada `test_lobby_settings` 14/0 após ajuste de nomes internos. Capturas GPU
+OpenGL/Metal inspecionadas: `docs/settings-i18n/lobby-settings-entry.png`, modal
+EN/PT1280×800 e PT960×600. Sem mudança de regra; partidas completas/Python não
+repetidos. Sem export/push/alteração do perfil real ou de project.godot preexistente.
+Logs: `.tools/i18n/lobby-final.log`, `lobby-final-confirm.log`, `lobby-capture.log`.
+O registro abaixo da entrega inicial descreve a localização anterior na sala,
+substituída por esta emenda; as validações antigas não são evidência desta mudança.
+
+
+## Idiomas e Settings da sala — REQ-55 / ADR-155 (08/11/2026)
+
+Implementado diretamente na main local por solicitação. `I18n` registra 185
+mensagens em TranslationServer: inglês padrão e português (`pt_BR`) salvo nas
+options. Controles Godot usam tradução automática; templates, fragmentos e
+textos de desenho manual traduzem antes da formatação. Catálogos de combate,
+IDs, apelidos e chat permanecem intactos. Textos incorporados às imagens não
+foram alterados. O menu de batalha da ADR-137 continua nativo.
+
+Settings da sala usa `settings_panel.gd`: painel escalável em duas colunas com
+apelido, dificuldade, clima, idioma, música, efeitos, Drag/Slice, velocidade de
+câmera e fundo. Limitações atuais são informadas sem controles fictícios.
+Áudio/idioma têm prévia; Cancelar/ESC restaura snapshot. Salvar confirma treino
+após gravar; falha conserva edição e restaura o apelido persistido. Moldura e
+fonte bitmap antigas preservadas em disco, substituídas no modal por pedido
+atual (ADR-109 → ADR-155). Botões raster START/SETTINGS preservados.
+
+Validação (Godot 4.7.2/macOS): `test_i18n` 247/0, `test_settings_i18n` 34/0.
+`check.sh --quick`: parse aprovado, 105 suítes Godot/46.606 checks e 20 suítes
+Python/108 testes. Esse primeiro run terminou exit1: `test_roster` tinha quatro
+expectativas antigas de texto português; atualizadas para o inglês, passou
+79/0. Rodada final com 18 suítes afetadas: 2.085 checks, zero falhas/exit0
+(cenas, lobby/sala, roster, itens, loja, HUD, menu nativo, loading, resultado,
+música e i18n). Não reutilizar exit1 inicial como resultado verde integral.
+Nenhuma falha permanece após as repetições. Partidas completas não rodadas:
+nenhuma regra/modelo de combate mudou.
+
+Revisão independente encontrou P2 (tooltips após fechar Settings usavam ordem
+de catálogo diferente da grade) e P3 (placeholder do apelido ficava no idioma
+anterior); ambos reproduzidos por testes antes das correções, cenário conjunto
+8 falhas → 34/0. Capturas GPU OpenGL/Metal Apple M4 Pro inspecionadas em EN/PT
+1280×800 e PT960×600, com 20 caracteres largos no apelido: `docs/settings-i18n/`.
+Aceite visual/escuta humanos e smoke de pacote novo não executados. Presets
+all_resources incluem o catálogo por preload; aplicativo não reexportado.
+
+Plano, decisões e comandos em `I18N_SETTINGS.md`; logs locais em
+`.tools/i18n/full-harness.log`, `final-focused.log` e `review-fixes.log`.
+`project.godot` e `tests/test_music_screens.gd.uid` preexistentes preservados.
+Sem push, publicação, mudança de versão ou alteração no perfil real.
+
+
 ## Tiros do Nak, Dragon e Knight — REQ-54 / ADR-154 — 07/11/2026
 
 Pedido: o Nak T1/T2 parecia "passar por um eclipse" e Dragon/Knight não tinham os tiros do cliente.

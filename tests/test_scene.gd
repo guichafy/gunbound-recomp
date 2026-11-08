@@ -38,7 +38,7 @@ func run() -> void:
 	scene.menu.choose_difficulty(2)
 	scene.menu.choose_weather("all")
 	scene.menu.accept_settings()
-	check(scene.screen == "menu" and scene.cpu_difficulty == 2 and scene.weather_mode == "all" and scene.menu.weather_caption.text.begins_with("Clima:"), "Aceitar grava dificuldade e clima e permanece na sala")
+	check(scene.screen == "menu" and scene.cpu_difficulty == 2 and scene.weather_mode == "all" and scene.menu.weather_caption.text.begins_with("Weather:"), "Aceitar grava dificuldade e clima e permanece na sala")
 	scene.cpu_difficulty = 1
 	scene.weather_mode = "original"
 	scene.menu.choose_player_side()
@@ -46,7 +46,7 @@ func run() -> void:
 	for button in scene.menu.grid_buttons:
 		if int(button.get_meta("vehicle_id")) == 1:
 			button.pressed.emit()
-	check(scene.vehicle == 1 and not scene.menu.popup_open() and scene.menu.portrait_name.text == "Mage" and scene.menu.choice_label.text == "Escolhendo: piloto", "O clique na grade aplica o Mage no piloto, sem popup")
+	check(scene.vehicle == 1 and not scene.menu.popup_open() and scene.menu.portrait_name.text == "Mage" and scene.menu.choice_label.text == "Choosing: player", "O clique na grade aplica o Mage no piloto, sem popup")
 	scene.select_vehicle(2)
 	check(scene.opening == -1, "Real matches draw who opens (ADR-076)")
 	scene.opening = 0
@@ -61,7 +61,7 @@ func run() -> void:
 	for button in scene.menu.grid_buttons:
 		if int(button.get_meta("vehicle_id")) == 4:
 			button.pressed.emit()
-	check(scene.cpu_vehicle == 4 and scene.vehicle == 2 and not scene.menu.popup_open() and scene.menu.cpu_mobile.text == "Armor" and scene.menu.choice_label.text == "Escolhendo: máquina", "O clique na grade aplica o Armor na CPU, sem popup")
+	check(scene.cpu_vehicle == 4 and scene.vehicle == 2 and not scene.menu.popup_open() and scene.menu.cpu_mobile.text == "Armor" and scene.menu.choice_label.text == "Choosing: CPU", "O clique na grade aplica o Armor na CPU, sem popup")
 	scene.opening = 0
 	scene.start_match()
 	check(int(scene.model.actors[1].vehicle) == 4 and int(scene.model.actors[0].vehicle) == 2, "The match drives the mobile chosen for the machine")
