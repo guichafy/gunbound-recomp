@@ -1,5 +1,5 @@
 extends RefCounted
-## Knight Ion (client type 14, ADR-152). The guide of every shot only wakes the
+## Knight Ion (client type 14, ADR-154). The guide of every shot only wakes the
 ## Ion: SpawnKnightIon 0x438100, Animate 0x47ca40, S1/S2 activation 0x47c040,
 ## SS 0x47c3f0, children 0x4305c0 (vtable 0x556008, Animate 0x47ab00).
 ##  - idle: hovers over its owner at y-200, closing ceil(|d|/8) per tick and

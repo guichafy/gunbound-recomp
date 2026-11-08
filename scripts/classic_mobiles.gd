@@ -88,7 +88,7 @@ static func definitions() -> Dictionary:
 			shot("SS", 26, 18, 1290, {"flight": "grub_ss", "skip_actors": true, "shells": [{"spawn": 0.0, "angle": 0.0, "power": 0.0, "native_angle": 2}]})],
 			[Vector2(30, 60), Vector2(30, 60), Vector2(30, 60)],
 			"1000 de vida · S2 e SS ricocheteiam.")),
-		# tank14.img is the Dragon (client type 13). MainAction 0x46d070 (ADR-152):
+		# tank14.img is the Dragon (client type 13). MainAction 0x46d070 (ADR-154):
 		# S1 theta, P+10; S2 frames 1/6/11/16 (theta+1,P+10) (theta+1,P-10)
 		# (theta-1,P+10) (theta-1,P-10); SS theta, P+10. S1/S2 are spark trails;
 		# the SS Explode 0x46ca60 calls five children in from the upper half circle.

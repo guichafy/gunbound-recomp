@@ -26,7 +26,7 @@ const AdukaEffect = preload("res://scripts/aduka_effect.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const MINE_RANGE := 90.0
 const MINE_STEPS := 90
-# Dragon (ADR-152). S1/S2 are PrimaryShot_Bullet14 (sparks only, no body); the
+# Dragon (ADR-154). S1/S2 are PrimaryShot_Bullet14 (sparks only, no body); the
 # SS Explode 0x46ca60 calls the spawner 0x4388e0 five times.
 const DRAGON_SPARKS := "dragon_sparks"
 const DRAGON_SS := "dragon_ss"

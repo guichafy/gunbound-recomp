@@ -38,7 +38,7 @@ var meta: Dictionary = {}
 var bullets: Array = []
 var lights: Array = []
 # bullet3nl/sl are light layers: 0x458690 publishes them to BulletTexture2, which
-# 0x4c3020 draws SRCALPHA/ONE after the BulletTexture1 bodies (ADR-152).
+# 0x4c3020 draws SRCALPHA/ONE after the BulletTexture1 bodies (ADR-154).
 var glow = preload("res://scripts/additive_sprite_art.gd").new()
 
 func _init() -> void:

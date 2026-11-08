@@ -1,5 +1,5 @@
 extends SceneTree
-## Shot QA (ADR-152): T1 / T2 / SS of one mobile flying over a flat floor, each
+## Shot QA (ADR-154): T1 / T2 / SS of one mobile flying over a flat floor, each
 ## panel following its lead shell. 1920x1080, 60 Hz presentation over the 20 Hz
 ## model, isolated from the profile. Usage:
 ##   Godot --path . --script tests/capture_mobile_shots.gd -- <id> [tag] [dark]

@@ -1,5 +1,5 @@
 extends RefCounted
-## Knight Ion and children (ADR-152): knightion/knightbullet bodies in the alpha
+## Knight Ion and children (ADR-154): knightion/knightbullet bodies in the alpha
 ## pass and their "l" sheets added on top, like every published bullet (0x4c3020).
 ## The Ion turns to its aim angle and bobs while idle (0x47dc00, same 22-step
 ## table as ASate); a child turns to its heading. Read-only on snapshot state.

@@ -1,5 +1,5 @@
 extends "res://tests/support/suite.gd"
-## Knight (ID 15, client type 14), ADR-152: guide -> Ion -> children. Expected
+## Knight (ID 15, client type 14), ADR-154: guide -> Ion -> children. Expected
 ## values come from the ASM constants of 0x47ca40 / 0x47c3f0 / 0x4305c0 / 0x47ab00.
 const Match = preload("res://scripts/match.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")

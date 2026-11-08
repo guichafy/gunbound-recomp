@@ -134,9 +134,9 @@ Sem rastro (ADR-120). Luz: `bullet13nl/sl` e `tank13l.img` (`CharacterSpriteshee
 aditivas via `grub_sprite.gd` (emenda da ADR-150); a luz do casco vale por view (`hull_view`): batalha e figuras da sala/loading. Testes test_grub_{surface,flight,model} e
 test_grub_assets.py; captura tests/capture_grub.gd.
 
-## Tiros Nak, Dragon e Knight — ADR-152
+## Tiros Nak, Dragon e Knight — ADR-154
 
-Ler docs/sdd/SHOTS_NAK_DRAGON_KNIGHT.md (REQ-53). `0x4c3020` desenha o corpo publicado em
+Ler docs/sdd/SHOTS_NAK_DRAGON_KNIGHT.md (REQ-54). `0x4c3020` desenha o corpo publicado em
 alfa e depois a luz `*l` somada (SRCALPHA/ONE): Nak T1/T2 (`nak_sprite.gd`) e Dragon/Knight
 (`ClassicSprite.ADDITIVE_LIGHT_KINDS`); os demais clássicos não mudaram. Dragon: S1/SS P+10,
 S2 quatro corpos (θ±1, P±10) em 1/6/11/16; S1/S2 sem corpo, rastro `dragon_sparks.gd` (RNG só

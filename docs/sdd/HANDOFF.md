@@ -1,6 +1,6 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
-## Tiros do Nak, Dragon e Knight — REQ-53 / ADR-152 — 07/11/2026
+## Tiros do Nak, Dragon e Knight — REQ-54 / ADR-154 — 07/11/2026
 
 Pedido: o Nak T1/T2 parecia "passar por um eclipse" e Dragon/Knight não tinham os tiros do cliente.
 Registro completo em `SHOTS_NAK_DRAGON_KNIGHT.md`; extratos Ghidra 12.2 em `.tools/knight-dragon/`.

@@ -1,4 +1,4 @@
-"""Source oracle for the Knight Ion/child sheets (ADR-152).
+"""Source oracle for the Knight Ion/child sheets (ADR-154).
 
 Each committed frame is compared, pixel for pixel, with the frame decoded from the
 pinned graphics.xfs at its hotspot; states/durations come from the .epa entries."""

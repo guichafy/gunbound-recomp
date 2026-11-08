@@ -1957,9 +1957,9 @@ movimento é 28×24, o corpo do PE. O apoio visual 25 permanece. (d) `0x41da80` 
 `[33]` continua fora do custo: a flag `+0x8bb4` fica limpa.
 
 
-## ADR-152 — Luz dos tiros, Dragon e Knight pelo cliente (07/11/2026)
+## ADR-154 — Luz dos tiros, Dragon e Knight pelo cliente (07/11/2026)
 
-REQ-53. Contexto: o Nak T1/T2 aparecia escurecido e Dragon/Knight usavam a balística comum.
+REQ-54. Contexto: o Nak T1/T2 aparecia escurecido e Dragon/Knight usavam a balística comum.
 Decisão: (a) para os tiros publicados por `0x458690`, o corpo vai no passe alfa de
 `BulletTexture1` e a luz `*l` no passe SRCALPHA/ONE de `BulletTexture2`, depois do corpo e com
 alfa 255 no nível 0 (`0x4c3020`, comprovado). Aplicado ao Nak T1/T2 e aos Dragon/Knight

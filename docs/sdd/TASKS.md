@@ -1,6 +1,6 @@
 # Entregas e próximos trabalhos
 
-## Tiros do Nak, Dragon e Knight — REQ-53 / ADR-152 (07/11/2026)
+## Tiros do Nak, Dragon e Knight — REQ-54 / ADR-154 (07/11/2026)
 
 - [x] Provar no PE a ordem/mistura corpo → luz aditiva (`0x458690`, `0x4c3020`) e corrigir o Nak T1/T2.
 - [x] Dragon: emissão do MainAction `0x46d070`, rastro de faíscas e cinco filhos do SS.
