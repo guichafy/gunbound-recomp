@@ -343,8 +343,7 @@ func category_icon(category: int, gender: int) -> String:
 
 func toggle_gender() -> void:
 	if model.profile.set_gender(1-model.profile.gender):
-		model.preview = model.profile.equipped_set()
-		model.selected_key = ""
+		model.reset_preview()
 		update_gender_caption()
 		refresh(model.category,0)
 	else:
@@ -469,7 +468,7 @@ func update_inventory() -> void:
 		inventory_rows.remove_child(child)
 		child.queue_free()
 	for category in range(4):
-		for item in model.catalog.inventory_items(model.profile.gender,category):
+		for item in model.catalog.shop_items(model.profile.gender,category,true):
 			if not model.profile.owns(item.key):
 				continue
 			var row := RowButton.new()
@@ -489,23 +488,26 @@ func inventory_count() -> int:
 	return inventory_rows.get_child_count() if is_instance_valid(inventory_rows) else 0
 
 func equip_inventory(key: String) -> void:
-	if model.profile.equip(key):
+	if model.profile.equip(key,true):
 		model.preview = model.profile.equipped_set()
+		model.preview_gender = model.profile.gender
+		update_gender_caption()
 		model.selected_key = key
 		model.query = ""
 		status_label.text = "Avatar vestido e salvo"
-		refresh(int(model.catalog.find(key).category),0)
+		var category := int(model.catalog.find(key).category)
+		refresh(category,model.page_for(key,category))
 	else:
 		status_label.text = "Não foi possível salvar o avatar"
 
 ## Card grid of owned items (kept for the model's inventory filter).
 func switch_tab(inventory: bool) -> void:
 	model.inventory = inventory
-	model.preview = model.profile.equipped_set()
-	model.selected_key = ""
+	model.reset_preview()
 	refresh(model.category,0)
 
 func refresh(category: int, page: int) -> void:
+	update_gender_caption()
 	if is_instance_valid(cards):
 		content.remove_child(cards)
 		cards.queue_free()
@@ -529,7 +531,7 @@ func refresh(category: int, page: int) -> void:
 		card.tooltip_text = item.name+"\n"+str(item.get("description",""))+"\n"+bonus_description(item)
 		card.pressed.connect(func():
 			if model.select(item.key):
-				refresh(model.category,model.page)
+				refresh(model.category,model.page_for(item.key,model.category))
 			else:
 				status_label.text = "Não foi possível salvar o avatar"
 		)
@@ -572,11 +574,14 @@ func can_buy(item: Dictionary) -> bool:
 	return (int(item.get("gold_price",0))>0 and model.profile.gold>=int(item.gold_price)) or (int(item.get("cash_price",0))>0 and model.profile.cash>=int(item.cash_price))
 
 func try_selected() -> void:
+	var page: int = model.page
 	if model.try_selected():
+		update_gender_caption()
+		page = model.page_for(model.selected_key,model.category)
 		status_label.text = "Avatar vestido e salvo" if model.profile.owns(model.selected_key) else "Prévia temporária · compre para vestir"
 	else:
 		status_label.text = "Não foi possível salvar o avatar"
-	refresh(model.category,model.page)
+	refresh(model.category,page)
 
 func open_buy() -> void:
 	if is_instance_valid(modal) or attributes_panel.visible or buy_button.disabled:
@@ -710,6 +715,8 @@ func paint_card(card: CardButton) -> void:
 
 ## Cash row y+110 (yellow, comma 279), Gold row y+126 (cyan, comma 280).
 func draw_prices(view: CanvasItem, item: Dictionary, origin: Vector2) -> void:
+	if model.catalog.offline_piece(item):
+		return
 	var cash := int(item.get("cash_price",0))
 	var gold := int(item.get("gold_price",0))
 	if gold > 0:

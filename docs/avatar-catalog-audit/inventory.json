@@ -1,0 +1,654 @@
+{
+  "source_sha256": {
+    "GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "avatar.xfs": "829be830e0c50c273d5e0ece03c22fbe0c45e07527129e60e8843d16a1df0e6d",
+    "graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08"
+  },
+  "xfs_version": 280,
+  "dat_counts": {
+    "fb.dat": {
+      "records": 78,
+      "buyable": 72
+    },
+    "ff.dat": {
+      "records": 0,
+      "buyable": 0
+    },
+    "fg.dat": {
+      "records": 37,
+      "buyable": 34
+    },
+    "fh.dat": {
+      "records": 81,
+      "buyable": 74
+    },
+    "mb.dat": {
+      "records": 78,
+      "buyable": 69
+    },
+    "mf.dat": {
+      "records": 174,
+      "buyable": 126
+    },
+    "mg.dat": {
+      "records": 37,
+      "buyable": 34
+    },
+    "mh.dat": {
+      "records": 77,
+      "buyable": 70
+    }
+  },
+  "records": 562,
+  "buyable": 479,
+  "with_layers": 550,
+  "layers": 629,
+  "hidden": 83,
+  "hidden_with_layers": 71,
+  "hidden_nondefault_with_layers": 67,
+  "missing_native_art": [
+    {
+      "key": "xfs:0:1:61",
+      "asset": "mb00061.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:0:1:62",
+      "asset": "mb00062.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:0:1:63",
+      "asset": "mb00063.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:2:3:84",
+      "asset": "mf00084.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:2:3:85",
+      "asset": "mf00085.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:2:3:86",
+      "asset": "mf00086.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:2:3:87",
+      "asset": "mf00087.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:2:3:88",
+      "asset": "mf00088.img",
+      "buyable": false
+    },
+    {
+      "key": "xfs:2:3:163",
+      "asset": "mf00163.img",
+      "buyable": false
+    }
+  ],
+  "unlisted_graphics": [
+    "ff00001.img",
+    "sff00001.img"
+  ],
+  "shop_groups": [
+    {
+      "gender": 0,
+      "category": 0,
+      "items": 70,
+      "pages": 8
+    },
+    {
+      "gender": 0,
+      "category": 1,
+      "items": 69,
+      "pages": 8
+    },
+    {
+      "gender": 0,
+      "category": 2,
+      "items": 34,
+      "pages": 4
+    },
+    {
+      "gender": 0,
+      "category": 3,
+      "items": 126,
+      "pages": 14
+    },
+    {
+      "gender": 1,
+      "category": 0,
+      "items": 74,
+      "pages": 9
+    },
+    {
+      "gender": 1,
+      "category": 1,
+      "items": 72,
+      "pages": 8
+    },
+    {
+      "gender": 1,
+      "category": 2,
+      "items": 34,
+      "pages": 4
+    },
+    {
+      "gender": 1,
+      "category": 3,
+      "items": 126,
+      "pages": 14
+    }
+  ],
+  "pixel_frames_compared": 10466,
+  "pixel_portraits_compared": 534,
+  "hidden_records": [
+    {
+      "key": "xfs:1:1:0",
+      "name": "Standard",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfb00000.png"
+    },
+    {
+      "key": "xfs:1:1:20",
+      "name": "FriendShip A",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfb00020.png"
+    },
+    {
+      "key": "xfs:1:1:36",
+      "name": "Ballroom Dress",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfb00036_rle.png"
+    },
+    {
+      "key": "xfs:1:1:39",
+      "name": "High School Band",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfb00039_rle.png"
+    },
+    {
+      "key": "xfs:1:1:50",
+      "name": "Clown Custom C",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfb00050_rle.png"
+    },
+    {
+      "key": "xfs:1:1:74",
+      "name": "Skeleton",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfb00074_rle.png"
+    },
+    {
+      "key": "xfs:1:2:0",
+      "name": "Standard",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/sfg00000.png"
+    },
+    {
+      "key": "xfs:1:2:19",
+      "name": "Orbiting Moon",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfg00019_rle.png"
+    },
+    {
+      "key": "xfs:1:2:20",
+      "name": "20",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfg00020_rle.png"
+    },
+    {
+      "key": "xfs:1:0:0",
+      "name": "Standard",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfh00000.png"
+    },
+    {
+      "key": "xfs:1:0:13",
+      "name": "Soccer Hat",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfh00013_rle.png"
+    },
+    {
+      "key": "xfs:1:0:21",
+      "name": "Friendship A",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfh00021_rle.png"
+    },
+    {
+      "key": "xfs:1:0:38",
+      "name": "birthday Hat",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfh00038_rle.png"
+    },
+    {
+      "key": "xfs:1:0:41",
+      "name": "Black Noodle",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfh00041_rle.png"
+    },
+    {
+      "key": "xfs:1:0:52",
+      "name": "Clown Custom H",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfh00052_rle.png"
+    },
+    {
+      "key": "xfs:1:0:77",
+      "name": "Skeleton",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/sfh00077_rle.png"
+    },
+    {
+      "key": "xfs:0:1:0",
+      "name": "Standard",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smb00000_rle.png"
+    },
+    {
+      "key": "xfs:0:1:19",
+      "name": "FrendShip A",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smb00019_rle.png"
+    },
+    {
+      "key": "xfs:0:1:35",
+      "name": "Ballroom Suit",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smb00035_rle.png"
+    },
+    {
+      "key": "xfs:0:1:36",
+      "name": "High School Band",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smb00036_rle.png"
+    },
+    {
+      "key": "xfs:0:1:48",
+      "name": "Clown Custom C",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smb00048.png"
+    },
+    {
+      "key": "xfs:0:1:61",
+      "name": ".",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smb00061.png"
+    },
+    {
+      "key": "xfs:0:1:62",
+      "name": ".",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smb00062.png"
+    },
+    {
+      "key": "xfs:0:1:63",
+      "name": ".",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smb00063.png"
+    },
+    {
+      "key": "xfs:0:1:74",
+      "name": "Skeleton",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smb00074_rle.png"
+    },
+    {
+      "key": "xfs:2:3:0",
+      "name": "Standard",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smf00000.png"
+    },
+    {
+      "key": "xfs:2:3:48",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00048_rle.png"
+    },
+    {
+      "key": "xfs:2:3:61",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00061_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:62",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00062_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:63",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00063_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:64",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00064_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:65",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00065_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:66",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00066_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:67",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00067_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:68",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00068_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:69",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00069_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:70",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00070_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:71",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00071_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:72",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00072_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:73",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00073_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:74",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00074_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:75",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00075_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:76",
+      "name": "Guild Flag",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00076_alpha.png"
+    },
+    {
+      "key": "xfs:2:3:84",
+      "name": "84",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smf00084.png"
+    },
+    {
+      "key": "xfs:2:3:85",
+      "name": "85",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smf00085.png"
+    },
+    {
+      "key": "xfs:2:3:86",
+      "name": "86",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smf00086.png"
+    },
+    {
+      "key": "xfs:2:3:87",
+      "name": "87",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smf00087.png"
+    },
+    {
+      "key": "xfs:2:3:88",
+      "name": "88",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smf00088.png"
+    },
+    {
+      "key": "xfs:2:3:89",
+      "name": "89",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00089_rle.png"
+    },
+    {
+      "key": "xfs:2:3:90",
+      "name": "90",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00090_rle.png"
+    },
+    {
+      "key": "xfs:2:3:91",
+      "name": "91",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00091_rle.png"
+    },
+    {
+      "key": "xfs:2:3:92",
+      "name": "92",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00092_rle.png"
+    },
+    {
+      "key": "xfs:2:3:93",
+      "name": "93",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00093_rle.png"
+    },
+    {
+      "key": "xfs:2:3:94",
+      "name": "94",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00094_rle.png"
+    },
+    {
+      "key": "xfs:2:3:95",
+      "name": "95",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00095_rle.png"
+    },
+    {
+      "key": "xfs:2:3:96",
+      "name": "96",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00096_rle.png"
+    },
+    {
+      "key": "xfs:2:3:97",
+      "name": "97",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00097_rle.png"
+    },
+    {
+      "key": "xfs:2:3:139",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00139_rle.png"
+    },
+    {
+      "key": "xfs:2:3:140",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00140_rle.png"
+    },
+    {
+      "key": "xfs:2:3:141",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00141_rle.png"
+    },
+    {
+      "key": "xfs:2:3:142",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00142_rle.png"
+    },
+    {
+      "key": "xfs:2:3:143",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00143_rle.png"
+    },
+    {
+      "key": "xfs:2:3:144",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00144_rle.png"
+    },
+    {
+      "key": "xfs:2:3:145",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00145_rle.png"
+    },
+    {
+      "key": "xfs:2:3:146",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00146.png"
+    },
+    {
+      "key": "xfs:2:3:147",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00147_rle.png"
+    },
+    {
+      "key": "xfs:2:3:148",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00148.png"
+    },
+    {
+      "key": "xfs:2:3:149",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00149.png"
+    },
+    {
+      "key": "xfs:2:3:150",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00150.png"
+    },
+    {
+      "key": "xfs:2:3:151",
+      "name": ".",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00151_rle.png"
+    },
+    {
+      "key": "xfs:2:3:154",
+      "name": "England",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00154_rle.png"
+    },
+    {
+      "key": "xfs:2:3:163",
+      "name": "lucky",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smf00163.png"
+    },
+    {
+      "key": "xfs:2:3:170",
+      "name": "Skeleton Sword",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smf00170_rle.png"
+    },
+    {
+      "key": "xfs:0:2:0",
+      "name": "Standard",
+      "has_layers": false,
+      "portrait": "res://assets/xfs/avatars/smg00000.png"
+    },
+    {
+      "key": "xfs:0:2:19",
+      "name": "Orbiting Moon",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smg00019_rle.png"
+    },
+    {
+      "key": "xfs:0:2:20",
+      "name": "20",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smg00020_rle.png"
+    },
+    {
+      "key": "xfs:0:0:0",
+      "name": "Standard",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smh00000.png"
+    },
+    {
+      "key": "xfs:0:0:12",
+      "name": "Soccer Hat",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smh00012_rle.png"
+    },
+    {
+      "key": "xfs:0:0:20",
+      "name": "Friendship A",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smh00020.png"
+    },
+    {
+      "key": "xfs:0:0:37",
+      "name": "Birthday Hat",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smh00037_rle.png"
+    },
+    {
+      "key": "xfs:0:0:38",
+      "name": "Black Noodle",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smh00038_rle.png"
+    },
+    {
+      "key": "xfs:0:0:50",
+      "name": "Clown Custom H",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smh00050_rle.png"
+    },
+    {
+      "key": "xfs:0:0:73",
+      "name": "Skeleton",
+      "has_layers": true,
+      "portrait": "res://assets/xfs/avatars/smh00073_rle.png"
+    }
+  ],
+  "problems": [],
+  "source_unchanged": true
+}

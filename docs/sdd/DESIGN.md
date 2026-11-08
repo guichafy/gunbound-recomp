@@ -1070,3 +1070,25 @@ completo. Consolidar patches sobre a main atual e testar em venv Python3.13
 isolado. Auditoria de vulnerabilidades usa ambiente separado do harness,
 sem acrescentar dependências ao jogo. DEPENDABOT_CONSOLIDATION.md registra
 compatibilidade, escopo e limites dos serviços de análise remota.
+
+## Auditoria do catálogo — REQ-46/47 (08/11/2026)
+
+`AVATAR_CATALOG_AUDIT.md` documenta os consumidores nativos e a cobertura
+562 registros/629 camadas. `AvatarCatalog.items` limita por gênero e
+`AvatarShopModel.filter` limita por disponibilidade do DAT; só o segundo
+filtro coincide com a listagem nativa comprovada em `0x00449540`, que
+enumera ambos os gêneros. O seletor atual permanece uma adaptação; não houve
+alteração de arquitetura/runtime. Os 67 registros não padrão fora de venda
+já têm arte, mas não há concessão offline exposta para adquiri-los.
+
+## Acesso offline e loja mista — ADR-157 (08/11/2026)
+
+A evidência da auditoria acima é histórica quanto ao acesso: o pedido posterior
+ativa `AvatarCatalog.offline_piece` (critério da concessão) e `shop_items`
+(ordenação mista/deduplicação), sem mudar items/compatible de outros consumidores.
+`Profile.grant_offline_avatars` persiste apenas posses faltantes no startup;
+`equip` aceita switch_gender explícito só nas ações de vestir da loja.
+`AvatarShopModel.preview_gender` separa o gênero exibido do salvo e page_for
+mantém o card em vista após reordenar grupos. AvatarShop reúne inventários e
+omite preços dos concedidos. Fonte/dados nativos e cálculo de atributos não
+mudam. Contrato/validação: `AVATAR_OFFLINE_ACCESS.md`.

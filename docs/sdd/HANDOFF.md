@@ -1,5 +1,64 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Versionamento e integração — 08/11/2026
+
+Pedido atual autoriza versionar a investigação/liberação offline e enviar
+para `origin/feature/updates-recomp`. Integrar sobre os dois commits posteriores
+de Nak/clima preservados nessa branch; a decisão dos avatares foi renumerada
+ADR-156 → ADR-157 para evitar colisão com o tornado nativo. Verificar novamente
+o resultado integrado antes do push. Esta autorização não inclui release,
+nova versão, exportação ou alteração da branch main.
+
+## 67 peças offline e loja mista — ADR-157 / REQ-38..41/46/47 (08/11/2026)
+
+Pedido posterior à auditoria implementado na mesma worktree
+`codex/avatar-catalog-ghidra-audit`. As67 peças não padrão com arte são
+concedidas gratuitamente no startup para perfis novos/existentes, de forma
+idempotente/transacional, sem mudar buyable/preços/bônus/IDs/imagens.
+Save ilegível não é sobrescrito; falha de escrita faz rollback.
+
+Loja/inventário reúnem ambos os gêneros, atual primeiro, bandeiras únicas:
+546peças ofertadas (479vendáveis+67liberadas), 74posses no perfil novo com
+os sete padrões. Selecionar/experimentar/comprar outro gênero não troca o
+piloto salvo; vestir possuído troca gênero/equipamento numa só gravação.
+Conjuntos separados preservados; card acompanha a reordenação de gênero.
+
+Registro: `AVATAR_OFFLINE_ACCESS.md`. Teste novo1195/0; rodada final25suítes
+Godot/5819checks/0 +14testesPythonXFS/0. Sete scripts compilam; revisão
+independente sem achados acionáveis. QA GPU em `docs/avatar-offline-access/`:
+três capturas de loja1920×1080 e três viewports sala/loading/batalha1728×1080
+(sem barras laterais da janela1920×1080), com Skeleton e espada concedidos.
+Perfil temporário removido; cliente Windows e uso manual não executados.
+
+Erro ambiental de CA no sandbox e tentativas iniciais de captura estão
+explicitados no registro; rodada final sem esses erros. Regras de combate inalteradas; partidas completas não repetidas. Sem nova
+versão, exportação, commit ou push. Perfil real
+não foi usado nos testes; a concessão nele ocorrerá ao iniciar este código.
+A seção seguinte descreve o estado anterior à liberação, agora substituído.
+
+## Auditoria de avatares com Ghidra — 08/11/2026 / REQ-46/47
+
+Worktree `codex/avatar-catalog-ghidra-audit`; relatório em
+`AVATAR_CATALOG_AUDIT.md`, inventário/galerias/ASM em
+`docs/avatar-catalog-audit/`. TestClient de `GunboundClassic` idêntico ao
+do porte: 562 registros, 479 vendáveis, 550 com arte/629 camadas. Nenhum
+registro/camada faltando; 10.466 quadros e 534 retratos nativos comparados
+por pixels/pivôs sem divergências. Nove lacunas de arte já existem no XFS;
+três padrões são vazios. `ff00001/sff00001` são uma bandeira vermelha sem DAT.
+
+Há 67 peças não padrão com arte já migrada, ocultas da venda pelo byte zero
+do DAT, como Skeleton/Friendship/Soccer Hat. Ghidra12.2 confirma o filtro
+nativo e revela outra diferença: original lista ambos os gêneros; o porte
+mostra só o selecionado (adaptação existente). Nenhum item foi liberado nem
+perfil alterado. Love Cupid143 do exemplo do servidor não existe nesta build.
+
+Validação da sessão: 14 testes Python e 3.924 checks Godot/0 falhas; import
+exit0. Cinco consultas finais Ghidra com ambos os manifestos ok=true; consulta
+parcial anterior e seeding da entrada pela vtable explicitados no relatório.
+Sem mudança de runtime, versão, exportação, commit ou push; cliente Windows
+não executado. Acesso offline às peças não vendáveis e lista mista seriam
+mudanças futuras, dependentes de novo pedido. Galerias são montagens nativas.
+
 ## Revisão: carga e SS do Nak, clima e tornado — ADR-156 e emenda ADR-154 — 08/11/2026
 
 - **Nak T2 carregando**: o brilho elétrico da carga (`bfire2`) mora na luz do casco `tank3l.img`, que

@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-08",
+  "godot": "4.7.2",
+  "window": [
+    1920,
+    1080
+  ],
+  "renderer": "OpenGL 4.1 Metal Compatibility / Apple M4 Pro",
+  "godot_suites": 25,
+  "godot_checks": 5819,
+  "new_suite_checks": 1195,
+  "python_tests": 14,
+  "failures": 0,
+  "independent_review": "No actionable findings; static/read-only",
+  "original_client_executed": false,
+  "real_profile_used": false,
+  "exported_app_updated": false,
+  "capture_note": "Three store viewport PNGs at 1920x1080; three game viewport PNGs at 1728x1080, excludes 96px side letterboxes. No rescaling/reconstruction.",
+  "frames": {
+    "battle-skeleton.png": {
+      "size": [
+        1728,
+        1080
+      ],
+      "sha256": "1732579427ff0300dee3197d4cbe2acfa856e66933fbeb7446d199d64d50a0d3"
+    },
+    "female-skeleton.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "25272b00a88c4a837c316508eca714067c0c3e9e104b58dabac1778805f547fa"
+    },
+    "loading-skeleton.png": {
+      "size": [
+        1728,
+        1080
+      ],
+      "sha256": "dd36a1716878cc5a5690cb7a7285b286a4918ec2a13a6cc9137939009809d60f"
+    },
+    "mixed-genders-male-skeleton.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "77cb42454cd84d5614e2feb032df323e1f41fc41b3b24a7b18260498d70e24e4"
+    },
+    "offline-skeleton-sword.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "99fc3a9266b06bada2c276b6d68e3c608fc87be5a9f90abfc01decd99ce70122"
+    },
+    "room-skeleton.png": {
+      "size": [
+        1728,
+        1080
+      ],
+      "sha256": "65f0757f9ab1c534bb13ca3d4b544fcf04ddc88d112334f378ca181762e010c8"
+    }
+  }
+}
