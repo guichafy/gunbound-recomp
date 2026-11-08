@@ -46,7 +46,7 @@ func run() -> void:
 		for button in view.menu.grid_buttons:
 			if int(button.get_meta("vehicle_id")) == id:
 				button.pressed.emit()
-		check(view.vehicle == id and view.menu.choice_label.text == "Escolhendo: piloto", "Button slot dispatches stable mobile ID")
+		check(view.vehicle == id and view.menu.choice_label.text == "Choosing: player", "Button slot dispatches stable mobile ID")
 		view.opening = 0
 		view.start_match()
 		check(view.model.actors[0].vehicle == id and view.model.actors[1].vehicle == opponents[id], "Menu selection starts the correct duel")
@@ -55,7 +55,7 @@ func run() -> void:
 	for button in view.menu.grid_buttons:
 		if int(button.get_meta("vehicle_id")) == 4:
 			button.pressed.emit()
-	check(view.cpu_vehicle == 4 and view.menu.cpu_mobile.text == "Armor" and view.menu.choice_label.text == "Escolhendo: máquina", "The same grid applies the clicked mobile to the CPU")
+	check(view.cpu_vehicle == 4 and view.menu.cpu_mobile.text == "Armor" and view.menu.choice_label.text == "Choosing: CPU", "The same grid applies the clicked mobile to the CPU")
 	view.show_menu()
 	# Room settings apply the selected difficulty on Accept (ADR-092).
 	for slot in 3:

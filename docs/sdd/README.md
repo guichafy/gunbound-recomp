@@ -1,5 +1,8 @@
 # SDD — contexto persistente 0.20.5
 
+Idioma e Settings atuais: [I18N_SETTINGS.md](I18N_SETTINGS.md) (REQ-55/ADR-155),
+inglês padrão e português opcional; modal modernizado no lobby à esquerda de Ranking, arte preservada.
+
 Neste repositório, SDD significa **desenvolvimento orientado por especificações**
 (Spec-Driven Development). Esta é uma documentação do protótipo já entregue,
 com requisitos ligados à implementação e à validação; não adotamos um framework

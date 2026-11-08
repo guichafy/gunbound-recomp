@@ -1,4 +1,5 @@
 extends Control
+const I18n = preload("res://scripts/i18n.gd")
 ## Avatar Shop from the original client frames (ADR-130, AVATAR_SHOP_ORIGINAL).
 ## Geometry is the native 800×600 store: card/price/status rules come from
 ## the client draw routine 0x44a000; the rest is measured on gb-avatar.png.
@@ -316,8 +317,8 @@ func bonus_description(item: Dictionary) -> String:
 	var lines: PackedStringArray=[]
 	for i in range(values.size()):
 		if int(values[i])!=0:
-			lines.append("%s: %+d" % [names[i],int(values[i])])
-	return "\n".join(lines) if not lines.is_empty() else "Sem modificadores"
+			lines.append("%s: %+d" % [I18n.text(names[i]),int(values[i])])
+	return "\n".join(lines) if not lines.is_empty() else I18n.text("Sem modificadores")
 
 ## 0x44a000: shot_delay shows "+" for values ≤0 and the negated value; every
 ## other stat shows "−" (even frame) only below zero, also negated.
@@ -457,7 +458,7 @@ func update_attributes() -> void:
 	for value in model.draft_attributes:
 		total += int(value)
 	var remaining := Attributes.budget(model.profile.level())-total
-	points_label.text = "Nível %d · %d pontos restantes" % [model.profile.level(),remaining]
+	points_label.text = I18n.text("Nível %d · %d pontos restantes") % [model.profile.level(),remaining]
 	for i in range(8):
 		attribute_labels[i].text = str(model.draft_attributes[i])
 		add_buttons[i].disabled = remaining <= 0 or int(model.draft_attributes[i]) >= 50
@@ -478,7 +479,7 @@ func update_inventory() -> void:
 			row.focus_mode = Control.FOCUS_NONE
 			row.custom_minimum_size = ROW_SIZE
 			row.name = "Owned_"+str(item.key).replace(":","_")
-			row.tooltip_text = "Vestir "+str(item.name)+"\n"+bonus_description(item)
+			row.tooltip_text = I18n.text("Vestir ")+str(item.name)+"\n"+bonus_description(item)
 			for state in ["normal","hover","pressed","disabled","focus"]:
 				row.add_theme_stylebox_override(state,StyleBoxEmpty.new())
 			row.pressed.connect(func(): equip_inventory(item.key))
@@ -633,13 +634,13 @@ func open_buy() -> void:
 			var price := int(item.get(action+"_price",0))
 			var balance: int = model.profile.gold if action == "gold" else model.profile.cash
 			node.disabled = balance < price
-			node.tooltip_text = "Pagar %s %s · saldo %s" % [format_number(price),action.capitalize(),format_number(balance)]
+			node.tooltip_text = I18n.text("Pagar %s %s · saldo %s") % [format_number(price),action.capitalize(),format_number(balance)]
 			node.pressed.connect(func():
 				if not is_instance_valid(modal):
 					return
 				var result: String = model.confirm_buy(purchase_key,action)
 				close_buy()
-				status_label.text = "Compra concluída" if result == "ok" else "Compra não concluída: "+result
+				status_label.text = "Compra concluída" if result == "ok" else I18n.text("Compra não concluída: ")+result
 				refresh(model.category,model.page)
 			)
 		modal.add_child(node)

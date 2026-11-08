@@ -1,5 +1,30 @@
 # Entregas e próximos trabalhos
 
+## Emenda: Settings no lobby — REQ-55 / ADR-155 (08/11/2026)
+
+- [x] Mover Settings para antes de Ranking desabilitado no lobby; remover acesso da sala.
+- [x] Modal com Salvar/Cancelar/ESC no lobby, prévia e falhas restauráveis.
+- [x] Atualizar nome/idioma preservando histórico e rascunho de chat; Create herda opções.
+- [x] Clique real e regressão: 18 suítes/1.582 checks sem falhas; captura GPU conferida.
+- [ ] Aceite visual do usuário; aplicativo não reexportado.
+
+
+## Idiomas e Settings — REQ-55 / ADR-155 (08/11/2026)
+
+- [x] Executar na main local, preservando alterações preexistentes.
+- [x] Inglês padrão/português selecionável e persistente, catálogo central e formatação traduzida.
+- [x] Modal Settings escalável na sala: treino, idioma, áudio, mira, câmera e fundo.
+- [x] Prévia, Cancelar/ESC, persistência e erros de gravação com edição preservada.
+- [x] Apelidos/chat e regras/arte preservados; menu de batalha continua nativo.
+- [x] Testes i18n/persistência e revisão independente; correções dos tooltips e placeholder cobertas.
+- [x] Capturas GPU EN/PT em 1280×800 e PT em 960×600, inspecionadas.
+- [x] Regressão ampla e repetição final das 18 suítes afetadas: 2.085/0; detalhes no HANDOFF.
+- [ ] Aceite visual humano e escuta das preferências de áudio.
+- [ ] Textos incorporados às imagens, adiados explicitamente pelo usuário.
+- [ ] Reexportar o aplicativo somente quando solicitado.
+
+Contrato e resultados: `I18N_SETTINGS.md` e `HANDOFF.md`.
+
 ## Tiros do Nak, Dragon e Knight — REQ-54 / ADR-154 (07/11/2026)
 
 - [x] Provar no PE a ordem/mistura corpo → luz aditiva (`0x458690`, `0x4c3020`) e corrigir o Nak T1/T2.

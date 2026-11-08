@@ -1,5 +1,18 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Idioma e Settings da sala — REQ-55 / ADR-155
+
+Texto de código da interface deve oferecer inglês (padrão) e português,
+com seleção persistente em Settings no lobby, à esquerda de Ranking desabilitado
+e antes de entrar na sala por Create (emenda de 08/11/2026). O acesso sai da sala. O modal deve exibir apelido,
+dificuldade, clima e todas as preferências atuais de áudio, mira, câmera e
+fundo com texto escalável, sem sobreposição. Salvar confirma; Cancelar/ESC
+restaura a prévia; erro de gravação mantém a edição aberta. Nomes próprios,
+apelidos/chat e textos incorporados às imagens são preservados. Este pedido
+substitui a moldura e tipografia bitmap do modal da sala, como modernização
+explícita; menu de batalha continua nativo. Plano em `I18N_SETTINGS.md`.
+
+
 ## Gravidade durante tiros — REQ-04/05/08/19/32/42/44/45
 
 Atores vivos que perdem sustentação em uma cratera devem se acomodar ainda

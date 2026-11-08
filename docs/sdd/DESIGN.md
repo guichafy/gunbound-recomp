@@ -1,5 +1,18 @@
 # Design implementado
 
+## Idioma e Settings da sala — ADR-155
+
+`I18n` centraliza mensagens e TranslationServer, com locale salvo em Options.
+SettingsPanel usa controles escaláveis e duas colunas, com rodapé próprio;
+MenuScreen guarda os drafts de treino e o snapshot das preferências. Prévia
+restaurável de áudio/idioma e gravação antes de confirmar/fechar. Textos de
+catálogos são traduzidos ao apresentar, sem alterar dados de combate. A
+moldura bitmap da sala é substituída por solicitação; assets preservados.
+Emenda: Settings fica no lobby, antes de Ranking; MatchOverlay guarda seu painel
+e rascunho de treino. Lobby atualiza nome/idioma sem reconstruir o chat.
+Ver `I18N_SETTINGS.md`. ADR-137 permanece para o menu de batalha.
+
+
 ## Menu clássico único — ADR-137
 
 `OptionsPopup` usa somente play_option e b_option_* completos: painel276×408

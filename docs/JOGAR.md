@@ -7,14 +7,20 @@ ou reexporte (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).
 ## Fluxo
 
 1. **Lobby clássico.** CREATE abre a sala, AVATAR abre a loja e EXIT fecha o jogo.
+   Settings fica à esquerda de Ranking e abre as configurações antes de Create.
    Ranking e Join ficam desabilitados, porque o treino é offline.
 2. **Sala 1×1.** A grade 5×3 escolhe o seu mobile: 14 mobiles e Random. Dragon e Knight não
    têm botão, como no cliente, e saem só pelo Random, sorteado no START (ADR-105). Clique no
-   lugar B e depois na grade para escolher o da máquina. Os seis lugares à direita trocam os itens. CHANGE
-   ajusta apelido, dificuldade e clima. START abre a transição por 5 segundos,
+   lugar B e depois na grade para escolher o da máquina. Os seis lugares à direita trocam os itens.
+   As opções de treino vêm do Settings do lobby. START abre a transição por 5 segundos,
    com o mobile já sorteado e o ponto de cada piloto no Miramo, e só então
    começa a partida. EXIT ou Esc voltam ao lobby.
 3. **Partida** no Miramo Town A. Ao fim, a janela WIN/LOSE do cliente mostra os dois times com P (XP) e G (Gold); OK volta à sala.
+
+A interface usa inglês por padrão. No lobby, **Settings → Language**, escolha
+**Português (Brasil)** e **Salvar alterações**. Áudio e idioma têm prévia;
+**Cancelar** ou **Esc** restaura os valores anteriores. A escolha do idioma fica
+salva para a próxima abertura. Textos que fazem parte de imagens ficam como estão.
 
 A loja segue o cliente: Experimentar mostra uma prévia temporária, Comprar gasta Cash ou
 Gold e clicar numa peça possuída a veste. Os bônus valem na próxima partida. O perfil

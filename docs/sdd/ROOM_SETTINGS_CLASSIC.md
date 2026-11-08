@@ -1,5 +1,10 @@
 # SETTINGS e modal clássico da sala — 25/10/2026
 
+Atualização de 08/11/2026: a ADR-155 substitui somente o modal ativo por
+Settings escalável com idioma e preferências completas (`I18N_SETTINGS.md`).
+Botões raster START/SETTINGS, fontes e assets descritos abaixo ficam preservados;
+o restante deste registro documenta a entrega histórica da ADR-109.
+
 REQ-02/12/19/20. Pedido posterior àADR-108 autoriza adaptar a apresentação:
 START sem seta de retorno; CHANGE passa aSETTINGS sem seta circular; modal
 compatível com Gunbound Classic. Não altera regras ou opções disponíveis.

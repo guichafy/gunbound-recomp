@@ -3,10 +3,12 @@ extends RefCounted
 ## Accept saves them next to the profile; progress lives in the profile only.
 ## The equipped items (PopupSelectItem, REQ-36) are kept here too.
 
+const I18n = preload("res://scripts/i18n.gd")
 const Items = preload("res://scripts/items.gd")
 const JsonStore = preload("res://scripts/json_store.gd")
 
 var path: String
+var language := "en"
 var sfx := 100
 var bgm := 50
 var scroll := 50
@@ -37,6 +39,7 @@ func load_options() -> void:
 	var data = JsonStore.read_dict(path)
 	if data == null:
 		return
+	language = I18n.normalize(data.get("language"))
 	sfx = JsonStore.read_int(data, "sfx", 0, 100, sfx)
 	bgm = JsonStore.read_int(data, "bgm", 0, 100, bgm)
 	scroll = JsonStore.read_int(data, "scroll", 0, 100, scroll)
@@ -47,5 +50,5 @@ func load_options() -> void:
 		items = Items.sanitize(data.items)
 
 func save_options() -> bool:
-	last_save_ok = JsonStore.write_atomic(path, {"version": 1, "sfx": sfx, "bgm": bgm, "scroll": scroll, "aiming": aiming, "background": background, "items": items})
+	last_save_ok = JsonStore.write_atomic(path, {"version": 1, "language": I18n.normalize(language), "sfx": sfx, "bgm": bgm, "scroll": scroll, "aiming": aiming, "background": background, "items": items})
 	return last_save_ok

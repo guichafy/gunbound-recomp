@@ -4,6 +4,7 @@ extends RefCounted
 ## o clique vale para o piloto, e o lugar B passa o próximo clique à CPU.
 ## Os itens ficam nos 6 lugares do painel direito; a troca grava na hora.
 
+const I18n = preload("res://scripts/i18n.gd")
 const Choice = preload("res://scripts/room_choice.gd")
 const RANDOM_CHOICE := Choice.RANDOM
 const Mobiles = preload("res://scripts/mobiles.gd")
@@ -46,6 +47,7 @@ var room_art = RoomArt.new()
 var portrait: TextureRect
 var owner_label: Label
 var status_line: Label
+var version_tag: Label
 var climate_weights: Array[Label] = []
 var owner_rank := Ranks.GM
 var chrome
@@ -113,7 +115,8 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	draft_weather = saved_weather
 	player_anchor = slot_anchor(PLAYER_SLOT)
 	cpu_anchor = slot_anchor(CPU_SLOT)
-	var tag: Label = ui.label(root, "TREINO OFFLINE\n/   " + str(info.version), Vector2(6, 8), Vector2(96, 42), 10, ui.CREAM, true)
+	var tag: Label = ui.label(root, I18n.text("TREINO OFFLINE\n/   ") + str(info.version), Vector2(6, 8), Vector2(96, 42), 10, ui.CREAM, true)
+	version_tag = tag
 	tag.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tag.add_theme_constant_override("outline_size", 3)
 	tag.add_theme_color_override("font_outline_color", ui.INK)
@@ -197,6 +200,7 @@ func build_slots(stage: Control) -> void:
 	player_slot.name = "PlayerSlot"
 	room_buttons.append(player_slot)
 	player_name = caption(stage,"",Vector2(PLAYER_SLOT.position.x+19,172),Vector2(76,14),10,Color("063342"))
+	player_name.auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED
 	player_name.add_theme_constant_override("outline_size",0)
 	player_mobile = caption(stage,"",PLAYER_SLOT.position+Vector2(6,4),Vector2(112,14),10,Color("ffe08a"))
 	player_mobile.visible = false
@@ -204,7 +208,7 @@ func build_slots(stage: Control) -> void:
 	var cpu_slot := ghost(stage, CPU_SLOT, choose_cpu_side, "Escolher mobile da máquina — time B")
 	cpu_slot.name = "CpuSlot"
 	room_buttons.append(cpu_slot)
-	cpu_detail = caption(stage,"CPU · " + DIFFICULTIES[saved_difficulty],Vector2(CPU_SLOT.position.x+6,172),Vector2(112,14),10,Color("063342"))
+	cpu_detail = caption(stage,I18n.text("CPU · %s") % I18n.text(DIFFICULTIES[saved_difficulty]),Vector2(CPU_SLOT.position.x+6,172),Vector2(112,14),10,Color("063342"))
 	cpu_detail.name = "CpuDetail"
 	cpu_detail.add_theme_constant_override("outline_size",0)
 	cpu_mobile = caption(stage,"",CPU_SLOT.position+Vector2(6,4),Vector2(112,14),10,Color("ffe08a"))
@@ -394,7 +398,7 @@ func reference_button(stage: Control, key: String, at: Vector2, bounds: Vector2)
 
 func item_tip(id: String) -> String:
 	var data: Dictionary = Items.definition(id)
-	return "%s\nAtraso %s\n%s" % [data.name, str(roundi(Items.delay(id))), data.description]
+	return I18n.text("%s\nAtraso %s\n%s") % [data.name, str(roundi(Items.delay(id))), data.description]
 
 func press_slot(index: int) -> void:
 	if index < 0 or index >= item_slot_buttons.size():
@@ -428,7 +432,7 @@ func commit_loadout(next: Array) -> void:
 func hover_item(id: String) -> void:
 	item_hovered = id
 	if status_line != null:
-		status_line.text = "%s · Atraso %d · %d slot(s)" % [Items.definition(id).name,roundi(Items.delay(id)),Items.slots(id)]
+		status_line.text = I18n.text("%s · Atraso %d · %d slot(s)") % [Items.definition(id).name,roundi(Items.delay(id)),Items.slots(id)]
 
 func hover_line() -> Dictionary:
 	if not Items.has_id(item_hovered):
@@ -509,11 +513,6 @@ func build_bar(stage: Control) -> void:
 	exit_button.tooltip_text = "Volta ao lobby."
 	exit_button.pressed.connect(actions.leave)
 	room_buttons.append(exit_button)
-	var change: TextureButton = text_button(stage, "SETTINGS", Vector2(545, 552))
-	change.name = "Settings"
-	change.tooltip_text = "Apelido, dificuldade da máquina e clima."
-	change.pressed.connect(open_settings)
-	room_buttons.append(change)
 	var start: TextureButton = text_button(stage, "START", Vector2(660, 552))
 	start.name = "Start"
 	start.tooltip_text = "Mostra o mapa e onde cada piloto nasce, depois começa o treino."
@@ -521,124 +520,18 @@ func build_bar(stage: Control) -> void:
 	room_buttons.append(start)
 
 func text_button(parent: Control, text: String, at: Vector2) -> TextureButton:
-	var button = preload("res://scripts/classic_text_button.gd").new()
-	button.text = text
-	if text=="SETTINGS":
-		var cell: Array = room_art.records.room_settings_word.frame_size
-		button.word_size = Vector2(cell[0],cell[1])
-		for state in 4:button.word_frames.append(room_art.frame("room_settings_word",state))
-	button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	button.focus_mode = Control.FOCUS_NONE
-	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	button.ignore_texture_size = true
-	button.stretch_mode = TextureButton.STRETCH_SCALE
-	button.position = at
-	button.custom_minimum_size = Vector2(107,45)
-	for state in 4:button.lettering_frames.append(chrome.frame("b_ready_startgame",state))
-	button.texture_normal = room_art.frame("room_footer_shell",0)
-	button.texture_hover = room_art.frame("room_footer_shell",1)
-	button.texture_pressed = room_art.frame("room_footer_shell",2)
-	button.texture_disabled = room_art.frame("room_footer_shell",3)
-	parent.add_child(button)
-	button.size = Vector2(107,45)
-	return button
-
-func settings_radio(parent: Control, text: String, at: Vector2, bounds: Vector2, callback: Callable) -> Button:
-	var button := Button.new()
-	button.text = text
-	button.position = at
-	button.size = bounds
-	button.focus_mode = Control.FOCUS_ALL
-	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	button.expand_icon = true
-	button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	button.add_theme_font_override("font",settings_font)
-	button.add_theme_font_size_override("font_size",17)
-	button.add_theme_constant_override("h_separation",10)
-	button.add_theme_constant_override("icon_max_width",20)
-	for state in ["normal","hover","pressed","disabled"]:
-		var empty := StyleBoxEmpty.new()
-		empty.content_margin_left = 4
-		empty.content_margin_top = 8
-		empty.content_margin_bottom = 8
-		button.add_theme_stylebox_override(state,empty)
-	button.add_theme_color_override("font_color",Color("edf5ff"))
-	button.add_theme_color_override("font_hover_color",Color("ffe875"))
-	button.add_theme_color_override("font_pressed_color",Color("ffe875"))
-	button.add_theme_stylebox_override("focus",ui.box(Color.TRANSPARENT,3,Color("75e2ff"),1))
-	button.pressed.connect(callback)
-	parent.add_child(button)
-	button.size = bounds
-	return button
-
-func settings_action(parent: Control, key: String, name: String, at: Vector2, callback: Callable) -> TextureButton:
-	var button := TextureButton.new()
-	button.name = name
-	button.ignore_texture_size = true
-	button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	button.focus_mode = Control.FOCUS_ALL
-	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	button.position = at
-	button.texture_normal = room_art.frame(key,0)
-	button.texture_hover = room_art.frame(key,1)
-	button.texture_pressed = room_art.frame(key,2)
-	button.texture_disabled = room_art.frame(key,3)
-	button.stretch_mode = TextureButton.STRETCH_SCALE
-	button.pressed.connect(callback)
-	parent.add_child(button)
-	button.size = Vector2(82,34)*1.6
-	return button
+	return preload("res://scripts/classic_text_button.gd").create(parent,text,at,chrome,room_art)
 
 func build_settings_popup(root: Control, nickname: String) -> void:
-	settings_popup = preload("res://scripts/classic_room_panel.gd").new()
-	settings_font = load("res://assets/classic/room/settings/room_text.fnt").duplicate()
-	settings_font.fallbacks = [ui.font]
-	settings_popup.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	settings_popup.name = "RoomSettings"
-	settings_popup.connect("cancelled",cancel_popup)
-	settings_popup.set("texture",room_art.frame("room_settings_frame",0))
-	settings_popup.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
-	settings_popup.position = Vector2(360,165)
-	settings_popup.size = Vector2(560,470)
-	settings_popup.mouse_filter = Control.MOUSE_FILTER_STOP
-	settings_popup.visible = false
+	settings_font = ui.font
+	settings_popup = preload("res://scripts/settings_panel.gd").new(ui, actions.options, nickname,
+		accept_settings, cancel_popup, choose_difficulty, choose_weather)
+	settings_popup.changed.connect(actions.apply_options)
+	settings_popup.cancelled.connect(cancel_popup)
 	root.add_child(settings_popup)
-	var title: Panel = ui.panel(settings_popup,Vector2(26,9),Vector2(180,35),Color("003443"),3)
-	title.add_theme_stylebox_override("panel",ui.box(Color("003443"),3,Color("61d9f5"),1))
-	var heading := caption(title,"SETTINGS",Vector2(9,3),Vector2(162,29),20,Color("ffe875"),true)
-	heading.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	caption(settings_popup,"Apelido",Vector2(32,65),Vector2(496,22),15,Color("ffe875"))
-	nickname_input = LineEdit.new()
-	nickname_input.position = Vector2(32,92)
-	nickname_input.size = Vector2(496,42)
-	nickname_input.text = nickname
-	nickname_input.max_length = 20
-	nickname_input.placeholder_text = "Seu apelido"
-	nickname_input.add_theme_font_override("font",settings_font)
-	nickname_input.add_theme_font_size_override("font_size",19)
-	nickname_input.add_theme_color_override("font_color",Color("edf5ff"))
-	nickname_input.add_theme_color_override("caret_color",Color("ffe875"))
-	nickname_input.add_theme_stylebox_override("normal",ui.box(Color("003443"),4,Color("58cdea"),1))
-	nickname_input.add_theme_stylebox_override("focus",ui.box(Color("003443"),4,Color("a6f1ff"),2))
-	settings_popup.add_child(nickname_input)
-	caption(settings_popup,"Dificuldade da CPU",Vector2(32,161),Vector2(496,22),15,Color("ffe875"))
-	difficulty_buttons.clear()
-	for index in DIFFICULTIES.size():
-		var captured := index
-		difficulty_buttons.append(settings_radio(settings_popup,DIFFICULTIES[index],Vector2(32+index*165,190),Vector2(165,42),func():choose_difficulty(captured)))
-	caption(settings_popup,"Clima",Vector2(32,257),Vector2(496,22),15,Color("ffe875"))
-	weather_buttons.clear()
-	for index in WEATHER_MODES.size():
-		var mode: String = WEATHER_MODES[index]
-		weather_buttons.append(settings_radio(settings_popup,WEATHER_LABELS[index],Vector2(32+index*250,286),Vector2(246,42),func():choose_weather(mode)))
-	caption(settings_popup,"Confirme para aplicar as novas escolhas.",Vector2(32,348),Vector2(496,24),14,Color("d2f0ff"),true)
-	var cancel := settings_action(settings_popup,"room_settings_cancel","SettingsCancel",Vector2(32,390),cancel_popup)
-	cancel.tooltip_text = "Cancelar alterações (ESC)"
-	var accept := settings_action(settings_popup,"room_settings_ok","SettingsAccept",Vector2(397,390),accept_settings)
-	accept.tooltip_text = "Aceitar configurações"
-	highlight(difficulty_buttons,saved_difficulty)
-	highlight(weather_buttons,WEATHER_MODES.find(saved_weather))
+	nickname_input = settings_popup.nickname_input
+	difficulty_buttons = settings_popup.difficulty_buttons
+	weather_buttons = settings_popup.weather_buttons
 
 func popup_open() -> bool:
 	return popup_kind != ""
@@ -646,6 +539,7 @@ func popup_open() -> bool:
 func open_settings() -> void:
 	if popup_kind != "":
 		return
+	settings_popup.begin_edit()
 	nickname_snapshot = nickname_input.text
 	draft_difficulty = saved_difficulty
 	draft_weather = saved_weather
@@ -677,18 +571,22 @@ func choose_weather(mode: String) -> void:
 func accept_settings() -> void:
 	if popup_kind != "settings":
 		return
+	if not actions.save_settings.call(nickname_input.text):
+		settings_popup.show_save_error()
+		return
 	saved_difficulty = draft_difficulty
 	saved_weather = draft_weather
 	var label: String = str(actions.set_weather.call(saved_weather))
 	actions.select_difficulty.call(saved_difficulty)
 	weather_caption.text = label
 	refresh_climate()
-	cpu_detail.text = "CPU · " + DIFFICULTIES[saved_difficulty]
+	cpu_detail.text = I18n.text("CPU · %s") % I18n.text(DIFFICULTIES[saved_difficulty])
 	var shown := nickname_input.text.strip_edges()
 	player_name.text = shown if not shown.is_empty() else "Piloto"
 	owner_label.text = player_name.text + " · " + Ranks.title(owner_rank)
-	owner_label.tooltip_text = player_name.text + " · " + Ranks.description(owner_rank)
+	owner_label.tooltip_text = player_name.text + " · " + I18n.text(Ranks.description(owner_rank))
 	close_popup()
+	refresh_language()
 
 func pick_vehicle(id: int) -> void:
 	if mobile_for == "cpu":
@@ -698,10 +596,12 @@ func pick_vehicle(id: int) -> void:
 
 func cancel_popup() -> void:
 	if popup_kind == "settings":
+		settings_popup.restore()
 		nickname_input.text = nickname_snapshot
 		draft_difficulty = saved_difficulty
 		draft_weather = saved_weather
 	close_popup()
+	refresh_language()
 
 func show_popup(kind: String, popup: Panel) -> void:
 	popup_kind = kind
@@ -732,9 +632,9 @@ func show_vehicle(id: int) -> void:
 	vehicle_info.visible = not native_card
 	if native_card:
 		portrait.texture = room_art.frame("room_portraits",int(RoomArt.PORTRAITS[id]))
-	portrait.tooltip_text = "%s · %d de vida · %d de movimento\n%s" % [data.name,data.hp,int(data.move),data.summary]
+	portrait.tooltip_text = I18n.text("%s · %d de vida · %d de movimento\n%s") % [data.name,data.hp,int(data.move),I18n.text(data.summary)]
 	player_mobile.text = str(data.name)
-	vehicle_info.text = "%d de vida · %d de movimento\n%s" % [data.hp, int(data.move), str(data.summary)]
+	vehicle_info.text = I18n.text("%d de vida · %d de movimento\n%s") % [data.hp, int(data.move), I18n.text(data.summary)]
 	refresh_choice()
 
 func show_cpu(id: int) -> void:
@@ -748,9 +648,9 @@ func refresh_choice() -> void:
 	refresh_climate()
 	var picking_cpu := mobile_for == "cpu"
 	if choice_label != null:
-		choice_label.text = "Escolhendo: máquina" if picking_cpu else "Escolhendo: piloto"
+		choice_label.text = I18n.text("Escolhendo: máquina" if picking_cpu else "Escolhendo: piloto")
 	if status_line != null:
-		status_line.text = "Selecionando %s · %s" % ["máquina" if picking_cpu else "piloto",("Random" if (cpu_random if picking_cpu else player_random) else Mobiles.definition(cpu_vehicle_id if picking_cpu else player_vehicle_id).name)]
+		status_line.text = I18n.text("Selecionando %s · %s") % [I18n.text("máquina" if picking_cpu else "piloto"),("Random" if (cpu_random if picking_cpu else player_random) else Mobiles.definition(cpu_vehicle_id if picking_cpu else player_vehicle_id).name)]
 	mark_grid(RANDOM_CHOICE if (cpu_random if picking_cpu else player_random) else (cpu_vehicle_id if picking_cpu else player_vehicle_id))
 
 func _clear_item_button(button: TextureButton, index: int) -> void:
@@ -808,13 +708,23 @@ func mark_grid(id: int) -> void:
 
 func highlight(buttons: Array[Button], chosen: int) -> void:
 	for index in buttons.size():
-		var selected := index==chosen
-		var icon := AtlasTexture.new()
-		icon.atlas = preload("res://scripts/client_hud_assets.gd").new().texture("OptionsRadioButton.png", preload("res://assets/openbound/hud/OptionsRadioButton.png"))
-		icon.region = Rect2(12,0,11,12) if selected else Rect2(0,0,12,12)
-		buttons[index].icon = icon
-		buttons[index].add_theme_color_override("font_color",Color("ffe875") if selected else Color("edf5ff"))
-		buttons[index].modulate = Color("ffe875") if selected else Color.WHITE
+		buttons[index].set_pressed_no_signal(index==chosen)
+
+func refresh_language() -> void:
+	version_tag.text = I18n.text("TREINO OFFLINE\n/   ") + str(ProjectSettings.get_setting("application/config/version", ""))
+	cpu_detail.text = "CPU · " + I18n.text(DIFFICULTIES[saved_difficulty])
+	weather_caption.text = actions.weather_label.call()
+	if player_random:
+		show_random("player")
+	else:
+		show_vehicle(player_vehicle_id)
+	if cpu_random:
+		show_random("cpu")
+	else:
+		show_cpu(cpu_vehicle_id)
+	show_loadout(loadout)
+	for button in item_grid_buttons:
+		button.tooltip_text = item_tip(str(button.get_meta("item_id")))
 
 
 func texture_rect(parent: Node, key: String, texture: Texture2D, at: Vector2, bounds: Vector2) -> TextureRect:
@@ -839,7 +749,7 @@ func build_header(stage: Control, info: Dictionary) -> void:
 	owner.name = "RoomOwner"
 	owner.mouse_filter = Control.MOUSE_FILTER_PASS
 	owner_label = owner
-	owner.tooltip_text = str(info.nickname)+" · "+Ranks.description(owner_rank)
+	owner.tooltip_text = str(info.nickname)+" · "+I18n.text(Ranks.description(owner_rank))
 	texture_rect(stage,"RoomRankIcon",Ranks.icon(owner_rank,true),Vector2(568,12),Vector2(25,15))
 
 func refresh_climate() -> void:
@@ -850,10 +760,10 @@ func refresh_climate() -> void:
 		weights = [stage[0],stage[1],stage[2],stage[3],0,stage[5],stage[6],stage[4],0,0]
 	for index in climate_weights.size():
 		climate_weights[index].text = str(int(weights[index]))
-		var label: String = Weather.TYPES[index]
+		var label: String = I18n.text(preload("res://scripts/weather_art.gd").NAMES.get(Weather.TYPES[index],Weather.TYPES[index]))
 		if native:
-			label = {"protection":"Lua","ignorance":"Eclipse","weakness":"—"}.get(label,label)
-		climate_weights[index].tooltip_text = "%s: peso %d"%[label,weights[index]] if native else "%s: peso %d\nEspelho: %d · Aleatório: %d" % [label,weights[index],weights[8],weights[9]]
+			label = {"protection":I18n.text("Lua"),"ignorance":"Eclipse","weakness":"—"}.get(label,label)
+		climate_weights[index].tooltip_text = I18n.text("%s: peso %d")%[label,weights[index]] if native else I18n.text("%s: peso %d\nEspelho: %d · Aleatório: %d") % [label,weights[index],weights[8],weights[9]]
 
 
 ## Keep the selected map and its embedded title, plus the room's figure composition.
