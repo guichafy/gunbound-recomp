@@ -67,7 +67,12 @@ func test_children() -> void:
 		check(Vector2i(child.fp_velocity) == Vector2i(int(Physics.s(heading + 90) * 2560.0), int(Physics.s(heading) * -2560.0)), "child %d flies inward at 2560 (0x55808c/0x558088)" % index)
 		check(Vector2i(child.fp_acceleration) == Vector2i.ZERO, "child %d: acceleration cells 0xaf4/0xd18 are 0" % index)
 		check(bool(child.child) and str(child.flight) == ClassicFlight.DRAGON_CHILD and int(child.weapon) == 2 and int(child.damage) == 160, "child %d keeps the SS row (160) and its own flight" % index)
-	# 90 degrees: straight above, falling at 10 px per tick onto the impact.
+	var charged := {"owner": 0, "vehicle": 14, "volley": 0, "weapon": 2, "flight": ClassicFlight.DRAGON_SS, "electric": true, "thor": true}
+	var plain := true
+	for shell in ClassicFlight.dragon_children(charged, impact, rules):
+		plain = plain and not bool(shell.electric) and not bool(shell.thor)
+	check(plain, "electricity/Thor of the parent are not copied to the five children")
+		# 90 degrees: straight above, falling at 10 px per tick onto the impact.
 	var middle: Dictionary = children[2]
 	check(Vector2i(middle.fp_pos) == Vector2i(900, 400) * 256 and Vector2i(middle.fp_velocity) == Vector2i(0, 2560), "middle child: 200 px above, 10 px per tick down")
 
@@ -134,6 +139,20 @@ func test_model_publishes_sweeps() -> void:
 		if model.phase != Match.PHASE_FLIGHT:
 			break
 	check(sweeps > 3, "every S1 tick publishes its sweep (%d)" % sweeps)
+	var beacon_model = fresh()
+	var beacon: Dictionary = beacon_model.shot_shells(0, 45, 60, 0)[0]
+	beacon.beacon = true
+	beacon.launched = true
+	beacon_model.projectiles = [beacon]
+	beacon_model.phase = Match.PHASE_FLIGHT
+	beacon_model.shot_actor = 0
+	var beacon_sweeps := 0
+	for _step in 20:
+		beacon_model.advance_projectiles(Combat.STEP)
+		for event in beacon_model.events:
+			beacon_sweeps += 1 if event.type == "dragon_spark_sweep" else 0
+		beacon_model.events.clear()
+	check(beacon_sweeps == 0, "the teleport beacon leaves no Dragon sparks")
 
 func test_presentation() -> void:
 	var sprite = ClassicSprite.new()

@@ -1,10 +1,9 @@
 extends RefCounted
-## Shell × weather columns (Weather.CheckProjectileInteraction, Tornado.cs),
+## Shell × weather columns (Weather.CheckProjectileInteraction),
 ## moved out of Match (ADR-081). Match keeps the facade and the event queue;
 ## runs on the CPU snapshot as well, so it reads only the given model.
 
 const Physics = preload("res://scripts/classic_ballistics.gd")
-const Weather = preload("res://scripts/weather.gd")
 const NativeWeather = preload("res://scripts/aduka_weather.gd")
 
 ## Entering a column's inner rectangle interacts once; leaving through the
@@ -49,45 +48,16 @@ static func interact(model, projectile: Dictionary, column: Dictionary) -> void:
 			if first:
 				projectile.electric = true
 		"tornado":
+			# ADR-155: every shell takes the client's tornado branch (451030 in the
+			# sweep, then AdukaWeather.finish): velocity kept, |vx| >= 200, X turned on
+			# each border crossing up to three, no gravity or wind while inside. The
+			# C# relaunch at the launch speed (tornado_step) is no longer used.
 			if projectile.tornado.is_empty():
-				var velocity: Vector2 = projectile.velocity
-				projectile.tornado = {"column": int(column.id), "step": 1, "direction": velocity.normalized() if velocity != Vector2.ZERO else Vector2.DOWN, "speed": maxf(velocity.length(), Weather.TORNADO_MIN_SPEED)}
+				var span := NativeWeather.geometry(column)
+				projectile.tornado = {"native": true, "column": int(column.id), "turns": 0, "center": span.x, "half": span.y}
 		"random":
 			if not bool(column.used):
 				column.used = true
 				var spawned: Dictionary = model.weather.add_column(column.extra, float(column.x), 1.0)
 				projectile.inside.erase(int(spawned.id))
 	model.events.append({"type": "weather_hit", "weather": type, "position": projectile.pos, "extra": column.get("extra", "")})
-
-## Tornado.cs: cross the column along the entry heading, back across mirrored,
-## then out along the heading; afterwards relaunch at the initial speed.
-static func tornado_step(model, projectile: Dictionary, delta: float) -> Dictionary:
-	var state: Dictionary = projectile.tornado
-	var column: Dictionary = model.weather.find_column(int(state.column))
-	var direction: Vector2 = state.direction
-	var travel: float = float(state.speed) * delta
-	var position: Vector2 = projectile.pos
-	var heading := direction
-	if column.is_empty():
-		state.step = 3
-	match int(state.step):
-		1:
-			var next := position + direction * travel
-			if model.weather.inside_inner(column, next):
-				position = next
-			else:
-				state.step = 2
-		2:
-			heading = Vector2(-direction.x, direction.y)
-			var next := position + heading * travel
-			if model.weather.inside_inner(column, next):
-				position = next
-			else:
-				state.step = 3
-		_:
-			position += direction * travel
-			if column.is_empty() or not model.weather.inside_outer(column, position):
-				projectile.tornado = {}
-				projectile.inside.erase(int(state.column))
-				return {"position": position, "velocity": direction * float(projectile.launch_speed)}
-	return {"position": position, "velocity": heading * float(state.speed)}

@@ -1,5 +1,14 @@
 # Entregas e próximos trabalhos
 
+## Revisão Nak/clima/tornado — ADR-155 e emenda ADR-154 (08/11/2026)
+
+- [x] Luz do casco `tank3l` do Nak (carga do T2) importada e somada por view.
+- [x] SS do Nak: luz `bullet3pl` somada, rumo e espelho vertical de `0x488880`.
+- [x] Tornado nativo para todos os tiros, sem relançamento; testes reescritos com esperados à mão.
+- [x] Clima/itens: filhos do Dragon sem eletricidade/Thor herdados; Teleport sem faíscas.
+- [x] Harness completo e integração na main local.
+- [ ] Aceite visual e escuta do usuário.
+
 ## Emenda: Settings no lobby — REQ-55 / ADR-155 (08/11/2026)
 
 - [x] Mover Settings para antes de Ranking desabilitado no lobby; remover acesso da sala.

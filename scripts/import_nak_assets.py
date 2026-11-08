@@ -3,7 +3,7 @@
     python3 scripts/import_nak_assets.py [--xfs .tools/gunbound-client/graphics.xfs]
 
 OpenBound has no Nak atlas. The original client keeps it in graphics.xfs:
-tank3.img (392 frames) with its animation table tank3.epa, the shots
+tank3.img (392 frames) with its animation table tank3.epa and its light tank3l.img, the shots
 bullet3n/bullet3s/bullet3pl with their glow layers, and the impacts
 flame31/flame32/ssflame3. Every frame is placed by its own hotspot, so the
 pixels are copied unchanged into uniform cells: CharacterSpritesheet.png uses
@@ -26,6 +26,8 @@ ARCHIVE_SHA = "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08"
 # file -> (graphics.xfs entry, animation table, columns)
 SHEETS = {
     "CharacterSpritesheet.png": ("tank3.img", "tank3.epa", 20),
+    # tank3l: hull light (charge glow of bfire2 etc.), 382 frames; sfire 382..391 has none.
+    "CharacterSpritesheetLight.png": ("tank3l.img", None, 20),
     "Bullet1.png": ("bullet3n.img", "bullet3n.epa", 10),
     "Bullet1Light.png": ("bullet3nl.img", None, 10),
     "Bullet2.png": ("bullet3s.img", "bullet3s.epa", 8),

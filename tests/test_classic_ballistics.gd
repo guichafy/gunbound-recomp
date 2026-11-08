@@ -153,6 +153,10 @@ func charge() -> void:
 	check(host.shots == 1,"Drag releases native P1")
 	check(host.model.projectiles[0].launch_velocity_fp == Vector2i.ZERO,"Drag native diagonal P1, no15percent floor")
 
+## ADR-155: the client's tornado branch for every shell. Column x=600 at scale 1
+## has the native half width 128/4 = 32 (568..632). v=(3840,-1280) is kept while
+## inside, X turns at x=645 and x=555, and the third crossing (x=645, tick 17)
+## releases the shell with the same velocity: nothing is relaunched.
 func tornado_bridge() -> void:
 	var model = Match.new()
 	model.start(2,1,7,"","original")
@@ -164,19 +168,26 @@ func tornado_bridge() -> void:
 	shell.launched = true
 	model.projectiles = [shell]
 	model.advance_projectiles(0.05)
-	check(shell.fp_pos == Vector2i(585*256,295*256),"tornado external position imported once")
-	check(shell.fp_velocity == Vector2i(3840,-1280),"tornado suppresses native acceleration in column")
+	check(bool(shell.tornado.get("native",false)) and int(shell.tornado.center) == 600 and int(shell.tornado.half) == 32,"tornado takes the native branch of the column")
+	check(shell.fp_pos == Vector2i(585*256,295*256),"first tornado tick moves by the kept velocity")
+	check(shell.fp_velocity == Vector2i(3840,-1280),"tornado suppresses gravity and wind in the column")
+	var ticks := 1
+	var turned := false
 	for _i in 100:
 		if shell.tornado.is_empty():
 			break
 		model.advance_projectiles(0.05)
-	check(shell.tornado.is_empty(),"tornado exits through existing C# adapter")
+		ticks += 1
+		turned = turned or int(shell.fp_velocity.x) < 0
+	check(turned and ticks == 17 and shell.tornado.is_empty(),"two turns, released on the third crossing at tick 17 (got %d)" % ticks)
+	check(shell.fp_pos == Vector2i(645*256,215*256),"exit point (645,215)")
+	check(shell.fp_velocity == Vector2i(3840,-1280),"the shell leaves with its own speed, not the launch speed")
 	var exit_velocity: Vector2i = shell.fp_velocity
 	var exit_position: Vector2i = shell.fp_pos
-	model.weather.columns.clear()
 	model.advance_projectiles(0.05)
-	check(shell.fp_pos == exit_position + exit_velocity,"native step resumes at imported exit position")
-	check(shell.fp_velocity == exit_velocity + Vector2i(0,250),"native frozen acceleration resumes after tornado")
+	check(shell.fp_pos == exit_position + exit_velocity,"native step resumes after the tornado")
+	check(shell.fp_velocity == exit_velocity + Vector2i(0,250),"gravity resumes after the tornado")
+	check(shell.tornado.is_empty(),"the same column does not catch the shell again")
 
 func launch_boundaries() -> void:
 	# Regression: canonicalizing72% Bigfoot P302 back to percent and quantizing

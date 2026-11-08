@@ -595,5 +595,9 @@
   "nak/Flame3.png": {
     "source": "TestClient/graphics.xfs:ssflame3.img",
     "sha256": "b4bacd16d2ac3536e72ee1ab74d211b4df64a1c3142f5d266f53d165d53e5de5"
+  },
+  "nak/CharacterSpritesheetLight.png": {
+    "source": "TestClient/graphics.xfs:tank3l.img",
+    "sha256": "deedddef002ffb8d89c4db24de8ccdf4e46aceb090f3c9d56117ffbf6c466732"
   }
 }

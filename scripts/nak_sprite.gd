@@ -33,6 +33,7 @@ const BUBBLE_PERIOD := 6.0
 const RIDER_ADJUST := Vector2(5, 4)
 const SHOT_FPS := 20.0
 const FOLDER := "res://assets/openbound/nak"
+const NativeBallistics = preload("res://scripts/classic_ballistics.gd")
 
 var meta: Dictionary = {}
 var bullets: Array = []
@@ -40,6 +41,12 @@ var lights: Array = []
 # bullet3nl/sl are light layers: 0x458690 publishes them to BulletTexture2, which
 # 0x4c3020 draws SRCALPHA/ONE after the BulletTexture1 bodies (ADR-154).
 var glow = preload("res://scripts/additive_sprite_art.gd").new()
+# tank3l.img is the hull light: the T2 charge (bfire2) holds a dark ball whose
+# electric glow lives only in this layer. Additive over the body, per view, as
+# the Grub tank13l (ADR-150); frames 382..391 (sfire) have no light.
+var hull_glow = preload("res://scripts/additive_sprite_art.gd").new()
+var hull_light: Texture2D
+var hull_view := 0
 
 func _init() -> void:
 	configure(FOLDER, CELL, PIVOT, SEQUENCES, 51.0, 53.0)
@@ -49,6 +56,8 @@ func _init() -> void:
 		bullets.append(pixel_texture(load(FOLDER + "/%s.png" % name)))
 	for name in ["Bullet1Light", "Bullet2Light"]:
 		lights.append(pixel_texture(load(FOLDER + "/%s.png" % name)))
+	if ResourceLoader.exists(FOLDER + "/CharacterSpritesheetLight.png"):
+		hull_light = pixel_texture(load(FOLDER + "/CharacterSpritesheetLight.png"))
 
 func rider_offset(frame: int) -> Vector2:
 	return super.rider_offset(frame) + RIDER_ADJUST
@@ -64,7 +73,36 @@ func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int
 ## The Nak fires from its tail: the original aims 130–170° from the way the
 ## head looks, so the art is mirrored against the aiming side.
 func draw(view: Node2D, request) -> void:
-	super.draw(view, request.mirrored())
+	var mirrored = request.mirrored()
+	super.draw(view, mirrored)
+	draw_hull_glow(view, mirrored)
+
+func begin_hull_glow(view: Node2D) -> void:
+	hull_glow.begin(view)
+	hull_view = view.get_instance_id()
+
+func clear_hull_glow() -> void:
+	hull_glow.clear()
+	hull_view = 0
+
+## Light cell of `frame` placed on the body's hotspot (MobileSprite.draw geometry).
+func hull_light_layer(request) -> Dictionary:
+	var info := sheet("CharacterSpritesheetLight.png")
+	if hull_light == null or request.frame < 0 or request.frame >= int(info.frames):
+		return {}
+	var amount: float = request.width / hull_width
+	var ground: float = 24.0 if request.width < 150.0 else request.width * 0.23
+	var hotspot := Vector2(0.0, ground - (contact_y - pivot.y) * amount)
+	var parts := cell_frame("CharacterSpritesheetLight.png", request.frame)
+	return {"source": parts[0], "target": Rect2(hotspot + parts[1].position * amount, parts[1].size * amount),
+		"transform": Transform2D(request.rotation, Vector2(-request.facing, 1), 0.0, request.pos)}
+
+func draw_hull_glow(view: Node2D, request) -> void:
+	if hull_view != view.get_instance_id():
+		return
+	var layer := hull_light_layer(request)
+	if not layer.is_empty():
+		hull_glow.draw(view, hull_light, layer.target, layer.source, layer.transform, request.color)
 
 func sheet(name: String) -> Dictionary:
 	return meta.sheets[name]
@@ -87,21 +125,31 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 	if not projectile.get("launched", true):
 		return
 	var position: Vector2 = projectile.get("hit_pos", projectile.pos) + offset
-	var step := int(float(projectile.age) * SHOT_FPS)
 	if weapon == 2:
-		# Mini Nak faces right in bullet3pl; mirror it toward the flight.
-		var parts := cell_frame("Bullet3.png", step % int(sheet("Bullet3.png").frames))
-		var flip := -1.0 if Vector2(projectile.velocity).x < 0.0 else 1.0
-		view.draw_set_transform(position, 0.0, Vector2(flip, 1))
-		view.draw_texture_rect_region(bullets[2], parts[1], parts[0])
+		var layer := ss_layer(projectile, position)
+		glow.draw(view, bullets[2], layer.target, layer.source, layer.transform)
 	else:
+		# 0x458690 publishes the heading with the cells; the render turns them.
+		var turn := Transform2D(Vector2(projectile.velocity).angle(), position)
 		for layer in shell_layers(projectile, weapon, position):
 			if layer.additive:
-				glow.draw(view, layer.texture, layer.target, layer.source, Transform2D(0.0, position))
+				glow.draw(view, layer.texture, layer.target, layer.source, turn)
 			else:
-				view.draw_set_transform(position)
+				view.draw_set_transform_matrix(turn)
 				view.draw_texture_rect_region(layer.texture, layer.target, layer.source)
 	view.draw_set_transform(Vector2.ZERO)
+
+## SuperShot_Bullet3 (vtable 0x556284) publishes through 0x488880: the cell turns
+## with the heading and mirrors vertically while 90 < heading < 270. The archive
+## has no bullet3p.img, only the light bullet3pl, so the mini Nak is added
+## (BulletTexture2, SRCALPHA/ONE) and never alpha blended.
+func ss_layer(projectile: Dictionary, position: Vector2) -> Dictionary:
+	var info := sheet("Bullet3.png")
+	var parts := cell_frame("Bullet3.png", int(float(projectile.age) * SHOT_FPS) % int(info.frames))
+	var heading := NativeBallistics.velocity_angle(projectile.fp_velocity) if projectile.has("fp_velocity") else int(round(-rad_to_deg(Vector2(projectile.velocity).angle())))
+	var mirror := heading > 90 and heading < 270
+	return {"source": parts[0], "target": parts[1], "mirror": mirror,
+		"transform": Transform2D(Vector2(projectile.velocity).angle(), Vector2(1, -1) if mirror else Vector2.ONE, 0.0, position)}
 
 ## S1/S2 cells in draw order: the alpha body, then its light added on top.
 func shell_layers(projectile: Dictionary, weapon: int, position: Vector2) -> Array:
