@@ -9,10 +9,12 @@
 - [x] Harness completo:46.113checks Godot,29partidas,152Python/zero skips,
   329parses/zero falhas; cobertura automação Python62%.
 - [x] GPU180quadros FullHD, ambos sentidos, pausa30idêntica e retomada.
+- [x] Integrar à main local por solicitação posterior; base atualizada validada:
+  46.124checks/29partidas/152Python/330parses, zero falhas; confirmação na main68/0.
 - [ ] Aceite visual do usuário; pacote atualizado somente se solicitado.
 
-Contrato, validação e limites: `GRAVITY_DURING_SHOTS.md`. Worktree preservada;
-sem merge, push ou publicação.
+Contrato, validação e limites: `GRAVITY_DURING_SHOTS.md`. Main integrada localmente;
+worktree preservada, sem push ou publicação.
 
 ## Consolidação Dependabot — REQ-52 / ADR-151 (28/10/2026)
 
