@@ -1,5 +1,5 @@
 extends "res://tests/support/suite.gd"
-## Dragon (ID 14, client type 13), ADR-152: MainAction 0x46d070 emission, the
+## Dragon (ID 14, client type 13), ADR-154: MainAction 0x46d070 emission, the
 ## SS children of 0x46ca60/0x4388e0 and the 0x46fb20 spark trail. Expected
 ## values are written from the ASM constants, not read back from the port.
 const Match = preload("res://scripts/match.gd")

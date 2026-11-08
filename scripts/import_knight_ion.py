@@ -1,4 +1,4 @@
-"""Knight Ion and child sheets from the original graphics.xfs (ADR-152).
+"""Knight Ion and child sheets from the original graphics.xfs (ADR-154).
 
 knightion.img/.epa and knightionl.img are the satellite (SpawnKnightIon 0x438100,
 draw 0x47dc00); knightbullet.img/.epa and knightbulletl.img are the children of

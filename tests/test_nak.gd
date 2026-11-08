@@ -147,7 +147,7 @@ func _initialize() -> void:
 	test_light_layers(sprite)
 	finish("NAK CHECKS")
 
-## ADR-152: 0x4c3020 draws the BulletTexture1 bodies (SRCALPHA/INVSRCALPHA) and then
+## ADR-154: 0x4c3020 draws the BulletTexture1 bodies (SRCALPHA/INVSRCALPHA) and then
 ## the BulletTexture2 lights (SRCALPHA/ONE, level 0 at alpha 255). bullet3nl/sl
 ## must go to the additive pass, never as a translucent alpha veil under the body.
 func test_light_layers(sprite) -> void:

@@ -12,7 +12,7 @@ const NativeBallistics = preload("res://scripts/classic_ballistics.gd")
 const RAYON_CELL := Rect2(-16, -24, 32, 32)
 ## Client afterimage history depth (ADR-118); shown only where has_trail().
 const NATIVE_TRAIL_LEVELS := 8
-## ADR-152: 0x4c3020 draws BulletTexture1 bodies with SRCALPHA/INVSRCALPHA and
+## ADR-154: 0x4c3020 draws BulletTexture1 bodies with SRCALPHA/INVSRCALPHA and
 ## then BulletTexture2 lights with SRCALPHA/ONE. Kinds listed here use that
 ## order; the others keep the approved translucent light under the body.
 const ADDITIVE_LIGHT_KINDS := ["dragon", "knight"]
@@ -252,7 +252,7 @@ func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, li
 	var body := cell_frame(name, index)
 	view.draw_texture_rect_region(_optional_cached(name), body[1], body[0], Color(1, 1, 1, alpha))
 
-## Body in the alpha pass, then its light added on top (ADR-152). The Knight
+## Body in the alpha pass, then its light added on top (ADR-154). The Knight
 ## S1/S2 guide has only bullet15nl/sl: its single sheet is a light.
 func _draw_lit_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float, mirror: bool) -> void:
 	var transform := Transform2D(angle, Vector2(1, -1) if mirror else Vector2.ONE, 0.0, at)

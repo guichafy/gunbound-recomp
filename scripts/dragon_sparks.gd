@@ -1,7 +1,7 @@
 extends RefCounted
 ## Dragon S1/S2 have no published body (vtable 0x555ea8 publish = 0x429800):
 ## the shot is the trail of sparks that its Simulate 0x46fb20 leaves on every
-## coarse sample of the sweep (ADR-152). The model only publishes each tick's
+## coarse sample of the sweep (ADR-154). The model only publishes each tick's
 ## sweep ("dragon_spark_sweep"); this presentation owns the RNG, like mage_sparks.
 ##  - sweep: 8 px samples from the previous to the current position; a per-shell
 ##    counter (0x3f9c, mod 6) lets a sample emit while it is below the Effect3D

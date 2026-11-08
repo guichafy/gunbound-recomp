@@ -1,4 +1,4 @@
-# Tiros do Nak, Dragon e Knight pelo cliente — REQ-53 / ADR-152
+# Tiros do Nak, Dragon e Knight pelo cliente — REQ-54 / ADR-154
 
 Pedido de 07/11/2026: "Nak T1 e T2 estão com efeitos como se o tiro passasse pelo clima
 eclipse ou algo que escurece os tiros"; "Dragon e Knight: T1, T2 e SS não estão
