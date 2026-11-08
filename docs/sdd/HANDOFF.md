@@ -1,6 +1,6 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
-## Revisão: carga e SS do Nak, clima e tornado — ADR-155 e emenda ADR-154 — 08/11/2026
+## Revisão: carga e SS do Nak, clima e tornado — ADR-156 e emenda ADR-154 — 08/11/2026
 
 - **Nak T2 carregando**: o brilho elétrico da carga (`bfire2`) mora na luz do casco `tank3l.img`, que
   não existia no porte; agora é importada e somada ao corpo por view, como o `tank13l` do Grub.

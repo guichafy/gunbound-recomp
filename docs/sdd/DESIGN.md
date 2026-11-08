@@ -451,7 +451,7 @@ ADR-081, plano em `QUALITY_REVIEW.md`. Nenhuma regra mudou (golden master de
 | `scripts/sprite_pose.gd` | Objeto de parâmetros de `MobileSprite.draw`/`MobileRig.draw` (posição, largura, lado e estado da animação, campos opcionais nomeados) |
 | `scripts/delay_units.gd` | Única conversão custo original → unidade de atraso (÷7,5), com redução de atributo truncada como no C#; `TurnTable.DELAY_SCALE` aponta para ela |
 | `scripts/item_effects.gd` | Efeitos de item por tipo do catálogo: instantâneos (`heal`, `health_cost`, `turn_wind`) e de tiro (`second_volley`, `beacon`, `electric`) |
-| `scripts/weather_contact.gd` | Contato projétil × colunas de clima; o tornado entra no ramo nativo de `aduka_weather.gd` (ADR-155) |
+| `scripts/weather_contact.gd` | Contato projétil × colunas de clima; o tornado entra no ramo nativo de `aduka_weather.gd` (ADR-156) |
 | `scripts/gold_tracker.gd` | Metadados de Gold do tiro: início, coleta por explosão e fechamento |
 | `scripts/cpu_planner.gd` | Plano da CPU em três passos (grade + refino ADR-076); liga/desliga `cpu_thinking`; a busca roda na thread só sobre o snapshot |
 | `scripts/actor_state.gd`, `scripts/shell_state.gd` | Fábricas únicas do formato de ator e de projétil (Dictionary) |
@@ -463,7 +463,7 @@ ADR-081, plano em `QUALITY_REVIEW.md`. Nenhuma regra mudou (golden master de
 
 `TurnTable.order` é a única regra de ordem (agenda, prévia com `shot_cost`,
 `current_order` da fila do HUD). `Match` continua a fachada: `weather_interact`,
-`apply_weather_contact` (o `tornado_step` herdado saiu na ADR-155), `begin/search/score/finish_cpu_plan`,
+`apply_weather_contact` (o `tornado_step` herdado saiu na ADR-156), `begin/search/score/finish_cpu_plan`,
 `blast`, `deal_damage`, `schedule`, `pass_turn` e `current_order` delegam aos
 módulos acima. Fases são `Match.PHASE_MENU/AIM/FLIGHT/SETTLE/FINISHED`
 (strings, por compatibilidade com eventos e testes). `MatchOverlay` guarda a

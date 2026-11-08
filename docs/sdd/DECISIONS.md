@@ -1957,7 +1957,7 @@ movimento é 28×24, o corpo do PE. O apoio visual 25 permanece. (d) `0x41da80` 
 `[33]` continua fora do custo: a flag `+0x8bb4` fica limpa.
 
 
-## ADR-155 — Tornado do cliente para todos os tiros (08/11/2026)
+## ADR-156 — Tornado do cliente para todos os tiros (08/11/2026)
 
 REQ-24/REQ-54. Relato do usuário: tiros que passam pelo tornado ganham velocidade demais;
 deveriam ganhar só um pouco. Causa: os mobiles fora do caminho nativo usavam a ponte do

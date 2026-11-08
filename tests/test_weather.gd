@@ -168,7 +168,7 @@ func run() -> void:
 	model.apply_weather_contact(shell)
 	check(random_column.used and model.weather.columns.size() == 2 and model.weather.columns[1].type == "force" and shell.damage == 118, "Random activates once, spawning its extra weather that then acts")
 
-	# Tornado (ADR-155): the client's branch, velocity kept; see test_classic_ballistics.
+	# Tornado (ADR-156): the client's branch, velocity kept; see test_classic_ballistics.
 	shell = model.projectile_parameters(0, 45, 60, 0)[0]
 	model.weather.columns.clear()
 	var tornado: Dictionary = model.weather.add_column("tornado", 600, 1)

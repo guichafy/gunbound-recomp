@@ -1,6 +1,6 @@
 # Entregas e próximos trabalhos
 
-## Revisão Nak/clima/tornado — ADR-155 e emenda ADR-154 (08/11/2026)
+## Revisão Nak/clima/tornado — ADR-156 e emenda ADR-154 (08/11/2026)
 
 - [x] Luz do casco `tank3l` do Nak (carga do T2) importada e somada por view.
 - [x] SS do Nak: luz `bullet3pl` somada, rumo e espelho vertical de `0x488880`.

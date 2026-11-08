@@ -978,7 +978,7 @@ ordem; o SS fica como estava. O Dragon emite S1 θ/P+10, S2 quatro corpos nos qu
 200 px (30…150°) acima do impacto e voam a 10 px/tick até ele, sem gravidade nem vento. O
 Knight usa guia → Ion → filhos (3/5/8). O casco do Nak soma a luz `tank3l` (brilho da carga do
 T2) e o SS do Nak é o mini-Nak `bullet3pl` somado, girado pelo rumo e espelhado na vertical. Todo
-tiro que cruza um tornado conserva a velocidade e só tem o X invertido nas bordas (ADR-155).
+tiro que cruza um tornado conserva a velocidade e só tem o X invertido nas bordas (ADR-156).
 Matriz e limites em `SHOTS_NAK_DRAGON_KNIGHT.md`.
 
 ## CI/CD desktop — REQ-52 / REQ-01 / REQ-12

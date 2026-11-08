@@ -40,7 +40,7 @@ Visuais de clima/Thor/partícula usam os sprites e sons originais do OpenBound
   código); Mirror inverte vx e dano ×1,1+5; Electricity dispara raio vertical no
   impacto (cratera 10, choque 30 a até 30 px da linha); Tornado conduz o tiro
   em zigue-zague (3 etapas) e o relança na velocidade inicial (substituído pela
-  ADR-155: ramo nativo, velocidade conservada, sem relançamento); Random ativa uma
+  ADR-156: ramo nativo, velocidade conservada, sem relançamento); Random ativa uma
   vez e cria Force/Tornado/Electricity/Weakness/Mirror; Protection cura 35;
   Ignorance sem efeito (não há itens).
 - **REQ-25 — Thor.** Satélite em x 10–90%, y 10–70% do mapa. Enquanto ativo,

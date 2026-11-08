@@ -48,7 +48,7 @@ static func interact(model, projectile: Dictionary, column: Dictionary) -> void:
 			if first:
 				projectile.electric = true
 		"tornado":
-			# ADR-155: every shell takes the client's tornado branch (451030 in the
+			# ADR-156: every shell takes the client's tornado branch (451030 in the
 			# sweep, then AdukaWeather.finish): velocity kept, |vx| >= 200, X turned on
 			# each border crossing up to three, no gravity or wind while inside. The
 			# C# relaunch at the launch speed (tornado_step) is no longer used.
