@@ -34,6 +34,7 @@ const RIDER_ADJUST := Vector2(5, 4)
 const SHOT_FPS := 20.0
 const FOLDER := "res://assets/openbound/nak"
 const NativeBallistics = preload("res://scripts/classic_ballistics.gd")
+const IceEffects = preload("res://scripts/ice_effects.gd")
 
 var meta: Dictionary = {}
 var bullets: Array = []
@@ -63,6 +64,9 @@ func rider_offset(frame: int) -> Vector2:
 	return super.rider_offset(frame) + RIDER_ADJUST
 
 func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int:
+	if pose == "ice":
+		var source := IceEffects.pose(3)
+		return preload("res://scripts/classic_shot_timing.gd").frame(source.frames,source.durations,age,false)
 	if pose == "idle" and not low_health:
 		var cycle := fmod(maxf(age, 0.0), BUBBLE_PERIOD)
 		var start := BUBBLE_PERIOD - float(BUBBLE[1] - BUBBLE[0] + 1) / float(BUBBLE[2])

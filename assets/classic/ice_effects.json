@@ -1,0 +1,242 @@
+{
+  "sources": {
+    "GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "characterdata.dat": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+    "graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08"
+  },
+  "weapons": [
+    {
+      "power": 220,
+      "dimension": 66,
+      "aspect": 144,
+      "flags": 2,
+      "effect_radius": 0
+    },
+    {
+      "power": 310,
+      "dimension": 56,
+      "aspect": 124,
+      "flags": 2,
+      "effect_radius": 0
+    },
+    {
+      "power": 350,
+      "dimension": 60,
+      "aspect": 124,
+      "flags": 2,
+      "effect_radius": 130
+    }
+  ],
+  "attack_masks": {
+    "1": [
+      4,
+      4,
+      4
+    ],
+    "2": [
+      8,
+      8,
+      8
+    ],
+    "3": [
+      2,
+      2,
+      2
+    ],
+    "4": [
+      8,
+      8,
+      8
+    ],
+    "5": [
+      8,
+      8,
+      8
+    ],
+    "6": [
+      2,
+      2,
+      2
+    ],
+    "7": [
+      4,
+      4,
+      4
+    ],
+    "8": [
+      1,
+      1,
+      1
+    ],
+    "9": [
+      1,
+      1,
+      1
+    ],
+    "10": [
+      4,
+      4,
+      4
+    ],
+    "11": [
+      2,
+      2,
+      2
+    ],
+    "12": [
+      2,
+      2,
+      2
+    ],
+    "13": [
+      1,
+      1,
+      1
+    ],
+    "14": [
+      8,
+      8,
+      8
+    ],
+    "15": [
+      4,
+      4,
+      4
+    ],
+    "16": [
+      1,
+      0,
+      0
+    ]
+  },
+  "poses": {
+    "1": {
+      "frames": [
+        167
+      ],
+      "durations": [
+        1
+      ]
+    },
+    "2": {
+      "frames": [
+        154
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "3": {
+      "frames": [
+        114
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "4": {
+      "frames": [
+        216
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "5": {
+      "frames": [
+        137
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "6": {
+      "frames": [
+        122
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "7": {
+      "frames": [
+        129
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "8": {
+      "frames": [
+        156
+      ],
+      "durations": [
+        1
+      ]
+    },
+    "9": {
+      "frames": [
+        157
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "10": {
+      "frames": [
+        172
+      ],
+      "durations": [
+        1
+      ]
+    },
+    "11": {
+      "frames": [
+        135
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "12": {
+      "frames": [
+        171
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "13": {
+      "frames": [
+        83
+      ],
+      "durations": [
+        1
+      ]
+    },
+    "14": {
+      "frames": [
+        448
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "15": {
+      "frames": [
+        216
+      ],
+      "durations": [
+        20
+      ]
+    },
+    "16": {
+      "frames": [
+        114
+      ],
+      "durations": [
+        20
+      ]
+    }
+  }
+}

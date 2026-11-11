@@ -1,0 +1,22 @@
+{
+  "frames": 451,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "pause_frames": 30,
+  "pause_rgba_sha256": "9f500b71cf23edf858cc5fe0909dc4f72ac24d895159d518f20b0ae29714cf55",
+  "pause_identical": true,
+  "files": {
+    "ice-000.png": "92d0d5ee1cb5e9bb6e35da8fa7e545d5804fd5f2a7414acd8e5db67b5391d556",
+    "ice-030.png": "20ab71fc7c59f0a0b3282eab41b887d9b04db3bf1cc7019e4a6f6c84b6e14198",
+    "ice-044.png": "3c8f5eee5ef614e83db2950f429a7c2b4936832743ad0b35ec1b4bf0b0e2271c",
+    "ice-045.png": "3c8f5eee5ef614e83db2950f429a7c2b4936832743ad0b35ec1b4bf0b0e2271c",
+    "ice-074.png": "3c8f5eee5ef614e83db2950f429a7c2b4936832743ad0b35ec1b4bf0b0e2271c",
+    "ice-075.png": "e740b4a2bfa364839e673ad60e2250a1e3e692d398f869c24504a8c9a883bdd4",
+    "ice-330.png": "14c11e55c1dbda7d27509ec52d3ab2be9431377e5328bd8b34d7b3e57881ddbe",
+    "ice-360.png": "04c4cc70655927a4e8eb9657271aa6a1495a440d044ffe2b0b93cc498610ca0f",
+    "ice-420.png": "8081e5144ddc8434a0437febad321d6fc460b110152b08660a22fa867d953747",
+    "ice-450.png": "9baac1fb551525b1ec3bacd48094c7356a908209101c25316963c6e217ab0655"
+  }
+}

@@ -1,5 +1,35 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Efeitos Ice — issue #29 / ADR-162 (11/11/2026)
+
+Ghidra12.2/JDK26 em banco próprio, PE/DAT/XFS pinados e contratos antes do
+código. T2 aplica[0,0,5,0] antes de escudo/HP com teto50; SS blast→área130
+estrita→quatrocampos+5/teto20. Estado não expira com a poseEPA; perfil e
+AdukaWeather.active preservados. Dano/crateraT2/SS nativos compartilhados,
+com pontes de geometria/itens e bases restantes delimitadas no contrato.
+
+RED12/10→GREEN300/0; oito dirigidas1617/0. Harness final exit0/377,427s:
+360parses,114suítesGodot/54.937checks,160Python sem falhas/skips,29partidas;
+coberturaPython62%, Ruff/diff aprovados. Runner por partida preservado.
+Revisão independente fechou P2 de proveniência do oráculo (PE efetivo/DAT
+direto); fixture regenerada idêntica e PE divergente rejeitado pelo revisor.
+
+GPU451quadros1920×1080/60Hz manual,68impactos nos dois sentidos e30quadros
+de pausaRGBA idênticos por comparação independente; captura padrãoID11
+com11stills. App/ZIPmacOS local universal, assinatura deep/strict e smoke
+48tiros+UI+Ice no ZIP extraído aprovados. Versão local0.20.5 do checkout;
+manifest aponta a basea525728f pois fontes ainda não commitadas no export,
+ZIP finalSHA25617b3d852633df1db589768be7b9d3fd0f645f09824722cf21303e869268634f6.
+Sem publicação manual. A release automática usará o SHA integrado da CI.
+
+Rodada integral inicial exit1 (coverage ausente e tradução da nova descrição
+Ice faltando) foi substituída pela rodada final acima; logs vermelhos mantidos.
+Sem clienteWindows inteiro/escuta/input/aceite visual humano. Contrato,
+comandos, revisão e limites: ICE_EFFECTS_ISSUE_29.md; evidência docs/ice-native.
+PR/rebase merge e acompanhamento CI/release autorizados; resultados remotos
+serão devolvidos à orquestração após os quatro gates obrigatórios.
+
+
 ## Combate Bigfoot — issue #28 / ADR-161 (11/11/2026)
 
 Dispersão nativa depois de theta/P inteiros, bônusAttack/Dig divididos por

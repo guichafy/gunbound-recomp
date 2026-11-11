@@ -32,6 +32,7 @@ const LightningCombat = preload("res://scripts/lightning_combat.gd")
 const MageCombat = preload("res://scripts/mage_combat.gd")
 const GrubCombat = preload("res://scripts/grub_combat.gd")
 const BigfootCombat = preload("res://scripts/bigfoot_combat.gd")
+const IceEffects = preload("res://scripts/ice_effects.gd")
 const GrubFlight = preload("res://scripts/grub_flight.gd")
 const AdukaWeather = preload("res://scripts/aduka_weather.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
@@ -75,6 +76,7 @@ static func _static_init() -> void:
 	MageCombat.warmup()
 	GrubCombat.warmup()
 	LightningCombat.warmup()
+	IceEffects.warmup()
 	NATIVE_STAGE = JSON.parse_string(FileAccess.get_file_as_string("res://assets/openbound/weather/native_stage.json"))
 	Physics.warmup()
 	VEHICLES = Mobiles.ALL
@@ -384,6 +386,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		LightningCombat.prepare(shell,actors[index])
 		GrubCombat.prepare(shell,actors[index])
 		BigfootCombat.prepare(shell,actors[index])
+		IceEffects.prepare(shell,actors[index])
 		result.append(shell)
 	return result
 
@@ -842,6 +845,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var native_boomer := BoomerFlight.active(projectile)
 	var native_grub := GrubCombat.active(projectile)
 	var native_bigfoot := BigfootCombat.active(projectile)
+	var native_ice := IceEffects.active(projectile)
 	var native_data: Dictionary = AdukaCombat.t1_parameters(projectile,actors[shot_actor]) if native_aduka else {}
 	if native_mage:
 		native_data = MageCombat.parameters(projectile,actors[shot_actor])
@@ -851,16 +855,20 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		native_data = GrubCombat.parameters(projectile,actors[shot_actor])
 	elif native_bigfoot:
 		native_data = BigfootCombat.parameters(projectile,actors[shot_actor])
+	elif native_ice:
+		native_data = IceEffects.parameters(projectile,actors[shot_actor])
 	var crater_percent := int(projectile.get("mage_crater_percent",100)) if native_mage else int(projectile.get("aduka_crater_percent",100))
 	if native_boomer:
 		crater_percent = int(projectile.get("boomer_crater_percent",100))
 	elif native_bigfoot:
 		crater_percent = int(projectile.get("bigfoot_crater_percent",100))
+	elif native_ice:
+		crater_percent = int(projectile.get("ice_crater_percent",100))
 	var crater_dimension := Physics.quot(int(native_data.get("dimension",0))*crater_percent,100)
 	var removed: int
 	if native_grub:
 		removed = terrain.carve_native(GrubCombat.crater_spans(projectile,Vector2i(position)))
-	elif native_aduka or native_mage or native_boomer or native_bigfoot:
+	elif native_aduka or native_mage or native_boomer or native_bigfoot or native_ice:
 		removed = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect)))
 	else:
 		removed = terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
@@ -870,17 +878,18 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		velocity = projectile.velocity
 		heading = velocity.angle()
 	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "child":bool(projectile.get("child",false)), "ss_state":str(projectile.get("ss_state","normal")), "collided_actor": collided_actor, "removed": removed, "angle": heading})
-	if native_grub:
+	if native_ice:
+		ice_impact(projectile,Vector2i(position),native_data)
+	elif native_grub:
 		GrubCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
 	elif native_mage:
 		MageCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
 	elif native_aduka or native_boomer or native_bigfoot:
 		AdukaCombat.apply(actors,events,Vector2i(position),native_data)
 	else:
-		blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
+		blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor,IceEffects.attack_mask(int(projectile.get("vehicle",actors[shot_actor].vehicle)),weapon_index))
 	if not projectile.is_empty():
 		ClassicFlight.bolts(self, projectile, position)
-		ClassicFlight.chill(self, projectile, event_start)
 		ClassicFlight.plant_mine(self, projectile, position)
 		ClassicFlight.burst(self, projectile, position, velocity)
 		if str(projectile.get("flight","")) == "crystal":
@@ -921,8 +930,31 @@ func explode_actions(position: Vector2, projectile: Dictionary, event_start: int
 		lightning_strike(position)
 	collect_gold_damage(event_start, position, projectile)
 
-func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0, shooter: int = -1) -> int:
-	return Damage.blast(actors, events, position, radius, damage, emp, attack, shooter)
+func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0, shooter: int = -1, attack_flags: int = -1) -> int:
+	if attack_flags < 0:
+		attack_flags = IceEffects.attack_mask(int(actors[shooter].vehicle),shot_weapon) if shooter >= 0 else 0
+	return Damage.blast(actors, events, position, radius, damage, emp, attack, shooter,attack_flags)
+
+## 474650/4759b0: state gates use native computed damage or their own area,
+## never HP-only event slices. The source alive flag survives the whole blast.
+func ice_impact(shell: Dictionary, impact: Vector2i, data: Dictionary) -> void:
+	for target in actors:
+		target.ice_alive = int(target.hp)>0
+	for index in actors.size():
+		var target: Dictionary = actors[index]
+		if not IceEffects.eligible(target):
+			continue
+		var amount := AdukaCombat.amount(target,impact,data)
+		var changed := int(shell.weapon)==1 and IceEffects.t2(target,amount)
+		Damage.deal_damage(actors,events,index,amount,"ice_silent" if not IceEffects.publishes_t2_pose(int(target.vehicle)) else "")
+		if changed and IceEffects.publishes_t2_pose(int(target.vehicle)):
+			events.append({"type":"ice_effect","actor":index,"position":target.pos})
+	if int(shell.weapon)==2:
+		for index in actors.size():
+			if IceEffects.ss(actors[index],AdukaCombat.origin(actors[index]),impact):
+				events.append({"type":"ice_effect","actor":index,"position":actors[index].pos})
+	for target in actors:
+		target.erase("ice_alive")
 
 ## TeleportationBeacon.Explode: explode actions (Thor, Electricity) first, then
 ## the owner moves to previousPosition (the free point just before the contact)

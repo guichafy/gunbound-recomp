@@ -9,6 +9,7 @@ const ClassicProjectileArt = preload("res://scripts/classic_projectile_art.gd")
 const SmoothArt = preload("res://scripts/mobile_smooth_art.gd")
 const RaonEffect = preload("res://scripts/raon_effect.gd")
 const NativeBallistics = preload("res://scripts/classic_ballistics.gd")
+const IceEffects = preload("res://scripts/ice_effects.gd")
 const RAYON_CELL := Rect2(-16, -24, 32, 32)
 ## Client afterimage history depth (ADR-118); shown only where has_trail().
 const NATIVE_TRAIL_LEVELS := 8
@@ -100,6 +101,9 @@ func load_sounds(folder: String) -> void:
 		effects.append(pixel_texture(load(flame)) if ResourceLoader.exists(flame) else pixel_texture(texture))
 
 func frame_index(pose: String, age: float, weapon: int, low_health: bool) -> int:
+	if pose == "ice":
+		var source := IceEffects.pose(preload("res://scripts/mobile_looks.gd").id_of(mobile_kind))
+		return Timing.frame(source.frames,source.durations,age,false)
 	var key := pose
 	if pose in ["charging", "recoil"]:
 		key += "_" + str(clampi(weapon, 0, 2))

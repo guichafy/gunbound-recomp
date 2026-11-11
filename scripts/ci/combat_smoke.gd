@@ -4,6 +4,7 @@ extends RefCounted
 const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 const Combat = preload("res://scripts/combat.gd")
+const NativeCombat = preload("res://scripts/aduka_combat.gd")
 
 static func run(check: Callable) -> int:
 	var shots := 0
@@ -65,4 +66,19 @@ static func run(check: Callable) -> int:
 				check.call(removed > 0, label + "contact carves real ground")
 			if vehicle == 13 and weapon > 0:
 				check.call(ground_bounces > 0, label + "ricochets on the platform before the map boundary")
+	# Real package must include Ice metadata as well as the executable scripts.
+	var ice = Match.new()
+	ice.start(11,1,29,"miramo_town_a","wind",null,[],[],[],0,2)
+	ice.actors[0].invulnerable = true
+	ice.actors[1].shield = 10000
+	ice.shot_actor = 0
+	ice.weather.columns.clear()
+	var original: Array = ice.actors[1].attributes.duplicate(true)
+	for step in 3:
+		var weapon: int = [1,1,2][step]
+		ice.shot_weapon = weapon
+		var shell: Dictionary = ice.projectile_parameters(0,30,50,weapon)[0]
+		ice.explode(Vector2(NativeCombat.center(ice.actors[1])),1,shell)
+		check.call(ice.actors[1].native_resistance == [[0,0,5,0],[0,0,10,0],[5,5,15,5]][step],"packaged Ice repeated T2 / separate SS state")
+	check.call(ice.actors[1].attributes==original and ice.actors[1].hp==ice.actors[1].max_hp,"packaged Ice shield absorption / profile isolation")
 	return shots

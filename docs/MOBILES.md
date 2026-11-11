@@ -22,7 +22,7 @@ limites em [NATIVE_WEATHER_ISSUE_26](sdd/NATIVE_WEATHER_ISSUE_26.md).
 | 8 | Lightning | Revisado pelo cliente: T1/T2/SS, dano, Force e tornado. Aguarda aceite | [LIGHTNING_CLIENT_REVIEW](sdd/LIGHTNING_CLIENT_REVIEW.md) |
 | 9 | JD | Cristal de atração no T2 e efeito numérico no SS. Falta a captura GPU | [JD_CLASSIC_FIX](sdd/JD_CLASSIC_FIX.md) |
 | 10 | ASate | Guia, Ion e 1/3/6 filhos. Falta a captura GPU | [ASATE_CLASSIC_FIX](sdd/ASATE_CLASSIC_FIX.md) |
-| 11 | Ice | Balística comum. Falta o campo do S2/SS | [BATTLE_MOBILE_FAMILY_PLANS §6](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |
+| 11 | Ice | T2/SS com campos nativos de vulnerabilidade: T2 terceiro campo+5 até50 antes do escudo; SS quatrocampos+5 até20 em área130. PoseEPA própria, sem expiração dos campos; contato/itens e bases restantes delimitados. ADR-162, issue#29. Aguarda aceite visual humano | [ICE_EFFECTS_ISSUE_29](sdd/ICE_EFFECTS_ISSUE_29.md) |
 | 12 | Turtle | T1/T2 com a onda original (T2 aceito). Dano e física dos filhos do SS adaptados | [TURTLE_T2_FIDELITY](sdd/TURTLE_T2_FIDELITY.md), [TURTLE_ANIMATION_FIX](sdd/TURTLE_ANIMATION_FIX.md) |
 | 13 | Grub | Revisado pelo cliente: T1 no contato 0x455cc0, T2 (4 corpos)/SS com ricochete, dano repetido do SS, linha type 12, caixa 28×24 e Lua 8%. Sem cura por turno. A boca do tiro segue o muzzle genérico | [GRUB_CLIENT_FIX](sdd/GRUB_CLIENT_FIX.md) |
 | 14 | Dragon | Pelo cliente: S1/SS P+10, S2 quatro corpos (θ±1, P±10) em 1/6/11/16, rastro de faíscas `CrashTexture` e cinco filhos do SS no semicírculo de 200 px (ADR-154). Contato comum. Aguarda aceite | [SHOTS_NAK_DRAGON_KNIGHT](sdd/SHOTS_NAK_DRAGON_KNIGHT.md) |

@@ -4,6 +4,7 @@ extends RefCounted
 const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 const SpritePose = preload("res://scripts/sprite_pose.gd")
+const IceEffects = preload("res://scripts/ice_effects.gd")
 
 const MobileLooks = preload("res://scripts/mobile_looks.gd")
 const USING_ITEM_TIME := MobileLooks.USING_ITEM_TIME
@@ -51,7 +52,16 @@ func react(event: Dictionary) -> void:
 		# ForceChangePosition: the mobile appears at the beacon, no slide.
 		motion[event.actor].pos = Vector2(event.to)
 		motion[event.actor].previous = Vector2(event.to)
+	elif event.type == "ice_effect":
+		var ticks := 0
+		for duration in IceEffects.pose(int(motion[event.actor].vehicle)).durations:
+			ticks += int(duration)
+		# A hurt timer shares the native action slot; this never expires state.
+		motion[event.actor].hurt_pose = "ice"
+		start_pose(event.actor,"ice","hurt",ticks * 0.05)
 	elif event.type in ["damage", "shield_damage"]:
+		if str(event.get("kind","")) == "ice_silent":
+			return
 		if str(event.get("kind", "")) == "shock":
 			start_pose(event.actor, "shock", "shock", source_duration(event.actor,"shock",1.0))
 		else:
@@ -76,6 +86,8 @@ func tick(model, delta: float, charging: bool = false, selected_weapon: int = 0,
 		state.rotation = lerp_angle(float(state.rotation), model.body_rotation(index), 1.0 - exp(-delta * 18.0))
 		state.recoil = maxf(0.0, state.recoil - delta)
 		state.hurt = maxf(0.0, state.hurt - delta)
+		if state.hurt_pose == "ice" and state.hurt < 0.000000001:
+			state.hurt = 0.0
 		state.shock = maxf(0.0, state.shock - delta)
 		state.falling = maxf(0.0, state.falling - delta)
 		state.unable = maxf(0.0, state.unable - delta)
