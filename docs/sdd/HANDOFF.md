@@ -1,5 +1,14 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+EmendaREQ-52/Trico: PR37 rebase integrado em74401ca1; quatro gates verdes,
+59387checks/160Python/29partidas em macOS/Windows. MainmacOS passou; mainWindows
+atingiu guardPython900s duas vezes, bloqueando release corretamente.
+ColetaPython passa de scripts para scripts/ci (escopo do piso40%), com todo
+inventário ativo, guard900s e partidas/pool inalterados. XML/HTML somente
+automação; python_lane final160testes/0skips/130,904s, cobertura62% idêntica,
+regressão12testes e revisão aprovadas. Detalhes em TRICO_SPECIALS_ISSUE_30.md.
+Novo CI e release pendentes; não confundir integração com entrega publicada.
+
 ## Trico T2/SS — issue #30 / ADR-163 (11/11/2026)
 
 T2 usa dois componentes especiais e idx2 comum: centro24.8 separado do

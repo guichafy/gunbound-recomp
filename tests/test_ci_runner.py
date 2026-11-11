@@ -119,6 +119,7 @@ class RunnerTests(unittest.TestCase):
             root = Path(temp)
             (root/'scripts/ci').mkdir(parents=True)
             (root/'tests').mkdir()
+            (root/'scripts/pixel.py').write_text('def value():\n    return 42\n')
             (root/'scripts/check.sh').write_text(inventory)
             for name in ['test_scene', 'test_matches', 'test_classic_matches']:
                 (root/f'tests/{name}.gd').touch()
@@ -143,6 +144,9 @@ if '--script' in args and '--check-only' not in args:
             python = root/'scripts/ci/check.py'
             python.write_text('''import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from scripts import pixel
+assert pixel.value() == 42
 Path(sys.argv[-1]).write_text('[]')
 print('Ran 1 test')
 print('OK')
@@ -168,6 +172,9 @@ print('OK')
             self.assertTrue(report['results']['python']['ok'])
             self.assertTrue(report['results']['automation_coverage']['ok'])
             self.assertTrue((root/'.tools/coverage.xml').is_file())
+            coverage_xml = (root/'.tools/coverage.xml').read_text()
+            self.assertIn('check.py', coverage_xml)
+            self.assertNotIn('pixel.py', coverage_xml, 'asset code must run without per-pixel coverage tracing')
             self.assertTrue((root/'.tools/coverage-html/index.html').is_file())
 
     def test_wall_clock_suites_run_alone_after_parallel_lanes(self):

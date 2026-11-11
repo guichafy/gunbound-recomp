@@ -1040,6 +1040,14 @@ Matriz e limites em `SHOTS_NAK_DRAGON_KNIGHT.md`.
 
 ## CI/CD desktop — REQ-52 / REQ-01 / REQ-12
 
+Emenda11/11/2026 (Trico#30): coletar cobertura de linhas/branches somente
+em scripts/ci, o escopo do piso40%. Continuar executando todo o inventário
+Python, inclusive importadores e comparações de pixels, sem tracing desses
+loops. XML/HTML devem identificar esse escopo; não representam cobertura dos
+importadores nem do GDScript. Preservar guardPython900s e29partidas/900s/pool4.
+Plano: regressão com módulo externo realmente executado e ausente do XML,
+repetir160testes, comparar métrica da automação e validar nas duas plataformas.
+
 Otimização autorizada no PR20 (28/10/2026): preservar todas as suítes, as
 13+16 partidas e a instrumentação Python com piso de40% da automação.
 Executar partidas em grupos determinísticos e Python em paralelo ao Godot,

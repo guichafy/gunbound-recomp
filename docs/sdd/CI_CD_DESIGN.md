@@ -74,10 +74,11 @@ inclui duração por comando/total e partidas; `python-times.json` registra
 tempos de cada teste e os15 maiores aparecem no log do Actions. Esses tempos
 não incluem o setUpClass como teste individual; o tempo total Python inclui-o.
 
-A cobertura de linhas/branches mede **Python**, com relatório completo em
-`.tools/coverage.xml` e `.tools/coverage-html/`. O gate inicial de40% aplica-se
-somente a `scripts/ci/*`, não ao jogo. O restante Python aparece no relatório
-sem piso global artificial. O inventário e os checks Godot são publicados
+A cobertura de linhas/branches mede somente a **automação Python scripts/ci**,
+com relatórios em `.tools/coverage.xml` e `.tools/coverage-html/` e piso40%.
+Todos os testes Python continuam ativos, mas os importadores de assets não
+são instrumentados nem aparecem nesses relatórios (emendaREQ-52 de11/11/2026).
+O inventário e os checks Godot são publicados
 separadamente em `report.json`; não representam cobertura de linhas GDScript.
 Instrumentação de linhas GDScript ainda é uma limitação desta entrega.
 

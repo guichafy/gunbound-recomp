@@ -11,7 +11,10 @@
 - [x] GPU421frames/FullHD, lados/vento/rampa/SS;30pausas fullRGBA idênticas.
 - [x] ZIPmacOS local universal assinado; smoke48tiros/UI/Ice/Trico aprovado.
 - [x] SPEC/ADR/contrato/MOBILES/HANDOFF atualizados; Ruff/diff aprovados.
-- [x] Teardown de mapa/timing aguarda WeakRefs; duas assertivas novas, dirigidas4815/0 e revisão. CI nova pendente.
+- [x] Teardown mapa/timing aguarda WeakRefs; PR37 e mainmacOS59387checks/0.
+- [x] PR37 rebase integrado74401ca1; quatro gates aprovados em ambas plataformas.
+- [x] Diagnóstico de dois timeoutsPython900s na mainWindows; coletor restrito à automação, todos160testes/guards mantidos; regressãoRED2→GREEN12.
+- [ ] Validar CI do ajuste de coleta e release automática; publish anterior bloqueado.
 - [ ] Operação remota autorizada: commit/push/PR/quatro gates/rebase merge/CI/release;
   resultados exatos devolvidos à orquestração, sem publicação manual adicional.
 - [ ] Aceite visual/escuta/input humanos; clienteWindows completo não executado.
