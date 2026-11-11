@@ -19,7 +19,7 @@ static func run(check: Callable) -> int:
 				continue
 			# Independent consumer inventory: guard before entering release's unchecked
 			# byte-array reads. Missing ground must fail even without a SCRIPT ERROR.
-			if vehicle in [1, 6, 8, 13, 16]:
+			if vehicle in [1, 4, 6, 8, 13, 16]:
 				var ready: bool = model.terrain.native_cells.size() == 1800 * 1800
 				check.call(ready, label + "native terrain ready without Mage opponent")
 				if not ready:
@@ -33,6 +33,8 @@ static func run(check: Callable) -> int:
 			if not fired:
 				continue
 			shots += 1
+			var armor_shell: Dictionary = model.projectiles[0] if vehicle==4 and weapon==1 else {}
+			var armor_identity := false
 			var contacts := 0
 			var ground_bounces := 0
 			var removed := 0
@@ -47,6 +49,8 @@ static func run(check: Callable) -> int:
 						removed += int(event.get("removed", 0))
 					if event.type == "ricochet" and Vector2(event.position).y < 1700.0:
 						ground_bounces += 1
+				if not armor_shell.is_empty() and contacts==1 and not model.projectiles.is_empty():
+					armor_identity = is_same(armor_shell,model.projectiles[0]) and int(armor_shell.armor_phase)==1
 				model.events.clear()
 				if model.phase != Match.PHASE_FLIGHT:
 					break
@@ -54,6 +58,8 @@ static func run(check: Callable) -> int:
 			# Nak SS intentionally crosses terrain and can miss an empty lane.
 			if not (vehicle == 3 and weapon == 2):
 				check.call(contacts > 0, label + "terrain/effect contact observed")
+			if vehicle==4 and weapon==1:
+				check.call(contacts==2 and armor_identity, label + "same Armor T2 shell survives first crater and ends after second")
 			if vehicle in [6, 13]:
 				check.call(first_contact > 5, label + "flies before contact instead of exploding at launch")
 				check.call(removed > 0, label + "contact carves real ground")

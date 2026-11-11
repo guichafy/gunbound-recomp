@@ -1,0 +1,529 @@
+{
+  "base": "bb5486d5b38b7ff08f4b3229e861bda7786e03d5",
+  "inputs": {
+    "sound.xfs": "081c1b9f5751c486512a9df1a894f6db7a5ed891b8ebdad9fbce1b9169901023",
+    "graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+    "characterdata.dat": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+    "itemdata.dat": "de6f4d3c424df046d344c4f952542255a1eeb2898457eac74ff6379051b48523",
+    "GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "specialdata.dat": "9cc0d99f87e4fff6fd56160c3737fb966546ab9bb77a6a33374cb4642233e086",
+    "avatar.xfs": "829be830e0c50c273d5e0ece03c22fbe0c45e07527129e60e8843d16a1df0e6d",
+    "stage.dat": "103c2b488977e1721becf8cb90496f95477302ec24141f94116d5214a3e6cfca"
+  },
+  "queries": {
+    "evidence-consumers": {
+      "manifest": {
+        "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+        "program": "GunBound.gme",
+        "language": "x86:LE:32:default",
+        "compiler": "windows",
+        "image_base": "00400000",
+        "address_kind": "VA in the imported program",
+        "functions": [
+          {
+            "requested_va": "0x455cc0",
+            "seeded": false,
+            "entry_va": "00455cc0",
+            "name": "FUN_00455cc0",
+            "body": "[[00455cc0, 00456956] [00456960, 004572ae]]",
+            "instructions": 1534,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x468880",
+            "seeded": false,
+            "entry_va": "00468880",
+            "name": "FUN_00468880",
+            "body": "[[00468880, 0046889f]]",
+            "instructions": 12,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x450eb0",
+            "seeded": false,
+            "entry_va": "00450eb0",
+            "name": "FUN_00450eb0",
+            "body": "[[00450eb0, 00450ff9] [00451000, 00451021]]",
+            "instructions": 139,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x4e4970",
+            "seeded": false,
+            "entry_va": "004e4970",
+            "name": "FUN_004e4970",
+            "body": "[[004e4970, 004e4bb1]]",
+            "instructions": 164,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x4262d0",
+            "seeded": false,
+            "entry_va": "004262d0",
+            "name": "FUN_004262d0",
+            "body": "[[004262d0, 00426402]]",
+            "instructions": 96,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x458850",
+            "seeded": true,
+            "entry_va": "00458850",
+            "name": "FUN_00458850",
+            "body": "[[00458850, 00458910]]",
+            "instructions": 68,
+            "status": "decompiled",
+            "diagnostic": ""
+          }
+        ],
+        "data": [
+          {
+            "requested": "0x555dac:32",
+            "hex": "80884600601c4600c0f148009086450000984200c05c4500b088460050884500",
+            "status": "read"
+          }
+        ],
+        "ok": true
+      },
+      "run": {
+        "source": {
+          "path": "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+          "program": "GunBound.gme"
+        },
+        "ghidra_properties": "application.revision.ghidra-Ghidra_12.2_build=\napplication.build.date=2026-Oct-23 0156 GMT\napplication.build.date.short=20261023\napplication.name=Ghidra\napplication.version=12.2\napplication.release.name=PUBLIC\napplication.layout.version=3\napplication.gradle.min=9.1\napplication.gradle.max=\napplication.java.min=25\napplication.java.max=\napplication.java.compiler=25\napplication.python.supported=3.15, 3.14, 3.13, 3.12, 3.11, 3.10, 3.9\n",
+        "command": [
+          "/opt/homebrew/Cellar/ghidra/12.2/libexec/support/analyzeHeadless",
+          "/private/tmp/gunbound-issue27-ghidra/projects",
+          "GunboundClient",
+          "-process",
+          "GunBound.gme",
+          "-noanalysis",
+          "-max-cpu",
+          "2",
+          "-scriptPath",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.codex/skills/gunbound-client-port/scripts",
+          "-postScript",
+          "ExportClientEvidence.java",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-consumers",
+          "seed",
+          "0x455cc0,0x468880,0x450eb0,0x4e4970,0x4262d0,0x458850",
+          "0x555dac:32",
+          "-log",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-consumers/analysis.log",
+          "-scriptlog",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-consumers/scripts.log"
+        ],
+        "java_home": "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
+        "isolated_java_options": " \"-Duser.home=/private/tmp/gunbound-issue27-ghidra/profile\" \"-Dapplication.cachedir=/private/tmp/gunbound-issue27-ghidra/cache\" \"-Dapplication.tempdir=/private/tmp/gunbound-issue27-ghidra/tmp\" \"-Djava.io.tmpdir=/private/tmp/gunbound-issue27-ghidra/tmp\"",
+        "reused_project": true,
+        "exit_code": 0,
+        "source_unchanged": true,
+        "analysis_timed_out": false,
+        "ok": true
+      }
+    },
+    "evidence-effects": {
+      "manifest": {
+        "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+        "program": "GunBound.gme",
+        "language": "x86:LE:32:default",
+        "compiler": "windows",
+        "image_base": "00400000",
+        "address_kind": "VA in the imported program",
+        "functions": [
+          {
+            "requested_va": "0x436dc0",
+            "seeded": false,
+            "entry_va": "00436dc0",
+            "name": "FUN_00436dc0",
+            "body": "[[00436dc0, 00436ebb]]",
+            "instructions": 75,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x436ec0",
+            "seeded": false,
+            "entry_va": "00436ec0",
+            "name": "FUN_00436ec0",
+            "body": "[[00436ec0, 00436fcb]]",
+            "instructions": 80,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x436bd0",
+            "seeded": false,
+            "entry_va": "00436bd0",
+            "name": "FUN_00436bd0",
+            "body": "[[00436bd0, 00436ccb]]",
+            "instructions": 75,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x436070",
+            "seeded": false,
+            "entry_va": "00436070",
+            "name": "FUN_00436070",
+            "body": "[[00436070, 00436146]]",
+            "instructions": 61,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x4372f0",
+            "seeded": false,
+            "entry_va": "004372f0",
+            "name": "FUN_004372f0",
+            "body": "[[004372f0, 004373b7]]",
+            "instructions": 62,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x437150",
+            "seeded": false,
+            "entry_va": "00437150",
+            "name": "FUN_00437150",
+            "body": "[[00437150, 004372e7]]",
+            "instructions": 118,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x4e4d00",
+            "seeded": false,
+            "entry_va": "004e4d00",
+            "name": "FUN_004e4d00",
+            "body": "[[004e4d00, 004e4f46]]",
+            "instructions": 193,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x4ee9b0",
+            "seeded": false,
+            "entry_va": "004ee9b0",
+            "name": "FUN_004ee9b0",
+            "body": "[[004ee9b0, 004eea20]]",
+            "instructions": 53,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x43a530",
+            "seeded": false,
+            "entry_va": "0043a530",
+            "name": "FUN_0043a530",
+            "body": "[[0043a530, 0043a5ef]]",
+            "instructions": 64,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x4510f0",
+            "seeded": false,
+            "entry_va": "004510f0",
+            "name": "FUN_004510f0",
+            "body": "[[004510f0, 004511a3]]",
+            "instructions": 69,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x451030",
+            "seeded": false,
+            "entry_va": "00451030",
+            "name": "FUN_00451030",
+            "body": "[[00451030, 004510e3]]",
+            "instructions": 69,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x4511b0",
+            "seeded": false,
+            "entry_va": "004511b0",
+            "name": "FUN_004511b0",
+            "body": "[[004511b0, 00451263]]",
+            "instructions": 69,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x454dc0",
+            "seeded": false,
+            "entry_va": "00454dc0",
+            "name": "FUN_00454dc0",
+            "body": "[[00454dc0, 0045554e]]",
+            "instructions": 502,
+            "status": "decompiled",
+            "diagnostic": ""
+          }
+        ],
+        "data": [],
+        "ok": true
+      },
+      "run": {
+        "source": {
+          "path": "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+          "program": "GunBound.gme"
+        },
+        "ghidra_properties": "application.revision.ghidra-Ghidra_12.2_build=\napplication.build.date=2026-Oct-23 0156 GMT\napplication.build.date.short=20261023\napplication.name=Ghidra\napplication.version=12.2\napplication.release.name=PUBLIC\napplication.layout.version=3\napplication.gradle.min=9.1\napplication.gradle.max=\napplication.java.min=25\napplication.java.max=\napplication.java.compiler=25\napplication.python.supported=3.15, 3.14, 3.13, 3.12, 3.11, 3.10, 3.9\n",
+        "command": [
+          "/opt/homebrew/Cellar/ghidra/12.2/libexec/support/analyzeHeadless",
+          "/private/tmp/gunbound-issue27-ghidra/projects",
+          "GunboundClient",
+          "-process",
+          "GunBound.gme",
+          "-noanalysis",
+          "-readOnly",
+          "-max-cpu",
+          "2",
+          "-scriptPath",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.codex/skills/gunbound-client-port/scripts",
+          "-postScript",
+          "ExportClientEvidence.java",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-effects",
+          "inspect",
+          "0x436dc0,0x436ec0,0x436bd0,0x436070,0x4372f0,0x437150,0x4e4d00,0x4ee9b0,0x43a530,0x4510f0,0x451030,0x4511b0,0x454dc0",
+          "-",
+          "-log",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-effects/analysis.log",
+          "-scriptlog",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-effects/scripts.log"
+        ],
+        "java_home": "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
+        "isolated_java_options": " \"-Duser.home=/private/tmp/gunbound-issue27-ghidra/profile\" \"-Dapplication.cachedir=/private/tmp/gunbound-issue27-ghidra/cache\" \"-Dapplication.tempdir=/private/tmp/gunbound-issue27-ghidra/tmp\" \"-Djava.io.tmpdir=/private/tmp/gunbound-issue27-ghidra/tmp\"",
+        "reused_project": true,
+        "exit_code": 0,
+        "source_unchanged": true,
+        "analysis_timed_out": false,
+        "ok": true
+      }
+    },
+    "evidence-fields": {
+      "manifest": {
+        "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+        "program": "GunBound.gme",
+        "language": "x86:LE:32:default",
+        "compiler": "windows",
+        "image_base": "00400000",
+        "address_kind": "VA in the imported program",
+        "functions": [
+          {
+            "requested_va": "0x45db20",
+            "seeded": false,
+            "entry_va": "0045db20",
+            "name": "FUN_0045db20",
+            "body": "[[0045db20, 0045ea35]]",
+            "instructions": 933,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x41da80",
+            "seeded": false,
+            "entry_va": "0041da80",
+            "name": "FUN_0041da80",
+            "body": "[[0041da80, 0041e992]]",
+            "instructions": 961,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x454dc0",
+            "seeded": false,
+            "entry_va": "00454dc0",
+            "name": "FUN_00454dc0",
+            "body": "[[00454dc0, 0045554e]]",
+            "instructions": 502,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x458920",
+            "seeded": false,
+            "entry_va": "00458920",
+            "name": "FUN_00458920",
+            "body": "[[00458920, 004589f7]]",
+            "instructions": 79,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x458a00",
+            "seeded": false,
+            "entry_va": "00458a00",
+            "name": "FUN_00458a00",
+            "body": "[[00458a00, 00458ad7]]",
+            "instructions": 79,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x436ac0",
+            "seeded": false,
+            "entry_va": "00436ac0",
+            "name": "FUN_00436ac0",
+            "body": "[[00436ac0, 00436b42]]",
+            "instructions": 39,
+            "status": "decompiled",
+            "diagnostic": ""
+          }
+        ],
+        "data": [],
+        "ok": true
+      },
+      "run": {
+        "source": {
+          "path": "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+          "program": "GunBound.gme"
+        },
+        "ghidra_properties": "application.revision.ghidra-Ghidra_12.2_build=\napplication.build.date=2026-Oct-23 0156 GMT\napplication.build.date.short=20261023\napplication.name=Ghidra\napplication.version=12.2\napplication.release.name=PUBLIC\napplication.layout.version=3\napplication.gradle.min=9.1\napplication.gradle.max=\napplication.java.min=25\napplication.java.max=\napplication.java.compiler=25\napplication.python.supported=3.15, 3.14, 3.13, 3.12, 3.11, 3.10, 3.9\n",
+        "command": [
+          "/opt/homebrew/Cellar/ghidra/12.2/libexec/support/analyzeHeadless",
+          "/private/tmp/gunbound-issue27-ghidra/projects",
+          "GunboundClient",
+          "-process",
+          "GunBound.gme",
+          "-noanalysis",
+          "-readOnly",
+          "-max-cpu",
+          "2",
+          "-scriptPath",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.codex/skills/gunbound-client-port/scripts",
+          "-postScript",
+          "ExportClientEvidence.java",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-fields",
+          "inspect",
+          "0x45db20,0x41da80,0x454dc0,0x458920,0x458a00,0x436ac0",
+          "-",
+          "-log",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-fields/analysis.log",
+          "-scriptlog",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-fields/scripts.log"
+        ],
+        "java_home": "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
+        "isolated_java_options": " \"-Duser.home=/private/tmp/gunbound-issue27-ghidra/profile\" \"-Dapplication.cachedir=/private/tmp/gunbound-issue27-ghidra/cache\" \"-Dapplication.tempdir=/private/tmp/gunbound-issue27-ghidra/tmp\" \"-Djava.io.tmpdir=/private/tmp/gunbound-issue27-ghidra/tmp\"",
+        "reused_project": true,
+        "exit_code": 0,
+        "source_unchanged": true,
+        "analysis_timed_out": false,
+        "ok": true
+      }
+    },
+    "evidence-initial": {
+      "manifest": {
+        "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+        "program": "GunBound.gme",
+        "language": "x86:LE:32:default",
+        "compiler": "windows",
+        "image_base": "00400000",
+        "address_kind": "VA in the imported program",
+        "functions": [
+          {
+            "requested_va": "0x4688b0",
+            "seeded": false,
+            "entry_va": "004688b0",
+            "name": "FUN_004688b0",
+            "body": "[[004688b0, 004689ec] [004689f0, 0046a494]]",
+            "instructions": 1893,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x40a7d0",
+            "seeded": false,
+            "entry_va": "0040a7d0",
+            "name": "FUN_0040a7d0",
+            "body": "[[0040a7d0, 0040a8ba]]",
+            "instructions": 56,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x40a8c0",
+            "seeded": false,
+            "entry_va": "0040a8c0",
+            "name": "FUN_0040a8c0",
+            "body": "[[0040a8c0, 0040a9bb]]",
+            "instructions": 64,
+            "status": "decompiled",
+            "diagnostic": ""
+          },
+          {
+            "requested_va": "0x40d9ba",
+            "seeded": false,
+            "entry_va": "0040d8e0",
+            "name": "FUN_0040d8e0",
+            "body": "[[0040d8e0, 0040dc67] [0040dc70, 0040e7c8] [0040e7d0, 0040e84a]]",
+            "instructions": 1048,
+            "status": "decompiled",
+            "diagnostic": ""
+          }
+        ],
+        "data": [
+          {
+            "requested": "0x555dac:96",
+            "hex": "80884600601c4600c0f148009086450000984200c05c4500b088460050884500a0a44600601c4600c0f148009086450000984200c05c4500d0a4460050884500e0ae4600601c460010b646009086450000984200c05c450010af460050884500",
+            "status": "read"
+          },
+          {
+            "requested": "0xe9ba40:32",
+            "hex": "0000000000000000000000000000000000000000000000000000000000000000",
+            "status": "read"
+          }
+        ],
+        "ok": true
+      },
+      "run": {
+        "source": {
+          "path": "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+          "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+          "program": "GunBound.gme"
+        },
+        "ghidra_properties": "application.revision.ghidra-Ghidra_12.2_build=\napplication.build.date=2026-Oct-23 0156 GMT\napplication.build.date.short=20261023\napplication.name=Ghidra\napplication.version=12.2\napplication.release.name=PUBLIC\napplication.layout.version=3\napplication.gradle.min=9.1\napplication.gradle.max=\napplication.java.min=25\napplication.java.max=\napplication.java.compiler=25\napplication.python.supported=3.15, 3.14, 3.13, 3.12, 3.11, 3.10, 3.9\n",
+        "command": [
+          "/opt/homebrew/Cellar/ghidra/12.2/libexec/support/analyzeHeadless",
+          "/private/tmp/gunbound-issue27-ghidra/projects",
+          "GunboundClient",
+          "-import",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+          "-analysisTimeoutPerFile",
+          "240",
+          "-max-cpu",
+          "2",
+          "-scriptPath",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.codex/skills/gunbound-client-port/scripts",
+          "-postScript",
+          "ExportClientEvidence.java",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-initial",
+          "inspect",
+          "0x4688b0,0x40a7d0,0x40a8c0,0x40d9ba",
+          "0x555dac:96,0xe9ba40:32",
+          "-log",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-initial/analysis.log",
+          "-scriptlog",
+          "/Users/guichafy/.codex/worktrees/8bf2/DemoGame/.tools/armor-t2/evidence-initial/scripts.log"
+        ],
+        "java_home": "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
+        "isolated_java_options": " \"-Duser.home=/private/tmp/gunbound-issue27-ghidra/profile\" \"-Dapplication.cachedir=/private/tmp/gunbound-issue27-ghidra/cache\" \"-Dapplication.tempdir=/private/tmp/gunbound-issue27-ghidra/tmp\" \"-Djava.io.tmpdir=/private/tmp/gunbound-issue27-ghidra/tmp\"",
+        "reused_project": false,
+        "exit_code": 0,
+        "source_unchanged": true,
+        "analysis_timed_out": false,
+        "ok": true
+      }
+    }
+  }
+}

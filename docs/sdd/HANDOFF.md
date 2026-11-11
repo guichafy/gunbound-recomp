@@ -1,5 +1,27 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Armor T2 — issue #27 / ADR-160 (11/11/2026)
+
+Um shell mantém duas fases; primeira cratera/dano precede redução assinada
+por7/10 das três potências e três dimensões. Retoma do pixel de contato,
+conserva velocidade/relógio, acelera no fim do primeiro tick e remove no
+segundo contato. Saída/limite de voo encerram sem travar. T1/SS preservados;
+AdukaWeather.active não foi ampliado. Dano/itens/cratera seguem pontes
+explicitadas em ARMOR_T2_ISSUE_27.md; não alegar Armor integralmente nativo.
+
+Ghidra12.2/JDK26 em banco exclusivo e quatro consultas aprovadas; oráculo
+Unicorn executa tick e varredura reais do PE pinado. RED16/4→GREEN179/0.
+Harness integral exit0/320,647s:112suítesGodot/51714checks,156Python sem
+skips/falhas,29partidas; confirmação posterior179+225/0. Smoke embarcado
+confere mesma identidade entre duas colisões no Miramo real. Ruff/diff OK.
+GPU241quadros1920×1080:primeirotick9/segundotick13,30quadros de pausa
+RGBAidênticos ainda na fase1 e retomada aprovada. Revisão independente
+aprovada após reparar dois P2 de QA. Evidências/MP4 em docs/armor-t2 e
+stills em docs/mobile-shots. ClienteWindows inteiro/escuta/input/aceitehumano
+não executados. PR/rebase merge e release automática autorizados nesta
+sessão; resultados remotos são devolvidos à orquestração.
+
+
 ## Clima global sem Mage — issue #26 / ADR-159 (11/11/2026)
 
 Todo treino agora usa o calendário Thor’s Hammer existente, sete categorias,

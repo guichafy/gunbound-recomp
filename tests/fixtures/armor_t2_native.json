@@ -1,0 +1,539 @@
+{
+  "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "tick_va": "0x4688b0",
+  "fields_offsets": [
+    "0x1e54",
+    "0x2078",
+    "0x229c",
+    "0x24c0",
+    "0x26e4",
+    "0x2908"
+  ],
+  "scope": "Real tick with controlled contact and recorded side effects; not whole-client execution.",
+  "cases": [
+    {
+      "direction": 1,
+      "initial_fields": [
+        236,
+        237,
+        -239,
+        56,
+        57,
+        -59
+      ],
+      "contacts": [
+        1,
+        4
+      ],
+      "ticks": [
+        {
+          "tick": 1,
+          "position_fp": [
+            28160,
+            26880
+          ],
+          "velocity_fp": [
+            2567,
+            1291
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": [
+            "0x4262d0",
+            "0x4e4970",
+            "0x4e4d00",
+            "0x450eb0",
+            "0x436ac0",
+            "0x4372f0",
+            "0x437150",
+            "0x4ee9b0"
+          ]
+        },
+        {
+          "tick": 2,
+          "position_fp": [
+            30727,
+            28171
+          ],
+          "velocity_fp": [
+            2574,
+            1302
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 3,
+          "position_fp": [
+            33301,
+            29473
+          ],
+          "velocity_fp": [
+            2581,
+            1313
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 4,
+          "position_fp": [
+            35840,
+            30720
+          ],
+          "velocity_fp": [
+            2581,
+            1313
+          ],
+          "phase": 1,
+          "removed": 1,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": [
+            "0x4262d0",
+            "0x4e4970",
+            "0x4e4d00",
+            "0x450eb0",
+            "0x436ac0",
+            "0x4372f0",
+            "0x437150",
+            "0x4ee9b0"
+          ]
+        }
+      ]
+    },
+    {
+      "direction": -1,
+      "initial_fields": [
+        236,
+        237,
+        -239,
+        56,
+        57,
+        -59
+      ],
+      "contacts": [
+        1,
+        4
+      ],
+      "ticks": [
+        {
+          "tick": 1,
+          "position_fp": [
+            23040,
+            26880
+          ],
+          "velocity_fp": [
+            -2567,
+            1291
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": [
+            "0x4262d0",
+            "0x4e4970",
+            "0x4e4d00",
+            "0x450eb0",
+            "0x436ac0",
+            "0x4372f0",
+            "0x437150",
+            "0x4ee9b0"
+          ]
+        },
+        {
+          "tick": 2,
+          "position_fp": [
+            20473,
+            28171
+          ],
+          "velocity_fp": [
+            -2574,
+            1302
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 3,
+          "position_fp": [
+            17899,
+            29473
+          ],
+          "velocity_fp": [
+            -2581,
+            1313
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 4,
+          "position_fp": [
+            15104,
+            30720
+          ],
+          "velocity_fp": [
+            -2581,
+            1313
+          ],
+          "phase": 1,
+          "removed": 1,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": [
+            "0x4262d0",
+            "0x4e4970",
+            "0x4e4d00",
+            "0x450eb0",
+            "0x436ac0",
+            "0x4372f0",
+            "0x437150",
+            "0x4ee9b0"
+          ]
+        }
+      ]
+    },
+    {
+      "direction": 1,
+      "initial_fields": [
+        236,
+        237,
+        -239,
+        56,
+        57,
+        -59
+      ],
+      "contacts": [
+        1
+      ],
+      "ticks": [
+        {
+          "tick": 1,
+          "position_fp": [
+            28160,
+            26880
+          ],
+          "velocity_fp": [
+            2567,
+            1291
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": [
+            "0x4262d0",
+            "0x4e4970",
+            "0x4e4d00",
+            "0x450eb0",
+            "0x436ac0",
+            "0x4372f0",
+            "0x437150",
+            "0x4ee9b0"
+          ]
+        },
+        {
+          "tick": 2,
+          "position_fp": [
+            30727,
+            28171
+          ],
+          "velocity_fp": [
+            2574,
+            1302
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 3,
+          "position_fp": [
+            33301,
+            29473
+          ],
+          "velocity_fp": [
+            2581,
+            1313
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 4,
+          "position_fp": [
+            35882,
+            30786
+          ],
+          "velocity_fp": [
+            2588,
+            1324
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 5,
+          "position_fp": [
+            38470,
+            32110
+          ],
+          "velocity_fp": [
+            2595,
+            1335
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        },
+        {
+          "tick": 6,
+          "position_fp": [
+            41065,
+            33445
+          ],
+          "velocity_fp": [
+            2602,
+            1346
+          ],
+          "phase": 1,
+          "removed": 0,
+          "fields": [
+            165,
+            165,
+            -167,
+            39,
+            39,
+            -41
+          ],
+          "effects": []
+        }
+      ]
+    }
+  ],
+  "contact_cases": [
+    {
+      "start_fp": [
+        51200,
+        37120
+      ],
+      "end_fp": [
+        51200,
+        39680
+      ],
+      "floor": 150,
+      "boxes": [],
+      "contact": true,
+      "position_fp": [
+        51200,
+        38400
+      ],
+      "point": [
+        200,
+        150
+      ]
+    },
+    {
+      "start_fp": [
+        51200,
+        37120
+      ],
+      "end_fp": [
+        51712,
+        37888
+      ],
+      "floor": 150,
+      "boxes": [],
+      "contact": true,
+      "position_fp": [
+        52992,
+        38400
+      ],
+      "point": [
+        207,
+        150
+      ]
+    },
+    {
+      "start_fp": [
+        25600,
+        25600
+      ],
+      "end_fp": [
+        33280,
+        28160
+      ],
+      "floor": 300,
+      "boxes": [
+        [
+          112,
+          90,
+          118,
+          120
+        ]
+      ],
+      "contact": true,
+      "position_fp": [
+        28672,
+        27136
+      ],
+      "point": [
+        112,
+        106
+      ]
+    },
+    {
+      "start_fp": [
+        33280,
+        25600
+      ],
+      "end_fp": [
+        25600,
+        28160
+      ],
+      "floor": 300,
+      "boxes": [
+        [
+          112,
+          90,
+          118,
+          120
+        ]
+      ],
+      "contact": true,
+      "position_fp": [
+        30208,
+        27136
+      ],
+      "point": [
+        118,
+        106
+      ]
+    },
+    {
+      "start_fp": [
+        51299,
+        37137
+      ],
+      "end_fp": [
+        51589,
+        39757
+      ],
+      "floor": 150,
+      "boxes": [],
+      "contact": true,
+      "position_fp": [
+        51456,
+        38400
+      ],
+      "point": [
+        201,
+        150
+      ]
+    }
+  ]
+}

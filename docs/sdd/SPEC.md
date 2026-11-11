@@ -1,5 +1,16 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Armor T2 — issue #27 / ADR-160
+
+REQ-04/05/07/08/19/44/45: um único shell mantém duas fases de impacto.
+Primeiro contato resolve cratera/dano, reduz as três potências e três dimensões
+por7/10 com truncamento assinado e continua do pixel de contato, preservando
+velocidade e relógio. Segundo contato remove; saída do mundo/limite de voo
+termina sem travar. Execução/previsão compartilham estado e terreno independente.
+T1/SS preservados; pontes de dano/itens e cratera seguem adaptações declaradas.
+Contrato/plano: ARMOR_T2_ISSUE_27.md.
+
+
 ## Clima global sem Mage — issue #26 / ADR-159
 
 REQ-04/05/07/08/09/19/23/24/25/32/35/44/45: todo treino usa o calendário
