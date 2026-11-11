@@ -22,6 +22,7 @@ const GoldTracker = preload("res://scripts/gold_tracker.gd")
 const CpuPlanner = preload("res://scripts/cpu_planner.gd")
 const ActorState = preload("res://scripts/actor_state.gd")
 const ShellState = preload("res://scripts/shell_state.gd")
+const TricoFlight = preload("res://scripts/trico_flight.gd")
 const ClassicFlight = preload("res://scripts/classic_flight.gd")
 const AsateEffect = preload("res://scripts/asate_effect.gd")
 const KnightEffect = preload("res://scripts/knight_effect.gd")
@@ -379,6 +380,11 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		# Preserve exact launch integers instead of re-quantizing their float projection.
 		shell.launch_velocity_fp = launch_velocity
 		ClassicFlight.prepare(shell, entry)
+		if TricoFlight.active(shell):
+			var limits := aim_limits(index,weapon)
+			var selected := clampf(angle,limits.x,limits.y)
+			var theta := int((selected if int(actors[index].facing)>0 else 180.0-selected)-rad_to_deg(body_rotation(index)))
+			TricoFlight.prepare(shell,entry,theta)
 		ArmorFlight.prepare(shell)
 		BoomerFlight.prepare(shell,actors[index])
 		AdukaCombat.prepare(shell,actors[index])
@@ -593,6 +599,20 @@ func advance_projectile_tick(delta: float) -> void:
 			travel_delta = clampf(flight_elapsed - float(projectile.spawn_at), 0.0, delta)
 			if travel_delta <= TIME_EPSILON:
 				continue
+		if TricoFlight.active(projectile) and int(projectile.get("trico_ss_tick",-1))>=0:
+			projectile.age += travel_delta
+			var action := TricoFlight.tick_ss(projectile)
+			if action.has("position"):
+				var point: Vector2 = action.position
+				# 431d90 bounds-checks each secondary blast independently.
+				if point.x>=0 and point.x<terrain.world_size().x and point.y> -201 and point.y<terrain.world_size().y:
+					var child: Dictionary = projectile.duplicate(true)
+					child.child = true
+					child.ss_state = "normal"
+					explode(point,-1,child)
+			if bool(action.finished):
+				projectiles.remove_at(i)
+			continue
 		if ClassicFlight.hold(projectile, travel_delta):
 			if ClassicFlight.split_open_shell(self,projectile):
 				projectiles.remove_at(i)
@@ -642,6 +662,12 @@ func advance_projectile_tick(delta: float) -> void:
 		var hit: Dictionary
 		if ArmorFlight.active(projectile):
 			hit = ArmorFlight.contact(projectile,terrain,actors)
+		elif TricoFlight.active(projectile):
+			# Contact is an independent consumer; do not enable another mobile's
+			# weather physics through AdukaWeather.active just to get its mask.
+			var start_fp := Physics.position_fp(projectile.hit_pos)
+			var end_fp := Physics.position_fp(actual)
+			hit = AdukaCombat.projectile_contact(Vector2i(start_fp.x>>8,start_fp.y>>8),Vector2i(end_fp.x>>8,end_fp.y>>8),terrain,actors)
 		elif native_weather:
 			var previous_fp := Physics.position_fp(projectile.hit_pos)
 			# MageS2 samples the displaced laser, not its ballistic carrier.
@@ -690,6 +716,14 @@ func advance_projectile_tick(delta: float) -> void:
 			if beacon:
 				land_beacon(hit.position, previous, projectile)
 				projectiles.remove_at(i)
+			elif TricoFlight.active(projectile) and str(projectile.flight)==TricoFlight.SS:
+				# The carrier makes only the SS flame at contact. Attachments are
+				# consumed once here; secondary blasts never clone Thor/Thunder.
+				explode_actions(hit.position,projectile,events.size())
+				projectile.electric = false
+				projectile.thor = false
+				TricoFlight.begin_ss(projectile,hit.position)
+				events.append({"type":"trico_ss_start","position":projectile.hit_pos,"weapon":2,"vehicle":5})
 			elif ClassicFlight.begin_chain(projectile, hit.position, float(actors[shot_actor].facing)):
 				explode(hit.position, int(hit.actor), projectile)
 			else:
@@ -703,7 +737,10 @@ func advance_projectile_tick(delta: float) -> void:
 			ClassicFlight.finish_tick(projectile)
 			if bool(projectile.get("boomer", false)):
 				BoomerFlight.finish_tick(projectile, accelerate)
-		if (hit.is_empty() or armor_continues) and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
+		# 4a42fd checks f54/1178, the displaced published point. A Trico
+		# component may leave the map while its private carrier is still inside.
+		var bounds_fp: Vector2i = Physics.position_fp(projectile.hit_pos) if TricoFlight.active(projectile) else projectile.fp_pos
+		if (hit.is_empty() or armor_continues) and (Physics.outside(bounds_fp, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
 	LightningCombat.resolve(self)

@@ -6,12 +6,13 @@ extends RefCounted
 ## open: Armor SS waits 2 s, pauses while the shell opens, then adds the extra
 ##   damage (ProjectileArmorSSTransformTime / SSE damage). Turtle SS starts
 ##   change at tick44; after10 EPA ticks it divides into6 and removes its parent.
-## chain: Trico SS, 8 blasts, 20 px and ±45° every 0.1 s.
-## orbit: Trico S2 and Raon S1. Turtle S2 uses its native integer wave schedule.
+## Trico T2/SS use their private native state in trico_flight.gd (ADR-163).
+## Raon S1 and Turtle S2 keep their separate native integer wave schedules.
 ## mine: Raon S2/SS leaves a mine. It walks up to 90 px on its owner's turn and
 ##   explodes inside 90 px (ProjectileRaonLauncherS2MineSquaredProximityRange).
 ## bolt: Lightning electricity added at the impact.
 
+const TricoFlight = preload("res://scripts/trico_flight.gd")
 const IceEffects = preload("res://scripts/ice_effects.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Combat = preload("res://scripts/combat.gd")
@@ -49,6 +50,8 @@ static func prepare(projectile: Dictionary, entry: Dictionary) -> void:
 		TurtleFlight.prepare(projectile,int(entry.get("wave_phase",0)))
 
 static func hit_point(projectile: Dictionary, carrier: Vector2) -> Vector2:
+	if TricoFlight.active(projectile):
+		return TricoFlight.hit_point(projectile,carrier)
 	if RaonEffect.active(projectile):
 		return RaonEffect.hit_point(projectile,carrier)
 	if MageFlight.active(projectile):
@@ -61,6 +64,7 @@ static func hit_point(projectile: Dictionary, carrier: Vector2) -> Vector2:
 	return carrier + orbit.rotated(float(projectile.phase_orbit) + float(projectile.age) * float(projectile.spin))
 
 static func finish_tick(projectile: Dictionary) -> void:
+	TricoFlight.finish_tick(projectile)
 	AsateEffect.finish_child_tick(projectile)
 	RaonEffect.finish_tick(projectile)
 	if MageFlight.active(projectile):

@@ -1,5 +1,10 @@
 # Registro de decisões
 
+## ADR-163 — Trajetória T2 e máquina SS do Trico (11/11/2026)
+
+Substituir somente órbitas e cadeia genéricas do Trico pelos consumidores nativos4a2ce0/4a4610/4ad230/4acd10, com estado por shell e passo comum da previsão. Contato455cc0 é independente da máscara climática; Raon/Turtle preservados. Dano/cratera/clima particular e muzzle continuam pontes declaradas. Ver TRICO_SPECIALS_ISSUE_30.md.
+
+
 ## ADR-162 — Efeitos Ice T2/SS (11/11/2026)
 
 Substituir chill/DEFENSE pelo contrato distinto comprovado em474650/4759b0/45db20. T2 terceiro campo+5 até50 antes do escudo; SS quatrocampos+5 até20, área130 estrita e filtros nativos. Campos não expiram; pose ice tem relógioEPA independente. Reusar native_resistance e preservar perfil/contato. Dano/crateraT2/SS fechados para a elegibilidade; demais bases continuam pontes declaradas. Ver ICE_EFFECTS_ISSUE_29.md.

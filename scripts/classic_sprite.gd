@@ -203,6 +203,8 @@ func projectile_sheet(projectile: Dictionary, weapon: int) -> String:
 	return "Bullet%d.png" % (weapon+1)
 
 func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: Vector2 = Vector2.ZERO) -> void:
+	if mobile_kind=="trico" and int(projectile.get("trico_ss_tick",-1))>=0:
+		return
 	if not projectile.get("launched", true) or weapon < 0 or weapon >= bullets.size():
 		return
 	if mobile_kind == "asate" and bool(projectile.get("child",false)):
@@ -240,6 +242,8 @@ func draw_projectile(view: Node2D, projectile: Dictionary, weapon: int, offset: 
 ## 458690 publishes Boomer's model angle; 4ebdd0 rotates it toward negative
 ## screen Y. Other mobiles retain their established heading bridge.
 static func projectile_angle(projectile: Dictionary) -> float:
+	if str(projectile.get("flight",""))=="trico_t2" and int(projectile.get("trico_component",2))<2:
+		return -deg_to_rad(float(projectile.get("trico_heading",0)))
 	if bool(projectile.get("boomer",false)) and projectile.has("boomer_angle"):
 		return -deg_to_rad(float(projectile.boomer_angle))
 	return Vector2(projectile.velocity).angle()
@@ -423,6 +427,8 @@ func effect_capacity(weapon: int) -> int:
 
 func effect_sheets(effect: Dictionary) -> Array:
 	var weapon := int(effect.weapon)
+	if mobile_kind=="trico" and str(effect.get("ss_state",""))=="trico_start":
+		return ["SSFlame.png"]
 	var name := "Flame%d.png" % (weapon+1)
 	# Turtle's unsplit SS calls the common flame123 and its extra ssflame12
 	# stage. A bullet12c fragment only calls flame123 (PE 0x432b5c).

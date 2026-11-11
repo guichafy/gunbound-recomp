@@ -146,7 +146,7 @@ const MESSAGES := {
 	"T1: 4 bombas · T2: 6 · SS: 8 bombas.": "S1: 4 bombs · S2: 6 · SS: 8 bombs.",
 	"S2 cava e emerge · SS atravessa o chão.": "S2 burrows and resurfaces · SS passes through terrain.",
 	"1000 de vida · SS abre no ar.": "1000 health · SS opens in mid-air.",
-	"1050 de vida · S2 em três órbitas · SS em leque.": "1050 health · S2 has three orbits · SS fires a spread.",
+	"1050 de vida · S2 em três componentes · SS com oito impactos.": "1050 health · S2 has three components · SS has eight impacts.",
 	"1000 de vida · mira larga 10–90°.": "1000 health · wide 10–90° aim range.",
 	"1050 de vida · S2 e SS plantam mina.": "1050 health · S2 and SS plant mines.",
 	"750 de vida · 300 de escudo · raio no impacto.": "750 health · 300 shield · lightning on impact.",

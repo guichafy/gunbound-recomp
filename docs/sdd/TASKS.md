@@ -1,5 +1,21 @@
 # Entregas e próximos trabalhos
 
+## Trico T2/SS — issue #30 / ADR-163 (11/11/2026)
+
+- [x] Basea9a89fd9/worktree própria, bootstrap e Ghidra12consultas antes do porte.
+- [x] OráculoPE/DAT, estado T2 por componente e SS sem blast inicial/ações2..16/fim21.
+- [x] Centro/publicado/contato/bordas; máscaras climáticas e Raon/Turtle preservados.
+- [x] TDD T2/SS/bordas, snapshot, relógios, itens e Gold;4043+394checks/0.
+- [x] Revisão independente, AL/EAX corrigido e raster/bordas reexecutados no PE.
+- [x] Harness364parses/116suítes/59385checks/160Python/29partidas, zero falhas.
+- [x] GPU421frames/FullHD, lados/vento/rampa/SS;30pausas fullRGBA idênticas.
+- [x] ZIPmacOS local universal assinado; smoke48tiros/UI/Ice/Trico aprovado.
+- [x] SPEC/ADR/contrato/MOBILES/HANDOFF atualizados; Ruff/diff aprovados.
+- [ ] Operação remota autorizada: commit/push/PR/quatro gates/rebase merge/CI/release;
+  resultados exatos devolvidos à orquestração, sem publicação manual adicional.
+- [ ] Aceite visual/escuta/input humanos; clienteWindows completo não executado.
+
+
 ## Efeitos Ice — issue #29 / ADR-162 (11/11/2026)
 
 - [x] Basea525728f, bootstrap/venv próprios, Ghidra e matriz antes do código.

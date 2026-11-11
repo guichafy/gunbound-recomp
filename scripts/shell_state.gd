@@ -10,6 +10,8 @@ static func create(position: Vector2, velocity: Vector2, spawn_at: float, rules:
 		"previous_draw_pos": position, "previous_hit_pos": position,
 		"boomer": bool(rules.get("boomer", false)), "boomer_ss": bool(rules.get("boomer_ss", false)), "boomer_diameter": int(rules.get("boomer_diameter", 46)),
 		"ss_state": "normal", "ss_state_tick": 0,
+		"trico_component": 0, "trico_phase": 0, "trico_step": 0, "trico_radius": 2, "trico_heading": 0,
+		"trico_ss_tick": -1, "trico_seed": 0, "trico_ss_origin": Vector2i.ZERO, "trico_width": 50,
 		"armor_phase": 0, "armor_fields": [],
 		"mage_phase": 0, "mage_component": component % 2, "laser_sides": [],
 		"pos": position, "hit_pos": position, "velocity": velocity, "age": 0.0, "trail": [position],

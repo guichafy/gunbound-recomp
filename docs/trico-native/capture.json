@@ -1,0 +1,302 @@
+{
+  "frames": 421,
+  "impact_counts": [
+    3,
+    3,
+    8,
+    3,
+    3,
+    8
+  ],
+  "journal": [
+    {
+      "frame": 77,
+      "panel": 3,
+      "position": [
+        855.0,
+        540.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 83,
+      "panel": 4,
+      "position": [
+        920.0,
+        573.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 86,
+      "panel": 0,
+      "position": [
+        482.0,
+        540.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 86,
+      "panel": 0,
+      "position": [
+        393.0,
+        540.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 89,
+      "panel": 0,
+      "position": [
+        443.0,
+        540.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 89,
+      "panel": 2,
+      "position": [
+        443.0,
+        540.0
+      ],
+      "type": "trico_ss_start"
+    },
+    {
+      "frame": 89,
+      "panel": 3,
+      "position": [
+        831.0,
+        546.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 89,
+      "panel": 5,
+      "position": [
+        835.0,
+        540.0
+      ],
+      "type": "trico_ss_start"
+    },
+    {
+      "frame": 92,
+      "panel": 1,
+      "position": [
+        583.0,
+        534.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 95,
+      "panel": 2,
+      "position": [
+        438.0,
+        526.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 95,
+      "panel": 3,
+      "position": [
+        793.0,
+        540.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 95,
+      "panel": 5,
+      "position": [
+        826.0,
+        544.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 98,
+      "panel": 1,
+      "position": [
+        540.0,
+        528.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 131,
+      "panel": 1,
+      "position": [
+        588.0,
+        558.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 131,
+      "panel": 2,
+      "position": [
+        434.0,
+        538.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 131,
+      "panel": 4,
+      "position": [
+        907.0,
+        594.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 131,
+      "panel": 4,
+      "position": [
+        881.0,
+        568.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 131,
+      "panel": 5,
+      "position": [
+        816.0,
+        552.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 137,
+      "panel": 2,
+      "position": [
+        466.0,
+        537.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 137,
+      "panel": 5,
+      "position": [
+        839.0,
+        554.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 143,
+      "panel": 2,
+      "position": [
+        439.0,
+        533.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 143,
+      "panel": 5,
+      "position": [
+        848.0,
+        530.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 149,
+      "panel": 2,
+      "position": [
+        424.0,
+        531.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 149,
+      "panel": 5,
+      "position": [
+        815.0,
+        548.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 155,
+      "panel": 2,
+      "position": [
+        465.0,
+        516.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 155,
+      "panel": 5,
+      "position": [
+        815.0,
+        535.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 161,
+      "panel": 2,
+      "position": [
+        437.0,
+        518.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 161,
+      "panel": 5,
+      "position": [
+        844.0,
+        544.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 167,
+      "panel": 2,
+      "position": [
+        460.0,
+        516.0
+      ],
+      "type": "explosion"
+    },
+    {
+      "frame": 167,
+      "panel": 5,
+      "position": [
+        857.0,
+        521.0
+      ],
+      "type": "explosion"
+    }
+  ],
+  "pause": [
+    100,
+    130
+  ],
+  "pause_rgba_identical": true,
+  "remaining": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "resolution": [
+    1920,
+    1080
+  ],
+  "pause_rgba_sha256": "f397b24481bafdf84b2dedcb1d2fb4bfc27ab040345bada250952ba7a35d6705",
+  "independent_png_check": "Pillow RGBA equality, frames100..129, full1920x1080"
+}

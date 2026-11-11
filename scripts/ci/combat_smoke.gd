@@ -20,7 +20,7 @@ static func run(check: Callable) -> int:
 				continue
 			# Independent consumer inventory: guard before entering release's unchecked
 			# byte-array reads. Missing ground must fail even without a SCRIPT ERROR.
-			if vehicle in [1, 2, 4, 6, 8, 13, 16]:
+			if vehicle in [1, 2, 4, 5, 6, 8, 13, 16]:
 				var ready: bool = model.terrain.native_cells.size() == 1800 * 1800
 				check.call(ready, label + "native terrain ready without Mage opponent")
 				if not ready:
@@ -39,10 +39,19 @@ static func run(check: Callable) -> int:
 			var contacts := 0
 			var ground_bounces := 0
 			var removed := 0
+			var trico_start := -1
+			var trico_actions: Array = []
+			var final_tick := -1
 			var first_contact := -1
 			for tick in 1000:
 				model.advance_projectiles(Combat.STEP)
+				final_tick = tick
 				for event in model.events:
+					if vehicle==5 and weapon==2:
+						if event.type=="trico_ss_start":
+							trico_start = tick
+						elif event.type=="explosion":
+							trico_actions.append(tick-trico_start)
 					if event.type in ["explosion", "mine_plant", "thor", "ricochet"]:
 						contacts += 1
 						if first_contact < 0:
@@ -61,7 +70,10 @@ static func run(check: Callable) -> int:
 				check.call(contacts > 0, label + "terrain/effect contact observed")
 			if vehicle==4 and weapon==1:
 				check.call(contacts==2 and armor_identity, label + "same Armor T2 shell survives first crater and ends after second")
-			if vehicle in [2, 6, 13]:
+			if vehicle==5 and weapon==2:
+				check.call(trico_start>=0 and trico_actions==[2,4,6,8,10,12,14,16], label + "native SS has no impact blast and eight timed actions")
+				check.call(final_tick-trico_start==21, label + "native SS waits through20 and terminates21")
+			if vehicle in [2, 5, 6, 13]:
 				check.call(first_contact > 5, label + "flies before contact instead of exploding at launch")
 				check.call(removed > 0, label + "contact carves real ground")
 			if vehicle == 13 and weapon > 0:
