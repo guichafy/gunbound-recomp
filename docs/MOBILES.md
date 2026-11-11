@@ -4,6 +4,12 @@ Os 16 mobiles do cliente estão no elenco jogável desde a 0.19 (ADR-083), com a
 a balística comum da 0.20. Esta tabela diz até onde cada um foi portado a partir do cliente.
 As classes de evidência estão explicadas em [PORTE.md](PORTE.md).
 
+ADR-159 / issue #26: calendário, pesos/ranges de Miramo, vento/colunas,
+Moon/Eclipse e ciclo global do Thor são compartilhados pelos 16 mobiles,
+independentemente do adversário. Isso não amplia o estado de fidelidade dos
+anexos ou do contato particular de cada tiro listado abaixo. Contrato e
+limites em [NATIVE_WEATHER_ISSUE_26](sdd/NATIVE_WEATHER_ISSUE_26.md).
+
 | ID | Mobile | Estado | Registro |
 |---|---|---|---|
 | 1 | Mage | Revisado pelo cliente: T1/T2/SS, força, climas secundários e partículas em voo. Aguarda aceite | [MAGE_CLIENT_REVIEW](sdd/MAGE_CLIENT_REVIEW.md), [MAGE_SECONDARY_WEATHER](sdd/MAGE_SECONDARY_WEATHER.md), [MAGE_FLIGHT_SPARKS](sdd/MAGE_FLIGHT_SPARKS.md) |

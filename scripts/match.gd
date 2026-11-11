@@ -171,27 +171,25 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	events.clear()
 	shot_gold = {}
 	last_shots = [{}, {}]
-	var mage_climate := actors.any(func(actor):return int(actor.vehicle)==1)
-	weather = MageWeather.new() if mage_climate else Weather.new()
+	# The native calendar is global; MageWeather retains its historical name.
+	weather = MageWeather.new()
 	var preset: Array = Maps.get_map(map_id).weather if not map_id.is_empty() else PROCEDURAL_WEATHER
 	if weather_mode == "all":
 		preset = ALL_WEATHER
-	if mage_climate and map_id==Maps.DEFAULT:
+	if map_id==Maps.DEFAULT:
 		var stage: Dictionary = NATIVE_STAGE.miramo_town_a
 		if weather_mode!="all":preset=stage.weights
 		for kind in stage.column_ranges:
 			weather.spawn_ranges[kind]=[]
 			for pair in stage.column_ranges[kind]:
 				weather.spawn_ranges[kind].append(Vector2i(pair[0],pair[1]))
-	var initial: Dictionary = weather.setup(preset, terrain.world_size(), rng)
-	if mage_climate:
-		# Seed and room period are explicit offline inputs, not network replay.
-		MageWeatherEffects.setup_thor(self,rng.seed)
-	else:
-		apply_weather(initial)
+	weather.setup(preset, terrain.world_size(), rng)
+	# Seed and room period are explicit offline inputs, not network replay.
+	MageWeatherEffects.setup_thor(self,rng.seed)
+	# Global Thor consumes 1px terrain even when neither mobile uses native
+	# projectile contact. Preparing the mask must not widen AdukaWeather.active.
+	terrain.enable_native()
 	for actor_index in actors.size():
-		if int(actors[actor_index].vehicle) in AdukaWeather.NATIVE_TERRAIN_VEHICLES:
-			terrain.enable_native()
 		if int(actors[actor_index].vehicle) == 10:
 			AsateEffect.ensure_satellite(self,actor_index)
 		elif int(actors[actor_index].vehicle) == KnightEffect.VEHICLE:

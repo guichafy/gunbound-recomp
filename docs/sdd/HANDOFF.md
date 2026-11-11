@@ -1,5 +1,31 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Clima global sem Mage — issue #26 / ADR-159 (11/11/2026)
+
+Todo treino agora usa o calendário Thor’s Hammer existente, sete categorias,
+pesos/ranges nativos de Miramo, vento/colunas, Moon/Eclipse e ciclo global do
+Thor. A máscara1px é preparada também para o consumidor global Thor, sem
+ampliar AdukaWeather.active nem a física particular dos mobiles. A sala
+mostra os mesmos pesos/nomes com seleção fixa ou Random. Nome MageWeather
+histórico preservado; adaptações particulares permanecem declaradas.
+
+Ghidra12.2/JDK26 executado em banco próprio, PE/DAT/XFS pinados; consulta final
+14VAs comrun/manifest/source_unchanged aprovados. Regressão roster RED320falhas
+→GREEN2976/0; sala RED8→GREEN15/0; legado separado preserva68checks.
+Harness final exit0/318,421s:350parses,111suítesGodot/51531checks,29partidas,
+156Python/zero falhas/skips, cobertura automação62%. Ruff/diff aprovados.
+GPU:480quadros1920×1080 de sete transições nos pares2×4/4×2,60pausasRGBA
+idênticas por verificador independente, mais60quadros focaisThor/feixe.
+Passo manual1/60s, sem alegação de desempenho em tempo real. Revisão
+independente sem achados acionáveis, incluindo sala e imagens focais.
+
+Plano/contrato/resultados/limites: `NATIVE_WEATHER_ISSUE_26.md`;
+provas e vídeos em `docs/native-weather`. Sem execução do clienteWindows
+original, escuta/input/aceite humano ou publicação manual de artefatos.
+A integração autorizada segue PR, quatro checks, Rebase and merge e release
+automática; resultados remotos ficam no PR e retorno à orquestração.
+
+
 ## Autorização de entrega da correção — 08/11/2026
 
 Pedido posterior autoriza commit/push da ADR-158 e geração de nova versão

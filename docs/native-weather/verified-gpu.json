@@ -1,0 +1,35 @@
+{
+  "raw_frames": 480,
+  "ordered_png_hash_digest": "c3e1cef125150641f446bb7d9b1fff4e85604895a7d91e5c23db039b682837a5",
+  "pause_independent_rgba": [
+    {
+      "reference_frame": 89,
+      "identical_frames": 30,
+      "rgba_sha256": "ae416c0499b20cd89584953010935d140a1214fe3e2f68d5a6d8548f5293559f"
+    },
+    {
+      "reference_frame": 329,
+      "identical_frames": 30,
+      "rgba_sha256": "a88ba461ab7f5150735099970ba05021ebedfc91152a2429315d1706af1b7418"
+    }
+  ],
+  "capture": "Compatibility/OpenGL Metal Apple M4Pro",
+  "timebase": "Manually stepped 1/60 s; not a real-time performance measurement",
+  "limit": "Controlled calendar and explicit Thor request; no Windows runtime or human visual acceptance",
+  "thor_focal": {
+    "frames": 60,
+    "ordered_png_digest": "eb5a4087517a6773598c0dc6a30f5ad0473200efc90ac8c09d9d86cdc0108061",
+    "pairs": [
+      [
+        2,
+        4
+      ],
+      [
+        4,
+        2
+      ]
+    ],
+    "camera": "manual after GrantTurn",
+    "explicit_request_frame": 10
+  }
+}

@@ -1,5 +1,16 @@
 # Design implementado
 
+## Clima global — ADR-159
+
+Match.start instancia MageWeather para todo roster (nome histórico preservado),
+configura ranges/pesos nativos de Miramo e inicializa Thor. A máscara1px é
+preparada para o consumidor global Thor, independentemente do inventário de
+contato em AdukaWeather.active. FlightSnapshot mantém o calendário/RNG/Thor
+privados pela cópia profunda existente. Interações específicas por projétil
+não são generalizadas. Substitui o gate por Mage da ADR-128; ver
+`NATIVE_WEATHER_ISSUE_26.md`.
+
+
 ## Idioma e Settings da sala — ADR-155
 
 `I18n` centraliza mensagens e TranslationServer, com locale salvo em Options.

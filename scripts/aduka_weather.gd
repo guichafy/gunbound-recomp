@@ -2,7 +2,8 @@ extends RefCounted
 ## Shared native weather sampling,455cc0/451030/4510f0. Mage4572b0/4a4950/
 ##483ff0, Lightning482550/4a8360 and Aduka share the velocity-preserving tornado.
 const Physics = preload("res://scripts/classic_ballistics.gd")
-## Shared inventory for common contact and Match.start's 1 px terrain warmup.
+## Inventory selecting common native projectile contact, not terrain readiness.
+## Global Thor independently requires the 1px mask for every roster.
 ## Grub T2/SS also consume this mask through their separate ricochet loop.
 const NATIVE_TERRAIN_VEHICLES := [1, 6, 8, 13, 16]
 

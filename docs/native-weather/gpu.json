@@ -1,0 +1,216 @@
+{
+	"controlled_calendar": [
+		0,
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		0
+	],
+	"fps": 60,
+	"frames": 480,
+	"pairs": [
+		[
+			2,
+			4
+		],
+		[
+			4,
+			2
+		]
+	],
+	"pause_identical_frames": 60,
+	"samples": [
+		{
+			"category": 0,
+			"columns": [
+				{
+					"extra": "",
+					"id": 0,
+					"lifetime": 10000,
+					"native": true,
+					"native_width": 97,
+					"scale": 0.7578125,
+					"type": "force",
+					"used": false,
+					"x": 1131
+				}
+			],
+			"path": "res://docs/native-weather/side0-force.png",
+			"side": 0,
+			"thor_y": 540.0,
+			"type": "force"
+		},
+		{
+			"category": 1,
+			"columns": [
+				{
+					"extra": "",
+					"id": 1,
+					"lifetime": 10000,
+					"native": true,
+					"native_width": 67,
+					"scale": 0.5234375,
+					"type": "tornado",
+					"used": false,
+					"x": 649
+				}
+			],
+			"path": "res://docs/native-weather/side0-tornado.png",
+			"side": 0,
+			"thor_y": 540.0,
+			"type": "tornado"
+		},
+		{
+			"category": 2,
+			"columns": [
+				{
+					"extra": "",
+					"id": 2,
+					"lifetime": 10000,
+					"native": true,
+					"native_width": 108,
+					"scale": 0.84375,
+					"type": "electricity",
+					"used": false,
+					"x": 917
+				}
+			],
+			"path": "res://docs/native-weather/side0-electricity.png",
+			"side": 0,
+			"thor_y": 540.0,
+			"type": "electricity"
+		},
+		{
+			"category": 3,
+			"columns": [],
+			"path": "res://docs/native-weather/side0-wind.png",
+			"side": 0,
+			"thor_y": 540.0,
+			"type": "wind"
+		},
+		{
+			"category": 4,
+			"columns": [],
+			"path": "res://docs/native-weather/side0-thor.png",
+			"side": 0,
+			"thor_y": 580.0,
+			"type": "thor"
+		},
+		{
+			"category": 5,
+			"columns": [],
+			"path": "res://docs/native-weather/side0-protection.png",
+			"side": 0,
+			"thor_y": 580.0,
+			"type": "protection"
+		},
+		{
+			"category": 6,
+			"columns": [],
+			"path": "res://docs/native-weather/side0-ignorance.png",
+			"side": 0,
+			"thor_y": 580.0,
+			"type": "ignorance"
+		},
+		{
+			"category": 0,
+			"columns": [
+				{
+					"extra": "",
+					"id": 0,
+					"lifetime": 10000,
+					"native": true,
+					"native_width": 97,
+					"scale": 0.7578125,
+					"type": "force",
+					"used": false,
+					"x": 1131
+				}
+			],
+			"path": "res://docs/native-weather/side1-force.png",
+			"side": 1,
+			"thor_y": 540.0,
+			"type": "force"
+		},
+		{
+			"category": 1,
+			"columns": [
+				{
+					"extra": "",
+					"id": 1,
+					"lifetime": 10000,
+					"native": true,
+					"native_width": 67,
+					"scale": 0.5234375,
+					"type": "tornado",
+					"used": false,
+					"x": 649
+				}
+			],
+			"path": "res://docs/native-weather/side1-tornado.png",
+			"side": 1,
+			"thor_y": 540.0,
+			"type": "tornado"
+		},
+		{
+			"category": 2,
+			"columns": [
+				{
+					"extra": "",
+					"id": 2,
+					"lifetime": 10000,
+					"native": true,
+					"native_width": 108,
+					"scale": 0.84375,
+					"type": "electricity",
+					"used": false,
+					"x": 917
+				}
+			],
+			"path": "res://docs/native-weather/side1-electricity.png",
+			"side": 1,
+			"thor_y": 540.0,
+			"type": "electricity"
+		},
+		{
+			"category": 3,
+			"columns": [],
+			"path": "res://docs/native-weather/side1-wind.png",
+			"side": 1,
+			"thor_y": 540.0,
+			"type": "wind"
+		},
+		{
+			"category": 4,
+			"columns": [],
+			"path": "res://docs/native-weather/side1-thor.png",
+			"side": 1,
+			"thor_y": 580.0,
+			"type": "thor"
+		},
+		{
+			"category": 5,
+			"columns": [],
+			"path": "res://docs/native-weather/side1-protection.png",
+			"side": 1,
+			"thor_y": 580.0,
+			"type": "protection"
+		},
+		{
+			"category": 6,
+			"columns": [],
+			"path": "res://docs/native-weather/side1-ignorance.png",
+			"side": 1,
+			"thor_y": 580.0,
+			"type": "ignorance"
+		}
+	],
+	"size": [
+		1920,
+		1080
+	],
+	"thor_camera": "manual at satellite for category4; explicit strike at frame10"
+}

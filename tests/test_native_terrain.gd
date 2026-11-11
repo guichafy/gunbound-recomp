@@ -53,7 +53,7 @@ func run() -> void:
 	for pair in [[13,2], [2,2], [2,6], [2,13]]:
 		start_pair(reused, pair[0], pair[1], "miramo_town_a")
 		if pair == [2,2]:
-			check(reused.terrain.native_cells.is_empty(), "non-native restart discards previous mask")
+			check(ready_mask(reused), "global Thor requires fresh mask even on non-native-contact restart")
 		else:
 			check(ready_mask(reused), "reused match prepares native mask for %s" % str(pair))
 			if not ready_mask(reused): continue

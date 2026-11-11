@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-11",
+  "base": "43ba5162089ce235f2ae3869357ce007ca42a9f0",
+  "command": "GUNBOUND_SOUND_XFS=$PWD/.tools/gunbound-client/sound.xfs .tools/issue26-venv/bin/python scripts/ci/check.py --workers 4",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "python": "3.12.12",
+  "seconds": 318.421,
+  "parses": 350,
+  "godot_suites": 111,
+  "godot_checks": 51531,
+  "matches": 29,
+  "python_tests": 156,
+  "python_skips": 0,
+  "automation_line_coverage_percent": 62,
+  "failures": [],
+  "report_sha256": "2d1db2f2edab3e847f0efe6300122e0c95f5f13e3904d27632722aaa16c6d627",
+  "logs": [
+    ".tools/issue26-full-final.log",
+    ".tools/check-logs/",
+    ".tools/issue26-room-green.log",
+    ".tools/issue26-gpu-final.log",
+    ".tools/issue26-gpu-thor.log"
+  ],
+  "supplemental": [
+    "Ruff CI select E9,F63,F7,F82: pass",
+    "Ruff new independent oracle: pass",
+    "git diff --check: pass",
+    "Independent PE oracle:6 seeds pass",
+    "Independent RGBA:60 pause frames identical"
+  ],
+  "limits": [
+    "No original Windows client execution or human listening/input/visual acceptance.",
+    "Local videos use manual model1/60s; not real-time performance evidence.",
+    "Package/native Windows validation delegated to required hosted CI before merge; no manual release."
+  ]
+}

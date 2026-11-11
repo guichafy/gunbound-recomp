@@ -1,0 +1,48 @@
+{
+	"controlled_calendar": [
+		0,
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		0
+	],
+	"fps": 60,
+	"frames": 60,
+	"pairs": [
+		[
+			2,
+			4
+		],
+		[
+			4,
+			2
+		]
+	],
+	"pause_identical_frames": 0,
+	"samples": [
+		{
+			"category": 4,
+			"columns": [],
+			"path": "res://docs/native-weather/side0-thor.png",
+			"side": 0,
+			"thor_y": 580.0,
+			"type": "thor"
+		},
+		{
+			"category": 4,
+			"columns": [],
+			"path": "res://docs/native-weather/side1-thor.png",
+			"side": 1,
+			"thor_y": 580.0,
+			"type": "thor"
+		}
+	],
+	"size": [
+		1920,
+		1080
+	],
+	"thor_camera": "manual at satellite for category4; explicit strike at frame10"
+}
