@@ -7,7 +7,7 @@ void __fastcall FUN_004ae1a0(int param_1)
   undefined4 uVar3;
   int iVar4;
   uint uVar5;
-  
+
   if ((*(int *)(DAT_005b3484 + 0x20b94) != 0) && (*(int *)(param_1 + 0x3fa0) == -1)) {
     cVar1 = FUN_004065a0();
     if (cVar1 != '\0') {
@@ -51,4 +51,3 @@ void __fastcall FUN_004ae1a0(int param_1)
   }
   return;
 }
-
