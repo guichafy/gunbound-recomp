@@ -643,6 +643,9 @@ func consume_events() -> void:
 				play_mobile_shot(event)
 			"projectile_launch":
 				play_mobile_shot(event)
+			"trico_ss_start":
+				rig.last_impact = event.position
+				effects.append({"pos":event.position,"radius":0.0,"weapon":2,"vehicle":5,"ss_state":"trico_start","age":0.0,"angle":0.0})
 			"explosion":
 				rig.last_impact = event.position
 				var vehicle_id := int(event.get("vehicle", Mobiles.DEFAULT_ID))

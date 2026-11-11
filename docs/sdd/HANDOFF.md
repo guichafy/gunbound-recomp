@@ -1,5 +1,33 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Trico T2/SS — issue #30 / ADR-163 (11/11/2026)
+
+T2 usa dois componentes especiais e idx2 comum: centro24.8 separado do
+publicado, LUT/fase/raio nativos, contato455cc0 e limites pelo publicado.
+SS contato sem blast→oito ações2..16 pares→remoção21, estadoRNG privado.
+Anexos uma vez/Gold efetivo; Raon/Turtle/AdukaWeather.active preservados.
+Dano/cratera/clima particular/itens e muzzle seguem pontes declaradas.
+
+Ghidra12.2/JDK26 em banco próprio,12consultas aprovadas, PE/DAT/XFS pinados.
+Oráculo14T2/12contatos/3SS/2inits, regeneração idêntica e PE divergente
+rejeitado. T2 RED2642/1757, SS RED146/78; finais4043+394/0. Revisão
+independente corrigiu P2 AL/EAX do oráculo; autoauditoria de bordas gerou
+RED4043/3→GREEN4043/0, confirmada pelo revisor. Sem achados pendentes.
+
+Harness final exit0/387,267s:364parses,116suítesGodot/59.385checks,
+160Python sem falhas/skips,29partidas; coberturaPython62%, Ruff/diff OK.
+Runner por partida/900s preservado. Smoke fonte249/0 e ZIPmacOS extraído
+universal/ad-hoc deep/strict,48tiros+UI+Ice+Trico aprovados. Local0.20.5,
+manifest basea9a89fd9 pré-commit; sem publicação manual ou bump de versão.
+
+GPU421quadrosFullHD/60Hz manual:dois sentidos, vento/rampa,3/3/8impactos
+por lado, zero shells; pausa100..129 fullRGBA idêntica (Pillow+revisor) e
+retomada. Sem clienteWindows inteiro/escuta/input/aceite humano. Contrato,
+plano/logs/limites:TRICO_SPECIALS_ISSUE_30.md; evidência docs/trico-native.
+Operação remota autorizada por PR/quatro gates/rebase merge; resultado
+exato de PR/SHA/mainCI/release devolvido à orquestração.
+
+
 ## Efeitos Ice — issue #29 / ADR-162 (11/11/2026)
 
 Ghidra12.2/JDK26 em banco próprio, PE/DAT/XFS pinados e contratos antes do

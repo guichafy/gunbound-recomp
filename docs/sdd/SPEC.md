@@ -1,5 +1,10 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Trico T2/SS — issue #30 / ADR-163
+
+REQ-04/05/07/08/19/44/45: T2 usa dois componentes especiais com centro24.8, LUT nativa e fase/raio próprios; idx2 comum. SS inicia no contato sem blast, emite oito ações nos ticks2..16 pares e termina no21. Contrato/plano/evidências e adaptações restantes em TRICO_SPECIALS_ISSUE_30.md.
+
+
 ## Ice — issue #29 / ADR-162
 
 REQ-04/05/07/08/09/19/20/38/44/45: T2 aplica vetor[0,0,5,0] aos quatro campos de vulnerabilidade após dano calculado positivo e antes do escudo/HP, teto50. SS aplica +5 nos quatro campos com teto20 em área própria estrita, sem depender de danoHP. Nenhuma expiração inventada ou alteração de atributo persistente. Contrato/plano/evidência em ICE_EFFECTS_ISSUE_29.md.
