@@ -11,8 +11,8 @@ extends RefCounted
 ## mine: Raon S2/SS leaves a mine. It walks up to 90 px on its owner's turn and
 ##   explodes inside 90 px (ProjectileRaonLauncherS2MineSquaredProximityRange).
 ## bolt: Lightning electricity added at the impact.
-## chill: Ice S2, −5 defense on each mobile it hits.
 
+const IceEffects = preload("res://scripts/ice_effects.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Combat = preload("res://scripts/combat.gd")
 const Damage = preload("res://scripts/damage.gd")
@@ -186,7 +186,7 @@ static func _detonate_mine(model, index: int) -> void:
 	var dead: Array = model.actors.map(func(actor): return int(actor.hp) <= 0)
 	var event_start: int = model.events.size()
 	var center: Vector2 = RaonEffect.blast_point(mine) if bool(mine.get("raon_mine",false)) else Vector2(mine.pos)
-	model.blast(center, float(mine.radius), float(mine.damage), 0.0, 0.0, int(mine.owner))
+	model.blast(center, float(mine.radius), float(mine.damage), 0.0, 0.0, int(mine.owner), IceEffects.attack_mask(int(mine.vehicle),int(mine.weapon)))
 	GoldTracker.collect_mine(model, event_start, int(mine.owner), dead)
 	var removed: int = model.terrain.carve(center,float(mine.radius))
 	model.events.append({"type": "explosion", "actor": int(mine.owner), "position": center, "radius": mine.radius, "weapon": mine.weapon, "vehicle": mine.vehicle, "raon_mine":true, "collided_actor": -1, "removed": removed, "angle": 0.0})
@@ -310,21 +310,6 @@ static func bolts(model, projectile: Dictionary, position: Vector2) -> void:
 		if Vector2(traced.at).distance_to(position) > 4.0:
 			model.blast(Vector2(traced.at), radius, damage, 0.0, 0.0, model.shot_actor)
 		_shock(model, traced.shocked, extra)
-
-static func chill(model, projectile: Dictionary, event_start: int) -> void:
-	var amount := int(projectile.get("chill", 0))
-	if amount == 0:
-		return
-	var seen := {}
-	for event in model.events.slice(event_start):
-		if event.type != "damage":
-			continue
-		var index := int(event.actor)
-		if seen.has(index):
-			continue
-		seen[index] = true
-		var attributes: Array = model.actors[index].attributes
-		attributes[Attributes.DEFENSE] = int(attributes[Attributes.DEFENSE]) + amount
 
 static func burst(model, projectile: Dictionary, position: Vector2, velocity: Vector2) -> void:
 	var flight := str(projectile.get("flight", ""))

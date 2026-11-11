@@ -152,7 +152,7 @@ const MESSAGES := {
 	"750 de vida · 300 de escudo · raio no impacto.": "750 health · 300 shield · lightning on impact.",
 	"700 de vida · 250 de escudo.": "700 health · 250 shield.",
 	"750 de vida · 200 de escudo.": "750 health · 200 shield.",
-	"1200 de vida · S2 reduz a defesa.": "1200 health · S2 lowers defense.",
+	"1200 de vida · S2 e SS aumentam a vulnerabilidade por tipo.": "1200 health · S2 and SS increase vulnerability by attack type.",
 	"960 de vida · o tempo gasto pesa 12.": "960 health · time spent adds 12 delay per second.",
 	"1000 de vida · S2 e SS ricocheteiam.": "1000 health · S2 and SS bounce.",
 	"1000 de vida · S2 em quatro · SS chama cinco dragões.": "1000 health · S2 fires four shots · SS calls five dragons.",

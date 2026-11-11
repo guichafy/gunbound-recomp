@@ -1,0 +1,212 @@
+[
+  {
+    "query": "01",
+    "run_ok": true,
+    "manifest_ok": true,
+    "source_unchanged": true,
+    "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "functions": [
+      {
+        "requested": "0x4731b0",
+        "entry": "004731b0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x474650",
+        "entry": "00474650",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x4759b0",
+        "entry": "004759b0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x425ac0",
+        "entry": "00425ac0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x48de60",
+        "entry": "0048de60",
+        "status": "decompiled"
+      }
+    ]
+  },
+  {
+    "query": "02",
+    "run_ok": true,
+    "manifest_ok": true,
+    "source_unchanged": true,
+    "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "functions": [
+      {
+        "requested": "0x45db20",
+        "entry": "0045db20",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x458b80",
+        "entry": "00458b80",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x40a380",
+        "entry": "0040a380",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x4759b0",
+        "entry": "004759b0",
+        "status": "decompiled"
+      }
+    ]
+  },
+  {
+    "query": "03",
+    "run_ok": false,
+    "manifest_ok": false,
+    "source_unchanged": true,
+    "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "functions": [
+      {
+        "requested": "0x40d9ee",
+        "entry": "0040d8e0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x432320",
+        "entry": "00432320",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x541023",
+        "entry": null,
+        "status": "function_not_found"
+      },
+      {
+        "requested": "0x45cdb1",
+        "entry": "0045cb50",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x4373c0",
+        "entry": "004373c0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x48de60",
+        "entry": "0048de60",
+        "status": "decompiled"
+      }
+    ]
+  },
+  {
+    "query": "04",
+    "run_ok": true,
+    "manifest_ok": true,
+    "source_unchanged": true,
+    "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "functions": [
+      {
+        "requested": "0x40d8e0",
+        "entry": "0040d8e0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x45a560",
+        "entry": "0045a560",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x450eb0",
+        "entry": "00450eb0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x41da80",
+        "entry": "0041da80",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x474650",
+        "entry": "00474650",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x4759b0",
+        "entry": "004759b0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x45db20",
+        "entry": "0045db20",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x458b80",
+        "entry": "00458b80",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x425ac0",
+        "entry": "00425ac0",
+        "status": "decompiled"
+      }
+    ]
+  },
+  {
+    "query": "05",
+    "run_ok": true,
+    "manifest_ok": true,
+    "source_unchanged": true,
+    "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "functions": [
+      {
+        "requested": "0x475e40",
+        "entry": "00475e40",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x461c60",
+        "entry": "00461c60",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x40d8e0",
+        "entry": "0040d8e0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x45db20",
+        "entry": "0045db20",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x474650",
+        "entry": "00474650",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x4759b0",
+        "entry": "004759b0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x425ac0",
+        "entry": "00425ac0",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x458b80",
+        "entry": "00458b80",
+        "status": "decompiled"
+      },
+      {
+        "requested": "0x41da80",
+        "entry": "0041da80",
+        "status": "decompiled"
+      }
+    ]
+  }
+]

@@ -3,6 +3,7 @@ extends RefCounted
 
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Combat = preload("res://scripts/combat.gd")
+const IceEffects = preload("res://scripts/ice_effects.gd")
 
 static func deal_damage(actors: Array, events: Array, index: int, damage: int, kind: String = "") -> int:
 	if damage <= 0:
@@ -25,7 +26,7 @@ static func deal_damage(actors: Array, events: Array, index: int, damage: int, k
 
 ## Attack and defense scale only the blast. EMP adds the current shield after that,
 ## so the shield portion is absorbed and is not multiplied again.
-static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0, shooter: int = -1) -> int:
+static func blast(actors: Array, events: Array, position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0, shooter: int = -1, attack_flags: int = 0) -> int:
 	var dealt := 0
 	for index in range(actors.size()):
 		if int(actors[index].hp) <= 0:
@@ -40,5 +41,6 @@ static func blast(actors: Array, events: Array, position: Vector2, radius: float
 			elif attack != 0.0:
 				hp_damage = int(hp_damage * (1.0 + attack / 100.0))
 		var shield_bonus := int(actors[index].shield) if emp > 0.0 and gap < emp else 0
+		hp_damage = IceEffects.modify_damage(actors[index],hp_damage,attack_flags)
 		dealt += deal_damage(actors, events, index, hp_damage + shield_bonus)
 	return dealt

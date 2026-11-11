@@ -1,5 +1,10 @@
 # Registro de decisões
 
+## ADR-162 — Efeitos Ice T2/SS (11/11/2026)
+
+Substituir chill/DEFENSE pelo contrato distinto comprovado em474650/4759b0/45db20. T2 terceiro campo+5 até50 antes do escudo; SS quatrocampos+5 até20, área130 estrita e filtros nativos. Campos não expiram; pose ice tem relógioEPA independente. Reusar native_resistance e preservar perfil/contato. Dano/crateraT2/SS fechados para a elegibilidade; demais bases continuam pontes declaradas. Ver ICE_EFFECTS_ISSUE_29.md.
+
+
 **ADR-153 — Música por tela pelo cliente (issue #7, 07/11/2026):** lobby e
 loja pedem `channel.mp3`, a sala e o loading `ready.mp3`, a batalha
 `stage%d.mp3` com o mapa sem lado (`client_stage % 11`; Miramo → `stage1`,

@@ -1,0 +1,17 @@
+{
+  "base": "a525728fa1bd4ed1a13c80f173ff3508effdf479",
+  "seconds": 377.427,
+  "godot_parses": 360,
+  "godot_suites": 114,
+  "godot_checks": 54937,
+  "python_tests": 160,
+  "python_skips": 0,
+  "matches": 29,
+  "failures": 0,
+  "python_coverage_percent": 62,
+  "gpu_frames": 451,
+  "gpu_pause_identical": 30,
+  "package_zip_sha256": "17b3d852633df1db589768be7b9d3fd0f645f09824722cf21303e869268634f6",
+  "package_version": "0.20.5",
+  "package_manifest_head_is_base": true
+}

@@ -1,6 +1,7 @@
 extends RefCounted
 ## Mage native damage/EMP. Shared algorithms are the same PE45db20/455cc0.
 ## See MAGE_CLIENT_REVIEW.md for source ABI, units and offline bridges.
+const IceEffects = preload("res://scripts/ice_effects.gd")
 const Shared = preload("res://scripts/aduka_combat.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
@@ -32,6 +33,7 @@ static func parameters(projectile: Dictionary, actor: Dictionary) -> Dictionary:
 	var source: Dictionary = catalog.weapons[int(projectile.weapon)]
 	return {"power":int(projectile.damage),"dimension":int(projectile.mage_dimension),
 		"aspect":int(source.aspect),"flags":int(source.flags),
+		"resistance_flags":IceEffects.attack_mask(1,int(projectile.weapon)),
 		"weather_bonus":int(projectile.get("native_force",0)),
 		"percent":100+int(Items.attack(str(actor.get("turn_item",""))))}
 

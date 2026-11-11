@@ -1,0 +1,2505 @@
+{
+  "binary_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "damage": [
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 310,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 690,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 0,
+      "damage": 310,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 9690
+    },
+    {
+      "before": [
+        -20,
+        -3,
+        -8,
+        -1
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 285,
+      "after": [
+        -20,
+        -3,
+        -3,
+        -1
+      ],
+      "hp_after": 715,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        -20,
+        -3,
+        -8,
+        -1
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 0,
+      "damage": 285,
+      "after": [
+        -20,
+        -3,
+        -3,
+        -1
+      ],
+      "hp_after": 1000,
+      "shield_after": 9715
+    },
+    {
+      "before": [
+        15,
+        19,
+        20,
+        49
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 372,
+      "after": [
+        15,
+        19,
+        25,
+        49
+      ],
+      "hp_after": 628,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        15,
+        19,
+        20,
+        49
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 0,
+      "damage": 372,
+      "after": [
+        15,
+        19,
+        25,
+        49
+      ],
+      "hp_after": 1000,
+      "shield_after": 9628
+    },
+    {
+      "before": [
+        20,
+        45,
+        46,
+        50
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 452,
+      "after": [
+        20,
+        45,
+        50,
+        50
+      ],
+      "hp_after": 548,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        20,
+        45,
+        46,
+        50
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 0,
+      "damage": 452,
+      "after": [
+        20,
+        45,
+        50,
+        50
+      ],
+      "hp_after": 1000,
+      "shield_after": 9548
+    },
+    {
+      "before": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 465,
+      "after": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "hp_after": 535,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 0,
+      "damage": 465,
+      "after": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "hp_after": 1000,
+      "shield_after": 9535
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 100,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": false,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": true,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 14,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 310,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": -309,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 0,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 310,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": -310,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 10,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 310,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 690,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 0,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 310,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 690,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 1,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 387,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 613,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 2,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 362,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 638,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 3,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 452,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 548,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 4,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 337,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 663,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 5,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 421,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 579,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 6,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 394,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 606,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 7,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 492,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 508,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 8,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 319,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 681,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 9,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 398,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 602,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 10,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 373,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 627,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 11,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 466,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 534,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 12,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 347,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 653,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 13,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 433,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 567,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 14,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 405,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 595,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "flags": 15,
+      "vector": null,
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 0,
+      "damage": 506,
+      "after": [
+        3,
+        9,
+        17,
+        25
+      ],
+      "hp_after": 494,
+      "shield_after": 0
+    }
+  ],
+  "ss": [
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 129,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 130,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 131,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 0,
+      "alive": false,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": true,
+      "source_type": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 14,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 10,
+      "after": [
+        5,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        -3,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 129,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        -3,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 130,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        -8,
+        15,
+        19,
+        20
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 131,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        -8,
+        15,
+        19,
+        20
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 0,
+      "alive": false,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        -8,
+        15,
+        19,
+        20
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": true,
+      "source_type": 0,
+      "after": [
+        -8,
+        15,
+        19,
+        20
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 14,
+      "after": [
+        -8,
+        15,
+        19,
+        20
+      ]
+    },
+    {
+      "before": [
+        -8,
+        15,
+        19,
+        20
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 10,
+      "after": [
+        -3,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        20,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 129,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        20,
+        20,
+        20,
+        20
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 130,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        20,
+        21,
+        49,
+        50
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 131,
+      "alive": true,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        20,
+        21,
+        49,
+        50
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 0,
+      "alive": false,
+      "immune": false,
+      "source_type": 0,
+      "after": [
+        20,
+        21,
+        49,
+        50
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": true,
+      "source_type": 0,
+      "after": [
+        20,
+        21,
+        49,
+        50
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 14,
+      "after": [
+        20,
+        21,
+        49,
+        50
+      ]
+    },
+    {
+      "before": [
+        20,
+        21,
+        49,
+        50
+      ],
+      "distance": 0,
+      "alive": true,
+      "immune": false,
+      "source_type": 10,
+      "after": [
+        20,
+        20,
+        20,
+        20
+      ]
+    }
+  ],
+  "initializers": [
+    {
+      "source_type": 10,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 310,
+      "dimension": 56,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 10,
+      "weapon": 1,
+      "attack": -7,
+      "dig": -5,
+      "power": 289,
+      "dimension": 54,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 10,
+      "weapon": 1,
+      "attack": 17,
+      "dig": 11,
+      "power": 361,
+      "dimension": 61,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 10,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 350,
+      "dimension": 60,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 10,
+      "weapon": 2,
+      "attack": -7,
+      "dig": -5,
+      "power": 329,
+      "dimension": 58,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 10,
+      "weapon": 2,
+      "attack": 17,
+      "dig": 11,
+      "power": 401,
+      "dimension": 65,
+      "aspect": 124,
+      "flags": 2
+    }
+  ],
+  "masks": [
+    {
+      "source_type": 0,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 210,
+      "dimension": 68,
+      "aspect": 144,
+      "flags": 8
+    },
+    {
+      "source_type": 0,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 236,
+      "dimension": 56,
+      "aspect": 134,
+      "flags": 8
+    },
+    {
+      "source_type": 0,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 280,
+      "dimension": 70,
+      "aspect": 134,
+      "flags": 8
+    },
+    {
+      "source_type": 1,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 200,
+      "dimension": 66,
+      "aspect": 143,
+      "flags": 4
+    },
+    {
+      "source_type": 1,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 186,
+      "dimension": 54,
+      "aspect": 134,
+      "flags": 4
+    },
+    {
+      "source_type": 1,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 380,
+      "dimension": 60,
+      "aspect": 130,
+      "flags": 4
+    },
+    {
+      "source_type": 2,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 200,
+      "dimension": 60,
+      "aspect": 144,
+      "flags": 2
+    },
+    {
+      "source_type": 2,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 350,
+      "dimension": 70,
+      "aspect": 134,
+      "flags": 2
+    },
+    {
+      "source_type": 2,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 360,
+      "dimension": 70,
+      "aspect": 100,
+      "flags": 2
+    },
+    {
+      "source_type": 3,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 200,
+      "dimension": 70,
+      "aspect": 144,
+      "flags": 8
+    },
+    {
+      "source_type": 3,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 150,
+      "dimension": 48,
+      "aspect": 134,
+      "flags": 8
+    },
+    {
+      "source_type": 3,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 256,
+      "dimension": 120,
+      "aspect": 120,
+      "flags": 8
+    },
+    {
+      "source_type": 4,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 86,
+      "dimension": 52,
+      "aspect": 134,
+      "flags": 8
+    },
+    {
+      "source_type": 4,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 70,
+      "dimension": 40,
+      "aspect": 124,
+      "flags": 8
+    },
+    {
+      "source_type": 4,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 92,
+      "dimension": 48,
+      "aspect": 126,
+      "flags": 8
+    },
+    {
+      "source_type": 5,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 254,
+      "dimension": 48,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 5,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 118,
+      "dimension": 42,
+      "aspect": 114,
+      "flags": 2
+    },
+    {
+      "source_type": 5,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 350,
+      "dimension": 46,
+      "aspect": 120,
+      "flags": 2
+    },
+    {
+      "source_type": 6,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 90,
+      "dimension": 54,
+      "aspect": 130,
+      "flags": 4
+    },
+    {
+      "source_type": 6,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 200,
+      "dimension": 42,
+      "aspect": 122,
+      "flags": 4
+    },
+    {
+      "source_type": 6,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 400,
+      "dimension": 42,
+      "aspect": 130,
+      "flags": 4
+    },
+    {
+      "source_type": 7,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 230,
+      "dimension": 54,
+      "aspect": 134,
+      "flags": 1
+    },
+    {
+      "source_type": 7,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 240,
+      "dimension": 40,
+      "aspect": 143,
+      "flags": 1
+    },
+    {
+      "source_type": 7,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 230,
+      "dimension": 40,
+      "aspect": 143,
+      "flags": 1
+    },
+    {
+      "source_type": 8,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 180,
+      "dimension": 64,
+      "aspect": 144,
+      "flags": 1
+    },
+    {
+      "source_type": 8,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 240,
+      "dimension": 54,
+      "aspect": 124,
+      "flags": 1
+    },
+    {
+      "source_type": 8,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 0,
+      "dimension": 30,
+      "aspect": 124,
+      "flags": 1
+    },
+    {
+      "source_type": 9,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 190,
+      "dimension": 54,
+      "aspect": 144,
+      "flags": 4
+    },
+    {
+      "source_type": 9,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 160,
+      "dimension": 46,
+      "aspect": 134,
+      "flags": 4
+    },
+    {
+      "source_type": 9,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 140,
+      "dimension": 44,
+      "aspect": 134,
+      "flags": 4
+    },
+    {
+      "source_type": 10,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 220,
+      "dimension": 66,
+      "aspect": 144,
+      "flags": 2
+    },
+    {
+      "source_type": 10,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 310,
+      "dimension": 56,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 10,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 350,
+      "dimension": 60,
+      "aspect": 124,
+      "flags": 2
+    },
+    {
+      "source_type": 11,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 230,
+      "dimension": 56,
+      "aspect": 134,
+      "flags": 2
+    },
+    {
+      "source_type": 11,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 224,
+      "dimension": 46,
+      "aspect": 114,
+      "flags": 2
+    },
+    {
+      "source_type": 11,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 300,
+      "dimension": 46,
+      "aspect": 120,
+      "flags": 2
+    },
+    {
+      "source_type": 12,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 190,
+      "dimension": 50,
+      "aspect": 144,
+      "flags": 1
+    },
+    {
+      "source_type": 12,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 94,
+      "dimension": 38,
+      "aspect": 120,
+      "flags": 1
+    },
+    {
+      "source_type": 12,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 26,
+      "dimension": 36,
+      "aspect": 100,
+      "flags": 1
+    },
+    {
+      "source_type": 13,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 290,
+      "dimension": 58,
+      "aspect": 136,
+      "flags": 8
+    },
+    {
+      "source_type": 13,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 200,
+      "dimension": 54,
+      "aspect": 130,
+      "flags": 8
+    },
+    {
+      "source_type": 13,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 160,
+      "dimension": 54,
+      "aspect": 130,
+      "flags": 8
+    },
+    {
+      "source_type": 14,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 136,
+      "dimension": 48,
+      "aspect": 110,
+      "flags": 4
+    },
+    {
+      "source_type": 14,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 128,
+      "dimension": 40,
+      "aspect": 120,
+      "flags": 4
+    },
+    {
+      "source_type": 14,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 126,
+      "dimension": 40,
+      "aspect": 120,
+      "flags": 4
+    },
+    {
+      "source_type": 15,
+      "weapon": 0,
+      "attack": 0,
+      "dig": 0,
+      "power": 152,
+      "dimension": 64,
+      "aspect": 120,
+      "flags": 1
+    },
+    {
+      "source_type": 15,
+      "weapon": 1,
+      "attack": 0,
+      "dig": 0,
+      "power": 0,
+      "dimension": 0,
+      "aspect": 0,
+      "flags": 0
+    },
+    {
+      "source_type": 15,
+      "weapon": 2,
+      "attack": 0,
+      "dig": 0,
+      "power": 0,
+      "dimension": 0,
+      "aspect": 0,
+      "flags": 0
+    }
+  ],
+  "body": [
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 297,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 703,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 10,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 234,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 766,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 45,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 15,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 985,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 100,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 297,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 9703
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 10,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 234,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 9766
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 45,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 15,
+      "after": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 9985
+    },
+    {
+      "before": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 100,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 0,
+      "after": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hp_after": 1000,
+      "shield_after": 10000
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 430,
+      "after": [
+        5,
+        9,
+        50,
+        17
+      ],
+      "hp_after": 570,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 10,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 339,
+      "after": [
+        5,
+        9,
+        50,
+        17
+      ],
+      "hp_after": 661,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 45,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 21,
+      "after": [
+        5,
+        9,
+        50,
+        17
+      ],
+      "hp_after": 979,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 100,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 0,
+      "defense_flags": 8,
+      "damage": 0,
+      "after": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "hp_after": 1000,
+      "shield_after": 0
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 0,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 430,
+      "after": [
+        5,
+        9,
+        50,
+        17
+      ],
+      "hp_after": 1000,
+      "shield_after": 9570
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 10,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 339,
+      "after": [
+        5,
+        9,
+        50,
+        17
+      ],
+      "hp_after": 1000,
+      "shield_after": 9661
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 45,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 21,
+      "after": [
+        5,
+        9,
+        50,
+        17
+      ],
+      "hp_after": 1000,
+      "shield_after": 9979
+    },
+    {
+      "before": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "flags": 2,
+      "vector": [
+        0,
+        0,
+        5,
+        0
+      ],
+      "dx": 100,
+      "power": 310,
+      "alive": true,
+      "immune": false,
+      "source_type": 4,
+      "hp": 1000,
+      "shield": 10000,
+      "defense_flags": 8,
+      "damage": 0,
+      "after": [
+        5,
+        9,
+        45,
+        17
+      ],
+      "hp_after": 1000,
+      "shield_after": 10000
+    }
+  ]
+}

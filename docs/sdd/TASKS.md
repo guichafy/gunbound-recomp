@@ -1,5 +1,20 @@
 # Entregas e próximos trabalhos
 
+## Efeitos Ice — issue #29 / ADR-162 (11/11/2026)
+
+- [x] Basea525728f, bootstrap/venv próprios, Ghidra e matriz antes do código.
+- [x] Contratos separados T2/SS, limites/filtros/duração/escudo/HP; perfil intacto.
+- [x] FixturesPE e regressão12/10→300/0; estado profundo na previsão/CPU.
+- [x] PoseEPA original, captura451quadros/68impactos/30pausasRGBA idênticas.
+- [x] Revisão independente aprovada após fechar P2 do gerador de evidência.
+- [x] Harness360parses/114suítes/54937checks/160Python/29partidas, zero falhas.
+- [x] Ruff/diff; pacoteQA universal assinado e smoke48tiros+UI+Ice no ZIP extraído.
+- [ ] Operação remota autorizada: commit/push/PR/quatro gates/rebase merge/CI/release;
+  resultado exato devolvido à orquestração, sem publicação manual adicional.
+- [ ] Aceite visual/escuta/input humanos; clienteWindows inteiro não executado.
+
+Registro: ICE_EFFECTS_ISSUE_29.md. Nenhuma pendência técnica de implementação.
+
 ## Combate Bigfoot — issue #28 / ADR-161 (11/11/2026)
 
 - [x] Base035d8e17, bootstrap pinado e Ghidra próprio; contrato antes do código.

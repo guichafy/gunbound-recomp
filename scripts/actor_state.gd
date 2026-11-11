@@ -16,4 +16,5 @@ static func create(vehicle: int, position: Vector2, facing: int, max_health: int
 		# Item bar (EquippedButtonBar) and the item acting this turn.
 		"items": bar, "turn_item": "",
 		"attributes": attributes, "gold_state": {"gold": 0, "enemy_damage": 0},
+		"native_resistance": [0,0,0,0],
 	}

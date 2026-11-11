@@ -1,5 +1,10 @@
 # Design implementado
 
+## Ice — issue #29 / ADR-162
+
+IceEffects concentra parâmetros e estado por ator; Match resolve T2/SS no passo comum. native_resistance é copiado profundamente pelos snapshots e consumido por tipo de ataque. ice_effect publica somente a poseEPA, separada do estado duradouro. Preservar contatoAdukaWeather e assinaturas públicas; pontes em ICE_EFFECTS_ISSUE_29.md.
+
+
 ## Combate Bigfoot — issue #28 / ADR-161
 
 BigfootAttacks guarda geometria em theta/força nativos e o catálogoEPA

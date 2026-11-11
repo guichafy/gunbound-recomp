@@ -5,6 +5,7 @@ const Physics = preload("res://scripts/classic_ballistics.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Items = preload("res://scripts/items.gd")
 const Damage = preload("res://scripts/damage.gd")
+const IceEffects = preload("res://scripts/ice_effects.gd")
 const NativeWeather = preload("res://scripts/aduka_weather.gd")
 static var catalog: Dictionary = {}
 
@@ -65,11 +66,7 @@ static func amount(actor: Dictionary, impact: Vector2i, shot: Dictionary) -> int
 	if (defense&2)!=0:
 		vulnerability += (4 if (attack&4)!=0 else 0)+(-4 if (attack&1)!=0 else 0)
 	damage = Physics.quot(damage*vulnerability,100)
-	var resistance: Array = actor.get("native_resistance",[0,0,0,0])
-	for index in 4:
-		if (attack&(8>>index))!=0:
-			damage = Physics.quot(damage*(100+int(resistance[index])),100)
-	return maxi(0,damage)
+	return IceEffects.modify_damage(actor,damage,int(shot.get("resistance_flags",attack)))
 
 static func apply(actors: Array, events: Array, impact: Vector2i, shot: Dictionary, _thor: bool = false) -> int:
 	var total := 0
@@ -94,6 +91,7 @@ static func prepare(projectile: Dictionary, actor: Dictionary) -> void:
 
 static func t1_parameters(projectile: Dictionary, actor: Dictionary) -> Dictionary:
 	return {"power":int(projectile.damage),"dimension":int(projectile.get("aduka_dimension",64)),
+		"resistance_flags":IceEffects.attack_mask(16,0),
 		"aspect":int(catalog.t1.aspect),"flags":int(catalog.t1.flags),
 		"weather_bonus":int(projectile.get("native_force",0)),
 		"percent":100+int(Items.attack(str(actor.get("turn_item",""))))}
