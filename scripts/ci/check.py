@@ -213,14 +213,17 @@ def main():
         if not args.suites:
             python_profile = profile('python')
             tasks['python'] = lambda: python_lane(logs, python_profile)
-        shards = min(4, args.workers)
         for name in suites:
             if name in MATCH_CASES:
+                # Native combat can make some seeds substantially longer than
+                # others. Keep the same bounded pool and per-process timeout,
+                # but give every complete match its own budget and inventory.
+                shards = len(MATCH_CASES[name])
                 for shard in range(shards):
                     label = f'{name}-{shard}'
                     shard_profile = profile(label)
-                    tasks[label] = lambda n=name, s=shard, p=shard_profile: match_or_suite(godot, logs, p, n, s, shards)
-        print(f'CI workers: {args.workers}; match groups per suite: {shards}', flush=True)
+                    tasks[label] = lambda n=name, s=shard, p=shard_profile, c=shards: match_or_suite(godot, logs, p, n, s, c)
+        print(f'CI workers: {args.workers}; one complete match per process', flush=True)
         results.update(run_parallel(tasks, args.workers))
         for name in suites:
             if name in ISOLATED_SUITES:

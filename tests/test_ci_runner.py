@@ -106,6 +106,12 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(len(result.skipped), 1)
 
     def test_full_runner_keeps_29_matches_coverage_and_failing_scene(self):
+        self.verify_full_runner('ALL="test_scene test_matches test_classic_matches"\n')
+
+    def test_full_runner_preserves_matches_with_reversed_families(self):
+        self.verify_full_runner('ALL="test_scene test_classic_matches test_matches"\n')
+
+    def verify_full_runner(self, inventory):
         # Only replace the external engine: execute real processes and coverage.
         # A missing lane, wrong shard argument, swallowed failure or stale
         # coverage must change the final status/report observed by a caller.
@@ -113,7 +119,7 @@ class RunnerTests(unittest.TestCase):
             root = Path(temp)
             (root/'scripts/ci').mkdir(parents=True)
             (root/'tests').mkdir()
-            (root/'scripts/check.sh').write_text('ALL="test_scene test_matches test_classic_matches"\n')
+            (root/'scripts/check.sh').write_text(inventory)
             for name in ['test_scene', 'test_matches', 'test_classic_matches']:
                 (root/f'tests/{name}.gd').touch()
             fixture = root/'engine.py'
@@ -127,6 +133,9 @@ if '--script' in args and '--check-only' not in args:
         raise SystemExit(3)
     index, count = map(int, args[-1].split('=')[1].split('/'))
     cases = list(range(81, 94)) if name == 'test_matches' else list(range(1, 17))
+    if count != len(cases) or index >= count:
+        print('FAIL: wrong family denominator')
+        raise SystemExit(1)
     for case in cases[index::count]:
         print(('MATCH seed=' if name == 'test_matches' else 'CLASSIC MATCH id=') + str(case))
     print(('COMPLETE' if name == 'test_matches' else 'CLASSIC') + ' MATCHES: ' + str(len(cases[index::count])) + ' | FAILURES: 0')
@@ -151,6 +160,10 @@ print('OK')
             self.assertEqual(exit_status.exception.code, 1)
             report = json.loads((root/'.tools/check-logs/report.json').read_text())
             self.assertEqual(report['matches'], 29)
+            match_results = [value for name, value in report['results'].items()
+                             if name.startswith(('test_matches', 'test_classic_matches'))]
+            self.assertEqual(len(match_results), 29, 'each match needs its own timeout budget')
+            self.assertTrue(all(len(value['cases']) == 1 for value in match_results))
             self.assertFalse(report['results']['test_scene']['ok'])
             self.assertTrue(report['results']['python']['ok'])
             self.assertTrue(report['results']['automation_coverage']['ok'])

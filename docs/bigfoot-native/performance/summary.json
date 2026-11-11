@@ -1,0 +1,42 @@
+{
+  "baseline": {
+    "shots": 26,
+    "wall_s": 25.312026,
+    "predict_calls": 5333,
+    "candidates_per_turn": 205.1153846153846,
+    "prediction_ms": 4.713073504594037,
+    "cpu_mean_s": 0.9671478076923077,
+    "cpu_p95_s": 2.232672,
+    "cpu_max_s": 3.480718,
+    "duplicate_explosion": false,
+    "finished": true,
+    "ticks": 172161,
+    "native_carve_s": 3.259675
+  },
+  "native": {
+    "shots": 82,
+    "wall_s": 116.759646,
+    "predict_calls": 16905,
+    "candidates_per_turn": 206.15853658536585,
+    "prediction_ms": 6.855019047619047,
+    "cpu_mean_s": 1.4136370365853659,
+    "cpu_p95_s": 3.712951,
+    "cpu_max_s": 4.453653,
+    "duplicate_explosion": false,
+    "finished": true,
+    "ticks": 627470,
+    "native_carve_s": 21.960479
+  },
+  "ui": {
+    "cpu_vehicle": 2,
+    "fired": true,
+    "frames": 3468,
+    "pause_frames": 12,
+    "pause_input_us": 6670,
+    "wall_us": 5471194,
+    "process_us_p95_ms": 0.1,
+    "process_us_max_ms": 0.302,
+    "render_frame_us_p95_ms": 1.911,
+    "render_frame_us_max_ms": 8.872
+  }
+}

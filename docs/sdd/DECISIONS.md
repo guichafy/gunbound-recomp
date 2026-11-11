@@ -2175,3 +2175,11 @@ contratos de BIGFOOT_COMBAT_ISSUE_28.md. Dividir bônus por4/6/8 antes de
 somar; contato455cc0 e resolução nativa compartilhada, sem mudança de EPA
 ou aparência. Itens/hotspot permanecem pontes declaradas. Substitui somente
 as regras correspondentes de BIGFOOT_ATTACKS_0_5.md, preservando histórico.
+
+
+Emenda ADR-161/REQ-52: após timeoutWindows do grupo81/85/89/93, cada uma
+das29partidas passa a ter processo/log/guard900s próprio no pool limitado,
+sem mudar seeds/assertivas/regras. Perfil comparativo demonstra3,15×mais
+turnos e candidatos/turno estáveis; custo adicional nativo está explícito,
+sem contatos/explosões duplicados. Gate de cena agora mede ambos os mobiles.
+Comparação/GPU/responsividade e limites em BIGFOOT_COMBAT_ISSUE_28.md.

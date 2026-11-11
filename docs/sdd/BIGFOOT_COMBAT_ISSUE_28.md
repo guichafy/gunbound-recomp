@@ -104,8 +104,8 @@ Unicorn isolado em .tools/oracle-py; JIT exige execução fora do sandbox
   clienteWindows inteiro ou publicação manual de pacote. Os gates hospedados
   macOS/Windows validarão os pacotes finais; versão permanece automática.
 
-Harness integral final:exit0/366,1s,355parses,113suítesGodot/54.628checks,
-156testesPython/zero skips/falhas e29partidas completas. CoberturaPython62%.
+Harness integral final:exit0/361,706s,357parses,113suítesGodot/54.633checks,
+157testesPython/zero skips/falhas e29partidas completas. CoberturaPython62%.
 Relatório durável em docs/bigfoot-native/harness.json; logs individuais
 em.tools/check-logs. O relatório versionado preserva essa rodada; repetição dirigida posterior
 atualizou report.json/import e os logs de três suites, sem invalidar a integral.
@@ -124,3 +124,79 @@ mantém a coberturaThor. Nenhuma regra/asset mudou; revisor aprovou o ajuste.
 Repetição dirigida após o ajuste:mage_scene15/0,BigfootNative2905/0,
 NativeWeatherRoster2976/0 (5896checks,exit0). Logs em
 .tools/check-logs e /private/tmp/issue28-ci-fixture-fix.log.
+
+
+### Emenda REQ-52: orçamento de partidas na CIWindows
+
+Head e277adaf,run42984907453:macOS completo/export/smoke aprovados;
+Windows teve somente test_matches-1-of-4 timeout900, após seeds81 e85
+concluídos (grupo estridado81/85/89/93). Python823,797s passou, comparável
+à base035d8e17/Python821,347s; grupo da base296,225s. O combate nativo
+altera concentração/dano e duração das partidas, sem alterar suas seeds.
+
+Plano antes do código: manter física/assertivas e timeout900; agendar cada
+seed/mobile em processo próprio por --match-shard=i/N, usando o seletor
+existente, com o mesmo pool limitado a4workers. O guard passa a ser por
+partida, sem um seed consumir orçamento dos seguintes. Preservar inventário
+exato13+16, logs por caso, falhas e coberturaPython. Regressão deve executar
+processos reais com engine-fixture e exigir29resultados unitários antes do
+GREEN; depois runner integral real e nova revisão/CI de ambos os pacotes.
+
+
+### Comparação de custo e estabilidade antes de aceitar a emenda
+
+Atendendo ao acompanhamento da orquestração, o particionamento não foi
+usado como prova de performance. Sondas reproduzíveis em tests/tools/bigfoot_profile
+compararam a base035d8e17 e o porte no mesmoM4Pro, em sequência e sem outro
+harness/encoding; somente wrappers de medição nas cópias isoladas dos scripts.
+Resultados completos em docs/bigfoot-native/performance.
+
+| Seed81 / mesmo cenário e RNG | Base | Nativo |
+|---|---:|---:|
+| tiros/turnos até finished |26|82|
+| tempo instrumentado |25,312s|116,760s|
+| candidatos de busca |5333|16905|
+| candidatos por turno |205,12|206,16|
+| tempo médio por previsão |4,713ms|6,855ms|
+| busca por turno média / p95 / máxima |0,967/2,233/3,481s|1,414/3,713/4,454s|
+| ticks físicos totais (previsão+real) |172161|627470|
+| rasterizações nativas / tempo |7293/3,260s|61494/21,960s|
+| shell primário explodindo mais de uma vez |nenhum|nenhum|
+
+O fator4,61 de custo vem principalmente de3,15×mais turnos, com o novo
+resultado de dispersão/contato/dano. Candidatos por turno mudam apenas0,5%
+(arma, limites e refino determinam o número), não há duplicação da grade. Cada previsão executa
+em média37,12ticks contra32,28; o consumidor1px/dano/cratera nativo também
+custa mais por tick. O algoritmo carve_native não foi alterado; a média por chamada foi0,357ms
+contra0,447ms, com dimensões/cargas diferentes (não é um microbenchmark
+pareado da função). Há mais chamadas porque Bigfoot passou da cratera adaptada2px para
+o consumidor1px, além dos anexos. Não se trocou a física na previsão para
+reduzir esse custo. As duas partidas terminam, sem loop de contato ou shell
+reexplodindo. No nativo270lançamentos−38misses=232explosões primárias;
+43explosões elétricas anexas explicam as275explosões publicadas.
+
+Há aumento real de trabalho e duração das partidas; não alegar paridade de
+performance com a adaptação anterior. O novo orçamento é por partida,
+com900s intactos, inventário exato e29resultados independentes. A rodada do
+runner durante a revisão encontrou captura tardia do denominador da última
+família; corrigida com c=shards. Regressão cobre ambasordens reais por
+engine-fixture:RED2→GREEN12/0. O run intermediário com13partições inválidas
+é explicitamente falho e não valida a emenda final.
+
+Responsividade: o gate test_performance agora mede cenaCPU Mage e Bigfoot,
+mesmos limites40ms/frame e12s para buscar/disparar. Rodada local24/0;
+Mage0,874ms/frame/873ms até disparo; Bigfoot0,940ms/frame/1872ms. SondaGPU
+real1920×1080,Bigfoot+Thor/eletricidade,seed23:3468quadros/5,471s até disparo,
+_process p95=0,100ms/máximo0,302ms; render p95=1,911ms/máximo8,872ms;
+abrir pausa6,670ms,12quadros com modelo idêntico e retomada aprovada.
+Sem vsync; não é metaFPS nem input humano. Essa medição demonstra que o
+trabalho permanece no worker e não bloqueia os controles no host observado;
+aceite humano e outras máquinas continuam sem medição manual.
+
+Validação final da emenda (fonte corrigida): runner exit0/361,706s,
+357parses,113suítesGodot/54.633checks,157Python sem skips e29partidas
+unitárias (13seeds+16mobiles), todas aprovadas. CoberturaPython62%.
+Gate de cena24/0: Mage0,543ms/frame/887ms; Bigfoot2,393ms/frame/1891ms.
+Ruff com a seleção do workflow E9,F63,F7,F82 e git diff --check aprovados.
+Um Ruff sem a seleção do projeto encontrou465avisos históricos de estilo;
+essa invocação ampliada não é o gate do projeto nem foi usada como GREEN.
