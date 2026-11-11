@@ -63,9 +63,9 @@ func run() -> void:
 		m.start(2,1,42,"","original",null,[],[[0,0,0,0,0,0,0,50]])
 		m.actors[1].pos = m.muzzle(0,30)
 		m.fire(30,65,0)
-		var contact: Vector2 = load("res://scripts/combat.gd").full_hit(m.actors[1], 25.0)
+		var contact: Vector2 = Vector2(load("res://scripts/aduka_combat.gd").center(m.actors[1]))
 		m.explode(contact,1,m.projectiles[0])
-		check(m.shot_gold.enemy_damage == 90, "Live damage informs Gold")
+		check(m.shot_gold.enemy_damage == 79, "Live damage informs Gold")
 		m.explode(contact,1,m.projectiles[1])
 		m.finish_gold_shot()
 		var before: int = m.actors[0].gold_state.gold

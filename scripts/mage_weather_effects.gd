@@ -21,6 +21,8 @@ const THOR_Y_STEP := 40
 const THOR_Y_CAP := 1000
 
 static func shell_divisor(projectile: Dictionary) -> int:
+	if int(projectile.get("vehicle",0)) == 2:
+		return [4,6,8][int(projectile.weapon)]
 	if int(projectile.get("weapon",0)) != 1:
 		return 1
 	return 4 if int(projectile.get("vehicle",0)) == 6 else 2
@@ -37,7 +39,7 @@ static func parameters(projectile: Dictionary, actor: Dictionary) -> Dictionary:
 		"percent":100+int(Items.attack(str(actor.get("turn_item",""))))}
 
 static func impact(model, projectile: Dictionary, position: Vector2) -> void:
-	if int(projectile.get("vehicle",0)) not in [1,6] or bool(projectile.get("beacon",false)):
+	if int(projectile.get("vehicle",0)) not in [1,2,6] or bool(projectile.get("beacon",false)):
 		return
 	if bool(projectile.get("electric",false)):
 		for actor in model.actors:
@@ -65,7 +67,8 @@ static func impact(model, projectile: Dictionary, position: Vector2) -> void:
 	# Native callers inspect current climate4 at impact. No launch-time
 	# projectile.thor flag can replace this gate. Electricity may carve first.
 	if not model.weather.queue.is_empty() and str(model.weather.queue[0].type)=="thor":
-		Thor.strike(model,projectile,position,"boomer_weather" if int(projectile.get("vehicle",0)) == 6 else "mage_weather",shell_divisor(projectile))
+		var source: String = {1:"mage_weather",2:"bigfoot_weather",6:"boomer_weather"}[int(projectile.vehicle)]
+		Thor.strike(model,projectile,position,source,shell_divisor(projectile))
 
 ## 4bb730→4bc117→439d90: input is the native LCG seed at setup entry.
 ## The normal1×1 setup has no previous5b3480 advance. MSVCRT rand used

@@ -1,5 +1,34 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Combate Bigfoot — issue #28 / ADR-161 (11/11/2026)
+
+Dispersão nativa depois de theta/P inteiros, bônusAttack/Dig divididos por
+4/6/8, contato455cc0 e consumidores45db20/4e4450 integrados no passo comum.
+T1/T2/SS mantêm EPA4/6/8 e arte/smoothing4×. Force/Tornado/Electricity e
+Thor usam os ramos compartilhados, anexos antes do blast e divisor por
+salvo. Itens e geometria hotspot/muzzle são pontes explícitas do treino.
+
+Ghidra12.2/JDK26 próprio,3consultas com manifests/source_unchanged aprovados;
+PE/DAT/XFS pinados. OráculoUnicorn gera72emissões/18inicializações/180danos/
+18rasterizações; velocidades usam LUT do próprioPE. RED998falhas→GREEN2905/0.
+Revisão independente corrigiu P2 de theta em inclinação fracionária (2RED);
+revisão final sem achados. Fixtures antigas atualizadas só por contrato.
+
+Harness integral final exit0/366,1s:355parses,113suítesGodot/54.628checks,
+156Python/zero skips/falhas,29partidas; Ruff/diff aprovados. Smoke embarcado
+234/0 cobre Bigfoot sem Mage. GPU903quadros1920×1080 nos dois sentidos,
+vento/normal/tornado/Force/Electricity/Thor:108impactos,zero shells restantes,
+90quadros de pausaRGBA idênticos verificados independentemente. Passo manual
+1/60s, não benchmark. Capturas solicitadas Bigfoot/ID2 também exit0.
+
+Contrato/plano/logs/limites: BIGFOOT_COMBAT_ISSUE_28.md;
+PNGs/MP4/manifests em docs/bigfoot-native e docs/mobile-shots.
+Sem clienteWindows inteiro, escuta/input/aceite visual humano ou pacote
+publicado manualmente. PR/rebase merge/CI/release automática autorizados;
+resultados remotos serão devolvidos à orquestração após os quatro gates.
+
+
+
 ## Armor T2 — issue #27 / ADR-160 (11/11/2026)
 
 Um shell mantém duas fases; primeira cratera/dano precede redução assinada

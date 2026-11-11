@@ -31,6 +31,7 @@ const AdukaCombat = preload("res://scripts/aduka_combat.gd")
 const LightningCombat = preload("res://scripts/lightning_combat.gd")
 const MageCombat = preload("res://scripts/mage_combat.gd")
 const GrubCombat = preload("res://scripts/grub_combat.gd")
+const BigfootCombat = preload("res://scripts/bigfoot_combat.gd")
 const GrubFlight = preload("res://scripts/grub_flight.gd")
 const AdukaWeather = preload("res://scripts/aduka_weather.gd")
 # Procedural arena has no map preset: only the Wind weather re-rolls each round.
@@ -358,7 +359,13 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		# native_angle is a client-cell offset (theta); on the left-facing side the
 		# HUD angle runs the other way (Grub MainAction: S1/SS theta + 2).
 		var turn := float(entry.angle) + float(entry.get("native_angle", 0)) * float(actors[index].facing)
-		var velocity := shot_velocity(index, angle, power, weapon, turn, entry.power, native) if spread_after else shot_velocity(index, angle + turn, power, weapon, 0.0, 0.0, native)
+		var launch_velocity := shot_velocity_fp(index, angle, power, weapon, turn, entry.power, native) if spread_after else shot_velocity_fp(index, angle + turn, power, weapon, 0.0, 0.0, native)
+		if vehicle_id == 2:
+			var limits := aim_limits(index,weapon)
+			var selected := clampf(angle,limits.x,limits.y)
+			var theta := int((selected if int(actors[index].facing)>0 else 180.0-selected)-rad_to_deg(body_rotation(index)))
+			launch_velocity = BigfootCombat.launch_velocity_fp(theta,Physics.native_power(power,Mobiles.force_max(vehicle_id)),entry)
+		var velocity := Vector2(launch_velocity) / (256.0 * Combat.STEP)
 		var shell := ShellState.create(initial, velocity, entry.spawn, rules, weapon, component)
 		shell.owner = index
 		# Pending emissions follow displacement of their owner until launch.
@@ -368,7 +375,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		shell.sound = bool(entry.get("sound", true))
 		shell.pose_start_at = float(entry.get("pose_start_at", 0.0))
 		# Preserve exact launch integers instead of re-quantizing their float projection.
-		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, turn, entry.power, native) if spread_after else shot_velocity_fp(index, angle + turn, power, weapon, 0.0, 0.0, native)
+		shell.launch_velocity_fp = launch_velocity
 		ClassicFlight.prepare(shell, entry)
 		ArmorFlight.prepare(shell)
 		BoomerFlight.prepare(shell,actors[index])
@@ -376,6 +383,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		MageCombat.prepare(shell,actors[index])
 		LightningCombat.prepare(shell,actors[index])
 		GrubCombat.prepare(shell,actors[index])
+		BigfootCombat.prepare(shell,actors[index])
 		result.append(shell)
 	return result
 
@@ -817,7 +825,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	# Tilt stays as stamped at the start of the step. A crater must not
 	# rotate the target before this explosion's damage is measured.
 	var event_start := events.size()
-	if MageCombat.active(projectile) or BoomerFlight.active(projectile):
+	if MageCombat.active(projectile) or BoomerFlight.active(projectile) or BigfootCombat.active(projectile):
 		#4572b0/4a4950/483ff0: attached electricity and Thor precede
 		# even the SS EMP; shock pending is flushed at the shared tick end.
 		MageWeatherEffects.impact(self,projectile,position)
@@ -833,6 +841,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var native_mage := MageCombat.active(projectile)
 	var native_boomer := BoomerFlight.active(projectile)
 	var native_grub := GrubCombat.active(projectile)
+	var native_bigfoot := BigfootCombat.active(projectile)
 	var native_data: Dictionary = AdukaCombat.t1_parameters(projectile,actors[shot_actor]) if native_aduka else {}
 	if native_mage:
 		native_data = MageCombat.parameters(projectile,actors[shot_actor])
@@ -840,14 +849,18 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		native_data = BoomerFlight.parameters(projectile,actors[shot_actor])
 	elif native_grub:
 		native_data = GrubCombat.parameters(projectile,actors[shot_actor])
+	elif native_bigfoot:
+		native_data = BigfootCombat.parameters(projectile,actors[shot_actor])
 	var crater_percent := int(projectile.get("mage_crater_percent",100)) if native_mage else int(projectile.get("aduka_crater_percent",100))
 	if native_boomer:
 		crater_percent = int(projectile.get("boomer_crater_percent",100))
+	elif native_bigfoot:
+		crater_percent = int(projectile.get("bigfoot_crater_percent",100))
 	var crater_dimension := Physics.quot(int(native_data.get("dimension",0))*crater_percent,100)
 	var removed: int
 	if native_grub:
 		removed = terrain.carve_native(GrubCombat.crater_spans(projectile,Vector2i(position)))
-	elif native_aduka or native_mage or native_boomer:
+	elif native_aduka or native_mage or native_boomer or native_bigfoot:
 		removed = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect)))
 	else:
 		removed = terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
@@ -861,7 +874,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		GrubCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
 	elif native_mage:
 		MageCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
-	elif native_aduka or native_boomer:
+	elif native_aduka or native_boomer or native_bigfoot:
 		AdukaCombat.apply(actors,events,Vector2i(position),native_data)
 	else:
 		blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor)
@@ -877,7 +890,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 					battle_effects.remove_at(index)
 			battle_effects.append(JDEffect.create(projectile,position,owner))
 	explode_actions(position, projectile, event_start)
-	if native_boomer:
+	if native_boomer or native_bigfoot:
 		detonate_boomer_mines(Vector2i(position), projectile, native_data)
 
 ## 450eb0 -> 499650: only the blast, not the flight scan, tests Raon mines.
@@ -902,9 +915,9 @@ func detonate_boomer_mines(impact: Vector2i, projectile: Dictionary, data: Dicti
 ## OnExplodeAction order: Thor attached at launch, then Electricity; then the
 ## Gold metadata of everything this impact dealt.
 func explode_actions(position: Vector2, projectile: Dictionary, event_start: int) -> void:
-	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and bool(projectile.get("thor", false)):
+	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and not BigfootCombat.active(projectile) and bool(projectile.get("thor", false)):
 		thor_strike(position)
-	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and bool(projectile.get("electric", false)):
+	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and not BigfootCombat.active(projectile) and bool(projectile.get("electric", false)):
 		lightning_strike(position)
 	collect_gold_damage(event_start, position, projectile)
 

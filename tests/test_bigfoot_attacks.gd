@@ -47,7 +47,7 @@ func _initialize() -> void:
 		for projectile in model.projectiles:
 			same = same and Vector2(projectile.pos).is_equal_approx(origin)
 		check(same, "All bombs use the same original muzzle " + str(weapon))
-	# T1 angular pattern mirrors; T2 changes speed, never aim.
+	# Issue28/489580: T1 changes native power then theta; theta offsets mirror.
 	for facing in [1, -1]:
 		model = fixture()
 		model.actors[0].facing = facing
@@ -55,11 +55,11 @@ func _initialize() -> void:
 		for index in range(4):
 			var speed: Vector2 = model.projectiles[index].velocity
 			var degrees := rad_to_deg(atan2(-speed.y, speed.x * facing))
-			check(absf(degrees - [43.0, 37.0, 40.0, 40.0][index]) < 0.15, "T1 spread keeps angle within native Sine 1/512 quantization at facing " + str(facing))
+			check(absf(degrees - [40.0, 40.0, 40.0+facing, 40.0-facing][index]) < 0.15, "T1 spread keeps angle within native Sine 1/512 quantization at facing " + str(facing))
 	model = fixture()
 	model.fire(30, 50, 1)
-	check(model.projectiles[0].velocity.length() < model.projectiles[1].velocity.length() and model.projectiles[2].velocity.length() > model.projectiles[1].velocity.length(), "T2 force variants remain distinct below native power cap")
-	check(Vector2(model.projectiles[0].velocity).normalized().dot(Vector2(model.projectiles[2].velocity).normalized()) > 0.99999, "T2 force variants share aim direction within native component truncation")
+	check(model.projectiles[0].velocity.length() > model.projectiles[1].velocity.length() and absf(model.projectiles[2].velocity.length()-model.projectiles[1].velocity.length()) < 3.0, "T2 first trio uses P+15 then two P+10 components")
+	check(Vector2(model.projectiles[0].velocity).normalized().dot(Vector2(model.projectiles[2].velocity).normalized()) < 0.999, "T2 native theta spread separates the trio")
 	model.advance_projectiles(0.1)
 	var pending: Dictionary = model.projectiles[0]
 	check(pending.age == 0 and pending.pos == pending.hit_pos and not pending.launched, "Pending T2 bombs cannot age, move or collide")
@@ -72,8 +72,9 @@ func _initialize() -> void:
 		model = fixture()
 		model.shot_weapon = weapon
 		model.shot_actor = 0
-		model.explode(Combat.full_hit(model.actors[1], 25.0))
-		check(model.actors[1].shield == [130, 150, 130][weapon] and model.actors[1].hp == 730, "Original per-bomb damage consumes Mage shield " + str(weapon))
+		var shell: Dictionary = model.projectile_parameters(0,30,50,weapon)[0]
+		model.explode(Vector2(load("res://scripts/aduka_combat.gd").center(model.actors[1])),1,shell)
+		check(model.actors[1].shield == [141, 156, 136][weapon] and model.actors[1].hp == 730, "Native per-bomb damage with Mage vulnerability92 consumes shield " + str(weapon))
 	model = fixture()
 	model.fire(85, 70, 0)
 	check(model.last_shots[0].angle == 40, "Bigfoot T1 uses original max aim")

@@ -1,5 +1,15 @@
 # Design implementado
 
+## Combate Bigfoot — issue #28 / ADR-161
+
+BigfootAttacks guarda geometria em theta/força nativos e o catálogoEPA
+continua dono dos ticks. BigfootCombat inicializa parâmetros privados por
+shell no emissor comum; Match delega dano/cratera aos consumidores nativos
+compartilhados. Snapshot copia profundamente esses Dictionaries. Contato
+ID2 explícito não depende do preparo da máscara nem do adversário.
+Contrato: BIGFOOT_COMBAT_ISSUE_28.md.
+
+
 ## Clima global — ADR-159
 
 Match.start instancia MageWeather para todo roster (nome histórico preservado),

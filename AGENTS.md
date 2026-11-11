@@ -92,8 +92,10 @@ a possibilidade de exportar para macOS, Windows, Linux, Android e iOS.
 O usuário quer aprender com o resultado e validar um protótipo funcional.
 
 Mage tem escudo/regen, mira própria, duplo laser helicoidal e EMP, revisados
-pelo cliente (ADR-126/128/129). Bigfoot tem T1 com 4 bombas, T2 duas rajadas de 3
-e SS com 8, ainda como adaptação herdada (`docs/sdd/BIGFOOT_ATTACKS_0_5.md`).
+pelo cliente (ADR-126/128/129). Bigfoot tem T1 com 4 bombas, T2 duas rajadas de 3 e SS com 8; dispersão,
+bônus por componente, contato, dano/cratera e anexos seguem o cliente na
+ADR-161/issue#28 (`docs/sdd/BIGFOOT_COMBAT_ISSUE_28.md`). Itens e hotspot
+continuam pontes declaradas; EPA, arte e smoothing4× preservados.
 Itens entraram em 0.13 (ver seção abaixo); o roster completo entrou em 0.19 e os
 portes especiais restantes estão nos planos por família. Estado por mobile em
 `docs/MOBILES.md`. Ao portar outro mobile, siga a skill gunbound-client-port.

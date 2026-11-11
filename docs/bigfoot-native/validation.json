@@ -1,0 +1,32 @@
+{
+  "normal": {
+    "frames": 301,
+    "size": [
+      1920,
+      1080
+    ],
+    "pause_identical_rgba": 30,
+    "pause_rgba_sha256": "026a5e27021f9e2fa948b3c3fe0bec037758a6aa91fc43beff4cf1f8b91223a4",
+    "video_sha256": "83e1f5a02b00ef6f4c1e5dbb09a4346679e0b398ec98391a368a355efe8e81b9"
+  },
+  "tornado": {
+    "frames": 301,
+    "size": [
+      1920,
+      1080
+    ],
+    "pause_identical_rgba": 30,
+    "pause_rgba_sha256": "5d3dfa3b481a98d99dd5fffb4ec8a3bdf4f686d518edc8a4da41c1a13b78f280",
+    "video_sha256": "2f80d541f91a1265fcc1341bf3ff1fbf062037a73c6e370a02ea0759597657f1"
+  },
+  "attachments": {
+    "frames": 301,
+    "size": [
+      1920,
+      1080
+    ],
+    "pause_identical_rgba": 30,
+    "pause_rgba_sha256": "514e9b78c305a7390ab3ff2fbaa14b6e00acd9f9087375aff0416c4214f61ce8",
+    "video_sha256": "43de6cf016512caf2edf78a5b02e4273ba0b1f9a13127f209589f0db9cddd25b"
+  }
+}

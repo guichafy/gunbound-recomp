@@ -239,5 +239,5 @@ func run() -> void:
 	test_snapshot_and_clock(0.05)
 	test_snapshot_and_clock(0.025)
 	test_terminal_paths()
-	check(NativeWeather.NATIVE_TERRAIN_VEHICLES==[1,6,8,13,16],"Armor does not enable other native weather/contact families")
+	check(NativeWeather.NATIVE_TERRAIN_VEHICLES==[1,2,6,8,13,16],"Armor stays outside native inventory; Bigfoot explicitly added by issue28")
 	finish("ARMOR T2 CHECKS")

@@ -2166,3 +2166,12 @@ aceleração no fim desse tick. Segunda colisão usa a cratera anterior e remove
 o objeto. Estado em ArmorFlight/ShellState, execução/previsão comuns; não
 ampliar AdukaWeather.active. Preservar T1/SS e pontes de dano/itens/cratera
 fora do subconjunto comprovado. Contrato e plano: ARMOR_T2_ISSUE_27.md.
+
+
+## ADR-161 — Combate Bigfoot pelo cliente (11/11/2026)
+
+Aceita para issue#28: substituir dispersão e dano/cratera herdados pelos
+contratos de BIGFOOT_COMBAT_ISSUE_28.md. Dividir bônus por4/6/8 antes de
+somar; contato455cc0 e resolução nativa compartilhada, sem mudança de EPA
+ou aparência. Itens/hotspot permanecem pontes declaradas. Substitui somente
+as regras correspondentes de BIGFOOT_ATTACKS_0_5.md, preservando histórico.
