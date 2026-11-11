@@ -2199,3 +2199,12 @@ WeakRefs dos playbacks antes de mute/stop e aguardam a liberação real pelo
 mixer, limite5s já adotado em test_client_audio. Acrescentar assertiva de
 liberação, sem ocultar logs de vazamento nem alterar áudio do jogo ou o
 orçamento900s por partida. Evidência e limite de reprodução no contratoTrico.
+
+Emenda ADR-163/REQ-52 (11/11/2026): PR37 integrado por rebase em74401ca1;
+mainWindows excedeu guardPython900s nas duas tentativas do run43025235781,
+sem falhas nas59387assertivasGodot/29partidas. PR idêntico completouPython
+em837s. Coletar branches/linhas somente em scripts/ci, escopo já usado pelo
+piso40%, deixando todos os testes de assets ativos sem tracing por pixel.
+XML/HTML passam a cobrir explicitamente só automação; não anunciam cobertura
+dos importadores. Prova local comparável:160testes,116,383s contra cerca240s,
+mesma automação62%. Não ampliar timeout nem reduzir inventário/assertivas.

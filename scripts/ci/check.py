@@ -125,7 +125,9 @@ def python_lane(logs, profile):
     Path(env['COVERAGE_FILE']).unlink(missing_ok=True)
     timings = logs / 'python-times.json'
     timings.unlink(missing_ok=True)
-    results = {'python': run_logged([sys.executable, '-m', 'coverage', 'run', '--branch', '--source=scripts',
+    # The gate measures CI automation. Keep every asset test, but do not trace
+    # their per-pixel/decompression loops into an unmeasured coverage scope.
+    results = {'python': run_logged([sys.executable, '-m', 'coverage', 'run', '--branch', '--source=scripts/ci',
                                     str(Path(__file__).resolve()), '--python-tests', '--python-timings', str(timings)],
                                    logs / 'python.log', 900, env=env)}
     print(('OK' if results['python']['ok'] else 'FAIL'), 'python', results['python']['seconds'], 's', flush=True)

@@ -152,3 +152,25 @@ Revisão independente sem achados. Dirigidas finais de seis suítes:
 4815checks/0 (mapa49, timing50, áudio224, música55, Trico4043/394).
 O harness59385 acima é anterior a essa emenda somente de testes; os dois
 checks adicionais e os resultados remotos serão registrados no PR/retorno.
+
+## Emenda de cobertura da main — REQ-52 (11/11/2026)
+
+PR37 rebase integrado em74401ca1 após quatro gates verdes. As duas plataformas
+aprovaram59387checks/160Python/29partidas e ZIP extraído no PR. MainmacOS
+também passou, mas Windows atingiu900,023s e900,099s na etapaPython das duas
+tentativas do run43025235781. Nenhuma falhaGodot; publish foi corretamente
+bloqueado. O PR havia completado a mesma etapa em837,369s.
+
+Coletor anterior instrumentava scripts inteiros, inclusive loops de pixels e
+descompressão, embora o gate medisse somente scripts/ci. A coleta passa a
+esse escopo já exigido, mantendo branchcoverage/piso40%, todo inventárioPython,
+guard900s e29processos de partidas/pool4/900s. XML/HTML agora representam só
+automação, sem cobertura de linhas dos importadores; testes exatos dos assets
+continuam ativos. Experimento local com160testes:116,383s contra cerca240s,
+automação62% idêntica. Regressão integra módulo externo realmente executado,
+mas ausente do XML:RED2falhas, GREEN12testes. Execução final do python_lane:
+160testes/0falhas/0skips,130,904s; XML/HTML e piso40% aprovados, automação62%
+(742statements/296branches,257miss/39partial), idêntica à métrica anterior.
+Ruff com seleção do workflow e diff--check aprovados; revisão independente
+sem achados. Não se reexecutou Godot local nesta emenda só de instrumentação;
+59387checks finais anteriores continuam a evidência local. CI hospedada pendente.
