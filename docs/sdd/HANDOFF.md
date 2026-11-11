@@ -28,6 +28,13 @@ Operação remota autorizada por PR/quatro gates/rebase merge; resultado
 exato de PR/SHA/mainCI/release devolvido à orquestração.
 
 
+EmendaQA PR37: as assertivas remotas passaram, mas macOS reportou recursos
+pendentes no encerramento de mapa/timing. Fixtures agora aguardamWeakRefs
+de playback até liberação, limite5s já usado por test_client_audio; duas
+assertivas adicionais, sem mudar áudio/jogo/guard900s. Dirigidas4815/0 e
+revisão aprovadas; ausência de reprodução local e confirmação remota pendente
+explicitadas no contrato. Resultados da nova cabeça no PR/retorno.
+
 ## Efeitos Ice — issue #29 / ADR-162 (11/11/2026)
 
 Ghidra12.2/JDK26 em banco próprio, PE/DAT/XFS pinados e contratos antes do

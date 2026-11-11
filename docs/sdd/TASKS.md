@@ -11,6 +11,7 @@
 - [x] GPU421frames/FullHD, lados/vento/rampa/SS;30pausas fullRGBA idênticas.
 - [x] ZIPmacOS local universal assinado; smoke48tiros/UI/Ice/Trico aprovado.
 - [x] SPEC/ADR/contrato/MOBILES/HANDOFF atualizados; Ruff/diff aprovados.
+- [x] Teardown de mapa/timing aguarda WeakRefs; duas assertivas novas, dirigidas4815/0 e revisão. CI nova pendente.
 - [ ] Operação remota autorizada: commit/push/PR/quatro gates/rebase merge/CI/release;
   resultados exatos devolvidos à orquestração, sem publicação manual adicional.
 - [ ] Aceite visual/escuta/input humanos; clienteWindows completo não executado.

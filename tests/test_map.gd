@@ -153,6 +153,8 @@ func run() -> void:
 	var scene = load("res://scenes/main.tscn").instantiate()
 	scene.profile = load("res://scripts/profile.gd").new("res://.tools/map-test-profile.json")
 	root.add_child(scene)
+	# Observe the lobby playback before muting releases the player reference.
+	var playbacks: Array[WeakRef] = audio_playbacks(scene.sound)
 	if scene.get("sound") != null:
 		scene.sound.muted = true
 	scene.opening = 0
@@ -196,7 +198,9 @@ func run() -> void:
 	check(scene.rig.position == Vector2(180, 560) and not scene.dragging, "Motion without a pressed button never pans (release eaten by the HUD)")
 	check(scene.model.terrain.visual_texture != null, "Arena draws the client foreground texture")
 	check(scene.weather_art.ground != null and scene.weather_art.ground.resource_path == map.particle, "Ground particles use the client pmos frames")
+	playbacks.append_array(audio_playbacks(scene.sound))
 	scene.queue_free()
 	await process_frame
+	await await_audio_release(playbacks)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path("res://.tools/map-test-profile.json"))
 	finish("MAP CHECKS")
