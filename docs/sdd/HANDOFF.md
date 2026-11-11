@@ -26,6 +26,9 @@ PNGs/MP4/manifests em docs/bigfoot-native e docs/mobile-shots.
 Sem clienteWindows inteiro, escuta/input/aceite visual humano ou pacote
 publicado manualmente. PR/rebase merge/CI/release automática autorizados;
 resultados remotos serão devolvidos à orquestração após os quatro gates.
+Primeiro gatePR35 detectou fixtureMageScene com clima aleatório:Thor
+adicionava dano/pose ao pulso isolado. Wind agora é explícito nessa fixture;
+assertivas preservadas, regra intacta e Thor coberto no BigfootNative.
 
 
 
