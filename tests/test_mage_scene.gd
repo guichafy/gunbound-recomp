@@ -29,6 +29,10 @@ func run() -> void:
 	scene.start_match()
 	scene.model.shot_actor = 1
 	scene.model.shot_weapon = 0
+	# This fixture measures one shield pulse. The room seed is random, and
+	# native Bigfoot now also requests Thor when climate4 is active. That adds
+	# damage and a second hurt pose; attachment coverage lives in BigfootNative.
+	scene.model.weather.queue[0].type = "wind"
 	scene.model.explode(Vector2(load("res://scripts/aduka_combat.gd").center(scene.model.actors[0])),0,scene.model.projectile_parameters(1,30,50,0)[0])
 	scene.consume_events()
 	scene.update_hud()

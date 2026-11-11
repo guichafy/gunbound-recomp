@@ -107,4 +107,20 @@ Unicorn isolado em .tools/oracle-py; JIT exige execução fora do sandbox
 Harness integral final:exit0/366,1s,355parses,113suítesGodot/54.628checks,
 156testesPython/zero skips/falhas e29partidas completas. CoberturaPython62%.
 Relatório durável em docs/bigfoot-native/harness.json; logs individuais
-em.tools/check-logs. Nenhum runner posterior sobrescreveu essa rodada.
+em.tools/check-logs. O relatório versionado preserva essa rodada; repetição dirigida posterior
+atualizou report.json/import e os logs de três suites, sem invalidar a integral.
+
+
+### Gate remoto do PR35 — correção de fixture
+
+Primeira execução42981907826,head1b710864:macOS teve somente
+`test_mage_scene` com2falhas (pose e escudo). Todos os outros modelos,
+156Python e29partidas passaram. A fixture usava match_seed−1 e por isso
+às vezes nascia sobThor. Com pulso nativo, o anexo corretamente altera
+escudo141/hurt para129/hurt_2. Probe local reproduziu ambos os climas.
+A fixture fixaWind antes do pulso isolado; assertivas intactas. BigfootNative
+mantém a coberturaThor. Nenhuma regra/asset mudou; revisor aprovou o ajuste.
+
+Repetição dirigida após o ajuste:mage_scene15/0,BigfootNative2905/0,
+NativeWeatherRoster2976/0 (5896checks,exit0). Logs em
+.tools/check-logs e /private/tmp/issue28-ci-fixture-fix.log.
