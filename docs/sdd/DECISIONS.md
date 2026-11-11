@@ -2193,3 +2193,9 @@ sem mudar seeds/assertivas/regras. Perfil comparativo demonstra3,15×mais
 turnos e candidatos/turno estáveis; custo adicional nativo está explícito,
 sem contatos/explosões duplicados. Gate de cena agora mede ambos os mobiles.
 Comparação/GPU/responsividade e limites em BIGFOOT_COMBAT_ISSUE_28.md.
+
+Emenda de validação ADR-163/REQ-52: fixtures de cena mapa/timing observam
+WeakRefs dos playbacks antes de mute/stop e aguardam a liberação real pelo
+mixer, limite5s já adotado em test_client_audio. Acrescentar assertiva de
+liberação, sem ocultar logs de vazamento nem alterar áudio do jogo ou o
+orçamento900s por partida. Evidência e limite de reprodução no contratoTrico.

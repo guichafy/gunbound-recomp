@@ -1,6 +1,7 @@
 extends "res://tests/support/suite.gd"
 ## Real scene + Sound pool: counts actual stream allocations, including mute.
 var view
+var playbacks: Array[WeakRef] = []
 
 func fresh(vehicle: int = 4, items: Array = []) -> void:
 	view.model.start(vehicle,1,42,"","original",null,items)
@@ -14,6 +15,7 @@ func fresh(vehicle: int = 4, items: Array = []) -> void:
 func advance(seconds: float, fps: int = 60) -> void:
 	for frame in roundi(seconds*fps):
 		view._process(1.0/fps)
+	playbacks.append_array(audio_playbacks(view.sound))
 	# The model clock is simulated above, but AudioServer processes play/stop
 	# commands on its own real mixer clock. Let each assertion boundary drain
 	# before the next scenario reuses the same five AudioStreamPlayers.
@@ -26,6 +28,7 @@ func run() -> void:
 	view.set_process(false)
 	view.opening = 0
 	view.start_match()
+	playbacks.append_array(audio_playbacks(view.sound))
 	view.sound.stop_music()
 	for fps in [30,60,120]:
 		fresh(4)
@@ -111,6 +114,7 @@ func run() -> void:
 		check(view.sound.next_player == 2 and view.sound.players[1].stream != null and view.sound.players[1].stream.resource_path.ends_with("62blast.wav"),"Boomer weapon %d impact uses 62blast" % weapon)
 	# AudioServer owns playback asynchronously; stop it before freeing the scene
 	# so headless runs cannot quit with live streams from the last assertion.
+	playbacks.append_array(audio_playbacks(view.sound))
 	view.sound.stop_music()
 	for player in view.sound.players:
 		player.stop()
@@ -118,4 +122,5 @@ func run() -> void:
 	await create_timer(0.1).timeout
 	view.queue_free()
 	await process_frame
+	await await_audio_release(playbacks)
 	finish("CLASSIC TIMING SCENE CHECKS")

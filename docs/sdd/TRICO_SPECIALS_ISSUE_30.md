@@ -131,3 +131,24 @@ dano/cratera/itens/clima particular e geometria muzzle/hotspot continuam
 pontes declaradas. Não há alegação de Trico integralmente nativo.
 Operação remota autorizada: PR/quatro gates/rebase merge e acompanhamento
 CI/main/release; SHA/PR/issue/resultados remotos no retorno à orquestração.
+
+## Emenda de QA do PR37 — REQ-52 (11/11/2026)
+
+Cabeça29e18b44: macOS aprovou todas as assertivas (mapa48/0, timing49/0,
+Trico4043+394/0 e smoke249/0), mas o processo reportou1/3recursos em uso no
+encerramento de mapa/timing. Logs em .tools/pr37-macos/check-logs e run
+43017556712/job130512726833. Doze repetições locais verbosas não reproduziram
+o vazamento; não confundir isso com prova de correção do host remoto.
+
+Somente fixtures foram ajustadas: tests/support/suite.gd capturaWeakRefs de
+playbacks antes de mute/stop/free e aguarda sua liberação observada, com o
+mesmo limite5s de test_client_audio. Cada cena ganhou uma assertiva de
+liberação; nenhuma assertiva anterior, regra de áudio/jogo, timeout900s do
+runner ou inventário de29partidas foi relaxado. A causa assíncrona é
+consistente com o precedente, mas a CI anterior não identificou os tipos
+dos recursos vazados; confirmação cabe à nova execução hospedada.
+
+Revisão independente sem achados. Dirigidas finais de seis suítes:
+4815checks/0 (mapa49, timing50, áudio224, música55, Trico4043/394).
+O harness59385 acima é anterior a essa emenda somente de testes; os dois
+checks adicionais e os resultados remotos serão registrados no PR/retorno.
