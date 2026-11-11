@@ -8,6 +8,7 @@ func _init() -> void:
 	material.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
 
 func begin(view: Node2D) -> RID:
+	_prune_views()
 	var key := view.get_instance_id()
 	if not canvases.has(key):
 		var canvas := RenderingServer.canvas_item_create()
@@ -24,7 +25,16 @@ func draw(view: Node2D, texture: Texture2D, target: Rect2, source: Rect2, transf
 	RenderingServer.canvas_item_add_set_transform(canvas,transform)
 	RenderingServer.canvas_item_add_texture_rect_region(canvas,target,texture.get_rid(),source,color)
 
+## View IDs do not retain Nodes. Release their private RIDs when a preview or
+## capture view was destroyed while this sprite remains alive in another view.
+func _prune_views() -> void:
+	for key in canvases.keys():
+		if not is_instance_id_valid(key):
+			RenderingServer.free_rid(canvases[key])
+			canvases.erase(key)
+
 func clear() -> void:
+	_prune_views()
 	for canvas in canvases.values():
 		RenderingServer.canvas_item_clear(canvas)
 

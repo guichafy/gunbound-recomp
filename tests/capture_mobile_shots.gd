@@ -61,6 +61,7 @@ class ShotPanel extends Node2D:
 		draw_string(font, Vector2(16, 28), "%s %s | %d projéteis" % [Looks.look(host.vehicle).kind, ["T1", "T2", "SS"][index], model.projectiles.size()], HORIZONTAL_ALIGNMENT_LEFT, -1, 22)
 
 	func draw_armor(model) -> void:
+		host.sprite.begin_projectiles(self)
 		draw_rect(Rect2(0,0,640,1080),Color("101820"))
 		draw_string(font,Vector2(22,40),"Armor %s — issue #27"%["T1","T2","SS"][index],HORIZONTAL_ALIGNMENT_LEFT,-1,25)
 		draw_set_transform(Vector2.ZERO)

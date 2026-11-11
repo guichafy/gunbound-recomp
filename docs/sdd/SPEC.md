@@ -1,5 +1,9 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Composição das luzes — issue #32 / ADR-165
+
+REQ-07/19/20/44/45: consumidores comprovados Armor, Bigfoot, Trico, JD, ASate e Ice usam corpo alfa seguido de luz SRCALPHA/ONE; folhas somente luz entram uma vez. Preservar geometria, EPA, rastros, física e demais caminhos. Contrato/plano: PROJECTILE_LIGHT_ISSUE_32.md.
+
 ## Sondagem Raon — issue #31 / ADR-164
 
 REQ-04/05/07/08/19/44/45: minas normais e SS selecionam superfície por

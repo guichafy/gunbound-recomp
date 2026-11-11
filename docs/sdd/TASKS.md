@@ -1,5 +1,18 @@
 # Entregas e próximos trabalhos
 
+## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
+
+- [x] Worktree própria na main2f622d85, bootstrap pinado, Ghidra7consultas aprovadas.
+- [x] Inventário por consumidor/vtable; corpo alfa→luz aditiva nos seis candidatos comprovados.
+- [x] FixturePE/XFS independente e regenerável, PE divergente rejeitado; RED332→GREEN910/0.
+- [x] Rastros/EPA/pivôs/smooth4×/física preservados; passes limpos por view e RIDs descartados.
+- [x] GPU722framesFullHD/200impactos,60pausaRGBAidênticos,72paresvazios,12paresunlitexatos.
+- [x] PacoteZIPmacOS local universal assinado, extraído e smoke48tiros/UI aprovado.
+- [x] Revisão independente sem achados após P2 da capturaArmor; SPEC/ADR/plano/MOBILES.
+- [x] Harness estável358,979s/367parses/118suítes/61090checks/160Python/29partidas/62%.
+- [ ] PR/quatro gates/rebase merge/mainCI/release automática.
+
+
 ## Sondagem Raon — issue #31 / ADR-164 (11/11/2026)
 
 - [x] Worktree própria na main33c3c7a7, bootstrap pinado e Ghidra2consultas.

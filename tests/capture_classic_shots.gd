@@ -14,6 +14,8 @@ class Board extends Node2D:
 		draw_string(font,point,text,HORIZONTAL_ALIGNMENT_LEFT,-1,size,color)
 	func _draw() -> void:
 		draw_rect(Rect2(0,0,1920,1080),Color("152331"))
+		for id in [4,6]:
+			host.sprite_for(id).begin_projectiles(self)
 		if mode == 0:
 			text_at(Vector2(45,50),"Composição original: Turtle × Armor | estados Boomer SS",32)
 			text_at(Vector2(45,88),"Mesmo corpo PNG na fonte; Turtle S1/S2 substitui a cabeça pela faixa WaterEffect.",22)

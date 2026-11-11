@@ -53,6 +53,7 @@ class Demo extends Node2D:
 	func _draw() -> void:
 		if sprite == null:
 			return
+		sprite.begin_projectiles(self)
 		sprite.draw_projectile(self,shot,weapon)
 		sprite.draw_effect(self,{"pos":Vector2(120,0),"weapon":weapon,"age":fmod(clock,1.8)})
 

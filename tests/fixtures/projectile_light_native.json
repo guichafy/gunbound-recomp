@@ -1,0 +1,270 @@
+{
+  "source_sha256": {
+    "GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "characterdata.dat": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+    "graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08"
+  },
+  "render": {
+    "body": [
+      19,
+      5,
+      20,
+      6
+    ],
+    "light": [
+      19,
+      5,
+      20,
+      2
+    ],
+    "head_alpha": 255,
+    "order": [
+      "body",
+      "light"
+    ]
+  },
+  "asm": {
+    "0x4c4d2b": "6a05",
+    "0x4c4d3e": "6a13",
+    "0x4c4d4b": "6a06",
+    "0x4c4d4d": "6a14",
+    "0x4c4d53": "6880685500",
+    "0x4c4f55": "6870685500",
+    "0x4c4f7f": "6a05",
+    "0x4c4f81": "6a13",
+    "0x4c4f9a": "53",
+    "0x4c4f9b": "6a14",
+    "0x4c4f6b": "bb02000000",
+    "0x4c4e90": "c0e105",
+    "0x4c4e96": "80caff",
+    "0x4c4e99": "2ad1"
+  },
+  "consumers": [
+    {
+      "kind": "armor",
+      "id": 4,
+      "weapon": 0,
+      "vtable": "0x555c34",
+      "publish": "0x458690",
+      "body": "bullet1n.img",
+      "light": "bullet1nl.img",
+      "entry_sha256": {
+        "bullet1n.img": "ce81891c8095354ea052b898358d901073d918db615783c7fe669cc36420f530",
+        "bullet1nl.img": "8990c0f7d5c63614528e9e1d33a3a2d83eee5b9c9a0dd7e50fd651b28d06c76e"
+      }
+    },
+    {
+      "kind": "armor",
+      "id": 4,
+      "weapon": 1,
+      "vtable": "0x555dac",
+      "publish": "0x458690",
+      "body": "bullet1s.img",
+      "light": "bullet1sl.img",
+      "entry_sha256": {
+        "bullet1s.img": "d2cec4c7df95286d580703504319ddebf6e4f15e92f169ef1188749f5f8c3dd6",
+        "bullet1sl.img": "9ae76541f511a26a0523fef580171f687c867a4533b3edbc95d99f8fea761f1e"
+      }
+    },
+    {
+      "kind": "armor",
+      "id": 4,
+      "weapon": 2,
+      "vtable": "0x555ac4",
+      "publish": "0x458690",
+      "body": "bullet1p.img",
+      "light": "",
+      "entry_sha256": {
+        "bullet1p.img": "ce53072f02ec874b4825b1329caaf414884855a04d865b19dc524e65e8d81a45"
+      }
+    },
+    {
+      "kind": "bigfoot",
+      "id": 2,
+      "weapon": 0,
+      "vtable": "0x555c34",
+      "publish": "0x458690",
+      "body": "bullet5n.img",
+      "light": "bullet5nl.img",
+      "entry_sha256": {
+        "bullet5n.img": "5a1056aa9b003c8870e9683e7387346c731696ea7a4376a37d88fec5b9abf0b6",
+        "bullet5nl.img": "363ca251da4ba2c71cd199e5c371abed6577c2999a89b2a56b3a58c935145f00"
+      }
+    },
+    {
+      "kind": "bigfoot",
+      "id": 2,
+      "weapon": 1,
+      "vtable": "0x555c34",
+      "publish": "0x458690",
+      "body": "bullet5s.img",
+      "light": "",
+      "entry_sha256": {
+        "bullet5s.img": "297d4813dff0aa6378864b3bacdac4d15720f5bf923624ddbb83c5575afcd69b"
+      }
+    },
+    {
+      "kind": "bigfoot",
+      "id": 2,
+      "weapon": 2,
+      "vtable": "0x55631c",
+      "publish": "0x458690",
+      "body": "bullet5p.img",
+      "light": "bullet5pl.img",
+      "entry_sha256": {
+        "bullet5p.img": "9d470c7f45d829839bf35fa1d4e7886d22ed79091fa2648f3902357c7e136ff4",
+        "bullet5pl.img": "cc9ef5e32afc39a9b016b98144875b821203b4efae44a6f1662350095cd845b6"
+      }
+    },
+    {
+      "kind": "trico",
+      "id": 5,
+      "weapon": 0,
+      "vtable": "0x555c34",
+      "publish": "0x458690",
+      "body": "bullet4n.img",
+      "light": "bullet4nl.img",
+      "entry_sha256": {
+        "bullet4n.img": "e2a68a3f7ae8f9941dc5bceb27213460fed766dcd06c222670e47f043d04c665",
+        "bullet4nl.img": "fc20fd292e8ae9483cbda89974863b4cc6f91bc666f33d43e5cff53e733eeae7"
+      }
+    },
+    {
+      "kind": "trico",
+      "id": 5,
+      "weapon": 1,
+      "vtable": "0x5564d0",
+      "publish": "0x458690",
+      "body": "bullet4s.img",
+      "light": "bullet4sl.img",
+      "entry_sha256": {
+        "bullet4s.img": "fe19ff25ac19cb2ad76ee9e88e64c6251f350a18b136efd4c0199bb862777134",
+        "bullet4sl.img": "fc20fd292e8ae9483cbda89974863b4cc6f91bc666f33d43e5cff53e733eeae7"
+      }
+    },
+    {
+      "kind": "trico",
+      "id": 5,
+      "weapon": 2,
+      "vtable": "0x5565f8",
+      "publish": "0x4ae1a0",
+      "body": "bullet4p.img",
+      "light": "bullet4pl.img",
+      "entry_sha256": {
+        "bullet4p.img": "bfe07804bfd5453305429019a148e1e3b81f878bed1816122b27a3f1bdc9ce98",
+        "bullet4pl.img": "da40779ff4e2d9205afbbe64f28e01e6fda6a7514b959dc29111c4157082bab7"
+      }
+    },
+    {
+      "kind": "jd",
+      "id": 9,
+      "weapon": 0,
+      "vtable": "0x555e88",
+      "publish": "0x458690",
+      "body": "",
+      "light": "bullet9nl.img",
+      "entry_sha256": {
+        "bullet9nl.img": "b1e5aa83f19fe5028e815fbeff4e4777d0b468c88877a657d37d48432a2e3748"
+      }
+    },
+    {
+      "kind": "jd",
+      "id": 9,
+      "weapon": 1,
+      "vtable": "0x555d14",
+      "publish": "0x458690",
+      "body": "",
+      "light": "bullet9sl.img",
+      "entry_sha256": {
+        "bullet9sl.img": "92e21e1d365669a4e106023913c2496b6cf9f31de09d1c63920393fd8915f991"
+      }
+    },
+    {
+      "kind": "jd",
+      "id": 9,
+      "weapon": 2,
+      "vtable": "0x556360",
+      "publish": "0x458690",
+      "body": "bullet9p.img",
+      "light": "bullet9pl.img",
+      "entry_sha256": {
+        "bullet9p.img": "efaf409904cc35cfbaec8717d8431283ce8faede00278eb9f247bb53dbf72801",
+        "bullet9pl.img": "5a6f3fe24309aac680637b55ea8fb77a193f321e5060ee3c55342d439404187a"
+      }
+    },
+    {
+      "kind": "asate",
+      "id": 10,
+      "weapon": 0,
+      "vtable": "0x556160",
+      "publish": "0x458690",
+      "body": "",
+      "light": "bullet10nl.img",
+      "entry_sha256": {
+        "bullet10nl.img": "76ee42742b84da858fa375850d75a5cee97f84b63bf2dccdb8e46e4f3339755e"
+      }
+    },
+    {
+      "kind": "asate",
+      "id": 10,
+      "weapon": 1,
+      "vtable": "0x556160",
+      "publish": "0x458690",
+      "body": "",
+      "light": "bullet10sl.img",
+      "entry_sha256": {
+        "bullet10sl.img": "76ee42742b84da858fa375850d75a5cee97f84b63bf2dccdb8e46e4f3339755e"
+      }
+    },
+    {
+      "kind": "asate",
+      "id": 10,
+      "weapon": 2,
+      "vtable": "0x555b18",
+      "publish": "0x458690",
+      "body": "bullet10p.img",
+      "light": "",
+      "entry_sha256": {
+        "bullet10p.img": "ad527556a8a5f6f19c588c10b4e75d9111a4431b78c6e8548dfa35b41a70babb"
+      }
+    },
+    {
+      "kind": "ice",
+      "id": 11,
+      "weapon": 0,
+      "vtable": "0x555c34",
+      "publish": "0x458690",
+      "body": "bullet11n.img",
+      "light": "bullet11nl.img",
+      "entry_sha256": {
+        "bullet11n.img": "e8238d6258566b10c5bbcff08643a5501041ccdb05fd7e38de5156f3184a95c1",
+        "bullet11nl.img": "e8238d6258566b10c5bbcff08643a5501041ccdb05fd7e38de5156f3184a95c1"
+      }
+    },
+    {
+      "kind": "ice",
+      "id": 11,
+      "weapon": 1,
+      "vtable": "0x555f38",
+      "publish": "0x458690",
+      "body": "",
+      "light": "bullet11sl.img",
+      "entry_sha256": {
+        "bullet11sl.img": "244b7029ab9b39bd2e4464cba8059be14f7133e6e010235c592ea9ee87b2e1ec"
+      }
+    },
+    {
+      "kind": "ice",
+      "id": 11,
+      "weapon": 2,
+      "vtable": "0x555f58",
+      "publish": "0x458690",
+      "body": "bullet11p.img",
+      "light": "bullet11pl.img",
+      "entry_sha256": {
+        "bullet11p.img": "eec46db73aa7a51c9b9ce26d55ea72aac1eb0dba57bf85e7899d828ea6c1169c",
+        "bullet11pl.img": "3258b0e9b2aafe6628698e10488c6bc3e69fe702ec749a09337d59d25e51a1e7"
+      }
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Design implementado
 
+## Composição das luzes — ADR-165
+
+ClassicSprite seleciona explicitamente os seis consumidores auditados e reutiliza o passe aditivo existente por view. Folhas somente luz têm inventário fechado; não generalizar pelo sufixo. Canvas de views destruídas deve ser liberado. Contrato: PROJECTILE_LIGHT_ISSUE_32.md.
+
 ## Sondagem de minas Raon — ADR-164
 
 Terrain.native_surface_at lê a máscara1px já preparada em Match.start;

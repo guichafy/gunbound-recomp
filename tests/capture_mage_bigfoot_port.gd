@@ -34,6 +34,7 @@ class ShotPanel extends Node2D:
 		if not first.is_empty():
 			host.centers[index] = Vector2(first.previous_hit_pos).lerp(first.hit_pos,clampf(float(model.accumulator)/0.05,0,1))
 		var offset: Vector2 = Vector2(480,140)-host.centers[index]
+		sprite.begin_projectiles(self)
 		for source in model.projectiles:
 			var shot: Dictionary = source.duplicate()
 			var blend := clampf(float(model.accumulator)/0.05,0,1)

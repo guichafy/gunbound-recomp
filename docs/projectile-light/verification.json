@@ -1,0 +1,174 @@
+{
+  "light": {
+    "probes": [
+      {
+        "kind": "armor",
+        "alpha": 1.0,
+        "actual": [
+          157,
+          153,
+          160
+        ],
+        "expected": [
+          157,
+          153,
+          161
+        ]
+      },
+      {
+        "kind": "armor",
+        "alpha": 0.5,
+        "actual": [
+          179,
+          185,
+          196
+        ],
+        "expected": [
+          179,
+          185,
+          196
+        ]
+      },
+      {
+        "kind": "jd",
+        "alpha": 1.0,
+        "actual": [
+          251,
+          243,
+          245
+        ],
+        "expected": [
+          251,
+          243,
+          245
+        ]
+      },
+      {
+        "kind": "jd",
+        "alpha": 0.5,
+        "actual": [
+          226,
+          230,
+          239
+        ],
+        "expected": [
+          226,
+          230,
+          239
+        ]
+      }
+    ],
+    "pause_frames": 30,
+    "pause_sha256": "6d3ed1735a3f24eb44a53add7735c732039b87b9b678352b9b264fba7e5b9b98",
+    "resume_sha256": "e4ceed1f812e9dc9ebe977f3a3528488ff1cca56a3ea4f25d94d551bfd70a29f",
+    "changed_samples": {
+      "armor/0": 6,
+      "armor/1": 4,
+      "armor/2": 0,
+      "bigfoot/0": 8,
+      "bigfoot/1": 1,
+      "bigfoot/2": 8,
+      "trico/0": 6,
+      "trico/1": 5,
+      "trico/2": 4,
+      "jd/0": 6,
+      "jd/1": 6,
+      "jd/2": 6,
+      "asate/0": 6,
+      "asate/1": 6,
+      "asate/2": 0,
+      "ice/0": 4,
+      "ice/1": 6,
+      "ice/2": 6
+    },
+    "impacts": 100,
+    "empty_pairs": 36,
+    "same_position_unlit_pairs": 6
+  },
+  "dark": {
+    "probes": [
+      {
+        "kind": "armor",
+        "alpha": 1.0,
+        "actual": [
+          65,
+          56,
+          60
+        ],
+        "expected": [
+          66,
+          57,
+          61
+        ]
+      },
+      {
+        "kind": "armor",
+        "alpha": 0.5,
+        "actual": [
+          40,
+          40,
+          46
+        ],
+        "expected": [
+          41,
+          40,
+          47
+        ]
+      },
+      {
+        "kind": "jd",
+        "alpha": 1.0,
+        "actual": [
+          67,
+          49,
+          44
+        ],
+        "expected": [
+          67,
+          50,
+          45
+        ]
+      },
+      {
+        "kind": "jd",
+        "alpha": 0.5,
+        "actual": [
+          41,
+          36,
+          38
+        ],
+        "expected": [
+          42,
+          37,
+          39
+        ]
+      }
+    ],
+    "pause_frames": 30,
+    "pause_sha256": "fe181ed773f105f7e4158752ac55e037b8e7399895fc607c8d344112f2d1775f",
+    "resume_sha256": "f16e3e027be8cd4ff0ac54bc5219c81d19f181ff90a99154f4b7657f1866d363",
+    "changed_samples": {
+      "armor/0": 6,
+      "armor/1": 4,
+      "armor/2": 0,
+      "bigfoot/0": 8,
+      "bigfoot/1": 1,
+      "bigfoot/2": 8,
+      "trico/0": 6,
+      "trico/1": 5,
+      "trico/2": 4,
+      "jd/0": 6,
+      "jd/1": 6,
+      "jd/2": 6,
+      "asate/0": 6,
+      "asate/1": 6,
+      "asate/2": 0,
+      "ice/0": 4,
+      "ice/1": 6,
+      "ice/2": 6
+    },
+    "impacts": 100,
+    "empty_pairs": 36,
+    "same_position_unlit_pairs": 6
+  }
+}

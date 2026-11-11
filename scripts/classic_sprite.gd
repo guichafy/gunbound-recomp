@@ -15,8 +15,16 @@ const RAYON_CELL := Rect2(-16, -24, 32, 32)
 const NATIVE_TRAIL_LEVELS := 8
 ## ADR-154: 0x4c3020 draws BulletTexture1 bodies with SRCALPHA/INVSRCALPHA and
 ## then BulletTexture2 lights with SRCALPHA/ONE. Kinds listed here use that
-## order; the others keep the approved translucent light under the body.
-const ADDITIVE_LIGHT_KINDS := ["dragon", "knight"]
+## order. ADR-165 closes the remaining common publishers (issue #32).
+const ADDITIVE_LIGHT_KINDS := ["armor", "bigfoot", "trico", "jd", "asate", "ice", "dragon", "knight"]
+## Audited missing-body entries, not a suffix-based guess. Their imported
+## Bullet sheet contains only the light and must be submitted exactly once.
+const LIGHT_ONLY_SHEETS := {
+	"jd": ["Bullet1.png", "Bullet2.png"],
+	"asate": ["Bullet1.png", "Bullet2.png"],
+	"ice": ["Bullet2.png"],
+	"knight": ["Bullet1.png", "Bullet2.png"],
+}
 var classic_art = ClassicProjectileArt.new()
 var light_pass = preload("res://scripts/additive_sprite_art.gd").new()
 # The Ion is drawn before the shells, so it owns a pass begun with the satellites.
@@ -248,9 +256,9 @@ static func projectile_angle(projectile: Dictionary) -> float:
 		return -deg_to_rad(float(projectile.boomer_angle))
 	return Vector2(projectile.velocity).angle()
 
-## One published bullet level: light cell then body cell, rotated by the heading.
+## One published level, preserving its existing cells, heading and alpha.
 func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float, mirror: bool = false) -> void:
-	if mobile_kind in ADDITIVE_LIGHT_KINDS:
+	if mobile_kind in ADDITIVE_LIGHT_KINDS and (light_index >= 0 or light_only(name)):
 		_draw_lit_bullet(view, name, index, light_name, light_index, at, angle, alpha, mirror)
 		return
 	view.draw_set_transform(at, angle, Vector2(1, -1) if mirror else Vector2.ONE)
@@ -261,7 +269,7 @@ func _draw_bullet(view: Node2D, name: String, index: int, light_name: String, li
 	view.draw_texture_rect_region(_optional_cached(name), body[1], body[0], Color(1, 1, 1, alpha))
 
 ## Body in the alpha pass, then its light added on top (ADR-154). The Knight
-## S1/S2 guide has only bullet15nl/sl: its single sheet is a light.
+## S1/S2 guide and the audited missing-body entries submit only their light.
 func _draw_lit_bullet(view: Node2D, name: String, index: int, light_name: String, light_index: int, at: Vector2, angle: float, alpha: float, mirror: bool) -> void:
 	var transform := Transform2D(angle, Vector2(1, -1) if mirror else Vector2.ONE, 0.0, at)
 	var body := cell_frame(name, index)
@@ -275,9 +283,9 @@ func _draw_lit_bullet(view: Node2D, name: String, index: int, light_name: String
 		var light := cell_frame(light_name, light_index)
 		light_pass.draw(view, _optional_cached(light_name), light[1], light[0], transform, Color(1, 1, 1, alpha))
 
-## The sheet itself is a client light layer (an "l" entry of graphics.xfs).
+## Explicitly audited light-only consumers (PE publisher + XFS inventory).
 func light_only(name: String) -> bool:
-	return str(sheet(name).get("entry", "")).ends_with("l.img")
+	return name in LIGHT_ONLY_SHEETS.get(mobile_kind, [])
 
 ## User decision (ADR-120): the client's afterimage history is shown only on
 ## the Raon T1 (ADR-118); every other shot keeps the approved single sprite.

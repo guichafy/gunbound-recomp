@@ -42,6 +42,7 @@ class TricoWorld extends Node2D:
 			var a: Dictionary = model.actors[actor]
 			if a.pos.x<1280:
 				host.sprites[int(a.vehicle)].draw(self,Pose.new(a.pos,60,int(a.facing),{"pose":"idle","age":0.0,"weapon":1,"rotation":float(a.tilt)}))
+		host.sprites[5].begin_projectiles(self)
 		for shell in model.projectiles:
 			host.sprites[5].draw_projectile(self,shell,int(shell.weapon))
 		for effect in host.effects[index]:
