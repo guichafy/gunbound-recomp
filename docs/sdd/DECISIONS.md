@@ -2147,3 +2147,13 @@ com prova de voo/contato/cratera e ricochete do Grub na plataforma. O gate de
 empacotamento passa a exigir o marcador dos 48 disparos além do smoke de UI.
 Não altera o contrato nativo da ADR-150; corrige sua preparação e a lacuna
 da ADR-151. Registro, resultados e limites: `BUILD_COLLISION_AUDIT.md`.
+
+## ADR-159 — Clima global independente do roster (11/11/2026)
+
+Issue #26 substitui a restrição a partidas com Mage da ADR-128. O calendário,
+pesos/ranges de Miramo, vento/colunas, Moon/Eclipse e Thor são globais no
+cliente confirmado no Ghidra. Reutilizar MageWeather sem renomeação ampla.
+Habilitar máscara1px para Thor em todo treino sem ampliar o conjunto que
+seleciona o contato nativo dos projéteis. Categorias ausentes da build ficam
+somente no legado. Entradas offline e interações adaptadas continuam explícitas.
+Evidência/contrato/plano em NATIVE_WEATHER_ISSUE_26.md.

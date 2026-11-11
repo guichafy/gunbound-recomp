@@ -1,5 +1,16 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Clima global sem Mage — issue #26 / ADR-159
+
+REQ-04/05/07/08/09/19/23/24/25/32/35/44/45: todo treino usa o calendário
+Thor’s Hammer de oito slots/sete categorias, independentemente dos mobiles.
+Miramo usa pesos e ranges de stage.dat também sem Mage; “todos” habilita
+somente essas sete categorias. Moon/Eclipse e a inicialização/transição de
+Thor são globais. Seed/período e fallback procedural continuam entradas offline.
+Preparar terreno para Thor não ativa física nativa de outros projéteis.
+Contrato, evidência e plano em `NATIVE_WEATHER_ISSUE_26.md`.
+
+
 ## Idioma e Settings da sala — REQ-55 / ADR-155
 
 Texto de código da interface deve oferecer inglês (padrão) e português,

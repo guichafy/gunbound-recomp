@@ -1,5 +1,11 @@
 # Mage: climas secundários pelo cliente
 
+> Emenda ADR-159 / issue #26 (11/11/2026): o calendário, stage, vento/colunas,
+> Moon/Eclipse e ciclo global do Thor abaixo agora atendem todo roster.
+> A restrição a partidas contendo Mage é histórica e foi substituída.
+> Os anexos particulares dos projéteis continuam com seu escopo delimitado.
+> Ver `NATIVE_WEATHER_ISSUE_26.md`.
+
 Pedido de27/10/2026, apósADR-126. AfetaREQ-04/07/08/09/23/24/25/35/44.
 Plano: provar consumidores emASM; fixtures independentes; portar calendário,
 vento e colunas em estado copiável; Moon/Eclipse; anexos elétrico/Thor antes

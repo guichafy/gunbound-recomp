@@ -68,8 +68,8 @@ func run() -> void:
 				check(model.events==sim.events and model.actors==sim.actors and model.projectiles==sim.projectiles,"Mage secondary climates real=prediction weapon%d electric%s tick%d"%[weapon,electric,tick])
 				check(model.weather.thor==sim.weather.thor and model.terrain.native_cells==sim.terrain.native_cells,"Native Thor/electric state and crater parity")
 				if model.phase!=Match.PHASE_FLIGHT:break
-	# Scope guard: a pair without Mage keeps its existing weather model.
+	# Issue26: global native calendar also governs pairs without Mage.
 	model=Match.new()
 	model.start(2,1,42,"", "original",null,[],[],[],0,4)
-	check(model.weather.get("is_native")!=true,"Native climate replacement scoped to Mage matches")
+	check(model.weather.get("is_native")==true,"Native climate calendar is independent of Mage presence")
 	finish("MAGE SECONDARY WEATHER CHECKS")

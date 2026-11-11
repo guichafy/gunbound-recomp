@@ -1,0 +1,491 @@
+{
+  "date": "2026-11-11",
+  "base": "43ba5162089ce235f2ae3869357ce007ca42a9f0",
+  "toolchain": "Ghidra12.2/JDK26.0.1",
+  "architecture": "x86 LE32 Windows ABI",
+  "image_base": "0x400000",
+  "inputs": {
+    "characterdata.dat": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+    "graphics.xfs": "a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08",
+    "sound.xfs": "081c1b9f5751c486512a9df1a894f6db7a5ed891b8ebdad9fbce1b9169901023",
+    "GunBound.gme": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "stage.dat": "103c2b488977e1721becf8cb90496f95477302ec24141f94116d5214a3e6cfca",
+    "itemdata.dat": "de6f4d3c424df046d344c4f952542255a1eeb2898457eac74ff6379051b48523",
+    "specialdata.dat": "9cc0d99f87e4fff6fd56160c3737fb966546ab9bb77a6a33374cb4642233e086",
+    "avatar.xfs": "829be830e0c50c273d5e0ece03c22fbe0c45e07527129e60e8843d16a1df0e6d"
+  },
+  "extracts": [
+    {
+      "path": "/private/tmp/gunbound-issue26-evidence-initial",
+      "run_sha256": "42e8d75ce41796657fe93b540316654b26e5761a00f85d56004f06317d720729",
+      "manifest_sha256": "07bd60f99f082fee9dc1180605ec1d56630d39f77fc74257f8b4f2c19320d565",
+      "run_ok": true,
+      "manifest_ok": true,
+      "functions": [
+        {
+          "requested_va": "0x41fd50",
+          "seeded": false,
+          "entry_va": "0041fd50",
+          "name": "FUN_0041fd50",
+          "body": "[[0041fd50, 0041fe27] [0041fe30, 00420276]]",
+          "instructions": 348,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "4ee0a6000ea97a572611c4b50b29133c4dd3035a5b4a5193af5b39f623b75b05",
+          "c_sha256": "45b9331d2e6cbbe7d44edaca9dd9e8630e57a49ac84e6a179341948bdd9e6e40"
+        },
+        {
+          "requested_va": "0x41f200",
+          "seeded": false,
+          "entry_va": "0041f200",
+          "name": "FUN_0041f200",
+          "body": "[[0041f200, 0041fd46]]",
+          "instructions": 739,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "9aa3a0e2c422f795ed77af23bf41ca0a4f78379fe942e9c7d6347203aa85a840",
+          "c_sha256": "194c7835de61f653f9f7e145692cda9e5f4a2d9192780080939f3b95ef3eba55"
+        },
+        {
+          "requested_va": "0x43c620",
+          "seeded": false,
+          "entry_va": "0043c620",
+          "name": "FUN_0043c620",
+          "body": "[[0043c620, 0043c698]]",
+          "instructions": 44,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "930b14a569853f888cfb0f9824c339c8ce0d520cb419ee9ac3e46c627ce4519c",
+          "c_sha256": "04b731004e99c4f9cfafe028b19dacdb60c3dde2c71a09c2be3649919c435b3d"
+        },
+        {
+          "requested_va": "0x43c6a0",
+          "seeded": false,
+          "entry_va": "0043c6a0",
+          "name": "FUN_0043c6a0",
+          "body": "[[0043c6a0, 0043c815]]",
+          "instructions": 98,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "dd0f0c9e2f4e992d1fc9806969ef63473cc2484c74318dc79e591aabb0ec003e",
+          "c_sha256": "c30162e8243b7e6468b0cb90076ead8c9d10581e4bbc83b7c4c4c43815e46cc8"
+        },
+        {
+          "requested_va": "0x43a670",
+          "seeded": false,
+          "entry_va": "0043a670",
+          "name": "FUN_0043a670",
+          "body": "[[0043a670, 0043af3d]]",
+          "instructions": 634,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "42ede9dae684db0dbe09b4733224ed6813cf8d16477a8edcfd67156dd6047abe",
+          "c_sha256": "d33ab7a373b390e89b81dc9941c070c9b397381d9f6ea0e1d57661be0e331611"
+        },
+        {
+          "requested_va": "0x4cee30",
+          "seeded": false,
+          "entry_va": "004cee30",
+          "name": "FUN_004cee30",
+          "body": "[[004cee30, 004cf046]]",
+          "instructions": 147,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "85b9101a3c3b7a5a376ee4e17fb427c405973268f5e689fce11c20bf51a39a7e",
+          "c_sha256": "57e7ea3d116860c6e1d6195d7def7b527227aed5461bb6bf5fb57b97a18beb58"
+        },
+        {
+          "requested_va": "0x4ccd10",
+          "seeded": false,
+          "entry_va": "004ccd10",
+          "name": "FUN_004ccd10",
+          "body": "[[004ccd10, 004ce3c0]]",
+          "instructions": 1553,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "316bce284af65ecac6cede8ad7e2d64bec9a797202e8ae7c12352787a22fb48c",
+          "c_sha256": "fd9fbe164f16a6dc01e45d77304287d97160dd6198871bb3dc5b156cdb26e5e4"
+        },
+        {
+          "requested_va": "0x439d90",
+          "seeded": false,
+          "entry_va": "00439d90",
+          "name": "FUN_00439d90",
+          "body": "[[00439d90, 00439e37]]",
+          "instructions": 46,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "b326d92778dee84514d367ef3d64cda19988d590861a5943dde4c0cd53e4706d",
+          "c_sha256": "8b31960bc6d5f903f5542a8cac1f4dfd8e976ddfaeddf9719f0d764b74c42166"
+        }
+      ]
+    },
+    {
+      "path": "/private/tmp/gunbound-issue26-evidence-consumers",
+      "run_sha256": "d9bd9c02320cd3ce95b8d5626e246e715fde69fd38ddd448956cc60eed91f4ab",
+      "manifest_sha256": "7a1f1be3f2af0301ffd18ca3eaa0a7a20aba3fd13f5bfe1450ac0ce3d2b3ed9c",
+      "run_ok": false,
+      "manifest_ok": false,
+      "functions": [
+        {
+          "requested_va": "0x419d90",
+          "seeded": false,
+          "entry_va": "00419d90",
+          "name": "FUN_00419d90",
+          "body": "[[00419d90, 0041ad1c] [0041ad20, 0041b0c8] [0041b0d0, 0041b405]]",
+          "instructions": 1590,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "16372fba35f85f0e995fb9f5b9cd89d452a0372403f14838597e45f88f51b7ff",
+          "c_sha256": "d74e035d0b742ad4462f9c606e17804d21b4267a4fca745930657f7c1be1f363"
+        },
+        {
+          "requested_va": "0x41ebf0",
+          "seeded": false,
+          "entry_va": "0041ebf0",
+          "name": "FUN_0041ebf0",
+          "body": "[[0041ebf0, 0041ee0e]]",
+          "instructions": 172,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "9315d7f9ac564d26493bcd604223c9944ad70dd1bb35809a5812c3c6d96b207c",
+          "c_sha256": "3808a0a1bb84d35bdc5d815159ac18be4fd87a5884f976377e1927f7c41402f7"
+        },
+        {
+          "requested_va": "0x4217b0",
+          "seeded": false,
+          "entry_va": "004217b0",
+          "name": "FUN_004217b0",
+          "body": "[[004217b0, 0042181d]]",
+          "instructions": 35,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "4d70c75187090c4e002f41d938e8dc1d0949bd03b58379abbd843fa92fe81d43",
+          "c_sha256": "d944f48598a17a66c8ff89844618aa377034dfe805852a51fcecbeb7960320e4"
+        },
+        {
+          "requested_va": "0x4d0a10",
+          "seeded": false,
+          "entry_va": "004d0a10",
+          "name": "FUN_004d0a10",
+          "body": "[[004d0a10, 004d0dc5]]",
+          "instructions": 243,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "5ee6477e407b9e4f8a0590e90f6d21d5ff3a335b8c653b5e83e624ac3851da89",
+          "c_sha256": "5754bcf46d9f19eb12a7c42167c7b55972d22170dfec4cbd1d2e490bbbd029ba"
+        },
+        {
+          "requested_va": "0x4b8584",
+          "seeded": false,
+          "status": "function_not_found"
+        },
+        {
+          "requested_va": "0x4ba690",
+          "seeded": false,
+          "status": "function_not_found"
+        },
+        {
+          "requested_va": "0x4bb730",
+          "seeded": false,
+          "status": "function_not_found"
+        },
+        {
+          "requested_va": "0x4bc117",
+          "seeded": false,
+          "status": "function_not_found"
+        },
+        {
+          "requested_va": "0x4ac180",
+          "seeded": false,
+          "entry_va": "004ac180",
+          "name": "FUN_004ac180",
+          "body": "[[004ac180, 004ac251]]",
+          "instructions": 60,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "7ac11681ee5daeb57d87228b27378a0f97781b547e1e80da4b9191a1e8cd95da",
+          "c_sha256": "1cd3da734e058f774fd83104fab8b4afd72052729a91239304f14ba4288c15da"
+        },
+        {
+          "requested_va": "0x435800",
+          "seeded": false,
+          "entry_va": "00435800",
+          "name": "FUN_00435800",
+          "body": "[[00435800, 00435ac0]]",
+          "instructions": 184,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "c14d5abfdec6f062a9a9f79342477709c530c89db7dbc04d1849ef8c48c332f0",
+          "c_sha256": "7903c195384e6dc865a39b7d3110ebf3c53ac808bc67ee8a601a04b44ac93e43"
+        },
+        {
+          "requested_va": "0x435ad0",
+          "seeded": false,
+          "entry_va": "00435ad0",
+          "name": "FUN_00435ad0",
+          "body": "[[00435ad0, 00435d90]]",
+          "instructions": 184,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "76b5c0d055fc2ed6d1d400dc8f7fdd26567e5930d9e57f4126d9521a07058bcc",
+          "c_sha256": "cdc9bf82c05fe56cf726a611dc9fd1676d308e0b6136147ce4e53c64313f2655"
+        },
+        {
+          "requested_va": "0x435da0",
+          "seeded": false,
+          "entry_va": "00435da0",
+          "name": "FUN_00435da0",
+          "body": "[[00435da0, 00436060]]",
+          "instructions": 184,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "6320bde2b559eb0756d44b8b09887b7cafbc469f32f55dfe3295a83e09a60fd7",
+          "c_sha256": "612dc50250f44edcd8fc7aa123ca8f84801ef9aaee80cda24135407d912a259f"
+        }
+      ]
+    },
+    {
+      "path": "/private/tmp/gunbound-issue26-evidence-entries",
+      "run_sha256": "db084d462d024280a1d698921c20e32e9d13b947df5c8f01f4186eae761b10ff",
+      "manifest_sha256": "7ba5ac56fa80f831f87b8987ff0263c8b360bd1e50d488ea1edf627d7618c166",
+      "run_ok": true,
+      "manifest_ok": true,
+      "functions": []
+    },
+    {
+      "path": "/private/tmp/gunbound-issue26-evidence-seeded",
+      "run_sha256": "c953dc25006f140258c17288b4ae1ede9397284781c35210bb38082d2db0f1d9",
+      "manifest_sha256": "217c6a336b12375466264656db71369cf8b14ff4256ac8ebb295b88f0613c958",
+      "run_ok": true,
+      "manifest_ok": true,
+      "functions": [
+        {
+          "requested_va": "0x4bb730",
+          "seeded": true,
+          "entry_va": "004bb730",
+          "name": "FUN_004bb730",
+          "body": "[[004bb730, 004bbbc4] [004bbbd0, 004bccfe]]",
+          "instructions": 1500,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "721a6230deed5e970bb3f1a42f9e89d0672f1d2793ecf137f807c2e490c1318e",
+          "c_sha256": "db4c5d594b8a934a8275cfed1eb6d7ac2eebceb9b9eaaae30ec0cae7df5fc88f"
+        },
+        {
+          "requested_va": "0x4b82b0",
+          "seeded": true,
+          "entry_va": "004b82b0",
+          "name": "FUN_004b82b0",
+          "body": "[[004b82b0, 004b9746]]",
+          "instructions": 1264,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "d4cf93738d0746f19a40a8db8e10ab87bea75cb02b72b85cd8aaeba7e1a8ff39",
+          "c_sha256": "c767166acdd99cfa8e90dd6a287eab87eac05bc1625f67843ef3e2d87eefdd1d"
+        },
+        {
+          "requested_va": "0x4b97d0",
+          "seeded": true,
+          "entry_va": "004b97d0",
+          "name": "FUN_004b97d0",
+          "body": "[[004b97d0, 004ba6a9] [004ba6b0, 004bb727]]",
+          "instructions": 1941,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "e8fa6f4d7d52548c96e5543877fddd67718f60171cff12e39547292b61ddb975",
+          "c_sha256": "5039183a8b5c5c4a1313e9161913ee9e348cfaaa37b7b673a2d5e2a164e27c74"
+        }
+      ]
+    },
+    {
+      "path": "/private/tmp/gunbound-issue26-evidence-final",
+      "run_sha256": "61d80091f44b7be46ed2ed9b2e6f4c7694696b3a0b721491560ff8d954e99c4e",
+      "manifest_sha256": "620178b1f85247ac12b29995b3459f9d314d6cac148bee6edb134805e68facc2",
+      "run_ok": true,
+      "manifest_ok": true,
+      "functions": [
+        {
+          "requested_va": "0x41fd50",
+          "seeded": false,
+          "entry_va": "0041fd50",
+          "name": "FUN_0041fd50",
+          "body": "[[0041fd50, 0041fe27] [0041fe30, 00420276]]",
+          "instructions": 348,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "4ee0a6000ea97a572611c4b50b29133c4dd3035a5b4a5193af5b39f623b75b05",
+          "c_sha256": "45b9331d2e6cbbe7d44edaca9dd9e8630e57a49ac84e6a179341948bdd9e6e40"
+        },
+        {
+          "requested_va": "0x41f200",
+          "seeded": false,
+          "entry_va": "0041f200",
+          "name": "FUN_0041f200",
+          "body": "[[0041f200, 0041fd46]]",
+          "instructions": 739,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "9aa3a0e2c422f795ed77af23bf41ca0a4f78379fe942e9c7d6347203aa85a840",
+          "c_sha256": "194c7835de61f653f9f7e145692cda9e5f4a2d9192780080939f3b95ef3eba55"
+        },
+        {
+          "requested_va": "0x419d90",
+          "seeded": false,
+          "entry_va": "00419d90",
+          "name": "FUN_00419d90",
+          "body": "[[00419d90, 0041ad1c] [0041ad20, 0041b0c8] [0041b0d0, 0041b405]]",
+          "instructions": 1590,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "16372fba35f85f0e995fb9f5b9cd89d452a0372403f14838597e45f88f51b7ff",
+          "c_sha256": "d74e035d0b742ad4462f9c606e17804d21b4267a4fca745930657f7c1be1f363"
+        },
+        {
+          "requested_va": "0x43c620",
+          "seeded": false,
+          "entry_va": "0043c620",
+          "name": "FUN_0043c620",
+          "body": "[[0043c620, 0043c698]]",
+          "instructions": 44,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "930b14a569853f888cfb0f9824c339c8ce0d520cb419ee9ac3e46c627ce4519c",
+          "c_sha256": "04b731004e99c4f9cfafe028b19dacdb60c3dde2c71a09c2be3649919c435b3d"
+        },
+        {
+          "requested_va": "0x43c6a0",
+          "seeded": false,
+          "entry_va": "0043c6a0",
+          "name": "FUN_0043c6a0",
+          "body": "[[0043c6a0, 0043c815]]",
+          "instructions": 98,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "dd0f0c9e2f4e992d1fc9806969ef63473cc2484c74318dc79e591aabb0ec003e",
+          "c_sha256": "c30162e8243b7e6468b0cb90076ead8c9d10581e4bbc83b7c4c4c43815e46cc8"
+        },
+        {
+          "requested_va": "0x43a670",
+          "seeded": false,
+          "entry_va": "0043a670",
+          "name": "FUN_0043a670",
+          "body": "[[0043a670, 0043af3d]]",
+          "instructions": 634,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "42ede9dae684db0dbe09b4733224ed6813cf8d16477a8edcfd67156dd6047abe",
+          "c_sha256": "d33ab7a373b390e89b81dc9941c070c9b397381d9f6ea0e1d57661be0e331611"
+        },
+        {
+          "requested_va": "0x4b8584",
+          "seeded": false,
+          "entry_va": "004b82b0",
+          "name": "FUN_004b82b0",
+          "body": "[[004b82b0, 004b9746]]",
+          "instructions": 1264,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "d4cf93738d0746f19a40a8db8e10ab87bea75cb02b72b85cd8aaeba7e1a8ff39",
+          "c_sha256": "c767166acdd99cfa8e90dd6a287eab87eac05bc1625f67843ef3e2d87eefdd1d"
+        },
+        {
+          "requested_va": "0x4ba690",
+          "seeded": false,
+          "entry_va": "004b97d0",
+          "name": "FUN_004b97d0",
+          "body": "[[004b97d0, 004ba6a9] [004ba6b0, 004bb727]]",
+          "instructions": 1941,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "e8fa6f4d7d52548c96e5543877fddd67718f60171cff12e39547292b61ddb975",
+          "c_sha256": "5039183a8b5c5c4a1313e9161913ee9e348cfaaa37b7b673a2d5e2a164e27c74"
+        },
+        {
+          "requested_va": "0x4bb730",
+          "seeded": false,
+          "entry_va": "004bb730",
+          "name": "FUN_004bb730",
+          "body": "[[004bb730, 004bbbc4] [004bbbd0, 004bccfe]]",
+          "instructions": 1500,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "721a6230deed5e970bb3f1a42f9e89d0672f1d2793ecf137f807c2e490c1318e",
+          "c_sha256": "db4c5d594b8a934a8275cfed1eb6d7ac2eebceb9b9eaaae30ec0cae7df5fc88f"
+        },
+        {
+          "requested_va": "0x4bc117",
+          "seeded": false,
+          "entry_va": "004bb730",
+          "name": "FUN_004bb730",
+          "body": "[[004bb730, 004bbbc4] [004bbbd0, 004bccfe]]",
+          "instructions": 1500,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "721a6230deed5e970bb3f1a42f9e89d0672f1d2793ecf137f807c2e490c1318e",
+          "c_sha256": "db4c5d594b8a934a8275cfed1eb6d7ac2eebceb9b9eaaae30ec0cae7df5fc88f"
+        },
+        {
+          "requested_va": "0x439d90",
+          "seeded": false,
+          "entry_va": "00439d90",
+          "name": "FUN_00439d90",
+          "body": "[[00439d90, 00439e37]]",
+          "instructions": 46,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "b326d92778dee84514d367ef3d64cda19988d590861a5943dde4c0cd53e4706d",
+          "c_sha256": "8b31960bc6d5f903f5542a8cac1f4dfd8e976ddfaeddf9719f0d764b74c42166"
+        },
+        {
+          "requested_va": "0x4cee30",
+          "seeded": false,
+          "entry_va": "004cee30",
+          "name": "FUN_004cee30",
+          "body": "[[004cee30, 004cf046]]",
+          "instructions": 147,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "85b9101a3c3b7a5a376ee4e17fb427c405973268f5e689fce11c20bf51a39a7e",
+          "c_sha256": "57e7ea3d116860c6e1d6195d7def7b527227aed5461bb6bf5fb57b97a18beb58"
+        },
+        {
+          "requested_va": "0x4ccd10",
+          "seeded": false,
+          "entry_va": "004ccd10",
+          "name": "FUN_004ccd10",
+          "body": "[[004ccd10, 004ce3c0]]",
+          "instructions": 1553,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "316bce284af65ecac6cede8ad7e2d64bec9a797202e8ae7c12352787a22fb48c",
+          "c_sha256": "fd9fbe164f16a6dc01e45d77304287d97160dd6198871bb3dc5b156cdb26e5e4"
+        },
+        {
+          "requested_va": "0x4ac180",
+          "seeded": false,
+          "entry_va": "004ac180",
+          "name": "FUN_004ac180",
+          "body": "[[004ac180, 004ac251]]",
+          "instructions": 60,
+          "status": "decompiled",
+          "diagnostic": "",
+          "asm_sha256": "7ac11681ee5daeb57d87228b27378a0f97781b547e1e80da4b9191a1e8cd95da",
+          "c_sha256": "1cd3da734e058f774fd83104fab8b4afd72052729a91239304f14ba4288c15da"
+        }
+      ]
+    }
+  ],
+  "seeding": "4bb730 prologue confirmed from PE bytes; vtable5566e0 contains4bb730,4b82b0,4b97d0. Interiors4b8584/4ba690/4bc117 resolved after entry seeding, final manifest all valid.",
+  "limits": [
+    "Static analysis; no Windows client executed.",
+    "Intermediate consumers manifest partial: four absent functions, resolved in final extraction.",
+    "Only global climate contracts generalized; existing per-projectile adaptations remain."
+  ],
+  "fixture_checks": {
+    "script": "tests/tools/native_weather/check_calendar.py",
+    "result": "6 seeds OK; independent PE32 arithmetic",
+    "stage_command": ".tools/issue26-venv/bin/python scripts/import_mage_weather.py",
+    "stage_result": "Miramo2/1/2/1/2/0/0; 3x8ranges regenerated unchanged"
+  }
+}

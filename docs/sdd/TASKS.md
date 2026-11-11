@@ -1,5 +1,24 @@
 # Entregas e próximos trabalhos
 
+## Clima global sem Mage — issue #26 / ADR-159 (11/11/2026)
+
+- [x] Fixar base43ba5162 e entradas pinadas; Ghidra próprio confirma14VAs finais.
+- [x] Matriz, especificação e plano antes do runtime; sem regra inventada.
+- [x] Regressão roster320falhas→2976/0;16mobiles, lados, modos, mundos e fronteiras.
+- [x] Calendário/Miramo/Thor globais; máscara separada da seleção de contato.
+- [x] Sala original/todos/Random e nomes Moon/Eclipse;15/0 após RED8.
+- [x] Moon elegível3/8%, Eclipse/Dual, Thor persistente, snapshot/RNG/terreno isolados.
+- [x] Legado explicitamente separado,68assertivas preservadas.
+- [x] Harness integral350parses/111suítes/51531checks/156Python/29partidas/0falhas.
+- [x] GPU480+60quadros;60pausasRGBA idênticas; revisão independente aprovada.
+- [ ] Aceite visual humano/escuta/input e execução do cliente Windows original.
+
+Integração autorizada por PR/Rebase and merge e gates hospedados; sem versão
+manual. Registro de comandos/logs/limites em `NATIVE_WEATHER_ISSUE_26.md` e
+`docs/native-weather/validation.json`. Não ampliar a física dos outros mobiles
+como consequência da troca global do calendário.
+
+
 ## Colisão de Grub/Boomer no build — ADR-158 (08/11/2026)
 
 - [x] Conferir ZIP/assinatura da 0.22.0 e reproduzir com template release/PCK original.
