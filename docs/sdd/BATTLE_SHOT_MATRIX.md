@@ -1,5 +1,9 @@
 # Matriz dos 48 tiros — pesquisa estática de 24/10/2026
 
+Issue#28/ADR-161: geometria, inicialização, contato e resolução Bigfoot
+portados em [BIGFOOT_COMBAT_ISSUE_28](BIGFOOT_COMBAT_ISSUE_28.md).
+As lacunas Bigfoot nas seções históricas abaixo foram substituídas por esse contrato.
+
 REQ-44/45. Pesquisa da tarefa8; não é alegação de paridade implementada. Nenhum algoritmo novo foi implementado. A identidade vigente é type13 Dragon, type14 Knight, type15 Aduka; nomes antigos do decomp não definem identidade. IDs Godot preservados.
 
 ## Fontes e precisão

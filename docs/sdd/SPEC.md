@@ -1,5 +1,14 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Combate Bigfoot — issue #28 / ADR-161
+
+REQ-04/05/07/08/19/44/45: dispersão nativa pós-clamp/quantização,
+inicialização por componente com divisores4/6/8, contato455cc0, dano45db20
+e cratera4e4450 compartilhados entre execução/previsão. Preservar os ticks
+EPA, arte e smoothing; itens offline e hotspot são pontes declaradas.
+Contrato e plano: BIGFOOT_COMBAT_ISSUE_28.md.
+
+
 ## Armor T2 — issue #27 / ADR-160
 
 REQ-04/05/07/08/19/44/45: um único shell mantém duas fases de impacto.

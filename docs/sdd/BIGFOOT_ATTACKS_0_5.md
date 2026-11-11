@@ -1,5 +1,8 @@
 # Bigfoot T1/T2/SS — especificação e plano 0.5
 
+Registro histórico. Dispersão/combate substituídos pela ADR-161/issue#28;
+timing já substituído pelo catálogoEPA. Caminho atual: [BIGFOOT_COMBAT_ISSUE_28](BIGFOOT_COMBAT_ISSUE_28.md).
+
 Pedido atual: identificar no C# e assets recebidos os tiros reais do Bigfoot e
 implementar as diferenças. Escopo: REQ-03–08, REQ-09 (pausa), REQ-19; offline,
 mesma escala arena60/menu180 e perfil local. Mage permanece implementado.

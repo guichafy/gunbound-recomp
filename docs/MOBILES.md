@@ -13,7 +13,7 @@ limites em [NATIVE_WEATHER_ISSUE_26](sdd/NATIVE_WEATHER_ISSUE_26.md).
 | ID | Mobile | Estado | Registro |
 |---|---|---|---|
 | 1 | Mage | Revisado pelo cliente: T1/T2/SS, força, climas secundários e partículas em voo. Aguarda aceite | [MAGE_CLIENT_REVIEW](sdd/MAGE_CLIENT_REVIEW.md), [MAGE_SECONDARY_WEATHER](sdd/MAGE_SECONDARY_WEATHER.md), [MAGE_FLIGHT_SPARKS](sdd/MAGE_FLIGHT_SPARKS.md) |
-| 2 | Bigfoot | Arte original, suavizada 4×. Ataques herdados (adaptação), com porte parcial de animações na 0.20.4 sem resultados registrados. Falta a revisão de combate pelo cliente | [ORIGINAL_MAGE_BIGFOOT](sdd/ORIGINAL_MAGE_BIGFOOT.md), [BIGFOOT_ATTACKS_0_5](sdd/BIGFOOT_ATTACKS_0_5.md), [BIGFOOT_SMOOTH_4X](sdd/BIGFOOT_SMOOTH_4X.md) |
+| 2 | Bigfoot | Dispersão pós-quantização, bônus4/6/8, contato455cc0, dano/cratera e anexos revistos pelo cliente (ADR-161). EPA, arte e suavização4× preservados. Hotspot/muzzle e itens offline são pontes declaradas; aceite humano pendente | [BIGFOOT_COMBAT_ISSUE_28](sdd/BIGFOOT_COMBAT_ISSUE_28.md), [BIGFOOT_SMOOTH_4X](sdd/BIGFOOT_SMOOTH_4X.md) |
 | 3 | Nak | Arte, dano e voo com dados do cliente. Luz dos tiros T1/T2 aditiva sobre o corpo como no cliente (ADR-154). Falta a revisão completa | [NAK_0_15](sdd/NAK_0_15.md), [SHOTS_NAK_DRAGON_KNIGHT](sdd/SHOTS_NAK_DRAGON_KNIGHT.md) |
 | 4 | Armor | T2 com único shell, dois impactos e seis campos×7/10 (ADR-160/issue27). Dano/cratera/itens seguem pontes declaradas; T1/SS preservados | [ARMOR_T2_ISSUE_27](sdd/ARMOR_T2_ISSUE_27.md) |
 | 5 | Trico | Balística comum. Falta o S2 de três componentes | [BATTLE_MOBILE_FAMILY_PLANS §1](sdd/BATTLE_MOBILE_FAMILY_PLANS.md) |

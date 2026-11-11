@@ -41,7 +41,7 @@ func run() -> void:
 		_test_snapshot(model)
 	# Mask readiness and selection of native projectile contact are separate.
 	for vehicle in range(1,17):
-		check(Contact.active({"vehicle":vehicle})==(vehicle in [1,6,8,13,16]),"Preparing global mask does not change contact physics vehicle%d"%vehicle)
+		check(Contact.active({"vehicle":vehicle})==(vehicle in [1,2,6,8,13,16]),"Preparing global mask does not change contact physics vehicle%d"%vehicle)
 	finish("NATIVE WEATHER ROSTER CHECKS")
 
 func _test_global_effects(model) -> void:

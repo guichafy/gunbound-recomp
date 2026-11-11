@@ -14,23 +14,24 @@ func _initialize() -> void:
 		finish("MAGE CHECKS")
 		return
 	check(model.actors[1].hp == 730 and model.actors[1].shield == 220, "Mage starts with characterdata life and shield (ADR-076)")
-	# Bigfoot's actual 90-damage bomb exercises Mage shield absorption.
+	# Bigfoot power86 × native Mage vulnerability92% truncates to79.
 	model.start(2, 1, 42)
 	# Real explosions exercise shield absorption, not a mocked damage handler.
 	model.shot_actor = 0
 	model.shot_weapon = 0
-	var target: Vector2 = Combat.full_hit(model.actors[1], 25.0)
-	model.explode(target)
-	check(model.actors[1].hp == 730 and model.actors[1].shield == 130, "Shield absorbs an entire direct pulse")
-	model.explode(target)
-	model.explode(target)
-	check(model.actors[1].shield == 0 and model.actors[1].hp == 680, "Damage overflow reaches health")
+	var target: Vector2 = Vector2(load("res://scripts/aduka_combat.gd").center(model.actors[1]))
+	var bomb: Dictionary = model.projectile_parameters(0,30,50,0)[0]
+	model.explode(target,1,bomb)
+	check(model.actors[1].hp == 730 and model.actors[1].shield == 141, "Shield absorbs an entire direct pulse")
+	model.explode(target,1,bomb)
+	model.explode(target,1,bomb)
+	check(model.actors[1].shield == 0 and model.actors[1].hp == 713, "Damage overflow reaches health")
 	model.active = 1
 	model.begin_turn()
 	check(model.actors[1].shield == 30, "Mage regenerates 30 shield on its own turn")
 	model.actors[1].shield = 260
 	model.begin_turn()
-	check(model.actors[1].shield == 270, "Shield cap compensates missing health as in the fork")
+	check(model.actors[1].shield == 237, "Shield cap compensates missing health as in the fork")
 	model.start(1, 1, 43)
 	model.fire(80, 65, 1)
 	check(model.last_shots[0].angle == 50.0, "Mage clamps aim to original 50 degree maximum")

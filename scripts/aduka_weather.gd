@@ -5,7 +5,7 @@ const Physics = preload("res://scripts/classic_ballistics.gd")
 ## Inventory selecting common native projectile contact, not terrain readiness.
 ## Global Thor independently requires the 1px mask for every roster.
 ## Grub T2/SS also consume this mask through their separate ricochet loop.
-const NATIVE_TERRAIN_VEHICLES := [1, 6, 8, 13, 16]
+const NATIVE_TERRAIN_VEHICLES := [1, 2, 6, 8, 13, 16]
 
 static func active(projectile: Dictionary) -> bool:
 	# Grub T1 is Projectile::Simulate 0x455cc0, the same sampler as Mage/Aduka.

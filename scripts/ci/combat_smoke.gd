@@ -10,7 +10,7 @@ static func run(check: Callable) -> int:
 	for vehicle in Mobiles.PLAYABLE:
 		for weapon in 3:
 			var model = Match.new()
-			# Bigfoot cannot incidentally initialize a native mask for the shooter.
+			# Fixed opponent; contact inventory must be explicit for each shooter.
 			model.start(vehicle, 1, 42, "miramo_town_a", "original", null, [], [], [], 0, 2,
 				[Vector2(448, 1374), Vector2(1515, 1394)])
 			var label := "mobile %d weapon %d: " % [vehicle, weapon]
@@ -19,7 +19,7 @@ static func run(check: Callable) -> int:
 				continue
 			# Independent consumer inventory: guard before entering release's unchecked
 			# byte-array reads. Missing ground must fail even without a SCRIPT ERROR.
-			if vehicle in [1, 4, 6, 8, 13, 16]:
+			if vehicle in [1, 2, 4, 6, 8, 13, 16]:
 				var ready: bool = model.terrain.native_cells.size() == 1800 * 1800
 				check.call(ready, label + "native terrain ready without Mage opponent")
 				if not ready:
@@ -60,7 +60,7 @@ static func run(check: Callable) -> int:
 				check.call(contacts > 0, label + "terrain/effect contact observed")
 			if vehicle==4 and weapon==1:
 				check.call(contacts==2 and armor_identity, label + "same Armor T2 shell survives first crater and ends after second")
-			if vehicle in [6, 13]:
+			if vehicle in [2, 6, 13]:
 				check.call(first_contact > 5, label + "flies before contact instead of exploding at launch")
 				check.call(removed > 0, label + "contact carves real ground")
 			if vehicle == 13 and weapon > 0:

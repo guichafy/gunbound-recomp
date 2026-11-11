@@ -123,9 +123,10 @@ func run() -> void:
 	model.schedule(model.active, 50.0)
 	check(model.actors[0].hp == 1035 and model.actors[1].hp == model.actors[1].max_hp, "Protection heals 35, capped at full life")
 
-	# Contact rules on a single Bigfoot shell (base damage 90).
-	start_legacy(model, 2, 1, 12, "", "original", null, [], [], [], 0, 4)
-	var shell: Dictionary = model.projectile_parameters(0, 45, 60, 0)[0]
+	# Historical adapter on an Armor T1 shell with fixed test power90.
+	# Bigfoot is native after issue28 and must no longer stand in for this adapter.
+	start_legacy(model, 4, 1, 12, "", "original", null, [], [], [], 0, 4)
+	var shell: Dictionary = legacy_shell(model)
 	model.weather.columns.clear()
 	var force_column: Dictionary = model.weather.add_column("force", 600, 1)
 	shell.pos = Vector2(600, 300)
@@ -136,13 +137,13 @@ func run() -> void:
 	shell.pos = Vector2(200, 300)
 	model.apply_weather_contact(shell)
 	check(shell.damage == 118, "A second Force column does not stack on the same shell")
-	shell = model.projectile_parameters(0, 45, 60, 0)[0]
+	shell = legacy_shell(model)
 	model.weather.columns.clear()
 	model.weather.add_column("weakness", 600, 1)
 	shell.pos = Vector2(600, 300)
 	model.apply_weather_contact(shell)
 	check(shell.damage == 65, "Weakness: damage ÷1.2 − 10 (Force factors, as the original code)")
-	shell = model.projectile_parameters(0, 45, 60, 0)[0]
+	shell = legacy_shell(model)
 	model.weather.columns.clear()
 	var mirror: Dictionary = model.weather.add_column("mirror", 600, 1)
 	var vx: float = shell.velocity.x
@@ -154,13 +155,13 @@ func run() -> void:
 	shell.pos = Vector2(600, 300)
 	model.apply_weather_contact(shell)
 	check(shell.damage == 104 and is_equal_approx(shell.velocity.x, vx), "Re-entering a Mirror reflects again without re-scaling damage")
-	shell = model.projectile_parameters(0, 45, 60, 0)[0]
+	shell = legacy_shell(model)
 	model.weather.columns.clear()
 	model.weather.add_column("electricity", 600, 1)
 	shell.pos = Vector2(600, 300)
 	model.apply_weather_contact(shell)
 	check(shell.electric and shell.damage == 90, "Electricity marks the shell for a lightning strike")
-	shell = model.projectile_parameters(0, 45, 60, 0)[0]
+	shell = legacy_shell(model)
 	model.weather.columns.clear()
 	var random_column: Dictionary = model.weather.add_column("random", 600, 1, "force")
 	shell.pos = Vector2(600, 300)
@@ -169,7 +170,7 @@ func run() -> void:
 	check(random_column.used and model.weather.columns.size() == 2 and model.weather.columns[1].type == "force" and shell.damage == 118, "Random activates once, spawning its extra weather that then acts")
 
 	# Tornado (ADR-156): the client's branch, velocity kept; see test_classic_ballistics.
-	shell = model.projectile_parameters(0, 45, 60, 0)[0]
+	shell = legacy_shell(model)
 	model.weather.columns.clear()
 	var tornado: Dictionary = model.weather.add_column("tornado", 600, 1)
 	shell.pos = Vector2(570, 300)
@@ -211,7 +212,7 @@ func run() -> void:
 
 	# Live shots and CPU prediction agree with every weather in the path.
 	for setup in [["force"], ["weakness"], ["mirror"], ["electricity"], ["tornado"], ["random"], ["thor"]]:
-		start_legacy(model, 2, 1, 21, "", "original", null, [], [], [], 0, 4)
+		start_legacy(model, 4, 1, 21, "", "original", null, [], [], [], 0, 4)
 		model.wind = Vector2.ZERO
 		model.weather.columns.clear()
 		model.weather.thor.active = false
@@ -311,3 +312,10 @@ func start_legacy(model, vehicle: int, difficulty: int, seed_value: int, map: St
 	if mode=="all":preset=model.ALL_WEATHER
 	model.apply_weather(model.weather.setup(preset,model.terrain.world_size(),model.rng))
 	model.wind=model.weather.wind_vector()
+
+# Deliberately fixed damage for the preserved adapter arithmetic, independent
+# of the active mobile DAT. Uses a family that still owns legacy contact.
+func legacy_shell(model) -> Dictionary:
+	var shell: Dictionary=model.projectile_parameters(0,45,60,0)[0]
+	shell.damage=90
+	return shell

@@ -125,14 +125,14 @@ func run() -> void:
 	model = fresh(2, ["bunge_shot"])
 	var ground := Vector2(640, model.terrain.surface_at(640) + 30.0)
 	model.shot_actor = Match.PLAYER
-	model.explode(ground, -1, {"damage": 90, "weapon": 0})
+	model.explode(ground, -1, model.projectile_parameters(0,30,50,0)[0])
 	var normal_removed := int(events_of(model, "explosion")[0].removed)
 	model = fresh(2, ["bunge_shot"])
 	model.use_item(0)
 	model.shot_actor = Match.PLAYER
-	model.explode(ground, -1, {"damage": 90, "weapon": 0})
+	model.explode(ground, -1, model.projectile_parameters(0,30,50,0)[0])
 	var bunge: Dictionary = events_of(model, "explosion")[0]
-	check(int(bunge.removed) > normal_removed and is_equal_approx(float(bunge.radius), 25.0), "Bunge Shot carves a wider crater; the damage radius is unchanged")
+	check(int(bunge.removed) > normal_removed and is_equal_approx(float(bunge.radius), 26.0), "Bunge Shot carves a wider crater; the damage radius is unchanged")
 
 	# Change Wind: opposite direction, same force.
 	model = fresh(2, ["change_wind"])
