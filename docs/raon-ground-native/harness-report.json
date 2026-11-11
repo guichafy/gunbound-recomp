@@ -1,0 +1,4223 @@
+{
+  "scope": "GDScript suite results; line coverage is Python only",
+  "workers": 4,
+  "seconds": 351.293,
+  "matches": 29,
+  "results": {
+    "import": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.708,
+      "matches": 0,
+      "log": ".tools/check-logs/import.log",
+      "checks": 0
+    },
+    "test_matches-2-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 76.682,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-2-of-13.log",
+      "checks": 0,
+      "cases": [
+        82
+      ]
+    },
+    "test_matches-3-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 22.487,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-3-of-13.log",
+      "checks": 0,
+      "cases": [
+        83
+      ]
+    },
+    "python": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 99.8,
+      "matches": 0,
+      "log": ".tools/check-logs/python.log",
+      "checks": 0
+    },
+    "coverage_xml": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.09,
+      "matches": 0,
+      "log": ".tools/check-logs/coverage-xml.log",
+      "checks": 0
+    },
+    "coverage_html": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/coverage-html.log",
+      "checks": 0
+    },
+    "automation_coverage": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.09,
+      "matches": 0,
+      "log": ".tools/check-logs/coverage-report.log",
+      "checks": 0
+    },
+    "test_matches-1-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 128.38,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-1-of-13.log",
+      "checks": 0,
+      "cases": [
+        81
+      ]
+    },
+    "test_matches-6-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 18.235,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-6-of-13.log",
+      "checks": 0,
+      "cases": [
+        86
+      ]
+    },
+    "test_matches-4-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 88.485,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-4-of-13.log",
+      "checks": 0,
+      "cases": [
+        84
+      ]
+    },
+    "test_matches-5-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 90.025,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-5-of-13.log",
+      "checks": 0,
+      "cases": [
+        85
+      ]
+    },
+    "test_matches-7-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 46.326,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-7-of-13.log",
+      "checks": 0,
+      "cases": [
+        87
+      ]
+    },
+    "test_matches-9-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 15.528,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-9-of-13.log",
+      "checks": 0,
+      "cases": [
+        89
+      ]
+    },
+    "test_matches-11-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 6.756,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-11-of-13.log",
+      "checks": 0,
+      "cases": [
+        91
+      ]
+    },
+    "test_matches-12-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.713,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-12-of-13.log",
+      "checks": 0,
+      "cases": [
+        92
+      ]
+    },
+    "test_matches-13-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 9.351,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-13-of-13.log",
+      "checks": 0,
+      "cases": [
+        93
+      ]
+    },
+    "test_matches-10-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 49.121,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-10-of-13.log",
+      "checks": 0,
+      "cases": [
+        90
+      ]
+    },
+    "test_classic_matches-1-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 18.964,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-1-of-16.log",
+      "checks": 0,
+      "cases": [
+        1
+      ]
+    },
+    "test_classic_matches-3-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.564,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-3-of-16.log",
+      "checks": 0,
+      "cases": [
+        3
+      ]
+    },
+    "test_matches-8-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 62.855,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-8-of-13.log",
+      "checks": 0,
+      "cases": [
+        88
+      ]
+    },
+    "test_classic_matches-4-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.054,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-4-of-16.log",
+      "checks": 0,
+      "cases": [
+        4
+      ]
+    },
+    "test_classic_matches-5-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 7.502,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-5-of-16.log",
+      "checks": 0,
+      "cases": [
+        5
+      ]
+    },
+    "test_classic_matches-2-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 22.928,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-2-of-16.log",
+      "checks": 0,
+      "cases": [
+        2
+      ]
+    },
+    "test_classic_matches-7-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 13.41,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-7-of-16.log",
+      "checks": 0,
+      "cases": [
+        7
+      ]
+    },
+    "test_classic_matches-6-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 26.036,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-6-of-16.log",
+      "checks": 0,
+      "cases": [
+        6
+      ]
+    },
+    "test_classic_matches-9-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.894,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-9-of-16.log",
+      "checks": 0,
+      "cases": [
+        9
+      ]
+    },
+    "test_classic_matches-10-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.834,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-10-of-16.log",
+      "checks": 0,
+      "cases": [
+        10
+      ]
+    },
+    "test_classic_matches-12-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.805,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-12-of-16.log",
+      "checks": 0,
+      "cases": [
+        12
+      ]
+    },
+    "test_classic_matches-11-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.804,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-11-of-16.log",
+      "checks": 0,
+      "cases": [
+        11
+      ]
+    },
+    "test_classic_matches-14-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.073,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-14-of-16.log",
+      "checks": 0,
+      "cases": [
+        14
+      ]
+    },
+    "test_classic_matches-8-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 22.498,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-8-of-16.log",
+      "checks": 0,
+      "cases": [
+        8
+      ]
+    },
+    "test_classic_matches-15-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.962,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-15-of-16.log",
+      "checks": 0,
+      "cases": [
+        15
+      ]
+    },
+    "test_classic_matches-13-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 20.143,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-13-of-16.log",
+      "checks": 0,
+      "cases": [
+        13
+      ]
+    },
+    "test_classic_matches-16-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 22.161,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-16-of-16.log",
+      "checks": 0,
+      "cases": [
+        16
+      ]
+    },
+    "scripts/actor_state.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-actor_state.gd.log",
+      "checks": 0
+    },
+    "scripts/additive_sprite_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.19,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-additive_sprite_art.gd.log",
+      "checks": 0
+    },
+    "scripts/aduka_beam_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-aduka_beam_art.gd.log",
+      "checks": 0
+    },
+    "scripts/aduka_combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.204,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-aduka_combat.gd.log",
+      "checks": 0
+    },
+    "scripts/aduka_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-aduka_effect.gd.log",
+      "checks": 0
+    },
+    "scripts/aduka_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-aduka_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/aduka_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-aduka_weather.gd.log",
+      "checks": 0
+    },
+    "scripts/aim_control.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.313,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-aim_control.gd.log",
+      "checks": 0
+    },
+    "scripts/armor_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.216,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-armor_flight.gd.log",
+      "checks": 0
+    },
+    "scripts/asate_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-asate_art.gd.log",
+      "checks": 0
+    },
+    "scripts/asate_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-asate_effect.gd.log",
+      "checks": 0
+    },
+    "scripts/avatar_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.309,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-avatar_art.gd.log",
+      "checks": 0
+    },
+    "scripts/avatar_catalog.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-avatar_catalog.gd.log",
+      "checks": 0
+    },
+    "scripts/avatar_contour_glow.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-avatar_contour_glow.gd.log",
+      "checks": 0
+    },
+    "scripts/avatar_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.199,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-avatar_hd.gd.log",
+      "checks": 0
+    },
+    "scripts/avatar_shop.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.255,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-avatar_shop.gd.log",
+      "checks": 0
+    },
+    "scripts/avatar_shop_model.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.21,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-avatar_shop_model.gd.log",
+      "checks": 0
+    },
+    "scripts/avatar_xfs_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-avatar_xfs_hd.gd.log",
+      "checks": 0
+    },
+    "scripts/battle_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.262,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-battle_art.gd.log",
+      "checks": 0
+    },
+    "scripts/battle_hud_layout.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-battle_hud_layout.gd.log",
+      "checks": 0
+    },
+    "scripts/bigfoot_attacks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-bigfoot_attacks.gd.log",
+      "checks": 0
+    },
+    "scripts/bigfoot_combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.146,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-bigfoot_combat.gd.log",
+      "checks": 0
+    },
+    "scripts/bigfoot_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.264,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-bigfoot_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/boomer_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.198,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-boomer_flight.gd.log",
+      "checks": 0
+    },
+    "scripts/camera_rig.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.209,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-camera_rig.gd.log",
+      "checks": 0
+    },
+    "scripts/ci/combat_smoke.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.264,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-ci-combat_smoke.gd.log",
+      "checks": 0
+    },
+    "scripts/ci/smoke.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.268,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-ci-smoke.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_ballistics.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_ballistics.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_battle_options_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_battle_options_art.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_chrome.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.204,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_chrome.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_flight.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_lobby_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_lobby_art.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_mage_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_mage_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_mobiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_mobiles.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_projectile_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_projectile_art.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_ranks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_ranks.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_result.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.261,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_result.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_room_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_room_art.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_room_panel.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_room_panel.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_shop_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.206,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_shop_art.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_shot_timing.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.2,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_shot_timing.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.263,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/classic_text_button.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-classic_text_button.gd.log",
+      "checks": 0
+    },
+    "scripts/client_audio.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.207,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-client_audio.gd.log",
+      "checks": 0
+    },
+    "scripts/client_hud_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-client_hud_assets.gd.log",
+      "checks": 0
+    },
+    "scripts/client_weather_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.141,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-client_weather_assets.gd.log",
+      "checks": 0
+    },
+    "scripts/combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-combat.gd.log",
+      "checks": 0
+    },
+    "scripts/cpu_planner.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.193,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-cpu_planner.gd.log",
+      "checks": 0
+    },
+    "scripts/cpu_turn.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.261,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-cpu_turn.gd.log",
+      "checks": 0
+    },
+    "scripts/damage.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-damage.gd.log",
+      "checks": 0
+    },
+    "scripts/delay_units.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-delay_units.gd.log",
+      "checks": 0
+    },
+    "scripts/dragon_sparks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.148,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-dragon_sparks.gd.log",
+      "checks": 0
+    },
+    "scripts/flight_snapshot.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-flight_snapshot.gd.log",
+      "checks": 0
+    },
+    "scripts/game.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.568,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-game.gd.log",
+      "checks": 0
+    },
+    "scripts/gold_rewards.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-gold_rewards.gd.log",
+      "checks": 0
+    },
+    "scripts/gold_tracker.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-gold_tracker.gd.log",
+      "checks": 0
+    },
+    "scripts/grub_combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-grub_combat.gd.log",
+      "checks": 0
+    },
+    "scripts/grub_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-grub_flight.gd.log",
+      "checks": 0
+    },
+    "scripts/grub_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-grub_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/grub_surface.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-grub_surface.gd.log",
+      "checks": 0
+    },
+    "scripts/hd_sheet.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-hd_sheet.gd.log",
+      "checks": 0
+    },
+    "scripts/hud_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.265,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-hud_art.gd.log",
+      "checks": 0
+    },
+    "scripts/i18n.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.192,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-i18n.gd.log",
+      "checks": 0
+    },
+    "scripts/ice_effects.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.193,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-ice_effects.gd.log",
+      "checks": 0
+    },
+    "scripts/item_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.199,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-item_art.gd.log",
+      "checks": 0
+    },
+    "scripts/item_bar.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.268,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-item_bar.gd.log",
+      "checks": 0
+    },
+    "scripts/item_effects.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-item_effects.gd.log",
+      "checks": 0
+    },
+    "scripts/items.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-items.gd.log",
+      "checks": 0
+    },
+    "scripts/jd_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-jd_effect.gd.log",
+      "checks": 0
+    },
+    "scripts/json_store.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-json_store.gd.log",
+      "checks": 0
+    },
+    "scripts/knight_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.21,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-knight_art.gd.log",
+      "checks": 0
+    },
+    "scripts/knight_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-knight_effect.gd.log",
+      "checks": 0
+    },
+    "scripts/lightning_beam_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.199,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-lightning_beam_art.gd.log",
+      "checks": 0
+    },
+    "scripts/lightning_combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.193,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-lightning_combat.gd.log",
+      "checks": 0
+    },
+    "scripts/lightning_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.259,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-lightning_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/loading_view.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.21,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-loading_view.gd.log",
+      "checks": 0
+    },
+    "scripts/lobby_screen.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.208,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-lobby_screen.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_combat.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_flight.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_projectile_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_projectile_art.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_spark_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.204,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_spark_art.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_sparks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_sparks.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.267,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_weather.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_weather_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_weather_art.gd.log",
+      "checks": 0
+    },
+    "scripts/mage_weather_effects.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mage_weather_effects.gd.log",
+      "checks": 0
+    },
+    "scripts/maps.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-maps.gd.log",
+      "checks": 0
+    },
+    "scripts/match.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.251,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-match.gd.log",
+      "checks": 0
+    },
+    "scripts/match_loading.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.207,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-match_loading.gd.log",
+      "checks": 0
+    },
+    "scripts/match_overlay.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-match_overlay.gd.log",
+      "checks": 0
+    },
+    "scripts/menu_screen.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.361,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-menu_screen.gd.log",
+      "checks": 0
+    },
+    "scripts/mobile_looks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.191,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mobile_looks.gd.log",
+      "checks": 0
+    },
+    "scripts/mobile_rig.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mobile_rig.gd.log",
+      "checks": 0
+    },
+    "scripts/mobile_smooth_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.199,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mobile_smooth_art.gd.log",
+      "checks": 0
+    },
+    "scripts/mobile_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.261,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mobile_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/mobiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-mobiles.gd.log",
+      "checks": 0
+    },
+    "scripts/nak_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.27,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-nak_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/options.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.149,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-options.gd.log",
+      "checks": 0
+    },
+    "scripts/options_popup.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.209,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-options_popup.gd.log",
+      "checks": 0
+    },
+    "scripts/player_attributes.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.147,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-player_attributes.gd.log",
+      "checks": 0
+    },
+    "scripts/profile.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-profile.gd.log",
+      "checks": 0
+    },
+    "scripts/projectile_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.149,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-projectile_art.gd.log",
+      "checks": 0
+    },
+    "scripts/raon_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.191,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-raon_effect.gd.log",
+      "checks": 0
+    },
+    "scripts/room_choice.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-room_choice.gd.log",
+      "checks": 0
+    },
+    "scripts/room_figures.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-room_figures.gd.log",
+      "checks": 0
+    },
+    "scripts/room_random_sprite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.264,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-room_random_sprite.gd.log",
+      "checks": 0
+    },
+    "scripts/select_item_popup.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-select_item_popup.gd.log",
+      "checks": 0
+    },
+    "scripts/settings_panel.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-settings_panel.gd.log",
+      "checks": 0
+    },
+    "scripts/shell_state.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-shell_state.gd.log",
+      "checks": 0
+    },
+    "scripts/shop_card_style.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.188,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-shop_card_style.gd.log",
+      "checks": 0
+    },
+    "scripts/shop_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-shop_hd.gd.log",
+      "checks": 0
+    },
+    "scripts/sound.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.149,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-sound.gd.log",
+      "checks": 0
+    },
+    "scripts/sprite_pose.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-sprite_pose.gd.log",
+      "checks": 0
+    },
+    "scripts/terrain.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.206,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-terrain.gd.log",
+      "checks": 0
+    },
+    "scripts/thor_native_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-thor_native_art.gd.log",
+      "checks": 0
+    },
+    "scripts/trico_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-trico_flight.gd.log",
+      "checks": 0
+    },
+    "scripts/turn_table.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.192,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-turn_table.gd.log",
+      "checks": 0
+    },
+    "scripts/turtle_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-turtle_flight.gd.log",
+      "checks": 0
+    },
+    "scripts/ui.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-ui.gd.log",
+      "checks": 0
+    },
+    "scripts/weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.206,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-weather.gd.log",
+      "checks": 0
+    },
+    "scripts/weather_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-weather_art.gd.log",
+      "checks": 0
+    },
+    "scripts/weather_contact.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-weather_contact.gd.log",
+      "checks": 0
+    },
+    "scripts/xfs_shop_style.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.209,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-scripts-xfs_shop_style.gd.log",
+      "checks": 0
+    },
+    "tests/audit_xfs_hd_runtime.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.204,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-audit_xfs_hd_runtime.gd.log",
+      "checks": 0
+    },
+    "tests/capture.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture.gd.log",
+      "checks": 0
+    },
+    "tests/capture_actor_gravity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.606,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_actor_gravity.gd.log",
+      "checks": 0
+    },
+    "tests/capture_aduka_game.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.204,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_aduka_game.gd.log",
+      "checks": 0
+    },
+    "tests/capture_aduka_mount.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.491,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_aduka_mount.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_card_fix.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_card_fix.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_card_fix_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_card_fix_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_continuity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_continuity.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_effect_shop.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_effect_shop.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_effects.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_effects.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_hd_roster.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.19,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_hd_roster.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_mount.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_mount.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_offline.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_offline.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_pck_smoke.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_pck_smoke.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_price_crisp.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_price_crisp.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.196,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_audit.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_audit.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_audit_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_audit_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_classic.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.206,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_classic.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_classic_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.198,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_classic_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_parity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.206,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_parity.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_parity_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_parity_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_video.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_video.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_video_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.177,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_video_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_xfs.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.198,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_xfs.gd.log",
+      "checks": 0
+    },
+    "tests/capture_avatar_shop_xfs_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.206,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_avatar_shop_xfs_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_battle_hud_layout.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_battle_hud_layout.gd.log",
+      "checks": 0
+    },
+    "tests/capture_battle_options.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.193,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_battle_options.gd.log",
+      "checks": 0
+    },
+    "tests/capture_bigfoot.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_bigfoot.gd.log",
+      "checks": 0
+    },
+    "tests/capture_bigfoot_attacks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_bigfoot_attacks.gd.log",
+      "checks": 0
+    },
+    "tests/capture_bigfoot_native.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.246,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_bigfoot_native.gd.log",
+      "checks": 0
+    },
+    "tests/capture_bigfoot_smooth.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.294,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_bigfoot_smooth.gd.log",
+      "checks": 0
+    },
+    "tests/capture_bigfoot_smooth_scene.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.292,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_bigfoot_smooth_scene.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_audio.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.18,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_audio.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_fall_wind.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.186,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_fall_wind.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_impact.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_impact.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_issue9.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.567,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_issue9.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_muzzle.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_muzzle.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_muzzle_slope.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_muzzle_slope.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_native_poses.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.177,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_native_poses.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_standing_wind.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_standing_wind.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_support.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_support.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_weak_pose.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_weak_pose.gd.log",
+      "checks": 0
+    },
+    "tests/capture_boomer_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.191,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_boomer_weather.gd.log",
+      "checks": 0
+    },
+    "tests/capture_classic_buttons_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.179,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_classic_buttons_hd.gd.log",
+      "checks": 0
+    },
+    "tests/capture_classic_buttons_smooth.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.186,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_classic_buttons_smooth.gd.log",
+      "checks": 0
+    },
+    "tests/capture_classic_shots.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_classic_shots.gd.log",
+      "checks": 0
+    },
+    "tests/capture_client_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_client_assets.gd.log",
+      "checks": 0
+    },
+    "tests/capture_client_weather_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_client_weather_assets.gd.log",
+      "checks": 0
+    },
+    "tests/capture_footer_background.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_footer_background.gd.log",
+      "checks": 0
+    },
+    "tests/capture_grub.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.55,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_grub.gd.log",
+      "checks": 0
+    },
+    "tests/capture_hd_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_hd_assets.gd.log",
+      "checks": 0
+    },
+    "tests/capture_horn_aura.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.181,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_horn_aura.gd.log",
+      "checks": 0
+    },
+    "tests/capture_horn_classic.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.186,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_horn_classic.gd.log",
+      "checks": 0
+    },
+    "tests/capture_horn_curve.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_horn_curve.gd.log",
+      "checks": 0
+    },
+    "tests/capture_hud.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_hud.gd.log",
+      "checks": 0
+    },
+    "tests/capture_hud_clock_wind.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.186,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_hud_clock_wind.gd.log",
+      "checks": 0
+    },
+    "tests/capture_ice_effects.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.288,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_ice_effects.gd.log",
+      "checks": 0
+    },
+    "tests/capture_items.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_items.gd.log",
+      "checks": 0
+    },
+    "tests/capture_lightning_game.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.179,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_lightning_game.gd.log",
+      "checks": 0
+    },
+    "tests/capture_lightning_poses.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.561,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_lightning_poses.gd.log",
+      "checks": 0
+    },
+    "tests/capture_lobby_art_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_lobby_art_hd.gd.log",
+      "checks": 0
+    },
+    "tests/capture_lobby_ui.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.178,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_lobby_ui.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mage.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mage.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mage_bigfoot_port.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.279,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mage_bigfoot_port.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mage_game.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mage_game.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mage_review.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.566,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mage_review.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mage_sparks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.637,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mage_sparks.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mage_sparks_game.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.204,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mage_sparks_game.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mage_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.2,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mage_weather.gd.log",
+      "checks": 0
+    },
+    "tests/capture_main_shop_items_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_main_shop_items_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_map.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_map.gd.log",
+      "checks": 0
+    },
+    "tests/capture_match_loading.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.197,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_match_loading.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mobile_animation.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mobile_animation.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mobile_composition.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mobile_composition.gd.log",
+      "checks": 0
+    },
+    "tests/capture_mobile_shots.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.256,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_mobile_shots.gd.log",
+      "checks": 0
+    },
+    "tests/capture_move_bar.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_move_bar.gd.log",
+      "checks": 0
+    },
+    "tests/capture_nak.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_nak.gd.log",
+      "checks": 0
+    },
+    "tests/capture_original_mobiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.179,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_original_mobiles.gd.log",
+      "checks": 0
+    },
+    "tests/capture_pilot_projectiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_pilot_projectiles.gd.log",
+      "checks": 0
+    },
+    "tests/capture_raon_mines.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.602,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_raon_mines.gd.log",
+      "checks": 0
+    },
+    "tests/capture_raon_shots.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.594,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_raon_shots.gd.log",
+      "checks": 0
+    },
+    "tests/capture_readme.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.21,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_readme.gd.log",
+      "checks": 0
+    },
+    "tests/capture_result_screen.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_result_screen.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_button_alpha.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_button_alpha.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_button_alpha_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_button_alpha_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_card.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_card.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_card_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.19,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_card_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_finish.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.19,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_finish.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_finish_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.202,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_finish_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_polish.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_polish.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_reference.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.2,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_reference.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_settings.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_settings.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_settings_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_settings_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_room_ui.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_room_ui.gd.log",
+      "checks": 0
+    },
+    "tests/capture_settings_baseline.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_settings_baseline.gd.log",
+      "checks": 0
+    },
+    "tests/capture_settings_i18n.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.459,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_settings_i18n.gd.log",
+      "checks": 0
+    },
+    "tests/capture_settings_word.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.192,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_settings_word.gd.log",
+      "checks": 0
+    },
+    "tests/capture_settings_word_finish.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.189,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_settings_word_finish.gd.log",
+      "checks": 0
+    },
+    "tests/capture_settings_word_finish_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_settings_word_finish_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_settings_word_original.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.199,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_settings_word_original.gd.log",
+      "checks": 0
+    },
+    "tests/capture_settings_word_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.192,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_settings_word_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_shop_original.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_shop_original.gd.log",
+      "checks": 0
+    },
+    "tests/capture_shop_original_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.155,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_shop_original_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_shop_test_funds.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_shop_test_funds.gd.log",
+      "checks": 0
+    },
+    "tests/capture_side_pilot.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.204,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_side_pilot.gd.log",
+      "checks": 0
+    },
+    "tests/capture_special_mobiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.592,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_special_mobiles.gd.log",
+      "checks": 0
+    },
+    "tests/capture_trico_native.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.387,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_trico_native.gd.log",
+      "checks": 0
+    },
+    "tests/capture_turtle_projectiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.409,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_turtle_projectiles.gd.log",
+      "checks": 0
+    },
+    "tests/capture_turtle_t2.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.388,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_turtle_t2.gd.log",
+      "checks": 0
+    },
+    "tests/capture_using_item.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.196,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_using_item.gd.log",
+      "checks": 0
+    },
+    "tests/capture_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_weather.gd.log",
+      "checks": 0
+    },
+    "tests/capture_xfs_hd_migration.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.192,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_xfs_hd_migration.gd.log",
+      "checks": 0
+    },
+    "tests/capture_xfs_hd_motion.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_xfs_hd_motion.gd.log",
+      "checks": 0
+    },
+    "tests/capture_xfs_hd_pck.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.21,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_xfs_hd_pck.gd.log",
+      "checks": 0
+    },
+    "tests/capture_xfs_outfits.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.209,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-capture_xfs_outfits.gd.log",
+      "checks": 0
+    },
+    "tests/legacy_profile.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.203,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-legacy_profile.gd.log",
+      "checks": 0
+    },
+    "tests/prepare_hd_references.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.193,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-prepare_hd_references.gd.log",
+      "checks": 0
+    },
+    "tests/support/actor_platforms.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.456,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-support-actor_platforms.gd.log",
+      "checks": 0
+    },
+    "tests/support/match_partition.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.303,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-support-match_partition.gd.log",
+      "checks": 0
+    },
+    "tests/support/suite.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.178,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-support-suite.gd.log",
+      "checks": 0
+    },
+    "tests/test_actor_gravity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.397,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_actor_gravity.gd.log",
+      "checks": 0
+    },
+    "tests/test_aduka_beam_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.289,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_aduka_beam_art.gd.log",
+      "checks": 0
+    },
+    "tests/test_aduka_combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.512,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_aduka_combat.gd.log",
+      "checks": 0
+    },
+    "tests/test_aduka_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.508,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_aduka_effect.gd.log",
+      "checks": 0
+    },
+    "tests/test_aduka_native.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.089,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_aduka_native.gd.log",
+      "checks": 0
+    },
+    "tests/test_aduka_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.4,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_aduka_weather.gd.log",
+      "checks": 0
+    },
+    "tests/test_aiming.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.181,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_aiming.gd.log",
+      "checks": 0
+    },
+    "tests/test_armor_t2.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.296,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_armor_t2.gd.log",
+      "checks": 0
+    },
+    "tests/test_asate_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.182,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_asate_effect.gd.log",
+      "checks": 0
+    },
+    "tests/test_attributes.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.182,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_attributes.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_art.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_catalog.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_catalog.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_continuity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_continuity.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_hd.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_mount.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.182,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_mount.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_offline.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.178,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_offline.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_profile.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_profile.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_shop.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.179,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_shop.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_shop_classic.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_shop_classic.gd.log",
+      "checks": 0
+    },
+    "tests/test_avatar_shop_parity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_avatar_shop_parity.gd.log",
+      "checks": 0
+    },
+    "tests/test_battle_hud_layout.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.178,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_battle_hud_layout.gd.log",
+      "checks": 0
+    },
+    "tests/test_battle_options.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_battle_options.gd.log",
+      "checks": 0
+    },
+    "tests/test_battle_rules.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.238,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_battle_rules.gd.log",
+      "checks": 0
+    },
+    "tests/test_bigfoot.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_bigfoot.gd.log",
+      "checks": 0
+    },
+    "tests/test_bigfoot_attacks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.291,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_bigfoot_attacks.gd.log",
+      "checks": 0
+    },
+    "tests/test_bigfoot_attacks_scene.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_bigfoot_attacks_scene.gd.log",
+      "checks": 0
+    },
+    "tests/test_bigfoot_native.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.243,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_bigfoot_native.gd.log",
+      "checks": 0
+    },
+    "tests/test_bigfoot_smooth.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_bigfoot_smooth.gd.log",
+      "checks": 0
+    },
+    "tests/test_boomer.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.568,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_boomer.gd.log",
+      "checks": 0
+    },
+    "tests/test_ci_combat.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.292,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_ci_combat.gd.log",
+      "checks": 0
+    },
+    "tests/test_ci_smoke.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_ci_smoke.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.454,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_assets.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_ballistics.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.286,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_ballistics.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_buttons_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.176,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_buttons_hd.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_flight_parity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.294,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_flight_parity.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_matches.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.294,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_matches.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_mobiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.287,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_mobiles.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_shot_timing.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.281,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_shot_timing.gd.log",
+      "checks": 0
+    },
+    "tests/test_classic_shot_timing_scene.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.182,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_classic_shot_timing_scene.gd.log",
+      "checks": 0
+    },
+    "tests/test_client_audio.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_client_audio.gd.log",
+      "checks": 0
+    },
+    "tests/test_client_hud_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.29,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_client_hud_assets.gd.log",
+      "checks": 0
+    },
+    "tests/test_client_item_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.188,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_client_item_assets.gd.log",
+      "checks": 0
+    },
+    "tests/test_client_weather_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_client_weather_assets.gd.log",
+      "checks": 0
+    },
+    "tests/test_dragon_shots.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.351,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_dragon_shots.gd.log",
+      "checks": 0
+    },
+    "tests/test_gold_rewards.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.182,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_gold_rewards.gd.log",
+      "checks": 0
+    },
+    "tests/test_grub_flight.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.186,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_grub_flight.gd.log",
+      "checks": 0
+    },
+    "tests/test_grub_model.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.351,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_grub_model.gd.log",
+      "checks": 0
+    },
+    "tests/test_grub_surface.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_grub_surface.gd.log",
+      "checks": 0
+    },
+    "tests/test_hd_assets.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_hd_assets.gd.log",
+      "checks": 0
+    },
+    "tests/test_hud.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_hud.gd.log",
+      "checks": 0
+    },
+    "tests/test_hud_clock_wind.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.293,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_hud_clock_wind.gd.log",
+      "checks": 0
+    },
+    "tests/test_i18n.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.186,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_i18n.gd.log",
+      "checks": 0
+    },
+    "tests/test_ice_effects.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.292,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_ice_effects.gd.log",
+      "checks": 0
+    },
+    "tests/test_items.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.18,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_items.gd.log",
+      "checks": 0
+    },
+    "tests/test_items_scene.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_items_scene.gd.log",
+      "checks": 0
+    },
+    "tests/test_jd_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.182,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_jd_effect.gd.log",
+      "checks": 0
+    },
+    "tests/test_knight_shots.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_knight_shots.gd.log",
+      "checks": 0
+    },
+    "tests/test_lightning_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_lightning_art.gd.log",
+      "checks": 0
+    },
+    "tests/test_lightning_native.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.293,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_lightning_native.gd.log",
+      "checks": 0
+    },
+    "tests/test_lightning_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_lightning_weather.gd.log",
+      "checks": 0
+    },
+    "tests/test_lobby_art_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_lobby_art_hd.gd.log",
+      "checks": 0
+    },
+    "tests/test_lobby_settings.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.179,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_lobby_settings.gd.log",
+      "checks": 0
+    },
+    "tests/test_lobby_ui.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_lobby_ui.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.293,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_client_animation.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_client_animation.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_native.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_native.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_scene.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_scene.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_secondary_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_secondary_weather.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_spark_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_spark_art.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_sparks.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.291,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_sparks.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_weather.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_weather_art.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_weather_art.gd.log",
+      "checks": 0
+    },
+    "tests/test_mage_weather_effects.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.241,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mage_weather_effects.gd.log",
+      "checks": 0
+    },
+    "tests/test_map.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_map.gd.log",
+      "checks": 0
+    },
+    "tests/test_match_loading.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_match_loading.gd.log",
+      "checks": 0
+    },
+    "tests/test_match_partition.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_match_partition.gd.log",
+      "checks": 0
+    },
+    "tests/test_matches.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.291,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_matches.gd.log",
+      "checks": 0
+    },
+    "tests/test_mobile_animation.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mobile_animation.gd.log",
+      "checks": 0
+    },
+    "tests/test_mobile_parity.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_mobile_parity.gd.log",
+      "checks": 0
+    },
+    "tests/test_music_screens.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.292,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_music_screens.gd.log",
+      "checks": 0
+    },
+    "tests/test_nak.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_nak.gd.log",
+      "checks": 0
+    },
+    "tests/test_native_terrain.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_native_terrain.gd.log",
+      "checks": 0
+    },
+    "tests/test_native_weather_roster.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_native_weather_roster.gd.log",
+      "checks": 0
+    },
+    "tests/test_original_mobiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_original_mobiles.gd.log",
+      "checks": 0
+    },
+    "tests/test_performance.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_performance.gd.log",
+      "checks": 0
+    },
+    "tests/test_pilot_projectiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_pilot_projectiles.gd.log",
+      "checks": 0
+    },
+    "tests/test_raon_effect.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.18,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_raon_effect.gd.log",
+      "checks": 0
+    },
+    "tests/test_raon_ground.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.29,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_raon_ground.gd.log",
+      "checks": 0
+    },
+    "tests/test_raon_mines.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.24,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_raon_mines.gd.log",
+      "checks": 0
+    },
+    "tests/test_raon_shots.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.294,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_raon_shots.gd.log",
+      "checks": 0
+    },
+    "tests/test_raon_trail.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.292,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_raon_trail.gd.log",
+      "checks": 0
+    },
+    "tests/test_refinement.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.29,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_refinement.gd.log",
+      "checks": 0
+    },
+    "tests/test_refinement_scene.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_refinement_scene.gd.log",
+      "checks": 0
+    },
+    "tests/test_result_screen.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.296,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_result_screen.gd.log",
+      "checks": 0
+    },
+    "tests/test_room_polish.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_room_polish.gd.log",
+      "checks": 0
+    },
+    "tests/test_room_reference.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_room_reference.gd.log",
+      "checks": 0
+    },
+    "tests/test_room_settings.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_room_settings.gd.log",
+      "checks": 0
+    },
+    "tests/test_room_ui.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_room_ui.gd.log",
+      "checks": 0
+    },
+    "tests/test_roster.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_roster.gd.log",
+      "checks": 0
+    },
+    "tests/test_runner.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_runner.gd.log",
+      "checks": 0
+    },
+    "tests/test_scene.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.181,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_scene.gd.log",
+      "checks": 0
+    },
+    "tests/test_settings_i18n.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.188,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_settings_i18n.gd.log",
+      "checks": 0
+    },
+    "tests/test_shop_audit.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.185,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_shop_audit.gd.log",
+      "checks": 0
+    },
+    "tests/test_shop_hd.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.179,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_shop_hd.gd.log",
+      "checks": 0
+    },
+    "tests/test_shop_items_integration.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.24,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_shop_items_integration.gd.log",
+      "checks": 0
+    },
+    "tests/test_shop_original.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_shop_original.gd.log",
+      "checks": 0
+    },
+    "tests/test_shop_test_funds.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_shop_test_funds.gd.log",
+      "checks": 0
+    },
+    "tests/test_shop_wide.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.179,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_shop_wide.gd.log",
+      "checks": 0
+    },
+    "tests/test_shop_xfs.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.186,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_shop_xfs.gd.log",
+      "checks": 0
+    },
+    "tests/test_special_mobiles_integration.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_special_mobiles_integration.gd.log",
+      "checks": 0
+    },
+    "tests/test_trico_ss.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.352,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_trico_ss.gd.log",
+      "checks": 0
+    },
+    "tests/test_trico_t2.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.4,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_trico_t2.gd.log",
+      "checks": 0
+    },
+    "tests/test_turtle_projectiles.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.346,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_turtle_projectiles.gd.log",
+      "checks": 0
+    },
+    "tests/test_turtle_t2.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.296,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_turtle_t2.gd.log",
+      "checks": 0
+    },
+    "tests/test_weather.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.288,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_weather.gd.log",
+      "checks": 0
+    },
+    "tests/test_weather_legacy.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_weather_legacy.gd.log",
+      "checks": 0
+    },
+    "tests/test_xfs_catalog.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.187,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_xfs_catalog.gd.log",
+      "checks": 0
+    },
+    "tests/test_xfs_equipment.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.184,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_xfs_equipment.gd.log",
+      "checks": 0
+    },
+    "tests/test_xfs_hd_migration.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.183,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-test_xfs_hd_migration.gd.log",
+      "checks": 0
+    },
+    "tests/tools/bigfoot_profile/match.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.178,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-tools-bigfoot_profile-match.gd.log",
+      "checks": 0
+    },
+    "tests/tools/bigfoot_profile/ui.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.182,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-tools-bigfoot_profile-ui.gd.log",
+      "checks": 0
+    },
+    "test_runner": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.329,
+      "matches": 0,
+      "log": ".tools/check-logs/test_runner.log",
+      "checks": 39
+    },
+    "test_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.469,
+      "matches": 0,
+      "log": ".tools/check-logs/test_scene.log",
+      "checks": 27
+    },
+    "test_lobby_ui": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.408,
+      "matches": 0,
+      "log": ".tools/check-logs/test_lobby_ui.log",
+      "checks": 96
+    },
+    "test_lobby_art_hd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.483,
+      "matches": 0,
+      "log": ".tools/check-logs/test_lobby_art_hd.log",
+      "checks": 93
+    },
+    "test_room_ui": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.335,
+      "matches": 0,
+      "log": ".tools/check-logs/test_room_ui.log",
+      "checks": 172
+    },
+    "test_room_reference": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.292,
+      "matches": 0,
+      "log": ".tools/check-logs/test_room_reference.log",
+      "checks": 232
+    },
+    "test_room_polish": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.044,
+      "matches": 0,
+      "log": ".tools/check-logs/test_room_polish.log",
+      "checks": 162
+    },
+    "test_room_settings": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.173,
+      "matches": 0,
+      "log": ".tools/check-logs/test_room_settings.log",
+      "checks": 59
+    },
+    "test_classic_buttons_hd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.331,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_buttons_hd.log",
+      "checks": 596
+    },
+    "test_refinement": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.077,
+      "matches": 0,
+      "log": ".tools/check-logs/test_refinement.log",
+      "checks": 28
+    },
+    "test_refinement_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.125,
+      "matches": 0,
+      "log": ".tools/check-logs/test_refinement_scene.log",
+      "checks": 22
+    },
+    "test_bigfoot": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.309,
+      "matches": 0,
+      "log": ".tools/check-logs/test_bigfoot.log",
+      "checks": 28
+    },
+    "test_bigfoot_smooth": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.381,
+      "matches": 0,
+      "log": ".tools/check-logs/test_bigfoot_smooth.log",
+      "checks": 70
+    },
+    "test_mage": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.62,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage.log",
+      "checks": 41
+    },
+    "test_mage_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.238,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_scene.log",
+      "checks": 15
+    },
+    "test_bigfoot_native": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.432,
+      "matches": 0,
+      "log": ".tools/check-logs/test_bigfoot_native.log",
+      "checks": 2905
+    },
+    "test_ice_effects": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.088,
+      "matches": 0,
+      "log": ".tools/check-logs/test_ice_effects.log",
+      "checks": 300
+    },
+    "test_bigfoot_attacks": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.433,
+      "matches": 0,
+      "log": ".tools/check-logs/test_bigfoot_attacks.log",
+      "checks": 56
+    },
+    "test_bigfoot_attacks_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.033,
+      "matches": 0,
+      "log": ".tools/check-logs/test_bigfoot_attacks_scene.log",
+      "checks": 14
+    },
+    "test_hd_assets": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.704,
+      "matches": 0,
+      "log": ".tools/check-logs/test_hd_assets.log",
+      "checks": 193
+    },
+    "test_mobile_animation": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.078,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mobile_animation.log",
+      "checks": 240
+    },
+    "test_pilot_projectiles": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.208,
+      "matches": 0,
+      "log": ".tools/check-logs/test_pilot_projectiles.log",
+      "checks": 108
+    },
+    "test_roster": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.305,
+      "matches": 0,
+      "log": ".tools/check-logs/test_roster.log",
+      "checks": 79
+    },
+    "test_map": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.73,
+      "matches": 0,
+      "log": ".tools/check-logs/test_map.log",
+      "checks": 49
+    },
+    "test_weather": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.189,
+      "matches": 0,
+      "log": ".tools/check-logs/test_weather.log",
+      "checks": 15
+    },
+    "test_hud": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.43,
+      "matches": 0,
+      "log": ".tools/check-logs/test_hud.log",
+      "checks": 531
+    },
+    "test_aiming": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.121,
+      "matches": 0,
+      "log": ".tools/check-logs/test_aiming.log",
+      "checks": 25
+    },
+    "test_items": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.197,
+      "matches": 0,
+      "log": ".tools/check-logs/test_items.log",
+      "checks": 49
+    },
+    "test_items_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 6.924,
+      "matches": 0,
+      "log": ".tools/check-logs/test_items_scene.log",
+      "checks": 49
+    },
+    "test_shop_items_integration": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.814,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_items_integration.log",
+      "checks": 39
+    },
+    "test_avatar_catalog": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.15,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_catalog.log",
+      "checks": 34
+    },
+    "test_avatar_profile": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.619,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_profile.log",
+      "checks": 25
+    },
+    "test_avatar_shop": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.39,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_shop.log",
+      "checks": 25
+    },
+    "test_avatar_shop_classic": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.42,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_shop_classic.log",
+      "checks": 24
+    },
+    "test_avatar_shop_parity": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.916,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_shop_parity.log",
+      "checks": 25
+    },
+    "test_shop_audit": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.884,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_audit.log",
+      "checks": 21
+    },
+    "test_shop_wide": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.196,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_wide.log",
+      "checks": 26
+    },
+    "test_shop_xfs": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.964,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_xfs.log",
+      "checks": 12
+    },
+    "test_shop_original": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.106,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_original.log",
+      "checks": 77
+    },
+    "test_xfs_catalog": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.495,
+      "matches": 0,
+      "log": ".tools/check-logs/test_xfs_catalog.log",
+      "checks": 3816
+    },
+    "test_shop_test_funds": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.661,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_test_funds.log",
+      "checks": 14
+    },
+    "test_xfs_equipment": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.096,
+      "matches": 0,
+      "log": ".tools/check-logs/test_xfs_equipment.log",
+      "checks": 19
+    },
+    "test_xfs_hd_migration": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.278,
+      "matches": 0,
+      "log": ".tools/check-logs/test_xfs_hd_migration.log",
+      "checks": 2009
+    },
+    "test_shop_hd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.559,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_hd.log",
+      "checks": 46
+    },
+    "test_avatar_art": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.266,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_art.log",
+      "checks": 9
+    },
+    "test_avatar_mount": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.567,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_mount.log",
+      "checks": 24
+    },
+    "test_avatar_hd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.373,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_hd.log",
+      "checks": 152
+    },
+    "test_avatar_continuity": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.087,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_continuity.log",
+      "checks": 130
+    },
+    "test_attributes": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.899,
+      "matches": 0,
+      "log": ".tools/check-logs/test_attributes.log",
+      "checks": 59
+    },
+    "test_gold_rewards": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.673,
+      "matches": 0,
+      "log": ".tools/check-logs/test_gold_rewards.log",
+      "checks": 43
+    },
+    "test_mobile_parity": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.892,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mobile_parity.log",
+      "checks": 27
+    },
+    "test_nak": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.785,
+      "matches": 0,
+      "log": ".tools/check-logs/test_nak.log",
+      "checks": 68
+    },
+    "test_battle_rules": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 7.203,
+      "matches": 0,
+      "log": ".tools/check-logs/test_battle_rules.log",
+      "checks": 60
+    },
+    "test_classic_mobiles": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.432,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_mobiles.log",
+      "checks": 129
+    },
+    "test_original_mobiles": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.514,
+      "matches": 0,
+      "log": ".tools/check-logs/test_original_mobiles.log",
+      "checks": 39
+    },
+    "test_mage_client_animation": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.345,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_client_animation.log",
+      "checks": 115
+    },
+    "test_classic_flight_parity": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.904,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_flight_parity.log",
+      "checks": 78
+    },
+    "test_classic_ballistics": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.89,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_ballistics.log",
+      "checks": 1081
+    },
+    "test_boomer": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.673,
+      "matches": 0,
+      "log": ".tools/check-logs/test_boomer.log",
+      "checks": 928
+    },
+    "test_classic_assets": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.948,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_assets.log",
+      "checks": 36
+    },
+    "test_turtle_projectiles": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.423,
+      "matches": 0,
+      "log": ".tools/check-logs/test_turtle_projectiles.log",
+      "checks": 158
+    },
+    "test_turtle_t2": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 8.846,
+      "matches": 0,
+      "log": ".tools/check-logs/test_turtle_t2.log",
+      "checks": 588
+    },
+    "test_classic_shot_timing": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.364,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_shot_timing.log",
+      "checks": 158
+    },
+    "test_classic_shot_timing_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 6.012,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_shot_timing_scene.log",
+      "checks": 50
+    },
+    "test_asate_effect": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.205,
+      "matches": 0,
+      "log": ".tools/check-logs/test_asate_effect.log",
+      "checks": 80
+    },
+    "test_jd_effect": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.263,
+      "matches": 0,
+      "log": ".tools/check-logs/test_jd_effect.log",
+      "checks": 80
+    },
+    "test_aduka_effect": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.371,
+      "matches": 0,
+      "log": ".tools/check-logs/test_aduka_effect.log",
+      "checks": 93
+    },
+    "test_aduka_beam_art": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.242,
+      "matches": 0,
+      "log": ".tools/check-logs/test_aduka_beam_art.log",
+      "checks": 16
+    },
+    "test_raon_effect": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.245,
+      "matches": 0,
+      "log": ".tools/check-logs/test_raon_effect.log",
+      "checks": 168
+    },
+    "test_raon_shots": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.617,
+      "matches": 0,
+      "log": ".tools/check-logs/test_raon_shots.log",
+      "checks": 102
+    },
+    "test_raon_mines": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.488,
+      "matches": 0,
+      "log": ".tools/check-logs/test_raon_mines.log",
+      "checks": 33
+    },
+    "test_raon_trail": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.389,
+      "matches": 0,
+      "log": ".tools/check-logs/test_raon_trail.log",
+      "checks": 93
+    },
+    "test_special_mobiles_integration": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 6.336,
+      "matches": 0,
+      "log": ".tools/check-logs/test_special_mobiles_integration.log",
+      "checks": 275
+    },
+    "test_armor_t2": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.312,
+      "matches": 0,
+      "log": ".tools/check-logs/test_armor_t2.log",
+      "checks": 179
+    },
+    "test_aduka_native": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.704,
+      "matches": 0,
+      "log": ".tools/check-logs/test_aduka_native.log",
+      "checks": 40
+    },
+    "test_aduka_combat": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.702,
+      "matches": 0,
+      "log": ".tools/check-logs/test_aduka_combat.log",
+      "checks": 661
+    },
+    "test_aduka_weather": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.893,
+      "matches": 0,
+      "log": ".tools/check-logs/test_aduka_weather.log",
+      "checks": 2628
+    },
+    "test_mage_native": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.695,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_native.log",
+      "checks": 3998
+    },
+    "test_lightning_native": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.614,
+      "matches": 0,
+      "log": ".tools/check-logs/test_lightning_native.log",
+      "checks": 1588
+    },
+    "test_lightning_art": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.38,
+      "matches": 0,
+      "log": ".tools/check-logs/test_lightning_art.log",
+      "checks": 136
+    },
+    "test_lightning_weather": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.897,
+      "matches": 0,
+      "log": ".tools/check-logs/test_lightning_weather.log",
+      "checks": 3102
+    },
+    "test_mage_weather": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.259,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_weather.log",
+      "checks": 687
+    },
+    "test_mage_weather_effects": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.912,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_weather_effects.log",
+      "checks": 57
+    },
+    "test_mage_secondary_weather": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.191,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_secondary_weather.log",
+      "checks": 575
+    },
+    "test_mage_weather_art": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.195,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_weather_art.log",
+      "checks": 41
+    },
+    "test_mage_sparks": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.203,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_sparks.log",
+      "checks": 63
+    },
+    "test_mage_spark_art": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.201,
+      "matches": 0,
+      "log": ".tools/check-logs/test_mage_spark_art.log",
+      "checks": 206
+    },
+    "test_client_item_assets": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.269,
+      "matches": 0,
+      "log": ".tools/check-logs/test_client_item_assets.log",
+      "checks": 66
+    },
+    "test_client_audio": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.564,
+      "matches": 0,
+      "log": ".tools/check-logs/test_client_audio.log",
+      "checks": 224
+    },
+    "test_client_weather_assets": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.261,
+      "matches": 0,
+      "log": ".tools/check-logs/test_client_weather_assets.log",
+      "checks": 75
+    },
+    "test_client_hud_assets": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.39,
+      "matches": 0,
+      "log": ".tools/check-logs/test_client_hud_assets.log",
+      "checks": 463
+    },
+    "test_battle_hud_layout": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.968,
+      "matches": 0,
+      "log": ".tools/check-logs/test_battle_hud_layout.log",
+      "checks": 65
+    },
+    "test_hud_clock_wind": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.557,
+      "matches": 0,
+      "log": ".tools/check-logs/test_hud_clock_wind.log",
+      "checks": 60
+    },
+    "test_battle_options": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.212,
+      "matches": 0,
+      "log": ".tools/check-logs/test_battle_options.log",
+      "checks": 146
+    },
+    "test_match_loading": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.192,
+      "matches": 0,
+      "log": ".tools/check-logs/test_match_loading.log",
+      "checks": 33
+    },
+    "test_result_screen": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.179,
+      "matches": 0,
+      "log": ".tools/check-logs/test_result_screen.log",
+      "checks": 37
+    },
+    "test_music_screens": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.605,
+      "matches": 0,
+      "log": ".tools/check-logs/test_music_screens.log",
+      "checks": 55
+    },
+    "test_grub_surface": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.252,
+      "matches": 0,
+      "log": ".tools/check-logs/test_grub_surface.log",
+      "checks": 720
+    },
+    "test_grub_flight": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.261,
+      "matches": 0,
+      "log": ".tools/check-logs/test_grub_flight.log",
+      "checks": 15690
+    },
+    "test_grub_model": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 18.055,
+      "matches": 0,
+      "log": ".tools/check-logs/test_grub_model.log",
+      "checks": 311
+    },
+    "test_dragon_shots": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.891,
+      "matches": 0,
+      "log": ".tools/check-logs/test_dragon_shots.log",
+      "checks": 61
+    },
+    "test_knight_shots": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.605,
+      "matches": 0,
+      "log": ".tools/check-logs/test_knight_shots.log",
+      "checks": 92
+    },
+    "test_ci_smoke": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.717,
+      "matches": 0,
+      "log": ".tools/check-logs/test_ci_smoke.log",
+      "checks": 9
+    },
+    "test_i18n": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.268,
+      "matches": 0,
+      "log": ".tools/check-logs/test_i18n.log",
+      "checks": 247
+    },
+    "test_settings_i18n": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.136,
+      "matches": 0,
+      "log": ".tools/check-logs/test_settings_i18n.log",
+      "checks": 34
+    },
+    "test_lobby_settings": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.329,
+      "matches": 0,
+      "log": ".tools/check-logs/test_lobby_settings.log",
+      "checks": 14
+    },
+    "test_match_partition": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.206,
+      "matches": 0,
+      "log": ".tools/check-logs/test_match_partition.log",
+      "checks": 153
+    },
+    "test_actor_gravity": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.687,
+      "matches": 0,
+      "log": ".tools/check-logs/test_actor_gravity.log",
+      "checks": 68
+    },
+    "test_avatar_offline": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.888,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_offline.log",
+      "checks": 1195
+    },
+    "test_native_terrain": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 10.774,
+      "matches": 0,
+      "log": ".tools/check-logs/test_native_terrain.log",
+      "checks": 477
+    },
+    "test_native_weather_roster": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.47,
+      "matches": 0,
+      "log": ".tools/check-logs/test_native_weather_roster.log",
+      "checks": 2976
+    },
+    "test_weather_legacy": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.049,
+      "matches": 0,
+      "log": ".tools/check-logs/test_weather_legacy.log",
+      "checks": 68
+    },
+    "test_ci_combat": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.186,
+      "matches": 0,
+      "log": ".tools/check-logs/test_ci_combat.log",
+      "checks": 255
+    },
+    "test_trico_t2": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.12,
+      "matches": 0,
+      "log": ".tools/check-logs/test_trico_t2.log",
+      "checks": 4043
+    },
+    "test_trico_ss": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 1.095,
+      "matches": 0,
+      "log": ".tools/check-logs/test_trico_ss.log",
+      "checks": 394
+    },
+    "test_raon_ground": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.496,
+      "matches": 0,
+      "log": ".tools/check-logs/test_raon_ground.log",
+      "checks": 787
+    },
+    "test_performance": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 27.343,
+      "matches": 0,
+      "log": ".tools/check-logs/test_performance.log",
+      "checks": 24
+    }
+  }
+}

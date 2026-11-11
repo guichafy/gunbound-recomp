@@ -160,6 +160,19 @@ func surface_at(world_x: float, from_y: float = 0.0) -> float:
 			return float(y * SCALE)
 	return void_y()
 
+## FindGroundHeightAtColumn 0x4e4340: byte mask, clamp only the initial Y,
+## scan to map height; invalid column/no solid returns the native sentinel.
+## Match.start prepares this mask before snapshots/workers and any crater.
+func native_surface_at(x: int, from_y: int) -> int:
+	var width := WIDTH*SCALE
+	if x < 0 or x >= width:
+		return 10000
+	assert(not native_cells.is_empty(),"Native mask must be prepared before CPU workers")
+	for y in range(maxi(0,from_y),HEIGHT*SCALE):
+		if native_cells[y*width+x] != 0:
+			return y
+	return 10000
+
 func raycast(from: Vector2, to: Vector2) -> Dictionary:
 	# Traverse every crossed mask cell (DDA), including short corner intersections.
 	var direction := to - from

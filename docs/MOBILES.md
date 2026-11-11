@@ -18,7 +18,7 @@ limites em [NATIVE_WEATHER_ISSUE_26](sdd/NATIVE_WEATHER_ISSUE_26.md).
 | 4 | Armor | T2 com único shell, dois impactos e seis campos×7/10 (ADR-160/issue27). Dano/cratera/itens seguem pontes declaradas; T1/SS preservados | [ARMOR_T2_ISSUE_27](sdd/ARMOR_T2_ISSUE_27.md) |
 | 5 | Trico | T2: dois componentes com centro/LUT/fase/raio/contato nativos e idx2 comum; SS sem blast inicial, oito ações2..16 e fim21 (ADR-163/issue30). Dano/cratera/itens/clima particular e muzzle seguem pontes declaradas | [TRICO_SPECIALS_ISSUE_30](sdd/TRICO_SPECIALS_ISSUE_30.md) |
 | 6 | Boomer | Curva, S2 temporizado, SS com congelamento e dano/cratera delimitados pelo cliente (ADR-142). Varredura, tornado e orientação (ADR-143), Lightning/Thor (ADR-144), minas e camadas do SS (ADR-145), vento na queda (ADR-146), boca fixa, poses e áudio (ADR-147); registro do apoio, pose ao vento apoiado e aceite visual/sonoro pendentes | [CLASSIC_BALLISTICS_0_20](sdd/CLASSIC_BALLISTICS_0_20.md) |
-| 7 | Raon | T1/T2/SS, minas e rastro do T1 portados. Restam detalhes do plantio e do contato das minas | [RAON_CLASSIC_FIX](sdd/RAON_CLASSIC_FIX.md) |
+| 7 | Raon | T1/T2/SS, minas e rastro do T1 portados; sondagem enterrada1px fechada na issue#31/ADR-164. Movimento/agenda/dano das minas ainda têm pontes declaradas | [RAON_CLASSIC_FIX](sdd/RAON_CLASSIC_FIX.md) |
 | 8 | Lightning | Revisado pelo cliente: T1/T2/SS, dano, Force e tornado. Aguarda aceite | [LIGHTNING_CLIENT_REVIEW](sdd/LIGHTNING_CLIENT_REVIEW.md) |
 | 9 | JD | Cristal de atração no T2 e efeito numérico no SS. Falta a captura GPU | [JD_CLASSIC_FIX](sdd/JD_CLASSIC_FIX.md) |
 | 10 | ASate | Guia, Ion e 1/3/6 filhos. Falta a captura GPU | [ASATE_CLASSIC_FIX](sdd/ASATE_CLASSIC_FIX.md) |

@@ -18,6 +18,8 @@ class Columns:
 	func surface_at(x: float, from_y: float = 0.0) -> float:
 		var top := float(heights.get(int(floor(x)),fallback))
 		return top if top >= from_y else maxf(top,from_y)
+	func native_surface_at(x: int, from_y: int) -> int:
+		return int(surface_at(x,from_y))
 	func is_void(y: float) -> bool:
 		return y >= height
 	func world_size() -> Vector2:
@@ -141,6 +143,9 @@ func test_match_paths() -> void:
 	for y in range(220,model.terrain.HEIGHT):
 		for x in model.terrain.WIDTH:
 			model.terrain.cells[y*model.terrain.WIDTH+x] = 1
+	# Replaced the whole procedural fixture, before any crater or snapshot.
+	model.terrain.native_cells.clear()
+	model.terrain.enable_native()
 	var stance := float(Mobiles.definition(int(model.actors[1].vehicle)).stance)
 	model.actors[0].pos = Vector2(200,440-float(Mobiles.definition(RAON).stance))
 	model.actors[1].pos = Vector2(640,440-stance)

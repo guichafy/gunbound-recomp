@@ -190,7 +190,7 @@ Extratos novos `.tools/raon-shots/r1..r5` (manifestos `ok=true`).
 | Desenho: célula 32×32 com origem EPA em (16,24), quad girado anti-horário pelo ângulo, espelho U quando `0x3fa8`=direita | `0x499d50`, `0x497980`, `0x4c5b35`→`0x4ebbc0`, floats `0x557ff0..0x55803c` | Comprovado |
 | `0x3fa8`: spawn `vx>0`; S2 alvo à direita (`0x49867c`); SS inverte em parede (`0x492fb7`) | — | Comprovado; o `dir` do Godot tinha o espelho invertido |
 | Balas T2/SS não testam mobiles (Simulate e Detonate sem `0x450e10/0x45d640`) | `0x44c950`, `0x499ef0` chamadas diretas | Comprovado; ADR-116 mantida |
-| Mina enterrada: busca nativa até 30 px | — | Adaptação: sobe para a superfície sondada |
+| Mina enterrada: 30 desloca origem da sonda, sem limite de alcance30 | AnimateMine498b60 / AnimateSuperMine4921e0 / helper40a6e0 / sonda4e4340 | Substituída pela ADR-164/issue#31; ver RAON_GROUND_ISSUE_31.md |
 | Grade de terreno 2 px quantiza alturas e inclinação | terrain.gd | Adaptação declarada |
 | Brilho `rayonminel` desenhado por cima com modo de mistura próprio | RayonTexture2 | Pendente; mantém ordem/alfa anteriores |
 

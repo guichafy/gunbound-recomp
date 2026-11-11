@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Sondagem Raon — issue #31 / ADR-164 (11/11/2026)
+
+- [x] Worktree própria na main33c3c7a7, bootstrap pinado e Ghidra2consultas.
+- [x] Contrato y−15/y−30/y+1 e flags fechado no PE, sem alcance30 inventado.
+- [x] Oráculo46cenários, RED88falhas→GREEN787/0, regeneração independente idêntica.
+- [x] Consumo1px sem ampliar contato de projétil; snapshot/crateras/pausa preservados.
+- [x] Harness365parses/117suítes/60180checks/160Python/29partidas, cobertura62%.
+- [x] GPU330framesFullHD/30buffers pausa idênticos/retomada; pacote assinado e smoke48tiros/UI.
+- [x] Revisão independente sem achados; SPEC/ADR/plano/MOBILES/HANDOFF e Ruff/diff.
+- [ ] PR, quatro gates, rebase merge e CI/release automática; devolver SHAs à orquestração.
+
+
 ## Trico T2/SS — issue #30 / ADR-163 (11/11/2026)
 
 - [x] Basea9a89fd9/worktree própria, bootstrap e Ghidra12consultas antes do porte.

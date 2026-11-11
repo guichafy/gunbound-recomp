@@ -1,5 +1,15 @@
 # Design implementado
 
+## Sondagem de minas Raon — ADR-164
+
+Terrain.native_surface_at lê a máscara1px já preparada em Match.start;
+RaonEffect.ground_at/settle compartilham sondas e flags entre execução e
+previsão. FlightSnapshot conserva cópias privadas de minas e ambas as máscaras.
+O preparo global de terreno permanece separado de AdukaWeather.active;
+consumir a máscara nas minas não seleciona contato nativo no projétilRaon.
+Contrato: RAON_GROUND_ISSUE_31.md.
+
+
 ## Ice — issue #29 / ADR-162
 
 IceEffects concentra parâmetros e estado por ator; Match resolve T2/SS no passo comum. native_resistance é copiado profundamente pelos snapshots e consumido por tipo de ataque. ice_effect publica somente a poseEPA, separada do estado duradouro. Preservar contatoAdukaWeather e assinaturas públicas; pontes em ICE_EFFECTS_ISSUE_29.md.
