@@ -2157,3 +2157,12 @@ Habilitar máscara1px para Thor em todo treino sem ampliar o conjunto que
 seleciona o contato nativo dos projéteis. Categorias ausentes da build ficam
 somente no legado. Entradas offline e interações adaptadas continuam explícitas.
 Evidência/contrato/plano em NATIVE_WEATHER_ISSUE_26.md.
+
+## ADR-160 — Armor T2 em duas fases (11/11/2026)
+
+Issue #27 fecha4688b0 e consumidores no Ghidra. Manter identidade do shell,
+writeback no pixel do primeiro contato, redução assinada dos seis campos e
+aceleração no fim desse tick. Segunda colisão usa a cratera anterior e remove
+o objeto. Estado em ArmorFlight/ShellState, execução/previsão comuns; não
+ampliar AdukaWeather.active. Preservar T1/SS e pontes de dano/itens/cratera
+fora do subconjunto comprovado. Contrato e plano: ARMOR_T2_ISSUE_27.md.

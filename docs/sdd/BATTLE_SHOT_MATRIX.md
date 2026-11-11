@@ -168,6 +168,9 @@ Sons conferidos nas tabelas PE 0x56d1d0/0x56d210/0x56d250 (fire) e 0x56d290/0x56
 
 ### Armor S2 e Raon S1
 
+Atualização Armor T2: duas fases implementadas pela issue#27/ADR-160;
+ver `ARMOR_T2_ISSUE_27.md` para contrato/validação e pontes ainda adaptadas.
+
 Armor S2: MainAction0x44e920 evento6/frame14 faz uma única chamada em 0x44ec23; count=2. Slot6 0x4688b0: primeira colisão aplica cratera/dano, conserva objeto, reduz os seis campos poder/raio por 7/10 e marca +0x3f9c; segunda colisão termina. Isso concorda estruturalmente com C# `Armor.cs:38–45` (um ArmorProjectile2) e `ArmorProjectile.cs` (`primaryExplosion`). Retira-se a inferência antiga de dois projéteis.
 
 Raon S1: MainAction0x49c120/frame11 faz três chamadas reais em 0x49c2dc/0x49c3fc/0x49c50d. O spawner deixa idx0 comum e idx1/2 com classe de oscilação. C# `RaonLauncherProjectile.cs:33–38` cria quatro: conflito real, original prevalece; corrigir para três somente em tarefa própria com testes.

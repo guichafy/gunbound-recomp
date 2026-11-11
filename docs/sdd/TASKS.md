@@ -1,5 +1,18 @@
 # Entregas e próximos trabalhos
 
+## Armor T2 — issue #27 / ADR-160 (11/11/2026)
+
+- [x] Basebb5486d5, entradas pinadas, Ghidra próprio, consumidores e contrato.
+- [x] OráculoPE independente, RED16checks/4falhas→GREEN179/0.
+- [x] Um shell, duas fases, seis reduçõesIDIV, cratera intermediária e clocks.
+- [x] Snapshots/itens/anexos/Gold/bordas/real×previsão; T1/SS preservados.
+- [x] Harness112suítesGodot/51714checks/156Python/29partidas/zero falhas.
+- [x] Smoke de pacote225/0 exige os dois contatos e identidade no Miramo.
+- [x] GPU241quadros/1920×1080 e30pausasRGBA idênticas na fase1; revisão independente.
+- [ ] Aceite humano visual/escuta/input e execução do clienteWindows completo.
+- [ ] IntegraçãoPR e CI/release remotas: acompanhar e registrar no retorno da sessão.
+
+
 ## Clima global sem Mage — issue #26 / ADR-159 (11/11/2026)
 
 - [x] Fixar base43ba5162 e entradas pinadas; Ghidra próprio confirma14VAs finais.

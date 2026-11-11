@@ -1,0 +1,9 @@
+{
+  "checks": 51714,
+  "python_tests": 156,
+  "matches": 29,
+  "godot_suites": 112,
+  "seconds": 320.647,
+  "python_skips": 0,
+  "failures": 0
+}

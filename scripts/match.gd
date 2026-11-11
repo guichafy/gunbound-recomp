@@ -7,6 +7,7 @@ const Maps = preload("res://scripts/maps.gd")
 const Weather = preload("res://scripts/weather.gd")
 const MageWeather = preload("res://scripts/mage_weather.gd")
 const MageWeatherEffects = preload("res://scripts/mage_weather_effects.gd")
+const ArmorFlight = preload("res://scripts/armor_flight.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const BoomerFlight = preload("res://scripts/boomer_flight.gd")
 const Combat = preload("res://scripts/combat.gd")
@@ -369,6 +370,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 		# Preserve exact launch integers instead of re-quantizing their float projection.
 		shell.launch_velocity_fp = shot_velocity_fp(index, angle, power, weapon, turn, entry.power, native) if spread_after else shot_velocity_fp(index, angle + turn, power, weapon, 0.0, 0.0, native)
 		ClassicFlight.prepare(shell, entry)
+		ArmorFlight.prepare(shell)
 		BoomerFlight.prepare(shell,actors[index])
 		AdukaCombat.prepare(shell,actors[index])
 		MageCombat.prepare(shell,actors[index])
@@ -627,7 +629,9 @@ func advance_projectile_tick(delta: float) -> void:
 		# The teleportation beacon only collides with the ground.
 		var beacon := bool(projectile.get("beacon", false))
 		var hit: Dictionary
-		if native_weather:
+		if ArmorFlight.active(projectile):
+			hit = ArmorFlight.contact(projectile,terrain,actors)
+		elif native_weather:
 			var previous_fp := Physics.position_fp(projectile.hit_pos)
 			# MageS2 samples the displaced laser, not its ballistic carrier.
 			var actual_fp := Physics.position_fp(actual)
@@ -668,7 +672,10 @@ func advance_projectile_tick(delta: float) -> void:
 		projectile.trail.append(projectile.hit_pos)
 		if projectile.trail.size() > 28:
 			projectile.trail.pop_front()
+		var armor_continues := false
 		if not hit.is_empty():
+			if ArmorFlight.active(projectile):
+				ArmorFlight.write_contact(projectile,hit.position)
 			if beacon:
 				land_beacon(hit.position, previous, projectile)
 				projectiles.remove_at(i)
@@ -676,14 +683,16 @@ func advance_projectile_tick(delta: float) -> void:
 				explode(hit.position, int(hit.actor), projectile)
 			else:
 				explode(hit.position, int(hit.actor), projectile)
-				projectiles.remove_at(i)
-		else:
+				armor_continues = ArmorFlight.after_impact(projectile)
+				if not armor_continues:
+					projectiles.remove_at(i)
+		if hit.is_empty() or armor_continues:
 			var accelerate := AdukaWeather.finish(projectile) if native_weather or bool(projectile.tornado.get("native", false)) else true
 			Physics.finish_tick(projectile, not entered_burrow and accelerate)
 			ClassicFlight.finish_tick(projectile)
 			if bool(projectile.get("boomer", false)):
 				BoomerFlight.finish_tick(projectile, accelerate)
-		if hit.is_empty() and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
+		if (hit.is_empty() or armor_continues) and (Physics.outside(projectile.fp_pos, Vector2i(terrain.world_size())) or projectile.age > Combat.MAX_FLIGHT_AGE):
 			events.append({"type": "miss", "position": projectile.hit_pos})
 			projectiles.remove_at(i)
 	LightningCombat.resolve(self)

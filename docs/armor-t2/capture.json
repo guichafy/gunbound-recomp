@@ -1,0 +1,22 @@
+{
+  "frames": 241,
+  "size": [
+    1920,
+    1080
+  ],
+  "model_hz": 20,
+  "presentation_step": "1/60 s manually stepped; not a real-time FPS benchmark",
+  "pause": [
+    30,
+    59
+  ],
+  "pause_rgba_sha256": "d46d2076aeaaad40a63ba6131bb0eaa2116c51c87e3d047a4eb0ff1f934754cb",
+  "pause_identical_frames": 30,
+  "stills": [
+    "../mobile-shots/armor-two-impacts-024.png",
+    "../mobile-shots/armor-two-impacts-036.png",
+    "../mobile-shots/armor-two-impacts-060.png",
+    "../mobile-shots/armor-two-impacts-090.png"
+  ],
+  "limits": "Godot GPU capture; no complete original Windows client, human listening/input or visual acceptance."
+}

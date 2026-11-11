@@ -18,6 +18,8 @@ REQ-44/45. Complemento de BATTLE_SHOT_MATRIX.md, 24/10/2026. Planos de pesquisa/
 
 ## 1. Rajadas e dois impactos — Armor/Raon/Trico/Dragon
 
+Atualização issue#27/ADR-160: pacote1 implementado em `ARMOR_T2_ISSUE_27.md`, com Ghidra/oráculo e revisão próprios. O plano histórico abaixo descreve a base.
+
 Pacote pequeno1: Armor S2 permanece um objeto. Fixture deve registrar primeiro impacto, estado do mesmo ID ativo, dados reduzidos por7/10 e segundo impacto final; terreno removido no primeiro afeta a segunda colisão. `count=2` nunca gera segundo objeto. Original0x44ec23/0x4688b0; C# confirma `primaryExplosion`.
 
 Pacote pequeno2: Raon S1 muda quatro para três projéteis, idx0 comum e idx1/2 orbitais. Fixture verifica as três chamadas em0x49c2dc/0x49c3fc/0x49c50d e as fases; C# de quatro não é a referência. As minas S2/SS dependem primeiro da correção de autoria/agenda da tarefa anterior.
