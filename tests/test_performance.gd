@@ -58,34 +58,36 @@ func run() -> void:
 	root.add_child(scene)
 	scene.set_process(false)
 	scene.sound.muted = true
-	scene.select_vehicle(2)
-	scene.opening = 0
-	scene.start_match()
-	if scene.model.active == 0:
-		scene.model.pass_turn()
-		scene.consume_events()
-	var worst := 0
-	var fired := false
-	var started_at := Time.get_ticks_msec()
-	var first_task := -2
-	# A fixed frame count finishes before a slow CI worker. The turn timer is
-	# the deadline; each frame still has to stay off the search.
-	while Time.get_ticks_msec() - started_at < 12000:
-		var before := Time.get_ticks_usec()
-		scene._process(1.0 / 60.0)
-		worst = maxi(worst, Time.get_ticks_usec() - before)
-		if first_task == -2:
-			first_task = scene.cpu.task
-			check(first_task >= 0 and scene.cpu.plan.is_empty(), "The CPU turn starts the search on a worker thread")
-		if scene.model.phase != "aim" or scene.model.active != 1:
-			fired = true
-			break
-		OS.delay_msec(4)
-	check(fired, "The CPU still fires after the threaded search")
-	check(worst < 40000, "No battle frame runs the CPU search (worst %.1f ms)" % (worst / 1000.0))
-	check(scene.cpu.task == -1 and scene.cpu.search.is_empty(), "The finished search is collected")
-	check(Time.get_ticks_msec() - started_at < 15000, "The CPU fires well before the turn timer")
-
+	for player_vehicle in [2,1]:
+		scene.select_vehicle(player_vehicle)
+		scene.match_seed = 42
+		scene.opening = 0
+		scene.start_match()
+		if scene.model.active == 0:
+			scene.model.pass_turn()
+			scene.consume_events()
+		var worst := 0
+		var fired := false
+		var started_at := Time.get_ticks_msec()
+		var first_task := -2
+		# A fixed frame count finishes before a slow CI worker. The turn timer is
+		# the deadline; each frame still has to stay off the search.
+		while Time.get_ticks_msec() - started_at < 12000:
+			var before := Time.get_ticks_usec()
+			scene._process(1.0 / 60.0)
+			worst = maxi(worst, Time.get_ticks_usec() - before)
+			if first_task == -2:
+				first_task = scene.cpu.task
+				check(first_task >= 0 and scene.cpu.plan.is_empty(), "The CPU turn starts the search on a worker thread")
+			if scene.model.phase != "aim" or scene.model.active != 1:
+				fired = true
+				break
+			OS.delay_msec(4)
+		check(fired, "The CPU still fires after the threaded search")
+		check(worst < 40000, "No battle frame runs the CPU search (worst %.1f ms)" % (worst / 1000.0))
+		check(scene.cpu.task == -1 and scene.cpu.search.is_empty(), "The finished search is collected")
+		check(Time.get_ticks_msec() - started_at < 15000, "The CPU fires well before the turn timer")
+		print("CPU SCENE vehicle=%d fired=%s frame_max_ms=%.3f wall_ms=%d" % [scene.model.actors[1].vehicle,fired,worst/1000.0,Time.get_ticks_msec()-started_at])
 	# Restarting during a search waits for the worker and drops it.
 	scene.opening = 0
 	scene.start_match()

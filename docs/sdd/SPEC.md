@@ -7,6 +7,8 @@ inicialização por componente com divisores4/6/8, contato455cc0, dano45db20
 e cratera4e4450 compartilhados entre execução/previsão. Preservar os ticks
 EPA, arte e smoothing; itens offline e hotspot são pontes declaradas.
 Contrato e plano: BIGFOOT_COMBAT_ISSUE_28.md.
+EmendaREQ-52: runner mantém29partidas e pool limitado, com um seed por
+processo e guard900s por caso; cobertura e assertivas preservadas.
 
 
 ## Armor T2 — issue #27 / ADR-160

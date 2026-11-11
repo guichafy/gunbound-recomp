@@ -7,7 +7,8 @@
 - [x] OráculosPE e LUT independentes; RED998→GREEN2905/0.
 - [x] Itens/Gold/climas/snapshots/deltas e EPA/arte/smoothing preservados.
 - [x] Revisão independente; P2 de theta corrigido com regressão RED2→GREEN.
-- [x] Harness355parses/113suítes/54.628checks/156Python/29partidas/zero falhas.
+- [x] Harness357parses/113suítes/54.633checks/157Python/29partidas/zero falhas.
+- [x] Diagnóstico de custo/contato/CPU, gateBigfoot24/0 e orçamentoCI por partida; regressão runner12/0.
 - [x] Smoke234/0; GPU903quadros/1920×1080/90pausasRGBA idênticas.
 - [ ] Aceite humano visual/escuta/input e execução do clienteWindows inteiro.
 - [ ] PR/rebase merge e CI/release automática: acompanhar no retorno da sessão.

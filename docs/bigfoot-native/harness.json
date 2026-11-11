@@ -1,34 +1,65 @@
 {
   "scope": "GDScript suite results; line coverage is Python only",
   "workers": 4,
-  "seconds": 366.1,
+  "seconds": 361.706,
   "matches": 29,
   "results": {
     "import": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.633,
+      "seconds": 3.157,
       "matches": 0,
       "log": ".tools/check-logs/import.log",
       "checks": 0
     },
-    "test_matches-2-of-4": {
+    "test_matches-2-of-13": {
       "ok": true,
       "exit": 0,
-      "seconds": 137.69,
-      "matches": 3,
-      "log": ".tools/check-logs/test_matches-2-of-4.log",
+      "seconds": 73.151,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-2-of-13.log",
       "checks": 0,
       "cases": [
-        82,
-        86,
-        90
+        82
+      ]
+    },
+    "test_matches-3-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 22.359,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-3-of-13.log",
+      "checks": 0,
+      "cases": [
+        83
+      ]
+    },
+    "test_matches-1-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 123.019,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-1-of-13.log",
+      "checks": 0,
+      "cases": [
+        81
+      ]
+    },
+    "test_matches-4-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 87.608,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-4-of-13.log",
+      "checks": 0,
+      "cases": [
+        84
       ]
     },
     "python": {
       "ok": true,
       "exit": 0,
-      "seconds": 187.36,
+      "seconds": 188.174,
       "matches": 0,
       "log": ".tools/check-logs/python.log",
       "checks": 0
@@ -36,7 +67,7 @@
     "coverage_xml": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.377,
+      "seconds": 0.375,
       "matches": 0,
       "log": ".tools/check-logs/coverage-xml.log",
       "checks": 0
@@ -44,7 +75,7 @@
     "coverage_html": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.419,
+      "seconds": 0.431,
       "matches": 0,
       "log": ".tools/check-logs/coverage-html.log",
       "checks": 0
@@ -52,84 +83,246 @@
     "automation_coverage": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.086,
+      "seconds": 0.09,
       "matches": 0,
       "log": ".tools/check-logs/coverage-report.log",
       "checks": 0
     },
-    "test_matches-3-of-4": {
+    "test_matches-6-of-13": {
       "ok": true,
       "exit": 0,
-      "seconds": 73.479,
-      "matches": 3,
-      "log": ".tools/check-logs/test_matches-3-of-4.log",
+      "seconds": 18.03,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-6-of-13.log",
       "checks": 0,
       "cases": [
-        83,
-        87,
+        86
+      ]
+    },
+    "test_matches-5-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 88.964,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-5-of-13.log",
+      "checks": 0,
+      "cases": [
+        85
+      ]
+    },
+    "test_matches-9-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 15.679,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-9-of-13.log",
+      "checks": 0,
+      "cases": [
+        89
+      ]
+    },
+    "test_matches-7-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 45.217,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-7-of-13.log",
+      "checks": 0,
+      "cases": [
+        87
+      ]
+    },
+    "test_matches-11-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 6.758,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-11-of-13.log",
+      "checks": 0,
+      "cases": [
         91
       ]
     },
-    "test_matches-1-of-4": {
+    "test_matches-12-of-13": {
       "ok": true,
       "exit": 0,
-      "seconds": 234.74,
-      "matches": 4,
-      "log": ".tools/check-logs/test_matches-1-of-4.log",
+      "seconds": 3.732,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-12-of-13.log",
       "checks": 0,
       "cases": [
-        81,
-        85,
-        89,
+        92
+      ]
+    },
+    "test_matches-13-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 9.292,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-13-of-13.log",
+      "checks": 0,
+      "cases": [
         93
       ]
     },
-    "test_classic_matches-1-of-4": {
+    "test_matches-8-of-13": {
       "ok": true,
       "exit": 0,
-      "seconds": 47.516,
-      "matches": 4,
-      "log": ".tools/check-logs/test_classic_matches-1-of-4.log",
+      "seconds": 62.646,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-8-of-13.log",
       "checks": 0,
       "cases": [
-        1,
-        5,
-        9,
-        13
+        88
       ]
     },
-    "test_classic_matches-3-of-4": {
+    "test_classic_matches-1-of-16": {
       "ok": true,
       "exit": 0,
-      "seconds": 19.753,
-      "matches": 4,
-      "log": ".tools/check-logs/test_classic_matches-3-of-4.log",
+      "seconds": 19.394,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-1-of-16.log",
       "checks": 0,
       "cases": [
-        3,
-        7,
-        11,
-        15
+        1
       ]
     },
-    "test_classic_matches-2-of-4": {
+    "test_classic_matches-3-of-16": {
       "ok": true,
       "exit": 0,
-      "seconds": 55.397,
-      "matches": 4,
-      "log": ".tools/check-logs/test_classic_matches-2-of-4.log",
+      "seconds": 1.562,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-3-of-16.log",
       "checks": 0,
       "cases": [
-        2,
-        6,
-        10,
-        14
+        3
+      ]
+    },
+    "test_matches-10-of-13": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 49.611,
+      "matches": 1,
+      "log": ".tools/check-logs/test_matches-10-of-13.log",
+      "checks": 0,
+      "cases": [
+        90
+      ]
+    },
+    "test_classic_matches-4-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.046,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-4-of-16.log",
+      "checks": 0,
+      "cases": [
+        4
+      ]
+    },
+    "test_classic_matches-5-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.302,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-5-of-16.log",
+      "checks": 0,
+      "cases": [
+        5
+      ]
+    },
+    "test_classic_matches-2-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 23.02,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-2-of-16.log",
+      "checks": 0,
+      "cases": [
+        2
+      ]
+    },
+    "test_classic_matches-7-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 13.337,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-7-of-16.log",
+      "checks": 0,
+      "cases": [
+        7
+      ]
+    },
+    "test_classic_matches-9-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 5.86,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-9-of-16.log",
+      "checks": 0,
+      "cases": [
+        9
+      ]
+    },
+    "test_classic_matches-10-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.826,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-10-of-16.log",
+      "checks": 0,
+      "cases": [
+        10
+      ]
+    },
+    "test_classic_matches-6-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 25.792,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-6-of-16.log",
+      "checks": 0,
+      "cases": [
+        6
+      ]
+    },
+    "test_classic_matches-12-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.761,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-12-of-16.log",
+      "checks": 0,
+      "cases": [
+        12
+      ]
+    },
+    "test_classic_matches-11-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.507,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-11-of-16.log",
+      "checks": 0,
+      "cases": [
+        11
+      ]
+    },
+    "test_classic_matches-8-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 22.429,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-8-of-16.log",
+      "checks": 0,
+      "cases": [
+        8
       ]
     },
     "scripts/actor_state.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.141,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-actor_state.gd.log",
       "checks": 0
@@ -137,7 +330,7 @@
     "scripts/additive_sprite_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-additive_sprite_art.gd.log",
       "checks": 0
@@ -145,7 +338,7 @@
     "scripts/aduka_beam_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.191,
+      "seconds": 0.145,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-aduka_beam_art.gd.log",
       "checks": 0
@@ -153,7 +346,7 @@
     "scripts/aduka_combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-aduka_combat.gd.log",
       "checks": 0
@@ -161,7 +354,7 @@
     "scripts/aduka_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-aduka_effect.gd.log",
       "checks": 0
@@ -169,7 +362,7 @@
     "scripts/aduka_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.307,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-aduka_sprite.gd.log",
       "checks": 0
@@ -177,7 +370,7 @@
     "scripts/aduka_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-aduka_weather.gd.log",
       "checks": 0
@@ -185,7 +378,7 @@
     "scripts/aim_control.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.268,
+      "seconds": 0.261,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-aim_control.gd.log",
       "checks": 0
@@ -193,7 +386,7 @@
     "scripts/armor_flight.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-armor_flight.gd.log",
       "checks": 0
@@ -201,7 +394,7 @@
     "scripts/asate_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.203,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-asate_art.gd.log",
       "checks": 0
@@ -209,7 +402,7 @@
     "scripts/asate_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.199,
+      "seconds": 0.194,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-asate_effect.gd.log",
       "checks": 0
@@ -217,7 +410,7 @@
     "scripts/avatar_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.249,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-avatar_art.gd.log",
       "checks": 0
@@ -225,7 +418,7 @@
     "scripts/avatar_catalog.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.197,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-avatar_catalog.gd.log",
       "checks": 0
@@ -233,7 +426,7 @@
     "scripts/avatar_contour_glow.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-avatar_contour_glow.gd.log",
       "checks": 0
@@ -241,7 +434,7 @@
     "scripts/avatar_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-avatar_hd.gd.log",
       "checks": 0
@@ -249,7 +442,7 @@
     "scripts/avatar_shop.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.262,
+      "seconds": 0.261,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-avatar_shop.gd.log",
       "checks": 0
@@ -257,7 +450,7 @@
     "scripts/avatar_shop_model.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.195,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-avatar_shop_model.gd.log",
       "checks": 0
@@ -265,7 +458,7 @@
     "scripts/avatar_xfs_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.191,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-avatar_xfs_hd.gd.log",
       "checks": 0
@@ -273,7 +466,7 @@
     "scripts/battle_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.252,
+      "seconds": 0.26,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-battle_art.gd.log",
       "checks": 0
@@ -281,7 +474,7 @@
     "scripts/battle_hud_layout.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.208,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-battle_hud_layout.gd.log",
       "checks": 0
@@ -289,7 +482,7 @@
     "scripts/bigfoot_attacks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.141,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-bigfoot_attacks.gd.log",
       "checks": 0
@@ -297,7 +490,7 @@
     "scripts/bigfoot_combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-bigfoot_combat.gd.log",
       "checks": 0
@@ -305,7 +498,7 @@
     "scripts/bigfoot_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.265,
+      "seconds": 0.268,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-bigfoot_sprite.gd.log",
       "checks": 0
@@ -313,7 +506,7 @@
     "scripts/boomer_flight.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-boomer_flight.gd.log",
       "checks": 0
@@ -321,7 +514,7 @@
     "scripts/camera_rig.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.147,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-camera_rig.gd.log",
       "checks": 0
@@ -329,7 +522,7 @@
     "scripts/ci/combat_smoke.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.314,
+      "seconds": 0.257,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-ci-combat_smoke.gd.log",
       "checks": 0
@@ -337,7 +530,7 @@
     "scripts/ci/smoke.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.304,
+      "seconds": 0.271,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-ci-smoke.gd.log",
       "checks": 0
@@ -345,7 +538,7 @@
     "scripts/classic_ballistics.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_ballistics.gd.log",
       "checks": 0
@@ -353,7 +546,7 @@
     "scripts/classic_battle_options_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_battle_options_art.gd.log",
       "checks": 0
@@ -361,7 +554,7 @@
     "scripts/classic_chrome.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.146,
+      "seconds": 0.148,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_chrome.gd.log",
       "checks": 0
@@ -369,7 +562,7 @@
     "scripts/classic_flight.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_flight.gd.log",
       "checks": 0
@@ -377,7 +570,7 @@
     "scripts/classic_lobby_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.146,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_lobby_art.gd.log",
       "checks": 0
@@ -385,7 +578,7 @@
     "scripts/classic_mage_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.262,
+      "seconds": 0.301,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_mage_sprite.gd.log",
       "checks": 0
@@ -393,7 +586,7 @@
     "scripts/classic_mobiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.192,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_mobiles.gd.log",
       "checks": 0
@@ -401,7 +594,7 @@
     "scripts/classic_projectile_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.148,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_projectile_art.gd.log",
       "checks": 0
@@ -409,7 +602,7 @@
     "scripts/classic_ranks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.194,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_ranks.gd.log",
       "checks": 0
@@ -417,7 +610,7 @@
     "scripts/classic_result.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.305,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_result.gd.log",
       "checks": 0
@@ -425,7 +618,7 @@
     "scripts/classic_room_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_room_art.gd.log",
       "checks": 0
@@ -433,7 +626,7 @@
     "scripts/classic_room_panel.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.191,
+      "seconds": 0.151,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_room_panel.gd.log",
       "checks": 0
@@ -441,7 +634,7 @@
     "scripts/classic_shop_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.141,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_shop_art.gd.log",
       "checks": 0
@@ -449,7 +642,7 @@
     "scripts/classic_shot_timing.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.144,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_shot_timing.gd.log",
       "checks": 0
@@ -457,7 +650,7 @@
     "scripts/classic_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.249,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_sprite.gd.log",
       "checks": 0
@@ -465,7 +658,7 @@
     "scripts/classic_text_button.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.193,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-classic_text_button.gd.log",
       "checks": 0
@@ -473,7 +666,7 @@
     "scripts/client_audio.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-client_audio.gd.log",
       "checks": 0
@@ -481,7 +674,7 @@
     "scripts/client_hud_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.195,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-client_hud_assets.gd.log",
       "checks": 0
@@ -489,7 +682,7 @@
     "scripts/client_weather_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.196,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-client_weather_assets.gd.log",
       "checks": 0
@@ -497,7 +690,7 @@
     "scripts/combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.148,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-combat.gd.log",
       "checks": 0
@@ -505,7 +698,7 @@
     "scripts/cpu_planner.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-cpu_planner.gd.log",
       "checks": 0
@@ -513,7 +706,7 @@
     "scripts/cpu_turn.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.262,
+      "seconds": 0.269,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-cpu_turn.gd.log",
       "checks": 0
@@ -521,7 +714,7 @@
     "scripts/damage.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.193,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-damage.gd.log",
       "checks": 0
@@ -529,7 +722,7 @@
     "scripts/delay_units.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.21,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-delay_units.gd.log",
       "checks": 0
@@ -537,7 +730,7 @@
     "scripts/dragon_sparks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.189,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-dragon_sparks.gd.log",
       "checks": 0
@@ -545,7 +738,7 @@
     "scripts/flight_snapshot.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.203,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-flight_snapshot.gd.log",
       "checks": 0
@@ -553,7 +746,7 @@
     "scripts/game.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.556,
+      "seconds": 0.603,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-game.gd.log",
       "checks": 0
@@ -561,7 +754,7 @@
     "scripts/gold_rewards.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-gold_rewards.gd.log",
       "checks": 0
@@ -569,7 +762,7 @@
     "scripts/gold_tracker.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.192,
+      "seconds": 0.197,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-gold_tracker.gd.log",
       "checks": 0
@@ -577,7 +770,7 @@
     "scripts/grub_combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-grub_combat.gd.log",
       "checks": 0
@@ -585,7 +778,7 @@
     "scripts/grub_flight.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.189,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-grub_flight.gd.log",
       "checks": 0
@@ -593,7 +786,7 @@
     "scripts/grub_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.254,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-grub_sprite.gd.log",
       "checks": 0
@@ -601,7 +794,7 @@
     "scripts/grub_surface.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.209,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-grub_surface.gd.log",
       "checks": 0
@@ -609,7 +802,7 @@
     "scripts/hd_sheet.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.186,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-hd_sheet.gd.log",
       "checks": 0
@@ -617,7 +810,7 @@
     "scripts/hud_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.267,
+      "seconds": 0.249,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-hud_art.gd.log",
       "checks": 0
@@ -625,7 +818,7 @@
     "scripts/i18n.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-i18n.gd.log",
       "checks": 0
@@ -633,7 +826,7 @@
     "scripts/item_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.198,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-item_art.gd.log",
       "checks": 0
@@ -649,7 +842,7 @@
     "scripts/item_effects.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-item_effects.gd.log",
       "checks": 0
@@ -657,7 +850,7 @@
     "scripts/items.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.148,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-items.gd.log",
       "checks": 0
@@ -665,7 +858,7 @@
     "scripts/jd_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-jd_effect.gd.log",
       "checks": 0
@@ -673,7 +866,7 @@
     "scripts/json_store.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.207,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-json_store.gd.log",
       "checks": 0
@@ -681,7 +874,7 @@
     "scripts/knight_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-knight_art.gd.log",
       "checks": 0
@@ -689,7 +882,7 @@
     "scripts/knight_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.184,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-knight_effect.gd.log",
       "checks": 0
@@ -697,7 +890,7 @@
     "scripts/lightning_beam_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-lightning_beam_art.gd.log",
       "checks": 0
@@ -705,7 +898,7 @@
     "scripts/lightning_combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-lightning_combat.gd.log",
       "checks": 0
@@ -713,7 +906,7 @@
     "scripts/lightning_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.269,
+      "seconds": 0.268,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-lightning_sprite.gd.log",
       "checks": 0
@@ -721,7 +914,7 @@
     "scripts/loading_view.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.146,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-loading_view.gd.log",
       "checks": 0
@@ -729,7 +922,7 @@
     "scripts/lobby_screen.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-lobby_screen.gd.log",
       "checks": 0
@@ -737,7 +930,7 @@
     "scripts/mage_combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_combat.gd.log",
       "checks": 0
@@ -745,7 +938,7 @@
     "scripts/mage_flight.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.179,
+      "seconds": 0.189,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_flight.gd.log",
       "checks": 0
@@ -753,7 +946,7 @@
     "scripts/mage_projectile_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_projectile_art.gd.log",
       "checks": 0
@@ -761,7 +954,7 @@
     "scripts/mage_spark_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.196,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_spark_art.gd.log",
       "checks": 0
@@ -769,7 +962,7 @@
     "scripts/mage_sparks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.195,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_sparks.gd.log",
       "checks": 0
@@ -777,7 +970,7 @@
     "scripts/mage_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.263,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_sprite.gd.log",
       "checks": 0
@@ -785,7 +978,7 @@
     "scripts/mage_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.198,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_weather.gd.log",
       "checks": 0
@@ -793,7 +986,7 @@
     "scripts/mage_weather_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.148,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_weather_art.gd.log",
       "checks": 0
@@ -801,7 +994,7 @@
     "scripts/mage_weather_effects.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.146,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mage_weather_effects.gd.log",
       "checks": 0
@@ -809,7 +1002,7 @@
     "scripts/maps.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.196,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-maps.gd.log",
       "checks": 0
@@ -817,7 +1010,7 @@
     "scripts/match.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.262,
+      "seconds": 0.259,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-match.gd.log",
       "checks": 0
@@ -825,7 +1018,7 @@
     "scripts/match_loading.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-match_loading.gd.log",
       "checks": 0
@@ -833,7 +1026,7 @@
     "scripts/match_overlay.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.258,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-match_overlay.gd.log",
       "checks": 0
@@ -841,7 +1034,7 @@
     "scripts/menu_screen.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.257,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-menu_screen.gd.log",
       "checks": 0
@@ -849,7 +1042,7 @@
     "scripts/mobile_looks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mobile_looks.gd.log",
       "checks": 0
@@ -857,7 +1050,7 @@
     "scripts/mobile_rig.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.26,
+      "seconds": 0.267,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mobile_rig.gd.log",
       "checks": 0
@@ -865,7 +1058,7 @@
     "scripts/mobile_smooth_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.203,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mobile_smooth_art.gd.log",
       "checks": 0
@@ -881,7 +1074,7 @@
     "scripts/mobiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.188,
+      "seconds": 0.193,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-mobiles.gd.log",
       "checks": 0
@@ -889,7 +1082,7 @@
     "scripts/nak_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.245,
+      "seconds": 0.256,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-nak_sprite.gd.log",
       "checks": 0
@@ -897,7 +1090,7 @@
     "scripts/options.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.182,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-options.gd.log",
       "checks": 0
@@ -905,7 +1098,7 @@
     "scripts/options_popup.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.192,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-options_popup.gd.log",
       "checks": 0
@@ -913,7 +1106,7 @@
     "scripts/player_attributes.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.192,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-player_attributes.gd.log",
       "checks": 0
@@ -921,7 +1114,7 @@
     "scripts/profile.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-profile.gd.log",
       "checks": 0
@@ -929,7 +1122,7 @@
     "scripts/projectile_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.144,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-projectile_art.gd.log",
       "checks": 0
@@ -937,7 +1130,7 @@
     "scripts/raon_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-raon_effect.gd.log",
       "checks": 0
@@ -945,7 +1138,7 @@
     "scripts/room_choice.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-room_choice.gd.log",
       "checks": 0
@@ -953,7 +1146,7 @@
     "scripts/room_figures.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-room_figures.gd.log",
       "checks": 0
@@ -961,7 +1154,7 @@
     "scripts/room_random_sprite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.259,
+      "seconds": 0.256,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-room_random_sprite.gd.log",
       "checks": 0
@@ -969,7 +1162,7 @@
     "scripts/select_item_popup.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.192,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-select_item_popup.gd.log",
       "checks": 0
@@ -977,7 +1170,7 @@
     "scripts/settings_panel.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.208,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-settings_panel.gd.log",
       "checks": 0
@@ -985,7 +1178,7 @@
     "scripts/shell_state.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-shell_state.gd.log",
       "checks": 0
@@ -993,7 +1186,7 @@
     "scripts/shop_card_style.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.144,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-shop_card_style.gd.log",
       "checks": 0
@@ -1001,7 +1194,7 @@
     "scripts/shop_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-shop_hd.gd.log",
       "checks": 0
@@ -1017,7 +1210,7 @@
     "scripts/sprite_pose.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.203,
+      "seconds": 0.178,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-sprite_pose.gd.log",
       "checks": 0
@@ -1025,7 +1218,7 @@
     "scripts/terrain.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-terrain.gd.log",
       "checks": 0
@@ -1033,7 +1226,7 @@
     "scripts/thor_native_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-thor_native_art.gd.log",
       "checks": 0
@@ -1041,7 +1234,7 @@
     "scripts/turn_table.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.148,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-turn_table.gd.log",
       "checks": 0
@@ -1049,7 +1242,7 @@
     "scripts/turtle_flight.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-turtle_flight.gd.log",
       "checks": 0
@@ -1057,7 +1250,7 @@
     "scripts/ui.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.191,
+      "seconds": 0.194,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-ui.gd.log",
       "checks": 0
@@ -1065,7 +1258,7 @@
     "scripts/weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-weather.gd.log",
       "checks": 0
@@ -1081,7 +1274,7 @@
     "scripts/weather_contact.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-weather_contact.gd.log",
       "checks": 0
@@ -1089,7 +1282,7 @@
     "scripts/xfs_shop_style.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.145,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-scripts-xfs_shop_style.gd.log",
       "checks": 0
@@ -1097,7 +1290,7 @@
     "tests/audit_xfs_hd_runtime.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-audit_xfs_hd_runtime.gd.log",
       "checks": 0
@@ -1105,7 +1298,7 @@
     "tests/capture.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture.gd.log",
       "checks": 0
@@ -1113,7 +1306,7 @@
     "tests/capture_actor_gravity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.605,
+      "seconds": 0.565,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_actor_gravity.gd.log",
       "checks": 0
@@ -1121,7 +1314,7 @@
     "tests/capture_aduka_game.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_aduka_game.gd.log",
       "checks": 0
@@ -1129,7 +1322,7 @@
     "tests/capture_aduka_mount.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.508,
+      "seconds": 0.605,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_aduka_mount.gd.log",
       "checks": 0
@@ -1137,7 +1330,7 @@
     "tests/capture_avatar_card_fix.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.189,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_card_fix.gd.log",
       "checks": 0
@@ -1153,7 +1346,7 @@
     "tests/capture_avatar_continuity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_continuity.gd.log",
       "checks": 0
@@ -1161,7 +1354,7 @@
     "tests/capture_avatar_effect_shop.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.187,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_effect_shop.gd.log",
       "checks": 0
@@ -1169,7 +1362,7 @@
     "tests/capture_avatar_effects.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.19,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_effects.gd.log",
       "checks": 0
@@ -1177,7 +1370,7 @@
     "tests/capture_avatar_hd_roster.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.144,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_hd_roster.gd.log",
       "checks": 0
@@ -1185,7 +1378,7 @@
     "tests/capture_avatar_mount.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.141,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_mount.gd.log",
       "checks": 0
@@ -1193,7 +1386,7 @@
     "tests/capture_avatar_offline.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.198,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_offline.gd.log",
       "checks": 0
@@ -1209,7 +1402,7 @@
     "tests/capture_avatar_price_crisp.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_price_crisp.gd.log",
       "checks": 0
@@ -1217,7 +1410,7 @@
     "tests/capture_avatar_shop.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.184,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop.gd.log",
       "checks": 0
@@ -1225,7 +1418,7 @@
     "tests/capture_avatar_shop_audit.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_audit.gd.log",
       "checks": 0
@@ -1233,7 +1426,7 @@
     "tests/capture_avatar_shop_audit_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.14,
+      "seconds": 0.194,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_audit_pck.gd.log",
       "checks": 0
@@ -1241,7 +1434,7 @@
     "tests/capture_avatar_shop_classic.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_classic.gd.log",
       "checks": 0
@@ -1257,7 +1450,7 @@
     "tests/capture_avatar_shop_parity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_parity.gd.log",
       "checks": 0
@@ -1265,7 +1458,7 @@
     "tests/capture_avatar_shop_parity_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_parity_pck.gd.log",
       "checks": 0
@@ -1273,7 +1466,7 @@
     "tests/capture_avatar_shop_video.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_video.gd.log",
       "checks": 0
@@ -1281,7 +1474,7 @@
     "tests/capture_avatar_shop_video_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_video_pck.gd.log",
       "checks": 0
@@ -1289,7 +1482,7 @@
     "tests/capture_avatar_shop_xfs.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.19,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_xfs.gd.log",
       "checks": 0
@@ -1297,7 +1490,7 @@
     "tests/capture_avatar_shop_xfs_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.14,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_avatar_shop_xfs_pck.gd.log",
       "checks": 0
@@ -1305,7 +1498,7 @@
     "tests/capture_battle_hud_layout.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_battle_hud_layout.gd.log",
       "checks": 0
@@ -1321,7 +1514,7 @@
     "tests/capture_bigfoot.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.196,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_bigfoot.gd.log",
       "checks": 0
@@ -1329,7 +1522,7 @@
     "tests/capture_bigfoot_attacks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.198,
+      "seconds": 0.151,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_bigfoot_attacks.gd.log",
       "checks": 0
@@ -1337,7 +1530,7 @@
     "tests/capture_bigfoot_native.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.259,
+      "seconds": 0.255,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_bigfoot_native.gd.log",
       "checks": 0
@@ -1345,7 +1538,7 @@
     "tests/capture_bigfoot_smooth.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.266,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_bigfoot_smooth.gd.log",
       "checks": 0
@@ -1353,7 +1546,7 @@
     "tests/capture_bigfoot_smooth_scene.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.251,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_bigfoot_smooth_scene.gd.log",
       "checks": 0
@@ -1361,7 +1554,7 @@
     "tests/capture_boomer_audio.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.187,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_audio.gd.log",
       "checks": 0
@@ -1369,7 +1562,7 @@
     "tests/capture_boomer_fall_wind.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_fall_wind.gd.log",
       "checks": 0
@@ -1377,7 +1570,7 @@
     "tests/capture_boomer_impact.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_impact.gd.log",
       "checks": 0
@@ -1385,7 +1578,7 @@
     "tests/capture_boomer_issue9.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.506,
+      "seconds": 0.508,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_issue9.gd.log",
       "checks": 0
@@ -1393,7 +1586,7 @@
     "tests/capture_boomer_muzzle.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.196,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_muzzle.gd.log",
       "checks": 0
@@ -1401,7 +1594,7 @@
     "tests/capture_boomer_muzzle_slope.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_muzzle_slope.gd.log",
       "checks": 0
@@ -1409,7 +1602,7 @@
     "tests/capture_boomer_native_poses.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.19,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_native_poses.gd.log",
       "checks": 0
@@ -1417,7 +1610,7 @@
     "tests/capture_boomer_standing_wind.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.209,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_standing_wind.gd.log",
       "checks": 0
@@ -1425,7 +1618,7 @@
     "tests/capture_boomer_support.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_support.gd.log",
       "checks": 0
@@ -1433,7 +1626,7 @@
     "tests/capture_boomer_weak_pose.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_weak_pose.gd.log",
       "checks": 0
@@ -1441,7 +1634,7 @@
     "tests/capture_boomer_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_boomer_weather.gd.log",
       "checks": 0
@@ -1449,7 +1642,7 @@
     "tests/capture_classic_buttons_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.145,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_classic_buttons_hd.gd.log",
       "checks": 0
@@ -1457,7 +1650,7 @@
     "tests/capture_classic_buttons_smooth.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.177,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_classic_buttons_smooth.gd.log",
       "checks": 0
@@ -1465,7 +1658,7 @@
     "tests/capture_classic_shots.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.187,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_classic_shots.gd.log",
       "checks": 0
@@ -1473,7 +1666,7 @@
     "tests/capture_client_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_client_assets.gd.log",
       "checks": 0
@@ -1481,7 +1674,7 @@
     "tests/capture_client_weather_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.143,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_client_weather_assets.gd.log",
       "checks": 0
@@ -1489,7 +1682,7 @@
     "tests/capture_footer_background.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.14,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_footer_background.gd.log",
       "checks": 0
@@ -1497,7 +1690,7 @@
     "tests/capture_grub.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.378,
+      "seconds": 0.363,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_grub.gd.log",
       "checks": 0
@@ -1505,7 +1698,7 @@
     "tests/capture_hd_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.181,
+      "seconds": 0.193,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_hd_assets.gd.log",
       "checks": 0
@@ -1513,7 +1706,7 @@
     "tests/capture_horn_aura.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_horn_aura.gd.log",
       "checks": 0
@@ -1521,7 +1714,7 @@
     "tests/capture_horn_classic.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_horn_classic.gd.log",
       "checks": 0
@@ -1529,7 +1722,7 @@
     "tests/capture_horn_curve.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_horn_curve.gd.log",
       "checks": 0
@@ -1537,7 +1730,7 @@
     "tests/capture_hud.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.208,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_hud.gd.log",
       "checks": 0
@@ -1545,7 +1738,7 @@
     "tests/capture_hud_clock_wind.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_hud_clock_wind.gd.log",
       "checks": 0
@@ -1561,7 +1754,7 @@
     "tests/capture_lightning_game.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.21,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_lightning_game.gd.log",
       "checks": 0
@@ -1569,7 +1762,7 @@
     "tests/capture_lightning_poses.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.556,
+      "seconds": 0.561,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_lightning_poses.gd.log",
       "checks": 0
@@ -1577,7 +1770,7 @@
     "tests/capture_lobby_art_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_lobby_art_hd.gd.log",
       "checks": 0
@@ -1585,7 +1778,7 @@
     "tests/capture_lobby_ui.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.192,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_lobby_ui.gd.log",
       "checks": 0
@@ -1593,7 +1786,7 @@
     "tests/capture_mage.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.197,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mage.gd.log",
       "checks": 0
@@ -1601,7 +1794,7 @@
     "tests/capture_mage_bigfoot_port.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.262,
+      "seconds": 0.266,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mage_bigfoot_port.gd.log",
       "checks": 0
@@ -1609,7 +1802,7 @@
     "tests/capture_mage_game.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mage_game.gd.log",
       "checks": 0
@@ -1617,7 +1810,7 @@
     "tests/capture_mage_review.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.605,
+      "seconds": 0.55,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mage_review.gd.log",
       "checks": 0
@@ -1625,7 +1818,7 @@
     "tests/capture_mage_sparks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.549,
+      "seconds": 0.563,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mage_sparks.gd.log",
       "checks": 0
@@ -1633,7 +1826,7 @@
     "tests/capture_mage_sparks_game.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.147,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mage_sparks_game.gd.log",
       "checks": 0
@@ -1641,7 +1834,7 @@
     "tests/capture_mage_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mage_weather.gd.log",
       "checks": 0
@@ -1657,7 +1850,7 @@
     "tests/capture_map.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.143,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_map.gd.log",
       "checks": 0
@@ -1665,7 +1858,7 @@
     "tests/capture_match_loading.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_match_loading.gd.log",
       "checks": 0
@@ -1673,7 +1866,7 @@
     "tests/capture_mobile_animation.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.144,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mobile_animation.gd.log",
       "checks": 0
@@ -1681,7 +1874,7 @@
     "tests/capture_mobile_composition.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mobile_composition.gd.log",
       "checks": 0
@@ -1689,7 +1882,7 @@
     "tests/capture_mobile_shots.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.269,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_mobile_shots.gd.log",
       "checks": 0
@@ -1697,7 +1890,7 @@
     "tests/capture_move_bar.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.144,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_move_bar.gd.log",
       "checks": 0
@@ -1705,7 +1898,7 @@
     "tests/capture_nak.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.147,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_nak.gd.log",
       "checks": 0
@@ -1721,7 +1914,7 @@
     "tests/capture_pilot_projectiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.193,
+      "seconds": 0.197,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_pilot_projectiles.gd.log",
       "checks": 0
@@ -1729,7 +1922,7 @@
     "tests/capture_raon_mines.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.485,
+      "seconds": 0.567,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_raon_mines.gd.log",
       "checks": 0
@@ -1737,7 +1930,7 @@
     "tests/capture_raon_shots.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.56,
+      "seconds": 0.552,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_raon_shots.gd.log",
       "checks": 0
@@ -1745,7 +1938,7 @@
     "tests/capture_readme.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.147,
+      "seconds": 0.192,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_readme.gd.log",
       "checks": 0
@@ -1753,7 +1946,7 @@
     "tests/capture_result_screen.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.184,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_result_screen.gd.log",
       "checks": 0
@@ -1761,7 +1954,7 @@
     "tests/capture_room_button_alpha.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.142,
+      "seconds": 0.186,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_button_alpha.gd.log",
       "checks": 0
@@ -1769,7 +1962,7 @@
     "tests/capture_room_button_alpha_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.148,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_button_alpha_pck.gd.log",
       "checks": 0
@@ -1777,7 +1970,7 @@
     "tests/capture_room_card.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.142,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_card.gd.log",
       "checks": 0
@@ -1785,7 +1978,7 @@
     "tests/capture_room_card_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.209,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_card_pck.gd.log",
       "checks": 0
@@ -1793,7 +1986,7 @@
     "tests/capture_room_finish.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.147,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_finish.gd.log",
       "checks": 0
@@ -1801,7 +1994,7 @@
     "tests/capture_room_finish_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_finish_pck.gd.log",
       "checks": 0
@@ -1809,7 +2002,7 @@
     "tests/capture_room_polish.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.21,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_polish.gd.log",
       "checks": 0
@@ -1817,7 +2010,7 @@
     "tests/capture_room_reference.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.196,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_reference.gd.log",
       "checks": 0
@@ -1833,7 +2026,7 @@
     "tests/capture_room_settings_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.139,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_settings_pck.gd.log",
       "checks": 0
@@ -1841,7 +2034,7 @@
     "tests/capture_room_ui.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.196,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_room_ui.gd.log",
       "checks": 0
@@ -1849,7 +2042,7 @@
     "tests/capture_settings_baseline.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.142,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_settings_baseline.gd.log",
       "checks": 0
@@ -1857,7 +2050,7 @@
     "tests/capture_settings_i18n.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_settings_i18n.gd.log",
       "checks": 0
@@ -1865,7 +2058,7 @@
     "tests/capture_settings_word.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_settings_word.gd.log",
       "checks": 0
@@ -1881,7 +2074,7 @@
     "tests/capture_settings_word_finish_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_settings_word_finish_pck.gd.log",
       "checks": 0
@@ -1889,7 +2082,7 @@
     "tests/capture_settings_word_original.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.208,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_settings_word_original.gd.log",
       "checks": 0
@@ -1897,7 +2090,7 @@
     "tests/capture_settings_word_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_settings_word_pck.gd.log",
       "checks": 0
@@ -1905,7 +2098,7 @@
     "tests/capture_shop_original.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.199,
+      "seconds": 0.19,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_shop_original.gd.log",
       "checks": 0
@@ -1913,7 +2106,7 @@
     "tests/capture_shop_original_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_shop_original_pck.gd.log",
       "checks": 0
@@ -1921,7 +2114,7 @@
     "tests/capture_shop_test_funds.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.194,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_shop_test_funds.gd.log",
       "checks": 0
@@ -1929,7 +2122,7 @@
     "tests/capture_side_pilot.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.194,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_side_pilot.gd.log",
       "checks": 0
@@ -1937,7 +2130,7 @@
     "tests/capture_special_mobiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.499,
+      "seconds": 0.548,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_special_mobiles.gd.log",
       "checks": 0
@@ -1945,7 +2138,7 @@
     "tests/capture_turtle_projectiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.379,
+      "seconds": 0.38,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_turtle_projectiles.gd.log",
       "checks": 0
@@ -1961,7 +2154,7 @@
     "tests/capture_using_item.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_using_item.gd.log",
       "checks": 0
@@ -1969,7 +2162,7 @@
     "tests/capture_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.187,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_weather.gd.log",
       "checks": 0
@@ -1977,7 +2170,7 @@
     "tests/capture_xfs_hd_migration.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_xfs_hd_migration.gd.log",
       "checks": 0
@@ -1985,7 +2178,7 @@
     "tests/capture_xfs_hd_motion.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.143,
+      "seconds": 0.152,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_xfs_hd_motion.gd.log",
       "checks": 0
@@ -1993,7 +2186,7 @@
     "tests/capture_xfs_hd_pck.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.194,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_xfs_hd_pck.gd.log",
       "checks": 0
@@ -2001,7 +2194,7 @@
     "tests/capture_xfs_outfits.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-capture_xfs_outfits.gd.log",
       "checks": 0
@@ -2009,7 +2202,7 @@
     "tests/legacy_profile.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-legacy_profile.gd.log",
       "checks": 0
@@ -2017,7 +2210,7 @@
     "tests/prepare_hd_references.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-prepare_hd_references.gd.log",
       "checks": 0
@@ -2025,7 +2218,7 @@
     "tests/support/actor_platforms.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-support-actor_platforms.gd.log",
       "checks": 0
@@ -2041,7 +2234,7 @@
     "tests/support/suite.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-support-suite.gd.log",
       "checks": 0
@@ -2049,7 +2242,7 @@
     "tests/test_actor_gravity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.24,
+      "seconds": 0.258,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_actor_gravity.gd.log",
       "checks": 0
@@ -2057,7 +2250,7 @@
     "tests/test_aduka_beam_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.191,
+      "seconds": 0.198,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_aduka_beam_art.gd.log",
       "checks": 0
@@ -2065,7 +2258,7 @@
     "tests/test_aduka_combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.258,
+      "seconds": 0.26,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_aduka_combat.gd.log",
       "checks": 0
@@ -2073,7 +2266,7 @@
     "tests/test_aduka_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.265,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_aduka_effect.gd.log",
       "checks": 0
@@ -2081,7 +2274,7 @@
     "tests/test_aduka_native.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.51,
+      "seconds": 0.496,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_aduka_native.gd.log",
       "checks": 0
@@ -2089,7 +2282,7 @@
     "tests/test_aduka_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.258,
+      "seconds": 0.261,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_aduka_weather.gd.log",
       "checks": 0
@@ -2097,7 +2290,7 @@
     "tests/test_aiming.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_aiming.gd.log",
       "checks": 0
@@ -2105,7 +2298,7 @@
     "tests/test_armor_t2.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.267,
+      "seconds": 0.271,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_armor_t2.gd.log",
       "checks": 0
@@ -2113,7 +2306,7 @@
     "tests/test_asate_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.206,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_asate_effect.gd.log",
       "checks": 0
@@ -2121,7 +2314,7 @@
     "tests/test_attributes.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_attributes.gd.log",
       "checks": 0
@@ -2129,7 +2322,7 @@
     "tests/test_avatar_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_art.gd.log",
       "checks": 0
@@ -2145,7 +2338,7 @@
     "tests/test_avatar_continuity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.195,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_continuity.gd.log",
       "checks": 0
@@ -2153,7 +2346,7 @@
     "tests/test_avatar_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_hd.gd.log",
       "checks": 0
@@ -2161,7 +2354,7 @@
     "tests/test_avatar_mount.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_mount.gd.log",
       "checks": 0
@@ -2169,7 +2362,7 @@
     "tests/test_avatar_offline.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.193,
+      "seconds": 0.208,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_offline.gd.log",
       "checks": 0
@@ -2177,7 +2370,7 @@
     "tests/test_avatar_profile.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_profile.gd.log",
       "checks": 0
@@ -2185,7 +2378,7 @@
     "tests/test_avatar_shop.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.145,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_shop.gd.log",
       "checks": 0
@@ -2193,7 +2386,7 @@
     "tests/test_avatar_shop_classic.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.193,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_shop_classic.gd.log",
       "checks": 0
@@ -2201,7 +2394,7 @@
     "tests/test_avatar_shop_parity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.141,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_avatar_shop_parity.gd.log",
       "checks": 0
@@ -2209,7 +2402,7 @@
     "tests/test_battle_hud_layout.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_battle_hud_layout.gd.log",
       "checks": 0
@@ -2217,7 +2410,7 @@
     "tests/test_battle_options.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_battle_options.gd.log",
       "checks": 0
@@ -2225,7 +2418,7 @@
     "tests/test_battle_rules.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.268,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_battle_rules.gd.log",
       "checks": 0
@@ -2233,7 +2426,7 @@
     "tests/test_bigfoot.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_bigfoot.gd.log",
       "checks": 0
@@ -2241,7 +2434,7 @@
     "tests/test_bigfoot_attacks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.258,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_bigfoot_attacks.gd.log",
       "checks": 0
@@ -2249,7 +2442,7 @@
     "tests/test_bigfoot_attacks_scene.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.208,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_bigfoot_attacks_scene.gd.log",
       "checks": 0
@@ -2257,7 +2450,7 @@
     "tests/test_bigfoot_native.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.262,
+      "seconds": 0.261,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_bigfoot_native.gd.log",
       "checks": 0
@@ -2265,7 +2458,7 @@
     "tests/test_bigfoot_smooth.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.269,
+      "seconds": 0.26,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_bigfoot_smooth.gd.log",
       "checks": 0
@@ -2273,7 +2466,7 @@
     "tests/test_boomer.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.612,
+      "seconds": 0.608,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_boomer.gd.log",
       "checks": 0
@@ -2281,7 +2474,7 @@
     "tests/test_ci_combat.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.26,
+      "seconds": 0.261,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_ci_combat.gd.log",
       "checks": 0
@@ -2289,7 +2482,7 @@
     "tests/test_ci_smoke.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_ci_smoke.gd.log",
       "checks": 0
@@ -2297,7 +2490,7 @@
     "tests/test_classic_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.377,
+      "seconds": 0.367,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_assets.gd.log",
       "checks": 0
@@ -2305,7 +2498,7 @@
     "tests/test_classic_ballistics.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.244,
+      "seconds": 0.261,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_ballistics.gd.log",
       "checks": 0
@@ -2313,7 +2506,7 @@
     "tests/test_classic_buttons_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.192,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_buttons_hd.gd.log",
       "checks": 0
@@ -2321,7 +2514,7 @@
     "tests/test_classic_flight_parity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.268,
+      "seconds": 0.255,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_flight_parity.gd.log",
       "checks": 0
@@ -2329,7 +2522,7 @@
     "tests/test_classic_matches.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.26,
+      "seconds": 0.269,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_matches.gd.log",
       "checks": 0
@@ -2337,7 +2530,7 @@
     "tests/test_classic_mobiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.262,
+      "seconds": 0.268,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_mobiles.gd.log",
       "checks": 0
@@ -2345,7 +2538,7 @@
     "tests/test_classic_shot_timing.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.257,
+      "seconds": 0.258,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_shot_timing.gd.log",
       "checks": 0
@@ -2353,7 +2546,7 @@
     "tests/test_classic_shot_timing_scene.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.199,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_classic_shot_timing_scene.gd.log",
       "checks": 0
@@ -2361,7 +2554,7 @@
     "tests/test_client_audio.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.146,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_client_audio.gd.log",
       "checks": 0
@@ -2369,7 +2562,7 @@
     "tests/test_client_hud_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.255,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_client_hud_assets.gd.log",
       "checks": 0
@@ -2377,7 +2570,7 @@
     "tests/test_client_item_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_client_item_assets.gd.log",
       "checks": 0
@@ -2393,7 +2586,7 @@
     "tests/test_dragon_shots.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.384,
+      "seconds": 0.371,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_dragon_shots.gd.log",
       "checks": 0
@@ -2401,7 +2594,7 @@
     "tests/test_gold_rewards.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_gold_rewards.gd.log",
       "checks": 0
@@ -2409,7 +2602,7 @@
     "tests/test_grub_flight.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.191,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_grub_flight.gd.log",
       "checks": 0
@@ -2417,7 +2610,7 @@
     "tests/test_grub_model.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.363,
+      "seconds": 0.373,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_grub_model.gd.log",
       "checks": 0
@@ -2425,7 +2618,7 @@
     "tests/test_grub_surface.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_grub_surface.gd.log",
       "checks": 0
@@ -2433,7 +2626,7 @@
     "tests/test_hd_assets.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_hd_assets.gd.log",
       "checks": 0
@@ -2441,7 +2634,7 @@
     "tests/test_hud.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_hud.gd.log",
       "checks": 0
@@ -2449,7 +2642,7 @@
     "tests/test_hud_clock_wind.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.263,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_hud_clock_wind.gd.log",
       "checks": 0
@@ -2457,7 +2650,7 @@
     "tests/test_i18n.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_i18n.gd.log",
       "checks": 0
@@ -2465,7 +2658,7 @@
     "tests/test_items.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.199,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_items.gd.log",
       "checks": 0
@@ -2473,7 +2666,7 @@
     "tests/test_items_scene.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_items_scene.gd.log",
       "checks": 0
@@ -2481,7 +2674,7 @@
     "tests/test_jd_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.203,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_jd_effect.gd.log",
       "checks": 0
@@ -2489,7 +2682,7 @@
     "tests/test_knight_shots.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.265,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_knight_shots.gd.log",
       "checks": 0
@@ -2497,7 +2690,7 @@
     "tests/test_lightning_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_lightning_art.gd.log",
       "checks": 0
@@ -2505,7 +2698,7 @@
     "tests/test_lightning_native.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.264,
+      "seconds": 0.254,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_lightning_native.gd.log",
       "checks": 0
@@ -2513,7 +2706,7 @@
     "tests/test_lightning_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.312,
+      "seconds": 0.255,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_lightning_weather.gd.log",
       "checks": 0
@@ -2521,7 +2714,7 @@
     "tests/test_lobby_art_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.207,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_lobby_art_hd.gd.log",
       "checks": 0
@@ -2529,7 +2722,7 @@
     "tests/test_lobby_settings.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.149,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_lobby_settings.gd.log",
       "checks": 0
@@ -2537,7 +2730,7 @@
     "tests/test_lobby_ui.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_lobby_ui.gd.log",
       "checks": 0
@@ -2545,7 +2738,7 @@
     "tests/test_mage.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.303,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage.gd.log",
       "checks": 0
@@ -2553,7 +2746,7 @@
     "tests/test_mage_client_animation.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.252,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_client_animation.gd.log",
       "checks": 0
@@ -2561,7 +2754,7 @@
     "tests/test_mage_native.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.26,
+      "seconds": 0.265,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_native.gd.log",
       "checks": 0
@@ -2569,7 +2762,7 @@
     "tests/test_mage_scene.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.147,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_scene.gd.log",
       "checks": 0
@@ -2577,7 +2770,7 @@
     "tests/test_mage_secondary_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.259,
+      "seconds": 0.255,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_secondary_weather.gd.log",
       "checks": 0
@@ -2585,7 +2778,7 @@
     "tests/test_mage_spark_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.198,
+      "seconds": 0.195,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_spark_art.gd.log",
       "checks": 0
@@ -2593,7 +2786,7 @@
     "tests/test_mage_sparks.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.305,
+      "seconds": 0.269,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_sparks.gd.log",
       "checks": 0
@@ -2601,7 +2794,7 @@
     "tests/test_mage_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.148,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_weather.gd.log",
       "checks": 0
@@ -2609,7 +2802,7 @@
     "tests/test_mage_weather_art.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.205,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_weather_art.gd.log",
       "checks": 0
@@ -2617,7 +2810,7 @@
     "tests/test_mage_weather_effects.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.266,
+      "seconds": 0.257,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mage_weather_effects.gd.log",
       "checks": 0
@@ -2625,7 +2818,7 @@
     "tests/test_map.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.192,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_map.gd.log",
       "checks": 0
@@ -2633,7 +2826,7 @@
     "tests/test_match_loading.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.198,
+      "seconds": 0.191,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_match_loading.gd.log",
       "checks": 0
@@ -2641,7 +2834,7 @@
     "tests/test_match_partition.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.197,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_match_partition.gd.log",
       "checks": 0
@@ -2649,7 +2842,7 @@
     "tests/test_matches.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.257,
+      "seconds": 0.263,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_matches.gd.log",
       "checks": 0
@@ -2665,7 +2858,7 @@
     "tests/test_mobile_parity.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.264,
+      "seconds": 0.26,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_mobile_parity.gd.log",
       "checks": 0
@@ -2673,7 +2866,7 @@
     "tests/test_music_screens.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.254,
+      "seconds": 0.263,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_music_screens.gd.log",
       "checks": 0
@@ -2681,7 +2874,7 @@
     "tests/test_nak.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.269,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_nak.gd.log",
       "checks": 0
@@ -2689,7 +2882,7 @@
     "tests/test_native_terrain.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.264,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_native_terrain.gd.log",
       "checks": 0
@@ -2697,7 +2890,7 @@
     "tests/test_native_weather_roster.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.265,
+      "seconds": 0.254,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_native_weather_roster.gd.log",
       "checks": 0
@@ -2705,7 +2898,7 @@
     "tests/test_original_mobiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.295,
+      "seconds": 0.265,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_original_mobiles.gd.log",
       "checks": 0
@@ -2713,7 +2906,7 @@
     "tests/test_performance.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.199,
+      "seconds": 0.195,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_performance.gd.log",
       "checks": 0
@@ -2721,7 +2914,7 @@
     "tests/test_pilot_projectiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.195,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_pilot_projectiles.gd.log",
       "checks": 0
@@ -2729,7 +2922,7 @@
     "tests/test_raon_effect.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.206,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_raon_effect.gd.log",
       "checks": 0
@@ -2737,7 +2930,7 @@
     "tests/test_raon_mines.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.264,
+      "seconds": 0.268,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_raon_mines.gd.log",
       "checks": 0
@@ -2745,7 +2938,7 @@
     "tests/test_raon_shots.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.264,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_raon_shots.gd.log",
       "checks": 0
@@ -2753,7 +2946,7 @@
     "tests/test_raon_trail.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.263,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_raon_trail.gd.log",
       "checks": 0
@@ -2761,7 +2954,7 @@
     "tests/test_refinement.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.27,
+      "seconds": 0.265,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_refinement.gd.log",
       "checks": 0
@@ -2769,7 +2962,7 @@
     "tests/test_refinement_scene.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.198,
+      "seconds": 0.207,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_refinement_scene.gd.log",
       "checks": 0
@@ -2777,7 +2970,7 @@
     "tests/test_result_screen.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.301,
+      "seconds": 0.263,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_result_screen.gd.log",
       "checks": 0
@@ -2785,7 +2978,7 @@
     "tests/test_room_polish.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_room_polish.gd.log",
       "checks": 0
@@ -2793,7 +2986,7 @@
     "tests/test_room_reference.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_room_reference.gd.log",
       "checks": 0
@@ -2801,7 +2994,7 @@
     "tests/test_room_settings.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_room_settings.gd.log",
       "checks": 0
@@ -2809,7 +3002,7 @@
     "tests/test_room_ui.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.21,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_room_ui.gd.log",
       "checks": 0
@@ -2817,7 +3010,7 @@
     "tests/test_roster.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.203,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_roster.gd.log",
       "checks": 0
@@ -2825,7 +3018,7 @@
     "tests/test_runner.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.203,
+      "seconds": 0.196,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_runner.gd.log",
       "checks": 0
@@ -2833,7 +3026,7 @@
     "tests/test_scene.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_scene.gd.log",
       "checks": 0
@@ -2841,7 +3034,7 @@
     "tests/test_settings_i18n.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.208,
+      "seconds": 0.195,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_settings_i18n.gd.log",
       "checks": 0
@@ -2849,7 +3042,7 @@
     "tests/test_shop_audit.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.202,
+      "seconds": 0.191,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_shop_audit.gd.log",
       "checks": 0
@@ -2857,7 +3050,7 @@
     "tests/test_shop_hd.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.143,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_shop_hd.gd.log",
       "checks": 0
@@ -2865,7 +3058,7 @@
     "tests/test_shop_items_integration.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.298,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_shop_items_integration.gd.log",
       "checks": 0
@@ -2873,7 +3066,7 @@
     "tests/test_shop_original.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.149,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_shop_original.gd.log",
       "checks": 0
@@ -2881,7 +3074,7 @@
     "tests/test_shop_test_funds.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.198,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_shop_test_funds.gd.log",
       "checks": 0
@@ -2889,7 +3082,7 @@
     "tests/test_shop_wide.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_shop_wide.gd.log",
       "checks": 0
@@ -2897,7 +3090,7 @@
     "tests/test_shop_xfs.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.207,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_shop_xfs.gd.log",
       "checks": 0
@@ -2905,7 +3098,7 @@
     "tests/test_special_mobiles_integration.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.259,
+      "seconds": 0.252,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_special_mobiles_integration.gd.log",
       "checks": 0
@@ -2913,7 +3106,7 @@
     "tests/test_turtle_projectiles.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.385,
+      "seconds": 0.382,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_turtle_projectiles.gd.log",
       "checks": 0
@@ -2921,7 +3114,7 @@
     "tests/test_turtle_t2.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.26,
+      "seconds": 0.264,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_turtle_t2.gd.log",
       "checks": 0
@@ -2929,7 +3122,7 @@
     "tests/test_weather.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.248,
+      "seconds": 0.261,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_weather.gd.log",
       "checks": 0
@@ -2937,7 +3130,7 @@
     "tests/test_weather_legacy.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.194,
+      "seconds": 0.196,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_weather_legacy.gd.log",
       "checks": 0
@@ -2945,7 +3138,7 @@
     "tests/test_xfs_catalog.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.147,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_xfs_catalog.gd.log",
       "checks": 0
@@ -2953,7 +3146,7 @@
     "tests/test_xfs_equipment.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.2,
+      "seconds": 0.15,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_xfs_equipment.gd.log",
       "checks": 0
@@ -2961,15 +3154,31 @@
     "tests/test_xfs_hd_migration.gd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.207,
+      "seconds": 0.204,
       "matches": 0,
       "log": ".tools/check-logs/parse-tests-test_xfs_hd_migration.gd.log",
+      "checks": 0
+    },
+    "tests/tools/bigfoot_profile/match.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.198,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-tools-bigfoot_profile-match.gd.log",
+      "checks": 0
+    },
+    "tests/tools/bigfoot_profile/ui.gd": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.194,
+      "matches": 0,
+      "log": ".tools/check-logs/parse-tests-tools-bigfoot_profile-ui.gd.log",
       "checks": 0
     },
     "test_runner": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.321,
+      "seconds": 1.338,
       "matches": 0,
       "log": ".tools/check-logs/test_runner.log",
       "checks": 39
@@ -2977,7 +3186,7 @@
     "test_scene": {
       "ok": true,
       "exit": 0,
-      "seconds": 3.715,
+      "seconds": 3.336,
       "matches": 0,
       "log": ".tools/check-logs/test_scene.log",
       "checks": 27
@@ -2985,7 +3194,7 @@
     "test_lobby_ui": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.46,
+      "seconds": 2.524,
       "matches": 0,
       "log": ".tools/check-logs/test_lobby_ui.log",
       "checks": 96
@@ -2993,7 +3202,7 @@
     "test_lobby_art_hd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.507,
+      "seconds": 0.488,
       "matches": 0,
       "log": ".tools/check-logs/test_lobby_art_hd.log",
       "checks": 93
@@ -3001,7 +3210,7 @@
     "test_room_ui": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.184,
+      "seconds": 2.29,
       "matches": 0,
       "log": ".tools/check-logs/test_room_ui.log",
       "checks": 172
@@ -3009,7 +3218,7 @@
     "test_room_reference": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.308,
+      "seconds": 2.391,
       "matches": 0,
       "log": ".tools/check-logs/test_room_reference.log",
       "checks": 232
@@ -3017,7 +3226,7 @@
     "test_room_polish": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.019,
+      "seconds": 2.116,
       "matches": 0,
       "log": ".tools/check-logs/test_room_polish.log",
       "checks": 162
@@ -3025,7 +3234,7 @@
     "test_room_settings": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.201,
+      "seconds": 2.212,
       "matches": 0,
       "log": ".tools/check-logs/test_room_settings.log",
       "checks": 59
@@ -3033,7 +3242,7 @@
     "test_classic_buttons_hd": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.328,
+      "seconds": 2.292,
       "matches": 0,
       "log": ".tools/check-logs/test_classic_buttons_hd.log",
       "checks": 596
@@ -3041,7 +3250,7 @@
     "test_refinement": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.989,
+      "seconds": 1.006,
       "matches": 0,
       "log": ".tools/check-logs/test_refinement.log",
       "checks": 28
@@ -3049,7 +3258,7 @@
     "test_refinement_scene": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.685,
+      "seconds": 2.838,
       "matches": 0,
       "log": ".tools/check-logs/test_refinement_scene.log",
       "checks": 22
@@ -3057,7 +3266,7 @@
     "test_bigfoot": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.315,
+      "seconds": 2.328,
       "matches": 0,
       "log": ".tools/check-logs/test_bigfoot.log",
       "checks": 28
@@ -3065,7 +3274,7 @@
     "test_bigfoot_smooth": {
       "ok": true,
       "exit": 0,
-      "seconds": 5.222,
+      "seconds": 5.381,
       "matches": 0,
       "log": ".tools/check-logs/test_bigfoot_smooth.log",
       "checks": 70
@@ -3073,7 +3282,7 @@
     "test_mage": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.574,
+      "seconds": 1.582,
       "matches": 0,
       "log": ".tools/check-logs/test_mage.log",
       "checks": 41
@@ -3081,7 +3290,7 @@
     "test_mage_scene": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.979,
+      "seconds": 2.134,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_scene.log",
       "checks": 15
@@ -3089,7 +3298,7 @@
     "test_bigfoot_native": {
       "ok": true,
       "exit": 0,
-      "seconds": 4.486,
+      "seconds": 4.44,
       "matches": 0,
       "log": ".tools/check-logs/test_bigfoot_native.log",
       "checks": 2905
@@ -3097,7 +3306,7 @@
     "test_bigfoot_attacks": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.424,
+      "seconds": 1.42,
       "matches": 0,
       "log": ".tools/check-logs/test_bigfoot_attacks.log",
       "checks": 56
@@ -3105,7 +3314,7 @@
     "test_bigfoot_attacks_scene": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.02,
+      "seconds": 1.986,
       "matches": 0,
       "log": ".tools/check-logs/test_bigfoot_attacks_scene.log",
       "checks": 14
@@ -3113,7 +3322,7 @@
     "test_hd_assets": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.684,
+      "seconds": 0.679,
       "matches": 0,
       "log": ".tools/check-logs/test_hd_assets.log",
       "checks": 193
@@ -3121,7 +3330,7 @@
     "test_mobile_animation": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.039,
+      "seconds": 2.106,
       "matches": 0,
       "log": ".tools/check-logs/test_mobile_animation.log",
       "checks": 240
@@ -3129,7 +3338,7 @@
     "test_pilot_projectiles": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.212,
+      "seconds": 2.21,
       "matches": 0,
       "log": ".tools/check-logs/test_pilot_projectiles.log",
       "checks": 108
@@ -3137,7 +3346,7 @@
     "test_roster": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.417,
+      "seconds": 2.396,
       "matches": 0,
       "log": ".tools/check-logs/test_roster.log",
       "checks": 79
@@ -3145,7 +3354,7 @@
     "test_map": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.743,
+      "seconds": 2.74,
       "matches": 0,
       "log": ".tools/check-logs/test_map.log",
       "checks": 48
@@ -3153,7 +3362,7 @@
     "test_weather": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.211,
+      "seconds": 2.205,
       "matches": 0,
       "log": ".tools/check-logs/test_weather.log",
       "checks": 15
@@ -3161,7 +3370,7 @@
     "test_hud": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.483,
+      "seconds": 2.426,
       "matches": 0,
       "log": ".tools/check-logs/test_hud.log",
       "checks": 531
@@ -3169,7 +3378,7 @@
     "test_aiming": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.098,
+      "seconds": 2.09,
       "matches": 0,
       "log": ".tools/check-logs/test_aiming.log",
       "checks": 25
@@ -3177,7 +3386,7 @@
     "test_items": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.172,
+      "seconds": 2.103,
       "matches": 0,
       "log": ".tools/check-logs/test_items.log",
       "checks": 49
@@ -3185,7 +3394,7 @@
     "test_items_scene": {
       "ok": true,
       "exit": 0,
-      "seconds": 6.937,
+      "seconds": 6.962,
       "matches": 0,
       "log": ".tools/check-logs/test_items_scene.log",
       "checks": 49
@@ -3193,7 +3402,7 @@
     "test_shop_items_integration": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.85,
+      "seconds": 2.818,
       "matches": 0,
       "log": ".tools/check-logs/test_shop_items_integration.log",
       "checks": 39
@@ -3201,7 +3410,7 @@
     "test_avatar_catalog": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.201,
+      "seconds": 0.262,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_catalog.log",
       "checks": 34
@@ -3209,7 +3418,7 @@
     "test_avatar_profile": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.51,
+      "seconds": 0.592,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_profile.log",
       "checks": 25
@@ -3217,7 +3426,7 @@
     "test_avatar_shop": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.425,
+      "seconds": 2.509,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_shop.log",
       "checks": 25
@@ -3225,7 +3434,7 @@
     "test_avatar_shop_classic": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.42,
+      "seconds": 2.408,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_shop_classic.log",
       "checks": 24
@@ -3233,7 +3442,7 @@
     "test_avatar_shop_parity": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.947,
+      "seconds": 1.9,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_shop_parity.log",
       "checks": 25
@@ -3241,7 +3450,7 @@
     "test_shop_audit": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.0,
+      "seconds": 1.928,
       "matches": 0,
       "log": ".tools/check-logs/test_shop_audit.log",
       "checks": 21
@@ -3249,7 +3458,7 @@
     "test_shop_wide": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.212,
+      "seconds": 2.312,
       "matches": 0,
       "log": ".tools/check-logs/test_shop_wide.log",
       "checks": 26
@@ -3265,7 +3474,7 @@
     "test_shop_original": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.124,
+      "seconds": 2.094,
       "matches": 0,
       "log": ".tools/check-logs/test_shop_original.log",
       "checks": 77
@@ -3273,7 +3482,7 @@
     "test_xfs_catalog": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.488,
+      "seconds": 0.611,
       "matches": 0,
       "log": ".tools/check-logs/test_xfs_catalog.log",
       "checks": 3816
@@ -3281,7 +3490,7 @@
     "test_shop_test_funds": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.552,
+      "seconds": 0.551,
       "matches": 0,
       "log": ".tools/check-logs/test_shop_test_funds.log",
       "checks": 14
@@ -3289,7 +3498,7 @@
     "test_xfs_equipment": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.135,
+      "seconds": 2.107,
       "matches": 0,
       "log": ".tools/check-logs/test_xfs_equipment.log",
       "checks": 19
@@ -3297,7 +3506,7 @@
     "test_xfs_hd_migration": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.213,
+      "seconds": 1.3,
       "matches": 0,
       "log": ".tools/check-logs/test_xfs_hd_migration.log",
       "checks": 2009
@@ -3305,7 +3514,7 @@
     "test_shop_hd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.498,
+      "seconds": 0.616,
       "matches": 0,
       "log": ".tools/check-logs/test_shop_hd.log",
       "checks": 46
@@ -3313,7 +3522,7 @@
     "test_avatar_art": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.264,
+      "seconds": 0.27,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_art.log",
       "checks": 9
@@ -3321,7 +3530,7 @@
     "test_avatar_mount": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.591,
+      "seconds": 0.564,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_mount.log",
       "checks": 24
@@ -3329,7 +3538,7 @@
     "test_avatar_hd": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.378,
+      "seconds": 0.377,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_hd.log",
       "checks": 152
@@ -3337,7 +3546,7 @@
     "test_avatar_continuity": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.125,
+      "seconds": 2.102,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_continuity.log",
       "checks": 130
@@ -3345,7 +3554,7 @@
     "test_attributes": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.906,
+      "seconds": 0.883,
       "matches": 0,
       "log": ".tools/check-logs/test_attributes.log",
       "checks": 59
@@ -3353,7 +3562,7 @@
     "test_gold_rewards": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.668,
+      "seconds": 0.67,
       "matches": 0,
       "log": ".tools/check-logs/test_gold_rewards.log",
       "checks": 43
@@ -3361,7 +3570,7 @@
     "test_mobile_parity": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.884,
+      "seconds": 0.892,
       "matches": 0,
       "log": ".tools/check-logs/test_mobile_parity.log",
       "checks": 27
@@ -3369,7 +3578,7 @@
     "test_nak": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.778,
+      "seconds": 0.795,
       "matches": 0,
       "log": ".tools/check-logs/test_nak.log",
       "checks": 68
@@ -3377,7 +3586,7 @@
     "test_battle_rules": {
       "ok": true,
       "exit": 0,
-      "seconds": 7.322,
+      "seconds": 7.248,
       "matches": 0,
       "log": ".tools/check-logs/test_battle_rules.log",
       "checks": 60
@@ -3385,7 +3594,7 @@
     "test_classic_mobiles": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.421,
+      "seconds": 2.438,
       "matches": 0,
       "log": ".tools/check-logs/test_classic_mobiles.log",
       "checks": 129
@@ -3393,7 +3602,7 @@
     "test_original_mobiles": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.51,
+      "seconds": 1.494,
       "matches": 0,
       "log": ".tools/check-logs/test_original_mobiles.log",
       "checks": 39
@@ -3401,7 +3610,7 @@
     "test_mage_client_animation": {
       "ok": true,
       "exit": 0,
-      "seconds": 3.29,
+      "seconds": 3.358,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_client_animation.log",
       "checks": 115
@@ -3409,7 +3618,7 @@
     "test_classic_flight_parity": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.901,
+      "seconds": 0.889,
       "matches": 0,
       "log": ".tools/check-logs/test_classic_flight_parity.log",
       "checks": 78
@@ -3417,7 +3626,7 @@
     "test_classic_ballistics": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.863,
+      "seconds": 0.848,
       "matches": 0,
       "log": ".tools/check-logs/test_classic_ballistics.log",
       "checks": 1081
@@ -3425,7 +3634,7 @@
     "test_boomer": {
       "ok": true,
       "exit": 0,
-      "seconds": 4.715,
+      "seconds": 4.731,
       "matches": 0,
       "log": ".tools/check-logs/test_boomer.log",
       "checks": 928
@@ -3433,7 +3642,7 @@
     "test_classic_assets": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.01,
+      "seconds": 0.968,
       "matches": 0,
       "log": ".tools/check-logs/test_classic_assets.log",
       "checks": 36
@@ -3441,7 +3650,7 @@
     "test_turtle_projectiles": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.325,
+      "seconds": 2.311,
       "matches": 0,
       "log": ".tools/check-logs/test_turtle_projectiles.log",
       "checks": 158
@@ -3449,7 +3658,7 @@
     "test_turtle_t2": {
       "ok": true,
       "exit": 0,
-      "seconds": 9.184,
+      "seconds": 9.067,
       "matches": 0,
       "log": ".tools/check-logs/test_turtle_t2.log",
       "checks": 588
@@ -3457,7 +3666,7 @@
     "test_classic_shot_timing": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.401,
+      "seconds": 1.375,
       "matches": 0,
       "log": ".tools/check-logs/test_classic_shot_timing.log",
       "checks": 158
@@ -3465,7 +3674,7 @@
     "test_classic_shot_timing_scene": {
       "ok": true,
       "exit": 0,
-      "seconds": 6.03,
+      "seconds": 6.116,
       "matches": 0,
       "log": ".tools/check-logs/test_classic_shot_timing_scene.log",
       "checks": 49
@@ -3473,7 +3682,7 @@
     "test_asate_effect": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.204,
+      "seconds": 0.268,
       "matches": 0,
       "log": ".tools/check-logs/test_asate_effect.log",
       "checks": 80
@@ -3481,7 +3690,7 @@
     "test_jd_effect": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.259,
+      "seconds": 0.264,
       "matches": 0,
       "log": ".tools/check-logs/test_jd_effect.log",
       "checks": 80
@@ -3489,7 +3698,7 @@
     "test_aduka_effect": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.353,
+      "seconds": 0.369,
       "matches": 0,
       "log": ".tools/check-logs/test_aduka_effect.log",
       "checks": 93
@@ -3497,7 +3706,7 @@
     "test_aduka_beam_art": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.269,
+      "seconds": 0.266,
       "matches": 0,
       "log": ".tools/check-logs/test_aduka_beam_art.log",
       "checks": 16
@@ -3505,7 +3714,7 @@
     "test_raon_effect": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.306,
+      "seconds": 0.265,
       "matches": 0,
       "log": ".tools/check-logs/test_raon_effect.log",
       "checks": 168
@@ -3513,7 +3722,7 @@
     "test_raon_shots": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.604,
+      "seconds": 1.602,
       "matches": 0,
       "log": ".tools/check-logs/test_raon_shots.log",
       "checks": 102
@@ -3521,7 +3730,7 @@
     "test_raon_mines": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.386,
+      "seconds": 0.371,
       "matches": 0,
       "log": ".tools/check-logs/test_raon_mines.log",
       "checks": 33
@@ -3529,7 +3738,7 @@
     "test_raon_trail": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.255,
+      "seconds": 0.368,
       "matches": 0,
       "log": ".tools/check-logs/test_raon_trail.log",
       "checks": 93
@@ -3537,7 +3746,7 @@
     "test_special_mobiles_integration": {
       "ok": true,
       "exit": 0,
-      "seconds": 6.507,
+      "seconds": 6.573,
       "matches": 0,
       "log": ".tools/check-logs/test_special_mobiles_integration.log",
       "checks": 275
@@ -3545,7 +3754,7 @@
     "test_armor_t2": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.286,
+      "seconds": 1.294,
       "matches": 0,
       "log": ".tools/check-logs/test_armor_t2.log",
       "checks": 179
@@ -3553,7 +3762,7 @@
     "test_aduka_native": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.615,
+      "seconds": 1.736,
       "matches": 0,
       "log": ".tools/check-logs/test_aduka_native.log",
       "checks": 40
@@ -3561,7 +3770,7 @@
     "test_aduka_combat": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.656,
+      "seconds": 0.665,
       "matches": 0,
       "log": ".tools/check-logs/test_aduka_combat.log",
       "checks": 661
@@ -3569,7 +3778,7 @@
     "test_aduka_weather": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.857,
+      "seconds": 0.902,
       "matches": 0,
       "log": ".tools/check-logs/test_aduka_weather.log",
       "checks": 2628
@@ -3577,7 +3786,7 @@
     "test_mage_native": {
       "ok": true,
       "exit": 0,
-      "seconds": 5.771,
+      "seconds": 5.85,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_native.log",
       "checks": 3998
@@ -3585,7 +3794,7 @@
     "test_lightning_native": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.631,
+      "seconds": 1.602,
       "matches": 0,
       "log": ".tools/check-logs/test_lightning_native.log",
       "checks": 1588
@@ -3593,7 +3802,7 @@
     "test_lightning_art": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.38,
+      "seconds": 0.386,
       "matches": 0,
       "log": ".tools/check-logs/test_lightning_art.log",
       "checks": 136
@@ -3601,7 +3810,7 @@
     "test_lightning_weather": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.913,
+      "seconds": 1.887,
       "matches": 0,
       "log": ".tools/check-logs/test_lightning_weather.log",
       "checks": 3102
@@ -3609,7 +3818,7 @@
     "test_mage_weather": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.29,
+      "seconds": 0.262,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_weather.log",
       "checks": 687
@@ -3617,7 +3826,7 @@
     "test_mage_weather_effects": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.903,
+      "seconds": 0.852,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_weather_effects.log",
       "checks": 57
@@ -3625,7 +3834,7 @@
     "test_mage_secondary_weather": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.178,
+      "seconds": 1.194,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_secondary_weather.log",
       "checks": 575
@@ -3633,7 +3842,7 @@
     "test_mage_weather_art": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.202,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_weather_art.log",
       "checks": 41
@@ -3641,7 +3850,7 @@
     "test_mage_sparks": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.201,
+      "seconds": 1.19,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_sparks.log",
       "checks": 63
@@ -3649,7 +3858,7 @@
     "test_mage_spark_art": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.15,
+      "seconds": 0.151,
       "matches": 0,
       "log": ".tools/check-logs/test_mage_spark_art.log",
       "checks": 206
@@ -3665,7 +3874,7 @@
     "test_client_audio": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.618,
+      "seconds": 0.567,
       "matches": 0,
       "log": ".tools/check-logs/test_client_audio.log",
       "checks": 224
@@ -3673,7 +3882,7 @@
     "test_client_weather_assets": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.26,
+      "seconds": 0.252,
       "matches": 0,
       "log": ".tools/check-logs/test_client_weather_assets.log",
       "checks": 75
@@ -3681,7 +3890,7 @@
     "test_client_hud_assets": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.365,
+      "seconds": 0.381,
       "matches": 0,
       "log": ".tools/check-logs/test_client_hud_assets.log",
       "checks": 463
@@ -3689,7 +3898,7 @@
     "test_battle_hud_layout": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.962,
+      "seconds": 2.089,
       "matches": 0,
       "log": ".tools/check-logs/test_battle_hud_layout.log",
       "checks": 65
@@ -3697,7 +3906,7 @@
     "test_hud_clock_wind": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.484,
+      "seconds": 0.482,
       "matches": 0,
       "log": ".tools/check-logs/test_hud_clock_wind.log",
       "checks": 60
@@ -3705,7 +3914,7 @@
     "test_battle_options": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.211,
+      "seconds": 2.299,
       "matches": 0,
       "log": ".tools/check-logs/test_battle_options.log",
       "checks": 146
@@ -3713,7 +3922,7 @@
     "test_match_loading": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.101,
+      "seconds": 2.228,
       "matches": 0,
       "log": ".tools/check-logs/test_match_loading.log",
       "checks": 33
@@ -3721,7 +3930,7 @@
     "test_result_screen": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.19,
+      "seconds": 2.214,
       "matches": 0,
       "log": ".tools/check-logs/test_result_screen.log",
       "checks": 37
@@ -3729,7 +3938,7 @@
     "test_music_screens": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.579,
+      "seconds": 2.604,
       "matches": 0,
       "log": ".tools/check-logs/test_music_screens.log",
       "checks": 55
@@ -3737,7 +3946,7 @@
     "test_grub_surface": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.259,
+      "seconds": 0.201,
       "matches": 0,
       "log": ".tools/check-logs/test_grub_surface.log",
       "checks": 720
@@ -3745,7 +3954,7 @@
     "test_grub_flight": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.261,
+      "seconds": 0.259,
       "matches": 0,
       "log": ".tools/check-logs/test_grub_flight.log",
       "checks": 15690
@@ -3753,7 +3962,7 @@
     "test_grub_model": {
       "ok": true,
       "exit": 0,
-      "seconds": 18.387,
+      "seconds": 18.778,
       "matches": 0,
       "log": ".tools/check-logs/test_grub_model.log",
       "checks": 311
@@ -3761,7 +3970,7 @@
     "test_dragon_shots": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.878,
+      "seconds": 0.913,
       "matches": 0,
       "log": ".tools/check-logs/test_dragon_shots.log",
       "checks": 61
@@ -3769,7 +3978,7 @@
     "test_knight_shots": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.561,
+      "seconds": 0.681,
       "matches": 0,
       "log": ".tools/check-logs/test_knight_shots.log",
       "checks": 92
@@ -3777,7 +3986,7 @@
     "test_ci_smoke": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.604,
+      "seconds": 1.726,
       "matches": 0,
       "log": ".tools/check-logs/test_ci_smoke.log",
       "checks": 9
@@ -3785,7 +3994,7 @@
     "test_i18n": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.271,
+      "seconds": 0.298,
       "matches": 0,
       "log": ".tools/check-logs/test_i18n.log",
       "checks": 247
@@ -3793,7 +4002,7 @@
     "test_settings_i18n": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.129,
+      "seconds": 2.084,
       "matches": 0,
       "log": ".tools/check-logs/test_settings_i18n.log",
       "checks": 34
@@ -3801,7 +4010,7 @@
     "test_lobby_settings": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.356,
+      "seconds": 2.387,
       "matches": 0,
       "log": ".tools/check-logs/test_lobby_settings.log",
       "checks": 14
@@ -3809,7 +4018,7 @@
     "test_match_partition": {
       "ok": true,
       "exit": 0,
-      "seconds": 0.205,
+      "seconds": 0.2,
       "matches": 0,
       "log": ".tools/check-logs/test_match_partition.log",
       "checks": 153
@@ -3817,7 +4026,7 @@
     "test_actor_gravity": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.671,
+      "seconds": 1.703,
       "matches": 0,
       "log": ".tools/check-logs/test_actor_gravity.log",
       "checks": 68
@@ -3825,7 +4034,7 @@
     "test_avatar_offline": {
       "ok": true,
       "exit": 0,
-      "seconds": 2.928,
+      "seconds": 2.997,
       "matches": 0,
       "log": ".tools/check-logs/test_avatar_offline.log",
       "checks": 1195
@@ -3833,7 +4042,7 @@
     "test_native_terrain": {
       "ok": true,
       "exit": 0,
-      "seconds": 10.896,
+      "seconds": 11.16,
       "matches": 0,
       "log": ".tools/check-logs/test_native_terrain.log",
       "checks": 477
@@ -3841,7 +4050,7 @@
     "test_native_weather_roster": {
       "ok": true,
       "exit": 0,
-      "seconds": 4.58,
+      "seconds": 4.728,
       "matches": 0,
       "log": ".tools/check-logs/test_native_weather_roster.log",
       "checks": 2976
@@ -3849,7 +4058,7 @@
     "test_weather_legacy": {
       "ok": true,
       "exit": 0,
-      "seconds": 3.091,
+      "seconds": 3.305,
       "matches": 0,
       "log": ".tools/check-logs/test_weather_legacy.log",
       "checks": 68
@@ -3857,45 +4066,62 @@
     "test_ci_combat": {
       "ok": true,
       "exit": 0,
-      "seconds": 1.144,
+      "seconds": 1.198,
       "matches": 0,
       "log": ".tools/check-logs/test_ci_combat.log",
       "checks": 234
     },
-    "test_classic_matches-4-of-4": {
+    "test_classic_matches-14-of-16": {
       "ok": true,
       "exit": 0,
-      "seconds": 47.551,
-      "matches": 4,
-      "log": ".tools/check-logs/test_classic_matches-4-of-4.log",
+      "seconds": 4.015,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-14-of-16.log",
       "checks": 0,
       "cases": [
-        4,
-        8,
-        12,
-        16
+        14
       ]
     },
-    "test_matches-4-of-4": {
+    "test_classic_matches-15-of-16": {
       "ok": true,
       "exit": 0,
-      "seconds": 150.467,
-      "matches": 3,
-      "log": ".tools/check-logs/test_matches-4-of-4.log",
+      "seconds": 3.762,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-15-of-16.log",
       "checks": 0,
       "cases": [
-        84,
-        88,
-        92
+        15
+      ]
+    },
+    "test_classic_matches-13-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 19.599,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-13-of-16.log",
+      "checks": 0,
+      "cases": [
+        13
+      ]
+    },
+    "test_classic_matches-16-of-16": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 21.631,
+      "matches": 1,
+      "log": ".tools/check-logs/test_classic_matches-16-of-16.log",
+      "checks": 0,
+      "cases": [
+        16
       ]
     },
     "test_performance": {
       "ok": true,
       "exit": 0,
-      "seconds": 24.742,
+      "seconds": 27.165,
       "matches": 0,
       "log": ".tools/check-logs/test_performance.log",
-      "checks": 19
+      "checks": 24
     }
   }
 }

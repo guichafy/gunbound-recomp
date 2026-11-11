@@ -1,0 +1,304 @@
+{
+  "duplicate_explosion": false,
+  "events": {
+    "damage": 18,
+    "explosion": 69,
+    "finished": 1,
+    "fire": 26,
+    "lightning": 20,
+    "mage_spark_samples": 480,
+    "miss": 17,
+    "projectile_launch": 86,
+    "shield_damage": 13,
+    "thor": 13,
+    "turn": 26,
+    "weather": 13,
+    "weather_hit": 64
+  },
+  "finished": true,
+  "frames": 2224,
+  "launches": 86,
+  "match": {
+    "explode_calls": 14809,
+    "explode_us": 13567534,
+    "predict_calls": 5333,
+    "predict_us": 25134821,
+    "settle_calls": 172462,
+    "settle_us": 1337895,
+    "tick_calls": 172161,
+    "tick_us": 24507267
+  },
+  "mode": "baseline",
+  "seed": 81,
+  "shells": 86,
+  "shots": [
+    {
+      "actor": 1,
+      "cpu_us": 633617,
+      "hp": [
+        730,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 0
+    },
+    {
+      "actor": 0,
+      "cpu_us": 726714,
+      "hp": [
+        730,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 0
+    },
+    {
+      "actor": 0,
+      "cpu_us": 689487,
+      "hp": [
+        730,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 2
+    },
+    {
+      "actor": 1,
+      "cpu_us": 658227,
+      "hp": [
+        730,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 0
+    },
+    {
+      "actor": 1,
+      "cpu_us": 798533,
+      "hp": [
+        730,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 1
+    },
+    {
+      "actor": 0,
+      "cpu_us": 675650,
+      "hp": [
+        730,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 1
+    },
+    {
+      "actor": 1,
+      "cpu_us": 795033,
+      "hp": [
+        730,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 1
+    },
+    {
+      "actor": 0,
+      "cpu_us": 399072,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 0
+    },
+    {
+      "actor": 1,
+      "cpu_us": 3177969,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 2
+    },
+    {
+      "actor": 0,
+      "cpu_us": 1051246,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 0
+    },
+    {
+      "actor": 0,
+      "cpu_us": 329398,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 2
+    },
+    {
+      "actor": 1,
+      "cpu_us": 633310,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 0
+    },
+    {
+      "actor": 1,
+      "cpu_us": 3480718,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 1
+    },
+    {
+      "actor": 0,
+      "cpu_us": 1775098,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 1
+    },
+    {
+      "actor": 1,
+      "cpu_us": 670857,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 0
+    },
+    {
+      "actor": 0,
+      "cpu_us": 404212,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 0
+    },
+    {
+      "actor": 1,
+      "cpu_us": 818578,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 2,
+      "weapon": 1
+    },
+    {
+      "actor": 0,
+      "cpu_us": 422838,
+      "hp": [
+        702,
+        1100
+      ],
+      "vehicle": 1,
+      "weapon": 0
+    },
+    {
+      "actor": 0,
+      "cpu_us": 746325,
+      "hp": [
+        702,
+        973
+      ],
+      "vehicle": 1,
+      "weapon": 1
+    },
+    {
+      "actor": 1,
+      "cpu_us": 861571,
+      "hp": [
+        702,
+        973
+      ],
+      "vehicle": 2,
+      "weapon": 1
+    },
+    {
+      "actor": 0,
+      "cpu_us": 339502,
+      "hp": [
+        253,
+        973
+      ],
+      "vehicle": 1,
+      "weapon": 0
+    },
+    {
+      "actor": 1,
+      "cpu_us": 853817,
+      "hp": [
+        253,
+        973
+      ],
+      "vehicle": 2,
+      "weapon": 2
+    },
+    {
+      "actor": 0,
+      "cpu_us": 336231,
+      "hp": [
+        70,
+        973
+      ],
+      "vehicle": 1,
+      "weapon": 0
+    },
+    {
+      "actor": 1,
+      "cpu_us": 679054,
+      "hp": [
+        70,
+        973
+      ],
+      "vehicle": 2,
+      "weapon": 0
+    },
+    {
+      "actor": 0,
+      "cpu_us": 956114,
+      "hp": [
+        14,
+        973
+      ],
+      "vehicle": 1,
+      "weapon": 2
+    },
+    {
+      "actor": 1,
+      "cpu_us": 2232672,
+      "hp": [
+        14,
+        973
+      ],
+      "vehicle": 2,
+      "weapon": 0
+    }
+  ],
+  "terrain": {
+    "carve_calls": 7293,
+    "carve_us": 3259675,
+    "copy_calls": 5359,
+    "copy_us": 10544
+  },
+  "wall_us": 25312026,
+  "winner": 1
+}

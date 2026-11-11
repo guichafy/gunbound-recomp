@@ -14,8 +14,8 @@ PE/DAT/XFS pinados. OráculoUnicorn gera72emissões/18inicializações/180danos/
 Revisão independente corrigiu P2 de theta em inclinação fracionária (2RED);
 revisão final sem achados. Fixtures antigas atualizadas só por contrato.
 
-Harness integral final exit0/366,1s:355parses,113suítesGodot/54.628checks,
-156Python/zero skips/falhas,29partidas; Ruff/diff aprovados. Smoke embarcado
+Harness integral final exit0/361,706s:357parses,113suítesGodot/54.633checks,
+157Python/zero skips/falhas,29partidas; Ruff/diff aprovados. Smoke embarcado
 234/0 cobre Bigfoot sem Mage. GPU903quadros1920×1080 nos dois sentidos,
 vento/normal/tornado/Force/Electricity/Thor:108impactos,zero shells restantes,
 90quadros de pausaRGBA idênticos verificados independentemente. Passo manual
@@ -26,6 +26,16 @@ PNGs/MP4/manifests em docs/bigfoot-native e docs/mobile-shots.
 Sem clienteWindows inteiro, escuta/input/aceite visual humano ou pacote
 publicado manualmente. PR/rebase merge/CI/release automática autorizados;
 resultados remotos serão devolvidos à orquestração após os quatro gates.
+Gate Windows da cabeça e277 falhou apenas pelo orçamento agregado900s
+(seeds81/85/89/93); base296s. Emenda mantém900s e pool4, mas dá orçamento
+por partida:13+16casos exatos, regressão runner12/0. Perfil seed81 revela
+26→82turnos e4,61×custo total, candidatos/turno quase iguais; sem shell
+reexplodindo ou grade duplicada. Custo por previsão também cresce46%; não
+há promessa de performance igual. GateCPU inclui Bigfoot (24/0); sondaGPU
+mostra controles/pausa responsivos no host. Dados/limites no contratoSDD.
+Runner integral corrigido361,706s/zero falhas, substitui a rodada366,1s;
+29resultados unitários e157Python. Rodada intermediária com denominador
+capturado incorretamente falhou, foi corrigida e não serve como validação.
 Primeiro gatePR35 detectou fixtureMageScene com clima aleatório:Thor
 adicionava dano/pose ao pulso isolado. Wind agora é explícito nessa fixture;
 assertivas preservadas, regra intacta e Thor coberto no BigfootNative.
