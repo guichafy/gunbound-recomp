@@ -37,6 +37,7 @@ class Lane extends Node2D:
 		for actor in 2:
 			var ctx := {"charging":false,"cpu_charging":false,"player_weapon":0,"cpu_weapon":0,"elapsed":host.elapsed,"atlas":host.sprites[2],"shadow":host.shadow}
 			host.arts[index].draw_actor(self,model,actor,offset,ctx)
+		host.sprites[2].begin_projectiles(self)
 		for source in model.projectiles:
 			if not bool(source.launched): continue
 			var shot: Dictionary = source.duplicate()

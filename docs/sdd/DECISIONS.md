@@ -2216,3 +2216,13 @@ Sondas usam bytes1px já preparados globalmente; y−30 é origem condicional,
 seguida por y+1 somente se sólida naquela origem. Conservar h15 no outro
 ramo e flags até pouso. Não incluir ID7 em AdukaWeather.active; terreno e
 contato são contratos separados. Evidência/plano: RAON_GROUND_ISSUE_31.md.
+
+
+## ADR-165 — Luzes publicadas restantes (issue #32, 11/11/2026)
+
+Aceita. Substitui a exclusão temporária dos demais clássicos na ADR-154
+exclusivamente para Armor, Bigfoot, Trico, JD, ASate e Ice comprovados no
+contrato PROJECTILE_LIGHT_ISSUE_32.md. Corpo alfa e luz aditiva, com folhas
+somente luz desenhadas uma vez; EPA/geometria/rastro/física preservados.
+Limpar passes por view e liberar RIDs quando a view deixa de existir.
+Não altera outros consumidores próprios nem a lista de contato nativo.

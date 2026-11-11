@@ -1,5 +1,11 @@
 # Mobiles
 
+ADR-165 / issue #32: Armor, Bigfoot, Trico, JD, ASate e Ice agora compõem
+corpo alfa → luz aditiva nos consumidores comprovados do cliente. Folhas
+somente luz entram uma vez. Armas sem luz, EPA, pivôs, suavização4× e regras
+continuam preservados. Inventário e limites em
+[PROJECTILE_LIGHT_ISSUE_32](sdd/PROJECTILE_LIGHT_ISSUE_32.md).
+
 Os 16 mobiles do cliente estão no elenco jogável desde a 0.19 (ADR-083), com arte original e
 a balística comum da 0.20. Esta tabela diz até onde cada um foi portado a partir do cliente.
 As classes de evidência estão explicadas em [PORTE.md](PORTE.md).

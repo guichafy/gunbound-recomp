@@ -1,5 +1,32 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
+
+Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,
+PE/DAT/XFS pinados: buffersBulletTexture1/2, estados19/20 de5/6→5/2,
+publish458690 eTricoSS4ae1a0 fechados por consumidor. Armor/Bigfoot/Trico/
+JD/ASate/Ice usam corpo alfa→luz aditiva; light-only explícito entra uma vez.
+Armas sem luz conservam caminho anterior. Física/contato/estado/EPA/pivôs/
+smooth4×/rastros preservados; views destruídas liberamRIDs no begin/clear.
+
+Fixture regenerada idêntica, PE divergente rejeitado, RED610/332→GREEN910/0.
+Revisão independente sem achados após P2debegin na capturaArmor. ProbesGPU
+722framesFullHD/200impactos;60bufferspausaRGBAidênticos/retomada;8probesRGB,
+8fundosvazios,72paresfinaissemresíduo e12paressem luz no MESMOlocal idênticos.
+Comparar painéis transladados não prova rasterexato na borda filtrada4×.
+
+ZIPmacOSlocal0.20.5 universal/ad-hocdeep/strict e smoke48tiros/UI aprovados;
+manifest aponta base2f622d85 pré-commit, fonte do delta. Sem bump/publicação
+manual. Integral final358,979s/367parses/118suítes/61090checks/160Python/
+29partidas/cobertura62%passou, sem falhas/skips/leaks. Runner,
+pool4/guard900s preservados. RuffCI/novoshelpers/diff aprovados.
+
+Contrato/plano/evidência/logs/limites em PROJECTILE_LIGHT_ISSUE_32.md e
+docs/projectile-light. Sem clienteWindowsinteiro/escuta/input/aceitehumano.
+PR/quatro gates/rebase merge/mainCI/release automática ainda pendentes;
+resultado remoto final será devolvido à orquestração, sem iniciar outra issue.
+
+
 ## Sondagem das minas Raon — issue #31 / ADR-164 (11/11/2026)
 
 Base33c3c7a7 em worktree própria; Ghidra12.2/JDK26 novo fechou o ramo comum
