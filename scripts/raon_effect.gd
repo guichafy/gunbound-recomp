@@ -74,7 +74,7 @@ static func create_mine(projectile: Dictionary, position: Vector2, owner: int, v
 
 ## FindGroundHeightAtColumn probe used by AnimateMine/0x4986a0: from y-15.
 static func ground_at(terrain, x: float, y: float) -> float:
-	return float(terrain.surface_at(x,y-GROUND_PROBE))
+	return float(terrain.native_surface_at(int(x),int(y)-int(GROUND_PROBE)))
 
 ## 0x4986a0: heights at x-10/x/x+10, cliff deeper than h0+20 mirrored through
 ## h0, native int16 angle LUT for (20,dy); angles above 270 wrap negative.
@@ -103,7 +103,9 @@ static func slope_angle(terrain, x: float, y: float) -> int:
 
 ## AnimateMine ground handling and fall (0x498b60/0x4921e0): snap within15px,
 ## otherwise fall accelerating1px/tick; a landing at speed>=5 bounces by it.
-## A buried mine rises to the probed surface (the native30px search is pending).
+## If y-15 starts solid, also probe y-30. Only when that origin is solid
+## select the surface from y+1 (solid y+1 preserves y); otherwise retain h15.
+## 30 is an origin displacement, not a scan limit. Snap preserves fall flags.
 static func settle(mine: Dictionary, terrain) -> void:
 	var x := float(mine.pos.x)
 	var y := float(mine.pos.y)
@@ -115,6 +117,12 @@ static func settle(mine: Dictionary, terrain) -> void:
 			mine.falling = true
 			mine.fall_speed = 0
 	else:
+		if ground == y-GROUND_PROBE:
+			var upper: int = terrain.native_surface_at(int(x),int(y)-30)
+			if upper == int(y)-30:
+				ground = float(terrain.native_surface_at(int(x),int(y)+1))
+				if ground == y+1.0:
+					ground = y
 		y = ground
 	if bool(mine.get("falling",false)):
 		var speed := int(mine.get("fall_speed",0))

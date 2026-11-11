@@ -2208,3 +2208,11 @@ piso40%, deixando todos os testes de assets ativos sem tracing por pixel.
 XML/HTML passam a cobrir explicitamente só automação; não anunciam cobertura
 dos importadores. Prova local comparável:160testes,116,383s contra cerca240s,
 mesma automação62%. Não ampliar timeout nem reduzir inventário/assertivas.
+
+## ADR-164 — Sondagem das minas Raon (#31, 11/11/2026)
+
+Substitui a adaptação de enterramento/descrição de alcance30 na ADR-117.
+Sondas usam bytes1px já preparados globalmente; y−30 é origem condicional,
+seguida por y+1 somente se sólida naquela origem. Conservar h15 no outro
+ramo e flags até pouso. Não incluir ID7 em AdukaWeather.active; terreno e
+contato são contratos separados. Evidência/plano: RAON_GROUND_ISSUE_31.md.

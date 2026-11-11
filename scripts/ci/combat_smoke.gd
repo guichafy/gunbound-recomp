@@ -5,6 +5,7 @@ const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
 const Combat = preload("res://scripts/combat.gd")
 const NativeCombat = preload("res://scripts/aduka_combat.gd")
+const Raon = preload("res://scripts/raon_effect.gd")
 
 static func run(check: Callable) -> int:
 	var shots := 0
@@ -20,7 +21,7 @@ static func run(check: Callable) -> int:
 				continue
 			# Independent consumer inventory: guard before entering release's unchecked
 			# byte-array reads. Missing ground must fail even without a SCRIPT ERROR.
-			if vehicle in [1, 2, 4, 5, 6, 8, 13, 16]:
+			if vehicle in [1, 2, 4, 5, 6, 7, 8, 13, 16]:
 				var ready: bool = model.terrain.native_cells.size() == 1800 * 1800
 				check.call(ready, label + "native terrain ready without Mage opponent")
 				if not ready:
@@ -93,4 +94,20 @@ static func run(check: Callable) -> int:
 		ice.explode(Vector2(NativeCombat.center(ice.actors[1])),1,shell)
 		check.call(ice.actors[1].native_resistance == [[0,0,5,0],[0,0,10,0],[5,5,15,5]][step],"packaged Ice repeated T2 / separate SS state")
 	check.call(ice.actors[1].attributes==original and ice.actors[1].hp==ice.actors[1].max_hp,"packaged Ice shield absorption / profile isolation")
+	var raon = Match.new()
+	raon.start(7,1,31,"miramo_town_a","original",null,[],[],[],0,12)
+	var at := Vector2i(-1,-1)
+	# Choose a real thick column; do not replace or repair the package mask.
+	for x in range(400,1400):
+		var top: int = raon.terrain.native_surface_at(x,0)
+		var y := top+30
+		if raon.terrain.native_solid(Vector2i(x,y)) and raon.terrain.native_solid(Vector2i(x,y+1)) and raon.terrain.native_solid(Vector2i(x,y-15)):
+			at = Vector2i(x,y)
+			break
+	check.call(at.x>=0,"packaged Miramo provides a buried mine fixture")
+	if at.x>=0:
+		for weapon in [1,2]:
+			var mine := Raon.create_mine({"weapon":weapon},Vector2(at),0,7)
+			Raon.settle(mine,raon.terrain)
+			check.call(mine.pos==Vector2(at) and not mine.falling,"packaged buried Raon remains in solid layer for weapon%d"%weapon)
 	return shots

@@ -1,0 +1,3123 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "cases": [
+    {
+      "name": "thin",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          90,
+          91
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 90,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              90
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 90,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              75,
+              90
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 90,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              75,
+              90
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "buried_solid30",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          60,
+          160
+        ],
+        [
+          180,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "buried_empty30",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          80,
+          160
+        ],
+        [
+          180,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              80
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 80,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              80
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 80,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              65,
+              80
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty_below",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          60,
+          101
+        ],
+        [
+          160,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 160,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              160
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 160,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              145,
+              160
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 160,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              145,
+              160
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty_world",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 103,
+          "falling": true,
+          "speed": 2,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 106,
+          "falling": true,
+          "speed": 3,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              88,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "snap14",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          114,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 114,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              114
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 114,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              99,
+              114
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 114,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              99,
+              114
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "snap15",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          115,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 115,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              115
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 115,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              100,
+              115
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 115,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              100,
+              115
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fall16",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          116,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              101,
+              116
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "origin15",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          85,
+          86
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              85
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              85
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              85
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "origin30",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          70,
+          71
+        ],
+        [
+          85,
+          86
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 140,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              140
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 140,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              125,
+              140
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 140,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              125,
+              140
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "origin30_empty",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          71,
+          72
+        ],
+        [
+          85,
+          86
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              71
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 71,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              71
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 71,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              56,
+              71
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "single_pixel_floor",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          101,
+          102
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 101,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 101,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              101
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bounce4",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          116,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": true,
+      "speed": 4,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 105,
+          "falling": true,
+          "speed": 5,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 111,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              90,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              96,
+              116
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bounce5",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          116,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": true,
+      "speed": 5,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 106,
+          "falling": true,
+          "speed": 6,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 110,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              91,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              95,
+              116
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "buried_falling",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          60,
+          160
+        ],
+        [
+          180,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": true,
+      "speed": 8,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 92,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 92,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              77,
+              77
+            ],
+            [
+              32,
+              62,
+              62
+            ],
+            [
+              32,
+              93,
+              93
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 92,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              77,
+              77
+            ],
+            [
+              32,
+              62,
+              62
+            ],
+            [
+              32,
+              93,
+              93
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "above_map",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          1,
+          2
+        ],
+        [
+          40,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": -10,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 1,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -25,
+              1
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 1,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -14,
+              1
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 1,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -14,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "top_limit",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": -201,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": -200,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -216,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": -198,
+          "falling": true,
+          "speed": 2,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -215,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": -195,
+          "falling": true,
+          "speed": 3,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -213,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "above_top_limit",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": -202,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": -201,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              32,
+              -217,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bottom_limit",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": 200,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 201,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              32,
+              185,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "left_limit",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          100,
+          200
+        ]
+      ],
+      "x": -1,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              -1,
+              85,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "right_limit",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          100,
+          200
+        ]
+      ],
+      "x": 64,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              64,
+              85,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "edge",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          100,
+          200
+        ]
+      ],
+      "x": 63,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              63,
+              85,
+              100
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              63,
+              85,
+              100
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              63,
+              85,
+              100
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "crater",
+      "weapon": 1,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          145,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 103,
+          "falling": true,
+          "speed": 2,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 106,
+          "falling": true,
+          "speed": 3,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              88,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 4,
+          "y": 110,
+          "falling": true,
+          "speed": 4,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              91,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 5,
+          "y": 115,
+          "falling": true,
+          "speed": 5,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              95,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 6,
+          "y": 121,
+          "falling": true,
+          "speed": 6,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              100,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 7,
+          "y": 128,
+          "falling": true,
+          "speed": 7,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              106,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 8,
+          "y": 136,
+          "falling": true,
+          "speed": 8,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              113,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 9,
+          "y": 137,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              121,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 10,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              122,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 11,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 12,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 13,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 14,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 15,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "thin",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          90,
+          91
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 90,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              90
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 90,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              75,
+              90
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 90,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              75,
+              90
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "buried_solid30",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          60,
+          160
+        ],
+        [
+          180,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "buried_empty30",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          80,
+          160
+        ],
+        [
+          180,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              80
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 80,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              80
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 80,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              65,
+              80
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty_below",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          60,
+          101
+        ],
+        [
+          160,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 160,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              160
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 160,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              145,
+              160
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 160,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              145,
+              160
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty_world",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 103,
+          "falling": true,
+          "speed": 2,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 106,
+          "falling": true,
+          "speed": 3,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              88,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "snap14",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          114,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 114,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              114
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 114,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              99,
+              114
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 114,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              99,
+              114
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "snap15",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          115,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 115,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              115
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 115,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              100,
+              115
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 115,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              100,
+              115
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fall16",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          116,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              101,
+              116
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "origin15",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          85,
+          86
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              85
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              85
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              85
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "origin30",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          70,
+          71
+        ],
+        [
+          85,
+          86
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 140,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              140
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 140,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              125,
+              140
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 140,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              125,
+              140
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "origin30_empty",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          71,
+          72
+        ],
+        [
+          85,
+          86
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 85,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              71
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 71,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              70,
+              71
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 71,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              56,
+              71
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "single_pixel_floor",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          101,
+          102
+        ],
+        [
+          140,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 101,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 101,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              101
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bounce4",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          116,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": true,
+      "speed": 4,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 105,
+          "falling": true,
+          "speed": 5,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 111,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              90,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              96,
+              116
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bounce5",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          116,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": true,
+      "speed": 5,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 106,
+          "falling": true,
+          "speed": 6,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 110,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              91,
+              116
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 116,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              95,
+              116
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "buried_falling",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          60,
+          160
+        ],
+        [
+          180,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": true,
+      "speed": 8,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 92,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              85
+            ],
+            [
+              32,
+              70,
+              70
+            ],
+            [
+              32,
+              101,
+              101
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 92,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              77,
+              77
+            ],
+            [
+              32,
+              62,
+              62
+            ],
+            [
+              32,
+              93,
+              93
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 92,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              77,
+              77
+            ],
+            [
+              32,
+              62,
+              62
+            ],
+            [
+              32,
+              93,
+              93
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "above_map",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          1,
+          2
+        ],
+        [
+          40,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": -10,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 1,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -25,
+              1
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 1,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -14,
+              1
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 1,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -14,
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "top_limit",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": -201,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": -200,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -216,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": -198,
+          "falling": true,
+          "speed": 2,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -215,
+              10000
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": -195,
+          "falling": true,
+          "speed": 3,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              -213,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "above_top_limit",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": -202,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": -201,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              32,
+              -217,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bottom_limit",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [],
+      "x": 32,
+      "y": 200,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 201,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              32,
+              185,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "left_limit",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          100,
+          200
+        ]
+      ],
+      "x": -1,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              -1,
+              85,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "right_limit",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          100,
+          200
+        ]
+      ],
+      "x": 64,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": true,
+          "probes": [
+            [
+              64,
+              85,
+              10000
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "edge",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          100,
+          200
+        ]
+      ],
+      "x": 63,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              63,
+              85,
+              100
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              63,
+              85,
+              100
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 100,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              63,
+              85,
+              100
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "crater",
+      "weapon": 2,
+      "width": 64,
+      "height": 200,
+      "layers": [
+        [
+          145,
+          200
+        ]
+      ],
+      "x": 32,
+      "y": 100,
+      "falling": false,
+      "speed": 0,
+      "ticks": [
+        {
+          "tick": 1,
+          "y": 101,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              85,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 2,
+          "y": 103,
+          "falling": true,
+          "speed": 2,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              86,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 3,
+          "y": 106,
+          "falling": true,
+          "speed": 3,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              88,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 4,
+          "y": 110,
+          "falling": true,
+          "speed": 4,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              91,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 5,
+          "y": 115,
+          "falling": true,
+          "speed": 5,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              95,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 6,
+          "y": 121,
+          "falling": true,
+          "speed": 6,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              100,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 7,
+          "y": 128,
+          "falling": true,
+          "speed": 7,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              106,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 8,
+          "y": 136,
+          "falling": true,
+          "speed": 8,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              113,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 9,
+          "y": 137,
+          "falling": true,
+          "speed": 1,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              121,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 10,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              122,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 11,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 12,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 13,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 14,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        },
+        {
+          "tick": 15,
+          "y": 145,
+          "falling": false,
+          "speed": 0,
+          "lost": false,
+          "probes": [
+            [
+              32,
+              130,
+              145
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

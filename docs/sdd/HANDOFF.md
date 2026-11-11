@@ -1,5 +1,31 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Sondagem das minas Raon — issue #31 / ADR-164 (11/11/2026)
+
+Base33c3c7a7 em worktree própria; Ghidra12.2/JDK26 novo fechou o ramo comum
+AnimateMine498b60/AnimateSuperMine4921e0, helperSUB40a6e0 e sonda4e4340.
+Minas/slope consomem1px pré-preparado globalmente. h15 é conservado salvo
+origens y−15/y−30 sólidas, quando y+1 seleciona o chão/preserva y se sólido.
+30 é deslocamento de origem, sem limite de alcance. Queda/flags continuam
+no passo comum; ID7 não entrou em AdukaWeather.active.
+
+OráculoPE46cenários; RED586/88→GREEN787/0; regeneração independente byte a
+byte idêntica e PE divergente rejeitado. Dirigidas13suítes7238/0 (incluem
+Raon/Trico/Turtle); harness final351,293s,365parses/117suítes/60180checks,
+160Python sem skips/falhas,29partidas/cobertura62%. Guard900s/pool4/coleta
+scripts/ci preservados. Ruff/diff aprovados; logs inspecionados sem leaks.
+
+Revisão independente sem achados. GPU330FullHD manual60Hz/30buffers pausa
+idênticos e retomada; PNGs conferidos independentemente. ZIPmacOS extraído
+universal/ad-hocdeep/strict, UI/48tiros/Ice/Trico/Raon enterrado aprovados.
+Versão local0.20.5/precommitbase33c3c7a7; sem publicação manual/bump.
+ClienteWindows inteiro/escuta/input/aceite humano não executados; movimento,
+agenda/dano/clima particular das minas mantêm pontes anteriores declaradas.
+Contrato/plano/logs/limites: RAON_GROUND_ISSUE_31.md e docs/raon-ground-native.
+PR/quatro gates/rebase merge e CI/release pendentes, autorizados; devolver
+resultado remoto exato à orquestração antes de iniciar próxima issue.
+
+
 EmendaREQ-52/Trico: PR37 rebase integrado em74401ca1; quatro gates verdes,
 59387checks/160Python/29partidas em macOS/Windows. MainmacOS passou; mainWindows
 atingiu guardPython900s duas vezes, bloqueando release corretamente.

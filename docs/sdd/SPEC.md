@@ -1,5 +1,13 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Sondagem Raon — issue #31 / ADR-164
+
+REQ-04/05/07/08/19/44/45: minas normais e SS selecionam superfície por
+sondas nativas1px y−15/y−30/y+1 e conservam flags/queda conforme o cliente.
+30 desloca a origem, sem limite de alcance30. Preparar máscara antes dos
+snapshots, preservar crateras e seleção de contato dos projéteis. Contrato
+e plano em RAON_GROUND_ISSUE_31.md.
+
 ## Trico T2/SS — issue #30 / ADR-163
 
 REQ-04/05/07/08/19/44/45: T2 usa dois componentes especiais com centro24.8, LUT nativa e fase/raio próprios; idx2 comum. SS inicia no contato sem blast, emite oito ações nos ticks2..16 pares e termina no21. Contrato/plano/evidências e adaptações restantes em TRICO_SPECIALS_ISSUE_30.md.

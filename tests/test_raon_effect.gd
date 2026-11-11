@@ -8,6 +8,8 @@ class FlatGround:
 	var edge := 10000.0
 	func surface_at(x: float, _from: float = 0.0) -> float:
 		return 700.0 if x < edge else 2000.0
+	func native_surface_at(x: int, from_y: int) -> int:
+		return maxi(from_y,int(surface_at(x,from_y)))
 	func is_void(y: float) -> bool:
 		return y >= 2000.0
 

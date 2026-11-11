@@ -10,6 +10,7 @@ const Game = preload("res://scripts/game.gd")
 const Pose = preload("res://scripts/sprite_pose.gd")
 const ClassicFlight = preload("res://scripts/classic_flight.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
+const Raon = preload("res://scripts/raon_effect.gd")
 var sprites
 var model
 var impacts: Array = []
@@ -27,6 +28,10 @@ class Lane extends Node2D:
 			var body = host.sprites[int(actor.vehicle)]
 			body.draw(self,host.Pose.new(actor.pos,60,int(actor.facing),{"frame":body.frame_index("idle",host.elapsed,0,false),"age":host.elapsed,"pose":"idle","weapon":0}))
 		sprite.draw_placed(self,model.mines,model.actors,Vector2.ZERO)
+		draw_string(ThemeDB.fallback_font,Vector2(20,35),"Raon / native buried probes / thin layers / crater / manual60Hz",HORIZONTAL_ALIGNMENT_LEFT,-1,22)
+		for mine in model.mines:
+			draw_circle(mine.pos,3,Color("ff9864"))
+			draw_string(ThemeDB.fallback_font,mine.pos+Vector2(-25,-36),"y%d v%d"%[mine.pos.y,mine.fall_speed],HORIZONTAL_ALIGNMENT_LEFT,-1,16)
 		for effect in host.impacts:
 			sprite.draw_effect(self,effect,Vector2.ZERO)
 
@@ -51,10 +56,12 @@ func run() -> void:
 	var out: String = args[0]
 	var frames := int(args[1]) if args.size() > 1 else 330
 	sprites = Game.build_sprites()
-	var view := SubViewport.new(); view.size = Vector2i(1280,800)
+	root.size = Vector2i(1920,1080)
+	var view := SubViewport.new(); view.size = Vector2i(1920,1080)
 	view.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	root.add_child(view)
 	var lane := Lane.new(); lane.host = self; view.add_child(lane)
+	lane.scale = Vector2(1.35,1.35); lane.position = Vector2(96,0)
 	model = Match.new()
 	model.start(7,1,42,"","original",null,[],[],[],0,1)
 	model.wind = Vector2.ZERO
@@ -70,6 +77,12 @@ func run() -> void:
 		for y in range(top,400):
 			terrain.cells[y*640+x] = 1
 			terrain.image.set_pixel(x,y,Color("cdbd88") if y == top else Color("685741"))
+	# A thin suspended platform above the thick base, without filling its gap.
+	for x in range(290,325):
+		terrain.cells[240*640+x] = 1
+		terrain.image.set_pixel(x,240,Color("cdbd88"))
+	terrain.native_cells.clear()
+	terrain.enable_native() # artificial fixture replacement, before craters/copies
 	terrain.texture = ImageTexture.create_from_image(terrain.image)
 	terrain.visual = null
 	var stances := [float(Mobiles.definition(7).stance),0.0]
@@ -83,6 +96,9 @@ func run() -> void:
 	plant(1,800,false)
 	plant(1,1040,false)
 	plant(2,560,true)
+	# y-30 empty vs solid, both types and facings, and a layer below a shelf.
+	for entry in [[1,230,615,1],[2,960,650,-1],[1,620,500,-1]]:
+		model.mines.append(Raon.create_mine({"weapon":entry[0],"velocity":Vector2(entry[3],0),"damage":200},Vector2(entry[1],entry[2]),0,7))
 	model.events.clear()
 	DirAccess.make_dir_recursive_absolute(out)
 	var hashes: Array = []
@@ -123,4 +139,4 @@ func run() -> void:
 	var f := FileAccess.open(out+"/log.jsonl",FileAccess.WRITE)
 	f.store_string("\n".join(log_lines))
 	f.close()
-	quit()
+	quit(0 if same and hashes[120] != hashes[119] else 1)
