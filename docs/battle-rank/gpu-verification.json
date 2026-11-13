@@ -1,0 +1,18 @@
+{
+	"resolution": [
+		1280,
+		800
+	],
+	"world_rank_samples": [
+		{
+			"code": -4,
+			"mismatch": 0,
+			"opaque_pixels": 375
+		},
+		{
+			"code": 19,
+			"mismatch": 0,
+			"opaque_pixels": 375
+		}
+	]
+}

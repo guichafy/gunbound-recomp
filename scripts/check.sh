@@ -27,7 +27,7 @@ ALL="$ALL test_ci_smoke test_i18n test_settings_i18n test_lobby_settings"
 ALL="$ALL test_match_partition test_actor_gravity"
 ALL="$ALL test_avatar_offline"
 ALL="$ALL test_native_terrain test_native_weather_roster test_weather_legacy"
-ALL="$ALL test_ci_combat test_trico_t2 test_trico_ss test_raon_ground"
+ALL="$ALL test_ci_combat test_trico_t2 test_trico_ss test_raon_ground test_battle_rank"
 # --quick: todas as suites Godot/Python menos as partidas completas.
 QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches)$' | tr '\n' ' ')
 

@@ -1145,3 +1145,12 @@ recursos no worker nem reparar a máscara depois de crateras.
 o terreno; `smoke.gd` o chama após lobby/sala/loja e `package.py` exige também
 seu marcador de aprovação. O mesmo código roda no harness via `test_ci_combat`.
 Reprodução, matriz de regressão e limites: `BUILD_COLLISION_AUDIT.md`.
+
+## Patente no HUD de batalha — ADR-166 / issue #43
+
+Game.hud_state transmite actor_ranks=[profile.rank,ClassicRanks.CHICK].
+HudArt resolve os códigos por identidade do ator, não pela posição na fila.
+O cache rank_icons retém AtlasTexture de rank2 original por código normalizado;
+as âncoras são compartilhadas pelo desenho e pela regressão de geometria.
+Nenhum dado de patente entra no Match/CPU/FlightSnapshot. Contrato e limites
+de fonte/escala em BATTLE_RANK_ISSUE_43.md.

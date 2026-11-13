@@ -1,5 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Patente na batalha — issue #43 / ADR-166 (12/11/2026)
+
+- [x] BancoGhidra próprio/PEpinado; consumidores/ASM/ordem/âncoras/XFSpivôs conferidos.
+- [x] Patente atribuída/CPUChick no HUD, rank2original no mundo e fila; cache de recursos.
+- [x] RegressãoRED3→GREEN73/0, códigos−4..20, nome20caracteres, ambos os times/ordens.
+- [x] GPU2×1920×1080+1280×800 e375+375pixels idênticos ao PNGfonte.
+- [x] Revisão independente sem achados; SPEC/DESIGN/ADR/contrato/HANDOFF.
+- [x] Integral401,293s/369parses/119suítes/61.163checks/160Python/29partidas/62%; Ruff/diffOK.
+- Aceite humano/clienteWindows inteiro pendentes; som/input não alterados nem verificados.
+- PR/rebase autorizados; resultado de integração e checks é devolvido nesta tarefa.
+
+
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 
 - [x] Worktree própria na main2f622d85, bootstrap pinado, Ghidra7consultas aprovadas.

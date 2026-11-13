@@ -1,5 +1,26 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Patente na batalha — issue #43 / ADR-166 (12/11/2026)
+
+Worktreef29c/branchcodex/battle-rank-issue-43, basea1556fd9. Ghidra12.2/JDK26
+em banco próprio, PEpinado, consumidores462900/408180 e ABI4eb890 conferidos
+em ASM. Ramo sem guilda e fila usam rank2original; jogadorprofile.rank,
+CPUChick, sem XP→patente/ranking. Fonte/contorno/escala do porte preservados
+como adaptações; combate, equipamento e perfil não mudaram.
+
+RED4/3→GREEN73/0. Revisão independente sem achados. GPU2×FullHD+1280×800,
+GM/código−4/Chick, nome20caracteres e fila invertida;375pixels por ator
+idênticos à fonte. Harness final401,293s/369parses/119suítes/61.163checks/
+160Python/0skips/29partidas/62% aprovado; logsGodot sem erros/leaks, Ruff/diffOK.
+Tentativas ambientais de CA/dependências/referência foram substituídas pela
+rodada final; detalhes e limites em BATTLE_RANK_ISSUE_43.md e docs/battle-rank.
+
+Sem clienteWindows inteiro, escuta/input/aceitehumano ou exportação manual.
+Commit/push/PR/rebase autorizados posteriormente pelo usuário; integração
+segue os quatro checks obrigatórios e a main atualizada, sem bypass.
+Link/SHA/resultado remoto devolvidos nesta tarefa; nenhuma política alterada.
+
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,
