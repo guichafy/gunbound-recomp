@@ -10,6 +10,7 @@ externo nem confundimos SDD com desenvolvimento conduzido por subagentes.
 
 | Documento | Função |
 |---|---|
+| [CLASSIC_MAPS_PLAN.md](CLASSIC_MAPS_PLAN.md) | Issue45: inventário Thor, variantes e plano futuro de mapas; sem implementação |
 | [TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md) | Movimento 0.20.2: onda T2, fontes, raster, testes e captura temporal |
 | [TURTLE_ANIMATION_FIX.md](TURTLE_ANIMATION_FIX.md) | Correção 0.20.1: água contínua, divisão SS, revisão e captura temporal Full HD |
 | [HANDOFF.md](HANDOFF.md) | Ponto de entrada: estado, execução, evidências, pendências e retomada |

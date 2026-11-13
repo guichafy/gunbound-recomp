@@ -1,5 +1,14 @@
 # Design implementado
 
+## Proposta de mapas clássicos — issue #45 (não implementada)
+
+[CLASSIC_MAPS_PLAN.md](CLASSIC_MAPS_PLAN.md) propõe catálogo validado por
+variante e contexto único de mapa/spawns entre sala, loading e Match.start.
+Identidade DAT, família musical, lado e aliases ficam separados; recursos
+faltantes não podem iniciar outro mapa silenciosamente. Máscaras1px/coarse,
+CPU isolada e apresentação continuam nos contratos existentes. Nenhum
+componente ou fluxo desta proposta está ativo nesta entrega documental.
+
 ## Composição das luzes — ADR-165
 
 ClassicSprite seleciona explicitamente os seis consumidores auditados e reutiliza o passe aditivo existente por view. Folhas somente luz têm inventário fechado; não generalizar pelo sufixo. Canvas de views destruídas deve ser liberado. Contrato: PROJECTILE_LIGHT_ISSUE_32.md.

@@ -1,0 +1,38 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/.tools/gunbound-client/GunBound.gme",
+    "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "program": "GunBound.gme"
+  },
+  "ghidra_properties": "application.revision.ghidra-Ghidra_12.2_build=\napplication.build.date=2026-Oct-23 0156 GMT\napplication.build.date.short=20261023\napplication.name=Ghidra\napplication.version=12.2\napplication.release.name=PUBLIC\napplication.layout.version=3\napplication.gradle.min=9.1\napplication.gradle.max=\napplication.java.min=25\napplication.java.max=\napplication.java.compiler=25\napplication.python.supported=3.15, 3.14, 3.13, 3.12, 3.11, 3.10, 3.9\n",
+  "command": [
+    "/opt/homebrew/Cellar/ghidra/12.2/libexec/support/analyzeHeadless",
+    "/private/tmp/gunbound-map-45-bb36/projects",
+    "GunboundClient",
+    "-process",
+    "GunBound.gme",
+    "-noanalysis",
+    "-readOnly",
+    "-max-cpu",
+    "2",
+    "-scriptPath",
+    "/Users/guichafy/.codex/worktrees/bb36/DemoGame/.codex/skills/gunbound-client-port/scripts",
+    "-postScript",
+    "ExportClientEvidence.java",
+    "/private/tmp/gunbound-map-45-bb36-evidence-04",
+    "inspect",
+    "0x00419d90,0x004430c0,0x004e3c50",
+    "0x00557258:8,0x00557098:24,0x00555504:16,0x00557074:24,0x004d4004:64",
+    "-log",
+    "/private/tmp/gunbound-map-45-bb36-evidence-04/analysis.log",
+    "-scriptlog",
+    "/private/tmp/gunbound-map-45-bb36-evidence-04/scripts.log"
+  ],
+  "java_home": "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
+  "isolated_java_options": " \"-Duser.home=/private/tmp/gunbound-map-45-bb36/profile\" \"-Dapplication.cachedir=/private/tmp/gunbound-map-45-bb36/cache\" \"-Dapplication.tempdir=/private/tmp/gunbound-map-45-bb36/tmp\" \"-Djava.io.tmpdir=/private/tmp/gunbound-map-45-bb36/tmp\"",
+  "reused_project": true,
+  "exit_code": 0,
+  "source_unchanged": true,
+  "analysis_timed_out": false,
+  "ok": true
+}

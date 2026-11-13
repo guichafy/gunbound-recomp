@@ -2235,3 +2235,14 @@ ClassicRanks; transmitir profile.rank/CPUChick só à apresentação. Preservar
 fonte/contorno, cores, escala e regras atuais. Ramo guilda/rank1 fora do treino.
 Sem progressão de patente nem ranking competitivo. Contrato/evidência e
 limites em BATTLE_RANK_ISSUE_43.md.
+
+## Decisão de planejamento — mapas, issue #45 (12/11/2026)
+
+O pedido posterior permite pesquisar/planejar os mapas clássicos ausentes;
+a restrição de outros mapas da ADR-044 é superada somente para essa pesquisa.
+Implementação ainda depende de autorização. ADR-132 permanece: só Thor's Hammer,
+sem nova arte HD, rede ou alteração de perfil. [Plano](CLASSIC_MAPS_PLAN.md)
+separa os22 registros DAT dos14 pares IMG/LND existentes e não presume aliases
+para os oito B sem terreno próprio. Miramo A e adaptações atuais preservados.
+Novos números REQ/ADR de runtime serão definidos sobre a main atual antes
+do código; esta entrada não consome número paralelo nem aprova comportamento.
