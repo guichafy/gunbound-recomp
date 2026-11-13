@@ -24,6 +24,21 @@
 - [ ] Aguardar quatro checks obrigatórios no head atualizado do PR47 e integrar por rebase, sem bypass; devolver SHA remoto para liberar JEWEL.
 - [x] Push/PR liberados por confirmação direta do usuário nesta conversa; [PR47](https://github.com/guichafy/gunbound-recomp/pull/47) aberto, sem merge. Rejeições anteriores preservadas como histórico no HANDOFF.
 
+## JEWEL — pesquisa e plano, issue #46 (12/11/2026)
+
+- [x] Ler SDD/skill, localizar issue e separar modo/capacidade/terminologia.
+- [x] Ghidra headless em banco próprio; seleção, criação, contato, dano,
+  pontos, término, apresentação e dependências cliente/servidor localizados.
+- [x] Fixar PE/XFS/DAT/commitservidor, extratos e limites de análise;
+  oráculo estático de pontos/limite extraído doPE eSHAdivergente rejeitado.
+- [x] Plano por gates com REQs/ADR, arquitetura, fixtures e validação em
+  [JEWEL_ISSUE_46.md](JEWEL_ISSUE_46.md); nenhuma mudança de runtime.
+- [ ] Futura implementação: primeiro fechar dano/ABI, spawn/turnos, mortes
+  de piloto, autoria e interações por família; depois entidades/objetivo,
+  CPU, sala/HUD/áudio e regressão integral. Requer nova solicitação.
+- [ ] Merge na posição4 da fila #43→#44→#45→#46, somente após liberação
+  explícita, atualização/rebase e checks; sem release manual.
+
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 
 - [x] Worktree própria na main2f622d85, bootstrap pinado, Ghidra7consultas aprovadas.

@@ -2246,3 +2246,16 @@ separa os22 registros DAT dos14 pares IMG/LND existentes e não presume aliases
 para os oito B sem terreno próprio. Miramo A e adaptações atuais preservados.
 Novos números REQ/ADR de runtime serão definidos sobre a main atual antes
 do código; esta entrada não consome número paralelo nem aprova comportamento.
+
+## ADR-JEWEL-46 — pesquisa delimitada do modo JEWEL (12/11/2026)
+
+Aceita para pesquisa/planejamento; implementação futura proposta.
+Identificador próprio evita colisão com a numeração das tarefas simultâneas.
+Modo e capacidade são dimensões distintas. Não equiparar “Duel Mode” ao
+nomeJEWEL sem evidência. Priorizar PE Thor/consumidores, separar autoridade
+do emulador da regra do cliente e não ativar fórmulas comABIincerta.
+Plano/contrato: [JEWEL_ISSUE_46.md](JEWEL_ISSUE_46.md), com pontuação nativa
+delimitada, lacunas e política offline proposta. PreservarSOLO1×1 e perfil.
+Não substitui ADR-096/132/134/139 nem autoriza runtime, rede ou publicação
+do jogo. Orientação posterior autoriza commit/PR do plano e integração
+serial apenas após liberação explícita na posição4, depois #43/#44/#45.

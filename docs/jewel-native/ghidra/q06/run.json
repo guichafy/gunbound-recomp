@@ -1,0 +1,38 @@
+{
+  "source": {
+    "path": "/Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme",
+    "sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "program": "GunBound.gme"
+  },
+  "ghidra_properties": "application.revision.ghidra-Ghidra_12.2_build=\napplication.build.date=2026-Oct-23 0156 GMT\napplication.build.date.short=20261023\napplication.name=Ghidra\napplication.version=12.2\napplication.release.name=PUBLIC\napplication.layout.version=3\napplication.gradle.min=9.1\napplication.gradle.max=\napplication.java.min=25\napplication.java.max=\napplication.java.compiler=25\napplication.python.supported=3.15, 3.14, 3.13, 3.12, 3.11, 3.10, 3.9\n",
+  "command": [
+    "/opt/homebrew/Cellar/ghidra/12.2/libexec/support/analyzeHeadless",
+    "/private/tmp/gb-jewel-46-ghidra/projects",
+    "GunboundClient",
+    "-process",
+    "GunBound.gme",
+    "-noanalysis",
+    "-readOnly",
+    "-max-cpu",
+    "2",
+    "-scriptPath",
+    "/Users/guichafy/.codex/worktrees/f19e/DemoGame/.codex/skills/gunbound-client-port/scripts",
+    "-postScript",
+    "ExportClientEvidence.java",
+    "/private/tmp/gb-jewel-46-q6",
+    "inspect",
+    "0x450e10,0x4065a0,0x40b270,0x4cf310",
+    "0x555fdc:32",
+    "-log",
+    "/private/tmp/gb-jewel-46-q6/analysis.log",
+    "-scriptlog",
+    "/private/tmp/gb-jewel-46-q6/scripts.log"
+  ],
+  "java_home": "/Library/Java/JavaVirtualMachines/jdk-26.jdk/Contents/Home",
+  "isolated_java_options": " \"-Duser.home=/private/tmp/gb-jewel-46-ghidra/profile\" \"-Dapplication.cachedir=/private/tmp/gb-jewel-46-ghidra/cache\" \"-Dapplication.tempdir=/private/tmp/gb-jewel-46-ghidra/tmp\" \"-Djava.io.tmpdir=/private/tmp/gb-jewel-46-ghidra/tmp\"",
+  "reused_project": true,
+  "exit_code": 0,
+  "source_unchanged": true,
+  "analysis_timed_out": false,
+  "ok": true
+}

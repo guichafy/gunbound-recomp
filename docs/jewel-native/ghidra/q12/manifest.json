@@ -1,0 +1,82 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x4bb730",
+      "seeded": false,
+      "entry_va": "004bb730",
+      "name": "JewelBattleSetupResearch",
+      "body": "[[004bb730, 004bbbc4] [004bbbd0, 004bccfe]]",
+      "instructions": 1500,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4bc02d",
+      "seeded": false,
+      "entry_va": "004bb730",
+      "name": "JewelBattleSetupResearch",
+      "body": "[[004bb730, 004bbbc4] [004bbbd0, 004bccfe]]",
+      "instructions": 1500,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x478ca0",
+      "seeded": false,
+      "entry_va": "00478a80",
+      "name": "FUN_00478a80",
+      "body": "[[00478a80, 00478ca8]]",
+      "instructions": 141,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x45db20",
+      "seeded": false,
+      "entry_va": "0045db20",
+      "name": "FUN_0045db20",
+      "body": "[[0045db20, 0045ea35]]",
+      "instructions": 933,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x41ed21",
+      "seeded": false,
+      "entry_va": "0041ebf0",
+      "name": "FUN_0041ebf0",
+      "body": "[[0041ebf0, 0041ee0e]]",
+      "instructions": 172,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x41fb29",
+      "seeded": false,
+      "entry_va": "0041f200",
+      "name": "FUN_0041f200",
+      "body": "[[0041f200, 0041fd46]]",
+      "instructions": 739,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x422a1b",
+      "seeded": false,
+      "entry_va": "004218c0",
+      "name": "FUN_004218c0",
+      "body": "[[004218c0, 00421abc] [00421ac0, 00421d38] [00421d40, 00422e57] [00422e60, 00422f0e]]",
+      "instructions": 1607,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [],
+  "ok": true
+}

@@ -1,0 +1,71 @@
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-46-ghidra/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-46-ghidra/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-46-ghidra/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-46-ghidra/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-46-ghidra/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-46-ghidra/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-46-ghidra/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-46-ghidra/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-46-ghidra/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-46-ghidra/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-46-ghidra/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-46-ghidra/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-46-ghidra/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-46-ghidra/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-46-ghidra/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-46-ghidra/tmp"
+openjdk version "25.0.5.0.2" 2026-10-22
+OpenJDK Runtime Environment Homebrew (build 25.0.5.0.2)
+OpenJDK 64-Bit Server VM Homebrew (build 25.0.5.0.2, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
+INFO  Using log file: /private/tmp/gb-jewel-46-q2/analysis.log (LoggingInitialization)
+INFO  Loading user preferences: /private/tmp/gb-jewel-46-ghidra/profile/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)
+INFO  Searching for classes... (ClassSearcher)
+INFO  Class search complete (880 ms) (ClassSearcher)
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)
+INFO  Initializing Random Number Generator... (SecureRandomFactory)
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)
+INFO  Loaded 110 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)
+INFO  Headless startup complete (1888 ms) (AnalyzeHeadless)
+INFO  Class searcher loaded 60 extension points (19 false positives) (ClassSearcher)
+INFO  HEADLESS Script Paths:
+    /Users/guichafy/.codex/worktrees/f19e/DemoGame/.codex/skills/gunbound-client-port/scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)
+INFO  Opening existing project: /private/tmp/gb-jewel-46-ghidra/projects/GunboundClient (HeadlessAnalyzer)
+INFO  Opening project: /private/tmp/gb-jewel-46-ghidra/projects/GunboundClient (HeadlessProject)
+INFO  REPORT: Processing read-only project file: /GunBound.gme (HeadlessAnalyzer)
+INFO  REPORT: Execute script: ExportClientEvidence.java '/private/tmp/gb-jewel-46-q2' 'inspect' '0x428f68,0x4385e2,0x441c71,0x4df6fc,0x4c1ed1,0x4e41d2,0x4c5e8c,0x4d69e6' '-'  (HeadlessAnalyzer)
+ERROR Abort due to Headless analyzer error: ExportClientEvidence has been compiled by a more recent version of the Java Runtime (class file version 70.0), this version of the Java Runtime only recognizes class file versions up to 69.0 (HeadlessAnalyzer) java.lang.UnsupportedClassVersionError: ExportClientEvidence has been compiled by a more recent version of the Java Runtime (class file version 70.0), this version of the Java Runtime only recognizes class file versions up to 69.0
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:962)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.defineClass(BundleWiringImpl.java:2338)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.defineClassParallel(BundleWiringImpl.java:2156)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.findClass(BundleWiringImpl.java:2090)
+	at org.apache.felix.framework.BundleWiringImpl.findClassOrResourceByDelegation(BundleWiringImpl.java:1556)
+	at org.apache.felix.framework.BundleWiringImpl.access$300(BundleWiringImpl.java:79)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.loadClass(BundleWiringImpl.java:1976)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490)
+	at org.apache.felix.framework.Felix.loadBundleClass(Felix.java:2116)
+	at org.apache.felix.framework.BundleImpl.loadClass(BundleImpl.java:986)
+	at ghidra.app.script.JavaScriptProvider.loadClass(JavaScriptProvider.java:166)
+	at ghidra.app.script.JavaScriptProvider.getScriptInstance(JavaScriptProvider.java:97)
+	at ghidra.app.util.headless.HeadlessAnalyzer.runScriptsList(HeadlessAnalyzer.java:929)
+	at ghidra.app.util.headless.HeadlessAnalyzer.analyzeProgram(HeadlessAnalyzer.java:1107)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processFileNoImport(HeadlessAnalyzer.java:1206)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processFolderNoImport(HeadlessAnalyzer.java:1376)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processNoImport(HeadlessAnalyzer.java:1405)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processLocal(HeadlessAnalyzer.java:461)
+	at ghidra.app.util.headless.AnalyzeHeadless.launch(AnalyzeHeadless.java:211)
+	at ghidra.GhidraLauncher.launch(GhidraLauncher.java:78)
+	at ghidra.Ghidra.main(Ghidra.java:41)

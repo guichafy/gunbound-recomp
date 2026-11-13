@@ -1,0 +1,78 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x478cb0",
+      "seeded": false,
+      "entry_va": "00478cb0",
+      "name": "FUN_00478cb0",
+      "body": "[[00478cb0, 0047990a]]",
+      "instructions": 736,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x43a670",
+      "seeded": false,
+      "entry_va": "0043a670",
+      "name": "FUN_0043a670",
+      "body": "[[0043a670, 0043af3d]]",
+      "instructions": 634,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4d54e0",
+      "seeded": false,
+      "entry_va": "004d54e0",
+      "name": "FUN_004d54e0",
+      "body": "[[004d54e0, 004d613e]]",
+      "instructions": 881,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x438410",
+      "seeded": false,
+      "entry_va": "00438410",
+      "name": "FUN_00438410",
+      "body": "[[00438410, 004388ca]]",
+      "instructions": 349,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x479ba0",
+      "seeded": false,
+      "entry_va": "00479ba0",
+      "name": "FUN_00479ba0",
+      "body": "[[00479ba0, 0047a947]]",
+      "instructions": 913,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [
+    {
+      "requested": "0x556ee0:72",
+      "hex": "625f72656164795f6a6577656c2e696d67000000625f72656164795f7461672e696d6700625f72656164795f73636f72652e696d67000000625f72656164795f736f6c6f2e696d67",
+      "status": "read"
+    },
+    {
+      "requested": "0x553bcc:8",
+      "hex": "64726f7000000000",
+      "status": "read"
+    },
+    {
+      "requested": "0x555ff0:16",
+      "hex": "6a666c616d652564000000006a626c61",
+      "status": "read"
+    }
+  ],
+  "ok": true
+}
