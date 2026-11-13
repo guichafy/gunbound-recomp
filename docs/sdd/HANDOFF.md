@@ -80,6 +80,27 @@ Naquele momento, merge aguardava liberação da posição3 após #43/#44.
 Checks remotos ainda não conferidos neste registro; validação documental local
 permanece a descrita acima. Nenhum mapa/runtime implementado ou exportado.
 
+## JEWEL — pesquisa e plano, issue #46 (12/11/2026)
+
+Pesquisa somente, em worktreef19e/branchcodex/jewel-46-research-plan.
+[JEWEL_ISSUE_46.md](JEWEL_ISSUE_46.md) registra configuraçãoJEWEL0xc0000,
+modo interno3, categoria própria0x186a6/8slots, seis tentativas iniciais,
+delta por tipo+25/+10/+5/−5, piso0 e limite inicial100. Startup/consumidores
+conferidos emPE; não confundir recompensa separada com pontos. Cliente
+emite0x4200 por gate/latch; emulador retransmite0x4410 sem recalcular score.
+“Duel Mode” permanece sem equivalência demonstrada, e capacidade é campo
+separado.14consultasGhidra12.2/JDK26;11integrais aprovadas,3falhas/parciais
+preservadas. Seed interior do setup corrigido no banco privado e q12/q14
+substituem a análise exploratória. Evidência em docs/jewel-native.
+
+Pontos/limite extraídos diretamente doPE, regeneração idêntica eSHAerrado
+rejeitado; limites/logs no contrato. Dano/ABI/oráculo completo, mortes de
+piloto, spawn/turnos e matrizclima/itens/som ainda exigem gates. CPUJEWEL
+será adaptação offline; nenhum modo/runtime/arte/perfil/build foi alterado.
+Sem clienteWindows/GPU/escuta/input novos. Plano pronto para continuidade,
+sem alegar porte integral. Commit/PR autorizados posteriormente; merge
+posição4 após #43/#44/#45, aguardando liberação explícita e rebase/checks.
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,

@@ -9,6 +9,15 @@ faltantes não podem iniciar outro mapa silenciosamente. Máscaras1px/coarse,
 CPU isolada e apresentação continuam nos contratos existentes. Nenhum
 componente ou fluxo desta proposta está ativo nesta entrega documental.
 
+## Pesquisa JEWEL — arquitetura futura (issue #46)
+
+Nenhum componenteJEWEL foi implementado. O estudo
+[JEWEL_ISSUE_46.md](JEWEL_ISSUE_46.md) propõe estado próprio de objetos e
+placares noMatch, política de término por modo, snapshots profundos e CPU
+offline adaptada ao objetivo. Game/HUD só apresentam os eventos. IDs de
+mobile e dois atores são independentes do modo. A proposta permanece
+condicionada aos gates da pesquisa; TurnTable.check_end continuaSOLO.
+
 ## Composição das luzes — ADR-165
 
 ClassicSprite seleciona explicitamente os seis consumidores auditados e reutiliza o passe aditivo existente por view. Folhas somente luz têm inventário fechado; não generalizar pelo sufixo. Canvas de views destruídas deve ser liberado. Contrato: PROJECTILE_LIGHT_ISSUE_32.md.

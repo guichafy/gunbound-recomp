@@ -11,6 +11,18 @@ alocados na main da implementação, evitando colisão com entregas paralelas.
 22 registros DAT não equivalem a22 variantes implementáveis:14 prefixos
 possuem IMG/LND; oito B dependem de investigação de consumidor/alias.
 
+## Pesquisa JEWEL — issue #46 / REQ-JEWEL-46
+
+Investigar e planejar o modoJEWEL do cliente Thor's Hammer, distinguindo
+configuração de modo, capacidade e a expressão ainda não comprovada “Duel
+Mode”. Escopo aprovado nesta etapa: evidência e plano em
+[JEWEL_ISSUE_46.md](JEWEL_ISSUE_46.md), sem ativar regras ou rede. Requisitos
+atuais de combate, CPU, sala, HUD e resultado permanecem vigentes. O plano
+propõe opção offline1×1 futura, condicionada aos gates de dano, autoria,
+turnos, mortes/respawn, famílias especiais, apresentação e validação.
+REQ-JEWEL-46 é identificação documental desta pesquisa; não significa
+funcionalidade entregue nem altera o defaultSOLO.
+
 ## Composição das luzes — issue #32 / ADR-165
 
 REQ-07/19/20/44/45: consumidores comprovados Armor, Bigfoot, Trico, JD, ASate e Ice usam corpo alfa seguido de luz SRCALPHA/ONE; folhas somente luz entram uma vez. Preservar geometria, EPA, rastros, física e demais caminhos. Contrato/plano: PROJECTILE_LIGHT_ISSUE_32.md.

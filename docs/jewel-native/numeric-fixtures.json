@@ -1,0 +1,13 @@
+{
+  "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "xor_key": "0xeeaeaec0",
+  "team_score_by_type": [
+    25,
+    10,
+    5,
+    -5
+  ],
+  "startup_score_limit": 100,
+  "end_command": "0x4200",
+  "derivation": "PE instructions; not a run of the client or a damage oracle"
+}

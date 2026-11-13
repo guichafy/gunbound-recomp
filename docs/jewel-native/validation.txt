@@ -1,0 +1,8 @@
+Issue46 documentary validation (2026-11-12 America/Sao_Paulo)
+PE direct-byte extraction PASS
+Regeneration byte-identical PASS
+Wrong PE SHA rejected PASS
+Complete setup repaired: q12/q14 1500 instructions PASS
+Ghidra runs: {'q01': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q02': {'run_ok': False, 'manifest_ok': None, 'timeout': False}, 'q03': {'run_ok': False, 'manifest_ok': False, 'timeout': False}, 'q04': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q05': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q06': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q07': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q08': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q09': {'run_ok': False, 'manifest_ok': False, 'timeout': False}, 'q10': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q11': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q12': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q13': {'run_ok': True, 'manifest_ok': True, 'timeout': False}, 'q14': {'run_ok': True, 'manifest_ok': True, 'timeout': False}}
+No Godot/client/GPU/audio/input execution; no runtime files modified.
+Local research links: 9 PASS

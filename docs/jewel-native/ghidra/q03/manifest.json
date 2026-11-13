@@ -1,0 +1,77 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x428f68",
+      "seeded": false,
+      "status": "function_not_found"
+    },
+    {
+      "requested_va": "0x4385e2",
+      "seeded": false,
+      "entry_va": "00438410",
+      "name": "FUN_00438410",
+      "body": "[[00438410, 004388ca]]",
+      "instructions": 349,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x441c71",
+      "seeded": false,
+      "status": "function_not_found"
+    },
+    {
+      "requested_va": "0x4df6fc",
+      "seeded": false,
+      "entry_va": "004dcbe0",
+      "name": "FUN_004dcbe0",
+      "body": "[[004dcbe0, 004dfbbd]]",
+      "instructions": 2670,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4c1ed1",
+      "seeded": false,
+      "entry_va": "004c1d30",
+      "name": "FUN_004c1d30",
+      "body": "[[004c1d30, 004c21c4] [004c21d0, 004c2259] [004c2260, 004c2414] [004c2420, 004c25d4] [004c25e0, 004c2794] [004c27a0, 004c2954] [004c2960, 004c2b14] [004c2b20, 004c2cd4] [004c2ce0, 004c301f]]",
+      "instructions": 1282,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4e41d2",
+      "seeded": false,
+      "entry_va": "004e4010",
+      "name": "FUN_004e4010",
+      "body": "[[004e4010, 004e4210]]",
+      "instructions": 104,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4c5e8c",
+      "seeded": false,
+      "entry_va": "004c3020",
+      "name": "FUN_004c3020",
+      "body": "[[004c3020, 004c3197] [004c31a0, 004c3adc] [004c3ae0, 004c3fb7] [004c3fc0, 004c4899] [004c48a0, 004c4fe4] [004c4ff0, 004c5554] [004c5560, 004c56f4] [004c5700, 004c5894] [004c58a0, 004c5c8c] [004c5c90, 004c6075] [004c6080, 004c8765] [004c8770, 004c888a]]",
+      "instructions": 5946,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4d69e6",
+      "seeded": false,
+      "status": "function_not_found"
+    }
+  ],
+  "data": [],
+  "ok": false
+}

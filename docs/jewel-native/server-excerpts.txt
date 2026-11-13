@@ -1,0 +1,133 @@
+1106:                         elif client_command == 0x2120:
+1107:                             print("RECV> SVC_ROOM_CREATE")
+1108:                             received_data = data[6:]
+1109:                             room_title = string_decode(received_data[1:received_data[0] + 1])
+1110:                             # [0:3] game configuration - see 3101, [4:7] pass, [8] room capacity
+1111:                             room_other_data = received_data[received_data[0] + 1:]
+1112:                             room_playmode = bytes_to_int(room_other_data[2:4], 2)
+1113:                             room_playmode_string = "UNKNOWN"
+1114:                             if room_playmode == 0:
+1115:                                 room_playmode_string = "SOLO"
+1116:                             elif room_playmode == 0x44:
+1117:                                 room_playmode_string = "SCORE"
+1118:                             elif room_playmode == 0x08:
+1119:                                 room_playmode_string = "TAG"
+1120:                             elif room_playmode == 0x0C:
+1121:                                 room_playmode_string = "JEWEL"
+1122:                             room_password = string_decode(room_other_data[4:8])
+1123:                             room_capacity = room_other_data[8]
+1124:                             created_room = Room(Room.find_room_position(self.world_room), room_title, room_password, 0,
+1125:                                                 room_other_data[0:4], room_capacity)
+1126:                             client_session.room_slot = 0  # host room slot
+1127:                             client_session.is_room_key = True  # indicates host
+1128:
+1162:                         elif client_command == 0x3101:
+1163:                             print("RECV> SVC_ROOM_CHANGE_OPTION")
+1164:                             map_properties = data[6:]
+1165:                             # game config is stored in a bitwise manner, but the details don't matter on the server
+1166:                             selected_room: Room = Room.find_room_by_user(self.world_room, client_session.user.username)
+1167:                             if selected_room is not None:
+1168:                                 selected_room.game_settings = map_properties
+1169:                             self.command_processor.room_update(client_session)
+1170:
+1248:                         elif client_command == 0x4200:
+1249:                             print("RECV> SVC_PLAY_END_JEWEL")
+1250:                             # probably rebroadcast to all clients (authoritative)
+1251:                             message_to_rebroadcast = client_session.decrypt(data[6:], 0x4200)
+1252:                             client_room: Room = Room.find_room_by_user(self.world_room, client_session.user.username)
+1253:                             for session_item in client_room.player_sessions:
+1254:                                 session_item.send_encrypted(0x4410, message_to_rebroadcast)
+1255:
+1256:                         elif client_command == 0x4100:
+579:         start_data = bytearray()
+580:
+581:         # set the game's map
+582:         if selected_room.map_id == 0:
+583:             print("Rolling random map with", self.parent_instance.cave_map_chance_percentage, "%")
+584:             if random.randint(0, 100) <= self.parent_instance.cave_map_chance_percentage:
+585:                 selected_room.map_id = 0  # special map (cave), assigning it for readability
+586:             else:
+587:                 selected_room.map_id = random.randint(1, 10)
+588:             start_data.append(selected_room.map_id)  # random, normal map
+589:         else:
+590:             start_data.append(selected_room.map_id)  # user-selected map
+591:
+592:         current_map_data = None
+593:         spawn_points = []  # can be overwritten in the future to support Mix / EvsW
+594:         for map_row in self.parent_instance.map_data:
+595:             if map_row["map_id"] == selected_room.map_id:
+596:                 current_map_data = map_row
+597:                 map_side_ab = selected_room.game_settings[2] & 1
+598:                 print("Map Side (A=0, B=1): ", map_side_ab)
+599:                 if map_side_ab == 0:
+600:                     spawn_points = current_map_data["positions_a_side"]
+601:                 else:
+602:                     spawn_points = current_map_data["positions_b_side"]
+603:         # In Serv2, if ( numberOfPlayers <= 6 ), "Small Mode" is internally activated.
+604:         # I am not sure what it does yet. Probably to prevent spawning players too far from each other
+605:
+606:         print(current_map_data)
+607:         print(spawn_points)
+608:
+609:         # randomized spawn order list (8 possible spawn points)
+610:         spawn_order = list(range(8))
+611:         random.shuffle(spawn_order)
+612:         print("Spawn order / slot:", spawn_order)
+613:
+614:         # randomized turn order list
+615:         turn_order = list(range(len(selected_room.player_sessions)))
+616:         random.shuffle(turn_order)
+617:         print("Turn order / slot:", turn_order)
+618:
+619:         # below size of WORD seems excessive, value is guessed
+620:         start_data.extend(int_to_bytes(len(selected_room.player_sessions), 2))
+621:         for session_item in selected_room.player_sessions:
+622:             # random bot selection
+623:             # turns out that dragon and knight are 17/18 respectively, differing from Serv2's 14/15. Thanks @phnx
+624:             if session_item.room_tank_primary == 0xFF:
+625:                 print("Rolling primary random with", self.parent_instance.special_bot_chance_percentage, "%")
+626:                 if random.randint(0, 100) <= self.parent_instance.special_bot_chance_percentage:
+627:                     session_item.room_tank_primary = random.randint(17, 18)
+628:                 else:
+629:                     session_item.room_tank_primary = random.randint(0, 13)
+630:             if session_item.room_tank_secondary == 0xFF:
+631:                 print("Rolling secondary random with", self.parent_instance.special_bot_chance_percentage, "%")
+632:                 if random.randint(0, 100) <= self.parent_instance.special_bot_chance_percentage:
+633:                     session_item.room_tank_secondary = random.randint(17, 18)
+634:                 else:
+635:                     session_item.room_tank_secondary = random.randint(0, 13)
+636:
+637:             start_data.append(session_item.room_slot)
+638:             start_data.extend(resize_bytes(session_item.user.username.encode("ascii"), 0xC))
+639:             start_data.append(session_item.room_team)
+640:             start_data.append(session_item.room_tank_primary)
+641:             start_data.append(session_item.room_tank_secondary)
+642:             # Positional data: x (2 bytes), y (2 bytes). thanks @phnx
+643:             player_spawn_point = spawn_points[spawn_order[session_item.room_slot]]  # default randomized spawn
+644:             # player_spawn_point = spawn_points[7]  # override spawn position. use either this or the above line
+645:             player_x = random.randint(player_spawn_point["x_min"], player_spawn_point["x_max"])
+646:             player_y = 0 if player_spawn_point["y"] is None else player_spawn_point["y"]
+647:             print("Player spawn point:", player_spawn_point, "x:", player_x, "y", player_y)
+648:             start_data.extend(int_to_bytes(player_x, 2))  # x position
+649:             start_data.extend(int_to_bytes(player_y, 2))  # y position
+650:
+651:             start_data.extend(int_to_bytes(turn_order[session_item.room_slot], 2))  # turn position. thanks @phnx
+652:         # unknown: would guess FuncRestrict but it's short of a byte
+653:         # default FFFF, setting 0000 activates event
+654:         start_data.extend(bytes.fromhex("00 FF"))
+655:         start_data.extend(unknown_data)  # echo the stuff sent by game host
+656:
+657:         for session_item in selected_room.player_sessions:
+658:             session_item.send_encrypted(0x3432, start_data)
+659:
+660:     def start_game_gis(self, data, client_session):
+661:         # GIS experiment
+662:         unknown_data = data[6:]  # see start_game_serv2
+663:         selected_room: Room = Room.find_room_by_user(self.world_room, client_session.user.username)
+664:         selected_room.room_state = 1  # waiting -> playing
+665:         start_data = bytearray()
+666:         # start_data.extend(selected_room.game_settings)
+667:         # start_data.extend(bytes.fromhex("00 00 00 00"))
+668:
+669:         start_data.extend(bytes.fromhex("00 00 00 00"))
+670:         # start_data.extend(unknown_data)  # echo the stuff sent by game host

@@ -1,0 +1,88 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x40a440",
+      "seeded": false,
+      "entry_va": "0040a440",
+      "name": "FUN_0040a440",
+      "body": "[[0040a440, 0040a466]]",
+      "instructions": 11,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x40b330",
+      "seeded": false,
+      "entry_va": "0040b330",
+      "name": "FUN_0040b330",
+      "body": "[[0040b330, 0040b35c]]",
+      "instructions": 12,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x40b300",
+      "seeded": false,
+      "entry_va": "0040b300",
+      "name": "FUN_0040b300",
+      "body": "[[0040b300, 0040b32c]]",
+      "instructions": 12,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x40b450",
+      "seeded": false,
+      "entry_va": "0040b450",
+      "name": "FUN_0040b450",
+      "body": "[[0040b450, 0040b487]]",
+      "instructions": 17,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x40b410",
+      "seeded": false,
+      "entry_va": "0040b410",
+      "name": "FUN_0040b410",
+      "body": "[[0040b410, 0040b447]]",
+      "instructions": 17,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x40b390",
+      "seeded": false,
+      "entry_va": "0040b390",
+      "name": "FUN_0040b390",
+      "body": "[[0040b390, 0040b3c7]]",
+      "instructions": 17,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4785f0",
+      "seeded": false,
+      "entry_va": "004785f0",
+      "name": "FUN_004785f0",
+      "body": "[[004785f0, 00478a7f]]",
+      "instructions": 304,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [
+    {
+      "requested": "0x47a948:16",
+      "hex": "17a347002fa3470047a347005fa34700",
+      "status": "read"
+    }
+  ],
+  "ok": true
+}

@@ -1,0 +1,113 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x406a9b",
+      "seeded": false,
+      "entry_va": "00406990",
+      "name": "FUN_00406990",
+      "body": "[[00406990, 00407fcc] [00407fd0, 0040816f]]",
+      "instructions": 1586,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4116d1",
+      "seeded": false,
+      "entry_va": "004104f0",
+      "name": "FUN_004104f0",
+      "body": "[[004104f0, 004117d5] [004117e0, 00411acc]]",
+      "instructions": 1514,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4da8c1",
+      "seeded": false,
+      "entry_va": "004da460",
+      "name": "FUN_004da460",
+      "body": "[[004da460, 004daa5b]]",
+      "instructions": 457,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4da926",
+      "seeded": false,
+      "entry_va": "004da460",
+      "name": "FUN_004da460",
+      "body": "[[004da460, 004daa5b]]",
+      "instructions": 457,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4d606c",
+      "seeded": false,
+      "status": "function_not_found"
+    },
+    {
+      "requested_va": "0x43acb0",
+      "seeded": false,
+      "entry_va": "0043a670",
+      "name": "FUN_0043a670",
+      "body": "[[0043a670, 0043af3d]]",
+      "instructions": 634,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x43b416",
+      "seeded": false,
+      "entry_va": "0043af40",
+      "name": "FUN_0043af40",
+      "body": "[[0043af40, 0043b793]]",
+      "instructions": 575,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x43ba9c",
+      "seeded": false,
+      "entry_va": "0043b7a0",
+      "name": "FUN_0043b7a0",
+      "body": "[[0043b7a0, 0043bae9] [0043baf0, 0043bd93]]",
+      "instructions": 385,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x43c9e4",
+      "seeded": false,
+      "entry_va": "0043c860",
+      "name": "FUN_0043c860",
+      "body": "[[0043c860, 0043ca79] [0043ca80, 0043d137] [0043d140, 0043d474] [0043d480, 0043d5ce]]",
+      "instructions": 987,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4be484",
+      "seeded": false,
+      "entry_va": "004bd8b0",
+      "name": "FUN_004bd8b0",
+      "body": "[[004bd8b0, 004bd9c6] [004bd9d0, 004be466] [004be470, 004be904] [004be910, 004c1b5e]]",
+      "instructions": 4337,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [
+    {
+      "requested": "0x796aa0:28",
+      "hex": "00000000000000000000000000000000000000000000000000000000",
+      "status": "read"
+    }
+  ],
+  "ok": false
+}
