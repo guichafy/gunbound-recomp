@@ -1,0 +1,72 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x004d7630",
+      "seeded": true,
+      "entry_va": "004d7630",
+      "name": "FUN_004d7630",
+      "body": "[[004d7630, 004d78e8] [004d78f0, 004d7aac] [004d7ab0, 004d7b1e]]",
+      "instructions": 461,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x004d7b20",
+      "seeded": true,
+      "entry_va": "004d7b20",
+      "name": "FUN_004d7b20",
+      "body": "[[004d7b20, 004d7d66]]",
+      "instructions": 150,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x004d7d70",
+      "seeded": true,
+      "entry_va": "004d7d70",
+      "name": "FUN_004d7d70",
+      "body": "[[004d7d70, 004d7da9]]",
+      "instructions": 23,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x004d7db0",
+      "seeded": false,
+      "entry_va": "004d7db0",
+      "name": "FUN_004d7db0",
+      "body": "[[004d7db0, 004d7f27] [004d7f30, 004d8195] [004d81a0, 004d8537] [004d8540, 004d90bf]]",
+      "instructions": 1389,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x004d90c0",
+      "seeded": true,
+      "entry_va": "004d90c0",
+      "name": "FUN_004d90c0",
+      "body": "[[004d90c0, 004d914c] [004d9150, 004d96f7] [004d9700, 004d9ad9]]",
+      "instructions": 692,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x004d9ae0",
+      "seeded": true,
+      "entry_va": "004d9ae0",
+      "name": "FUN_004d9ae0",
+      "body": "[[004d9ae0, 004d9d74] [004d9d80, 004da450]]",
+      "instructions": 710,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [],
+  "ok": true
+}

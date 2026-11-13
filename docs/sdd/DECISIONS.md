@@ -2264,3 +2264,13 @@ Emenda13/11: a orientação posterior “Piloto B depois do JEWEL” substitui a
 dependência de #44 acima. JEWEL deve anteceder #44; conferir emblema/mapas,
 atualizar sobre main e aguardar liberação explícita pelos estados remotos
 antes de merge. Proteções/checks permanecem obrigatórios.
+
+
+## ADR-167 — Composição do piloto B na sala (issue #44, 12/11/2026)
+
+O contexto vazio de B selecionava o fallback chassis→corpo→cabeça, enquanto A
+usava AvatarArt→chassis. O cliente Thor `0x4d90c0` envia AvataTexture1/2 antes
+de CharacterTexture1/2 com as mesmas âncoras e sinal por slot. Fornecer a B
+catalog.defaults(0), já usado pela CPU em batalha. Preservar A, pivôs, recursos,
+orientações, fallback legado e regras; aplicar também ao loading pelo consumidor
+compartilhado. Evidências/validação/limites em ROOM_RIDER_ISSUE_44.md.

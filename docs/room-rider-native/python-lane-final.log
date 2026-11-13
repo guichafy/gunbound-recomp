@@ -1,0 +1,26 @@
+OK python 104.063 s
+PYTHON TIME 20.240s test_original_mobile_assets.OriginalMobileAssets.test_pixels_and_registration
+PYTHON TIME 14.150s test_mage_assets.MageAssets.test_all_pixels_pivots_and_epa
+PYTHON TIME 8.446s test_grub_assets.GrubAssets.test_hull_light_pixels_and_registration
+PYTHON TIME 6.911s test_grub_assets.GrubAssets.test_projectile_sheets_and_epa
+PYTHON TIME 6.316s test_aduka_assets.AdukaAssets.test_all_mobile_frames_pivots_and_epa
+PYTHON TIME 4.782s test_lightning_assets.LightningAssets.test_all_shot_and_impact_pixels
+PYTHON TIME 4.400s test_client_weather_source.ClientWeatherAssets.test_thor_112_native_frames_hotspots_and_epa
+PYTHON TIME 4.354s test_grub_assets.GrubAssets.test_hull_pixels_and_registration
+PYTHON TIME 4.227s test_aduka_assets.AdukaAssets.test_thor_body_light_and_native_epa
+PYTHON TIME 4.043s test_lightning_assets.LightningAssets.test_body_epa_and_pivots
+PYTHON TIME 2.798s test_import_xfs_hud.NativeHudImport.test_native_source_identity
+PYTHON TIME 1.332s test_import_xfs_hud.NativeHudImport.test_native_charge_pixels
+PYTHON TIME 1.230s test_import_xfs_hud.NativeHudImport.test_full_native_bands_and_mode_panels
+PYTHON TIME 1.143s test_client_weather_source.ClientWeatherAssets.test_six_xtf_sheets_every_original_channel
+PYTHON TIME 1.121s test_import_xfs_hud.NativeHudImport.test_native_weather_only
+Name                           Stmts   Miss Branch BrPart  Cover
+----------------------------------------------------------------
+scripts/ci/bootstrap.py          189    114     78      7    37%
+scripts/ci/check.py              180      7     54      9    93%
+scripts/ci/package.py            149     66     64      6    54%
+scripts/ci/package_common.py      19     15     10      0    14%
+scripts/ci/publish.py            117     30     50     11    74%
+scripts/ci/release.py             88     25     40      6    70%
+----------------------------------------------------------------
+TOTAL                            742    257    296     39    62%

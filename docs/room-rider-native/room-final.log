@@ -1,0 +1,3 @@
+CI workers: 4; one complete match per process
+OK test_room_rider 410 checks 0 matches 2.284 s
+FAILED: []

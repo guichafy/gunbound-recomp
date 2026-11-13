@@ -874,7 +874,9 @@ func draw_room_figures(canvas: Node2D) -> void:
 		if sprite.has_method("begin_hull_glow"):
 			sprite.begin_hull_glow(canvas)
 	draw_figure(canvas, player_kind, menu.player_anchor, 1, profile.equipped_set())
-	draw_figure(canvas, cpu_kind, menu.cpu_anchor, -1, {})
+	# Same default rider as battle: native room draws avatar before chassis
+	# (0x4d90c0). Empty equipment would select the legacy foreground rider.
+	draw_figure(canvas, cpu_kind, menu.cpu_anchor, -1, profile.catalog.defaults(0))
 
 func _draw_screen_hud() -> void:
 	if screen == "match" and is_instance_valid(screen_hud) and model.terrain != null:

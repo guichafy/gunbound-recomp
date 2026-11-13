@@ -126,6 +126,30 @@ emblema/mapas e adicionando JEWEL; delta somente em docs. Verificação
 documental/PE repetida, revisão e quatro checks do novo head precedem merge
 por rebase do PR50. A fila segue emblema → mapas → JEWEL → piloto B.
 
+## Piloto B na sala — issue #44 / ADR-167 (12/11/2026)
+
+Correção em worktree própria `5975/DemoGame`, branch
+`codex/fix-room-rider-44`, basea1556fd9: B recebe catalog.defaults(0), como
+CPU em batalha. Ghidra próprio comprova AvataTexture1/2 antes de
+CharacterTexture1/2 em0x4d90c0; pivôs/orientação/A/fallback/16mobiles preservados.
+RED410/136→GREEN410/0. GPU24/24 pares idênticos, A intacto antes/depois;
+mais12loading reais e12batalhas com ambos atores visíveis. Revisão sem achados.
+
+Integral369parses/119suítesGodot/61.500checks/29partidas aprovado; agregado
+inicial saiu1 por referênciasPython ausentes. Bootstrap das referências e
+repetição oficial160Python/cobertura62% passaram; suite final410/0 e Ruff/diff
+aprovados. Não anunciar integral única verde: resultados de faixas compostos.
+Sondagem de câmeraCPU teve SIGSEGVGodot descartado; fixturefinal de spawns
+próximos terminou sem erro. Sem clienteWindows inteiro/input/escuta/aceite
+humano/reexportação local. Contrato/evidências/limites: ROOM_RIDER_ISSUE_44.md.
+
+Fila autorizada:1emblema#43→2pilotoB#44→3planoMapas#45→4pesquisaJEWEL#46.
+Desenvolvimento paralelo; merges seriais. Commit/push/PR autorizados para as
+quatro entregas, sem reconfirmação. **#44 não pode fazer merge/auto-merge antes
+da liberação após #43**; então rebase main e repetir gates afetados/proteções.
+Mapas/JEWEL continuam pesquisa/plano, sem runtime. Sem publicação manual extra.
+
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,

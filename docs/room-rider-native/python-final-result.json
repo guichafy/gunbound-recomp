@@ -1,0 +1,34 @@
+{
+  "python": {
+    "ok": true,
+    "exit": 0,
+    "seconds": 104.063,
+    "matches": 0,
+    "log": ".tools/room-rider/python-lane/python.log",
+    "checks": 0
+  },
+  "coverage_xml": {
+    "ok": true,
+    "exit": 0,
+    "seconds": 0.13,
+    "matches": 0,
+    "log": ".tools/room-rider/python-lane/coverage-xml.log",
+    "checks": 0
+  },
+  "coverage_html": {
+    "ok": true,
+    "exit": 0,
+    "seconds": 0.188,
+    "matches": 0,
+    "log": ".tools/room-rider/python-lane/coverage-html.log",
+    "checks": 0
+  },
+  "automation_coverage": {
+    "ok": true,
+    "exit": 0,
+    "seconds": 0.13,
+    "matches": 0,
+    "log": ".tools/room-rider/python-lane/coverage-report.log",
+    "checks": 0
+  }
+}
