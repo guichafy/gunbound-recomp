@@ -36,8 +36,9 @@
 - [ ] Futura implementação: primeiro fechar dano/ABI, spawn/turnos, mortes
   de piloto, autoria e interações por família; depois entidades/objetivo,
   CPU, sala/HUD/áudio e regressão integral. Requer nova solicitação.
-- [ ] Merge na posição4 da fila #43→#44→#45→#46, somente após liberação
-  explícita, atualização/rebase e checks; sem release manual.
+- [ ] Merge após liberação explícita, atualização/rebase e checks; sem release
+  manual. Emenda13/11: JEWEL antecede pilotoB/#44, substituindo a posição4
+  original. Conferir emblema/mapas e main antes da liberação.
 
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 
