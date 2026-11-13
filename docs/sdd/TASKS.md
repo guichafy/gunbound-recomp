@@ -12,7 +12,12 @@ explicitamente identificado. Efeitos numerados opcionais ficam desativados:
 o prefixo usado pelo carregador normal está vazio no PE pinado.
 Contrato/evidência/validação em [CLASSIC_MAPS_IMPLEMENTATION.md](CLASSIC_MAPS_IMPLEMENTATION.md).
 Integração de mapas precede JEWEL, com quatro checks obrigatórios sem bypass.
-Revisão, pacote isolado e resultados finais serão registrados nesta seção.
+Revisão independente corrigiu spawn enterrado e rótuloCave com RED→GREEN.
+Harness final:381parses/125suítes/83.688checks/171Python semskips/73partidas,
+544,924s, semfalhas. GPU pós-revisão22lados/88PNG/660quadros pausados
+idênticos e22retomadas,1920×1080. Pacote macOS universal/assinaturaestrita/ZIPextraído:48+66tiros e smokePASS;
+override ausenteROOT/PCK, manifestSHA registrado. Release oficial peloCI;
+sem escuta/aceite visual humano ou clienteWindows inteiro executado.
 
 ## Patente na batalha — issue #43 / ADR-166 (12/11/2026)
 
