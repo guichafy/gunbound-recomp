@@ -348,3 +348,9 @@ Não usar outro mecanismo para contornar a rejeição. A pesquisa permanece
 utilizável integralmente no commit local. Em13/11, a conversa coordenadora
 encaminhou nova declaração humana “Autorizado” para envio/PR; essa mensagem
 não comprova por si só que a revisão automática desta sessão foi liberada.
+
+Resultado posterior de13/11: a revisão automática aprovou a nova tentativa,
+branch enviada e [PR #50](https://github.com/guichafy/gunbound-recomp/pull/50)
+aberto em rascunho. O bloqueio de push/PR está resolvido; os parágrafos acima
+preservam seu histórico. Merge continua aguardando checks, atualização sobre
+main e liberação explícita da fila, com JEWEL antes do piloto B.
