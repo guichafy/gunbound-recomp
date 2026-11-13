@@ -52,6 +52,15 @@ e não aceitou como autorização confiável a orientação encaminhada pela out
 tarefa. Aprovação direta do usuário solicitada, pendente. Nenhum push/PR/merge
 foi realizado; não contornar a rejeição por outro transporte ou ferramenta.
 
+Segunda avaliação: a coordenação forneceu transcrição literal da autorização
+humana por voz na conversa `New voice chat`, incluindo aceite do plano de
+PR/checks/merges em fila. A tentativa de push acrescentou essa evidência;
+o revisor automático rejeitou novamente por considerar a transcrição
+encaminhada conteúdo não confiável e não uma autorização direta verificável.
+Ação necessária: o usuário confirmar nesta conversa o envio da branch e
+abertura do PR documental, sem merge. Não houve publicação; não repetir o
+push sem essa confirmação. A posição3 e a liberação separada de merge seguem.
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,
