@@ -45,8 +45,14 @@ JEWEL#46 → piloto B#44. Mapas ocupa posição2, depende apenas da confirmaçã
 do merge do emblema (PR49), e não aguarda piloto B. Depois da confirmação,
 rebasear na main resultante, preservar SDD anterior, repetir validação
 documental/checks e integrar pelo PR protegido conforme autorização da fila.
-Implementação de mapas não está autorizada. Consulta remota desta atualização:
-PR47 e PR49 abertos, ambos merged=false; ainda sem liberação da posição2.
+Implementação de mapas não está autorizada. Posição2 liberada em13/11:
+PR49 confirmado remotamente merged=true, main406a426d. Branch do PR47
+rebaseada nessa main; conflitos apenas em DECISIONS/HANDOFF/TASKS resolvidos
+preservando as seções do emblema e mapas. Delta contra main restrito a docs,
+sem modificação de scripts/tests/assets/configuração do jogo. Links, sintaxe
+do helper, manifestos, contagens e identidade do inventário reconferidos.
+Integração do PR47 aguarda os quatro checks obrigatórios do novo head; usar
+rebase com SHA esperado e sem bypass. JEWEL é a próxima entrega da fila.
 
 Histórico de aprovação e ordem anterior (substituída pelo parágrafo acima):
 
