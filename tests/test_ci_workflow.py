@@ -35,6 +35,22 @@ class WorkflowTests(unittest.TestCase):
                         self.assertFalse(step['with']['persist-credentials'])
         self.assertNotIn('pull_request_target', (ROOT / '.github/workflows/desktop.yml').read_text())
 
+    def test_desktop_sparse_checkout_covers_documentary_fixtures(self):
+        data = yaml.safe_load((ROOT / '.github/workflows/desktop.yml').read_text())
+        checkout = next(step for step in data['jobs']['desktop']['steps']
+                        if step.get('uses', '').startswith('actions/checkout@'))
+        included = checkout['with']['sparse-checkout'].split()
+        references = []
+        for script in (ROOT / 'tests').glob('test_*.gd'):
+            references += [(script.name, path) for path in
+                           re.findall(r"res://(docs/[^\"]+)", script.read_text(encoding='utf-8'))]
+        self.assertTrue(references, 'The inventory must include documentary fixture consumers')
+        for script, path in references:
+            with self.subTest(script=script, fixture=path):
+                self.assertTrue(any(path == entry or path.startswith(entry.rstrip('/') + '/')
+                                    for entry in included),
+                                f'{script}: sparse checkout excludes required fixture {path}')
+
     def test_required_checks_and_full_test_command_preserved(self):
         data = yaml.safe_load((ROOT / '.github/workflows/desktop.yml').read_text())
         jobs = data['jobs']
