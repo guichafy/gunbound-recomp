@@ -114,6 +114,12 @@ revisor recusou autorização oriunda de read_thread como saída não confiável
 Pedido de autorização direta nesta tarefa está pendente. Não há branch
 remota nem PR desta entrega; não contornar esse bloqueio por outro conector.
 
+Bloqueio de envio resolvido em13/11: nova avaliação aprovou o push da mesma
+branch documental. [PR #50](https://github.com/guichafy/gunbound-recomp/pull/50)
+aberto em rascunho, sem merge. As rejeições acima são histórico. A fila atual
+coloca JEWEL antes de pilotoB/#44; aguardam-se checks e liberação explícita
+da coordenação após conferir emblema/mapas e main. Runtime preservado.
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,

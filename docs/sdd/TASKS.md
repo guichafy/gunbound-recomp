@@ -39,6 +39,8 @@
 - [ ] Merge após liberação explícita, atualização/rebase e checks; sem release
   manual. Emenda13/11: JEWEL antecede pilotoB/#44, substituindo a posição4
   original. Conferir emblema/mapas e main antes da liberação.
+- [x] Push aprovado em13/11; [PR #50](https://github.com/guichafy/gunbound-recomp/pull/50)
+  aberto em rascunho. Rejeições anteriores resolvidas, sem merge.
 
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 
