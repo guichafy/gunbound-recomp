@@ -6,7 +6,7 @@
 - [x] Modelo4504/0, cena1395/0 eGPU22lados/682assertivas/660pausa/22retomadas.
 - [x] Agregado1059,496s/398parses/137suítes/91.779checks/177Python/103partidas/62%.
 - [x] SmokeJEWEL do pacote RED1→GREEN203/0, complementar aos48+66 casos prévios.
-- [ ] Rebase finalPR53/f1bfba90; seleção/regressão afetada e PCK final.
+- [x] Rebase finalPR53/f1bfba90; faixa afetada6465/0 e PCK48+66+JEWEL22/UI PASS.
 - [ ] Quatro checks do head integrado, PR51 pronto e merge por rebase protegido.
 - [ ] CI main e publicação automática existentes, sem release manual extra.
 - Liberação final de integração recebida; nenhuma nova permissão de rotina pendente.

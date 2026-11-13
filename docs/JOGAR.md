@@ -6,8 +6,8 @@ entre os22lados disponíveis. Miramo Town A continua o padrão; a escolha fica
 apenas na sessão, sem alterar o perfil. Cave também pode ser escolhido.
 
 Abra `scenes/main.tscn` no Godot 4.7.2 ou o app exportado em `builds/Gunbound Recomp.app`.
-O app atual é 0.20.5, mas foi gerado antes da loja, HUD e menu de batalha originais. Para vê-los, rode pelo editor
-ou reexporte (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).
+O app local contém a última exportação feita; mudanças neste checkout aparecem ao rodar
+pelo editor ou reexportar (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).
 
 ## Fluxo
 
@@ -22,6 +22,17 @@ ou reexporte (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).
    mostrando o ponto de cada piloto no mapa e lado selecionados, e só então
    começa a partida. EXIT ou Esc voltam ao lobby.
 3. **Partida no mapa e lado selecionados.** Ao fim, a janela WIN/LOSE do cliente mostra os dois times com P (XP) e G (Gold); OK volta à sala.
+
+## Modo JEWEL
+
+Na sala, clique na placa **SOLO** para alternar para **JEWEL**. Mapa, lado e
+Random continuam disponíveis. Destrua os alvos com valores **+25, +10, +5 ou −5**;
+o placar não fica abaixo de zero e vence quem chega a **100 pontos**. Esses pontos
+são o objetivo da partida, separados de Gold e XP.
+
+Ataques preservam o HP dos pilotos nesse modo. Se cair do terreno, clique no
+mapa para escolher a coluna de retorno: o piloto volta após dois avanços de
+turno. A CPU joga pelo objetivo com uma estratégia própria do treino offline.
 
 A interface usa inglês por padrão. No lobby, **Settings → Language**, escolha
 **Português (Brasil)** e **Salvar alterações**. Áudio e idioma têm prévia;

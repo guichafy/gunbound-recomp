@@ -1,5 +1,24 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## JEWEL — head final sobre PR53, pronto para checks remotos
+
+Rebase final sobre f1bfba90 concluído, mantendo integralmente o cicloRandom,
+guia e regressão dos mapas. Comparação contra o head da matriz mostra só
+essa alteração de seleção/teste no código de jogo. Faixa afetada repetida:
+classic_maps_scene333, jewel_scene21, jewel_maps_scene1395, jewel_maps4504,
+jewel_package203 e ci_smoke9 =6465checks/0. Automação13+3testes/0; Ruff/diffOK.
+O agregado103partidas acima continua a prova dos modelos; não foi repetido
+por mudanças de guia/seleção não relacionadas, conforme orientação atual.
+
+PCK final isolado exportado e executado: lobby/sala/loja,48tiros,66casos de
+mapas eJEWEL em22lados+selector/loadingMetaMineB PASS, sem recurso privado ou
+override. SHA/manifests no registroJEWEL. Revisão independente aprovou também
+os helpers de pacote, semP1/P2. GuiaJOGAR documenta pontos/retornoJEWEL.
+
+Liberação final recebida; falta confirmar os quatro checks do head enviado,
+marcar PR51 pronto e integrar por rebase protegido, depois mainCI/publicação.
+Nenhuma nova autorização de rotina pendente; nenhum merge/bypass antecipado.
+
 ## JEWEL × mapas — integração PR51 (13/11/2026)
 
 Rebase sobre mapasPR52/main e2e6da50 preservou seleção/lado/Random,
