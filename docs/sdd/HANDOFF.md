@@ -143,10 +143,11 @@ Sondagem de câmeraCPU teve SIGSEGVGodot descartado; fixturefinal de spawns
 próximos terminou sem erro. Sem clienteWindows inteiro/input/escuta/aceite
 humano/reexportação local. Contrato/evidências/limites: ROOM_RIDER_ISSUE_44.md.
 
-Fila autorizada:1emblema#43→2pilotoB#44→3planoMapas#45→4pesquisaJEWEL#46.
+Fila atualizada por pedido posterior “Piloto B depois do JEWEL”:
+1emblema#43→2planoMapas#45→3pesquisaJEWEL#46→4pilotoB#44.
 Desenvolvimento paralelo; merges seriais. Commit/push/PR autorizados para as
 quatro entregas, sem reconfirmação. **#44 não pode fazer merge/auto-merge antes
-da liberação após #43**; então rebase main e repetir gates afetados/proteções.
+da confirmação da integração JEWEL (#46) e liberação desta entrega**; então rebase main e repetir gates afetados/proteções.
 Mapas/JEWEL continuam pesquisa/plano, sem runtime. Sem publicação manual extra.
 Implementação local commitada em a9f264ad. Push rejeitado duas vezes pela
 revisão automática, mesmo após verificar remoto/permissões e autorização na
@@ -154,7 +155,7 @@ conversa de origem: exige autorização direta nesta conversa. Pergunta aberta;
 nenhuma alteração remota/PR/merge ocorreu. Não contornar por outro mecanismo.
 Emenda13/11: usuário aprovou diretamente push/PR; envio passou e abriu
 PR48 (https://github.com/guichafy/gunbound-recomp/pull/48), cabeça inicial498b5786,
-implementaçãoa9f264ad. CI pendente e merge ainda aguardando liberação após#43;
+implementaçãoa9f264ad. CI pendente e merge agora aguardando liberação apósJEWEL#46;
 sem auto-merge. O bloqueio acima é histórico, resolvido por aprovação humana.
 
 
