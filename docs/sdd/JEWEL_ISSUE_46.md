@@ -332,8 +332,10 @@ modo implementado. Fontes de versões posteriores e OpenBound não foram usadas.
 
 Worktree desta entrega: `/Users/guichafy/.codex/worktrees/f19e/DemoGame`;
 branch `codex/jewel-46-research-plan`. Orientação posterior autoriza preparar
-commit/PR do plano; merge ocupa posição 4, após #43, #44 e #45 e exige
-liberação explícita nesta tarefa. Antes de merge: atualizar/rebase na main
+commit/PR do plano. A fila original colocava JEWEL na posição 4, após
+#43, #44 e #45. Orientação de13/11 substitui essa dependência: **JEWEL antes
+do piloto B (#44)**. Conferir emblema/mapas e aguardar liberação explícita
+do coordenador pelos estados remotos reais. Antes de merge: atualizar/rebase na main
 resultante, conciliar registros SDD preservando entregas anteriores e repetir
 verificações. Não fazer merge automático nem release manual nesta pesquisa.
 
@@ -343,4 +345,6 @@ autorização humana na conversa coordenadora e auditoria do conteúdo. A
 revisão não aceita autorização encaminhada por ferramenta e exige mensagem
 direta nesta tarefa. Autorização direta solicitada; sem branch remota/PR.
 Não usar outro mecanismo para contornar a rejeição. A pesquisa permanece
-utilizável integralmente no commit local.
+utilizável integralmente no commit local. Em13/11, a conversa coordenadora
+encaminhou nova declaração humana “Autorizado” para envio/PR; essa mensagem
+não comprova por si só que a revisão automática desta sessão foi liberada.

@@ -101,6 +101,12 @@ Sem clienteWindows/GPU/escuta/input novos. Plano pronto para continuidade,
 sem alegar porte integral. Commit/PR autorizados posteriormente; merge
 posição4 após #43/#44/#45, aguardando liberação explícita e rebase/checks.
 
+Emenda13/11: orientação posterior recebida coloca **JEWEL antes do pilotoB
+(#44)**, substituindo a posição4 original. Conferir estados de emblema/mapas
+e main; merge ainda depende de liberação explícita e checks. A coordenação
+encaminhou nova declaração humana “Autorizado” para envio/PR; verificar o
+resultado real da revisão automática, sem contornar rejeições anteriores.
+
 Publicação desta pesquisa: commit local73462776 concluído; duas tentativas
 de push rejeitadas pela revisão automática. Mesmo após conferir a mensagem
 humana na conversa coordenadora e auditar209arquivos somente em docs, o

@@ -2259,3 +2259,8 @@ delimitada, lacunas e política offline proposta. PreservarSOLO1×1 e perfil.
 Não substitui ADR-096/132/134/139 nem autoriza runtime, rede ou publicação
 do jogo. Orientação posterior autoriza commit/PR do plano e integração
 serial apenas após liberação explícita na posição4, depois #43/#44/#45.
+
+Emenda13/11: a orientação posterior “Piloto B depois do JEWEL” substitui a
+dependência de #44 acima. JEWEL deve anteceder #44; conferir emblema/mapas,
+atualizar sobre main e aguardar liberação explícita pelos estados remotos
+antes de merge. Proteções/checks permanecem obrigatórios.
