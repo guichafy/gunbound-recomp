@@ -8,7 +8,8 @@
 - [x] Sala SOLO/JEWEL, loading, HUD por time, arte/EPA/luz/som e resultado idempotente.
 - [x] 48 tiros em execução/previsão, itens, JD/Lightning/Raon e regressões dirigidas.
 - [x] Revisão independente e correção dos P2; GPU210quadros/271checks/pausa30.
-- [ ] Harness integral final, commit, push e PR de implementação.
+- [x] Harness final606,981s/385parses/129suítes/62.933checks/165Python/37partidas/62%.
+- [x] Commit63b4be53 enviado; [PR51](https://github.com/guichafy/gunbound-recomp/pull/51) de implementação aberto em rascunho.
 - [ ] Após liberação da fila: rebase na integração dos mapas, matriz JEWEL×mapas,
   quatro checks remotos e merge protegido. Sem publicação manual extra.
 - Limites e pontes mantidas: [JEWEL_IMPLEMENTATION.md](JEWEL_IMPLEMENTATION.md).

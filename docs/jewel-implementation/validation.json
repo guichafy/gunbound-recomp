@@ -1,0 +1,26 @@
+{
+  "source_commit": "63b4be53",
+  "command": ".tools/jewel-ci-venv/bin/python scripts/ci/check.py",
+  "seconds": 606.981,
+  "parses": 385,
+  "godot_suites": 129,
+  "assertions": 62933,
+  "python_tests": 165,
+  "python_skips": 0,
+  "python_coverage_percent": 62,
+  "matches": 37,
+  "solo_matches": 29,
+  "jewel_matches": 8,
+  "workers": 4,
+  "suite_timeout_seconds": 900,
+  "failures": [],
+  "pck_sha256": "9759adca78aff61a326efd9cdbd1cce5575edaa2b062defbd57c05e93c4bde6d",
+  "pck_smoke": "PASS (48 shots + lobby/room/shop)",
+  "review": "No outstanding P1/P2",
+  "gpu_frames": 210,
+  "gpu_size": [
+    1920,
+    1080
+  ],
+  "pause_frames_exact_rgba": 30
+}

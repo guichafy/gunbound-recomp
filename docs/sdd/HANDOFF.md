@@ -1,6 +1,6 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
-## Implementação JEWEL — em validação (13/11/2026)
+## Implementação JEWEL — validada localmente, PR51 (13/11/2026)
 
 Worktree f19e, branch `codex/jewel-offline-mode`, base `a10ebf26`;
 implementação paralela aos mapas em bb36, autorizada posteriormente à
@@ -24,10 +24,18 @@ passou sem falhas. Depois, pose imune foi preservada por evento pilot_hit
 (RED17/2→GREEN17/0; dirigidas410/0); agregado do head final em execução.
 Pool4/guard900/cobertura scripts/ci preservados.
 
+Agregado do código final63b4be53 aprovado em606,981s:385parses,129suítes,
+62.933checks,165Python sem skips,37partidas (29SOLO+8JEWEL), cobertura62%.
+Ruff/diff e revisão semP1/P2 pendente; metadados em
+`docs/jewel-implementation/validation.json`.
+
 PCK isolado exportado e smoke48tiros/UI aprovados; sem app/release manual,
 sem bump0.20.5 da fonte. ClienteWindows inteiro, escuta/input físicos e
 aceite visual humano não realizados. Merge JEWEL aguarda integração dos
-mapas, rebase/matriz e liberação explícita da fila; PR ainda não aberto.
+mapas, rebase/matriz e liberação explícita da fila.
+[PR51](https://github.com/guichafy/gunbound-recomp/pull/51) aberto em rascunho;
+commit63b4be53 enviado. Quatro checks remotos pendentes no registro; sem
+merge/auto-merge. Entrega atual é implementação, não o PR50 de pesquisa.
 
 ## Seguimento dos mapas — navegação de Random e guia (13/11/2026)
 

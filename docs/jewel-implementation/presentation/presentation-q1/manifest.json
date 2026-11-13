@@ -1,0 +1,72 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x406990",
+      "seeded": false,
+      "entry_va": "00406990",
+      "name": "FUN_00406990",
+      "body": "[[00406990, 00407fcc] [00407fd0, 0040816f]]",
+      "instructions": 1586,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4784a0",
+      "seeded": false,
+      "entry_va": "004784a0",
+      "name": "FUN_004784a0",
+      "body": "[[004784a0, 004785ef]]",
+      "instructions": 125,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x436860",
+      "seeded": false,
+      "entry_va": "00436860",
+      "name": "FUN_00436860",
+      "body": "[[00436860, 004368e4]]",
+      "instructions": 44,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4372f0",
+      "seeded": false,
+      "entry_va": "004372f0",
+      "name": "FUN_004372f0",
+      "body": "[[004372f0, 004373b7]]",
+      "instructions": 62,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4d54e0",
+      "seeded": false,
+      "entry_va": "004d54e0",
+      "name": "FUN_004d54e0",
+      "body": "[[004d54e0, 004d613e]]",
+      "instructions": 881,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x461c60",
+      "seeded": false,
+      "entry_va": "00461c60",
+      "name": "FUN_00461c60",
+      "body": "[[00461c60, 00461c9e]]",
+      "instructions": 26,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [],
+  "ok": true
+}
