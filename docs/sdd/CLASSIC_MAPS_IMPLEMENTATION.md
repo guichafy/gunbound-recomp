@@ -78,3 +78,23 @@ emRandom entra emStardustB; passos históricos2/3 do guia ainda citamMiramo.
 
 RecapturaGPU pós-revisão exit0:22lados/88PNG,660quadros de pausa idênticos
 por lado e22retomadas distintas, em1920×1080. Substitui a captura anterior.
+
+Harness final:381scripts compilados,125suítes Godot,83.688checks,
+171testesPython/0skips,29partidas legadas+44novas=73,544,924s, FAILED[].
+Os testes alterados e as partidas dosB afetados executaram após as correções;
+MiramoA e os outros mapas conservaram o comportamento já validado. Lint de
+correção doCI e50testes de automação passaram; coberturaPythonCI62%.
+Logs fonte sem SCRIPT ERROR/ERROR/leaks. Perfis isolados, sem tocar o perfil
+real. OverrideCA ignorado usado nos testes fonte foi removido doROOT antes
+da exportação, sem alteração de checks/timeouts. Pacote/CI remotos pendentes.
+
+Pacote macOS local exportado de86b2a196, versãofonte0.20.5, Godot4.7.2.
+ZIP284.175.773bytes, SHA256
+`3a0e74d68ae9c23fbdf465ecfcaacbb1f28b2f749c74ad19aee8b7aaa0a00abe`.
+Universalarm64/x86_64, codesign ad-hoc deep/strict aprovado (sem notarização).
+Executável extraído doZIP em diretório temporário sem projeto/cache/perfil
+real:48tiros legados+66casos dos mapas, PACKAGED COMBAT/MAPS/SMOKE PASS,
+exit0, semERROR/SCRIPT ERROR/leaks; guard180s mantido. `override.cfg` ausente
+doROOT/PCK; testes/docs/referênciasprivadas excluídos. Manifesto em
+[qa-summary.json](../classic-maps/qa-summary.json). Alterações posteriores
+restritas a este registro/SDD; release oficial será calculada e publicada peloCI.

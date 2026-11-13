@@ -1,0 +1,34 @@
+{
+  "source_commit": "86b2a196e72c183afaaa97bb3eb3f1880b875031",
+  "harness_seconds": 544.924,
+  "matches": 73,
+  "godot_checks": 83688,
+  "runner_results": 584,
+  "failed": [],
+  "python_tests": 171,
+  "python_skips": 0,
+  "python_ci_coverage_percent": 62,
+  "automation_tests": 50,
+  "gpu_sides": 22,
+  "gpu_resolution": [
+    1920,
+    1080
+  ],
+  "gpu_paused_frames": 660,
+  "gpu_resumed_changes": 22,
+  "package": {
+    "schema": 1,
+    "version": "0.20.5",
+    "commit": "86b2a196e72c183afaaa97bb3eb3f1880b875031",
+    "platform": "macos",
+    "architecture": "universal",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "file": "Gunbound-Recomp-0.20.5-macOS.zip",
+    "size": 284175773,
+    "sha256": "3a0e74d68ae9c23fbdf465ecfcaacbb1f28b2f749c74ad19aee8b7aaa0a00abe",
+    "smoke": "passed",
+    "signing": "ad-hoc, not notarized"
+  },
+  "parses": 381,
+  "godot_suites": 125
+}
