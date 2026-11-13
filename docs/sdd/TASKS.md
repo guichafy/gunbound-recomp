@@ -20,6 +20,7 @@
 - [x] Regeneração idêntica, helper compilado, hash divergente rejeitado, links/diff conferidos; revisão independente corrigiu atlas MetaMine38/41.
 - [ ] Implementar etapas1–7 somente com autorização posterior; B sem prova não é alias automático.
 - [ ] Integração documental na posição3, depois de #43/#44 e antes de #46; aguardar liberação explícita de merge.
+- [ ] Push/PR pendentes: revisão automática rejeitou autorização encaminhada; aprovação direta solicitada. Commit local pronto, sem envio.
 
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 
