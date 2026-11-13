@@ -11,6 +11,15 @@
 - Aceite humano/clienteWindows inteiro pendentes; som/input não alterados nem verificados.
 - PR/rebase autorizados; resultado de integração e checks é devolvido nesta tarefa.
 
+## Planejamento dos mapas — issue #45 (12/11/2026)
+
+- [x] Pesquisa em worktree própria `bb36/DemoGame`, branch `codex/issue-45-classic-maps-plan`.
+- [x] Inventário22registros/11famílias,14IMG/LND,11partículasA,15load_stage; hashes e spawns auxiliares fixados.
+- [x] BancoGhidra próprio, consulta final3funções/5dados ok=true; lacunasB/consumidores declaradas.
+- [x] [Plano por etapas](CLASSIC_MAPS_PLAN.md), contratos M45-1..6, aceites por variante, sem runtime/arte/perfil alterados.
+- [x] Regeneração idêntica, helper compilado, hash divergente rejeitado, links/diff conferidos; revisão independente corrigiu atlas MetaMine38/41.
+- [ ] Implementar etapas1–7 somente com autorização posterior; B sem prova não é alias automático.
+- [ ] Integração documental na posição3, depois de #43/#44 e antes de #46; aguardar liberação explícita de merge.
 
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 

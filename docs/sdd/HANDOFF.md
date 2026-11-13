@@ -20,6 +20,30 @@ Commit/push/PR/rebase autorizados posteriormente pelo usuário; integração
 segue os quatro checks obrigatórios e a main atualizada, sem bypass.
 Link/SHA/resultado remoto devolvidos nesta tarefa; nenhuma política alterada.
 
+## Pesquisa e plano dos mapas — issue #45 (12/11/2026)
+
+Worktree `bb36/DemoGame`, branch `codex/issue-45-classic-maps-plan`.
+[CLASSIC_MAPS_PLAN.md](CLASSIC_MAPS_PLAN.md) inventaria22registros/11famílias,
+14prefixos com IMG/LND (11A+3B), dimensões1600²/1800²/2000²,
+partículas40..64, prévias, clima, música e spawns auxiliares de jglim.
+Oito B não têm terreno próprio; herança/seleção de lado ficam como gates de
+pesquisa, sem alias presumido. `dragon.lnd` órfão não amplia o catálogo.
+
+Ghidra12.2/JDK26 em banco próprio: consulta final3consumidores/5dados ok=true,
+com ASM/refs/logs em `docs/maps-issue-45`; três sondagens parciais explicitadas.
+Inventário regenerado pelo helper de pesquisa idêntico em JSON (22registros,
+14LND), identidade divergente rejeitada, helper compilado/links/diff conferidos.
+Revisão independente corrigiu premissa de partícula48×48 em MetaMine38/41:
+plano agora exige alpha útil e célula/pivô por mapa, preservando Miramo48/24.
+Sem execução do clienteWindows, aceite visual/escuta/input ou harness
+do jogo nesta mudança documental; nenhum mapa/runtime/asset/perfil alterado.
+Avisos Java de reflexão e truststore doSO ocorreram;109CAsJava carregadas,
+sem impedir a consulta. Sem export ou release novo.
+
+Autorização atual permite commit/PR do plano, mas merge ocupa posição3 após
+#43/#44, antes de #46, somente mediante liberação explícita nesta tarefa.
+Na retomada rebasear na main resultante, preservar SDD anterior e repetir
+validação documental/checks do PR. Implementação de mapas não está autorizada.
 
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 

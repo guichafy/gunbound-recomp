@@ -1,5 +1,16 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Pesquisa de mapas clássicos — issue #45 (12/11/2026)
+
+Pedido autoriza inventário e planejamento dos mapas ausentes do cliente
+Thor's Hammer, superando a exclusão anterior somente nessa extensão.
+Não altera o mapa ativo, perfil, regras ou UI. Contrato futuro e critérios
+M45-1..6 em [CLASSIC_MAPS_PLAN.md](CLASSIC_MAPS_PLAN.md), relacionados a
+REQ-02/04/05/08/12/19/21–26/32/33/48/49/52/53. Novos números REQ/ADR serão
+alocados na main da implementação, evitando colisão com entregas paralelas.
+22 registros DAT não equivalem a22 variantes implementáveis:14 prefixos
+possuem IMG/LND; oito B dependem de investigação de consumidor/alias.
+
 ## Composição das luzes — issue #32 / ADR-165
 
 REQ-07/19/20/44/45: consumidores comprovados Armor, Bigfoot, Trico, JD, ASate e Ice usam corpo alfa seguido de luz SRCALPHA/ONE; folhas somente luz entram uma vez. Preservar geometria, EPA, rastros, física e demais caminhos. Contrato/plano: PROJECTILE_LIGHT_ISSUE_32.md.
