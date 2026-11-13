@@ -148,6 +148,10 @@ Desenvolvimento paralelo; merges seriais. Commit/push/PR autorizados para as
 quatro entregas, sem reconfirmação. **#44 não pode fazer merge/auto-merge antes
 da liberação após #43**; então rebase main e repetir gates afetados/proteções.
 Mapas/JEWEL continuam pesquisa/plano, sem runtime. Sem publicação manual extra.
+Implementação local commitada em a9f264ad. Push rejeitado duas vezes pela
+revisão automática, mesmo após verificar remoto/permissões e autorização na
+conversa de origem: exige autorização direta nesta conversa. Pergunta aberta;
+nenhuma alteração remota/PR/merge ocorreu. Não contornar por outro mecanismo.
 
 
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)

@@ -140,3 +140,19 @@ A suíte com criação própria de diretório foi repetida pelo runner oficial:
 410/0/exit0, sem erros de script/leaks. As 369 verificações de parse pertencem
 à rodada integral; a captura final editada depois foi executada na GPU.
 Revisão final independente sem achados, incluindo a fixture de spawns próximos.
+
+
+## Estado remoto — aprovação automática
+
+Implementação commitada localmente em `a9f264ad` na branch indicada.
+Duas tentativas de `git push -u origin codex/fix-room-rider-44` foram
+rejeitadas antes da execução pela revisão automática. A primeira citou
+remoto não verificado e ausência de autorização direta nesta conversa.
+A segunda ocorreu depois de confirmar o remoto exato e permissões admin/push
+pelo conector GitHub e ler a mensagem humana de origem; o revisor declarou
+que autorização recuperada por ferramenta não vale como conteúdo confiável
+do usuário nesta conversa. Não houve envio, PR, merge nem tentativa por
+mecanismo alternativo. Pergunta de aprovação direta apresentada ao usuário;
+aguardar resposta antes de nova ação remota. O commit local e a validação
+permanecem prontos. A fila serial e a exigência de liberação antes do merge
+continuam válidas mesmo após a aprovação do push/PR.
