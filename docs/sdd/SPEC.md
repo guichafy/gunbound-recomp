@@ -1,5 +1,13 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Implementação JEWEL autorizada — REQ-JEWEL-46 (13/11/2026)
+
+O pedido posterior autoriza executar integralmente o plano JEWEL offline1×1,
+superando a limitação anterior de pesquisa. Requisitos JI-1..7 e execução em
+[JEWEL_IMPLEMENTATION.md](JEWEL_IMPLEMENTATION.md). PreservarSOLO, perfil,
+16mobiles e apresentação aprovada; fechar lacunas nativas antes do código
+afetado, declarar adaptações e integrar após a implementação de mapas.
+
 ## Mapas clássicos — REQ-MAPS-45 (13/11/2026)
 
 Implementação agora autorizada, conforme CLASSIC_MAPS_IMPLEMENTATION.md e
@@ -18,7 +26,7 @@ alocados na main da implementação, evitando colisão com entregas paralelas.
 22 registros DAT não equivalem a22 variantes implementáveis:14 prefixos
 possuem IMG/LND; oito B dependem de investigação de consumidor/alias.
 
-## Pesquisa JEWEL — issue #46 / REQ-JEWEL-46
+## Pesquisa JEWEL — issue #46 (histórico, superado pelo pedido acima)
 
 Investigar e planejar o modoJEWEL do cliente Thor's Hammer, distinguindo
 configuração de modo, capacidade e a expressão ainda não comprovada “Duel

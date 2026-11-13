@@ -1,5 +1,15 @@
 # Registro de decisões
 
+## Emenda ADR-JEWEL-46 — implementação offline autorizada (13/11/2026)
+
+Executar o plano do PR50 mediante novo pedido. Manter entidadesJEWEL fora
+dos actors, política de término por modo e passo real/previsão compartilhado.
+Contratos/fixtures do PE precedem dano, mortes/respawn, reposição e agenda;
+estratégiaCPU e fronteira local de resultado são adaptações offline explícitas.
+Arte original preservada. Requisitos/estado em JEWEL_IMPLEMENTATION.md.
+Mapas executam em worktree distinta e integram antes; JEWEL só mergeia após
+liberação, rebase e validação da combinação com os mapas novos.
+
 ## Emenda ADR-MAPS-45 — entrada no ciclo a partir de Random (13/11/2026)
 
 Random fica fora da lista fixa. Previous escolhe o último lado válido e Next
@@ -21,7 +31,6 @@ catalogados, desativados no boot normal. RGB565 de fundo/prévia é opaco no
 consumidor retangular; máscara de terreno/scan continuam separadas.
 REQ-MAPS-45 e evidência em CLASSIC_MAPS_IMPLEMENTATION.md. Identificação
 namespaced evita colisão com o trabalhoJEWEL paralelo. Sem rede/perfil novo.
-
 
 ## ADR-163 — Trajetória T2 e máquina SS do Trico (11/11/2026)
 

@@ -15,6 +15,7 @@ const MatchRules = preload("res://scripts/match.gd")
 const RoomArt = preload("res://scripts/classic_room_art.gd")
 const Items = preload("res://scripts/items.gd")
 const Chrome = preload("res://scripts/classic_chrome.gd")
+const JewelArt = preload("res://scripts/jewel_art.gd")
 const DIFFICULTIES := ["Leve", "Normal", "Precisa"]
 const WEATHER_MODES := ["original", "all"]
 const WEATHER_LABELS := ["Original do mapa", "Todos os efeitos"]
@@ -98,6 +99,9 @@ var popup_kind := ""
 var mobile_for := "player"
 var player_vehicle_id := 2
 var cpu_vehicle_id := 1
+var room_mode := "solo"
+var mode_button: TextureButton
+var jewel_art = JewelArt.new()
 
 ## `info`: version, nickname, difficulty, weather_mode, weather_label,
 ## items_label, items, level, xp, wins, cpu_vehicle.
@@ -108,6 +112,7 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	chrome = Chrome.new()
 	actions = callbacks
 	map_id = str(info.get("map_id",Maps.DEFAULT))
+	room_mode = str(info.get("mode", "solo"))
 	item_art = info.get("item_art", null)
 	if item_art == null:
 		item_art = preload("res://scripts/item_art.gd").new()
@@ -264,9 +269,20 @@ func build_centre(stage: Control, weather_label: String) -> void:
 	following.name = "MapNext"
 	room_buttons.append(previous)
 	room_buttons.append(following)
-	# Placas de configuração, sem controles de modos ausentes do treino.
+	mode_button = TextureButton.new()
+	mode_button.name = "RoomMode"
+	mode_button.position = Vector2(317,225)
+	mode_button.ignore_texture_size = true
+	mode_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	mode_button.focus_mode = Control.FOCUS_NONE
+	mode_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	stage.add_child(mode_button)
+	mode_button.size = Vector2(81,24)
+	mode_button.pressed.connect(func(): actions.set_mode.call("solo" if room_mode == "jewel" else "jewel"))
+	room_buttons.append(mode_button)
+	show_mode(room_mode)
+	# As demais placas conservam o treino offline de dois atores.
 	for data in [
-		["RoomMode","room_mode",Vector2(317,225),"Solo — treino offline."],
 		["RoomSize","room_size",Vector2(403,225),"Um piloto contra uma máquina."],
 		["RoomMapSide","room_map_side",Vector2(317,255),"Miramo Town A."],
 		["RoomDeath","room_death",Vector2(403,255),"Sem morte súbita."],
@@ -285,6 +301,19 @@ func build_centre(stage: Control, weather_label: String) -> void:
 	)
 	weather_caption = caption(stage, weather_label, Vector2(312, 329), Vector2(176, 14), 10, Color("9dffe2"), true)
 	refresh_map(map_id)
+
+func show_mode(value: String) -> void:
+	room_mode = "jewel" if value == "jewel" else "solo"
+	if mode_button == null:
+		return
+	var frames: Array = []
+	for index in 4:
+		frames.append(jewel_art.room_frame(room_mode,index) if room_mode == "jewel" and jewel_art != null else room_art.frame("room_mode",index))
+	mode_button.texture_normal = frames[0]
+	mode_button.texture_hover = frames[1]
+	mode_button.texture_pressed = frames[2]
+	mode_button.texture_disabled = frames[3]
+	mode_button.tooltip_text = "JEWEL" if room_mode == "jewel" else "SOLO"
 
 func build_grid(stage: Control) -> void:
 	status_line = caption(stage,"Selecione o mobile do piloto ou da máquina.",Vector2(76,364),Vector2(408,15),10)

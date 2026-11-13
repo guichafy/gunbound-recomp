@@ -16,14 +16,26 @@ faltantes não podem iniciar outro mapa silenciosamente. Máscaras1px/coarse,
 CPU isolada e apresentação continuam nos contratos existentes. Nenhum
 componente ou fluxo desta proposta está ativo nesta entrega documental.
 
-## Pesquisa JEWEL — arquitetura futura (issue #46)
+## JEWEL offline — REQ-JEWEL-46
 
-Nenhum componenteJEWEL foi implementado. O estudo
-[JEWEL_ISSUE_46.md](JEWEL_ISSUE_46.md) propõe estado próprio de objetos e
-placares noMatch, política de término por modo, snapshots profundos e CPU
-offline adaptada ao objetivo. Game/HUD só apresentam os eventos. IDs de
-mobile e dois atores são independentes do modo. A proposta permanece
-condicionada aos gates da pesquisa; TurnTable.check_end continuaSOLO.
+`MatchMode` seleciona a política de objetivo sem substituir a iniciativa de
+`TurnTable`: SOLO mantém eliminação e JEWEL usa placar por time/alvo100.
+`JewelRules` guarda entidades separadas dos dois mobiles, slots, CRT privado,
+resistência/autoria, apoio/queda/vento, EPA e remoção. `JewelCombat` adapta os
+produtores existentes ao consumidor nativo de dano/contacto; `JewelAux`
+concentra os consumidores próprios de JD, Lightning e minas Raon.
+
+`FlightSnapshot` copia profundamente modo/estado JEWEL, além de terreno,
+atores e efeitos. A CPU avalia a rajada inteira e a consequência tardia de
+queda pelo passo comum, sem avançar agenda/reposição na cópia. Sua estratégia
+é adaptação offline. `Game`/sala/HUD exibem modo, arte, placares, sons e
+resultado; humano escolhe retorno por clique no mundo e CPU escolhe seu X
+anterior. A agenda permite retorno após dois avanços de turno.
+
+A arquitetura antes descrita como pesquisa foi autorizada e implementada em
+13/11. Contratos, evidências e limites das pontes remanescentes em
+[JEWEL_IMPLEMENTATION.md](JEWEL_IMPLEMENTATION.md). Não há rede/servidor novo,
+modernização de arte ou alteração de perfil. Presets incluem os JSONs JEWEL.
 
 ## Composição das luzes — ADR-165
 

@@ -1,5 +1,34 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Implementação JEWEL — em validação (13/11/2026)
+
+Worktree f19e, branch `codex/jewel-offline-mode`, base `a10ebf26`;
+implementação paralela aos mapas em bb36, autorizada posteriormente à
+pesquisa do PR50. Sala seleciona SOLO/JEWEL, loading conserva modo e Match
+usa objetivo por time até100. Jewels têm oito slots, seis tentativas iniciais,
+reposições, resistência/autoria, contato/dano e física/EPA compartilhados
+com previsão. Retorno por clique após dois avanços de turno; CPU offline
+adaptada ao placar. SOLO/16mobiles/perfil/arte aprovados preservados.
+
+Contratos novos em `docs/jewel-implementation`, execução e limites em
+[JEWEL_IMPLEMENTATION.md](JEWEL_IMPLEMENTATION.md). Dano339blastsPE,
+contato16, shock7, tick355; regras759/0, integração48tiros263/0, auxiliares24/0,
+arte26/0, cena21/0 e modelo17/0. GPU210quadros FullHD/271assertivas,30bufferspausaRGBA
+idênticos e retomada; quatro capturas do fluxo1280×800 inspecionadas.
+
+Primeiro harness completo executou37partidas (29SOLO+8JEWEL) e165Python,
+mas falhou corretamente por SCRIPT ERROR em scanner vazio Armor/Trico e
+stub de Thor sem modo. Causas corrigidas; timing158/0 e Aduka93/0 repetidos.
+Segunda rodada integral616,667s/385parses/62.930checks/165Python/37partidas
+passou sem falhas. Depois, pose imune foi preservada por evento pilot_hit
+(RED17/2→GREEN17/0; dirigidas410/0); agregado do head final em execução.
+Pool4/guard900/cobertura scripts/ci preservados.
+
+PCK isolado exportado e smoke48tiros/UI aprovados; sem app/release manual,
+sem bump0.20.5 da fonte. ClienteWindows inteiro, escuta/input físicos e
+aceite visual humano não realizados. Merge JEWEL aguarda integração dos
+mapas, rebase/matriz e liberação explícita da fila; PR ainda não aberto.
+
 ## Seguimento dos mapas — navegação de Random e guia (13/11/2026)
 
 REQ-MAPS-45.3, branch `codex/maps-random-navigation-followup`, base `e2e6da50`.

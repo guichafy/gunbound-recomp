@@ -5,7 +5,7 @@ extends RefCounted
 ## A new Match field stays out of prediction until explicitly handled here.
 
 const FLIGHT_FIELDS := [
-	"terrain", "actors", "wind", "weather",
+	"terrain", "actors", "mode", "jewel_state", "wind", "weather",
 	"shot_actor", "shot_weapon", "projectiles", "phase",
 	"flight_elapsed", "events", "resolve_wait", "shot_gold", "mines", "volleys", "battle_effects", "satellites", "spark_tick"
 ]
@@ -14,6 +14,10 @@ static func capture(source):
 	# get_script() avoids load() here: the CPU search calls this from a worker,
 	# and loading a script off the main thread deadlocks the resource loader.
 	var sim = source.get_script().new()
+	sim.mode=source.mode
+	sim.jewel_state=source.jewel_state.duplicate(true)
+	sim.map_id=source.map_id
+	sim.winner=source.winner
 	sim.terrain = source.terrain.collision_copy()
 	sim.actors = source.actors.duplicate(true)
 	sim.shot_gold = source.shot_gold.duplicate(true)

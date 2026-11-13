@@ -21,3 +21,11 @@ native shop portraits. Legacy C# identities remain available for saved items.
 The new reader and IMG decoder are tooling, not a server/client protocol
 implementation. Compressed-block checksums have not been reverse engineered;
 structural bounds, preserved fixture bytes and decoded-frame hashes are checked.
+
+`jewel/` contains the original Thor's Hammer jewel bodies, additive lights,
+EPA timelines, Jflame impacts, room control and score glyphs, extracted from
+that same `graphics.xfs` (SHA-256
+`a52f9f468bb1c6d772bfa0431ec436b0c515a7cebc490c6970e55c7dffb20f08`).
+`jewel/catalog.json` preserves source entry hashes, pivots and frame counts;
+`jewel/combat.json` records the material triples from the pinned client DAT.
+Reproduce with `scripts/import_jewel_assets.py` and `scripts/import_jewel_combat.py`.

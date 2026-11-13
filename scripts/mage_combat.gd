@@ -45,7 +45,7 @@ static func apply(actors: Array, events: Array, impact: Vector2i, projectile: Di
 	if int(data.emp)>0:
 		for index in actors.size():
 			var target: Dictionary = actors[index]
-			if int(target.hp)<=0 or bool(target.get("invulnerable",false)):
+			if int(target.hp)<=0 or bool(target.get("jewel_mode",false)) or bool(target.get("invulnerable",false)):
 				continue
 			var delta := Shared.origin(target)-Vector2i(0,10)-impact
 			if delta.length_squared()<int(data.emp)*int(data.emp):

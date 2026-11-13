@@ -19,7 +19,16 @@ static func begin(model) -> Dictionary:
 	var index: int = model.active
 	var actor: Dictionary = model.actors[index]
 	var target: Dictionary = model.actors[TurnTable.other(index)]
-	actor.facing = 1 if target.pos.x > actor.pos.x else -1
+	var target_position := Vector2(target.pos)
+	if model.mode=="jewel":
+		var closest := INF
+		for entity in model.jewel_state.entities:
+			if bool(entity.removed) or bool(entity.drop) or int(entity.type)==3:continue
+			var distance := Vector2(entity.pos).distance_to(Vector2(actor.pos))
+			if distance<closest:
+				closest=distance
+				target_position=Vector2(entity.pos)-Vector2(0,10)
+	actor.facing = 1 if target_position.x > actor.pos.x else -1
 	var weapon := 1 if model.rng.randf() < S2_CHANCE else 0
 	if model.can_use_special(index) and model.rng.randf() < SS_CHANCE:
 		weapon = 2
@@ -27,7 +36,8 @@ static func begin(model) -> Dictionary:
 	snapshot.active = index
 	model.cpu_thinking = true
 	return {"actor": index, "weapon": weapon, "limits": model.aim_limits(index, weapon), "min_power": model.minimum_power(index), "snapshot": snapshot,
-		"target": target.pos, "best": {"angle": 45.0, "power": 65.0, "weapon": weapon}}
+		"target": target_position, "jewel_baseline": model.jewel_state.scores.duplicate() if model.mode=="jewel" else [],
+		"jewel_progress": model.JewelCombat.progress(model.jewel_state,index) if model.mode=="jewel" else 0.0, "best": {"angle": 45.0, "power": 65.0, "weapon": weapon}}
 
 static func search(plan: Dictionary) -> void:
 	var limits: Vector2 = plan.limits
@@ -48,9 +58,13 @@ static func score(plan: Dictionary, angle: int, power: float) -> void:
 	var index: int = plan.actor
 	var impact: Dictionary = plan.snapshot.predict_shot(index, angle, power, plan.weapon)
 	var distance := Vector2(impact.position).distance_to(plan.target)
-	if int(impact.actor) == TurnTable.other(index):
+	if plan.snapshot.mode=="jewel":
+		var score_delta := int(impact.jewel_scores[index])-int(plan.jewel_baseline[index])
+		var enemy_delta := int(impact.jewel_scores[TurnTable.other(index)])-int(plan.jewel_baseline[TurnTable.other(index)])
+		distance=distance*0.01-1000.0*(score_delta-enemy_delta)-10.0*(float(impact.jewel_damage)-float(plan.jewel_progress))
+	elif int(impact.actor) == TurnTable.other(index):
 		distance -= 20.0
-	elif int(impact.actor) == index:
+	elif plan.snapshot.mode!="jewel" and int(impact.actor) == index:
 		distance += 500.0
 	if distance < float(plan.best_score):
 		plan.best_score = distance

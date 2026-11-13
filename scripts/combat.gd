@@ -49,7 +49,7 @@ static func trace_actors(from: Vector2, to: Vector2, actors: Array, ignored: int
 	var closest := INF
 	var hit: Dictionary = {}
 	for index in range(actors.size()):
-		if index == ignored or int(actors[index].hp) <= 0:
+		if index == ignored or int(actors[index].hp) <= 0 or bool(actors[index].get("jewel_waiting",false)):
 			continue
 		var fraction := segment_box(from, to, actors[index])
 		if fraction < closest:

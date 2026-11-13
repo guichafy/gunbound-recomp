@@ -1,0 +1,180 @@
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-impl-damage/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-impl-damage/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-impl-damage/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-impl-damage/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-impl-damage/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-impl-damage/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-impl-damage/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-impl-damage/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-impl-damage/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-impl-damage/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-impl-damage/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-impl-damage/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gb-jewel-impl-damage/profile" "-Dapplication.cachedir=/private/tmp/gb-jewel-impl-damage/cache" "-Dapplication.tempdir=/private/tmp/gb-jewel-impl-damage/tmp" "-Djava.io.tmpdir=/private/tmp/gb-jewel-impl-damage/tmp"
+java version "26.0.1" 2026-04-21
+Java(TM) SE Runtime Environment (build 26.0.1+8-34)
+Java HotSpot(TM) 64-Bit Server VM (build 26.0.1+8-34, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
+INFO  Using log file: /private/tmp/gb-jewel-impl-damage-q01/analysis.log (LoggingInitialization)
+INFO  Loading user preferences: /private/tmp/gb-jewel-impl-damage/profile/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)
+INFO  Searching for classes... (ClassSearcher)
+INFO  Class search complete (886 ms) (ClassSearcher)
+WARNING: Final field name in class ghidra.util.charset.CharsetInfo has been mutated reflectively by class com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$2 in unnamed module @3c73951 (file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/gson-2.13.2.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)
+INFO  Initializing Random Number Generator... (SecureRandomFactory)
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)
+INFO  Loaded 109 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)
+INFO  Starting cache cleanup: /private/tmp/gb-jewel-impl-damage/cache/guichafy-ghidra/fscache2 (FileCacheMaintenanceDaemon)
+INFO  Finished cache cleanup, estimated storage used: 0 (FileCacheMaintenanceDaemon)
+INFO  Headless startup complete (2078 ms) (AnalyzeHeadless)
+INFO  Class searcher loaded 60 extension points (19 false positives) (ClassSearcher)
+INFO  HEADLESS Script Paths:
+    /Users/guichafy/.codex/worktrees/f19e/DemoGame/.codex/skills/gunbound-client-port/scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)
+INFO  Creating project: /private/tmp/gb-jewel-impl-damage/projects/GunboundClient (HeadlessAnalyzer)
+INFO  Creating project: /private/tmp/gb-jewel-impl-damage/projects/GunboundClient (DefaultProject)
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)
+INFO       project: /private/tmp/gb-jewel-impl-damage/projects/GunboundClient (HeadlessAnalyzer)
+INFO  IMPORTING: file:///Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme (HeadlessAnalyzer)
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)
+INFO  Using Language/Compiler: x86:LE:32:default:windows (ProgramLoader)
+INFO  Using Library Search Path: [., /System/Library/dyld/dyld_shared_cache_arm64e, /System/Library/dyld/dyld_shared_cache_x86_64, /System/Library/dyld/dyld_shared_cache_x86_64h, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64, /System/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_x86_64h, /Users/guichafy/Library/Java/Extensions, /Library/Java/Extensions, /Network/Library/Java/Extensions, /System/Library/Java/Extensions, /usr/lib/java] (ProgramLoader)
+INFO  Removing 2 unused filesystems from cache (FileSystemInstanceManager)
+INFO  Additional info:
+Loading file:///Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme?MD5=f38da743e00edccc31fb2bdc95c02032...
+------------------------------------------------
+
+Searching 4 paths for library ADVAPI32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library GDI32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library IMM32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library KERNEL32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library NTDLL.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library OLE32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library OLEAUT32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library SHELL32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library USER32.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library WINMM.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 4 paths for library WS2_32.DLL...
+Library not found.
+------------------------------------------------
+
+Linking the External Programs of 'GunBound.gme' to imported libraries...
+  [ADVAPI32.DLL] -> not found in project
+  [GDI32.DLL] -> not found in project
+  [IMM32.DLL] -> not found in project
+  [KERNEL32.DLL] -> not found in project
+  [OLEAUT32.DLL] -> not found in project
+  [SHELL32.DLL] -> not found in project
+  [USER32.DLL] -> not found in project
+  [WINMM.DLL] -> not found in project
+  [WS2_32.DLL] -> not found in project
+  [OLE32.DLL] -> not found in project
+  [NTDLL.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)
+INFO  ANALYZING all memory and code: file:///Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme (HeadlessAnalyzer)
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/data/PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/data/PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)
+INFO  Unable to find DWARF information, skipping DWARF analysis (DWARFAnalyzer)
+INFO  Skipping PDB processing: missing PDB information in program metadata (PdbUniversalAnalyzer)
+INFO  Packed database cache: /private/tmp/gb-jewel-impl-damage/cache/guichafy-ghidra/packed-db-cache (PackedDatabaseCache)
+INFO  Applied data type archive: windows_vs12_32 (ApplyDataArchiveAnalyzer)
+INFO  Applied data type archive: windows_vs12_32 (ApplyDataArchiveAnalyzer)
+INFO  No functions detected that make variadic function calls with format strings containing format specifiers (FormatStringAnalyzer)
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.480 secs
+    Apply Data Archives                        0.877 secs
+    Call Convention ID                         0.801 secs
+    Call-Fixup Installer                       0.073 secs
+    Create Address Tables                      0.119 secs
+    Create Address Tables - One Time           1.103 secs
+    Create Function                            0.656 secs
+    DWARF                                      0.002 secs
+    Data Reference                             0.548 secs
+    Decompiler Switch Analysis                16.969 secs
+    Demangler Microsoft                        0.077 secs
+    Disassemble                                2.662 secs
+    Disassemble Entry Points                   1.173 secs
+    Embedded Media                             0.074 secs
+    External Entry References                  0.000 secs
+    Function ID                                1.480 secs
+    Function Start Pre Search                  0.032 secs
+    Function Start Search                      0.339 secs
+    Function Start Search After Code           0.100 secs
+    Function Start Search After Data           0.113 secs
+    Function Start Search delayed - One Time   0.006 secs
+    Non-Returning Functions - Discovered       0.908 secs
+    Non-Returning Functions - Known            0.005 secs
+    PDB Universal                              0.003 secs
+    Reference                                  0.784 secs
+    Scalar Operand References                  1.327 secs
+    Shared Return Calls                        0.358 secs
+    Source Language Support                    0.002 secs
+    Stack                                      4.597 secs
+    Subroutine References                      0.705 secs
+    Subroutine References - One Time           0.116 secs
+    Variadic Function Signature Override       0.110 secs
+    WindowsResourceReference                   2.914 secs
+    X86 Function Callee Purge                  0.303 secs
+    x86 Constant Reference Analyzer            6.515 secs
+-----------------------------------------------------
+     Total Time   46 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)
+INFO  REPORT: Analysis succeeded for file: file:///Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme (HeadlessAnalyzer)
+INFO  REPORT: Execute script: ExportClientEvidence.java '/private/tmp/gb-jewel-impl-damage-q01' 'seed' '0x40a5f0,0x40a6e0,0x40a7d0,0x40a8c0,0x478a80,0x40d9ba,0x450f56,0x43af40,0x43b7a0,0x53753c' '0x558078:8'  (HeadlessAnalyzer)
+INFO  SCRIPT: /Users/guichafy/.codex/worktrees/f19e/DemoGame/.codex/skills/gunbound-client-port/scripts/ExportClientEvidence.java (HeadlessAnalyzer)
+INFO  ExportClientEvidence.java> CLIENT_EVIDENCE ok=true output=/private/tmp/gb-jewel-impl-damage-q01 (GhidraScript)
+INFO  ANALYZING changes made by post scripts: file:///Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme (HeadlessAnalyzer)
+INFO  REPORT: Post-analysis succeeded for file: file:///Users/guichafy/Workspaces/DemoGame/.tools/mobile-animation-port/GunBound.gme (HeadlessAnalyzer)
+INFO  /GunBound.gme: file created (guichafy) (LocalFileSystem)
+INFO  REPORT: Save succeeded for: /GunBound.gme (GunboundClient:/GunBound.gme) (HeadlessAnalyzer)
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)

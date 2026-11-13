@@ -1,0 +1,17 @@
+{
+  "frames": 210,
+  "size": [
+    1920,
+    1080
+  ],
+  "pause_frames": 30,
+  "pause_rgba_identical": true,
+  "resume_changed": true,
+  "art_checks": 271,
+  "source": "Thor graphics.xfs",
+  "flow_size": [
+    1280,
+    800
+  ],
+  "flow_captures": 4
+}

@@ -25,6 +25,8 @@ const MapArt = preload("res://scripts/map_art.gd")
 var map_art = MapArt.new()
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
+const ClientAudio = preload("res://scripts/client_audio.gd")
+const JewelArt = preload("res://scripts/jewel_art.gd")
 const ClassicRanks = preload("res://scripts/classic_ranks.gd")
 const Options = preload("res://scripts/options.gd")
 const OptionsPopup = preload("res://scripts/options_popup.gd")
@@ -38,6 +40,7 @@ const ItemBar = preload("res://scripts/item_bar.gd")
 const SelectItemPopup = preload("res://scripts/select_item_popup.gd")
 const Items = preload("res://scripts/items.gd")
 var hud = HudArt.new()
+var jewel_art = JewelArt.new()
 var screen_hud: Node2D
 var item_art = ItemArt.new()
 var item_bar = ItemBar.new(item_art)
@@ -71,6 +74,8 @@ const LoadingView = preload("res://scripts/loading_view.gd")
 var room_random_sprite = preload("res://scripts/room_random_sprite.gd").new()
 var player_random := false
 var cpu_random := false
+var room_mode := "solo"
+var loading_mode := "solo"
 # Resolved while the loading screen is up. -1 until Start from the room.
 var loading_player := -1
 var loading_cpu := -1
@@ -201,6 +206,7 @@ func replace_root() -> void:
 
 ## Drops the room controls after replace_root has queued them for deletion.
 func _clear_front() -> void:
+	jewel_art.glow.clear()
 	if overlays.kind=="settings":
 		overlays.close()
 	if screen == "menu" and menu != null and is_instance_valid(menu.nickname_input):
@@ -237,9 +243,9 @@ func show_menu() -> void:
 	menu.build(root, ui, {"version": version(), "nickname": profile.nickname, "difficulty": cpu_difficulty,
 		"map_id": room_map_id, "weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
 		"items": options.items.duplicate(), "rank": profile.rank, "level": profile.level(), "xp": profile.xp, "wins": profile.wins,
-		"cpu_vehicle": resolved_cpu_id(), "item_art": item_art},
+		"cpu_vehicle": resolved_cpu_id(), "item_art": item_art, "mode": room_mode},
 		{"select_map": select_map, "select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
-		"set_weather": set_weather, "show_items": show_items, "start": begin_loading, "show_shop": show_shop,
+		"set_weather": set_weather, "set_mode": set_room_mode, "show_items": show_items, "start": begin_loading, "show_shop": show_shop,
 		"show_help": show_help, "leave": show_lobby, "commit_items": commit_items,
 		"options": options, "apply_options": apply_options, "save_settings": save_front_settings, "weather_label": weather_label})
 	menu.figures.paint = draw_room_figures
@@ -332,6 +338,13 @@ func select_cpu_vehicle(index: int) -> void:
 	queue_redraw()
 
 ## Room Start. Resolves Random, shows where the two pilots spawn, then enters.
+func set_room_mode(value: String) -> void:
+	if screen != "menu":
+		return
+	room_mode = "jewel" if value == "jewel" else "solo"
+	if menu != null:
+		menu.show_mode(room_mode)
+
 func begin_loading() -> void:
 	if screen != "menu" or menu == null or not is_instance_valid(menu.stage):
 		start_match()
@@ -359,6 +372,7 @@ func begin_loading() -> void:
 	loading_spawns = spawns
 	loading_width = width
 	loading_elapsed = 0.0
+	loading_mode = room_mode
 	screen = "loading"
 	menu.present_loading()
 	loading_view = LoadingView.new()
@@ -376,6 +390,7 @@ func select_map(id: String) -> void:
 	if menu!=null:menu.refresh_map(id)
 
 func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Array = []) -> void:
+	var selected_mode := loading_mode if screen == "loading" else room_mode
 	var resolved_map := room_map_id
 	if screen=="loading" and not loading_context.is_empty():
 		resolved_map = str(loading_context.map_id)
@@ -393,7 +408,7 @@ func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Arra
 		cpu_vehicle = resolved_cpu if resolved_cpu >= 0 else RoomChoice.roll(room_rng)
 	screen = "match"
 	loading_view = null
-	model.start(vehicle, cpu_difficulty, match_seed, resolved_map, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle, spawns)
+	model.start(vehicle, cpu_difficulty, match_seed, resolved_map, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle, spawns, selected_mode)
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# The map's stage track; the result window keeps it until OK returns to the room.
@@ -483,7 +498,7 @@ func animation_state(index: int) -> String:
 	return art.state_name(model, index, aim.charging, cpu.charging(model))
 
 func player_can_act() -> bool:
-	return screen == "match" and model.phase == Match.PHASE_AIM and model.active == Match.PLAYER and not paused
+	return screen == "match" and model.phase == Match.PHASE_AIM and model.active == Match.PLAYER and not paused and not bool(model.actors[Match.PLAYER].get("jewel_waiting",false))
 
 func select_weapon(index: int) -> void:
 	if screen != "match" or not player_can_act():
@@ -671,6 +686,13 @@ func consume_events() -> void:
 			"trico_ss_start":
 				rig.last_impact = event.position
 				effects.append({"pos":event.position,"radius":0.0,"weapon":2,"vehicle":5,"ss_state":"trico_start","age":0.0,"angle":0.0})
+			"jewel_removed":
+				if bool(event.get("sound",not bool(event.get("drop",false)))):
+					sound.play("explosion",ClientAudio.native_stream("jblast.xes"))
+				if bool(event.get("effect",false)):
+					effects.append({"jewel":true,"kind":int(event.kind),"pos":event.position,"age":0.0})
+			"jewel_score":
+				floating.append({"pos":event.position-Vector2(0,35),"text":"%+d" % int(event.delta),"age":0.0,"color":Color("fff3a0")})
 			"explosion":
 				rig.last_impact = event.position
 				var vehicle_id := int(event.get("vehicle", Mobiles.DEFAULT_ID))
@@ -940,6 +962,11 @@ func _draw() -> void:
 	draw_set_transform(Vector2.ZERO)
 	weather_art.draw_columns(self, model, offset)
 	weather_art.draw_thor(self, model, offset)
+	if model.mode == "jewel":
+		jewel_art.draw(self,model.jewel_state.get("entities",[]),offset)
+		jewel_art.draw_lights(self,model.jewel_state.get("entities",[]),offset)
+	else:
+		jewel_art.glow.clear()
 	for sprite in sprites.values():
 		if sprite.has_method("begin_satellites"):
 			sprite.begin_satellites(self)
@@ -952,6 +979,8 @@ func _draw() -> void:
 		if sprite.has_method("begin_hull_glow"):
 			sprite.begin_hull_glow(self)
 	for index in range(model.actors.size()):
+		if bool(model.actors[index].get("jewel_waiting",false)):
+			continue
 		art.draw_actor(self, model, index, offset, actor_context(index))
 		if art.motion[index].pose == "using_item":
 			var body = sprite_for(int(model.actors[index].vehicle))
@@ -966,6 +995,9 @@ func _draw() -> void:
 	weather_art.draw_particles(self, offset)
 	draw_set_transform(offset)
 	for effect in effects:
+		if bool(effect.get("jewel",false)):
+			jewel_art.draw_effects(self,[effect],offset)
+			continue
 		var body = sprite_for(int(effect.get("vehicle", -1)))
 		if body != null:
 			body.draw_effect(self, effect, offset)
@@ -1132,6 +1164,16 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if screen != "match" or overlays.is_open():
 		return
+	if not paused and model.mode == "jewel" and bool(model.actors[Match.PLAYER].get("jewel_waiting",false)):
+		var point := Vector2.INF
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			point = event.position
+		elif event is InputEventScreenTouch and event.pressed:
+			point = event.position
+		if point != Vector2.INF and HudArt.Layout.in_world(point):
+			model.choose_respawn(Match.PLAYER,point.x-HudArt.Layout.WORLD.position.x+rig.position.x)
+			dragging = false
+			return
 	# Drag mode: a left press in the world during the player's aim starts the shot.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and options.drag_aiming() and player_can_act() and HudArt.Layout.in_world(event.position):
 		begin_drag(event.position.x)

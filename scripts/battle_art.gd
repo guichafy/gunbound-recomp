@@ -59,7 +59,7 @@ func react(event: Dictionary) -> void:
 		# A hurt timer shares the native action slot; this never expires state.
 		motion[event.actor].hurt_pose = "ice"
 		start_pose(event.actor,"ice","hurt",ticks * 0.05)
-	elif event.type in ["damage", "shield_damage"]:
+	elif event.type in ["damage", "shield_damage", "pilot_hit"]:
 		if str(event.get("kind","")) == "ice_silent":
 			return
 		if str(event.get("kind", "")) == "shock":
