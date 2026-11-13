@@ -1,5 +1,30 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## JEWEL × mapas — integração PR51 (13/11/2026)
+
+Rebase sobre mapasPR52/main e2e6da50 preservou seleção/lado/Random,
+loading/spawns/clima/música e ambos catálogos/export. Revisão independente
+semP1/P2. Matriz4504/0 (209salvos,22ThreadCPU) e cena1395/0 (44combinações
+SOLO/JEWEL+2Random) cobrem22lados/11mundos1600/1800/2000, máscara original,
+autoria/placar, snapshot de duas máscaras/clima/RNG e execução=previsão.
+
+Agregado1059,496s/398parses/137suítes/91.779checks/177Python semskips/
+103partidas (29regressões+44mapas+30JEWEL), cobertura62%, exit0/FAILED[].
+Pool4/guard900 preservados. GPU22lados1920×1080,682assertivas/0,
+660bufferspausa idênticos/22retomadas;88buffers salvos comparados emPillow.
+Prova/galeria em docs/jewel-implementation/gpu/maps.
+
+Após iniciar o agregado, smoke específico do pacoteJEWEL foi acrescentado
+(RED1→GREEN203/0), sem alterar regras:22lados, arte/catálogos, imunidade,
+snapshot, blast/placar/latch e selector/loading real. Complementa48tiros+
+66casos de mapas já existentes. Sua validação de pacote final será registrada.
+
+PR53 de seguimento dos mapas confirmado merged emmain f1bfba90, liberação
+FINAL de mergeJEWEL recebida. Atualizar sobre essa main e repetir seleção
+atingida, sem repetir testes locais não relacionados já verdes. Depois os
+quatro checks do head e merge protegido; acompanhar mainCI/publicação
+existente. As esperas anteriores por mapas são histórico superado.
+
 ## Implementação JEWEL — validada localmente, PR51 (13/11/2026)
 
 Worktree f19e, branch `codex/jewel-offline-mode`, base `a10ebf26`;

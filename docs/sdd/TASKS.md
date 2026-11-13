@@ -1,5 +1,16 @@
 # Entregas e próximos trabalhos
 
+## JEWEL × mapas — integração atual
+
+- [x] Rebase mapasPR52/e2e6da50 preservando mapa/modo/loading e inventários.
+- [x] Modelo4504/0, cena1395/0 eGPU22lados/682assertivas/660pausa/22retomadas.
+- [x] Agregado1059,496s/398parses/137suítes/91.779checks/177Python/103partidas/62%.
+- [x] SmokeJEWEL do pacote RED1→GREEN203/0, complementar aos48+66 casos prévios.
+- [ ] Rebase finalPR53/f1bfba90; seleção/regressão afetada e PCK final.
+- [ ] Quatro checks do head integrado, PR51 pronto e merge por rebase protegido.
+- [ ] CI main e publicação automática existentes, sem release manual extra.
+- Liberação final de integração recebida; nenhuma nova permissão de rotina pendente.
+
 ## Implementação JEWEL — REQ-JEWEL-46 (13/11/2026)
 
 - [x] Contratos PE de dano/contato, ciclo de vida, turnos/respawn e auxiliares.

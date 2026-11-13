@@ -147,7 +147,7 @@ jobs:
         env:
           RELEASE_VERSION: ${{ needs.version.outputs.version }}
         run: python scripts/ci/release.py --apply "$RELEASE_VERSION"
-      - name: Parse, all model/scene suites, 29 SOLO + 8 JEWEL matches and Python coverage
+      - name: Parse, all model/scene suites, 29 regressions + 44 map + 30 JEWEL matches and Python coverage
         run: python scripts/ci/check.py
       - name: Build and smoke extracted package outside project
         env:
