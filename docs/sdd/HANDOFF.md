@@ -128,6 +128,16 @@ por rebase do PR50. A fila segue emblema → mapas → JEWEL → piloto B.
 
 ## Piloto B na sala — issue #44 / ADR-167 (12/11/2026)
 
+Emenda13/11: posição4 liberada; PR49/47/50 conferidos `merged=true`.
+Rebase sobre main0f4a6a14 concluído, conflitos SDD/harness preservam as três
+entregas e ambas suítes. Recaptura24/24; P2 de playbackchannel inicial na
+fixture corrigido com Sound mudo antes de _ready/teardown observado; GPU
+final sem erros/leaks. Harness rebaseado exit0/500,531s:371parses,
+120suítes/61.573checks/160Python/29partidas/62%; revisão/Ruff/diff aprovados.
+Quatro checks do head rebaseado antecedem merge
+por rebase do PR48; acompanhar CI main resultante sem cancelar a anterior.
+O gate de espera e resultados de faixas abaixo são histórico pré-liberação.
+
 Correção em worktree própria `5975/DemoGame`, branch
 `codex/fix-room-rider-44`, basea1556fd9: B recebe catalog.defaults(0), como
 CPU em batalha. Ghidra próprio comprova AvataTexture1/2 antes de

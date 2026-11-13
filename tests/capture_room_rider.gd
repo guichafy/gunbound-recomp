@@ -1,4 +1,4 @@
-extends SceneTree
+extends "res://tests/support/suite.gd"
 ## GPU oracle: compare the actual room/loading renderer against explicit
 ## battle-default equipment, at identical pixel coordinates and clock.
 const OUT := "res://.tools/room-rider/"
@@ -27,6 +27,10 @@ func run() -> void:
 	for path in [PROFILE,PROFILE.get_basename()+"-options.json"]: DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	scene = load("res://scenes/main.tscn").instantiate()
 	scene.profile = load("res://scripts/profile.gd").new(PROFILE)
+	# This visual probe is silent from startup: muting after _ready would
+	# detach the initial lobby playback before teardown can observe it.
+	scene.sound = load("res://scripts/sound.gd").new()
+	scene.sound.muted = true
 	root.add_child(scene)
 	scene.scale = Vector2.ONE*1.35
 	scene.position = Vector2(96,0)
@@ -75,8 +79,10 @@ func run() -> void:
 	var file := FileAccess.open(OUT+tag+".json",FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"\t"))
 	file.close()
+	var playbacks := audio_playbacks(scene.sound)
 	scene.free()
+	await await_audio_release(playbacks)
 	for path in [PROFILE,PROFILE.get_basename()+"-options.json"]: DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	var passed := report.filter(func(r): return r.equal).size()
 	print("ROOM RIDER GPU: ",passed,"/",report.size()," exact comparisons")
-	quit(0 if passed == report.size() else 1)
+	quit(exit_code() if passed == report.size() else 1)

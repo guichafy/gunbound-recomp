@@ -1,0 +1,17 @@
+{
+  "docs/sdd/DECISIONS.md": {
+    "all_main_lines_retained_in_order": true
+  },
+  "docs/sdd/DESIGN.md": {
+    "all_main_lines_retained_in_order": true
+  },
+  "docs/sdd/HANDOFF.md": {
+    "all_main_lines_retained_in_order": true
+  },
+  "docs/sdd/SPEC.md": {
+    "all_main_lines_retained_in_order": true
+  },
+  "docs/sdd/TASKS.md": {
+    "all_main_lines_retained_in_order": true
+  }
+}
