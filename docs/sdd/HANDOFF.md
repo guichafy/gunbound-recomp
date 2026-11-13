@@ -61,6 +61,14 @@ Ação necessária: o usuário confirmar nesta conversa o envio da branch e
 abertura do PR documental, sem merge. Não houve publicação; não repetir o
 push sem essa confirmação. A posição3 e a liberação separada de merge seguem.
 
+Bloqueio resolvido após confirmação direta do usuário nesta conversa:
+“Autorizar push e PR, sem merge”. Branch enviada e
+[PR #47](https://github.com/guichafy/gunbound-recomp/pull/47) aberto.
+As rejeições acima são histórico; não há mais aprovação pendente de push/PR.
+Merge continua não autorizado, aguardando liberação da posição3 após #43/#44.
+Checks remotos ainda não conferidos neste registro; validação documental local
+permanece a descrita acima. Nenhum mapa/runtime implementado ou exportado.
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,
