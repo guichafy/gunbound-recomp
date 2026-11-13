@@ -120,6 +120,12 @@ aberto em rascunho, sem merge. As rejeições acima são histórico. A fila atua
 coloca JEWEL antes de pilotoB/#44; aguardam-se checks e liberação explícita
 da coordenação após conferir emblema/mapas e main. Runtime preservado.
 
+Posição3 liberada em13/11: PR49/PR47 confirmados merged=true; rebase sobre
+main7f3116ee concluído. Conflitos SDD resolvidos preservando integralmente
+emblema/mapas e adicionando JEWEL; delta somente em docs. Verificação
+documental/PE repetida, revisão e quatro checks do novo head precedem merge
+por rebase do PR50. A fila segue emblema → mapas → JEWEL → piloto B.
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,
