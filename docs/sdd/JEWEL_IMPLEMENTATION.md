@@ -187,3 +187,41 @@ checkout: RED3falhas (uma por fixture) → GREEN3testes/0. Probe independente
 com os padrões reais do Git incluiu3/3. Python completo166testes/0skips,
 120,447s/cobertura62%; Ruff/diff aprovados. Runtime, fixtures, assertivas,
 nomes dos quatro checks, pool4 e guard900s não mudaram. Nova CI pendente.
+
+## Integração após PR52 — REQ-JEWEL-46 / JI-7 (13/11)
+
+PR52 confirmado merged em20:34:37UTC, main e2e6da50. JEWEL rebaseado sobre
+essa main; conflitos de sala/loading, catálogos/export, SDD e inventários
+resolvidos preservando as duas entregas. Os quatro checks do head anterior
+97b2193e passaram (incluindo macOS/Windows e pacotes), mas não validam o rebase.
+
+Gate atual: matriz dos22lados/11mundos1600/1800/2000 em modoJEWEL e regressão
+SOLO; seleção/lado/Random e contexto único congelado no loading, spawn,
+clima por lado, música por família, máscara privada, CPU e previsão real.
+Expandir as oito partidasJEWEL anteriores com22naturais (uma por lado),
+preservar29regressões+44partidas de mapas e todos os guards/pool4. Nova
+suite de modelo/cena e GPU da combinação precedem checks do head rebaseado.
+
+A coordenação liberou a integração após mapas e depois acrescentou um
+seguimento pequeno de mapas (seta anterior saindo deRandom e guia). Isso
+não interrompe desenvolvimento/QA; somente o MERGE aguarda a última
+liberação após esse seguimento. Não duplicar a correção de mapas aqui.
+
+O smoke do pacote deve exercitar também o novo modo: selector/loading e
+catálogos exportados, JEWEL em22lados, imunidade sem crédito fictício,
+snapshot, blast nativo, placar e latch de resultado. Isso complementa, sem
+substituir, os48tiros e66casos de mapas já presentes no smoke do release.
+
+
+### Resultado da matriz sobre e2e6da50
+
+Modelo4504/0 e cena1395/0; agregado local1059,496s/398parses/137suítes/
+91.779checks/177Python semskips/103partidas/62%, exit0. GPU22lados FullHD,
+682assertivas/0 e660bufferspausa idênticos,22retomadas;88buffers salvos
+verificados independentemente emPillow. Smoke específico do pacote acrescentado
+após início desse agregado passou203/0; não confundir essa faixa com o agregado.
+
+PR53/main f1bfba90 confirmado integrado e liberação final de merge recebida.
+O último rebase trará só o cicloRandom/guia e sua regressão; validar seleção
+comJEWEL/SOLO e preservar o agregado já verde, sem repetir faixas não afetadas.
+Checks remotos do head completo continuam obrigatórios antes do merge.

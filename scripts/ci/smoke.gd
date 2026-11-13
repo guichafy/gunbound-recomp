@@ -1,6 +1,7 @@
 extends Node
 ## Release templates disable --script. Game._ready selects this runtime smoke
 ## only for --ci-smoke, injecting an isolated profile before any normal setup.
+const JewelSmoke = preload("res://scripts/ci/jewel_smoke.gd")
 const MapSmoke = preload("res://scripts/ci/map_smoke.gd")
 const CombatSmoke = preload("res://scripts/ci/combat_smoke.gd")
 
@@ -44,7 +45,7 @@ func run() -> void:
 		check(not FileAccess.file_exists(forbidden) and not ResourceLoader.exists(forbidden), "unexpected private/source resource: " + forbidden)
 	for path in ["res://scenes/main.tscn", "res://scripts/match.gd", "res://assets/hd/pilot_side.png"]:
 		check(ResourceLoader.exists(path), "missing resource: " + path)
-	for path in ["res://assets/xfs/shop/catalog.json", "res://assets/xfs/avatars/catalog.json", "res://assets/classic/manifest.json", "res://assets/xfs/result/catalog.json"]:
+	for path in ["res://assets/xfs/shop/catalog.json", "res://assets/xfs/avatars/catalog.json", "res://assets/classic/manifest.json", "res://assets/xfs/result/catalog.json", "res://assets/xfs/jewel/catalog.json", "res://assets/xfs/jewel/combat.json"]:
 		check(FileAccess.file_exists(path), "missing catalog: " + path)
 	if failures == 0:
 		view.set_process(false)
@@ -68,6 +69,16 @@ func run() -> void:
 	if failures==0:
 		check(MapSmoke.run(check,false)==66,"all22map sides and three weapons packaged")
 		print("PACKAGED MAPS: ","PASS" if failures==0 else "FAIL")
+	if failures==0:
+		check(JewelSmoke.run(check)==22,"JEWEL objective packaged on all22map sides")
+		view.show_menu()
+		view.select_map("meta_mine_b")
+		view.set_room_mode("jewel")
+		view.begin_loading()
+		check(view.screen=="loading" and view.loading_mode=="jewel","packaged JEWEL loading")
+		view._tick_loading(10.0)
+		check(view.screen=="match" and view.model.mode=="jewel" and view.model.map_id=="meta_mine_b","packaged JEWEL selector/map/context")
+		print("PACKAGED JEWEL: ","PASS" if failures==0 else "FAIL")
 	view.queue_free()
 	await get_tree().process_frame
 	print("PACKAGED SMOKE: ", "PASS" if failures == 0 else "FAIL")
