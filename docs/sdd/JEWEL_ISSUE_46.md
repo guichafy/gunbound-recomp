@@ -336,3 +336,11 @@ commit/PR do plano; merge ocupa posição 4, após #43, #44 e #45 e exige
 liberação explícita nesta tarefa. Antes de merge: atualizar/rebase na main
 resultante, conciliar registros SDD preservando entregas anteriores e repetir
 verificações. Não fazer merge automático nem release manual nesta pesquisa.
+
+Estado de publicação: commit local `73462776` pronto. Duas tentativas de
+push foram rejeitadas pela revisão automática, inclusive após leitura da
+autorização humana na conversa coordenadora e auditoria do conteúdo. A
+revisão não aceita autorização encaminhada por ferramenta e exige mensagem
+direta nesta tarefa. Autorização direta solicitada; sem branch remota/PR.
+Não usar outro mecanismo para contornar a rejeição. A pesquisa permanece
+utilizável integralmente no commit local.
