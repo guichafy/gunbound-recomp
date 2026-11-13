@@ -1,0 +1,45 @@
+2026-11-13 13:15:01 INFO  (LoggingInitialization) Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml
+2026-11-13 13:15:01 INFO  (LoggingInitialization) Using log file: /Users/guichafy/.codex/worktrees/bb36/DemoGame/.tools/maps-implementation/g08/analysis.log
+2026-11-13 13:15:01 DEBUG (GhidraObjectInputFilter) Including serial input filter: FileSystem/data/client.rmi.serial.filter
+2026-11-13 13:15:01 INFO  (Preferences) Loading user preferences: /private/tmp/gunbound-maps-implementation-bb36/profile/Library/ghidra/ghidra_12.2_PUBLIC/preferences
+2026-11-13 13:15:01 INFO  (ClassSearcher) Searching for classes...
+2026-11-13 13:15:01 INFO  (ClassSearcher) Class search complete (513 ms)
+2026-11-13 13:15:01 INFO  (DefaultSSLContextInitializer) Initializing SSL Context
+2026-11-13 13:15:01 INFO  (SecureRandomFactory) Initializing Random Number Generator...
+2026-11-13 13:15:01 INFO  (SecureRandomFactory) Random Number Generator initialization complete: NativePRNGNonBlocking
+2026-11-13 13:15:01 WARN  (DefaultTrustManagerFactory) OS Truststore load failed: X509 trusted CA certificates not found
+2026-11-13 13:15:01 INFO  (DefaultTrustManagerFactory) Loaded 146 trusted CA certificates from the Java default trust store.
+2026-11-13 13:15:01 INFO  (AnalyzeHeadless) Headless startup complete (1229 ms)
+2026-11-13 13:15:01 INFO  (ClassSearcher) Class searcher loaded 60 extension points (19 false positives)
+2026-11-13 13:15:01 INFO  (HeadlessAnalyzer) HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /Users/guichafy/.codex/worktrees/bb36/DemoGame/.codex/skills/gunbound-client-port/scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts
+2026-11-13 13:15:01 INFO  (HeadlessAnalyzer) HEADLESS: execution starts
+2026-11-13 13:15:01 INFO  (HeadlessAnalyzer) Opening existing project: /private/tmp/gunbound-maps-implementation-bb36/projects/GunboundClient
+2026-11-13 13:15:02 INFO  (HeadlessProject) Opening project: /private/tmp/gunbound-maps-implementation-bb36/projects/GunboundClient
+2026-11-13 13:15:02 DEBUG (SleighLanguage) Took 99ms (0ms inside lock) to initialize language /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/x86/data/languages/x86.slaspec -> /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/x86/data/languages/x86.sla
+2026-11-13 13:15:02 INFO  (HeadlessAnalyzer) REPORT: Processing read-only project file: /GunBound.gme
+2026-11-13 13:15:02 INFO  (HeadlessAnalyzer) REPORT: Execute script: ExportClientEvidence.java '/Users/guichafy/.codex/worktrees/bb36/DemoGame/.tools/maps-implementation/g08' 'inspect' '-' '0x00551cb1:32,0x00557234:24'
+2026-11-13 13:15:02 INFO  (HeadlessAnalyzer) SCRIPT: /Users/guichafy/.codex/worktrees/bb36/DemoGame/.codex/skills/gunbound-client-port/scripts/ExportClientEvidence.java
+2026-11-13 13:15:03 INFO  (GhidraScript) ExportClientEvidence.java> CLIENT_EVIDENCE ok=true output=/Users/guichafy/.codex/worktrees/bb36/DemoGame/.tools/maps-implementation/g08

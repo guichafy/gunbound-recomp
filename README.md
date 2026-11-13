@@ -8,7 +8,7 @@ The goal is to preserve the original game, bring it to multiple platforms, and b
 features on that foundation.
 
 The current implementation covers the client: **offline 1v1 training against the CPU on
-macOS**, on Miramo Town A, with all 16 mobiles, items, weather, the classic lobby, room,
+macOS**, across 22 classic map sides (11 native worlds), with all 16 mobiles, items, weather, the classic lobby, room,
 and Avatar Shop.
 
 > **GunBound** is a third-party trademark. This is a study prototype with code published on GitHub.
@@ -58,7 +58,7 @@ The full methodology is in [docs/PORTE.md](docs/PORTE.md).
 | | |
 |---|---|
 | Source version | **0.20.5** (single source of truth: `application/config/version` in `project.godot`) |
-| Playable flow | Lobby → 1v1 room → 5-second transition showing the map and spawns → match on Miramo Town A → the client's WIN/LOSE window, with OK returning to the room; shop and local profile |
+| Playable flow | Lobby → 1v1 room → 5-second transition showing the map and spawns → match on the selected classic map → the client's WIN/LOSE window, with OK returning to the room; shop and local profile |
 | Validation | Results, dates, and limits for each change are recorded in [HANDOFF](docs/sdd/HANDOFF.md). The full harness includes Godot suites, Python tests, and 29 matches; `--quick` skips the long match suites. Earlier results do not validate later changes |
 | Exported application | Local build at `builds/Gunbound Recomp.app`, excluded from Git. The exported 0.20.5 build does not include all subsequent `main` changes; re-export and verify its signature as described in [Development](docs/DESENVOLVIMENTO.md) |
 
@@ -86,7 +86,7 @@ Per-mobile status is tracked in [docs/MOBILES.md](docs/MOBILES.md). Detailed tas
   and native minimum power ([BATTLE_FIDELITY_0_20](docs/sdd/BATTLE_FIDELITY_0_20.md)).
 - Client turn rules: delay includes time spent aiming, a randomized opening turn, and
   a pass cost of 200 ([BATTLE_RULES_AUDIT](docs/sdd/BATTLE_RULES_AUDIT.md)).
-- Miramo Town A at native scale, camera, 2D wind, weather, and Thor.
+- Eleven classic map worlds and 22 sides at native scale, with room selection, side weather, camera, wind and Thor. Miramo Town A remains the default.
 - Battle HUD and a single classic menu (ESC/Options/P), music, and Slice/Drag aiming.
 - Eleven battle items, with the F1–F6 bar and Select Item.
 - Turtle T1, T2, and SS with the original wave effect. The user accepted T2.

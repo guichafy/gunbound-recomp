@@ -34,7 +34,9 @@ static func roll_spawns(rng: RandomNumberGenerator, map: Dictionary, world_width
 		rolled.append(options[rng.randi_range(0, options.size() - 1)])
 	return rolled
 
-static func ground_rows() -> PackedInt32Array:
+static func ground_rows(map_id: String = Maps.DEFAULT) -> PackedInt32Array:
+	if Maps.get_map(map_id).has("ground_rows") and map_id!=Maps.DEFAULT:
+		return PackedInt32Array(Maps.get_map(map_id).ground_rows)
 	var catalog = JSON.parse_string(FileAccess.get_file_as_string("res://assets/classic/loading/catalog.json"))
 	var rows := PackedInt32Array()
 	if catalog is Dictionary and catalog.get("ground_rows") is Array:

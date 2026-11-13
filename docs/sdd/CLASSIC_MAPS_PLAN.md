@@ -1,5 +1,9 @@
 # Mapas clássicos ausentes — plano de implementação da issue #45
 
+> Atualização13/11: implementação autorizada e executada em
+> `codex/classic-maps-implementation`. O histórico de pesquisa abaixo permanece;
+> decisões substituídas e conclusão em [CLASSIC_MAPS_IMPLEMENTATION.md](CLASSIC_MAPS_IMPLEMENTATION.md).
+
 > Para execução futura: usar `superpowers:executing-plans` por etapas, após
 > autorização de implementação. As caixas abaixo estão abertas porque esta
 > entrega é pesquisa e planejamento, sem alteração do jogo.

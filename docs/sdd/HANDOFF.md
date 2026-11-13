@@ -1,5 +1,19 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Implementação dos mapas clássicos — REQ-MAPS-45 / ADR-MAPS-45 (13/11/2026)
+
+Pedido atual autoriza implementar e integrar os mapas; substitui o limite de
+pesquisa do PR47. Branch `codex/classic-maps-implementation`, base `a10ebf26`.
+22 lados compartilham11mundos por consumo nativo comprovado. Sala seleciona
+família/lado ou Random; contexto único alimenta loading, Match e CPU.
+MiramoA permanece padrão e conserva os dois sorteios legados. Novos spawns
+por faixas jglim são adaptação offline1×1; oito préviasB usam fallbackA
+explicitamente identificado. Efeitos numerados opcionais ficam desativados:
+o prefixo usado pelo carregador normal está vazio no PE pinado.
+Contrato/evidência/validação em [CLASSIC_MAPS_IMPLEMENTATION.md](CLASSIC_MAPS_IMPLEMENTATION.md).
+Integração de mapas precede JEWEL, com quatro checks obrigatórios sem bypass.
+Revisão, pacote isolado e resultados finais serão registrados nesta seção.
+
 ## Patente na batalha — issue #43 / ADR-166 (12/11/2026)
 
 Worktreef29c/branchcodex/battle-rank-issue-43, basea1556fd9. Ghidra12.2/JDK26

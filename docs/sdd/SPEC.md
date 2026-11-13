@@ -1,5 +1,12 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Mapas clássicos — REQ-MAPS-45 (13/11/2026)
+
+Implementação agora autorizada, conforme CLASSIC_MAPS_IMPLEMENTATION.md e
+plano anterior.22lados compartilham11mundos por consumidores nativos; clima
+e spawn são separados por lado. Seleção/loading/terreno/CPU seguem contratos
+REQ-MAPS-45.1..6, preservando MiramoA e perfil. Supersede o limite de pesquisa.
+
 ## Pesquisa de mapas clássicos — issue #45 (12/11/2026)
 
 Pedido autoriza inventário e planejamento dos mapas ausentes do cliente

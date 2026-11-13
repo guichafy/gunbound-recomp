@@ -89,6 +89,15 @@ class RunnerTests(unittest.TestCase):
                 self.module.validate_matches(result, log, 'test_matches', [81, 83])
                 self.assertEqual(result['ok'], ok, output)
 
+    def test_map_match_inventory_rejects_missing_duplicate_or_wrong_cases(self):
+        with tempfile.TemporaryDirectory() as temp:
+            log = Path(temp) / 'log'
+            for cases, expected in [([0, 43], True), ([0], False), ([0, 0], False), ([0, 42], False)]:
+                log.write_text(''.join(f'MAP MATCH id={case} map=cave_a\n' for case in cases))
+                result = {'ok': True, 'matches': 2}
+                self.module.validate_matches(result, log, 'test_map_matches', [0, 43])
+                self.assertEqual(result['ok'], expected)
+
     def test_python_timing_records_success_failure_and_skip(self):
         self.assertTrue(hasattr(self.module, 'TimedResult'), 'per-test timings missing')
         class Cases(unittest.TestCase):

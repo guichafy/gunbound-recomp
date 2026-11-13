@@ -88,6 +88,7 @@ var figures: Node2D
 var player_anchor := Vector2.ZERO
 var cpu_anchor := Vector2.ZERO
 var actions: Dictionary = {}
+var map_id := Maps.DEFAULT
 var saved_difficulty := 1
 var saved_weather := "original"
 var draft_difficulty := 1
@@ -106,6 +107,7 @@ func build(root: Control, factory, info: Dictionary, callbacks: Dictionary) -> v
 	ui = factory
 	chrome = Chrome.new()
 	actions = callbacks
+	map_id = str(info.get("map_id",Maps.DEFAULT))
 	item_art = info.get("item_art", null)
 	if item_art == null:
 		item_art = preload("res://scripts/item_art.gd").new()
@@ -224,7 +226,20 @@ func build_slots(stage: Control) -> void:
 	cpu_random_preview.visible = false
 
 func build_centre(stage: Control, weather_label: String) -> void:
-	map_preview = texture_rect(stage, "RoomMapPreview", room_art.frame("room_maps",1), Vector2(332,51),Vector2(136,84))
+	map_preview = texture_rect(stage, "RoomMapPreview", room_art.frame("room_maps",int(Maps.get_map(map_id).get("room_frame",1))), Vector2(332,51),Vector2(136,84))
+	# Cave is explicitly selectable offline; native room frames call it Random.
+	# Cover only that embedded name with the CAVE raster from load_stage0.
+	var fixed_name := ColorRect.new()
+	fixed_name.name = "MapFixedName"
+	fixed_name.position = Vector2(7,1)
+	fixed_name.size = Vector2(119,18)
+	fixed_name.color = Color("00333c")
+	fixed_name.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	map_preview.add_child(fixed_name)
+	var cave_title := AtlasTexture.new()
+	cave_title.atlas = load("res://assets/xfs/maps/cave/loading_a.png")
+	cave_title.region = Rect2(13,4,44,14)
+	texture_rect(fixed_name,"CaveTitle",cave_title,Vector2(37,2),Vector2(44,14))
 	map_preview.mouse_filter = Control.MOUSE_FILTER_PASS
 	map_preview.tooltip_text = "Miramo Town A — mapa fixo do treino"
 	climate_weights.clear()
@@ -243,12 +258,12 @@ func build_centre(stage: Control, weather_label: String) -> void:
 	refresh_climate()
 	# The source preview/backdrop already draws the sole arrow pair. Transparent
 	# controls sit exactly over them; no duplicate graphics below the preview.
-	var previous := ghost(stage,Rect2(322,94,24,24),func():pass,"O mapa segue Miramo Town A.")
-	var following := ghost(stage,Rect2(454,94,24,24),func():pass,"O mapa segue Miramo Town A.")
+	var previous := ghost(stage,Rect2(322,94,24,24),func():cycle_map(-1),I18n.text("Mapa anterior"))
+	var following := ghost(stage,Rect2(454,94,24,24),func():cycle_map(1),I18n.text("Próximo mapa"))
 	previous.name = "MapPrevious"
 	following.name = "MapNext"
-	previous.disabled = true
-	following.disabled = true
+	room_buttons.append(previous)
+	room_buttons.append(following)
 	# Placas de configuração, sem controles de modos ausentes do treino.
 	for data in [
 		["RoomMode","room_mode",Vector2(317,225),"Solo — treino offline."],
@@ -260,7 +275,16 @@ func build_centre(stage: Control, weather_label: String) -> void:
 		var plate := texture_rect(stage,data[0],room_art.frame(data[1],0),data[2],Vector2(81,24))
 		plate.mouse_filter = Control.MOUSE_FILTER_PASS
 		plate.tooltip_text = data[3]
+	var side_button := ghost(stage,Rect2(317,255,81,24),toggle_map_side,I18n.text("Trocar lado A/B do mapa"))
+	side_button.name = "MapSide"
+	room_buttons.append(side_button)
+	# Clicking the existing preview selects the explicit offline Random choice.
+	map_preview.gui_input.connect(func(event):
+		if event is InputEventMouseButton and event.pressed and event.button_index in [MOUSE_BUTTON_LEFT,MOUSE_BUTTON_RIGHT]:
+			if actions.has("select_map"):actions.select_map.call("random")
+	)
 	weather_caption = caption(stage, weather_label, Vector2(312, 329), Vector2(176, 14), 10, Color("9dffe2"), true)
+	refresh_map(map_id)
 
 func build_grid(stage: Control) -> void:
 	status_line = caption(stage,"Selecione o mobile do piloto ou da máquina.",Vector2(76,364),Vector2(408,15),10)
@@ -752,9 +776,43 @@ func build_header(stage: Control, info: Dictionary) -> void:
 	owner.tooltip_text = str(info.nickname)+" · "+I18n.text(Ranks.description(owner_rank))
 	texture_rect(stage,"RoomRankIcon",Ranks.icon(owner_rank,true),Vector2(568,12),Vector2(25,15))
 
+func cycle_map(direction: int) -> void:
+	var ids := Maps.available_ids()
+	if ids.is_empty():return
+	var at := ids.find(map_id)
+	if actions.has("select_map"):actions.select_map.call(ids[posmod(at+direction,ids.size())])
+
+func toggle_map_side() -> void:
+	var row := Maps.get_map(map_id)
+	if row.is_empty():return
+	var target := int(row.stage_index)+ (11 if int(row.stage_index)<11 else -11)
+	for id in Maps.available_ids():
+		if int(Maps.get_map(id).stage_index)==target and actions.has("select_map"):
+			actions.select_map.call(id)
+			return
+
+func refresh_map(id: String) -> void:
+	map_id = id
+	var map := Maps.get_map(id)
+	map_preview.get_node("MapFixedName").visible = not map.is_empty() and int(map.stage_index)%11==0
+	var side_control = stage.get_node_or_null("MapSide")
+	var side_plate = stage.get_node_or_null("RoomMapSide")
+	if side_control!=null:side_control.disabled = map.is_empty()
+	if side_plate!=null:side_plate.modulate.a = 0.35 if map.is_empty() else 1.0
+	if map.is_empty():
+		map_preview.texture = room_art.frame("room_maps",0)
+		map_preview.tooltip_text = I18n.text("Mapa e lado aleatórios — definidos ao iniciar")
+	else:
+		map_preview.texture = room_art.frame("room_maps",int(map.room_frame))
+		map_preview.tooltip_text = str(map.name)+" "+str(map.type)+" — "+I18n.text("Clique no mapa: aleatório")
+		var side = stage.get_node_or_null("RoomMapSide")
+		if side!=null:
+			side.texture = load("res://assets/xfs/maps/ui/bside.png") if map.type=="B" else room_art.frame("room_map_side",0)
+	refresh_climate()
+
 func refresh_climate() -> void:
 	# Same global stage/calendar contract as Match.start, including Random slots.
-	var stage: Array = MatchRules.NATIVE_STAGE.miramo_town_a.weights if saved_weather!="all" else [1,1,1,1,1,1,1]
+	var stage: Array = Maps.native_weather(Maps.get_map(map_id)) if saved_weather!="all" else [1,1,1,1,1,1,1]
 	# The original room artwork keeps its eight fixed icon slots.
 	var weights := [stage[0],stage[1],stage[2],stage[3],0,stage[5],stage[6],stage[4]]
 	for index in climate_weights.size():

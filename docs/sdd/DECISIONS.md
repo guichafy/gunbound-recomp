@@ -1,5 +1,20 @@
 # Registro de decisões
 
+## ADR-MAPS-45 — 22 lados sobre11mundos clássicos (13/11/2026)
+
+A autorização de implementação substitui a limitação documental anterior.
+Consumidores43f0e0/4d4004/41f200 separam família do terreno e lado do clima;
+carregar11mundos, não inventar oitoB ou ativar os trêsBsem consumidor.
+MapChoice resolve identidade e spawns uma vez para loading/Match/CPU. MiramoA
+conserva catálogo/arte/RNG legado; demais faixas jglim são adaptação1×1.
+PreviewsB ausentes usam fallbackA declarado; Random uniforme eCave direto são
+extensões offline. Prefixo opcional551cb1 vazio mantém54efeitos numerados
+catalogados, desativados no boot normal. RGB565 de fundo/prévia é opaco no
+consumidor retangular; máscara de terreno/scan continuam separadas.
+REQ-MAPS-45 e evidência em CLASSIC_MAPS_IMPLEMENTATION.md. Identificação
+namespaced evita colisão com o trabalhoJEWEL paralelo. Sem rede/perfil novo.
+
+
 ## ADR-163 — Trajetória T2 e máquina SS do Trico (11/11/2026)
 
 Substituir somente órbitas e cadeia genéricas do Trico pelos consumidores nativos4a2ce0/4a4610/4ad230/4acd10, com estado por shell e passo comum da previsão. Contato455cc0 é independente da máscara climática; Raon/Turtle preservados. Dano/cratera/clima particular e muzzle continuam pontes declaradas. Ver TRICO_SPECIALS_ISSUE_30.md.

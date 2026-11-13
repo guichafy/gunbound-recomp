@@ -1,6 +1,12 @@
 extends RefCounted
 ## English UI catalog. Keys are original source messages; format after translation.
 const MESSAGES := {
+	"Mapa anterior": "Previous map",
+	"Próximo mapa": "Next map",
+	"Trocar lado A/B do mapa": "Change map side A/B",
+	"Mapa e lado aleatórios — definidos ao iniciar": "Random map and side A/B — resolved once at Start",
+	"Clique no mapa: aleatório": "Click map: Random",
+	"Recursos do mapa indisponíveis": "Map resources unavailable",
 	"Leve": "Easy",
 	"Normal": "Normal",
 	"Precisa": "Accurate",

@@ -14,7 +14,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 ERRORS = re.compile(r'SCRIPT ERROR|Parse Error|Failed to load script|^ERROR:|^FAIL:|FAILURES: [1-9]', re.M)
-MATCH_CASES = {'test_matches': list(range(81, 94)), 'test_classic_matches': list(range(1, 17))}
+MATCH_CASES = {'test_matches': list(range(81, 94)), 'test_classic_matches': list(range(1, 17)), 'test_map_matches': list(range(44))}
 # Suites that time real frames; they run alone once the parallel lanes finish.
 ISOLATED_SUITES = ('test_performance',)
 
@@ -82,7 +82,7 @@ def run_parallel(tasks, workers):
 
 def validate_matches(result, log, suite, expected):
     text = log.read_text(encoding='utf-8', errors='replace')
-    pattern = r'^MATCH seed=(\d+)\b' if suite == 'test_matches' else r'^CLASSIC MATCH id=(\d+)\b'
+    pattern = {'test_matches': r'^MATCH seed=(\d+)\b', 'test_classic_matches': r'^CLASSIC MATCH id=(\d+)\b', 'test_map_matches': r'^MAP MATCH id=(\d+)\b'}[suite]
     cases = list(map(int, re.findall(pattern, text, re.M)))
     result['cases'] = cases
     result['ok'] = result['ok'] and cases == expected and result['matches'] == len(expected)

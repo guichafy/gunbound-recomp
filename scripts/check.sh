@@ -1,7 +1,7 @@
 #!/bin/sh
 # Harness de qualidade: roda todas as suites headless e consolida o resultado.
 # Uso: scripts/check.sh [--quick] [suite ...]
-#   --quick   omite test_matches e test_classic_matches (partidas completas)
+#   --quick   omite test_matches, test_classic_matches e test_map_matches (partidas completas)
 # Sem suites nomeadas, antes roda --check-only em scripts/*.gd e tests/**/*.gd,
 # incluindo as capturas GPU que nao entram no harness.
 #   suite     roda apenas as suites informadas (nomes sem tests/ nem .gd)
@@ -28,9 +28,9 @@ ALL="$ALL test_match_partition test_actor_gravity"
 ALL="$ALL test_avatar_offline"
 ALL="$ALL test_native_terrain test_native_weather_roster test_weather_legacy"
 ALL="$ALL test_ci_combat test_trico_t2 test_trico_ss test_raon_ground test_battle_rank"
-ALL="$ALL test_room_rider"
-# --quick: todas as suites Godot/Python menos as partidas completas.
-QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches)$' | tr '\n' ' ')
+ALL="$ALL test_room_rider test_classic_maps test_map_choice test_classic_maps_scene test_map_art test_import_classic_maps test_map_matches test_map_combat"
+# --quick: todas as suites Godot/Python menos as partidas completas (29regressões+44casos de mapas).
+QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches|test_map_matches)$' | tr '\n' ' ')
 
 suites=""
 quick=0

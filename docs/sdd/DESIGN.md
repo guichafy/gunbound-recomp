@@ -1,5 +1,12 @@
 # Design implementado
 
+## Mapas clássicos — arquitetura autorizada (13/11/2026)
+
+Catálogo validado por variante, com família de terreno separada do registro
+DAT do clima; contexto MapChoice resolve mapa/spawns uma vez na main thread.
+Loading e Match recebem a mesma identidade. Contrato pré-código e fontes:
+CLASSIC_MAPS_IMPLEMENTATION.md.
+
 ## Proposta de mapas clássicos — issue #45 (não implementada)
 
 [CLASSIC_MAPS_PLAN.md](CLASSIC_MAPS_PLAN.md) propõe catálogo validado por

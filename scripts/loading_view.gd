@@ -2,6 +2,7 @@ extends Control
 ## Bottom band of the original loading screen: load_back under the room,
 ## the selected stage, and the two names on the ground mask.
 
+const Maps = preload("res://scripts/maps.gd")
 const Loading = preload("res://scripts/match_loading.gd")
 const NAME_FONT = preload("res://assets/classic/room/settings/room_text.fnt")
 ## load_back.img is 800×244. The header groove (y 5–26) holds the red bar.
@@ -25,6 +26,7 @@ var _panel: Texture2D
 var _stage: Texture2D
 var _bar: Texture2D
 var _rows := PackedInt32Array()
+var _picture: TextureRect
 
 func _init() -> void:
 	name = "MatchLoading"
@@ -43,6 +45,7 @@ func _init() -> void:
 	hole.clip_contents = true
 	hole.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var picture := TextureRect.new()
+	_picture = picture
 	picture.texture = _stage
 	picture.position = (HOLE_SIZE - STAGE_SIZE) * 0.5
 	picture.size = STAGE_SIZE
@@ -52,6 +55,14 @@ func _init() -> void:
 	picture.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	hole.add_child(picture)
 	add_child(hole)
+
+func configure(map: Dictionary) -> bool:
+	if map.is_empty() or not Maps.is_available(str(map.id)):
+		return false
+	_stage = load(str(map.preview))
+	_picture.texture = _stage
+	_rows = Loading.ground_rows(str(map.id))
+	return _stage!=null
 
 func show_marks(world_width: int, points: Array, names: PackedStringArray) -> void:
 	var colors := [TEAM_A, TEAM_B]

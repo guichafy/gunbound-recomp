@@ -1,0 +1,178 @@
+{
+  "world": {
+    "mask": "res://assets/xfs/maps/star/foreground.png",
+    "background": "res://assets/xfs/maps/star/background.png",
+    "particle": "res://assets/xfs/maps/star/particle.png",
+    "particle_frames": 64,
+    "particle_pivot": [
+      24,
+      24
+    ],
+    "world_size": [
+      1800,
+      1800
+    ],
+    "crop": [
+      231,
+      922,
+      1576,
+      1347
+    ],
+    "alpha_equals_lnd": true,
+    "world_prefix": "star",
+    "scenery": [
+      {
+        "texture": "res://assets/xfs/maps/star/star1.png",
+        "cell": [
+          180,
+          246
+        ],
+        "positions": [
+          [
+            258,
+            349
+          ],
+          [
+            258,
+            349
+          ],
+          [
+            258,
+            349
+          ],
+          [
+            258,
+            349
+          ],
+          [
+            258,
+            349
+          ],
+          [
+            258,
+            349
+          ],
+          [
+            258,
+            349
+          ],
+          [
+            258,
+            349
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          5,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/star/star2.png",
+        "cell": [
+          140,
+          169
+        ],
+        "positions": [
+          [
+            678,
+            158
+          ],
+          [
+            678,
+            158
+          ],
+          [
+            678,
+            158
+          ],
+          [
+            678,
+            158
+          ],
+          [
+            678,
+            158
+          ],
+          [
+            678,
+            158
+          ],
+          [
+            678,
+            158
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1,
+          0
+        ],
+        "durations": [
+          30,
+          3,
+          3,
+          3,
+          3,
+          3,
+          30,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          30
+        ],
+        "native_epa": true,
+        "loop": true
+      }
+    ],
+    "scenery_enabled": false
+  },
+  "entries": {
+    "star.img": "242635738843e2a9f2d6f45f2fcd113049f1a0d56845b666f930e09115d2f06e",
+    "star.lnd": "60f861588c8865775665129623a9c7a4e60fc5caa2af91e1d9dd8e141697c681",
+    "pstar.img": "f83162730ebc59796e05016ee73da929b804980e6986dddce439436e125cc3e8"
+  }
+}

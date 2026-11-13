@@ -1,0 +1,382 @@
+{
+  "world": {
+    "mask": "res://assets/xfs/maps/brick/foreground.png",
+    "background": "res://assets/xfs/maps/brick/background.png",
+    "particle": "res://assets/xfs/maps/brick/particle.png",
+    "particle_frames": 40,
+    "particle_pivot": [
+      24,
+      24
+    ],
+    "world_size": [
+      1800,
+      1800
+    ],
+    "crop": [
+      80,
+      1384,
+      1729,
+      1800
+    ],
+    "alpha_equals_lnd": true,
+    "world_prefix": "brick",
+    "scenery": [
+      {
+        "texture": "res://assets/xfs/maps/brick/brick1.png",
+        "cell": [
+          188,
+          164
+        ],
+        "positions": [
+          [
+            40,
+            691
+          ],
+          [
+            40,
+            691
+          ],
+          [
+            40,
+            691
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          300,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick10.png",
+        "cell": [
+          240,
+          218
+        ],
+        "positions": [
+          [
+            1060,
+            176
+          ],
+          [
+            1060,
+            176
+          ],
+          [
+            1060,
+            176
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          400,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick2.png",
+        "cell": [
+          196,
+          169
+        ],
+        "positions": [
+          [
+            257,
+            757
+          ],
+          [
+            257,
+            757
+          ],
+          [
+            257,
+            757
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          230,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick3.png",
+        "cell": [
+          280,
+          247
+        ],
+        "positions": [
+          [
+            537,
+            702
+          ],
+          [
+            537,
+            702
+          ],
+          [
+            537,
+            702
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          350,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick4.png",
+        "cell": [
+          216,
+          151
+        ],
+        "positions": [
+          [
+            856,
+            785
+          ],
+          [
+            856,
+            785
+          ],
+          [
+            856,
+            785
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          210,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick5.png",
+        "cell": [
+          200,
+          161
+        ],
+        "positions": [
+          [
+            1095,
+            731
+          ],
+          [
+            1095,
+            731
+          ],
+          [
+            1095,
+            731
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          330,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick6.png",
+        "cell": [
+          180,
+          141
+        ],
+        "positions": [
+          [
+            59,
+            271
+          ],
+          [
+            59,
+            271
+          ],
+          [
+            59,
+            271
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          200,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick7.png",
+        "cell": [
+          156,
+          124
+        ],
+        "positions": [
+          [
+            329,
+            291
+          ],
+          [
+            329,
+            291
+          ],
+          [
+            329,
+            291
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          330,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick8.png",
+        "cell": [
+          160,
+          120
+        ],
+        "positions": [
+          [
+            594,
+            276
+          ],
+          [
+            594,
+            276
+          ],
+          [
+            594,
+            276
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          250,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/brick/brick9.png",
+        "cell": [
+          176,
+          150
+        ],
+        "positions": [
+          [
+            796,
+            296
+          ],
+          [
+            796,
+            296
+          ],
+          [
+            796,
+            296
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "durations": [
+          350,
+          4,
+          60,
+          4
+        ],
+        "native_epa": true,
+        "loop": true
+      }
+    ],
+    "scenery_enabled": false
+  },
+  "entries": {
+    "brick.img": "afbab695c55dfbc694d06b3b5adf3dd1a23ae616c5ce509a28fbf3d765748f7d",
+    "brick.lnd": "b883e7bf485c2afd1cf9c1df07138d17210c60a28ad8b44bf12c73c82bc9a246",
+    "pbrick.img": "61efc95e6b8d20415d93afa72192c2f81cc522893254db6bde06e518cc0315ef"
+  }
+}

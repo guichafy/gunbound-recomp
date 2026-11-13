@@ -1,5 +1,19 @@
 # Contexto para agentes — Gunbound Recomp
 
+## Implementação dos mapas clássicos — REQ-MAPS-45 / ADR-MAPS-45 (13/11/2026)
+
+Pedido atual autoriza implementar e integrar os mapas; substitui o limite de
+pesquisa do PR47. Branch `codex/classic-maps-implementation`, base `a10ebf26`.
+22 lados compartilham11mundos por consumo nativo comprovado. Sala seleciona
+família/lado ou Random; contexto único alimenta loading, Match e CPU.
+MiramoA permanece padrão e conserva os dois sorteios legados. Novos spawns
+por faixas jglim são adaptação offline1×1; oito préviasB usam fallbackA
+explicitamente identificado. Efeitos numerados opcionais ficam desativados:
+o prefixo usado pelo carregador normal está vazio no PE pinado.
+Contrato/evidência/validação em [CLASSIC_MAPS_IMPLEMENTATION.md](docs/sdd/CLASSIC_MAPS_IMPLEMENTATION.md).
+Integração de mapas precede JEWEL, com quatro checks obrigatórios sem bypass.
+Revisão, pacote isolado e resultados finais serão registrados nesta seção.
+
 Leia primeiro `docs/sdd/HANDOFF.md`, depois `docs/sdd/SPEC.md` e
 `docs/sdd/DESIGN.md`. `docs/sdd/README.md` explica a organização SDD.
 Converse com o usuário em português.
