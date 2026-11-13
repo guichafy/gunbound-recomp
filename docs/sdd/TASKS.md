@@ -1,5 +1,18 @@
 # Entregas e próximos trabalhos
 
+## Seguimento dos mapas — navegação de Random e guia (13/11/2026)
+
+REQ-MAPS-45.3, branch `codex/maps-random-navigation-followup`, base `e2e6da50`.
+Correção limitada à seta anterior de Random: entra no último lado disponível,
+sem pular Meta Mine B. Próxima entra no primeiro; ciclo fixo preservado.
+Passos2/3 de JOGAR.md agora descrevem mapa/lado escolhidos e Random resolvido
+no START. Regressão dirigida reproduziu333checks/1falha antes da correção.
+Sem mudança de física, recursos, perfil ou JEWEL; validação local de cena,
+sem repetir GPU/partidas completas. CI obrigatório intacto. Cena333/0 após RED333/1; sala172/0, total505checks
+locais, sem ERROR/SCRIPT ERROR/leaks. Avisos do teste de imagem bruta da
+sala são anteriores e restritos à fixture. GPU e partidas não repetidas.
+Resolve os dois menores adiados no PR52; commit/PR/checks/merge a seguir.
+
 ## Implementação dos mapas clássicos — REQ-MAPS-45 / ADR-MAPS-45 (13/11/2026)
 
 Pedido atual autoriza implementar e integrar os mapas; substitui o limite de

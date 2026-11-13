@@ -780,7 +780,8 @@ func cycle_map(direction: int) -> void:
 	var ids := Maps.available_ids()
 	if ids.is_empty():return
 	var at := ids.find(map_id)
-	if actions.has("select_map"):actions.select_map.call(ids[posmod(at+direction,ids.size())])
+	var target := posmod(at+direction,ids.size()) if at>=0 else (ids.size()-1 if direction<0 else 0)
+	if actions.has("select_map"):actions.select_map.call(ids[target])
 
 func toggle_map_side() -> void:
 	var row := Maps.get_map(map_id)

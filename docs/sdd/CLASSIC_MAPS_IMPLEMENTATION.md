@@ -98,3 +98,19 @@ exit0, semERROR/SCRIPT ERROR/leaks; guard180s mantido. `override.cfg` ausente
 doROOT/PCK; testes/docs/referênciasprivadas excluídos. Manifesto em
 [qa-summary.json](../classic-maps/qa-summary.json). Alterações posteriores
 restritas a este registro/SDD; release oficial será calculada e publicada peloCI.
+
+## Seguimento de navegação e guia (13/11/2026)
+
+REQ-MAPS-45.3: Random é uma escolha fora da lista de mapas fixos. A seta
+anterior entra no último lado disponível; a próxima entra no primeiro.
+O ciclo dos mapas fixos inclui todos os lados, com volta entre as pontas.
+A transição anterior pulava Meta Mine B porque find(Random) devolve−1 e
+somar−1 produzia−2. Corrigir apenas a entrada no ciclo; sem regra nativa
+nova alegada. Os passos2/3 do guia devem nomear o mapa/lado selecionado,
+com Random resolvido uma vez no START. Validação e integração a registrar.
+
+Validação local proporcional: cena333/0 após RED333/1 e sala172/0,
+505checks sem erros de script/leaks. Regressão cobre as duas entradas de
+Random e ciclos completos nos dois sentidos, incluindo todos os22lados e
+volta às pontas. Sem reexecução local de GPU/partidas completas porque não
+houve mudança de render/física. Resolve os dois menores adiados do PR52.

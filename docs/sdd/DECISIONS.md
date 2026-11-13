@@ -1,5 +1,13 @@
 # Registro de decisões
 
+## Emenda ADR-MAPS-45 — entrada no ciclo a partir de Random (13/11/2026)
+
+Random fica fora da lista fixa. Previous escolhe o último lado válido e Next
+o primeiro; depois ambos percorrem o ciclo completo. O índice−1 de find não
+é um mapa e não participa do módulo. Correção de navegação offline existente,
+sem nova feature ou alegação de comportamento nativo. Ver seguimento em
+CLASSIC_MAPS_IMPLEMENTATION.md e regressão test_classic_maps_scene.
+
 ## ADR-MAPS-45 — 22 lados sobre11mundos clássicos (13/11/2026)
 
 A autorização de implementação substitui a limitação documental anterior.
