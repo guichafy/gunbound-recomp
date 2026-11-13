@@ -55,7 +55,10 @@
 - [x] Commit local da implementação: a9f264ad, codex/fix-room-rider-44.
 - [x] Após aprovação direta do usuário, push executado e PR #48 aberto (cabeça inicial498b5786; implementaçãoa9f264ad).
 - [ ] Acompanhar CI remota de #48; sem auto-merge antecipado.
-- [ ] Aguardar liberação da posição4 após confirmação de integração JEWEL (#46); rebase main, verificar delta/gates e integrar sem bypass.
+- [x] Posição4 liberada após confirmar PR49/47/50 merged; rebase na main0f4a6a14, conflitos SDD/harness preservam todas as entregas.
+- [x] Recaptura pós-rebase24/24; P2 de playback inicial corrigido só na fixture, final sem leaks.
+- [x] Gates locais pós-rebase:371parses/120suítes/61.573checks/160Python/29partidas/62%, exit0; GPU/revisão/Ruff/diff aprovados.
+- [ ] Quatro checks do head rebaseado, integrar PR48 por rebase sem bypass e acompanhar CI main.
 - [ ] Aceite visual humano; sem reexportação local/clienteWindows/input/escuta nesta entrega.
 
 Fila atual (pedido posterior “Piloto B depois do JEWEL”):

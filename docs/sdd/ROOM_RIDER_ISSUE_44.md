@@ -179,3 +179,35 @@ outras entregas. Desenvolvimento/envio continuam autorizados; sem auto-merge.
 Em consulta remota, #48 continua aberto, não integrado, head eb16a108;
 workflow43356195308 ainda em execução. Nenhum merge de outra tarefa foi
 presumido. Após liberação, rebase sobre main e repetir os gates afetados.
+
+
+## Liberação e rebase sobre JEWEL (13/11/2026)
+
+Posição4 liberada após conferência direta dos PRs49/47/50 no GitHub,
+todos `merged=true`: emblema406a426d, mapas7f3116ee e
+JEWEL0f4a6a14d7fdc0ae736946de730871ecd4559284. Rebase local concluído sobre
+essa main. Conflitos aditivos em DECISIONS/DESIGN/HANDOFF/SPEC/TASKS e na
+lista de suítes resolvidos preservando todas as linhas dos cinco documentos
+da main na ordem original. Harness mantém test_battle_rank e test_room_rider.
+Contra essa base, o produto ainda muda somente o equipamento passado a B;
+emblemas, planos e runtime anterior permanecem intactos.
+
+A recaptura inicial teve24/24 pares iguais mas2objetos/1recurso pendentes.
+Verbose identificou playbackMP3/channel criado antes de mute. Corrigida
+somente a fixture: Sound já mudo antes de adicionar a cena à árvore, com
+teardown/WeakRefs do suporte comum e falhas refletidas no exit code. A
+rodada `rebase-silent` terminou24/24,12loading+12batalha, sem ERROR/leaks.
+Os logs anteriores permanecem como evidência do achadoP2; não são aprovação.
+
+
+Validação final do rebase: harness integral exit0/500,531s,371parses,
+120suítesGodot/61.573checks,160Python sem falhas/skips,29partidas,
+cobertura62%. Inclui emblema73/0 e pilotoB410/0. Todas as faixas verdes na
+mesma execução; substitui a validação composta inicial para esta árvore.
+Ruff/diff aprovados. Revisão independente aprovou preservação das entregas,
+os24paresRGBA e o teardown final sem erros/leaks. Relatórios em
+`docs/room-rider-native/rebase-*`; logs detalhados locais preservados.
+A captura final editada após o parse foi executada na GPU com sucesso.
+Próximos gates: publicar head rebaseado com lease exato, quatro checks desse
+head, merge por rebase com SHA esperado e CI da main resultante. Não cancelar
+execuções main anteriores nem baixar proteções/inventário/timeout.

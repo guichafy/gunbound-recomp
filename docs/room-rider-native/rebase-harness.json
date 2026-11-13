@@ -1,0 +1,26 @@
+{
+  "base": "0f4a6a14d7fdc0ae736946de730871ecd4559284",
+  "seconds": 500.531,
+  "matches": 29,
+  "parses": 371,
+  "godot_suites": 120,
+  "godot_checks": 61573,
+  "failed": [],
+  "python": {
+    "ok": true,
+    "exit": 0,
+    "seconds": 149.192,
+    "matches": 0,
+    "log": ".tools/check-logs/python.log",
+    "checks": 0
+  },
+  "automation_coverage": {
+    "ok": true,
+    "exit": 0,
+    "seconds": 0.147,
+    "matches": 0,
+    "log": ".tools/check-logs/coverage-report.log",
+    "checks": 0
+  },
+  "notes": "All lanes green in the same complete run; GPU final capture after fixture-only teardown fix is recorded separately."
+}

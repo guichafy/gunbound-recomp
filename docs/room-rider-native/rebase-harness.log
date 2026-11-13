@@ -1,0 +1,178 @@
+CI workers: 4; one complete match per process
+OK test_projectile_light 910 checks 0 matches 3.965 s
+OK test_runner 39 checks 0 matches 1.894 s
+OK test_scene 27 checks 0 matches 4.616 s
+OK test_matches-2-of-13 0 checks 1 matches 114.047 s
+OK test_lobby_ui 96 checks 0 matches 3.48 s
+OK test_lobby_art_hd 93 checks 0 matches 0.682 s
+OK test_room_ui 172 checks 0 matches 3.396 s
+OK test_room_reference 232 checks 0 matches 3.346 s
+OK test_room_polish 162 checks 0 matches 2.967 s
+OK test_room_settings 59 checks 0 matches 3.138 s
+OK test_classic_buttons_hd 596 checks 0 matches 3.284 s
+OK test_refinement 28 checks 0 matches 1.488 s
+OK test_refinement_scene 22 checks 0 matches 4.278 s
+OK test_bigfoot 28 checks 0 matches 3.363 s
+OK test_bigfoot_smooth 70 checks 0 matches 7.991 s
+OK test_matches-3-of-13 0 checks 1 matches 34.097 s
+OK python 149.192 s
+PYTHON TIME 29.955s test_original_mobile_assets.OriginalMobileAssets.test_pixels_and_registration
+PYTHON TIME 20.286s test_mage_assets.MageAssets.test_all_pixels_pivots_and_epa
+PYTHON TIME 11.944s test_grub_assets.GrubAssets.test_hull_light_pixels_and_registration
+PYTHON TIME 10.010s test_grub_assets.GrubAssets.test_projectile_sheets_and_epa
+PYTHON TIME 8.101s test_aduka_assets.AdukaAssets.test_all_mobile_frames_pivots_and_epa
+PYTHON TIME 7.463s test_lightning_assets.LightningAssets.test_all_shot_and_impact_pixels
+PYTHON TIME 6.776s test_client_weather_source.ClientWeatherAssets.test_thor_112_native_frames_hotspots_and_epa
+PYTHON TIME 6.382s test_grub_assets.GrubAssets.test_hull_pixels_and_registration
+PYTHON TIME 6.318s test_lightning_assets.LightningAssets.test_body_epa_and_pivots
+PYTHON TIME 5.663s test_aduka_assets.AdukaAssets.test_thor_body_light_and_native_epa
+PYTHON TIME 4.018s test_import_xfs_hud.NativeHudImport.test_native_source_identity
+PYTHON TIME 1.752s test_client_weather_source.ClientWeatherAssets.test_six_xtf_sheets_every_original_channel
+PYTHON TIME 1.708s test_import_xfs_hud.NativeHudImport.test_full_native_bands_and_mode_panels
+PYTHON TIME 1.601s test_import_xfs_hud.NativeHudImport.test_native_charge_pixels
+PYTHON TIME 1.581s test_import_xfs_hud.NativeHudImport.test_native_weather_only
+Name                           Stmts   Miss Branch BrPart  Cover
+----------------------------------------------------------------
+scripts/ci/bootstrap.py          189    114     78      7    37%
+scripts/ci/check.py              180      7     54      9    93%
+scripts/ci/package.py            149     66     64      6    54%
+scripts/ci/package_common.py      19     15     10      0    14%
+scripts/ci/publish.py            117     30     50     11    74%
+scripts/ci/release.py             88     25     40      6    70%
+----------------------------------------------------------------
+TOTAL                            742    257    296     39    62%
+
+OK test_mage 41 checks 0 matches 2.473 s
+OK test_mage_scene 15 checks 0 matches 2.882 s
+OK test_bigfoot_native 2905 checks 0 matches 6.968 s
+OK test_ice_effects 300 checks 0 matches 3.57 s
+OK test_bigfoot_attacks 56 checks 0 matches 2.457 s
+OK test_bigfoot_attacks_scene 14 checks 0 matches 3.246 s
+OK test_hd_assets 193 checks 0 matches 1.108 s
+OK test_mobile_animation 240 checks 0 matches 3.185 s
+OK test_pilot_projectiles 108 checks 0 matches 3.54 s
+OK test_roster 79 checks 0 matches 3.876 s
+OK test_map 49 checks 0 matches 4.236 s
+OK test_weather 15 checks 0 matches 3.482 s
+OK test_hud 531 checks 0 matches 3.703 s
+OK test_matches-1-of-13 0 checks 1 matches 194.499 s
+OK test_aiming 25 checks 0 matches 3.016 s
+OK test_items 49 checks 0 matches 3.188 s
+OK test_items_scene 49 checks 0 matches 9.739 s
+OK test_shop_items_integration 39 checks 0 matches 4.158 s
+OK test_avatar_catalog 34 checks 0 matches 0.271 s
+OK test_avatar_profile 25 checks 0 matches 0.673 s
+OK test_avatar_shop 25 checks 0 matches 3.518 s
+OK test_avatar_shop_classic 24 checks 0 matches 3.436 s
+OK test_matches-6-of-13 0 checks 1 matches 27.365 s
+OK test_avatar_shop_parity 25 checks 0 matches 2.837 s
+OK test_shop_audit 21 checks 0 matches 2.749 s
+OK test_shop_wide 26 checks 0 matches 3.302 s
+OK test_shop_xfs 12 checks 0 matches 2.934 s
+OK test_shop_original 77 checks 0 matches 2.929 s
+OK test_xfs_catalog 3816 checks 0 matches 0.781 s
+OK test_shop_test_funds 14 checks 0 matches 0.887 s
+OK test_xfs_equipment 19 checks 0 matches 3.246 s
+OK test_xfs_hd_migration 2009 checks 0 matches 1.807 s
+OK test_shop_hd 46 checks 0 matches 0.685 s
+OK test_avatar_art 9 checks 0 matches 0.369 s
+OK test_avatar_mount 24 checks 0 matches 0.789 s
+OK test_avatar_hd 152 checks 0 matches 0.506 s
+OK test_avatar_continuity 130 checks 0 matches 3.447 s
+OK test_attributes 59 checks 0 matches 1.441 s
+OK test_gold_rewards 43 checks 0 matches 1.079 s
+OK test_mobile_parity 27 checks 0 matches 1.433 s
+OK test_nak 68 checks 0 matches 1.4 s
+OK test_battle_rules 60 checks 0 matches 11.916 s
+OK test_classic_mobiles 129 checks 0 matches 3.998 s
+OK test_original_mobiles 39 checks 0 matches 2.311 s
+OK test_mage_client_animation 115 checks 0 matches 5.197 s
+OK test_classic_flight_parity 78 checks 0 matches 1.409 s
+OK test_classic_ballistics 1081 checks 0 matches 1.221 s
+OK test_boomer 928 checks 0 matches 7.115 s
+OK test_matches-4-of-13 0 checks 1 matches 139.702 s
+OK test_classic_assets 36 checks 0 matches 1.395 s
+OK test_turtle_projectiles 158 checks 0 matches 3.363 s
+OK test_matches-5-of-13 0 checks 1 matches 141.937 s
+OK test_matches-7-of-13 0 checks 1 matches 72.104 s
+OK test_turtle_t2 588 checks 0 matches 13.701 s
+OK test_classic_shot_timing 158 checks 0 matches 2.004 s
+OK test_classic_shot_timing_scene 50 checks 0 matches 6.99 s
+OK test_asate_effect 80 checks 0 matches 0.265 s
+OK test_jd_effect 80 checks 0 matches 0.309 s
+OK test_aduka_effect 93 checks 0 matches 0.503 s
+OK test_matches-9-of-13 0 checks 1 matches 23.617 s
+OK test_aduka_beam_art 16 checks 0 matches 0.266 s
+OK test_raon_effect 168 checks 0 matches 0.321 s
+OK test_raon_shots 102 checks 0 matches 2.419 s
+OK test_raon_mines 33 checks 0 matches 0.618 s
+OK test_raon_trail 93 checks 0 matches 0.48 s
+OK test_matches-11-of-13 0 checks 1 matches 10.302 s
+OK test_special_mobiles_integration 275 checks 0 matches 9.945 s
+OK test_armor_t2 179 checks 0 matches 1.911 s
+OK test_matches-12-of-13 0 checks 1 matches 5.788 s
+OK test_aduka_native 40 checks 0 matches 2.473 s
+OK test_aduka_combat 661 checks 0 matches 1.012 s
+OK test_aduka_weather 2628 checks 0 matches 1.284 s
+OK test_mage_native 3998 checks 0 matches 8.987 s
+OK test_matches-13-of-13 0 checks 1 matches 14.375 s
+OK test_lightning_native 1588 checks 0 matches 2.308 s
+OK test_lightning_art 136 checks 0 matches 0.594 s
+OK test_lightning_weather 3102 checks 0 matches 2.945 s
+OK test_mage_weather 687 checks 0 matches 0.324 s
+OK test_mage_weather_effects 57 checks 0 matches 1.317 s
+OK test_mage_secondary_weather 575 checks 0 matches 1.538 s
+OK test_mage_weather_art 41 checks 0 matches 0.324 s
+OK test_mage_sparks 63 checks 0 matches 1.724 s
+OK test_mage_spark_art 206 checks 0 matches 0.304 s
+OK test_client_item_assets 66 checks 0 matches 0.369 s
+OK test_client_audio 224 checks 0 matches 0.702 s
+OK test_client_weather_assets 75 checks 0 matches 0.406 s
+OK test_client_hud_assets 463 checks 0 matches 0.615 s
+OK test_battle_hud_layout 65 checks 0 matches 2.951 s
+OK test_hud_clock_wind 60 checks 0 matches 0.782 s
+OK test_battle_options 146 checks 0 matches 3.262 s
+OK test_match_loading 33 checks 0 matches 3.139 s
+OK test_matches-10-of-13 0 checks 1 matches 74.885 s
+OK test_result_screen 37 checks 0 matches 3.254 s
+OK test_classic_matches-1-of-16 0 checks 1 matches 28.911 s
+OK test_music_screens 55 checks 0 matches 3.819 s
+OK test_grub_surface 720 checks 0 matches 0.271 s
+OK test_grub_flight 15690 checks 0 matches 0.365 s
+OK test_classic_matches-3-of-16 0 checks 1 matches 2.395 s
+OK test_matches-8-of-13 0 checks 1 matches 96.934 s
+OK test_classic_matches-4-of-16 0 checks 1 matches 8.103 s
+OK test_classic_matches-5-of-16 0 checks 1 matches 11.657 s
+OK test_grub_model 311 checks 0 matches 28.835 s
+OK test_classic_matches-2-of-16 0 checks 1 matches 36.235 s
+OK test_dragon_shots 61 checks 0 matches 1.199 s
+OK test_knight_shots 92 checks 0 matches 0.89 s
+OK test_ci_smoke 9 checks 0 matches 2.683 s
+OK test_i18n 247 checks 0 matches 0.315 s
+OK test_settings_i18n 34 checks 0 matches 3.164 s
+OK test_lobby_settings 14 checks 0 matches 3.366 s
+OK test_match_partition 153 checks 0 matches 0.306 s
+OK test_classic_matches-7-of-16 0 checks 1 matches 21.234 s
+OK test_actor_gravity 68 checks 0 matches 2.667 s
+OK test_avatar_offline 1195 checks 0 matches 4.464 s
+OK test_classic_matches-6-of-16 0 checks 1 matches 40.84 s
+OK test_classic_matches-9-of-16 0 checks 1 matches 9.041 s
+OK test_classic_matches-10-of-16 0 checks 1 matches 7.333 s
+OK test_classic_matches-12-of-16 0 checks 1 matches 1.214 s
+OK test_classic_matches-11-of-16 0 checks 1 matches 8.909 s
+OK test_classic_matches-8-of-16 0 checks 1 matches 34.815 s
+OK test_native_terrain 477 checks 0 matches 16.558 s
+OK test_classic_matches-14-of-16 0 checks 1 matches 6.176 s
+OK test_classic_matches-15-of-16 0 checks 1 matches 5.783 s
+OK test_native_weather_roster 2976 checks 0 matches 6.766 s
+OK test_weather_legacy 68 checks 0 matches 3.922 s
+OK test_ci_combat 255 checks 0 matches 1.502 s
+OK test_trico_t2 4043 checks 0 matches 4.111 s
+OK test_trico_ss 394 checks 0 matches 1.374 s
+OK test_raon_ground 787 checks 0 matches 0.62 s
+OK test_battle_rank 73 checks 0 matches 2.408 s
+OK test_classic_matches-13-of-16 0 checks 1 matches 27.618 s
+OK test_room_rider 410 checks 0 matches 2.622 s
+OK test_classic_matches-16-of-16 0 checks 1 matches 27.439 s
+OK test_performance 24 checks 0 matches 27.637 s
+FAILED: []
