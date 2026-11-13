@@ -225,3 +225,14 @@ PR53/main f1bfba90 confirmado integrado e liberação final de merge recebida.
 O último rebase trará só o cicloRandom/guia e sua regressão; validar seleção
 comJEWEL/SOLO e preservar o agregado já verde, sem repetir faixas não afetadas.
 Checks remotos do head completo continuam obrigatórios antes do merge.
+
+
+### Head final sobre f1bfba90
+
+Rebase confirmado, apenas cicloRandom/teste/guia no delta de jogo sobre a
+matriz. Faixa afetada6465/0 (333+21+1395+4504+203+9), automação13+3/0,
+Ruff/diffOK. Nenhuma repetição local integral desnecessária; o novo head
+passará pelos quatro checks completos obrigatórios. PCK final passou
+lobby/sala/loja,48tiros,66casos de mapas eJEWEL22+UI/MetaMineB. Perfil isolado,
+override e testes ausentes; sem aplicativo instalado atualizado manualmente.
+Liberação final recebida, merge só após checks e revisão semP1/P2 pendente.

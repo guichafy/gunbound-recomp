@@ -63,7 +63,12 @@
     "independently_verified_buffers": 88,
     "additional_package_checks": 203,
     "additional_package_checks_after_full_started": true,
-    "final_rebase": "f1bfba90 pending",
-    "remote_checks": "pending"
+    "final_rebase": "f1bfba90a13bb87a9eef433b52d60bb3c9e5b911",
+    "remote_checks": "pending",
+    "post_rebase_targeted_checks": 6465,
+    "automation_tests": 16,
+    "packaged_smoke": "PASS (48shots +66mapcases +22JEWELmaps +UI/loading)",
+    "pck_sha256": "265bec1f5bf7d0c25c7efe963b7337239a16ba2fb04c3547486229c393f6e164",
+    "final_merge_release_received": true
   }
 }
