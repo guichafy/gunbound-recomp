@@ -10,6 +10,8 @@
 - [x] Revisão independente e correção dos P2; GPU210quadros/271checks/pausa30.
 - [x] Harness final606,981s/385parses/129suítes/62.933checks/165Python/37partidas/62%.
 - [x] Commit63b4be53 enviado; [PR51](https://github.com/guichafy/gunbound-recomp/pull/51) de implementação aberto em rascunho.
+- [x] CheckoutCI inclui as três fixtures; regressão RED3→GREEN3, Python166/0/62%.
+- [ ] Confirmar os quatro checks remotos após o fix de checkout do PR51.
 - [ ] Após liberação da fila: rebase na integração dos mapas, matriz JEWEL×mapas,
   quatro checks remotos e merge protegido. Sem publicação manual extra.
 - Limites e pontes mantidas: [JEWEL_IMPLEMENTATION.md](JEWEL_IMPLEMENTATION.md).

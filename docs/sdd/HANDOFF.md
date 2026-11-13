@@ -37,6 +37,13 @@ mapas, rebase/matriz e liberação explícita da fila.
 commit63b4be53 enviado. Quatro checks remotos pendentes no registro; sem
 merge/auto-merge. Entrega atual é implementação, não o PR50 de pesquisa.
 
+Emenda CI do PR51: run43477147316/head9b4d7eb6 falhou porque o checkout
+reduzido excluía as três fixtures em docs/jewel-implementation. Windows
+executou37partidas e demais suítes, mas rules atingiu900s após JSONNil;
+macOS cancelado. Pasta incluída, regressão checkout RED3→GREEN3, probeGit3/3,
+Python completo166/0 em120,447s e cobertura62%. Runtime/fixtures/guards
+intactos; confirmação dos quatro checks do novo head pendente.
+
 ## Seguimento dos mapas — navegação de Random e guia (13/11/2026)
 
 REQ-MAPS-45.3, branch `codex/maps-random-navigation-followup`, base `e2e6da50`.

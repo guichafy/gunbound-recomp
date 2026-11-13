@@ -22,5 +22,19 @@
     1920,
     1080
   ],
-  "pause_frames_exact_rgba": 30
+  "pause_frames_exact_rgba": 30,
+  "ci_checkout_followup": {
+    "failed_run": 43477147316,
+    "failed_head": "9b4d7eb6",
+    "cause": "desktop sparse checkout omitted three documentary fixtures",
+    "regression_red_fixture_failures": 3,
+    "regression_green_tests": 3,
+    "python_tests": 166,
+    "python_skips": 0,
+    "python_seconds": 120.447,
+    "python_coverage_percent": 62,
+    "runtime_unchanged": true,
+    "guard_unchanged": 900,
+    "remote_revalidation": "pending"
+  }
 }

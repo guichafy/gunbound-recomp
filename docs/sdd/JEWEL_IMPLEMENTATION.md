@@ -170,3 +170,20 @@ P1/P2 pendente. Os quatro checks remotos ainda precisam de confirmação;
 merge aguarda mapas integrados, liberação da fila e rebase com a matriz
 JEWEL×mapas. Worktree/branch preservados para essa continuidade. PR50 é
 somente a pesquisa histórica já integrada, não esta entrega.
+
+
+## Correção do checkout CI — PR51
+
+A execução [43477147316](https://github.com/guichafy/gunbound-recomp/actions/runs/43477147316)
+do head9b4d7eb6 falhou corretamente no Windows: `test_jewel_rules` encontrou
+JSON vazio na primeira fixture e atingiu guard900s. O sparse checkout do job
+não incluía `docs/jewel-implementation`, onde estão as três fixtures. As
+37partidas e as outras suítes Windows passaram; macOS foi cancelado nessa
+execução. Isso não valida o pacoteWindows nem substitui o novo gate remoto.
+
+Incluída somente essa pasta no checkout desktop. Nova regressão inventaria
+os literais `res://docs/` das suítes e exige cobertura pelos diretórios do
+checkout: RED3falhas (uma por fixture) → GREEN3testes/0. Probe independente
+com os padrões reais do Git incluiu3/3. Python completo166testes/0skips,
+120,447s/cobertura62%; Ruff/diff aprovados. Runtime, fixtures, assertivas,
+nomes dos quatro checks, pool4 e guard900s não mudaram. Nova CI pendente.
