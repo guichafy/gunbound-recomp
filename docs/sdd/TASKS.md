@@ -53,7 +53,8 @@
 - [x] 369parses/119suítesGodot/61.500checks/29partidas; repetir160Python após bootstrap, cobertura62%; Ruff/diff.
 - [x] Registrar resultados compostos, crash de sondagem descartado e limites em ROOM_RIDER_ISSUE_44.md.
 - [x] Commit local da implementação: a9f264ad, codex/fix-room-rider-44.
-- [ ] Push/PR: revisão automática rejeitou duas vezes; requer aprovação direta nesta conversa. Depois registrar URL/SHA/checks.
+- [x] Após aprovação direta do usuário, push executado e PR #48 aberto (cabeça inicial498b5786; implementaçãoa9f264ad).
+- [ ] Acompanhar CI remota de #48; sem auto-merge antecipado.
 - [ ] Aguardar liberação da posição2 após #43; rebase main, verificar delta/gates e integrar sem bypass.
 - [ ] Aceite visual humano; sem reexportação local/clienteWindows/input/escuta nesta entrega.
 

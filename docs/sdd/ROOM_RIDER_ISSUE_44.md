@@ -156,3 +156,14 @@ mecanismo alternativo. Pergunta de aprovação direta apresentada ao usuário;
 aguardar resposta antes de nova ação remota. O commit local e a validação
 permanecem prontos. A fila serial e a exigência de liberação antes do merge
 continuam válidas mesmo após a aprovação do push/PR.
+
+
+## Autorização direta e PR (13/11/2026)
+
+O usuário respondeu nesta conversa: **“Autorizo o push e o PR”**. O push
+foi então aprovado/executado, sem contorno do bloqueio anterior, publicando
+`codex/fix-room-rider-44` no origin. PR aberto:
+https://github.com/guichafy/gunbound-recomp/pull/48 (cabeça inicial498b5786,
+implementaçãoa9f264ad). A autorização não libera o merge antecipado: #48
+aguarda liberação após #43, rebase sobre main e checks/proteções completos.
+CI remota pendente; sem auto-merge nem publicação manual extra.
