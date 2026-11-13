@@ -44,6 +44,23 @@
 - [x] Posição3 liberada após PR49/PR47; rebase na main7f3116ee e preservação
   integral das seções emblema/mapas. Delta exclusivamente documental.
 
+## Piloto B na sala — issue #44 / ADR-167 (12/11/2026)
+
+- [x] Reproduzir contexto/raster divergente e confirmar consumidor Thor em Ghidra próprio.
+- [x] Fornecer defaults da CPU a B na sala/loading; preservar A/roster/pivôs/equipamentos.
+- [x] Regressão16mobiles+Random,2gêneros,2telas: RED410/136→GREEN410/0.
+- [x] GPU24pares iguais/Aintacto;12loading reais+12batalhas; revisão sem achados.
+- [x] 369parses/119suítesGodot/61.500checks/29partidas; repetir160Python após bootstrap, cobertura62%; Ruff/diff.
+- [x] Registrar resultados compostos, crash de sondagem descartado e limites em ROOM_RIDER_ISSUE_44.md.
+- [ ] Commit/push/PR autorizado; registrar URL/SHA e checks remotos.
+- [ ] Aguardar liberação da posição2 após #43; rebase main, verificar delta/gates e integrar sem bypass.
+- [ ] Aceite visual humano; sem reexportação local/clienteWindows/input/escuta nesta entrega.
+
+Fila:1#43emblema→2#44pilotoB→3#45planoMapas→4#46pesquisaJEWEL.
+Quatro worktrees em paralelo; merges sequenciais. As quatro entregas têm
+commit/push/PR autorizados; #45/#46 seguem somente pesquisa/plano, sem runtime.
+
+
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 
 - [x] Worktree própria na main2f622d85, bootstrap pinado, Ghidra7consultas aprovadas.

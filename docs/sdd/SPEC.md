@@ -1136,3 +1136,12 @@ e na fila de turnos, com rank2/âncoras comprovados no cliente Thor's Hammer.
 Jogador usa profile.rank; CPU usa Chick, como no resultado. Nenhuma tabela
 XP→patente ou ranking competitivo. Fonte/escala do porte e demais regras
 preservadas; contrato e validação em BATTLE_RANK_ISSUE_43.md.
+
+
+## Piloto B na sala — issue #44 / ADR-167
+
+REQ-19/20/39/45/47: ambos os slots da sala e do loading usam o compositor de
+avatares nativos. A conserva o equipamento do perfil e B usa o conjunto padrão
+masculino da CPU em batalha, com avatar atrás do chassis conforme `0x4d90c0`.
+Pivôs, orientação, EPA, roster, equipamentos e regras ficam preservados.
+Contrato, fila serial de integração e limites: ROOM_RIDER_ISSUE_44.md.

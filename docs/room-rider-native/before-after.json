@@ -1,0 +1,266 @@
+[
+  {
+    "case": "before-loading-0-1-actual.png",
+    "changed_bounds": [
+      1237,
+      226,
+      1276,
+      265
+    ],
+    "A_equal": true,
+    "changed_pixels": 641
+  },
+  {
+    "case": "before-loading-0-13-actual.png",
+    "changed_bounds": [
+      1238,
+      206,
+      1277,
+      245
+    ],
+    "A_equal": true,
+    "changed_pixels": 491
+  },
+  {
+    "case": "before-loading-0-16-actual.png",
+    "changed_bounds": [
+      1232,
+      221,
+      1271,
+      260
+    ],
+    "A_equal": true,
+    "changed_pixels": 431
+  },
+  {
+    "case": "before-loading-0-2-actual.png",
+    "changed_bounds": [
+      1229,
+      213,
+      1266,
+      256
+    ],
+    "A_equal": true,
+    "changed_pixels": 659
+  },
+  {
+    "case": "before-loading-0-3-actual.png",
+    "changed_bounds": [
+      1234,
+      218,
+      1287,
+      266
+    ],
+    "A_equal": true,
+    "changed_pixels": 968
+  },
+  {
+    "case": "before-loading-0-4-actual.png",
+    "changed_bounds": [
+      1248,
+      221,
+      1287,
+      263
+    ],
+    "A_equal": true,
+    "changed_pixels": 657
+  },
+  {
+    "case": "before-loading-1-1-actual.png",
+    "changed_bounds": [
+      1237,
+      226,
+      1276,
+      265
+    ],
+    "A_equal": true,
+    "changed_pixels": 641
+  },
+  {
+    "case": "before-loading-1-13-actual.png",
+    "changed_bounds": [
+      1238,
+      206,
+      1277,
+      245
+    ],
+    "A_equal": true,
+    "changed_pixels": 491
+  },
+  {
+    "case": "before-loading-1-16-actual.png",
+    "changed_bounds": [
+      1232,
+      221,
+      1271,
+      260
+    ],
+    "A_equal": true,
+    "changed_pixels": 431
+  },
+  {
+    "case": "before-loading-1-2-actual.png",
+    "changed_bounds": [
+      1229,
+      213,
+      1266,
+      256
+    ],
+    "A_equal": true,
+    "changed_pixels": 659
+  },
+  {
+    "case": "before-loading-1-3-actual.png",
+    "changed_bounds": [
+      1234,
+      218,
+      1287,
+      266
+    ],
+    "A_equal": true,
+    "changed_pixels": 968
+  },
+  {
+    "case": "before-loading-1-4-actual.png",
+    "changed_bounds": [
+      1248,
+      221,
+      1287,
+      263
+    ],
+    "A_equal": true,
+    "changed_pixels": 657
+  },
+  {
+    "case": "before-menu-0-1-actual.png",
+    "changed_bounds": [
+      1237,
+      226,
+      1276,
+      265
+    ],
+    "A_equal": true,
+    "changed_pixels": 641
+  },
+  {
+    "case": "before-menu-0-13-actual.png",
+    "changed_bounds": [
+      1238,
+      206,
+      1277,
+      245
+    ],
+    "A_equal": true,
+    "changed_pixels": 491
+  },
+  {
+    "case": "before-menu-0-16-actual.png",
+    "changed_bounds": [
+      1232,
+      221,
+      1271,
+      260
+    ],
+    "A_equal": true,
+    "changed_pixels": 431
+  },
+  {
+    "case": "before-menu-0-2-actual.png",
+    "changed_bounds": [
+      1229,
+      213,
+      1266,
+      256
+    ],
+    "A_equal": true,
+    "changed_pixels": 659
+  },
+  {
+    "case": "before-menu-0-3-actual.png",
+    "changed_bounds": [
+      1234,
+      218,
+      1287,
+      266
+    ],
+    "A_equal": true,
+    "changed_pixels": 968
+  },
+  {
+    "case": "before-menu-0-4-actual.png",
+    "changed_bounds": [
+      1248,
+      221,
+      1287,
+      263
+    ],
+    "A_equal": true,
+    "changed_pixels": 657
+  },
+  {
+    "case": "before-menu-1-1-actual.png",
+    "changed_bounds": [
+      1237,
+      226,
+      1276,
+      265
+    ],
+    "A_equal": true,
+    "changed_pixels": 641
+  },
+  {
+    "case": "before-menu-1-13-actual.png",
+    "changed_bounds": [
+      1238,
+      206,
+      1277,
+      245
+    ],
+    "A_equal": true,
+    "changed_pixels": 491
+  },
+  {
+    "case": "before-menu-1-16-actual.png",
+    "changed_bounds": [
+      1232,
+      221,
+      1271,
+      260
+    ],
+    "A_equal": true,
+    "changed_pixels": 431
+  },
+  {
+    "case": "before-menu-1-2-actual.png",
+    "changed_bounds": [
+      1229,
+      213,
+      1266,
+      256
+    ],
+    "A_equal": true,
+    "changed_pixels": 659
+  },
+  {
+    "case": "before-menu-1-3-actual.png",
+    "changed_bounds": [
+      1234,
+      218,
+      1287,
+      266
+    ],
+    "A_equal": true,
+    "changed_pixels": 968
+  },
+  {
+    "case": "before-menu-1-4-actual.png",
+    "changed_bounds": [
+      1248,
+      221,
+      1287,
+      263
+    ],
+    "A_equal": true,
+    "changed_pixels": 657
+  }
+]

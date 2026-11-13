@@ -1172,3 +1172,11 @@ O cache rank_icons retém AtlasTexture de rank2 original por código normalizado
 as âncoras são compartilhadas pelo desenho e pela regressão de geometria.
 Nenhum dado de patente entra no Match/CPU/FlightSnapshot. Contrato e limites
 de fonte/escala em BATTLE_RANK_ISSUE_43.md.
+
+
+## Contexto do piloto B — issue #44 / ADR-167
+
+Game.draw_room_figures fornece catalog.defaults(0) para B, como start_match.
+O contexto completo em draw_figure seleciona AvatarArt→chassis em MobileSprite;
+A mantém profile.equipped_set(). Nenhuma mudança em pivôs/fallback/estado de
+batalha. A mesma função atende loading. Contrato: ROOM_RIDER_ISSUE_44.md.
