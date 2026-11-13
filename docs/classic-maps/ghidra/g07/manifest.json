@@ -1,0 +1,32 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x004ebaf0",
+      "seeded": false,
+      "entry_va": "004ebaf0",
+      "name": "FUN_004ebaf0",
+      "body": "[[004ebaf0, 004ebbb8]]",
+      "instructions": 85,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x004ed870",
+      "seeded": false,
+      "entry_va": "004ed870",
+      "name": "FUN_004ed870",
+      "body": "[[004ed870, 004ed9e7]]",
+      "instructions": 129,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [],
+  "ok": true
+}

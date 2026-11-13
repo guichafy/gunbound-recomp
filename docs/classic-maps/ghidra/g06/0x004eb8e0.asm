@@ -1,0 +1,38 @@
+004eb8e0  8b542404  MOV EDX,dword ptr [ESP + 0x4]
+004eb8e4  56  PUSH ESI
+004eb8e5  8b351c0eea00  MOV ESI,dword ptr [0x00ea0e1c]
+004eb8eb  8b761c  MOV ESI,dword ptr [ESI + 0x1c]
+004eb8ee  57  PUSH EDI
+004eb8ef  8b7e04  MOV EDI,dword ptr [ESI + 0x4]
+004eb8f2  3bfa  CMP EDI,EDX
+004eb8f4  770c  JA 0x004eb902
+004eb8f6  740d  JZ 0x004eb905
+004eb8f8  8b761c  MOV ESI,dword ptr [ESI + 0x1c]
+004eb8fb  8b7e04  MOV EDI,dword ptr [ESI + 0x4]
+004eb8fe  3bfa  CMP EDI,EDX
+004eb900  76f4  JBE 0x004eb8f6
+004eb902  5f  POP EDI
+004eb903  5e  POP ESI
+004eb904  c3  RET
+004eb905  8b7610  MOV ESI,dword ptr [ESI + 0x10]
+004eb908  8b7e08  MOV EDI,dword ptr [ESI + 0x8]
+004eb90b  3bf9  CMP EDI,ECX
+004eb90d  77f3  JA 0x004eb902
+004eb90f  740d  JZ 0x004eb91e
+004eb911  8b7610  MOV ESI,dword ptr [ESI + 0x10]
+004eb914  8b7e08  MOV EDI,dword ptr [ESI + 0x8]
+004eb917  3bf9  CMP EDI,ECX
+004eb919  76f4  JBE 0x004eb90f
+004eb91b  5f  POP EDI
+004eb91c  5e  POP ESI
+004eb91d  c3  RET
+004eb91e  85c9  TEST ECX,ECX
+004eb920  7ce0  JL 0x004eb902
+004eb922  807e1801  CMP byte ptr [ESI + 0x18],0x1
+004eb926  5f  POP EDI
+004eb927  5e  POP ESI
+004eb928  7509  JNZ 0x004eb933
+004eb92a  895c2404  MOV dword ptr [ESP + 0x4],EBX
+004eb92e  e93d1f0000  JMP 0x004ed870
+004eb933  895c2404  MOV dword ptr [ESP + 0x4],EBX
+004eb937  e9b4010000  JMP 0x004ebaf0

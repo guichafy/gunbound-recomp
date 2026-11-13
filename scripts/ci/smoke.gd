@@ -1,6 +1,7 @@
 extends Node
 ## Release templates disable --script. Game._ready selects this runtime smoke
 ## only for --ci-smoke, injecting an isolated profile before any normal setup.
+const MapSmoke = preload("res://scripts/ci/map_smoke.gd")
 const CombatSmoke = preload("res://scripts/ci/combat_smoke.gd")
 
 var failures := 0
@@ -64,6 +65,9 @@ func run() -> void:
 		var shots := CombatSmoke.run(check)
 		check(shots == 48, "all 16 mobiles and three weapons exercised")
 		print("PACKAGED COMBAT: ", "PASS" if failures == 0 else "FAIL", " (", shots, " shots)")
+	if failures==0:
+		check(MapSmoke.run(check,false)==66,"all22map sides and three weapons packaged")
+		print("PACKAGED MAPS: ","PASS" if failures==0 else "FAIL")
 	view.queue_free()
 	await get_tree().process_frame
 	print("PACKAGED SMOKE: ", "PASS" if failures == 0 else "FAIL")

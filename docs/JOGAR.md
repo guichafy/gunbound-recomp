@@ -1,5 +1,10 @@
 # Jogar
 
+Na sala, use as setas para trocar a família do mapa e A/B para selecionar o
+lado. Clique na prévia para Random: o mapa é sorteado uma vez ao iniciar,
+entre os22lados disponíveis. Miramo Town A continua o padrão; a escolha fica
+apenas na sessão, sem alterar o perfil. Cave também pode ser escolhido.
+
 Abra `scenes/main.tscn` no Godot 4.7.2 ou o app exportado em `builds/Gunbound Recomp.app`.
 O app atual é 0.20.5, mas foi gerado antes da loja, HUD e menu de batalha originais. Para vê-los, rode pelo editor
 ou reexporte (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).

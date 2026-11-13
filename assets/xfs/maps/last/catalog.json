@@ -1,0 +1,167 @@
+{
+  "world": {
+    "mask": "res://assets/xfs/maps/last/foreground.png",
+    "background": "res://assets/xfs/maps/last/background.png",
+    "particle": "res://assets/xfs/maps/last/particle.png",
+    "particle_frames": 44,
+    "particle_pivot": [
+      24,
+      24
+    ],
+    "world_size": [
+      2000,
+      2000
+    ],
+    "crop": [
+      0,
+      1539,
+      2000,
+      2000
+    ],
+    "alpha_equals_lnd": true,
+    "world_prefix": "last",
+    "scenery": [
+      {
+        "texture": "res://assets/xfs/maps/last/last1.png",
+        "cell": [
+          280,
+          171
+        ],
+        "positions": [
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ],
+          [
+            441,
+            607
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "durations": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      }
+    ],
+    "scenery_enabled": false
+  },
+  "entries": {
+    "last.img": "f456e30d24e11b077c687cbf173c80d78bbe2f7e0a8bfddb5fe34c66a2b6566e",
+    "last.lnd": "1c2169f4f9b05edd9f51d35858bf5ea9e46cbfc1e29a22d5e132a6fefb909216",
+    "plast.img": "3730771a8bf0243e90a85fd486f1d0803946f73bd7219b852fa6165198cd5c65"
+  }
+}

@@ -4,6 +4,7 @@ extends RefCounted
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
+const MapChoice = preload("res://scripts/map_choice.gd")
 const Weather = preload("res://scripts/weather.gd")
 const MageWeather = preload("res://scripts/mage_weather.gd")
 const MageWeatherEffects = preload("res://scripts/mage_weather_effects.gd")
@@ -137,6 +138,10 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		if spawn_override.size() >= 2:
 			spawns[PLAYER] = Vector2(spawn_override[PLAYER])
 			spawns[CPU] = Vector2(spawn_override[CPU])
+		elif map_id != Maps.DEFAULT:
+			var context := MapChoice.resolve(map_id,rng)
+			assert(not context.is_empty(),"Selected map must have supported offline spawns")
+			spawns = context.spawns
 		else:
 			for index in [PLAYER, CPU]:
 				var options: Array = Maps.spawn_points(Maps.get_map(map_id), index == PLAYER, terrain.world_size().x)
@@ -148,7 +153,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 		var kind := vehicle if index == PLAYER else cpu_kind
 		var x: float = spawns[index].x
 		# Search from just above the listed spawn so layered maps keep its platform.
-		var ground: float = terrain.surface_at(x, maxf(0.0, spawns[index].y - 80.0))
+		var ground: float = terrain.surface_at(x, maxf(0.0, spawns[index].y - (80.0 if map_id == Maps.DEFAULT else 0.0)))
 		var spec: Dictionary = Mobiles.definition(kind)
 		var values: Array = Attributes.sanitize(attributes_by_actor[index] if index < attributes_by_actor.size() and attributes_by_actor[index] is Array else [])
 		# Pilot points plus signed gear modifiers (XFS equipment).
@@ -181,9 +186,9 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 	var preset: Array = Maps.get_map(map_id).weather if not map_id.is_empty() else PROCEDURAL_WEATHER
 	if weather_mode == "all":
 		preset = ALL_WEATHER
-	if map_id==Maps.DEFAULT:
-		var stage: Dictionary = NATIVE_STAGE.miramo_town_a
-		if weather_mode!="all":preset=stage.weights
+	if not map_id.is_empty():
+		var stage: Dictionary = Maps.get_map(map_id)
+		if weather_mode!="all":preset=Maps.native_weather(stage)
 		for kind in stage.column_ranges:
 			weather.spawn_ranges[kind]=[]
 			for pair in stage.column_ranges[kind]:

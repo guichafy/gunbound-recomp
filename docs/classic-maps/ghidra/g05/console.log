@@ -1,0 +1,54 @@
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-maps-implementation-bb36/profile" "-Dapplication.cachedir=/private/tmp/gunbound-maps-implementation-bb36/cache" "-Dapplication.tempdir=/private/tmp/gunbound-maps-implementation-bb36/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-maps-implementation-bb36/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-maps-implementation-bb36/profile" "-Dapplication.cachedir=/private/tmp/gunbound-maps-implementation-bb36/cache" "-Dapplication.tempdir=/private/tmp/gunbound-maps-implementation-bb36/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-maps-implementation-bb36/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-maps-implementation-bb36/profile" "-Dapplication.cachedir=/private/tmp/gunbound-maps-implementation-bb36/cache" "-Dapplication.tempdir=/private/tmp/gunbound-maps-implementation-bb36/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-maps-implementation-bb36/tmp"
+Picked up JAVA_TOOL_OPTIONS:  "-Duser.home=/private/tmp/gunbound-maps-implementation-bb36/profile" "-Dapplication.cachedir=/private/tmp/gunbound-maps-implementation-bb36/cache" "-Dapplication.tempdir=/private/tmp/gunbound-maps-implementation-bb36/tmp" "-Djava.io.tmpdir=/private/tmp/gunbound-maps-implementation-bb36/tmp"
+openjdk version "26.0.1" 2026-04-21
+OpenJDK Runtime Environment Corretto-26.0.1.8.1 (build 26.0.1+8-FR)
+OpenJDK 64-Bit Server VM Corretto-26.0.1.8.1 (build 26.0.1+8-FR, mixed mode)
+INFO  Using log config file: jar:file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
+INFO  Using log file: /Users/guichafy/.codex/worktrees/bb36/DemoGame/.tools/maps-implementation/g05/analysis.log (LoggingInitialization)
+INFO  Loading user preferences: /private/tmp/gunbound-maps-implementation-bb36/profile/Library/ghidra/ghidra_12.2_PUBLIC/preferences (Preferences)
+INFO  Searching for classes... (ClassSearcher)
+INFO  Class search complete (519 ms) (ClassSearcher)
+WARNING: Final field name in class ghidra.util.charset.CharsetInfo has been mutated reflectively by class com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$2 in unnamed module @4bb33f74 (file:/opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Framework/Generic/lib/gson-2.13.2.jar)
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)
+INFO  Initializing Random Number Generator... (SecureRandomFactory)
+INFO  Random Number Generator initialization complete: NativePRNGNonBlocking (SecureRandomFactory)
+WARN  OS Truststore load failed: X509 trusted CA certificates not found (DefaultTrustManagerFactory)
+INFO  Loaded 146 trusted CA certificates from the Java default trust store. (DefaultTrustManagerFactory)
+INFO  Headless startup complete (1076 ms) (AnalyzeHeadless)
+INFO  Class searcher loaded 60 extension points (19 false positives) (ClassSearcher)
+INFO  HEADLESS Script Paths:
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/WildcardAssembler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Decompiler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/SystemEmulation/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FunctionID/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/FileFormats/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/8051/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/VersionTracking/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger-rmi-trace/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BSim/ghidra_scripts
+    /Users/guichafy/.codex/worktrees/bb36/DemoGame/.codex/skills/gunbound-client-port/scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/DecompilerDependent/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/Atmel/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Swift/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/DATA/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Debug/Debugger/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/JVM/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Processors/PIC/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/GnuDemangler/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PDB/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/BytePatterns/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/PyGhidra/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/Base/ghidra_scripts
+    /opt/homebrew/Cellar/ghidra/12.2/libexec/Ghidra/Features/MicrosoftCodeAnalyzer/ghidra_scripts (HeadlessAnalyzer)
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)
+INFO  Opening existing project: /private/tmp/gunbound-maps-implementation-bb36/projects/GunboundClient (HeadlessAnalyzer)
+INFO  Opening project: /private/tmp/gunbound-maps-implementation-bb36/projects/GunboundClient (HeadlessProject)
+INFO  REPORT: Processing project file: /GunBound.gme (HeadlessAnalyzer)
+INFO  REPORT: Execute script: ExportClientEvidence.java '/Users/guichafy/.codex/worktrees/bb36/DemoGame/.tools/maps-implementation/g05' 'seed' '0x00405e90,0x004aa760' '-'  (HeadlessAnalyzer)
+INFO  SCRIPT: /Users/guichafy/.codex/worktrees/bb36/DemoGame/.codex/skills/gunbound-client-port/scripts/ExportClientEvidence.java (HeadlessAnalyzer)
+INFO  ExportClientEvidence.java> CLIENT_EVIDENCE ok=true output=/Users/guichafy/.codex/worktrees/bb36/DemoGame/.tools/maps-implementation/g05 (GhidraScript)
+INFO  REPORT: Save succeeded for processed file: /GunBound.gme (HeadlessAnalyzer)

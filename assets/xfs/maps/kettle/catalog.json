@@ -1,0 +1,449 @@
+{
+  "world": {
+    "mask": "res://assets/xfs/maps/kettle/foreground.png",
+    "background": "res://assets/xfs/maps/kettle/background.png",
+    "particle": "res://assets/xfs/maps/kettle/particle.png",
+    "particle_frames": 44,
+    "particle_pivot": [
+      24,
+      24
+    ],
+    "world_size": [
+      1600,
+      1600
+    ],
+    "crop": [
+      76,
+      1037,
+      1505,
+      1428
+    ],
+    "alpha_equals_lnd": true,
+    "world_prefix": "kettle",
+    "scenery": [
+      {
+        "texture": "res://assets/xfs/maps/kettle/kettle1.png",
+        "cell": [
+          80,
+          57
+        ],
+        "positions": [
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ],
+          [
+            784,
+            581
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/kettle/kettle2.png",
+        "cell": [
+          56,
+          44
+        ],
+        "positions": [
+          [
+            418,
+            707
+          ],
+          [
+            418,
+            707
+          ],
+          [
+            418,
+            707
+          ],
+          [
+            418,
+            707
+          ],
+          [
+            418,
+            707
+          ],
+          [
+            418,
+            707
+          ],
+          [
+            418,
+            707
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/kettle/kettle3.png",
+        "cell": [
+          40,
+          27
+        ],
+        "positions": [
+          [
+            616,
+            469
+          ],
+          [
+            616,
+            469
+          ],
+          [
+            616,
+            469
+          ],
+          [
+            616,
+            469
+          ],
+          [
+            616,
+            469
+          ],
+          [
+            616,
+            469
+          ],
+          [
+            616,
+            469
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/kettle/kettle4.png",
+        "cell": [
+          40,
+          27
+        ],
+        "positions": [
+          [
+            915,
+            679
+          ],
+          [
+            915,
+            679
+          ],
+          [
+            915,
+            679
+          ],
+          [
+            915,
+            679
+          ],
+          [
+            915,
+            679
+          ],
+          [
+            915,
+            679
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          3,
+          2,
+          2,
+          2,
+          2,
+          3,
+          2,
+          2,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/kettle/kettle5.png",
+        "cell": [
+          80,
+          58
+        ],
+        "positions": [
+          [
+            611,
+            570
+          ],
+          [
+            611,
+            570
+          ],
+          [
+            611,
+            570
+          ],
+          [
+            611,
+            570
+          ],
+          [
+            611,
+            570
+          ],
+          [
+            611,
+            570
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "durations": [
+          30,
+          2,
+          2,
+          3,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/kettle/kettle6.png",
+        "cell": [
+          20,
+          18
+        ],
+        "positions": [
+          [
+            532,
+            534
+          ],
+          [
+            532,
+            534
+          ],
+          [
+            532,
+            534
+          ],
+          [
+            532,
+            534
+          ],
+          [
+            532,
+            534
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "durations": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/kettle/kettle7.png",
+        "cell": [
+          16,
+          19
+        ],
+        "positions": [
+          [
+            696,
+            564
+          ],
+          [
+            696,
+            564
+          ],
+          [
+            696,
+            564
+          ],
+          [
+            696,
+            564
+          ],
+          [
+            696,
+            564
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "durations": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      }
+    ],
+    "scenery_enabled": false
+  },
+  "entries": {
+    "kettle.img": "1408ceba9f6e83b510d06041b83357a0bb3d187cc398347e03daa9f5cbfd745c",
+    "kettle.lnd": "03376a2bd4118be26f8abd9c7caa81a2541028e30f36235000b7f957bf0b5a88",
+    "pkettle.img": "e60e66703a8eabcece3e6abec876d48ed294ad692f982ea478b86b48191bb067"
+  }
+}

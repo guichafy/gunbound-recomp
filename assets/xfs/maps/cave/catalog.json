@@ -1,0 +1,241 @@
+{
+  "world": {
+    "mask": "res://assets/xfs/maps/cave/foreground.png",
+    "background": "res://assets/xfs/maps/cave/background.png",
+    "particle": "res://assets/xfs/maps/cave/particle.png",
+    "particle_frames": 62,
+    "particle_pivot": [
+      24,
+      24
+    ],
+    "world_size": [
+      1800,
+      1800
+    ],
+    "crop": [
+      133,
+      1103,
+      1678,
+      1800
+    ],
+    "alpha_equals_lnd": true,
+    "world_prefix": "cave",
+    "scenery": [
+      {
+        "texture": "res://assets/xfs/maps/cave/cave1.png",
+        "cell": [
+          128,
+          218
+        ],
+        "positions": [
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ],
+          [
+            350,
+            312
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          9,
+          8,
+          7,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/cave/cave2.png",
+        "cell": [
+          168,
+          186
+        ],
+        "positions": [
+          [
+            688,
+            213
+          ],
+          [
+            688,
+            213
+          ],
+          [
+            688,
+            213
+          ],
+          [
+            688,
+            213
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          120,
+          2,
+          2,
+          120,
+          2,
+          2
+        ],
+        "native_epa": true,
+        "loop": true
+      },
+      {
+        "texture": "res://assets/xfs/maps/cave/cave3.png",
+        "cell": [
+          156,
+          119
+        ],
+        "positions": [
+          [
+            879,
+            304
+          ],
+          [
+            879,
+            304
+          ],
+          [
+            879,
+            304
+          ],
+          [
+            879,
+            304
+          ],
+          [
+            879,
+            304
+          ],
+          [
+            879,
+            304
+          ],
+          [
+            879,
+            304
+          ]
+        ],
+        "frames": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          5,
+          4,
+          3,
+          2,
+          1
+        ],
+        "durations": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "native_epa": true,
+        "loop": true
+      }
+    ],
+    "scenery_enabled": false
+  },
+  "entries": {
+    "cave.img": "7543732486c14449c7e7628f2b535b6dadd2dc66fcd092d76905d6f306c2d768",
+    "cave.lnd": "974c49fa434d0177ab605750886ec7ac499efedd443210fff420e182c5287e47",
+    "pcave.img": "12d030b2106712c87c5680abaa87e10222fd647a47cb0342a915fe1e01f27c1e"
+  }
+}

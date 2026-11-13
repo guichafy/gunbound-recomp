@@ -20,6 +20,9 @@ const BattleArt = preload("res://scripts/battle_art.gd")
 const MobileLooks = preload("res://scripts/mobile_looks.gd")
 const SpritePose = preload("res://scripts/sprite_pose.gd")
 const Maps = preload("res://scripts/maps.gd")
+const MapChoice = preload("res://scripts/map_choice.gd")
+const MapArt = preload("res://scripts/map_art.gd")
+var map_art = MapArt.new()
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
 const ClassicRanks = preload("res://scripts/classic_ranks.gd")
@@ -75,6 +78,8 @@ var loading_spawns: Array = []
 var loading_width := 0
 var loading_elapsed := 0.0
 var loading_view: Control = null
+var room_map_id := Maps.DEFAULT
+var loading_context: Dictionary = {}
 var room_rng := RandomNumberGenerator.new()
 var impact_rng := RandomNumberGenerator.new()
 var vehicle := 2
@@ -230,10 +235,10 @@ func show_menu() -> void:
 	sound.request_music(Sound.ROOM_MUSIC)
 	menu = MenuScreen.new()
 	menu.build(root, ui, {"version": version(), "nickname": profile.nickname, "difficulty": cpu_difficulty,
-		"weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
+		"map_id": room_map_id, "weather_mode": weather_mode, "weather_label": weather_label(), "items_label": items_label(),
 		"items": options.items.duplicate(), "rank": profile.rank, "level": profile.level(), "xp": profile.xp, "wins": profile.wins,
 		"cpu_vehicle": resolved_cpu_id(), "item_art": item_art},
-		{"select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
+		{"select_map": select_map, "select_vehicle": select_vehicle, "select_cpu_vehicle": select_cpu_vehicle, "select_difficulty": func(index: int): cpu_difficulty = index,
 		"set_weather": set_weather, "show_items": show_items, "start": begin_loading, "show_shop": show_shop,
 		"show_help": show_help, "leave": show_lobby, "commit_items": commit_items,
 		"options": options, "apply_options": apply_options, "save_settings": save_front_settings, "weather_label": weather_label})
@@ -341,12 +346,14 @@ func begin_loading() -> void:
 	var cpu_id := cpu_vehicle if cpu_vehicle >= 0 else Mobiles.opponent(player_id)
 	if cpu_random:
 		cpu_id = RoomChoice.roll(room_rng)
-	var probe = Terrain.new()
-	var width := 1800
-	var spawns: Array = [Vector2(235, 0), Vector2(1045, 0)]
-	if probe.load_map(Maps.DEFAULT, false):
-		width = int(probe.world_size().x)
-		spawns = MatchLoading.roll_spawns(room_rng, Maps.get_map(Maps.DEFAULT), float(width))
+	loading_context = MapChoice.resolve(room_map_id,room_rng)
+	if loading_context.is_empty():
+		menu.status_line.text = I18n.text("Recursos do mapa indisponíveis")
+		return
+	var width: int = loading_context.world_width
+	var spawns: Array = loading_context.spawns
+	if room_map_id=="random":
+		menu.refresh_map(str(loading_context.map_id))
 	loading_player = player_id
 	loading_cpu = cpu_id
 	loading_spawns = spawns
@@ -356,11 +363,27 @@ func begin_loading() -> void:
 	menu.present_loading()
 	loading_view = LoadingView.new()
 	menu.stage.add_child(loading_view)
+	loading_view.configure(Maps.get_map(str(loading_context.map_id)))
 	var names := PackedStringArray([profile.nickname.left(12), "CPU"])
 	loading_view.show_marks(width, spawns, names)
 	queue_redraw()
 
+func select_map(id: String) -> void:
+	if screen!="menu":return
+	if id!="random" and not Maps.is_available(id):return
+	room_map_id = id
+	loading_context = {}
+	if menu!=null:menu.refresh_map(id)
+
 func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Array = []) -> void:
+	var resolved_map := room_map_id
+	if screen=="loading" and not loading_context.is_empty():
+		resolved_map = str(loading_context.map_id)
+	elif resolved_map=="random" or not Maps.is_available(resolved_map):
+		loading_context = MapChoice.resolve(resolved_map,room_rng)
+		if loading_context.is_empty():return
+		resolved_map = str(loading_context.map_id)
+		spawns = loading_context.spawns
 	if (screen == "menu" or screen == "loading") and menu != null and is_instance_valid(menu.nickname_input):
 		profile.nickname = profile.clean_nickname(menu.nickname_input.text)
 		profile.save_profile()
@@ -370,7 +393,7 @@ func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Arra
 		cpu_vehicle = resolved_cpu if resolved_cpu >= 0 else RoomChoice.roll(room_rng)
 	screen = "match"
 	loading_view = null
-	model.start(vehicle, cpu_difficulty, match_seed, Maps.DEFAULT, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle, spawns)
+	model.start(vehicle, cpu_difficulty, match_seed, resolved_map, weather_mode, Terrain.new(), options.items, [profile.attributes, []], [profile.equipment_bonuses(), []], opening, cpu_vehicle, spawns)
 	item_art.clear()
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# The map's stage track; the result window keeps it until OK returns to the room.
@@ -382,6 +405,7 @@ func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Arra
 	rig.last_impact = Vector2.INF
 	rig.position = clamp_camera(camera_goal())
 	weather_art.reset(Maps.get_map(model.map_id))
+	map_art.prepare(Maps.get_map(model.map_id))
 	match_id = str(Time.get_unix_time_from_system()) + ":" + str(Time.get_ticks_usec())
 	reward = 0
 	gold_reward = 0
@@ -901,6 +925,7 @@ func _draw() -> void:
 		draw_texture_rect(background, Rect2(0, 0, 1280, 800), false)
 	else:
 		draw_texture_rect_region(backdrop.texture, Rect2(0, 0, 1280, 800), background_region(backdrop))
+		map_art.draw(self,Maps.get_map(model.map_id),background_region(backdrop),elapsed)
 	if model.terrain == null:
 		return
 	var offset := (HudArt.Layout.WORLD.position + Vector2(sin(elapsed * 81.0), cos(elapsed * 74.0)) * shake - rig.position).round()
