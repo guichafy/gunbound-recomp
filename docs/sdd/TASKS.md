@@ -41,6 +41,8 @@
   original. Conferir emblema/mapas e main antes da liberação.
 - [x] Push aprovado em13/11; [PR #50](https://github.com/guichafy/gunbound-recomp/pull/50)
   aberto em rascunho. Rejeições anteriores resolvidas, sem merge.
+- [x] Posição3 liberada após PR49/PR47; rebase na main7f3116ee e preservação
+  integral das seções emblema/mapas. Delta exclusivamente documental.
 
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
 

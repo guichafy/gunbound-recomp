@@ -1,0 +1,13 @@
+Rebase validation 2026-11-13 America/Sao_Paulo
+Base 7f3116ee6ae3355a7993667f1c83879c923f6249
+PE regeneration byte-identical PASS (two runs and versioned fixture)
+Wrong PE SHA rejected PASS
+JSON, AST, local JEWEL links PASS
+Main existing SDD sections: zero removed lines PASS
+Delta docs-only PASS
+No runtime/client/GPU/audio execution claimed.
+Python compile with isolated /tmp cache PASS
+Conventional PR title validation PASS
+Independent review of rebased research aa3f669b: no actionable findings;
+verified constants/ABI, regenerated fixture, wrong SHA rejection and SDD preservation.
+Later changes only append queue/rebase/validation status, no research or runtime change.

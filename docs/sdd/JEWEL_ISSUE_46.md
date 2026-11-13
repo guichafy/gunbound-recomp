@@ -354,3 +354,12 @@ branch enviada e [PR #50](https://github.com/guichafy/gunbound-recomp/pull/50)
 aberto em rascunho. O bloqueio de push/PR está resolvido; os parágrafos acima
 preservam seu histórico. Merge continua aguardando checks, atualização sobre
 main e liberação explícita da fila, com JEWEL antes do piloto B.
+
+Posição3 liberada em13/11 após confirmação remota dos merges PR49/PR47.
+Branch rebaseada na main `7f3116ee6ae3355a7993667f1c83879c923f6249`;
+conflitos apenas em SPEC/DESIGN/DECISIONS/TASKS/HANDOFF, preservando as
+seções de emblema e mapas. Delta contra essa main exclusivamente em docs,
+sem remoções nos cinco registros existentes. Repetir verificaçãoPE,
+regeneração/recusaSHA, links/JSON/sintaxe/diff e aguardar os quatro checks do
+head atualizado antes de integrar PR50 por rebase, sem bypass. Esta liberação
+é documental: não autoriza implementar JEWEL ou alterar treino/perfil.
