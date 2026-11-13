@@ -45,7 +45,7 @@ o plano aprovado já escolhe entidades separadas e passo comum.
 3. Objetivo/agenda/resultado: implementados, cena21/0, retorno/XP idempotentes.
 4. CPU/famílias/itens/clima: integração48tiros261/0; primeira partida natural33tiros.
 5. Importação/arte/sala/loading/HUD/áudio: implementados; GPU210quadros271/0.
-6. QA/revisão/CI/rebase mapas/entrega: harness integral e remotos pendentes.
+6. QA/revisão local aprovados; PR51 em rascunho, CI remoto e rebase/matriz de mapas pendentes.
 
 Cada lacuna resolvida deve apontar ASM/bytes/oráculo e fronteiras; qualquer
 adaptação remanescente deve ser nomeada com impacto e validação. Esta página
@@ -148,3 +148,25 @@ com esse evento visual está em execução e terá resultado registrado à parte
 
 PCK final isolado passou smoke de lobby/sala/loja e48tiros; versão0.20.5,
 sem override/recursos de teste. Não é atualização do aplicativo instalado.
+
+O treino não ativa o sorteio de falas/canal de chat do cliente (ramo raro
+após47a83c); pixels e EPA `say` estão preservados e são interpretáveis pelo
+renderer. Essa omissão de apresentação é declarada, sem inventar textos ou
+ampliar o escopo para o chat/rede do cliente. Evidência de clipping, publicação,
+HUD e Jflame em [presentation/CONTRACT.md](../jewel-implementation/presentation/CONTRACT.md).
+
+
+## Resultado final local — código63b4be53
+
+`head-harness.log`:606,981s,385scripts compilados,129suítesGodot,
+62.933assertivas,165testesPython sem skips,37partidas completas
+(29SOLO existentes+8JEWEL cobrindo16mobiles), coberturaPython62%.
+Exit0/FAILED[]; logs inspecionados, Ruff e diff sem erros. Metadados e hash
+do PCK em [validation.json](../jewel-implementation/validation.json).
+
+O [PR51 de implementação](https://github.com/guichafy/gunbound-recomp/pull/51)
+foi aberto em rascunho após envio da branch. Revisão independente não tem
+P1/P2 pendente. Os quatro checks remotos ainda precisam de confirmação;
+merge aguarda mapas integrados, liberação da fila e rebase com a matriz
+JEWEL×mapas. Worktree/branch preservados para essa continuidade. PR50 é
+somente a pesquisa histórica já integrada, não esta entrega.
