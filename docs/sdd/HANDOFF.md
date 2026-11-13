@@ -152,6 +152,10 @@ Implementação local commitada em a9f264ad. Push rejeitado duas vezes pela
 revisão automática, mesmo após verificar remoto/permissões e autorização na
 conversa de origem: exige autorização direta nesta conversa. Pergunta aberta;
 nenhuma alteração remota/PR/merge ocorreu. Não contornar por outro mecanismo.
+Emenda13/11: usuário aprovou diretamente push/PR; envio passou e abriu
+PR48 (https://github.com/guichafy/gunbound-recomp/pull/48), cabeça inicial498b5786,
+implementaçãoa9f264ad. CI pendente e merge ainda aguardando liberação após#43;
+sem auto-merge. O bloqueio acima é histórico, resolvido por aprovação humana.
 
 
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
