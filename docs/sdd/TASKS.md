@@ -52,7 +52,8 @@
 - [x] GPU24pares iguais/Aintacto;12loading reais+12batalhas; revisão sem achados.
 - [x] 369parses/119suítesGodot/61.500checks/29partidas; repetir160Python após bootstrap, cobertura62%; Ruff/diff.
 - [x] Registrar resultados compostos, crash de sondagem descartado e limites em ROOM_RIDER_ISSUE_44.md.
-- [ ] Commit/push/PR autorizado; registrar URL/SHA e checks remotos.
+- [x] Commit local da implementação: a9f264ad, codex/fix-room-rider-44.
+- [ ] Push/PR: revisão automática rejeitou duas vezes; requer aprovação direta nesta conversa. Depois registrar URL/SHA/checks.
 - [ ] Aguardar liberação da posição2 após #43; rebase main, verificar delta/gates e integrar sem bypass.
 - [ ] Aceite visual humano; sem reexportação local/clienteWindows/input/escuta nesta entrega.
 
