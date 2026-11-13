@@ -19,8 +19,11 @@ Ghidra 12.2/JDK26 e LLVM objdump para evidência, sem dependência nova no jogo.
 **Contrato:** [issue #45](https://github.com/guichafy/gunbound-recomp/issues/45),
 [SPEC.md](SPEC.md), [DESIGN.md](DESIGN.md), ADR-132/133/134/138/153/158/159.
 Pesquisa em 12/11/2026, worktree própria `bb36/DemoGame`, branch
-`codex/issue-45-classic-maps-plan`. A integração documental ocupa a posição 3,
-depois de #43 e #44 e antes de #46; merge somente após liberação explícita.
+`codex/issue-45-classic-maps-plan`. Ordem atualizada pelo usuário em13/11/2026:
+emblema#43 → plano de mapas#45 → plano JEWEL#46 → piloto B#44.
+Esta integração documental ocupa a posição2 e depende apenas da confirmação
+do merge do emblema; não aguarda o piloto B. Depois disso, rebase/validação
+e integração por PR/checks protegidos, conforme a autorização da fila.
 
 ## Escopo e decisões de planejamento
 
@@ -387,5 +390,5 @@ dependências, contratos/testes e lacunas B estão registrados e revisados.
 Isso **não** marca as etapas de implementação como concluídas. Nenhum novo
 mapa, arte, pacote ou mudança de perfil faz parte da issue de planejamento.
 
-Na retomada, partir da main após #43/#44, conferir IDs REQ/ADR e consumidores
+Na retomada, partir da main após #43, conferir IDs REQ/ADR e consumidores
 atuais, atualizar este plano e executar etapa1 antes de expor variantes.

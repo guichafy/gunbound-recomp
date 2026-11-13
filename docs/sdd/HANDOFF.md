@@ -40,10 +40,15 @@ do jogo nesta mudança documental; nenhum mapa/runtime/asset/perfil alterado.
 Avisos Java de reflexão e truststore doSO ocorreram;109CAsJava carregadas,
 sem impedir a consulta. Sem export ou release novo.
 
-Autorização atual permite commit/PR do plano, mas merge ocupa posição3 após
-#43/#44, antes de #46, somente mediante liberação explícita nesta tarefa.
-Na retomada rebasear na main resultante, preservar SDD anterior e repetir
-validação documental/checks do PR. Implementação de mapas não está autorizada.
+Ordem vigente, alterada pelo usuário em13/11/2026: emblema#43 → mapas#45 →
+JEWEL#46 → piloto B#44. Mapas ocupa posição2, depende apenas da confirmação
+do merge do emblema (PR49), e não aguarda piloto B. Depois da confirmação,
+rebasear na main resultante, preservar SDD anterior, repetir validação
+documental/checks e integrar pelo PR protegido conforme autorização da fila.
+Implementação de mapas não está autorizada. Consulta remota desta atualização:
+PR47 e PR49 abertos, ambos merged=false; ainda sem liberação da posição2.
+
+Histórico de aprovação e ordem anterior (substituída pelo parágrafo acima):
 
 Entrega local: commit documental preparado, worktree limpa antes da tentativa
 de envio. O revisor automático rejeitou `git push -u origin
@@ -65,7 +70,7 @@ Bloqueio resolvido após confirmação direta do usuário nesta conversa:
 “Autorizar push e PR, sem merge”. Branch enviada e
 [PR #47](https://github.com/guichafy/gunbound-recomp/pull/47) aberto.
 As rejeições acima são histórico; não há mais aprovação pendente de push/PR.
-Merge continua não autorizado, aguardando liberação da posição3 após #43/#44.
+Naquele momento, merge aguardava liberação da posição3 após #43/#44.
 Checks remotos ainda não conferidos neste registro; validação documental local
 permanece a descrita acima. Nenhum mapa/runtime implementado ou exportado.
 

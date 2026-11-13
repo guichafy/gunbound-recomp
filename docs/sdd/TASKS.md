@@ -19,7 +19,7 @@
 - [x] [Plano por etapas](CLASSIC_MAPS_PLAN.md), contratos M45-1..6, aceites por variante, sem runtime/arte/perfil alterados.
 - [x] Regeneração idêntica, helper compilado, hash divergente rejeitado, links/diff conferidos; revisão independente corrigiu atlas MetaMine38/41.
 - [ ] Implementar etapas1–7 somente com autorização posterior; B sem prova não é alias automático.
-- [ ] Integração documental na posição3, depois de #43/#44 e antes de #46; aguardar liberação explícita de merge.
+- [ ] Integração documental na posição2: confirmar merge do emblema#43, rebasear/validar e integrar por PR/checks protegidos. Ordem de13/11: #43 → #45 → #46 → #44; piloto B não é dependência.
 - [x] Push/PR liberados por confirmação direta do usuário nesta conversa; [PR47](https://github.com/guichafy/gunbound-recomp/pull/47) aberto, sem merge. Rejeições anteriores preservadas como histórico no HANDOFF.
 
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
