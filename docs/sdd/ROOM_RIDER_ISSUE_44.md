@@ -60,10 +60,10 @@ de batalha, perfil, regras, música, equipamentos e originais não mudam.
 
 | Posição | Issue | Escopo | Gate de integração |
 |---|---|---|---|
-| 1 | #43 | Emblema | Confirmar integração antes de liberar #44 |
-| 2 | #44 | Piloto B na sala | Esta worktree; aguardar liberação, atualizar/rebase sobre main e repetir verificações afetadas |
-| 3 | #45 | Inventário e plano de mapas | Pesquisa/plano; sem runtime |
-| 4 | #46 | Pesquisa e plano JEWEL | Pesquisa/plano; sem runtime |
+| 1 | #43 | Emblema | Integração própria; estado não presumido nesta tarefa |
+| 2 | #45 | Inventário e plano de mapas | Pesquisa/plano; sem runtime |
+| 3 | #46 | Pesquisa e plano JEWEL | Pesquisa/plano; sem runtime; confirmar integração antes de liberar #44 |
+| 4 | #44 | Piloto B na sala | Esta worktree; aguardar liberação após JEWEL, atualizar/rebase sobre main e repetir verificações afetadas |
 
 Desenvolvimento paralelo em quatro worktrees; merges sequenciais por PR,
 checks/proteções sem bypass. Commit/push/PR destas quatro entregas autorizados pela
@@ -126,7 +126,7 @@ macOS/Windows permanece na CI do PR.
 Worktree `/Users/guichafy/.codex/worktrees/5975/DemoGame`, branch
 `codex/fix-room-rider-44`, base `a1556fd9`.
 Gates locais concluídos; pronta para commit/push/PR autorizado; merge aguarda
-liberação da posição2, integração da #43, rebase sobre a main resultante e
+liberação da posição4, confirmação da integração da #46 (JEWEL), rebase sobre a main resultante e
 nova verificação dos pontos afetados. Não ativar auto-merge antecipado.
 
 
@@ -167,3 +167,15 @@ https://github.com/guichafy/gunbound-recomp/pull/48 (cabeça inicial498b5786,
 implementaçãoa9f264ad). A autorização não libera o merge antecipado: #48
 aguarda liberação após #43, rebase sobre main e checks/proteções completos.
 CI remota pendente; sem auto-merge nem publicação manual extra.
+
+
+## Fila substituída por pedido posterior (13/11/2026)
+
+O usuário determinou **“Piloto B depois do JEWEL”**. O gate anterior após
+#43, descrito no histórico acima, foi substituído: #48 só pode integrar após
+confirmação da integração da pesquisa/plano JEWEL (#46) e liberação desta
+entrega. A fila passa a #43→#45→#46→#44, preservando a ordem relativa das
+outras entregas. Desenvolvimento/envio continuam autorizados; sem auto-merge.
+Em consulta remota, #48 continua aberto, não integrado, head eb16a108;
+workflow43356195308 ainda em execução. Nenhum merge de outra tarefa foi
+presumido. Após liberação, rebase sobre main e repetir os gates afetados.
