@@ -45,6 +45,13 @@ Autorização atual permite commit/PR do plano, mas merge ocupa posição3 após
 Na retomada rebasear na main resultante, preservar SDD anterior e repetir
 validação documental/checks do PR. Implementação de mapas não está autorizada.
 
+Entrega local: commit documental preparado, worktree limpa antes da tentativa
+de envio. O revisor automático rejeitou `git push -u origin
+codex/issue-45-classic-maps-plan`: classificou o push como publicação externa
+e não aceitou como autorização confiável a orientação encaminhada pela outra
+tarefa. Aprovação direta do usuário solicitada, pendente. Nenhum push/PR/merge
+foi realizado; não contornar a rejeição por outro transporte ou ferramenta.
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,
