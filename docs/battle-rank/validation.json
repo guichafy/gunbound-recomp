@@ -1,0 +1,20 @@
+{
+  "base": "a1556fd949828e25a525c837f1b3274123bcd573",
+  "branch": "codex/battle-rank-issue-43",
+  "worktree": "/Users/guichafy/.codex/worktrees/f29c/DemoGame",
+  "harness_seconds": 401.293,
+  "failed": [],
+  "parse_scripts": 369,
+  "godot_suites": 119,
+  "godot_checks": 61163,
+  "matches": 29,
+  "python_tests": 160,
+  "python_skips": 0,
+  "python_automation_coverage": 62,
+  "python": "3.15.2",
+  "harness_log_sha256": "c2137421901b74163e76842ee0689c52147f02da1454e9e7af1f73119728e2d4",
+  "review": "independent, no actionable findings",
+  "gpu": "1920x1080 x2, 1280x800 x1;375+375 source pixels matched",
+  "manual_export": false,
+  "windows_client_executed": false
+}

@@ -7,6 +7,7 @@ const I18n = preload("res://scripts/i18n.gd")
 ## Missing native equivalents keep preserved 1x sprites; no GPT HUD is active.
 
 const Match = preload("res://scripts/match.gd")
+const Ranks = preload("res://scripts/classic_ranks.gd")
 
 const Layout = preload("res://scripts/battle_hud_layout.gd")
 const K := Layout.K
@@ -45,6 +46,8 @@ const ClientHudAssets = preload("res://scripts/client_hud_assets.gd")
 var client_assets := ClientHudAssets.new()
 var textures := {}
 var originals := {}
+# Canvas draw commands retain RIDs only; keep atlas resources across redraws.
+var rank_icons := {}
 var clock_sound: AudioStream
 var font: Font
 # Crosshair intro (Crosshair.PlayAnimation), compass animation, timer, floats.
@@ -450,38 +453,43 @@ func draw_timer(view: CanvasItem, model) -> void:
 	native_rect(view,"NativeTimerDot.png",Rect2(Vector2(759,81)*K,Vector2(6,6)*K))
 	native_rect(view,"NativeTimerFraction.png",Rect2(Vector2(767,59)*K,Vector2(17,28)*K),"",Rect2(int(digits[2])*17,0,17,28))
 
+## Native408180: turn number, rank2 at19, nickname at47, then delay.
+## Preserve the port's16px rows, variable name width and delay layout.
+func delayboard_layout(state: Dictionary) -> Dictionary:
+	var names: Array = []
+	var ranks: Array = []
+	var widest := 0.0
+	var delay_width := 0.0
+	for entry in state.queue:
+		var name: String = state.player_name if entry.actor == Match.PLAYER else I18n.text("Autômato")
+		names.append(name)
+		ranks.append(actor_rank(state, int(entry.actor)))
+		widest = maxf(widest, font.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, int(10*K)).x/K)
+		delay_width = maxf(delay_width, number_width("delay", int(entry.delay)))
+	return {"names":names,"ranks":ranks,"rank_x":19.0,"nick_x":47.0,
+		"delay_width":delay_width,"delay_right":47.0+widest+delay_width+4.0}
+
 func draw_delayboard(view, model, state: Dictionary) -> void:
-	# Delayboard: bottom-left anchored at the bar's top-left, one 16 px row per player.
 	var entries: Array = state.queue
 	if entries.is_empty():
 		return
 	var row_height := 16.0
 	var base := Vector2(0, Layout.FOOTER_Y - row_height * entries.size())
 	var nick_size := 10.0 * K
-	var names: Array = []
-	var widest := 0.0
-	for entry in entries:
-		var name: String = state.player_name if entry.actor == Match.PLAYER else I18n.text("Autômato")
-		names.append(name)
-		widest = maxf(widest, font.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size)).x / K)
-	var delay_width := 0.0
-	for entry in entries:
-		delay_width = maxf(delay_width, number_width("delay", int(entry.delay)))
-	var nick_x := (13.0 - 2.0) + 4.0 + 4.0
-	var delay_right := nick_x + widest + delay_width + 4.0
+	var layout := delayboard_layout(state)
 	for row in range(entries.size()):
 		var entry: Dictionary = entries[row]
 		var top := base + Vector2(0, row * row_height)
 		if entry.actor == Match.PLAYER:
-			# SelectedPlayerTurnBG column: green when next, orange otherwise.
 			var column := 1.0 if row == 0 else 4.0
-			blit(view, "SelectedPlayerTurnBG.png", Rect2(column, 0, 1, 17), Rect2(top * K, Vector2(delay_right + 4.0, 17) * K))
+			blit(view, "SelectedPlayerTurnBG.png", Rect2(column, 0, 1, 17), Rect2(top * K, Vector2(layout.delay_right + 4.0, 17) * K))
 		draw_number(view, "blue_turn" if entry.actor == Match.PLAYER else "red_turn", row, top * K, "left", K)
+		view.draw_texture_rect(rank_icon(layout.ranks[row]),Rect2((top+Vector2(layout.rank_x,0))*K,Vector2(25,15)*K),false)
 		var color := TEAM_BLUE if entry.actor == Match.PLAYER else TEAM_RED
-		var baseline := (top + Vector2(nick_x, 12.5)) * K
-		view.draw_string_outline(font, baseline, names[row], HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size), 4, Color.BLACK)
-		view.draw_string(font, baseline, names[row], HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size), color)
-		draw_number(view, "delay", int(entry.delay), (top + Vector2(delay_right, 4.5)) * K, "right", K)
+		var baseline := (top + Vector2(layout.nick_x, 12.5)) * K
+		view.draw_string_outline(font, baseline, layout.names[row], HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size), 4, Color.BLACK)
+		view.draw_string(font, baseline, layout.names[row], HORIZONTAL_ALIGNMENT_LEFT, -1, int(nick_size), color)
+		draw_number(view, "delay", int(entry.delay), (top + Vector2(layout.delay_right, 4.5)) * K, "right", K)
 
 # ---------------------------------------------------------------- world HUD
 
@@ -492,7 +500,7 @@ func draw_world(view, model, offset: Vector2, state: Dictionary) -> void:
 			continue
 		draw_health(view, actor, Vector2(actor.pos) + offset)
 		var name: String = state.player_name if index == Match.PLAYER else I18n.text("Autômato")
-		draw_nameplate(view, name, TEAM_BLUE if index == Match.PLAYER else TEAM_RED, Vector2(actor.pos) + offset + Vector2(0, 70))
+		draw_nameplate(view, name, TEAM_BLUE if index == Match.PLAYER else TEAM_RED, Vector2(actor.pos) + offset, actor_rank(state,index))
 	if model.phase == Match.PHASE_AIM and model.active == Match.PLAYER and not state.paused_cpu:
 		draw_crosshair(view, model, offset, state)
 	if model.phase == Match.PHASE_AIM and model.active == Match.CPU:
@@ -521,12 +529,29 @@ func draw_health(view: CanvasItem, actor: Dictionary, position: Vector2) -> void
 		var critical := float(actor.hp) <= float(actor.max_hp) * 0.3
 		view.draw_rect(Rect2(left, Vector2(health, 3)), HEALTH_RED if critical else HEALTH_GREEN)
 
-func draw_nameplate(view: CanvasItem, name: String, color: Color, center: Vector2) -> void:
+## Rank is presentation data, separate from XP/level and combat actors.
+static func actor_rank(state: Dictionary, index: int) -> int:
+	var ranks: Array = state.get("actor_ranks",[])
+	return Ranks.normalize(ranks[index]) if index >= 0 and index < ranks.size() else Ranks.CHICK
+
+func rank_icon(code: int) -> AtlasTexture:
+	code = Ranks.normalize(code)
+	if not rank_icons.has(code):
+		rank_icons[code] = Ranks.icon(code,true,false)
+	return rank_icons[code]
+
+## 462ecb..462fd7/4635be..463608: box(-41,+38), rank(1,7), text(27,9).
+## Native text top47; baseline59 preserves the port's13px font/outline.
+static func nameplate_layout(position: Vector2) -> Dictionary:
+	return {"rank":Rect2(position+Vector2(-40,45),Vector2(25,15)),
+		"baseline":position+Vector2(-14,59)}
+
+func draw_nameplate(view: CanvasItem, name: String, color: Color, position: Vector2, rank_code: int = Ranks.CHICK) -> void:
 	var size := 13
-	var width := font.get_string_size(name, HORIZONTAL_ALIGNMENT_LEFT, -1, size).x
-	var baseline := center + Vector2(-width * 0.5, 5)
-	view.draw_string_outline(font, baseline, name, HORIZONTAL_ALIGNMENT_LEFT, -1, size, 3, Color.BLACK)
-	view.draw_string(font, baseline, name, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
+	var layout := nameplate_layout(position)
+	view.draw_texture_rect(rank_icon(rank_code),layout.rank,false)
+	view.draw_string_outline(font, layout.baseline, name, HORIZONTAL_ALIGNMENT_LEFT, -1, size, 3, Color.BLACK)
+	view.draw_string(font, layout.baseline, name, HORIZONTAL_ALIGNMENT_LEFT, -1, size, color)
 
 func crosshair_name(model, index: int, weapon: int) -> String:
 	var mob: String = str(model.VEHICLES[model.actors[index].vehicle].name)

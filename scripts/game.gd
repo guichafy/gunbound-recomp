@@ -22,6 +22,7 @@ const SpritePose = preload("res://scripts/sprite_pose.gd")
 const Maps = preload("res://scripts/maps.gd")
 const WeatherArt = preload("res://scripts/weather_art.gd")
 const HudArt = preload("res://scripts/hud_art.gd")
+const ClassicRanks = preload("res://scripts/classic_ranks.gd")
 const Options = preload("res://scripts/options.gd")
 const OptionsPopup = preload("res://scripts/options_popup.gd")
 const Terrain = preload("res://scripts/terrain.gd")
@@ -710,7 +711,7 @@ func hud_state() -> Dictionary:
 	return {"power": aim.power, "angle": hud.hud_angle(model, aim.angle, aim.weapon),
 		"movement": model.movement_left / maxf(1.0, model.movement_budget()), "gold": maxi(0,int(model.actors[Match.PLAYER].gold_state.gold)), "queue": queue_entries,
 		"drag": options.drag_aiming(), "moving": model.phase==Match.PHASE_AIM and model.active==Match.PLAYER and (move_left.is_pressed() or move_right.is_pressed() or Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_LEFT) or Input.is_physical_key_pressed(KEY_RIGHT)),
-		"player_name": profile.nickname, "weapon": aim.weapon, "aim": aim.angle, "paused_cpu": false}
+		"player_name": profile.nickname, "actor_ranks": [profile.rank, ClassicRanks.CHICK], "weapon": aim.weapon, "aim": aim.angle, "paused_cpu": false}
 
 func _tick_loading(delta: float) -> void:
 	loading_elapsed += delta

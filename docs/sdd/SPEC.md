@@ -1105,3 +1105,11 @@ IDs/preços/bônus/arte ficam intactos. Seleção/prévia/compra não trocam o
 piloto salvo; vestir possuído troca conjunto de gênero numa transação.
 Contrato e plano: `AVATAR_OFFLINE_ACCESS.md`; substitui apenas as restrições
 de acesso e listagem descritas na auditoria anterior.
+
+## Patente na batalha — issue #43 / ADR-166
+
+REQ-19/27/28: exibir a patente atribuída junto ao nome dos dois atores vivos
+e na fila de turnos, com rank2/âncoras comprovados no cliente Thor's Hammer.
+Jogador usa profile.rank; CPU usa Chick, como no resultado. Nenhuma tabela
+XP→patente ou ranking competitivo. Fonte/escala do porte e demais regras
+preservadas; contrato e validação em BATTLE_RANK_ISSUE_43.md.

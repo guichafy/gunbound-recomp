@@ -2226,3 +2226,12 @@ contrato PROJECTILE_LIGHT_ISSUE_32.md. Corpo alfa e luz aditiva, com folhas
 somente luz desenhadas uma vez; EPA/geometria/rastro/física preservados.
 Limpar passes por view e liberar RIDs quando a view deixa de existir.
 Não altera outros consumidores próprios nem a lista de contato nativo.
+
+## ADR-166 — Patente junto aos nomes na batalha (issue #43)
+
+Aceita. REQ-19/27/28. Consumidores462900 e408180 usam rank2 no ramo sem
+guilda e na fila. Reutilizar atlas original horizontal25×15 e códigos de
+ClassicRanks; transmitir profile.rank/CPUChick só à apresentação. Preservar
+fonte/contorno, cores, escala e regras atuais. Ramo guilda/rank1 fora do treino.
+Sem progressão de patente nem ranking competitivo. Contrato/evidência e
+limites em BATTLE_RANK_ISSUE_43.md.
