@@ -101,6 +101,13 @@ Sem clienteWindows/GPU/escuta/input novos. Plano pronto para continuidade,
 sem alegar porte integral. Commit/PR autorizados posteriormente; merge
 posição4 após #43/#44/#45, aguardando liberação explícita e rebase/checks.
 
+Publicação desta pesquisa: commit local73462776 concluído; duas tentativas
+de push rejeitadas pela revisão automática. Mesmo após conferir a mensagem
+humana na conversa coordenadora e auditar209arquivos somente em docs, o
+revisor recusou autorização oriunda de read_thread como saída não confiável.
+Pedido de autorização direta nesta tarefa está pendente. Não há branch
+remota nem PR desta entrega; não contornar esse bloqueio por outro conector.
+
 ## Luzes dos projéteis — issue #32 / ADR-165 (11/11/2026)
 
 Base2f622d85 em worktree própria. Ghidra12.2/JDK26,7consultas aprovadas,
