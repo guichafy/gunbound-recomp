@@ -28,6 +28,22 @@ func run() -> void:
 			root.push_input(event)
 			await process_frame
 		check(scene.room_map_id==({"MapNext":"nirvana_a","MapSide":"nirvana_b","RoomMapPreview":"random"}[name]),"Actual pointer reaches "+name)
+	var ids := Maps.available_ids()
+	for direction in [-1,1]:
+		scene.select_map("random")
+		scene.menu.cycle_map(direction)
+		check(scene.room_map_id==(ids.back() if direction<0 else ids.front()),"Random arrow enters cycle at matching end "+str(direction))
+		scene.select_map(ids.front())
+		var visited: Array[String] = []
+		for step in ids.size():
+			scene.menu.cycle_map(direction)
+			visited.append(scene.room_map_id)
+		var expected := ids.duplicate()
+		if direction<0:
+			expected.reverse()
+		else:
+			expected.append(expected.pop_front())
+		check(visited==expected,"Complete cycle includes all sides and wraps "+str(direction))
 	for id in Maps.available_ids():
 		scene.select_map(id)
 		if Maps.get_map(id).type=="B":

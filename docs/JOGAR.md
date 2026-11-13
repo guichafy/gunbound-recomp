@@ -18,9 +18,10 @@ ou reexporte (veja [DESENVOLVIMENTO.md](DESENVOLVIMENTO.md)).
    têm botão, como no cliente, e saem só pelo Random, sorteado no START (ADR-105). Clique no
    lugar B e depois na grade para escolher o da máquina. Os seis lugares à direita trocam os itens.
    As opções de treino vêm do Settings do lobby. START abre a transição por 5 segundos,
-   com o mobile já sorteado e o ponto de cada piloto no Miramo, e só então
+   com os mobiles e o mapa já definidos (incluindo os sorteios de Random),
+   mostrando o ponto de cada piloto no mapa e lado selecionados, e só então
    começa a partida. EXIT ou Esc voltam ao lobby.
-3. **Partida** no Miramo Town A. Ao fim, a janela WIN/LOSE do cliente mostra os dois times com P (XP) e G (Gold); OK volta à sala.
+3. **Partida no mapa e lado selecionados.** Ao fim, a janela WIN/LOSE do cliente mostra os dois times com P (XP) e G (Gold); OK volta à sala.
 
 A interface usa inglês por padrão. No lobby, **Settings → Language**, escolha
 **Português (Brasil)** e **Salvar alterações**. Áudio e idioma têm prévia;
