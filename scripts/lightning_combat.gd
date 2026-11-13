@@ -1,6 +1,8 @@
 extends RefCounted
 ## Lightning native consumers:482550/4a8360/4837e0/43af40/43bda0/45ea40.
 ## See LIGHTNING_CLIENT_REVIEW.md for coordinate/item/weather bridges.
+const JewelAux = preload("res://scripts/jewel_aux.gd")
+const JewelCombat = preload("res://scripts/jewel_combat.gd")
 const Shared = preload("res://scripts/aduka_combat.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
@@ -57,6 +59,12 @@ static func shock_hit(feet: Vector2i, impact: Vector2i, direction: int, radius: 
 	return false
 
 static func queue_shock(model, projectile: Dictionary, point: Vector2i, direction: int, data: Dictionary) -> void:
+	if JewelCombat.enabled(model):
+		var cursor := Vector2i(point.x,mini(point.y,int(model.terrain.world_size().y)))
+		var step := int(data.shock_radius) if direction==0 else Physics.quot(int(data.shock_radius)*7,10)
+		while cursor.y>=0 and step>0:
+			JewelCombat.shock(model,cursor,int(data.shock_radius))
+			cursor+=Vector2i(direction*step,-step)
 	for index in model.actors.size():
 		var target: Dictionary=model.actors[index]
 		if not bool(target.get("lightning_alive",int(target.hp)>0)) or bool(target.get("invulnerable",false)) or target.has("lightning_pending"):continue
@@ -69,6 +77,7 @@ static func blast(model, projectile: Dictionary, point: Vector2i, weapon: int) -
 	var dimension:=Physics.quot(int(data.dimension)*int(projectile.get("lightning_crater_percent",100)),100)
 	var removed: int=model.terrain.carve_native(Shared.crater_spans(point,dimension,int(data.aspect)))
 	model.events.append({"type":"explosion","position":Vector2(point),"radius":int(data.dimension)*0.5,"weapon":weapon,"vehicle":8,"removed":removed,"angle":PI*0.5})
+	JewelCombat.native_blast(model,point,data,owner)
 	Shared.apply(model.actors,model.events,point,data)
 
 static func ray(model, projectile: Dictionary, impact: Vector2i, direction: int, weapon: int) -> void:
@@ -100,6 +109,9 @@ static func impact(model, projectile: Dictionary, position: Vector2) -> void:
 			if index==owner or int(target.hp)<=0 or bool(target.get("invulnerable",false)):continue
 			if (Shared.origin(target)-Vector2i(0,10)-point).length_squared()<radius*radius:
 				ray(model,projectile,Shared.origin(target),0,0)
+		if JewelCombat.enabled(model):
+			for target in JewelAux.lightning_targets(model.jewel_state.entities,point,radius):
+				ray(model,projectile,target,0,0)
 	else:
 		for direction in ([0] if weapon==0 else [1,-1]):
 			ray(model,projectile,point,direction,weapon)

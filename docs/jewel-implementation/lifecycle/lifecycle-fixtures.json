@@ -1,0 +1,387 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "basis": "ASM-translated fixtures with checked PE bytes; not PE execution",
+  "checked_signatures": {
+    "0x40d9d2": "6a0fbff04b7900",
+    "0x41fb65": "83f806",
+    "0x45e8bd": "0f8558010000",
+    "0x4ba90f": "83c002",
+    "0x4d0d48": "4050",
+    "0x525c57": "69c9fd43030081c1c39e2600"
+  },
+  "kind_boundaries": [
+    {
+      "roll": 0,
+      "kind": 0
+    },
+    {
+      "roll": 14,
+      "kind": 0
+    },
+    {
+      "roll": 15,
+      "kind": 1
+    },
+    {
+      "roll": 16,
+      "kind": 1
+    },
+    {
+      "roll": 39,
+      "kind": 1
+    },
+    {
+      "roll": 40,
+      "kind": 2
+    },
+    {
+      "roll": 41,
+      "kind": 2
+    },
+    {
+      "roll": 79,
+      "kind": 2
+    },
+    {
+      "roll": 80,
+      "kind": 3
+    },
+    {
+      "roll": 81,
+      "kind": 3
+    },
+    {
+      "roll": 99,
+      "kind": 3
+    }
+  ],
+  "replenishment_count": [
+    {
+      "settled": 0,
+      "request_one": true
+    },
+    {
+      "settled": 4,
+      "request_one": true
+    },
+    {
+      "settled": 5,
+      "request_one": true
+    },
+    {
+      "settled": 6,
+      "request_one": false
+    },
+    {
+      "settled": 7,
+      "request_one": false
+    },
+    {
+      "settled": 8,
+      "request_one": false
+    }
+  ],
+  "respawn_due": [
+    {
+      "scheduled_at": 20,
+      "due": 22,
+      "turn": 21,
+      "ready": false
+    },
+    {
+      "scheduled_at": 20,
+      "due": 22,
+      "turn": 22,
+      "ready": true
+    },
+    {
+      "scheduled_at": 20,
+      "due": 22,
+      "turn": 23,
+      "ready": true
+    }
+  ],
+  "native_rand": [
+    {
+      "seed": 0,
+      "outputs": [
+        38,
+        7719,
+        21238,
+        2437,
+        8855,
+        11797,
+        8365,
+        32285,
+        10450,
+        30612,
+        5853,
+        28100
+      ],
+      "state_after": 3989110284,
+      "initial_six": [
+        {
+          "x": 38,
+          "roll": 19,
+          "kind": 1
+        },
+        {
+          "x": 1438,
+          "roll": 37,
+          "kind": 1
+        },
+        {
+          "x": 1655,
+          "roll": 97,
+          "kind": 3
+        },
+        {
+          "x": 1165,
+          "roll": 85,
+          "kind": 3
+        },
+        {
+          "x": 1450,
+          "roll": 12,
+          "kind": 0
+        },
+        {
+          "x": 453,
+          "roll": 0,
+          "kind": 0
+        }
+      ],
+      "replacement_first": {
+        "roll": 38,
+        "kind": 1,
+        "x": 519
+      }
+    },
+    {
+      "seed": 1,
+      "outputs": [
+        41,
+        18467,
+        6334,
+        26500,
+        19169,
+        15724,
+        11478,
+        29358,
+        26962,
+        24464,
+        5705,
+        28145
+      ],
+      "state_after": 1844513277,
+      "initial_six": [
+        {
+          "x": 41,
+          "roll": 67,
+          "kind": 2
+        },
+        {
+          "x": 934,
+          "roll": 0,
+          "kind": 0
+        },
+        {
+          "x": 1169,
+          "roll": 24,
+          "kind": 1
+        },
+        {
+          "x": 678,
+          "roll": 58,
+          "kind": 2
+        },
+        {
+          "x": 1762,
+          "roll": 64,
+          "kind": 2
+        },
+        {
+          "x": 305,
+          "roll": 45,
+          "kind": 2
+        }
+      ],
+      "replacement_first": {
+        "roll": 41,
+        "kind": 2,
+        "x": 467
+      }
+    },
+    {
+      "seed": 42,
+      "outputs": [
+        175,
+        400,
+        17869,
+        30056,
+        16083,
+        12879,
+        8016,
+        7644,
+        15809,
+        1769,
+        32409,
+        29950
+      ],
+      "state_after": 4110349206,
+      "initial_six": [
+        {
+          "x": 175,
+          "roll": 0,
+          "kind": 0
+        },
+        {
+          "x": 1669,
+          "roll": 56,
+          "kind": 2
+        },
+        {
+          "x": 1683,
+          "roll": 79,
+          "kind": 2
+        },
+        {
+          "x": 816,
+          "roll": 44,
+          "kind": 2
+        },
+        {
+          "x": 1409,
+          "roll": 69,
+          "kind": 2
+        },
+        {
+          "x": 9,
+          "roll": 50,
+          "kind": 2
+        }
+      ],
+      "replacement_first": {
+        "roll": 75,
+        "kind": 2,
+        "x": 400
+      }
+    },
+    {
+      "seed": 2147483647,
+      "outputs": [
+        35,
+        29739,
+        3374,
+        11141,
+        31308,
+        7870,
+        5253,
+        2445,
+        26706,
+        3992,
+        6001,
+        28056
+      ],
+      "state_after": 3986223643,
+      "initial_six": [
+        {
+          "x": 35,
+          "roll": 39,
+          "kind": 1
+        },
+        {
+          "x": 1574,
+          "roll": 41,
+          "kind": 2
+        },
+        {
+          "x": 708,
+          "roll": 70,
+          "kind": 2
+        },
+        {
+          "x": 1653,
+          "roll": 45,
+          "kind": 2
+        },
+        {
+          "x": 1506,
+          "roll": 92,
+          "kind": 3
+        },
+        {
+          "x": 601,
+          "roll": 56,
+          "kind": 2
+        }
+      ],
+      "replacement_first": {
+        "roll": 35,
+        "kind": 1,
+        "x": 939
+      }
+    },
+    {
+      "seed": 4294967295,
+      "outputs": [
+        35,
+        29739,
+        3374,
+        11141,
+        31308,
+        7870,
+        5253,
+        2445,
+        26706,
+        3992,
+        6001,
+        28056
+      ],
+      "state_after": 1838739995,
+      "initial_six": [
+        {
+          "x": 35,
+          "roll": 39,
+          "kind": 1
+        },
+        {
+          "x": 1574,
+          "roll": 41,
+          "kind": 2
+        },
+        {
+          "x": 708,
+          "roll": 70,
+          "kind": 2
+        },
+        {
+          "x": 1653,
+          "roll": 45,
+          "kind": 2
+        },
+        {
+          "x": 1506,
+          "roll": 92,
+          "kind": 3
+        },
+        {
+          "x": 601,
+          "roll": 56,
+          "kind": 2
+        }
+      ],
+      "replacement_first": {
+        "roll": 35,
+        "kind": 1,
+        "x": 939
+      }
+    }
+  ],
+  "constraints": [
+    "rand sequence isolated here; client also consumes CRT draws for protected memory and UI",
+    "World width1800 in RNG examples only; actual X is WORD rand modulo active width",
+    "score transfer during drop is suppressed; physical slots8; settled target6",
+    "Respawn X is chosen by user; autonomous offline selection is adaptation"
+  ]
+}

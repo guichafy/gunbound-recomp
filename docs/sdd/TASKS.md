@@ -1,5 +1,18 @@
 # Entregas e próximos trabalhos
 
+## Implementação JEWEL — REQ-JEWEL-46 (13/11/2026)
+
+- [x] Contratos PE de dano/contato, ciclo de vida, turnos/respawn e auxiliares.
+- [x] Entidades, física/apoio, resistência/autoria, pontos e objetivo no passo comum.
+- [x] Snapshot privado e CPU por resultado completo, incluindo bunge tardio.
+- [x] Sala SOLO/JEWEL, loading, HUD por time, arte/EPA/luz/som e resultado idempotente.
+- [x] 48 tiros em execução/previsão, itens, JD/Lightning/Raon e regressões dirigidas.
+- [x] Revisão independente e correção dos P2; GPU210quadros/271checks/pausa30.
+- [ ] Harness integral final, commit, push e PR de implementação.
+- [ ] Após liberação da fila: rebase na integração dos mapas, matriz JEWEL×mapas,
+  quatro checks remotos e merge protegido. Sem publicação manual extra.
+- Limites e pontes mantidas: [JEWEL_IMPLEMENTATION.md](JEWEL_IMPLEMENTATION.md).
+
 ## Seguimento dos mapas — navegação de Random e guia (13/11/2026)
 
 REQ-MAPS-45.3, branch `codex/maps-random-navigation-followup`, base `e2e6da50`.

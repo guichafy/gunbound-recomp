@@ -1,0 +1,78 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "program": "GunBound.gme",
+  "language": "x86:LE:32:default",
+  "compiler": "windows",
+  "image_base": "00400000",
+  "address_kind": "VA in the imported program",
+  "functions": [
+    {
+      "requested_va": "0x4ce3d0",
+      "seeded": false,
+      "entry_va": "004ce3d0",
+      "name": "FUN_004ce3d0",
+      "body": "[[004ce3d0, 004ce599] [004ce5a0, 004ce601]]",
+      "instructions": 152,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4ccd10",
+      "seeded": false,
+      "entry_va": "004ccd10",
+      "name": "FUN_004ccd10",
+      "body": "[[004ccd10, 004ce3c0]]",
+      "instructions": 1553,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4ce610",
+      "seeded": false,
+      "entry_va": "004ce610",
+      "name": "FUN_004ce610",
+      "body": "[[004ce610, 004ce81c] [004ce820, 004cea4c]]",
+      "instructions": 272,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x4b65bf",
+      "seeded": false,
+      "entry_va": "004b5460",
+      "name": "FUN_004b5460",
+      "body": "[[004b5460, 004b5725] [004b5730, 004b822f]]",
+      "instructions": 3053,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x45e925",
+      "seeded": false,
+      "entry_va": "0045db20",
+      "name": "FUN_0045db20",
+      "body": "[[0045db20, 0045ea35]]",
+      "instructions": 933,
+      "status": "decompiled",
+      "diagnostic": ""
+    },
+    {
+      "requested_va": "0x406500",
+      "seeded": false,
+      "entry_va": "00406500",
+      "name": "FUN_00406500",
+      "body": "[[00406500, 00406528]]",
+      "instructions": 12,
+      "status": "decompiled",
+      "diagnostic": ""
+    }
+  ],
+  "data": [
+    {
+      "requested": "0xbf3438:3",
+      "hex": "000000",
+      "status": "read"
+    }
+  ],
+  "ok": true
+}

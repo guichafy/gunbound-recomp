@@ -27,7 +27,7 @@ func begin_turn() -> void:
 	wait = TURN_WAIT
 
 func tick(model, delta: float) -> void:
-	if model.phase != Match.PHASE_AIM or model.active != Match.CPU:
+	if model.phase != Match.PHASE_AIM or model.active != Match.CPU or bool(model.actors[Match.CPU].get("jewel_waiting",false)):
 		return
 	if plan.is_empty() and search.is_empty():
 		start(model)

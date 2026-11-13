@@ -1,0 +1,6611 @@
+{
+  "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "method": "native 478cb0/478a80; protected helpers and x87 conversion executed, only malloc/rand/critical-section/visual stubs",
+  "blast": [
+    {
+      "input": {},
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 139
+      },
+      "output": {
+        "damage": 5,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 140
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 141
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 61
+      },
+      "output": {
+        "damage": 5,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 60
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 59
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "iy": 129
+      },
+      "output": {
+        "damage": 5,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "iy": 130
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "iy": 131
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 127,
+        "iy": 113
+      },
+      "output": {
+        "damage": 22,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 125,
+        "aspect": 134
+      },
+      "output": {
+        "damage": 110,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 75,
+        "aspect": 134
+      },
+      "output": {
+        "damage": 110,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "dimension": 61
+      },
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "dimension": 1
+      },
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "dimension": 0
+      },
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "power": 201,
+        "ix": 107
+      },
+      "output": {
+        "damage": 165,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "power": 201,
+        "percent": 153,
+        "bonus": 12,
+        "force": 11,
+        "ix": 107
+      },
+      "output": {
+        "damage": 294,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "aspect": 0,
+        "ix": 101
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "aspect": -5,
+        "ix": 101
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "old_damage": 299
+      },
+      "output": {
+        "damage": 499,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "power": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "power": -1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "stage_coef": 3
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "scale": 99,
+        "ix": 111
+      },
+      "output": {
+        "damage": 151,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "removed": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "global_blocked": true
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "stage_coef": 0,
+        "power0": 103,
+        "power1": 211,
+        "power2": 317,
+        "dimension0": 21,
+        "dimension1": 43,
+        "dimension2": 65,
+        "aspect0": 81,
+        "aspect1": 134,
+        "aspect2": 200,
+        "ix": 117,
+        "iy": 98
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "stage_coef": 1,
+        "power0": 103,
+        "power1": 211,
+        "power2": 317,
+        "dimension0": 21,
+        "dimension1": 43,
+        "dimension2": 65,
+        "aspect0": 81,
+        "aspect1": 134,
+        "aspect2": 200,
+        "ix": 117,
+        "iy": 98
+      },
+      "output": {
+        "damage": 112,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "stage_coef": 2,
+        "power0": 103,
+        "power1": 211,
+        "power2": 317,
+        "dimension0": 21,
+        "dimension1": 43,
+        "dimension2": 65,
+        "aspect0": 81,
+        "aspect1": 134,
+        "aspect2": 200,
+        "ix": 117,
+        "iy": 98
+      },
+      "output": {
+        "damage": 231,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "owner": 255
+      },
+      "output": {
+        "damage": 200,
+        "owner": 255,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "owner": 0,
+        "old_owner": 1
+      },
+      "output": {
+        "damage": 200,
+        "owner": 0,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "old_damage": 299,
+        "power": 501
+      },
+      "output": {
+        "damage": 800,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "power": 1,
+        "ix": 139
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "force": -11,
+        "percent": 153
+      },
+      "output": {
+        "damage": 290,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "removed": 2
+      },
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "dropping": true
+      },
+      "output": {
+        "damage": 200,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 81,
+        "iy": 142,
+        "aspect": 58,
+        "dimension": 30,
+        "power": 534,
+        "percent": 6,
+        "force": 16,
+        "bonus": 30,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 48,
+        "iy": 107,
+        "aspect": 162,
+        "dimension": 89,
+        "power": 319,
+        "percent": 225,
+        "force": 21,
+        "bonus": 51,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 376,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 82,
+        "iy": 73,
+        "aspect": 112,
+        "dimension": 137,
+        "power": 530,
+        "percent": 127,
+        "force": 38,
+        "bonus": 50,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 795,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 114,
+        "iy": 59,
+        "aspect": 162,
+        "dimension": 88,
+        "power": 529,
+        "percent": 243,
+        "force": -6,
+        "bonus": 19,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 605,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 140,
+        "iy": 37,
+        "aspect": 184,
+        "dimension": 154,
+        "power": 312,
+        "percent": 103,
+        "force": 23,
+        "bonus": 72,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 201,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 45,
+        "iy": 127,
+        "aspect": 32,
+        "dimension": 42,
+        "power": 324,
+        "percent": 206,
+        "force": 5,
+        "bonus": 29,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 152,
+        "iy": 87,
+        "aspect": 95,
+        "dimension": 117,
+        "power": 31,
+        "percent": 177,
+        "force": 68,
+        "bonus": 100,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 23,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 40,
+        "iy": 124,
+        "aspect": 226,
+        "dimension": 15,
+        "power": 556,
+        "percent": 71,
+        "force": -9,
+        "bonus": 34,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 147,
+        "iy": 82,
+        "aspect": 153,
+        "dimension": 5,
+        "power": 185,
+        "percent": 185,
+        "force": 19,
+        "bonus": 10,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 107,
+        "iy": 115,
+        "aspect": 146,
+        "dimension": 2,
+        "power": 518,
+        "percent": 132,
+        "force": 50,
+        "bonus": 38,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 142,
+        "iy": 121,
+        "aspect": 69,
+        "dimension": 141,
+        "power": 136,
+        "percent": 221,
+        "force": 39,
+        "bonus": 11,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 59,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 55,
+        "iy": 117,
+        "aspect": 66,
+        "dimension": 54,
+        "power": 679,
+        "percent": 214,
+        "force": 52,
+        "bonus": 39,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 48,
+        "iy": 122,
+        "aspect": 143,
+        "dimension": 92,
+        "power": 676,
+        "percent": 232,
+        "force": 50,
+        "bonus": 72,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 423,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 57,
+        "iy": 115,
+        "aspect": 66,
+        "dimension": 93,
+        "power": 67,
+        "percent": 91,
+        "force": -13,
+        "bonus": -18,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 157,
+        "iy": 117,
+        "aspect": 158,
+        "dimension": 116,
+        "power": 760,
+        "percent": 5,
+        "force": 16,
+        "bonus": 78,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 22,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 125,
+        "iy": 67,
+        "aspect": 102,
+        "dimension": 8,
+        "power": 136,
+        "percent": 156,
+        "force": 34,
+        "bonus": 4,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 96,
+        "iy": 106,
+        "aspect": 220,
+        "dimension": 134,
+        "power": 524,
+        "percent": 75,
+        "force": 99,
+        "bonus": 13,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 502,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 149,
+        "iy": 65,
+        "aspect": 229,
+        "dimension": 111,
+        "power": 63,
+        "percent": 76,
+        "force": -3,
+        "bonus": 100,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 45,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 48,
+        "iy": 66,
+        "aspect": 144,
+        "dimension": 62,
+        "power": 287,
+        "percent": 56,
+        "force": 56,
+        "bonus": 1,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 137,
+        "iy": 35,
+        "aspect": 73,
+        "dimension": 66,
+        "power": 318,
+        "percent": 192,
+        "force": 34,
+        "bonus": 24,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 155,
+        "iy": 55,
+        "aspect": 75,
+        "dimension": 157,
+        "power": 543,
+        "percent": 49,
+        "force": 74,
+        "bonus": 36,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 36,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 145,
+        "iy": 66,
+        "aspect": 63,
+        "dimension": 43,
+        "power": 713,
+        "percent": 198,
+        "force": 100,
+        "bonus": 41,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 148,
+        "iy": 82,
+        "aspect": 75,
+        "dimension": 88,
+        "power": 798,
+        "percent": 6,
+        "force": 85,
+        "bonus": 70,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 42,
+        "iy": 121,
+        "aspect": 52,
+        "dimension": 138,
+        "power": 147,
+        "percent": 168,
+        "force": 36,
+        "bonus": 9,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 89,
+        "iy": 93,
+        "aspect": 215,
+        "dimension": 98,
+        "power": 844,
+        "percent": 73,
+        "force": -13,
+        "bonus": 95,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 1047,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 94,
+        "iy": 81,
+        "aspect": 186,
+        "dimension": 99,
+        "power": 817,
+        "percent": 207,
+        "force": 59,
+        "bonus": -13,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1643,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 113,
+        "iy": 143,
+        "aspect": 98,
+        "dimension": 113,
+        "power": 133,
+        "percent": 246,
+        "force": 77,
+        "bonus": 64,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 113,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 85,
+        "iy": 126,
+        "aspect": 123,
+        "dimension": 122,
+        "power": 148,
+        "percent": 149,
+        "force": 61,
+        "bonus": -12,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 119,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 112,
+        "iy": 133,
+        "aspect": 222,
+        "dimension": 88,
+        "power": 517,
+        "percent": 155,
+        "force": 100,
+        "bonus": -14,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 214,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 74,
+        "iy": 141,
+        "aspect": 42,
+        "dimension": 89,
+        "power": 358,
+        "percent": 118,
+        "force": -6,
+        "bonus": 88,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 155,
+        "iy": 88,
+        "aspect": 109,
+        "dimension": 49,
+        "power": 765,
+        "percent": 3,
+        "force": 61,
+        "bonus": 90,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 143,
+        "iy": 110,
+        "aspect": 226,
+        "dimension": 36,
+        "power": 507,
+        "percent": 36,
+        "force": 19,
+        "bonus": 31,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 2,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 139,
+        "iy": 71,
+        "aspect": 74,
+        "dimension": 66,
+        "power": 815,
+        "percent": 36,
+        "force": -21,
+        "bonus": 72,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 138,
+        "iy": 52,
+        "aspect": 35,
+        "dimension": 27,
+        "power": 251,
+        "percent": 209,
+        "force": 97,
+        "bonus": -18,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 71,
+        "iy": 132,
+        "aspect": 105,
+        "dimension": 155,
+        "power": 201,
+        "percent": 237,
+        "force": -19,
+        "bonus": 66,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 315,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 135,
+        "iy": 36,
+        "aspect": 228,
+        "dimension": 36,
+        "power": 763,
+        "percent": 57,
+        "force": -6,
+        "bonus": 66,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 108,
+        "iy": 76,
+        "aspect": 82,
+        "dimension": 52,
+        "power": 791,
+        "percent": 154,
+        "force": 58,
+        "bonus": 33,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1056,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 154,
+        "iy": 70,
+        "aspect": 158,
+        "dimension": 152,
+        "power": 499,
+        "percent": 209,
+        "force": 94,
+        "bonus": 99,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 1382,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 85,
+        "iy": 61,
+        "aspect": 132,
+        "dimension": 128,
+        "power": 219,
+        "percent": 190,
+        "force": 72,
+        "bonus": -18,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 284,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 149,
+        "iy": 84,
+        "aspect": 120,
+        "dimension": 133,
+        "power": 507,
+        "percent": 61,
+        "force": 95,
+        "bonus": 29,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 251,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 62,
+        "iy": 108,
+        "aspect": 159,
+        "dimension": 127,
+        "power": 314,
+        "percent": 6,
+        "force": 35,
+        "bonus": 42,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 17,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 80,
+        "iy": 108,
+        "aspect": 206,
+        "dimension": 131,
+        "power": 831,
+        "percent": 100,
+        "force": 41,
+        "bonus": 91,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 1280,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 126,
+        "iy": 56,
+        "aspect": 179,
+        "dimension": 98,
+        "power": 296,
+        "percent": 53,
+        "force": 85,
+        "bonus": 83,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 130,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 118,
+        "iy": 70,
+        "aspect": 151,
+        "dimension": 14,
+        "power": 322,
+        "percent": 130,
+        "force": 75,
+        "bonus": -5,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 43,
+        "iy": 72,
+        "aspect": 224,
+        "dimension": 108,
+        "power": 383,
+        "percent": 49,
+        "force": 16,
+        "bonus": 10,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 114,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 114,
+        "iy": 47,
+        "aspect": 109,
+        "dimension": 109,
+        "power": 59,
+        "percent": 47,
+        "force": 64,
+        "bonus": 46,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 12,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 64,
+        "iy": 94,
+        "aspect": 113,
+        "dimension": 25,
+        "power": 535,
+        "percent": 151,
+        "force": -2,
+        "bonus": 29,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 86,
+        "iy": 40,
+        "aspect": 206,
+        "dimension": 146,
+        "power": 18,
+        "percent": 198,
+        "force": 37,
+        "bonus": 89,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 26,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 72,
+        "iy": 45,
+        "aspect": 165,
+        "dimension": 149,
+        "power": 322,
+        "percent": 42,
+        "force": -7,
+        "bonus": 13,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 62,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 85,
+        "iy": 135,
+        "aspect": 157,
+        "dimension": 102,
+        "power": 681,
+        "percent": 91,
+        "force": -4,
+        "bonus": 69,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 253,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 80,
+        "iy": 71,
+        "aspect": 240,
+        "dimension": 102,
+        "power": 469,
+        "percent": 105,
+        "force": -7,
+        "bonus": -10,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 282,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 108,
+        "iy": 117,
+        "aspect": 141,
+        "dimension": 134,
+        "power": 827,
+        "percent": 63,
+        "force": 91,
+        "bonus": 32,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 591,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 149,
+        "iy": 102,
+        "aspect": 174,
+        "dimension": 122,
+        "power": 608,
+        "percent": 162,
+        "force": 3,
+        "bonus": -7,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 526,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 72,
+        "iy": 52,
+        "aspect": 45,
+        "dimension": 106,
+        "power": 599,
+        "percent": 142,
+        "force": 67,
+        "bonus": 97,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 127,
+        "iy": 110,
+        "aspect": 140,
+        "dimension": 95,
+        "power": 616,
+        "percent": 129,
+        "force": 72,
+        "bonus": 76,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 864,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 123,
+        "iy": 142,
+        "aspect": 100,
+        "dimension": 86,
+        "power": 579,
+        "percent": 208,
+        "force": 83,
+        "bonus": 21,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 81,
+        "iy": 141,
+        "aspect": 99,
+        "dimension": 86,
+        "power": 40,
+        "percent": 62,
+        "force": 82,
+        "bonus": 26,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 117,
+        "iy": 105,
+        "aspect": 191,
+        "dimension": 128,
+        "power": 812,
+        "percent": 52,
+        "force": 46,
+        "bonus": 84,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 672,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 96,
+        "iy": 142,
+        "aspect": 201,
+        "dimension": 9,
+        "power": 757,
+        "percent": 204,
+        "force": 77,
+        "bonus": 74,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 65,
+        "iy": 36,
+        "aspect": 173,
+        "dimension": 82,
+        "power": 57,
+        "percent": 224,
+        "force": 37,
+        "bonus": 27,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 152,
+        "iy": 41,
+        "aspect": 40,
+        "dimension": 154,
+        "power": 640,
+        "percent": 133,
+        "force": 87,
+        "bonus": 21,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 108,
+        "iy": 69,
+        "aspect": 80,
+        "dimension": 65,
+        "power": 321,
+        "percent": 205,
+        "force": -20,
+        "bonus": 6,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 281,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 72,
+        "iy": 108,
+        "aspect": 22,
+        "dimension": 87,
+        "power": 528,
+        "percent": 241,
+        "force": 66,
+        "bonus": 17,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 136,
+        "iy": 123,
+        "aspect": 134,
+        "dimension": 44,
+        "power": 69,
+        "percent": 145,
+        "force": 50,
+        "bonus": 19,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 100,
+        "iy": 120,
+        "aspect": 205,
+        "dimension": 119,
+        "power": 557,
+        "percent": 59,
+        "force": 12,
+        "bonus": 68,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 321,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 148,
+        "iy": 116,
+        "aspect": 199,
+        "dimension": 20,
+        "power": 166,
+        "percent": 83,
+        "force": 2,
+        "bonus": 55,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 140,
+        "iy": 137,
+        "aspect": 35,
+        "dimension": 133,
+        "power": 703,
+        "percent": 249,
+        "force": 6,
+        "bonus": 11,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 117,
+        "iy": 50,
+        "aspect": 143,
+        "dimension": 17,
+        "power": 799,
+        "percent": 149,
+        "force": 68,
+        "bonus": 91,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 155,
+        "iy": 47,
+        "aspect": 88,
+        "dimension": 59,
+        "power": 65,
+        "percent": 240,
+        "force": -6,
+        "bonus": -16,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 40,
+        "iy": 62,
+        "aspect": 215,
+        "dimension": 21,
+        "power": 370,
+        "percent": 40,
+        "force": 56,
+        "bonus": 100,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 47,
+        "iy": 104,
+        "aspect": 181,
+        "dimension": 54,
+        "power": 560,
+        "percent": 189,
+        "force": 50,
+        "bonus": 15,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 190,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 48,
+        "iy": 138,
+        "aspect": 197,
+        "dimension": 74,
+        "power": 556,
+        "percent": 216,
+        "force": -12,
+        "bonus": 50,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 103,
+        "iy": 67,
+        "aspect": 165,
+        "dimension": 109,
+        "power": 738,
+        "percent": 208,
+        "force": 34,
+        "bonus": 67,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 1805,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 127,
+        "iy": 118,
+        "aspect": 218,
+        "dimension": 97,
+        "power": 145,
+        "percent": 249,
+        "force": -21,
+        "bonus": 38,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 216,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 50,
+        "iy": 38,
+        "aspect": 108,
+        "dimension": 122,
+        "power": 814,
+        "percent": 106,
+        "force": 12,
+        "bonus": 73,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 32,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 65,
+        "iy": 41,
+        "aspect": 162,
+        "dimension": 149,
+        "power": 596,
+        "percent": 57,
+        "force": 51,
+        "bonus": 68,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 237,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 86,
+        "iy": 46,
+        "aspect": 224,
+        "dimension": 99,
+        "power": 54,
+        "percent": 1,
+        "force": 43,
+        "bonus": 51,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 77,
+        "iy": 131,
+        "aspect": 96,
+        "dimension": 116,
+        "power": 603,
+        "percent": 234,
+        "force": 40,
+        "bonus": 29,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 643,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 87,
+        "iy": 45,
+        "aspect": 195,
+        "dimension": 2,
+        "power": 760,
+        "percent": 14,
+        "force": 69,
+        "bonus": 20,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 59,
+        "iy": 88,
+        "aspect": 75,
+        "dimension": 22,
+        "power": 711,
+        "percent": 245,
+        "force": 91,
+        "bonus": 32,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 46,
+        "iy": 60,
+        "aspect": 172,
+        "dimension": 61,
+        "power": 562,
+        "percent": 163,
+        "force": 98,
+        "bonus": -18,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 126,
+        "iy": 141,
+        "aspect": 121,
+        "dimension": 15,
+        "power": 696,
+        "percent": 154,
+        "force": 30,
+        "bonus": 76,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 121,
+        "iy": 80,
+        "aspect": 164,
+        "dimension": 29,
+        "power": 383,
+        "percent": 35,
+        "force": 4,
+        "bonus": 97,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 91,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 117,
+        "iy": 38,
+        "aspect": 67,
+        "dimension": 55,
+        "power": 606,
+        "percent": 72,
+        "force": 37,
+        "bonus": 53,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 66,
+        "iy": 145,
+        "aspect": 191,
+        "dimension": 76,
+        "power": 459,
+        "percent": 4,
+        "force": 52,
+        "bonus": 99,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 64,
+        "iy": 107,
+        "aspect": 175,
+        "dimension": 26,
+        "power": 806,
+        "percent": 24,
+        "force": 9,
+        "bonus": -6,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 129,
+        "iy": 71,
+        "aspect": 159,
+        "dimension": 46,
+        "power": 820,
+        "percent": 55,
+        "force": 71,
+        "bonus": 69,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 187,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 50,
+        "iy": 94,
+        "aspect": 69,
+        "dimension": 29,
+        "power": 326,
+        "percent": 238,
+        "force": 98,
+        "bonus": 78,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 140,
+        "iy": 75,
+        "aspect": 55,
+        "dimension": 158,
+        "power": 560,
+        "percent": 28,
+        "force": 55,
+        "bonus": 48,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 45,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 44,
+        "iy": 100,
+        "aspect": 134,
+        "dimension": 46,
+        "power": 145,
+        "percent": 105,
+        "force": 84,
+        "bonus": 37,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 100,
+        "iy": 92,
+        "aspect": 234,
+        "dimension": 81,
+        "power": 98,
+        "percent": 236,
+        "force": 33,
+        "bonus": 30,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 322,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 132,
+        "iy": 108,
+        "aspect": 205,
+        "dimension": 102,
+        "power": 821,
+        "percent": 229,
+        "force": -15,
+        "bonus": 58,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1742,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 104,
+        "iy": 49,
+        "aspect": 94,
+        "dimension": 98,
+        "power": 700,
+        "percent": 5,
+        "force": 98,
+        "bonus": 55,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 20,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 88,
+        "iy": 44,
+        "aspect": 221,
+        "dimension": 22,
+        "power": 640,
+        "percent": 160,
+        "force": 79,
+        "bonus": -6,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 72,
+        "iy": 123,
+        "aspect": 131,
+        "dimension": 74,
+        "power": 783,
+        "percent": 202,
+        "force": -16,
+        "bonus": 77,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 442,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 126,
+        "iy": 70,
+        "aspect": 61,
+        "dimension": 132,
+        "power": 764,
+        "percent": 209,
+        "force": 7,
+        "bonus": 89,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1182,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 132,
+        "iy": 55,
+        "aspect": 236,
+        "dimension": 128,
+        "power": 699,
+        "percent": 157,
+        "force": 9,
+        "bonus": 52,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 847,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 140,
+        "iy": 119,
+        "aspect": 70,
+        "dimension": 18,
+        "power": 794,
+        "percent": 23,
+        "force": 87,
+        "bonus": 82,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 135,
+        "iy": 93,
+        "aspect": 155,
+        "dimension": 44,
+        "power": 792,
+        "percent": 98,
+        "force": 85,
+        "bonus": 44,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 440,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 57,
+        "iy": 44,
+        "aspect": 39,
+        "dimension": 95,
+        "power": 117,
+        "percent": 169,
+        "force": -18,
+        "bonus": 11,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 101,
+        "iy": 96,
+        "aspect": 164,
+        "dimension": 6,
+        "power": 746,
+        "percent": 88,
+        "force": 86,
+        "bonus": 31,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 612,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 151,
+        "iy": 74,
+        "aspect": 96,
+        "dimension": 8,
+        "power": 53,
+        "percent": 59,
+        "force": 49,
+        "bonus": 91,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 64,
+        "iy": 119,
+        "aspect": 22,
+        "dimension": 22,
+        "power": 593,
+        "percent": 137,
+        "force": 31,
+        "bonus": 61,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 109,
+        "iy": 119,
+        "aspect": 163,
+        "dimension": 78,
+        "power": 390,
+        "percent": 118,
+        "force": 17,
+        "bonus": -20,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 160,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 60,
+        "iy": 121,
+        "aspect": 228,
+        "dimension": 128,
+        "power": 732,
+        "percent": 147,
+        "force": -19,
+        "bonus": 68,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 891,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 134,
+        "iy": 40,
+        "aspect": 20,
+        "dimension": 7,
+        "power": 241,
+        "percent": 16,
+        "force": 5,
+        "bonus": 97,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 129,
+        "iy": 107,
+        "aspect": 40,
+        "dimension": 68,
+        "power": 198,
+        "percent": 229,
+        "force": 2,
+        "bonus": 41,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 67,
+        "iy": 117,
+        "aspect": 157,
+        "dimension": 12,
+        "power": 96,
+        "percent": 221,
+        "force": 46,
+        "bonus": 66,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 72,
+        "iy": 95,
+        "aspect": 118,
+        "dimension": 19,
+        "power": 269,
+        "percent": 86,
+        "force": -2,
+        "bonus": 31,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 57,
+        "iy": 108,
+        "aspect": 94,
+        "dimension": 152,
+        "power": 432,
+        "percent": 112,
+        "force": 98,
+        "bonus": 34,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 384,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 74,
+        "iy": 114,
+        "aspect": 153,
+        "dimension": 41,
+        "power": 440,
+        "percent": 143,
+        "force": 14,
+        "bonus": 16,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 27,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 85,
+        "iy": 56,
+        "aspect": 82,
+        "dimension": 53,
+        "power": 466,
+        "percent": 118,
+        "force": -19,
+        "bonus": 77,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 92,
+        "iy": 138,
+        "aspect": 69,
+        "dimension": 78,
+        "power": 760,
+        "percent": 77,
+        "force": 63,
+        "bonus": 58,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 58,
+        "iy": 110,
+        "aspect": 165,
+        "dimension": 1,
+        "power": 308,
+        "percent": 162,
+        "force": -12,
+        "bonus": -16,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 68,
+        "iy": 110,
+        "aspect": 165,
+        "dimension": 40,
+        "power": 735,
+        "percent": 248,
+        "force": -1,
+        "bonus": 15,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 164,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 80,
+        "iy": 48,
+        "aspect": 158,
+        "dimension": 115,
+        "power": 241,
+        "percent": 229,
+        "force": 99,
+        "bonus": 100,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 473,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 119,
+        "iy": 138,
+        "aspect": 84,
+        "dimension": 71,
+        "power": 118,
+        "percent": 15,
+        "force": 37,
+        "bonus": 62,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 132,
+        "iy": 95,
+        "aspect": 49,
+        "dimension": 154,
+        "power": 780,
+        "percent": 149,
+        "force": 11,
+        "bonus": 7,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 324,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 160,
+        "iy": 84,
+        "aspect": 43,
+        "dimension": 47,
+        "power": 218,
+        "percent": 171,
+        "force": -16,
+        "bonus": 23,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 137,
+        "iy": 92,
+        "aspect": 210,
+        "dimension": 61,
+        "power": 698,
+        "percent": 127,
+        "force": 89,
+        "bonus": 0,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 728,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 121,
+        "iy": 43,
+        "aspect": 86,
+        "dimension": 27,
+        "power": 290,
+        "percent": 74,
+        "force": 62,
+        "bonus": 1,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 83,
+        "iy": 50,
+        "aspect": 195,
+        "dimension": 157,
+        "power": 712,
+        "percent": 151,
+        "force": 92,
+        "bonus": 77,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1282,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 115,
+        "iy": 130,
+        "aspect": 74,
+        "dimension": 60,
+        "power": 561,
+        "percent": 118,
+        "force": 17,
+        "bonus": 57,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 68,
+        "iy": 66,
+        "aspect": 28,
+        "dimension": 74,
+        "power": 471,
+        "percent": 125,
+        "force": 89,
+        "bonus": 0,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 83,
+        "iy": 96,
+        "aspect": 192,
+        "dimension": 1,
+        "power": 662,
+        "percent": 207,
+        "force": 65,
+        "bonus": 91,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 122,
+        "iy": 143,
+        "aspect": 83,
+        "dimension": 107,
+        "power": 546,
+        "percent": 204,
+        "force": 38,
+        "bonus": 23,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 95,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 113,
+        "iy": 83,
+        "aspect": 135,
+        "dimension": 56,
+        "power": 413,
+        "percent": 100,
+        "force": 2,
+        "bonus": -3,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 282,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 147,
+        "iy": 110,
+        "aspect": 72,
+        "dimension": 44,
+        "power": 579,
+        "percent": 46,
+        "force": 25,
+        "bonus": 45,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 132,
+        "iy": 128,
+        "aspect": 142,
+        "dimension": 156,
+        "power": 398,
+        "percent": 131,
+        "force": 15,
+        "bonus": 89,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 509,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 148,
+        "iy": 100,
+        "aspect": 196,
+        "dimension": 91,
+        "power": 294,
+        "percent": 60,
+        "force": 75,
+        "bonus": 5,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 130,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 60,
+        "iy": 106,
+        "aspect": 35,
+        "dimension": 116,
+        "power": 154,
+        "percent": 149,
+        "force": 64,
+        "bonus": 32,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 117,
+        "iy": 83,
+        "aspect": 231,
+        "dimension": 110,
+        "power": 326,
+        "percent": 30,
+        "force": 86,
+        "bonus": 62,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 168,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 118,
+        "iy": 136,
+        "aspect": 231,
+        "dimension": 4,
+        "power": 62,
+        "percent": 53,
+        "force": -15,
+        "bonus": 84,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 113,
+        "iy": 110,
+        "aspect": 185,
+        "dimension": 81,
+        "power": 541,
+        "percent": 9,
+        "force": 49,
+        "bonus": 30,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 41,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 155,
+        "iy": 51,
+        "aspect": 104,
+        "dimension": 91,
+        "power": 842,
+        "percent": 200,
+        "force": 4,
+        "bonus": 60,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 107,
+        "iy": 45,
+        "aspect": 45,
+        "dimension": 36,
+        "power": 815,
+        "percent": 166,
+        "force": 67,
+        "bonus": 53,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 75,
+        "iy": 73,
+        "aspect": 65,
+        "dimension": 113,
+        "power": 515,
+        "percent": 126,
+        "force": 0,
+        "bonus": 14,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 272,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 93,
+        "iy": 66,
+        "aspect": 196,
+        "dimension": 49,
+        "power": 355,
+        "percent": 110,
+        "force": 9,
+        "bonus": 17,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 135,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 74,
+        "iy": 36,
+        "aspect": 175,
+        "dimension": 139,
+        "power": 52,
+        "percent": 87,
+        "force": 63,
+        "bonus": 13,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 18,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 45,
+        "iy": 70,
+        "aspect": 177,
+        "dimension": 50,
+        "power": 566,
+        "percent": 59,
+        "force": 15,
+        "bonus": 5,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 132,
+        "iy": 83,
+        "aspect": 143,
+        "dimension": 160,
+        "power": 201,
+        "percent": 107,
+        "force": 26,
+        "bonus": 15,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 203,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 142,
+        "iy": 44,
+        "aspect": 61,
+        "dimension": 85,
+        "power": 481,
+        "percent": 43,
+        "force": 50,
+        "bonus": -20,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 82,
+        "iy": 112,
+        "aspect": 181,
+        "dimension": 137,
+        "power": 224,
+        "percent": 157,
+        "force": 91,
+        "bonus": 44,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 459,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 73,
+        "iy": 45,
+        "aspect": 118,
+        "dimension": 76,
+        "power": 580,
+        "percent": 83,
+        "force": 91,
+        "bonus": -6,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 134,
+        "iy": 100,
+        "aspect": 94,
+        "dimension": 75,
+        "power": 445,
+        "percent": 36,
+        "force": -5,
+        "bonus": 32,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 41,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 71,
+        "iy": 51,
+        "aspect": 150,
+        "dimension": 84,
+        "power": 134,
+        "percent": 122,
+        "force": 56,
+        "bonus": 60,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 48,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 109,
+        "iy": 122,
+        "aspect": 74,
+        "dimension": 156,
+        "power": 369,
+        "percent": 238,
+        "force": -12,
+        "bonus": 73,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 893,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 102,
+        "iy": 65,
+        "aspect": 82,
+        "dimension": 120,
+        "power": 266,
+        "percent": 144,
+        "force": 27,
+        "bonus": 82,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 475,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 78,
+        "iy": 37,
+        "aspect": 90,
+        "dimension": 111,
+        "power": 57,
+        "percent": 104,
+        "force": 70,
+        "bonus": 54,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 9,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 136,
+        "iy": 112,
+        "aspect": 70,
+        "dimension": 93,
+        "power": 245,
+        "percent": 121,
+        "force": 36,
+        "bonus": -6,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 111,
+        "iy": 72,
+        "aspect": 152,
+        "dimension": 141,
+        "power": 206,
+        "percent": 81,
+        "force": -2,
+        "bonus": 43,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 178,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 50,
+        "iy": 74,
+        "aspect": 170,
+        "dimension": 101,
+        "power": 568,
+        "percent": 194,
+        "force": 27,
+        "bonus": 40,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 749,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 160,
+        "iy": 135,
+        "aspect": 171,
+        "dimension": 8,
+        "power": 617,
+        "percent": 202,
+        "force": -4,
+        "bonus": 38,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 40,
+        "iy": 53,
+        "aspect": 85,
+        "dimension": 10,
+        "power": 78,
+        "percent": 190,
+        "force": 86,
+        "bonus": 29,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 99,
+        "iy": 62,
+        "aspect": 193,
+        "dimension": 147,
+        "power": 164,
+        "percent": 193,
+        "force": 24,
+        "bonus": 75,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 388,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 139,
+        "iy": 55,
+        "aspect": 21,
+        "dimension": 84,
+        "power": 21,
+        "percent": 218,
+        "force": 62,
+        "bonus": -8,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 41,
+        "iy": 55,
+        "aspect": 89,
+        "dimension": 42,
+        "power": 377,
+        "percent": 102,
+        "force": 50,
+        "bonus": 63,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 148,
+        "iy": 65,
+        "aspect": 185,
+        "dimension": 72,
+        "power": 204,
+        "percent": 146,
+        "force": -6,
+        "bonus": 77,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 118,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 89,
+        "iy": 133,
+        "aspect": 158,
+        "dimension": 63,
+        "power": 539,
+        "percent": 186,
+        "force": 33,
+        "bonus": 11,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 148,
+        "iy": 73,
+        "aspect": 120,
+        "dimension": 100,
+        "power": 259,
+        "percent": 79,
+        "force": -9,
+        "bonus": 85,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 101,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 43,
+        "iy": 65,
+        "aspect": 222,
+        "dimension": 53,
+        "power": 303,
+        "percent": 46,
+        "force": 48,
+        "bonus": -3,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 2,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 66,
+        "iy": 102,
+        "aspect": 61,
+        "dimension": 28,
+        "power": 61,
+        "percent": 213,
+        "force": 49,
+        "bonus": 5,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 75,
+        "iy": 40,
+        "aspect": 164,
+        "dimension": 132,
+        "power": 401,
+        "percent": 125,
+        "force": 88,
+        "bonus": 71,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 335,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 76,
+        "iy": 70,
+        "aspect": 162,
+        "dimension": 117,
+        "power": 664,
+        "percent": 3,
+        "force": -14,
+        "bonus": 27,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 14,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 43,
+        "iy": 54,
+        "aspect": 210,
+        "dimension": 68,
+        "power": 770,
+        "percent": 32,
+        "force": 83,
+        "bonus": 68,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 98,
+        "iy": 69,
+        "aspect": 136,
+        "dimension": 88,
+        "power": 332,
+        "percent": 148,
+        "force": 88,
+        "bonus": 35,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 533,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 112,
+        "iy": 41,
+        "aspect": 24,
+        "dimension": 45,
+        "power": 376,
+        "percent": 217,
+        "force": -3,
+        "bonus": 19,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 151,
+        "iy": 77,
+        "aspect": 115,
+        "dimension": 117,
+        "power": 794,
+        "percent": 157,
+        "force": 97,
+        "bonus": -7,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 571,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 121,
+        "iy": 127,
+        "aspect": 225,
+        "dimension": 38,
+        "power": 718,
+        "percent": 45,
+        "force": 80,
+        "bonus": 42,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 135,
+        "iy": 96,
+        "aspect": 218,
+        "dimension": 97,
+        "power": 697,
+        "percent": 70,
+        "force": 52,
+        "bonus": 61,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 641,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 124,
+        "iy": 103,
+        "aspect": 199,
+        "dimension": 38,
+        "power": 659,
+        "percent": 142,
+        "force": 83,
+        "bonus": 65,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 747,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 97,
+        "iy": 108,
+        "aspect": 172,
+        "dimension": 50,
+        "power": 849,
+        "percent": 56,
+        "force": -7,
+        "bonus": 80,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 405,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 100,
+        "iy": 78,
+        "aspect": 24,
+        "dimension": 52,
+        "power": 101,
+        "percent": 210,
+        "force": 98,
+        "bonus": 12,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 225,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 78,
+        "iy": 104,
+        "aspect": 33,
+        "dimension": 24,
+        "power": 127,
+        "percent": 212,
+        "force": 56,
+        "bonus": 32,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 99,
+        "iy": 127,
+        "aspect": 159,
+        "dimension": 140,
+        "power": 504,
+        "percent": 217,
+        "force": 24,
+        "bonus": -1,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 649,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 65,
+        "iy": 63,
+        "aspect": 143,
+        "dimension": 55,
+        "power": 685,
+        "percent": 216,
+        "force": 55,
+        "bonus": 24,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 48,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 99,
+        "iy": 67,
+        "aspect": 80,
+        "dimension": 103,
+        "power": 347,
+        "percent": 233,
+        "force": 9,
+        "bonus": 53,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 785,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 140,
+        "iy": 142,
+        "aspect": 96,
+        "dimension": 27,
+        "power": 35,
+        "percent": 63,
+        "force": -8,
+        "bonus": 45,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 79,
+        "iy": 139,
+        "aspect": 24,
+        "dimension": 50,
+        "power": 365,
+        "percent": 234,
+        "force": 23,
+        "bonus": 36,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 81,
+        "iy": 94,
+        "aspect": 230,
+        "dimension": 71,
+        "power": 522,
+        "percent": 59,
+        "force": 40,
+        "bonus": 61,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 445,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 45,
+        "iy": 78,
+        "aspect": 134,
+        "dimension": 137,
+        "power": 335,
+        "percent": 191,
+        "force": 25,
+        "bonus": 24,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 391,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 40,
+        "iy": 41,
+        "aspect": 114,
+        "dimension": 137,
+        "power": 192,
+        "percent": 10,
+        "force": 41,
+        "bonus": 52,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 92,
+        "iy": 119,
+        "aspect": 184,
+        "dimension": 64,
+        "power": 465,
+        "percent": 176,
+        "force": 33,
+        "bonus": 87,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 499,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 40,
+        "iy": 84,
+        "aspect": 105,
+        "dimension": 108,
+        "power": 760,
+        "percent": 155,
+        "force": 86,
+        "bonus": -7,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 165,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 61,
+        "iy": 66,
+        "aspect": 174,
+        "dimension": 145,
+        "power": 186,
+        "percent": 228,
+        "force": -8,
+        "bonus": 29,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 316,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 107,
+        "iy": 125,
+        "aspect": 206,
+        "dimension": 108,
+        "power": 59,
+        "percent": 28,
+        "force": -12,
+        "bonus": -15,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 5,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 117,
+        "iy": 97,
+        "aspect": 169,
+        "dimension": 49,
+        "power": 399,
+        "percent": 180,
+        "force": 59,
+        "bonus": 81,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 963,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 73,
+        "iy": 105,
+        "aspect": 237,
+        "dimension": 6,
+        "power": 140,
+        "percent": 145,
+        "force": 37,
+        "bonus": -2,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 65,
+        "iy": 118,
+        "aspect": 208,
+        "dimension": 122,
+        "power": 510,
+        "percent": 18,
+        "force": 39,
+        "bonus": 39,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 77,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 143,
+        "iy": 108,
+        "aspect": 149,
+        "dimension": 64,
+        "power": 99,
+        "percent": 223,
+        "force": -2,
+        "bonus": 21,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 52,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 56,
+        "iy": 103,
+        "aspect": 182,
+        "dimension": 34,
+        "power": 696,
+        "percent": 57,
+        "force": -5,
+        "bonus": 40,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 131,
+        "iy": 145,
+        "aspect": 111,
+        "dimension": 79,
+        "power": 372,
+        "percent": 109,
+        "force": 38,
+        "bonus": 48,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 154,
+        "iy": 43,
+        "aspect": 204,
+        "dimension": 5,
+        "power": 169,
+        "percent": 30,
+        "force": 32,
+        "bonus": -11,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 42,
+        "iy": 141,
+        "aspect": 71,
+        "dimension": 98,
+        "power": 194,
+        "percent": 13,
+        "force": 30,
+        "bonus": 17,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 50,
+        "iy": 91,
+        "aspect": 138,
+        "dimension": 102,
+        "power": 540,
+        "percent": 149,
+        "force": -7,
+        "bonus": 8,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 343,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 150,
+        "iy": 44,
+        "aspect": 229,
+        "dimension": 35,
+        "power": 714,
+        "percent": 210,
+        "force": 83,
+        "bonus": -8,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 58,
+        "iy": 70,
+        "aspect": 228,
+        "dimension": 75,
+        "power": 569,
+        "percent": 5,
+        "force": 30,
+        "bonus": 95,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 25,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 132,
+        "iy": 108,
+        "aspect": 105,
+        "dimension": 159,
+        "power": 648,
+        "percent": 190,
+        "force": -11,
+        "bonus": 46,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 1049,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 44,
+        "iy": 140,
+        "aspect": 190,
+        "dimension": 18,
+        "power": 773,
+        "percent": 146,
+        "force": 48,
+        "bonus": 72,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 97,
+        "iy": 110,
+        "aspect": 108,
+        "dimension": 66,
+        "power": 422,
+        "percent": 82,
+        "force": 93,
+        "bonus": -16,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 237,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 47,
+        "iy": 62,
+        "aspect": 72,
+        "dimension": 45,
+        "power": 545,
+        "percent": 210,
+        "force": -16,
+        "bonus": 41,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 71,
+        "iy": 132,
+        "aspect": 102,
+        "dimension": 139,
+        "power": 268,
+        "percent": 56,
+        "force": 52,
+        "bonus": 13,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 73,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 121,
+        "iy": 107,
+        "aspect": 150,
+        "dimension": 9,
+        "power": 122,
+        "percent": 127,
+        "force": 82,
+        "bonus": 85,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 155,
+        "iy": 75,
+        "aspect": 175,
+        "dimension": 13,
+        "power": 673,
+        "percent": 21,
+        "force": -9,
+        "bonus": 80,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 87,
+        "iy": 142,
+        "aspect": 45,
+        "dimension": 54,
+        "power": 701,
+        "percent": 242,
+        "force": 99,
+        "bonus": 42,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 107,
+        "iy": 50,
+        "aspect": 64,
+        "dimension": 63,
+        "power": 396,
+        "percent": 181,
+        "force": 48,
+        "bonus": -2,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 148,
+        "iy": 106,
+        "aspect": 157,
+        "dimension": 92,
+        "power": 355,
+        "percent": 241,
+        "force": 94,
+        "bonus": -14,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 444,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 95,
+        "iy": 122,
+        "aspect": 217,
+        "dimension": 12,
+        "power": 439,
+        "percent": 110,
+        "force": -15,
+        "bonus": 4,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 45,
+        "iy": 81,
+        "aspect": 20,
+        "dimension": 125,
+        "power": 814,
+        "percent": 55,
+        "force": 4,
+        "bonus": 65,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 86,
+        "iy": 99,
+        "aspect": 38,
+        "dimension": 121,
+        "power": 437,
+        "percent": 61,
+        "force": -10,
+        "bonus": 20,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 142,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 103,
+        "iy": 42,
+        "aspect": 179,
+        "dimension": 30,
+        "power": 118,
+        "percent": 236,
+        "force": 21,
+        "bonus": 73,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 108,
+        "iy": 72,
+        "aspect": 124,
+        "dimension": 97,
+        "power": 697,
+        "percent": 126,
+        "force": 92,
+        "bonus": 34,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1060,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 56,
+        "iy": 56,
+        "aspect": 67,
+        "dimension": 25,
+        "power": 694,
+        "percent": 219,
+        "force": 60,
+        "bonus": 76,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 49,
+        "iy": 74,
+        "aspect": 129,
+        "dimension": 125,
+        "power": 207,
+        "percent": 144,
+        "force": 17,
+        "bonus": -5,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 125,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 116,
+        "iy": 73,
+        "aspect": 38,
+        "dimension": 36,
+        "power": 26,
+        "percent": 28,
+        "force": 40,
+        "bonus": 45,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 120,
+        "iy": 56,
+        "aspect": 237,
+        "dimension": 149,
+        "power": 607,
+        "percent": 245,
+        "force": 22,
+        "bonus": -6,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 910,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 135,
+        "iy": 145,
+        "aspect": 116,
+        "dimension": 38,
+        "power": 198,
+        "percent": 124,
+        "force": 89,
+        "bonus": 79,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 66,
+        "iy": 108,
+        "aspect": 127,
+        "dimension": 20,
+        "power": 767,
+        "percent": 131,
+        "force": 35,
+        "bonus": 67,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 96,
+        "iy": 37,
+        "aspect": 99,
+        "dimension": 50,
+        "power": 606,
+        "percent": 238,
+        "force": 47,
+        "bonus": 49,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 97,
+        "iy": 124,
+        "aspect": 215,
+        "dimension": 98,
+        "power": 770,
+        "percent": 13,
+        "force": 46,
+        "bonus": -12,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 46,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 158,
+        "iy": 107,
+        "aspect": 108,
+        "dimension": 65,
+        "power": 75,
+        "percent": 185,
+        "force": 45,
+        "bonus": 5,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 99,
+        "iy": 76,
+        "aspect": 23,
+        "dimension": 75,
+        "power": 579,
+        "percent": 134,
+        "force": 64,
+        "bonus": -4,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 683,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 156,
+        "iy": 98,
+        "aspect": 57,
+        "dimension": 66,
+        "power": 316,
+        "percent": 203,
+        "force": 31,
+        "bonus": 84,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 67,
+        "iy": 98,
+        "aspect": 134,
+        "dimension": 69,
+        "power": 499,
+        "percent": 218,
+        "force": 38,
+        "bonus": 47,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 766,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 77,
+        "iy": 93,
+        "aspect": 82,
+        "dimension": 147,
+        "power": 610,
+        "percent": 17,
+        "force": -18,
+        "bonus": -16,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 51,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 135,
+        "iy": 47,
+        "aspect": 169,
+        "dimension": 59,
+        "power": 373,
+        "percent": 32,
+        "force": 13,
+        "bonus": -8,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 116,
+        "iy": 126,
+        "aspect": 174,
+        "dimension": 148,
+        "power": 148,
+        "percent": 19,
+        "force": 94,
+        "bonus": 0,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 22,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 99,
+        "iy": 59,
+        "aspect": 200,
+        "dimension": 21,
+        "power": 727,
+        "percent": 13,
+        "force": 41,
+        "bonus": 37,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 78,
+        "iy": 141,
+        "aspect": 74,
+        "dimension": 4,
+        "power": 25,
+        "percent": 194,
+        "force": -13,
+        "bonus": 48,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 40,
+        "iy": 50,
+        "aspect": 78,
+        "dimension": 21,
+        "power": 197,
+        "percent": 145,
+        "force": 9,
+        "bonus": -20,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 96,
+        "iy": 38,
+        "aspect": 39,
+        "dimension": 31,
+        "power": 492,
+        "percent": 224,
+        "force": 46,
+        "bonus": 74,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 47,
+        "iy": 112,
+        "aspect": 52,
+        "dimension": 40,
+        "power": 451,
+        "percent": 140,
+        "force": -8,
+        "bonus": 81,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 124,
+        "iy": 128,
+        "aspect": 206,
+        "dimension": 15,
+        "power": 730,
+        "percent": 203,
+        "force": 24,
+        "bonus": -17,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 112,
+        "iy": 43,
+        "aspect": 72,
+        "dimension": 69,
+        "power": 130,
+        "percent": 182,
+        "force": 91,
+        "bonus": 7,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 108,
+        "iy": 117,
+        "aspect": 94,
+        "dimension": 7,
+        "power": 276,
+        "percent": 75,
+        "force": 18,
+        "bonus": 18,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 72,
+        "iy": 56,
+        "aspect": 183,
+        "dimension": 112,
+        "power": 693,
+        "percent": 196,
+        "force": 61,
+        "bonus": 3,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 786,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 155,
+        "iy": 114,
+        "aspect": 26,
+        "dimension": 5,
+        "power": 103,
+        "percent": 27,
+        "force": 17,
+        "bonus": 19,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 144,
+        "iy": 37,
+        "aspect": 208,
+        "dimension": 81,
+        "power": 439,
+        "percent": 181,
+        "force": 0,
+        "bonus": 88,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 138,
+        "iy": 93,
+        "aspect": 104,
+        "dimension": 88,
+        "power": 796,
+        "percent": 13,
+        "force": -6,
+        "bonus": 39,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 46,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 122,
+        "iy": 88,
+        "aspect": 189,
+        "dimension": 137,
+        "power": 232,
+        "percent": 234,
+        "force": -13,
+        "bonus": 21,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 532,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 67,
+        "iy": 83,
+        "aspect": 67,
+        "dimension": 71,
+        "power": 84,
+        "percent": 166,
+        "force": -12,
+        "bonus": 34,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 122,
+        "iy": 57,
+        "aspect": 227,
+        "dimension": 86,
+        "power": 346,
+        "percent": 9,
+        "force": 42,
+        "bonus": -7,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 11,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 155,
+        "iy": 55,
+        "aspect": 65,
+        "dimension": 18,
+        "power": 42,
+        "percent": 181,
+        "force": 38,
+        "bonus": 26,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 114,
+        "iy": 93,
+        "aspect": 63,
+        "dimension": 39,
+        "power": 625,
+        "percent": 70,
+        "force": 74,
+        "bonus": 44,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 184,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 64,
+        "iy": 71,
+        "aspect": 180,
+        "dimension": 20,
+        "power": 181,
+        "percent": 103,
+        "force": 42,
+        "bonus": 94,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 119,
+        "iy": 55,
+        "aspect": 52,
+        "dimension": 65,
+        "power": 264,
+        "percent": 1,
+        "force": 15,
+        "bonus": 99,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 114,
+        "iy": 138,
+        "aspect": 84,
+        "dimension": 24,
+        "power": 602,
+        "percent": 153,
+        "force": 71,
+        "bonus": 26,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 93,
+        "iy": 67,
+        "aspect": 46,
+        "dimension": 45,
+        "power": 734,
+        "percent": 37,
+        "force": 75,
+        "bonus": 82,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 83,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 133,
+        "iy": 74,
+        "aspect": 163,
+        "dimension": 29,
+        "power": 69,
+        "percent": 140,
+        "force": 48,
+        "bonus": 33,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 55,
+        "iy": 132,
+        "aspect": 116,
+        "dimension": 59,
+        "power": 198,
+        "percent": 4,
+        "force": 73,
+        "bonus": 63,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 66,
+        "iy": 108,
+        "aspect": 97,
+        "dimension": 125,
+        "power": 332,
+        "percent": 204,
+        "force": 30,
+        "bonus": 65,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 550,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 144,
+        "iy": 145,
+        "aspect": 235,
+        "dimension": 1,
+        "power": 308,
+        "percent": 88,
+        "force": 44,
+        "bonus": 17,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 69,
+        "iy": 81,
+        "aspect": 220,
+        "dimension": 84,
+        "power": 613,
+        "percent": 204,
+        "force": 95,
+        "bonus": 0,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1246,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 136,
+        "iy": 60,
+        "aspect": 93,
+        "dimension": 33,
+        "power": 151,
+        "percent": 231,
+        "force": -7,
+        "bonus": -15,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 139,
+        "iy": 65,
+        "aspect": 193,
+        "dimension": 27,
+        "power": 244,
+        "percent": 2,
+        "force": 50,
+        "bonus": -8,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 131,
+        "iy": 120,
+        "aspect": 181,
+        "dimension": 84,
+        "power": 658,
+        "percent": 144,
+        "force": -19,
+        "bonus": 41,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 419,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 149,
+        "iy": 91,
+        "aspect": 124,
+        "dimension": 154,
+        "power": 501,
+        "percent": 170,
+        "force": 63,
+        "bonus": 57,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 881,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 47,
+        "iy": 48,
+        "aspect": 137,
+        "dimension": 121,
+        "power": 184,
+        "percent": 138,
+        "force": 21,
+        "bonus": 85,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 89,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 70,
+        "iy": 131,
+        "aspect": 140,
+        "dimension": 48,
+        "power": 607,
+        "percent": 140,
+        "force": -21,
+        "bonus": 7,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 81,
+        "iy": 113,
+        "aspect": 219,
+        "dimension": 160,
+        "power": 189,
+        "percent": 244,
+        "force": 23,
+        "bonus": -1,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 367,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 45,
+        "iy": 56,
+        "aspect": 139,
+        "dimension": 48,
+        "power": 616,
+        "percent": 161,
+        "force": 42,
+        "bonus": -17,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 96,
+        "iy": 78,
+        "aspect": 236,
+        "dimension": 45,
+        "power": 413,
+        "percent": 68,
+        "force": -9,
+        "bonus": 27,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 214,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 78,
+        "iy": 48,
+        "aspect": 145,
+        "dimension": 36,
+        "power": 569,
+        "percent": 111,
+        "force": 2,
+        "bonus": 90,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 100,
+        "iy": 90,
+        "aspect": 164,
+        "dimension": 90,
+        "power": 130,
+        "percent": 52,
+        "force": 43,
+        "bonus": 25,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 97,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 112,
+        "iy": 144,
+        "aspect": 153,
+        "dimension": 56,
+        "power": 844,
+        "percent": 30,
+        "force": -5,
+        "bonus": 99,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 73,
+        "iy": 145,
+        "aspect": 193,
+        "dimension": 145,
+        "power": 399,
+        "percent": 220,
+        "force": 50,
+        "bonus": 91,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 583,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 120,
+        "iy": 55,
+        "aspect": 153,
+        "dimension": 76,
+        "power": 309,
+        "percent": 36,
+        "force": -20,
+        "bonus": 31,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 29,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 140,
+        "iy": 139,
+        "aspect": 170,
+        "dimension": 80,
+        "power": 558,
+        "percent": 60,
+        "force": 17,
+        "bonus": 6,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 159,
+        "iy": 93,
+        "aspect": 225,
+        "dimension": 105,
+        "power": 689,
+        "percent": 159,
+        "force": 67,
+        "bonus": 31,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1034,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 61,
+        "iy": 130,
+        "aspect": 170,
+        "dimension": 26,
+        "power": 361,
+        "percent": 100,
+        "force": 81,
+        "bonus": 2,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 143,
+        "iy": 139,
+        "aspect": 97,
+        "dimension": 130,
+        "power": 481,
+        "percent": 172,
+        "force": -1,
+        "bonus": 44,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 142,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 142,
+        "iy": 90,
+        "aspect": 185,
+        "dimension": 129,
+        "power": 684,
+        "percent": 216,
+        "force": 24,
+        "bonus": 47,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 1647,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 47,
+        "iy": 112,
+        "aspect": 107,
+        "dimension": 138,
+        "power": 418,
+        "percent": 45,
+        "force": 3,
+        "bonus": 50,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 89,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 153,
+        "iy": 36,
+        "aspect": 32,
+        "dimension": 149,
+        "power": 826,
+        "percent": 244,
+        "force": 95,
+        "bonus": 0,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 157,
+        "iy": 124,
+        "aspect": 142,
+        "dimension": 66,
+        "power": 30,
+        "percent": 248,
+        "force": 81,
+        "bonus": 63,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 85,
+        "iy": 57,
+        "aspect": 72,
+        "dimension": 148,
+        "power": 694,
+        "percent": 143,
+        "force": 86,
+        "bonus": 58,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 1073,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 57,
+        "iy": 109,
+        "aspect": 75,
+        "dimension": 136,
+        "power": 649,
+        "percent": 196,
+        "force": 48,
+        "bonus": 68,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 556,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 63,
+        "iy": 95,
+        "aspect": 36,
+        "dimension": 154,
+        "power": 315,
+        "percent": 200,
+        "force": 78,
+        "bonus": 33,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 141,
+        "iy": 112,
+        "aspect": 212,
+        "dimension": 13,
+        "power": 134,
+        "percent": 219,
+        "force": 95,
+        "bonus": 17,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 133,
+        "iy": 37,
+        "aspect": 62,
+        "dimension": 39,
+        "power": 679,
+        "percent": 168,
+        "force": 98,
+        "bonus": 84,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 52,
+        "iy": 36,
+        "aspect": 35,
+        "dimension": 109,
+        "power": 469,
+        "percent": 23,
+        "force": -4,
+        "bonus": 5,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 123,
+        "iy": 129,
+        "aspect": 47,
+        "dimension": 151,
+        "power": 815,
+        "percent": 216,
+        "force": 100,
+        "bonus": 7,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 748,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 85,
+        "iy": 108,
+        "aspect": 70,
+        "dimension": 16,
+        "power": 321,
+        "percent": 94,
+        "force": 82,
+        "bonus": 40,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 82,
+        "iy": 65,
+        "aspect": 21,
+        "dimension": 160,
+        "power": 399,
+        "percent": 220,
+        "force": 26,
+        "bonus": 74,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 20,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 102,
+        "iy": 116,
+        "aspect": 45,
+        "dimension": 101,
+        "power": 417,
+        "percent": 105,
+        "force": 67,
+        "bonus": -7,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 307,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 70,
+        "iy": 111,
+        "aspect": 141,
+        "dimension": 33,
+        "power": 568,
+        "percent": 171,
+        "force": 72,
+        "bonus": -1,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 124,
+        "iy": 76,
+        "aspect": 214,
+        "dimension": 113,
+        "power": 134,
+        "percent": 44,
+        "force": 66,
+        "bonus": 98,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 97,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 146,
+        "iy": 93,
+        "aspect": 96,
+        "dimension": 77,
+        "power": 160,
+        "percent": 179,
+        "force": -20,
+        "bonus": 17,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 3,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 45,
+        "iy": 46,
+        "aspect": 171,
+        "dimension": 72,
+        "power": 250,
+        "percent": 45,
+        "force": 99,
+        "bonus": 62,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 55,
+        "iy": 126,
+        "aspect": 194,
+        "dimension": 1,
+        "power": 14,
+        "percent": 177,
+        "force": 100,
+        "bonus": 98,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 97,
+        "iy": 92,
+        "aspect": 114,
+        "dimension": 97,
+        "power": 776,
+        "percent": 71,
+        "force": 73,
+        "bonus": 3,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 726,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 68,
+        "iy": 67,
+        "aspect": 221,
+        "dimension": 14,
+        "power": 492,
+        "percent": 216,
+        "force": 57,
+        "bonus": 23,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 135,
+        "iy": 43,
+        "aspect": 211,
+        "dimension": 109,
+        "power": 164,
+        "percent": 235,
+        "force": 67,
+        "bonus": 34,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 140,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 80,
+        "iy": 86,
+        "aspect": 70,
+        "dimension": 34,
+        "power": 652,
+        "percent": 17,
+        "force": 92,
+        "bonus": -14,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 126,
+        "iy": 134,
+        "aspect": 91,
+        "dimension": 2,
+        "power": 594,
+        "percent": 77,
+        "force": 63,
+        "bonus": 48,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 85,
+        "iy": 49,
+        "aspect": 197,
+        "dimension": 127,
+        "power": 643,
+        "percent": 239,
+        "force": 47,
+        "bonus": 80,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 1337,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 41,
+        "iy": 55,
+        "aspect": 78,
+        "dimension": 143,
+        "power": 390,
+        "percent": 193,
+        "force": 39,
+        "bonus": 74,
+        "stage_coef": 2
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "ix": 49,
+        "iy": 53,
+        "aspect": 234,
+        "dimension": 90,
+        "power": 754,
+        "percent": 185,
+        "force": 61,
+        "bonus": 78,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 653,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 43,
+        "iy": 79,
+        "aspect": 146,
+        "dimension": 112,
+        "power": 547,
+        "percent": 213,
+        "force": 54,
+        "bonus": 29,
+        "stage_coef": 0
+      },
+      "output": {
+        "damage": 700,
+        "owner": 1,
+        "visual": [
+          "number",
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "ix": 130,
+        "iy": 68,
+        "aspect": 202,
+        "dimension": 24,
+        "power": 23,
+        "percent": 37,
+        "force": 93,
+        "bonus": 38,
+        "stage_coef": 1
+      },
+      "output": {
+        "damage": 0,
+        "owner": 7,
+        "visual": []
+      }
+    }
+  ],
+  "hitbox": [
+    {
+      "input": {
+        "x": 89,
+        "y": 90,
+        "removed": 0
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 89,
+        "y": 90,
+        "removed": 1
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 90,
+        "y": 90,
+        "removed": 0
+      },
+      "output": true
+    },
+    {
+      "input": {
+        "x": 90,
+        "y": 90,
+        "removed": 1
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 110,
+        "y": 90,
+        "removed": 0
+      },
+      "output": true
+    },
+    {
+      "input": {
+        "x": 110,
+        "y": 90,
+        "removed": 1
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 111,
+        "y": 90,
+        "removed": 0
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 111,
+        "y": 90,
+        "removed": 1
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 79,
+        "removed": 0
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 79,
+        "removed": 1
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 80,
+        "removed": 0
+      },
+      "output": true
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 80,
+        "removed": 1
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 100,
+        "removed": 0
+      },
+      "output": true
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 100,
+        "removed": 1
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 101,
+        "removed": 0
+      },
+      "output": false
+    },
+    {
+      "input": {
+        "x": 100,
+        "y": 101,
+        "removed": 1
+      },
+      "output": false
+    }
+  ],
+  "shock": [
+    {
+      "input": {},
+      "output": {
+        "damage": 17,
+        "owner": 7,
+        "shock": 1,
+        "primary": 20,
+        "secondary": 30,
+        "radius": 25,
+        "visual": [
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "x": 124
+      },
+      "output": {
+        "damage": 17,
+        "owner": 7,
+        "shock": 1,
+        "primary": 20,
+        "secondary": 30,
+        "radius": 25,
+        "visual": [
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "x": 125
+      },
+      "output": {
+        "damage": 17,
+        "owner": 7,
+        "shock": 0,
+        "primary": 0,
+        "secondary": 0,
+        "radius": 0,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "x": 126
+      },
+      "output": {
+        "damage": 17,
+        "owner": 7,
+        "shock": 0,
+        "primary": 0,
+        "secondary": 0,
+        "radius": 0,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "removed": 1
+      },
+      "output": {
+        "damage": 17,
+        "owner": 7,
+        "shock": 0,
+        "primary": 0,
+        "secondary": 0,
+        "radius": 0,
+        "visual": []
+      }
+    },
+    {
+      "input": {
+        "routine": 4435776
+      },
+      "output": {
+        "damage": 17,
+        "owner": 7,
+        "shock": 1,
+        "primary": 20,
+        "secondary": 30,
+        "radius": 25,
+        "visual": [
+          "pose"
+        ]
+      }
+    },
+    {
+      "input": {
+        "routine": 4435776,
+        "x": 125
+      },
+      "output": {
+        "damage": 17,
+        "owner": 7,
+        "shock": 0,
+        "primary": 0,
+        "secondary": 0,
+        "radius": 0,
+        "visual": []
+      }
+    }
+  ]
+}

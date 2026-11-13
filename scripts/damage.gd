@@ -8,6 +8,12 @@ const IceEffects = preload("res://scripts/ice_effects.gd")
 static func deal_damage(actors: Array, events: Array, index: int, damage: int, kind: String = "") -> int:
 	if damage <= 0:
 		return 0
+	if bool(actors[index].get("jewel_mode",false)):
+		#45db20 chooses the pose before its mode3 HP/stats gate. This event
+		# is intentionally distinct from damage: HUD/Gold never count it.
+		if not bool(actors[index].get("jewel_waiting",false)):
+			events.append({"type":"pilot_hit","actor":index,"position":actors[index].pos,"kind":kind})
+		return 0
 	var absorbed := mini(damage, int(actors[index].shield))
 	if absorbed > 0:
 		actors[index].shield -= absorbed

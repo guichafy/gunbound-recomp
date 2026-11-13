@@ -1,4 +1,5 @@
 extends RefCounted
+const JewelAux = preload("res://scripts/jewel_aux.gd")
 ## Raon S1 PE0x497730/0x495e80 and private placed-mine state.
 ## Native evidence and explicit terrain/S2 fallbacks: RAON_CLASSIC_FIX.md.
 ## No presentation clock, scene, live model or shared mutable state is read.
@@ -148,16 +149,17 @@ static func outside(mine: Dictionary, terrain) -> bool:
 
 ## AnimateMine/AnimateSuperMine: any living mobile (dead flag+0xbff7 skipped,
 ## owner included) whose ground anchor is inside the weapon radius [66]/[79]=8.
-static func touching(mine: Dictionary, actors: Array) -> int:
+static func touching(mine: Dictionary, actors: Array, jewels: Array = []) -> int:
 	var at := Vector2i(Vector2(mine.pos).floor())
 	for index in actors.size():
 		var actor: Dictionary = actors[index]
-		if int(actor.get("hp",0)) <= 0:
+		if int(actor.get("hp",0)) <= 0 or bool(actor.get("jewel_waiting",false)):
 			continue
 		var foot := Vector2i((Vector2(actor.pos)+Vector2(0,float(Mobiles.definition(int(actor.vehicle)).stance))).floor())
 		var gap := at-foot
 		if gap.x*gap.x+gap.y*gap.y < TRIGGER_RADIUS*TRIGGER_RADIUS:
 			return index
+	if JewelAux.mine_touching(jewels,at):return actors.size()
 	return -1
 
 ## AnimateSuperMine also detonates on another placed mine inside the radius.
@@ -230,8 +232,8 @@ static func begin_turn(mines: Array, actors: Array, owner: int) -> void:
 		elif str(mine.get("state","normal")) == "move":
 			_set_state(mine,"active")
 
-static func contact(mine: Dictionary, actors: Array) -> int:
-	return touching(mine,actors)
+static func contact(mine: Dictionary, actors: Array, jewels: Array = []) -> int:
+	return touching(mine,actors,jewels)
 
 static func visual_state(mine: Dictionary) -> String:
 	return str(mine.get("state","normal"))
@@ -242,7 +244,7 @@ static func visual_age(mine: Dictionary) -> float:
 ## Surface following remains the Godot adaptation: scan each1px move so a
 ## three-pixel tick cannot skip a mobile. SS reverses on invalid terrain;
 ## S2 yields. Native slope-speed arithmetic is deliberately not claimed.
-static func _walk(mine: Dictionary, actors: Array, terrain, budget: int) -> bool:
+static func _walk(mine: Dictionary, actors: Array, terrain, budget: int, jewels: Array = []) -> bool:
 	if bool(mine.get("falling",false)):
 		return false
 	for _pixel in budget:
@@ -260,12 +262,12 @@ static func _walk(mine: Dictionary, actors: Array, terrain, budget: int) -> bool
 		mine.pos = Vector2(next_x,ground)
 		if not bool(mine.get("crawl",false)):
 			mine.steps = maxi(0,int(mine.steps)-1)
-		if contact(mine,actors) >= 0:
+		if contact(mine,actors,jewels) >= 0:
 			return true
 	return false
 
 ## AnimateMine order: slope, ground/fall, bounds, proximity; movement after.
-static func _tick(mine: Dictionary, actors: Array, terrain, may_move: bool, mines: Array = []) -> bool:
+static func _tick(mine: Dictionary, actors: Array, terrain, may_move: bool, mines: Array = [], jewels: Array = []) -> bool:
 	mine.previous_pos = mine.pos
 	mine.mine_ticks = int(mine.get("mine_ticks",0))+1
 	mine.age = int(mine.mine_ticks)*STEP
@@ -276,7 +278,7 @@ static func _tick(mine: Dictionary, actors: Array, terrain, may_move: bool, mine
 	if outside(mine,terrain):
 		mine.lost = true
 		return false
-	if touching(mine,actors) >= 0:
+	if touching(mine,actors,jewels) >= 0:
 		return true
 	if bool(mine.get("crawl",false)) and touching_mine(mine,mines):
 		return true
@@ -286,7 +288,7 @@ static func _tick(mine: Dictionary, actors: Array, terrain, may_move: bool, mine
 		if int(mine.move_ticks) >= SS_CALLS:
 			return true
 		_set_state(mine,"move")
-		return _walk(mine,actors,terrain,3)
+		return _walk(mine,actors,terrain,3,jewels)
 	refresh_target(mine,actors)
 	if not may_move or not bool(mine.get("queued",false)) or int(mine.get("steps",0)) <= 0:
 		return false
@@ -295,7 +297,7 @@ static func _tick(mine: Dictionary, actors: Array, terrain, may_move: bool, mine
 		return false
 	mine.move_ticks = int(mine.get("move_ticks",0))+1
 	_set_state(mine,"move")
-	var detonate := _walk(mine,actors,terrain,mini(3,int(mine.steps)))
+	var detonate := _walk(mine,actors,terrain,mini(3,int(mine.steps)),jewels)
 	if int(mine.steps) <= 0:
 		mine.queued = false
 		_set_state(mine,"active")
@@ -303,7 +305,7 @@ static func _tick(mine: Dictionary, actors: Array, terrain, may_move: bool, mine
 
 ## Returns descending indices. The owner-aware caller applies damage/Gold and
 ## removes each mine; this helper never removes from the array while iterating.
-static func step_mines(mines: Array, actors: Array, terrain, delta: float) -> Array[int]:
+static func step_mines(mines: Array, actors: Array, terrain, delta: float, jewels: Array = []) -> Array[int]:
 	var detonated: Array[int] = []
 	if delta <= 0.0:
 		return detonated
@@ -324,7 +326,7 @@ static func step_mines(mines: Array, actors: Array, terrain, delta: float) -> Ar
 				continue
 			pending = true
 			mine.debt = maxf(0.0,float(mine.debt)-STEP)
-			if _tick(mine,actors,terrain,index == moving_index,mines):
+			if _tick(mine,actors,terrain,index == moving_index,mines,jewels):
 				detonated.append(index)
 	detonated.sort()
 	detonated.reverse()

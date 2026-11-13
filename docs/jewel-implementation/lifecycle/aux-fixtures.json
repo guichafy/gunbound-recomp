@@ -1,0 +1,104 @@
+{
+  "source_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "basis": "ASM arithmetic and characterdata JD[82]=14; no PE execution",
+  "jd": [
+    {
+      "weapon": 1,
+      "center": [
+        100,
+        100
+      ],
+      "position": [
+        110,
+        100
+      ],
+      "slope": 0,
+      "debt_before": 0,
+      "position_after": [
+        108,
+        100
+      ],
+      "debt_after": 0,
+      "damage_delta": 0
+    },
+    {
+      "weapon": 1,
+      "center": [
+        100,
+        100
+      ],
+      "position": [
+        110,
+        100
+      ],
+      "slope": 50,
+      "debt_before": 0,
+      "position_after": [
+        110,
+        100
+      ],
+      "debt_after": 100,
+      "damage_delta": 0
+    },
+    {
+      "weapon": 2,
+      "center": [
+        100,
+        100
+      ],
+      "position": [
+        110,
+        100
+      ],
+      "slope": 81,
+      "debt_before": 0,
+      "position_after": [
+        110,
+        100
+      ],
+      "damage_delta": 14,
+      "working": false
+    },
+    {
+      "weapon": 2,
+      "center": [
+        100,
+        100
+      ],
+      "position": [
+        100,
+        100
+      ],
+      "slope": 0,
+      "debt_before": 0,
+      "position_after": [
+        98,
+        100
+      ],
+      "debt_after": 0,
+      "damage_delta": 14
+    }
+  ],
+  "radial_boundaries": {
+    "lightning_jewel": {
+      "radius": 120,
+      "y_offset": 0,
+      "exclusive": true
+    },
+    "raon_mine_jewel": {
+      "radius": 8,
+      "y_offset": 0,
+      "exclusive": true
+    },
+    "jd_s2_jewel": {
+      "radius": 60,
+      "y_offset": 0,
+      "exclusive": true
+    },
+    "jd_ss_jewel": {
+      "radius": 68,
+      "y_offset": 0,
+      "exclusive": true
+    }
+  }
+}

@@ -1,6 +1,7 @@
 extends RefCounted
 ## Fixed JD crystals. Native sources/ABI/limits: docs/sdd/JD_CLASSIC_FIX.md.
 ## Called by the common 20Hz model step; no render/clock/global profile reads.
+const JewelAux = preload("res://scripts/jewel_aux.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Damage = preload("res://scripts/damage.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
@@ -67,7 +68,7 @@ static func _pull_mines(effect: Dictionary, mines: Array) -> bool:
 	return working
 
 ## Returns true while retained; false removes AFTER this call's effects.
-static func step(effect: Dictionary, actors: Array, mines: Array, terrain, events: Array) -> bool:
+static func step(effect: Dictionary, actors: Array, mines: Array, terrain, events: Array, jewels: Array = []) -> bool:
 	if not bool(effect.get("active",true)):
 		return false
 	var repulse := int(effect.weapon) == 2
@@ -75,7 +76,7 @@ static func step(effect: Dictionary, actors: Array, mines: Array, terrain, event
 	var working := false
 	for index in range(actors.size()):
 		var actor: Dictionary = actors[index]
-		if int(actor.hp) <= 0 or bool(actor.get("jd_immune",false)):
+		if int(actor.hp) <= 0 or bool(actor.get("jewel_waiting",false)) or bool(actor.get("jd_immune",false)):
 			continue
 		var delta := Vector2i(int(actor.pos.x)-int(center.x),int(actor.pos.y)-int(center.y))
 		var radius := radius_for(effect,actor)
@@ -104,7 +105,9 @@ static func step(effect: Dictionary, actors: Array, mines: Array, terrain, event
 				actor.pos.x += direction*amount
 			debt %= 100
 		actor.jd_motion_debt = debt
-	working = _pull_mines(effect,mines) or working
+	var jewel_work := JewelAux.jd_step(effect,jewels)
+	var mine_work := _pull_mines(effect,mines)
+	working = jewel_work or mine_work or working
 	var counter := int(effect.ticks)
 	effect.ticks = counter+1
 	effect.age = float(effect.ticks)*0.05

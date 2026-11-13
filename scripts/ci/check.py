@@ -14,7 +14,8 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
 ERRORS = re.compile(r'SCRIPT ERROR|Parse Error|Failed to load script|^ERROR:|^FAIL:|FAILURES: [1-9]', re.M)
-MATCH_CASES = {'test_matches': list(range(81, 94)), 'test_classic_matches': list(range(1, 17)), 'test_map_matches': list(range(44))}
+MATCH_CASES = {'test_matches': list(range(81, 94)), 'test_classic_matches': list(range(1, 17)),
+               'test_map_matches': list(range(44)), 'test_jewel_matches': list(range(1, 9))}
 # Suites that time real frames; they run alone once the parallel lanes finish.
 ISOLATED_SUITES = ('test_performance',)
 
@@ -60,7 +61,7 @@ def run_logged(command, log, timeout, summary=False, cwd=None, env=None):
     has_summary = bool(re.search(r'CHECKS:|MATCHES:', text))
     ok = status == 0 and not ERRORS.search(text) and (not summary or has_summary)
     return {'ok': ok, 'exit': status, 'seconds': round(time.perf_counter() - started, 3),
-            'matches': sum(map(int, re.findall(r'^(?:COMPLETE|CLASSIC) MATCHES:\s*(\d+)', text, re.M))),
+            'matches': sum(map(int, re.findall(r'^(?:COMPLETE|CLASSIC|MAP|JEWEL) MATCHES:\s*(\d+)', text, re.M))),
             'log': str(log.relative_to(ROOT)) if log.is_relative_to(ROOT) else str(log),
             'checks': sum(map(int, re.findall(r'CHECKS:\s*(\d+)', text)))}
 
@@ -82,7 +83,8 @@ def run_parallel(tasks, workers):
 
 def validate_matches(result, log, suite, expected):
     text = log.read_text(encoding='utf-8', errors='replace')
-    pattern = {'test_matches': r'^MATCH seed=(\d+)\b', 'test_classic_matches': r'^CLASSIC MATCH id=(\d+)\b', 'test_map_matches': r'^MAP MATCH id=(\d+)\b'}[suite]
+    pattern = {'test_matches': r'^MATCH seed=(\d+)\b', 'test_classic_matches': r'^CLASSIC MATCH id=(\d+)\b',
+               'test_map_matches': r'^MAP MATCH id=(\d+)\b', 'test_jewel_matches': r'^JEWEL MATCH id=(\d+)\b'}[suite]
     cases = list(map(int, re.findall(pattern, text, re.M)))
     result['cases'] = cases
     result['ok'] = result['ok'] and cases == expected and result['matches'] == len(expected)

@@ -3,6 +3,7 @@ extends RefCounted
 ## Native tables/SETG thresholds/beam raster: ADUKA_CLASSIC_FIX.md.
 ## Initial Thor placement remains the deterministic offline world policy.
 
+const JewelCombat = preload("res://scripts/jewel_combat.gd")
 const Combat = preload("res://scripts/combat.gd")
 const NativeCombat = preload("res://scripts/aduka_combat.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
@@ -116,7 +117,7 @@ static func strike(model, projectile: Dictionary, position: Vector2, source: Str
 	var origin := cannon(Vector2(thor.pos),position)
 	# Native producer computes/stores the contact; the consumer applies that
 	# record. One offline call combines those stages, without a swept DDA.
-	var contact := NativeCombat.thor_contact(Vector2i(origin),Vector2i(position),model.terrain,model.actors)
+	var contact := NativeCombat.thor_contact(Vector2i(origin),Vector2i(position),model.terrain,model.actors,model)
 	# Missing contact records suppress the blast, but the native consumer still
 	# publishes the visual ray to the guide. Do not invent damage at its target.
 	var strike: Vector2 = contact.get("position",position)
@@ -126,6 +127,7 @@ static func strike(model, projectile: Dictionary, position: Vector2, source: Str
 	# owner Attack/Dig transfer. Shield/overkill credit follows45db20.
 	var dealt: int = 0 if contact.is_empty() else NativeCombat.apply(model.actors,model.events,Vector2i(strike),
 		{"power":data.power,"dimension":data.dimension,"aspect":150,"flags":4,"percent":100},true)
+	if not contact.is_empty():JewelCombat.native_blast(model,Vector2i(strike),{"power":data.power,"dimension":data.dimension,"aspect":150,"percent":100},owner)
 	thor.xp = int(thor.xp)+maxi(0,dealt)
 	#4ccd10→4ac180 recomputes level at the next turn transition. Keep the
 	# existing non-Mage bridge until its separate integration is requested.

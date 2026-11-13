@@ -1,6 +1,7 @@
 extends RefCounted
 ## Native Aduka/Thor contact and damage; VA/contracts in ADUKA_COMBAT_REA.md.
 ## World→hotspot conversion bridges the existing actor presentation coordinates.
+const JewelCombat = preload("res://scripts/jewel_combat.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Items = preload("res://scripts/items.gd")
@@ -96,13 +97,15 @@ static func t1_parameters(projectile: Dictionary, actor: Dictionary) -> Dictiona
 		"weather_bonus":int(projectile.get("native_force",0)),
 		"percent":100+int(Items.attack(str(actor.get("turn_item",""))))}
 
-static func point_contact(point: Vector2i, terrain, actors: Array, ground: bool = true, bodies: bool = true) -> Dictionary:
+static func point_contact(point: Vector2i, terrain, actors: Array, ground: bool = true, bodies: bool = true, model = null) -> Dictionary:
 	if ground and terrain.native_solid(point):
 		return {"position":Vector2(point),"actor":-1,"fraction":0.0}
 	if bodies:
 		for index in actors.size():
 			if hit_actor(point,actors[index]):
 				return {"position":Vector2(point),"actor":index,"fraction":0.0}
+		var jewel := JewelCombat.point(model,point)
+		if not jewel.is_empty():return jewel
 	return {}
 
 ## 455cc0 coarse8 (Lightning T1:3), then458920/458a00 refine the contact kind.
@@ -121,18 +124,18 @@ static func projectile_contact(start: Vector2i, end: Vector2i, terrain, actors: 
 	for distance in range(0,major+coarse_step,coarse_step):
 		minor += stride*coarse_step
 		var position := _point(start,horizontal,direction,distance,minor>>16)
-		if model!=null:
+		if model!=null and not projectile.is_empty():
 			force_sampled = NativeWeather.sample(model,projectile,position,force_sampled)
 		if mage_samples:
 			spark_samples.append_array(PackedInt32Array([position.x,position.y,int(projectile.get("native_force",0)),int(bool(projectile.get("electric",false)))]))
-		var coarse := point_contact(position,terrain,actors)
+		var coarse := point_contact(position,terrain,actors,true,not bool(projectile.get("skip_actors",false)),model)
 		if coarse.is_empty():
 			continue
 		if distance>0:
 			var fine_minor := minor-stride*coarse_step
 			for fine in range(distance-coarse_step,distance):
 				fine_minor += stride
-				var contact := point_contact(_point(start,horizontal,direction,fine,fine_minor>>16),terrain,actors,int(coarse.actor)<0,int(coarse.actor)>=0)
+				var contact := point_contact(_point(start,horizontal,direction,fine,fine_minor>>16),terrain,actors,int(coarse.actor)<0 and not coarse.has("jewel"),int(coarse.actor)>=0 or coarse.has("jewel"),model)
 				if not contact.is_empty():
 					return _spark_contact_result(contact,model,spark_samples)
 		return _spark_contact_result(coarse,model,spark_samples)
@@ -149,7 +152,7 @@ static func _point(start: Vector2i, horizontal: bool, direction: int, distance: 
 
 ## Producer4398e0/4e4fe0 computes contact;4262d0 records it for the consumer.
 ## The offline simulation performs those stages together with the same integers.
-static func thor_contact(start: Vector2i, target: Vector2i, terrain, actors: Array) -> Dictionary:
+static func thor_contact(start: Vector2i, target: Vector2i, terrain, actors: Array, model = null) -> Dictionary:
 	var delta := target-start
 	var horizontal := absi(delta.y)<absi(delta.x)
 	var major := absi(delta.x if horizontal else delta.y)
@@ -162,7 +165,7 @@ static func thor_contact(start: Vector2i, target: Vector2i, terrain, actors: Arr
 		var point := _point(start,horizontal,direction,distance,minor>>16)
 		if point.x<0 or point.x>world.x or point.y< -500 or point.y>world.y:
 			return {}
-		var contact := point_contact(point,terrain,actors)
+		var contact := point_contact(point,terrain,actors,true,true,model)
 		if not contact.is_empty():
 			return contact
 	return {}

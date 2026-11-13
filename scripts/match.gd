@@ -1,6 +1,9 @@
 extends RefCounted
 ## Owns the entire combat lifecycle. Presentation consumes events, never decides damage.
 
+const MatchMode = preload("res://scripts/match_mode.gd")
+const JewelRules = preload("res://scripts/jewel_rules.gd")
+const JewelCombat = preload("res://scripts/jewel_combat.gd")
 const Attributes = preload("res://scripts/player_attributes.gd")
 const Terrain = preload("res://scripts/terrain.gd")
 const Maps = preload("res://scripts/maps.gd")
@@ -66,6 +69,8 @@ const SPECIAL_WEAPON := Mobiles.SPECIAL
 const PLAYABLE_VEHICLES := Mobiles.PLAYABLE
 static var VEHICLES := {}
 static var NATIVE_STAGE := {}
+var mode := MatchMode.SOLO
+var jewel_state: Dictionary = {}
 var mines: Array = []
 var battle_effects: Array = []
 var satellites: Dictionary = {}
@@ -120,7 +125,7 @@ static func normalize_vehicle(vehicle: int) -> int:
 static func other(index: int) -> int:
 	return TurnTable.other(index)
 
-func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = [], opening: int = PLAYER, cpu_vehicle: int = -1, spawn_override: Array = []) -> void:
+func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: String = Maps.DEFAULT, weather_mode: String = "original", mask = null, loadout: Array = [], attributes_by_actor: Array = [], gear_bonuses_by_actor: Array = [], opening: int = PLAYER, cpu_vehicle: int = -1, spawn_override: Array = [], match_mode: String = MatchMode.SOLO) -> void:
 	vehicle = normalize_vehicle(vehicle)
 	if seed_value < 0:
 		rng.randomize()
@@ -206,6 +211,7 @@ func start(vehicle: int, cpu_difficulty: int = 1, seed_value: int = -1, map: Str
 			KnightEffect.ensure_ion(self,actor_index)
 		elif int(actors[actor_index].vehicle) == 16:
 			AdukaEffect.ensure_thor(self)
+	MatchMode.setup(self,match_mode)
 	# The server draws the turn order (MatchManager / jglim start_game); fixtures
 	# pass an explicit side so their first shot stays the player's.
 	active = rng.randi_range(PLAYER, CPU) if opening == RANDOM_OPENING else clampi(opening, PLAYER, CPU)
@@ -220,6 +226,7 @@ func begin_turn() -> void:
 	turn_time = TURN_TIME
 	actors[active].turns += 1
 	total_turns += 1
+	MatchMode.begin_turn(self)
 	var native_climate: bool = weather.get("is_native")==true
 	if native_climate:
 		var entry: Dictionary = weather.advance_turn(total_turns-1,rng)
@@ -281,7 +288,7 @@ func can_use_item(index: int, slot: int) -> bool:
 	# One item per turn: the whole bar is disabled after a use.
 	if slot < 0 or slot >= items.size() or bool(items[slot].used) or not str(actor.get("turn_item", "")).is_empty():
 		return false
-	return int(actor.hp) > 0
+	return int(actor.hp) > 0 and not bool(actor.get("jewel_waiting",false))
 
 ## Mobile.UseItem plus MatchManager.ComputePlayerItem: the delay cost is
 ## charged at once; instant items act now, turn items modify this turn's shot.
@@ -299,7 +306,7 @@ func use_item(slot: int) -> bool:
 	return true
 
 func move_actor(direction: float, delta: float) -> void:
-	if phase != PHASE_AIM or is_zero_approx(direction):
+	if phase != PHASE_AIM or bool(actors[active].get("jewel_waiting",false)) or is_zero_approx(direction):
 		return
 	var actor: Dictionary = actors[active]
 	actor.facing = int(signf(direction))
@@ -471,6 +478,16 @@ func predict_shot(index: int, angle: float, power: float, weapon: int) -> Dictio
 		simulation.events.clear()
 		if simulation.phase != PHASE_FLIGHT:
 			break
+	if closest.is_empty():closest={"position":muzzle(index,angle,weapon),"actor":-1,"hit":false}
+	if mode==MatchMode.JEWEL:
+		# Bunge can leave a live Jewel falling after the last shell. Evaluate
+		# its physical consequences, without scheduling a turn or replacement.
+		for settle_tick in 360:
+			if simulation.phase==PHASE_FINISHED or not JewelCombat.pending(simulation):break
+			simulation.advance_idle_tick(Combat.STEP)
+		closest.jewel_scores=simulation.jewel_state.scores.duplicate()
+		closest.jewel_damage=JewelCombat.progress(simulation.jewel_state,index)
+		closest.jewel_winner=simulation.winner
 	return closest
 
 func cannon_pivot(index: int) -> Vector2:
@@ -488,7 +505,7 @@ func initiative_preview(weapon: int) -> Array:
 	return TurnTable.initiative_preview(self, weapon)
 
 func fire(angle: float, power: float, weapon: int) -> bool:
-	if phase != PHASE_AIM or weapon < 0 or weapon >= Mobiles.weapon_count(actors[active].vehicle):
+	if phase != PHASE_AIM or bool(actors[active].get("jewel_waiting",false)) or weapon < 0 or weapon >= Mobiles.weapon_count(actors[active].vehicle):
 		return false
 	if Mobiles.is_special(actors[active].vehicle, weapon) and not can_use_special(active):
 		return false
@@ -539,13 +556,11 @@ func tick(delta: float) -> void:
 		accumulator += delta
 		while accumulator + TIME_EPSILON >= Combat.STEP:
 			accumulator = maxf(0.0, accumulator - Combat.STEP)
-			spark_tick+=1
-			if phase==PHASE_FINISHED:continue
-			ClassicFlight.crawl_mines(self, Combat.STEP)
-			AsateEffect.step_satellites(self)
-			KnightEffect.step_ions(self)
-			AdukaEffect.step_thor(self)
-			settle_actors()
+			if phase==PHASE_FINISHED:
+				spark_tick+=1
+				continue
+			advance_idle_tick(Combat.STEP)
+			if mode==MatchMode.JEWEL and phase==PHASE_FINISHED:return
 			if int(actors[PLAYER].hp) <= 0 or int(actors[CPU].hp) <= 0:
 				finish_gold_shot()
 				check_end()
@@ -555,6 +570,9 @@ func tick(delta: float) -> void:
 			phase = PHASE_AIM
 		return
 	if phase == PHASE_AIM:
+		if bool(actors[active].get("jewel_waiting",false)):
+			pass_turn()
+			return
 		if cpu_thinking and active == CPU:
 			return
 		turn_time = maxf(0.0, turn_time - delta)
@@ -572,6 +590,16 @@ func tick(delta: float) -> void:
 			finish_gold_shot()
 			if not check_end():
 				schedule(shot_actor, TurnTable.shot_cost(self, shot_actor, shot_weapon, shot_elapsed))
+
+func advance_idle_tick(delta: float) -> void:
+	spark_tick+=1
+	ClassicFlight.crawl_mines(self,delta)
+	AsateEffect.step_satellites(self)
+	KnightEffect.step_ions(self)
+	AdukaEffect.step_thor(self)
+	settle_actors()
+	step_jewels(delta)
+	if mode==MatchMode.JEWEL:check_end()
 
 func advance_projectiles(delta: float) -> void:
 	# Public callers (tests and scene bridges) may pass arbitrary deltas. The
@@ -666,13 +694,13 @@ func advance_projectile_tick(delta: float) -> void:
 		var beacon := bool(projectile.get("beacon", false))
 		var hit: Dictionary
 		if ArmorFlight.active(projectile):
-			hit = ArmorFlight.contact(projectile,terrain,actors)
+			hit = ArmorFlight.contact(projectile,terrain,actors,self)
 		elif TricoFlight.active(projectile):
 			# Contact is an independent consumer; do not enable another mobile's
 			# weather physics through AdukaWeather.active just to get its mask.
 			var start_fp := Physics.position_fp(projectile.hit_pos)
 			var end_fp := Physics.position_fp(actual)
-			hit = AdukaCombat.projectile_contact(Vector2i(start_fp.x>>8,start_fp.y>>8),Vector2i(end_fp.x>>8,end_fp.y>>8),terrain,actors)
+			hit = AdukaCombat.projectile_contact(Vector2i(start_fp.x>>8,start_fp.y>>8),Vector2i(end_fp.x>>8,end_fp.y>>8),terrain,actors,{},self)
 		elif native_weather:
 			var previous_fp := Physics.position_fp(projectile.hit_pos)
 			# MageS2 samples the displaced laser, not its ballistic carrier.
@@ -680,6 +708,7 @@ func advance_projectile_tick(delta: float) -> void:
 			hit = AdukaCombat.projectile_contact(Vector2i(previous_fp.x>>8,previous_fp.y>>8),Vector2i(actual_fp.x>>8,actual_fp.y>>8),terrain,[] if bool(projectile.get("skip_actors",false)) else actors,projectile,self)
 		elif bool(projectile.get("ghost", false)) or underground:
 			hit = Combat.trace_actors(projectile.hit_pos, actual, actors, ignored)
+			if not bool(projectile.get("skip_actors",false)):hit=JewelCombat.contact(self,projectile.hit_pos,actual,hit)
 			# A buried shell explodes on the first free pixel where it resurfaces.
 			if underground:
 				var exit: Dictionary = Combat.burrow_exit(terrain, projectile.hit_pos, actual)
@@ -688,9 +717,10 @@ func advance_projectile_tick(delta: float) -> void:
 		else:
 			var bodies: Array = [] if beacon or bool(projectile.get("skip_actors", false)) else actors
 			hit = Combat.trace_segment(projectile.hit_pos, actual, terrain, bodies, ignored)
+			if not beacon and not bool(projectile.get("skip_actors",false)):hit=JewelCombat.contact(self,projectile.hit_pos,actual,hit)
 			# SimulateShot2_Bullet3: the first solid pixel switches the shell to its
 			# "special" underground state there and halves the vertical speed.
-			if bool(projectile.get("burrow", false)) and not hit.is_empty() and int(hit.actor) < 0:
+			if bool(projectile.get("burrow", false)) and not hit.is_empty() and int(hit.actor) < 0 and not hit.has("jewel"):
 				projectile.underground = true
 				entered_burrow = true
 				next.position = hit.position
@@ -752,6 +782,8 @@ func advance_projectile_tick(delta: float) -> void:
 	# Resolve support after this tick's damage/craters, before the next flight
 	# tick tests contact. Prediction runs this same path on its own actors.
 	settle_actors()
+	step_jewels(delta)
+	if mode==MatchMode.JEWEL and check_end():return
 	var pending_supermine := mines.any(func(mine):return bool(mine.get("raon_mine",false)) and bool(mine.get("crawl",false)) and int(mine.get("owner",-1)) == shot_actor)
 	if projectiles.is_empty() and battle_effects.is_empty() and not pending_supermine:
 		phase = PHASE_SETTLE
@@ -764,6 +796,7 @@ func advance_grub(projectile: Dictionary, index: int, travel: float) -> void:
 	var height: int = terrain.HEIGHT * terrain.SCALE
 	var ignored := Combat.ignored_shooter(float(projectile.age), shot_actor)
 	var hit_body := func(x: int, y: int) -> bool:
+		if not JewelCombat.point(self,Vector2i(x,y)).is_empty():return true
 		for slot in range(actors.size()):
 			if slot != ignored and AdukaCombat.hit_actor(Vector2i(x, y), actors[slot]):
 				return true
@@ -798,6 +831,7 @@ func advance_grub(projectile: Dictionary, index: int, travel: float) -> void:
 	# SuperShot_Bullet13 Animate (0x488780) damages around its position every frame.
 	if int(projectile.g_kind) == GrubFlight.SS:
 		var event_start := events.size()
+		JewelCombat.impact(self,projectile.hit_pos,projectile,GrubCombat.parameters(projectile,actors[shot_actor]))
 		GrubCombat.apply(actors, events, Vector2i(projectile.g_int), projectile, actors[shot_actor])
 		collect_gold_damage(event_start, projectile.hit_pos, projectile)
 	GrubFlight.finish_frame(projectile)
@@ -824,7 +858,7 @@ func advance_battle_effects() -> void:
 			alive = KnightEffect.step(effect,self)
 		elif str(effect.kind) == "jd_crystal":
 			var event_start := events.size()
-			alive = JDEffect.step(effect,actors,mines,terrain,events)
+			alive = JDEffect.step(effect,actors,mines,terrain,events,jewel_state.entities if mode==MatchMode.JEWEL else [])
 			collect_gold_damage(event_start,Vector2(effect.pos),effect.projectile)
 		elif str(effect.kind) == "aduka":
 			alive = AdukaEffect.tick(self,effect)
@@ -920,6 +954,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		velocity = projectile.velocity
 		heading = velocity.angle()
 	events.append({"type": "explosion", "position": position, "radius": radius, "weapon": weapon_index, "vehicle": actors[shot_actor].vehicle, "child":bool(projectile.get("child",false)), "ss_state":str(projectile.get("ss_state","normal")), "collided_actor": collided_actor, "removed": removed, "angle": heading})
+	JewelCombat.impact(self,position,projectile,native_data)
 	if native_ice:
 		ice_impact(projectile,Vector2i(position),native_data)
 	elif native_grub:
@@ -929,7 +964,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	elif native_aduka or native_boomer or native_bigfoot:
 		AdukaCombat.apply(actors,events,Vector2i(position),native_data)
 	else:
-		blast(position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor,IceEffects.attack_mask(int(projectile.get("vehicle",actors[shot_actor].vehicle)),weapon_index))
+		Damage.blast(actors,events,position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor,IceEffects.attack_mask(int(projectile.get("vehicle",actors[shot_actor].vehicle)),weapon_index))
 	if not projectile.is_empty():
 		ClassicFlight.bolts(self, projectile, position)
 		ClassicFlight.plant_mine(self, projectile, position)
@@ -975,6 +1010,7 @@ func explode_actions(position: Vector2, projectile: Dictionary, event_start: int
 func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, attack: float = 0.0, shooter: int = -1, attack_flags: int = -1) -> int:
 	if attack_flags < 0:
 		attack_flags = IceEffects.attack_mask(int(actors[shooter].vehicle),shot_weapon) if shooter >= 0 else 0
+	JewelCombat.bridge(self,position,radius,damage,shooter,attack)
 	return Damage.blast(actors, events, position, radius, damage, emp, attack, shooter,attack_flags)
 
 ## 474650/4759b0: state gates use native computed damage or their own area,
@@ -1016,6 +1052,7 @@ func land_beacon(position: Vector2, previous: Vector2, projectile: Dictionary) -
 
 ## Losing the support below the island eliminates (REQ-05).
 func kill_by_fall(index: int) -> void:
+	if MatchMode.fall(self,index):return
 	actors[index].hp = 0
 	events.append({"type": "fall", "actor": index})
 
@@ -1094,7 +1131,7 @@ func drift_fall(actor: Dictionary, drop: float) -> void:
 func settle_actors() -> void:
 	for index in range(actors.size()):
 		var actor: Dictionary = actors[index]
-		if int(actor.hp) <= 0:
+		if int(actor.hp) <= 0 or bool(actor.get("jewel_waiting",false)):
 			continue
 		var stance := stance_of(index)
 		var floor_y: float = terrain.surface_at(actor.pos.x, actor.pos.y + 10.0)
@@ -1107,7 +1144,19 @@ func settle_actors() -> void:
 			kill_by_fall(index)
 	stamp_tilt()
 
+func choose_respawn(index: int, x: float) -> bool:
+	return MatchMode.choose_respawn(self,index,x)
+
+func step_jewels(delta: float) -> void:
+	if mode!=MatchMode.JEWEL:return
+	jewel_state.wind=roundi(wind.length())
+	jewel_state.wind_angle=roundi(-rad_to_deg(wind.angle())) if not wind.is_zero_approx() else 0
+	JewelRules.tick(jewel_state,terrain,delta)
+	events.append_array(jewel_state.get("events",[]))
+	jewel_state.events=[]
+
 func check_end() -> bool:
+	if mode==MatchMode.JEWEL:return MatchMode.check_end(self)
 	return TurnTable.check_end(self)
 
 func choose_cpu_shot() -> Dictionary:

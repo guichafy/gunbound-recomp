@@ -14,11 +14,11 @@ static func prepare(shell: Dictionary) -> void:
 	shell.armor_fields=[236,236,236,56,56,56]
 	shell.armor_phase=0
 
-static func contact(shell: Dictionary, terrain, actors: Array) -> Dictionary:
+static func contact(shell: Dictionary, terrain, actors: Array, model = null) -> Dictionary:
 	# 455cc0 recovers position−velocity, then scans toward the new endpoint.
 	var end := Physics.integer_position(shell)
 	var previous := Vector2i((int(shell.fp_pos.x)-int(shell.fp_velocity.x))>>8,(int(shell.fp_pos.y)-int(shell.fp_velocity.y))>>8)
-	return Contact.projectile_contact(previous,end,terrain,actors)
+	return Contact.projectile_contact(previous,end,terrain,actors,{},model)
 
 static func write_contact(shell: Dictionary, point: Vector2) -> void:
 	# 4566bc..456724 fixes +40/+264 to the contact pixel<<8. Do not relaunch,

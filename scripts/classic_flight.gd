@@ -222,7 +222,7 @@ static func walk_mines(model) -> void:
 ## Raon SS mine: keep walking the way it faces, flip at a gap, burst on a
 ## mobile or when the 360-step budget ends.
 static func crawl_mines(model, delta: float) -> void:
-	for index in RaonEffect.step_mines(model.mines,model.actors,model.terrain,delta):
+	for index in RaonEffect.step_mines(model.mines,model.actors,model.terrain,delta,model.jewel_state.entities if model.mode=="jewel" else []):
 		_detonate_mine(model,index)
 	# AnimateMine bounds: a mine that left the world disappears without a blast.
 	for index in range(model.mines.size()-1,-1,-1):

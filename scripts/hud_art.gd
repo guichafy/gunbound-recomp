@@ -8,6 +8,7 @@ const I18n = preload("res://scripts/i18n.gd")
 
 const Match = preload("res://scripts/match.gd")
 const Ranks = preload("res://scripts/classic_ranks.gd")
+const JewelArt = preload("res://scripts/jewel_art.gd")
 
 const Layout = preload("res://scripts/battle_hud_layout.gd")
 const K := Layout.K
@@ -69,6 +70,7 @@ var previous_angle := -1
 var weather_slide := 0.0
 var weather_shown: Array = []
 var weather_previous := ""
+var jewel_art = JewelArt.new()
 
 func _init() -> void:
 	font = SystemFont.new()
@@ -318,14 +320,37 @@ func native_digits(view: CanvasItem, name: String, value: int, right_top: Vector
 	for index in text.length():
 		view.draw_texture_rect_region(texture,Rect2(right_top+Vector2((index-text.length())*step,0),cell*K*factor),Rect2(Vector2(int(text[index])*cell.x,0),cell))
 
+func mode_scores(model) -> Array:
+	if model.mode != "jewel":
+		return []
+	return model.jewel_state.get("scores", [0, 0]).duplicate()
+
+func draw_mode_panel(view: CanvasItem, model, gold: int) -> void:
+	var scores := mode_scores(model)
+	if scores.is_empty():
+		native_rect(view,Layout.MODE_PANELS.solo,Rect2(Vector2(321,0)*K,Vector2(156,37)*K),"ActionBar.png")
+		native_digits(view,"NativeGoldDigits.png",gold,Vector2(450,6)*K,Vector2(19,24),20,5,"gold")
+		return
+	# Original panel/glyph pixels; centering in this port's 800px stage is presentation.
+	var at := Vector2(332.5,0)*K
+	native_rect(view,Layout.MODE_PANELS.jewel,Rect2(at,Vector2(135,49)*K))
+	for team in 2:
+		# Three native digits fit each 48px score well at a uniform 8/9 scale.
+		var value := maxi(0,int(scores[team]))
+		var scale := minf(8.0/9.0,48.0/(str(value).length()*18.0))
+		var right := Vector2(63+team*57,18)
+		var origin := at+(right-Vector2(str(value).length()*18*scale,0))*K
+		for layer in jewel_art.digit_layers(value,Vector2.ZERO):
+			var box := Rect2(origin+(layer.transform.origin+layer.target.position)*K*scale,layer.target.size*K*scale)
+			view.draw_texture_rect_region(layer.texture,box,layer.source)
+
 func draw_screen(view, model, state: Dictionary) -> void:
 	draw_compass(view, model)
 	draw_timer(view, model)
 	draw_delayboard(view, model, state)
 	native_rect(view,"NativeHeader.png",Layout.HEADER,"ActionBar.png")
 	native_rect(view,"NativeFooter.png",Layout.FOOTER,"ActionBar.png")
-	# Solo Gold has its own purple header panel. Do not borrow Jewel scores.
-	native_rect(view,Layout.MODE_PANELS.solo,Rect2(Vector2(321,0)*K,Vector2(156,37)*K),"ActionBar.png")
+	draw_mode_panel(view,model,int(state.gold))
 	draw_weather(view, model)
 	var strength := clampf(float(state.power)/100.0,0.0,1.0)
 	var width := floorf(400*strength)
@@ -341,7 +366,6 @@ func draw_screen(view, model, state: Dictionary) -> void:
 	native_digits(view,"NativeAngleDigits.png",absi(int(state.angle)),Vector2(161,Layout.FOOTER_Y+25)*K,Vector2(8,10),8,2,"current_angle")
 	if int(state.angle) < 0:
 		native_rect(view,"NativeAngleMinus.png",Rect2(Vector2(138,Layout.FOOTER_Y+29)*K,Vector2(5,2)*K))
-	native_digits(view,"NativeGoldDigits.png",int(state.gold),Vector2(450,6)*K,Vector2(19,24),20,5,"gold")
 	if move_active:
 		# 407860..40796f: MOVE overlays the lower charge area, not the world.
 		var expanded := move_expanded and client_assets.has("NativeMoveExpanded.png")
