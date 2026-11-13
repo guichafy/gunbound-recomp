@@ -20,6 +20,8 @@
 - [x] Regeneração idêntica, helper compilado, hash divergente rejeitado, links/diff conferidos; revisão independente corrigiu atlas MetaMine38/41.
 - [ ] Implementar etapas1–7 somente com autorização posterior; B sem prova não é alias automático.
 - [ ] Integração documental na posição2: confirmar merge do emblema#43, rebasear/validar e integrar por PR/checks protegidos. Ordem de13/11: #43 → #45 → #46 → #44; piloto B não é dependência.
+- [x] PR49/emblema confirmado merged=true; rebase na main406a426d, conflitos SDD preservam ambas as entregas; validação documental repetida.
+- [ ] Aguardar quatro checks obrigatórios no head atualizado do PR47 e integrar por rebase, sem bypass; devolver SHA remoto para liberar JEWEL.
 - [x] Push/PR liberados por confirmação direta do usuário nesta conversa; [PR47](https://github.com/guichafy/gunbound-recomp/pull/47) aberto, sem merge. Rejeições anteriores preservadas como histórico no HANDOFF.
 
 ## Luzes de projéteis — issue #32 / ADR-165 (11/11/2026)
