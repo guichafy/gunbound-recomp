@@ -12341,7 +12341,34 @@
           "rgba_copy": false
         }
       ],
-      "purpose": "Jewel team score; extracted, inactive in Solo"
+      "purpose": "Jewel footer score, local team A; inactive in Solo"
+    },
+    "NativeJewelPanelB.png": {
+      "file": "res://assets/xfs/hud/NativeJewelPanelB.png",
+      "size": [
+        135,
+        49
+      ],
+      "sha256": "ee9eac7491f0ba47f45f9535560358b345da356bb4ae9b89c93b349f94697589",
+      "rgba_sha256": "c2b2c9c4f32e8fa36470defd5c418523ada5b50fdbe3956917e87272a2d72d87",
+      "composition": "adapted to preserved UI slots",
+      "operations": [
+        {
+          "entry": "play_back.img",
+          "frame": 180,
+          "crop": null,
+          "destination": [
+            0,
+            0,
+            135,
+            49
+          ],
+          "mode": "stretch",
+          "rotate": 0,
+          "rgba_copy": false
+        }
+      ],
+      "purpose": "Jewel footer score, local team B; inactive in Solo"
     },
     "NativeOptions.png": {
       "file": "res://assets/xfs/hud/NativeOptions.png",

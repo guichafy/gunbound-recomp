@@ -92,9 +92,10 @@ com checksGodot nem evidência estática com execuçãoPE.
 - CPU é adaptação offline: escolhe jewel positivo próximo para rumo,
   avalia rajada completa com pontos e resistência útil na cópia, evita valor
   negativo e mantém dificuldade/erros e relógio de busca anteriores.
-- HUDusa NativeJewelPanel/dígitosnumfont189..198 e pontos dos dois times;
-  posição no header800×500 e escala para caber são adaptações visuais do
-  layout atual. O consumidorPE408180 desenha dígitos no footer800×600.
+- HUD usa painéis179/180 e numfont189..199 no rodapé, com time local à
+  esquerda e contador superior separado. A adaptação anterior que colocava
+  o placar no header e reduzia os dígitos foi substituída em14/11/2026;
+  contrato e validação em [JEWEL_HUD_REVIEW.md](JEWEL_HUD_REVIEW.md).
   Som de remoção `jblast.xes` já extraído; Jflame em remoção por dano (inclusive drop), salvo ramo de vitória,
   sem trilha nova. Resultado mantém BGM de batalha até OK (ADR-153).
 

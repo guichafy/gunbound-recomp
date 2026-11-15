@@ -1,5 +1,27 @@
 # Entregas e próximos trabalhos
 
+## Seguimento autorizado — envio e integração remota (14/11/2026)
+
+Pedido posterior do usuário autoriza enviar a branch, abrir o PR e fazer o
+merge após os quatro checks obrigatórios, sem bypass; acompanhar mainCI e a
+publicação automática existente. Isso substitui somente o limite local da
+entrega acima. Validação local permanece a registrada, sem mudanças novas
+no runtime e sem exportação manual. Resultado remoto será registrado à parte.
+
+
+## Revisão JEWEL — placar e integração local (14/11/2026)
+
+- [x] Reproduzir o defeito GPU e conferir ambas as janelas originais da referência.
+- [x] Corrigir painéis no footer, variantesAB/BA, centena e contador superior separado.
+- [x] Bloquear input sobre o placar e preservar SOLO/navegação/resultado.
+- [x] Rever contratos do modo e executar agregado103partidas:92.293checks/177Python,0falhas.
+- [x] GPU24cenários/792checks/720pausas exatas/24retomadas, galeria inspecionada.
+- [x] Integrar localmente no projeto salvo, preservar arquivo alheio e conferir981checks no destino.
+- [ ] Aceite visual humano/escuta/input físicos (não realizados; não bloqueiam a entrega local solicitada).
+
+Contrato, causa, fontes, metadados e limites: JEWEL_HUD_REVIEW.md e
+../jewel-hud-review/validation.json. Sem exportação nem operações remotas.
+
 ## JEWEL × mapas — integração atual
 
 - [x] Rebase mapasPR52/e2e6da50 preservando mapa/modo/loading e inventários.

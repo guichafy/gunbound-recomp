@@ -1,5 +1,9 @@
 # Registro de decisões
 
+## ADR-JEWEL-HUD-REVIEW — placar no rodapé (14/11/2026)
+
+Substitui a adaptação de placar no header de JEWEL_IMPLEMENTATION: painéis179/180 no rodapé, dígitos nativos e marcador de centena, contador superior separado e área de input coerente. Preserva conversão de canvas existente, SOLO e contratos de combate. Plano/evidência em [JEWEL_HUD_REVIEW.md](JEWEL_HUD_REVIEW.md).
+
 ## Emenda ADR-JEWEL-46 — implementação offline autorizada (13/11/2026)
 
 Executar o plano do PR50 mediante novo pedido. Manter entidadesJEWEL fora

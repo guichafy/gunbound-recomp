@@ -227,7 +227,7 @@ def build(archive, output=OUT):
                      ('NativeSelector.png',3),('NativePreviousPower.png',4),
                      ('NativeMoveFrame.png',5),('NativeMoveExpanded.png',6),('NativeMovement.png',7),
                      ('NativeMoveFill.png',8),('NativeSlice.png',9),('NativeDrag.png',11),
-                     ('NativeGoldPanel.png',178),('NativeLifePanel.png',172),('NativeJewelPanel.png',179)]
+                     ('NativeGoldPanel.png',178),('NativeLifePanel.png',172),('NativeJewelPanel.png',179),('NativeJewelPanelB.png',180)]
     for name, frame in native_frames:
         w,h = source('play_back.img',frame).size
         save(name,(w,h),lambda c,f=frame,w=w,h=h:layer(c,'play_back.img',f,(0,0,w,h)))
@@ -262,7 +262,8 @@ def build(archive, output=OUT):
     save('NativeWindTexture.png',(256,256),lambda c:layer(c,'moon.xtf',0,(0,0,256,256),rgba_copy=True))
     files['NativeGoldPanel.png']['purpose']='Solo/training Gold header; no fictitious team scores'
     files['NativeLifePanel.png']['purpose']='Score life counter; extracted, inactive in Solo'
-    files['NativeJewelPanel.png']['purpose']='Jewel team score; extracted, inactive in Solo'
+    files['NativeJewelPanel.png']['purpose']='Jewel footer score, local team A; inactive in Solo'
+    files['NativeJewelPanelB.png']['purpose']='Jewel footer score, local team B; inactive in Solo'
     gaps = ['CompassBackground.png','CompassForeground.png','CompassWhiteArrow.png','CompassYellowArrow.png','CompassRedArrow.png',
             'HealthBarFrame.png','TurnCounterBalloon.png','SelectedPlayerTurnBG.png','WeatherFrame.png','Crosshair*Ally.png','Crosshair*Enemy.png']
     catalog = {'version':1, 'archive_sha256':ARCHIVE_SHA, 'archive':'TestClient/graphics.xfs',
