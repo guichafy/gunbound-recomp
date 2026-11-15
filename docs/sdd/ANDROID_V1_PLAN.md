@@ -2,6 +2,11 @@
 
 ## Emenda — primeira entrega para testes sem secrets
 
+Seguimento CI do PR57: o primeiro runner Android limpo falhou antes do APK,
+pois `bootstrap.prepare_client` importa Pillow e o job ainda não instalava o
+lock Python. Corrigir a ordem: setup Python → instalar requirements-ci.txt →
+bootstrap Android. Acrescentar teste de ordem e repetir os checks no novo head.
+
 Pedido atual adia distribuição estável/Play Store. Implementar uma tarefa curta:
 
 - [x] RED: matriz PR/main × flag ausente/false/true confirma que o caminho padrão
