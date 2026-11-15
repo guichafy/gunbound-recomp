@@ -1,5 +1,14 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## PR57 aberto e acompanhamento da CI (15/11/2026)
+
+Novo pedido do usuário autoriza abrir o PR; ele continua responsável pelo merge.
+PR57 aberto contra main, head inicialc6f6cc40, run43740720709. Lint/version
+passaram; Android falhou em bootstrap antes de testar o APK por ausência do
+Pillow no runner limpo. A instalação do lock Python foi adicionada antes do
+bootstrap, com regressão RED→GREEN de ordem. Nenhuma regra, APK aceito ou gate
+foi modificado; o novo commit exige acompanhar novamente os checks do head.
+
 ## Emenda — APK de teste sem secrets (15/11/2026)
 
 Pedido posterior do usuário adia publicação na Play Store e remove a chave de

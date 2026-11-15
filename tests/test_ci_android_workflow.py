@@ -9,6 +9,15 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 class AndroidWorkflowTests(unittest.TestCase):
+    def test_android_installs_locked_python_dependencies_before_bootstrap(self):
+        steps=yaml.safe_load((ROOT/'.github/workflows/desktop.yml').read_text())['jobs']['android']['steps']
+        installations=[i for i,s in enumerate(steps) if 'python -m pip install -r .github/requirements-ci.txt' in s.get('run','')]
+        self.assertTrue(installations,'Clean Android runner needs Pillow before client/bootstrap imports')
+        bootstrap=next(i for i,s in enumerate(steps) if 'python scripts/ci/bootstrap.py' in s.get('run',''))
+        setup=next(i for i,s in enumerate(steps) if s.get('uses','').startswith('actions/setup-python@'))
+        self.assertLess(setup,installations[0]);self.assertLess(installations[0],bootstrap)
+        self.assertRegex((ROOT/'.github/requirements-ci.txt').read_text(),r'(?m)^Pillow==[^\s]+$')
+
     @staticmethod
     def gate(expression,event,publication):
         expression=expression.removeprefix('${{').removesuffix('}}').strip()

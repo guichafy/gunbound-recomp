@@ -196,6 +196,8 @@ jobs:
           sudo apt-get install -y libpulse0 libxkbcommon0 libnss3 tesseract-ocr
           test -c /dev/kvm
           sudo chmod a+rw /dev/kvm
+      - name: Install locked Python dependencies before client bootstrap
+        run: python -m pip install -r .github/requirements-ci.txt
       - name: Verify editor and Android templates for this target
         run: python scripts/ci/bootstrap.py --target android --no-legacy-sound
       - name: Prepare exact locked SDK JDK and emulator images in the workspace
