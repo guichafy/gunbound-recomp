@@ -53,6 +53,7 @@ func _init(factory, values, nickname: String, accept: Callable, cancel: Callable
 	nickname_input.placeholder_text = I18n.text("Seu apelido")
 	style(nickname_input)
 	body.add_child(nickname_input)
+	nickname_input.text_submitted.connect(func(_text: String): accept.call())
 	label(body,"Dificuldade da CPU",Vector2(8,140))
 	var difficulty_group := ButtonGroup.new()
 	var difficulties := ["Leve","Normal","Precisa"]
@@ -98,6 +99,8 @@ func _init(factory, values, nickname: String, accept: Callable, cancel: Callable
 	accept_button = ui.button(self,"Salvar alterações",Vector2(758,620),Vector2(210,42),accept,true)
 	accept_button.name = "SettingsAccept"
 	accept_button.focus_mode = Control.FOCUS_ALL
+	if OS.has_feature("android"):
+		ui.button(self,"Licenças",Vector2(300,620),Vector2(180,48),show_licenses)
 	visible = false
 
 func label(parent: Control, text: String, at: Vector2) -> void:
@@ -177,3 +180,18 @@ func _notification(what: int) -> void:
 
 func commit() -> void:
 	snapshot.clear()
+
+func show_licenses() -> void:
+	var dialog := AcceptDialog.new()
+	dialog.title=I18n.text("Licenças")
+	dialog.min_size=Vector2i(720,480)
+	var text := TextEdit.new()
+	text.custom_minimum_size=Vector2(700,420)
+	text.editable=false
+	text.wrap_mode=TextEdit.LINE_WRAPPING_BOUNDARY
+	for file in DirAccess.get_files_at("res://assets/licenses"):
+		text.text+=file+"\n\n"+FileAccess.get_file_as_string("res://assets/licenses/"+file)+"\n\n"
+	if text.text.is_empty():text.text=I18n.text("Licenças indisponíveis neste pacote.")
+	dialog.add_child(text)
+	add_child(dialog)
+	dialog.popup_centered()

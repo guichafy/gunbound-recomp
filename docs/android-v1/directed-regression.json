@@ -1,0 +1,192 @@
+{
+  "scope": "GDScript suite results; line coverage is Python only",
+  "workers": 4,
+  "seconds": 98.146,
+  "matches": 0,
+  "results": {
+    "import": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 12.821,
+      "matches": 0,
+      "log": ".tools/check-logs/import.log",
+      "checks": 0
+    },
+    "test_android_layout": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.33,
+      "matches": 0,
+      "log": ".tools/check-logs/test_android_layout.log",
+      "checks": 331
+    },
+    "test_android_touch": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.012,
+      "matches": 0,
+      "log": ".tools/check-logs/test_android_touch.log",
+      "checks": 35
+    },
+    "test_android_lifecycle": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.822,
+      "matches": 0,
+      "log": ".tools/check-logs/test_android_lifecycle.log",
+      "checks": 26
+    },
+    "test_android_smoke": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.005,
+      "matches": 0,
+      "log": ".tools/check-logs/test_android_smoke.log",
+      "checks": 13
+    },
+    "test_android_map_previews": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.369,
+      "matches": 0,
+      "log": ".tools/check-logs/test_android_map_previews.log",
+      "checks": 49
+    },
+    "test_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 4.032,
+      "matches": 0,
+      "log": ".tools/check-logs/test_scene.log",
+      "checks": 27
+    },
+    "test_shop_original": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.599,
+      "matches": 0,
+      "log": ".tools/check-logs/test_shop_original.log",
+      "checks": 77
+    },
+    "test_avatar_shop": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.031,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_shop.log",
+      "checks": 25
+    },
+    "test_avatar_shop_classic": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.865,
+      "matches": 0,
+      "log": ".tools/check-logs/test_avatar_shop_classic.log",
+      "checks": 24
+    },
+    "test_jewel_hud": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.681,
+      "matches": 0,
+      "log": ".tools/check-logs/test_jewel_hud.log",
+      "checks": 304
+    },
+    "test_jewel_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.877,
+      "matches": 0,
+      "log": ".tools/check-logs/test_jewel_scene.log",
+      "checks": 21
+    },
+    "test_jewel_maps_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 18.437,
+      "matches": 0,
+      "log": ".tools/check-logs/test_jewel_maps_scene.log",
+      "checks": 1395
+    },
+    "test_classic_maps_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 6.867,
+      "matches": 0,
+      "log": ".tools/check-logs/test_classic_maps_scene.log",
+      "checks": 333
+    },
+    "test_room_ui": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.814,
+      "matches": 0,
+      "log": ".tools/check-logs/test_room_ui.log",
+      "checks": 172
+    },
+    "test_room_settings": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.874,
+      "matches": 0,
+      "log": ".tools/check-logs/test_room_settings.log",
+      "checks": 59
+    },
+    "test_match_loading": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.035,
+      "matches": 0,
+      "log": ".tools/check-logs/test_match_loading.log",
+      "checks": 33
+    },
+    "test_result_screen": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.844,
+      "matches": 0,
+      "log": ".tools/check-logs/test_result_screen.log",
+      "checks": 37
+    },
+    "test_music_screens": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 3.423,
+      "matches": 0,
+      "log": ".tools/check-logs/test_music_screens.log",
+      "checks": 55
+    },
+    "test_i18n": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 0.308,
+      "matches": 0,
+      "log": ".tools/check-logs/test_i18n.log",
+      "checks": 271
+    },
+    "test_items_scene": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 9.123,
+      "matches": 0,
+      "log": ".tools/check-logs/test_items_scene.log",
+      "checks": 49
+    },
+    "test_aiming": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.899,
+      "matches": 0,
+      "log": ".tools/check-logs/test_aiming.log",
+      "checks": 25
+    },
+    "test_ci_smoke": {
+      "ok": true,
+      "exit": 0,
+      "seconds": 2.068,
+      "matches": 0,
+      "log": ".tools/check-logs/test_ci_smoke.log",
+      "checks": 9
+    }
+  }
+}

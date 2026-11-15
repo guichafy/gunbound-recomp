@@ -78,6 +78,7 @@ func layout(host) -> void:
 
 ## HUD.UseItemAction.
 func press(host, slot: int) -> void:
+	if host.has_method("effective_paused") and host.effective_paused():return
 	if host.screen != "match" or host.paused or slot < 0 or slot >= buttons.size():
 		return
 	var model = host.model

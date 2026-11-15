@@ -15,12 +15,19 @@ var polish_art = Conservative.new(POLISH_ROOT)
 var polish_keys: Array = []
 var reference_art = Conservative.new(REFERENCE_ROOT)
 var reference_keys: Array = []
+const ANDROID_PREVIEWS := "res://assets/hd/classic/android_map_previews/"
+var android_mode := OS.has_feature("android")
+var android_previews: Dictionary = {}
+var android_cache: Dictionary = {}
 const PORTRAITS := {4:1,1:2,3:3,5:4,2:5,6:6,7:7,8:8,9:9,10:10,11:11,12:12,13:13,16:16}
 var art = Conservative.new(ROOT)
 var item_art = Conservative.new(ROOT,"assets/openbound/")
 var records: Dictionary = {}
 
 func _init() -> void:
+	if FileAccess.file_exists(ANDROID_PREVIEWS+"catalog.json"):
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(ANDROID_PREVIEWS+"catalog.json"))
+		if parsed is Dictionary:android_previews=parsed
 	var native = JSON.parse_string(FileAccess.get_file_as_string("res://assets/classic/room/details/catalog.json"))
 	if native is Dictionary and native.get("assets") is Dictionary:
 		records = native.assets
@@ -44,6 +51,8 @@ func _init() -> void:
 	records["room_back"] = manifest.images.room_back
 
 func image(key: String) -> Texture2D:
+	# Android must never load the11968px strip, including fallback paths.
+	if android_mode and key=="room_maps":return load("res://assets/classic/room/details/maps.png")
 	var record: Dictionary = records.get(key,{})
 	if record.is_empty():
 		return null
@@ -56,6 +65,9 @@ func image(key: String) -> Texture2D:
 	return hd if hd != null else load("res://assets/classic/" + str(record.file))
 
 func frame(key: String, index: int) -> AtlasTexture:
+	if android_mode and key=="room_maps":
+		var preview := android_map_frame(index)
+		if preview!=null:return preview
 	var record: Dictionary = records.get(key,{})
 	if record.is_empty():
 		return null
@@ -88,3 +100,26 @@ func style_reference(button: TextureButton, key: String, shown: int = 0) -> void
 	button.texture_hover = frame(key,1 if shown==0 else shown) if atlas else image(key+"_1")
 	button.texture_pressed = frame(key,2) if atlas else image(key+"_2")
 	button.texture_disabled = frame(key,3) if atlas else image(key+"_3")
+
+## Exact crops of approved HD, partitioned for GLES maximum texture dimensions.
+func android_map_frame(index: int) -> AtlasTexture:
+	if android_previews.get("schema")!=1:return null
+	var frame_size=android_previews.get("frame_size")
+	if not frame_size is Array or frame_size.size()!=2 or frame_size[0]!=544 or frame_size[1]!=336:return null
+	var source = android_previews.get("source")
+	var approved: Dictionary=art.catalog.get("assets",{}).get("room_maps",{})
+	if not source is Dictionary or source.get("file")!="assets/hd/classic/room_smooth_4x/room/details/maps.png" or source.get("sha256")!=approved.get("sha256"):return null
+	var frames = android_previews.get("frames")
+	if not frames is Array or frames.size()!=22:return null
+	for i in 22:
+		if not frames[i] is Dictionary or frames[i].get("index")!=i or frames[i].get("file")!="map_%02d.png"%i:return null
+		if not ResourceLoader.exists(ANDROID_PREVIEWS+str(frames[i].file)):return null
+	var safe := clampi(index,0,21)
+	var path := ANDROID_PREVIEWS+str(frames[safe].file)
+	if not android_cache.has(path):android_cache[path]=load(path)
+	var texture: Texture2D=android_cache[path]
+	if texture==null or texture.get_size()!=Vector2(544,336):return null
+	var result := AtlasTexture.new()
+	result.atlas=texture
+	result.region=Rect2(0,0,544,336)
+	return result

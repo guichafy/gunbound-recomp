@@ -1,0 +1,583 @@
+{
+  "schema": 1,
+  "apk_sha256": "e59c1515892b135c453fa94d73fe846669f40b7e66954d07f63ae21c96b8a2d9",
+  "version": "0.20.5",
+  "app_id": "com.chafy.gunboundrecomp.ci",
+  "executed_abi": "arm64-v8a",
+  "kind": "final-ui",
+  "status": "passed",
+  "results": {
+    "launch": "passed",
+    "lobby": "passed",
+    "shop": "passed",
+    "solo": "passed",
+    "jewel": "passed",
+    "persistence": "passed",
+    "back": "passed",
+    "home": "passed",
+    "touch": "single-finger-adb",
+    "camera_mode": "verified-on-and-off",
+    "camera_pan": "gesture-attempted-world-displacement-not-proven",
+    "charge": "see-actions-attempted-shot-not-proven",
+    "actions_attempted": [
+      {
+        "action": "tap-text",
+        "pattern": "AVATAR",
+        "target": {
+          "left": 1348,
+          "top": 1016,
+          "width": 92,
+          "height": 29,
+          "text": "AVATAR"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "SETTINGS|CONFIGURA[C\u00c7][\u00d5O]ES",
+        "target": {
+          "left": 865,
+          "top": 1017,
+          "width": 136,
+          "height": 31,
+          "text": "SETTINGS"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-below-label",
+        "pattern": "Nickname|Apelido",
+        "target": {
+          "left": 634,
+          "top": 282,
+          "width": 101,
+          "height": 20,
+          "text": "Nickname"
+        }
+      },
+      {
+        "action": "tap-text",
+        "pattern": "Save changes|Salvar altera[\u00e7c][\u00f5o]es",
+        "target": {
+          "left": 1681,
+          "top": 926,
+          "width": 150,
+          "height": 24,
+          "text": "Save changes"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "CREATE",
+        "target": {
+          "left": 1566,
+          "top": 1016,
+          "width": 101,
+          "height": 29,
+          "text": "CREATE"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "START",
+        "target": {
+          "left": 1786,
+          "top": 1020,
+          "width": 80,
+          "height": 27,
+          "text": "START"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "CAMERA|C[\u00c2A]MERA",
+        "target": {
+          "left": 1855,
+          "top": 323,
+          "width": 80,
+          "height": 17,
+          "text": "CAMERA"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "camera-pan",
+        "duration_ms": 600,
+        "outcome": "gesture-delivered-camera-mode-visible",
+        "world_displacement": "not-proven"
+      },
+      {
+        "action": "tap-text",
+        "pattern": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+        "target": {
+          "left": 1839,
+          "top": 320,
+          "width": 113,
+          "height": 20,
+          "text": "CAMERA ON"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "camera-off",
+        "attempts": 1,
+        "outcome": "visible-off"
+      },
+      {
+        "action": "charge-hold",
+        "duration_ms": 3500,
+        "player_turn_evidence": "visible-native-timer",
+        "timer": {
+          "left": 1977,
+          "top": 121,
+          "width": 125,
+          "height": 76,
+          "text": "0.2",
+          "line": [
+            "1",
+            "1",
+            "1",
+            "12"
+          ]
+        },
+        "anchor": {
+          "left": 2012,
+          "top": 870,
+          "width": 59,
+          "height": 21,
+          "text": "PASS"
+        },
+        "shot_outcome": "not-proven"
+      },
+      {
+        "action": "tap-text",
+        "pattern": "PAUSE|PAUSA",
+        "target": {
+          "left": 2260,
+          "top": 316,
+          "width": 83,
+          "height": 28,
+          "text": "PAUSE"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "OK",
+        "target": {
+          "left": 861,
+          "top": 891,
+          "width": 59,
+          "height": 34,
+          "text": "OK"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "Resume|Retomar|Continuar|Continue",
+        "target": {
+          "left": 1220,
+          "top": 484,
+          "width": 90,
+          "height": 21,
+          "text": "Resume"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "OK",
+        "target": {
+          "left": 861,
+          "top": 891,
+          "width": 59,
+          "height": 34,
+          "text": "OK"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "CREATE",
+        "target": {
+          "left": 1566,
+          "top": 1016,
+          "width": 101,
+          "height": 29,
+          "text": "CREATE"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "SOLO",
+        "target": {
+          "left": 1151,
+          "top": 411,
+          "width": 76,
+          "height": 27,
+          "text": "SOLO"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "START",
+        "target": {
+          "left": 1786,
+          "top": 1020,
+          "width": 80,
+          "height": 27,
+          "text": "START"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "CAMERA|C[\u00c2A]MERA",
+        "target": {
+          "left": 1855,
+          "top": 323,
+          "width": 80,
+          "height": 17,
+          "text": "CAMERA"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "camera-pan",
+        "duration_ms": 600,
+        "outcome": "gesture-delivered-camera-mode-visible",
+        "world_displacement": "not-proven"
+      },
+      {
+        "action": "tap-text",
+        "pattern": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+        "target": {
+          "left": 1838,
+          "top": 320,
+          "width": 114,
+          "height": 20,
+          "text": "CAMERA ON"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "camera-off",
+        "attempts": 1,
+        "outcome": "visible-off"
+      },
+      {
+        "action": "charge-hold",
+        "duration_ms": 3500,
+        "player_turn_evidence": "visible-native-timer",
+        "timer": {
+          "left": 1949,
+          "top": 101,
+          "width": 153,
+          "height": 97,
+          "text": "15.2",
+          "line": [
+            "1",
+            "1",
+            "1",
+            "12"
+          ]
+        },
+        "anchor": {
+          "left": 2012,
+          "top": 870,
+          "width": 59,
+          "height": 24,
+          "text": "PASS"
+        },
+        "shot_outcome": "not-proven"
+      },
+      {
+        "action": "tap-text",
+        "pattern": "PAUSE|PAUSA",
+        "target": {
+          "left": 2263,
+          "top": 316,
+          "width": 80,
+          "height": 25,
+          "text": "PAUSE"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "OK",
+        "target": {
+          "left": 861,
+          "top": 898,
+          "width": 58,
+          "height": 34,
+          "text": "OK"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "Resume|Retomar|Continuar|Continue",
+        "target": {
+          "left": 1220,
+          "top": 484,
+          "width": 90,
+          "height": 20,
+          "text": "Resume"
+        },
+        "hold_ms": 0
+      },
+      {
+        "action": "tap-text",
+        "pattern": "OK",
+        "target": {
+          "left": 861,
+          "top": 898,
+          "width": 58,
+          "height": 34,
+          "text": "OK"
+        },
+        "hold_ms": 0
+      }
+    ],
+    "multitouch": "not-tested",
+    "audio": "not-tested",
+    "arm64": "manual_gate_required"
+  },
+  "observations": [
+    {
+      "screen": "system-fullscreen-tip-probe",
+      "ocr_pattern": null,
+      "ocr_absent": null,
+      "screenshot": "system-fullscreen-tip-probe.png"
+    },
+    {
+      "screen": "lobby",
+      "ocr_pattern": "CREATE|SETTINGS",
+      "ocr_absent": null,
+      "screenshot": "lobby.png"
+    },
+    {
+      "screen": "shop",
+      "ocr_pattern": "GOLD|CASH|AVATAR|SHOP",
+      "ocr_absent": null,
+      "screenshot": "shop.png"
+    },
+    {
+      "screen": "shop-system-tip-probe",
+      "ocr_pattern": null,
+      "ocr_absent": null,
+      "screenshot": "shop-system-tip-probe.png"
+    },
+    {
+      "screen": "lobby-after-shop",
+      "ocr_pattern": "CREATE|SETTINGS",
+      "ocr_absent": null,
+      "screenshot": "lobby-after-shop.png"
+    },
+    {
+      "screen": "settings",
+      "ocr_pattern": "Nickname|Apelido|Preferences|Prefer",
+      "ocr_absent": null,
+      "screenshot": "settings.png"
+    },
+    {
+      "screen": "profile-saved",
+      "ocr_pattern": "\\bAndroid42\\b",
+      "ocr_absent": null,
+      "screenshot": "profile-saved.png"
+    },
+    {
+      "screen": "profile-relaunch-tip-probe",
+      "ocr_pattern": null,
+      "ocr_absent": null,
+      "screenshot": "profile-relaunch-tip-probe.png"
+    },
+    {
+      "screen": "profile-persisted",
+      "ocr_pattern": "\\bAndroid42\\b",
+      "ocr_absent": null,
+      "screenshot": "profile-persisted.png"
+    },
+    {
+      "screen": "solo-room",
+      "ocr_pattern": "START",
+      "ocr_absent": null,
+      "screenshot": "solo-room.png"
+    },
+    {
+      "screen": "solo-battle",
+      "ocr_pattern": "CAMERA|PAUSE|PAUSA|ANGLE|[0-9]+\\s*%",
+      "ocr_absent": null,
+      "screenshot": "solo-battle.png"
+    },
+    {
+      "screen": "solo-camera-active",
+      "ocr_pattern": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "ocr_absent": null,
+      "screenshot": "solo-camera-active.png"
+    },
+    {
+      "screen": "solo-camera-after-pan",
+      "ocr_pattern": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "ocr_absent": null,
+      "screenshot": "solo-camera-after-pan.png"
+    },
+    {
+      "screen": "solo-camera-disabled",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA",
+      "ocr_absent": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "screenshot": "solo-camera-disabled.png"
+    },
+    {
+      "screen": "solo-after-charge",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA|PAUSE|PAUSA",
+      "ocr_absent": null,
+      "screenshot": "solo-after-charge.png"
+    },
+    {
+      "screen": "solo-touch-pause-visible",
+      "ocr_pattern": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "ocr_absent": null,
+      "screenshot": "solo-touch-pause-visible.png"
+    },
+    {
+      "screen": "solo-pause",
+      "ocr_pattern": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "ocr_absent": null,
+      "screenshot": "solo-pause.png"
+    },
+    {
+      "screen": "solo-resume-tip-probe",
+      "ocr_pattern": null,
+      "ocr_absent": null,
+      "screenshot": "solo-resume-tip-probe.png"
+    },
+    {
+      "screen": "solo-resume",
+      "ocr_pattern": "Resume|Retomar|Continuar|Continue",
+      "ocr_absent": null,
+      "screenshot": "solo-resume.png"
+    },
+    {
+      "screen": "solo-foreground-confirmed",
+      "ocr_pattern": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "ocr_absent": "\\bResume\\b|\\bRetomar\\b|\\bContinuar\\b|\\bContinue\\b",
+      "screenshot": "solo-foreground-confirmed.png"
+    },
+    {
+      "screen": "solo-running-again",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA",
+      "ocr_absent": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "screenshot": "solo-running-again.png"
+    },
+    {
+      "screen": "solo-restart-tip-probe",
+      "ocr_pattern": null,
+      "ocr_absent": null,
+      "screenshot": "solo-restart-tip-probe.png"
+    },
+    {
+      "screen": "solo-restart",
+      "ocr_pattern": "\\bAndroid42\\b",
+      "ocr_absent": null,
+      "screenshot": "solo-restart.png"
+    },
+    {
+      "screen": "jewel-room",
+      "ocr_pattern": "START",
+      "ocr_absent": null,
+      "screenshot": "jewel-room.png"
+    },
+    {
+      "screen": "jewel-selected",
+      "ocr_pattern": "JEWEL",
+      "ocr_absent": null,
+      "screenshot": "jewel-selected.png"
+    },
+    {
+      "screen": "jewel-battle",
+      "ocr_pattern": "CAMERA|PAUSE|PAUSA|ANGLE|[0-9]+\\s*%",
+      "ocr_absent": null,
+      "screenshot": "jewel-battle.png"
+    },
+    {
+      "screen": "jewel-camera-active",
+      "ocr_pattern": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "ocr_absent": null,
+      "screenshot": "jewel-camera-active.png"
+    },
+    {
+      "screen": "jewel-camera-after-pan",
+      "ocr_pattern": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "ocr_absent": null,
+      "screenshot": "jewel-camera-after-pan.png"
+    },
+    {
+      "screen": "jewel-camera-disabled",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA",
+      "ocr_absent": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "screenshot": "jewel-camera-disabled.png"
+    },
+    {
+      "screen": "jewel-after-charge",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA|PAUSE|PAUSA",
+      "ocr_absent": null,
+      "screenshot": "jewel-after-charge.png"
+    },
+    {
+      "screen": "jewel-touch-pause-visible",
+      "ocr_pattern": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "ocr_absent": null,
+      "screenshot": "jewel-touch-pause-visible.png"
+    },
+    {
+      "screen": "jewel-pause",
+      "ocr_pattern": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "ocr_absent": null,
+      "screenshot": "jewel-pause.png"
+    },
+    {
+      "screen": "jewel-resume-tip-probe",
+      "ocr_pattern": null,
+      "ocr_absent": null,
+      "screenshot": "jewel-resume-tip-probe.png"
+    },
+    {
+      "screen": "jewel-resume",
+      "ocr_pattern": "Resume|Retomar|Continuar|Continue",
+      "ocr_absent": null,
+      "screenshot": "jewel-resume.png"
+    },
+    {
+      "screen": "jewel-foreground-confirmed",
+      "ocr_pattern": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "ocr_absent": "\\bResume\\b|\\bRetomar\\b|\\bContinuar\\b|\\bContinue\\b",
+      "screenshot": "jewel-foreground-confirmed.png"
+    },
+    {
+      "screen": "jewel-running-again",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA",
+      "ocr_absent": "(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\\bOK\\b)",
+      "screenshot": "jewel-running-again.png"
+    },
+    {
+      "screen": "jewel-restart-tip-probe",
+      "ocr_pattern": null,
+      "ocr_absent": null,
+      "screenshot": "jewel-restart-tip-probe.png"
+    },
+    {
+      "screen": "jewel-restart",
+      "ocr_pattern": "\\bAndroid42\\b",
+      "ocr_absent": null,
+      "screenshot": "jewel-restart.png"
+    }
+  ]
+}

@@ -1,5 +1,31 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+Requisito adicional Android A8: fluxo reproduzível de APK no emulador macOS;
+[guia local](../ANDROID.md), T10 do [plano](ANDROID_V1_PLAN.md). Execução real e
+evidência separadas do aceite físico.
+
+## Android v1 — REQ-ANDROID-V1 (15/11/2026)
+
+Seguimento autorizado: após teste no emulador, o usuário aceitou a primeira
+implementação e pediu a branch pronta para seu próprio PR/merge. Commit/push e
+issues autorizados; o limite local anterior é histórico. Gates de distribuição
+e validação estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56);
+redesign permanece na #55. Sem autorização para provisionar credenciais,
+alterar proteções ou publicar manualmente. Aceite do emulador não é aceite físico.
+
+Planejamento clássico/touch confirmado e implementação local autorizada
+posteriormente. Contratos A1–A8 e limites em
+[ANDROID_V1_DESIGN.md](ANDROID_V1_DESIGN.md); execução T1–T10 em
+[ANDROID_V1_PLAN.md](ANDROID_V1_PLAN.md). Paisagem, offline1×1, touch completo,
+safe areas/lifecycle e APK pela CI, preservando SOLO/JEWEL/16mobiles/22lados.
+Redesign avançado: [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55).
+Sem autorização para commit/push/PR/merge/release, secrets, administração
+GitHub ou aparelho pessoal. Android ainda não validado remotamente/fisicamente.
+Implementação, APKs locais e fluxo AVD no macOS disponíveis; resultados e
+pendências vinculados aos bytes testados em
+[validação local](../android-v1/local-validation.md). Critérios físicos e
+implantação da CI permanecem abertos, sem alegação de aceite integral A1–A7.
+
 ## Revisão JEWEL solicitada (14/11/2026)
 
 REQ-JEWEL-46/JI-1..7 e REQ-27/28/30/48/50: corrigir placar conforme cliente Thor, separar contador superior e placares inferiores, rever caminhos relevantes do modo e validar cenas/GPU/regressões. Contrato e plano em [JEWEL_HUD_REVIEW.md](JEWEL_HUD_REVIEW.md). Somente correção local, sem autorização remota herdada.
@@ -524,7 +550,7 @@ guardam o histórico e, em caso de dúvida, vale a seção mais nova indicada aq
 
 | ID | Requisito vigente | Documento | Estado |
 |---|---|---|---|
-| REQ-01 | Engine multiplataforma; entrega executável no Mac | este arquivo, `build_macos.py` | macOS entregue; Windows/Linux/Android/iOS não testados |
+| REQ-01 | Engine multiplataforma; entrega executável no Mac | este arquivo, `build_macos.py` | macOS entregue; Android validado em AVDmacOS/API36/ARM64, físico pendente; Windows/Linux/iOS conforme CI/roadmap |
 | REQ-02 | Treino offline 1×1: apelido, mobile e dificuldade | este arquivo | Vigente; sala exibe uma faixa por time e preserva o relevo nativo dos demais poços; 16 mobiles (REQ-45) |
 | REQ-03 | Mira, força e movimento; teclado e extras na tela | HUD_0_10, AIMING_0_12 | Vigente; console original substituído por REQ-27..30 |
 | REQ-04 | Balística, colisão e crateras | CLASSIC_BALLISTICS_0_20, BATTLE_FIDELITY_0_20, TURTLE_T2_FIDELITY | Física comum 20 Hz/24.8 e onda Turtle T2 implementadas; colisão/dano continuam adaptações declaradas |
@@ -640,7 +666,7 @@ Jogar com amigos é o objetivo futuro; a primeira validação é contra a máqui
 
 | ID | Requisito / critério de aceitação | Implementação | Evidência |
 |---|---|---|---|
-| REQ-01 | Engine com suporte a macOS, Windows, Linux, Android e iOS; entrega inicial executável no Mac | Godot 4.7.2, Compatibility; `project.godot`, preset macOS, `build_macos.py` | Aplicativo Universal e assinatura; demais alvos ainda não testados |
+| REQ-01 | Engine com suporte a macOS, Windows, Linux, Android e iOS; entrega inicial executável no Mac | Godot 4.7.2, Compatibility; `project.godot`, preset macOS, `build_macos.py` | Aplicativo Universal e assinatura; Android APK/AVD API36/ARM64 com limites em docs/android-v1/local-validation.md; demais alvos conforme CI/roadmap |
 | REQ-02 | Iniciar treino offline 1×1; escolher apelido, veículo e dificuldade | Lobby `lobby_screen.gd`, sala `menu_screen.gd` pelo Create; popup da partida; `match.gd.start` | `test_scene.gd` + roteiro manual |
 | REQ-03 | Mirar, escolher força e mover com limite por turno; teclado e controles na tela | `game.gd`, `ui.gd`, `match.gd.move_actor` | Modelos, cena/input e roteiro manual |
 | REQ-04 | Balística afetada por gravidade/vento, colisão com terreno e veículos, crateras | `combat.gd`, `terrain.gd`, `match.gd` | `test_runner.gd`, partidas completas |

@@ -1,5 +1,19 @@
 # Design implementado
 
+## Android v1 — implementação local (15/11/2026)
+
+Contrato de adaptação de plataforma em [ANDROID_V1_DESIGN.md](ANDROID_V1_DESIGN.md),
+tarefas em [ANDROID_V1_PLAN.md](ANDROID_V1_PLAN.md). Layout/touch/lifecycle
+pertencem à apresentação; Match/CPU conservam regras/física. Diagnóstico
+isolado é distinto do APK candidato. Layout usa canvas clássico uniforme,
+viewport Android expand, IME por interseção física e alvos dp compartilhados
+entre desenho/hit test. Touch tem ownership e cancelamento; lifecycle exige
+Retomar e preserva a buscaCPU pura sem novo sorteio. WindowBack usa gate300ms
+declarado. PréviaHD Android usa22recortes exatos para respeitar o limite GL.
+Exportador/inspector/smokes/publisher e guia macOS estão implementados.
+Resultados e limites em [validação local](../android-v1/local-validation.md).
+AVD ARM64/API36 no Mac não comprova aparelho físico nem CI remota.
+
 ## Placar JEWEL — revisão14/11/2026
 
 BattleHudLayout compartilha JEWEL_PANEL entre desenho e bloqueio de input.

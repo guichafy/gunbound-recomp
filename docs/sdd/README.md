@@ -1,5 +1,11 @@
 # SDD — contexto persistente 0.20.5
 
+Android v1: [design](ANDROID_V1_DESIGN.md) e [plano técnico](ANDROID_V1_PLAN.md),
+base clássica/touch aprovada, execução local autorizada em15/11/2026;
+resultados/limites no topo do HANDOFF e na [validação local](../android-v1/local-validation.md).
+APK real validado em AVD macOSARM64/API36; guia em [ANDROID.md](../ANDROID.md).
+CI remota/assinatura persistente/aparelho físico continuam pendentes. Redesign futuro: issue55.
+
 Idioma e Settings atuais: [I18N_SETTINGS.md](I18N_SETTINGS.md) (REQ-55/ADR-155),
 inglês padrão e português opcional; modal modernizado no lobby à esquerda de Ranking, arte preservada.
 

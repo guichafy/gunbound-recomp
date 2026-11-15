@@ -1,5 +1,75 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Fechamento Android aceito — branch para PR do usuário (15/11/2026)
+
+Usuário testou o APK no emulador visível do macOS e confirmou “Agora funcionou”.
+Pedido atual autoriza commit/push da branch `codex/android-v1` e documentação
+das pendências no GitHub. O próprio usuário abrirá o PR e fará o merge; este
+trabalho não cria PR, merge, secrets, ambientes nem publicação manual.
+Base atualizada para `origin/main` `7d1e66d4`, que já contém a correção JEWEL;
+arquivos Android preservados, sem duplicar nem apagar o histórico integrado.
+
+Pendências estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56),
+incluindo o bloqueio da assinatura antes do merge/main. Consulta de nomes em
+15/11 confirmou que ainda não existem os secrets/variáveis Android necessários.
+Sem esses dados, o job Android da main falha explicitamente; sem habilitação e
+atestado físico, a nova publicação conjunta Android/desktop não ocorre.
+Não tratar o push/merge como garantia de APK oficial publicado.
+Ergonomia e reorganização visual permanecem na
+[issue #55](https://github.com/guichafy/gunbound-recomp/issues/55), atualizada.
+
+Revisão de fechamento encontrou e corrigiu o uso de `list packages -U` e
+`logcat --uid` na API24: o smoke Android7 agora resolve o pacote exato por
+`dumpsys`, exige usuário0 e filtra o formato UID localmente, preservando
+erros de todos os PIDs anteriores. Regressão RED→GREEN e revisão independente
+aprovadas. Execução real API24/CI ainda depende do PR e permanece pendente.
+O aceite do emulador não substitui aparelho físico, escuta ou teste de update.
+
+Fechamento validado antes do commit/push:1055,875s, 103partidas, 140suítes
+Godot,92.765checks,228Python3.13.11 sem skips,56% de cobertura da automação,
+FAILED[]. AutomaçãoCI isolada100testes/4,028s; Ruff/actionlint/whitespaceOK.
+[Relatório final](../android-v1/closing-regression.json) e
+[evidência](../android-v1/local-validation.md). Branch preparada para o PR do
+usuário; nenhum PR/merge/provisionamento de secrets ou release manual realizado.
+
+Requisito adicional Android A8: fluxo reproduzível de APK no emulador macOS;
+[guia local](../ANDROID.md), T10 do [plano](ANDROID_V1_PLAN.md). Execução real e
+evidência separadas do aceite físico.
+
+## Android v1 — implementação e QA local entregues (15/11/2026)
+
+[Design](ANDROID_V1_DESIGN.md) e [plano](ANDROID_V1_PLAN.md). Base clássica/touch
+confirmada e pedido posterior autoriza implementação/verificação local.
+Worktree3114, base49fdeaa9 e revisão JEWEL conciliada; projeto salvo preservado.
+Sem commit/push/PR/merge/release/secrets/administração/aparelho pessoal.
+Adaptadores de safe area/dp, touch, IME, Back e lifecycle implementados, com
+canvas clássico preservado e viewport Android expand. Exportador/inspector,
+diagnóstico isolado, CI e publisher atômico implementados. CPU preserva busca
+pura durante suspensão, aplicação bloqueada até Retomar, sem novo sorteio.
+PréviaHD Android usa22 recortes exatos para evitar tira11968px além do limite GL.
+Back Window tem gate heurístico300ms declarado e confirmação de saída única.
+
+APK candidato `builds/android/candidate.apk`, SHA256
+`e59c1515892b135c453fa94d73fe846669f40b7e66954d07f63ae21c96b8a2d9`:
+PASS real no AVD macOS ARM64/API36, loja/Back/IME/perfil persistido,
+SOLO/JEWEL/câmera/pausa/Home/Resume explícito/batalha/force-stop. APK diagnóstico
+`e8425034f0d2ed1151cebb26dd8df4be492fe15bcb3c05d22b5c5aea1444a054`:
+48tiros+66mapas+22JEWEL+UI3, zero falhas, perfil isolado. São `.ci`/chaves
+efêmeras, não distribuição nem prova de update persistente.
+
+Agregado anterior aos últimos ajustes de plataforma:1093,258s/92.682checks/
+194Python3.12.14/103partidas/51%, sem falhas. Faixa final22suítes/3370checks/
+98,146s e98testesCI Python3.13.11/5,164s, recortes2/0, Ruff/actionlint/diffOK.
+Revisão independente sem P1/P2 pendente no escopo. Evidência durável, SHA,
+capturas, limites e comandos: [validação local](../android-v1/local-validation.md)
+e [guia macOS](../ANDROID.md). Ledger/logs adicionais em `.tools/android-v1`.
+
+Pendente: CI remota/API24/x86, secrets/chave persistente/ambiente/required
+checks, update assinado conservando perfil, aparelho ARM64, partidas naturais
+por toque, multitouch/áudio/desempenho/insets/aceite humano. Main falha sem
+secrets válidos; publicação continua desligada sem habilitação/atestado.
+Sem commit/push/publicação ou alteração do projeto salvo/perfil real.
+
 ## Seguimento autorizado — envio e integração remota (14/11/2026)
 
 Pedido posterior do usuário autoriza enviar a branch, abrir o PR e fazer o
@@ -7,7 +77,6 @@ merge após os quatro checks obrigatórios, sem bypass; acompanhar mainCI e a
 publicação automática existente. Isso substitui somente o limite local da
 entrega acima. Validação local permanece a registrada, sem mudanças novas
 no runtime e sem exportação manual. Resultado remoto será registrado à parte.
-
 
 ## Revisão do placar JEWEL — correção local concluída (14/11/2026)
 

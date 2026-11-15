@@ -1,0 +1,112 @@
+{
+  "status": "passed",
+  "apk_sha256": "e59c1515892b135c453fa94d73fe846669f40b7e66954d07f63ae21c96b8a2d9",
+  "cases": [
+    "already-off-no-tap",
+    "observed-on-to-off"
+  ],
+  "actions": [
+    {
+      "action": "tap-text",
+      "pattern": "CREATE",
+      "target": {
+        "left": 1566,
+        "top": 1016,
+        "width": 101,
+        "height": 29,
+        "text": "CREATE"
+      },
+      "hold_ms": 0
+    },
+    {
+      "action": "tap-text",
+      "pattern": "START",
+      "target": {
+        "left": 1786,
+        "top": 1020,
+        "width": 80,
+        "height": 27,
+        "text": "START"
+      },
+      "hold_ms": 0
+    },
+    {
+      "action": "camera-off",
+      "attempts": 0,
+      "outcome": "visible-off"
+    },
+    {
+      "action": "tap-text",
+      "pattern": "CAMERA",
+      "target": {
+        "left": 1852,
+        "top": 320,
+        "width": 83,
+        "height": 20,
+        "text": "CAMERA"
+      },
+      "hold_ms": 0
+    },
+    {
+      "action": "tap-text",
+      "pattern": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "target": {
+        "left": 1838,
+        "top": 319,
+        "width": 114,
+        "height": 22,
+        "text": "CAMERA ON"
+      },
+      "hold_ms": 0
+    },
+    {
+      "action": "camera-off",
+      "attempts": 1,
+      "outcome": "visible-off"
+    }
+  ],
+  "observations": [
+    {
+      "screen": "lobby",
+      "ocr_pattern": "CREATE",
+      "ocr_absent": null,
+      "screenshot": "lobby.png"
+    },
+    {
+      "screen": "room",
+      "ocr_pattern": "START",
+      "ocr_absent": null,
+      "screenshot": "room.png"
+    },
+    {
+      "screen": "battle",
+      "ocr_pattern": "CAMERA",
+      "ocr_absent": null,
+      "screenshot": "battle.png"
+    },
+    {
+      "screen": "already-off-camera-state",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA",
+      "ocr_absent": null,
+      "screenshot": "already-off-camera-state.png"
+    },
+    {
+      "screen": "camera-on",
+      "ocr_pattern": "CAMERA\\s+ON",
+      "ocr_absent": null,
+      "screenshot": "camera-on.png"
+    },
+    {
+      "screen": "after-on-camera-state",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA",
+      "ocr_absent": null,
+      "screenshot": "after-on-camera-state.png"
+    },
+    {
+      "screen": "after-on-camera-disabled",
+      "ocr_pattern": "CAMERA|C[\u00c2A]MERA",
+      "ocr_absent": "CAMERA\\s+ON|C[\u00c2A]MERA\\s+ATIVA",
+      "screenshot": "after-on-camera-disabled.png"
+    }
+  ]
+}

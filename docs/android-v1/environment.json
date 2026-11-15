@@ -1,0 +1,18 @@
+{
+  "host": "macOS Apple Silicon",
+  "serial": "emulator-5590",
+  "avd": "gunbound_android_v1",
+  "android_api": "36",
+  "executed_abi": "arm64-v8a",
+  "qemu": "1",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": "Compatibility / SwiftShader / OpenGL ES 3.1",
+  "screenshot_size": [
+    2400,
+    1080
+  ],
+  "physical_device": false,
+  "human_emulator_acceptance": true,
+  "human_audio_acceptance_recorded": false,
+  "human_physical_acceptance": false
+}

@@ -34,11 +34,11 @@ def verify_digest(path: Path, expected: str, algorithm: str = 'sha256') -> None:
         raise ValueError(f'{algorithm.upper()} mismatch: {path.name}')
 
 
-def download(url: str, target: Path, expected: str) -> Path:
+def download(url: str, target: Path, expected: str, algorithm: str = 'sha256') -> Path:
     """Cache only verified inputs; incomplete downloads cannot become cache hits."""
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.is_file():
-        verify_digest(target, expected)
+        verify_digest(target, expected, algorithm)
         return target
     temporary = target.with_name(target.name + '.part')
     for attempt in range(3):
@@ -46,7 +46,7 @@ def download(url: str, target: Path, expected: str) -> Path:
             request = urllib.request.Request(url, headers={'User-Agent': 'Gunbound-Recomp-CI'})
             with urllib.request.urlopen(request, timeout=120) as response, temporary.open('wb') as out:
                 shutil.copyfileobj(response, out)
-            verify_digest(temporary, expected)
+            verify_digest(temporary, expected, algorithm)
             temporary.replace(target)
             return target
         except (OSError, ValueError):
@@ -103,7 +103,21 @@ def templates_directory(system: str) -> Path:
     return base / 'Godot/export_templates' / (CONFIG['godot_version'] + '.stable')
 
 
-def prepare_godot(root: Path, templates: bool = True) -> Path:
+def template_members(system: str, target: str | None = None) -> list[str]:
+    if target not in (None, 'android'):
+        raise ValueError(f'Unknown export target: {target}')
+    members = ['templates/version.txt']
+    if target == 'android':
+        return members + ['templates/android_debug.apk', 'templates/android_release.apk']
+    if system == 'Darwin':
+        return members + ['templates/macos.zip']
+    if system == 'Windows':
+        return members + ['templates/windows_release_x86_64.exe', 'templates/windows_debug_x86_64.exe']
+    return members + ['templates/linux_release.x86_64', 'templates/linux_debug.x86_64']
+
+
+def prepare_godot(root: Path, templates: bool = True, target: str | None = None) -> Path:
+    selected = template_members(platform.system(), target)
     system = platform.system()
     name, executable = editor_asset(system, platform.machine())
     cache = root / '.tools/cache'
@@ -130,16 +144,9 @@ def prepare_godot(root: Path, templates: bool = True) -> Path:
         binary.chmod(binary.stat().st_mode | 0o111)
     if templates:
         archive = asset('Godot_v4.7.2-stable_export_templates.tpz')
-        selected = ['templates/version.txt']
-        if system == 'Darwin':
-            selected.append('templates/macos.zip')
-        elif system == 'Windows':
-            selected += ['templates/windows_release_x86_64.exe', 'templates/windows_debug_x86_64.exe']
-        else:
-            selected += ['templates/linux_release.x86_64', 'templates/linux_debug.x86_64']
         unpacked = root / '.tools/template-unpack'
         safe_extract(archive, unpacked, selected)
-        installed = templates_directory(system)
+        installed = root / '.tools/android/templates' if target == 'android' else templates_directory(system)
         installed.mkdir(parents=True, exist_ok=True)
         for entry in selected:
             shutil.copy2(unpacked / entry, installed / Path(entry).name)
@@ -208,16 +215,19 @@ def prepare_client(root: Path, source: Path | None = None, legacy_sound: bool = 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--target', choices=['android'])
     parser.add_argument('--skip-godot', action='store_true', help='Use the installed editor; prepare only test evidence')
     parser.add_argument('--skip-templates', action='store_true', help='Prepare tests without export templates')
     parser.add_argument('--client-source', type=Path, help='Copy verified TestClient inputs from a local directory')
     parser.add_argument('--no-legacy-sound', action='store_true', help='Do not prepare the historical sibling sound path')
     args = parser.parse_args()
-    binary = None if args.skip_godot else prepare_godot(ROOT, not args.skip_templates)
+    binary = None if args.skip_godot else prepare_godot(ROOT, not args.skip_templates, args.target)
     prepare_client(ROOT, args.client_source, not args.no_legacy_sound)
     values = {'GUNBOUND_SOUND_XFS': str((ROOT / '.tools/gunbound-client/sound.xfs').resolve())}
     if binary:
         values['GODOT'] = str(binary)
+    if args.target == 'android':
+        values['GODOT_TEMPLATES'] = str((ROOT / '.tools/android/templates').resolve())
     for key, value in values.items():
         if '\n' in value or '\r' in value:
             raise ValueError('Environment path contains a newline')

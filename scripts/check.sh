@@ -30,6 +30,7 @@ ALL="$ALL test_native_terrain test_native_weather_roster test_weather_legacy"
 ALL="$ALL test_ci_combat test_trico_t2 test_trico_ss test_raon_ground test_battle_rank"
 ALL="$ALL test_room_rider test_classic_maps test_map_choice test_classic_maps_scene test_map_art test_import_classic_maps test_map_matches test_map_combat"
 ALL="$ALL test_jewel_hud test_jewel_rules test_jewel_match test_jewel_art test_jewel_scene test_jewel_assets test_jewel_combat test_jewel_aux test_jewel_integration test_jewel_matches test_jewel_maps test_jewel_maps_scene test_jewel_package"
+ALL="$ALL test_android_layout test_android_touch test_android_lifecycle test_android_smoke test_android_map_previews test_android_map_previews_assets"
 # --quick: sem partidas SOLO, mapas e JEWEL; inventarios completos preservados.
 QUICK=$(printf '%s\n' $ALL | grep -Ev '^(test_matches|test_classic_matches|test_map_matches|test_jewel_matches)$' | tr '\n' ' ')
 

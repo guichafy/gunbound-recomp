@@ -1,0 +1,24 @@
+CI workers: 4; one complete match per process
+OK test_android_layout 331 checks 0 matches 3.33 s
+OK test_android_touch 35 checks 0 matches 3.012 s
+OK test_android_lifecycle 26 checks 0 matches 3.822 s
+OK test_android_smoke 13 checks 0 matches 2.005 s
+OK test_android_map_previews 49 checks 0 matches 0.369 s
+OK test_scene 27 checks 0 matches 4.032 s
+OK test_shop_original 77 checks 0 matches 2.599 s
+OK test_avatar_shop 25 checks 0 matches 3.031 s
+OK test_avatar_shop_classic 24 checks 0 matches 2.865 s
+OK test_jewel_hud 304 checks 0 matches 2.681 s
+OK test_jewel_scene 21 checks 0 matches 2.877 s
+OK test_jewel_maps_scene 1395 checks 0 matches 18.437 s
+OK test_classic_maps_scene 333 checks 0 matches 6.867 s
+OK test_room_ui 172 checks 0 matches 2.814 s
+OK test_room_settings 59 checks 0 matches 2.874 s
+OK test_match_loading 33 checks 0 matches 3.035 s
+OK test_result_screen 37 checks 0 matches 2.844 s
+OK test_music_screens 55 checks 0 matches 3.423 s
+OK test_i18n 271 checks 0 matches 0.308 s
+OK test_items_scene 49 checks 0 matches 9.123 s
+OK test_aiming 25 checks 0 matches 2.899 s
+OK test_ci_smoke 9 checks 0 matches 2.068 s
+FAILED: []
