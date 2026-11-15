@@ -2,6 +2,11 @@
 
 ## Android v1 — implementação local (15/11/2026)
 
+Primeira entrega usa candidato `.ci` com assinatura de teste automática em PR e
+main padrão, sem secrets. Somente main com `ANDROID_PUBLICATION_ENABLED=true`
+seleciona distribuição persistente e seus gates. Package/APK da API24 acompanha
+a seleção da API36. Esta emenda não altera exportador, gameplay ou publisher.
+
 Contrato de adaptação de plataforma em [ANDROID_V1_DESIGN.md](ANDROID_V1_DESIGN.md),
 tarefas em [ANDROID_V1_PLAN.md](ANDROID_V1_PLAN.md). Layout/touch/lifecycle
 pertencem à apresentação; Match/CPU conservam regras/física. Diagnóstico

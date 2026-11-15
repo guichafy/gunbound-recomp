@@ -1,5 +1,22 @@
 # Android v1 — plano técnico de implementação
 
+## Emenda — primeira entrega para testes sem secrets
+
+Pedido atual adia distribuição estável/Play Store. Implementar uma tarefa curta:
+
+- [x] RED: matriz PR/main × flag ausente/false/true confirma que o caminho padrão
+  usa candidato sem secrets; só main com flagtrue entra em assinatura persistente.
+- [x] Alterar `.github/workflows/desktop.yml`: candidato e artifact de teste em
+  PR/main padrão; assinatura/artifact de distribuição somente na ativação explícita.
+  API24 deve testar o mesmo package/APK escolhido na API36.
+- [x] GREEN: executar testes de automação, shell da seleção API24 e actionlint;
+  manter os quatro checks, diagnóstico, validação de assinatura e gates oficiais.
+- [x] Atualizar guia/SDD/issue56, revisar e enviar o ajuste à mesma branch.
+
+Reutilizar o exportador `candidate`; não criar APK sem assinatura, credenciais
+remotas ou novo caminho de gameplay. A chave efêmera limita updates entre builds.
+Regressões de combate já verdes não serão repetidas para mudanças só de CI/docs.
+
 > **Para execução por agentes:** quando houver autorização de implementação,
 > usar `superpowers:executing-plans` ou, se escolhida delegação,
 > `superpowers:subagent-driven-development`, tarefa por tarefa. Os checkboxes
@@ -308,7 +325,8 @@ estender testes de perfil/resultado/música quando atingidos.
 - Secrets futuros: ANDROID_KEYSTORE_BASE64,ANDROID_KEY_ALIAS,ANDROID_KEY_PASSWORD,
   ANDROID_KEYSTORE_PASSWORD; variável pública ANDROID_CERT_SHA256. Workflow decodifica
   para runner temp, modo 0600, apksigner recebe senhas via env e cleanup usa trap.
-  Main sem inputs válidos falha; sucesso de assinatura real ainda não observado.
+  Main no modo de distribuição explícito sem inputs válidos falha; o modo
+  padrão de teste não usa esses inputs. Assinatura persistente não foi executada.
 
 - [x] Testar versão0.20.5→20005,0.21.0→21000,1.0.0→1000000, ordenação patch/minor/major,
   zeros iniciais inválidos, prerelease inválida, componente1000, código0 e
@@ -398,8 +416,8 @@ novos testes descobertos nas tarefas anteriores.
 
 **Interfaces implementadas:** job `android`, nome **Build and smoke Android candidate**,
 `needs:[lint,version]`, Ubuntu 24.04, timeout de 120 min. Artifacts:
-`android-package` (apenas APK/manifesto/sidecar, main),
-`android-test-candidates-not-for-distribution` (dois APKs de PR), `android-evidence`
+`android-package` (APK/manifesto/sidecar, main com distribuição habilitada),
+`android-test-candidates-not-for-distribution` (dois APKs de PR/main padrão), `android-evidence`
 (logs/relatórios/capturas/inspeções, always). Mesma versão/SHA de needs.version.
 `android-acceptance` usa environment `android-device-acceptance` e artifact separado.
 Release mantém nome existente e depende de version/desktop/android/android-acceptance.
@@ -418,8 +436,8 @@ foi provisionado e não há CI remota comprovada.
   source touch/layout/lifecycle no Linux sem repetir desnecessariamente as
   103 partidas ali, que continuam integrais nos dois jobs desktop existentes.
   Source Android suites também ficam no inventário normal desktop.
-- [ ] PR sem secrets produz diagnóstico e candidato efêmeros, nome de teste;
-  main tenta final assinado numa etapa limitada a push/main; secrets
+- [x] PR e main padrão sem secrets produzem diagnóstico/candidato efêmeros,
+  nome de teste. Main só tenta final persistente com a ativação explícita; secrets
   ausentes/inválidos impedem sucesso, sem fallback debug.
   Revalidar integridade dos insumos antes de uso no job de assinatura; cache
   de PR não é fonte confiável de executável/credencial. Fixar Actions por SHA.

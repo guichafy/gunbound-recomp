@@ -1,6 +1,16 @@
 # Android v1 — design e contrato de implementação local
 
 Data: 15/11/2026 (America/Sao_Paulo). Estado: **implementação local entregue; aceite físico/remoto pendente**.
+
+**Emenda do pedido atual:** a primeira entrega serve para instalação direta e
+testes, sem Play Store. PR e main devem produzir o candidato `.ci` com assinatura
+de teste automática, sem secrets, enquanto `ANDROID_PUBLICATION_ENABLED` não for
+`true`. A assinatura é exigência do Android para instalar qualquer APK, não uma
+exigência exclusiva da loja. Chave estável e seus gates ficam para distribuição
+futura; o caminho explícito de distribuição continua falhando se faltar chave.
+O candidato usa chave efêmera e não garante atualização conservando dados.
+Esta emenda prevalece sobre as passagens históricas abaixo que exigiam secrets
+em toda execução da main; não altera combate, formato do APK ou publisher.
 O recorte de interface clássica com controles touch completos foi aprovado.
 Tooling/exportação/CI/publicação já têm código e testes locais; a validação de
 interface do APK candidato passou no AVD macOS ARM64/API36, incluindo retomada
@@ -335,9 +345,10 @@ timeout de 120 min. Usa a mesma versão/SHA dos desktops, insumos verificados e
 AVDs descartáveis API 36 e 24. Boot tem limite de 300 s; diagnóstico 900 s; UI tem
 esperas por estado. As suítes fonte Android continuam no harness desktop.
 
-PR/fork: diagnóstico debug e candidato release-template `.ci`, nome de teste,
-sem secrets. Artifacts: `android-test-candidates-not-for-distribution` e
-`android-evidence` (este em `always`). Main: a etapa protegida por push/main
+PR/fork e main padrão: diagnóstico debug e candidato release-template `.ci`,
+nome de teste e assinatura automática, sem secrets. Artifacts:
+`android-test-candidates-not-for-distribution` e `android-evidence` (em `always`).
+Main somente com `ANDROID_PUBLICATION_ENABLED=true`: a etapa protegida
 **tenta** gerar o final com chave persistente, inspeciona e executa os mesmos
 bytes, e só depois sobe `android-package` (APK/JSON/sidecar). Isso ainda não foi
 executado na CI e não garante disponibilidade/correção de secrets ou QA.

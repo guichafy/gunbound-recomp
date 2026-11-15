@@ -617,5 +617,17 @@
     "report": "closing-regression.json",
     "remote_ci": "pending user-created pull request",
     "same_tested_apk_bytes": true
+  },
+  "test_delivery_policy": {
+    "user_request": "No Play Store or persistent signing setup for the first test delivery",
+    "default": "PR and main use candidate APK with automatic ephemeral test signature and .ci package",
+    "requires_distribution_secrets": false,
+    "official_distribution": "main plus ANDROID_PUBLICATION_ENABLED=true; existing signing and physical gates retained",
+    "update_limit": "Different ephemeral keys may require uninstalling test app and reset its data",
+    "workflow_tests": 3,
+    "ci_tests": 102,
+    "ci_seconds": 4.281,
+    "real_remote_ci": "not executed yet",
+    "runtime_apks_unchanged": true
   }
 }

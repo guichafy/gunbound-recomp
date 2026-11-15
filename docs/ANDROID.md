@@ -10,11 +10,17 @@ em [validação local](android-v1/local-validation.md). CI remota e aceite físi
 continuam pendentes.
 
 O usuário aceitou o teste no emulador em15/11/2026. A branch de fechamento é
-`codex/android-v1`; PR e merge serão feitos por ele. As pendências de assinatura,
-CI, atualização e aparelho estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56),
+`codex/android-v1`; PR e merge serão feitos por ele. As pendências futuras de
+distribuição estável, CI, atualização e aparelho estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56),
 e a melhoria de HUD na [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55).
-Antes do merge, prepare os inputs de assinatura: a main falha sem eles e a
-publicação conjunta desktop/Android fica desligada até completar o gate físico.
+O pedido posterior dispensa chave de distribuição nesta fase: PR e main geram
+APK de teste com assinatura automática, sem secrets. O artifact se chama
+`android-test-candidates-not-for-distribution`; instale `candidate.apk`, cujo
+nome Android é **Gunbound Recomp Test**. O Android exige assinatura mesmo fora
+da loja ([documentação](https://developer.android.com/studio/publish/app-signing));
+ela já é feita pelo exportador, sem configuração manual. Entre builds a chave
+efêmera muda: pode ser necessário desinstalar a versão anterior, perdendo os
+dados desse app de teste. Não há garantia de update conservando perfil ainda.
 
 Use Python 3.12 ou mais recente, Godot **4.7.2** em `/Applications/Godot.app`,
 Xcode Command Line Tools (`swiftc` para OCR nativo) e um SDK Android instalado.
@@ -142,11 +148,13 @@ permissões, recursos/remaps, 22 previews Android e licenças são inspecionados
 
 Na CI, job `android` aparece como **Build and smoke Android candidate**;
 Ubuntu 24.04/Python 3.13, timeout de 120 min, SDK/JDK Linux pinados em `ci-tools.json`,
-AVDs x86_64 API 36/24. PRs produzem apenas APKs de teste sem secrets:
+AVDs x86_64 API 36/24. PRs e a main padrão produzem APKs de teste sem secrets:
 `android-test-candidates-not-for-distribution`; evidências sobem em
-`android-evidence`, inclusive em falha. Main tenta assinatura persistente e só
+`android-evidence`, inclusive em falha. Main com distribuição ativada tenta assinatura persistente e só
 após os gates sobe `android-package` (APK/manifesto/sidecar). Esse caminho ainda
 não foi executado remotamente nem comprova que secrets/reviewers estão disponíveis.
+Somente main com `ANDROID_PUBLICATION_ENABLED=true` seleciona distribuição
+persistente; os inputs de assinatura são exigidos apenas nesse modo futuro.
 Chave/certificado ausente ou divergente falha; não há fallback debug publicável.
 
 A finalização (`build_android.py --finalize` com dois relatórios e commit)
