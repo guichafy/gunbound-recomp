@@ -69,6 +69,7 @@ class NativeHudImport(unittest.TestCase):
         expected = {'NativeHeader.png': decoded[0][0].crop((20,12,820,52)),
                     'NativeFooter.png': decoded[1][0], 'NativeGoldPanel.png': decoded[178][0],
                     'NativeLifePanel.png': decoded[172][0], 'NativeJewelPanel.png': decoded[179][0],
+                    'NativeJewelPanelB.png': decoded[180][0],
                     'NativeMoveExpanded.png': decoded[6][0], 'NativeStrength.png': decoded[2][0], 'NativeMovement.png': decoded[7][0]}
         for name, native in expected.items():
             path = self.folder/name
@@ -117,7 +118,7 @@ class NativeHudImport(unittest.TestCase):
             self.assertEqual(hashlib.sha256(xfs.read_entry(self.archive, self.toc[name])).hexdigest(), entry['entry_sha256'])
 
     def test_packaged_size_and_hash(self):
-        self.assertEqual(len(self.catalog['files']), 61)
+        self.assertEqual(len(self.catalog['files']), 62)
         for key, entry in self.catalog['files'].items():
             path = ROOT / entry['file'].removeprefix('res://')
             image = Image.open(path).convert('RGBA')

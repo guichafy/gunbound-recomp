@@ -1,5 +1,40 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Seguimento autorizado — envio e integração remota (14/11/2026)
+
+Pedido posterior do usuário autoriza enviar a branch, abrir o PR e fazer o
+merge após os quatro checks obrigatórios, sem bypass; acompanhar mainCI e a
+publicação automática existente. Isso substitui somente o limite local da
+entrega acima. Validação local permanece a registrada, sem mudanças novas
+no runtime e sem exportação manual. Resultado remoto será registrado à parte.
+
+
+## Revisão do placar JEWEL — correção local concluída (14/11/2026)
+
+REQ-JEWEL-46/JI-6/7 e REQ-27/28/30/48/50. Branchcodex/jewel-hud-review,
+base integrada49fdeaa9. ReproduçãoGPU mostrou painel135×49 sobre header40px:
+era adaptação antiga do porte, substituíaGold e invadia mundo. FonteThor
+406990/408180 confirmou footer665,551, variantes179/180 por time e numfont
+189..199 com centena estreita. Corrigidos âncora/escala/AB-BA, Gold independente,
+bloqueio de input no painel e espaço dos extras. Combate/modelos preservados.
+
+Plano/evidência em JEWEL_HUD_REVIEW.md. RED9/4+Python13/1; HUD304/0 após fix.
+Agregado1076,715s/402parses/139suítes/92.293checks/177Python/103partidas/62%,
+exit0 sem erros/leaks. GPU24cenários1280×800/1920×1080,792/0,720bufferspausa
+idênticos e24retomadas; headerPillow invariante. Revisão independente semP1/P2.
+Pontuação/ciclo/retorno/itens/clima/CPU/previsão/resultado revistos pelos contratos
+e regressões; nenhuma outra falha comprovada, adaptações anteriores explícitas.
+
+Correção também disponível no projeto salvo /Users/guichafy/Workspaces/DemoGame:
+ff-only local43ba5162→49fdeaa9, patch conferido,14arquivos iguais porSHA;
+AGENTS.local.md preservado. Importação no destino sem erros; sete suítes981/0.
+Documentação/capturas em docs/jewel-hud-review. Sem commit/push/PR/merge remoto,
+publicação ou app reexportado. Input/áudio físicos e clienteWindows inteiro
+não executados. A tentativa inicial no sandbox falhou no acesso a certificados
+antes dos testes; rodada final com acesso permitido a substitui. Ruff ampliado
+fora dos gates tem3diagnósticos anteriores ao delta, registrados no plano;
+lint de correção usado pelaCI passou.
+
 ## JEWEL — head final sobre PR53, pronto para checks remotos
 
 Rebase final sobre f1bfba90 concluído, mantendo integralmente o cicloRandom,

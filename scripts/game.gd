@@ -446,7 +446,9 @@ func build_hud() -> void:
 	screen_hud.z_index = -1
 	screen_hud.draw.connect(_draw_screen_hud)
 	root.add_child(screen_hud)
-	for box in [HudArt.Layout.HEADER,HudArt.Layout.FOOTER]:
+	var hud_boxes := [HudArt.Layout.HEADER,HudArt.Layout.FOOTER]
+	if model.mode=="jewel":hud_boxes.append(HudArt.Layout.JEWEL_PANEL)
+	for box in hud_boxes:
 		var blocker := Control.new()
 		blocker.position = box.position
 		blocker.size = box.size
@@ -476,7 +478,7 @@ func build_hud() -> void:
 	pass_button.tooltip_text = "Passar o turno (F8)"
 	pass_button.pressed.connect(pass_turn)
 	# Discreet extras for mouse/touch play; the original only has the keyboard.
-	var extras := Vector2(1062, HudArt.Layout.FOOTER.position.y - 40)
+	var extras := Vector2(1062, (HudArt.Layout.JEWEL_PANEL.position.y if model.mode=="jewel" else HudArt.Layout.FOOTER.position.y) - 40)
 	move_left = ui.button(root, "←", extras, Vector2(40, 32), func(): pass)
 	move_right = ui.button(root, "→", extras + Vector2(44, 0), Vector2(40, 32), func(): pass)
 	flip_button = ui.button(root, "F", extras + Vector2(88, 0), Vector2(36, 32), flip)
@@ -1170,12 +1172,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			point = event.position
 		elif event is InputEventScreenTouch and event.pressed:
 			point = event.position
-		if point != Vector2.INF and HudArt.Layout.in_world(point):
+		if point != Vector2.INF and HudArt.Layout.in_world(point,model.mode):
 			model.choose_respawn(Match.PLAYER,point.x-HudArt.Layout.WORLD.position.x+rig.position.x)
 			dragging = false
 			return
 	# Drag mode: a left press in the world during the player's aim starts the shot.
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and options.drag_aiming() and player_can_act() and HudArt.Layout.in_world(event.position):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and options.drag_aiming() and player_can_act() and HudArt.Layout.in_world(event.position,model.mode):
 		begin_drag(event.position.x)
 		dragging = false
 		return
@@ -1186,10 +1188,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	var touch_as_mouse: bool = ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch", true)
 	if event is InputEventMouseButton and event.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE]:
 		# The right (or middle) button always looks around; Drag mode needs it.
-		dragging = event.pressed and HudArt.Layout.in_world(event.position)
+		dragging = event.pressed and HudArt.Layout.in_world(event.position,model.mode)
 		pan_mask = {MOUSE_BUTTON_LEFT: MOUSE_BUTTON_MASK_LEFT, MOUSE_BUTTON_RIGHT: MOUSE_BUTTON_MASK_RIGHT, MOUSE_BUTTON_MIDDLE: MOUSE_BUTTON_MASK_MIDDLE}[event.button_index]
 	elif event is InputEventScreenTouch and not touch_as_mouse:
-		dragging = event.pressed and HudArt.Layout.in_world(event.position)
+		dragging = event.pressed and HudArt.Layout.in_world(event.position,model.mode)
 	elif event is InputEventMouseMotion and dragging:
 		# A release consumed by the HUD must not leave the drag stuck on.
 		if not (event.button_mask & pan_mask):

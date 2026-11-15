@@ -1,5 +1,9 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Revisão JEWEL solicitada (14/11/2026)
+
+REQ-JEWEL-46/JI-1..7 e REQ-27/28/30/48/50: corrigir placar conforme cliente Thor, separar contador superior e placares inferiores, rever caminhos relevantes do modo e validar cenas/GPU/regressões. Contrato e plano em [JEWEL_HUD_REVIEW.md](JEWEL_HUD_REVIEW.md). Somente correção local, sem autorização remota herdada.
+
 ## Implementação JEWEL autorizada — REQ-JEWEL-46 (13/11/2026)
 
 O pedido posterior autoriza executar integralmente o plano JEWEL offline1×1,

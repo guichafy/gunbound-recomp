@@ -8,7 +8,7 @@ const Options = preload("res://scripts/options.gd")
 
 func run() -> void:
 	var assets := ClientHudAssets.new()
-	check(assets.files.size() == 61, "61 client texture records are available")
+	check(assets.files.size() == 62, "62 client texture records include both JEWEL team variants")
 	for name in assets.files:
 		var paint := assets.texture(name)
 		check(paint != null, "Validated client texture loads: " + name)

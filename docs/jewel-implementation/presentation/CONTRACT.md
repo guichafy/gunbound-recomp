@@ -22,6 +22,10 @@ inalterada. Espaços finais normalizados; ASM e diagnósticos preservados.
   e passo20; valor em três posições, espaços omitidos. O layout do porte
  800×500 usa o painel no header, posição/escala adaptadas e documentadas.
   Os dois placares são apresentados por equipe, independentes de Gold.
+  **Substituído em14/11/2026:** o placar volta ao footer com frame179/180,
+  dois dígitos no passo20 e marcador199 para a centena100, sem redução
+  interna; ver [JEWEL_HUD_REVIEW](../../sdd/JEWEL_HUD_REVIEW.md). A descrição
+  acima do header/escala adaptados é o histórico da entrega inicial.
 
 PNG/EPA são conferidos contra o XFS pinado em `test_jewel_assets.py`;
 registro, clip, frame e ausência de luz em `test_jewel_art.gd`. O programa

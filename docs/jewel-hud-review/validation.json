@@ -1,0 +1,56 @@
+{
+  "base_commit": "49fdeaa9a5b29b216ecd7ce44a44e8a840ef8bf4",
+  "local_branch": "codex/jewel-hud-review",
+  "scope": "local HUD/input correction; combat code unchanged",
+  "full": {
+    "exit": 0,
+    "seconds": 1076.715,
+    "workers": 4,
+    "gdscript_parse": 402,
+    "godot_suites": 139,
+    "checks": 92293,
+    "python_tests": 177,
+    "python_skips": 0,
+    "complete_matches": 103,
+    "failed": [],
+    "error_or_leak_lines": 0
+  },
+  "gpu": {
+    "checks": 792,
+    "failures": 0,
+    "scenarios": 24,
+    "pause_frames_identical": 720,
+    "resumes": 24,
+    "resolutions": [
+      [
+        1280,
+        800
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "header_pixels_independent_comparison": "header-verification.json"
+  },
+  "destination": {
+    "path": "/Users/guichafy/Workspaces/DemoGame",
+    "base_fast_forward": "43ba5162 -> 49fdeaa9",
+    "runtime_files_sha256_identical": 14,
+    "directed_scene_checks": 981,
+    "failures": 0,
+    "untracked_local_file_preserved": true
+  },
+  "limits": [
+    "No export or installed app update",
+    "No remote push/PR/merge/publication",
+    "No physical input/audio acceptance",
+    "No full original Windows client execution",
+    "Existing native producer/item/CPU bridges retained"
+  ],
+  "notes": [
+    "Full test runtime code is final. After the aggregate started, test setup explicitly created its isolated profile folder and was repeated304/0; capture output path changed to ignored storage.",
+    "First sandbox aggregate failed during macOS CA import; retained separately, replaced by final escalated run.",
+    "Expanded Ruff diagnostics EXE001/I001/RUF059 pre-existed HEAD; exact CI correctness lint passed."
+  ]
+}

@@ -325,24 +325,42 @@ func mode_scores(model) -> Array:
 		return []
 	return model.jewel_state.get("scores", [0, 0]).duplicate()
 
-func draw_mode_panel(view: CanvasItem, model, gold: int) -> void:
+## Native406b20 panel order and408180 readout. Team identity stays in the
+## objective model; the local team's panel is left, independently of turn.
+func jewel_panel_sample(model) -> Dictionary:
 	var scores := mode_scores(model)
 	if scores.is_empty():
-		native_rect(view,Layout.MODE_PANELS.solo,Rect2(Vector2(321,0)*K,Vector2(156,37)*K),"ActionBar.png")
-		native_digits(view,"NativeGoldDigits.png",gold,Vector2(450,6)*K,Vector2(19,24),20,5,"gold")
-		return
-	# Original panel/glyph pixels; centering in this port's 800px stage is presentation.
-	var at := Vector2(332.5,0)*K
-	native_rect(view,Layout.MODE_PANELS.jewel,Rect2(at,Vector2(135,49)*K))
+		return {}
+	var local_team := int(model.jewel_state.get("teams",[0,1])[Match.PLAYER])
+	var layers: Array = []
 	for team in 2:
-		# Three native digits fit each 48px score well at a uniform 8/9 scale.
 		var value := maxi(0,int(scores[team]))
-		var scale := minf(8.0/9.0,48.0/(str(value).length()*18.0))
-		var right := Vector2(63+team*57,18)
-		var origin := at+(right-Vector2(str(value).length()*18*scale,0))*K
-		for layer in jewel_art.digit_layers(value,Vector2.ZERO):
-			var box := Rect2(origin+(layer.transform.origin+layer.target.position)*K*scale,layer.target.size*K*scale)
-			view.draw_texture_rect_region(layer.texture,box,layer.source)
+		var x := 692 if team==local_team else 749
+		# Native %3d skips the first character. The narrow glyph199 supplies
+		# the hundreds1 at the target100 (legal terminal score is100..124).
+		var text := str(value%100).pad_zeros(2) if value>=100 else "%2d" % value
+		for index in 2:
+			if text[index]==" ":continue
+			var anchor := Vector2(x+index*20,469)*K
+			var glyph: Dictionary=jewel_art._layer("score_digits",int(text[index]),Transform2D.IDENTITY,false)
+			if not glyph.is_empty():
+				layers.append({"texture":glyph.texture,"source":glyph.source,"box":Rect2(anchor+glyph.target.position*K,glyph.target.size*K),"anchor":anchor,"team":team,"value":value})
+		if value>=100:
+			var anchor := Vector2(x-8 if team==local_team else x-7,469)*K
+			var glyph: Dictionary=jewel_art._layer("score_digits",10,Transform2D.IDENTITY,false)
+			if not glyph.is_empty():
+				layers.append({"texture":glyph.texture,"source":glyph.source,"box":Rect2(anchor+glyph.target.position*K,glyph.target.size*K),"anchor":anchor,"team":team,"value":value})
+	return {"texture":"NativeJewelPanel.png" if local_team==0 else "NativeJewelPanelB.png","rect":Layout.JEWEL_PANEL,"layers":layers}
+
+func draw_mode_panel(view: CanvasItem, model, gold: int) -> void:
+	# Header Gold is independent of the JEWEL objective scores (406990).
+	native_rect(view,Layout.MODE_PANELS.solo,Rect2(Vector2(321,0)*K,Vector2(156,37)*K),"ActionBar.png")
+	native_digits(view,"NativeGoldDigits.png",gold,Vector2(450,6)*K,Vector2(19,24),20,5,"gold")
+	var sample := jewel_panel_sample(model)
+	if sample.is_empty():return
+	native_rect(view,sample.texture,sample.rect)
+	for layer in sample.layers:
+		view.draw_texture_rect_region(layer.texture,layer.box,layer.source)
 
 func draw_screen(view, model, state: Dictionary) -> void:
 	draw_compass(view, model)

@@ -1,5 +1,13 @@
 # Design implementado
 
+## Placar JEWEL — revisão14/11/2026
+
+BattleHudLayout compartilha JEWEL_PANEL entre desenho e bloqueio de input.
+HudArt amostra variante179/180 e dígitos/centena por time, enquanto o contador
+Gold do header continua independente. Conversão vertical do footer e escala
+global existentes preservadas; nenhum campo novo no modelo. Contrato e QA:
+[JEWEL_HUD_REVIEW.md](JEWEL_HUD_REVIEW.md).
+
 ## Mapas clássicos — arquitetura autorizada (13/11/2026)
 
 Catálogo validado por variante, com família de terreno separada do registro

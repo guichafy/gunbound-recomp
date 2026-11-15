@@ -1,0 +1,328 @@
+{
+  "checks": 792,
+  "failures": 0,
+  "paused_frames": 720,
+  "records": [
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        0,
+        0
+      ],
+      "sha256_rgba": "8c2c344d353a089ed4e493a766675784436e2da1af9a03d839f9f31169ac1f5a",
+      "tag": "1280-team0-0-0",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        5,
+        10
+      ],
+      "sha256_rgba": "e347ef28c07e178ca9e2c998d83ccc9a7de4d7f056e4aa835ab7022e7a7d4d12",
+      "tag": "1280-team0-5-10",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        75,
+        25
+      ],
+      "sha256_rgba": "db7624b382f87f64ca7452769ed7c7cd5884f88ab08d5b7892c9bc231d123477",
+      "tag": "1280-team0-75-25",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        99,
+        95
+      ],
+      "sha256_rgba": "5c13e12bb2d9588eb365199db38e7518a9e7af6a7014e8a7eb80a42810b5cd90",
+      "tag": "1280-team0-99-95",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        100,
+        25
+      ],
+      "sha256_rgba": "b4217b647fa87aba49d120103dc320977a1370b12dba0664b91c607cd1e25530",
+      "tag": "1280-team0-100-25",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        124,
+        99
+      ],
+      "sha256_rgba": "3ca1d520acf8ba16e4c547ab274c5d6bf189a22bb4549d567837ace6259867fd",
+      "tag": "1280-team0-124-99",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        0,
+        0
+      ],
+      "sha256_rgba": "6a8ae82560cfb3158b7e84759d474e2c716fd49d705c466643ed5a69a6736abd",
+      "tag": "1280-team1-0-0",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        5,
+        10
+      ],
+      "sha256_rgba": "4b999da8c75b16a666db55cbd546798866554583e4338832783afd0cbe698878",
+      "tag": "1280-team1-5-10",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        75,
+        25
+      ],
+      "sha256_rgba": "b87b8badcc329d49a94c0c4e82647b9ad791b80364c250f6756805caa1ef44bc",
+      "tag": "1280-team1-75-25",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        99,
+        95
+      ],
+      "sha256_rgba": "3881b44a172eff3d92f493237bf6af8eb699ed49f37c2a2190d81394bb95ce3b",
+      "tag": "1280-team1-99-95",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        100,
+        25
+      ],
+      "sha256_rgba": "4707d12bb09265b76941810032574f512cf8032a5d4fdfc55c62b6ee9bcd6dad",
+      "tag": "1280-team1-100-25",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1280,
+        800
+      ],
+      "scores": [
+        124,
+        99
+      ],
+      "sha256_rgba": "16173488c5a09278e6fd5ef97dd4de90050fa84cfe0d81210943a5e8664d39e4",
+      "tag": "1280-team1-124-99",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        0,
+        0
+      ],
+      "sha256_rgba": "74c8f6315b3eee0336b04f1f9b64fd5c1e8d1267598b73d3a37f9993a80c8c22",
+      "tag": "1920-team0-0-0",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        5,
+        10
+      ],
+      "sha256_rgba": "fb52cc36290a29e61e4d348bde180b91e7adebe40ba79281b2364d1676c059c4",
+      "tag": "1920-team0-5-10",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        75,
+        25
+      ],
+      "sha256_rgba": "d72457d0435b932205fc27edee75945f0b7efcebd35d6fc33689c6ebdcd4da37",
+      "tag": "1920-team0-75-25",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        99,
+        95
+      ],
+      "sha256_rgba": "36ccc1c2eb3c42ba492e22d18330f2f437c75e0aa6607c8b5ac683e2a5c9d1ce",
+      "tag": "1920-team0-99-95",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        100,
+        25
+      ],
+      "sha256_rgba": "1a1bd54a79e60dd023c8f0fac79df44056e7833a3201dc8eb41cb6d5c2da220e",
+      "tag": "1920-team0-100-25",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        124,
+        99
+      ],
+      "sha256_rgba": "94f859fff86402f1e9943385df9e698bc206330cae284528acfac4177dcc85e5",
+      "tag": "1920-team0-124-99",
+      "team": 0
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        0,
+        0
+      ],
+      "sha256_rgba": "91bf6c1237fe9cc95526d3f086e5203aee0e978918a6d48ff6781ab903741e8a",
+      "tag": "1920-team1-0-0",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        5,
+        10
+      ],
+      "sha256_rgba": "1d59037098a3e7c2c80d14d99988c1a12e9c031213371f8a340896f458cb9137",
+      "tag": "1920-team1-5-10",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        75,
+        25
+      ],
+      "sha256_rgba": "198a13f239d3ba527e2f32a357f6aaf93652b456847922297e6a9d9d055f40d7",
+      "tag": "1920-team1-75-25",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        99,
+        95
+      ],
+      "sha256_rgba": "1870493a98f3f3203623e26543ae96bbba9f9acf80e87fa899af16fda0350243",
+      "tag": "1920-team1-99-95",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        100,
+        25
+      ],
+      "sha256_rgba": "e16e8aa5919d5992200243c19c60734c8fcc21a48d716b4d9fa8d14bcb8a6d50",
+      "tag": "1920-team1-100-25",
+      "team": 1
+    },
+    {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scores": [
+        124,
+        99
+      ],
+      "sha256_rgba": "51df0fb29675301b63483913112334f2abfae976d3f3eb5ffbf1dc036dc29d64",
+      "tag": "1920-team1-124-99",
+      "team": 1
+    }
+  ],
+  "source": "49fdeaa9 plus local JEWEL HUD correction; source fixture only, no original client execution",
+  "raw_capture_location": ".tools/jewel-hud-review/gpu (ignored); five representative full captures retained alongside this record",
+  "retained_png": [
+    "1280-team0-75-25.png",
+    "1280-team1-100-25.png",
+    "1920-result.png",
+    "1920-solo.png",
+    "1920-team0-75-25.png"
+  ]
+}

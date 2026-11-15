@@ -9,13 +9,14 @@ const FOOTER_Y := 456.0
 const STRENGTH := Rect2(390.4,750.4,640,35.2)
 const ITEM_ORIGIN := Vector2(501,2)
 const ITEM_SCALE := Vector2(35.0/36.0,31.0/36.0)
-# Modes with a separate life/score model remain outside the offline scope.
+# Only JEWEL has an additional objective panel; other modes remain inactive.
 const MODE_PANELS := {"solo":"NativeGoldPanel.png", "score":"NativeLifePanel.png", "jewel":"NativeJewelPanel.png"}
+const JEWEL_PANEL := Rect2(1064,721.6,216,78.4) # native665,551 -> y-100, K1.6
 static func point(offset: Vector2) -> Vector2:
 	return (Vector2(400,FOOTER_Y+22)+offset)*K
 static func button_rect(kind: String, index: int = 0) -> Rect2:
 	if kind == "shot":
 		return Rect2(Vector2(6+index*41,FOOTER_Y+6)*K,Vector2(35,34)*K)
 	return Rect2(Vector2(11 if kind=="options" else 750,3)*K,Vector2(40,30)*K)
-static func in_world(point: Vector2) -> bool:
-	return WORLD.has_point(point)
+static func in_world(point: Vector2, mode: String = "solo") -> bool:
+	return WORLD.has_point(point) and not (mode=="jewel" and JEWEL_PANEL.has_point(point))

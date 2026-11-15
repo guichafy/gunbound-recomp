@@ -1,0 +1,12 @@
+{
+  "header_invariant_across_scores_and_teams": {
+    "1280": [
+      "145e31a0766d1590e48cae868db9ec7cb68bd70bd4c9883380ea902aa995dcf7"
+    ],
+    "1920": [
+      "5bf542583f21d7619c8475f93979e1293b317aef2030de902f86f68641635133"
+    ]
+  },
+  "images": 24,
+  "scope": "independent Pillow comparison of restored top counter; same resolution per comparison"
+}
