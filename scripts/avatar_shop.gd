@@ -107,6 +107,8 @@ var category_buttons: Array = []
 var window_scale_state: Dictionary = {}
 var attributes_feedback: Label
 var portrait_cache: Dictionary = {}
+var android_tools: Button
+var android_tools_open := false
 
 func setup(owner, shop_model) -> void:
 	host = owner
@@ -229,7 +231,7 @@ func side_button(text: String, action: Callable) -> Button:
 	return node
 
 func update_gender_caption() -> void:
-	gender_button.text = "♂ Masculino" if model.profile.gender==0 else "♀ Feminino"
+	gender_button.text = ("♂" if model.profile.gender==0 else "♀") if host.android_enabled() else ("♂ Masculino" if model.profile.gender==0 else "♀ Feminino")
 
 ## Original EPA button: frames 0 ready, 1 mouse, 2 push, 3 disable (4 active).
 func frame_button(entry: String, at: Vector2, action: Callable) -> TextureButton:
@@ -255,25 +257,55 @@ func paint_button(node: TextureButton, entry: String, active: bool) -> void:
 
 func fit_viewport() -> void:
 	size = get_viewport_rect().size
-	var factor := minf(size.x/CANVAS.x,size.y/CANVAS.y)
+	var safe := Rect2(Vector2.ZERO,size)
+	if host.android_enabled():
+		var physical := Vector2(DisplayServer.window_get_size())
+		if physical.x>0 and physical.y>0 and OS.has_feature("android"):
+			var area := Rect2(DisplayServer.get_display_safe_area())
+			area.position-=Vector2(DisplayServer.window_get_position())
+			safe=preload("res://scripts/platform_layout.gd").safe_canvas(area,get_viewport().get_screen_transform())
+	var factor := minf(safe.size.x/CANVAS.x,safe.size.y/CANVAS.y)
 	content.scale = Vector2.ONE*factor
-	content.position = (size-CANVAS*factor)*0.5
+	content.position = safe.position+(safe.size-CANVAS*factor)*0.5
 	backdrop.size = size
 	# Side controls live in the right letterbox and never cross the stage; a
 	# window without room for them (near 4:3) stacks them over the top-left.
-	var strip := Rect2(content.position+Vector2(CANVAS.x*factor,0),Vector2(maxf(0,size.x-content.position.x-CANVAS.x*factor),size.y))
+	var strip := Rect2(content.position+Vector2(CANVAS.x*factor,0),Vector2(maxf(0,safe.end.x-content.position.x-CANVAS.x*factor),safe.size.y))
 	var fits := strip.size.x >= 72
 	var width := minf(200,strip.size.x-16) if fits else 120.0
-	var x := strip.position.x+8 if fits else 8.0
+	var x := strip.position.x+8 if fits else safe.position.x+8.0
 	var font_size := clampi(int(width/7),11,15)
 	for node in [gender_button,attributes_button,status_label]:
 		node.add_theme_font_size_override("font_size",font_size)
-	gender_button.position = Vector2(x,16)
+	gender_button.position = Vector2(x,safe.position.y+16)
 	gender_button.size = Vector2(width,36)
-	attributes_button.position = Vector2(x,60)
+	attributes_button.position = Vector2(x,safe.position.y+60)
 	attributes_button.size = Vector2(width,36)
-	status_label.position = Vector2(x,108)
+	status_label.position = Vector2(x,safe.position.y+108)
 	status_label.size = Vector2(width,160)
+	if host.android_enabled():
+		var dp := preload("res://scripts/platform_layout.gd").dp_scale(get_viewport().get_screen_transform(),DisplayServer.screen_get_dpi()) if OS.has_feature("android") else 2.0
+		var enough := strip.size.x>=64*dp
+		if not is_instance_valid(android_tools):
+			android_tools=side_button("…",func(): android_tools_open=not android_tools_open;fit_viewport())
+		android_tools.visible=not enough
+		android_tools.position=safe.position+Vector2(8,8)*dp
+		android_tools.size=Vector2(48,48)*dp
+		android_tools.add_theme_font_size_override("font_size",int(20*dp))
+		var tool_x := strip.position.x+8*dp if enough else safe.position.x+8*dp
+		var tool_width := maxf(48*dp,strip.size.x-16*dp) if enough else 96*dp
+		for i in 2:
+			var button: Button=[gender_button,attributes_button][i]
+			button.visible=enough or android_tools_open
+			button.position=Vector2(tool_x,safe.position.y+(8+i*56+(0 if enough else 56))*dp)
+			button.size=Vector2(tool_width,48*dp)
+			button.add_theme_font_size_override("font_size",int(16*dp))
+		gender_button.text="♂" if model.profile.gender==0 else "♀"
+		attributes_button.text="Stats"
+		status_label.visible=enough
+		status_label.position=Vector2(tool_x,safe.position.y+128*dp)
+		status_label.size=Vector2(tool_width,160*dp)
+		status_label.add_theme_font_size_override("font_size",int(14*dp))
 
 func _exit_tree() -> void:
 	if get_viewport().size_changed.is_connected(fit_viewport):
@@ -688,6 +720,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			host.leave_shop()
 
 func _process(delta: float) -> void:
+	if host.android_enabled() and host.effective_paused():return
 	elapsed += delta
 	painter.queue_redraw()
 

@@ -1,5 +1,48 @@
 # Registro de decisões
 
+## ADR-ANDROID-V1 — base clássica e suporte Android (15/11/2026)
+
+Seguimento de fechamento: aceite do usuário no emulador e autorização de
+commit/push da branch `codex/android-v1`; PR/merge ficam com o usuário. Main
+`7d1e66d4` adotada sem duplicar o patch JEWEL. Pendências explícitas na
+issue56 e ergonomia na issue55. Assinatura/atestado/proteções não são contornados
+para anunciar uma release. O job main falhará sem os inputs de assinatura,
+hoje ausentes; publicação conjunta também exige habilitação/aceite.
+
+Android7/API24 não oferece os flags modernos `list packages -U`/`logcat --uid`.
+Para API<26, resolver somente o bloco exato de `dumpsys package`, exigir usuário0
+do AVD dedicado e filtrar localmente `logcat -d -v threadtime -v uid` pelos UIDs
+numéricos. Preservar todos os PIDs do app e recusar formato incompleto, sem
+fallback para apenas o processo atual. APIs modernas mantêm o caminho comprovado.
+
+Recorte clássico/touch auxiliar aprovado e reconfirmado; redesign na issue55.
+[Design](ANDROID_V1_DESIGN.md) reúne D1–D8/A1–A8. Pedido posterior autoriza
+executar localmente o plano, sem publicação/administração GitHub. Revisão
+JEWEL conciliada apenas no worktree, projeto salvo preservado. Propostas
+exigem prova; desktop não comprova CI Android/aparelho.
+
+Emenda de implementação local: canvas clássico preservado em transformação
+uniforme dentro da área segura; viewport Android `expand` permite desenhar os
+alvos dp nas margens. A IME usa interseção física display/janela antes da inversa,
+sem subtrair novamente a área já redimensionada. Loja restaura content scale.
+CPU mantém a busca pura já iniciada durante a suspensão, bloqueando a aplicação
+até Retomar; reiniciar consumiria RNG outra vez. Modelos de combate inalterados.
+
+Back chega pelo sinal Window, com quit automático desativado. Godot4.7.2 envia
+Activity e raw KEY_BACK por caminhos diferentes; no AVD foram observados160ms
+entre callbacks. Gate monotônico300ms substitui o dedupe por frame insuficiente.
+É adaptação heurística: Back intencional dentro300ms é ignorado e callback mais
+atrasado não tem deduplicação garantida. Confirmação de saída é modal única,
+cancelável por um novo Back aceito; regressão26/0 após RED26/2.
+
+A tira de préviasHD11968px excedeu o limite GL do AVD. Android usa22recortes
+RGBA544×336 exatos, preservando originais/HD; catálogo ausente cai no nativo.
+Exportação portátil no Mac assina apenas a cópia do editor; SDK instalado é
+read-only. APK de teste tem package`.ci`/chave efêmera; distribuição exige chave
+persistente. CI/publicação atômica foram implementadas, sem execução remota ou
+provisionamento. A8 usa APK Android real no AVDARM64/API36 do macOS; isso não
+substitui aceite físico, multitouch, escuta, desempenho ou atualização assinada.
+
 ## ADR-JEWEL-HUD-REVIEW — placar no rodapé (14/11/2026)
 
 Substitui a adaptação de placar no header de JEWEL_IMPLEMENTATION: painéis179/180 no rodapé, dígitos nativos e marcador de centena, contador superior separado e área de input coerente. Preserva conversão de canvas existente, SOLO e contratos de combate. Plano/evidência em [JEWEL_HUD_REVIEW.md](JEWEL_HUD_REVIEW.md).

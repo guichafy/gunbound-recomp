@@ -82,6 +82,9 @@ func update_keys(host, delta: float) -> void:
 		direction = 1
 	elif Input.is_physical_key_pressed(KEY_S) or Input.is_physical_key_pressed(KEY_DOWN):
 		direction = -1
+	update_direction(host,direction,delta)
+
+func update_direction(host, direction: int, delta: float) -> void:
 	if direction != aim_direction:
 		aim_direction = direction
 		aim_elapsed = 0.0

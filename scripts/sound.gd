@@ -16,6 +16,7 @@ var muted := false:
 	set(value):
 		muted = value
 		update_music()
+var suspended := false
 var next_player := 0
 # Native option attenuation is converted to linear amplitude by Options.
 # The existing master −19dB normalization remains a declared adaptation.
@@ -86,7 +87,7 @@ func battle_music(client_stage: int) -> String:
 	return track
 
 func audible_music() -> bool:
-	return not music_request.is_empty() and not muted and music_volume > 0.0
+	return not suspended and not music_request.is_empty() and not muted and music_volume > 0.0
 
 func update_music() -> void:
 	if music == null:
@@ -130,7 +131,7 @@ func play_turn(local_player: bool) -> void:
 	play("turn", original)
 
 func play(kind: String, original: AudioStream = null, pitch: float = 1.0) -> void:
-	if muted or volume <= 0.0 or (original == null and not streams.has(kind)):
+	if suspended or muted or volume <= 0.0 or (original == null and not streams.has(kind)):
 		return
 	var player := players[next_player]
 	next_player = (next_player + 1) % players.size()
@@ -166,3 +167,9 @@ func synthesize(kind: String) -> AudioStreamWAV:
 	stream.mix_rate = 22050
 	stream.data = data
 	return stream
+
+func set_suspended(value: bool) -> void:
+	suspended=value
+	for player in players:
+		if value:player.stop()
+	update_music()

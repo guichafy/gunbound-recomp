@@ -146,7 +146,11 @@ func show_settings(host) -> void:
 	for index in settings_popup.weather_buttons.size():
 		settings_popup.weather_buttons[index].set_pressed_no_signal(index==(1 if host.weather_mode=="all" else 0))
 	settings_popup.visible = true
-	settings_popup.nickname_input.grab_focus()
+	if host.android_enabled():
+		# Settings also contains audio/options: open IME only on a deliberate tap.
+		settings_popup.nickname_input.select_all_on_focus=true
+	else:
+		settings_popup.nickname_input.grab_focus()
 
 func accept_settings(host) -> void:
 	if kind!="settings" or settings_popup==null:

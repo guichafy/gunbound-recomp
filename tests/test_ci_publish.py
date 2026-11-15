@@ -61,195 +61,159 @@ class ReleaseAPI:
 
 class PublishTests(unittest.TestCase):
     def setUp(self):
-        self.assertTrue(PATH.exists(), 'publisher missing')
         spec = importlib.util.spec_from_file_location('ci_publish', PATH)
         self.module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(self.module)
 
     def packages(self, root):
-        for platform, label in [('macos', 'macOS'), ('windows', 'Windows-x86_64')]:
-            archive = root / f'Gunbound-Recomp-1.2.3-{label}.zip'
+        for platform, label, extension in [('macos','macOS','.zip'),('windows','Windows-x86_64','.zip')]:
+            archive = root / f'Gunbound-Recomp-1.2.3-{label}{extension}'
             payload = (platform + ' package').encode()
             archive.write_bytes(payload)
             digest = hashlib.sha256(payload).hexdigest()
             archive.with_suffix('.json').write_text(json.dumps({
-                'version': '1.2.3', 'commit': 'a'*40, 'platform': platform,
-                'file': archive.name, 'sha256': digest, 'size': len(payload), 'smoke': 'passed'}))
-            # Exercise input produced by Windows as well as native LF input.
-            archive.with_suffix('.zip.sha256').write_bytes(f'{digest}  {archive.name}\r\n'.encode())
+                'version':'1.2.3','commit':'a'*40,'platform':platform,'file':archive.name,
+                'sha256':digest,'size':len(payload),'smoke':'passed'}))
+            archive.with_suffix(extension+'.sha256').write_bytes(f'{digest}  {archive.name}\r\n'.encode())
 
-    def test_public_release_has_two_zips_and_one_checksum_file(self):
-        api = ReleaseAPI()
+    def complete_packages(self, root):
+        self.packages(root)
+        archive=root/'Gunbound-Recomp-1.2.3-Android.apk'
+        archive.write_bytes(b'android package')
+        digest=hashlib.sha256(archive.read_bytes()).hexdigest()
+        data=dict(schema=2,godot='4.7.2',version='1.2.3',commit='a'*40,platform='android',file=archive.name,
+                  sha256=digest,size=archive.stat().st_size,smoke='passed',abis=['arm64-v8a','x86_64'],
+                  package_id='com.chafy.gunboundrecomp',version_code=1002003,min_sdk=24,target_sdk=36,
+                  certificate_sha256='e'*64,arm64_acceptance='manual_gate_required',diagnostic='passed',final_x86_64='passed')
+        archive.with_suffix('.json').write_text(json.dumps(data))
+        archive.with_suffix('.apk.sha256').write_text(f'{digest}  {archive.name}\n')
+        return data
+
+    def accepted(self, api, manifest):
+        import sys
+        sys.path.insert(0,str(PATH.parent))
+        from android_acceptance import validate_reviews
+        payload=dict(run_id=123,commit='a'*40,apk_sha256=manifest['sha256'],version='1.2.3',device='Lab device',api=36,abi='arm64-v8a',gpu='Mali',evidence_url='https://example.org/qa',results={k:'passed' for k in ('install','solo','jewel','touch','lifecycle','audio','update')})
+        review=dict(state='approved',environments=[dict(name='android-device-acceptance')],user=dict(login='trusted',id=42),comment='ANDROID_ACCEPTANCE_V1\n'+json.dumps(payload))
+        original=api.request
+        def request(method,path,data=None,binary=False):
+            if method=='GET' and path=='/actions/runs/123':
+                return dict(event='push',head_branch='main',head_sha='a'*40)
+            if method=='GET' and path=='/actions/runs/123/approvals':
+                return [review]
+            return original(method,path,data,binary)
+        api.request=request
+        return validate_reviews([review],manifest,123,{'trusted'})
+
+    def test_new_publication_is_atomic_three_packages_and_checksums(self):
+        api=ReleaseAPI()
         with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            self.packages(root)
-            inputs = {p.name: p.read_bytes() for p in root.iterdir()}
-            self.module.publish(api, root, '1.2.3', 'a'*40)
+            root=Path(temp);manifest=self.complete_packages(root)
+            acceptance=self.accepted(api,manifest)
+            before={p.name:p.read_bytes() for p in root.iterdir()}
+            self.module.publish(api,root,'1.2.3','a'*40,acceptance,123,{'trusted'})
             self.assertFalse(api.release['draft'])
-            self.assertEqual(set(api.uploads), {
-                'Gunbound-Recomp-1.2.3-macOS.zip',
-                'Gunbound-Recomp-1.2.3-Windows-x86_64.zip', 'SHA256SUMS'})
-            self.assertEqual(api.uploads['SHA256SUMS'], (
-                f'{hashlib.sha256(b"macos package").hexdigest()}  Gunbound-Recomp-1.2.3-macOS.zip\n'
-                f'{hashlib.sha256(b"windows package").hexdigest()}  Gunbound-Recomp-1.2.3-Windows-x86_64.zip\n').encode())
-            self.assertEqual({p.name: p.read_bytes() for p in root.iterdir()}, inputs)
-            # A second invocation must be safe without cleaning generated files.
-            writes = list(api.writes)
-            self.module.publish(api, root, '1.2.3', 'a'*40)
-            self.assertEqual(api.writes, writes)
+            self.assertEqual(set(api.uploads),{'Gunbound-Recomp-1.2.3-macOS.zip','Gunbound-Recomp-1.2.3-Windows-x86_64.zip','Gunbound-Recomp-1.2.3-Android.apk','SHA256SUMS'})
+            self.assertIn('ARM64 QA: trusted',api.release['body'])
+            self.assertEqual(len(api.uploads['SHA256SUMS'].splitlines()),3)
+            self.assertEqual({p.name:p.read_bytes() for p in root.iterdir()},before)
+            writes=list(api.writes)
+            self.module.publish(api,Path('/nonexistent'),'1.2.3','a'*40)
+            self.assertEqual(api.writes,writes)
 
-    def test_failed_checksum_upload_stays_draft_and_retry_preserves_release(self):
-        api = ReleaseAPI(fail_upload='SHA256SUMS')
+    def test_failed_upload_stays_draft_and_retry_reuses_tag(self):
+        api=ReleaseAPI(fail_upload='SHA256SUMS')
         with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            self.packages(root)
-            with self.assertRaisesRegex(RuntimeError, 'upload failed'):
-                self.module.publish(api, root, '1.2.3', 'a'*40)
+            root=Path(temp);manifest=self.complete_packages(root);acceptance=self.accepted(api,manifest)
+            with self.assertRaisesRegex(RuntimeError,'upload failed'):
+                self.module.publish(api,root,'1.2.3','a'*40,acceptance,123,{'trusted'})
             self.assertTrue(api.release['draft'])
-            self.assertNotIn(('PATCH', '/releases/1'), api.writes)
-            self.assertIsNotNone(api.ref)
-            api.fail_upload = None
-            self.module.publish(api, root, '1.2.3', 'a'*40)
+            self.assertNotIn(('PATCH','/releases/1'),api.writes)
+            api.fail_upload=None
+            api.release['body']='Prior draft notes\nARM64 QA: stale approval for other APK'
+            self.module.publish(api,root,'1.2.3','a'*40,acceptance,123,{'trusted'})
             self.assertFalse(api.release['draft'])
-            self.assertEqual(api.writes.count(('POST', '/releases')), 1)
-            self.assertEqual(api.writes.count(('POST', '/git/refs')), 1)
-            self.assertEqual({a['name'] for a in api.release['assets']}, set(api.uploads))
-            self.assertEqual(len(api.release['assets']), 3)
+            self.assertIn('ARM64 QA: trusted',api.release['body'])
+            self.assertNotIn('stale approval',api.release['body'])
+            self.assertEqual(api.writes.count(('POST','/releases')),1)
+            self.assertEqual(api.writes.count(('POST','/git/refs')),1)
 
-    def test_tampered_manifest_blocks_all_remote_writes(self):
-        api = ReleaseAPI()
+    def test_tampered_package_or_acceptance_blocks_all_writes(self):
+        for tamper in ('apk','acceptance'):
+            with self.subTest(tamper=tamper),tempfile.TemporaryDirectory() as temp:
+                api=ReleaseAPI();root=Path(temp);manifest=self.complete_packages(root);acceptance=self.accepted(api,manifest)
+                if tamper=='apk':
+                    (root/manifest['file']).write_bytes(b'changed')
+                else:
+                    acceptance['apk_sha256']='f'*64
+                with self.assertRaises(ValueError):
+                    self.module.publish(api,root,'1.2.3','a'*40,acceptance,123,{'trusted'})
+                self.assertFalse(api.writes)
+
+    def test_legacy_six_assets_are_readonly_without_local_packages(self):
+        api=ReleaseAPI();api.ref={'object':{'type':'commit','sha':'a'*40}}
         with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            self.packages(root)
-            manifest = root / 'Gunbound-Recomp-1.2.3-Windows-x86_64.json'
-            data = json.loads(manifest.read_text())
-            data['smoke'] = 'failed'
-            manifest.write_text(json.dumps(data))
-            with self.assertRaises(ValueError):
-                self.module.publish(api, root, '1.2.3', 'a'*40)
+            root=Path(temp);self.packages(root)
+            api.release=dict(id=1,draft=False,tag_name='v1.2.3',target_commitish='a'*40,html_url='https://example.org',assets=[dict(id=i,name=p.name) for i,p in enumerate(root.iterdir())])
+            self.module.publish(api,Path('/nonexistent'),'1.2.3','a'*40)
+            self.assertFalse(api.writes)
+            api.release['assets'].pop()
+            with self.assertRaisesRegex(ValueError,'Published release is incomplete'):
+                self.module.publish(api,root,'1.2.3','a'*40)
             self.assertFalse(api.writes)
 
-    def test_incomplete_public_release_is_not_repaired(self):
-        api = ReleaseAPI()
+    def test_wrong_existing_tag_cannot_be_repaired(self):
+        api=ReleaseAPI();api.ref={'object':{'type':'commit','sha':'b'*40}}
         with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            self.packages(root)
-            self.module.publish(api, root, '1.2.3', 'a'*40)
-            api.release['assets'] = [a for a in api.release['assets'] if a['name'] != 'SHA256SUMS']
-            writes = list(api.writes)
-            with self.assertRaisesRegex(ValueError, 'Published release is incomplete'):
-                self.module.publish(api, root, '1.2.3', 'a'*40)
-            self.assertEqual(api.writes, writes)
+            with self.assertRaises(ValueError):
+                self.module.publish(api,Path(temp),'1.2.3','a'*40)
+        self.assertFalse(api.writes)
 
-    def test_legacy_six_asset_release_keeps_its_original_files(self):
-        api = ReleaseAPI()
+    def test_nine_inputs_validate_hash_version_commit_and_smoke(self):
         with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            self.packages(root)
-            api.ref = {'object': {'type': 'commit', 'sha': 'a'*40}}
-            api.release = {'id': 1, 'draft': False, 'tag_name': 'v1.2.3',
-                           'target_commitish': 'a'*40, 'html_url': 'https://github.com/example/release',
-                           'assets': [{'id': i, 'name': p.name} for i,p in enumerate(root.iterdir())]}
-            original = copy.deepcopy(api.release)
-            self.module.publish(api, root, '1.2.3', 'a'*40)
+            root=Path(temp);manifest=self.complete_packages(root)
+            self.assertEqual(len(self.module.validate_assets(root,'1.2.3','a'*40)),9)
+            for field in ('version','commit','smoke'):
+                data=dict(manifest,**{field:'wrong'})
+                (root/'Gunbound-Recomp-1.2.3-Android.json').write_text(json.dumps(data))
+                with self.assertRaises(ValueError):
+                    self.module.validate_assets(root,'1.2.3','a'*40)
+
+    def test_existing_draft_without_tag_reuses_release_after_full_validation(self):
+        api=ReleaseAPI()
+        api.release=dict(id=1,draft=True,tag_name='v1.2.3',target_commitish='a'*40,
+                         assets=[],html_url='https://example.org',upload_url='https://uploads.github.com/release{?name}')
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);manifest=self.complete_packages(root);acceptance=self.accepted(api,manifest)
+            self.module.publish(api,root,'1.2.3','a'*40,acceptance,123,{'trusted'})
+            self.assertFalse(api.release['draft'])
+            self.assertNotIn(('POST','/releases'),api.writes)
+            self.assertEqual(api.writes.count(('POST','/git/refs')),1)
+
+    def test_published_release_without_tag_is_never_repaired(self):
+        api=ReleaseAPI();api.release=dict(id=1,draft=False,tag_name='v1.2.3',assets=[])
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaisesRegex(ValueError,'Published release has no valid tag'):
+                self.module.publish(api,Path(temp),'1.2.3','a'*40)
+        self.assertFalse(api.writes)
+
+    def test_desktop_only_draft_cannot_choose_historical_contract(self):
+        api=ReleaseAPI();api.release=dict(id=1,draft=True,tag_name='v1.2.3',target_commitish='a'*40,assets=[])
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);self.packages(root)
+            with self.assertRaisesRegex(ValueError,'android'):
+                self.module.publish(api,root,'1.2.3','a'*40)
+        self.assertFalse(api.writes)
+
+    def test_wrong_android_godot_version_blocks_publication(self):
+        api=ReleaseAPI()
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);manifest=self.complete_packages(root)
+            manifest['godot']='4.7.1'
+            (root/'Gunbound-Recomp-1.2.3-Android.json').write_text(json.dumps(manifest))
+            with self.assertRaisesRegex(ValueError,'Android manifest'):
+                self.module.validate_assets(root,'1.2.3','a'*40)
             self.assertFalse(api.writes)
-            self.assertEqual(api.release, original)
-
-    def test_published_release_is_not_overwritten(self):
-        from unittest.mock import patch
-        paths = [Path('a.zip'), Path('b.zip')]
-        calls = []
-        class API:
-            def request(self, method, path, data=None, binary=False):
-                calls.append((method, path))
-                if '/git/ref/' in path:
-                    return {'object': {'type': 'commit', 'sha': 'a'*40}}
-                return {'draft': False, 'assets': [{'name': p.name} for p in paths], 'html_url': 'release'}
-        with patch.object(self.module, 'validate_assets', return_value=paths):
-            self.module.publish(API(), Path('.'), '1.2.3', 'a'*40)
-        self.assertTrue(all(method == 'GET' for method, _ in calls))
-
-    def test_upload_failure_leaves_draft_unpublished(self):
-        from unittest.mock import patch
-        calls = []
-        class API:
-            def request(self, method, path, data=None, binary=False):
-                calls.append((method, path, data))
-                if method == 'GET':
-                    return None
-                if method == 'POST' and path == '/git/refs':
-                    return {'object': {'type': 'commit', 'sha': 'a'*40}}
-                if method == 'POST' and path == '/releases':
-                    return {'id': 1, 'draft': True, 'assets': [], 'upload_url': 'https://uploads.github.com/r{?name}'}
-                raise RuntimeError('upload failed')
-        with tempfile.TemporaryDirectory() as temp:
-            package = Path(temp)/'a.zip'
-            package.write_bytes(b'package')
-            with patch.object(self.module, 'validate_assets', return_value=[package]):
-                with self.assertRaisesRegex(RuntimeError, 'upload failed'):
-                    self.module.publish(API(), Path(temp), '1.2.3', 'a'*40)
-        self.assertTrue(next(data['draft'] for method, path, data in calls if method == 'POST' and path == '/releases'))
-        self.assertFalse(any(method == 'PATCH' for method, _, _ in calls))
-        writes = [path for method, path, _ in calls if method == 'POST']
-        self.assertEqual(writes[:2], ['/git/refs', '/releases'])
-
-    def test_retry_resumes_draft_even_without_a_git_tag(self):
-        from unittest.mock import patch
-        calls = []
-        class API:
-            def request(self, method, path, data=None, binary=False):
-                calls.append((method, path))
-                if method == 'GET' and path.startswith('/releases?'):
-                    return [{'id': 2, 'tag_name': 'v1.2.3', 'target_commitish': 'a'*40,
-                             'draft': True, 'assets': [], 'upload_url': 'https://uploads.github.com/r{?name}'}]
-                if method == 'GET':
-                    return None
-                if method == 'POST' and path == '/git/refs':
-                    return {'object': {'type': 'commit', 'sha': 'a'*40}}
-                if method == 'POST' and path.startswith('https://uploads.github.com/'):
-                    raise RuntimeError('resuming upload')
-                raise AssertionError('must not create another release')
-        with tempfile.TemporaryDirectory() as temp:
-            package = Path(temp)/'a.zip'
-            package.write_bytes(b'package')
-            with patch.object(self.module, 'validate_assets', return_value=[package]):
-                with self.assertRaisesRegex(RuntimeError, 'resuming upload'):
-                    self.module.publish(API(), Path(temp), '1.2.3', 'a'*40)
-        self.assertNotIn(('POST', '/releases'), calls)
-
-    def test_preexisting_tag_with_different_commit_blocks_creation(self):
-        from unittest.mock import patch
-        mutations = []
-        class API:
-            def request(self, method, path, data=None, binary=False):
-                if method != 'GET':
-                    mutations.append((method, path))
-                if '/git/ref/' in path:
-                    return {'object': {'type': 'commit', 'sha': 'b'*40}}
-                return None
-        with patch.object(self.module, 'validate_assets', return_value=[]):
-            with self.assertRaises(ValueError):
-                self.module.publish(API(), Path('.'), '1.2.3', 'a'*40)
-        self.assertFalse(mutations)
-
-    def test_requires_both_platforms(self):
-        with tempfile.TemporaryDirectory() as temp:
-            with self.assertRaises(ValueError):
-                self.module.validate_assets(Path(temp), '1.2.3', 'a'*40)
-
-    def test_checks_hash_version_commit_and_smoke(self):
-        with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)
-            for platform, suffix in [('macos', 'macOS'), ('windows', 'Windows-x86_64')]:
-                archive = root / f'Gunbound-Recomp-1.2.3-{suffix}.zip'
-                archive.write_bytes(b'package')
-                digest = hashlib.sha256(b'package').hexdigest()
-                archive.with_suffix('.json').write_text(json.dumps({'version':'1.2.3', 'commit':'a'*40, 'platform':platform, 'file':archive.name,'sha256':digest,'size':7,'smoke':'passed'}))
-                archive.with_suffix('.zip.sha256').write_text(f'{digest}  {archive.name}\n')
-            self.assertEqual(len(self.module.validate_assets(root, '1.2.3', 'a'*40)), 6)
-            archive.write_bytes(b'tampered')
-            with self.assertRaises(ValueError):
-                self.module.validate_assets(root, '1.2.3', 'a'*40)
 
 
 if __name__ == '__main__':

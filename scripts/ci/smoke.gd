@@ -8,6 +8,7 @@ const CombatSmoke = preload("res://scripts/ci/combat_smoke.gd")
 var failures := 0
 var view
 var requested: Dictionary = {}
+var cases := {"shots": 0, "maps": 0, "jewel": 0, "ui": 0}
 
 func check(condition: bool, message: String) -> void:
 	if not condition:
@@ -29,6 +30,8 @@ func validate_arguments(arguments: PackedStringArray) -> Dictionary:
 	return {"ok": not version.is_empty() and isolated, "version": version, "profile": profile_path}
 
 func prepare(target, arguments: PackedStringArray = OS.get_cmdline_user_args()) -> bool:
+	if OS.has_feature("android"):
+		return false
 	requested = validate_arguments(arguments)
 	if not requested.ok or str(ProjectSettings.get_setting("application/config/version", "")) != requested.version:
 		return false
@@ -39,6 +42,9 @@ func prepare(target, arguments: PackedStringArray = OS.get_cmdline_user_args()) 
 
 func _ready() -> void:
 	call_deferred("run")
+
+func finish_report() -> void:
+	pass
 
 func run() -> void:
 	for forbidden in ["res://override.cfg", "res://export_credentials.cfg", "res://tests/test_runner.gd", "res://.github/workflows/desktop.yml", "res://assets/xfs/reference/avatar.xfs", "res://assets/xfs/reference/mh.dat"]:
@@ -62,15 +68,19 @@ func run() -> void:
 		print("PACKAGED SMOKE: shop initialized")
 		check(view.screen == "shop", "shop initialization failed")
 		check(view.profile.path == requested.profile and view.profile.save_profile(), "temporary profile save failed")
+		cases.ui = 3
 	if failures == 0:
 		var shots := CombatSmoke.run(check)
+		cases.shots = shots
 		check(shots == 48, "all 16 mobiles and three weapons exercised")
 		print("PACKAGED COMBAT: ", "PASS" if failures == 0 else "FAIL", " (", shots, " shots)")
 	if failures==0:
-		check(MapSmoke.run(check,false)==66,"all22map sides and three weapons packaged")
+		cases.maps = MapSmoke.run(check,false)
+		check(cases.maps==66,"all22map sides and three weapons packaged")
 		print("PACKAGED MAPS: ","PASS" if failures==0 else "FAIL")
 	if failures==0:
-		check(JewelSmoke.run(check)==22,"JEWEL objective packaged on all22map sides")
+		cases.jewel = JewelSmoke.run(check)
+		check(cases.jewel==22,"JEWEL objective packaged on all22map sides")
 		view.show_menu()
 		view.select_map("meta_mine_b")
 		view.set_room_mode("jewel")
@@ -82,4 +92,5 @@ func run() -> void:
 	view.queue_free()
 	await get_tree().process_frame
 	print("PACKAGED SMOKE: ", "PASS" if failures == 0 else "FAIL")
+	finish_report()
 	get_tree().quit(0 if failures == 0 else 1)

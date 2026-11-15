@@ -18,5 +18,78 @@
     "itemdata.dat": "de6f4d3c424df046d344c4f952542255a1eeb2898457eac74ff6379051b48523",
     "specialdata.dat": "9cc0d99f87e4fff6fd56160c3737fb966546ab9bb77a6a33374cb4642233e086",
     "avatar.xfs": "829be830e0c50c273d5e0ece03c22fbe0c45e07527129e60e8843d16a1df0e6d"
+  },
+  "android": {
+    "host": "Linux/x86_64",
+    "java": {
+      "version": "17.0.21+9",
+      "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21_9.tar.gz",
+      "sha256": "8b9b611d917e3dfd8419d3566b5949226f69b052fed7e109c1368add1dfe8711"
+    },
+    "packages": [
+      {
+        "package": "platforms;android-36",
+        "revision": "2",
+        "url": "https://dl.google.com/android/repository/platform-36_r02.zip",
+        "sha1": "2c1a80dd4d9f7d0e6dd336ec603d9b5c55a6f576",
+        "size": 65878410,
+        "sha256": "37607369a28c5b640b3a7998868d45898ebcb777565a0e85f9acf36f29631d2e"
+      },
+      {
+        "package": "build-tools;36.1.0",
+        "revision": "36.1.0",
+        "url": "https://dl.google.com/android/repository/build-tools_r36.1_linux.zip",
+        "sha1": "936a0d6bd5ae3e2118a7567dddbc95ff67ed46e9",
+        "size": 64195204,
+        "sha256": "a7b5889e4a79fcf3b0976bef40d401f4240fb1eed891d9d91169da1111e11d78"
+      },
+      {
+        "package": "cmdline-tools;19.0",
+        "revision": "19.0",
+        "url": "https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip",
+        "sha1": "5fdcc763663eefb86a5b8879697aa6088b041e70",
+        "size": 164760899,
+        "sha256": "7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee"
+      },
+      {
+        "package": "platform-tools",
+        "revision": "37.0.3",
+        "url": "https://dl.google.com/android/repository/platform-tools_r37.0.3-linux.zip",
+        "sha1": "e1579b288a7ae4e9bc28dedec6a154d78b3c04ed",
+        "size": 9571024,
+        "sha256": "214548146cadb2ca3508143d8a1d4be4c59de5bb837253e3ede89ed74cf450d1"
+      },
+      {
+        "package": "emulator",
+        "revision": "37.3.9",
+        "url": "https://dl.google.com/android/repository/emulator-linux_x64-16863232.zip",
+        "sha1": "5c3eeebb678f7f94a45a0b963409d8e875d1962d",
+        "size": 350070672,
+        "sha256": "887266c9e0a4b6e3449a57ae5392a9e18cec74f05d4d201c01d19aba82492e5c"
+      },
+      {
+        "package": "system-images;android-36;default;x86_64",
+        "revision": "2",
+        "url": "https://dl.google.com/android/repository/sys-img/android/x86_64-36_r02.zip",
+        "sha1": "829c076e8ff448a336097ae25a355b495ba36e2c",
+        "size": 844217077,
+        "sha256": "e1b9d9fb665001ef27b16e57d8762a2d54aec6bff617e17506edb8676667b9da"
+      },
+      {
+        "package": "system-images;android-24;default;x86_64",
+        "revision": "8",
+        "url": "https://dl.google.com/android/repository/sys-img/android/x86_64-24_r08.zip",
+        "sha1": "f6559e1949a5879f31a9662f4f0e50ad60181684",
+        "size": 419261998,
+        "sha256": "c122b69f70a229186314ec9a6f7abedcc7a6ff7ed52cb6fdce0d4f1585c09f92"
+      }
+    ],
+    "min_sdk": 24,
+    "target_sdk": 36,
+    "build_tools": "36.1.0",
+    "metadata": {
+      "repository.xml": "d670de8bce15cc4ecf5d1a135f2168137ccbb8402111dfc8efcf9cb6f3b2f28f",
+      "images.xml": "7b119fdc282a65432aab52e8bbc64546f7fb6ec74e79e235633c60d06564b111"
+    }
   }
 }

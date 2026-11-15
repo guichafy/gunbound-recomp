@@ -1,0 +1,13 @@
+................................................................................fatal: Not a valid commit name 0000000000000000000000000000000000000000
+................Release already published: https://example.org
+Published: https://example.org
+Published: https://github.com/example/release
+Release already published: https://example.org
+Published: https://github.com/example/release
+Release already published: https://github.com/example/release
+FAIL broken broken worker
+....
+----------------------------------------------------------------------
+Ran 100 tests in 4.028s
+
+OK

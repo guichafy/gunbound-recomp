@@ -1,5 +1,32 @@
 # Entregas e próximos trabalhos
 
+## Fechamento da primeira implementação Android (15/11/2026)
+
+- [x] Aceite do usuário no emulador macOS: “Agora funcionou”.
+- [x] Branch `codex/android-v1` sobre main `7d1e66d4`, preservando a correção JEWEL já integrada.
+- [x] Criar [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56) para assinatura/CI/update/aceite físico/publicação; atualizar [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55) de HUD/ergonomia.
+- [x] Corrigir e revisar a observação de logs compatível com Android7/API24, sem perder erros de processos anteriores.
+- [x] Agregado final1055,875s/103partidas/140suítes/92.765checks/228Python/56%, zero falhas;100CItests/4,028s, Ruff/actionlint/whitespaceOK.
+- [x] Preparar a entrega na branch `codex/android-v1` para push; PR e merge serão feitos pelo usuário, após checks remotos e preparação da assinatura.
+- [ ] Resolver os gates da #56 antes de anunciar distribuição oficial; secrets/variáveis ainda ausentes, main falha sem assinatura e publicação conjunta está desligada.
+
+Requisito adicional Android A8: fluxo reproduzível de APK no emulador macOS;
+[guia local](../ANDROID.md), T10 do [plano](ANDROID_V1_PLAN.md). Execução real e
+evidência separadas do aceite físico.
+
+## Android v1 — implementação local entregue (15/11/2026)
+
+- [x] Design/plano em português, base clássica/touch confirmada.
+- [x] Revisão documental: atestado ARM separado, histórico e gestos.
+- [x] Conciliar revisão JEWEL apenas neste worktree.
+- [x] T1–T8: código local de adaptadores, exportação, smoke, CI e publisher.
+- [x] T9 local: agregado103partidas/92.682checks/194Python; faixa final22suítes/3370checks,98CItests/2pixels, sem falhas.
+- [x] T10/A8: prepare/build/boot/open/check reais no macOS, AVDARM64/API36, candidatoUI e diagnóstico48/66/22/UI3 PASS.
+- [x] Revisões independentes, relatório/SHA/capturas e limites em [validação local](../android-v1/local-validation.md); guia em [ANDROID.md](../ANDROID.md).
+- [ ] T9 externo: CI PR/fork/main/API24/x86, secrets/chave/required checks/ambiente; sem autorização de implantação remota.
+- [ ] Aceite físico ARM64 do APK exato, partidas completas por toque, multitouch/áudio/insets/desempenho e update com assinatura persistente.
+- Redesign futuro já na [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55).
+
 ## Seguimento autorizado — envio e integração remota (14/11/2026)
 
 Pedido posterior do usuário autoriza enviar a branch, abrir o PR e fazer o
@@ -7,7 +34,6 @@ merge após os quatro checks obrigatórios, sem bypass; acompanhar mainCI e a
 publicação automática existente. Isso substitui somente o limite local da
 entrega acima. Validação local permanece a registrada, sem mudanças novas
 no runtime e sem exportação manual. Resultado remoto será registrado à parte.
-
 
 ## Revisão JEWEL — placar e integração local (14/11/2026)
 

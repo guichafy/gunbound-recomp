@@ -1,0 +1,293 @@
+--------- beginning of main
+11-15 12:39:50.072 15009 15009 I nboundrecomp.ci: Using CollectorTypeCMC GC.
+11-15 12:39:50.121 15009 15009 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-15 12:39:50.265 15009 15009 D nativeloader: Configuring clns-9 for other apk /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64:/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.chafy.gunboundrecomp.ci
+11-15 12:39:50.272 15009 15009 I nboundrecomp.ci: AssetManager2(0xb400007a9481f818) locale list changing from [] to [en-US]
+11-15 12:39:50.317 15009 15009 V GraphicsEnvironment: Currently set values for:
+11-15 12:39:50.317 15009 15009 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-15 12:39:50.317 15009 15009 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-15 12:39:50.317 15009 15009 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in per-application setting
+11-15 12:39:50.320 15009 15009 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-15 12:39:50.320 15009 15009 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in ANGLE allowlist or settings, returning default
+11-15 12:39:50.320 15009 15009 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-15 12:39:50.381 15009 15009 I nboundrecomp.ci: AssetManager2(0xb400007a948258f8) locale list changing from [] to [en-US]
+--------- beginning of system
+11-15 12:39:50.385 15009 15023 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-15 12:39:50.413 15009 15009 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-15 12:39:50.427 15009 15009 D CompatChangeReporter: Compat change id reported: 377864165; UID 10235; state: ENABLED
+11-15 12:39:50.432 15009 15009 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-15 12:39:50.436 15009 15009 D GodotActivity: Project command line parameters: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:39:50.437 15009 15009 D GodotActivity: Launch intent Intent { flg=0x10000000 xflg=0x5 cmp=com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher } with parameters []
+11-15 12:39:50.449 15009 15009 V GodotActivity: Creating new Godot fragment instance.
+11-15 12:39:50.475 15009 15009 V Godot   : Initializing Godot plugin registry
+11-15 12:39:50.482 15009 15009 I GodotPluginRegistry: Registering runtime plugin AndroidRuntime
+11-15 12:39:50.482 15009 15009 V Godot   : InitEngine with params: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:39:50.484 15009 15023 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-15 12:39:50.485 15009 15023 I EGL_emulation: Opening libGLESv2_emulation.so
+11-15 12:39:50.487 15009 15023 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-15 12:39:50.487 15009 15023 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-15 12:39:50.495 15009 15009 D nativeloader: Load /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64/libgodot_android.so using class loader ns clns-9 (caller=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk): ok
+11-15 12:39:50.505 15009 15009 V Godot   : Godot native layer initialization completed: true
+11-15 12:39:50.505 15009 15009 V Godot   : Setting up native layer with params: [--xr-mode, off, --fullscreen]
+11-15 12:39:50.570 15009 15009 V Godot   : Godot native layer setup completed
+11-15 12:39:50.570 15009 15009 V Godot   : OnInitRenderView: GodotFragment{2111392} (d53f71e3-5358-4c1f-8461-9694ca3b311e id=0x7f07002c)
+11-15 12:39:50.582 15009 15009 W HWUI    : Image decoding logging dropped!
+11-15 12:39:50.583 15009 15009 W HWUI    : Image decoding logging dropped!
+11-15 12:39:50.583 15009 15009 W HWUI    : Image decoding logging dropped!
+11-15 12:39:50.603 15009 15009 D Godot   : Render view should be transparent: false
+11-15 12:39:50.603 15009 15009 D Godot   : renderingDevice: opengl3 (ProjectSettings)
+11-15 12:39:50.603 15009 15009 D Godot   : 			renderer: gl_compatibility (ProjectSettings)
+11-15 12:39:50.617 15009 15009 V Godot   : OnStart: GodotFragment{2111392} (d53f71e3-5358-4c1f-8461-9694ca3b311e id=0x7f07002c)
+11-15 12:39:50.617 15009 15009 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-15 12:39:50.618 15009 15009 V Godot   : OnResume: GodotFragment{2111392} (d53f71e3-5358-4c1f-8461-9694ca3b311e id=0x7f07002c)
+11-15 12:39:50.629 15009 15009 W HWUI    : Unknown dataspace 0
+11-15 12:39:50.644 15009 15009 D InsetsController: Setting requestedVisibleTypes to -16 (was -9)
+11-15 12:39:50.683 15009 15028 W RegularContextFactory: creating OpenGL ES 3.0 context :
+11-15 12:39:50.698 15009 15028 I godot   : Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+11-15 12:39:50.821 15009 15009 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:39:50.821 15009 15009 I ImeTracker: com.chafy.gunboundrecomp.ci:d55b9cec: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-15 12:39:51.184 15009 15009 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=true, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.chafy.gunboundrecomp.ci
+11-15 12:39:51.714 15009 15036 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[GodotAppLauncher]#1) as ready
+11-15 12:39:51.715 15009 15036 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[GodotAppLauncher]#2) as ready
+11-15 12:39:51.715 15009 15036 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(SurfaceView[com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher]#0) as ready
+11-15 12:39:51.740 15009 15028 I godot   : OpenGL API OpenGL ES 3.1 (OpenGL ES 3.1.0 (ANGLE 2.1.1 git hash: fbf66f49c7cc)) - Compatibility - Using Device: Google (Google Inc. (Google)) - Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))
+11-15 12:39:51.742 15009 15028 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0xb4000079a4961390
+11-15 12:39:51.743 15009 15028 D AudioSystem: getService: checking for service media.audio_flinger: 0xb4000079148cd9c0
+11-15 12:39:51.743 15009 15028 D nboundrecomp.ci: PlayerBase::PlayerBase()
+11-15 12:39:51.743 15009 15028 D nboundrecomp.ci: TrackPlayerBase::TrackPlayerBase()
+11-15 12:39:51.743 15009 15028 I libOpenSLES: Emulating old channel mask behavior (ignoring positional mask 0x3, using default mask 0x3 based on channel count of 2)
+11-15 12:39:51.774 15009 15028 I godot   :
+11-15 12:39:53.881 15009 15028 V Godot   : OnGodotSetupCompleted
+11-15 12:39:54.165 15009 15028 V Godot   : OnGodotMainLoopStarted
+11-15 12:39:57.725 15009 15009 V Godot   : Invoking onMainBackPressed for plugin AndroidRuntime
+11-15 12:40:02.450 15009 15009 I ImeTracker: com.chafy.gunboundrecomp.ci:b69b9134: onRequestShow at ORIGIN_CLIENT reason SHOW_SOFT_INPUT fromUser false
+11-15 12:40:02.466 15009 15009 D InsetsController: show(ime(), fromIme=false)
+11-15 12:40:02.473 15009 15009 D InsetsController: Setting requestedVisibleTypes to -8 (was -16)
+11-15 12:40:02.518 15009 15014 I nboundrecomp.ci: Background concurrent mark compact GC freed 9170KB AllocSpace bytes, 9(712KB) LOS objects, 49% free, 2581KB/5163KB, paused 2.914ms,6.395ms total 106.266ms
+11-15 12:40:03.775 15009 15009 I ImeTracker: com.chafy.gunboundrecomp.ci:b69b9134: onShown
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381390, 40376092, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381426, 46494051, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381448, 66393343, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed App frame:UNKNOWN: 3, 381499, 99496970, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:UNKNOWN: 3, 381499, 99496970, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381566, 64888639, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381589, 46898557, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381627, 49784059, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381642, 47240976, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381665, 52849019, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.913 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 381680, 73998645, CUJ=J<IME_INSETS_SHOW_ANIMATION::0@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:03.917 15009 15045 V PerfettoTrigger: Triggering /system/bin/trigger_perfetto com.android.telemetry.interaction-jank-monitor-80
+11-15 12:40:07.313 15009 15009 I ImeTracker: com.chafy.gunboundrecomp.ci:1083e8ef: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT_REQUEST_HIDE_WITH_CONTROL fromUser true
+11-15 12:40:07.313 15009 15009 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ImeBackAnimationController@6930aa0
+11-15 12:40:07.314 15009 15009 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:40:07.315 15009 15009 D InsetsController: Setting requestedVisibleTypes to -16 (was -8)
+11-15 12:40:07.734 15009 15009 I ImeTracker: system_server:a81cf7be: onCancelled at PHASE_CLIENT_ON_CONTROLS_CHANGED
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 382284, 3133666, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 382322, 50796918, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 382330, 75708127, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 382347, 90748629, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 382357, 99341298, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 382365, 87246423, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed App frame:UNKNOWN: 3, 382375, 131162425, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:UNKNOWN: 3, 382375, 131162425, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.829 15009 15009 W FrameTracker: Missed SF frame:JANK_COMPOSER, 382391, 93407511, CUJ=J<IME_INSETS_HIDE_ANIMATION::1@1@com.chafy.gunboundrecomp.ci>
+11-15 12:40:07.830 15009 15045 V PerfettoTrigger: Triggering /system/bin/trigger_perfetto com.android.telemetry.interaction-jank-monitor-81
+11-15 12:40:09.514 15009 15009 I ImeTracker: com.chafy.gunboundrecomp.ci:930444f3: onRequestHide at ORIGIN_CLIENT reason HIDE_SOFT_INPUT fromUser false
+11-15 12:40:09.514 15009 15009 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:40:09.514 15009 15009 I ImeTracker: com.chafy.gunboundrecomp.ci:930444f3: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-15 12:40:09.514 15009 15009 D CompatChangeReporter: Compat change id reported: 395521150; UID 10235; state: ENABLED
+11-15 12:40:10.744 15405 15405 I nboundrecomp.ci: Using CollectorTypeCMC GC.
+11-15 12:40:10.808 15405 15405 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-15 12:40:11.006 15405 15405 D nativeloader: Configuring clns-9 for other apk /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64:/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.chafy.gunboundrecomp.ci
+11-15 12:40:11.021 15405 15405 I nboundrecomp.ci: AssetManager2(0xb400007a9481f818) locale list changing from [] to [en-US]
+11-15 12:40:11.033 15405 15405 V GraphicsEnvironment: Currently set values for:
+11-15 12:40:11.033 15405 15405 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-15 12:40:11.033 15405 15405 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-15 12:40:11.033 15405 15405 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in per-application setting
+11-15 12:40:11.034 15405 15405 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-15 12:40:11.034 15405 15405 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in ANGLE allowlist or settings, returning default
+11-15 12:40:11.034 15405 15405 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-15 12:40:11.063 15405 15420 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-15 12:40:11.068 15405 15405 I nboundrecomp.ci: AssetManager2(0xb400007a948258f8) locale list changing from [] to [en-US]
+11-15 12:40:11.103 15405 15420 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-15 12:40:11.103 15405 15420 I EGL_emulation: Opening libGLESv2_emulation.so
+11-15 12:40:11.119 15405 15420 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-15 12:40:11.119 15405 15420 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-15 12:40:11.120 15405 15405 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-15 12:40:11.148 15405 15405 D CompatChangeReporter: Compat change id reported: 377864165; UID 10235; state: ENABLED
+11-15 12:40:11.148 15405 15405 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-15 12:40:11.151 15405 15405 D GodotActivity: Project command line parameters: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:40:11.151 15405 15405 D GodotActivity: Launch intent Intent { flg=0x10000000 xflg=0x5 cmp=com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher } with parameters []
+11-15 12:40:11.184 15405 15405 V GodotActivity: Creating new Godot fragment instance.
+11-15 12:40:11.227 15405 15405 V Godot   : Initializing Godot plugin registry
+11-15 12:40:11.234 15405 15405 I GodotPluginRegistry: Registering runtime plugin AndroidRuntime
+11-15 12:40:11.235 15405 15405 V Godot   : InitEngine with params: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:40:11.249 15405 15405 D nativeloader: Load /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64/libgodot_android.so using class loader ns clns-9 (caller=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk): ok
+11-15 12:40:11.251 15405 15405 V Godot   : Godot native layer initialization completed: true
+11-15 12:40:11.251 15405 15405 V Godot   : Setting up native layer with params: [--xr-mode, off, --fullscreen]
+11-15 12:40:11.294 15405 15405 V Godot   : Godot native layer setup completed
+11-15 12:40:11.294 15405 15405 V Godot   : OnInitRenderView: GodotFragment{2111392} (322cfdab-5f3b-430f-a44d-72241f250b3b id=0x7f07002c)
+11-15 12:40:11.297 15405 15405 W HWUI    : Image decoding logging dropped!
+11-15 12:40:11.297 15405 15405 W HWUI    : Image decoding logging dropped!
+11-15 12:40:11.297 15405 15405 W HWUI    : Image decoding logging dropped!
+11-15 12:40:11.302 15405 15405 D Godot   : Render view should be transparent: false
+11-15 12:40:11.307 15405 15405 D Godot   : renderingDevice: opengl3 (ProjectSettings)
+11-15 12:40:11.307 15405 15405 D Godot   : 			renderer: gl_compatibility (ProjectSettings)
+11-15 12:40:11.313 15405 15405 V Godot   : OnStart: GodotFragment{2111392} (322cfdab-5f3b-430f-a44d-72241f250b3b id=0x7f07002c)
+11-15 12:40:11.313 15405 15405 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-15 12:40:11.314 15405 15405 V Godot   : OnResume: GodotFragment{2111392} (322cfdab-5f3b-430f-a44d-72241f250b3b id=0x7f07002c)
+11-15 12:40:11.316 15405 15405 W HWUI    : Unknown dataspace 0
+11-15 12:40:11.318 15405 15405 D InsetsController: Setting requestedVisibleTypes to -16 (was -9)
+11-15 12:40:11.331 15405 15425 W RegularContextFactory: creating OpenGL ES 3.0 context :
+11-15 12:40:11.334 15405 15425 I godot   : Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+11-15 12:40:11.381 15405 15425 E godot   : WARNING: Failed to load cached shader, recompiling.
+11-15 12:40:11.382 15405 15425 E godot   :    at: _load_from_cache (drivers/gles3/shader_gles3.cpp:615)
+11-15 12:40:11.470 15405 15405 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:40:11.470 15405 15405 I ImeTracker: com.chafy.gunboundrecomp.ci:c6d09bd7: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-15 12:40:11.755 15405 15405 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=true, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.chafy.gunboundrecomp.ci
+11-15 12:40:12.335 15405 15431 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[GodotAppLauncher]#1) as ready
+11-15 12:40:12.335 15405 15431 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[GodotAppLauncher]#2) as ready
+11-15 12:40:12.336 15405 15431 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(SurfaceView[com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher]#0) as ready
+11-15 12:40:12.343 15405 15425 I godot   : OpenGL API OpenGL ES 3.1 (OpenGL ES 3.1.0 (ANGLE 2.1.1 git hash: fbf66f49c7cc)) - Compatibility - Using Device: Google (Google Inc. (Google)) - Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))
+11-15 12:40:12.343 15405 15425 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0xb4000079a4961090
+11-15 12:40:12.344 15405 15425 D AudioSystem: getService: checking for service media.audio_flinger: 0xb4000079148cd2e0
+11-15 12:40:12.344 15405 15425 D nboundrecomp.ci: PlayerBase::PlayerBase()
+11-15 12:40:12.344 15405 15425 D nboundrecomp.ci: TrackPlayerBase::TrackPlayerBase()
+11-15 12:40:12.344 15405 15425 I libOpenSLES: Emulating old channel mask behavior (ignoring positional mask 0x3, using default mask 0x3 based on channel count of 2)
+11-15 12:40:12.359 15405 15425 I godot   :
+11-15 12:40:14.312 15405 15425 V Godot   : OnGodotSetupCompleted
+11-15 12:40:14.641 15405 15425 V Godot   : OnGodotMainLoopStarted
+11-15 12:40:49.305 15405 15405 V Godot   : Invoking onMainBackPressed for plugin AndroidRuntime
+11-15 12:40:50.368 15405 15405 V Godot   : OnPause: GodotFragment{2111392} (322cfdab-5f3b-430f-a44d-72241f250b3b id=0x7f07002c)
+11-15 12:40:50.372 15405 15425 D nboundrecomp.ci: PlayerBase::pause() from IPlayer
+11-15 12:40:50.491 15405 15405 V Godot   : OnResume: GodotFragment{2111392} (322cfdab-5f3b-430f-a44d-72241f250b3b id=0x7f07002c)
+11-15 12:40:50.512 15405 15405 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:40:50.512 15405 15405 I ImeTracker: com.chafy.gunboundrecomp.ci:a647d18e: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-15 12:40:57.611 15679 15679 I nboundrecomp.ci: Using CollectorTypeCMC GC.
+11-15 12:40:57.778 15679 15679 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-15 12:40:57.959 15679 15679 D nativeloader: Configuring clns-9 for other apk /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64:/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.chafy.gunboundrecomp.ci
+11-15 12:40:57.980 15679 15679 I nboundrecomp.ci: AssetManager2(0xb400007a9481f818) locale list changing from [] to [en-US]
+11-15 12:40:57.996 15679 15679 V GraphicsEnvironment: Currently set values for:
+11-15 12:40:57.996 15679 15679 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-15 12:40:57.996 15679 15679 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-15 12:40:57.996 15679 15679 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in per-application setting
+11-15 12:40:57.997 15679 15679 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-15 12:40:57.997 15679 15679 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in ANGLE allowlist or settings, returning default
+11-15 12:40:57.998 15679 15679 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-15 12:40:58.042 15679 15679 I nboundrecomp.ci: AssetManager2(0xb400007a948258f8) locale list changing from [] to [en-US]
+11-15 12:40:58.043 15679 15694 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-15 12:40:58.050 15679 15679 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-15 12:40:58.067 15679 15679 D CompatChangeReporter: Compat change id reported: 377864165; UID 10235; state: ENABLED
+11-15 12:40:58.069 15679 15679 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-15 12:40:58.074 15679 15679 D GodotActivity: Project command line parameters: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:40:58.075 15679 15679 D GodotActivity: Launch intent Intent { flg=0x10000000 xflg=0x5 cmp=com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher } with parameters []
+11-15 12:40:58.079 15679 15679 V GodotActivity: Creating new Godot fragment instance.
+11-15 12:40:58.103 15679 15679 V Godot   : Initializing Godot plugin registry
+11-15 12:40:58.106 15679 15694 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-15 12:40:58.107 15679 15694 I EGL_emulation: Opening libGLESv2_emulation.so
+11-15 12:40:58.113 15679 15679 I GodotPluginRegistry: Registering runtime plugin AndroidRuntime
+11-15 12:40:58.113 15679 15679 V Godot   : InitEngine with params: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:40:58.113 15679 15694 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-15 12:40:58.113 15679 15694 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-15 12:40:58.151 15679 15679 D nativeloader: Load /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64/libgodot_android.so using class loader ns clns-9 (caller=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk): ok
+11-15 12:40:58.157 15679 15679 V Godot   : Godot native layer initialization completed: true
+11-15 12:40:58.157 15679 15679 V Godot   : Setting up native layer with params: [--xr-mode, off, --fullscreen]
+11-15 12:40:58.248 15679 15679 V Godot   : Godot native layer setup completed
+11-15 12:40:58.249 15679 15679 V Godot   : OnInitRenderView: GodotFragment{2111392} (4a6935f2-2b33-467a-9e44-ffe8ecbeb95b id=0x7f07002c)
+11-15 12:40:58.250 15679 15679 W HWUI    : Image decoding logging dropped!
+11-15 12:40:58.250 15679 15679 W HWUI    : Image decoding logging dropped!
+11-15 12:40:58.250 15679 15679 W HWUI    : Image decoding logging dropped!
+11-15 12:40:58.258 15679 15679 D Godot   : Render view should be transparent: false
+11-15 12:40:58.258 15679 15679 D Godot   : renderingDevice: opengl3 (ProjectSettings)
+11-15 12:40:58.258 15679 15679 D Godot   : 			renderer: gl_compatibility (ProjectSettings)
+11-15 12:40:58.263 15679 15679 V Godot   : OnStart: GodotFragment{2111392} (4a6935f2-2b33-467a-9e44-ffe8ecbeb95b id=0x7f07002c)
+11-15 12:40:58.263 15679 15679 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-15 12:40:58.264 15679 15679 V Godot   : OnResume: GodotFragment{2111392} (4a6935f2-2b33-467a-9e44-ffe8ecbeb95b id=0x7f07002c)
+11-15 12:40:58.267 15679 15679 W HWUI    : Unknown dataspace 0
+11-15 12:40:58.270 15679 15679 D InsetsController: Setting requestedVisibleTypes to -16 (was -9)
+11-15 12:40:58.304 15679 15699 W RegularContextFactory: creating OpenGL ES 3.0 context :
+11-15 12:40:58.313 15679 15699 I godot   : Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+11-15 12:40:58.442 15679 15679 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:40:58.442 15679 15679 I ImeTracker: com.chafy.gunboundrecomp.ci:bece8a25: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-15 12:40:58.482 15679 15699 E godot   : WARNING: Failed to load cached shader, recompiling.
+11-15 12:40:58.483 15679 15699 E godot   :    at: _load_from_cache (drivers/gles3/shader_gles3.cpp:615)
+11-15 12:40:58.745 15679 15679 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=true, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.chafy.gunboundrecomp.ci
+11-15 12:40:59.298 15679 15705 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[GodotAppLauncher]#1) as ready
+11-15 12:40:59.299 15679 15705 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[GodotAppLauncher]#2) as ready
+11-15 12:40:59.300 15679 15705 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(SurfaceView[com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher]#0) as ready
+11-15 12:40:59.338 15679 15699 I godot   : OpenGL API OpenGL ES 3.1 (OpenGL ES 3.1.0 (ANGLE 2.1.1 git hash: fbf66f49c7cc)) - Compatibility - Using Device: Google (Google Inc. (Google)) - Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))
+11-15 12:40:59.339 15679 15699 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0xb4000079a4961390
+11-15 12:40:59.339 15679 15699 D AudioSystem: getService: checking for service media.audio_flinger: 0xb4000079148cd010
+11-15 12:40:59.339 15679 15699 D nboundrecomp.ci: PlayerBase::PlayerBase()
+11-15 12:40:59.339 15679 15699 D nboundrecomp.ci: TrackPlayerBase::TrackPlayerBase()
+11-15 12:40:59.339 15679 15699 I libOpenSLES: Emulating old channel mask behavior (ignoring positional mask 0x3, using default mask 0x3 based on channel count of 2)
+11-15 12:40:59.344 15679 15699 I godot   :
+11-15 12:41:01.515 15679 15699 V Godot   : OnGodotSetupCompleted
+11-15 12:41:01.823 15679 15699 V Godot   : OnGodotMainLoopStarted
+11-15 12:41:44.833 15679 15679 V Godot   : Invoking onMainBackPressed for plugin AndroidRuntime
+11-15 12:41:46.064 15679 15679 V Godot   : OnPause: GodotFragment{2111392} (4a6935f2-2b33-467a-9e44-ffe8ecbeb95b id=0x7f07002c)
+11-15 12:41:46.074 15679 15699 D nboundrecomp.ci: PlayerBase::pause() from IPlayer
+11-15 12:41:46.207 15679 15679 V Godot   : OnResume: GodotFragment{2111392} (4a6935f2-2b33-467a-9e44-ffe8ecbeb95b id=0x7f07002c)
+11-15 12:41:46.313 15679 15679 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:41:46.313 15679 15679 I ImeTracker: com.chafy.gunboundrecomp.ci:4f3d82ab: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-15 12:41:53.290 15975 15975 I nboundrecomp.ci: Using CollectorTypeCMC GC.
+11-15 12:41:53.327 15975 15975 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-15 12:41:53.433 15975 15975 D nativeloader: Configuring clns-9 for other apk /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk. target_sdk_version=36, uses_libraries=, library_path=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64:/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk!/lib/arm64-v8a, permitted_path=/data:/mnt/expand:/data/user/0/com.chafy.gunboundrecomp.ci
+11-15 12:41:53.441 15975 15975 I nboundrecomp.ci: AssetManager2(0xb400007a9481f818) locale list changing from [] to [en-US]
+11-15 12:41:53.443 15975 15975 V GraphicsEnvironment: Currently set values for:
+11-15 12:41:53.443 15975 15975 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-15 12:41:53.443 15975 15975 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-15 12:41:53.443 15975 15975 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in per-application setting
+11-15 12:41:53.443 15975 15975 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-15 12:41:53.443 15975 15975 V GraphicsEnvironment: com.chafy.gunboundrecomp.ci is not listed in ANGLE allowlist or settings, returning default
+11-15 12:41:53.443 15975 15975 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-15 12:41:53.454 15975 15990 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-15 12:41:53.466 15975 15975 I nboundrecomp.ci: AssetManager2(0xb400007a948258f8) locale list changing from [] to [en-US]
+11-15 12:41:53.507 15975 15975 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-15 12:41:53.520 15975 15975 D CompatChangeReporter: Compat change id reported: 377864165; UID 10235; state: ENABLED
+11-15 12:41:53.521 15975 15990 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-15 12:41:53.522 15975 15990 I EGL_emulation: Opening libGLESv2_emulation.so
+11-15 12:41:53.532 15975 15990 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+11-15 12:41:53.533 15975 15990 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-15 12:41:53.548 15975 15975 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-15 12:41:53.563 15975 15975 D GodotActivity: Project command line parameters: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:41:53.564 15975 15975 D GodotActivity: Launch intent Intent { flg=0x10000000 xflg=0x5 cmp=com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher } with parameters []
+11-15 12:41:53.581 15975 15975 V GodotActivity: Creating new Godot fragment instance.
+11-15 12:41:53.602 15975 15975 V Godot   : Initializing Godot plugin registry
+11-15 12:41:53.605 15975 15975 I GodotPluginRegistry: Registering runtime plugin AndroidRuntime
+11-15 12:41:53.605 15975 15975 V Godot   : InitEngine with params: [--xr_mode_regular, --xr-mode, off, --fullscreen, --background_color, #000000]
+11-15 12:41:53.630 15975 15975 D nativeloader: Load /data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/lib/arm64/libgodot_android.so using class loader ns clns-9 (caller=/data/app/~~xlk3Ms2cuI1ufHINSNXPsw==/com.chafy.gunboundrecomp.ci-bJD8wqYyrtHMEfszp8GOmw==/base.apk): ok
+11-15 12:41:53.632 15975 15975 V Godot   : Godot native layer initialization completed: true
+11-15 12:41:53.632 15975 15975 V Godot   : Setting up native layer with params: [--xr-mode, off, --fullscreen]
+11-15 12:41:53.736 15975 15975 V Godot   : Godot native layer setup completed
+11-15 12:41:53.737 15975 15975 V Godot   : OnInitRenderView: GodotFragment{2111392} (835c1e51-801a-4de2-a2f5-aa23e1483856 id=0x7f07002c)
+11-15 12:41:53.741 15975 15975 W HWUI    : Image decoding logging dropped!
+11-15 12:41:53.741 15975 15975 W HWUI    : Image decoding logging dropped!
+11-15 12:41:53.742 15975 15975 W HWUI    : Image decoding logging dropped!
+11-15 12:41:53.747 15975 15975 D Godot   : Render view should be transparent: false
+11-15 12:41:53.747 15975 15975 D Godot   : renderingDevice: opengl3 (ProjectSettings)
+11-15 12:41:53.747 15975 15975 D Godot   : 			renderer: gl_compatibility (ProjectSettings)
+11-15 12:41:53.752 15975 15975 V Godot   : OnStart: GodotFragment{2111392} (835c1e51-801a-4de2-a2f5-aa23e1483856 id=0x7f07002c)
+11-15 12:41:53.758 15975 15975 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-15 12:41:53.758 15975 15975 V Godot   : OnResume: GodotFragment{2111392} (835c1e51-801a-4de2-a2f5-aa23e1483856 id=0x7f07002c)
+11-15 12:41:53.773 15975 15975 W HWUI    : Unknown dataspace 0
+11-15 12:41:53.778 15975 15975 D InsetsController: Setting requestedVisibleTypes to -16 (was -9)
+11-15 12:41:53.822 15975 15995 W RegularContextFactory: creating OpenGL ES 3.0 context :
+11-15 12:41:53.854 15975 15995 I godot   : Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+11-15 12:41:54.017 15975 15995 E godot   : WARNING: Failed to load cached shader, recompiling.
+11-15 12:41:54.017 15975 15995 E godot   :    at: _load_from_cache (drivers/gles3/shader_gles3.cpp:615)
+11-15 12:41:54.029 15975 15975 D InsetsController: hide(ime(), fromIme=false)
+11-15 12:41:54.029 15975 15975 I ImeTracker: com.chafy.gunboundrecomp.ci:37052471: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-15 12:41:54.271 15975 15975 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=true, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.chafy.gunboundrecomp.ci
+11-15 12:41:54.756 15975 15995 I godot   : OpenGL API OpenGL ES 3.1 (OpenGL ES 3.1.0 (ANGLE 2.1.1 git hash: fbf66f49c7cc)) - Compatibility - Using Device: Google (Google Inc. (Google)) - Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))
+11-15 12:41:54.757 15975 15995 D AudioSystem: onNewServiceWithAdapter: media.audio_flinger service obtained 0xb4000079a4961840
+11-15 12:41:54.757 15975 15995 D AudioSystem: getService: checking for service media.audio_flinger: 0xb4000079148cd1a0
+11-15 12:41:54.758 15975 15995 D nboundrecomp.ci: PlayerBase::PlayerBase()
+11-15 12:41:54.758 15975 15995 D nboundrecomp.ci: TrackPlayerBase::TrackPlayerBase()
+11-15 12:41:54.758 15975 15995 I libOpenSLES: Emulating old channel mask behavior (ignoring positional mask 0x3, using default mask 0x3 based on channel count of 2)
+11-15 12:41:54.762 15975 15995 I godot   :
+11-15 12:41:54.831 15975 16001 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(wmsSync-VRI[GodotAppLauncher]#1) as ready
+11-15 12:41:54.832 15975 16001 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(VRI[GodotAppLauncher]#2) as ready
+11-15 12:41:54.832 15975 16001 E SurfaceSyncGroup: Failed to receive transaction ready in 1000ms. Marking SurfaceSyncGroup(SurfaceView[com.chafy.gunboundrecomp.ci/com.godot.game.GodotAppLauncher]#0) as ready
+11-15 12:41:56.937 15975 15995 V Godot   : OnGodotSetupCompleted
+11-15 12:41:57.231 15975 15995 V Godot   : OnGodotMainLoopStarted

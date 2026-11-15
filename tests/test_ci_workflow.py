@@ -23,8 +23,8 @@ class WorkflowTests(unittest.TestCase):
             suffix = ', matrix.platform' if name == 'desktop' else ''
             group = 'desktop-{0}-desktop-{1}' if name == 'desktop' else 'desktop-{0}-' + name
             self.assertEqual(policy['group'], "${{ format('" + group + "', github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id" + suffix + ") }}")
-        self.assertEqual(jobs['release']['permissions'], {'contents': 'write'})
-        self.assertEqual(jobs['release']['needs'], ['version', 'desktop'])
+        self.assertEqual(jobs['release']['permissions'], {'contents': 'write','actions':'read'})
+        self.assertEqual(jobs['release']['needs'], ['version', 'desktop', 'android', 'android-acceptance'])
         self.assertIn("github.event_name == 'push'", jobs['release']['if'])
         self.assertEqual({x['platform'] for x in jobs['desktop']['strategy']['matrix']['include']}, {'macos','windows'})
         for job in jobs.values():

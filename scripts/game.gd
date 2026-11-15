@@ -11,6 +11,28 @@ const ClassicSprite = preload("res://scripts/classic_sprite.gd")
 const AvatarShop = preload("res://scripts/avatar_shop.gd")
 const ShopModel = preload("res://scripts/avatar_shop_model.gd")
 var shop
+const PlatformLayout = preload("res://scripts/platform_layout.gd")
+const TouchControls = preload("res://scripts/touch_controls.gd")
+const TouchInput = preload("res://scripts/touch_input.gd")
+const PlatformLifecycle = preload("res://scripts/platform_lifecycle.gd")
+var android_test := false
+var lifecycle := PlatformLifecycle.new()
+var touch := TouchInput.new()
+var touch_move := 0
+var touch_aim := 0
+var camera_mode := false
+var touch_selector := ""
+var touch_mouse_consumed := false
+var presentation := Transform2D.IDENTITY
+var platform_matte: Node2D
+var touch_layer: Node2D
+var touch_turn := -1
+var platform_safe := Rect2(0,0,1280,800)
+var platform_pixels_per_dp := 2.0
+var keyboard_height := 0
+var platform_save_failed := false
+func android_enabled() -> bool:
+	return android_test or OS.has_feature("android")
 var actor_avatars: Array = []
 var gold_reward := 0
 const Profile = preload("res://scripts/profile.gd")
@@ -132,10 +154,17 @@ static func build_sprites() -> Dictionary:
 	return result
 
 func _ready() -> void:
+	if android_enabled():
+		get_tree().auto_accept_quit=false
+		get_tree().quit_on_go_back=false
+		# Window emits Back locally; WM notifications do not reach child nodes.
+		get_window().go_back_requested.connect(handle_back)
+		get_viewport().size_changed.connect(fit_platform)
+		fit_platform()
 	# Official release templates disable --script. Select the package smoke at
 	# runtime and inject its temporary profile before any normal profile read.
 	if OS.get_cmdline_user_args().has("--ci-smoke"):
-		var smoke = load("res://scripts/ci/smoke.gd").new()
+		var smoke = load("res://scripts/ci/android_smoke.gd" if OS.has_feature("android") else "res://scripts/ci/smoke.gd").new()
 		if not smoke.prepare(self):
 			smoke.free()
 			get_tree().quit(1)
@@ -166,6 +195,7 @@ func _ready() -> void:
 
 ## An overlay pauses the match, drops a charge and locks the Options button.
 func _on_overlay_opened(kind: String) -> void:
+	if android_enabled():cancel_platform_input("overlay")
 	aim.charging = false
 	paused = true
 	if is_instance_valid(options_button):
@@ -182,6 +212,10 @@ func _on_overlay_closed() -> void:
 		show_result()
 
 func replace_root() -> void:
+	if android_enabled():
+		cancel_platform_input("screen")
+		camera_mode=false
+		touch_layer=null
 	# Private world-effect canvases belong to Game, not to the replaced UI.
 	weather_art.clear_beams()
 	weather_art.native_thor_art.clear()
@@ -491,6 +525,7 @@ func build_hud() -> void:
 		button.modulate = Color(1, 1, 1, 0.82)
 	item_bar.build(self, root)
 	select_weapon(0)
+	if android_enabled():build_touch_controls()
 
 ## Test API (test_refinement_scene, test_hud): the Delayboard entries shown now.
 func displayed_queue() -> Array:
@@ -500,6 +535,7 @@ func animation_state(index: int) -> String:
 	return art.state_name(model, index, aim.charging, cpu.charging(model))
 
 func player_can_act() -> bool:
+	if android_enabled() and effective_paused():return false
 	return screen == "match" and model.phase == Match.PHASE_AIM and model.active == Match.PLAYER and not paused and not bool(model.actors[Match.PLAYER].get("jewel_waiting",false))
 
 func select_weapon(index: int) -> void:
@@ -561,6 +597,17 @@ func flip() -> void:
 		model.actors[Match.PLAYER].facing *= -1
 
 func _process(delta: float) -> void:
+	if android_enabled():
+		var height := DisplayServer.virtual_keyboard_get_height() if DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD) else 0
+		if height!=keyboard_height:
+			keyboard_height=height
+			fit_platform()
+		if effective_paused():return
+		if screen=="match" and touch_turn!=model.total_turns:
+			cancel_platform_input("turn")
+			camera_mode=false
+			touch_turn=model.total_turns
+	if is_instance_valid(platform_matte):platform_matte.queue_redraw()
 	if not paused:
 		elapsed += minf(delta, 0.1)
 	queue_redraw()
@@ -573,7 +620,7 @@ func _process(delta: float) -> void:
 		return
 	var frame_delta := minf(delta, 0.1)
 	if player_can_act():
-		var direction := 0.0
+		var direction := float(touch_move) if android_enabled() else 0.0
 		if Input.is_physical_key_pressed(KEY_A) or Input.is_physical_key_pressed(KEY_LEFT) or move_left.is_pressed():
 			direction -= 1.0
 		if Input.is_physical_key_pressed(KEY_D) or Input.is_physical_key_pressed(KEY_RIGHT) or move_right.is_pressed():
@@ -616,7 +663,8 @@ func _exit_tree() -> void:
 	cpu.discard()
 
 func update_aim_keys(delta: float) -> void:
-	aim.update_keys(self, delta)
+	if android_enabled():aim.update_direction(self,touch_aim,delta)
+	else:aim.update_keys(self, delta)
 
 func step_angle(direction: int) -> void:
 	aim.step_angle(self, direction)
@@ -777,6 +825,7 @@ func _tick_loading(delta: float) -> void:
 	start_match(player_id, cpu_id, spawns)
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if android_enabled() and (effective_paused() or get_viewport().gui_get_focus_owner() is LineEdit):return
 	if screen == "shop" or screen == "loading":
 		return
 	if not event is InputEventKey or event.echo:
@@ -1153,6 +1202,18 @@ func update_camera(delta: float) -> void:
 ## Drag aiming sees the motion and the release before the HUD, so letting go
 ## over the action bar (or a lost release) still ends the drag.
 func _input(event: InputEvent) -> void:
+	if android_enabled() and screen=="match":
+		if event is InputEventMouse and event.device==InputEvent.DEVICE_ID_EMULATION and (touch_mouse_consumed or (not overlays.is_open() and not lifecycle.is_blocked())):
+			get_viewport().set_input_as_handled()
+			return
+		if event is InputEventScreenTouch or event is InputEventScreenDrag:
+			if event is InputEventScreenTouch and event.pressed:touch_mouse_consumed=false
+			if touch.owners.has(event.index) or (event is InputEventScreenTouch and event.pressed):
+				if touch.handle(event,touch_context()):
+					touch_mouse_consumed=true
+					apply_touch_commands()
+					get_viewport().set_input_as_handled()
+			return
 	if not (aim.charging and aim.drag_aiming):
 		return
 	if event is InputEventMouseMotion:
@@ -1164,6 +1225,7 @@ func _input(event: InputEvent) -> void:
 		release_drag()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if android_enabled() and (event is InputEventScreenTouch or event is InputEventScreenDrag or (event is InputEventMouse and event.device==InputEvent.DEVICE_ID_EMULATION)):return
 	if screen != "match" or overlays.is_open():
 		return
 	if not paused and model.mode == "jewel" and bool(model.actors[Match.PLAYER].get("jewel_waiting",false)):
@@ -1216,3 +1278,186 @@ func draw_figure(canvas: Node2D, kind: int, pos: Vector2, facing: int, equipment
 		"age": elapsed,
 		"avatar_context": context,
 	}))
+
+## Android platform adaptation: keep all rules in their existing model methods.
+func effective_paused() -> bool:
+	return paused or lifecycle.is_blocked()
+
+func cancel_platform_input(reason: String) -> void:
+	touch.cancel_all(reason)
+	touch.drain_commands()
+	touch_move=0
+	touch_aim=0
+	aim.charging=false
+	dragging=false
+	touch_selector=""
+
+func fit_platform() -> void:
+	if not android_enabled():return
+	cancel_platform_input("resize")
+	var viewport_size := get_viewport_rect().size
+	var safe := Rect2(Vector2.ZERO,viewport_size)
+	if OS.has_feature("android"):
+		var physical := Vector2(DisplayServer.window_get_size())
+		var area := Rect2(DisplayServer.get_display_safe_area())
+		if physical.x>0 and physical.y>0:
+			area=PlatformLayout.safe_window(area,Rect2(Vector2(DisplayServer.window_get_position()),physical),Vector2(DisplayServer.screen_get_size()),keyboard_height)
+			safe=PlatformLayout.safe_canvas(area,get_viewport().get_screen_transform())
+			platform_pixels_per_dp=PlatformLayout.dp_scale(get_viewport().get_screen_transform(),DisplayServer.screen_get_dpi())
+	platform_safe=safe
+	presentation=PlatformLayout.fit(viewport_size,safe,Vector2(1280,800))
+	transform=presentation
+	if not is_instance_valid(platform_matte):
+		platform_matte=Node2D.new()
+		platform_matte.z_index=1
+		add_child(platform_matte)
+		platform_matte.draw.connect(func():
+			if screen=="shop":return
+			for box in [Rect2(-32768,-32768,32768,65536),Rect2(1280,-32768,32768,65536),Rect2(0,-32768,1280,32768),Rect2(0,800,1280,32768)]:
+				platform_matte.draw_rect(box,Color("0b1624"))
+		)
+	platform_matte.queue_redraw()
+	if is_instance_valid(touch_layer):touch_layer.queue_redraw()
+
+func touch_regions() -> Dictionary:
+	var dp := Rect2(platform_safe.position/platform_pixels_per_dp,platform_safe.size/platform_pixels_per_dp)
+	var regions := TouchControls.regions(dp,model.mode)
+	if touch_selector!="":regions.merge(TouchControls.selection(dp,touch_selector))
+	var result := {}
+	for key in regions:result[key]=Rect2(regions[key].position*platform_pixels_per_dp,regions[key].size*platform_pixels_per_dp)
+	return result
+
+func touch_context() -> Dictionary:
+	var world := HudArt.Layout.WORLD
+	return {"can_act":player_can_act(),"overlay":effective_paused() or overlays.is_open() or get_viewport().gui_get_focus_owner() is LineEdit,
+		"waiting":model.mode=="jewel" and bool(model.actors[Match.PLAYER].get("jewel_waiting",false)),
+		"drag_mode":options.drag_aiming(),"camera_mode":camera_mode,"regions":touch_regions(),
+		"world_rect":Rect2(presentation*world.position,world.size*presentation.x.length()),
+		"blocked_rects":[Rect2(presentation*HudArt.Layout.JEWEL_PANEL.position,HudArt.Layout.JEWEL_PANEL.size*presentation.x.length())] if model.mode=="jewel" else [],
+		"pixels_per_dp":platform_pixels_per_dp}
+
+func build_touch_controls() -> void:
+	touch_turn=model.total_turns
+	for button in [move_left,move_right,flip_button,fire_button]:button.hide()
+	touch_layer=Node2D.new()
+	touch_layer.z_index=5
+	root.add_child(touch_layer)
+	touch_layer.draw.connect(func():
+		for key in touch_regions():
+			var region: Rect2=touch_regions()[key]
+			region=Rect2(presentation.affine_inverse()*region.position,region.size/presentation.x.length())
+			var disabled: bool = (touch.busy() and key!="pause" and key!="charge") or (camera_mode and key=="charge")
+			if key in ["move_left","move_right","aim_down","aim_up","flip","charge","pass"] or key.begins_with("weapon_"):
+				disabled=disabled or not player_can_act()
+			var selected: bool = (key=="camera" and camera_mode) or key=="weapon_"+str(aim.weapon)
+			touch_layer.draw_style_box(ui.box(Color(0.13,0.33,0.43,0.92) if selected else Color(0.04,0.12,0.2,0.88),6,ui.MUTED if disabled else ui.STEEL,1),region)
+			var caption: String = {"move_left":"←","move_right":"→","aim_down":"−","aim_up":"+","flip":"F","charge":"●","camera":"CÂMERA ATIVA" if camera_mode else "CÂMERA","weapons":"ARMA","items":"ITEM","pause":"PAUSA","pass":"PASSAR"}.get(key,key.to_upper())
+			if key.begins_with("weapon_"):caption=["S1","S2","SS"][int(key.trim_prefix("weapon_"))]
+			if key.begins_with("item_"):
+				var slot := int(key.trim_prefix("item_"))
+				var items: Array=model.actors[Match.PLAYER].items
+				caption=str(slot+1)+": "+I18n.text(Items.definition(items[slot].id).name) if slot<items.size() and not items[slot].used else "—"
+				disabled=disabled or slot>=items.size() or (slot<items.size() and items[slot].used) or item_bar.blocked(self)
+			touch_layer.draw_string(ThemeDB.fallback_font,region.position+Vector2(5,region.size.y*0.6),I18n.text(caption),HORIZONTAL_ALIGNMENT_CENTER,region.size.x-10,14 if key.begins_with("item_") or key=="camera" else 18,ui.MUTED if disabled else ui.CREAM)
+	)
+
+func apply_touch_commands() -> void:
+	for command in touch.drain_commands():
+		var action: String=command.action
+		match action:
+			"move":touch_move=int(command.value)
+			"aim":touch_aim=int(command.value)
+			"charge_begin":touch_move=0;touch_aim=0;begin_charge()
+			"charge_end":release_charge()
+			"charge_cancel","drag_cancel":aim.charging=false
+			"drag_begin":touch_move=0;touch_aim=0;begin_drag(PlatformLayout.to_canvas(Vector2(command.value,0),presentation).x)
+			"drag_update":update_drag(PlatformLayout.to_canvas(Vector2(command.value.x,0),presentation).x,command.value.y/presentation.x.length())
+			"drag_end":release_drag()
+			"flip":flip()
+			"pass":pass_turn()
+			"pause":show_pause()
+			"camera":camera_mode=not camera_mode
+			"weapons":touch_selector="" if touch_selector=="weapon" else "weapon"
+			"items":touch_selector="" if touch_selector=="item" else "item"
+			"pan":rig.manual=true;rig.position=clamp_camera(rig.position-command.value/presentation.x.length()*options.scroll_factor())
+			"respawn":
+				var point := PlatformLayout.to_canvas(command.value,presentation)
+				if HudArt.Layout.in_world(point,model.mode):model.choose_respawn(Match.PLAYER,point.x-HudArt.Layout.WORLD.position.x+rig.position.x)
+		if action.begins_with("weapon_"):select_weapon(int(action.trim_prefix("weapon_")));touch_selector=""
+		if action.begins_with("item_"):item_bar.press(self,int(action.trim_prefix("item_")));touch_selector=""
+	if is_instance_valid(touch_layer):touch_layer.queue_redraw()
+
+func suspend_platform(reason: String) -> void:
+	lifecycle.suspend(reason)
+	cancel_platform_input(reason)
+	# Preserve the existing pure snapshot and request. No model tick can apply
+	# its result while blocked, and restarting would consume live RNG again.
+	if sound!=null:sound.set_suspended(true)
+	if profile!=null:platform_save_failed=not profile.save_profile()
+	if options!=null:platform_save_failed=not options.save_options() or platform_save_failed
+
+func resume_platform() -> void:
+	lifecycle.resume()
+	if is_instance_valid(root) and not is_instance_valid(root.get_node_or_null("PlatformResume")):
+		var card := Control.new()
+		card.name="PlatformResume"
+		card.size=Vector2(1280,800)
+		card.mouse_filter=Control.MOUSE_FILTER_STOP
+		card.z_index=100
+		root.add_child(card)
+		var shade := ColorRect.new()
+		shade.size=card.size
+		shade.color=Color(0.01,0.03,0.06,0.8)
+		card.add_child(shade)
+		ui.button(card,"Retomar",Vector2(440,320),Vector2(400,96),confirm_platform_resume,true)
+		if platform_save_failed:ui.label(card,"Não foi possível salvar o progresso.",Vector2(340,440),Vector2(600,60),24,ui.CREAM)
+
+func confirm_platform_resume() -> void:
+	lifecycle.confirm_resume()
+	if lifecycle.is_blocked():return
+	var card := root.get_node_or_null("PlatformResume")
+	if card!=null:card.queue_free()
+	if sound!=null:sound.set_suspended(false)
+
+func _notification(what: int) -> void:
+	if not android_enabled():return
+	if what in [NOTIFICATION_APPLICATION_PAUSED,NOTIFICATION_APPLICATION_FOCUS_OUT]:suspend_platform("background")
+	elif what in [NOTIFICATION_APPLICATION_RESUMED,NOTIFICATION_APPLICATION_FOCUS_IN]:
+		if lifecycle.is_blocked():resume_platform()
+
+func handle_back() -> void:
+	if not lifecycle.accept_back(Time.get_ticks_msec()):return
+	if lifecycle.is_blocked():
+		if not lifecycle.suspended:resume_platform()
+		return
+	cancel_platform_input("back")
+	var exit_dialog := root.get_node_or_null("PlatformExitConfirm")
+	if exit_dialog!=null:
+		exit_dialog.queue_free()
+		return
+	var focus := get_viewport().gui_get_focus_owner()
+	if focus is LineEdit:
+		focus.release_focus()
+		DisplayServer.virtual_keyboard_hide()
+		return
+	if overlays.is_open():
+		if overlays.kind=="result":show_menu()
+		else:close_overlay()
+		return
+	if screen=="shop":
+		if is_instance_valid(shop.modal):shop.close_buy()
+		elif shop.attributes_panel.visible:shop.close_attributes()
+		else:leave_shop()
+	elif screen=="loading":loading_context={};loading_player=-1;loading_cpu=-1;loading_spawns=[];show_menu()
+	elif screen=="menu":
+		if menu!=null and menu.popup_open():menu.cancel_popup()
+		else:show_lobby()
+	elif screen=="match":show_pause()
+	elif screen=="lobby":
+		var dialog := ConfirmationDialog.new()
+		dialog.name="PlatformExitConfirm"
+		dialog.dialog_text=I18n.text("Sair do Gunbound Recomp?")
+		dialog.confirmed.connect(quit_game)
+		dialog.canceled.connect(dialog.queue_free)
+		root.add_child(dialog)
+		dialog.popup_centered()

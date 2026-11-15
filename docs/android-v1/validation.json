@@ -1,0 +1,621 @@
+{
+  "schema": 1,
+  "date": "2026-11-15",
+  "source_base": "49fdeaa9a5b29b216ecd7ce44a44e8a840ef8bf4",
+  "source_state": "uncommitted local implementation",
+  "version": "0.20.5",
+  "local_status": "passed",
+  "android_acceptance_complete": false,
+  "environment": {
+    "host": "macOS Apple Silicon",
+    "serial": "emulator-5590",
+    "avd": "gunbound_android_v1",
+    "android_api": "36",
+    "executed_abi": "arm64-v8a",
+    "qemu": "1",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "renderer": "Compatibility / SwiftShader / OpenGL ES 3.1",
+    "screenshot_size": [
+      2400,
+      1080
+    ],
+    "physical_device": false,
+    "human_emulator_acceptance": true,
+    "human_audio_acceptance_recorded": false,
+    "human_physical_acceptance": false
+  },
+  "apks": {
+    "candidate": {
+      "package_id": "com.chafy.gunboundrecomp.ci",
+      "version_code": 20005,
+      "min_sdk": 24,
+      "target_sdk": 36,
+      "abis": [
+        "arm64-v8a",
+        "x86_64"
+      ],
+      "certificate_sha256": "bc92a6d72e0b4760edf7ee1ff1fcd982e26d25837d3e846f7ffd4f2c9d01f48b",
+      "signature": "verified",
+      "alignment": "16k-verified",
+      "orientation": "userLandscape",
+      "resources": "verified",
+      "licenses": "verified",
+      "version": "0.20.5",
+      "mode": "candidate",
+      "token": "3d73a7c11c7f4662890eaaa196410fb2",
+      "sha256": "e59c1515892b135c453fa94d73fe846669f40b7e66954d07f63ae21c96b8a2d9"
+    },
+    "diagnostic": {
+      "package_id": "com.chafy.gunboundrecomp.ci",
+      "version_code": 20005,
+      "min_sdk": 24,
+      "target_sdk": 36,
+      "abis": [
+        "arm64-v8a",
+        "x86_64"
+      ],
+      "certificate_sha256": "73fad49ef8a0cffa497f8e51c8d81f5f40e8789a1067f4cca085cc93df88b1d3",
+      "signature": "verified",
+      "alignment": "16k-verified",
+      "orientation": "userLandscape",
+      "resources": "verified",
+      "licenses": "verified",
+      "version": "0.20.5",
+      "mode": "diagnostic",
+      "token": "3bfb48a0f2684d50b531c2a9d0ce364c",
+      "sha256": "e8425034f0d2ed1151cebb26dd8df4be492fe15bcb3c05d22b5c5aea1444a054"
+    }
+  },
+  "validation": {
+    "broad_regression": {
+      "seconds": 1093.258,
+      "checks": 92682,
+      "matches": 103,
+      "python_tests": 194,
+      "python_version": "3.12.14",
+      "automation_coverage_percent": 51,
+      "before_final_platform_fixes": true,
+      "failures": []
+    },
+    "directed_final": {
+      "seconds": 98.146,
+      "suites": 22,
+      "checks": 3370,
+      "matches": 0,
+      "failures": []
+    },
+    "ci_unit_final": {
+      "tests": 98,
+      "python_version": "3.13.11",
+      "seconds": 5.164,
+      "failures": 0
+    },
+    "map_crop_pixels": {
+      "tests": 2,
+      "failures": 0
+    },
+    "candidate_ui": {
+      "launch": "passed",
+      "lobby": "passed",
+      "shop": "passed",
+      "solo": "passed",
+      "jewel": "passed",
+      "persistence": "passed",
+      "back": "passed",
+      "home": "passed",
+      "touch": "single-finger-adb",
+      "camera_mode": "verified-on-and-off",
+      "camera_pan": "gesture-attempted-world-displacement-not-proven",
+      "charge": "see-actions-attempted-shot-not-proven",
+      "actions_attempted": [
+        {
+          "action": "tap-text",
+          "pattern": "AVATAR",
+          "target": {
+            "left": 1348,
+            "top": 1016,
+            "width": 92,
+            "height": 29,
+            "text": "AVATAR"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "SETTINGS|CONFIGURA[CÇ][ÕO]ES",
+          "target": {
+            "left": 865,
+            "top": 1017,
+            "width": 136,
+            "height": 31,
+            "text": "SETTINGS"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-below-label",
+          "pattern": "Nickname|Apelido",
+          "target": {
+            "left": 634,
+            "top": 282,
+            "width": 101,
+            "height": 20,
+            "text": "Nickname"
+          }
+        },
+        {
+          "action": "tap-text",
+          "pattern": "Save changes|Salvar altera[çc][õo]es",
+          "target": {
+            "left": 1681,
+            "top": 926,
+            "width": 150,
+            "height": 24,
+            "text": "Save changes"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CREATE",
+          "target": {
+            "left": 1566,
+            "top": 1016,
+            "width": 101,
+            "height": 29,
+            "text": "CREATE"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "START",
+          "target": {
+            "left": 1786,
+            "top": 1020,
+            "width": 80,
+            "height": 27,
+            "text": "START"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CAMERA|C[ÂA]MERA",
+          "target": {
+            "left": 1855,
+            "top": 323,
+            "width": 80,
+            "height": 17,
+            "text": "CAMERA"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "camera-pan",
+          "duration_ms": 600,
+          "outcome": "gesture-delivered-camera-mode-visible",
+          "world_displacement": "not-proven"
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CAMERA\\s+ON|C[ÂA]MERA\\s+ATIVA",
+          "target": {
+            "left": 1839,
+            "top": 320,
+            "width": 113,
+            "height": 20,
+            "text": "CAMERA ON"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "camera-off",
+          "attempts": 1,
+          "outcome": "visible-off"
+        },
+        {
+          "action": "charge-hold",
+          "duration_ms": 3500,
+          "player_turn_evidence": "visible-native-timer",
+          "timer": {
+            "left": 1977,
+            "top": 121,
+            "width": 125,
+            "height": 76,
+            "text": "0.2",
+            "line": [
+              "1",
+              "1",
+              "1",
+              "12"
+            ]
+          },
+          "anchor": {
+            "left": 2012,
+            "top": 870,
+            "width": 59,
+            "height": 21,
+            "text": "PASS"
+          },
+          "shot_outcome": "not-proven"
+        },
+        {
+          "action": "tap-text",
+          "pattern": "PAUSE|PAUSA",
+          "target": {
+            "left": 2260,
+            "top": 316,
+            "width": 83,
+            "height": 28,
+            "text": "PAUSE"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "OK",
+          "target": {
+            "left": 861,
+            "top": 891,
+            "width": 59,
+            "height": 34,
+            "text": "OK"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "Resume|Retomar|Continuar|Continue",
+          "target": {
+            "left": 1220,
+            "top": 484,
+            "width": 90,
+            "height": 21,
+            "text": "Resume"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "OK",
+          "target": {
+            "left": 861,
+            "top": 891,
+            "width": 59,
+            "height": 34,
+            "text": "OK"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CREATE",
+          "target": {
+            "left": 1566,
+            "top": 1016,
+            "width": 101,
+            "height": 29,
+            "text": "CREATE"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "SOLO",
+          "target": {
+            "left": 1151,
+            "top": 411,
+            "width": 76,
+            "height": 27,
+            "text": "SOLO"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "START",
+          "target": {
+            "left": 1786,
+            "top": 1020,
+            "width": 80,
+            "height": 27,
+            "text": "START"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CAMERA|C[ÂA]MERA",
+          "target": {
+            "left": 1855,
+            "top": 323,
+            "width": 80,
+            "height": 17,
+            "text": "CAMERA"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "camera-pan",
+          "duration_ms": 600,
+          "outcome": "gesture-delivered-camera-mode-visible",
+          "world_displacement": "not-proven"
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CAMERA\\s+ON|C[ÂA]MERA\\s+ATIVA",
+          "target": {
+            "left": 1838,
+            "top": 320,
+            "width": 114,
+            "height": 20,
+            "text": "CAMERA ON"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "camera-off",
+          "attempts": 1,
+          "outcome": "visible-off"
+        },
+        {
+          "action": "charge-hold",
+          "duration_ms": 3500,
+          "player_turn_evidence": "visible-native-timer",
+          "timer": {
+            "left": 1949,
+            "top": 101,
+            "width": 153,
+            "height": 97,
+            "text": "15.2",
+            "line": [
+              "1",
+              "1",
+              "1",
+              "12"
+            ]
+          },
+          "anchor": {
+            "left": 2012,
+            "top": 870,
+            "width": 59,
+            "height": 24,
+            "text": "PASS"
+          },
+          "shot_outcome": "not-proven"
+        },
+        {
+          "action": "tap-text",
+          "pattern": "PAUSE|PAUSA",
+          "target": {
+            "left": 2263,
+            "top": 316,
+            "width": 80,
+            "height": 25,
+            "text": "PAUSE"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "OK",
+          "target": {
+            "left": 861,
+            "top": 898,
+            "width": 58,
+            "height": 34,
+            "text": "OK"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "Resume|Retomar|Continuar|Continue",
+          "target": {
+            "left": 1220,
+            "top": 484,
+            "width": 90,
+            "height": 20,
+            "text": "Resume"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "OK",
+          "target": {
+            "left": 861,
+            "top": 898,
+            "width": 58,
+            "height": 34,
+            "text": "OK"
+          },
+          "hold_ms": 0
+        }
+      ],
+      "multitouch": "not-tested",
+      "audio": "not-tested",
+      "arm64": "manual_gate_required"
+    },
+    "diagnostic": {
+      "cases": {
+        "jewel": 22,
+        "maps": 66,
+        "shots": 48,
+        "ui": 3
+      },
+      "failures": 0,
+      "profile_isolated": true,
+      "schema": 1,
+      "token": "3bfb48a0f2684d50b531c2a9d0ce364c",
+      "version": "0.20.5"
+    },
+    "lint": [
+      "ruff correctness E9,F63,F7,F82",
+      "actionlint with existing narrow queue exception",
+      "git diff --check"
+    ],
+    "camera_state_followup": {
+      "status": "passed",
+      "apk_sha256": "e59c1515892b135c453fa94d73fe846669f40b7e66954d07f63ae21c96b8a2d9",
+      "cases": [
+        "already-off-no-tap",
+        "observed-on-to-off"
+      ],
+      "actions": [
+        {
+          "action": "tap-text",
+          "pattern": "CREATE",
+          "target": {
+            "left": 1566,
+            "top": 1016,
+            "width": 101,
+            "height": 29,
+            "text": "CREATE"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "START",
+          "target": {
+            "left": 1786,
+            "top": 1020,
+            "width": 80,
+            "height": 27,
+            "text": "START"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "camera-off",
+          "attempts": 0,
+          "outcome": "visible-off"
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CAMERA",
+          "target": {
+            "left": 1852,
+            "top": 320,
+            "width": 83,
+            "height": 20,
+            "text": "CAMERA"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "tap-text",
+          "pattern": "CAMERA\\s+ON|C[ÂA]MERA\\s+ATIVA",
+          "target": {
+            "left": 1838,
+            "top": 319,
+            "width": 114,
+            "height": 22,
+            "text": "CAMERA ON"
+          },
+          "hold_ms": 0
+        },
+        {
+          "action": "camera-off",
+          "attempts": 1,
+          "outcome": "visible-off"
+        }
+      ],
+      "observations": [
+        {
+          "screen": "lobby",
+          "ocr_pattern": "CREATE",
+          "ocr_absent": null,
+          "screenshot": "lobby.png"
+        },
+        {
+          "screen": "room",
+          "ocr_pattern": "START",
+          "ocr_absent": null,
+          "screenshot": "room.png"
+        },
+        {
+          "screen": "battle",
+          "ocr_pattern": "CAMERA",
+          "ocr_absent": null,
+          "screenshot": "battle.png"
+        },
+        {
+          "screen": "already-off-camera-state",
+          "ocr_pattern": "CAMERA|C[ÂA]MERA",
+          "ocr_absent": null,
+          "screenshot": "already-off-camera-state.png"
+        },
+        {
+          "screen": "camera-on",
+          "ocr_pattern": "CAMERA\\s+ON",
+          "ocr_absent": null,
+          "screenshot": "camera-on.png"
+        },
+        {
+          "screen": "after-on-camera-state",
+          "ocr_pattern": "CAMERA|C[ÂA]MERA",
+          "ocr_absent": null,
+          "screenshot": "after-on-camera-state.png"
+        },
+        {
+          "screen": "after-on-camera-disabled",
+          "ocr_pattern": "CAMERA|C[ÂA]MERA",
+          "ocr_absent": "CAMERA\\s+ON|C[ÂA]MERA\\s+ATIVA",
+          "screenshot": "after-on-camera-disabled.png"
+        }
+      ]
+    }
+  },
+  "pending": [
+    "remote CI PR/fork/main and required-check administration",
+    "persistent distribution signing and signed update retaining profile",
+    "physical ARM64 SOLO/JEWEL acceptance of exact APK",
+    "physical multitouch, audio, insets/orientations, performance and human ergonomics"
+  ],
+  "saved_project_diff_unchanged": true,
+  "saved_project_diff_sha256": "a627081ee0831a2c0805159750a432613d8df9297951680c3cc505d9b3839cf7",
+  "user_acceptance": {
+    "date": "2026-11-15",
+    "statement": "Agora funcionou",
+    "scope": "visible macOS Android emulator; physical device acceptance still pending",
+    "apk_sha256": "e59c1515892b135c453fa94d73fe846669f40b7e66954d07f63ae21c96b8a2d9"
+  },
+  "integration_base": "7d1e66d410f2f2135b3872a43ec05eb41d5a5c9d",
+  "branch": "codex/android-v1",
+  "followup_issues": [
+    {
+      "number": 55,
+      "url": "https://github.com/guichafy/gunbound-recomp/issues/55",
+      "scope": "HUD and ergonomics"
+    },
+    {
+      "number": 56,
+      "url": "https://github.com/guichafy/gunbound-recomp/issues/56",
+      "scope": "signing, remote CI, physical acceptance, update and atomic publication"
+    }
+  ],
+  "integration_ownership": {
+    "commit_push": "assistant authorized",
+    "pull_request_merge": "user",
+    "secrets_protection_publication": "not performed"
+  },
+  "closing_validation": {
+    "integration_base": "7d1e66d410f2f2135b3872a43ec05eb41d5a5c9d",
+    "seconds": 1055.875,
+    "matches": 103,
+    "godot_suites": 140,
+    "checks": 92765,
+    "python_tests": 228,
+    "python_version": "3.13.11",
+    "ci_unit_tests": 100,
+    "ci_unit_seconds": 4.028,
+    "automation_coverage_percent": 56,
+    "failure_keys": [],
+    "report": "closing-regression.json",
+    "remote_ci": "pending user-created pull request",
+    "same_tested_apk_bytes": true
+  }
+}

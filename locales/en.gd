@@ -1,6 +1,15 @@
 extends RefCounted
 ## English UI catalog. Keys are original source messages; format after translation.
 const MESSAGES := {
+	"Retomar": "Resume",
+	"Sair do Gunbound Recomp?": "Exit Gunbound Recomp?",
+	"CÂMERA": "CAMERA",
+	"CÂMERA ATIVA": "CAMERA ON",
+	"ARMA": "WEAPON",
+	"PAUSA": "PAUSE",
+	"PASSAR": "PASS",
+	"Licenças": "Licenses",
+	"Licenças indisponíveis neste pacote.": "Licenses are unavailable in this package.",
 	"Mapa anterior": "Previous map",
 	"Próximo mapa": "Next map",
 	"Trocar lado A/B do mapa": "Change map side A/B",

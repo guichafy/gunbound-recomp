@@ -19,6 +19,8 @@ func run() -> void:
 	i18n.set_locale("en")
 	check(i18n.text("Dificuldade da CPU")=="CPU difficulty", "English text is translated")
 	check(i18n.text("%s · atraso %d") % ["Laser",42]=="Laser · delay 42", "Formatting occurs after translation")
+	for pair in [["Retomar","Resume"],["Sair do Gunbound Recomp?","Exit Gunbound Recomp?"],["CÂMERA","CAMERA"],["CÂMERA ATIVA","CAMERA ON"],["ARMA","WEAPON"],["PAUSA","PAUSE"],["PASSAR","PASS"],["Licenças","Licenses"],["Licenças indisponíveis neste pacote.","Licenses are unavailable in this package."]]:
+		check(i18n.text(pair[0])==pair[1],"Android source messages translate to English: "+pair[0])
 	check(i18n.text("Personal name 123")=="Personal name 123", "Unknown names remain intact")
 	var mobiles = load("res://scripts/mobiles.gd")
 	for id in mobiles.PLAYABLE:

@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "frame_size": [
+    544,
+    336
+  ],
+  "source": {
+    "file": "assets/hd/classic/room_smooth_4x/room/details/maps.png",
+    "sha256": "8d0fd9618ad4882ed7764992a27f112cb27b2a591137112db393b75bcc0406f7"
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "map_00.png",
+      "sha256": "95b745754b1cf12bd9631e6d57bd8325080accb13952a88e0c9820ac88f793b2"
+    },
+    {
+      "index": 1,
+      "file": "map_01.png",
+      "sha256": "96ad95663fad0682f17d73d28ca112b68d6d9751ed87443d571fb03fe813b0bd"
+    },
+    {
+      "index": 2,
+      "file": "map_02.png",
+      "sha256": "1c8729c28e7f2752b9750e7dad203af05ee6ea2228039a69596a6b93e10aaffc"
+    },
+    {
+      "index": 3,
+      "file": "map_03.png",
+      "sha256": "2509d30ebd865a1de4e057ac3797654479bee13ed2728d4483c15425fc567642"
+    },
+    {
+      "index": 4,
+      "file": "map_04.png",
+      "sha256": "34a4f07545ec2839cf142b4f16214018355ce1190fe40b2bd41ef72682b4130d"
+    },
+    {
+      "index": 5,
+      "file": "map_05.png",
+      "sha256": "132be2fecf72b69581396b3e15b2ca00be34be876c244f588041b3049f7831b0"
+    },
+    {
+      "index": 6,
+      "file": "map_06.png",
+      "sha256": "d85e34b2a2761840db130c63a7eca05f41d060bc1348c9303db5345615d29f69"
+    },
+    {
+      "index": 7,
+      "file": "map_07.png",
+      "sha256": "3285c411aaa30e72e335d88f5942b6bd16562613699d06d5af6da6c0896fbd1d"
+    },
+    {
+      "index": 8,
+      "file": "map_08.png",
+      "sha256": "1fb87a3e764146472a67354b06d4223d51316fed197279efe096811d5c9d2e82"
+    },
+    {
+      "index": 9,
+      "file": "map_09.png",
+      "sha256": "8f3bdaaafa348222e5f5c83549371adbc91b184b72ea2e249337b8bac25569ec"
+    },
+    {
+      "index": 10,
+      "file": "map_10.png",
+      "sha256": "a7b8563fde40effdaa660dd2dc106448ac743c05c19e1fb6f4af94de6c79a773"
+    },
+    {
+      "index": 11,
+      "file": "map_11.png",
+      "sha256": "95b745754b1cf12bd9631e6d57bd8325080accb13952a88e0c9820ac88f793b2"
+    },
+    {
+      "index": 12,
+      "file": "map_12.png",
+      "sha256": "96ad95663fad0682f17d73d28ca112b68d6d9751ed87443d571fb03fe813b0bd"
+    },
+    {
+      "index": 13,
+      "file": "map_13.png",
+      "sha256": "fe965e8b36c6d2c1989d412eedf94024b53dc52b45e23e619962d385a1b790ba"
+    },
+    {
+      "index": 14,
+      "file": "map_14.png",
+      "sha256": "2509d30ebd865a1de4e057ac3797654479bee13ed2728d4483c15425fc567642"
+    },
+    {
+      "index": 15,
+      "file": "map_15.png",
+      "sha256": "34a4f07545ec2839cf142b4f16214018355ce1190fe40b2bd41ef72682b4130d"
+    },
+    {
+      "index": 16,
+      "file": "map_16.png",
+      "sha256": "132be2fecf72b69581396b3e15b2ca00be34be876c244f588041b3049f7831b0"
+    },
+    {
+      "index": 17,
+      "file": "map_17.png",
+      "sha256": "d85e34b2a2761840db130c63a7eca05f41d060bc1348c9303db5345615d29f69"
+    },
+    {
+      "index": 18,
+      "file": "map_18.png",
+      "sha256": "6a473fe0846d6b1ec08b7f1c79d54106f9eff4c6b513e1fa7a92aa0cdeaabc72"
+    },
+    {
+      "index": 19,
+      "file": "map_19.png",
+      "sha256": "1fb87a3e764146472a67354b06d4223d51316fed197279efe096811d5c9d2e82"
+    },
+    {
+      "index": 20,
+      "file": "map_20.png",
+      "sha256": "8f3bdaaafa348222e5f5c83549371adbc91b184b72ea2e249337b8bac25569ec"
+    },
+    {
+      "index": 21,
+      "file": "map_21.png",
+      "sha256": "f7be7ce94723101fe7fa3a5432afdb96f9ca87fa4f81253a33e9058ce1b9a30b"
+    }
+  ]
+}
