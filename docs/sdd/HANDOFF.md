@@ -1,5 +1,25 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Emenda — APK de teste sem secrets (15/11/2026)
+
+Pedido posterior do usuário adia publicação na Play Store e remove a chave de
+distribuição como pré-requisito desta entrega. PR e main padrão agora usam o
+mesmo modo `candidate` já aceito: assinatura de teste automática, package `.ci`,
+artifact `android-test-candidates-not-for-distribution`, sem secrets. API24 e
+API36 usam o mesmo arquivo/package. Android não instala APK sem assinatura;
+o usuário não precisa provisionar nenhuma chave para o modo de teste.
+
+Somente main com `ANDROID_PUBLICATION_ENABLED=true` ativa assinatura persistente,
+manifesto/atestado e publisher oficial. Esse caminho continua recusando inputs
+ausentes/inválidos. A chave efêmera muda entre builds e pode exigir reinstalação
+do app de teste; update conservando perfil fica para distribuição estável.
+Essa emenda substitui o bloqueio pré-merge mencionado no fechamento inicial.
+Issue56 registra a fase futura; issue55 mantém o redesenho. PR/merge seguem
+com o usuário. Runtime e APK já testado não foram alterados.
+Validação desta emenda:102testesCI/4,281s, três testes do workflow com seis
+combinações de evento/flag e execução do shell da API24; Ruff/actionlint/diffOK.
+Revisão independente sem P1/P2; evidências em docs/android-v1/test-delivery-*.
+
 ## Fechamento Android aceito — branch para PR do usuário (15/11/2026)
 
 Usuário testou o APK no emulador visível do macOS e confirmou “Agora funcionou”.
@@ -9,12 +29,10 @@ trabalho não cria PR, merge, secrets, ambientes nem publicação manual.
 Base atualizada para `origin/main` `7d1e66d4`, que já contém a correção JEWEL;
 arquivos Android preservados, sem duplicar nem apagar o histórico integrado.
 
-Pendências estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56),
-incluindo o bloqueio da assinatura antes do merge/main. Consulta de nomes em
-15/11 confirmou que ainda não existem os secrets/variáveis Android necessários.
-Sem esses dados, o job Android da main falha explicitamente; sem habilitação e
-atestado físico, a nova publicação conjunta Android/desktop não ocorre.
-Não tratar o push/merge como garantia de APK oficial publicado.
+Pendências futuras estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56).
+A assinatura estável antes exigida em toda main foi adiada pela emenda acima.
+A ausência de secrets não impede gerar o APK de teste; distribuição oficial
+continua desabilitada sem habilitação e atestado físico.
 Ergonomia e reorganização visual permanecem na
 [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55), atualizada.
 
@@ -66,8 +84,8 @@ e [guia macOS](../ANDROID.md). Ledger/logs adicionais em `.tools/android-v1`.
 
 Pendente: CI remota/API24/x86, secrets/chave persistente/ambiente/required
 checks, update assinado conservando perfil, aparelho ARM64, partidas naturais
-por toque, multitouch/áudio/desempenho/insets/aceite humano. Main falha sem
-secrets válidos; publicação continua desligada sem habilitação/atestado.
+por toque, multitouch/áudio/desempenho/insets/aceite humano. O modo de distribuição
+falha sem secrets válidos; o modo padrão da main gera o APK de teste.
 Sem commit/push/publicação ou alteração do projeto salvo/perfil real.
 
 ## Seguimento autorizado — envio e integração remota (14/11/2026)

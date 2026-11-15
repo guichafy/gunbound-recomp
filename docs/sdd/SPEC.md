@@ -6,6 +6,11 @@ evidência separadas do aceite físico.
 
 ## Android v1 — REQ-ANDROID-V1 (15/11/2026)
 
+Emenda atual: sem Play Store nesta fase, entregar APK de teste também na main
+sem exigir credenciais persistentes. Reutilizar assinatura automática de teste
+e package `.ci`; APK sem assinatura não é instalável. Distribuição estável e
+atualização conservando perfil continuam futuras na #56, com ativação explícita.
+
 Seguimento autorizado: após teste no emulador, o usuário aceitou a primeira
 implementação e pediu a branch pronta para seu próprio PR/merge. Commit/push e
 issues autorizados; o limite local anterior é histórico. Gates de distribuição

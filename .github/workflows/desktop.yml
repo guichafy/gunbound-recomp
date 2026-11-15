@@ -221,8 +221,8 @@ jobs:
           --apk builds/android/diagnostic.apk --app-id com.chafy.gunboundrecomp.ci
           --token "$ANDROID_CI_TOKEN" --version "$RELEASE_VERSION"
           --output .tools/android-reports/diagnostic
-      - name: Build and smoke final-like PR candidate without secrets
-        if: github.event_name == 'pull_request'
+      - name: Build and smoke installable test APK without distribution credentials
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED != 'true')
         env:
           RELEASE_VERSION: ${{ needs.version.outputs.version }}
           RELEASE_SHA: ${{ needs.version.outputs.sha }}
@@ -230,7 +230,7 @@ jobs:
           python scripts/build_android.py --mode candidate --output builds/android/candidate.apk
           python scripts/ci/android_ui_smoke.py --apk builds/android/candidate.apk --app-id com.chafy.gunboundrecomp.ci --version "$RELEASE_VERSION" --output .tools/android-reports/final-api36
       - name: Sign and smoke exact persistent-key APK on main only
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED == 'true'
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -256,21 +256,21 @@ jobs:
       - name: Smoke same final APK on minimum supported API
         env:
           RELEASE_VERSION: ${{ needs.version.outputs.version }}
-          EVENT_NAME: ${{ github.event_name }}
+          ANDROID_DISTRIBUTION: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED == 'true' }}
         run: |
-          if [[ "$EVENT_NAME" == "pull_request" ]]; then
-            apk=builds/android/candidate.apk
-            app=com.chafy.gunboundrecomp.ci
-          else
+          if [[ "$ANDROID_DISTRIBUTION" == "true" ]]; then
             apk="builds/dist/Gunbound-Recomp-$RELEASE_VERSION-Android.apk"
             app=com.chafy.gunboundrecomp
+          else
+            apk=builds/android/candidate.apk
+            app=com.chafy.gunboundrecomp.ci
           fi
           python scripts/ci/android_ui_smoke.py --apk "$apk" --app-id "$app" --version "$RELEASE_VERSION" --output .tools/android-reports/final-api24
       - name: Stop disposable emulator
         if: always()
         run: '"$ADB" -s emulator-5554 emu kill || true'
       - name: Upload signed main package before human approval
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED == 'true'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: android-package
@@ -280,8 +280,8 @@ jobs:
             builds/dist/*.apk.sha256
           if-no-files-found: error
           retention-days: 14
-      - name: Upload PR test APKs clearly marked as candidates
-        if: github.event_name == 'pull_request'
+      - name: Upload installable test APKs for PR and main
+        if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED != 'true')
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: android-test-candidates-not-for-distribution

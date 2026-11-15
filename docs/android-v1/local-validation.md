@@ -1,5 +1,18 @@
 # Android v1 — entrega local e evidência
 
+## Emenda — entrega de teste sem chave de distribuição
+
+O usuário adiou distribuição estável/Play Store. O workflow agora gera o mesmo
+candidato com assinatura automática de teste em PR e main padrão, sem secrets.
+Somente main com `ANDROID_PUBLICATION_ENABLED=true` exige chave persistente e
+segue para os gates oficiais. A exigência pré-merge descrita no fechamento
+inicial foi substituída; não é preciso provisionar assinatura para esta fase.
+102 testes de automação passaram, incluindo seis combinações de evento/flag e
+a execução do shell que escolhe o APK da API24; revisão independente sem P1/P2.
+Evidências em [test-delivery-tests.txt](test-delivery-tests.txt) e
+[test-delivery-review.md](test-delivery-review.md). Gameplay/exportador/APKs
+aceitos não mudaram; o agregado de 103 partidas anterior continua registrado.
+
 ## Seguimento de fechamento aceito
 
 Após o teste manual no emulador visível, o usuário confirmou “Agora funcionou”
@@ -11,8 +24,8 @@ Revisão e regressões em [release-readiness-review.md](release-readiness-review
 e [closing-ci-tests.txt](closing-ci-tests.txt). Os APKs abaixo não mudaram.
 
 Pendências de distribuição estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56),
-que precisa ser considerada antes do merge: assinatura Android ainda não
-configurada, main falha sem os inputs persistentes e publicação conjunta fica
+para distribuição estável futura: assinatura persistente ainda não configurada,
+modo de distribuição falha sem seus inputs e publicação oficial conjunta fica
 desligada sem habilitação/aceite físico. HUD/ergonomia estão na
 [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55).
 As seções seguintes preservam a evidência da fase local anterior ao fechamento.
@@ -123,7 +136,7 @@ Nenhum alvo ausente/ambíguo vira clique por coordenada presumida.
 CI Linux PR/fork/main/API24/API36 não executada remotamente; secrets/chave
 persistente, environment/reviewers/required checks e publicação não configurados.
 Assinatura persistente e atualização entre dois versionCodes conservando perfil
-continuam pendentes. Main falha sem os secrets válidos; publicação permanece
+continuam pendentes para distribuição estável. Esse modo falha sem secrets; publicação permanece
 desligada sem habilitação e sem atestado vinculado ao APK/run/commit.
 
 Faltam aparelho ARM64 de teste, partidas naturais SOLO/JEWEL completas por toque,

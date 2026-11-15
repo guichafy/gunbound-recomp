@@ -2,6 +2,18 @@
 
 ## ADR-ANDROID-V1 — base clássica e suporte Android (15/11/2026)
 
+Emenda posterior — APK para testes sem credenciais de distribuição: o usuário
+adiou publicação na Play Store e dispensou provisionar uma chave estável nesta
+entrega. O Android exige assinatura mesmo para instalação direta; reutilizar
+o modo `candidate` já aceito, com chave de teste automática e package `.ci`.
+PR e push na main geram esse APK quando `ANDROID_PUBLICATION_ENABLED` não é
+`true`, sem secrets. Somente a ativação explícita da distribuição exige chave
+persistente, fingerprint e aceite físico. Não alterar o publisher oficial nem
+tratar candidato como pacote estável. Limite conhecido: trocar a chave efêmera
+entre builds exige reinstalar o app de teste, sem promessa de conservar perfil.
+Esta emenda substitui a exigência anterior de configurar assinatura antes de
+qualquer merge/main; a issue56 passa a registrar distribuição estável futura.
+
 Seguimento de fechamento: aceite do usuário no emulador e autorização de
 commit/push da branch `codex/android-v1`; PR/merge ficam com o usuário. Main
 `7d1e66d4` adotada sem duplicar o patch JEWEL. Pendências explícitas na

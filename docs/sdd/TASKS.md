@@ -1,5 +1,13 @@
 # Entregas e próximos trabalhos
 
+## Ajuste da primeira entrega para testes (15/11/2026)
+
+- [x] Dispensar chave persistente/secrets em PR e main padrão, usando candidato com assinatura de teste automática.
+- [x] Preservar assinatura obrigatória do APK, smoke/inspeção e seleção consistente API24/API36.
+- [x] Manter assinatura estável e aceite físico somente no modo futuro de distribuição habilitada.
+- [x] Revisão independente sem P1/P2; testes de matriz e shell aprovados, sem mudança de gameplay.
+- [ ] Validar o fluxo na primeira CI remota do PR; distribuição estável e updates ficam na #56.
+
 ## Fechamento da primeira implementação Android (15/11/2026)
 
 - [x] Aceite do usuário no emulador macOS: “Agora funcionou”.
@@ -7,8 +15,8 @@
 - [x] Criar [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56) para assinatura/CI/update/aceite físico/publicação; atualizar [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55) de HUD/ergonomia.
 - [x] Corrigir e revisar a observação de logs compatível com Android7/API24, sem perder erros de processos anteriores.
 - [x] Agregado final1055,875s/103partidas/140suítes/92.765checks/228Python/56%, zero falhas;100CItests/4,028s, Ruff/actionlint/whitespaceOK.
-- [x] Preparar a entrega na branch `codex/android-v1` para push; PR e merge serão feitos pelo usuário, após checks remotos e preparação da assinatura.
-- [ ] Resolver os gates da #56 antes de anunciar distribuição oficial; secrets/variáveis ainda ausentes, main falha sem assinatura e publicação conjunta está desligada.
+- [x] Preparar a entrega na branch `codex/android-v1` para push; PR e merge serão feitos pelo usuário, após checks remotos. Chave de distribuição não bloqueia esta entrega de teste.
+- [ ] Resolver os gates da #56 antes de anunciar distribuição estável; secrets/variáveis são futuros e publicação oficial conjunta continua desligada.
 
 Requisito adicional Android A8: fluxo reproduzível de APK no emulador macOS;
 [guia local](../ANDROID.md), T10 do [plano](ANDROID_V1_PLAN.md). Execução real e
