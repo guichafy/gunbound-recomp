@@ -270,3 +270,20 @@ RED2falhas/1erro → GREEN125testes/16,638s. Ruff/actionlint/diff aprovados.
 Replay no observer final do frame exato do CI: lobby recusado como loja,
 enhanced_ocr não chamado,1,586s. ProbeOFFaceito/ONrecusado preservado; hash em
 strict-camera-state.json. Comparação de threads em ocr-thread-benchmark.json.
+
+## Run122 — teclado do AVD (REQ-ANDROID-V1/A8)
+
+OCR passou loja/Back/configurações. Falha foi IME sem foco após toqueNick.
+AVDAPI36 era gerado com hw.keyboard=yes; avdmanagerAPI24 também pode gerar yes.
+Reprodução controlada no mesmo APK e174/AVD: teclado físico yes → campo com
+caret/foco, mInputShown=false e mServedView=GodotGLRenderView, mesmo permitindo
+show_ime_with_hard_keyboard. Reboot mudando somente hw.keyboard=no → mesmo
+toque abriu IME/mInputShown=true e GodotEditText/EditableInputConnection.
+Normalizar a configuração gerada das duas APIs para touch/keyboard=no, sem
+chaves duplicadas de tamanho/teclado; preservar ABI e demais dados do SDK.
+Não alterar o jogo, timeoutIME15s nem requisito de conexãoGodot. Persistir o
+último dumpsys no artifact quando essa espera falhar, para diagnóstico real.
+Regressões RED2falhas em8testes de ferramentas antes do ajuste.
+
+GREEN126testes/17,928s, Ruff/diff aprovados e revisão semP1/P2. Dados da
+comparação em ime-keyboard-mode.json. APK/runtime e174 não foram alterados.

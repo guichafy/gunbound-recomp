@@ -1,5 +1,13 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+Run122/head5b54394d superou OCR/loja/Back/configurações; IME falhou porque o
+AVD tinha teclado físico. Causa reproduzida com o mesmoAPK/toque: hw.keyboard=yes
+não abreIME; no abreIME com GodotEditText/conexão editável. AmbasAPIs agora
+normalizam hw.keyboard=no e removem duplicatas de configuração.126testesCI
+em17,928s/Ruff/diff e revisão aprovados. Prova ime-keyboard-mode.json.
+APK/jogo e174 intactos, timeoutIME15s/foco estrito preservados. Novo SHA precisa
+dos cinco gates completos antes de merge e CI da main.
+
 Run121/head383b: build/inspeção e diagnósticoAPI36 passaram; smoke parou no
 Tesseract3× redundante da loja (timeout30s). Observer agora prioriza recortes e
 templates, limitaOCR/OpenCV a1worker, preserva timeout e predicados.125testesCI

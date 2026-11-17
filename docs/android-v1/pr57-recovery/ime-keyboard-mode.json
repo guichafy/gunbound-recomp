@@ -1,0 +1,20 @@
+{
+  "apk_sha256": "e174f1dc63e8072a5918330ec981162e9cec8ac9a61eb19399fc11abb573f0cc",
+  "api": 36,
+  "abi": "arm64-v8a",
+  "same_apk_and_tap": true,
+  "states": {
+    "hardware_keyboard_yes": {
+      "ime_visible": false,
+      "served_view_class": "org.godotengine.godot.GodotGLRenderView"
+    },
+    "hardware_keyboard_yes_soft_allowed": {
+      "ime_visible": false,
+      "served_view_class": "org.godotengine.godot.GodotGLRenderView"
+    },
+    "hardware_keyboard_no": {
+      "ime_visible": true,
+      "served_view_class": "org.godotengine.godot.input.GodotEditText"
+    }
+  }
+}
