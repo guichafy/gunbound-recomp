@@ -11,6 +11,47 @@ import bootstrap
 
 
 class AndroidToolsTests(unittest.TestCase):
+    def test_boot_retries_transient_adb_read_timeout_before_unlocking(self):
+        import android_tools,subprocess
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);tools=dict(ANDROID_SDK_ROOT=str(root/'sdk'),EMULATOR='emulator',ADB='adb',AVDMANAGER='avdmanager')
+            reads=[];unlocks=[]
+            def run(args,**kwargs):
+                if args[0]=='avdmanager':
+                    folder=Path(args[args.index('--path')+1]);folder.mkdir(parents=True);(folder/'config.ini').touch()
+                if args[-1]=='sys.boot_completed':
+                    reads.append(kwargs['timeout'])
+                    if len(reads)==1:raise subprocess.TimeoutExpired(args,15)
+                if args[-3:]==['input','keyevent','82']:unlocks.append(args)
+                return subprocess.CompletedProcess(args,0,'1\n','')
+            with patch.object(android_tools.subprocess,'Popen') as process,patch.object(android_tools.subprocess,'run',side_effect=run),patch.object(android_tools.time,'sleep'):
+                process.return_value.poll.return_value=None
+                android_tools.boot(root,tools,24)
+                process.return_value.terminate.assert_not_called()
+            self.assertEqual(reads,[15,15])
+            self.assertEqual(len(unlocks),1)
+
+    def test_boot_persistent_adb_read_timeouts_still_expire_at_original_deadline(self):
+        import android_tools,subprocess
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);tools=dict(ANDROID_SDK_ROOT=str(root/'sdk'),EMULATOR='emulator',ADB='adb',AVDMANAGER='avdmanager')
+            reads=[]
+            def run(args,**kwargs):
+                if args[0]=='avdmanager':
+                    folder=Path(args[args.index('--path')+1]);folder.mkdir(parents=True);(folder/'config.ini').touch()
+                    return subprocess.CompletedProcess(args,0,'','')
+                self.assertEqual(args[-1],'sys.boot_completed','No unlock or input commands before readiness')
+                reads.append(kwargs['timeout'])
+                raise subprocess.TimeoutExpired(args,15)
+            with patch.object(android_tools.subprocess,'Popen') as process,patch.object(android_tools.subprocess,'run',side_effect=run),patch.object(android_tools.time,'sleep'),patch.object(android_tools.time,'monotonic',side_effect=[0,0,17,300]):
+                process.return_value.poll.return_value=None
+                with self.assertRaisesRegex(TimeoutError,'boot timed out'):
+                    android_tools.boot(root,tools,24)
+                process.return_value.terminate.assert_called_once()
+            self.assertEqual(reads,[15,15])
+
     def test_optional_input_diagnostics_record_denial_without_skipping_boot_checks(self):
         import android_tools,subprocess,json
         from unittest.mock import patch

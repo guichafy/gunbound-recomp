@@ -1,5 +1,12 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+Run126/headb3cd397b passou o fluxo completo API36 no Linux/x86_64 (versão0.25.0;
+report candidate-ui-ci-api36.json). API24 abortou por TimeoutExpired15s em
+getprop antes do limite300s, sem fatal/panic no log do emulador. Repetir apenas
+essa leitura dentro do orçamento original; comandos de entrada não repetidos.
+RED2erros → GREEN130testes/16,111s; Ruff/diff aprovados. Novo SHA ainda precisa
+passar APIs36/24 e os cinco gates antes de merge/main.
+
 Run125/head1f636ae1 comprovou entrada sem teclado físico e IME/foco no x86;
 perfil/loja/SOLO/câmera/pausa passaram. Falha de retomada expôs frame antigo:
 teste enviavaOK+Back sem observar o fechamento. Novo helper exige CAMERA e
