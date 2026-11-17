@@ -34,6 +34,7 @@ class RunnerTests(unittest.TestCase):
             self.module.prepare_test_dirs(root)
             self.assertTrue((root / '.tools/lobby-rank').is_dir())
             self.assertTrue((root / '.tools/room-ui').is_dir())
+            self.assertTrue((root / '.tools/android-v1').is_dir())
             self.assertFalse((root / '.tools/missing-shop-directory').exists())
 
     def test_timeout_fails(self):

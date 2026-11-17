@@ -11,6 +11,38 @@ import bootstrap
 
 
 class AndroidToolsTests(unittest.TestCase):
+    def test_modern_image_without_userdata_uses_emulator_data_directory(self):
+        import android_tools
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp)
+            sdk=root/'sdk'
+            image=sdk/'system-images/android-36/default/x86_64'
+            (image/'data').mkdir(parents=True)
+            (image/'data/empty_data_disk').write_text('')
+            avds=root/'avd'
+            android_tools.write_modern_avd(sdk,avds,36)
+            config=(avds/'gunbound-ci-api36.avd/config.ini').read_text()
+            self.assertIn('image.sysdir.1=system-images/android-36/default/x86_64/',config)
+            self.assertIn('hw.cpu.arch=x86_64',config)
+            self.assertIn('hw.initialOrientation=landscape',config)
+            self.assertIn(str(avds/'gunbound-ci-api36.avd'),(avds/'gunbound-ci-api36.ini').read_text())
+            self.assertFalse((image/'userdata.img').exists(),'Never fabricate a system image')
+            with self.assertRaises(ValueError):android_tools.write_modern_avd(sdk,avds,24)
+            (image/'data/empty_data_disk').unlink()
+            with self.assertRaises(ValueError):android_tools.write_modern_avd(sdk,avds,36)
+
+    def test_unzipped_emulator_registers_as_an_installed_sdk_package(self):
+        import android_tools
+        import xml.etree.ElementTree as ET
+        with tempfile.TemporaryDirectory() as temp:
+            folder=Path(temp)
+            (folder/'source.properties').write_text('Pkg.Revision=37.3.9\nPkg.Path=emulator\n')
+            android_tools.register_emulator(folder,'37.3.9')
+            package=ET.parse(folder/'package.xml').find('localPackage')
+            self.assertEqual(package.attrib['path'],'emulator')
+            self.assertEqual([n.text for n in package.find('revision')],['37','3','9'])
+            with self.assertRaises(ValueError):android_tools.register_emulator(folder,'37.3.8')
+
     def test_android_templates_are_selected_on_linux(self):
         self.assertTrue(hasattr(bootstrap, 'template_members'), 'target-aware templates missing')
         self.assertEqual(bootstrap.template_members('Linux', 'android'), [

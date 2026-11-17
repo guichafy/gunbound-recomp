@@ -1,0 +1,77 @@
+{
+  "environment": "macOS ARM64 API36 SwiftShader, 1280x800; after under concurrent regression; frame timings not comparable",
+  "samples": [
+    {
+      "draw_calls": {
+        "max": 91.0,
+        "mean": 91.0,
+        "p95": 91.0,
+        "samples": 180
+      },
+      "frame_ms": {
+        "max": 32.145,
+        "mean": 16.8801888888889,
+        "p95": 18.345,
+        "samples": 180
+      },
+      "process_ms": {
+        "max": 0.365,
+        "mean": 0.185561111111111,
+        "p95": 0.273,
+        "samples": 180
+      },
+      "scenario": "solo",
+      "static_bytes": 245560541,
+      "texture_bytes": 835863250.0,
+      "viewport": "(1280.0, 800.0)"
+    },
+    {
+      "draw_calls": {
+        "max": 92.0,
+        "mean": 87.4166666666667,
+        "p95": 92.0,
+        "samples": 180
+      },
+      "frame_ms": {
+        "max": 31.201,
+        "mean": 17.9005,
+        "p95": 25.455,
+        "samples": 180
+      },
+      "process_ms": {
+        "max": 3.219,
+        "mean": 0.341844444444444,
+        "p95": 0.884,
+        "samples": 180
+      },
+      "scenario": "volley",
+      "static_bytes": 249426573,
+      "texture_bytes": 835203714.0,
+      "viewport": "(1280.0, 800.0)"
+    },
+    {
+      "draw_calls": {
+        "max": 102.0,
+        "mean": 102.0,
+        "p95": 102.0,
+        "samples": 180
+      },
+      "frame_ms": {
+        "max": 27.412,
+        "mean": 16.9497722222222,
+        "p95": 19.104,
+        "samples": 180
+      },
+      "process_ms": {
+        "max": 1.245,
+        "mean": 0.209444444444444,
+        "p95": 0.306,
+        "samples": 180
+      },
+      "scenario": "jewel",
+      "static_bytes": 246122209,
+      "texture_bytes": 835898234.0,
+      "viewport": "(1280.0, 800.0)"
+    }
+  ]
+}

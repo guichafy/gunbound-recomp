@@ -1,5 +1,23 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Recuperação PR57 autorizada — merge pelo agente (17/11/2026)
+
+Novo pedido autoriza otimizar Android, corrigir PR57 e fazer merge somente
+após todos os gates remotos no head final, sem bypass. Esta autorização
+substitui as reservas anteriores de merge pelo usuário. Plano/provas em
+[ANDROID_PR57_RECOVERY.md](ANDROID_PR57_RECOVERY.md).
+
+Correções locais: fixtures Android no checkout limpo; Git Bash explícito e
+captura de argumentos portável no Windows; registro do SDK/emulador e AVD
+API36 compatível com data/ sem userdata.img legado.105 testes CI passaram.
+Sprites Android carregam somente os IDs apresentados, antes do resetEPA;
+recursos aprovados preservados. Regressores132/0, sete cenas962/0 antes do
+último guard de minas e GPU3/0 com SHA idênticos ao HEAD anterior.
+APK diagnóstico final1760ff17 no AVD:48tiros/66mapas/22JEWEL/UI3 sem falhas.
+Loading não desenha mundo antigo; regressão RED132/2→GREEN132/0.
+Revisão independente final sem P1/P2. Regressores completos e CI remota em andamento.
+Sem alegação de ganho deFPS ou aceite físico.
+
 ## PR57 aberto e acompanhamento da CI (15/11/2026)
 
 Novo pedido do usuário autoriza abrir o PR; ele continua responsável pelo merge.

@@ -1,5 +1,15 @@
 # Entregas e próximos trabalhos
 
+## Recuperação PR57 e recursos Android (17/11/2026)
+
+- [x] Reproduzir e corrigir fixture limpa, Windows Bash e instalação/AVD do SDK.
+- [x] Carregar somente sprites apresentados no Android, mantendo assets/EPA.
+- [x] Regressões de recursos130/0 e comparação GPU3/0, imagens finais idênticas.
+- [x] Automação105/0 e Ruff/diff aprovados.
+- [ ] Concluir regressão completa e smoke dos APKs finais; registrar provas.
+- [ ] Revisão independente, todos os gates do head final e merge protegido.
+- [ ] Acompanhar CI da main e atualizar #56 com os limites remanescentes.
+
 ## Ajuste da primeira entrega para testes (15/11/2026)
 
 - [x] Dispensar chave persistente/secrets em PR e main padrão, usando candidato com assinatura de teste automática.
