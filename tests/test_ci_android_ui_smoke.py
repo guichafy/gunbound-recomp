@@ -6,6 +6,18 @@ PATH=Path(__file__).resolve().parents[1]/'scripts/ci/android_ui_smoke.py'
 
 
 class AndroidUISmokeTests(unittest.TestCase):
+    def test_ocr_passes_cannot_join_distant_camera_and_on_labels(self):
+        import struct,tempfile,re
+        from unittest.mock import patch
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        png=b'\x89PNG\r\n\x1a\n'+b'\x00\x00\x00\rIHDR'+struct.pack('>II',1280,800)
+        device=object.__new__(m.Device);device.observations=[];device.run=lambda *args,**kwargs:png
+        with tempfile.TemporaryDirectory() as temp,patch.object(m.subprocess,'check_output',return_value='CAMERA'),patch.object(m,'enhanced_ocr',return_value='ON'),patch.object(m,'control_targets',return_value=[]):
+            device.output=Path(temp)
+            text=device.capture('camera',r'CAMERA')
+            self.assertIsNone(re.search(m.CAMERA_ON_PATTERN,text,re.I))
+
     def test_os_onboarding_target_requires_system_package_title_and_unique_button(self):
         spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
         m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
@@ -47,6 +59,9 @@ class AndroidUISmokeTests(unittest.TestCase):
         target=m.text_target(header+camera+on,m.CAMERA_ON_PATTERN)
         self.assertEqual((target['left'],target['top'],target['width'],target['height']),(100,100,60,38))
         self.assertEqual(m.text_target(header+camera+on,r'CAMERA')['height'],16)
+        hinted_camera=camera.replace('\t100\t100\t60\t16\t','\t29\t67\t146\t26\t')
+        hinted_on=on.replace('\t120\t122\t20\t16\t','\t73\t120\t52\t25\t')
+        self.assertEqual(m.text_target(header+hinted_camera+hinted_on,m.CAMERA_ON_PATTERN)['text'],'CAMERA ON')
         for distant in [on.replace('\t122\t','\t500\t'),on.replace('\t120\t','\t500\t')]:
             with self.assertRaisesRegex(ValueError,'missing'):m.text_target(header+camera+distant,m.CAMERA_ON_PATTERN)
         duplicate=camera.replace('\t100\t100\t','\t500\t100\t')+on.replace('\t120\t','\t520\t')
@@ -135,10 +150,10 @@ class AndroidUISmokeTests(unittest.TestCase):
         png=b'\x89PNG\r\n\x1a\n'+b'\x00\x00\x00\rIHDR'+struct.pack('>II',2400,1080)
         device=object.__new__(m.Device);device.observations=[]
         device.run=lambda *args,**kwargs:png
-        with tempfile.TemporaryDirectory() as temp,patch.object(m.subprocess,'check_output',side_effect=['CAMERA ON\nPAUSE','CAMERA\nPAUSE']) as ocr,patch.object(m.time,'sleep'):
+        with tempfile.TemporaryDirectory() as temp,patch.object(m.subprocess,'check_output',side_effect=['CAMERA ON\nPAUSE','CAMERA\nPAUSE']) as ocr,patch.object(m.time,'sleep'),patch.object(m,'enhanced_ocr',return_value=''),patch.object(m,'native_targets',return_value=[]),patch.object(m,'control_targets',return_value=[]):
             device.output=Path(temp)
             text=device.capture('camera-off',r'CAMERA',absent=r'CAMERA\s+ON')
-            self.assertEqual(text,'CAMERA\nPAUSE')
+            self.assertEqual(text.strip(),'CAMERA\nPAUSE')
             self.assertEqual(ocr.call_count,2)
 
     def test_smoke_rejects_personal_or_non_emulator_targets(self):

@@ -41,7 +41,7 @@ class AndroidToolsTests(unittest.TestCase):
             self.assertIn('image.sysdir.1=system-images/android-36/default/x86_64/',config)
             self.assertIn('hw.cpu.arch=x86_64',config)
             self.assertIn('hw.initialOrientation=landscape',config)
-            self.assertIn(str(avds/'gunbound-ci-api36.avd'),(avds/'gunbound-ci-api36.ini').read_text())
+            self.assertIn(str((avds/'gunbound-ci-api36.avd').resolve()),(avds/'gunbound-ci-api36.ini').read_text())
             self.assertFalse((image/'userdata.img').exists(),'Never fabricate a system image')
             with self.assertRaises(ValueError):android_tools.write_modern_avd(sdk,avds,24)
             (image/'data/empty_data_disk').unlink()

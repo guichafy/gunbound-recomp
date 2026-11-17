@@ -61,6 +61,13 @@ entre callbacks. Gate monotônico300ms substitui o dedupe por frame insuficiente
 atrasado não tem deduplicação garantida. Confirmação de saída é modal única,
 cancelável por um novo Back aceito; regressão26/0 após RED26/2.
 
+Emenda PR57/17-11: renovar o relógio após concluir o handler também. Reconstruir
+o lobby sob softwareGL pode consumir a janela que antes começava só na entrada,
+permitindo ao callback enfileirado agir na tela seguinte. Rastreio real confirmou
+dois callbacks na saída da loja; cena com navegação400ms reproduziu a confirmação
+de saída indevida (RED27/2). Janela300ms preservada a partir da conclusão;
+a limitação heurística para callbacks ainda mais atrasados continua explícita.
+
 A tira de préviasHD11968px excedeu o limite GL do AVD. Android usa22recortes
 RGBA544×336 exatos, preservando originais/HD; catálogo ausente cai no nativo.
 Exportação portátil no Mac assina apenas a cópia do editor; SDK instalado é

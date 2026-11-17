@@ -1,0 +1,10 @@
+OK   test_android_lifecycle -> ANDROID LIFECYCLE CHECKS: 28 | FAILURES: 0
+OK   test_android_layout -> ANDROID LAYOUT CHECKS: 352 | FAILURES: 0
+OK   test_android_touch -> ANDROID TOUCH CHECKS: 35 | FAILURES: 0
+OK   test_android_resources -> ANDROID RESOURCES CHECKS: 132 | FAILURES: 0
+OK   test_lobby_ui -> LOBBY UI CHECKS: 96 | FAILURES: 0
+OK   test_match_loading -> MATCH LOADING CHECKS: 33 | FAILURES: 0
+OK   test_settings_i18n -> SETTINGS I18N CHECKS: 34 | FAILURES: 0
+OK   test_shop_original -> ORIGINAL SHOP CHECKS: 77 | FAILURES: 0
+----------------------------------------
+CHECK HARNESS: todas as suites passaram (787 checks)

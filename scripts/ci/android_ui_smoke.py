@@ -26,10 +26,97 @@ from android_package import ERRORS, diagnostic_report
 
 OPTIONS_POPUP_PATTERN = r'(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\bOK\b)'
 CAMERA_ON_PATTERN = r'CAMERA\s+ON|C[ÂA]MERA\s+ATIVA'
+RESUME_PATTERN = r'Resume|Retomar|Continuar|Continue'
+CONTROL_OCR_CACHE = {}
 
 
 class CaptureTimeout(ValueError):
     pass
+
+
+def native_targets(path: Path,pattern: str):
+    from android_native_ui import LABELS,targets
+    if pattern==OPTIONS_POPUP_PATTERN:pattern=r'OK'
+    if not any(re.fullmatch(pattern,label,re.I) for label in LABELS):return []
+    from PIL import Image
+    with Image.open(path) as pixels:return targets(pixels,pattern)
+
+
+def resume_targets(path: Path,pattern: str):
+    if pattern!=RESUME_PATTERN:return []
+    from PIL import Image,ImageOps
+    from android_native_ui import bright_panels
+    found=[]
+    with Image.open(path) as pixels:
+        for index,region in enumerate(bright_panels(pixels)):
+            x,y,w,h=[region[key] for key in ('left','top','width','height')]
+            image=ImageOps.grayscale(pixels.crop((x,y,x+w,y+h))).resize((w*3,h*3),Image.Resampling.BICUBIC)
+            image=ImageOps.expand(image.point(lambda value:255 if value>80 else 0),border=12,fill=255)
+            crop=path.with_stem(path.stem+'-contrast'+str(index));image.save(crop)
+            tsv=subprocess.check_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(crop),'stdout','--psm','7','tsv'],text=True,stderr=subprocess.DEVNULL,timeout=30)
+            crop.with_suffix('.tsv').write_text(tsv)
+            try:target=text_target(tsv,pattern)
+            except ValueError as error:
+                if 'missing' not in str(error):raise
+                continue
+            target['left']-=12;target['top']-=12
+            target=unscale_target(target,3)
+            target['left']+=x;target['top']+=y
+            found.append(target)
+    return found
+
+
+def control_targets(path: Path,pattern: str,include_camera_state=False):
+    if not any(label in pattern.upper() for label in ('CAMERA','PAUSE','WEAPON')):return []
+    from PIL import Image,ImageOps
+    from android_native_ui import control_regions
+    found=[]
+    with Image.open(path) as pixels:
+        for index,region in enumerate(control_regions(pixels)):
+            x,y,w,h=[region[key] for key in ('left','top','width','height')]
+            margin=max(2,round(min(w,h)*.06));x+=margin;y+=margin;w-=margin*2;h-=margin*2
+            image=ImageOps.grayscale(pixels.crop((x,y,x+w,y+h))).resize((w*4,h*4),Image.Resampling.BICUBIC)
+            image=ImageOps.expand(ImageOps.invert(image.point(lambda value:255 if value>140 else 0)),border=20,fill=255)
+            crop=path.with_stem(path.stem+'-control'+str(index));image.save(crop)
+            key=hashlib.sha256(image.tobytes()+str(image.size).encode()).hexdigest()
+            if key not in CONTROL_OCR_CACHE:
+                CONTROL_OCR_CACHE[key]=subprocess.check_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(crop),'stdout','--psm','6','tsv'],text=True,stderr=subprocess.DEVNULL,timeout=30)
+                if len(CONTROL_OCR_CACHE)>128:del CONTROL_OCR_CACHE[next(iter(CONTROL_OCR_CACHE))]
+            tsv=CONTROL_OCR_CACHE[key];crop.with_suffix('.tsv').write_text(tsv)
+            try:
+                if 'CAMERA' in pattern.upper():
+                    try:target=text_target(tsv,CAMERA_ON_PATTERN)
+                    except ValueError as error:
+                        if 'missing' not in str(error):raise
+                        target=text_target(tsv,pattern)
+                else:target=text_target(tsv,pattern)
+                matches=re.search if include_camera_state else re.fullmatch
+                if not matches(pattern,target['text'],re.I):continue
+            except ValueError as error:
+                if 'missing' not in str(error):raise
+                continue
+            target['left']-=20;target['top']-=20;target=unscale_target(target,4)
+            target['left']+=x;target['top']+=y;found.append(target)
+    return found
+
+
+def enhanced_ocr(path: Path,tsv=False):
+    from PIL import Image,ImageOps
+    enhanced=path.with_stem(path.stem+'-ocr3x')
+    with Image.open(path) as pixels:
+        ImageOps.grayscale(pixels).resize((pixels.width*3,pixels.height*3),Image.Resampling.BICUBIC).save(enhanced)
+    args=[os.environ.get('GUNBOUND_OCR','tesseract'),str(enhanced),'stdout','--psm','11']
+    if tsv:args.append('tsv')
+    result=subprocess.check_output(args,text=True,stderr=subprocess.DEVNULL,timeout=30)
+    enhanced.with_suffix('.tsv' if tsv else '.txt').write_text(result)
+    return result
+
+
+def unscale_target(target: dict,scale: int):
+    left=target['left']//scale;top=target['top']//scale
+    right=(target['left']+target['width']+scale-1)//scale
+    bottom=(target['top']+target['height']+scale-1)//scale
+    return target|dict(left=left,top=top,width=right-left,height=bottom-top)
 
 
 def legacy_package_uid(dump: str,app: str) -> str:
@@ -119,7 +206,7 @@ def text_target(payload: str, pattern: str) -> dict:
         for second in spans:
             gap=second['top']-first['top']-first['height']
             overlap=min(first['left']+first['width'],second['left']+second['width'])-max(first['left'],second['left'])
-            if not (0<=gap<=max(first['height'],second['height']) and overlap>=min(first['width'],second['width'])*0.7):continue
+            if not (0<=gap<=max(first['height'],second['height'])*1.25 and overlap>=min(first['width'],second['width'])*0.7):continue
             text=first['text']+' '+second['text']
             if not re.fullmatch(pattern,text,re.I):continue
             left=min(first['left'],second['left']);top=first['top']
@@ -199,6 +286,21 @@ class Device:
             path.write_bytes(screenshot)
             text=subprocess.check_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(path),'stdout','--psm','11'],text=True,stderr=subprocess.DEVNULL,timeout=30)
             (self.output/(label+'.txt')).write_text(text)
+            if pattern and not re.search(pattern,text,re.I):
+                native=native_targets(path,pattern)
+                if native:
+                    (self.output/(label+'-native.json')).write_text(json.dumps(native,indent=2)+'\n')
+                    text+='\n'+'\n'.join(target['text'] for target in native)
+            if (pattern and (not re.search(pattern,text,re.I) or 'CAMERA' in pattern)) or absent:
+                enhanced=enhanced_ocr(path)
+                if enhanced.strip():text+='\n[enhanced OCR]\n'+enhanced
+            if absent:
+                text+='\n'+'\n'.join(target['text'] for target in native_targets(path,absent))
+            if pattern==RESUME_PATTERN and not re.search(pattern,text,re.I):
+                text+='\n[contrast OCR]\n'+'\n'.join(target['text'] for target in resume_targets(path,pattern))
+            if pattern and ('CAMERA' in pattern.upper() or not re.search(pattern,text,re.I)):
+                controls=control_targets(path,pattern,include_camera_state=True)
+                if controls:text+='\n[control OCR]\n'+'\n'.join(target['text'] for target in controls)
             if self.size[0]>=self.size[1] and (pattern is None or re.search(pattern,text,re.I)) and (absent is None or not re.search(absent,text,re.I)):
                 self.observations.append(dict(screen=label,ocr_pattern=pattern,ocr_absent=absent,screenshot=path.name))
                 return text
@@ -218,8 +320,25 @@ class Device:
         return tsv
 
     def locate_text(self,pattern,label='target'):
-        target=text_target(self.read_tsv(label),pattern)
-        if target['left']+target['width']>self.size[0] or target['top']+target['height']>self.size[1]:
+        try:
+            target=text_target(self.read_tsv(label),pattern)
+        except ValueError as error:
+            if 'missing' not in str(error):raise
+            found=native_targets(self.output/(label+'.png'),pattern)
+            if len(found)>1:raise ValueError('Native raster target ambiguous') from error
+            if found:
+                target=found[0]
+                (self.output/(label+'-native.json')).write_text(json.dumps(target,indent=2)+'\n')
+            else:
+                try:target=unscale_target(text_target(enhanced_ocr(self.output/(label+'.png'),tsv=True),pattern),3)
+                except ValueError as error:
+                    if 'missing' not in str(error):raise
+                    found=resume_targets(self.output/(label+'.png'),pattern)
+                    if not found:found=control_targets(self.output/(label+'.png'),pattern)
+                    if not found:raise
+                    if len(found)>1:raise ValueError('Contrast OCR target ambiguous') from error
+                    target=found[0]
+        if min(target['left'],target['top'])<0 or target['left']+target['width']>self.size[0] or target['top']+target['height']>self.size[1]:
             raise ValueError('OCR rectangle exceeds rendered screenshot')
         return target
 
@@ -455,7 +574,7 @@ def final_ui(device: Device,apk: Path,app: str):
     device.dismiss_system_tips()
     device.capture('lobby',r'CREATE|SETTINGS')
     # Real touch into shop; Back must return to lobby.
-    device.tap_text(r'AVATAR',label='open-shop');device.capture('shop',r'GOLD|CASH|AVATAR|SHOP')
+    device.tap_text(r'AVATAR',label='open-shop');device.capture('shop',r'GOLD|CASH|AVATAR|SHOP',absent=r'CREATE|SETTINGS')
     device.dismiss_system_tips('shop-system-tip')
     device.run('shell','input','keyevent','KEYCODE_BACK');device.capture('lobby-after-shop',r'CREATE|SETTINGS')
     device.tap_text(r'SETTINGS|CONFIGURA[CÇ][ÕO]ES',label='open-settings');device.capture('settings',r'Nickname|Apelido|Preferences|Prefer')
@@ -485,7 +604,7 @@ def final_ui(device: Device,apk: Path,app: str):
         device.disable_camera(mode)
         # Require exact OFF label after toggling; substring CAMERA also appears
         # in CAMERA ON, so an ordinary capture regex alone is insufficient.
-        device.locate_text(r'CAMERA|C[ÂA]MERA',label=mode+'-camera-off-confirmed')
+        device.capture(mode+'-camera-off-confirmed',r'CAMERA|C[ÂA]MERA',absent=CAMERA_ON_PATTERN)
         device.attempt_player_charge(mode)
         device.tap_text(r'PAUSE|PAUSA',label=mode+'-touch-pause')
         device.capture(mode+'-touch-pause-visible',OPTIONS_POPUP_PATTERN)

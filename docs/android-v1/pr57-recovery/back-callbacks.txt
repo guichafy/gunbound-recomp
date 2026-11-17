@@ -1,0 +1,5 @@
+11-17 13:07:30.031  4837  4857 I godot   : BACK PR57 entry 14729 screen=shop last=-300
+11-17 13:07:30.159  4837  4857 I godot   : BACK PR57 leave-shop-end 14857
+11-17 13:07:30.159  4837  4857 I godot   : BACK PR57 entry 14857 screen=lobby last=14731
+
+Temporary trace APK only; trace removed from final source.
