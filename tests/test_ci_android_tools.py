@@ -11,6 +11,26 @@ import bootstrap
 
 
 class AndroidToolsTests(unittest.TestCase):
+    def test_legacy_avd_is_normalized_for_touch_and_software_keyboard(self):
+        import android_tools,subprocess
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);tools=dict(ANDROID_SDK_ROOT=str(root/'sdk'),EMULATOR='emulator',ADB='adb',AVDMANAGER='avdmanager')
+            def run(args,**kwargs):
+                if args[0]=='avdmanager':
+                    folder=Path(args[args.index('--path')+1]);folder.mkdir(parents=True)
+                    (folder/'config.ini').write_text('hw.keyboard=yes\nhw.lcd.width=320\nhw.lcd.height=640\nabi.type=x86_64\n')
+                return subprocess.CompletedProcess(args,0,'1\n')
+            with patch.object(android_tools.subprocess,'Popen') as process,patch.object(android_tools.subprocess,'run',side_effect=run):
+                process.return_value.poll.return_value=None
+                android_tools.boot(root,tools,24)
+            config=(root/'.tools/android/avd/gunbound-ci-api24.avd/config.ini').read_text()
+            self.assertIn('hw.keyboard=no\n',config)
+            self.assertEqual(config.count('hw.keyboard='),1)
+            self.assertEqual(config.count('hw.lcd.width='),1)
+            self.assertIn('hw.lcd.width=1280\n',config)
+            self.assertIn('abi.type=x86_64\n',config)
+
     def test_boot_uses_modern_swiftshader_backend_and_confirms_android_ready(self):
         import android_tools
         from unittest.mock import patch
@@ -40,6 +60,7 @@ class AndroidToolsTests(unittest.TestCase):
             config=(avds/'gunbound-ci-api36.avd/config.ini').read_text()
             self.assertIn('image.sysdir.1=system-images/android-36/default/x86_64/',config)
             self.assertIn('hw.cpu.arch=x86_64',config)
+            self.assertIn('hw.keyboard=no\n',config,'Touch smoke must expose the software IME')
             self.assertIn('hw.initialOrientation=landscape',config)
             self.assertIn(str((avds/'gunbound-ci-api36.avd').resolve()),(avds/'gunbound-ci-api36.ini').read_text())
             self.assertFalse((image/'userdata.img').exists(),'Never fabricate a system image')

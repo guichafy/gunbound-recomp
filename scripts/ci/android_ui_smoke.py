@@ -381,6 +381,8 @@ class Device:
             if ready:
                 break
             if time.monotonic()>=deadline:
+                if hasattr(self,'output'):
+                    (self.output/('keyboard-'+('open' if shown else 'close')+'-timeout.txt')).write_text(dump)
                 raise ValueError('Android IME did not '+('open with Godot input focus' if shown else 'close'))
             time.sleep(0.25)
         # Allow focus/layout signals from the observed native IME transition

@@ -151,7 +151,7 @@ def write_modern_avd(sdk: Path, avd_home: Path, api: int) -> None:
     config = {'AvdId': name, 'avd.ini.encoding': 'UTF-8', 'abi.type': 'x86_64',
               'hw.cpu.arch': 'x86_64', 'image.sysdir.1': str(image.relative_to(sdk)).replace('\\', '/')+'/',
               'tag.id': 'default', 'tag.display': 'Default Android System Image',
-              'hw.keyboard': 'yes', 'hw.gpu.enabled': 'yes', 'hw.gpu.mode': 'auto',
+              'hw.keyboard': 'no', 'hw.gpu.enabled': 'yes', 'hw.gpu.mode': 'auto',
               'disk.dataPartition.size': '6G', 'fastboot.forceColdBoot': 'yes'}
     (folder / 'config.ini').write_text(''.join(f'{key}={value}\n' for key,value in config.items())+
                                      'hw.initialOrientation=landscape\n', encoding='utf-8')
@@ -171,8 +171,11 @@ def boot(root: Path, tools: dict, api: int) -> None:
         subprocess.run([tools['AVDMANAGER'],'create','avd','--force','--name',name,'--package',image,
                         '--path',str(avd_home / (name+'.avd'))],input='no\n',text=True,env=env,check=True,timeout=120)
     config = avd_home / (name+'.avd/config.ini')
-    with config.open('a') as output:
-        output.write('\nhw.lcd.width=1280\nhw.lcd.height=800\nhw.lcd.density=160\nhw.initialOrientation=landscape\nhw.ramSize=4096\n')
+    values=dict(line.split('=',1) for line in config.read_text(encoding='utf-8').splitlines()
+                if '=' in line and not line.lstrip().startswith('#'))
+    values.update({'hw.keyboard':'no','hw.lcd.width':'1280','hw.lcd.height':'800',
+                   'hw.lcd.density':'160','hw.initialOrientation':'landscape','hw.ramSize':'4096'})
+    config.write_text(''.join(f'{key}={value}\n' for key,value in values.items()),encoding='utf-8')
     with (root / f'.tools/android/emulator-api{api}.log').open('wb') as log:
         process = subprocess.Popen([tools['EMULATOR'],'-avd',name,'-port','5554','-no-window','-no-audio',
                                    '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swangle'],
