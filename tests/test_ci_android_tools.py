@@ -24,7 +24,7 @@ class AndroidToolsTests(unittest.TestCase):
                 popen.return_value.poll.return_value=None
                 android_tools.boot(root,tools,36)
                 args=popen.call_args.args[0]
-                self.assertEqual(args[args.index('-gpu')+1],'swiftshader','legacy indirect uses a broken GLES shader compiler')
+                self.assertEqual(args[args.index('-gpu')+1],'swangle','Linux swiftshader still uses legacy GLES; select ANGLE explicitly')
                 self.assertTrue(any(call.args[0][-1:] == ['sys.boot_completed'] for call in run.call_args_list))
 
     def test_modern_image_without_userdata_uses_emulator_data_directory(self):

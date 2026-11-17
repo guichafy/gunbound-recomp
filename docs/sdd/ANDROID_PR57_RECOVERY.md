@@ -117,3 +117,15 @@ fonte/driver semP1/P2. Smoke local do candidato c75fffc6 foi interrompido
 por desconexões transitórias do ADB após relaunch (emulator-5590 desaparece
 e retorna); não conta como PASS. Não repetir ações de entrada cegamente.
 O smoke completo no AVD limpo da CI continua obrigatório antes do merge.
+
+## Seleção explícita de ANGLE no Linux
+
+Run11744092615983/head7285fc50 manteve o erro261: o próprio log de boot
+mostra OpenGL ES3.0 SwiftShader4.0.0.1, apesar do nome swiftshader.
+O [código AOSP de seleção](https://android.googlesource.com/platform/external/qemu/+/refs/heads/emu-master-dev/android/android-ui/modules/aemu-gl-init/src/android/opengl/emugl_config.cpp)
+explica a diferença: Mac redireciona swiftshader para swangle; Linux conserva
+o GLES antigo. Usar `-gpu swangle` explicitamente nas duas APIs Linux.
+[Documentação Android](https://developer.android.com/studio/run/emulator-acceleration)
+define swangle como SwiftShader via ANGLE. Emulador instalado confirmou o
+mesmo em -help-gpu. Regressão prende essa seleção: RED swiftshader≠swangle,
+106testes de automação GREEN. Não mudar shader do jogo ou ignorar o erro.

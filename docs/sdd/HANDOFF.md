@@ -17,7 +17,7 @@ APK diagnóstico final1760ff17 no AVD:48tiros/66mapas/22JEWEL/UI3 sem falhas.
 Loading não desenha mundo antigo; regressão RED132/2→GREEN132/0.
 Revisão independente final sem P1/P2. Agregado1200,528s/103partidas/141suítes/92.895checks/233Python sem falhas.
 Run44085206451 iniciouAPI36, recusou erro de shader do SwiftShader legado;
-novo head troca para swiftshader/ANGLE, com logs estritos preservados.
+run117 ainda usou GLES antigo no Linux; novo head usa swangle/ANGLE explícito, com logs estritos preservados.
 Rótulos de toque completos a160dpi (fontes por dp, câmera em duas linhas),
 RED332/1→GREEN352/0 e faixa552/0; isso sucede a comparação GPU citada.
 106testesCI/4,960s e revisão do delta aprovados. Candidato c75fffc6 local
