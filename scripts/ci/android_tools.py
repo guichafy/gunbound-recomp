@@ -188,8 +188,14 @@ def boot(root: Path, tools: dict, api: int) -> None:
     while time.monotonic()<deadline:
         if process.poll() is not None:
             raise ValueError('Android emulator exited; inspect emulator log')
-        result=subprocess.run([tools['ADB'],'-s','emulator-5554','shell','getprop','sys.boot_completed'],
-                              text=True,capture_output=True,timeout=15,env=env)
+        try:
+            result=subprocess.run([tools['ADB'],'-s','emulator-5554','shell','getprop','sys.boot_completed'],
+                                  text=True,capture_output=True,timeout=15,env=env)
+        except subprocess.TimeoutExpired:
+            # ADB may connect before Android's property service responds.
+            # Retry only this read within the original overall boot budget.
+            time.sleep(2)
+            continue
         if result.returncode==0 and result.stdout.strip()=='1':
             evidence=root / f'.tools/android-reports/boot-api{api}'
             evidence.mkdir(parents=True,exist_ok=True)

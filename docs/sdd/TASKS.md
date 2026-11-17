@@ -2,6 +2,11 @@
 
 ## Recuperação PR57 e recursos Android (17/11/2026)
 
+Run126 passou fluxo completo API36/Linux x86; API24 boot interrompido por
+timeout15s de leitura ADB. Corrigida repetição só da leitura, orçamento300s
+preservado;130testes/16,111s e Ruff/diff aprovados. Gates remotos do novo SHA
+e merge/main ainda pendentes. Evidência candidate-ui-ci-api36.json.
+
 - [x] Reproduzir e corrigir fixture limpa, Windows Bash e instalação/AVD do SDK.
 - [x] Carregar somente sprites apresentados no Android, mantendo assets/EPA.
 - [x] Regressões de recursos130/0 e comparação GPU3/0, imagens finais idênticas.

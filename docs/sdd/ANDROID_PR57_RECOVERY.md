@@ -342,3 +342,18 @@ A nova regressão usa dois frames reais: popup antigo e batalha sempopup.
 REDhelperausente → GREEN128testes/16,290s. Replay comTesseractLinux dos PNGs
 exatos do run125: dois frames lidos, popup antigo recusado e batalha semOK
 aceita em10,884s; dados em popup-transition.json. Jogo/APK inalterados.
+
+## Run126 — fluxo API36 aprovado, consulta ADB transitória no boot API24
+
+O candidato0.25.0 passou o fluxo completo API36 no runner Linux/x86_64:
+loja, IME/foco, perfil, SOLO/JEWEL, câmeraON/OFF, pausa/Back e Home/Resume.
+Relatório integral em candidate-ui-ci-api36.json, com SHA e limites de ações
+não comprovadas. O gateAndroid ainda falhou: primeira consulta getprop na
+API24 expirou em15s, antes do orçamento de boot300s; sem fatal/panic no log.
+
+Tratar TimeoutExpired apenas da leitura sys.boot_completed como estado ainda
+não pronto e continuar no mesmo limite300s, com consultas15s e intervalo2s.
+Não repetir desbloqueio/input nem ignorar saída do emulador. Regressões cobrem
+leitura transitória seguida de sucesso/desbloqueio único e timeouts persistentes
+com encerramento no prazo original. RED2erros → GREEN130testes/16,111s; Ruff/diff
+aprovados. Fluxo API24 e cinco gates do novo SHA ainda pendentes.
