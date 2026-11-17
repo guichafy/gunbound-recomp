@@ -115,8 +115,21 @@ class NativeUITests(unittest.TestCase):
             def run(self,*args,**kwargs):return FIXTURE.read_bytes()
         with tempfile.TemporaryDirectory() as temp:
             device=Device(Path(temp))
-            with patch.object(ui.subprocess,'check_output',return_value='Gold Cash'),patch.object(ui.time,'monotonic',side_effect=[0,100]):
+            with patch.object(ui.subprocess,'check_output',return_value='Gold Cash'),patch.object(ui.time,'monotonic',side_effect=[0,100]),patch.object(ui,'enhanced_ocr',side_effect=AssertionError('Native absence already observes these pixels')):
                 with self.assertRaises(ui.CaptureTimeout):device.capture('shop','GOLD|CASH',absent='CREATE|SETTINGS')
+
+    def test_observed_camera_state_does_not_require_expensive_full_frame_enhancement(self):
+        import tempfile
+        from unittest.mock import patch
+        spec=importlib.util.spec_from_file_location('ui_test',ROOT/'scripts/ci/android_ui_smoke.py')
+        ui=importlib.util.module_from_spec(spec);spec.loader.exec_module(ui)
+        class Device(ui.Device):
+            def __init__(self,folder):self.output=folder;self.observations=[]
+            def run(self,*args,**kwargs):return (ROOT/'tests/fixtures/android_ui/busy_controls_api36.png').read_bytes()
+        with tempfile.TemporaryDirectory() as temp:
+            device=Device(Path(temp))
+            with patch.object(ui.subprocess,'check_output',return_value='unreadable'),patch.object(ui,'native_targets',return_value=[]),patch.object(ui,'control_targets',return_value=[dict(text='CAMERA')]),patch.object(ui,'enhanced_ocr',side_effect=AssertionError('Control OCR already proves state')):
+                self.assertIn('CAMERA',device.capture('camera','CAMERA',absent=ui.CAMERA_ON_PATTERN))
 
     def test_enhanced_ocr_preserves_original_pixel_coordinates(self):
         import tempfile

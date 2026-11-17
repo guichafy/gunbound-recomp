@@ -29,6 +29,12 @@ CAMERA_ON_PATTERN = r'CAMERA\s+ON|C[ÂA]MERA\s+ATIVA'
 RESUME_PATTERN = r'Resume|Retomar|Continuar|Continue'
 CONTROL_OCR_CACHE = {}
 
+def ocr_output(args):
+    # Software GL shares the runner CPUs. Tesseract's four OpenMP workers
+    # otherwise compete with the emulator and can make a small UI read stall.
+    return subprocess.check_output(args,text=True,stderr=subprocess.DEVNULL,timeout=30,
+                                   env=os.environ|{'OMP_THREAD_LIMIT':'1'})
+
 
 class CaptureTimeout(ValueError):
     pass
@@ -53,7 +59,7 @@ def resume_targets(path: Path,pattern: str):
             image=ImageOps.grayscale(pixels.crop((x,y,x+w,y+h))).resize((w*3,h*3),Image.Resampling.BICUBIC)
             image=ImageOps.expand(image.point(lambda value:255 if value>80 else 0),border=12,fill=255)
             crop=path.with_stem(path.stem+'-contrast'+str(index));image.save(crop)
-            tsv=subprocess.check_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(crop),'stdout','--psm','7','tsv'],text=True,stderr=subprocess.DEVNULL,timeout=30)
+            tsv=ocr_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(crop),'stdout','--psm','7','tsv'])
             crop.with_suffix('.tsv').write_text(tsv)
             try:target=text_target(tsv,pattern)
             except ValueError as error:
@@ -80,7 +86,7 @@ def control_targets(path: Path,pattern: str,include_camera_state=False):
             crop=path.with_stem(path.stem+'-control'+str(index));image.save(crop)
             key=hashlib.sha256(image.tobytes()+str(image.size).encode()).hexdigest()
             if key not in CONTROL_OCR_CACHE:
-                CONTROL_OCR_CACHE[key]=subprocess.check_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(crop),'stdout','--psm','6','tsv'],text=True,stderr=subprocess.DEVNULL,timeout=30)
+                CONTROL_OCR_CACHE[key]=ocr_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(crop),'stdout','--psm','6','tsv'])
                 if len(CONTROL_OCR_CACHE)>128:del CONTROL_OCR_CACHE[next(iter(CONTROL_OCR_CACHE))]
             tsv=CONTROL_OCR_CACHE[key];crop.with_suffix('.tsv').write_text(tsv)
             try:
@@ -107,7 +113,7 @@ def enhanced_ocr(path: Path,tsv=False):
         ImageOps.grayscale(pixels).resize((pixels.width*3,pixels.height*3),Image.Resampling.BICUBIC).save(enhanced)
     args=[os.environ.get('GUNBOUND_OCR','tesseract'),str(enhanced),'stdout','--psm','11']
     if tsv:args.append('tsv')
-    result=subprocess.check_output(args,text=True,stderr=subprocess.DEVNULL,timeout=30)
+    result=ocr_output(args)
     enhanced.with_suffix('.tsv' if tsv else '.txt').write_text(result)
     return result
 
@@ -284,23 +290,26 @@ class Device:
             screenshot=self.run('exec-out','screencap','-p',raw=True)
             self.size=png_size(screenshot)
             path.write_bytes(screenshot)
-            text=subprocess.check_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(path),'stdout','--psm','11'],text=True,stderr=subprocess.DEVNULL,timeout=30)
+            text=ocr_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(path),'stdout','--psm','11'])
             (self.output/(label+'.txt')).write_text(text)
             if pattern and not re.search(pattern,text,re.I):
                 native=native_targets(path,pattern)
                 if native:
                     (self.output/(label+'-native.json')).write_text(json.dumps(native,indent=2)+'\n')
                     text+='\n'+'\n'.join(target['text'] for target in native)
-            if (pattern and (not re.search(pattern,text,re.I) or 'CAMERA' in pattern)) or absent:
-                enhanced=enhanced_ocr(path)
-                if enhanced.strip():text+='\n[enhanced OCR]\n'+enhanced
             if absent:
                 text+='\n'+'\n'.join(target['text'] for target in native_targets(path,absent))
             if pattern==RESUME_PATTERN and not re.search(pattern,text,re.I):
                 text+='\n[contrast OCR]\n'+'\n'.join(target['text'] for target in resume_targets(path,pattern))
+            controls=[]
             if pattern and ('CAMERA' in pattern.upper() or not re.search(pattern,text,re.I)):
                 controls=control_targets(path,pattern,include_camera_state=True)
                 if controls:text+='\n[control OCR]\n'+'\n'.join(target['text'] for target in controls)
+            camera_observed=any(re.fullmatch(r'CAMERA(?:\s+ON)?|C[ÂA]MERA(?:\s+ATIVA)?',item['text'],re.I) for item in controls)
+            needs_absence_ocr=absent and absent!=r'CREATE|SETTINGS' and not (absent==CAMERA_ON_PATTERN and camera_observed)
+            if (pattern and not re.search(pattern,text,re.I)) or needs_absence_ocr or (pattern and 'CAMERA' in pattern and not camera_observed):
+                enhanced=enhanced_ocr(path)
+                if enhanced.strip():text+='\n[enhanced OCR]\n'+enhanced
             if self.size[0]>=self.size[1] and (pattern is None or re.search(pattern,text,re.I)) and (absent is None or not re.search(absent,text,re.I)):
                 self.observations.append(dict(screen=label,ocr_pattern=pattern,ocr_absent=absent,screenshot=path.name))
                 return text
@@ -314,8 +323,7 @@ class Device:
         self.size=png_size(screenshot);path.write_bytes(screenshot)
         if self.size[0]<self.size[1]:
             raise ValueError('Cannot locate Android UI before landscape render')
-        tsv=subprocess.check_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(path),'stdout','--psm','11','tsv'],
-                                    text=True,stderr=subprocess.DEVNULL,timeout=30)
+        tsv=ocr_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(path),'stdout','--psm','11','tsv'])
         (self.output/(label+'.tsv')).write_text(tsv)
         return tsv
 

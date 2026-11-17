@@ -6,6 +6,17 @@ PATH=Path(__file__).resolve().parents[1]/'scripts/ci/android_ui_smoke.py'
 
 
 class AndroidUISmokeTests(unittest.TestCase):
+    def test_ocr_has_one_worker_without_changing_the_timeout_or_parent_environment(self):
+        from unittest.mock import patch
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        with patch.dict(m.os.environ,{'OMP_THREAD_LIMIT':'8','OCR_TEST_MARKER':'preserved'}),patch.object(m.subprocess,'check_output',return_value='text') as run:
+            self.assertEqual(m.ocr_output(['tesseract','screen.png','stdout']),'text')
+            self.assertEqual(run.call_args.kwargs['env']['OMP_THREAD_LIMIT'],'1')
+            self.assertEqual(run.call_args.kwargs['env']['OCR_TEST_MARKER'],'preserved')
+            self.assertEqual(run.call_args.kwargs['timeout'],30)
+            self.assertEqual(m.os.environ['OMP_THREAD_LIMIT'],'8')
+
     def test_ocr_passes_cannot_join_distant_camera_and_on_labels(self):
         import struct,tempfile,re
         from unittest.mock import patch

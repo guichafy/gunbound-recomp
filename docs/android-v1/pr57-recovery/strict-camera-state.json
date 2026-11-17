@@ -1,5 +1,8 @@
 {
   "off_accepted_as_off": true,
   "on_accepted_as_off": false,
-  "observer_sha256": "99d28322406be252a91978308189fa0e3e35560fb55d536920d95e901e0a6eb3"
+  "ci_lobby_rejected_as_shop": true,
+  "ci_shop_enhanced_ocr_called": false,
+  "ci_shop_observation_seconds": 1.5861573750153184,
+  "observer_sha256": "c68517020782c86c64563089e67caa286e3d0ff4c0ce17521594242d782b37fe"
 }

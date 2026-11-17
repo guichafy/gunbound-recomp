@@ -14,6 +14,7 @@
 - [x] Cobrir navegação lenta no gateBack (RED27/2→GREEN28/0); faixa8suítes/787checks aprovada.
 - [x] SmokeLinux completo do candidato e174 (SOLO/JEWEL/loja/perfil/Back/retomada),123testes CI e revisão aprovados.
 - [x] Confirmar no observer final que OFF é aceito e ON recusado após endurecer a consulta.
+- [x] Corrigir custo redundante do OCR/run121 sem aumentar timeout;125testes e replay do frameCI aprovados.
 - [ ] Concluir os gates remotos do novo head nas APIs36/24 e nos desktops.
 - [ ] Revisão independente, todos os gates do head final e merge protegido.
 - [ ] Acompanhar CI da main e atualizar #56 com os limites remanescentes.

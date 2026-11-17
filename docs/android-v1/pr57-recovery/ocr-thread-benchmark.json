@@ -1,0 +1,16 @@
+[
+  {
+    "threads": "default",
+    "seconds": 0.7057974161580205,
+    "status": "passed",
+    "chars": 283,
+    "sha256": "b768352fef89f2944b7d32fc14673df363a5901c555131e3f4ff37637671be4f"
+  },
+  {
+    "threads": "1",
+    "seconds": 0.581844958011061,
+    "status": "passed",
+    "chars": 283,
+    "sha256": "b768352fef89f2944b7d32fc14673df363a5901c555131e3f4ff37637671be4f"
+  }
+]
