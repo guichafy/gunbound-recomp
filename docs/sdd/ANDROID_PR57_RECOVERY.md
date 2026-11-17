@@ -88,3 +88,32 @@ Regressão por cinco quadros reais: RED132/2, GREEN132/0; verifica
 Bigfoot/Mage→Grub/Lightning sem nenhuma recarga dos IDs antigos.
 
 Revisão final independente aprovou o delta sem P1/P2 pendente após esse ajuste.
+
+## Segundo run remoto e legibilidade dos controles
+
+Run44085206451/head0467d9f5: lint e versão PASS; API36 iniciou no Linux com a
+definição moderna, mas o diagnóstico recusou erros de link de shader no
+SwiftShader GLES legado (GL_MAX_FRAGMENT_UNIFORM_VECTORS261).
+Fonte primária: [Godot109550](https://github.com/godotengine/godot/issues/109550),
+mesma falha confirmada em4.7.2 com swiftshader_indirect. Usar backend moderno
+`swiftshader`, já executado no AVD Mac via ANGLE, mantendo fail-closed nos logs.
+Regressão de boot RED→GREEN prende driver e espera Android pronto.
+Windows/macOS foram cancelados nesse run e não contam como gates aprovados.
+
+APK candidato local mostrou rótulos cortados a160dpi (CAMERA→CAME,PAUSE→PAU),
+mesmo tamanho do alvo48dp. Corrigir escala de fonte por dp e medir largura/altura
+para texto completo; câmera ativa em duas linhas. Nenhuma mudança nas áreas de
+toque, no mundo ou nas regras. RED332/1→GREEN352/0; faixa final552/0.
+A comparação GPU3/0 acima precede somente essa correção intencional dos rótulos.
+
+Regressão completa observada:1200,528s/103partidas/141suítes/92.895checks/
+233Python, sem falhas. Inclui132checks de recursos e precede somente fonte
+dos rótulos/driver de CI. Relatório durável em ../android-v1/pr57-recovery/.
+Não repetir partidas por ajustes de texto ou do driver do emulador; manter
+faixa afetada e os gates completos remotos do novo head.
+
+Automação final106/0 em4,960s, Ruff/diffOK; revisão independente do delta
+fonte/driver semP1/P2. Smoke local do candidato c75fffc6 foi interrompido
+por desconexões transitórias do ADB após relaunch (emulator-5590 desaparece
+e retorna); não conta como PASS. Não repetir ações de entrada cegamente.
+O smoke completo no AVD limpo da CI continua obrigatório antes do merge.

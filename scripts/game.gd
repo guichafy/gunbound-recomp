@@ -1375,7 +1375,13 @@ func build_touch_controls() -> void:
 				var items: Array=model.actors[Match.PLAYER].items
 				caption=str(slot+1)+": "+I18n.text(Items.definition(items[slot].id).name) if slot<items.size() and not items[slot].used else "—"
 				disabled=disabled or slot>=items.size() or (slot<items.size() and items[slot].used) or item_bar.blocked(self)
-			touch_layer.draw_string(ThemeDB.fallback_font,region.position+Vector2(5,region.size.y*0.6),I18n.text(caption),HORIZONTAL_ALIGNMENT_CENTER,region.size.x-10,14 if key.begins_with("item_") or key=="camera" else 18,ui.MUTED if disabled else ui.CREAM)
+			caption=I18n.text(caption)
+			if key=="camera":caption=caption.replace(" ","\n")
+			var maximum := int((14 if key.begins_with("item_") or key=="camera" else 18)*platform_pixels_per_dp/presentation.x.length())
+			var label := TouchControls.caption_layout(ThemeDB.fallback_font,caption,region.size,maximum)
+			for line in label.lines:
+				touch_layer.draw_string(ThemeDB.fallback_font,region.position+Vector2(5,label.baseline),line,HORIZONTAL_ALIGNMENT_CENTER,region.size.x-10,label.font_size,ui.MUTED if disabled else ui.CREAM)
+				label.baseline+=label.line_height
 	)
 
 func apply_touch_commands() -> void:

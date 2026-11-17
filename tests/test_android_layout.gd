@@ -32,6 +32,16 @@ func run() -> void:
 	var controls_path := "res://scripts/touch_controls.gd"
 	check(ResourceLoader.exists(controls_path),"Touch controls exist")
 	if ResourceLoader.exists(controls_path):
+		var controls=load(controls_path)
+		check(controls.has_method("caption_layout"),"Touch captions fit their complete text at 160dpi")
+		if controls.has_method("caption_layout"):
+			var font: Font=ThemeDB.fallback_font
+			for caption in ["CAMERA","CAMERA\nON","CÂMERA\nATIVA","PAUSE","PAUSA","PASSAR"]:
+				var label: Dictionary=controls.caption_layout(font,caption,Vector2(48,48),18)
+				check("\n".join(label.lines)==caption,"Caption text is preserved")
+				for line in label.lines:
+					check(font.get_string_size(line,HORIZONTAL_ALIGNMENT_LEFT,-1,label.font_size).x<=38,"Full touch caption fits 48dp: "+caption)
+				check(label.line_height*label.lines.size()<=38,"Two-line camera label stays inside touch target")
 		for width in [640,800]:
 			var safe := Rect2(0,0,width,360)
 			var regions: Dictionary = load(controls_path).regions(safe,"jewel")

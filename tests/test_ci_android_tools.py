@@ -11,6 +11,22 @@ import bootstrap
 
 
 class AndroidToolsTests(unittest.TestCase):
+    def test_boot_uses_modern_swiftshader_backend_and_confirms_android_ready(self):
+        import android_tools
+        from unittest.mock import patch
+        import subprocess
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);sdk=root/'sdk'
+            (sdk/'system-images/android-36/default/x86_64/data').mkdir(parents=True)
+            (sdk/'system-images/android-36/default/x86_64/data/empty_data_disk').touch()
+            tools=dict(ANDROID_SDK_ROOT=str(sdk),ANDROID_HOME=str(sdk),EMULATOR='emulator',ADB='adb')
+            with patch.object(android_tools.subprocess,'Popen') as popen,patch.object(android_tools.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'1\n')) as run:
+                popen.return_value.poll.return_value=None
+                android_tools.boot(root,tools,36)
+                args=popen.call_args.args[0]
+                self.assertEqual(args[args.index('-gpu')+1],'swiftshader','legacy indirect uses a broken GLES shader compiler')
+                self.assertTrue(any(call.args[0][-1:] == ['sys.boot_completed'] for call in run.call_args_list))
+
     def test_modern_image_without_userdata_uses_emulator_data_directory(self):
         import android_tools
         with tempfile.TemporaryDirectory() as temp:

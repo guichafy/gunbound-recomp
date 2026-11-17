@@ -6,7 +6,9 @@
 - [x] Carregar somente sprites apresentados no Android, mantendo assets/EPA.
 - [x] Regressões de recursos130/0 e comparação GPU3/0, imagens finais idênticas.
 - [x] Automação105/0 e Ruff/diff aprovados.
-- [ ] Concluir regressão completa e smoke dos APKs finais; registrar provas.
+- [x] Regressão completa103partidas/92.895checks/233Python sem falhas; diagnóstico real aprovado.
+- [x] API36 iniciou no Linux; corrigir backend SwiftShader legado e rótulos cortados a160dpi.
+- [ ] Concluir smoke do candidato final e os gates remotos do novo head.
 - [ ] Revisão independente, todos os gates do head final e merge protegido.
 - [ ] Acompanhar CI da main e atualizar #56 com os limites remanescentes.
 
