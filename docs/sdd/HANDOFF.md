@@ -20,8 +20,12 @@ Run44085206451 iniciouAPI36, recusou erro de shader do SwiftShader legado;
 run117 ainda usou GLES antigo no Linux; novo head usa swangle/ANGLE explícito, com logs estritos preservados.
 Rótulos de toque completos a160dpi (fontes por dp, câmera em duas linhas),
 RED332/1→GREEN352/0 e faixa552/0; isso sucede a comparação GPU citada.
-106testesCI/4,960s e revisão do delta aprovados. Candidato c75fffc6 local
-interrompido por ADB transitório após relaunch; não conta como PASS.
+109testesCI/5,150s e revisão do delta aprovados. Candidato c75fffc6 local
+passou fluxo completo no AVD5554 após resolver wrap/reset do teste de câmera.
+Aviso SystemUI reproduzido/fechado por XML protegido e estado restaurado.
+Relatório em docs/android-v1/pr57-recovery/candidate-ui.json. Run118 passou
+diagnóstico Linux, mas o aviso OS bloqueou OCR do lobby; ajuste SystemUI
+precisa dos gates remotos completos do novo head.
 Gates remotos completos ainda pendentes no novo head.
 Sem alegação de ganho deFPS ou aceite físico.
 

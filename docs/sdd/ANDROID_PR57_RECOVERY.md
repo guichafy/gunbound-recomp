@@ -129,3 +129,35 @@ o GLES antigo. Usar `-gpu swangle` explicitamente nas duas APIs Linux.
 define swangle como SwiftShader via ANGLE. Emulador instalado confirmou o
 mesmo em -help-gpu. Regressão prende essa seleção: RED swiftshader≠swangle,
 106testes de automação GREEN. Não mudar shader do jogo ou ignorar o erro.
+
+## UI final e aviso do Android — fechamento local
+
+Run11844094721710 com swangle passou o diagnóstico completo Linux/API36.
+Candidato falhou no OCR do lobby: screenshot mostra aviso SystemUI, segunda
+frase truncada pelo Tesseract. Consultar hierarquia uiautomator do AVD: exigir
+package com.android.systemui, título exato, Got it único/habilitado/clicável,
+bounds positivos dentro da screenshot. Apagar o XML temporário antes/depois.
+Confirmação por ausência do aviso após um toque, sem aceitar diálogos do jogo.
+Teste negativo recusa package do app, título ausente, duplicata e bounds inválidos.
+
+Leitor de alvos agora une duas linhas somente com sobreposição horizontal≥70%
+e distância≤altura de linha, mantendo fullmatch e rejeição de ambiguidade;
+CAMERA/ON deve continuar comprovado. Pan pode ser repetido até3vezes somente
+após observar de novo o toggle (turnos o resetam), mantendo ON antes/depois do
+gesto final e sem repetir comando após falha de transporte. Não comprova
+deslocamento numérico do mundo nem tiro/multitouch/áudio.
+
+Candidato c75fffc646eb9b53061272419029a9eede38e4f1774ed24e2682dceec6b666f1
+no AVD ARM64/API36: lobby/loja/SOLO/JEWEL/Back/Home/Retomar/IME/perfil e câmera
+ON/OFF passaram. Em JEWEL, pan fez duas tentativas após reset; captura final
+confirmou ON e depois OFF. Relatório ../android-v1/pr57-recovery/candidate-ui.json.
+Isso sucede as tentativas interrompidas em5590 e a correção dos rótulos.
+
+Consulta SystemUI nova testada separadamente no mesmo AVD: aviso reproduzido
+com o estado de confirmação temporariamente limpo e restaurado no final;
+alvo Got it observado, fechado e consulta posterior retornou None.
+Prova em system-ui-real.txt. O fluxo completo da CI com essa consulta ainda
+precisa passar no head novo, incluindo API24.
+
+Automação109/0 em5,150s, Ruff/diffOK e revisão independente semP1/P2.
+Novos testes tiveram RED antes das correções (wrap, reset da câmera e XML).
