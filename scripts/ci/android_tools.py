@@ -179,30 +179,41 @@ def boot(root: Path, tools: dict, api: int) -> None:
     # The x86 PC machine also creates a PS/2 controller independently of
     # hw.keyboard. Suppress its keyboard port for this touchscreen fixture.
     # Android's loader appends these parameters to its generated command line.
+    evidence = root / f'.tools/android-reports/boot-api{api}'
+    evidence.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(config, evidence / 'config.ini')
+    # Only one QEMU console can own stdio. Retrieve Logcat separately over ADB.
+    console = ['-show-kernel'] if api == 24 else []
     with (root / f'.tools/android/emulator-api{api}.log').open('wb') as log:
         process = subprocess.Popen([tools['EMULATOR'],'-avd',name,'-port','5554','-no-window','-no-audio',
                                    '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swangle','-debug','init',
-                                   '-show-kernel','-logcat','*:W',
+                                   *console,
                                    '-qemu','-append','i8042.nokbd'],
                                    env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
     deadline=time.monotonic()+300
     while time.monotonic()<deadline:
-        if process.poll() is not None:
-            raise ValueError('Android emulator exited; inspect emulator log')
+        code = process.poll()
+        if code is not None:
+            raise ValueError(f'API {api} emulator exited with {code}; inspect emulator log')
         try:
             result=subprocess.run([tools['ADB'],'-s','emulator-5554','shell','getprop','sys.boot_completed'],
                                   text=True,capture_output=True,timeout=15,env=env)
+            observation = {'returncode': result.returncode, 'value': result.stdout.strip(),
+                           'stderr': (result.stderr or '').strip()[:500]}
         except subprocess.TimeoutExpired:
+            observation = {'timeout_seconds': 15}
+            result = None
+        with (evidence / 'boot-polls.jsonl').open('a', encoding='utf-8') as trace:
+            trace.write(json.dumps({'unix_time': time.time(), **observation}) + '\n')
+        if result is None:
             # ADB may connect before Android's property service responds.
             # Retry only this read within the original overall boot budget.
             time.sleep(2)
             continue
         if result.returncode==0 and result.stdout.strip()=='1':
-            evidence=root / f'.tools/android-reports/boot-api{api}'
-            evidence.mkdir(parents=True,exist_ok=True)
-            for filename in ('config.ini','hardware-qemu.ini'):
-                source=config.parent/filename
-                if source.is_file():shutil.copyfile(source,evidence/filename)
+            hardware = config.parent / 'hardware-qemu.ini'
+            if hardware.is_file():
+                shutil.copyfile(hardware, evidence / hardware.name)
             observation_status={}
             for filename,args in [('input-devices.txt',['cat','/proc/bus/input/devices']),
                               ('kernel-command-line.txt',['cat','/proc/cmdline']),
@@ -219,7 +230,21 @@ def boot(root: Path, tools: dict, api: int) -> None:
             subprocess.run([tools['ADB'],'-s','emulator-5554','shell','input','keyevent','82'],check=True,env=env)
             return
         time.sleep(2)
-    process.terminate()
+    # A small bounded snapshot before teardown also records offline/denied/timeout.
+    # The serial console remains available even when adbd never comes up.
+    try:
+        for filename, args in [('transport', ['get-state']),
+                               ('properties', ['shell', 'getprop']),
+                               ('logcat', ['logcat', '-b', 'all', '-d', '-t', '300'])]:
+            with (evidence / (filename + '.txt')).open('wb') as output:
+                try:
+                    snapshot = subprocess.run([tools['ADB'], '-s', 'emulator-5554', *args],
+                                              stdout=output, stderr=subprocess.STDOUT, timeout=4, env=env)
+                    output.write(f'\n[exit {snapshot.returncode}]\n'.encode())
+                except subprocess.TimeoutExpired:
+                    output.write(b'\n[timed out after 4 seconds]\n')
+    finally:
+        process.terminate()
     raise TimeoutError('Android emulator boot timed out')
 
 

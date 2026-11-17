@@ -42,6 +42,9 @@ class AndroidToolsTests(unittest.TestCase):
                 if args[0]=='avdmanager':
                     folder=Path(args[args.index('--path')+1]);folder.mkdir(parents=True);(folder/'config.ini').touch()
                     return subprocess.CompletedProcess(args,0,'','')
+                if kwargs.get('timeout') == 4:
+                    self.assertNotIn('input', args)
+                    return subprocess.CompletedProcess(args,1)
                 self.assertEqual(args[-1],'sys.boot_completed','No unlock or input commands before readiness')
                 reads.append(kwargs['timeout'])
                 raise subprocess.TimeoutExpired(args,15)
@@ -87,6 +90,8 @@ class AndroidToolsTests(unittest.TestCase):
                 process.return_value.poll.return_value=None
                 android_tools.boot(root,tools,24)
                 args=process.call_args.args[0]
+                self.assertIn('-show-kernel',args)
+                self.assertNotIn('-logcat',args)
                 self.assertEqual(args[args.index('-qemu')+1:],['-append','i8042.nokbd'])
             config=(root/'.tools/android/avd/gunbound-ci-api24.avd/config.ini').read_text()
             self.assertIn('hw.keyboard=no\n',config)
@@ -109,8 +114,8 @@ class AndroidToolsTests(unittest.TestCase):
                 android_tools.boot(root,tools,36)
                 args=popen.call_args.args[0]
                 self.assertEqual(args[args.index('-gpu')+1],'swangle','Linux swiftshader still uses legacy GLES; select ANGLE explicitly')
-                self.assertIn('-show-kernel',args,'Preserve guest boot failures in the emulator artifact')
-                self.assertEqual(args[args.index('-logcat')+1],'*:W')
+                self.assertNotIn('-show-kernel',args)
+                self.assertNotIn('-logcat',args)
                 self.assertEqual(args[args.index('-qemu')+1:],['-append','i8042.nokbd'],'The x86 PC keyboard must not impersonate phone hardware')
                 self.assertTrue(any(call.args[0][-1:] == ['sys.boot_completed'] for call in run.call_args_list))
 
