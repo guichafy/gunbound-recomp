@@ -16,6 +16,8 @@
 - [x] Confirmar no observer final que OFF é aceito e ON recusado após endurecer a consulta.
 - [x] Corrigir custo redundante do OCR/run121 sem aumentar timeout;125testes e replay do frameCI aprovados.
 - [x] Reproduzir IME com teclado físico/run122 e configurar touch nas duas APIs;126testes e prova no mesmoAPK aprovados.
+- [x] Investigar QWERTY extra do x86/run123; acrescentar supressãoPS2 e telemetria real de boot,126testes aprovados.
+- [ ] Comprovar no runner o perfil sem teclado físico e a abertura da IME após esse experimento.
 - [ ] Concluir os gates remotos do novo head nas APIs36/24 e nos desktops.
 - [ ] Revisão independente, todos os gates do head final e merge protegido.
 - [ ] Acompanhar CI da main e atualizar #56 com os limites remanescentes.

@@ -1,5 +1,12 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+Run123/headb183 ainda anunciaQWERTY no x86 mesmohw.keyboard=no;IMEfalhou.
+ARM/Mac com o mesmoEmulator37.3.9 fica nokeys. ELFpinado criaPS2/i8042 fora
+do controlehw.keyboard. Novo experimento de boot acrescenta i8042.nokbd e
+preserva cmdline; registra configs efetivas,procinput,dumpsysinput ecmdline.
+126testes/15,281s e revisão aprovados como experimento, sem afirmar resolução.
+Validar nos gates remotos a ausência de teclado e a aberturaIME15s/focoGodot.
+
 Run122/head5b54394d superou OCR/loja/Back/configurações; IME falhou porque o
 AVD tinha teclado físico. Causa reproduzida com o mesmoAPK/toque: hw.keyboard=yes
 não abreIME; no abreIME com GodotEditText/conexão editável. AmbasAPIs agora

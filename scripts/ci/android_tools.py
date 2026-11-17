@@ -176,9 +176,13 @@ def boot(root: Path, tools: dict, api: int) -> None:
     values.update({'hw.keyboard':'no','hw.lcd.width':'1280','hw.lcd.height':'800',
                    'hw.lcd.density':'160','hw.initialOrientation':'landscape','hw.ramSize':'4096'})
     config.write_text(''.join(f'{key}={value}\n' for key,value in values.items()),encoding='utf-8')
+    # The x86 PC machine also creates a PS/2 controller independently of
+    # hw.keyboard. Suppress its keyboard port for this touchscreen fixture.
+    # Android's loader appends these parameters to its generated command line.
     with (root / f'.tools/android/emulator-api{api}.log').open('wb') as log:
         process = subprocess.Popen([tools['EMULATOR'],'-avd',name,'-port','5554','-no-window','-no-audio',
-                                   '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swangle'],
+                                   '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swangle',
+                                   '-qemu','-append','i8042.nokbd'],
                                    env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
     deadline=time.monotonic()+300
     while time.monotonic()<deadline:
@@ -187,6 +191,17 @@ def boot(root: Path, tools: dict, api: int) -> None:
         result=subprocess.run([tools['ADB'],'-s','emulator-5554','shell','getprop','sys.boot_completed'],
                               text=True,capture_output=True,timeout=15,env=env)
         if result.returncode==0 and result.stdout.strip()=='1':
+            evidence=root / f'.tools/android-reports/boot-api{api}'
+            evidence.mkdir(parents=True,exist_ok=True)
+            for filename in ('config.ini','hardware-qemu.ini'):
+                source=config.parent/filename
+                if source.is_file():shutil.copyfile(source,evidence/filename)
+            for filename,args in [('input-devices.txt',['cat','/proc/bus/input/devices']),
+                              ('kernel-command-line.txt',['cat','/proc/cmdline']),
+                              ('input-service.txt',['dumpsys','input'])]:
+                observed=subprocess.run([tools['ADB'],'-s','emulator-5554','shell',*args],
+                                        text=True,capture_output=True,timeout=30,env=env,check=True)
+                (evidence/filename).write_text(observed.stdout,encoding='utf-8')
             subprocess.run([tools['ADB'],'-s','emulator-5554','shell','input','keyevent','82'],check=True,env=env)
             return
         time.sleep(2)

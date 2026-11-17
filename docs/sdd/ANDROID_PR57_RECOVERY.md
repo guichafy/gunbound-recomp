@@ -287,3 +287,28 @@ Regressões RED2falhas em8testes de ferramentas antes do ajuste.
 
 GREEN126testes/17,928s, Ruff/diff aprovados e revisão semP1/P2. Dados da
 comparação em ime-keyboard-mode.json. APK/runtime e174 não foram alterados.
+
+## Run123 — periférico PC x86 adicional
+
+O AVD com hw.keyboard=no ainda reporta Configurationqwerty/v/v no Linux/x86,
+mServedView=GodotGLRenderView, sem conexãoIME. Isso sucede a hipótese inicial
+de que só hw.keyboard explicava o runner. MesmoEmulator37.3.9 verificado no
+Mac/ARM mantémnokeys com o perfil sem teclado; os outros defaults não reproduzem.
+Revisão nativa do ELFpinado(SHA256590eb33800b1b0e29464fd4d6d6c28aa6a9f38469aa24ddd409083cd4579085b)
+encontrou i8042 criado em0x88ef06–0x88ef15 no caminhoPC, sem consultarhw.keyboard.
+O GodotEditText recusa showKeyboard quando Android anuncia teclado físico.
+
+Experimento restrito aos AVDs x86 das APIs24/36: acrescentar ao kernel
+i8042.nokbd, que impede criar a porta do tecladoPS2, mantendo touch/ADB/IME.
+O loaderAndroid concatena -qemu -append ao cmdline gerado, sem substituí-lo.
+Registrar config.ini/hardware-qemu.ini, /proc/bus/input/devices, dumpsysinput e
+/proc/cmdline em cada boot. Repetir o mesmo gateIME15s/focoGodot; não tratá-lo
+como corrigido antes da execução remota. APK/jogo seguem intactos.
+
+Fontes primárias:
+- https://android.googlesource.com/kernel/common/+/android-mainline/Documentation/admin-guide/kernel-parameters.txt
+- https://android.googlesource.com/platform/external/qemu/+/refs/heads/emu-32-release/android-qemu2-glue/main.cpp
+- https://raw.githubusercontent.com/godotengine/godot/4.7.2-stable/platform/android/java/lib/src/main/java/org/godotengine/godot/input/GodotEditText.java
+
+RED2erros → GREEN126testes/15,281s; Ruff/diff e revisão aprovados como
+experimento. Resolução e preservação efetiva dos bootargs aguardam o runner.
