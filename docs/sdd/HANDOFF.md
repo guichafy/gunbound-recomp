@@ -1,5 +1,11 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+Run124/headd11 chegou ao boot completo, mas a coletaextra/proc retornou1 e
+interrompeu indevidamente antes dos APKs. Agora coletas opcionais registram
+stdout/stderr/status/timeout sem bloquear; getprop/desbloqueio/IME/foco/app
+continuam obrigatórios. Debuginitemulador registra cmdline.127testes/15,220s,
+Ruff/diff aprovados. Efeito real de i8042.nokbd na IME ainda aguarda runner.
+
 Run123/headb183 ainda anunciaQWERTY no x86 mesmohw.keyboard=no;IMEfalhou.
 ARM/Mac com o mesmoEmulator37.3.9 fica nokeys. ELFpinado criaPS2/i8042 fora
 do controlehw.keyboard. Novo experimento de boot acrescenta i8042.nokbd e

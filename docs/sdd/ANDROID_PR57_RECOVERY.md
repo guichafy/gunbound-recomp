@@ -312,3 +312,16 @@ Fontes primárias:
 
 RED2erros → GREEN126testes/15,281s; Ruff/diff e revisão aprovados como
 experimento. Resolução e preservação efetiva dos bootargs aguardam o runner.
+
+## Run124 — coleta de proc opcional
+
+BootAPI36 com i8042.nokbd chegou a sys.boot_completed. Config efetiva confirma
+hw.keyboard=false, mas a nova coleta cat/proc/bus/input/devices retornou1 e
+interrompeu antes do diagnóstico/APK. Essa leitura é observabilidade adicionada,
+não gate de produto. Registrar stdout/stderr/returncode ou timeout das coletas
+opcionais e continuar; manter getprop, desbloqueio, instalação, logs do app e
+IME/foco estritos. Debuginit do emulador registra cmdlinegerado sem depender
+de acesso a/proc. Não foi possível afirmar efeito do parâmetro no gateIME ainda.
+
+Regressão da recusa de leitura RED1erro/9testes → GREEN127/15,220s no conjuntoCI.
+Ruff/diff aprovados. Nenhuma assertiva de produto foi omitida ou flexibilizada.

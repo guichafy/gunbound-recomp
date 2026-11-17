@@ -11,6 +11,27 @@ import bootstrap
 
 
 class AndroidToolsTests(unittest.TestCase):
+    def test_optional_input_diagnostics_record_denial_without_skipping_boot_checks(self):
+        import android_tools,subprocess,json
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);tools=dict(ANDROID_SDK_ROOT=str(root/'sdk'),EMULATOR='emulator',ADB='adb',AVDMANAGER='avdmanager')
+            def run(args,**kwargs):
+                if args[0]=='avdmanager':
+                    folder=Path(args[args.index('--path')+1]);folder.mkdir(parents=True);(folder/'config.ini').write_text('hw.keyboard=yes\n')
+                if '/proc/bus/input/devices' in args:
+                    if kwargs.get('check'):raise subprocess.CalledProcessError(1,args,output='',stderr='Permission denied')
+                    return subprocess.CompletedProcess(args,1,'','Permission denied')
+                return subprocess.CompletedProcess(args,0,'1\n','')
+            with patch.object(android_tools.subprocess,'Popen') as process,patch.object(android_tools.subprocess,'run',side_effect=run) as commands:
+                process.return_value.poll.return_value=None
+                android_tools.boot(root,tools,24)
+                self.assertTrue(any(c.args[0][-3:]==['input','keyevent','82'] and c.kwargs.get('check') for c in commands.call_args_list))
+            evidence=root/'.tools/android-reports/boot-api24'
+            status=json.loads((evidence/'input-observation-status.json').read_text())
+            self.assertEqual(status['input-devices.txt']['returncode'],1)
+            self.assertIn('Permission denied',(evidence/'input-devices.txt.stderr').read_text())
+
     def test_legacy_avd_is_normalized_for_touch_and_software_keyboard(self):
         import android_tools,subprocess
         from unittest.mock import patch
