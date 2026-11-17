@@ -251,3 +251,22 @@ e presençaCAMERA/ausênciaON no gate final. Captura pode preservar legendaON.
 
 Todas as tentativas interrompidas acima são histórico; somente os resultados
 explicitamente completos contam como PASS. Gates remotos e merge/main pendem.
+
+## Run121 — custo do observer (REQ-ANDROID-V1/A8)
+
+APK e diagnóstico Linux/API36 passaram; candidato foi exportado/inspecionado.
+O step falhou em enhanced_ocr(shop): Tesseract excedeu30s no frame3×.
+A ausênciaCREATE/SETTINGS já é verificada por pixels e GOLD/CASH estava lido;
+ampliar a imagem nesse caminho era redundante. Priorizar regiões/controles
+antes da ampliação total, mantendo todos os predicados positivos/negativos.
+Limitar OpenMP do OCR e OpenCV a1worker para reduzir concorrência com softwareGL;
+timeout30s e falha explícita preservados. Não alterar APK nem regras.
+Reproduzir com teste que recusa ampliação redundante e verifica env do processo.
+BenchmarkUbuntu24/2CPUs no PNG exato: padrão0,706s vs1thread0,582s, saída idêntica.
+O timeout não reproduziu nesse host; contenção no runner é inferência, não prova
+local. Orientação oficial: https://tesseract-ocr.github.io/tessdoc/FAQ.html
+
+RED2falhas/1erro → GREEN125testes/16,638s. Ruff/actionlint/diff aprovados.
+Replay no observer final do frame exato do CI: lobby recusado como loja,
+enhanced_ocr não chamado,1,586s. ProbeOFFaceito/ONrecusado preservado; hash em
+strict-camera-state.json. Comparação de threads em ocr-thread-benchmark.json.

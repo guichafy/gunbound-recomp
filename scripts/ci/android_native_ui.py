@@ -8,6 +8,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
+cv2.setNumThreads(1)
+
 ROOT=Path(__file__).resolve().parents[2]
 LABELS=('CREATE','AVATAR','SETTINGS','START','SOLO','JEWEL','OK')
 MAX_ERROR=0.04

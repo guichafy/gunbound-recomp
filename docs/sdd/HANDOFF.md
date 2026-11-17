@@ -1,5 +1,13 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+Run121/head383b: build/inspeção e diagnósticoAPI36 passaram; smoke parou no
+Tesseract3× redundante da loja (timeout30s). Observer agora prioriza recortes e
+templates, limitaOCR/OpenCV a1worker, preserva timeout e predicados.125testesCI
+em16,638s/Ruff/actionlintPASS. Replay do frame exatoCI recusou lobby como loja,
+sem ampliar,1,586s; OFFaceito/ONrecusado. Hash em strict-camera-state.json.
+Timeout não reproduziu localmente; possível contenção no runner. APK/runtime
+e174 inalterados. Aguardar revisão/push e gates remotos do novo SHA.
+
 ## Evidência local vigente do PR57 — 17/11/2026
 
 APK e174f1dc: fluxo completo com TesseractLinux/AVDARM64/API36,1280×800 PASS
