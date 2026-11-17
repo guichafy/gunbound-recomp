@@ -182,6 +182,7 @@ def boot(root: Path, tools: dict, api: int) -> None:
     with (root / f'.tools/android/emulator-api{api}.log').open('wb') as log:
         process = subprocess.Popen([tools['EMULATOR'],'-avd',name,'-port','5554','-no-window','-no-audio',
                                    '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swangle','-debug','init',
+                                   '-show-kernel','-logcat','*:W',
                                    '-qemu','-append','i8042.nokbd'],
                                    env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
     deadline=time.monotonic()+300

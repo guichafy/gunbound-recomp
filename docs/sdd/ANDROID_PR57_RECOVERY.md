@@ -357,3 +357,13 @@ Não repetir desbloqueio/input nem ignorar saída do emulador. Regressões cobre
 leitura transitória seguida de sucesso/desbloqueio único e timeouts persistentes
 com encerramento no prazo original. RED2erros → GREEN130testes/16,111s; Ruff/diff
 aprovados. Fluxo API24 e cinco gates do novo SHA ainda pendentes.
+
+## Run127 — diagnóstico do guest API24
+
+O retry preservou o orçamento e expôs a falha persistente de inicialização: API24
+não conclui em300s. API36 passou novamente. O log de host/debuginit não captura
+kernel ou logcat do guest, portanto não comprova a causa. Acrescentar apenas
+-show-kernel e -logcat *:W para preservar esses dados no artifact existente;
+não alterar RAM, imagem, backend, prazo ou gate.11testes da ferramenta aprovados.
+macOS foi cancelado por falta de capacidade do runner hospedado, segundo as
+anotações oficiais, e precisa reexecução no SHA final.
