@@ -109,6 +109,8 @@ class AndroidToolsTests(unittest.TestCase):
                 android_tools.boot(root,tools,36)
                 args=popen.call_args.args[0]
                 self.assertEqual(args[args.index('-gpu')+1],'swangle','Linux swiftshader still uses legacy GLES; select ANGLE explicitly')
+                self.assertIn('-show-kernel',args,'Preserve guest boot failures in the emulator artifact')
+                self.assertEqual(args[args.index('-logcat')+1],'*:W')
                 self.assertEqual(args[args.index('-qemu')+1:],['-append','i8042.nokbd'],'The x86 PC keyboard must not impersonate phone hardware')
                 self.assertTrue(any(call.args[0][-1:] == ['sys.boot_completed'] for call in run.call_args_list))
 

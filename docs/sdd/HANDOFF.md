@@ -1,5 +1,10 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+Run127/headb8b6e543 confirmou falha de bootAPI24 até o prazo300s; API36 voltou
+a passar. Logs atuais não mostram kernel/guestlogcat: habilitada apenas essa
+observabilidade para identificar a causa, sem alterar recursos/bootargs/gates.
+JobmacOS não adquiriu runner por falta de capacidade GitHub (anotações oficiais).
+
 Run126/headb3cd397b passou o fluxo completo API36 no Linux/x86_64 (versão0.25.0;
 report candidate-ui-ci-api36.json). API24 abortou por TimeoutExpired15s em
 getprop antes do limite300s, sem fatal/panic no log do emulador. Repetir apenas
