@@ -1,5 +1,13 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+Run125/head1f636ae1 comprovou entrada sem teclado físico e IME/foco no x86;
+perfil/loja/SOLO/câmera/pausa passaram. Falha de retomada expôs frame antigo:
+teste enviavaOK+Back sem observar o fechamento. Novo helper exige CAMERA e
+ausência do OK nativo após cada fechamento antes de continuar.128testes/16,290s
+e replayLinux dos dois framesCI em10,884s aprovados. Evidências
+x86-ime-verified.json e popup-transition.json. Jogo/APK inalterados; novo SHA
+precisa repetir o fluxo completo APIs36/24 e cinco gates antes de merge/main.
+
 Run124/headd11 chegou ao boot completo, mas a coletaextra/proc retornou1 e
 interrompeu indevidamente antes dos APKs. Agora coletas opcionais registram
 stdout/stderr/status/timeout sem bloquear; getprop/desbloqueio/IME/foco/app

@@ -8,6 +8,28 @@ PATH=ROOT/'scripts/ci/android_native_ui.py'
 FIXTURE=ROOT/'tests/fixtures/android_ui/lobby_api36.png'
 
 class NativeUITests(unittest.TestCase):
+    def test_resuming_options_waits_past_the_stale_popup_frame_before_back(self):
+        import tempfile
+        from unittest.mock import patch
+        spec=importlib.util.spec_from_file_location('ui_test',ROOT/'scripts/ci/android_ui_smoke.py')
+        ui=importlib.util.module_from_spec(spec);spec.loader.exec_module(ui)
+        class Device(ui.Device):
+            def __init__(self,folder):
+                self.output=folder;self.observations=[];self.reads=0;self.taps=[]
+                self.frames=iter([(ROOT/'tests/fixtures/android_ui'/file).read_bytes() for file in ['options_api36.png','busy_controls_api36.png']])
+            def tap_text(self,pattern,label):self.taps.append(pattern)
+            def run(self,*args,**kwargs):
+                if args==('exec-out','screencap','-p'):self.reads+=1;return next(self.frames)
+                self.assert_back_after_running_frame=args==('shell','input','keyevent','KEYCODE_BACK') and self.reads==2
+        with tempfile.TemporaryDirectory() as temp:
+            device=Device(Path(temp))
+            with patch.object(ui,'ocr_output',return_value='CAMERA'),patch.object(ui,'control_targets',return_value=[dict(text='CAMERA')]),patch.object(ui,'enhanced_ocr',return_value=''),patch.object(ui.time,'sleep'):
+                device.resume_options('touch-resume')
+            device.run('shell','input','keyevent','KEYCODE_BACK')
+            self.assertEqual(device.taps,['OK'])
+            self.assertEqual(device.reads,2)
+            self.assertTrue(device.assert_back_after_running_frame)
+
     def test_control_locator_rejects_on_when_requesting_exact_camera_off(self):
         import tempfile
         from unittest.mock import patch

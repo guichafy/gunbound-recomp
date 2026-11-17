@@ -1,0 +1,19 @@
+{
+  "run": 44161704120,
+  "api": 36,
+  "abi": "x86_64",
+  "kernel_argument_present": true,
+  "generated_boot_arguments_preserved": true,
+  "alphabetic_keyboards": [
+    {
+      "id": -1,
+      "name": "Virtual",
+      "keyboard_type": 2
+    }
+  ],
+  "physical_alphabetic_keyboard_count": 0,
+  "ime_gate_passed": true,
+  "candidate_sha256": "82d3215870f1bdebdca4ced0804c123260229645e1987d37fe2164e471b9226c",
+  "candidate_full_ui_passed": false,
+  "remaining_failure": "foreground-confirmed stale popup transition"
+}

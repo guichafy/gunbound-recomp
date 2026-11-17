@@ -1,0 +1,12 @@
+{
+  "stale_popup_rejected": true,
+  "running_frame_observed": true,
+  "frames_read": 2,
+  "seconds": 10.884585999883711,
+  "fixture_sha256": [
+    "3dc257ea803685fc1c53f836c727f3f70e7d23d8b92b3748e1f05971e36c6189",
+    "0ebdb0bd3f10ccdcd7d048f28f97137e65e295548f0cdabb27feea4869953148"
+  ],
+  "observer_sha256": "2bde6035e10feb0a76423f17d3079db2184fc23aad0a48f87b720d27f18fa780",
+  "run": 44161704120
+}
