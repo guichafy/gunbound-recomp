@@ -325,3 +325,20 @@ de acesso a/proc. Não foi possível afirmar efeito do parâmetro no gateIME ain
 
 Regressão da recusa de leitura RED1erro/9testes → GREEN127/15,220s no conjuntoCI.
 Ruff/diff aprovados. Nenhuma assertiva de produto foi omitida ou flexibilizada.
+
+## Run125 — confirmação de transições da pausa
+
+PS2config passou: cmdlinegerado mantém argumentos e incluii8042.nokbd; único
+tecladoalfabético no dumpsysinput é Virtual(-1). O candidato passou IME/foco,
+perfil/loja eSOLO/câmera/pausa. Falhou emforeground-confirmed, depois deRetomar.
+ScreenshotResume mostra batalha semConfiguration ao fundo; quadro solo-pause
+é pixel-idêntico ao popup anterior de touch-pause-visible. O teste enviavaOK e
+Back consecutivos, aceitando o popup antigo como nova pausa; oBack podia fechar
+esse popup ainda aberto. Validar ausência do OK nativo e presençaCAMERA depois
+de fechar opções, antes do próximoBack; fazer o mesmo após fechar na retomada.
+O Godot mapeiaAKEYCODE_BACKparaKEY_BACK, nãoESC; não mudar navegação do jogo.
+A nova regressão usa dois frames reais: popup antigo e batalha sempopup.
+
+REDhelperausente → GREEN128testes/16,290s. Replay comTesseractLinux dos PNGs
+exatos do run125: dois frames lidos, popup antigo recusado e batalha semOK
+aceita em10,884s; dados em popup-transition.json. Jogo/APK inalterados.

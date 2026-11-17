@@ -408,6 +408,12 @@ class Device:
         self.run('shell','input','tap',str(x),str(y))
         self.actions_attempted.append(dict(action='tap-below-label',pattern=pattern,target=target))
 
+    def resume_options(self,label):
+        self.tap_text(r'OK',label=label)
+        # A following Back must see the running screen. Otherwise an old
+        # popup frame can be mistaken for the pause requested by that Back.
+        self.capture(label+'-closed',r'CAMERA|C[ÂA]MERA',absent=r'\bOK\b')
+
     def system_tip_target(self):
         path='/data/local/tmp/gunbound-ci-window.xml'
         self.run('shell','rm','-f',path)
@@ -618,7 +624,7 @@ def final_ui(device: Device,apk: Path,app: str):
         device.attempt_player_charge(mode)
         device.tap_text(r'PAUSE|PAUSA',label=mode+'-touch-pause')
         device.capture(mode+'-touch-pause-visible',OPTIONS_POPUP_PATTERN)
-        device.tap_text(r'OK',label=mode+'-touch-resume')
+        device.resume_options(mode+'-touch-resume')
         device.run('shell','input','keyevent','KEYCODE_BACK')
         device.capture(mode+'-pause',OPTIONS_POPUP_PATTERN)
         device.run('shell','input','keyevent','KEYCODE_HOME')
@@ -627,8 +633,7 @@ def final_ui(device: Device,apk: Path,app: str):
         device.capture(mode+'-resume',r'Resume|Retomar|Continuar|Continue')
         device.tap_text(r'Resume|Retomar|Continuar|Continue',label=mode+'-confirm-foreground')
         device.capture(mode+'-foreground-confirmed',OPTIONS_POPUP_PATTERN,absent=r'\bResume\b|\bRetomar\b|\bContinuar\b|\bContinue\b')
-        device.tap_text(r'OK',label=mode+'-foreground-unpause')
-        device.capture(mode+'-running-again',r'CAMERA|C[ÂA]MERA',absent=OPTIONS_POPUP_PATTERN)
+        device.resume_options(mode+'-foreground-unpause')
         device.logs(app)
         # Force-stop discards live battle as specified, preserving saved profile.
         device.run('shell','am','force-stop',app);device.launch(app)
