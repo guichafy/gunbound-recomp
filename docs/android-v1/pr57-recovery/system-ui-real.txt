@@ -1,0 +1,2 @@
+SystemUI target: {'left': 1611, 'top': 436, 'width': 182, 'height': 126, 'text': 'Got it'}
+After dismissal: None

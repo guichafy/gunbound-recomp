@@ -8,7 +8,8 @@
 - [x] Automação105/0 e Ruff/diff aprovados.
 - [x] Regressão completa103partidas/92.895checks/233Python sem falhas; diagnóstico real aprovado.
 - [x] API36 iniciou no Linux; corrigir backend SwiftShader legado e rótulos cortados a160dpi.
-- [ ] Concluir smoke do candidato final e os gates remotos do novo head.
+- [x] Smoke candidato final completo no AVD5554 e aviso SystemUI reproduzido/fechado via XML confiável.
+- [ ] Concluir os gates remotos do novo head nas APIs36/24 e nos desktops.
 - [ ] Revisão independente, todos os gates do head final e merge protegido.
 - [ ] Acompanhar CI da main e atualizar #56 com os limites remanescentes.
 

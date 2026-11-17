@@ -6,6 +6,52 @@ PATH=Path(__file__).resolve().parents[1]/'scripts/ci/android_ui_smoke.py'
 
 
 class AndroidUISmokeTests(unittest.TestCase):
+    def test_os_onboarding_target_requires_system_package_title_and_unique_button(self):
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        xml='<hierarchy><node package="com.android.systemui" text="Viewing full screen"/><node package="com.android.systemui" text="Got it" clickable="true" enabled="true" bounds="[840,165][916,215]"/></hierarchy>'
+        self.assertEqual(m.system_tip_target(xml),dict(left=840,top=165,width=76,height=50,text='Got it'))
+        self.assertIsNone(m.system_tip_target(xml.replace('com.android.systemui','com.chafy.gunboundrecomp.ci')))
+        self.assertIsNone(m.system_tip_target(xml.replace('Viewing full screen','Game settings')))
+        with self.assertRaises(ValueError):m.system_tip_target(xml.replace('</hierarchy>',xml.split('<hierarchy>')[1]))
+        with self.assertRaises(ValueError):m.system_tip_target(xml.replace('[840,165][916,215]','[916,215][840,165]'))
+
+    def test_camera_pan_reobserves_a_turn_reset_before_one_bounded_new_gesture(self):
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        class Frames:
+            size=(1280,800)
+            actions_attempted=[]
+            taps=[]
+            swipes=[]
+            reads=0
+            def capture(self,label,pattern,**kwargs):
+                self.reads+=1
+                if self.reads==3:raise m.CaptureTimeout('Turn reset the camera')
+                return 'CAMERA' if self.reads in [1,4] else 'CAMERA\nON'
+            def tap_text(self,pattern,label):self.taps.append(pattern)
+            def run(self,*args):self.swipes.append(args)
+        frames=Frames()
+        m.Device.pan_camera(frames,'solo')
+        self.assertEqual(len(frames.swipes),2)
+        self.assertEqual(len(frames.taps),2)
+        self.assertEqual(frames.actions_attempted[-1]['outcome'],'gesture-delivered-camera-mode-visible')
+        self.assertEqual(frames.actions_attempted[-1]['attempts'],2)
+
+    def test_camera_on_can_wrap_inside_one_target_without_accepting_distant_words(self):
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        header='level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n'
+        camera='5\t1\t1\t1\t1\t1\t100\t100\t60\t16\t95\tCAMERA\n'
+        on='5\t1\t2\t1\t1\t1\t120\t122\t20\t16\t95\tON\n'
+        target=m.text_target(header+camera+on,m.CAMERA_ON_PATTERN)
+        self.assertEqual((target['left'],target['top'],target['width'],target['height']),(100,100,60,38))
+        self.assertEqual(m.text_target(header+camera+on,r'CAMERA')['height'],16)
+        for distant in [on.replace('\t122\t','\t500\t'),on.replace('\t120\t','\t500\t')]:
+            with self.assertRaisesRegex(ValueError,'missing'):m.text_target(header+camera+distant,m.CAMERA_ON_PATTERN)
+        duplicate=camera.replace('\t100\t100\t','\t500\t100\t')+on.replace('\t120\t','\t520\t')
+        with self.assertRaisesRegex(ValueError,'ambiguous'):m.text_target(header+camera+on+duplicate,m.CAMERA_ON_PATTERN)
+
     def test_api24_logs_preserve_all_application_pids_without_new_cli_flags(self):
         import tempfile
         spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
@@ -163,6 +209,7 @@ class AndroidUISmokeTests(unittest.TestCase):
             actions_attempted=[]
             clicks=[]
             remaining=iter([before,before,'AVATAR SHOP GOLD'])
+            def system_tip_target(self):return None
             def capture(self,label):
                 return next(self.remaining)
             def tap_text(self,pattern,label):

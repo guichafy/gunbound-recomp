@@ -19,6 +19,7 @@ import subprocess
 import time
 import sys
 import struct
+import xml.etree.ElementTree as ET
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from android_package import ERRORS, diagnostic_report
@@ -97,19 +98,34 @@ def text_target(payload: str, pattern: str) -> dict:
     for word in parse_tsv(payload):
         lines.setdefault(word['line'],[]).append(word)
     targets={}
+    spans=[]
     for words in lines.values():
         words.sort(key=lambda word:word['left'])
         for start in range(len(words)):
             for end in range(start+1,min(start+9,len(words))+1):
                 span=words[start:end]
                 text=' '.join(word['text'] for word in span)
-                if not re.fullmatch(pattern,text,re.I):
-                    continue
                 left=min(word['left'] for word in span);top=min(word['top'] for word in span)
                 right=max(word['left']+word['width'] for word in span)
                 bottom=max(word['top']+word['height'] for word in span)
                 box=(left,top,right-left,bottom-top)
-                targets[box]=dict(left=left,top=top,width=right-left,height=bottom-top,text=text)
+                candidate=dict(left=left,top=top,width=right-left,height=bottom-top,text=text)
+                spans.append(candidate)
+                if re.fullmatch(pattern,text,re.I):targets[box]=candidate
+    # A 48dp button can wrap its label (CAMERA / ON). Join only close,
+    # vertically stacked text with substantial horizontal overlap. A distant
+    # ON or another button must never manufacture the requested state.
+    for first in spans:
+        for second in spans:
+            gap=second['top']-first['top']-first['height']
+            overlap=min(first['left']+first['width'],second['left']+second['width'])-max(first['left'],second['left'])
+            if not (0<=gap<=max(first['height'],second['height']) and overlap>=min(first['width'],second['width'])*0.7):continue
+            text=first['text']+' '+second['text']
+            if not re.fullmatch(pattern,text,re.I):continue
+            left=min(first['left'],second['left']);top=first['top']
+            right=max(first['left']+first['width'],second['left']+second['width'])
+            bottom=second['top']+second['height']
+            targets[(left,top,right-left,bottom-top)]=dict(left=left,top=top,width=right-left,height=bottom-top,text=text)
     if len(targets)!=1:
         raise ValueError(f'OCR target {pattern!r} is '+('missing' if not targets else 'ambiguous'))
     return next(iter(targets.values()))
@@ -118,6 +134,18 @@ def text_target(payload: str, pattern: str) -> dict:
 def system_tip_visible(text: str) -> bool:
     return bool(re.search(r'Viewing\s+full\s+screen',text,re.I)
                 and re.search(r'To\s+exit,?\s+swipe\s+down\s+from\s+the\s+top\s+of\s+your\s+screen',text,re.I))
+
+
+def system_tip_target(xml: str) -> dict | None:
+    nodes=[n for n in ET.fromstring(xml).iter('node') if n.get('package')=='com.android.systemui']
+    if not any(n.get('text')=='Viewing full screen' for n in nodes):return None
+    buttons=[n for n in nodes if n.get('text')=='Got it' and n.get('clickable')=='true' and n.get('enabled')=='true']
+    if len(buttons)!=1:raise ValueError('System onboarding button missing or ambiguous')
+    match=re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]',buttons[0].get('bounds',''))
+    if not match:raise ValueError('Invalid system onboarding bounds')
+    left,top,right,bottom=map(int,match.groups())
+    if right<=left or bottom<=top:raise ValueError('Invalid system onboarding bounds')
+    return dict(left=left,top=top,width=right-left,height=bottom-top,text='Got it')
 
 
 def keyboard_visible(dump: str) -> bool:
@@ -251,17 +279,34 @@ class Device:
         self.run('shell','input','tap',str(x),str(y))
         self.actions_attempted.append(dict(action='tap-below-label',pattern=pattern,target=target))
 
+    def system_tip_target(self):
+        path='/data/local/tmp/gunbound-ci-window.xml'
+        self.run('shell','rm','-f',path)
+        try:
+            self.run('shell','uiautomator','dump','--compressed',path)
+            xml=self.run('shell','cat',path)
+            (self.output/'system-window.xml').write_text(xml)
+            return system_tip_target(xml)
+        finally:
+            self.run('shell','rm','-f',path)
+
     def dismiss_system_tips(self,label='system-fullscreen-tip'):
+        target=self.system_tip_target()
         text=self.capture(label+'-probe')
-        if not system_tip_visible(text):
+        if target is None and not system_tip_visible(text):
             return
         # Only Android's exact immersive-mode onboarding signature permits
         # dismissal. Never click generic OK or a game dialog opportunistically.
-        self.tap_text(r'Got it|Entendi',label=label+'-dismiss')
+        if target is not None:
+            if target['left']+target['width']>self.size[0] or target['top']+target['height']>self.size[1]:
+                raise ValueError('System onboarding target exceeds screenshot')
+            self.run('shell','input','tap',str(round(target['left']+target['width']/2)),str(round(target['top']+target['height']/2)))
+        else:
+            self.tap_text(r'Got it|Entendi',label=label+'-dismiss')
         deadline=time.monotonic()+5
         while True:
             after=self.capture(label+'-after')
-            if not system_tip_visible(after):
+            if (self.system_tip_target() is None if target is not None else not system_tip_visible(after)):
                 break
             if time.monotonic()>=deadline:
                 raise ValueError('Android full-screen onboarding did not dismiss')
@@ -293,6 +338,26 @@ class Device:
             time.sleep(1)
         self.actions_attempted.append(dict(action='charge-hold',outcome='not-attempted',
                                            reason='player-turn-timer-not-observed',shot_outcome='not-proven'))
+
+    def pan_camera(self,label):
+        for attempt in range(1,4):
+            text=self.capture(label+'-camera-state-before-pan',r'CAMERA|C[ÂA]MERA')
+            if not re.search(CAMERA_ON_PATTERN,text,re.I):
+                self.tap_text(r'CAMERA|C[ÂA]MERA',label=label+'-camera-on')
+            self.capture(label+'-camera-active',CAMERA_ON_PATTERN)
+            width,height=self.size
+            self.run('shell','input','swipe',str(round(width*.55)),str(round(height*.45)),
+                     str(round(width*.4)),str(round(height*.45)),'600')
+            try:
+                self.capture(label+'-camera-after-pan',CAMERA_ON_PATTERN,timeout=3)
+            except CaptureTimeout:
+                if attempt==3:raise
+                # Reobserve the toggle after a turn reset. Never retry a failed
+                # transport command, and still require ON after the final pan.
+                continue
+            self.actions_attempted.append(dict(action='camera-pan',duration_ms=600,attempts=attempt,
+                                               outcome='gesture-delivered-camera-mode-visible',world_displacement='not-proven'))
+            return
 
     def disable_camera(self,label):
         taps=0
@@ -416,14 +481,7 @@ def final_ui(device: Device,apk: Path,app: str):
             device.tap_text(r'SOLO',label='select-jewel');device.capture('jewel-selected',r'JEWEL')
         device.tap_text(r'START',label=mode+'-start')
         device.capture(mode+'-battle',r'CAMERA|PAUSE|PAUSA|ANGLE|[0-9]+\s*%',timeout=60)
-        device.tap_text(r'CAMERA|C[ÂA]MERA',label=mode+'-camera-on')
-        device.capture(mode+'-camera-active',r'CAMERA\s+ON|C[ÂA]MERA\s+ATIVA')
-        width,height=device.size
-        device.run('shell','input','swipe',str(round(width*.55)),str(round(height*.45)),
-                   str(round(width*.4)),str(round(height*.45)),'600')
-        device.actions_attempted.append(dict(action='camera-pan',duration_ms=600,
-                                             outcome='gesture-delivered-camera-mode-visible',world_displacement='not-proven'))
-        device.capture(mode+'-camera-after-pan',r'CAMERA\s+ON|C[ÂA]MERA\s+ATIVA')
+        device.pan_camera(mode)
         device.disable_camera(mode)
         # Require exact OFF label after toggling; substring CAMERA also appears
         # in CAMERA ON, so an ordinary capture regex alone is insufficient.
