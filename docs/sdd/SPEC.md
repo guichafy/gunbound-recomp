@@ -1,5 +1,13 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Recuperação Android PR57 — REQ-ANDROID-V1 (17/11/2026)
+
+Pedido atual autoriza otimizar recursos Android, corrigir as falhas da CI e
+fazer merge protegido após todos os gates, substituindo a reserva anterior
+do merge pelo usuário. Preservar os assets e as regras. Plano e provas em
+[ANDROID_PR57_RECOVERY.md](ANDROID_PR57_RECOVERY.md). Aceite físico e chave
+estável permanecem na #56; não habilitar publicação ou afrouxar proteções.
+
 Requisito adicional Android A8: fluxo reproduzível de APK no emulador macOS;
 [guia local](../ANDROID.md), T10 do [plano](ANDROID_V1_PLAN.md). Execução real e
 evidência separadas do aceite físico.

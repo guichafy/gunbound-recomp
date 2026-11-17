@@ -18,6 +18,7 @@ import tarfile
 import tempfile
 import sys
 import time
+import xml.etree.ElementTree as ET
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import bootstrap
@@ -35,6 +36,23 @@ def validate_package(folder: Path, package: str, revision: str) -> None:
     # Older archives omit Pkg.Path. The path is fixed by the lock/install map.
     if values.get('Pkg.Path', package) != package:
         raise ValueError(f'SDK package mismatch: {package}')
+
+
+def register_emulator(folder: Path, revision: str) -> None:
+    # Google's archive has source.properties but no installed-package manifest.
+    # avdmanager's modern lookup does not discover this generic legacy package.
+    validate_package(folder, 'emulator', revision)
+    repository = ET.Element('ns2:repository', {
+        'xmlns:ns2': 'http://schemas.android.com/repository/android/common/02',
+        'xmlns:generic': 'http://schemas.android.com/repository/android/generic/02',
+        'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance'})
+    package = ET.SubElement(repository, 'localPackage', path='emulator', obsolete='false')
+    ET.SubElement(package, 'type-details', {'xsi:type': 'generic:genericDetailsType'})
+    version = ET.SubElement(package, 'revision')
+    for name, value in zip(('major', 'minor', 'micro'), revision.split('.'), strict=True):
+        ET.SubElement(version, name).text = value
+    ET.SubElement(package, 'display-name').text = 'Android Emulator'
+    ET.ElementTree(repository).write(folder / 'package.xml', encoding='utf-8', xml_declaration=True)
 
 
 def safe_tar(archive: Path, destination: Path) -> None:
@@ -99,8 +117,10 @@ def prepare(root: Path, emulator: bool = False) -> dict[str, str]:
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.rmtree(target, ignore_errors=True)
             shutil.move(str(tree), target)
+            if name == 'emulator':
+                register_emulator(target, package['revision'])
     build = sdk / 'build-tools' / config['build_tools']
-    result = {'JAVA_HOME': str(java), 'ANDROID_SDK_ROOT': str(sdk),
+    result = {'JAVA_HOME': str(java), 'ANDROID_SDK_ROOT': str(sdk), 'ANDROID_HOME': str(sdk),
               'GODOT_TEMPLATES': str(root / '.tools/android/templates'),
               'ADB': str(sdk / 'platform-tools/adb'), 'APKSIGNER': str(build / 'apksigner'),
               'ZIPALIGN': str(build / 'zipalign'), 'AAPT': str(build / 'aapt')}
@@ -119,6 +139,25 @@ def image_package(api: int) -> str:
     return f'system-images;android-{api};default;x86_64'
 
 
+def write_modern_avd(sdk: Path, avd_home: Path, api: int) -> None:
+    # API36 r02 ships data/ instead of userdata.img. The pinned CLI19 tries to
+    # copy that obsolete file; Emulator37 itself creates ext4 from data/.
+    image = sdk.joinpath(*image_package(api).split(';'))
+    if api != 36 or not (image / 'data/empty_data_disk').is_file():
+        raise ValueError('Expected the pinned API36 directory-based userdata image')
+    name = f'gunbound-ci-api{api}'
+    folder = avd_home / (name + '.avd')
+    folder.mkdir(parents=True, exist_ok=True)
+    config = {'AvdId': name, 'avd.ini.encoding': 'UTF-8', 'abi.type': 'x86_64',
+              'hw.cpu.arch': 'x86_64', 'image.sysdir.1': str(image.relative_to(sdk)).replace('\\', '/')+'/',
+              'tag.id': 'default', 'tag.display': 'Default Android System Image',
+              'hw.keyboard': 'yes', 'hw.gpu.enabled': 'yes', 'hw.gpu.mode': 'auto',
+              'disk.dataPartition.size': '6G', 'fastboot.forceColdBoot': 'yes'}
+    (folder / 'config.ini').write_text(''.join(f'{key}={value}\n' for key,value in config.items())+
+                                     'hw.initialOrientation=landscape\n', encoding='utf-8')
+    (avd_home / (name+'.ini')).write_text(f'avd.ini.encoding=UTF-8\npath={folder.resolve()}\ntarget=android-{api}\n', encoding='utf-8')
+
+
 def boot(root: Path, tools: dict, api: int) -> None:
     image = image_package(api)
     name = f'gunbound-ci-api{api}'
@@ -126,8 +165,11 @@ def boot(root: Path, tools: dict, api: int) -> None:
     avd_home.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
     env.update(tools, ANDROID_AVD_HOME=str(avd_home), ANDROID_USER_HOME=str(root / '.tools/android/user'))
-    subprocess.run([tools['AVDMANAGER'],'create','avd','--force','--name',name,'--package',image,
-                    '--path',str(avd_home / (name+'.avd'))],input='no\n',text=True,env=env,check=True,timeout=120)
+    if api == 36:
+        write_modern_avd(Path(tools['ANDROID_SDK_ROOT']), avd_home, api)
+    else:
+        subprocess.run([tools['AVDMANAGER'],'create','avd','--force','--name',name,'--package',image,
+                        '--path',str(avd_home / (name+'.avd'))],input='no\n',text=True,env=env,check=True,timeout=120)
     config = avd_home / (name+'.avd/config.ini')
     with config.open('a') as output:
         output.write('\nhw.lcd.width=1280\nhw.lcd.height=800\nhw.lcd.density=160\nhw.initialOrientation=landscape\nhw.ramSize=4096\n')

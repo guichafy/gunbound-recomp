@@ -52,3 +52,7 @@ func finish_report() -> void:
 		"failures": failures, "profile_isolated": str(requested.get("profile", "")).begins_with("user://ci/gunbound-package-")}
 	print("ANDROID DIAGNOSTIC JSON: ", JSON.stringify(report))
 	print("ANDROID DIAGNOSTIC: ", "PASS" if failures == 0 else "FAIL")
+
+func run() -> void:
+	await preload("res://scripts/ci/android_performance.gd").run(view)
+	await super.run()

@@ -140,11 +140,15 @@ var move_right: Button
 var weapon_buttons: Array[TextureButton] = []
 var queue_entries: Array = []
 # One sprite per mobile, from the presentation catalog (ADR-081).
-var sprites := build_sprites()
+var sprites := initial_sprites(OS.has_feature("android"))
 
-static func build_sprites() -> Dictionary:
+static func initial_sprites(android: bool) -> Dictionary:
+	return {} if android else build_sprites()
+
+static func build_sprites(ids: Array = []) -> Dictionary:
+	if ids.is_empty():ids=MobileLooks.ids()
 	var result := {}
-	for vehicle_id in MobileLooks.ids():
+	for vehicle_id in ids:
 		var look: Dictionary = MobileLooks.look(vehicle_id)
 		var sprite = load(look.sprite).new()
 		if sprite.has_method("setup"):
@@ -152,6 +156,14 @@ static func build_sprites() -> Dictionary:
 			sprite.rear = bool(Mobiles.definition(vehicle_id).get("rear", false))
 		result[vehicle_id] = sprite
 	return result
+
+## Android keeps the visible pair, with the same original/HD resources and EPA.
+## Populate before BattleArt.reset so native pose metadata is already available.
+func prepare_sprites(ids: Array) -> void:
+	if android_enabled():
+		for id in sprites.keys():
+			if id not in ids:sprites.erase(id)
+	for id in ids:sprite_for(int(id))
 
 func _ready() -> void:
 	if android_enabled():
@@ -447,6 +459,7 @@ func start_match(resolved_player: int = -1, resolved_cpu: int = -1, spawns: Arra
 	actor_avatars = [profile.equipped_set(), profile.catalog.defaults(0)]
 	# The map's stage track; the result window keeps it until OK returns to the room.
 	sound.request_music(sound.battle_music(int(Maps.get_map(model.map_id).get("client_stage", 0))))
+	prepare_sprites([int(model.actors[0].vehicle),int(model.actors[1].vehicle)])
 	art.bind_sprites(sprites)
 	art.reset(model.actors)
 	rig.manual = false
@@ -687,6 +700,8 @@ func actor_frame(index: int) -> int:
 	return art.atlas_frame(model, index, actor_context(index))
 
 func sprite_for(vehicle_id: int):
+	if not sprites.has(vehicle_id) and Mobiles.has_id(vehicle_id):
+		sprites.merge(build_sprites([vehicle_id]))
 	return sprites.get(vehicle_id)
 
 func play_mobile_shot(event: Dictionary) -> void:
@@ -965,6 +980,7 @@ func draw_room_figures(canvas: Node2D) -> void:
 		player_kind = RoomChoice.RANDOM
 	if screen != "loading" and cpu_random:
 		cpu_kind = RoomChoice.RANDOM
+	prepare_sprites([player_kind,cpu_kind])
 	# The Grub hull light (tank13l) is part of the mobile, here as in the battle;
 	# opening it on this canvas clears the previous redraw.
 	for sprite in sprites.values():
@@ -985,7 +1001,7 @@ func _draw() -> void:
 	if screen == "shop":
 		draw_rect(Rect2(0,0,1280,800),Color("11223c"))
 		return
-	if screen == "lobby" or screen == "menu":
+	if screen in ["lobby","menu","loading"]:
 		_draw_classic_front()
 		return
 	if background == null:
@@ -1104,15 +1120,16 @@ func draw_projectiles(offset: Vector2) -> void:
 		draw_set_transform(offset)
 
 func draw_mines(offset: Vector2) -> void:
+	var marks: Array = model.mines.duplicate()
+	for projectile in model.projectiles:
+		if bool(projectile.get("crystal_body", false)):
+			marks.append({"pos": projectile.get("hit_pos", projectile.pos), "crystal": true})
+	for effect in model.battle_effects:
+		if str(effect.kind) == "jd_crystal":
+			marks.append(effect)
+	if marks.is_empty():return
 	var body = sprite_for(7)
 	if body != null and body.has_method("draw_placed"):
-		var marks: Array = model.mines.duplicate()
-		for projectile in model.projectiles:
-			if bool(projectile.get("crystal_body", false)):
-				marks.append({"pos": projectile.get("hit_pos", projectile.pos), "crystal": true})
-		for effect in model.battle_effects:
-			if str(effect.kind) == "jd_crystal":
-				marks.append(effect)
 		body.draw_placed(self, marks, model.actors, offset)
 
 ## Rising texts ("QUEDA!") that fade over 1.5 s.

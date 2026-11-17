@@ -101,7 +101,7 @@ def prepare_test_dirs(root):
     # deliberately missing directories used by rollback/failure-path tests.
     for name in ('lobby-rank', 'room-ui', 'room-contact', 'room-polish', 'room-reference',
                  'classic-buttons-hd', 'hud-layout', 'battle-menu', 'match-loading',
-                 'result-port', 'turtle-fix', 'turtle-t2'):
+                 'result-port', 'turtle-fix', 'turtle-t2', 'android-v1'):
         (root / '.tools' / name).mkdir(parents=True, exist_ok=True)
 
 

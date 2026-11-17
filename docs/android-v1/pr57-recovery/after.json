@@ -1,0 +1,80 @@
+{
+  "environment": "macOS ARM64 API36 SwiftShader, 1280x800; after under concurrent regression; frame timings not comparable",
+  "samples": [
+    {
+      "draw_calls": {
+        "max": 91.0,
+        "mean": 91.0,
+        "p95": 91.0,
+        "samples": 180
+      },
+      "frame_ms": {
+        "max": 92.089,
+        "mean": 27.4081277777778,
+        "p95": 42.711,
+        "samples": 180
+      },
+      "image_sha256": "d560ef5d2e20ac7038f2a8a9fdf48a715e269492425aa28481f0dc0039d37dd3",
+      "process_ms": {
+        "max": 4.784,
+        "mean": 0.343355555555555,
+        "p95": 0.794,
+        "samples": 180
+      },
+      "scenario": "solo",
+      "static_bytes": 147648936,
+      "texture_bytes": 517618654.0,
+      "viewport": "(1280.0, 800.0)"
+    },
+    {
+      "draw_calls": {
+        "max": 92.0,
+        "mean": 87.4166666666667,
+        "p95": 92.0,
+        "samples": 180
+      },
+      "frame_ms": {
+        "max": 78.26,
+        "mean": 27.6460666666667,
+        "p95": 41.856,
+        "samples": 180
+      },
+      "image_sha256": "e3578960681c30915b2cf38e35a16425d4efaf50e9d152b3901736368fb92e1b",
+      "process_ms": {
+        "max": 4.364,
+        "mean": 0.41965,
+        "p95": 1.274,
+        "samples": 180
+      },
+      "scenario": "volley",
+      "static_bytes": 151457052,
+      "texture_bytes": 516959118.0,
+      "viewport": "(1280.0, 800.0)"
+    },
+    {
+      "draw_calls": {
+        "max": 102.0,
+        "mean": 102.0,
+        "p95": 102.0,
+        "samples": 180
+      },
+      "frame_ms": {
+        "max": 56.559,
+        "mean": 27.2723111111111,
+        "p95": 38.934,
+        "samples": 180
+      },
+      "image_sha256": "8d756b68708179c9550aa9094f541b863e0986b457d1e3d694b84fd27b08a8fb",
+      "process_ms": {
+        "max": 4.993,
+        "mean": 0.269822222222222,
+        "p95": 0.365,
+        "samples": 180
+      },
+      "scenario": "jewel",
+      "static_bytes": 148286896,
+      "texture_bytes": 242207890.0,
+      "viewport": "(1280.0, 800.0)"
+    }
+  ]
+}

@@ -1,5 +1,19 @@
 # Registro de decisões
 
+## ADR-ANDROID-RESOURCES — recuperação PR57 (17/11/2026)
+
+Carregar no Android somente os sprites apresentados e os auxiliares realmente
+necessários, liberando os IDs anteriores na seleção/transição. Preparar antes
+de BattleArt.reset para preservar metadadosEPA. Não reduzir resolução/HD nem
+regras para economizar memória. Desktop mantém factory completa.
+
+A CI conserva todos os gates: preparar diretório das fixtures; executar testes
+com Git Bash no Windows; registrar metadados do emulador extraído dos bytes
+travados. API36r02 usa data/empty_data_disk em vez do userdata.img que CLI19
+tenta copiar; escrever definição AVD determinística e deixar Emulator37
+criar o disco conforme seu caminho nativo. API24 usa avdmanager. Boot e smokes
+reais nas duas APIs continuam obrigatórios. [Plano](ANDROID_PR57_RECOVERY.md).
+
 ## ADR-ANDROID-V1 — base clássica e suporte Android (15/11/2026)
 
 Emenda posterior — APK para testes sem credenciais de distribuição: o usuário

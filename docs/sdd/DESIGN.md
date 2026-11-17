@@ -1,5 +1,16 @@
 # Design implementado
 
+## Recursos Android e recuperação PR57 (17/11/2026)
+
+Android inicia catálogo de sprites vazio e prepara os IDs visíveis antes de
+BattleArt.reset, conservando EPA/native_animation. Sala/batalha liberam os
+IDs anteriores; Raon auxiliar só carrega quando existem minas/cristais.
+Desktop mantém catálogo completo. Probe opt-in pelo APK diagnóstico mede
+frames/CPU/texturas, sem servir como aceite físico. SDK travado registra
+emulator/package.xml; API36 usa a definição AVD e o diretório data/ nativo
+para criar userdata no Emulator37; API24 conserva avdmanager.
+[Plano e limites](ANDROID_PR57_RECOVERY.md).
+
 ## Android v1 — implementação local (15/11/2026)
 
 Primeira entrega usa candidato `.ci` com assinatura de teste automática em PR e
