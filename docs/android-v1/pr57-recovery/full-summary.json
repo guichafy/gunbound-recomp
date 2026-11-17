@@ -1,0 +1,11 @@
+{
+  "seconds": 1200.528,
+  "matches": 103,
+  "checks": 92895,
+  "failed": [],
+  "godot_suites": 141,
+  "python_log_summary": [
+    "Ran 233 tests in 128.239s",
+    "OK"
+  ]
+}

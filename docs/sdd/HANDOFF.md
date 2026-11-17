@@ -15,7 +15,14 @@ recursos aprovados preservados. Regressores132/0, sete cenas962/0 antes do
 último guard de minas e GPU3/0 com SHA idênticos ao HEAD anterior.
 APK diagnóstico final1760ff17 no AVD:48tiros/66mapas/22JEWEL/UI3 sem falhas.
 Loading não desenha mundo antigo; regressão RED132/2→GREEN132/0.
-Revisão independente final sem P1/P2. Regressores completos e CI remota em andamento.
+Revisão independente final sem P1/P2. Agregado1200,528s/103partidas/141suítes/92.895checks/233Python sem falhas.
+Run44085206451 iniciouAPI36, recusou erro de shader do SwiftShader legado;
+novo head troca para swiftshader/ANGLE, com logs estritos preservados.
+Rótulos de toque completos a160dpi (fontes por dp, câmera em duas linhas),
+RED332/1→GREEN352/0 e faixa552/0; isso sucede a comparação GPU citada.
+106testesCI/4,960s e revisão do delta aprovados. Candidato c75fffc6 local
+interrompido por ADB transitório após relaunch; não conta como PASS.
+Gates remotos completos ainda pendentes no novo head.
 Sem alegação de ganho deFPS ou aceite físico.
 
 ## PR57 aberto e acompanhamento da CI (15/11/2026)

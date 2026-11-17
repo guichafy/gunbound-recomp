@@ -173,10 +173,10 @@ def boot(root: Path, tools: dict, api: int) -> None:
     config = avd_home / (name+'.avd/config.ini')
     with config.open('a') as output:
         output.write('\nhw.lcd.width=1280\nhw.lcd.height=800\nhw.lcd.density=160\nhw.initialOrientation=landscape\nhw.ramSize=4096\n')
-    log = (root / f'.tools/android/emulator-api{api}.log').open('wb')
-    process = subprocess.Popen([tools['EMULATOR'],'-avd',name,'-port','5554','-no-window','-no-audio',
-                               '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swiftshader_indirect'],
-                               env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
+    with (root / f'.tools/android/emulator-api{api}.log').open('wb') as log:
+        process = subprocess.Popen([tools['EMULATOR'],'-avd',name,'-port','5554','-no-window','-no-audio',
+                                   '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swiftshader'],
+                                   env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
     deadline=time.monotonic()+300
     while time.monotonic()<deadline:
         if process.poll() is not None:
