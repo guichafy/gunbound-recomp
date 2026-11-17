@@ -181,7 +181,7 @@ def boot(root: Path, tools: dict, api: int) -> None:
     # Android's loader appends these parameters to its generated command line.
     with (root / f'.tools/android/emulator-api{api}.log').open('wb') as log:
         process = subprocess.Popen([tools['EMULATOR'],'-avd',name,'-port','5554','-no-window','-no-audio',
-                                   '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swangle',
+                                   '-no-boot-anim','-no-snapshot','-wipe-data','-gpu','swangle','-debug','init',
                                    '-qemu','-append','i8042.nokbd'],
                                    env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True)
     deadline=time.monotonic()+300
@@ -196,12 +196,19 @@ def boot(root: Path, tools: dict, api: int) -> None:
             for filename in ('config.ini','hardware-qemu.ini'):
                 source=config.parent/filename
                 if source.is_file():shutil.copyfile(source,evidence/filename)
+            observation_status={}
             for filename,args in [('input-devices.txt',['cat','/proc/bus/input/devices']),
                               ('kernel-command-line.txt',['cat','/proc/cmdline']),
                               ('input-service.txt',['dumpsys','input'])]:
-                observed=subprocess.run([tools['ADB'],'-s','emulator-5554','shell',*args],
-                                        text=True,capture_output=True,timeout=30,env=env,check=True)
-                (evidence/filename).write_text(observed.stdout,encoding='utf-8')
+                try:
+                    observed=subprocess.run([tools['ADB'],'-s','emulator-5554','shell',*args],
+                                            text=True,capture_output=True,timeout=30,env=env,check=False)
+                    (evidence/filename).write_text(observed.stdout or '',encoding='utf-8')
+                    (evidence/(filename+'.stderr')).write_text(observed.stderr or '',encoding='utf-8')
+                    observation_status[filename]={'returncode':observed.returncode}
+                except subprocess.TimeoutExpired:
+                    observation_status[filename]={'returncode':None,'timeout_seconds':30}
+            (evidence/'input-observation-status.json').write_text(json.dumps(observation_status,indent=2)+'\n',encoding='utf-8')
             subprocess.run([tools['ADB'],'-s','emulator-5554','shell','input','keyevent','82'],check=True,env=env)
             return
         time.sleep(2)
