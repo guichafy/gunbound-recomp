@@ -43,6 +43,12 @@ jobs:
             .github
             scripts
             tests
+            assets/classic
+            assets/hd/classic/buttons_smooth_4x
+            assets/hd/classic/room_settings_4x
+            assets/hd/classic/room_status_4x
+            assets/xfs/jewel
+            assets/xfs/hud_options_fallback
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.13'

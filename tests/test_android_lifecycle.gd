@@ -1,4 +1,8 @@
 extends "res://tests/support/suite.gd"
+class SlowGame extends "res://scripts/game.gd":
+	func leave_shop() -> void:
+		super.leave_shop()
+		OS.delay_msec(400)
 func get_tree_quit_back() -> bool:
 	return quit_on_go_back
 func run() -> void:
@@ -10,6 +14,11 @@ func run() -> void:
 		await process_frame
 		check(not life.accept_back(1160),"Duplicate native Back is ignored across frames")
 		check(life.accept_back(1300),"New Back is accepted after the 300 ms gate")
+		if life.has_method("finish_back"):
+			life.finish_back(2200)
+			check(not life.accept_back(2201),"A duplicate queued during slow navigation is rejected after completion")
+			check(life.accept_back(2500),"A new Back is accepted 300 ms after navigation completes")
+		else:check(false,"Back gate must cover navigation work, not only entry time")
 		check(not life.is_blocked(),"Initially running")
 		life.suspend("focus")
 		life.suspend("pause")
@@ -18,7 +27,7 @@ func run() -> void:
 		check(life.is_blocked(),"Resume requires explicit confirmation")
 		life.confirm_resume()
 		check(not life.is_blocked(),"Confirmed resume clears latch")
-	var scene = load("res://scenes/main.tscn").instantiate()
+	var scene = SlowGame.new()
 	scene.android_test=true
 	scene.profile=load("res://scripts/profile.gd").new("res://.tools/android-v1/lifecycle-profile.json")
 	root.add_child(scene)

@@ -161,3 +161,93 @@ precisa passar no head novo, incluindo API24.
 
 Automação109/0 em5,150s, Ruff/diffOK e revisão independente semP1/P2.
 Novos testes tiveram RED antes das correções (wrap, reset da câmera e XML).
+
+## Reconhecimento dos botões raster do cliente
+
+Run119 removeu o aviso SystemUI corretamente; lobby.png mostra o lobby livre.
+Tesseract não reconheceu CREATE/SETTINGS/AVATAR desenhados como sprites,
+reproduzido localmente com Tesseract Ubuntu24 (inclusive3×/gray/threshold).
+Adicionar observador visual para esses botões, START e placas SOLO/JEWEL.
+Templates vêm dos PNGs/catálogos ativos, incluindo somente estados habilitados;
+procurar no screenshot inteiro em escalas do canvas. Não inferir posições de
+clique pelo layout: a correspondência dos pixels deve localizar o alvo.
+Usar diferença quadrática normalizada/alpha, erro máximo0,04, juntar somente
+detecções sobrepostas e recusar duplicatas separadas. O texto comum continuaOCR.
+
+Experimento no screenshot real: CREATE0,00673 e AVATAR0,00679; melhor alvo
+errado0,118/0,114. SETTINGS0,02683, próximo alvoerrado0,215. Fixture preserva
+render real CI/API36; testes recusam alvo ausente, duplicado e tela escurecida.
+OpenCV headless4.12.0.88 + NumPy2.2.6 travados, só automação/fora do APK.
+Validar fluxo inteiro com Tesseract Linux no AVD local antes do próximo push.
+
+Run119 macOS terminou com sucesso. Windows completou regras/cenas/partidas,
+mas Python recusou a comparação literal do alias temporário RUNNER~1 com
+runneradmin. O teste agora resolve o caminho como a implementação; nenhuma
+regra de jogo ou gate foi removido.
+
+Tesseract Ubuntu24 também exige gray/BICUBIC3× para ler CAMERA de8px; RGB3×
+não resolveu. O observer conserva captura/OCR brutos e derivados, converte
+caixas TSV de volta aos pixels originais e continua recusando ambiguidade.
+A loja exige ausência dos controles CREATE/SETTINGS: GOLD/CASH sozinho podia
+aceitar o quadro anterior do lobby. Testes cobrem essa transição e reprojeção.
+Checkout reduzido inclui os catálogos/PNGs, com teste das seis famílias.
+Automação117/0 em89,278s concorrendo com AVD/softwareGL; Ruff/actionlint/diffOK.
+Fluxo Linux completo e CI do novo SHA permanecem pendentes até resultado real.
+
+O fluxo estrito revelou Back duplicado após a loja real. APK temporário de
+rastreio confirmou dois callbacks para uma única tecla: entrada14729ms/shop,
+fim14857ms/lobby, segunda entrada14857ms/lobby. JNI `GodotLib_back` e
+`AndroidInputHandler::process_key_event` emitem GO_BACK por caminhos distintos.
+O gate anterior começava antes de reconstruir o lobby; uma transição lenta
+pode consumir sua janela300ms. Reproduzir com leave_shop400ms no teste de cena.
+Manter a janela300ms, mas renovar o relógio ao concluir a navegação, cobrindo
+trabalho síncrono e o callback já enfileirado. Remover rastreio do APK final.
+
+Reprodução RED27/2; fix GREEN28/0. Faixa8suítes787checks PASS, acesso host
+permitido à CA do macOS. Rodada sandbox anterior teve zero assertivas falhas,
+mas ERROR ambiental de CA; não foi contada como gate verde. Rastreio removido.
+
+O fluxo v3 chegou à pausa com câmeraON/OFF, mas OCR não leu o OK raster.
+Adicionar sétimo template: recorte do NativeOptionOK original, fallback
+pixel-idêntico validado por ClassicBattleOptionsArt, canvasHUD800×500.
+Positivo erro0,02146, abaixo do mesmo limite0,04; estado desabilitado recusado.
+O gate composto ainda exige texto Configuration/Sound/etc observado na tela.
+Separador entre OCR bruto e gray impede compor CAMERA/ON entre duas leituras.
+Automação final119/0 em17,857s, Ruff/actionlint/diffOK. Candidato final e174f1dc
+reexportado/verificado; fluxo completo Linux v4 em andamento antes do push.
+
+v4 passou pausa/OK/Back/Home; Resume aparecia corretamente, mas Tesseract em
+imagem inteira (psm3/6/11/12, RGB/gray3×) retornou vazio. Região clara detectada
+pelos pixels + gray/binary80/padding branco leu Resume. Fallback limitado ao
+pattern de retomada: componentes claros retangulares são apenas candidatos;
+OCRpsm7 precisa reconhecer o texto e fornecer a caixa, convertida por escala e
+origem. Nenhum candidato, texto ausente ou alvo ambíguo não autoriza clique.
+Fixture real cobre região movida/reprojeção/ausência de texto.121testesCI/17,909s
+PASS; Ruff/actionlint/diffOK. Fluxo completo v5 ainda em andamento neste registro.
+
+## Fechamento local — evidência vigente
+
+v5 expôs variação do OCR com o fundo atrás de CAMERA. Detectar bordas fechadas
+dos controles, recortar o interior e exigir legendaOCR após contraste resolveu
+OFF/ON nos dois fundos reais. Candidatos não autorizam clique sem texto; cache
+limitado usa somente hash de pixels binários idênticos, não estado do jogo.
+Regressão cobre controles movidos e espaçamento de glifos em duas linhas.
+Revisão encontrou consultaOFF aceitandoON; corrigida com fullmatch no locator
+e presençaCAMERA/ausênciaON no gate final. Captura pode preservar legendaON.
+
+- Automação final123/0 em18,430s; Ruff/actionlint/diff aprovados.
+- Revisão independente semP1/P2 após resolver a consultaOFF.
+- APK final e174f1dc63e8072a5918330ec981162e9cec8ac9a61eb19399fc11abb573f0cc:
+  assinatura/alinhamento16k/recursos verificados, ARM64/API36,1280×800/160dpi.
+- FluxoLinux/TesseractUbuntu24 v6 completo PASS: loja real/perfil/IME/SOLO/JEWEL,
+  câmeraON/OFF, pausa/Back/Home/retomada explícita. Relatório candidate-ui-linux.json.
+- A rodada v6 precede somente o endurecimento final da consultaOFF. Probe do
+  observer final com as capturas reais: OFF aceito, ON recusado, hash do observer
+  em strict-camera-state.json;123testes incluem essa regressão. CI executará
+  novamente o fluxo completo no SHA final, nas APIs36/24.
+- Pan foi entregue e ON continuou visível; deslocamento do mundo não comprovado.
+  Timer do jogador não foi lido nessa rodada: carga não tentada/tiro não provado.
+  Multitouch, áudio e desempenho físico permanecem na issue56.
+
+Todas as tentativas interrompidas acima são histórico; somente os resultados
+explicitamente completos contam como PASS. Gates remotos e merge/main pendem.

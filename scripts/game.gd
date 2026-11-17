@@ -1450,6 +1450,10 @@ func _notification(what: int) -> void:
 
 func handle_back() -> void:
 	if not lifecycle.accept_back(Time.get_ticks_msec()):return
+	_handle_platform_back()
+	lifecycle.finish_back(Time.get_ticks_msec())
+
+func _handle_platform_back() -> void:
 	if lifecycle.is_blocked():
 		if not lifecycle.suspended:resume_platform()
 		return

@@ -11,6 +11,10 @@ func accept_back(now_msec: int) -> bool:
 	if now_msec-last_back_msec<BACK_GATE_MSEC:return false
 	last_back_msec=now_msec
 	return true
+func finish_back(now_msec: int) -> void:
+	# Rebuilding a screen can take longer than the gate under software GL.
+	# Cover that work so a queued duplicate cannot navigate the new screen.
+	last_back_msec=now_msec
 func suspend(value: String) -> void:
 	suspended=true
 	awaiting_resume=true

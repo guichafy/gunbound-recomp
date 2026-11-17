@@ -9,6 +9,11 @@
 - [x] Regressão completa103partidas/92.895checks/233Python sem falhas; diagnóstico real aprovado.
 - [x] API36 iniciou no Linux; corrigir backend SwiftShader legado e rótulos cortados a160dpi.
 - [x] Smoke candidato final completo no AVD5554 e aviso SystemUI reproduzido/fechado via XML confiável.
+- [x] Corrigir alias Windows e observação dos controles raster/pequenos, com117 testes CI aprovados.
+- [x] Revisar dependências do checkout reduzido e recusar falso positivo de loja no lobby.
+- [x] Cobrir navegação lenta no gateBack (RED27/2→GREEN28/0); faixa8suítes/787checks aprovada.
+- [x] SmokeLinux completo do candidato e174 (SOLO/JEWEL/loja/perfil/Back/retomada),123testes CI e revisão aprovados.
+- [x] Confirmar no observer final que OFF é aceito e ON recusado após endurecer a consulta.
 - [ ] Concluir os gates remotos do novo head nas APIs36/24 e nos desktops.
 - [ ] Revisão independente, todos os gates do head final e merge protegido.
 - [ ] Acompanhar CI da main e atualizar #56 com os limites remanescentes.

@@ -1,0 +1,20 @@
+{
+  "package_id": "com.chafy.gunboundrecomp.ci",
+  "version_code": 20005,
+  "min_sdk": 24,
+  "target_sdk": 36,
+  "abis": [
+    "arm64-v8a",
+    "x86_64"
+  ],
+  "certificate_sha256": "b981a63dc674a84ce02cf31688cc804842d637a566b37aba8f4450e1ae45a0e0",
+  "signature": "verified",
+  "alignment": "16k-verified",
+  "orientation": "userLandscape",
+  "resources": "verified",
+  "licenses": "verified",
+  "version": "0.20.5",
+  "mode": "candidate",
+  "token": "c15f1ae0c52e42f8845909788b46e1ec",
+  "sha256": "e174f1dc63e8072a5918330ec981162e9cec8ac9a61eb19399fc11abb573f0cc"
+}

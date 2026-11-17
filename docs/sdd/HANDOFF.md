@@ -1,11 +1,48 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Evidência local vigente do PR57 — 17/11/2026
+
+APK e174f1dc: fluxo completo com TesseractLinux/AVDARM64/API36,1280×800 PASS
+(loja real, perfil/IME, SOLO/JEWEL, ON/OFF, pausa/Back/Home/Retomar).
+candidate-ui-linux.json e candidate-final-inspection.json em docs/android-v1/pr57-recovery.
+EndurecimentoOFF posterior à rodada: probe final aceitaOFF/recusaON com as
+capturas reais; strict-camera-state.json registra hash do observer. Automação123/0
+em18,430s,8cenas/787checks, Ruff/actionlint/diffOK e revisão semP1/P2.
+Captura por contornos exige OCR exato; templatesraster só estados habilitados.
+Pan/tiro natural, multitouch, áudio e desempenho físico não comprovados (#56).
+Próximo: gates do SHA final nas APIs36/24 + desktop, merge protegido, CI da main.
+Os registros de tentativas abaixo são históricos e não substituem essa evidência.
+
 ## Recuperação PR57 autorizada — merge pelo agente (17/11/2026)
 
 Novo pedido autoriza otimizar Android, corrigir PR57 e fazer merge somente
 após todos os gates remotos no head final, sem bypass. Esta autorização
 substitui as reservas anteriores de merge pelo usuário. Plano/provas em
 [ANDROID_PR57_RECOVERY.md](ANDROID_PR57_RECOVERY.md).
+
+Seguimento run119: macOS passou; Windows falhou só na asserção de alias do
+diretório temporário (corrigida com resolve). Android passou diagnóstico/API36,
+mas Tesseract não leu botões raster. Observer localiza PNGs ativos e recusa
+alvos ausentes/desabilitados/duplicados; gray3× lê os pequenos rótulos de toque
+com reprojeção das caixas. Loja exige saída visual do lobby. Sparse checkout
+inclui recursos necessários e tem regressão. Automação117/0, Ruff/actionlint
+aprovados. Smoke Linux completo e todos os gates do novo SHA ainda pendentes.
+
+O smoke estrito da loja revelou Back duplicado após navegação lenta. Gate300ms
+agora renovado ao concluir handler; cenaSlowGame400ms RED27/2→GREEN28/0.
+Faixa8suítes/787checks aprovada em execução host; tentativa sandbox anterior
+falhou por CA nativa e não conta como PASS. Rastreio temporário removido;
+APK final em reexportação, exigindo novo smoke antes do push. Revisão semP1/P2.
+
+Candidato final e174f1dc reexportado/inspecionado. Observer agora inclui OK nativo
+da pausa, escalaHUD800×500 e separação dos passesOCR.119testesCI/17,857s,
+Ruff/actionlint/diffOK. Smoke completo com Tesseract Ubuntu24 no AVD1280×800
+continua em curso; não usar tentativas v1/v2/v3 interrompidas como PASS final.
+
+v4 passou SOLO/câmera/pausa/Back/Home, mas OCR não leu Resume visível.
+Fallback de retomada detecta região clara e exige textoOCR no crop com contraste,
+sem ponto fixo.121testesCI/17,909s e lint aprovados; rodadaLinuxv5 emcurso,
+mesmoAPK e174. v4 também não conta como PASS completo.
 
 Correções locais: fixtures Android no checkout limpo; Git Bash explícito e
 captura de argumentos portável no Windows; registro do SDK/emulador e AVD
