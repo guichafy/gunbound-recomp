@@ -1,5 +1,12 @@
 # Entregas e próximos trabalhos
 
+## APK de teste nas releases do GitHub
+
+- [x] Preparar publicação conjunta de macOS, Windows e Android de teste após os gates da main.
+- [x] Vincular o APK público à inspeção e aos smokes nos emuladores API 24 e API 36.
+- Acompanhar aceite físico e atualização com chave persistente na issue #56.
+
+
 ## Recuperação PR57 e recursos Android (17/11/2026)
 
 Run126 passou fluxo completo API36/Linux x86; API24 boot interrompido por

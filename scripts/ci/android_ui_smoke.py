@@ -682,6 +682,7 @@ def main():
             (args.output/'failure-logcat.txt').write_text(device.run('logcat','-d','--pid='+device.log_pid))
         raise
     result=dict(schema=1,apk_sha256=digest,version=args.version,app_id=args.app_id,
+                android_api=int(device.run('shell','getprop','ro.build.version.sdk').strip()),
                 executed_abi=device.run('shell','getprop','ro.product.cpu.abi').strip(),
                 kind='diagnostic' if args.diagnostic else 'final-ui',status='passed',results=report,
                 observations=device.observations)

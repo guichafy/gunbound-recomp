@@ -1,5 +1,11 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+As releases da main oferecem os ZIPs macOS e Windows e o APK Android de teste
+do mesmo CI. O download público traz o sufixo Android-Test.apk. O publisher
+verifica a inspeção e os dois relatórios de smoke antes de criar o rascunho.
+O caminho de distribuição com chave persistente usa o aceite físico da #56.
+
+
 O [run 128](https://github.com/guichafy/gunbound-recomp/actions/runs/44199581353) falhou antes do boot da API 36. O QEMU tentou conectar o kernel e o Logcat simultaneamente a stdio. Os runs 126 e 127 passaram o fluxo do candidato na API 36. O run 127 chegou ao prazo de 300 s na API 24, antes da instalação. Para localizar a falha, o runner grava o console serial apenas na API 24, registra cada consulta de prontidão em boot-polls.jsonl e consulta transporte, propriedades e Logcat por ADB antes de encerrar o emulador que excedeu o prazo. A causa da falha original na API 24 ainda depende das evidências do guest.
 
 Run127/headb8b6e543 confirmou falha de bootAPI24 até o prazo300s; API36 voltou

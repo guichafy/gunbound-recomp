@@ -1,5 +1,14 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## APK de teste nas releases do GitHub — REQ-ANDROID-V1
+
+A partir da 0.25.0, cada release da main deve oferecer os ZIPs macOS e Windows,
+o APK Android de teste identificado pelo nome e os checksums dos três pacotes.
+O CI deve usar os bytes aprovados no mesmo run nas APIs 24 e 36 e publicar o
+rascunho somente após completar os uploads. O modo de assinatura persistente
+continua exigindo seu aceite físico. A distribuição atual é por GitHub Releases.
+
+
 ## Recuperação Android PR57 — REQ-ANDROID-V1 (17/11/2026)
 
 Pedido atual autoriza otimizar recursos Android, corrigir as falhas da CI e

@@ -9,18 +9,16 @@ o diagnóstico passou48tiros/66mapas/22JEWEL/UI3. APKs exatos, capturas e limite
 em [validação local](android-v1/local-validation.md). CI remota e aceite físico
 continuam pendentes.
 
-O usuário aceitou o teste no emulador em15/11/2026. A branch de fechamento é
-`codex/android-v1`; PR e merge serão feitos por ele. As pendências futuras de
-distribuição estável, CI, atualização e aparelho estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56),
-e a melhoria de HUD na [issue #55](https://github.com/guichafy/gunbound-recomp/issues/55).
-O pedido posterior dispensa chave de distribuição nesta fase: PR e main geram
-APK de teste com assinatura automática, sem secrets. O artifact se chama
-`android-test-candidates-not-for-distribution`; instale `candidate.apk`, cujo
-nome Android é **Gunbound Recomp Test**. O Android exige assinatura mesmo fora
-da loja ([documentação](https://developer.android.com/studio/publish/app-signing));
-ela já é feita pelo exportador, sem configuração manual. Entre builds a chave
-efêmera muda: pode ser necessário desinstalar a versão anterior, perdendo os
-dados desse app de teste. Não há garantia de update conservando perfil ainda.
+Em [GitHub Releases](https://github.com/guichafy/gunbound-recomp/releases), baixe
+**Gunbound-Recomp-VERSÃO-Android-Test.apk** para instalar o jogo. O SHA-256 está
+em `SHA256SUMS`, junto aos checksums dos ZIPs macOS e Windows. O APK de teste
+usa o identificador `com.chafy.gunboundrecomp.ci` e uma chave efêmera. Se o
+Android recusar a atualização por diferença de assinatura, desinstalar o app
+anterior apaga seu perfil local.
+
+A primeira entrega passou o smoke nas APIs 24 e 36. Testes em aparelho físico e
+distribuição com chave persistente estão na [issue #56](https://github.com/guichafy/gunbound-recomp/issues/56).
+O artifact dos PRs contém o mesmo arquivo de instalação com o nome `candidate.apk`.
 
 Use Python 3.12 ou mais recente, Godot **4.7.2** em `/Applications/Godot.app`,
 Xcode Command Line Tools (`swiftc` para OCR nativo) e um SDK Android instalado.
@@ -164,15 +162,11 @@ satisfaz esse gate. Manifesto Android schema 2 registra `godot:"4.7.2"` do pin,
 `final_x86_64`, conservando `arm64_acceptance:"manual_gate_required"`.
 O JSON não transforma tentativa adb em prova de tiro ou aceite físico.
 
-Publicação nova é atômica: dois ZIPs desktop+APK, com seus manifestos/sidecars
-(nove entradas internas), e atestado ARM64 **separado** ligado a run/commit/SHA.
-Publisher consulta reviews da API e confere environment/reviewer/relatório antes
-de qualquer escrita. Só release já publicada com tag/commit/layout histórico
-reconhecidos tem retry read-only. `ANDROID_PUBLICATION_ENABLED` ausente mantém
-nova publicação desligada; habilitação, chave persistente, secrets, environment,
-reviewers e required checks são implantação externa ainda não autorizada/executada.
+A publicação padrão ocorre após um push na main com todos os builds aprovados.
+O publisher confere os manifestos desktop, a inspeção do APK de teste e os
+relatórios das APIs 24 e 36 contra o SHA-256 dos bytes a publicar. O rascunho
+só é publicado depois do envio dos dois ZIPs, do APK e de SHA256SUMS.
 
-Continuam pendentes CI real PR/fork/main, assinatura/update persistentes, aparelho
-ARM64 de teste com SOLO/JEWEL apenas por toque, multitouch, áudio, lifecycle,
-desempenho e aceite do APK exato. Nenhuma dessas provas é substituída por testes
-Python ou pelo diagnóstico interno 48/66/22.
+O modo com `ANDROID_PUBLICATION_ENABLED=true` publica o APK de distribuição
+após verificar o aceite físico ARM64 vinculado a run, commit e SHA. Ele requer
+chave persistente, secrets, environment e reviewers configurados.
