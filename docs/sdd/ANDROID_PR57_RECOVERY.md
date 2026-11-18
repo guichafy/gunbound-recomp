@@ -367,3 +367,16 @@ kernel ou logcat do guest, portanto não comprova a causa. Acrescentar apenas
 não alterar RAM, imagem, backend, prazo ou gate.11testes da ferramenta aprovados.
 macOS foi cancelado por falta de capacidade do runner hospedado, segundo as
 anotações oficiais, e precisa reexecução no SHA final.
+
+## Boot do Android 7 no run 129
+
+O candidato passou na API 36. Na API 24, o console serial registrou aos 0,76 s
+uma página inválida com PFN 0x12ec01 durante a alocação DMA do framebuffer
+goldfish. Com 4096 MiB de RAM, o mapa do PC virtual colocou 1 GiB acima da
+fronteira de 4 GiB. Aos 12,7 s houve kernel panic em goldfish_dma_mmap ao
+iniciar SystemUI. O transporte ADB ainda reportava device, mas consultas de
+propriedades e Logcat expiraram. O APK ainda não tinha sido instalado.
+
+O próximo ensaio varia apenas a RAM do AVD legado para 2048 MiB, permitindo
+que o QEMU mapeie toda a RAM abaixo da janela PCI. O gate requer o boot e o
+fluxo completo do candidato. [Execução com as evidências originais](https://github.com/guichafy/gunbound-recomp/actions/runs/44202553113/job/134460785386).
