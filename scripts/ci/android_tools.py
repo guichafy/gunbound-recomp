@@ -173,8 +173,11 @@ def boot(root: Path, tools: dict, api: int) -> None:
     config = avd_home / (name+'.avd/config.ini')
     values=dict(line.split('=',1) for line in config.read_text(encoding='utf-8').splitlines()
                 if '=' in line and not line.lstrip().startswith('#'))
+    # The API 24 goldfish framebuffer uses 32-bit DMA. Keep its guest RAM
+    # below the PC PCI hole so that framebuffers fit in that address space.
+    ram_mib = 2048 if api == 24 else 4096
     values.update({'hw.keyboard':'no','hw.lcd.width':'1280','hw.lcd.height':'800',
-                   'hw.lcd.density':'160','hw.initialOrientation':'landscape','hw.ramSize':'4096'})
+                   'hw.lcd.density':'160','hw.initialOrientation':'landscape','hw.ramSize':str(ram_mib)})
     config.write_text(''.join(f'{key}={value}\n' for key,value in values.items()),encoding='utf-8')
     # The x86 PC machine also creates a PS/2 controller independently of
     # hw.keyboard. Suppress its keyboard port for this touchscreen fixture.

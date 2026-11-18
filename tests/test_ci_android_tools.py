@@ -99,6 +99,7 @@ class AndroidToolsTests(unittest.TestCase):
             self.assertEqual(config.count('hw.lcd.width='),1)
             self.assertIn('hw.lcd.width=1280\n',config)
             self.assertIn('abi.type=x86_64\n',config)
+            self.assertIn('hw.ramSize=2048\n',config)
 
     def test_boot_uses_modern_swiftshader_backend_and_confirms_android_ready(self):
         import android_tools
@@ -114,6 +115,7 @@ class AndroidToolsTests(unittest.TestCase):
                 android_tools.boot(root,tools,36)
                 args=popen.call_args.args[0]
                 self.assertEqual(args[args.index('-gpu')+1],'swangle','Linux swiftshader still uses legacy GLES; select ANGLE explicitly')
+                self.assertIn('hw.ramSize=4096\n', (root / '.tools/android/avd/gunbound-ci-api36.avd/config.ini').read_text())
                 self.assertNotIn('-show-kernel',args)
                 self.assertNotIn('-logcat',args)
                 self.assertEqual(args[args.index('-qemu')+1:],['-append','i8042.nokbd'],'The x86 PC keyboard must not impersonate phone hardware')
