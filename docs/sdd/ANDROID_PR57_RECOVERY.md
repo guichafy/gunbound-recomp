@@ -388,3 +388,10 @@ inteira perdeu o rótulo do botão amarelo. Reaproveitar a leitura de contraste
 dos botões claros permitiu identificar uma única ocorrência de Save changes
 no quadro real, em (950,688), com 105×16 pixels, usando o Tesseract Linux.
 O smoke continua exigindo salvar e reabrir o aplicativo para provar persistência.
+
+O run 131 passou edição, persistência, SOLO e chegou à retomada de JEWEL na
+API 24. O último PNG tinha cabeçalho e dimensões válidos, mas CRC incorreto
+em IDAT. A mesma imagem falhou com Pillow e libpng/Tesseract Linux.
+O observador agora verifica o PNG antes de enviá-lo ao OCR, preserva as
+capturas inválidas e tenta no máximo três leituras da tela. Só uma captura
+válida pode satisfazer a asserção. O teste cobre corrupção transitória e persistente.

@@ -8,6 +8,27 @@ PATH=ROOT/'scripts/ci/android_native_ui.py'
 FIXTURE=ROOT/'tests/fixtures/android_ui/lobby_api36.png'
 
 class NativeUITests(unittest.TestCase):
+    def test_corrupt_idat_is_recaptured_before_ocr(self):
+        import tempfile
+        from unittest.mock import Mock
+        spec = importlib.util.spec_from_file_location('ui_test', ROOT/'scripts/ci/android_ui_smoke.py')
+        ui = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ui)
+        good = FIXTURE.read_bytes()
+        damaged = bytearray(good)
+        damaged[damaged.index(b'IDAT') + 4] ^= 1
+        with tempfile.TemporaryDirectory() as temp:
+            device = object.__new__(ui.Device)
+            device.output = Path(temp)
+            device.run = Mock(side_effect=[bytes(damaged), good])
+            self.assertEqual(device.screenshot('jewel'), good)
+            self.assertEqual((device.output/'jewel-invalid-1.png').read_bytes(), damaged)
+            self.assertTrue(all(c.args == ('exec-out','screencap','-p') for c in device.run.call_args_list))
+            device.run = Mock(return_value=bytes(damaged))
+            with self.assertRaisesRegex(ValueError, 'three invalid screenshots'):
+                device.screenshot('jewel')
+            self.assertEqual(device.run.call_count, 3)
+
     def test_resuming_options_waits_past_the_stale_popup_frame_before_back(self):
         import tempfile
         from unittest.mock import patch

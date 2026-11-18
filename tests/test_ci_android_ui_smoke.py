@@ -22,7 +22,7 @@ class AndroidUISmokeTests(unittest.TestCase):
         from unittest.mock import patch
         spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
         m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
-        png=b'\x89PNG\r\n\x1a\n'+b'\x00\x00\x00\rIHDR'+struct.pack('>II',1280,800)
+        png=(Path(__file__).parent/'fixtures/android_ui/active_controls_api36.png').read_bytes()
         device=object.__new__(m.Device);device.observations=[];device.run=lambda *args,**kwargs:png
         with tempfile.TemporaryDirectory() as temp,patch.object(m.subprocess,'check_output',return_value='CAMERA'),patch.object(m,'enhanced_ocr',return_value='ON'),patch.object(m,'control_targets',return_value=[]):
             device.output=Path(temp)
@@ -158,7 +158,7 @@ class AndroidUISmokeTests(unittest.TestCase):
         from unittest.mock import patch
         spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
         m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
-        png=b'\x89PNG\r\n\x1a\n'+b'\x00\x00\x00\rIHDR'+struct.pack('>II',2400,1080)
+        png=(Path(__file__).parent/'fixtures/android_ui/active_controls_api36.png').read_bytes()
         device=object.__new__(m.Device);device.observations=[]
         device.run=lambda *args,**kwargs:png
         with tempfile.TemporaryDirectory() as temp,patch.object(m.subprocess,'check_output',side_effect=['CAMERA ON\nPAUSE','CAMERA\nPAUSE']) as ocr,patch.object(m.time,'sleep'),patch.object(m,'enhanced_ocr',return_value=''),patch.object(m,'native_targets',return_value=[]),patch.object(m,'control_targets',return_value=[]):
