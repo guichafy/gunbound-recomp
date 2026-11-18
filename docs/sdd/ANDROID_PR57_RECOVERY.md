@@ -380,3 +380,11 @@ propriedades e Logcat expiraram. O APK ainda não tinha sido instalado.
 O próximo ensaio varia apenas a RAM do AVD legado para 2048 MiB, permitindo
 que o QEMU mapeie toda a RAM abaixo da janela PCI. O gate requer o boot e o
 fluxo completo do candidato. [Execução com as evidências originais](https://github.com/guichafy/gunbound-recomp/actions/runs/44202553113/job/134460785386).
+
+Com 2048 MiB a API 24 concluiu o boot no run 130. O mesmo candidato abriu loja
+e configurações, aceitou o apelido Android42 e fechou o teclado. A captura
+save-profile.png mostra o botão Save changes e o nome editado. O OCR da tela
+inteira perdeu o rótulo do botão amarelo. Reaproveitar a leitura de contraste
+dos botões claros permitiu identificar uma única ocorrência de Save changes
+no quadro real, em (950,688), com 105×16 pixels, usando o Tesseract Linux.
+O smoke continua exigindo salvar e reabrir o aplicativo para provar persistência.

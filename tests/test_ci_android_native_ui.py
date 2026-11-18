@@ -72,10 +72,10 @@ class NativeUITests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'screen.png';path.write_bytes((ROOT/'tests/fixtures/android_ui/resume_api36.png').read_bytes())
             with patch.object(ui.subprocess,'check_output',return_value=header+row):
-                found=ui.resume_targets(path,ui.RESUME_PATTERN)
+                found=ui.bright_button_targets(path,ui.RESUME_PATTERN)
                 self.assertEqual(found,[dict(left=609,top=358,width=60,height=14,text='Resume')])
-            with patch.object(ui.subprocess,'check_output',return_value=header):self.assertEqual(ui.resume_targets(path,ui.RESUME_PATTERN),[])
-            self.assertEqual(ui.resume_targets(path,'OK'),[])
+            with patch.object(ui.subprocess,'check_output',return_value=header):self.assertEqual(ui.bright_button_targets(path,ui.RESUME_PATTERN),[])
+            self.assertEqual(ui.bright_button_targets(path,'OK'),[])
 
     def test_native_options_ok_is_located_and_combines_with_observed_popup_text(self):
         m=self.module()

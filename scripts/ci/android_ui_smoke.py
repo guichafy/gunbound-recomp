@@ -26,6 +26,7 @@ from android_package import ERRORS, diagnostic_report
 
 OPTIONS_POPUP_PATTERN = r'(?s)(?=.*(?:Configuration|SFX|Sound|Aiming|Scroll))(?=.*\bOK\b)'
 CAMERA_ON_PATTERN = r'CAMERA\s+ON|C[ÂA]MERA\s+ATIVA'
+SAVE_PATTERN = r'Save changes|Salvar altera[çc][õo]es'
 RESUME_PATTERN = r'Resume|Retomar|Continuar|Continue'
 CONTROL_OCR_CACHE = {}
 
@@ -48,8 +49,8 @@ def native_targets(path: Path,pattern: str):
     with Image.open(path) as pixels:return targets(pixels,pattern)
 
 
-def resume_targets(path: Path,pattern: str):
-    if pattern!=RESUME_PATTERN:return []
+def bright_button_targets(path: Path,pattern: str):
+    if pattern not in (RESUME_PATTERN,SAVE_PATTERN):return []
     from PIL import Image,ImageOps
     from android_native_ui import bright_panels
     found=[]
@@ -300,7 +301,7 @@ class Device:
             if absent:
                 text+='\n'+'\n'.join(target['text'] for target in native_targets(path,absent))
             if pattern==RESUME_PATTERN and not re.search(pattern,text,re.I):
-                text+='\n[contrast OCR]\n'+'\n'.join(target['text'] for target in resume_targets(path,pattern))
+                text+='\n[contrast OCR]\n'+'\n'.join(target['text'] for target in bright_button_targets(path,pattern))
             controls=[]
             if pattern and ('CAMERA' in pattern.upper() or not re.search(pattern,text,re.I)):
                 controls=control_targets(path,pattern,include_camera_state=True)
@@ -341,7 +342,7 @@ class Device:
                 try:target=unscale_target(text_target(enhanced_ocr(self.output/(label+'.png'),tsv=True),pattern),3)
                 except ValueError as error:
                     if 'missing' not in str(error):raise
-                    found=resume_targets(self.output/(label+'.png'),pattern)
+                    found=bright_button_targets(self.output/(label+'.png'),pattern)
                     if not found:found=control_targets(self.output/(label+'.png'),pattern)
                     if not found:raise
                     if len(found)>1:raise ValueError('Contrast OCR target ambiguous') from error
@@ -608,7 +609,7 @@ def final_ui(device: Device,apk: Path,app: str):
     device.run('shell','input','keyevent','KEYCODE_BACK')
     device.wait_keyboard(False)
     nickname_pattern=r'\b'+re.escape(nickname)+r'\b'
-    device.tap_text(r'Save changes|Salvar altera[çc][õo]es',label='save-profile',wait_timeout=15);device.capture('profile-saved',nickname_pattern)
+    device.tap_text(SAVE_PATTERN,label='save-profile',wait_timeout=15);device.capture('profile-saved',nickname_pattern)
     device.launch(app);device.dismiss_system_tips('profile-relaunch-tip');device.capture('profile-persisted',nickname_pattern)
     for mode in ('solo','jewel'):
         device.tap_text(r'CREATE',label=mode+'-open-room');device.capture(mode+'-room',r'START')
