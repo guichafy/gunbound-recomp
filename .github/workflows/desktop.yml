@@ -288,12 +288,20 @@ jobs:
             builds/dist/*.apk.sha256
           if-no-files-found: error
           retention-days: 14
+      - name: Collect smoke reports for the GitHub release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED != 'true'
+        run: |
+          cp .tools/android-reports/final-api24/report.json builds/android/smoke-api24.json
+          cp .tools/android-reports/final-api36/report.json builds/android/smoke-api36.json
       - name: Upload installable test APKs for PR and main
         if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED != 'true')
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: android-test-candidates-not-for-distribution
-          path: builds/android/*.apk
+          path: |
+            builds/android/*.apk
+            builds/android/candidate.inspection.json
+            builds/android/smoke-api*.json
           if-no-files-found: error
           retention-days: 14
       - name: Preserve Android evidence even on failure
@@ -345,8 +353,12 @@ jobs:
           retention-days: 14
 
   release:
-    name: Publish verified desktop release
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ANDROID_PUBLICATION_ENABLED == 'true'
+    name: Publish verified GitHub release
+    if: >-
+      !cancelled() && github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+      needs.version.result == 'success' && needs.desktop.result == 'success' && needs.android.result == 'success' &&
+      ((vars.ANDROID_PUBLICATION_ENABLED == 'true' && needs.android-acceptance.result == 'success') ||
+       (vars.ANDROID_PUBLICATION_ENABLED != 'true' && needs.android-acceptance.result == 'skipped'))
     needs: [version, desktop, android, android-acceptance]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -369,14 +381,30 @@ jobs:
           merge-multiple: true
           path: release-assets
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        if: vars.ANDROID_PUBLICATION_ENABLED == 'true'
         with:
           name: android-package
           path: release-assets
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        if: vars.ANDROID_PUBLICATION_ENABLED == 'true'
         with:
           name: android-acceptance
           path: acceptance
+      - name: Download tested Android candidate
+        if: vars.ANDROID_PUBLICATION_ENABLED != 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: android-test-candidates-not-for-distribution
+          path: test-candidate
+      - name: Publish desktop ZIPs and the test APK
+        if: vars.ANDROID_PUBLICATION_ENABLED != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ needs.version.outputs.version }}
+          RELEASE_SHA: ${{ needs.version.outputs.sha }}
+        run: python scripts/ci/publish.py --version "$RELEASE_VERSION" --sha "$RELEASE_SHA" --test-candidate test-candidate
       - name: Verify manifests and publish draft only after all uploads
+        if: vars.ANDROID_PUBLICATION_ENABLED == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           ANDROID_TRUSTED_REVIEWERS: ${{ vars.ANDROID_TRUSTED_REVIEWERS }}

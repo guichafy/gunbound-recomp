@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publish three verified packages after exact-APK ARM64 approval; failures stay draft."""
+"""Publish verified desktop packages with the tested or device-approved Android APK."""
 import argparse
 import hashlib
 import json
@@ -12,11 +12,14 @@ import urllib.parse
 import urllib.request
 
 
-def validate_assets(folder, version, sha):
+def validate_assets(folder, version, sha, *, include_android=True):
     if not re.fullmatch(r'\d+\.\d+\.\d+', version) or not re.fullmatch(r'[0-9a-f]{40}', sha):
         raise ValueError('Invalid version or commit')
     assets = []
-    for platform, suffix in [('macos', 'macOS'), ('windows', 'Windows-x86_64'), ('android', 'Android')]:
+    platforms = [('macos', 'macOS'), ('windows', 'Windows-x86_64')]
+    if include_android:
+        platforms.append(('android', 'Android'))
+    for platform, suffix in platforms:
         extension = '.apk' if platform == 'android' else '.zip'
         archive = folder / f'Gunbound-Recomp-{version}-{suffix}{extension}'
         manifest = archive.with_suffix('.json')
@@ -48,6 +51,26 @@ def validate_assets(folder, version, sha):
     return assets
 
 
+def validate_test_candidate(folder, version):
+    apk = folder / 'candidate.apk'
+    inspection = json.loads(apk.with_suffix('.inspection.json').read_text())
+    with apk.open('rb') as source:
+        digest = hashlib.file_digest(source, 'sha256').hexdigest()
+    app = 'com.chafy.gunboundrecomp.ci'
+    expected = {'mode': 'candidate', 'package_id': app, 'version': version,
+                'sha256': digest, 'abis': ['arm64-v8a', 'x86_64'], 'min_sdk': 24, 'target_sdk': 36}
+    if any(inspection.get(key) != value for key, value in expected.items()):
+        raise ValueError('Test APK differs from the inspected candidate')
+    for api in (24, 36):
+        report = json.loads((folder / f'smoke-api{api}.json').read_text())
+        expected_report = {'kind': 'final-ui', 'status': 'passed', 'app_id': app,
+                           'apk_sha256': digest, 'version': version, 'executed_abi': 'x86_64',
+                           'android_api': api}
+        if any(report.get(key) != value for key, value in expected_report.items()):
+            raise ValueError(f'Test APK has no matching API {api} smoke report')
+    return apk
+
+
 class GitHub:
     def __init__(self, repo, token):
         self.base = f'https://api.github.com/repos/{repo}'
@@ -70,11 +93,14 @@ class GitHub:
             raise
 
 
-def publish(api, folder, version, sha, acceptance=None, run_id=None, trusted_reviewers=None):
+def publish(api, folder, version, sha, acceptance=None, run_id=None, trusted_reviewers=None, *, test_candidate=None):
     if not re.fullmatch(r'\d+\.\d+\.\d+', version) or not re.fullmatch(r'[0-9a-f]{40}', sha):
         raise ValueError('Invalid version or commit')
     desktop_names = {f'Gunbound-Recomp-{version}-{suffix}.zip' for suffix in ('macOS','Windows-x86_64')}
-    expected_names = desktop_names | {f'Gunbound-Recomp-{version}-Android.apk', 'SHA256SUMS'}
+    test_mode = test_candidate is not None
+    android_label = 'Android-Test' if test_mode else 'Android'
+    apk_name = f'Gunbound-Recomp-{version}-{android_label}.apk'
+    expected_names = desktop_names | {apk_name, 'SHA256SUMS'}
     tag = f'v{version}'
     release = api.request('GET', f'/releases/tags/{tag}')
     if not release:
@@ -102,23 +128,31 @@ def publish(api, folder, version, sha, acceptance=None, run_id=None, trusted_rev
         legacy_six = set()
         for name in desktop_names:
             legacy_six.update((name, name.removesuffix('.zip')+'.json', name+'.sha256'))
-        if names not in (expected_names, desktop_names | {'SHA256SUMS'}, legacy_six):
+        allowed = (expected_names,) if test_mode else (expected_names, desktop_names | {'SHA256SUMS'}, legacy_six)
+        if names not in allowed:
             raise ValueError('Published release is incomplete; refusing overwrite')
         print('Release already published:', release['html_url'])
         return
-    # Every new/draft release must satisfy the nine-entry Android contract.
-    # Only GETs above are permitted before local validation AND trusted review.
-    validated = validate_assets(folder, version, sha)
-    archives = [path for path in validated if path.suffix in ('.zip','.apk')]
-    if acceptance is None or run_id is None or not trusted_reviewers:
-        raise ValueError('Android acceptance and trusted review history required')
-    import sys
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from android_acceptance import fetch_acceptance
-    manifest = json.loads((folder / f'Gunbound-Recomp-{version}-Android.json').read_text())
-    verified_acceptance = fetch_acceptance(api,manifest,int(run_id),set(trusted_reviewers))
-    if acceptance != verified_acceptance:
-        raise ValueError('Android acceptance artifact differs from trusted API history')
+    validated = validate_assets(folder, version, sha, include_android=not test_mode)
+    archives = [path for path in validated if path.suffix in ('.zip', '.apk')]
+    if test_mode:
+        archives.append(validate_test_candidate(test_candidate, version))
+        qa_note = ('Android test build with an ephemeral signing key. Installing a later build may '
+                   'require uninstalling the previous app and clearing its local profile. '
+                   'This APK passed the API 24 and API 36 emulator smoke tests.')
+    else:
+        if acceptance is None or run_id is None or not trusted_reviewers:
+            raise ValueError('Android acceptance and trusted review history required')
+        import sys
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from android_acceptance import fetch_acceptance
+        manifest = json.loads((folder / apk_name).with_suffix('.json').read_text())
+        verified = fetch_acceptance(api, manifest, int(run_id), set(trusted_reviewers))
+        if acceptance != verified:
+            raise ValueError('Android acceptance artifact differs from trusted API history')
+        qa_note = (f"ARM64 QA: {verified['reviewer']}; APK SHA256 {manifest['sha256']}; "
+                   f"device {verified['device']}; evidence {verified['evidence_url']}")
+    names_by_path = {path: apk_name if path.suffix == '.apk' else path.name for path in archives}
     if not ref:
         ref = api.request('POST', '/git/refs', {'ref': f'refs/tags/{tag}', 'sha': sha})
         if ref['object']['type'] != 'commit' or ref['object']['sha'] != sha:
@@ -130,12 +164,9 @@ def publish(api, folder, version, sha, acceptance=None, run_id=None, trusted_rev
                  'Build manifests and individual checksums remain in the desktop workflow artifacts.\n'
                  'The Source code archives are repository snapshots. '
                  'Headless smoke does not replace visual/audio QA.')
-        notes += ('\n\nARM64 QA: ' + verified_acceptance['reviewer'] + '; APK SHA256 ' + manifest['sha256']
-                  + '; device ' + verified_acceptance['device'] + '; evidence ' + verified_acceptance['evidence_url'])
+        notes += '\n\n' + qa_note
         release = api.request('POST', '/releases', {'tag_name': tag, 'target_commitish': sha,
                               'name': f'Gunbound Recomp {version}', 'body': notes, 'draft': True, 'generate_release_notes': True})
-    qa_note=('ARM64 QA: ' + verified_acceptance['reviewer'] + '; APK SHA256 ' + manifest['sha256']
-             + '; device ' + verified_acceptance['device'] + '; evidence ' + verified_acceptance['evidence_url'])
     if qa_note not in release.get('body',''):
         body=re.sub(r'(?m)^ARM64 QA:.*$', '', release.get('body','')).rstrip()+'\n\n'+qa_note
         api.request('PATCH',f"/releases/{release['id']}",{'body':body})
@@ -144,18 +175,23 @@ def publish(api, folder, version, sha, acceptance=None, run_id=None, trusted_rev
     with tempfile.TemporaryDirectory(prefix='gunbound-release-') as temporary:
         checksum = Path(temporary) / 'SHA256SUMS'
         lines = []
+        expected_digests = {}
         for archive in archives:
             with archive.open('rb') as source:
                 digest = hashlib.file_digest(source, 'sha256').hexdigest()
-            lines.append(f'{digest}  {archive.name}\n')
+            expected_digests[names_by_path[archive]] = 'sha256:' + digest
+            lines.append(f'{digest}  {names_by_path[archive]}\n')
         checksum.write_bytes(''.join(lines).encode('utf-8'))
+        expected_digests[checksum.name] = 'sha256:' + hashlib.sha256(checksum.read_bytes()).hexdigest()
         for asset in release['assets']:
             api.request('DELETE', f"/releases/assets/{asset['id']}")
         upload = release['upload_url'].split('{')[0]
         for path in [*archives, checksum]:
-            api.request('POST', upload + '?name=' + urllib.parse.quote(path.name), path.read_bytes(), True)
+            api.request('POST', upload + '?name=' + urllib.parse.quote(names_by_path.get(path, path.name)), path.read_bytes(), True)
     final = api.request('GET', f"/releases/{release['id']}")
-    if {a['name'] for a in final['assets']} != expected_names:
+    uploaded = {asset['name']: asset.get('digest') for asset in final['assets']
+                if asset.get('state') == 'uploaded'}
+    if uploaded != expected_digests or len(final['assets']) != len(expected_names):
         raise ValueError('Release upload incomplete; draft preserved')
     api.request('PATCH', f"/releases/{release['id']}", {'draft': False, 'make_latest': 'legacy'})
     ref = api.request('GET', f'/git/ref/tags/{tag}')
@@ -169,12 +205,14 @@ def main():
     parser.add_argument('--version', required=True)
     parser.add_argument('--sha', required=True)
     parser.add_argument('--folder', type=Path, default=Path('release-assets'))
-    parser.add_argument('--acceptance', type=Path)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument('--acceptance', type=Path)
+    mode.add_argument('--test-candidate', type=Path)
     args = parser.parse_args()
     acceptance = json.loads(args.acceptance.read_text()) if args.acceptance else None
     publish(GitHub(os.environ['GITHUB_REPOSITORY'], os.environ['GH_TOKEN']), args.folder, args.version, args.sha, acceptance,
             int(os.environ['GITHUB_RUN_ID']) if os.environ.get('GITHUB_RUN_ID') else None,
-            set(filter(None, os.environ.get('ANDROID_TRUSTED_REVIEWERS','').split(','))))
+            set(filter(None, os.environ.get('ANDROID_TRUSTED_REVIEWERS','').split(','))), test_candidate=args.test_candidate)
 
 
 if __name__ == '__main__':

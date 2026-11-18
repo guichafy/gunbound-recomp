@@ -45,7 +45,8 @@ class ReleaseAPI:
             if not binary or not isinstance(data, bytes):
                 raise AssertionError('upload must contain file bytes')
             self.uploads[name] = data
-            self.release['assets'].append({'id': len(self.writes), 'name': name})
+            self.release['assets'].append({'id': len(self.writes), 'name': name, 'state': 'uploaded',
+                                           'digest': 'sha256:' + hashlib.sha256(data).hexdigest()})
             return self.release['assets'][-1]
         elif method == 'DELETE' and path.startswith('/releases/assets/'):
             asset_id = int(path.rsplit('/', 1)[1])
@@ -104,6 +105,45 @@ class PublishTests(unittest.TestCase):
             return original(method,path,data,binary)
         api.request=request
         return validate_reviews([review],manifest,123,{'trusted'})
+
+    def test_release_uses_exact_test_apk_and_requires_both_emulator_results(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            candidate = root / 'android'
+            desktop = root / 'desktop'
+            candidate.mkdir()
+            desktop.mkdir()
+            self.packages(desktop)
+            apk = candidate / 'candidate.apk'
+            apk.write_bytes(b'APK verified in both emulators')
+            (candidate / 'diagnostic.apk').write_bytes(b'private diagnostic')
+            digest = hashlib.sha256(apk.read_bytes()).hexdigest()
+            app = 'com.chafy.gunboundrecomp.ci'
+            info = dict(package_id=app, mode='candidate', version='1.2.3', sha256=digest,
+                        abis=['arm64-v8a','x86_64'], min_sdk=24, target_sdk=36)
+            (candidate / 'candidate.inspection.json').write_text(json.dumps(info))
+            report = dict(kind='final-ui', status='passed', app_id=app, version='1.2.3',
+                          executed_abi='x86_64', apk_sha256=digest)
+            for level in (24, 36):
+                (candidate / f'smoke-api{level}.json').write_text(json.dumps(dict(report, android_api=level)))
+            minimum = candidate / 'smoke-api24.json'
+            api = ReleaseAPI()
+            for wrong in [dict(android_api=36), dict(status='failed'), dict(apk_sha256='b'*64)]:
+                minimum.write_text(json.dumps(dict(report, android_api=24) | wrong))
+                with self.assertRaisesRegex(ValueError, 'API 24'):
+                    self.module.publish(api, desktop, '1.2.3', 'a'*40, test_candidate=candidate)
+                self.assertFalse(api.writes)
+            minimum.write_text(json.dumps(dict(report, android_api=24)))
+            self.module.publish(api, desktop, '1.2.3', 'a'*40, test_candidate=candidate)
+            name = 'Gunbound-Recomp-1.2.3-Android-Test.apk'
+            self.assertEqual(api.uploads[name], apk.read_bytes())
+            self.assertIn(f'{digest}  {name}\n'.encode(), api.uploads['SHA256SUMS'])
+            self.assertEqual(len(api.uploads), 4)
+            self.assertNotIn('ARM64 QA:', api.release['body'])
+            self.assertFalse(api.release['draft'])
+            prior_writes = list(api.writes)
+            self.module.publish(api, desktop, '1.2.3', 'a'*40, test_candidate=candidate)
+            self.assertEqual(api.writes, prior_writes)
 
     def test_new_publication_is_atomic_three_packages_and_checksums(self):
         api=ReleaseAPI()
