@@ -33,7 +33,7 @@ CONTROL_OCR_CACHE = {}
 def ocr_output(args):
     # Software GL shares the runner CPUs. Tesseract's four OpenMP workers
     # otherwise compete with the emulator and can make a small UI read stall.
-    return subprocess.check_output(args,text=True,stderr=subprocess.DEVNULL,timeout=30,
+    return subprocess.check_output(args,text=True,timeout=30,
                                    env=os.environ|{'OMP_THREAD_LIMIT':'1'})
 
 
@@ -284,13 +284,26 @@ class Device:
         x,y=point(x,y,self.size,canvas)
         self.run('shell','input','tap',str(x),str(y))
 
+    def screenshot(self, label):
+        from PIL import Image
+        for attempt in range(1, 4):
+            payload = self.run('exec-out', 'screencap', '-p', raw=True)
+            try:
+                with Image.open(io.BytesIO(payload)) as image:
+                    image.verify()
+                self.size = png_size(payload)
+                return payload
+            except (OSError, SyntaxError, ValueError) as error:
+                (self.output / f'{label}-invalid-{attempt}.png').write_bytes(payload)
+                print(f'{label}: invalid capture {attempt}/3: {error}', file=sys.stderr)
+                if attempt == 3:
+                    raise ValueError(f'ADB returned three invalid screenshots for {label}') from error
+
     def capture(self,label,pattern=None,timeout=30,absent=None):
         deadline=time.monotonic()+timeout
         path=self.output/(label+'.png')
         while True:
-            screenshot=self.run('exec-out','screencap','-p',raw=True)
-            self.size=png_size(screenshot)
-            path.write_bytes(screenshot)
+            path.write_bytes(self.screenshot(label))
             text=ocr_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(path),'stdout','--psm','11'])
             (self.output/(label+'.txt')).write_text(text)
             if pattern and not re.search(pattern,text,re.I):
@@ -320,8 +333,7 @@ class Device:
 
     def read_tsv(self,label='target'):
         path=self.output/(label+'.png')
-        screenshot=self.run('exec-out','screencap','-p',raw=True)
-        self.size=png_size(screenshot);path.write_bytes(screenshot)
+        path.write_bytes(self.screenshot(label))
         if self.size[0]<self.size[1]:
             raise ValueError('Cannot locate Android UI before landscape render')
         tsv=ocr_output([os.environ.get('GUNBOUND_OCR','tesseract'),str(path),'stdout','--psm','11','tsv'])
