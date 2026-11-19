@@ -1,5 +1,13 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Timeout de instalação na API 24 (19/11/2026)
+
+O run 44475488246 da main falhou duas vezes no `adb install -r` da API 24,
+após boot e antes de abrir o jogo. A abordagem em validação seleciona
+`--no-streaming` nessa API e inclui a saída parcial no erro de timeout.
+O teste do mesmo APK nas duas APIs e a publicação pelo CI continuam
+obrigatórios. [Registro](ANDROID_PR57_RECOVERY.md#instalação-do-apk-na-api-24).
+
 ## Auditoria de força e dano dos 48 tiros (19/11/2026)
 
 [Auditoria e plano](SHOT_DAMAGE_AUDIT.md). Armor T1 contra Bigfoot em SOLO

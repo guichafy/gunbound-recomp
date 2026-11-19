@@ -1,5 +1,14 @@
 # Registro de decisões
 
+## Instalação do smoke na API 24 (19/11/2026)
+
+Selecionar `adb install --no-streaming -r` no emulador Android 7 após
+dois timeouts da instalação automática na main. O envio como arquivo usa
+o mesmo APK e passa pelo gerenciador de pacotes. A execução continua
+exigindo a conclusão dentro de 120 s e publica contexto e saída parcial
+da instalação ao falhar. A CI das duas APIs é o teste de eficácia.
+[Registro de recuperação](ANDROID_PR57_RECOVERY.md#instalação-do-apk-na-api-24).
+
 ## Auditoria de dano dos tiros — critério de comparação (19/11/2026)
 
 A auditoria adota o dano por componente e a perda efetiva de HP/escudo como

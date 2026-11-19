@@ -278,6 +278,24 @@ class Device:
             # the event, and a second Back could navigate twice.
             raise RuntimeError(f'adb {self.serial} failed ({error.returncode}):\n{output[-4000:]}') from None
 
+    def install(self, apk: Path) -> None:
+        api = self.run('shell', 'getprop', 'ro.build.version.sdk').strip()
+        # On Android 7, stage the exact APK before invoking Package Manager.
+        # The automatic install timed out twice on the minimum-API runner.
+        flags = ('--no-streaming',) if api == '24' else ()
+        mode = 'file transfer' if flags else 'automatic'
+        print(f'Installing {apk.name} on Android API {api} ({mode})', flush=True)
+        try:
+            self.run('install', *flags, '-r', str(apk))
+        except subprocess.TimeoutExpired as error:
+            output = error.output or ''
+            if isinstance(output, bytes):
+                output = output.decode('utf-8', errors='replace')
+            raise RuntimeError(
+                f'APK installation timed out on Android API {api} ({mode}) after {error.timeout} s.\n'
+                f'{output[-4000:]}'
+            ) from error
+
     def tap(self,x,y,canvas=(1280,800)):
         if self.size[0]<self.size[1]:
             raise ValueError('Cannot tap Android UI before landscape render')
@@ -570,7 +588,7 @@ class Device:
 
 
 def diagnostic(device: Device,apk: Path,app: str,token: str,version: str):
-    device.run('install','-r',str(apk))
+    device.install(apk)
     device.run('logcat','-c')
     device.launch(app)
     deadline=time.monotonic()+900
@@ -597,7 +615,7 @@ def final_ui(device: Device,apk: Path,app: str):
     # Distribution install -r keeps its persistent-key update contract.
     if app=='com.chafy.gunboundrecomp.ci' and ('package:'+app) in device.run('shell','pm','list','packages',app).splitlines():
         device.run('uninstall',app)
-    device.run('install','-r',str(apk))
+    device.install(apk)
     device.run('logcat','-c')
     device.launch(app)
     device.dismiss_system_tips()

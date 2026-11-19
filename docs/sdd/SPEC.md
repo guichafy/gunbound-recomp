@@ -1,5 +1,13 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Instalação do smoke Android 7 — REQ-ANDROID-V1 (19/11/2026)
+
+A instalação automatizada no emulador da API 24 usa a transferência do
+APK como arquivo antes de chamar o gerenciador de pacotes. O smoke exige
+instalação, UI e persistência bem-sucedidas do APK validado por hash nas duas
+APIs. O prazo de instalação e a condição de publicação permanecem os mesmos.
+[Plano de recuperação](ANDROID_PR57_RECOVERY.md#instalação-do-apk-na-api-24).
+
 ## Auditoria dos 48 tiros — força, dano e clima (19/11/2026)
 
 REQ-04/05/07/08/19/23–26/35–38/44/45/52 e REQ-JEWEL-46. A revisão cobre

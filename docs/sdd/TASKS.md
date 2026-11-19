@@ -1,5 +1,10 @@
 # Entregas e próximos trabalhos
 
+## Instalação do smoke na API 24 (19/11/2026)
+
+- [x] Confirmar o timeout em duas execuções e testar a seleção da instalação por arquivo apenas na API 24.
+- [ ] Confirmar os cinco checks do PR e o smoke da main, incluindo a publicação pelo CI.
+
 ## Auditoria de força e dano dos 48 tiros (19/11/2026)
 
 - [x] Inspecionar os 48 tiros, confrontar o DAT e os consumidores comuns pelo Ghidra e reproduzir o dano alto no Godot.

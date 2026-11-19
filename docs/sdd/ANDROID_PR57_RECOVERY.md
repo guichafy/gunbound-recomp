@@ -4,6 +4,26 @@ REQ-ANDROID-V1/A1–A8. Pedido atual autoriza corrigir, otimizar, enviar e fazer
 merge do PR57 após todos os gates. Substitui a reserva anterior de merge pelo
 usuário. Play Store, credenciais persistentes e redesenho continuam fora.
 
+## Instalação do APK na API 24
+
+O [run da main](https://github.com/guichafy/gunbound-recomp/actions/runs/44475488246)
+falhou em duas tentativas em `adb install -r`, com timeout de 120 s antes
+do primeiro lançamento. O primeiro artefato registra boot completo na API 24
+e o mesmo hash no candidato e no relatório aprovado da API 36. O log de
+falha localiza a operação travada. A subetapa interna do instalador ainda
+depende de confirmação.
+
+O fluxo da API 24 usa `adb install --no-streaming -r`. O ADB primeiro envia
+o APK como arquivo e depois chama o gerenciador de pacotes. A API 36
+continua usando a seleção automática do ADB. O smoke registra a rota e
+a saída parcial em caso de timeout, sem repetir a instalação. O APK
+mantém os bytes, a assinatura e as verificações de UI/persistência.
+[Implementação do ADB no AOSP](https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/client/commandline.cpp).
+
+- [x] Cobrir a escolha das duas rotas e o timeout com testes dirigidos.
+- [ ] Executar o smoke integral nas APIs 24 e 36 no PR e conferir os hashes.
+- [ ] Confirmar o build e o smoke do novo commit na main e a publicação do CI.
+
 ## Design e execução
 
 Manter Godot/GL Compatibility e a apresentação aprovada. Medir antes/depois

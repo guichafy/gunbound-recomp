@@ -257,6 +257,31 @@ class AndroidUISmokeTests(unittest.TestCase):
                 device.run('shell','input','keyevent','KEYCODE_BACK')
             self.assertEqual(boundary.call_count,1)
 
+    def test_install_selects_file_transfer_only_for_api24(self):
+        from unittest.mock import patch
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        device=object.__new__(m.Device);device.adb='/test/adb';device.serial='emulator-5590'
+        apk=Path('builds/android/candidate.apk')
+        for api,flags in [('24',['--no-streaming']),('36',[])]:
+            with self.subTest(api=api),patch.object(m.subprocess,'check_output',side_effect=[f'{api}\n','Success\n']) as adb:
+                device.install(apk)
+                self.assertEqual([call.args[0][3:] for call in adb.call_args_list],[
+                    ['shell','getprop','ro.build.version.sdk'],['install',*flags,'-r',str(apk)]])
+                self.assertEqual(adb.call_args.kwargs['timeout'],120)
+
+    def test_install_reports_partial_timeout_without_retrying(self):
+        import subprocess
+        from unittest.mock import patch
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+        device=object.__new__(m.Device);device.adb='/test/adb';device.serial='emulator-5590'
+        error=subprocess.TimeoutExpired(['adb','install'],120,output=b'Performing Push Install\n')
+        with patch.object(m.subprocess,'check_output',side_effect=['24\n',error]) as adb:
+            with self.assertRaisesRegex(RuntimeError,r'API 24.*120 s[\s\S]*Performing Push Install'):
+                device.install(Path('candidate.apk'))
+            self.assertEqual(adb.call_count,2)
+
     def test_constructor_waits_for_transport_before_reading_properties(self):
         from unittest.mock import patch
         import struct,tempfile
