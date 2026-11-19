@@ -1,5 +1,13 @@
 # Registro de decisões
 
+## Auditoria de dano dos tiros — critério de comparação (19/11/2026)
+
+A auditoria adota o dano por componente e a perda efetiva de HP/escudo como
+medidas distintas. Dano acima de 600 entra na triagem com o estado completo
+de cada impacto. A aceitação exige resultado compatível com o consumidor
+do PE e seu produtor, com adaptações registradas quando aplicáveis.
+[AUDITORIA DOS TIROS](SHOT_DAMAGE_AUDIT.md).
+
 ## ADR-ANDROID-RESOURCES — recuperação PR57 (17/11/2026)
 
 Carregar no Android somente os sprites apresentados e os auxiliares realmente

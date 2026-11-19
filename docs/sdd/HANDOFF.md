@@ -1,5 +1,14 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Auditoria de força e dano dos 48 tiros (19/11/2026)
+
+[Auditoria e plano](SHOT_DAMAGE_AUDIT.md). Armor T1 contra Bigfoot em SOLO
+reproduz 626 HP num único impacto, sem bônus, em disparo e snapshot. O porte
+inicializa 280 em vez de 210 e usa uma atenuação inversa no blast legado.
+A smoke de emissão cobriu as 48 combinações no Godot e o inventário
+foi confrontado com catálogo e despachos do PE. A cobertura integral de paridade por arma, defesa e clima
+está especificada no plano. Entrega documental.
+
 As releases da main oferecem os ZIPs macOS e Windows e o APK Android de teste
 do mesmo CI. O download público traz o sufixo Android-Test.apk. O publisher
 verifica a inspeção e os dois relatórios de smoke antes de criar o rascunho.

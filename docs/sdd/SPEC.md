@@ -1,5 +1,13 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Auditoria dos 48 tiros — força, dano e clima (19/11/2026)
+
+REQ-04/05/07/08/19/23–26/35–38/44/45/52 e REQ-JEWEL-46. A revisão cobre
+T1/T2/SS dos 16 mobiles, produz um caso repetível de dano alto e define
+cobertura de clima, Attack e Defense por arma/alvo. Ver
+[AUDITORIA DOS TIROS](SHOT_DAMAGE_AUDIT.md). A validação de paridade completa
+e a correção do runtime ficam previstas para a execução do plano.
+
 ## APK de teste nas releases do GitHub — REQ-ANDROID-V1
 
 A partir da 0.25.0, cada release da main deve oferecer os ZIPs macOS e Windows,

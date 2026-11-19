@@ -1,5 +1,11 @@
 # Entregas e próximos trabalhos
 
+## Auditoria de força e dano dos 48 tiros (19/11/2026)
+
+- [x] Inspecionar os 48 tiros, confrontar o DAT e os consumidores comuns pelo Ghidra e reproduzir o dano alto no Godot.
+- [x] Definir a matriz de clima, Attack, Defense, escudo e produtores auxiliares em [SHOT_DAMAGE_AUDIT.md](SHOT_DAMAGE_AUDIT.md).
+- [ ] Executar as quatro etapas do plano, começando pela regressão Armor T1. Registrar o primeiro estágio divergente e concluir os oráculos por família antes de declarar paridade.
+
 ## APK de teste nas releases do GitHub
 
 - [x] Preparar publicação conjunta de macOS, Windows e Android de teste após os gates da main.
