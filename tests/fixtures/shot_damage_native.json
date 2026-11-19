@@ -1,0 +1,290 @@
+{
+  "schema": 1,
+  "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+  "dat_sha256": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+  "scope": "PE isolates the shared damage consumer and the recorded Godot segment. Controlled zero tilt.",
+  "armor_replay": {
+    "shooter": 4,
+    "weapon": 0,
+    "target": 2,
+    "attack": 0,
+    "defense": 0,
+    "force": 0,
+    "dx": 13,
+    "dy": 7,
+    "material": 0,
+    "shield": 0,
+    "hp": 1100,
+    "amount": 155,
+    "hp_after": 945,
+    "shield_after": 0,
+    "protection": false
+  },
+  "contact": {
+    "pe_sha256": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde",
+    "dat_sha256": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+    "scope": "Godot tick segment into 455cc0 with controlled AABB, weather absent.",
+    "contact": {
+      "start_fp": [
+        60783,
+        65144
+      ],
+      "end_fp": [
+        63675,
+        64658
+      ],
+      "floor": 278,
+      "boxes": [
+        [
+          236,
+          248,
+          264,
+          272
+        ]
+      ],
+      "contact": true,
+      "position_fp": [
+        60672,
+        64512
+      ],
+      "point": [
+        237,
+        252
+      ]
+    },
+    "original_point": [
+      237,
+      452
+    ],
+    "native_consumer": {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 13,
+      "dy": 9,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 149,
+      "hp_after": 951,
+      "shield_after": 0,
+      "protection": false
+    }
+  },
+  "common_inputs": {
+    "shooter": 4,
+    "weapon": 0,
+    "source_type": 0,
+    "attack": 0,
+    "divisor": 1,
+    "divisor_status": "proved",
+    "power": [
+      210,
+      210,
+      210
+    ],
+    "dimension": [
+      68,
+      68,
+      68
+    ],
+    "aspect": [
+      144,
+      144,
+      144
+    ],
+    "flags": 8
+  },
+  "common_cases": [
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 13,
+      "dy": 7,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 155,
+      "hp_after": 945,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 20,
+      "dx": 13,
+      "dy": 7,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 170,
+      "hp_after": 930,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 100,
+      "dx": 13,
+      "dy": 7,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 232,
+      "hp_after": 868,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 0,
+      "dy": 0,
+      "material": 0,
+      "shield": 0,
+      "hp": 1500,
+      "amount": 210,
+      "hp_after": 1290,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 0,
+      "dy": 0,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 210,
+      "hp_after": 890,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 20,
+      "dy": 0,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 147,
+      "hp_after": 953,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 63,
+      "dy": 0,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 4,
+      "hp_after": 1096,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 64,
+      "dy": 0,
+      "material": 0,
+      "shield": 0,
+      "hp": 1100,
+      "amount": 0,
+      "hp_after": 1100,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 0,
+      "dy": 0,
+      "material": 0,
+      "shield": 100,
+      "hp": 1100,
+      "amount": 210,
+      "hp_after": 990,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 0,
+      "dy": 0,
+      "material": 0,
+      "shield": 210,
+      "hp": 1100,
+      "amount": 210,
+      "hp_after": 1100,
+      "shield_after": 0,
+      "protection": false
+    },
+    {
+      "shooter": 4,
+      "weapon": 0,
+      "target": 2,
+      "attack": 0,
+      "defense": 0,
+      "force": 0,
+      "dx": 0,
+      "dy": 0,
+      "material": 0,
+      "shield": 300,
+      "hp": 1100,
+      "amount": 210,
+      "hp_after": 1100,
+      "shield_after": 90,
+      "protection": false
+    }
+  ]
+}

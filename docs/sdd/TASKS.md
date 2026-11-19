@@ -1,5 +1,11 @@
 # Entregas e próximos trabalhos
 
+## Execução da matriz dos 48 tiros (19/11/2026)
+
+- [x] Registrar o replay de Armor, validar os três consumidores numéricos no PE e cruzar clima, Ataque e Defesa no modelo.
+- [x] Adicionar a regressão dirigida de Armor ao harness e ferramentas reproduzíveis de validação.
+- [ ] Resolver as divergências comprovadas e fechar oráculos de estágio, variantes restantes e o cliente Windows inteiro. [Registro](SHOT_DAMAGE_VALIDATION.md).
+
 ## Instalação do smoke na API 24 (19/11/2026)
 
 - [x] Confirmar o timeout em duas execuções e testar a seleção da instalação por arquivo apenas na API 24.

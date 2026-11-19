@@ -8,6 +8,15 @@ instalação, UI e persistência bem-sucedidas do APK validado por hash nas duas
 APIs. O prazo de instalação e a condição de publicação permanecem os mesmos.
 [Plano de recuperação](ANDROID_PR57_RECOVERY.md#instalação-do-apk-na-api-24).
 
+## Execução da matriz dos 48 tiros (19/11/2026)
+
+REQ-04/05/07/08/19/23–26/35–38/44/45/52 e REQ-JEWEL-46. Executar a
+[matriz da auditoria](SHOT_DAMAGE_AUDIT.md#plano-de-validação-e-correção)
+a partir do replay do Armor T1. Exigir evidência por consumidor e por cenário
+antes de classificar a paridade. Registrar separadamente impactos controlados,
+voo completo, valores do PE, adaptações do projeto e lacunas.
+[Registro de execução](SHOT_DAMAGE_VALIDATION.md).
+
 ## Auditoria dos 48 tiros — força, dano e clima (19/11/2026)
 
 REQ-04/05/07/08/19/23–26/35–38/44/45/52 e REQ-JEWEL-46. A revisão cobre

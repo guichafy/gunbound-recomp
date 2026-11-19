@@ -1,5 +1,14 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Execução da matriz dos 48 tiros (19/11/2026)
+
+[Registro e sondas](SHOT_DAMAGE_VALIDATION.md). Armor T1 repetiu 626 HP no
+degrau e 667 em Miramo A, em disparo e snapshot. No replay do degrau, o
+consumidor isolado do PE aplicou 155 no ponto legado e 149 no ponto obtido
+com o segmento controlado. A comparação comum executou 79.872 entradas e
+isolou as 4.586 diferenças no Knight. A entrega registra a execução e as
+divergências de combate que continuam abertas.
+
 ## Timeout de instalação na API 24 (19/11/2026)
 
 O run 44475488246 da main falhou duas vezes no `adb install -r` da API 24,

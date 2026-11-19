@@ -10,7 +10,7 @@ const Snapshot = preload("res://scripts/flight_snapshot.gd")
 func _initialize() -> void:
 	call_deferred("run")
 
-func fixture(shooter: int, defender: int, rise: int = 0):
+static func fixture(shooter: int, defender: int, rise: int = 0):
 	var model = Match.new()
 	model.start(shooter, 1, 42, "", "original", null, [], [], [], 0, defender)
 	model.terrain.cells.fill(0)
@@ -38,7 +38,7 @@ func fixture(shooter: int, defender: int, rise: int = 0):
 	model.events.clear()
 	return model
 
-func flight(base, angle: float, power: float, weapon: int, gap: int, prediction: bool = false) -> Dictionary:
+static func flight(base, angle: float, power: float, weapon: int, gap: int, prediction: bool = false) -> Dictionary:
 	var model = Snapshot.capture(base)
 	model.phase = model.PHASE_AIM
 	model.active = 0

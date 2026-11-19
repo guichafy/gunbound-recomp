@@ -1,5 +1,13 @@
 # Registro de decisões
 
+## Evidência de força e dano por consumidor (19/11/2026)
+
+O registro da validação exige distinguir o impacto controlado, a execução
+x86 isolada e o disparo que percorre o passo comum. O limiar de 600 orienta
+a triagem pelo valor calculado e pela perda efetiva. A validação observou
+um caso x86 acima desse valor com bônus explícitos e um Armor T1 neutro
+divergente no porte. [Resultados](SHOT_DAMAGE_VALIDATION.md).
+
 ## Instalação do smoke na API 24 (19/11/2026)
 
 Selecionar `adb install --no-streaming -r` no emulador Android 7 após
