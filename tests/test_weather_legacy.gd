@@ -123,9 +123,8 @@ func run() -> void:
 	model.schedule(model.active, 50.0)
 	check(model.actors[0].hp == 1035 and model.actors[1].hp == model.actors[1].max_hp, "Protection heals 35, capped at full life")
 
-	# Historical adapter on an Armor T1 shell with fixed test power90.
-	# Bigfoot is native after issue28 and must no longer stand in for this adapter.
-	start_legacy(model, 4, 1, 12, "", "original", null, [], [], [], 0, 4)
+	# Historical adapter on a legacy Trico T1 shell with fixed test power90.
+	start_legacy(model, 5, 1, 12, "", "original", null, [], [], [], 0, 4)
 	var shell: Dictionary = legacy_shell(model)
 	model.weather.columns.clear()
 	var force_column: Dictionary = model.weather.add_column("force", 600, 1)

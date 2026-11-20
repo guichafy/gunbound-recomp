@@ -1,5 +1,12 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Armor T1 — impacto do disparo comum (19/11/2026)
+
+REQ-04/05/07/08/19/23–26/35–38/44/45/52 e REQ-JEWEL-46. Armor T1 usa
+parâmetros e contato nativos compartilhados no disparo e na previsão.
+O plano valida o replay, efeitos de clima e atributos e investiga o campo
+lido na seleção de alvos do PE. [Contrato e resultados](ARMOR_T1_COMBAT.md).
+
 ## Instalação do smoke Android 7 — REQ-ANDROID-V1 (19/11/2026)
 
 A instalação automatizada no emulador da API 24 usa a transferência do

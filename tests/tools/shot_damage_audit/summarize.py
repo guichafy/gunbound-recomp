@@ -182,6 +182,8 @@ def main():
         "shared_consumer": bridge,
         "impact_probe": impacts,
     }
+    if "action_controls" in native:
+        result["native_action_controls"] = native["action_controls"]
     if args.axes:
         axes = read_json(args.axes)
         if axes["rows"] != 48 * 101 * 2:

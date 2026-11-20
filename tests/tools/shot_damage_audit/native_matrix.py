@@ -114,7 +114,8 @@ class Oracle:
             e, actor = self.e, self.actor
             e.uc.mem_write(actor, bytes(0x20000))
             e.w32(actor, self.actor_vtable)
-            e.w32(actor + 0x24, kind)
+            e.setcell(actor + 0x1A2C, kind)  # Protected roster identity, initialized by 42b0b0.
+            e.w32(actor + 0x24, 0)  # Controlled normal EPA action, written by 461c60.
             e.setcell(self.world + 0x508AC, defense)  # Effective defense, slot 0.
             self._call(0x41C360, (self.world, actor), kind)
             row = {
@@ -130,10 +131,12 @@ class Oracle:
             self.targets[key] = row
         return row
 
-    def hit(self, shot, target, force=0, dx=0, dy=0, material=0, shield=0, hp=1500, protection=False):
+    def hit(self, shot, target, force=0, dx=0, dy=0, material=0, shield=0, hp=1500, protection=False, action=None):
         e, shell, actor = self.e, self.shell, self.actor
         e.uc.mem_write(shell, shot["state"])
         e.uc.mem_write(actor, target["state"])
+        if action is not None:
+            e.w32(actor + 0x24, action)
         e.set_flag(actor + 0x908, True)
         e.set_flag(actor + 0xBFF7, False)
         e.set_flag(actor + 0xBFD6, protection)
@@ -193,14 +196,36 @@ def armor_contact(oracle):
                                  floor=278, boxes=[[236, 248, 264, 272]])
     x, y = contact["point"]
     point = x, y + 200
-    result = oracle.hit(oracle.initialize(4, 0, 0), oracle.body(2, 0),
-                        dx=250 - point[0], dy=461 - point[1], hp=1100)
+    def damage(target, dx, dy, attack=0, defense=0, force=0):
+        result = oracle.hit(oracle.initialize(4, 0, attack), oracle.body(target, defense),
+                            dx=dx, dy=dy, force=force, hp=1100)
+        return dict(zip(DAMAGE_COLUMNS, result))
+
+    # Miramo: translate the recorded segment and its box by (-100,-1200).
+    # At this height in the sweep, contact is with the target, before terrain.
+    miramo = armor.contact_case([71757, 44848], [74701, 44848],
+                                floor=198, boxes=[[290, 168, 318, 192]])
+    map_x, map_y = miramo["point"][0] + 100, miramo["point"][1] + 1200
     return {
         "pe_sha256": oracle.ice.SHA, "dat_sha256": oracle.ice.DAT_SHA,
         "scope": "Godot tick segment into 455cc0 with controlled AABB, weather absent.",
         "contact": contact, "original_point": point,
-        "native_consumer": dict(zip(DAMAGE_COLUMNS, result)),
+        "native_consumer": damage(2, 250 - point[0], 461 - point[1]),
+        "miramo": {"contact": miramo, "point": [map_x, map_y],
+                   "damage": damage(2, 404 - map_x, 1381 - map_y)},
+        "knight_damage": damage(15, 250 - point[0], 464 - point[1]),
+        "signed_damage": [damage(2, 13, 9, 50, -50, 20), damage(2, 13, 9, -50, 50)],
     }
+
+
+def action_controls(oracle):
+    """Cross native body identity with the independent animation action ID."""
+    shot = oracle.initialize(4, 0, 0)
+    return [
+        {"action": action, **dict(zip(DAMAGE_COLUMNS, oracle.hit(shot, oracle.body(target, 0),
+                                                                shield=30, hp=1000, action=action)))}
+        for target, action in itertools.product((2, 15), (0, 14))
+    ]
 
 
 def roster_matrix(oracle):
@@ -245,6 +270,7 @@ def main():
         args.output.write_text(json.dumps(armor_contact(oracle), separators=(",", ":")) + "\n")
         return
     replay, armor = focused_armor(oracle)
+    controls = action_controls(oracle)
     matrix = signed_axis_matrix if args.signed_axes_only else roster_matrix
     common = [] if args.armor_only else list(matrix(oracle))
     result = {
@@ -254,6 +280,7 @@ def main():
         "stubs": ["protected-cell allocator and seed", "critical section IAT",
                   "zero tilt 45f300/45f5d0", "damage text 436860 and pose publication"],
         "scope": "Direct x86 consumers with controlled contact, Force and protection. No game/trajectory replay.",
+        "action_controls": controls,
         "initializers": serializable(oracle.initializers.values()),
         "targets": serializable(oracle.targets.values()),
         "armor_replay": dict(zip(DAMAGE_COLUMNS, replay)),

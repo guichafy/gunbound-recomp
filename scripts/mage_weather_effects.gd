@@ -2,6 +2,7 @@ extends RefCounted
 ## PE457386/4a4f42/4840c2: attached Electricity precedes Thor, then
 ## the caller applies Mage's crater/EMP/blast. Shared execution/prediction
 ## use this pure model path; no scene, profile, resource loading or RNG here.
+const ArmorCombat = preload("res://scripts/armor_combat.gd")
 const Lightning = preload("res://scripts/lightning_combat.gd")
 const Shared = preload("res://scripts/aduka_combat.gd")
 const Thor = preload("res://scripts/aduka_effect.gd")
@@ -39,7 +40,7 @@ static func parameters(projectile: Dictionary, actor: Dictionary) -> Dictionary:
 		"percent":100+int(Items.attack(str(actor.get("turn_item",""))))}
 
 static func impact(model, projectile: Dictionary, position: Vector2) -> void:
-	if int(projectile.get("vehicle",0)) not in [1,2,6] or bool(projectile.get("beacon",false)):
+	if bool(projectile.get("beacon",false)) or (int(projectile.get("vehicle",0)) not in [1,2,6] and not ArmorCombat.active(projectile)):
 		return
 	if bool(projectile.get("electric",false)):
 		for actor in model.actors:
@@ -67,7 +68,7 @@ static func impact(model, projectile: Dictionary, position: Vector2) -> void:
 	# Native callers inspect current climate4 at impact. No launch-time
 	# projectile.thor flag can replace this gate. Electricity may carve first.
 	if not model.weather.queue.is_empty() and str(model.weather.queue[0].type)=="thor":
-		var source: String = {1:"mage_weather",2:"bigfoot_weather",6:"boomer_weather"}[int(projectile.vehicle)]
+		var source: String = {1:"mage_weather",2:"bigfoot_weather",4:"armor_weather",6:"boomer_weather"}[int(projectile.vehicle)]
 		Thor.strike(model,projectile,position,source,shell_divisor(projectile))
 
 ## 4bb730→4bc117→439d90: input is the native LCG seed at setup entry.
