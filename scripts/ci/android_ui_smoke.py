@@ -317,7 +317,7 @@ class Device:
                 if attempt == 3:
                     raise ValueError(f'ADB returned three invalid screenshots for {label}') from error
 
-    def capture(self,label,pattern=None,timeout=30,absent=None):
+    def capture(self,label,pattern=None,timeout=30,absent=None,require_lobby=False):
         deadline=time.monotonic()+timeout
         path=self.output/(label+'.png')
         while True:
@@ -342,11 +342,20 @@ class Device:
             if (pattern and not re.search(pattern,text,re.I)) or needs_absence_ocr or (pattern and 'CAMERA' in pattern and not camera_observed):
                 enhanced=enhanced_ocr(path)
                 if enhanced.strip():text+='\n[enhanced OCR]\n'+enhanced
-            if self.size[0]>=self.size[1] and (pattern is None or re.search(pattern,text,re.I)) and (absent is None or not re.search(absent,text,re.I)):
+            matched = self.size[0]>=self.size[1] and (pattern is None or re.search(pattern,text,re.I)) and (absent is None or not re.search(absent,text,re.I))
+            if matched and require_lobby:
+                # The draft nickname is visible while Settings still covers the
+                # lobby. Require a native, undimmed lobby control in this frame.
+                lobby = native_targets(path, 'CREATE')
+                matched = len(lobby) == 1
+                if matched:
+                    (self.output/(label+'-lobby.json')).write_text(json.dumps(lobby[0],indent=2)+'\n')
+            if matched:
                 self.observations.append(dict(screen=label,ocr_pattern=pattern,ocr_absent=absent,screenshot=path.name))
                 return text
             if time.monotonic()>deadline:
-                raise CaptureTimeout(f'Android UI expected {label}: {pattern}, absent: {absent}; OCR: {text[:300]}')
+                screen = label + (' in the lobby' if require_lobby else '')
+                raise CaptureTimeout(f'Android UI expected {screen}: {pattern}, absent: {absent}; OCR: {text[:300]}')
             time.sleep(1)
 
     def read_tsv(self,label='target'):
@@ -381,15 +390,21 @@ class Device:
             raise ValueError('OCR rectangle exceeds rendered screenshot')
         return target
 
-    def wait_text(self,pattern,label,timeout=15):
+    def wait_text(self,pattern,label,timeout=15,reference=None):
         deadline=time.monotonic()+timeout
         while True:
             try:
-                return self.locate_text(pattern,label)
+                target = self.locate_text(pattern,label)
             except ValueError as error:
                 if 'missing' not in str(error) or time.monotonic()>=deadline:
                     raise
-                time.sleep(0.25)
+            else:
+                if reference is None or all(abs(target[key]-reference[key]) <= reference['height']
+                                            for key in ('left','top','width','height')):
+                    return target
+                if time.monotonic()>=deadline:
+                    raise CaptureTimeout(f'Android UI {label} did not return to its reference layout')
+            time.sleep(0.25)
 
     def wait_keyboard(self,shown: bool,timeout=15):
         deadline=time.monotonic()+timeout
@@ -420,8 +435,9 @@ class Device:
         # to reach the engine before editing or locating the Save control.
         time.sleep(0.25)
 
-    def tap_text(self,pattern,label='tap-target',hold_ms=0,wait_timeout=0):
-        target=self.wait_text(pattern,label,wait_timeout) if wait_timeout else self.locate_text(pattern,label)
+    def tap_text(self,pattern,label='tap-target',hold_ms=0,wait_timeout=0,reference=None):
+        target = (self.wait_text(pattern,label,wait_timeout or 15,reference=reference)
+                  if wait_timeout or reference is not None else self.locate_text(pattern,label))
         x=round(target['left']+target['width']/2);y=round(target['top']+target['height']/2)
         if hold_ms:
             self.run('shell','input','swipe',str(x),str(y),str(x),str(y),str(hold_ms))
@@ -625,6 +641,7 @@ def final_ui(device: Device,apk: Path,app: str):
     device.dismiss_system_tips('shop-system-tip')
     device.run('shell','input','keyevent','KEYCODE_BACK');device.capture('lobby-after-shop',r'CREATE|SETTINGS')
     device.tap_text(r'SETTINGS|CONFIGURA[CÇ][ÕO]ES',label='open-settings');device.capture('settings',r'Nickname|Apelido|Preferences|Prefer')
+    save_reference = device.wait_text(SAVE_PATTERN, 'save-before-keyboard')
     device.tap_below_label(r'Nickname|Apelido',label='nickname-field')
     device.wait_keyboard(True)
     device.run('shell','input','keyevent','KEYCODE_MOVE_END')
@@ -639,8 +656,11 @@ def final_ui(device: Device,apk: Path,app: str):
     device.run('shell','input','keyevent','KEYCODE_BACK')
     device.wait_keyboard(False)
     nickname_pattern=r'\b'+re.escape(nickname)+r'\b'
-    device.tap_text(SAVE_PATTERN,label='save-profile',wait_timeout=15);device.capture('profile-saved',nickname_pattern)
-    device.launch(app);device.dismiss_system_tips('profile-relaunch-tip');device.capture('profile-persisted',nickname_pattern)
+    # API24 can report the IME hidden before the rendered Settings restores its size.
+    device.tap_text(SAVE_PATTERN,label='save-profile',wait_timeout=15,reference=save_reference)
+    device.capture('profile-saved',nickname_pattern,require_lobby=True)
+    device.launch(app);device.dismiss_system_tips('profile-relaunch-tip')
+    device.capture('profile-persisted',nickname_pattern,require_lobby=True)
     for mode in ('solo','jewel'):
         device.tap_text(r'CREATE',label=mode+'-open-room');device.capture(mode+'-room',r'START')
         if mode=='jewel':
@@ -669,7 +689,7 @@ def final_ui(device: Device,apk: Path,app: str):
         # Force-stop discards live battle as specified, preserving saved profile.
         device.run('shell','am','force-stop',app);device.launch(app)
         device.dismiss_system_tips(mode+'-restart-tip')
-        device.capture(mode+'-restart',nickname_pattern)
+        device.capture(mode+'-restart',nickname_pattern,require_lobby=True)
     device.logs(app)
     return dict(launch='passed',lobby='passed',shop='passed',solo='passed',jewel='passed',
                 persistence='passed',back='passed',home='passed',touch='single-finger-adb',

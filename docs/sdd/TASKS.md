@@ -1,5 +1,11 @@
 # Entregas e próximos trabalhos
 
+## Confirmação de perfil no smoke Android 7
+
+- [x] Reproduzir a geometria deslocada e a confirmação indevida do rascunho.
+- [x] Esperar a restauração de Settings e conferir o apelido no lobby.
+- [ ] Verificar a execução remota das APIs 24 e 36 no PR #67 e em `main`.
+
 ## Correção do Ice T2 e SS contra Knight
 
 - [x] Distinguir ação EPA e tipo protegido e regenerar os controles do oráculo.

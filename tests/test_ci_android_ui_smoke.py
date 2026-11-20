@@ -6,6 +6,51 @@ PATH=Path(__file__).resolve().parents[1]/'scripts/ci/android_ui_smoke.py'
 
 
 class AndroidUISmokeTests(unittest.TestCase):
+    def test_save_waits_for_settings_layout_after_keyboard_back(self):
+        from unittest.mock import Mock, patch
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        ui=importlib.util.module_from_spec(spec);spec.loader.exec_module(ui)
+        before=dict(left=949,top=689,width=106,height=13,text='Save changes')
+        stale=dict(left=790,top=335,width=54,height=8,text='Save changes')
+        restored=dict(left=950,top=690,width=104,height=12,text='Save changes')
+        device=object.__new__(ui.Device)
+        device.actions_attempted=[]
+        device.locate_text=Mock(side_effect=[stale,restored])
+        device.run=Mock()
+        with patch.object(ui.time,'sleep'):
+            target=device.tap_text(ui.SAVE_PATTERN,label='save-profile',wait_timeout=15,reference=before)
+        self.assertEqual(target,restored)
+        self.assertEqual(device.locate_text.call_count,2)
+        device.run.assert_called_once_with('shell','input','tap','1002','696')
+
+        device.locate_text=Mock(return_value=stale)
+        device.run.reset_mock()
+        with patch.object(ui.time,'monotonic',side_effect=[0,16]):
+            with self.assertRaises(ui.CaptureTimeout):
+                device.tap_text(ui.SAVE_PATTERN,label='save-profile',wait_timeout=15,reference=before)
+        device.run.assert_not_called()
+
+    def test_profile_capture_rejects_draft_and_requires_observed_lobby(self):
+        import tempfile
+        from unittest.mock import patch
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        ui=importlib.util.module_from_spec(spec);spec.loader.exec_module(ui)
+        png=(Path(__file__).parent/'fixtures/android_ui/lobby_api36.png').read_bytes()
+        device=object.__new__(ui.Device)
+        device.run=lambda *args,**kwargs:png
+        device.observations=[]
+        with tempfile.TemporaryDirectory() as temp:
+            device.output=Path(temp)
+            with patch.object(ui,'ocr_output',return_value='Nickname\nAndroid42|'),patch.object(ui,'native_targets',return_value=[]),patch.object(ui.time,'monotonic',side_effect=[0,31]):
+                with self.assertRaises(ui.CaptureTimeout):
+                    device.capture('profile-saved',r'\bAndroid42\b',require_lobby=True)
+            self.assertEqual(device.observations,[])
+            with patch.object(ui,'ocr_output',side_effect=['Nickname\nAndroid42|','Android42']),patch.object(ui,'native_targets',side_effect=[[],[dict(text='CREATE')]]) as native,patch.object(ui.time,'sleep'):
+                observer=device.capture('profile-persisted',r'\bAndroid42\b',require_lobby=True)
+            self.assertEqual(observer,'Android42')
+            self.assertEqual([call.args[1] for call in native.call_args_list],['CREATE','CREATE'])
+            self.assertEqual(device.observations[0]['screenshot'],'profile-persisted.png')
+
     def test_ocr_has_one_worker_without_changing_the_timeout_or_parent_environment(self):
         from unittest.mock import patch
         spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
