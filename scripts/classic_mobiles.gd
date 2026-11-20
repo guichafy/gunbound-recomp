@@ -6,6 +6,7 @@ extends RefCounted
 ## and radius half of [47]/[60]/[73]. Same reading as Nak (ADR-074/076).
 ## Godot ids stay clear of 0 and of 1–3.
 
+const ArmorCombat = preload("res://scripts/armor_combat.gd")
 const IDS := [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
 static func shot(label: String, damage: float, radius: float, cost: int, extra: Dictionary = {}) -> Dictionary:
@@ -19,7 +20,7 @@ static func orbit(offset: Vector2, spin: float, phase: float) -> Dictionary:
 static func definitions() -> Dictionary:
 	return {
 		4: _body("Armor", "armor", 1000, 0, 0, 10, false, Vector2(30, 40), 25.0, 0.1, true,
-			[shot("Tiro 1", 280, 34, 770),
+			[shot("Tiro 1", ArmorCombat.POWER, ArmorCombat.DIMENSION * 0.5, 770),
 			shot("Tiro 2", 236, 28, 960),
 			shot("SS", 280, 35, 1320, {"flight": "open", "transform_at": 2.0, "extra_damage": 50, "extra_radius": 25.0})],
 			[Vector2(10, 55), Vector2(10, 50), Vector2(10, 50)],

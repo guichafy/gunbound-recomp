@@ -1,5 +1,9 @@
 # Execução da matriz de combate dos 48 tiros
 
+Registro histórico. O [seguimento](ARMOR_T1_COMBAT.md) corrige contato e dano
+do Armor T1 e invalida a conclusão de imunidade do Knight. Os 4.586 casos
+abaixo refletem a injeção do tipo do Knight no campo de ação EPA.
+
 Base `0a917667`. Escopo e critérios em [SHOT_DAMAGE_AUDIT.md](SHOT_DAMAGE_AUDIT.md).
 Usar o cliente Thor’s Hammer fixado, REA com Ghidra e os oráculos x86 locais.
 O disparo real e o snapshot são comparados no Godot. A matriz de comparação

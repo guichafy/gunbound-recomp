@@ -1,5 +1,5 @@
 extends SceneTree
-## Historical baseline probe. See docs/sdd/SHOT_DAMAGE_AUDIT.md.
+## Roster and Armor replay probe. See docs/sdd/ARMOR_T1_COMBAT.md.
 
 const Match = preload("res://scripts/match.gd")
 const Mobiles = preload("res://scripts/mobiles.gd")
@@ -102,4 +102,4 @@ func run() -> void:
 	var real := flight(armor, 10.0, 25.0, 0, 50)
 	var replay := flight(armor, 10.0, 25.0, 0, 50, true)
 	print("REPRO ", JSON.stringify({"real": real, "snapshot": replay, "equal": real == replay}))
-	quit(0 if real == replay and real.hp_lost == 626 else 2)
+	quit(0 if real == replay and real.hp_lost == 149 else 2)

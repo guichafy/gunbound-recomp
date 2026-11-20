@@ -1,5 +1,12 @@
 # Registro de decisões
 
+## Contato e dano do Armor T1 (19/11/2026)
+
+Usar o resultado de `455cc0` e a carga de `41da80` na rota comum do Armor
+T1. O campo `+0x24` do consumidor representa a ação EPA e `+0x1a2c`
+representa o tipo do mobile. A comparação passa a selecionar EPA `normal`
+para todos os tipos e mantém EPA `dead` como controle. [Evidência](ARMOR_T1_COMBAT.md).
+
 ## Evidência de força e dano por consumidor (19/11/2026)
 
 O registro da validação exige distinguir o impacto controlado, a execução

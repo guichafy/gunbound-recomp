@@ -11,6 +11,7 @@ const MapChoice = preload("res://scripts/map_choice.gd")
 const Weather = preload("res://scripts/weather.gd")
 const MageWeather = preload("res://scripts/mage_weather.gd")
 const MageWeatherEffects = preload("res://scripts/mage_weather_effects.gd")
+const ArmorCombat = preload("res://scripts/armor_combat.gd")
 const ArmorFlight = preload("res://scripts/armor_flight.gd")
 const Physics = preload("res://scripts/classic_ballistics.gd")
 const BoomerFlight = preload("res://scripts/boomer_flight.gd")
@@ -397,6 +398,7 @@ func projectile_parameters(index: int, angle: float, power: float, weapon: int) 
 			var selected := clampf(angle,limits.x,limits.y)
 			var theta := int((selected if int(actors[index].facing)>0 else 180.0-selected)-rad_to_deg(body_rotation(index)))
 			TricoFlight.prepare(shell,entry,theta)
+		ArmorCombat.prepare(shell,actors[index])
 		ArmorFlight.prepare(shell)
 		BoomerFlight.prepare(shell,actors[index])
 		AdukaCombat.prepare(shell,actors[index])
@@ -746,7 +748,7 @@ func advance_projectile_tick(delta: float) -> void:
 			projectile.trail.pop_front()
 		var armor_continues := false
 		if not hit.is_empty():
-			if ArmorFlight.active(projectile):
+			if ArmorFlight.active(projectile) or ArmorCombat.active(projectile):
 				ArmorFlight.write_contact(projectile,hit.position)
 			if beacon:
 				land_beacon(hit.position, previous, projectile)
@@ -904,7 +906,8 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	# Tilt stays as stamped at the start of the step. A crater must not
 	# rotate the target before this explosion's damage is measured.
 	var event_start := events.size()
-	if MageCombat.active(projectile) or BoomerFlight.active(projectile) or BigfootCombat.active(projectile):
+	var native_armor := ArmorCombat.active(projectile)
+	if native_armor or MageCombat.active(projectile) or BoomerFlight.active(projectile) or BigfootCombat.active(projectile):
 		#4572b0/4a4950/483ff0: attached electricity and Thor precede
 		# even the SS EMP; shock pending is flushed at the shared tick end.
 		MageWeatherEffects.impact(self,projectile,position)
@@ -923,7 +926,9 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var native_bigfoot := BigfootCombat.active(projectile)
 	var native_ice := IceEffects.active(projectile)
 	var native_data: Dictionary = AdukaCombat.t1_parameters(projectile,actors[shot_actor]) if native_aduka else {}
-	if native_mage:
+	if native_armor:
+		native_data = ArmorCombat.parameters(projectile,actors[shot_actor])
+	elif native_mage:
 		native_data = MageCombat.parameters(projectile,actors[shot_actor])
 	elif native_boomer:
 		native_data = BoomerFlight.parameters(projectile,actors[shot_actor])
@@ -934,7 +939,9 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	elif native_ice:
 		native_data = IceEffects.parameters(projectile,actors[shot_actor])
 	var crater_percent := int(projectile.get("mage_crater_percent",100)) if native_mage else int(projectile.get("aduka_crater_percent",100))
-	if native_boomer:
+	if native_armor:
+		crater_percent = int(projectile.get("armor_crater_percent",100))
+	elif native_boomer:
 		crater_percent = int(projectile.get("boomer_crater_percent",100))
 	elif native_bigfoot:
 		crater_percent = int(projectile.get("bigfoot_crater_percent",100))
@@ -944,7 +951,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 	var removed: int
 	if native_grub:
 		removed = terrain.carve_native(GrubCombat.crater_spans(projectile,Vector2i(position)))
-	elif native_aduka or native_mage or native_boomer or native_bigfoot or native_ice:
+	elif not native_data.is_empty():
 		removed = terrain.carve_native(AdukaCombat.crater_spans(Vector2i(position),crater_dimension,int(native_data.aspect)))
 	else:
 		removed = terrain.carve(position, Attributes.crater(radius, Attributes.points(actors[shot_actor], Attributes.DIG) + int(Items.dig(item))))
@@ -961,7 +968,7 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 		GrubCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
 	elif native_mage:
 		MageCombat.apply(actors,events,Vector2i(position),projectile,actors[shot_actor])
-	elif native_aduka or native_boomer or native_bigfoot:
+	elif not native_data.is_empty():
 		AdukaCombat.apply(actors,events,Vector2i(position),native_data)
 	else:
 		Damage.blast(actors,events,position, radius, float(maxi(0, int(projectile.get("damage", weapon.damage)))), float(weapon.get("emp", 0)), Items.attack(item), shot_actor,IceEffects.attack_mask(int(projectile.get("vehicle",actors[shot_actor].vehicle)),weapon_index))
@@ -976,13 +983,13 @@ func explode(position: Vector2, collided_actor: int = -1, projectile: Dictionary
 					battle_effects.remove_at(index)
 			battle_effects.append(JDEffect.create(projectile,position,owner))
 	explode_actions(position, projectile, event_start)
-	if native_boomer or native_bigfoot:
-		detonate_boomer_mines(Vector2i(position), projectile, native_data)
+	if native_armor or native_boomer or native_bigfoot:
+		detonate_raon_mines(Vector2i(position), projectile, native_data)
 
 ## 450eb0 -> 499650: only the blast, not the flight scan, tests Raon mines.
 ## The mine's existing blast remains the declared offline bridge. Collect the
 ## primary shot before this stage so mine credit cannot be counted twice.
-func detonate_boomer_mines(impact: Vector2i, projectile: Dictionary, data: Dictionary) -> void:
+func detonate_raon_mines(impact: Vector2i, projectile: Dictionary, data: Dictionary) -> void:
 	var index := 0
 	var radius := Physics.quot(int(data.dimension),2) + 10
 	while index < mines.size():
@@ -1001,9 +1008,10 @@ func detonate_boomer_mines(impact: Vector2i, projectile: Dictionary, data: Dicti
 ## OnExplodeAction order: Thor attached at launch, then Electricity; then the
 ## Gold metadata of everything this impact dealt.
 func explode_actions(position: Vector2, projectile: Dictionary, event_start: int) -> void:
-	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and not BigfootCombat.active(projectile) and bool(projectile.get("thor", false)):
+	var native_attachments := ArmorCombat.active(projectile) or MageCombat.active(projectile) or BoomerFlight.active(projectile) or BigfootCombat.active(projectile)
+	if not native_attachments and bool(projectile.get("thor", false)):
 		thor_strike(position)
-	if not MageCombat.active(projectile) and not BoomerFlight.active(projectile) and not BigfootCombat.active(projectile) and bool(projectile.get("electric", false)):
+	if not native_attachments and bool(projectile.get("electric", false)):
 		lightning_strike(position)
 	collect_gold_damage(event_start, position, projectile)
 

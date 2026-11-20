@@ -1,5 +1,12 @@
 # Entregas e próximos trabalhos
 
+## Armor T1 e investigação do Knight (19/11/2026)
+
+- [x] Corrigir o Armor T1 e reproduzir o contato, Ataque, Defesa e Force no Godot e no PE.
+- [x] Corrigir a entrada de ação EPA do oráculo e identificar o problema separado de Ice T2/SS.
+- [x] Repetir a matriz de 48 tiros, a regressão de 103 partidas e o smoke do pacote macOS.
+- [ ] Investigar a integração do estado de ação EPA em Ice T2/SS. [Evidência](ARMOR_T1_COMBAT.md#knight-como-alvo).
+
 ## Execução da matriz dos 48 tiros (19/11/2026)
 
 - [x] Registrar o replay de Armor, validar os três consumidores numéricos no PE e cruzar clima, Ataque e Defesa no modelo.

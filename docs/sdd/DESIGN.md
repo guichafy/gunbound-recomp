@@ -1,5 +1,12 @@
 # Design implementado
 
+## Armor T1 — contato e dano
+
+`ArmorCombat` prepara a carga por shell no emissor comum. O passo de clima
+nativo seleciona Armor T1 e resolve seu contato sobre a máscara 1 px. `Match`
+encaminha os anexos antes da escavação e do consumidor comum. A previsão e
+JEWEL reutilizam a carga e a geometria. [Contrato](ARMOR_T1_COMBAT.md).
+
 ## Recursos Android e recuperação PR57 (17/11/2026)
 
 Android inicia catálogo de sprites vazio e prepara os IDs visíveis antes de

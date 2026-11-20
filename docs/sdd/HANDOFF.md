@@ -1,5 +1,16 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Armor T1 e investigação do Knight (19/11/2026)
+
+O Armor T1 neutro passou de 626 para 149 HP no degrau e de 667 para 158 HP
+em Miramo A. A comparação de Knight no registro anterior foi invalidada
+pelo preenchimento do índice EPA com o tipo 14. O Knight em `normal`
+recebe dano no PE. O porte de Ice T2/SS ainda precisa corrigir a sua
+interpretação dessa condição. A repetição registrou 6.144 voos de matriz,
+79.872 comparações do consumidor comum, 92.965 assertivas GDScript,
+262 testes Python e 103 partidas completas, sem falhas. Smoke macOS passou.
+[Proveniência e limites](ARMOR_T1_COMBAT.md).
+
 ## Execução da matriz dos 48 tiros (19/11/2026)
 
 [Registro e sondas](SHOT_DAMAGE_VALIDATION.md). Armor T1 repetiu 626 HP no
