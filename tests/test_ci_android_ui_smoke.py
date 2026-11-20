@@ -51,6 +51,32 @@ class AndroidUISmokeTests(unittest.TestCase):
             self.assertEqual([call.args[1] for call in native.call_args_list],['CREATE','CREATE'])
             self.assertEqual(device.observations[0]['screenshot'],'profile-persisted.png')
 
+    def test_final_ui_reobserves_pause_before_tapping_during_battle_effects(self):
+        from unittest.mock import Mock, patch
+        spec=importlib.util.spec_from_file_location('android_ui_test',PATH)
+        ui=importlib.util.module_from_spec(spec);spec.loader.exec_module(ui)
+        observer=object.__new__(ui.Device)
+        observer.actions_attempted=[]
+        observer.run=Mock()
+        found=dict(left=1227,top=118,width=35,height=9,text='PAUSE')
+        observer.locate_text=Mock(side_effect=[ValueError('OCR target is missing'),found])
+        device=Mock()
+        device.run.return_value=''
+
+        class ObservedPause(Exception):
+            pass
+
+        def tap(pattern,label,**kwargs):
+            if label=='solo-touch-pause':
+                observer.tap_text(pattern,label=label,**kwargs)
+                raise ObservedPause
+
+        device.tap_text.side_effect=tap
+        with patch.object(ui.time,'sleep'),self.assertRaises(ObservedPause):
+            ui.final_ui(device,Path('candidate.apk'),'com.chafy.gunboundrecomp.ci')
+        self.assertEqual(observer.locate_text.call_count,2)
+        observer.run.assert_called_once_with('shell','input','tap','1244','122')
+
     def test_ocr_has_one_worker_without_changing_the_timeout_or_parent_environment(self):
         from unittest.mock import patch
         spec=importlib.util.spec_from_file_location('android_ui_test',PATH)

@@ -439,3 +439,11 @@ continua após `am force-stop` no mesmo APK instalado.
 Duas regressões cobrem a geometria deslocada e a tentativa de confirmar o
 rascunho com o formulário aberto. A suíte local de automação Android passou
 com 85 testes. [Falha original](https://github.com/guichafy/gunbound-recomp/actions/runs/44662854505/job/136045548775).
+
+O job `136069711353` confirmou `Android42` após a reabertura inicial e após
+SOLO no Android 7. Na etapa seguinte de JEWEL, um frame com Eletricidade
+quebrou o contorno legível do botão Pause. O frame de câmera imediatamente
+anterior ainda continha o botão e OCR `PAUSE`. O smoke passa a observar
+frames novos por um intervalo limitado antes do toque e confirma a abertura
+das opções em seguida. A regressão exige um único toque no alvo observado
+após a primeira leitura falhar. [Evidência do job](https://github.com/guichafy/gunbound-recomp/actions/runs/44670233215/job/136069711353).
