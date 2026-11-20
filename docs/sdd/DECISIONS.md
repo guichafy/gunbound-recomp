@@ -1,5 +1,11 @@
 # Registro de decisões
 
+## Perfil no smoke Android 7
+
+A restauração do layout pode acontecer depois do fim da sessão de teclado.
+O teste espera a geometria de Salvar antes do toque e só encerra o app após
+observar o apelido no lobby. [Registro](ANDROID_PR57_RECOVERY.md#confirmação-do-perfil-após-o-teclado-no-android-7).
+
 ## Emenda à ADR-162 — ação EPA nos efeitos de Ice
 
 O campo `+0x24` representa ação EPA. Ação 14 exclui alvos mortos.

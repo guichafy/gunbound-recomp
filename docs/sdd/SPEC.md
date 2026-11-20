@@ -1,5 +1,12 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Confirmação de perfil no smoke Android — REQ-ANDROID-V1
+
+O smoke aguarda a posição observada do botão Salvar depois de fechar o
+teclado. A confirmação de salvamento e os relançamentos exigem o apelido
+esperado e um controle do lobby clássico no mesmo frame.
+[Diagnóstico](ANDROID_PR57_RECOVERY.md#confirmação-do-perfil-após-o-teclado-no-android-7).
+
 ## Ice T2 e SS contra Knight
 
 REQ-04/05/07/08/09/19/20/38/44/45/52. A condição de vida do alvo e a ação

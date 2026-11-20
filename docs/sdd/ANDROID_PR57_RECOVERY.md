@@ -415,3 +415,27 @@ em IDAT. A mesma imagem falhou com Pillow e libpng/Tesseract Linux.
 O observador agora verifica o PNG antes de enviá-lo ao OCR, preserva as
 capturas inválidas e tenta no máximo três leituras da tela. Só uma captura
 válida pode satisfazer a asserção. O teste cobre corrupção transitória e persistente.
+
+
+## Confirmação do perfil após o teclado no Android 7
+
+No job `136045548775` da main (`9f042861`), a instalação e o fluxo de lobby
+passaram. Depois de fechar o teclado, o Android 7 informou `mInputShown=false`
+antes que a tela de Settings voltasse ao tamanho normal. O OCR encontrou
+Salvar na captura comprimida, em torno de `(817,339)`. Quando o toque foi
+entregue, o botão já estava em torno de `(1003,696)`. O frame `profile-saved`
+ainda mostrava `Piloto` no lobby e `Android42` no campo da janela. Após
+reabrir o app, `profile-persisted.png` era idêntico a `lobby.png` inicial
+(SHA-256 `ce6bad56bc91f6e4eb89aac1857250fa2c4b8efeb61d95629d6f931aae186372`).
+
+O smoke registra o retângulo de Salvar antes de abrir o teclado. Depois de
+Back, aguarda o mesmo botão no layout restaurado e toca uma vez no ponto
+observado. A confirmação de perfil exige o apelido via OCR e o botão CREATE
+nativo no mesmo frame, no primeiro salvamento e nos três relançamentos. O
+reconhecedor rejeitou os frames arquivados com Settings aberto e reconheceu
+o lobby nas capturas válidas das APIs 24 e 36. A verificação de persistência
+continua após `am force-stop` no mesmo APK instalado.
+
+Duas regressões cobrem a geometria deslocada e a tentativa de confirmar o
+rascunho com o formulário aberto. A suíte local de automação Android passou
+com 85 testes. [Falha original](https://github.com/guichafy/gunbound-recomp/actions/runs/44662854505/job/136045548775).

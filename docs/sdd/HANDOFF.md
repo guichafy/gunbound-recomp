@@ -1,5 +1,13 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Smoke de perfil no Android 7
+
+O job `136045548775` tocou em Salvar enquanto a tela saía do layout
+comprimido do teclado e aceitou o apelido do formulário como confirmação.
+O smoke espera o botão no retângulo de referência e confirma apelido e
+CREATE no mesmo frame de lobby antes e depois de relançar.
+[Diagnóstico e teste](ANDROID_PR57_RECOVERY.md#confirmação-do-perfil-após-o-teclado-no-android-7).
+
 ## Ice T2 e SS contra Knight
 
 O Knight vivo passa pelo mesmo filtro de HP e invulnerabilidade de outros
