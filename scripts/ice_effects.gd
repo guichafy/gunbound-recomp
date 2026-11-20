@@ -36,8 +36,9 @@ static func parameters(shell: Dictionary, actor: Dictionary) -> Dictionary:
 		"percent":100 + int(Items.attack(str(actor.get("turn_item",""))))}
 
 static func eligible(actor: Dictionary) -> bool:
-	# The source alive bit is cleared by the actor update, after the blast.
-	return bool(actor.get("ice_alive",int(actor.hp)>0)) and not bool(actor.get("invulnerable",false)) and int(actor.vehicle) != 15
+	# Native dead is an EPA action, independent of the mobile type. The model
+	# keeps the pre-blast alive stamp until the damage and area passes finish.
+	return bool(actor.get("ice_alive",int(actor.hp)>0)) and not bool(actor.get("invulnerable",false))
 
 static func t2(actor: Dictionary, amount: int) -> bool:
 	if amount <= 0 or not eligible(actor):
@@ -67,7 +68,3 @@ static func modify_damage(actor: Dictionary, amount: int, flags: int) -> int:
 		if (flags & (8 >> i)) != 0:
 			amount = Physics.quot(amount * (100 + int(values[i])),100)
 	return maxi(0,amount)
-
-static func publishes_t2_pose(vehicle: int) -> bool:
-	# Native type5/6/8/10 suppress damage/ice poses, not the state update.
-	return vehicle not in [6,7,9,11]

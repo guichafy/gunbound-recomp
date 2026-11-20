@@ -77,7 +77,7 @@ O Godot exclui Knight de Ice T2/SS por ID de mobile. No PE, o tipo 14 com
 EPA `normal` recebeu dano de Ice T2 e vulnerabilidade `[0,0,5,0]`, e SS
 aplicou `[5,5,5,5]`. O gate de `dead` se aplica a qualquer tipo. A supressão
 de pose de Ice T2 também lê ações EPA, hoje aproximadas por ID no Godot.
-Esses caminhos de Ice ficam para uma correção própria.
+Esses caminhos foram tratados na [correção de Ice e Knight](ICE_KNIGHT_EPA.md).
 
 ## Repetir a matriz
 

@@ -53,6 +53,10 @@ func react(event: Dictionary) -> void:
 		motion[event.actor].pos = Vector2(event.to)
 		motion[event.actor].previous = Vector2(event.to)
 	elif event.type == "ice_effect":
+		# 45db20 blocks the T2 reaction during firing. The SS area pose is
+		# issued separately by 4759b0 and can interrupt that action.
+		if int(event.get("weapon", -1)) == 1 and motion[event.actor].pose == "recoil":
+			return
 		var ticks := 0
 		for duration in IceEffects.pose(int(motion[event.actor].vehicle)).durations:
 			ticks += int(duration)
@@ -60,9 +64,10 @@ func react(event: Dictionary) -> void:
 		motion[event.actor].hurt_pose = "ice"
 		start_pose(event.actor,"ice","hurt",ticks * 0.05)
 	elif event.type in ["damage", "shield_damage", "pilot_hit"]:
-		if str(event.get("kind","")) == "ice_silent":
+		var kind := str(event.get("kind", ""))
+		if kind == "ice_silent" or (kind == "ice_blast" and motion[event.actor].pose == "recoil"):
 			return
-		if str(event.get("kind", "")) == "shock":
+		if kind == "shock":
 			start_pose(event.actor, "shock", "shock", source_duration(event.actor,"shock",1.0))
 		else:
 			# Two hurt animations alternate (MobileFlipbook second damage).

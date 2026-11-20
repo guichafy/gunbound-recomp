@@ -1,5 +1,9 @@
 # Ice T2/SS — issue #29 / ADR-162
 
+A [emenda de Ice e Knight](ICE_KNIGHT_EPA.md) corrige as linhas históricas
+de elegibilidade e pose abaixo. Os valores 14 e 5/6/8/10 são índices
+da ação EPA.
+
 O T2 soma 5 ao terceiro campo de vulnerabilidade do alvo, até 50, mesmo
 quando o escudo absorve todo o dano. O SS usa sua própria área e altera
 os quatro campos, com teto 20. Por exemplo, `[0,0,50,0]` vira `[5,5,20,5]`

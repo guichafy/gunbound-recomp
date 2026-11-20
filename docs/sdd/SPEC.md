@@ -1,5 +1,11 @@
 # Especificação — Gunbound Recomp 0.20.5
 
+## Ice T2 e SS contra Knight
+
+REQ-04/05/07/08/09/19/20/38/44/45/52. A condição de vida do alvo e a ação
+EPA de disparo governam regras distintas. Knight vivo recebe dano e os
+campos de vulnerabilidade de Ice T2/SS. [Contrato](ICE_KNIGHT_EPA.md).
+
 ## Armor T1 — impacto do disparo comum (19/11/2026)
 
 REQ-04/05/07/08/19/23–26/35–38/44/45/52 e REQ-JEWEL-46. Armor T1 usa

@@ -1024,6 +1024,7 @@ func blast(position: Vector2, radius: float, damage: float, emp: float = 0.0, at
 ## 474650/4759b0: state gates use native computed damage or their own area,
 ## never HP-only event slices. The source alive flag survives the whole blast.
 func ice_impact(shell: Dictionary, impact: Vector2i, data: Dictionary) -> void:
+	var weapon := int(shell.weapon)
 	for target in actors:
 		target.ice_alive = int(target.hp)>0
 	for index in actors.size():
@@ -1031,14 +1032,15 @@ func ice_impact(shell: Dictionary, impact: Vector2i, data: Dictionary) -> void:
 		if not IceEffects.eligible(target):
 			continue
 		var amount := AdukaCombat.amount(target,impact,data)
-		var changed := int(shell.weapon)==1 and IceEffects.t2(target,amount)
-		Damage.deal_damage(actors,events,index,amount,"ice_silent" if not IceEffects.publishes_t2_pose(int(target.vehicle)) else "")
-		if changed and IceEffects.publishes_t2_pose(int(target.vehicle)):
-			events.append({"type":"ice_effect","actor":index,"position":target.pos})
-	if int(shell.weapon)==2:
+		var changed := weapon == 1 and IceEffects.t2(target,amount)
+		# T2 requests one ice reaction. SS has a common blast and a separate area pose.
+		Damage.deal_damage(actors,events,index,amount,"ice_silent" if weapon == 1 else "ice_blast")
+		if changed:
+			events.append({"type":"ice_effect","actor":index,"position":target.pos,"weapon":weapon})
+	if weapon == 2:
 		for index in actors.size():
 			if IceEffects.ss(actors[index],AdukaCombat.origin(actors[index]),impact):
-				events.append({"type":"ice_effect","actor":index,"position":actors[index].pos})
+				events.append({"type":"ice_effect","actor":index,"position":actors[index].pos,"weapon":weapon})
 	for target in actors:
 		target.erase("ice_alive")
 

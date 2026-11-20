@@ -1,0 +1,1791 @@
+{
+  "impact_probe": {
+    "any_overkill": 51262,
+    "center_amount_compared": 51744,
+    "center_amount_differs": 31517,
+    "highest_hp_lost": {
+      "attack": 0,
+      "defense": 0,
+      "dx": 0,
+      "dy": 0,
+      "effects": 0,
+      "explosions": 1,
+      "hp_before": 1200,
+      "hp_lost": 1200,
+      "mines": 0,
+      "overkill": 4800,
+      "reported": 6000,
+      "sample": "center",
+      "shell_force": 0,
+      "shell_power": 200,
+      "shield_before": 0,
+      "shield_lost": 0,
+      "shooter": 3,
+      "target": 11,
+      "weapon": 0,
+      "weather": "neutral",
+      "weather_contacts": 0
+    },
+    "highest_reported": {
+      "attack": 50,
+      "defense": -50,
+      "dx": 0,
+      "dy": 0,
+      "effects": 0,
+      "explosions": 1,
+      "hp_before": 1000,
+      "hp_lost": 1000,
+      "mines": 0,
+      "overkill": 37040,
+      "reported": 38040,
+      "sample": "stats",
+      "shell_force": 0,
+      "shell_power": 317,
+      "shield_before": 0,
+      "shield_lost": 0,
+      "shooter": 5,
+      "target": 4,
+      "weapon": 2,
+      "weather": "force",
+      "weather_contacts": 1
+    },
+    "hp_600_or_more": 54953,
+    "per_shot": {
+      "10:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "10:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "10:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 672,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "11:0": {
+        "any_overkill": 2866,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3068,
+        "reported_600_or_more": 3115,
+        "rows": 3584
+      },
+      "11:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 86,
+        "reported_600_or_more": 122,
+        "rows": 3584
+      },
+      "11:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 123,
+        "reported_600_or_more": 162,
+        "rows": 3584
+      },
+      "12:0": {
+        "any_overkill": 2851,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2998,
+        "reported_600_or_more": 3047,
+        "rows": 3584
+      },
+      "12:1": {
+        "any_overkill": 2787,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2896,
+        "reported_600_or_more": 2929,
+        "rows": 3584
+      },
+      "12:2": {
+        "any_overkill": 2859,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3050,
+        "reported_600_or_more": 3102,
+        "rows": 3584
+      },
+      "13:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 23,
+        "reported_600_or_more": 31,
+        "rows": 3584
+      },
+      "13:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "13:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "14:0": {
+        "any_overkill": 2911,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3133,
+        "reported_600_or_more": 3150,
+        "rows": 3584
+      },
+      "14:1": {
+        "any_overkill": 2796,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2932,
+        "reported_600_or_more": 2961,
+        "rows": 3584
+      },
+      "14:2": {
+        "any_overkill": 2704,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2831,
+        "reported_600_or_more": 2885,
+        "rows": 3584
+      },
+      "15:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 672,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "15:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 672,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "15:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 672,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "16:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 1037,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 12,
+        "reported_600_or_more": 16,
+        "rows": 3584
+      },
+      "16:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 1568,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "16:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 1568,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "1:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 24,
+        "reported_600_or_more": 32,
+        "rows": 3584
+      },
+      "1:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 1341,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "1:2": {
+        "any_overkill": 40,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 392,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 385,
+        "reported_600_or_more": 677,
+        "rows": 3584
+      },
+      "2:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "2:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "2:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "3:0": {
+        "any_overkill": 2824,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2968,
+        "reported_600_or_more": 3013,
+        "rows": 3584
+      },
+      "3:1": {
+        "any_overkill": 3101,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3170,
+        "reported_600_or_more": 3174,
+        "rows": 3584
+      },
+      "3:2": {
+        "any_overkill": 3108,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3180,
+        "reported_600_or_more": 3184,
+        "rows": 3584
+      },
+      "4:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 24,
+        "reported_600_or_more": 32,
+        "rows": 3584
+      },
+      "4:1": {
+        "any_overkill": 2850,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3040,
+        "reported_600_or_more": 3093,
+        "rows": 3584
+      },
+      "4:2": {
+        "any_overkill": 2988,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3151,
+        "reported_600_or_more": 3157,
+        "rows": 3584
+      },
+      "5:0": {
+        "any_overkill": 2860,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3054,
+        "reported_600_or_more": 3105,
+        "rows": 3584
+      },
+      "5:1": {
+        "any_overkill": 2545,
+        "center_amount_compared": 784,
+        "center_amount_differs": 768,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2743,
+        "reported_600_or_more": 2832,
+        "rows": 3584
+      },
+      "5:2": {
+        "any_overkill": 3149,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3193,
+        "reported_600_or_more": 3196,
+        "rows": 3584
+      },
+      "6:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 49,
+        "reported_600_or_more": 66,
+        "rows": 3584
+      },
+      "6:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 1344,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "6:2": {
+        "any_overkill": 9,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 0,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 244,
+        "reported_600_or_more": 321,
+        "rows": 3584
+      },
+      "7:0": {
+        "any_overkill": 2343,
+        "center_amount_compared": 784,
+        "center_amount_differs": 768,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2626,
+        "reported_600_or_more": 2714,
+        "rows": 3584
+      },
+      "7:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "7:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "8:0": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "8:1": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 1565,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "8:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 1568,
+        "center_amount_differs": 1566,
+        "center_comparable_forces": {
+          "force": 784,
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      },
+      "9:0": {
+        "any_overkill": 2819,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 2948,
+        "reported_600_or_more": 2982,
+        "rows": 3584
+      },
+      "9:1": {
+        "any_overkill": 2852,
+        "center_amount_compared": 784,
+        "center_amount_differs": 784,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 3002,
+        "reported_600_or_more": 3048,
+        "rows": 3584
+      },
+      "9:2": {
+        "any_overkill": 0,
+        "center_amount_compared": 784,
+        "center_amount_differs": 448,
+        "center_comparable_forces": {
+          "neutral": 784
+        },
+        "hp_600_or_more": 0,
+        "reported_600_or_more": 0,
+        "rows": 3584
+      }
+    },
+    "primary_power_differences": [
+      {
+        "pe_cell": 200,
+        "primary_shell": 0,
+        "shooter": 7,
+        "weapon": 1
+      },
+      {
+        "pe_cell": 400,
+        "primary_shell": 0,
+        "shooter": 7,
+        "weapon": 2
+      },
+      {
+        "pe_cell": 190,
+        "primary_shell": 0,
+        "shooter": 10,
+        "weapon": 0
+      },
+      {
+        "pe_cell": 160,
+        "primary_shell": 0,
+        "shooter": 10,
+        "weapon": 1
+      },
+      {
+        "pe_cell": 140,
+        "primary_shell": 0,
+        "shooter": 10,
+        "weapon": 2
+      }
+    ],
+    "reported_600_or_more": 56146,
+    "rows": 172032,
+    "rows_per_weather": {
+      "electricity": 39936,
+      "force": 39936,
+      "ignorance": 3072,
+      "neutral": 39936,
+      "protection": 3072,
+      "thor": 39936,
+      "tornado": 3072,
+      "wind": 3072
+    },
+    "weather_target_shot_cells": 6144
+  },
+  "launch_grid": {
+    "boundaries": 7300,
+    "checks": 423417,
+    "ui_cells": 21900,
+    "velocity_pairs": 394200
+  },
+  "native_action_controls": [
+    {
+      "action": 0,
+      "amount": 210,
+      "attack": 0,
+      "defense": 0,
+      "dx": 0,
+      "dy": 0,
+      "force": 0,
+      "hp": 1000,
+      "hp_after": 820,
+      "material": 0,
+      "protection": false,
+      "shield": 30,
+      "shield_after": 0,
+      "shooter": 4,
+      "target": 2,
+      "weapon": 0
+    },
+    {
+      "action": 14,
+      "amount": 0,
+      "attack": 0,
+      "defense": 0,
+      "dx": 0,
+      "dy": 0,
+      "force": 0,
+      "hp": 1000,
+      "hp_after": 1000,
+      "material": 0,
+      "protection": false,
+      "shield": 30,
+      "shield_after": 30,
+      "shooter": 4,
+      "target": 2,
+      "weapon": 0
+    },
+    {
+      "action": 0,
+      "amount": 184,
+      "attack": 0,
+      "defense": 0,
+      "dx": 0,
+      "dy": 0,
+      "force": 0,
+      "hp": 1000,
+      "hp_after": 846,
+      "material": 0,
+      "protection": false,
+      "shield": 30,
+      "shield_after": 0,
+      "shooter": 4,
+      "target": 15,
+      "weapon": 0
+    },
+    {
+      "action": 14,
+      "amount": 0,
+      "attack": 0,
+      "defense": 0,
+      "dx": 0,
+      "dy": 0,
+      "force": 0,
+      "hp": 1000,
+      "hp_after": 1000,
+      "material": 0,
+      "protection": false,
+      "shield": 30,
+      "shield_after": 30,
+      "shooter": 4,
+      "target": 15,
+      "weapon": 0
+    }
+  ],
+  "native_roster": {
+    "armor_rows": 625,
+    "initializers": 430,
+    "numeric_rows": 79872,
+    "targets": 206
+  },
+  "scope": "Controlled impact and isolated shared consumer. No full-shot parity claim.",
+  "shared_consumer": {
+    "amount_mismatch": 0,
+    "examples": [],
+    "knight_amount_mismatch": 0,
+    "mismatch_per_target": {},
+    "per_shot": {
+      "10:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "10:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "10:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "11:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "11:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "11:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "12:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "12:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "12:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "13:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "13:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "13:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "14:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "14:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "14:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "15:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "15:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "15:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "16:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "16:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "16:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "1:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "1:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "1:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "2:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "2:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "2:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "3:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "3:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "3:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "4:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "4:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "4:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "5:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "5:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "5:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "6:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "6:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "6:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "7:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "7:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "7:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "8:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "8:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "8:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "9:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "9:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      },
+      "9:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 1664
+      }
+    },
+    "rows": 79872,
+    "schema": 1,
+    "state_mismatch": 0
+  },
+  "signed_axes_consumer": {
+    "amount_mismatch": 0,
+    "examples": [],
+    "knight_amount_mismatch": 0,
+    "mismatch_per_target": {},
+    "per_shot": {
+      "10:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "10:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "10:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "11:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "11:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "11:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "12:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "12:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "12:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "13:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "13:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "13:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "14:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "14:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "14:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "15:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "15:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "15:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "16:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "16:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "16:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "1:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "1:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "1:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "2:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "2:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "2:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "3:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "3:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "3:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "4:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "4:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "4:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "5:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "5:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "5:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "6:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "6:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "6:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "7:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "7:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "7:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "8:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "8:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "8:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "9:0": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "9:1": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      },
+      "9:2": {
+        "different_amount": 0,
+        "different_hp_shield": 0,
+        "rows": 202
+      }
+    },
+    "rows": 9696,
+    "schema": 1,
+    "state_mismatch": 0
+  },
+  "source_hashes": {
+    "characterdata": "b7278385d6ea60af3cdcbccbf6df15a74e857f196adbb87e5e99bea6a0feecaf",
+    "impact_csv": "32b2d7104f81552bc841144a33f51b36012a72d2df948fae64a5f0d45f4e885f",
+    "native_matrix": "1bf62766089c2514b1d437da5b17c8e6a20b7cb6740fbf28c03154f6f9ca229c",
+    "pe": "4af6283dfd151f5256b9bc0da8d07fff16384950c00da3b2baae825f5fc0fcde"
+  },
+  "weather_flight": {
+    "actor_contact_per_weather": {
+      "electricity": 43,
+      "force": 41,
+      "ignorance": 41,
+      "neutral": 34,
+      "protection": 41,
+      "thor": 42,
+      "tornado": 25,
+      "wind": 155
+    },
+    "cases": 1154,
+    "cases_per_weather": {
+      "electricity": 97,
+      "force": 96,
+      "ignorance": 96,
+      "neutral": 96,
+      "protection": 96,
+      "thor": 97,
+      "tornado": 96,
+      "wind": 480
+    },
+    "checks": 12378,
+    "column_consumed": {
+      "electricity": 97,
+      "force": 96,
+      "tornado": 96
+    },
+    "failures": 0,
+    "high_actual_hp_loss": 0,
+    "high_reported": 46,
+    "log_sha256": "71c44335249aff7b2f530dcbf4022b2e4d26a088cf1813f4b1a6fa31b81eb450",
+    "map_turns": 792,
+    "maps_modes": 44,
+    "max_reported": {
+      "category": "force",
+      "facing": -1,
+      "hp_lost": 300,
+      "scenario": "range",
+      "shield_lost": 0,
+      "shooter": 5,
+      "target_damage_event_sum": 1865,
+      "target_reported_minus_loss": 1565,
+      "weapon": 2
+    },
+    "max_reported_trace": [
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          1044.2890625,
+          448.00390625
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 7,
+        "type": "weather_hit",
+        "weapon": null,
+        "weather": "force"
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          782.0,
+          475.0
+        ],
+        "removed": 712,
+        "source": null,
+        "tick": 27,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      },
+      {
+        "actor": 1,
+        "amount": 1865,
+        "pixel": [
+          780.0,
+          475.0
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 27,
+        "type": "damage",
+        "weapon": null,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          770.0,
+          524.0
+        ],
+        "removed": 1445,
+        "source": null,
+        "tick": 29,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          809.0,
+          476.0
+        ],
+        "removed": 174,
+        "source": null,
+        "tick": 31,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          802.0,
+          477.0
+        ],
+        "removed": 0,
+        "source": null,
+        "tick": 33,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          805.0,
+          497.0
+        ],
+        "removed": 162,
+        "source": null,
+        "tick": 35,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          813.0,
+          509.0
+        ],
+        "removed": 285,
+        "source": null,
+        "tick": 37,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          783.0,
+          514.0
+        ],
+        "removed": 0,
+        "source": null,
+        "tick": 39,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          770.0,
+          512.0
+        ],
+        "removed": 8,
+        "source": null,
+        "tick": 41,
+        "type": "explosion",
+        "weapon": 2,
+        "weather": null
+      }
+    ]
+  },
+  "weather_map_item_flight": {
+    "actor_contact_per_weather": {
+      "electricity": 67,
+      "force": 66,
+      "ignorance": 75,
+      "neutral": 58,
+      "protection": 66,
+      "thor": 68,
+      "tornado": 33,
+      "wind": 66
+    },
+    "cases": 1302,
+    "cases_per_weather": {
+      "electricity": 160,
+      "force": 160,
+      "ignorance": 160,
+      "neutral": 182,
+      "protection": 160,
+      "thor": 160,
+      "tornado": 160,
+      "wind": 160
+    },
+    "checks": 10576,
+    "column_consumed": {
+      "electricity": 147,
+      "force": 160,
+      "tornado": 160
+    },
+    "failures": 0,
+    "high_actual_hp_loss": 0,
+    "high_reported": 17,
+    "item_cases": 1280,
+    "log_sha256": "fedd2f95f5601ee562d8c3046bffd6a63452b2e9a8faab8f3639f410eb505ddb",
+    "max_reported": {
+      "category": "thor",
+      "facing": 1,
+      "hp_lost": 300,
+      "scenario": "items",
+      "shield_lost": 0,
+      "shooter": 4,
+      "target_damage_event_sum": 1686,
+      "target_reported_minus_loss": 1386,
+      "weapon": 1
+    },
+    "max_reported_trace": [
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          464.0,
+          500.0
+        ],
+        "removed": 321,
+        "source": null,
+        "tick": 29,
+        "type": "explosion",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": 1,
+        "amount": 169,
+        "pixel": [
+          500.0,
+          475.0
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 29,
+        "type": "damage",
+        "weapon": null,
+        "weather": null
+      },
+      {
+        "actor": 0,
+        "amount": null,
+        "pixel": [
+          462.0,
+          529.0
+        ],
+        "removed": 386,
+        "source": "weather",
+        "tick": 29,
+        "type": "thor",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          493.0,
+          523.0
+        ],
+        "removed": 172,
+        "source": null,
+        "tick": 31,
+        "type": "explosion",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": 1,
+        "amount": 78,
+        "pixel": [
+          500.0,
+          475.0
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 31,
+        "type": "damage",
+        "weapon": null,
+        "weather": null
+      },
+      {
+        "actor": 1,
+        "amount": 20,
+        "pixel": [
+          500.0,
+          475.0
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 31,
+        "type": "damage",
+        "weapon": null,
+        "weather": null
+      },
+      {
+        "actor": 0,
+        "amount": null,
+        "pixel": [
+          492.0,
+          503.0
+        ],
+        "removed": 86,
+        "source": "weather",
+        "tick": 31,
+        "type": "thor",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          504.0,
+          522.0
+        ],
+        "removed": 209,
+        "source": null,
+        "tick": 64,
+        "type": "explosion",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": 1,
+        "amount": 1419,
+        "pixel": [
+          501.877777099609,
+          517.0
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 64,
+        "type": "damage",
+        "weapon": null,
+        "weather": null
+      },
+      {
+        "actor": 0,
+        "amount": null,
+        "pixel": [
+          506.0,
+          551.0
+        ],
+        "removed": 364,
+        "source": "weather",
+        "tick": 64,
+        "type": "thor",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          539.0,
+          551.0
+        ],
+        "removed": 205,
+        "source": null,
+        "tick": 66,
+        "type": "explosion",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": 0,
+        "amount": null,
+        "pixel": [
+          529.0,
+          501.0
+        ],
+        "removed": 150,
+        "source": "weather",
+        "tick": 66,
+        "type": "thor",
+        "weapon": 1,
+        "weather": null
+      }
+    ],
+    "native_maps": 22
+  },
+  "weather_target_flight": {
+    "actor_contact_per_weather": {
+      "electricity": 337,
+      "force": 337,
+      "ignorance": 337,
+      "neutral": 265,
+      "protection": 337,
+      "thor": 337,
+      "tornado": 173,
+      "wind": 337
+    },
+    "cases": 6144,
+    "cases_per_weather": {
+      "electricity": 768,
+      "force": 768,
+      "ignorance": 768,
+      "neutral": 768,
+      "protection": 768,
+      "thor": 768,
+      "tornado": 768,
+      "wind": 768
+    },
+    "checks": 43776,
+    "column_consumed": {
+      "electricity": 768,
+      "force": 768,
+      "tornado": 768
+    },
+    "failures": 0,
+    "high_actual_hp_loss": 0,
+    "high_reported": 276,
+    "log_sha256": "1054f4aa46d278922252a366bbf6d83a226a04ce5adbe159a655b8cd5996ae44",
+    "max_reported": {
+      "category": "tornado",
+      "facing": 1,
+      "hp_lost": 300,
+      "scenario": "target_matrix",
+      "shield_lost": 0,
+      "shooter": 5,
+      "target": 7,
+      "target_damage_event_sum": 2545,
+      "target_reported_minus_loss": 2245,
+      "weapon": 1
+    },
+    "max_reported_trace": [
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          237.4296875,
+          454.44921875
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 7,
+        "type": "weather_hit",
+        "weapon": null,
+        "weather": "tornado"
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          237.4296875,
+          454.44921875
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 7,
+        "type": "weather_hit",
+        "weapon": null,
+        "weather": "tornado"
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          237.4296875,
+          454.44921875
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 7,
+        "type": "weather_hit",
+        "weapon": null,
+        "weather": "tornado"
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          499.0,
+          479.0
+        ],
+        "removed": 18,
+        "source": null,
+        "tick": 31,
+        "type": "explosion",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": 1,
+        "amount": 2545,
+        "pixel": [
+          500.0,
+          480.0
+        ],
+        "removed": null,
+        "source": null,
+        "tick": 31,
+        "type": "damage",
+        "weapon": null,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          539.0,
+          500.0
+        ],
+        "removed": 238,
+        "source": null,
+        "tick": 37,
+        "type": "explosion",
+        "weapon": 1,
+        "weather": null
+      },
+      {
+        "actor": null,
+        "amount": null,
+        "pixel": [
+          601.0,
+          500.0
+        ],
+        "removed": 238,
+        "source": null,
+        "tick": 40,
+        "type": "explosion",
+        "weapon": 1,
+        "weather": null
+      }
+    ]
+  }
+}
