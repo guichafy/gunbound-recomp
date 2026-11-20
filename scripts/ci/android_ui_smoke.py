@@ -673,7 +673,8 @@ def final_ui(device: Device,apk: Path,app: str):
         # in CAMERA ON, so an ordinary capture regex alone is insufficient.
         device.capture(mode+'-camera-off-confirmed',r'CAMERA|C[ÂA]MERA',absent=CAMERA_ON_PATTERN)
         device.attempt_player_charge(mode)
-        device.tap_text(r'PAUSE|PAUSA',label=mode+'-touch-pause')
+        # A moving battle effect can hide the outline in a single OCR frame.
+        device.tap_text(r'PAUSE|PAUSA',label=mode+'-touch-pause',wait_timeout=15)
         device.capture(mode+'-touch-pause-visible',OPTIONS_POPUP_PATTERN)
         device.resume_options(mode+'-touch-resume')
         device.run('shell','input','keyevent','KEYCODE_BACK')
