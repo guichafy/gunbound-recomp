@@ -31,7 +31,15 @@ static func section_side(velocity: Vector2i) -> Vector2:
 
 static func finish_tick(shell: Dictionary) -> void:
 	# Called after acceleration, once the common flight loop records hit_pos.
-	shell.water_sides.append(section_side(shell.fp_velocity))
+	var velocity: Vector2i = shell.fp_velocity
+	var side := section_side(velocity)
+	if int(shell.wave_counter) == 0:
+		# PE 0x4b15bf: the initial rear edge shares the new section's side.
+		# Subtract post-step velocity in 24.8, then shift each axis arithmetically.
+		var backstep := Vector2((-velocity.x) >> 8, (-velocity.y) >> 8)
+		shell.trail[0] = Vector2(shell.hit_pos).floor() + backstep
+		shell.water_sides[0] = side
+	shell.water_sides.append(side)
 	while shell.water_sides.size() > shell.trail.size():
 		shell.water_sides.pop_front()
 	shell.wave_phase = posmod(int(shell.wave_phase)+int(shell.wave_step),360)

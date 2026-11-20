@@ -107,3 +107,34 @@ Logs locais: `.tools/turtle-t2/build-macos.log`, `pck.log` e
 `pck-source.log`; hashes em `.tools/turtle-t2/release-artifacts.json`.
 PNGs preexistentes não foram alterados; `git diff --check` passou. Pacote
 0.20.1 preservado como histórico. Sem commit, push ou publicação.
+
+## Primeiro segmento do rastro — REQ-19/44/45
+
+Emenda da ADR-087. No PE `4af6283d…`, após a atualização do voo, o
+Animate `0x4b1050` entra no ramo de histórico vazio em `0x4b15bf`.
+Cada coordenada inteira da borda mais antiga é
+`((coordenada_dianteira << 8) - velocidade_fp_pós_passo) >> 8` até
+`0x4b1687`. A combinação conserva o mesmo vetor lateral nas duas seções
+e aplica o shift aritmético por eixo, inclusive com velocidade negativa.
+A vtable `0x556660` liga Animate e Detonate a esse projétil.
+
+A correção deve semear a primeira seção mais antiga no histórico visual do
+T2 após o primeiro passo, a partir da posição atual em pixels e da
+velocidade pós-passo. A regressão compara os quatro vértices esperados com
+a malha emitida pelo Godot, para cargas normal e mínima nos dois sentidos,
+com as duas fases da onda. A verificação cobre também a captura GPU.
+
+### Validação da emenda
+
+Godot 4.7.2. Regressão do primeiro segmento falhou em oito casos no
+baseline (596 verificações ao todo). Após a correção, T2 598/0,
+projéteis 158/0 e cronologia 158/0. A sondagem de 48 projéteis comparou
+os quatro vértices, incluindo 16 casos de força mínima. Posição do
+carrier, ponto de colisão, emissão e velocidade coincidiram com o
+baseline da auditoria nas mesmas condições.
+
+A captura temporal executou 270 quadros Full HD a 60 FPS simulados, com
+30 buffers RGBA idênticos durante a pausa e mudança na retomada. Uma
+captura isolada a 12× confirmou o raster da primeira seção, nos dois
+sentidos e com as duas forças. A referência nativa é a análise estática
+do PE. A captura e as suítes executaram o Godot a partir da fonte.

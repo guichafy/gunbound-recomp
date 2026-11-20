@@ -528,6 +528,11 @@ T1 mantém `draw_polygon`. Dual/Dual+ têm estados separados, e Teleport limpa
 flight para continuar como beacon sem onda. Dados T1/SS/avatares preservados.
 Contrato, fontes e resultados: [TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md).
 
+O primeiro tick do T2 recalcula apenas a seção inicial do histórico visual.
+O lado vem da seção dianteira. O centro traseiro é o pixel de `hit_pos`
+mais `(-fp_velocity) >> 8` por eixo, já após o passo. As seções seguintes
+entram no mesmo histórico e usam a interpolação visual existente.
+
 ## Turtle 0.20.1
 
 `ClassicProjectileArt` usa uma seção transversal compartilhada por amostra,

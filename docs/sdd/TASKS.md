@@ -1226,3 +1226,12 @@ Ver ORIGINAL_MAGE_BIGFOOT.md e ADR-089; composição dos lasers Mage permanece a
 - [x] No merge com a `main`, REQ-45/ADR-082 permanecem do roster e do chifre; este catálogo usa REQ-46/ADR-089.
 - [ ] Usuário validar na loja as descrições com reticência e o nome coreano do concurso.
 - [ ] App não reexportado nesta entrega.
+
+## Primeiro segmento do T2 do Turtle (20/11/2026)
+
+- [x] Corrigir a borda traseira do primeiro segmento do T2 segundo a ADR-087.
+- [x] Comparar vértices nos dois sentidos e na força mínima. Oito falhas
+  reproduzidas antes da correção, 914 verificações aprovadas depois e
+  48 casos da sondagem coincidentes com o PE.
+- [x] Validar o desenho na GPU e registrar os limites em
+  [TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md).
