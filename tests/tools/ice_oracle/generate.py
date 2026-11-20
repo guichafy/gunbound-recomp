@@ -46,16 +46,18 @@ def character_rows():
     return tuple(struct.unpack_from('<83i', decoded, i * 332) for i in range(16))
 
 
-def target(e, values, alive=True, immune=False, source_type=0, hp=1000, shield=0):
+def target(e, values, alive=True, immune=False, source_type=0, hp=1000, shield=0,
+           action_index=0, vulnerability=100):
     actor = e.alloc(0x20000)
     for off, value in zip(FIELDS, values):
         e.setcell(actor + off, value)
     for off, value in ((0x90c, 200), (0xb30, 200), (0xf78, 24), (0x13c0, 0),
-                       (0x6520, 100), (0x6968, hp), (0x6fd4, shield)):
+                       (0x6520, vulnerability), (0x6968, hp), (0x6fd4, shield)):
         e.setcell(actor + off, value)
     e.set_flag(actor + 0x908, alive)
     e.set_flag(actor + 0xbff7, immune)
-    e.w32(actor + 0x24, source_type)
+    e.setcell(actor + 0x1a2c, source_type)
+    e.w32(actor + 0x24, action_index)
     vt = e.alloc(16)
     e.w32(actor, vt)
     e.w32(vt + 4, 0x7d000200)
@@ -81,10 +83,13 @@ def initialize(source_type, weapon, attack=0, dig=0):
 
 
 def damage_probe(values, flags=2, vector=(0, 0, 5, 0), dx=0, power=310,
-                 alive=True, immune=False, source_type=0, hp=1000, shield=0, defense_flags=0, bottom=0):
+                 alive=True, immune=False, source_type=0, hp=1000, shield=0, defense_flags=0, bottom=0,
+                 action_index=0, vulnerability=100):
     e, world = machine()
     shell = e.alloc(0x5000)
-    actor = target(e, values, alive, immune, source_type, hp, shield)
+    actor = target(e, values, alive, immune, source_type, hp, shield, action_index, vulnerability)
+    poses = []
+    e.watch[0x7d000200] = lambda _: poses.append(True)
     e.setcell(actor + 0x13c0, bottom)
     for i in range(3):
         e.set_flag(actor + 0x9ce4 + 3 * i, bool(defense_flags & (8 >> i)))
@@ -112,16 +117,19 @@ def damage_probe(values, flags=2, vector=(0, 0, 5, 0), dx=0, power=310,
     assert not e.unmapped
     return {'before': list(values), 'flags': flags, 'vector': vector, 'dx': dx,
             'power': power, 'alive': alive, 'immune': immune, 'source_type': source_type,
+            'action_index': action_index, 'poses': len(poses),
             'hp': hp, 'shield': shield, 'defense_flags': defense_flags,
             'damage': computed[0] if computed else 0,
             'after': [e.getcell(actor + off) for off in FIELDS],
             'hp_after': e.getcell(actor + 0x6968), 'shield_after': e.getcell(actor + 0x6fd4)}
 
 
-def ss_probe(values, distance=0, alive=True, immune=False, source_type=0):
+def ss_probe(values, distance=0, alive=True, immune=False, source_type=0, action_index=0):
     e, _ = machine()
     shell = e.alloc(0x5000)
-    actor = target(e, values, alive, immune, source_type)
+    actor = target(e, values, alive, immune, source_type, action_index=action_index)
+    poses = []
+    e.watch[0x7d000200] = lambda _: poses.append(True)
     for off, value in ((0xf54, 200 - distance), (0x1178, 190), (0x33c8, 130)):
         e.setcell(shell + off, value)
     e.hook_fn(0x48de60, lambda _: 0)  # base blast precedes this state-only probe
@@ -132,8 +140,8 @@ def ss_probe(values, distance=0, alive=True, immune=False, source_type=0):
     e.call(0x4759b0, ecx=shell)
     assert not e.unmapped
     return {'before': list(values), 'distance': distance, 'alive': alive,
-            'immune': immune, 'source_type': source_type,
-            'after': [e.getcell(actor + off) for off in FIELDS]}
+            'immune': immune, 'source_type': source_type, 'action_index': action_index,
+            'poses': len(poses), 'after': [e.getcell(actor + off) for off in FIELDS]}
 
 
 def main():
@@ -145,18 +153,31 @@ def main():
         for shield in (0, 10000):
             cases.append(damage_probe(values, shield=shield))
     for kw in ({'dx': 100}, {'power': 0}, {'alive': False}, {'immune': True},
-               {'source_type': 14}, {'hp': 1}, {'hp': 0}, {'source_type': 10}):
+               {'action_index': 14}, {'hp': 1}, {'hp': 0}, {'action_index': 10}):
         cases.append(damage_probe((0, 0, 0, 0), **kw))
     for flags in range(16):
         cases.append(damage_probe((3, 9, 17, 25), flags=flags, vector=None))
     ss = [ss_probe(v, **kw) for v in ((0, 0, 0, 0), (-8, 15, 19, 20), (20, 21, 49, 50))
           for kw in ({}, {'distance': 129}, {'distance': 130}, {'distance': 131},
-                     {'alive': False}, {'immune': True}, {'source_type': 14}, {'source_type': 10})]
+                     {'alive': False}, {'immune': True}, {'action_index': 14}, {'action_index': 10})]
     masks = [initialize(t, w) for t in range(16) for w in range(3)]
     init = [initialize(10, w, a, d) for w in (1, 2) for a, d in ((0, 0), (-7, -5), (17, 11))]
     body = [damage_probe(v, defense_flags=8, bottom=2, source_type=4, shield=s, dx=dx) for v in ((0, 0, 0, 0), (5, 9, 45, 17))
             for s in (0, 10000) for dx in (0, 10, 45, 100)]
-    result = {'binary_sha256': SHA, 'damage': cases, 'ss': ss, 'initializers': init, 'masks': masks, 'body': body}
+    knight = []
+    knight_type = 14
+    knight_stats = character_rows()[knight_type]
+    for action in (0, 5, 6, 8, 10, 14):
+        inputs = {'source_type': knight_type, 'action_index': action}
+        blast = {**inputs, 'vulnerability': knight_stats[21], 'defense_flags': knight_stats[35], 'shield': 30}
+        knight.append({
+            'action_index': action,
+            't2': damage_probe((0, 0, 0, 0), **blast),
+            'ss_blast': damage_probe((0, 0, 0, 0), power=350, vector=None, **blast),
+            'ss_area': ss_probe((0, 0, 0, 0), **inputs),
+        })
+    result = {'binary_sha256': SHA, 'damage': cases, 'ss': ss, 'initializers': init, 'masks': masks,
+              'body': body, 'knight': knight}
     (ROOT / 'tests/fixtures/ice_native.json').write_text(json.dumps(result, indent=2) + '\n')
     print(f'Ice oracle: {len(cases)} damage / {len(ss)} SS cases')
 

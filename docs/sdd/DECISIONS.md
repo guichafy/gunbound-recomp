@@ -1,5 +1,12 @@
 # Registro de decisões
 
+## Emenda à ADR-162 — ação EPA nos efeitos de Ice
+
+O campo `+0x24` representa ação EPA. Ação 14 exclui alvos mortos.
+Os índices 5, 6, 8 e 10 só preservam a pose de disparo no consumidor de
+dano. O SS aplica sua reação de área separadamente. A antiga leitura por
+tipo de mobile foi substituída. [Evidência](ICE_KNIGHT_EPA.md).
+
 ## Contato e dano do Armor T1 (19/11/2026)
 
 Usar o resultado de `455cc0` e a carga de `41da80` na rota comum do Armor

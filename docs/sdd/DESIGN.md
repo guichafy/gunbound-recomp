@@ -1,5 +1,11 @@
 # Design implementado
 
+## Elegibilidade e reação de Ice
+
+`Match` aplica o dano, o escudo e os campos tipados na simulação comum.
+`BattleArt` avalia a reação de T2 e do blast de SS pelo recoil corrente.
+O SS ainda publica a reação separada da sua área. [Contrato](ICE_KNIGHT_EPA.md).
+
 ## Armor T1 — contato e dano
 
 `ArmorCombat` prepara a carga por shell no emissor comum. O passo de clima

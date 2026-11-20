@@ -1,5 +1,16 @@
 # Hand-off — Gunbound Recomp 0.20.5
 
+## Ice T2 e SS contra Knight
+
+O Knight vivo passa pelo mesmo filtro de HP e invulnerabilidade de outros
+mobiles. T2 aplica [0,0,5,0], SS primeiro calcula o blast e depois aplica
+[5,5,5,5] dentro do raio, ambos com seus tetos. A reação de disparo é
+preservada pelo T2, enquanto a área do SS pode publicar gelo.
+A matriz repetiu 6.144 voos e 172.032 impactos. A validação reuniu 103
+partidas completas, 93.028 assertivas, 262 testes Python e smoke de pacote.
+A suíte Ice foi repetida com o alinhamento do teste ao controle x86.
+[Contrato, provas e limites](ICE_KNIGHT_EPA.md).
+
 ## Armor T1 e investigação do Knight (19/11/2026)
 
 O Armor T1 neutro passou de 626 para 149 HP no degrau e de 667 para 158 HP

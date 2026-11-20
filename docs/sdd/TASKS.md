@@ -1,11 +1,17 @@
 # Entregas e próximos trabalhos
 
+## Correção do Ice T2 e SS contra Knight
+
+- [x] Distinguir ação EPA e tipo protegido e regenerar os controles do oráculo.
+- [x] Corrigir dano, vulnerabilidade e reação nos consumidores de Ice T2/SS.
+- [x] Repetir a matriz, as 103 partidas, a verificação GPU e o smoke macOS.
+
 ## Armor T1 e investigação do Knight (19/11/2026)
 
 - [x] Corrigir o Armor T1 e reproduzir o contato, Ataque, Defesa e Force no Godot e no PE.
 - [x] Corrigir a entrada de ação EPA do oráculo e identificar o problema separado de Ice T2/SS.
 - [x] Repetir a matriz de 48 tiros, a regressão de 103 partidas e o smoke do pacote macOS.
-- [ ] Investigar a integração do estado de ação EPA em Ice T2/SS. [Evidência](ARMOR_T1_COMBAT.md#knight-como-alvo).
+- [x] Investigar e corrigir a seleção do alvo e a reação de Ice T2/SS. [Evidência](ICE_KNIGHT_EPA.md).
 
 ## Execução da matriz dos 48 tiros (19/11/2026)
 

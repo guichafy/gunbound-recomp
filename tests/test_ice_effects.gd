@@ -7,9 +7,9 @@ const Damage = preload("res://scripts/damage.gd")
 const Art = preload("res://scripts/battle_art.gd")
 const NativeWeather = preload("res://scripts/aduka_weather.gd")
 
-func fixture(opponent: int = 2):
+func fixture(opponent: int = 2, mode: String = "solo"):
 	var m = Match.new()
-	m.start(11,1,29,"","wind",null,[],[],[],0,opponent)
+	m.start(11,1,29,"","wind",null,[],[],[],0,opponent,[],mode)
 	m.actors[0].pos = Vector2(200,100)
 	m.actors[1].pos = Vector2(1100,200)
 	m.actors[0].invulnerable = true
@@ -50,7 +50,7 @@ func run() -> void:
 	for opponent in [2,11,15]:
 		m = fixture(opponent)
 		hit(m,1,Shared.center(m.actors[1]))
-		check(m.actors[1].get("native_resistance",[]) == ([0,0,0,0] if opponent==15 else [0,0,5,0]),"T2 source type exclusion%d" % opponent)
+		check(m.actors[1].get("native_resistance",[]) == [0,0,5,0],"T2 treats the living mobile %d as a target" % opponent)
 	model_cases()
 	finish("ICE EFFECTS CHECKS")
 
@@ -59,7 +59,7 @@ func oracle_cases() -> void:
 	for row in oracle.damage:
 		var actor := {"hp":int(row.hp),"shield":int(row.shield),"pos":Vector2.ZERO,
 			"vehicle":15 if int(row.source_type)==14 else 11 if int(row.source_type)==10 else 4,
-			"ice_alive":row.alive,"invulnerable":row.immune,"native_resistance":row.before.map(func(v): return int(v))}
+			"ice_alive":row.alive and int(row.action_index)!=14,"invulnerable":row.immune,"native_resistance":row.before.map(func(v): return int(v))}
 		var amount := Ice.modify_damage(actor,int(row.power),int(row.flags)) if Ice.eligible(actor) and int(row.dx)==0 else 0
 		check(amount==int(row.damage),"PE computed amount / sequential typed IDIV")
 		if row.vector != null:
@@ -71,7 +71,7 @@ func oracle_cases() -> void:
 		check(actor.hp==maxi(0,int(row.hp_after)),"PE HP consumer with declared terminal0")
 	for row in oracle.ss:
 		var actor := {"hp":1000,"vehicle":15 if int(row.source_type)==14 else 11,
-			"ice_alive":row.alive,"invulnerable":row.immune,"native_resistance":row.before.map(func(v): return int(v))}
+			"ice_alive":row.alive and int(row.action_index)!=14,"invulnerable":row.immune,"native_resistance":row.before.map(func(v): return int(v))}
 		Ice.ss(actor,Vector2i(200,200),Vector2i(200-int(row.distance),190))
 		check(actor.native_resistance==row.after.map(func(v): return int(v)),"PE SS real425ac0 area / capped4 fields " + str(row) + " actual=" + str(actor.native_resistance))
 	for row in oracle.body:
@@ -90,9 +90,92 @@ func oracle_cases() -> void:
 		var shell: Dictionary = m.projectile_parameters(0,30,50,int(row.weapon))[0]
 		var data := Ice.parameters(shell,m.actors[0])
 		check(int(data.power)==int(row.power) and int(data.dimension)==int(row.dimension) and int(data.aspect)==int(row.aspect) and int(data.flags)==int(row.flags),"PE41da80 Ice initializer signed bonuses")
+	knight_cases(oracle.knight)
 	var roster := [4,1,3,5,2,6,7,8,9,10,11,12,13,14,15,16]
 	for row in oracle.masks:
 		check(Ice.attack_mask(roster[int(row.source_type)],int(row.weapon))==int(row.flags),"PE41da80 attack mask for every mobile/weapon")
+
+func knight_cases(rows: Array) -> void:
+	for row in rows:
+		var action := int(row.action_index)
+		if action == 8:
+			# The offline presentation has no separate item-fire recoil slot.
+			check(int(row.t2.poses) == 0 and int(row.ss_area.poses) == 1,
+				"Native item fire suppresses T2 pose and allows SS area pose")
+			continue
+		var fire_weapon := [5, 6, 10].find(action)
+		for weapon in [1, 2]:
+			var m = fixture(15)
+			var target: Dictionary = m.actors[1]
+			var native: Dictionary = row.t2 if weapon == 1 else row.ss_blast
+			var vulnerability: Array = row.t2.after if weapon == 1 else row.ss_area.after
+			target.hp = 0 if action == 14 else int(native.hp)
+			target.shield = int(native.shield)
+			var art = Art.new()
+			art.reset(m.actors)
+			if fire_weapon >= 0:
+				art.react({"type":"fire", "actor":1, "vehicle":15, "weapon":fire_weapon})
+			var copy = Snapshot.capture(m)
+			hit(m, weapon, Shared.center(target))
+			hit(copy, weapon, Shared.center(copy.actors[1]))
+			var expected_hp := 0 if action == 14 else int(native.hp_after)
+			check(target.hp == expected_hp and target.shield == int(native.shield_after),
+				"Ice weapon %d matches PE HP and shield on Knight action %d" % [weapon,action])
+			check(target.native_resistance == vulnerability.map(func(value): return int(value)),
+				"Ice weapon %d matches PE typed vulnerability on Knight action %d" % [weapon,action])
+			check(copy.actors == m.actors and copy.events == m.events,
+				"Snapshot and match resolve Ice weapon %d identically" % weapon)
+			for event in m.events:
+				art.react(event)
+				if fire_weapon >= 0 and event.type in ["damage", "shield_damage"]:
+					check(art.state_name(m, 1, false) == "recoil",
+						"Ice blast must not interrupt firing before the separate area pose")
+			var pose_count := int(row.t2.poses if weapon == 1 else row.ss_area.poses)
+			var expected := "destroyed" if action == 14 else "ice" if pose_count > 0 else "recoil"
+			check(art.state_name(m, 1, false) == expected,
+				"Ice weapon %d matches PE pose on Knight action %d" % [weapon,action])
+			if weapon == 1:
+				check(not bool(art.motion[1].hurt_flip), "T2 publishes ice without a separate hurt action")
+
+	var model = fixture(11)
+	var art = Art.new()
+	art.reset(model.actors)
+	hit(model, 1, Shared.center(model.actors[1]))
+	for event in model.events:
+		art.react(event)
+	check(art.state_name(model, 1, false) == "ice", "An idle Ice target receives the T2 pose")
+
+	model = fixture(15)
+	art.reset(model.actors)
+	art.react({"type":"volley", "actor":1, "vehicle":15, "weapon":1})
+	var firing_time := float(art.motion[1].recoil)
+	art.tick(model, firing_time - 0.05)
+	hit(model, 1, Shared.center(model.actors[1]))
+	for event in model.events:
+		art.react(event)
+	check(art.state_name(model, 1, false) == "recoil", "A Dual recoil protects the current pose")
+	model.events.clear()
+	art.tick(model, 0.051)
+	hit(model, 1, Shared.center(model.actors[1]))
+	for event in model.events:
+		art.react(event)
+	check(art.state_name(model, 1, false) == "ice", "T2 sets ice after recoil expires")
+
+	model = fixture(15)
+	model.actors[1].hp = 1000
+	model.actors[1].tilt = 0.0
+	model.actors[1].native_resistance = [20,21,49,50]
+	hit(model, 2, Shared.origin(model.actors[1]) - Vector2i(0,10))
+	check(model.actors[1].hp == 586 and model.actors[1].native_resistance == [20,20,20,20],
+		"SS uses the old vulnerability for its 414-point blast before capping the type fields")
+
+	model = fixture(15, "jewel")
+	model.actors[1].hp = 1000
+	model.actors[1].shield = 30
+	hit(model, 1, Shared.center(model.actors[1]))
+	check(model.actors[1].hp == 1000 and model.actors[1].shield == 30
+		and model.actors[1].native_resistance == [0,0,5,0],
+		"JEWEL still processes Knight's T2 state while keeping HP and shield intact")
 
 func model_cases() -> void:
 	var presets := ConfigFile.new()
