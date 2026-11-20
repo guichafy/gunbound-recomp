@@ -997,6 +997,14 @@ original não executado; aceite visual do T2 posteriormente confirmado pelo usu�
 (“Agora funcionou”); escuta e mouse sem validação registrada.
 Contrato e evidências em `TURTLE_T2_FIDELITY.md`.
 
+### Emenda da ADR-087 — primeiro segmento do T2 (20/11/2026)
+
+O ramo inicial de `AnimateShot2_Bullet12` em `0x4b15bf–0x4b1687`
+recua a borda traseira pela velocidade pós-passo em ponto fixo e aplica
+shift aritmético. A seção inicial da boca deixa de alimentar o primeiro
+segmento. Os mesmos lados da seção dianteira são usados na traseira.
+A emenda trata o histórico visual do T2. Ver [TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md).
+
 ## ADR-088 — aprendizado reutilizável do porte e preservação visual
 
 Após o aceite visual do T2 (“Agora funcionou”), o usuário solicitou uma skill

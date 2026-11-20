@@ -74,6 +74,29 @@ func test_native_geometry() -> void:
 				var head := (Vector2(strip[0].points[0])+Vector2(strip[0].points[1]))*0.5
 				check(head == Vector2(vector_i(row.hit_pixel)), "T2 native cross-section is anchored to the original integer pixel")
 
+func test_first_water_segment() -> void:
+	# Integer vertices from PE 0x4b15bf..0x4b1687 and the native heading LUT.
+	# These are launch states sampled from 45-degree shots in both directions.
+	var cases := [
+		[1, Vector2i(134878,201249), Vector2i(4992,-4992),
+			PackedVector2Array([Vector2(552,773), Vector2(540,759), Vector2(520,777), Vector2(532,791)])],
+		[-1, Vector2i(121121,201249), Vector2i(-4992,-4992),
+			PackedVector2Array([Vector2(460,759), Vector2(446,773), Vector2(465,791), Vector2(479,777)])],
+		[1, Vector2i(134878,201249), Vector2i.ZERO,
+			PackedVector2Array([Vector2(516,786), Vector2(536,786), Vector2(536,785), Vector2(516,785)])],
+		[-1, Vector2i(121121,201249), Vector2i.ZERO,
+			PackedVector2Array([Vector2(463,786), Vector2(483,786), Vector2(483,785), Vector2(463,785)])],
+	]
+	var art = Water.new()
+	for row in cases:
+		for strand in 2:
+			var model = fresh(int(row[0]))
+			var shot := seed_shell(model, strand, row[1], row[2], Vector2i(0,250))
+			model.advance_projectiles(0.05)
+			var triangle: Dictionary = art.triangle_data(shot)
+			check(triangle.points == row[3] and triangle.indices == PackedInt32Array([0,1,2,0,2,3]),
+				"T2 native first segment facing %d, velocity %s, strand %d" % [row[0],str(row[2]),strand])
+
 func test_birth_and_beacon() -> void:
 	var model = fresh()
 	model.fire(45,60,1)
@@ -140,11 +163,12 @@ func test_item_clocks() -> void:
 func test_crossed_sections() -> void:
 	var model = fresh()
 	model.actors[0].pos = Vector2(500,300)
+	model.wind = Vector2(26,0)
 	model.fire(25,0,1)
 	for step in 8:
 		model.advance_projectiles(0.05)
 	var visual: Dictionary = model.projectiles[0].duplicate()
-	visual.draw_fraction = 0.5
+	visual.draw_fraction = 1.0
 	var strip := Water.water_segments(visual)
 	var crossed := false
 	for segment in strip:
@@ -187,6 +211,7 @@ func run() -> void:
 	oracle = JSON.parse_string(FileAccess.get_file_as_string("res://tests/turtle_t2_fixtures.json"))
 	test_native_schedule()
 	test_native_geometry()
+	test_first_water_segment()
 	test_birth_and_beacon()
 	test_rates_and_prediction()
 	test_item_clocks()

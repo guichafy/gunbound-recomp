@@ -597,6 +597,13 @@ inclusive nas seções cruzadas. T1 mantém seu raster anterior; T1/SS, avatares
 dano, itens, HUD e carga conservam os contratos existentes. Evidência e
 limites em `TURTLE_T2_FIDELITY.md`; não implica combate integral nativo.
 
+O primeiro segmento do T2 usa a seção dianteira do primeiro tick e uma
+seção traseira com a mesma largura e orientação. Cada coordenada inteira
+traseira é `((dianteira << 8) - velocidade_fp_pós_passo) >> 8`, com shift
+aritmético. Vale para os dois sentidos, inclusive quando a velocidade
+inicial quantizada é zero. Referência e validação em
+[TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md).
+
 ## Correção Turtle 0.20.1 — REQ-04/07/19/45
 
 Pedido atual: corrigir as animações de T1, T2 e SS. WaterEffect deve percorrer

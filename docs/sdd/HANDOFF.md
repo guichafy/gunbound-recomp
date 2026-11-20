@@ -2868,3 +2868,12 @@ esses números.
   perfil, equipamento, saldo, atributos, migração HD, arte e loja XFS, 2178
   checks, zero falhas. Sem partida completa: dano, atraso e o snapshot de
   bônus não mudaram de fórmula.
+
+## Primeiro segmento do T2 do Turtle (20/11/2026)
+
+A emenda visual da ADR-087 usa `((borda << 8) - velocidade_pós_passo) >> 8`
+na primeira seção traseira. Testes T2 598/0, projéteis 158/0 e timing
+158/0. A sondagem de 48 casos confirmou vértices, UV e alfa nos dois
+sentidos, inclusive força mínima. Captura GPU Full HD de 270 quadros
+e primeiro segmento ampliado em quatro painéis. Revisão aprovada.
+Evidência e limites em [TURTLE_T2_FIDELITY.md](TURTLE_T2_FIDELITY.md).
